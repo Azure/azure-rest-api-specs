@@ -73,6 +73,7 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
+@@clientName(Agents.patchAgentObject, "patchAgentDetails", "python");
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
@@ -87,6 +88,9 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+
+// Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
+@@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
 
 // --------------------------------------------------------------------------------
 // Memories sub-client
@@ -164,17 +168,6 @@ using Azure.AI.Projects;
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
-
-// --------------------------------------------------------------------------------
-// Evaluation Taxonomies sub-client
-// --------------------------------------------------------------------------------
-
-// It indirectly consumes this from openai-evaluations, via TypeSpec model "Target"
-// In Python, like we do for a few other classes, we hand-code a TypedDict version
-// of this class add the "Pram" suffix to distinguish it from the original emitted classes from
-// the TypedDict one. Since we don't want a class named ModelSamplingParamsParm, we
-// rename the original one here.
-@@clientName(ModelSamplingParams, "ModelSamplingConfig", "python");
 
 // --------------------------------------------------------------------------------
 // Insights sub‐client
