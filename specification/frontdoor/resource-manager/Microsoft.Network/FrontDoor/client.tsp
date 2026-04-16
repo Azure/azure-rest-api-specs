@@ -11,6 +11,11 @@ using TypeSpec.Rest;
   "FrontDoorManagementClient",
   "python, javascript"
 );
+@@clientName(Experiment, "FrontDoorExperiment", "csharp");
+@@clientName(Profile, "FrontDoorNetworkExperimentProfile", "csharp");
+@@clientName(RulesEngine, "FrontDoorRulesEngine", "csharp");
+@@clientName(WebApplicationFirewallPolicy, "FrontDoorWebApplicationFirewallPolicy", "csharp");
+
 @@clientName(MinimumTLSVersion.`1.0`, "ONE0", "python");
 @@clientName(MinimumTLSVersion.`1.2`, "ONE2", "python");
 @@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
