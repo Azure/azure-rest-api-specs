@@ -190,59 +190,44 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
-@doc("Specifies the properties of a Virtual Machine")
-@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-model BulkActionVMSpec {
-  /**
-   * The marketplace image plan used for the virtual machine.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  plan?: Plan;
-
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-
-  /**
-   * The identity of the virtual machine, if configured.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-  identity?: VirtualMachineIdentity;
-
-  /**
-   * The extended location of the Virtual Machine.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  extendedLocation?: ExtendedLocation;
-
-  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
-  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-  placement?: Placement;
-
-  /**
-   * Resource tags to apply to the virtual machines created by this bulk action.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  @doc("Describes the properties of a Virtual Machine.")
-  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-  vmProperties?: BulkActionVMProfile;
-}
-
 @doc("Specifies the configuration for a virtual machine operation")
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model BulkVMConfiguration {
-  @doc("Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
-  vmProperties?: BulkActionVMSpec;
-
-  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkActionVMExtension[];
+  @doc("Identifier for created virtual machine. If not passed, it will be created from resource prefix.")
+  name?: string;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
 
-  @doc("identifier for created virtual machine, if not passed it will create one from resource prefix.")
-  name?: string;
+  @doc("Resource group name for the virtual machine.")
+  resourceGroupName?: string;
+
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The marketplace image plan used for the virtual machine.")
+  plan?: Plan;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The identity of the virtual machine, if configured.")
+  identity?: VirtualMachineIdentity;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The extended location of the Virtual Machine.")
+  extendedLocation?: ExtendedLocation;
+
+  @doc("Placement constraints for virtual machine hardware placement.")
+  placement?: Placement;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("Resource tags to apply to the virtual machines created by this bulk action.")
+  tags?: Record<string>;
+
+  @doc("Specifies the properties of the virtual machine to be created.")
+  properties?: BulkActionVMProperties;
+
+  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
+  vmExtensions?: BulkActionVMExtension[];
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
@@ -250,7 +235,8 @@ model BulkVMConfiguration {
 model ResourceProvisionPayload {
   @doc("Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
-  baseProfile?: BulkVMConfiguration;
+  @renamedFrom(Versions.`2026-04-15-preview`, "baseProfile")
+  virtualMachineBaseProfile?: BulkVMConfiguration;
 
   @doc("Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
@@ -674,7 +660,8 @@ model FlexProperties {
 model ResourceProvisionFlexPayload {
   @doc("JSON object that contains VM properties that are common across all VMs in this batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
-  baseProfile?: BulkVMConfiguration;
+  @renamedFrom(Versions.`2026-04-15-preview`, "baseProfile")
+  virtualMachineBaseProfile?: BulkVMConfiguration;
 
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
