@@ -77,7 +77,8 @@ interface ConfigurationAssignmentOps
           SegmentName = "configurationAssignments",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceConfigurationAssignment"
     > {}
 
 @armResourceOperations
@@ -155,7 +156,8 @@ interface ConfigurationAssignmentOperationGroupOps
           SegmentName = "configurationAssignments",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceConfigurationAssignmentOperationGroup"
     > {}
 
 @armResourceOperations
@@ -205,7 +207,8 @@ interface ConfigurationAssignmentsForSubscriptionOps
           SegmentName = "configurationAssignments",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceConfigurationAssignmentForSubscription"
     > {}
 
 @armResourceOperations
@@ -274,7 +277,8 @@ interface ConfigurationAssignmentsForResourceGroupOps
           SegmentName = "configurationAssignments",
           NamePattern = "^.+$"
         >>,
-      }
+      },
+      "MaintenanceConfigurationAssignmentForResourceGroup"
     > {}
 
 @armResourceOperations
