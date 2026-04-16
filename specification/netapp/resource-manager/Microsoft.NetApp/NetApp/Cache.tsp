@@ -227,7 +227,7 @@ model SmbSettings {
 @added(Versions.v2026_01_01)
 model OriginClusterInformation {
   /**
-   * ONTAP cluster name of external cluster hosting the origin volume
+   * ONTAP cluster name of external cluster hosting the origin volume. Must match the exact cluster name.
    */
   peerClusterName: string;
 
