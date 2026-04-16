@@ -70,8 +70,9 @@ namespace ComputeCombine;
 @@clientName(Common.SubResource, "ComputeSubResourceData", "csharp");
 @@clientName(Common.SubResourceReadOnly, "ComputeWriteableSubResourceData", "csharp");
 
-// Replace Compute's local ExtendedLocation with ARM common type
+// Replace Compute's local ExtendedLocation / ExtendedLocationType with ARM common types
 @@alternateType(Common.ExtendedLocation, Azure.ResourceManager.CommonTypes.ExtendedLocation, "csharp");
+@@alternateType(ComputeSku.ResourceSkuLocationInfo.type, Azure.ResourceManager.CommonTypes.ExtendedLocationType, "csharp");
 
 // ComputeSku namespace types
 @@clientName(ComputeSku.ResourceSku, "ComputeResourceSku", "csharp");
