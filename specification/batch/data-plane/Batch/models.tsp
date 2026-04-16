@@ -292,14 +292,6 @@ union ContainerType {
   CriCompatible: "criCompatible",
 }
 
-@doc("BatchAccessScope enums")
-union BatchAccessScope {
-  string,
-
-  @doc("Grants access to perform all operations on the Job containing the Task.")
-  Job: "job",
-}
-
 @doc("LoginMode enums")
 union LoginMode {
   string,
