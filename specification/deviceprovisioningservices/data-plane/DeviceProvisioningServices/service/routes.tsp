@@ -189,7 +189,8 @@ interface IndividualEnrollmentOperationGroup {
     {
       /** The bulk enrollment operation. */
       @renamedFrom(Versions.v2025_07_01_preview, "bulkOperation")
-      @bodyRoot body: BulkEnrollmentOperation;
+      @bodyRoot
+      body: BulkEnrollmentOperation;
     },
     BulkEnrollmentOperationResult,
     {},
@@ -363,7 +364,8 @@ interface EnrollmentGroupOperationGroup {
     {
       /** The bulk enrollment group operation. */
       @renamedFrom(Versions.v2025_07_01_preview, "bulkOperation")
-      @bodyRoot body: BulkEnrollmentGroupOperation;
+      @bodyRoot
+      body: BulkEnrollmentGroupOperation;
     },
     BulkEnrollmentGroupOperationResult,
     {},
