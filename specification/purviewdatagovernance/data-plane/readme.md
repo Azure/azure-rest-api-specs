@@ -62,6 +62,15 @@ input-file:
   - Azure.Analytics.Purview.UnifiedCatalog/preview/2025-09-15-preview/CatalogApiService.json
 ```
 
+### Tag: package-dataaccess-2025-11-01-preview
+
+These settings apply only when `--tag=package-dataaccess-2025-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-dataaccess-2025-11-01-preview'
+input-file:
+  - Azure.Analytics.Purview.DataEstateHealth/preview/2025-11-01-preview/DataEstateHealthApiService.json
+```
+
 ---
 
 # Code Generation

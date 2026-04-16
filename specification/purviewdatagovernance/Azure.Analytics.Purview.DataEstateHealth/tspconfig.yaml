@@ -1,0 +1,22 @@
+parameters:
+  "service-dir":
+    default: "sdk/purview"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/use-standard-operations": "Service uses custom operation definitions matching existing API surface."
+    "@azure-tools/typespec-azure-core/use-standard-names": "Operation names match existing service API conventions."
+    "@azure-tools/typespec-azure-core/documentation-required": "Body parameters are self-documenting from their model types."
+    "@azure-tools/typespec-azure-core/bad-record-type": "Open-ended Record types used intentionally for extensible API contracts."
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Azure.Analytics.Purview.DataEstateHealth/{version-status}/{version}/DataEstateHealthApiService.json"
+    omit-unreachable-types: true

@@ -1,0 +1,2569 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PurviewDataEstateHealth",
+    "version": "2025-11-01-preview",
+    "description": "Creates a data plane client for Purview Data Estate Health.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/datagovernance/dataestate",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint of the Purview Data Estate Health service. Example: https://api.purview-service.microsoft.com/",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "https://api.purview-service.microsoft.com/"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://purview.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/actions/{actionId}": {
+      "get": {
+        "operationId": "Actions_GetAction",
+        "description": "Get an action by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "The unique identifier of the action.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Actions_GetAction": {
+            "$ref": "./examples/Actions_GetAction_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Actions_UpdateAction",
+        "description": "Update an action by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "The unique identifier of the action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Actions_UpdateAction": {
+            "$ref": "./examples/Actions_UpdateAction_Gen.json"
+          }
+        }
+      }
+    },
+    "/actions/facets": {
+      "post": {
+        "operationId": "Actions_GetActionFacets",
+        "description": "Get faceted aggregations for actions based on filters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionFacetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Actions_GetActionFacets": {
+            "$ref": "./examples/Actions_GetActionFacets_Gen.json"
+          }
+        }
+      }
+    },
+    "/actions/grouped": {
+      "post": {
+        "operationId": "Actions_QueryGroupedActions",
+        "description": "Query actions grouped by a specified field.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionGroupedRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GroupedActions"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Actions_QueryGroupedActions": {
+            "$ref": "./examples/Actions_QueryGroupedActions_Gen.json"
+          }
+        }
+      }
+    },
+    "/actions/query": {
+      "post": {
+        "operationId": "Actions_QueryActions",
+        "description": "Query actions with filters and pagination.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Actions_QueryActions": {
+            "$ref": "./examples/Actions_QueryActions_Gen.json"
+          }
+        }
+      }
+    },
+    "/analytics/schedule": {
+      "get": {
+        "operationId": "AnalyticsSchedules_GetAnalyticsSchedule",
+        "description": "Get the analytics global schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsSchedules_GetAnalyticsSchedule": {
+            "$ref": "./examples/AnalyticsSchedules_GetAnalyticsSchedule_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AnalyticsSchedules_CreateOrUpdateAnalyticsSchedule",
+        "description": "Create or update the analytics global schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DHAnalyticsScheduleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsSchedules_CreateOrUpdateAnalyticsSchedule": {
+            "$ref": "./examples/AnalyticsSchedules_CreateOrUpdateAnalyticsSchedule_Gen.json"
+          }
+        }
+      }
+    },
+    "/analytics/schedule/getjoblogs": {
+      "get": {
+        "operationId": "AnalyticsSchedules_GetAnalyticsJobLogs",
+        "description": "Get analytics job logs for the global schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DEHAnalyticsJobLogs"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsSchedules_GetAnalyticsJobLogs": {
+            "$ref": "./examples/AnalyticsSchedules_GetAnalyticsJobLogs_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls": {
+      "get": {
+        "operationId": "Controls_ListControls",
+        "description": "List all governance controls.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_ListControls": {
+            "$ref": "./examples/Controls_ListControls_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Controls_CreateControl",
+        "description": "Create a new governance control.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "withNewAssessment",
+            "in": "query",
+            "description": "Whether to create a new assessment along with the control.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_CreateControl": {
+            "$ref": "./examples/Controls_CreateControl_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/{id}": {
+      "get": {
+        "operationId": "Controls_GetControl",
+        "description": "Get a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_GetControl": {
+            "$ref": "./examples/Controls_GetControl_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Controls_UpdateControl",
+        "description": "Update a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_UpdateControl": {
+            "$ref": "./examples/Controls_UpdateControl_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Controls_DeleteControl",
+        "description": "Delete a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deleteAssessment",
+            "in": "query",
+            "description": "Whether to also delete the associated assessment.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        },
+        "x-ms-examples": {
+          "Controls_DeleteControl": {
+            "$ref": "./examples/Controls_DeleteControl_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/{id}/reset": {
+      "post": {
+        "operationId": "Controls_ResetControl",
+        "description": "Reset a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_ResetControl": {
+            "$ref": "./examples/Controls_ResetControl_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/alerts": {
+      "get": {
+        "operationId": "Alerts_ListAlerts",
+        "description": "List all alerts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alerts_ListAlerts": {
+            "$ref": "./examples/Alerts_ListAlerts_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Alerts_CreateAlert",
+        "description": "Create a new alert.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alerts_CreateAlert": {
+            "$ref": "./examples/Alerts_CreateAlert_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/alerts/{id}": {
+      "get": {
+        "operationId": "Alerts_GetAlert",
+        "description": "Get an alert by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the alert.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alerts_GetAlert": {
+            "$ref": "./examples/Alerts_GetAlert_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Alerts_UpdateAlert",
+        "description": "Update an alert by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the alert.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alerts_UpdateAlert": {
+            "$ref": "./examples/Alerts_UpdateAlert_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Alerts_DeleteAlert",
+        "description": "Delete an alert by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the alert.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        },
+        "x-ms-examples": {
+          "Alerts_DeleteAlert": {
+            "$ref": "./examples/Alerts_DeleteAlert_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/assessments": {
+      "get": {
+        "operationId": "Assessments_ListAssessments",
+        "description": "List all assessments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_ListAssessments": {
+            "$ref": "./examples/Assessments_ListAssessments_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Assessments_CreateAssessment",
+        "description": "Create a new assessment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_CreateAssessment": {
+            "$ref": "./examples/Assessments_CreateAssessment_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/assessments/{id}": {
+      "get": {
+        "operationId": "Assessments_GetAssessment",
+        "description": "Get an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_GetAssessment": {
+            "$ref": "./examples/Assessments_GetAssessment_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Assessments_UpdateAssessment",
+        "description": "Update an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_UpdateAssessment": {
+            "$ref": "./examples/Assessments_UpdateAssessment_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Assessments_DeleteAssessment",
+        "description": "Delete an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_DeleteAssessment": {
+            "$ref": "./examples/Assessments_DeleteAssessment_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/assessments/{id}/reset": {
+      "post": {
+        "operationId": "Assessments_ResetAssessment",
+        "description": "Reset an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_ResetAssessment": {
+            "$ref": "./examples/Assessments_ResetAssessment_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/monitoring/query": {
+      "post": {
+        "operationId": "Monitoring_QueryMonitoring",
+        "description": "Query monitoring data for controls.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryMonitoringRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "$ref": "#/definitions/DHComputingJobWrapper"
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitoring_QueryMonitoring": {
+            "$ref": "./examples/Monitoring_QueryMonitoring_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/reset": {
+      "post": {
+        "operationId": "Controls_ResetAllControls",
+        "description": "Reset all governance controls.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        },
+        "x-ms-examples": {
+          "Controls_ResetAllControls": {
+            "$ref": "./examples/Controls_ResetAllControls_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/schedule": {
+      "get": {
+        "operationId": "Schedules_GetSchedule",
+        "description": "Get the global control schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_GetSchedule": {
+            "$ref": "./examples/Schedules_GetSchedule_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Schedules_CreateOrUpdateSchedule",
+        "description": "Create or update the global control schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_CreateOrUpdateSchedule": {
+            "$ref": "./examples/Schedules_CreateOrUpdateSchedule_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/schedule/trigger": {
+      "post": {
+        "operationId": "Schedules_TriggerSchedule",
+        "description": "Trigger a control schedule run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerScheduleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TriggerScheduleResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_TriggerSchedule": {
+            "$ref": "./examples/Schedules_TriggerSchedule_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/scores": {
+      "get": {
+        "operationId": "ControlScores_ListControlScores",
+        "description": "List all governance scores (alias for /scores).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ControlScores_ListControlScores": {
+            "$ref": "./examples/ControlScores_ListControlScores_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/scores/query": {
+      "post": {
+        "operationId": "ControlScores_QueryControlScores",
+        "description": "Query scores via /controls/scores/query (alias for /scores/query).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ControlNode",
+              "ControlGroup"
+            ],
+            "x-ms-enum": {
+              "name": "ScoreQueryType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ControlNode",
+                  "value": "ControlNode",
+                  "description": "Aggregate by individual control."
+                },
+                {
+                  "name": "ControlGroup",
+                  "value": "ControlGroup",
+                  "description": "Aggregate by control group."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryScoresRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ControlScores_QueryControlScores": {
+            "$ref": "./examples/ControlScores_QueryControlScores_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/statusPalette": {
+      "get": {
+        "operationId": "StatusPalettes_ListStatusPalettes",
+        "description": "List all status palettes.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StatusPalettes_ListStatusPalettes": {
+            "$ref": "./examples/StatusPalettes_ListStatusPalettes_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "StatusPalettes_CreateStatusPalette",
+        "description": "Create a new status palette.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StatusPalettes_CreateStatusPalette": {
+            "$ref": "./examples/StatusPalettes_CreateStatusPalette_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/statusPalette/{id}": {
+      "get": {
+        "operationId": "StatusPalettes_GetStatusPalette",
+        "description": "Get a status palette by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the status palette.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StatusPalettes_GetStatusPalette": {
+            "$ref": "./examples/StatusPalettes_GetStatusPalette_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StatusPalettes_UpdateStatusPalette",
+        "description": "Update a status palette by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the status palette.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StatusPalettes_UpdateStatusPalette": {
+            "$ref": "./examples/StatusPalettes_UpdateStatusPalette_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StatusPalettes_DeleteStatusPalette",
+        "description": "Delete a status palette by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the status palette.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        },
+        "x-ms-examples": {
+          "StatusPalettes_DeleteStatusPalette": {
+            "$ref": "./examples/StatusPalettes_DeleteStatusPalette_Gen.json"
+          }
+        }
+      }
+    },
+    "/scores": {
+      "get": {
+        "operationId": "Scores_ListScores",
+        "description": "List all governance scores.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A paged collection of results.",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The collection of items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {}
+                  }
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The total count of items."
+                },
+                "continuationToken": {
+                  "type": "string",
+                  "description": "Continuation token for the next page of results."
+                }
+              },
+              "required": [
+                "value",
+                "count"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scores_ListScores": {
+            "$ref": "./examples/Scores_ListScores_Gen.json"
+          }
+        }
+      }
+    },
+    "/scores/query": {
+      "post": {
+        "operationId": "Scores_QueryScores",
+        "description": "Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ControlNode",
+              "ControlGroup"
+            ],
+            "x-ms-enum": {
+              "name": "ScoreQueryType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ControlNode",
+                  "value": "ControlNode",
+                  "description": "Aggregate by individual control."
+                },
+                {
+                  "name": "ControlGroup",
+                  "value": "ControlGroup",
+                  "description": "Aggregate by control group."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryScoresRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scores_QueryScores": {
+            "$ref": "./examples/Scores_QueryScores_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/executeSynapseQuery": {
+      "post": {
+        "operationId": "SynapseQuery_ExecuteSynapseQuery",
+        "description": "Execute an ad-hoc Synapse Serverless SQL query.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteSynapseQueryRequestPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SynapseQueryResultResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SynapseQuery_ExecuteSynapseQuery": {
+            "$ref": "./examples/SynapseQuery_ExecuteSynapseQuery_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/mpe": {
+      "post": {
+        "operationId": "Settings_CreateManagedPrivateEndpoint",
+        "description": "Create a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProperties"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_CreateManagedPrivateEndpoint": {
+            "$ref": "./examples/Settings_CreateManagedPrivateEndpoint_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/mpe/exists": {
+      "post": {
+        "operationId": "Settings_CheckManagedPrivateEndpointExists",
+        "description": "Check if a managed private endpoint exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointExistsResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointExistsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_CheckManagedPrivateEndpointExists": {
+            "$ref": "./examples/Settings_CheckManagedPrivateEndpointExists_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/storageConfig": {
+      "get": {
+        "operationId": "Settings_GetStorageConfig",
+        "description": "Get the current storage configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_GetStorageConfig": {
+            "$ref": "./examples/Settings_GetStorageConfig_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Settings_UpdateStorageConfig",
+        "description": "Update the storage configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_UpdateStorageConfig": {
+            "$ref": "./examples/Settings_UpdateStorageConfig_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/storageConfig/connectivity": {
+      "post": {
+        "operationId": "Settings_TestStorageConfigConnectivity",
+        "description": "Test storage configuration connectivity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_TestStorageConfigConnectivity": {
+            "$ref": "./examples/Settings_TestStorageConfigConnectivity_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/storageConfig/mitoken": {
+      "get": {
+        "operationId": "Settings_GetMIToken",
+        "description": "Get a managed identity token for storage access.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_GetMIToken": {
+            "$ref": "./examples/Settings_GetMIToken_Gen.json"
+          }
+        }
+      }
+    },
+    "/tips/{containerName}": {
+      "get": {
+        "operationId": "Tips_GetTipEntities",
+        "description": "Get tip entities from a container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the tips container.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "query",
+            "description": "Filter by entity ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "entityName",
+            "in": "query",
+            "description": "Filter by entity name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of results to return. Default is 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tips_GetTipEntities": {
+            "$ref": "./examples/Tips_GetTipEntities_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionFacetRequest": {
+      "type": "object",
+      "description": "Request to retrieve action facets.",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/ActionFiltersPayload",
+          "description": "Filters to apply when computing facets."
+        },
+        "facets": {
+          "type": "array",
+          "description": "The facets to retrieve.",
+          "items": {
+            "$ref": "#/definitions/FacetRequestObject"
+          }
+        }
+      }
+    },
+    "ActionFiltersPayload": {
+      "type": "object",
+      "description": "Filter payload for querying actions.",
+      "properties": {
+        "status": {
+          "type": "array",
+          "description": "Filter by action status values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by business domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "Filter by action categories.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assignedTo": {
+          "type": "array",
+          "description": "Filter by assigned user IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "findingTypes": {
+          "type": "array",
+          "description": "Filter by finding types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "findingSubTypes": {
+          "type": "array",
+          "description": "Filter by finding sub-types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "findingNames": {
+          "type": "array",
+          "description": "Filter by finding names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "severity": {
+          "type": "string",
+          "description": "Filter by severity level."
+        },
+        "targetEntityType": {
+          "type": "string",
+          "description": "Filter by target entity type."
+        },
+        "targetEntityIds": {
+          "type": "array",
+          "description": "Filter by target entity IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createTimeRange": {
+          "$ref": "#/definitions/CreateTimeRangeFilter",
+          "description": "Filter by creation time range."
+        }
+      }
+    },
+    "ActionGroupedRequest": {
+      "type": "object",
+      "description": "Request to query actions grouped by a field.",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/ActionFiltersPayload",
+          "description": "Filters to apply to the grouped action query."
+        },
+        "groupBy": {
+          "type": "string",
+          "description": "The field to group actions by."
+        }
+      }
+    },
+    "ActionQueryRequest": {
+      "type": "object",
+      "description": "Request to query actions with pagination and filters.",
+      "properties": {
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token from a previous response."
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of results per page.",
+          "default": 100
+        },
+        "orderBy": {
+          "type": "array",
+          "description": "Ordering specifications.",
+          "items": {
+            "$ref": "#/definitions/OrderBy"
+          }
+        },
+        "filters": {
+          "$ref": "#/definitions/ActionFiltersPayload",
+          "description": "Filters to apply to the action query."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "CreateTimeRangeFilter": {
+      "type": "object",
+      "description": "Time range filter for action creation time.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the time range."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the time range."
+        }
+      }
+    },
+    "DEHAnalyticsJobLogs": {
+      "type": "object",
+      "description": "Analytics job log entry.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the job failed."
+        },
+        "timeStamp": {
+          "type": "string",
+          "description": "The timestamp of the log entry."
+        }
+      }
+    },
+    "DHAnalyticsScheduleFrequency": {
+      "type": "string",
+      "description": "Frequency for analytics schedule.",
+      "enum": [
+        "Hour",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "x-ms-enum": {
+        "name": "DHAnalyticsScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hour",
+            "value": "Hour",
+            "description": "Hourly frequency."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily frequency."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly frequency."
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly frequency."
+          }
+        ]
+      }
+    },
+    "DHAnalyticsScheduleRequest": {
+      "type": "object",
+      "description": "Request to create or update an analytics schedule.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/DHAnalyticsScheduleFrequency",
+          "description": "The frequency of the analytics schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval between schedule runs."
+        },
+        "status": {
+          "$ref": "#/definitions/DHScheduleState",
+          "description": "The status of the schedule."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the schedule."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the schedule."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone for the schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval",
+        "startTime"
+      ]
+    },
+    "DHComputingJobStatus": {
+      "type": "string",
+      "description": "Status of a computing job.",
+      "enum": [
+        "Unknown",
+        "Created",
+        "Failed",
+        "Succeeded",
+        "InProgress",
+        "Cancelling",
+        "Cancelled",
+        "Queued",
+        "Accepted",
+        "Rejected",
+        "Skipped",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "DHComputingJobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown status."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The job has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job completed successfully."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The job is in progress."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "The job is being cancelled."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The job was cancelled."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The job is queued."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The job has been accepted."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The job was rejected."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The job was skipped."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The job is being deleted."
+          }
+        ]
+      }
+    },
+    "DHComputingJobWrapper": {
+      "type": "object",
+      "description": "A computing job wrapper with job details.",
+      "properties": {
+        "dqJobId": {
+          "type": "string",
+          "description": "The data quality job ID."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The control ID associated with this job."
+        },
+        "scheduleRunId": {
+          "type": "string",
+          "description": "The schedule run ID."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the job was created."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the job started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the job ended."
+        },
+        "status": {
+          "$ref": "#/definitions/DHComputingJobStatus",
+          "description": "The current status of the job."
+        }
+      }
+    },
+    "DHScheduleState": {
+      "type": "string",
+      "description": "State of a schedule.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DHScheduleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The schedule is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The schedule is disabled."
+          }
+        ]
+      }
+    },
+    "DataSourceType": {
+      "type": "string",
+      "description": "Supported data source types for managed private endpoints.",
+      "enum": [
+        "Fabric",
+        "ADLSGen2"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Microsoft Fabric data source."
+          },
+          {
+            "name": "ADLSGen2",
+            "value": "ADLSGen2",
+            "description": "Azure Data Lake Storage Gen2 data source."
+          }
+        ]
+      }
+    },
+    "ExecuteSynapseQueryRequestPayload": {
+      "type": "object",
+      "description": "Request to execute an ad-hoc Synapse Serverless SQL query.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The SQL query to execute."
+        },
+        "isBase64Encoded": {
+          "type": "boolean",
+          "description": "Whether the query is Base64 encoded."
+        },
+        "maxRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of rows to return.",
+          "default": 100
+        },
+        "connectTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Connection timeout in seconds.",
+          "default": 30
+        },
+        "commandTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Command execution timeout in seconds.",
+          "default": 120
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "FacetRequestObject": {
+      "type": "object",
+      "description": "A facet request object specifying which facets to retrieve.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the facet."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "FacetResponse": {
+      "type": "object",
+      "description": "Response containing faceted aggregation results.",
+      "properties": {
+        "facets": {
+          "type": "object",
+          "description": "A dictionary of facet name to facet values with counts.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/FacetResponseObject"
+            },
+            "type": "array"
+          }
+        }
+      },
+      "required": [
+        "facets"
+      ]
+    },
+    "FacetResponseObject": {
+      "type": "object",
+      "description": "A single facet value with its count.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The facet value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of items matching this facet value."
+        }
+      }
+    },
+    "GroupedActions": {
+      "type": "object",
+      "description": "A group of actions under a common grouping key.",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The name of the group."
+        },
+        "items": {
+          "type": "array",
+          "description": "The action items in this group.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        }
+      }
+    },
+    "ManagedPrivateEndpointExistsResponse": {
+      "type": "object",
+      "description": "Response indicating whether a managed private endpoint exists.",
+      "properties": {
+        "mpeStatus": {
+          "type": "string",
+          "description": "The status of the managed private endpoint."
+        },
+        "mpeId": {
+          "type": "string",
+          "description": "The managed private endpoint ID."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "The data source type."
+        }
+      }
+    },
+    "ManagedPrivateEndpointRequest": {
+      "type": "object",
+      "description": "Request to check or create a managed private endpoint.",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource."
+        },
+        "dataSourceType": {
+          "$ref": "#/definitions/DataSourceType",
+          "description": "The data source type."
+        }
+      },
+      "required": [
+        "targetResourceId",
+        "dataSourceType"
+      ]
+    },
+    "NetworkProperties": {
+      "type": "object",
+      "description": "Network properties including managed private endpoint information.",
+      "properties": {
+        "isManagedVnetEnabled": {
+          "type": "boolean",
+          "description": "Whether managed virtual network is enabled."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "The data source type."
+        },
+        "mpeStatus": {
+          "type": "string",
+          "description": "The status of the managed private endpoint."
+        },
+        "mpeId": {
+          "type": "string",
+          "description": "The managed private endpoint ID."
+        },
+        "markedForDeletion": {
+          "type": "boolean",
+          "description": "Whether the endpoint is marked for deletion."
+        }
+      }
+    },
+    "OrderBy": {
+      "type": "object",
+      "description": "Ordering specification for query results.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field name to order by."
+        },
+        "direction": {
+          "type": "string",
+          "description": "The order direction: 'asc' or 'desc'."
+        }
+      }
+    },
+    "QueryMonitoringRequest": {
+      "type": "object",
+      "description": "Request to query monitoring data for a control.",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "description": "The control ID to query monitoring data for."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the monitoring window."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the monitoring window."
+        }
+      },
+      "required": [
+        "controlId",
+        "startTime",
+        "endTime"
+      ]
+    },
+    "QueryScoresRequest": {
+      "type": "object",
+      "description": "Unified request for querying scores. When type=ControlNode, provide controlIds. When type=ControlGroup, provide controlGroupIds.",
+      "properties": {
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recordLatestCounts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of latest score records to return."
+        },
+        "recordTimeRange": {
+          "$ref": "#/definitions/QueryScoresRequestTimeRange",
+          "description": "Time range filter for scores."
+        },
+        "status": {
+          "type": "string",
+          "description": "Filter by control status."
+        },
+        "controlIds": {
+          "type": "array",
+          "description": "The control IDs to query scores for. Required when type=ControlNode.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "controlGroupIds": {
+          "type": "array",
+          "description": "The control group IDs to query scores for. Required when type=ControlGroup.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryScoresRequestTimeRange": {
+      "type": "object",
+      "description": "Time range for score queries.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of the time range."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of the time range."
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "SynapseQueryResultResponse": {
+      "type": "object",
+      "description": "Response from a Synapse query execution.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "The column names in the result set.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "description": "The result rows, each as a dictionary of column name to value.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "rowCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of rows returned."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "Whether the result set was truncated."
+        }
+      },
+      "required": [
+        "columns",
+        "rows",
+        "rowCount",
+        "truncated"
+      ]
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for a resource.",
+      "properties": {
+        "createdBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was created."
+        }
+      }
+    },
+    "TriggerScheduleRequest": {
+      "type": "object",
+      "description": "Request to trigger a schedule run.",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "description": "The control ID to trigger the schedule for."
+        }
+      },
+      "required": [
+        "controlId"
+      ]
+    },
+    "TriggerScheduleResponse": {
+      "type": "object",
+      "description": "Response from triggering a schedule run.",
+      "properties": {
+        "scheduleRunId": {
+          "type": "string",
+          "description": "The schedule run ID that was triggered."
+        }
+      },
+      "required": [
+        "scheduleRunId"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

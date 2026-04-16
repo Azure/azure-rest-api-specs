@@ -1,0 +1,30 @@
+{
+  "title": "Actions_QueryGroupedActions",
+  "operationId": "Actions_QueryGroupedActions",
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "body": {
+      "filters": {
+        "status": [
+          "NotStarted"
+        ]
+      },
+      "groupBy": "category"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "groupName": "DataQuality",
+          "items": [
+            {
+              "id": "action-001",
+              "status": "NotStarted"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
