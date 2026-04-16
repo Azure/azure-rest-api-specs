@@ -29,6 +29,7 @@ using TypeSpec.Versioning;
 /**
  * The Resource Health Client.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Microsoft.ResourceHealth" })
 @versioned(Versions)
@@ -45,11 +46,22 @@ enum Versions {
   v2025_05_01: "2025-05-01",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<operationListResult>,
-      ErrorResponse
-    > {}
-@@doc(Operations.list,
-  "Lists available operations for the resourcehealth resource provider"
-);
+@armResourceOperations
+interface Operations {
+  /**
+   * Lists available operations for the resourcehealth resource provider
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @get
+  @action("operations")
+  list(
+    ...ApiVersionParameter,
+
+    /**
+     * Provider
+     */
+    @path
+    @segment("providers")
+    providerNamespace: "Microsoft.ResourceHealth",
+  ): ArmResponse<operationListResult> | ErrorResponse;
+}

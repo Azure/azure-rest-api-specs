@@ -1412,7 +1412,6 @@ model operationListResult {
   /**
    * List of operations available in the Microsoft.ResourceHealth resource provider.
    */
-  @pageItems
   @identifiers(#["name"])
   value: Operation[];
 }
