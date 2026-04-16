@@ -210,9 +210,12 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "javascript"
 );
 
-@@clientName(Storage.File.EtagResponseHeader.etag, "etag", "javascript");
-@@clientName(Storage.File.SharePropertiesInternal.eTag, "etag", "javascript");
-@@clientName(Storage.File.FileProperty.eTag, "etag", "javascript");
+@@clientName(Storage.File.EtagResponseHeader.etag, "etag", "javascript,python");
+@@clientName(Storage.File.SharePropertiesInternal.eTag,
+  "etag",
+  "javascript,python"
+);
+@@clientName(Storage.File.FileProperty.eTag, "etag", "javascript,python");
 
 @@clientName(Storage.File.FileSmtPropertyRequestHeaders.fileCreationTime,
   "fileCreatedOn",
