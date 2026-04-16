@@ -214,7 +214,6 @@ model AgentVersionObject {
 
   definition: AgentDefinition;
 
-  @removed(Versions.v1)
   @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
   status: AgentVersionStatus = AgentVersionStatus.active;
 
