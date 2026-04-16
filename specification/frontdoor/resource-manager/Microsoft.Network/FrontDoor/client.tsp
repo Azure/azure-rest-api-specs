@@ -178,3 +178,22 @@ interface ProfilesOverrides {
 @@alternateType(BasicResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(BasicResourceWithSettableIDName.id, Azure.Core.armResourceIdentifier, "csharp");
 
+// Category D — output-only models need public constructors
+@@usage(TimeseriesDataPoint, Usage.input | Usage.output, "csharp");
+@@usage(LatencyMetric, Usage.input | Usage.output, "csharp");
+@@usage(RouteConfiguration, Usage.input | Usage.output, "csharp");
+
+// Category E — ResourceIdentifier type on nested id fields
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(KeyVaultCertificateSourceParametersVault.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// Category F — ETag and Uri type fixes
+@@alternateType(Profile.etag, Azure.Core.eTag, "csharp");
+@@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");
+@@alternateType(PolicySettings.redirectUrl, url, "csharp");
+
+// Category H — TLS enum member name fixes handled in Customized/ (Tls10->Tls1_0 aliases)
+// Note: @@clientName strips underscores (Tls1_0 → Tls10), so Customized/ adds the aliases.
+
