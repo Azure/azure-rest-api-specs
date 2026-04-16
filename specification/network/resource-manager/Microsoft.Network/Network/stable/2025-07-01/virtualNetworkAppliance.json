@@ -468,7 +468,8 @@
       "description": "VirtualNetworkAppliance properties.",
       "properties": {
         "bandwidthInGbps": {
-          "type": "string",
+          "type": "number",
+          "format": "double",
           "description": "Bandwidth of the VirtualNetworkAppliance resource in Gbps."
         },
         "ipConfigurations": {
@@ -478,6 +479,10 @@
             "$ref": "#/definitions/VirtualNetworkApplianceIpConfiguration"
           },
           "readOnly": true
+        },
+        "privateIPAddressVersion": {
+          "$ref": "./common.json#/definitions/VirtualNetworkApplianceIpVersionType",
+          "description": "Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
