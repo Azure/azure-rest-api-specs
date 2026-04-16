@@ -354,6 +354,11 @@ union ScenarioRunState {
   Running: "Running",
 
   /**
+   * The scenario run is in the process of being cleaned up.
+   */
+  CleaningUp: "CleaningUp",
+
+  /**
    * The scenario run is in the process of being canceled.
    */
   Canceling: "Canceling",
