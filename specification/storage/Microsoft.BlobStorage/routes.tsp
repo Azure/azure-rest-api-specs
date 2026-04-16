@@ -375,11 +375,7 @@ interface Container {
       @header("Content-Type")
       contentType?: "application/xml";
 
-      /** The access control list for the container. */
-      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-      @body
-      containerAcl?: SignedIdentifiers;
-
+      ...ContainerAclBodyParameter;
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...BlobPublicAccessParameter;

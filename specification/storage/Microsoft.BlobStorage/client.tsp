@@ -225,36 +225,48 @@ alias MetadataHeadersRequired = {
 // @@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");
 
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the containerAcl body ----- */
-/** Sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@route("?restype=container&comp=acl")
-op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
-  {
-    /** The media type of the requestbody */
-    @header("Content-Type")
-    contentType?: "application/xml";
+alias ContainerAclRequired = {
+  /** The access control list for the container. */
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+  @body
+  containerAcl: SignedIdentifiers;
+};
 
-    /** The access control list for the container. */
-    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-    @body
-    containerAcl: SignedIdentifiers;
-
-    ...TimeoutParameter;
-    ...LeaseIdOptionalParameter;
-    ...BlobPublicAccessParameter;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-  },
-  {
-    ...EtagResponseHeaderPrivate;
-    ...LastModifiedResponseHeaderPrivate;
-  }
->;
-
-@@override(Container.setAccessPolicy,
-  setAccessPolicyRequiredContainerAcl,
+@@alternateType(ContainerAclBodyParameter.containerAcl,
+  ContainerAclRequired.containerAcl,
   "rust"
 );
+
+// /** Sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+// @put
+// @route("?restype=container&comp=acl")
+// op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
+//   {
+//     /** The media type of the requestbody */
+//     @header("Content-Type")
+//     contentType?: "application/xml";
+
+//     /** The access control list for the container. */
+//     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+//     @body
+//     containerAcl: SignedIdentifiers;
+
+//     ...TimeoutParameter;
+//     ...LeaseIdOptionalParameter;
+//     ...BlobPublicAccessParameter;
+//     ...IfModifiedSinceParameter;
+//     ...IfUnmodifiedSinceParameter;
+//   },
+//   {
+//     ...EtagResponseHeaderPrivate;
+//     ...LastModifiedResponseHeaderPrivate;
+//   }
+// >;
+
+// @@override(Container.setAccessPolicy,
+//   setAccessPolicyRequiredContainerAcl,
+//   "rust"
+// );
