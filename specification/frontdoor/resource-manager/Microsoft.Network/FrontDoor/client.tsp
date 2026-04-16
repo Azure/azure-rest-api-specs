@@ -172,3 +172,9 @@ interface ProfilesOverrides {
 @@clientName(FrontDoorHealthProbeMethod.HEAD, "Head", "csharp");
 @@clientName(TimeseriesDataPoint.dateTimeUTC, "DateTimeUtc", "csharp");
 @@clientName(ActionType.CAPTCHA, "Captcha", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.Network.Resource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ResourcewithSettableName.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(BasicResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(BasicResourceWithSettableIDName.id, Azure.Core.armResourceIdentifier, "csharp");
+
