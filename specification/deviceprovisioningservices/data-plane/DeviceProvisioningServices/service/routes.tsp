@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace ProvisioningServiceClient;
 
@@ -61,12 +63,13 @@ interface IndividualEnrollmentOperationGroup {
        * The ETag of the enrollment record.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
-      @header
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * The device enrollment record.
        */
+      @renamedFrom(Versions.v2025_07_01_preview, "enrollment")
       @bodyRoot
       body: IndividualEnrollment;
     },
@@ -100,7 +103,7 @@ interface IndividualEnrollmentOperationGroup {
        * The ETag of the enrollment record.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
-      @header
+      @header("If-Match")
       `If-Match`?: string;
     },
     void,
@@ -137,6 +140,7 @@ interface IndividualEnrollmentOperationGroup {
       /**
        * The query specification.
        */
+      @renamedFrom(Versions.v2025_07_01_preview, "querySpecification")
       @bodyRoot
       body: QuerySpecification;
     },
@@ -184,6 +188,7 @@ interface IndividualEnrollmentOperationGroup {
   runBulkOperation is Azure.Core.Foundations.Operation<
     {
       /** The bulk enrollment operation. */
+      @renamedFrom(Versions.v2025_07_01_preview, "bulkOperation")
       @bodyRoot body: BulkEnrollmentOperation;
     },
     BulkEnrollmentOperationResult,
@@ -238,12 +243,13 @@ interface EnrollmentGroupOperationGroup {
        * The ETag of the enrollment record.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
-      @header
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * The device enrollment group.
        */
+      @renamedFrom(Versions.v2025_07_01_preview, "enrollmentGroup")
       @bodyRoot
       body: EnrollmentGroup;
     },
@@ -274,7 +280,7 @@ interface EnrollmentGroupOperationGroup {
        * The ETag of the enrollment group record.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
-      @header
+      @header("If-Match")
       `If-Match`?: string;
     },
     void,
@@ -311,6 +317,7 @@ interface EnrollmentGroupOperationGroup {
       /**
        * The query specification.
        */
+      @renamedFrom(Versions.v2025_07_01_preview, "querySpecification")
       @bodyRoot
       body: QuerySpecification;
     },
@@ -355,6 +362,7 @@ interface EnrollmentGroupOperationGroup {
   runBulkOperation is Azure.Core.Foundations.Operation<
     {
       /** The bulk enrollment group operation. */
+      @renamedFrom(Versions.v2025_07_01_preview, "bulkOperation")
       @bodyRoot body: BulkEnrollmentGroupOperation;
     },
     BulkEnrollmentGroupOperationResult,
@@ -409,7 +417,7 @@ interface DeviceRegistrationStateOperationGroup {
        * The ETag of the registration status record.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
-      @header
+      @header("If-Match")
       `If-Match`?: string;
     },
     void,
