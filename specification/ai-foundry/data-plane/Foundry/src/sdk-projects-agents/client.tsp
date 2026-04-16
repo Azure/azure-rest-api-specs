@@ -36,7 +36,7 @@ namespace Azure.AI.Projects {
   @@clientName(AgentObject, "ProjectsAgentRecord");
   @@clientName(AgentKind, "ProjectsAgentKind");
   @@clientName(AgentProtocol, "ProjectsAgentProtocol");
-  @@clientName(AgentSessionResource, "AgentSession");
+  @@clientName(AgentSessionResource, "ProjectAgentSession");
   @@access(AgentSessionResource, Access.public);
 
   @@clientName(BingGroundingSearchToolParameters,
@@ -207,6 +207,7 @@ namespace Azure.AI.Projects {
   @@access(PatchAgentRequest, Access.public);
   @@clientName(PatchAgentRequest, "PatchAgentOptions");
   @@access(Agents.patchAgentObject, Access.internal);
+  @@access(Agents.getSessionLogStream, Access.internal);
   // --------------------------------------------------------------------------------
   // Hide session opertaions, containing the foundry features
   // --------------------------------------------------------------------------------
