@@ -11,7 +11,7 @@ namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes the properties of a Virtual Machine for create.")
-model BulkActionVMProfile {
+model BulkActionVMProperties {
   @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.")
   scheduledEventsPolicy?: ScheduledEventsPolicy;
 
@@ -26,6 +26,9 @@ model BulkActionVMProfile {
 
   @doc("Specifies the network interfaces of the virtual machine.")
   networkProfile?: NetworkProfile;
+
+  @doc("Specifies the hardware profile for the virtual machine.")
+  hardwareProfile?: HardwareProfile;
 
   @doc("Specifies the Security related profile settings for the virtual machine.")
   securityProfile?: SecurityProfile;
@@ -104,6 +107,30 @@ model EventGridAndResourceGraph {
 model AllInstancesDown {
   @doc("Specifies if Scheduled Events should be auto-approved when all instances are down. Its default value is true.")
   automaticallyApprove?: boolean;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+@doc("Specifies the hardware profile for the virtual machine.")
+model HardwareProfile {
+  /**
+   * Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set.
+   */
+  vmSize?: string;
+
+  /**
+   * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
+   */
+  vmSizeProperties?: VmSizeProperties;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+@doc("Specifies VM Size Property settings on the virtual machine.")
+model VmSizeProperties {
+  @doc("Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list).")
+  vCpusAvailable?: int32;
+
+  @doc("Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list). **Setting this property to 1 also means that hyper-threading is disabled.**")
+  vCpusPerCore?: int32;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
