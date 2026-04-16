@@ -75,27 +75,9 @@ using Microsoft.BillingBenefits;
   "BillingBenefitsSavingsPlanUtilizationAggregate",
   "csharp"
 );
-
-// csharp: Rename Request/Response models to comply with AZC0030 naming rules
 @@clientName(PurchaseRequest, "BillingBenefitsPurchaseContent", "csharp");
-@@clientName(BenefitValidateRequest,
-  "BillingBenefitsBenefitValidateContent",
-  "csharp"
-);
-@@clientName(BenefitValidateResponse,
-  "BillingBenefitsBenefitValidateResult",
-  "csharp"
-);
-@@clientName(ChargeShortfallRequest,
-  "BillingBenefitsChargeShortfallContent",
-  "csharp"
-);
 @@clientName(SavingsPlanValidResponseProperty,
   "SavingsPlanValidateResult",
-  "csharp"
-);
-@@clientName(SavingsPlanValidateResponse,
-  "BillingBenefitsSavingsPlanValidateResult",
   "csharp"
 );
 @@clientName(SavingsPlanOrderAliasModel,
@@ -156,10 +138,6 @@ using Microsoft.BillingBenefits;
 @@clientName(SavingsPlanUpdateRequestProperties.renew, "IsRenewed", "csharp");
 @@clientName(SavingsPlanOrderAliasProperties.renew, "IsRenewed", "csharp");
 @@clientName(BenefitValidateResponseProperty.valid, "IsValid", "csharp");
-@@clientName(SellerResourceListRequest,
-  "BillingBenefitsSellerResourceListContent",
-  "csharp"
-);
 @@clientName(SellerResourceListRequestProperties.contributors,
   "IncludeContributors",
   "csharp"
@@ -298,10 +276,10 @@ using Microsoft.BillingBenefits;
 @@clientName(Term.P5Y, "P5_Y", "python");
 
 @@clientName(DiscountsOperationGroup.scopeList,
-  "GetApplicableDiscounts",
+  "listDiscountByScope",
   "csharp"
 );
 @@clientName(ConditionalCreditsOperationGroup.scopeList,
-  "GetApplicableConditionalCredits",
+  "listConditionalCreditByScope",
   "csharp"
 );
