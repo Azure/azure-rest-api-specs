@@ -499,7 +499,7 @@ union RoutingChoice {
 }
 
 /**
- * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+ * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
  */
 union MinimumTlsVersion {
   string,
@@ -3134,7 +3134,7 @@ model StorageAccountPropertiesCreateParameters {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -3832,7 +3832,7 @@ model StorageAccountProperties {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -4407,7 +4407,7 @@ model StorageAccountPropertiesUpdateParameters {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
