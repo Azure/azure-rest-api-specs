@@ -1078,21 +1078,21 @@ model SharePropertiesInternal {
   @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The share quota. */
-  @Xml.name("Quota") quota: int64;
+  @Xml.name("Quota") quota: int32;
 
   /** The provisioned IOPS. */
-  @Xml.name("ProvisionedIops") provisionedIops?: int64;
+  @Xml.name("ProvisionedIops") provisionedIops?: int32;
 
   /** The provisioned ingress in MBps. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
-  @Xml.name("ProvisionedIngressMBps") provisionedIngressMBps?: int64;
+  @Xml.name("ProvisionedIngressMBps") provisionedIngressMBps?: int32;
 
   /** The provisioned egress in MBps. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
-  @Xml.name("ProvisionedEgressMBps") provisionedEgressMBps?: int64;
+  @Xml.name("ProvisionedEgressMBps") provisionedEgressMBps?: int32;
 
   /** The provisioned bandwidth in MiBps. */
-  @Xml.name("ProvisionedBandwidthMiBps") provisionedBandwidthMiBps?: int64;
+  @Xml.name("ProvisionedBandwidthMiBps") provisionedBandwidthMiBps?: int32;
 
   /** The next allowed quota downgrade time. */
   @encode("rfc7231")
@@ -1680,7 +1680,7 @@ alias LeaseIdRequiredParameter = {
 /** Share quota optional header. */
 alias ShareQuotaOptionalHeader = {
   /** Specifies the maximum size of the share, in gigabytes. */
-  @header("x-ms-share-quota") quota?: int64;
+  @header("x-ms-share-quota") quota?: int32;
 };
 
 /** Recursive parameter (header). */
