@@ -3259,6 +3259,12 @@ model ApplicationProperties {
   applicationType?: RemoteApplicationType;
 
   /**
+   * Additional shortcut settings for the remote application.
+   */
+  @added(Versions.v2026_04_01_preview)
+  shortcutsExtension?: ShortcutsExtension;
+
+  /**
    * Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.
    */
   commandLineSetting: CommandLineSetting;
@@ -3364,6 +3370,12 @@ model ApplicationPatchProperties {
    * Resource Type of Application.
    */
   applicationType?: RemoteApplicationType;
+
+  /**
+   * Additional shortcut settings for the remote application.
+   */
+  @added(Versions.v2026_04_01_preview)
+  shortcutsExtension?: ShortcutsExtension;
 }
 
 /**
@@ -3505,6 +3517,16 @@ model StartMenuItemProperties {
    * Index of the icon.
    */
   iconIndex?: int32;
+}
+
+/**
+ * Additional shortcut settings for a remote application.
+ */
+model ShortcutsExtension {
+  /**
+   * Indicates whether to create a desktop shortcut for the remote application.
+   */
+  putShortcutOnDesktop: boolean;
 }
 
 /**
