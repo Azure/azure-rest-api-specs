@@ -82,7 +82,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "ContainerGroupProfiles_ListBySubscription",
+        "operationId": "CGProfiles_ListBySubscription",
         "summary": "List container group profiles in a subscription.",
         "description": "Gets a list of all container group profiles under a subscription.",
         "parameters": [
@@ -105,6 +105,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesList": {
+            "$ref": "./examples/ContainerGroupProfilesList.json"
           }
         },
         "x-ms-pageable": {
@@ -302,7 +307,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "ContainerGroupProfiles_ListByResourceGroup",
+        "operationId": "CGProfiles_ListByResourceGroup",
         "summary": "List container group profiles in a resource group.",
         "description": "Gets a list of all container group profiles under a resource group.",
         "parameters": [
@@ -330,6 +335,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ContainerGroupProfilesListByResourceGroup": {
+            "$ref": "./examples/ContainerGroupProfilesListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -337,7 +347,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
       "get": {
-        "operationId": "ContainerGroupProfiles_Get",
+        "operationId": "CGProfile_Get",
         "summary": "Display information about a specified ContainerGroupProfile.",
         "description": "Get the properties of the specified container group profile.",
         "parameters": [
@@ -374,10 +384,18 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesGetWithPriority": {
+            "$ref": "./examples/ContainerGroupProfilesGetPriority.json"
+          },
+          "ContainerGroupProfilesGet_Succeeded": {
+            "$ref": "./examples/ContainerGroupProfilesGet.json"
+          }
         }
       },
       "put": {
-        "operationId": "ContainerGroupProfiles_CreateOrUpdate",
+        "operationId": "CGProfile_CreateOrUpdate",
         "summary": "Create or Update a ContainerGroupProfile",
         "description": "Create a CGProfile if it doesn't exist or update an existing CGProfile.",
         "parameters": [
@@ -436,13 +454,27 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialContainerGroupProfile": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_CreateConfidential.json"
+          },
+          "ContainerGroupProfileCreateWithExtensions": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_Extensions.json"
+          },
+          "ContainerGroupProfileWithEncryptionProperties": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_EncryptionProperties.json"
+          },
+          "ContainerGroupProfilesCreateOrUpdate": {
+            "$ref": "./examples/ContainerGroupProfilesCreateOrUpdate.json"
           }
         }
       },
       "patch": {
-        "operationId": "ContainerGroupProfiles_Update",
+        "operationId": "CGProfile_Update",
         "summary": "Container group profile PATCH REST API.",
         "description": "Update a specified container group profile.",
         "parameters": [
@@ -490,13 +522,18 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesPatch": {
+            "$ref": "./examples/ContainerGroupProfilesPatch.json"
           }
         }
       },
       "delete": {
-        "operationId": "ContainerGroupProfiles_Delete",
+        "operationId": "CGProfile_Delete",
         "summary": "Container group profile DELETE REST API.",
         "description": "Deletes a container group profile.",
         "parameters": [
@@ -530,8 +567,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesDelete": {
+            "$ref": "./examples/ContainerGroupProfilesDelete.json"
           }
         }
       }
