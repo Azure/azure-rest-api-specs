@@ -270,11 +270,11 @@ union SoftDeleteFeatureState {
 @added(Versions.v2026_01_31_preview)
 union SourceSideScanStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Configured */
   Configured: "Configured",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Not configured */
   NotConfigured: "NotConfigured",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Not applicable */
   NotApplicable: "NotApplicable",
 }
 
@@ -284,13 +284,13 @@ union SourceSideScanStatus {
 @added(Versions.v2026_01_31_preview)
 union SourceSideScanSummary {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Unknown */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Not applicable */
   NotApplicable: "NotApplicable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Suspicious */
   Suspicious: "Suspicious",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Healthy */
   Healthy: "Healthy",
 }
 
@@ -316,15 +316,15 @@ model SourceSideScanInfo {
 @added(Versions.v2026_01_31_preview)
 union ThreatStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Unknown */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Healthy */
   Healthy: "Healthy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Unhealthy */
   UnHealthy: "UnHealthy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Warning */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Not available */
   NotAvailable: "NotAvailable",
 }
 
@@ -334,13 +334,13 @@ union ThreatStatus {
 @added(Versions.v2026_01_31_preview)
 union ThreatState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Active */
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** In progress */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Ignored */
   Ignored: "Ignored",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Resolved */
   Resolved: "Resolved",
 }
 
@@ -350,13 +350,13 @@ union ThreatState {
 @added(Versions.v2026_01_31_preview)
 union ThreatSeverity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Critical */
   Critical: "Critical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** High */
   High: "High",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Warning */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Informational */
   Informational: "Informational",
 }
 
@@ -713,13 +713,13 @@ union PolicyType {
 @added(Versions.v2026_01_31_preview)
 union VMWorkloadPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Invalid */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Snapshot V1 */
   SnapshotV1: "SnapshotV1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Snapshot V2 */
   SnapshotV2: "SnapshotV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Streaming */
   Streaming: "Streaming",
 }
 
@@ -818,9 +818,9 @@ union ProtectedItemState {
 @added(Versions.v2026_01_31_preview)
 union ProtectionLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Database */
   Database: "Database",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Database under instance */
   DatabaseUnderInstance: "DatabaseUnderInstance",
 }
 
@@ -830,15 +830,15 @@ union ProtectionLevel {
 @added(Versions.v2026_01_31_preview)
 union InstanceProtectionReadiness {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Unknown */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Ready */
   Ready: "Ready",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Schedule disabled */
   ScheduleDisabled: "ScheduleDisabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Partial protection */
   PartialProtection: "PartialProtection",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Protection error */
   ProtectionError: "ProtectionError",
 }
 
@@ -964,11 +964,11 @@ union RestorePointQueryType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SnapshotCopyOnlyFull: "SnapshotCopyOnlyFull",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Snapshot */
   @added(Versions.v2026_01_31_preview)
   Snapshot: "Snapshot",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Full, differential, and snapshot */
   @added(Versions.v2026_01_31_preview)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
@@ -1254,7 +1254,7 @@ union ContainerType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HanaHSRContainer: "HanaHSRContainer",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** HANA scale-out container */
   @added(Versions.v2026_01_31_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
@@ -4579,7 +4579,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   ...AzureVmWorkloadProtectedItemProperties;
 
   /**
-   * Parent Protected item in case protected as part of a parent.
+   * Name of the parent protected item (e.g., SQL Instance name) when this database is protected as part of a parent.
    */
   @added(Versions.v2026_01_31_preview)
   parentProtectedItem?: string;
@@ -5284,21 +5284,21 @@ model BmsrpQueryObject {
   /**
    * Id of the base snapshot recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   baseSnapshotRPId?: string;
 
   /**
    * Id of the datasource of the base snapshot recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   baseRPDatasourceId?: string;
 
   /**
    * Flag to indicate whether to get only the latest recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   getLatestRPOnly?: boolean;
 }
