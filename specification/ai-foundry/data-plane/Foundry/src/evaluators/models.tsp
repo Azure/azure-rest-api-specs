@@ -170,8 +170,8 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
-  @doc("Stable, human-readable slug assigned by the service on first generation. When editing criteria and saving as a new version, clients must echo the existing rubric_id to preserve identity across versions. Service-generated.")
-  @visibility(Lifecycle.Read)
+  @doc("Stable, human-readable slug assigned by the service on first generation. When editing criteria and saving as a new version, clients must echo the existing rubric_id to preserve identity across versions. Service-generated on first creation; client-echoed on subsequent saves.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   rubric_id?: string;
 
   @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
