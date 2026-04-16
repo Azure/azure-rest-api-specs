@@ -24,7 +24,7 @@ model DataExport is Azure.ResourceManager.ProxyResource<DataExportProperties> {
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface DataExports {
   /**
    * Gets a data export instance.
@@ -43,7 +43,10 @@ interface DataExports {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @tag("DataExport")
-  delete is ArmResourceDeleteSync<DataExport, Response = ArmDeletedResponse>;
+  delete is ArmResourceDeleteSync<
+    DataExport,
+    Response = ArmDeletedResponse | ArmNotFoundResponse
+  >;
 
   /**
    * Lists the data export instances within a workspace.

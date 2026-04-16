@@ -1785,6 +1785,9 @@
           "DataExportGet": {
             "$ref": "./examples/DataExportListByWorkspace.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1949,6 +1952,9 @@
         "responses": {
           "200": {
             "description": "Resource deleted successfully."
+          },
+          "404": {
+            "description": "ignore"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5732,6 +5738,10 @@
           "items": {
             "$ref": "#/definitions/DataExport"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },

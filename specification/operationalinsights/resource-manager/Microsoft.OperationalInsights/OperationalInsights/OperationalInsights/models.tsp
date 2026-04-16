@@ -1362,6 +1362,12 @@ model DataExportListResult {
    */
   @pageItems
   value?: DataExport[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3104,3 +3110,40 @@ model WorkspaceReplicationPatProperties {
 }
 
 @@identifiers(OperationListResult.value, #["name"]);
+
+/**
+ * ARM error response body.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+@error
+model ARMErrorResponseBody {
+  /**
+   * Gets or sets the string that describes the error in detail and provides debugging information.
+   */
+  message?: string;
+
+  /**
+   * Gets or sets the string that can be used to programmatically identify the error.
+   */
+  code?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ArmErrorResponse {
+  /**
+   * ARM error response body.
+   */
+  error?: ARMErrorResponseBody;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+@error
+model ArmNotFoundBodyResponse {
+  @body error: ArmErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+@doc("ignore")
+model ArmNotFoundResponse {
+  ...Response<404>;
+}
