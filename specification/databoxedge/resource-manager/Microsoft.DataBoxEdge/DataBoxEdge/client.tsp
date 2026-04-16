@@ -1782,7 +1782,7 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "csharp"
 );
 
-// Fix string → ResourceIdentifier breakings (baseline used arm-id format-by-name-rules)
+
 @@alternateType(JobProperties.refreshedEntityId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -1852,10 +1852,9 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "csharp"
 );
 
-// Fix string → ETag breaking (baseline had ETag? type)
 @@alternateType(DataBoxEdgeDevice.etag, Azure.Core.eTag, "csharp");
 
-// Fix TypesMustExist: naming mismatches (acronym casing + suffix renames)
+
 @@clientName(MECRole, "MecRole", "csharp");
 @@clientName(UploadCertificateRequest, "UploadCertificateContent", "csharp");
 @@clientName(DeviceCapacityRequestInfo,
@@ -1875,7 +1874,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "csharp"
 );
 
-// Round 1: Enum/union member acronym casing (baseline used PascalCase, generated uses ALL-CAPS)
 @@clientName(ShareAccessProtocol.SMB, "Smb", "csharp");
 @@clientName(ShareAccessProtocol.NFS, "Nfs", "csharp");
 @@clientName(RoleTypes.IOT, "IoT", "csharp");
@@ -1887,7 +1885,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(HostPlatformType.LinuxVM, "LinuxVm", "csharp");
 @@clientName(UserType.ARM, "Arm", "csharp");
 
-// Round 1: Property acronym casing (IPv4/IPv6/IP)
 @@clientName(NetworkAdapter.ipv4Configuration, "IPv4Configuration", "csharp");
 @@clientName(NetworkAdapter.ipv6Configuration, "IPv6Configuration", "csharp");
 @@clientName(NetworkAdapter.ipv6LinkLocalAddress,
@@ -1900,7 +1897,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(NodeInfo.ipConfiguration, "IPConfiguration", "csharp");
 @@clientName(NodeInfo.type, "NodeType", "csharp");
 
-// Round 1: Property name fixes (type→XxxType, URL→Uri, UTC casing, HyperV)
 @@clientName(EtcdInfo.type, "EtcdInfoType", "csharp");
 @@clientName(CniConfig.type, "CniConfigType", "csharp");
 @@clientName(KubernetesRoleStorageClassInfo.type,
@@ -1933,7 +1929,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "ImageRepositoryUri",
   "csharp"
 );
-// Round 1: SkuName member casing (22 members — generated ALL-CAPS → baseline PascalCase)
 @@clientName(SkuName.TEA_1Node, "Tea1Node", "csharp");
 @@clientName(SkuName.TEA_1Node_UPS, "Tea1NodeUps", "csharp");
 @@clientName(SkuName.TEA_1Node_Heater, "Tea1NodeHeater", "csharp");
@@ -1981,8 +1976,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@usage(TriggerSupportPackageRequest, Usage.input | Usage.output, "csharp");
 @@usage(UploadCertificateRequest, Usage.input | Usage.output, "csharp");
 @@usage(SecuritySettings, Usage.input | Usage.output, "csharp");
-// Input usage so generator produces public ctors + real setters on non-read-only properties,
-// matching the ApiCompat baseline for these output-only sub-resource models.
 @@usage(DeviceCapacityInfo, Usage.input | Usage.output, "csharp");
 @@usage(NetworkSettings, Usage.input | Usage.output, "csharp");
 @@usage(UpdateSummary, Usage.input | Usage.output, "csharp");
@@ -2055,7 +2048,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "csharp"
 );
 
-// Make roleStatus/hostPlatform nullable in C# to match baseline SDK API surface.
 @@alternateType(CloudEdgeManagementRoleProperties.roleStatus,
   RoleStatus | null,
   "csharp"
