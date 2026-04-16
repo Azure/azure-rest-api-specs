@@ -53,8 +53,10 @@ interface Actions {
   @get
   getAction(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the action.")
-    @path actionId: string,
+    @path
+    actionId: string,
   ): ActionResponse;
 
   @doc("Update an action by its unique identifier.")
@@ -62,8 +64,11 @@ interface Actions {
   @put
   updateAction(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the action.")
-    @path actionId: string,
+    @path
+    actionId: string,
+
     @body body: Record<unknown>,
   ): ActionResponse;
 
@@ -85,9 +90,7 @@ interface Alerts {
   @doc("List all alerts.")
   @route("/controls/alerts")
   @get
-  listAlerts(
-    ...ApiVersionParameter,
-  ): AlertListResponse;
+  listAlerts(...ApiVersionParameter): AlertListResponse;
 
   @doc("Create a new alert.")
   @route("/controls/alerts")
@@ -102,8 +105,10 @@ interface Alerts {
   @get
   getAlert(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the alert.")
-    @path id: string,
+    @path
+    id: string,
   ): AlertResponse;
 
   @doc("Update an alert by its unique identifier.")
@@ -111,8 +116,11 @@ interface Alerts {
   @put
   updateAlert(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the alert.")
-    @path id: string,
+    @path
+    id: string,
+
     @body body: Record<unknown>,
   ): AlertResponse;
 
@@ -121,8 +129,10 @@ interface Alerts {
   @delete
   deleteAlert(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the alert.")
-    @path id: string,
+    @path
+    id: string,
   ): void;
 }
 
@@ -135,9 +145,7 @@ interface AnalyticsSchedules {
   @doc("Get the analytics global schedule.")
   @route("/analytics/schedule")
   @get
-  getAnalyticsSchedule(
-    ...ApiVersionParameter,
-  ): AnalyticsScheduleResponse;
+  getAnalyticsSchedule(...ApiVersionParameter): AnalyticsScheduleResponse;
 
   @doc("Create or update the analytics global schedule.")
   @route("/analytics/schedule")
@@ -150,9 +158,7 @@ interface AnalyticsSchedules {
   @doc("Get analytics job logs for the global schedule.")
   @route("/analytics/schedule/getjoblogs")
   @get
-  getAnalyticsJobLogs(
-    ...ApiVersionParameter,
-  ): AnalyticsJobLogsResponse;
+  getAnalyticsJobLogs(...ApiVersionParameter): AnalyticsJobLogsResponse;
 }
 
 // ============================================================================
@@ -164,9 +170,7 @@ interface Assessments {
   @doc("List all assessments.")
   @route("/controls/assessments")
   @get
-  listAssessments(
-    ...ApiVersionParameter,
-  ): AssessmentListResponse;
+  listAssessments(...ApiVersionParameter): AssessmentListResponse;
 
   @doc("Create a new assessment.")
   @route("/controls/assessments")
@@ -181,8 +185,10 @@ interface Assessments {
   @get
   getAssessment(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the assessment.")
-    @path id: string,
+    @path
+    id: string,
   ): AssessmentResponse;
 
   @doc("Update an assessment by its unique identifier.")
@@ -190,8 +196,11 @@ interface Assessments {
   @put
   updateAssessment(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the assessment.")
-    @path id: string,
+    @path
+    id: string,
+
     @body body: Record<unknown>,
   ): AssessmentResponse;
 
@@ -200,8 +209,10 @@ interface Assessments {
   @delete
   deleteAssessment(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the assessment.")
-    @path id: string,
+    @path
+    id: string,
   ): void;
 
   @doc("Reset an assessment by its unique identifier.")
@@ -209,8 +220,10 @@ interface Assessments {
   @post
   resetAssessment(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the assessment.")
-    @path id: string,
+    @path
+    id: string,
   ): AssessmentResponse;
 }
 
@@ -223,17 +236,18 @@ interface Controls {
   @doc("List all governance controls.")
   @route("/controls")
   @get
-  listControls(
-    ...ApiVersionParameter,
-  ): ControlListResponse;
+  listControls(...ApiVersionParameter): ControlListResponse;
 
   @doc("Create a new governance control.")
   @route("/controls")
   @post
   createControl(
     ...ApiVersionParameter,
+
     @doc("Whether to create a new assessment along with the control.")
-    @query withNewAssessment?: boolean,
+    @query
+    withNewAssessment?: boolean,
+
     @body body: Record<unknown>,
   ): Created201Response<Record<unknown>>;
 
@@ -242,8 +256,10 @@ interface Controls {
   @get
   getControl(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the control.")
-    @path id: string,
+    @path
+    id: string,
   ): ControlResponse;
 
   @doc("Update a governance control by its unique identifier.")
@@ -251,8 +267,11 @@ interface Controls {
   @put
   updateControl(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the control.")
-    @path id: string,
+    @path
+    id: string,
+
     @body body: Record<unknown>,
   ): ControlResponse;
 
@@ -261,10 +280,14 @@ interface Controls {
   @delete
   deleteControl(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the control.")
-    @path id: string,
+    @path
+    id: string,
+
     @doc("Whether to also delete the associated assessment.")
-    @query deleteAssessment?: boolean,
+    @query
+    deleteAssessment?: boolean,
   ): void;
 
   @doc("Reset a governance control by its unique identifier.")
@@ -272,16 +295,16 @@ interface Controls {
   @post
   resetControl(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the control.")
-    @path id: string,
+    @path
+    id: string,
   ): ControlResponse;
 
   @doc("Reset all governance controls.")
   @route("/controls/reset")
   @post
-  resetAllControls(
-    ...ApiVersionParameter,
-  ): void;
+  resetAllControls(...ApiVersionParameter): void;
 }
 
 // ============================================================================
@@ -308,9 +331,7 @@ interface Schedules {
   @doc("Get the global control schedule.")
   @route("/controls/schedule")
   @get
-  getSchedule(
-    ...ApiVersionParameter,
-  ): ScheduleResponse;
+  getSchedule(...ApiVersionParameter): ScheduleResponse;
 
   @doc("Trigger a control schedule run.")
   @route("/controls/schedule/trigger")
@@ -349,17 +370,18 @@ interface Scores {
   @doc("List all governance scores.")
   @route("/scores")
   @get
-  listScores(
-    ...ApiVersionParameter,
-  ): ScoreListResponse;
+  listScores(...ApiVersionParameter): ScoreListResponse;
 
   @doc("Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.")
   @route("/scores/query")
   @post
   queryScores(
     ...ApiVersionParameter,
+
     @doc("Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.")
-    @query type: ScoreQueryType,
+    @query
+    type: ScoreQueryType,
+
     @body body: QueryScoresRequest,
   ): ScoreQueryResponse;
 }
@@ -369,17 +391,18 @@ interface ControlScores {
   @doc("List all governance scores (alias for /scores).")
   @route("/controls/scores")
   @get
-  listControlScores(
-    ...ApiVersionParameter,
-  ): ScoreListResponse;
+  listControlScores(...ApiVersionParameter): ScoreListResponse;
 
   @doc("Query scores via /controls/scores/query (alias for /scores/query).")
   @route("/controls/scores/query")
   @post
   queryControlScores(
     ...ApiVersionParameter,
+
     @doc("Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.")
-    @query type: ScoreQueryType,
+    @query
+    type: ScoreQueryType,
+
     @body body: QueryScoresRequest,
   ): ScoreQueryResponse;
 }
@@ -393,9 +416,7 @@ interface Settings {
   @doc("Get the current storage configuration.")
   @route("/settings/storageConfig")
   @get
-  getStorageConfig(
-    ...ApiVersionParameter,
-  ): StorageConfigResponse;
+  getStorageConfig(...ApiVersionParameter): StorageConfigResponse;
 
   @doc("Update the storage configuration.")
   @route("/settings/storageConfig")
@@ -409,9 +430,7 @@ interface Settings {
   @doc("Get a managed identity token for storage access.")
   @route("/settings/storageConfig/mitoken")
   @get
-  getMIToken(
-    ...ApiVersionParameter,
-  ): MITokenResponse;
+  getMIToken(...ApiVersionParameter): MITokenResponse;
 
   @doc("Test storage configuration connectivity.")
   @route("/settings/storageConfig/connectivity")
@@ -447,9 +466,7 @@ interface StatusPalettes {
   @doc("List all status palettes.")
   @route("/controls/statusPalette")
   @get
-  listStatusPalettes(
-    ...ApiVersionParameter,
-  ): StatusPaletteListResponse;
+  listStatusPalettes(...ApiVersionParameter): StatusPaletteListResponse;
 
   @doc("Create a new status palette.")
   @route("/controls/statusPalette")
@@ -464,8 +481,10 @@ interface StatusPalettes {
   @get
   getStatusPalette(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the status palette.")
-    @path id: string,
+    @path
+    id: string,
   ): StatusPaletteResponse;
 
   @doc("Update a status palette by its unique identifier.")
@@ -473,8 +492,11 @@ interface StatusPalettes {
   @put
   updateStatusPalette(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the status palette.")
-    @path id: string,
+    @path
+    id: string,
+
     @body body: Record<unknown>,
   ): StatusPaletteResponse;
 
@@ -483,8 +505,10 @@ interface StatusPalettes {
   @delete
   deleteStatusPalette(
     ...ApiVersionParameter,
+
     @doc("The unique identifier of the status palette.")
-    @path id: string,
+    @path
+    id: string,
   ): void;
 }
 
@@ -514,14 +538,22 @@ interface Tips {
   @get
   getTipEntities(
     ...ApiVersionParameter,
+
     @doc("The name of the tips container.")
-    @path containerName: string,
+    @path
+    containerName: string,
+
     @doc("Filter by entity ID.")
-    @query entityId?: string,
+    @query
+    entityId?: string,
+
     @doc("Filter by entity name.")
-    @query entityName?: string,
+    @query
+    entityName?: string,
+
     @doc("Maximum number of results to return. Default is 50.")
-    @query top?: int32 = 50,
+    @query
+    top?: int32 = 50,
   ): TipEntitiesResponse;
 }
 
