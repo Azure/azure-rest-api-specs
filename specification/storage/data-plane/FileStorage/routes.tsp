@@ -188,7 +188,7 @@ interface Share {
       ...EnableSnapshotVirtualDirectoryAccessHeader;
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
-      ...ShareProvisionedIopsRequestHeader;
+      ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
     },
@@ -196,21 +196,14 @@ interface Share {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** The share quota. */
-      @header("x-ms-share-quota") quota?: int64;
-
-      /** The provisioned IOPS. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int64;
-
+      ...ShareQuotaOptionalHeader;
+      ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
 
       /** The included burst IOPS. */
       @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int64;
 
-      /** The maximum burst credits for IOPS. */
-      @header("x-ms-share-max-burst-credits-for-iops")
-      maxBurstCreditsForIops?: int64;
+      ...MaxBurstCreditsForIopsOptionalHeader;
     }
   >;
 
@@ -230,9 +223,7 @@ interface Share {
       ...MetadataHeaders;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** The maximum quota for the share. */
-      @header("x-ms-share-quota") quota: int64;
+      ...ShareQuotaOptionalHeader;
 
       /** The provisioned IOPS for the share. */
       @header("x-ms-share-provisioned-iops") provisionedIops?: int64;
@@ -512,7 +503,7 @@ interface Share {
       ...EnableSnapshotVirtualDirectoryAccessHeader;
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
-      ...ShareProvisionedIopsRequestHeader;
+      ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
     },

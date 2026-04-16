@@ -1833,6 +1833,17 @@ alias PaidBurstingRequestHeaders = {
   paidBurstingMaxBandwidthMibps?: int64;
 };
 
+alias IncludedBurstIopsOptionalHeader = {
+  /** The included burst IOPS. */
+  @header("x-ms-share-included-burst-iops") includedBurstIops?: int64;
+};
+
+alias MaxBurstCreditsForIopsOptionalHeader = {
+  /** The maximum burst credits for IOPS. */
+  @header("x-ms-share-max-burst-credits-for-iops")
+  maxBurstCreditsForIops?: int64;
+};
+
 /** Paid bursting response headers for share get properties. */
 alias PaidBurstingResponseHeaders = {
   /** Whether paid bursting is enabled. */
@@ -1845,12 +1856,8 @@ alias PaidBurstingResponseHeaders = {
   @header("x-ms-share-paid-bursting-max-bandwidth-mibps")
   paidBurstingMaxBandwidthMibps?: int64;
 
-  /** The included burst IOPS. */
-  @header("x-ms-share-included-burst-iops") includedBurstIops?: int64;
-
-  /** The maximum burst credits for IOPS. */
-  @header("x-ms-share-max-burst-credits-for-iops")
-  maxBurstCreditsForIops?: int64;
+  ...IncludedBurstIopsOptionalHeader;
+  ...MaxBurstCreditsForIopsOptionalHeader;
 };
 
 //
@@ -2089,7 +2096,7 @@ alias ShareRootSquashRequestHeader = {
 };
 
 /** Share provisioned IOPS request header. */
-alias ShareProvisionedIopsRequestHeader = {
+alias ShareProvisionedIopsOptionalHeader = {
   /** Optional. Specifies the provisioned IOPS of the share. */
   @header("x-ms-share-provisioned-iops")
   shareProvisionedIops?: int64;
@@ -2346,8 +2353,7 @@ alias NfsTimestampResponseHeaders = {
 
 /** Share provisioning response headers (quota, IOPS, bandwidth, burst). Used in setProperties and restore responses. */
 alias ShareProvisioningResponseHeaders = {
-  /** The current share quota. */
-  @header("x-ms-share-quota") quota?: int64;
+  ...ShareQuotaOptionalHeader;
 
   /** The share provisioned IOPS. */
   @header("x-ms-share-provisioned-iops") provisionedIops?: int64;
@@ -2356,12 +2362,8 @@ alias ShareProvisioningResponseHeaders = {
   @header("x-ms-share-provisioned-bandwidth-mibps")
   provisionedBandwidthMibps?: int64;
 
-  /** The share included burst IOPS. */
-  @header("x-ms-share-included-burst-iops") includedBurstIops?: int64;
-
-  /** The share max burst credits for IOPS. */
-  @header("x-ms-share-max-burst-credits-for-iops")
-  maxBurstCreditsForIops?: int64;
+  ...IncludedBurstIopsOptionalHeader;
+  ...MaxBurstCreditsForIopsOptionalHeader;
 };
 
 /** Share downgrade time response headers. Used in getProperties and setProperties responses. */
