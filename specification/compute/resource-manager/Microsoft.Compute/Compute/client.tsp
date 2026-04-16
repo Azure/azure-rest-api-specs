@@ -88,6 +88,7 @@ namespace ComputeCombine;
 // ComputeSku property renames (C# backward compat)
 @@clientName(ComputeSku.ResourceSkuCosts.meterID, "MeterId", "csharp");
 @@clientName(ComputeSku.ResourceSkuRestrictions.type, "RestrictionsType", "csharp");
+@@clientName(ComputeSku.ExtendedLocationType, "ComputeExtendedLocationType", "csharp");
 @@clientName(ComputeSku.ResourceSkuLocationInfo.type, "ExtendedLocationType", "csharp");
 
 // ── alternateType: SubResource.id → ResourceIdentifier for C# (migration from AutoRest) ──
