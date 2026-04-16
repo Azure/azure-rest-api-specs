@@ -195,6 +195,15 @@ using Azure.AI.Projects;
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
 
+// Ensure SessionLogEvent and SessionLogEventType are emitted
+@@usage(SessionLogEvent, Usage.output);
+@@access(SessionLogEvent, Access.public);
+@@usage(SessionLogEventType, Usage.output);
+@@access(SessionLogEventType, Access.public);
+
+//Disabled convenient API generation for getSessionLogStream to handle deserialization manually
+@@convenientAPI(Agents.getSessionLogStream, false, "java");
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
