@@ -1,0 +1,11 @@
+parameters:
+  "service-dir":
+    default: "sdk/storage"
+options:
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Storage.Blobs.Batch"
+    model-namespace: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

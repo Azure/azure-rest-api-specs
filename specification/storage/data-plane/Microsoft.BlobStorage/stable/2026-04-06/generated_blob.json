@@ -4203,13 +4203,12 @@
         ],
         "parameters": [
           {
-            "name": "Content-Length",
+            "name": "x-ms-version",
             "in": "header",
-            "description": "The length of the request.",
+            "description": "Specifies the version of the operation to use for this request.",
             "required": true,
-            "type": "integer",
-            "format": "int64",
-            "x-ms-client-name": "contentLength"
+            "type": "string",
+            "x-ms-client-name": "version"
           },
           {
             "name": "timeout",
@@ -4221,14 +4220,6 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -4236,6 +4227,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "description": "The length of the request.",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "x-ms-client-name": "contentLength"
           },
           {
             "name": "body",

@@ -1555,7 +1555,14 @@ alias BlobContentLengthRequired = {
 };
 
 /** The deny encryption scope override response header. */
-alias DenyEncryptionScopeOverride = {
+alias DenyEncryptionScopeOverrideParameter = {
+  /** If a blob has a lease and the lease is of infinite duration then the value of this header is set to true, otherwise it is set to false. */
+  @header("x-ms-deny-encryption-scope-override")
+  preventEncryptionScopeOverride?: boolean;
+};
+
+/** The deny encryption scope override response header. */
+alias DenyEncryptionScopeOverrideResponseHeader = {
   /** If a blob has a lease and the lease is of infinite duration then the value of this header is set to true, otherwise it is set to false. */
   @header("x-ms-deny-encryption-scope-override")
   preventEncryptionScopeOverride?: boolean;
@@ -2611,7 +2618,7 @@ alias LeaseDurationHeaderParameter = {
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
+  @alternateType(Record<string>, "rust,javascript,python,csharp,go")
   @header("x-ms-meta")
   metadata?: string;
 };
@@ -2619,7 +2626,7 @@ alias MetadataHeaders = {
 // NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
 alias ObjectReplicationHeaders = {
   /** Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). */
-  @alternateType(Record<string>, "rust")
+  @alternateType(Record<string>, "rust,javascript,python,go")
   @header("x-ms-or")
   objectReplicationRules?: string;
 };
@@ -2653,7 +2660,7 @@ alias FilterBlobsIncludeParameter = {
 alias FilterBlobsWhereParameter = {
   /** Filters the results to return only to return only blobs whose tags match the specified expression. */
   @query
-  @clientName("filterExpression")
+  @clientName("filterExpression", "!python")
   where: string;
 };
 

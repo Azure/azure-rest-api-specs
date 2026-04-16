@@ -202,12 +202,15 @@ interface Service {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
+    @alternateType(string, "javascript,csharp")
     contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
     ...ContentLengthParameter,
+
+    /** The batch request content */
     ...MultipartBodyParameter,
   ): (MultipartBodyParameter & {
     @statusCode statusCode: 202;
@@ -260,7 +263,7 @@ interface Container {
       @header("x-ms-default-encryption-scope")
       defaultEncryptionScope?: string;
 
-      ...DenyEncryptionScopeOverride;
+      ...DenyEncryptionScopeOverrideParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -300,7 +303,7 @@ interface Container {
       @header("x-ms-default-encryption-scope")
       defaultEncryptionScope?: string;
 
-      ...DenyEncryptionScopeOverride;
+      ...DenyEncryptionScopeOverrideResponseHeader;
 
       /** Indicates whether version level worm is enabled on a container */
       @header("x-ms-immutable-storage-with-versioning-enabled")
@@ -442,17 +445,18 @@ interface Container {
   @post
   @route("?restype=container&comp=batch")
   submitBatch(
-    /** The batch request content */
-    ...MultipartBodyParameter,
-
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
+    @alternateType(string, "javascript")
     contentType: "multipart/mixed",
 
-    ...ContentLengthParameter,
-    ...TimeoutParameter,
     ...ApiVersionHeader,
+    ...TimeoutParameter,
     ...ClientRequestIdHeader,
+    ...ContentLengthParameter,
+
+    /** The batch request content */
+    ...MultipartBodyParameter,
   ): ({
     @statusCode statusCode: 202;
 
@@ -680,6 +684,7 @@ interface Blob {
     ...LeaseIdOptionalParameter,
 
     /** When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+    @clientName("rangeGetContentMD5", "javascript")
     @header("x-ms-range-get-content-md5")
     rangeGetContentMd5?: boolean,
 
@@ -874,6 +879,7 @@ interface Blob {
 
       /** For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier. */
       @header("x-ms-archive-status")
+      @alternateType(string, "go")
       archiveStatus?: ArchiveStatus;
 
       /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
