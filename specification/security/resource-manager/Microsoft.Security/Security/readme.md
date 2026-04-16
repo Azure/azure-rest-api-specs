@@ -136,7 +136,7 @@ These settings apply only when `--tag=package-preview-2026-04-only` is specified
 
 ```yaml $(tag) == 'package-preview-2026-04-only'
 input-file:
-  - preview/2026-04-01-preview/openapi.json
+  - preview/2026-04-01-preview/security-SqlVulnerabilityAssessments.json
 
 suppressions:
   - code: PathForResourceAction
@@ -206,7 +206,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - preview/2025-10-01-preview/openapi.json
+  - preview/2025-10-01-preview/security-Operations.json
   - preview/2025-10-01-preview/pricings.json
 ```
 
@@ -227,7 +227,7 @@ These settings apply only when `--tag=package-2025-05-04` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-04'
 input-file:
-  - stable/2025-05-04/openapi.json
+  - stable/2025-05-04/security-Assessment.json
 ```
 
 ### Tag: package-2025-03
@@ -313,7 +313,7 @@ These settings apply only when `--tag=package-2024-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-08'
 input-file:
-  - stable/2024-08-01/openapi.json
+  - stable/2024-08-01/security-SecurityStandards.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -380,7 +380,7 @@ These settings apply only when `--tag=package-preview-2023-12` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-12'
 input-file:
-  - preview/2023-12-01-preview/openapi.json
+  - preview/2023-12-01-preview/security-Automations.json
 ```
 
 ### Tag: package-2023-11-15
@@ -599,7 +599,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-08'
 input-file:
-  - preview/2021-08-01-preview/openapi.json
+  - preview/2021-08-01-preview/security-Standards.json
 
 override-info:
   title: SecurityCenter
@@ -696,29 +696,29 @@ input-file:
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2021-05-01-preview/softwareInventories.json
 - preview/2021-10-01-preview/mdeOnboardings.json
-- preview/2022-01-01-preview/openapi.json
+- preview/2022-01-01-preview/security-Governance.json
 - preview/2022-07-01-preview/applications.json
 - preview/2023-01-01-preview/securityOperators.json
-- preview/2026-04-01-preview/openapi.json
+- preview/2026-04-01-preview/security-SqlVulnerabilityAssessments.json
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
-- preview/2023-12-01-preview/openapi.json
+- preview/2023-12-01-preview/security-Automations.json
 - preview/2024-08-01-preview/securityConnectors.json
-- stable/2025-05-04/openapi.json
+- stable/2025-05-04/security-Assessment.json
 - preview/2025-09-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
-- preview/2025-10-01-preview/openapi.json
+- preview/2025-10-01-preview/security-Operations.json
 - stable/2017-08-01/complianceResults.json
 - stable/2019-01-01/advancedThreatProtectionSettings.json
-- stable/2019-08-01/openapi.json
+- stable/2019-08-01/security-IoTSecurity.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/openapi.json
+- stable/2020-01-01/security-SecuritySolutions.json
 - stable/2022-01-01/alerts.json
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
 - preview/2025-10-01-preview/pricings.json
-- stable/2024-08-01/openapi.json
+- stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
 
 # Autorest suppressions
@@ -798,26 +798,26 @@ input-file:
 - preview/2020-01-01-preview/securityContacts.json
 - preview/2021-05-01-preview/softwareInventories.json
 - preview/2021-10-01-preview/mdeOnboardings.json
-- preview/2022-01-01-preview/openapi.json
+- preview/2022-01-01-preview/security-Governance.json
 - preview/2022-07-01-preview/applications.json
 - preview/2022-12-01-preview/defenderForStorageSettings.json
 - preview/2023-01-01-preview/securityOperators.json
-- preview/2026-04-01-preview/openapi.json
+- preview/2026-04-01-preview/security-SqlVulnerabilityAssessments.json
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
 - preview/2023-10-01-preview/securityConnectors.json
 - stable/2017-08-01/complianceResults.json
 - stable/2019-01-01/advancedThreatProtectionSettings.json
-- stable/2019-08-01/openapi.json
+- stable/2019-08-01/security-IoTSecurity.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/openapi.json
-- stable/2025-05-04/openapi.json
+- stable/2020-01-01/security-SecuritySolutions.json
+- stable/2025-05-04/security-Assessment.json
 - stable/2022-01-01/alerts.json
 - stable/2022-05-01/settings.json
 - stable/2023-01-01/pricings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- stable/2024-08-01/openapi.json
+- stable/2024-08-01/security-SecurityStandards.json
 - stable/2025-03-01/securityConnectorsDevOps.json
 
 suppressions:
@@ -1041,7 +1041,7 @@ These settings apply only when `--tag=package-2019-08-python-only` is specified 
 
 ``` yaml $(tag) == 'package-2019-08-python-only'
 input-file:
-- stable/2019-08-01/openapi.json
+- stable/2019-08-01/security-IoTSecurity.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1089,7 +1089,7 @@ input-file:
 - stable/2020-01-01/assessmentMetadata.json
 - stable/2020-01-01/assessments.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/openapi.json
+- stable/2020-01-01/security-SecuritySolutions.json
 
 
 # Needed when there is more than one input file
@@ -1107,7 +1107,7 @@ input-file:
 - stable/2020-01-01/assessmentMetadata.json
 - stable/2020-01-01/assessments.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/openapi.json
+- stable/2020-01-01/security-SecuritySolutions.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1212,7 +1212,7 @@ These settings apply only when `--tag=package-2022-01-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2022-01-preview-only'
 input-file:
-  - preview/2022-01-01-preview/openapi.json
+  - preview/2022-01-01-preview/security-Governance.json
 
 # Needed when there is more than one input file
 override-info:
