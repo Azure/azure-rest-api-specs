@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/imageTemplates?api-version=2025-10-01&skip-token=2",
+        "value": [
+          {
+            "name": "myImageTemplate",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "location": "westus",
+            "properties": {
+              "customize": [
+                {
+                  "name": "Shell customization example",
+                  "type": "Shell",
+                  "scriptUri": "https://example.com/path/to/script.sh"
+                }
+              ],
+              "distribute": [
+                {
+                  "type": "ManagedImage",
+                  "artifactTags": {
+                    "tagName": "value"
+                  },
+                  "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+                  "location": "1_location",
+                  "runOutputName": "image_it_pir_1"
+                }
+              ],
+              "source": {
+                "type": "ManagedImage",
+                "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
+              },
+              "vmProfile": {
+                "osDiskSizeGB": 64,
+                "vmSize": "Standard_D2s_v3"
+              }
+            }
+          },
+          {
+            "name": "mySecondImageTemplate",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myOtherResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/mySecondImageTemplate",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "location": "westus",
+            "properties": {
+              "customize": [
+                {
+                  "name": "Shell customization example",
+                  "type": "Shell",
+                  "scriptUri": "https://example.com/path/to/script.sh"
+                }
+              ],
+              "distribute": [
+                {
+                  "type": "ManagedImage",
+                  "artifactTags": {
+                    "stage": "development"
+                  },
+                  "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/mySecondImage-eus",
+                  "location": "eastus",
+                  "runOutputName": "eus"
+                }
+              ],
+              "source": {
+                "type": "PlatformImage",
+                "offer": "UbuntuServer",
+                "planInfo": {
+                  "planName": "example_plan_name",
+                  "planProduct": "example_plan_product",
+                  "planPublisher": "example_plan_publisher"
+                },
+                "publisher": "Canonical",
+                "sku": "18.04-LTS",
+                "version": "18.04.201902121"
+              },
+              "vmProfile": {
+                "osDiskSizeGB": 32,
+                "vmSize": "Standard_D8s_v3"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineImageTemplates_List",
+  "title": "List images by subscription."
+}

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "imageTemplateName": "myImageTemplate",
+    "resourceGroupName": "myResourceGroup",
+    "runOutputName": "myManagedImageOutput",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myManagedImageOutput",
+        "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs",
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/myManagedImageOutput",
+        "properties": {
+          "artifactId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/output_managed_image",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineImageTemplates_GetRunOutput",
+  "title": "Retrieve single runOutput"
+}
