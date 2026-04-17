@@ -79,8 +79,12 @@ interface Projects {
   /**
    * Deletes a Cognitive Services project from the resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior — Projects_Delete always completes synchronously (HTTP 200)"
   @tag("CognitiveServicesProjects")
-  delete is ArmResourceDeleteWithoutOkAsync<Project>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Project,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all the projects in a Cognitive Services account.
