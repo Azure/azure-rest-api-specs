@@ -1968,14 +1968,14 @@ model JobResponse {
    * The start time of the job.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   startTimeUtc?: utcDateTime;
 
   /**
    * The time the job stopped processing.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   endTimeUtc?: utcDateTime;
 
   /**
@@ -2064,19 +2064,19 @@ model EndpointHealthData {
   /**
    * Time at which the last known error occurred
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   lastKnownErrorTime?: utcDateTime;
 
   /**
    * Last time iot hub successfully sent a message to the endpoint
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   lastSuccessfulSendAttemptTime?: utcDateTime;
 
   /**
    * Last time iot hub tried to send a message to the endpoint
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   lastSendAttemptTime?: utcDateTime;
 }
 
@@ -2472,7 +2472,7 @@ model CertificateProperties {
    * The certificate's expiration date and time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   expiry?: utcDateTime;
 
   /**
@@ -2490,14 +2490,14 @@ model CertificateProperties {
    * The certificate's create date and time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   created?: utcDateTime;
 
   /**
    * The certificate's last update date and time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   updated?: utcDateTime;
 
   /**
@@ -2559,7 +2559,7 @@ model CertificatePropertiesWithNonce {
    * The certificate's expiration date and time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   expiry?: utcDateTime;
 
   /**
@@ -2578,14 +2578,14 @@ model CertificatePropertiesWithNonce {
    * The certificate's create date and time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   created?: utcDateTime;
 
   /**
    * The certificate's last update date and time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode("rfc7231")
   updated?: utcDateTime;
 
   /**
