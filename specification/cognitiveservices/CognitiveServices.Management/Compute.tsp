@@ -81,7 +81,7 @@ interface Computes {
    * Updates a compute associated with the Cognitive Services account.
    */
   @tag("Computes")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Compute, PatchModel = Compute>;
 
   /**

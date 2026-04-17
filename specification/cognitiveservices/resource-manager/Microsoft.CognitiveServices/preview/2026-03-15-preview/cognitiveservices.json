@@ -2659,7 +2659,7 @@
             "description": "The compute properties to update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ComputeUpdate"
+              "$ref": "#/definitions/Compute"
             }
           }
         ],
@@ -12054,29 +12054,6 @@
       ],
       "x-ms-discriminator-value": "Cluster"
     },
-    "ClusterComputePropertiesUpdate": {
-      "type": "object",
-      "description": "Properties for a Cluster (AKS-backed) compute resource.",
-      "properties": {
-        "pools": {
-          "type": "array",
-          "description": "Pools attached to this compute cluster.",
-          "items": {
-            "$ref": "#/definitions/Pool"
-          }
-        },
-        "subnetArmId": {
-          "type": "string",
-          "description": "ARM ID of the subnet used for compute."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputePropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Cluster"
-    },
     "CommitmentCost": {
       "type": "object",
       "description": "Cognitive Services account commitment cost.",
@@ -12614,20 +12591,6 @@
         "computeType"
       ]
     },
-    "ComputePropertiesUpdate": {
-      "type": "object",
-      "description": "Base properties for all compute resource types.\nThe computeType discriminator determines the concrete property shape.",
-      "properties": {
-        "computeType": {
-          "$ref": "#/definitions/ComputeType",
-          "description": "The type of compute resource."
-        }
-      },
-      "discriminator": "computeType",
-      "required": [
-        "computeType"
-      ]
-    },
     "ComputeProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a compute resource.",
@@ -12730,36 +12693,6 @@
           }
         ]
       }
-    },
-    "ComputeUpdate": {
-      "type": "object",
-      "description": "Cognitive Services compute resource. Supports polymorphic compute types\n(Cluster, ContainerInstance) via the computeType discriminator in properties.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ComputePropertiesUpdate",
-          "description": "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind (type) of compute resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Identity for the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ConnectionAccessKey": {
       "type": "object",
@@ -13833,34 +13766,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ComputeProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerInstance"
-    },
-    "ContainerInstanceComputePropertiesUpdate": {
-      "type": "object",
-      "description": "Properties for a Container Instance compute resource.",
-      "properties": {
-        "targetClusterId": {
-          "type": "string",
-          "description": "ARM resource ID of the parent cluster that hosts this container instance."
-        },
-        "imageLink": {
-          "type": "string",
-          "description": "Container image URI (e.g., MCR or ACR image path) for the container instance."
-        },
-        "idleTimeBeforeShutdown": {
-          "type": "string",
-          "description": "ISO 8601 duration before the idle instance is automatically shut down (e.g., 'PT30M')."
-        },
-        "sshSettings": {
-          "$ref": "#/definitions/SshSettings",
-          "description": "SSH configuration for remote access to the container instance."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputePropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "ContainerInstance"
