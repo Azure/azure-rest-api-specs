@@ -29,20 +29,20 @@ These settings apply only when `--tag=package-2026-06-06` is specified on the co
 input-file: stable/2026-06-06/openapi.json
 ```
 
-### Release 3.0
-
-These settings apply only when `--tag=release_3_0` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_0'
-input-file: stable/3.0/openapi.json
-```
-
 ### Release 2025-10-01-preview
 
 These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2025-10-01-preview'
 input-file: preview/2025-10-01-preview/openapi.json
+```
+
+### Release 3.0
+
+These settings apply only when `--tag=release_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0'
+input-file: stable/3.0/openapi.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
