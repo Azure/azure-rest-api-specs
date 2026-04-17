@@ -118,8 +118,8 @@ union JobSourceType {
   @doc("Prompt source — inline text provided by the user.")
   Prompt: "Prompt",
 
-  @doc("Agent source — references an agent to fetch instructions and metadata from.")
-  Agent: "Agent",
+  @doc("Agent source — references a prompt agent to fetch instructions and metadata from.")
+  PromptAgent: "PromptAgent",
 
   @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
   Traces: "Traces",
@@ -135,7 +135,7 @@ model JobSource {
   type: JobSourceType;
 
   @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
-  purpose?: string;
+  description?: string;
 }
 
 @doc("Prompt source — inline text provided by the user.")
@@ -147,10 +147,10 @@ model PromptJobSource extends JobSource {
   prompt: string;
 }
 
-@doc("Agent source — references an agent to fetch instructions and metadata from. Optionally includes supplementary prompt text to augment the agent's instructions.")
-model AgentJobSource extends JobSource {
-  @doc("The source type for this source, which is Agent.")
-  type: "Agent";
+@doc("Prompt agent source — references a prompt agent to fetch instructions from. Optionally includes supplementary prompt text to augment the agent's instructions. Note: only prompt-based agents are supported; hosted agents do not expose fetchable instructions.")
+model PromptAgentJobSource extends JobSource {
+  @doc("The source type for this source, which is PromptAgent.")
+  type: "PromptAgent";
 
   @doc("The agent name to fetch instructions from.")
   agent_name: string;
@@ -170,7 +170,7 @@ model TracesJobSource extends JobSource {
   @doc("The agent name to fetch traces for.")
   agent_name: string;
 
-  @doc("The agent version. If not specified, the latest version is used.")
+  @doc("The agent version. If not specified, traces for ALL versions of the agent are included within the time window.")
   agent_version?: string;
 
   @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
