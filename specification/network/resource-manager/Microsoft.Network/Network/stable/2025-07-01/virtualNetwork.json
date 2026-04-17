@@ -15780,6 +15780,30 @@
         "customNetworkInterfaceName": {
           "type": "string",
           "description": "The custom name of the network interface attached to the private endpoint."
+        },
+        "billingSku": {
+          "type": "string",
+          "description": "The billing sku of the private endpoint.",
+          "enum": [
+            "PayAsYouGo",
+            "Fixed"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointBillingSku",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PayAsYouGo",
+                "value": "PayAsYouGo",
+                "description": "PayAsYouGo sku is the default price for private endpoints."
+              },
+              {
+                "name": "Fixed",
+                "value": "Fixed",
+                "description": "Fixed sku is best for high data processing private endpoints."
+              }
+            ]
+          }
         }
       }
     },
