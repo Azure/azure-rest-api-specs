@@ -214,9 +214,8 @@ model AgentVersionObject {
 
   definition: AgentDefinition;
 
-  @removed(Versions.v1)
   @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
-  status: AgentVersionStatus = AgentVersionStatus.active;
+  status?: AgentVersionStatus;
 
   @removed(Versions.v1)
   @doc("Error details if the agent version provisioning failed.")
@@ -263,7 +262,6 @@ model AgentVersionObject {
   agent_guid?: string;
 }
 
-@removed(Versions.v1)
 @doc("The provisioning status of an agent version.")
 union AgentVersionStatus {
   @doc("The agent version is being provisioned.")

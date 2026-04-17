@@ -19,7 +19,7 @@ alias CreateSkillRequest = {
   @maxLength(102400)
   instructions?: string;
 
-...MetadataPropertyForRequest;
+  ...MetadataPropertyForRequest;
 };
 
 alias CreateSkillFromPackageRequest = {
@@ -35,7 +35,7 @@ alias CreateSkillFromPackageRequest = {
 alias UpdateSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  skill_name: string;
+  name: string;
 
   @doc("A human-readable description of the skill.")
   @maxLength(1024)
@@ -51,13 +51,13 @@ alias UpdateSkillRequest = {
 alias GetSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  skill_name: string;
+  name: string;
 };
 
 alias DownloadSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  skill_name: string;
+  name: string;
 };
 
 alias ListSkillsRequest = {
@@ -67,7 +67,7 @@ alias ListSkillsRequest = {
 alias DeleteSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  skill_name: string;
+  name: string;
 };
 
 @doc("A skill object.")
