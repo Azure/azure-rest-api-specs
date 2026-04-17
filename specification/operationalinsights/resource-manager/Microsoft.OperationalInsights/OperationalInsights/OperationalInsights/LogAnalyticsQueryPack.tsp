@@ -26,7 +26,7 @@ model LogAnalyticsQueryPack
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface LogAnalyticsQueryPacks {
   /**
    * Returns a Log Analytics QueryPack.

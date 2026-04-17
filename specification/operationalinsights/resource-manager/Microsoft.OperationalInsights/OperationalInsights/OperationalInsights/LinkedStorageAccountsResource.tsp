@@ -56,7 +56,7 @@ alias LinkedStorageAccountsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface LinkedStorageAccountsResources {
   /**
    * Gets all linked storage account of a specific data source type associated with the specified workspace.

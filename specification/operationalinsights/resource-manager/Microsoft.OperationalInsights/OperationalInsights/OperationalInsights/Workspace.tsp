@@ -92,7 +92,7 @@ alias PurgeOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface Workspaces {
   /**
    * Gets a workspace instance.
@@ -341,7 +341,8 @@ interface Workspaces {
   failback is ArmResourceActionAsyncBase<
     Workspace,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>>,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
   >;
 }

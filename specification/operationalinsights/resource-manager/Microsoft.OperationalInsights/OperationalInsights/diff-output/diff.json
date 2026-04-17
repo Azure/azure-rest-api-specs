@@ -635,9 +635,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -771,9 +768,6 @@
           ]
         ],
         "responses": {
-          "404__deleted": {
-            "description": "ignore"
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -2893,6 +2887,25 @@
           }
         ]
       ]
+    },
+    "DataExportListResult": {
+      "description": {
+        "__old": "Result of the request to list data exports.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "List of data export instances within a workspace..",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
     },
     "DataSource": {
       "properties": {

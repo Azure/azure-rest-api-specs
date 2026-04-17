@@ -440,18 +440,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].put.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-
-### Changes for `404`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports/{dataExportName}'].delete.responses.404__deleted` | deleted | `{"description":"ignore"}` |
-
 ### Changes for `x-ms-odata`
 
 | Path | Change Type | Value |
@@ -531,6 +519,18 @@
 | `definitions.LogAnalyticsQueryPackQueryProperties.properties.description.readOnly__deleted` | deleted | `false` |
 | `definitions.LogAnalyticsQueryPackQueryProperties.properties.displayName.readOnly__deleted` | deleted | `false` |
 
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.DataExportListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.LinkedServiceListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.LinkedStorageAccountsListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.TablesListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.WorkspaceListManagementGroupsResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.WorkspaceListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.WorkspaceListUsagesResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+
 ### Changes for `properties`
 
 | Path | Change Type | Value |
@@ -539,17 +539,6 @@
 | `definitions.LogAnalyticsQueryPackQueryProperties.properties.related.properties__deleted` | deleted | `{"categories":{"type":"array","description":"The related categories for the function.","items":{"typ...` |
 | `definitions.LogAnalyticsQueryPackQuerySearchProperties.properties.related.properties__deleted` | deleted | `{"categories":{"type":"array","description":"The related categories for the function.","items":{"typ...` |
 | `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","description":"Service provider: Microsoft OperationsManagement."},"res...` |
-
-### Changes for `nextLink`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LinkedServiceListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
-| `definitions.LinkedStorageAccountsListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
-| `definitions.TablesListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
-| `definitions.WorkspaceListManagementGroupsResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
-| `definitions.WorkspaceListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
-| `definitions.WorkspaceListUsagesResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 
 ### Changes for `multipleOf`
 
@@ -575,6 +564,8 @@
 | `definitions.Cluster.properties.identity.description` | `Resource's identity.` | `The managed service identities assigned to this resource.` |
 | `definitions.ClusterPatch.properties.identity.$ref` | `../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.DataExport.allOf[0].$ref` | `../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource` | `../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.DataExportListResult.description` | `Result of the request to list data exports.` | `[Placeholder] Discription for page model` |
+| `definitions.DataExportListResult.properties.value.description` | `List of data export instances within a workspace..` | `[Placeholder] Discription for value property` |
 | `definitions.DataSource.allOf[0].$ref` | `../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource` | `../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.LinkedService.allOf[0].$ref` | `../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource` | `../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.LinkedServiceListResult.description` | `The list linked service operation response.` | `[Placeholder] Discription for page model` |

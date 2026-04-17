@@ -23,7 +23,7 @@ model SummaryLogs
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface SummaryLogsOperationGroup {
   /**
    * Gets Log Analytics workspace Summary rules.

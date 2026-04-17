@@ -1318,6 +1318,9 @@
           "DataExportGet": {
             "$ref": "./examples/DataExportListByWorkspace.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1447,6 +1450,9 @@
         ],
         "responses": {
           "200": {
+            "description": "ignore"
+          },
+          "404": {
             "description": "ignore"
           },
           "default": {
@@ -4363,14 +4369,19 @@
     },
     "DataExportListResult": {
       "type": "object",
-      "description": "Result of the request to list data exports.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of data export instances within a workspace..",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/DataExport"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },

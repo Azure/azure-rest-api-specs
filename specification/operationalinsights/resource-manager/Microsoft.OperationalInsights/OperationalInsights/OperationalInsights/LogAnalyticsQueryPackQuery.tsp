@@ -25,7 +25,7 @@ model LogAnalyticsQueryPackQuery
   >;
 }
 
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface LogAnalyticsQueryPackQueries {
   /**
    * Gets a specific Log Analytics Query defined within a Log Analytics QueryPack.
