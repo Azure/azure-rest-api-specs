@@ -23,7 +23,8 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
-  @removed(Versions.v2026_05_15_preview)
+
+  @removed(Versions.v2026_05_01)
   redactionPolicy?: BaseRedactionPolicy;
 
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
@@ -35,7 +36,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   entitySynonyms?: EntitySynonyms[];
 
   /** List of RedactionPolicies to be used on the input. */
-  @added(Versions.v2026_05_15_preview)
+  @added(Versions.v2026_05_01)
   redactionPolicies?: BaseRedactionPolicy[];
 
   /** Confidence score threshold configuration for PII entity recognition */
@@ -48,6 +49,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
   @added(Versions.v2024_11_15_preview)
+  @removed(Versions.v2026_05_01)
   excludeExtractionData?: boolean;
 }
 
@@ -139,15 +141,15 @@ model BaseRedactionPolicy {
   policyKind: RedactionPolicyKind;
 
   /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
-  @added(Versions.v2026_05_15_preview)
+  @added(Versions.v2026_05_01)
   entityTypes?: PiiCategories[];
 
   /** (Optional) name of the redaction policy for identification purposes. */
-  @added(Versions.v2026_05_15_preview)
+  @added(Versions.v2026_05_01)
   policyName?: string;
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
-  @added(Versions.v2026_05_15_preview)
+  @added(Versions.v2026_05_01)
   isDefault?: boolean = false;
 }
 
@@ -258,7 +260,7 @@ model EntityTag {
 }
 
 /** (Optional) describes the PII categories to return */
-@renamedFrom(Versions.v2026_05_15_preview, "PiiCategory")
+@renamedFrom(Versions.v2026_05_01, "PiiCategory")
 union PiiCategoriesExtended {
   string,
   PiiCategories,
@@ -281,7 +283,7 @@ model PiiEntityRecognitionLROResult extends AnalyzeDocumentsLROResult {
 }
 
 /** (Optional) describes the PII categories to return */
-@renamedFrom(Versions.v2026_05_15_preview, "PiiCategoriesExclude")
+@renamedFrom(Versions.v2026_05_01, "PiiCategoriesExclude")
 union PiiCategories {
   string,
 

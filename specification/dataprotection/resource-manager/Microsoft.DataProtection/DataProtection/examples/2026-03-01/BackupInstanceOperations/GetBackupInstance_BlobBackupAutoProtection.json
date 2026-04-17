@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "backupInstanceName": "blobbackupinstance",
+    "resourceGroupName": "blobrg",
+    "subscriptionId": "54707983-993e-43de-8d94-074451394eda",
+    "vaultName": "blobvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "blobbackupinstance",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "id": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/blobrg/providers/Microsoft.DataProtection/backupVaults/blobvault/backupInstances/blobbackupinstance",
+        "properties": {
+          "currentProtectionState": "ProtectionConfigured",
+          "dataSourceInfo": {
+            "datasourceType": "Microsoft.Storage/storageAccounts/blobServices",
+            "objectType": "Datasource",
+            "resourceID": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/blobrg/providers/Microsoft.Storage/storageAccounts/blobstorageaccount",
+            "resourceLocation": "centraluseuap",
+            "resourceName": "blobstorageaccount",
+            "resourceType": "Microsoft.Storage/storageAccounts",
+            "resourceUri": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/blobrg/providers/Microsoft.Storage/storageAccounts/blobstorageaccount"
+          },
+          "dataSourceSetInfo": {
+            "datasourceType": "Microsoft.Storage/storageAccounts/blobServices",
+            "objectType": "DatasourceSet",
+            "resourceID": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/blobrg/providers/Microsoft.Storage/storageAccounts/blobstorageaccount",
+            "resourceLocation": "centraluseuap",
+            "resourceName": "blobstorageaccount",
+            "resourceType": "Microsoft.Storage/storageAccounts",
+            "resourceUri": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/blobrg/providers/Microsoft.Storage/storageAccounts/blobstorageaccount"
+          },
+          "friendlyName": "blobbackupinstance",
+          "objectType": "BackupInstance",
+          "policyInfo": {
+            "policyId": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/blobrg/providers/Microsoft.DataProtection/backupVaults/blobvault/backupPolicies/blobpolicy",
+            "policyParameters": {
+              "backupDatasourceParametersList": [
+                {
+                  "autoProtectionSettings": {
+                    "enabled": true,
+                    "objectType": "BlobBackupRuleBasedAutoProtectionSettings",
+                    "rules": [
+                      {
+                        "objectType": "BlobBackupAutoProtectionRule",
+                        "mode": "Exclude",
+                        "type": "Prefix",
+                        "pattern": "temp-"
+                      },
+                      {
+                        "objectType": "BlobBackupAutoProtectionRule",
+                        "mode": "Exclude",
+                        "type": "Prefix",
+                        "pattern": "test-"
+                      }
+                    ]
+                  },
+                  "objectType": "BlobBackupDatasourceParametersForAutoProtection"
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "ProtectionConfigured"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "BackupInstances_Get",
+  "title": "Get BackupInstance with BlobBackupAutoProtection"
+}

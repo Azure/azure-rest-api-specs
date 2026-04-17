@@ -383,6 +383,11 @@ union Type {
    * PrometheusRangeQuery
    */
   PrometheusRangeQuery: "PrometheusRangeQuery",
+
+  /**
+   * PrometheusEnrichmentItem
+   */
+  PrometheusEnrichmentItem: "PrometheusEnrichmentItem",
 }
 
 /**
@@ -1124,7 +1129,7 @@ model MonitorServiceDetails {
 /**
  * Prometheus enrichment object.
  */
-model PrometheusEnrichmentItem is AlertEnrichmentItem {
+model PrometheusEnrichmentItem extends AlertEnrichmentItem {
   /**
    * Link to Prometheus query API (Url format).
    */
@@ -1144,6 +1149,8 @@ model PrometheusEnrichmentItem is AlertEnrichmentItem {
    * The Prometheus expression query.
    */
   query: string;
+
+  type: Type.PrometheusEnrichmentItem;
 }
 
 alias PrometheusEnrichmentItemProperties = {
@@ -1185,7 +1192,7 @@ model PrometheusInstantQuery extends AlertEnrichmentItem {
   /**
    * The enrichment type.
    */
-  type: "PrometheusInstantQuery";
+  type: Type.PrometheusInstantQuery;
 }
 
 /**
@@ -1217,5 +1224,5 @@ model PrometheusRangeQuery extends AlertEnrichmentItem {
   /**
    * The enrichment type.
    */
-  type: "PrometheusRangeQuery";
+  type: Type.PrometheusRangeQuery;
 }
