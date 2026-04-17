@@ -31,16 +31,12 @@ interface LogAnalyticsQueryPacks {
   /**
    * Returns a Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueryPacks_Get")
   get is ArmResourceRead<LogAnalyticsQueryPack>;
 
   /**
    * Creates (or updates) a Log Analytics QueryPack. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("QueryPacks_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LogAnalyticsQueryPack,
     Response = ArmResourceUpdatedResponse<LogAnalyticsQueryPack>
@@ -49,8 +45,6 @@ interface LogAnalyticsQueryPacks {
   /**
    * Updates an existing QueryPack's tags. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueryPacks_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     LogAnalyticsQueryPack,
@@ -60,29 +54,21 @@ interface LogAnalyticsQueryPacks {
   /**
    * Deletes a Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueryPacks_Delete")
   delete is ArmResourceDeleteSync<LogAnalyticsQueryPack>;
 
   /**
    * Gets a list of Log Analytics QueryPacks within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueryPacks_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<LogAnalyticsQueryPack>;
 
   /**
    * Gets a list of all Log Analytics QueryPacks within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueryPacks_List")
   list is ArmListBySubscription<LogAnalyticsQueryPack>;
 
   /**
    * Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Queries_Search")
   @list
   @action("queries/search")
   search is ArmResourceActionSync<

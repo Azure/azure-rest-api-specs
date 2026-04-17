@@ -27,13 +27,13 @@ model StorageInsight
   /**
    * The ETag of the storage insight.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -43,29 +43,21 @@ interface StorageInsights {
   /**
    * Gets a storage insight instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("StorageInsightConfigs_Get")
   get is ArmResourceRead<StorageInsight>;
 
   /**
    * Create or update a storage insight.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("StorageInsightConfigs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<StorageInsight>;
 
   /**
    * Deletes a storageInsightsConfigs resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("StorageInsightConfigs_Delete")
   delete is ArmResourceDeleteSync<StorageInsight>;
 
   /**
    * Lists the storage insight instances within a workspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("StorageInsightConfigs_ListByWorkspace")
   listByWorkspace is ArmResourceListByParent<
     StorageInsight,
     Response = ArmResponse<StorageInsightListResult>

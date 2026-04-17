@@ -3,38 +3,38 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.OperationalInsights;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClusterPatch.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataExportProperties.destination);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Destination.metaData);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagementGroup.properties);
 
 @@clientName(SearchMetadata.requestId, "SearchId");
 
 @@clientName(StorageInsightListResult.`@odata.nextLink`, "odataNextLink");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkspacePatch.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Clusters.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Cluster.properties);
 
 @@clientName(DataExports.createOrUpdate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataExport.properties);
 
 @@clientName(DataSources.createOrUpdate::parameters.resource, "parameters");
 
 @@clientName(LinkedServices.createOrUpdate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LinkedService.properties);
 
 @@clientLocation(LinkedStorageAccountsResources.get, "LinkedStorageAccounts");
@@ -50,7 +50,7 @@ using Microsoft.OperationalInsights;
 @@clientLocation(LinkedStorageAccountsResources.listByWorkspace,
   "LinkedStorageAccounts"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LinkedStorageAccountsResource.properties);
 
 @@clientLocation(LogAnalyticsQueryPackQueries.get, "Queries");
@@ -64,7 +64,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientLocation(LogAnalyticsQueryPackQueries.delete, "Queries");
 @@clientLocation(LogAnalyticsQueryPackQueries.list, "Queries");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LogAnalyticsQueryPackQuery.properties);
 
 @@clientLocation(LogAnalyticsQueryPacks.get, "QueryPacks");
@@ -83,11 +83,11 @@ using Microsoft.OperationalInsights;
 @@clientName(LogAnalyticsQueryPacks.search::parameters.body,
   "QuerySearchProperties"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LogAnalyticsQueryPack.properties);
 
 @@clientName(SavedSearches.createOrUpdate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SavedSearch.properties);
 
 @@clientLocation(StorageInsights.get, "StorageInsightConfigs");
@@ -95,12 +95,12 @@ using Microsoft.OperationalInsights;
 @@clientName(StorageInsights.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(StorageInsights.delete, "StorageInsightConfigs");
 @@clientLocation(StorageInsights.listByWorkspace, "StorageInsightConfigs");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageInsight.properties);
 
 @@clientName(Tables.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Tables.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Table.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "parameters");
@@ -122,7 +122,7 @@ using Microsoft.OperationalInsights;
 @@clientName(Workspaces.usagesList, "List");
 @@clientLocation(Workspaces.purge, "WorkspacePurge");
 @@clientLocation(Workspaces.getPurgeStatus, "WorkspacePurge");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Workspace.properties);
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.getNSP, Workspaces);
@@ -145,7 +145,7 @@ using Microsoft.OperationalInsights;
 @@clientLocation(SummaryLogsOperationGroup.stop, "SummaryLogs");
 @@clientLocation(SummaryLogsOperationGroup.retryBin, "SummaryLogs");
 @@clientName(SummaryLogsOperationGroup.retryBin::parameters.body, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SummaryLogs.properties);
 
 @@clientLocation(OperationStatusesOperationGroup.get, "OperationStatuses");

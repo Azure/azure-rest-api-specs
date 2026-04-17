@@ -485,12 +485,6 @@
 |------|------------|-------|
 | `definitions.WorkspaceReplicationPatProperties__deleted` | deleted | `{"type":"object","description":"Workspace replication properties.","properties":{"location":{"type":...` |
 
-### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>__added']` | added | `{"type":"object","description":"Resource operation accepted."}` |
-
 ### Changes for `LogAnalyticsQueryPackQueryPropertiesRelated`
 
 | Path | Change Type | Value |

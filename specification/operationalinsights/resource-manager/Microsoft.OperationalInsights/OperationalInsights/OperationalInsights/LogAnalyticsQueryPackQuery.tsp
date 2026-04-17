@@ -30,16 +30,12 @@ interface LogAnalyticsQueryPackQueries {
   /**
    * Gets a specific Log Analytics Query defined within a Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Queries_Get")
   get is ArmResourceRead<LogAnalyticsQueryPackQuery>;
 
   /**
    * Adds or Updates a specific Query within a Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Queries_Put")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   put is ArmResourceCreateOrReplaceSync<
     LogAnalyticsQueryPackQuery,
     Response = ArmResourceUpdatedResponse<LogAnalyticsQueryPackQuery>
@@ -48,8 +44,6 @@ interface LogAnalyticsQueryPackQueries {
   /**
    * Adds or Updates a specific Query within a Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Queries_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     LogAnalyticsQueryPackQuery,
@@ -59,15 +53,11 @@ interface LogAnalyticsQueryPackQueries {
   /**
    * Deletes a specific Query defined within an Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Queries_Delete")
   delete is ArmResourceDeleteSync<LogAnalyticsQueryPackQuery>;
 
   /**
    * Gets a list of Queries defined within a Log Analytics QueryPack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Queries_List")
   list is ArmResourceListByParent<
     LogAnalyticsQueryPackQuery,
     Parameters = {

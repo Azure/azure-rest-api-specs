@@ -27,7 +27,7 @@ model SavedSearch
   /**
    * The ETag of the saved search. To override an existing saved search, use "*" or specify the current Etag
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -41,7 +41,7 @@ interface SavedSearches {
   /**
    * Creates or updates a saved search for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SavedSearch,
     Response = ArmResourceUpdatedResponse<SavedSearch>
@@ -50,7 +50,7 @@ interface SavedSearches {
   /**
    * Deletes the specified saved search in a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<SavedSearch, Response = ArmDeletedResponse>;
 
   /**

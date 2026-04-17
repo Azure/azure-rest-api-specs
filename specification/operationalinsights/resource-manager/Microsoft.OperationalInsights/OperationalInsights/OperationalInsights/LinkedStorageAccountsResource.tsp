@@ -61,17 +61,13 @@ interface LinkedStorageAccountsResources {
   /**
    * Gets all linked storage account of a specific data source type associated with the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LinkedStorageAccounts_Get")
   @tag("LinkedStorageAccounts")
   get is LinkedStorageAccountsOps.Read<LinkedStorageAccountsResource>;
 
   /**
    * Create or Update a link relation between current workspace and a group of storage accounts of a specific data source type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("LinkedStorageAccounts_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("LinkedStorageAccounts")
   createOrUpdate is LinkedStorageAccountsOps.CreateOrUpdateSync<
     LinkedStorageAccountsResource,
@@ -81,9 +77,7 @@ interface LinkedStorageAccountsResources {
   /**
    * Deletes all linked storage accounts of a specific data source type associated with the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("LinkedStorageAccounts_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("LinkedStorageAccounts")
   delete is LinkedStorageAccountsOps.DeleteSync<
     LinkedStorageAccountsResource,
@@ -93,8 +87,6 @@ interface LinkedStorageAccountsResources {
   /**
    * Gets all linked storage accounts associated with the specified workspace, storage accounts will be sorted by their data source type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LinkedStorageAccounts_ListByWorkspace")
   @tag("LinkedStorageAccounts")
   listByWorkspace is LinkedStorageAccountsOps.List<
     LinkedStorageAccountsResource,

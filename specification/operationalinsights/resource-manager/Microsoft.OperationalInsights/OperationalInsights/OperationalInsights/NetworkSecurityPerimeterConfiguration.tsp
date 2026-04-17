@@ -61,8 +61,6 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Workspaces_GetNSP")
   @tag("NetworkSecurityPerimeterConfigurations")
   getNSP is NSPOps.Read<
     NetworkSecurityPerimeterConfiguration,
@@ -72,8 +70,6 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a list of NSP configurations for specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Workspaces_ListNSP")
   @tag("NetworkSecurityPerimeterConfigurations")
   listNSP is NSPOps.List<
     NetworkSecurityPerimeterConfiguration,
@@ -83,8 +79,6 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Reconcile network security perimeter configuration for Workspace resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Workspaces_ReconcileNSP")
   @action("reconcile")
   @tag("NetworkSecurityPerimeterConfigurations")
   reconcileNSP is NSPOps.ActionAsync<

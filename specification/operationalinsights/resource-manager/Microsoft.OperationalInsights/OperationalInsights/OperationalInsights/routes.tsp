@@ -13,13 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.OperationalInsights;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusesOperationGroup {
   /**
    * Get the status of a long running azure asynchronous operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationStatuses_Get")
   @tag("asyncOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}")
   @get
@@ -37,13 +35,11 @@ interface OperationStatusesOperationGroup {
   ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface QueryPacksOperationGroup {
   /**
    * Creates a Log Analytics QueryPack. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueryPacks_CreateOrUpdateWithoutName")
   @autoRoute
   @put
   @action("queryPacks")
@@ -54,21 +50,18 @@ interface QueryPacksOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface WorkspacesOperationGroup {
   /**
    * Activates failover for the specified workspace.
    *
    * The specified replication location must match the location of the enabled replication for this workspace. The failover operation is asynchronous and can take up to 30 minutes to complete. The status of the operation can be checked using the operationId returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Workspaces_Failover")
   @tag("Workspaces")
   @autoRoute
   failover is ArmProviderActionAsync<
     Scope = Extension.ResourceGroup,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmAcceptedLroResponse,
     Parameters = {
       ...LocationParameter;
 
@@ -81,17 +74,17 @@ interface WorkspacesOperationGroup {
       @path
       @segment("workspaces")
       workspaceName: string;
-    }
+    },
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DeletedWorkspacesOperationGroup {
   /**
    * Gets recently deleted workspaces in a subscription, available for recovery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedWorkspaces_List")
   @tag("DeletedWorkspaces")
   @autoRoute
   @list
@@ -104,8 +97,6 @@ interface DeletedWorkspacesOperationGroup {
   /**
    * Gets recently deleted workspaces in a resource group, available for recovery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedWorkspaces_ListByResourceGroup")
   @tag("DeletedWorkspaces")
   @autoRoute
   @list

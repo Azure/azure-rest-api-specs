@@ -24,13 +24,13 @@ model Workspace is Azure.ResourceManager.TrackedResource<WorkspaceProperties> {
   /**
    * The identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 
   /**
    * The etag of the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -103,7 +103,7 @@ interface Workspaces {
   /**
    * Create or update a workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
@@ -124,7 +124,7 @@ interface Workspaces {
   /**
    * Deletes a workspace resource. To recover the workspace, create it again with the same name, in the same subscription, resource group and location. The name is kept for 14 days and cannot be used for another workspace. To remove the workspace completely and release the name, use the force flag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
@@ -159,8 +159,6 @@ interface Workspaces {
   /**
    * Gets the available service tiers for the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AvailableServiceTiers_ListByWorkspace")
   @tag("AvailableServiceTiers")
   @get
   @action("availableServiceTiers")
@@ -173,16 +171,12 @@ interface Workspaces {
   /**
    * Delete a Log Analytics gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateways_Delete")
   @tag("Workspaces")
   gatewaysDelete is GatewayOps.DeleteSync<Workspace, Response = OkResponse>;
 
   /**
    * Disables an intelligence pack for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntelligencePacks_Disable")
   @tag("Workspaces")
   @tag("IntelligencePacks")
   @action("Disable")
@@ -203,8 +197,6 @@ interface Workspaces {
   /**
    * Enables an intelligence pack for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntelligencePacks_Enable")
   @tag("Workspaces")
   @tag("IntelligencePacks")
   @action("Enable")
@@ -225,8 +217,6 @@ interface Workspaces {
   /**
    * Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntelligencePacks_List")
   @tag("Workspaces")
   @tag("IntelligencePacks")
   @get
@@ -240,8 +230,6 @@ interface Workspaces {
   /**
    * Gets a list of management groups connected to a workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagementGroups_List")
   @tag("Workspaces")
   @list
   @get
@@ -255,8 +243,6 @@ interface Workspaces {
   /**
    * Gets the schema for a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schema_Get")
   @tag("Workspaces")
   @list
   @action("schema")
@@ -269,8 +255,6 @@ interface Workspaces {
   /**
    * Gets the shared keys for a workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SharedKeys_GetSharedKeys")
   @tag("Workspaces")
   @action("sharedKeys")
   getSharedKeys is ArmResourceActionSync<
@@ -282,8 +266,6 @@ interface Workspaces {
   /**
    * Regenerates the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SharedKeys_Regenerate")
   @tag("Workspaces")
   @action("regenerateSharedKey")
   regenerate is ArmResourceActionSync<Workspace, void, ArmResponse<SharedKeys>>;
@@ -291,8 +273,6 @@ interface Workspaces {
   /**
    * Gets a list of usage metrics for a workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Usages_List")
   @tag("Workspaces")
   @list
   @get
@@ -309,8 +289,6 @@ interface Workspaces {
    * In order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.
    * Log Analytics only supports purge operations required for compliance with GDPR. The Log Analytics product team reserves the right to reject requests for purge operations that are not for the purpose of GDPR compliance. In the event of a dispute, please create a support ticket
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspacePurge_Purge")
   @tag("Workspaces")
   purge is ArmResourceActionSync<
     Workspace,
@@ -324,8 +302,6 @@ interface Workspaces {
   /**
    * Gets status of an ongoing purge operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspacePurge_GetPurgeStatus")
   @tag("Workspaces")
   getPurgeStatus is PurgeOps.Read<
     Workspace,

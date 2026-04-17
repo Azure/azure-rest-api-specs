@@ -28,16 +28,12 @@ interface SummaryLogsOperationGroup {
   /**
    * Gets Log Analytics workspace Summary rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SummaryLogs_Get")
   @tag("SummaryRules")
   get is SummaryLogsOps.Read<SummaryLogs>;
 
   /**
    * Creates or updates Log Analytics workspace Summary rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SummaryLogs_CreateOrUpdate")
   @tag("SummaryRules")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
@@ -54,9 +50,7 @@ interface SummaryLogsOperationGroup {
   /**
    * Deletes Log Analytics workspace Summary rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("SummaryLogs_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SummaryRules")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is SummaryLogsOps.DeleteWithoutOkAsync<
@@ -67,16 +61,12 @@ interface SummaryLogsOperationGroup {
   /**
    * Gets all summary rules for the specified Log Analytics workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SummaryLogs_ListByWorkspace")
   @tag("SummaryRules")
   listByWorkspace is SummaryLogsOps.List<SummaryLogs>;
 
   /**
    * Starts an inactive Summary rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SummaryLogs_Start")
   @tag("SummaryRules")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   start is SummaryLogsOps.ActionAsync<
@@ -90,16 +80,12 @@ interface SummaryLogsOperationGroup {
   /**
    * Stops an active Summary rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SummaryLogs_Stop")
   @tag("SummaryRules")
   stop is SummaryLogsOps.ActionSync<SummaryLogs, void, OkResponse>;
 
   /**
    * Retries a failed Summary rule bin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SummaryLogs_RetryBin")
   @tag("SummaryRules")
   @action("retrybin")
   @Azure.Core.useFinalStateVia("azure-async-operation")
