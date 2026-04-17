@@ -1,4 +1,7 @@
-<!-- Upstream alignment: 2026-04-15 -->
+<!-- Upstream alignment: 2026-04-15
+     This date is for maintainers of this file only -- it records when
+     rules were last verified against upstream docs. No action is needed
+     by spec authors or PR reviewers. -->
 
 # Tracked Resource Lifecycle -- Required Operations
 

@@ -3,6 +3,11 @@ applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
 <!-- Upstream alignment: 2026-04-15
+     This date is for maintainers of this file only -- it records when
+     rules were last verified against upstream docs. No action is needed
+     by spec authors or PR reviewers. The upstream documents always take
+     precedence if there is a conflict.
+
      All rules derived from or aligned with:
        - Azure Resource Provider Contract (RPC) v1.0
          https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0

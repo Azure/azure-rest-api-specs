@@ -3,6 +3,11 @@ applyTo: "specification/**/*.json"
 ---
 
 <!-- Upstream alignment: 2026-04-15
+     This date is for maintainers of this file only -- it records when
+     rules were last verified against upstream docs. No action is needed
+     by spec authors or PR reviewers. The upstream documents always take
+     precedence if there is a conflict.
+
      Rules derived from:
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
