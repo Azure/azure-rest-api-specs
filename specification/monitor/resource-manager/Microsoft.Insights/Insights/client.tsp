@@ -41,6 +41,7 @@ using Microsoft.Insights;
 })
 namespace Microsoft.InsightsCombinedClient;
 
+@@clientName(Microsoft.InsightsCombinedClient, "MonitorClient", "javascript");
 // Fix duplicate client names when merging all services into CombineClient
 
 // ErrorResponse - keep DataCollection as canonical
