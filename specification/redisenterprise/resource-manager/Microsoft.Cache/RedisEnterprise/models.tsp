@@ -1455,7 +1455,21 @@ model AccessPolicyAssignmentProperties {
    * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
    */
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  accessPolicyName: string;
+  @madeOptional(Versions.v2026_05_01_preview)
+  accessPolicyName?: string;
+
+  /**
+   * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
+   */
+  @added(Versions.v2026_05_01_preview)
+  accessString?: string;
+
+  /**
+   * Provisioning error details when the access string failed to apply (e.g., invalid ACL syntax). Null when provisioning succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
+  provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
    * The user associated with the access policy.
@@ -1471,6 +1485,27 @@ model AccessPolicyAssignmentPropertiesUser {
    * The object ID of the user.
    */
   objectId?: string;
+}
+
+/**
+ * Error details for access policy assignment provisioning failures.
+ */
+@added(Versions.v2026_05_01_preview)
+model AccessPolicyAssignmentProvisioningError {
+  /**
+   * Machine-readable error code (e.g., "InvalidAccessString").
+   */
+  code: string;
+
+  /**
+   * Human-readable error message describing the failure.
+   */
+  message: string;
+
+  /**
+   * The property that caused the error (e.g., "properties.accessString").
+   */
+  target?: string;
 }
 
 /**
