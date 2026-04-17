@@ -1511,6 +1511,7 @@ model AppAttachPackageProperties {
 
   /**
    * Specific name of package owner, is "AppAttach" for native app attach packages
+   * @Introduced in 2024-03-06-preview
    */
   @added(Versions.vLatestPreview)
   packageOwnerName?: string;
@@ -1529,6 +1530,7 @@ model AppAttachPackageProperties {
 
   /**
    * DeploymentScope type for AppAttachPackage.
+   * @Introduced in 2025-08-01-preview
    */
   @added(Versions.vLatestPreview)
   deploymentScope?: DeploymentScope;
@@ -1727,12 +1729,14 @@ model DiskInfoProperties {
 
   /**
    * The managed disk parameters.
+   * @Introduced in 2025-03-01-preview
    */
   @added(Versions.vLatestPreview)
   managedDisk?: ManagedDiskProperties;
 
   /**
    * Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.
+   * @Introduced in 2025-03-01-preview
    */
   @added(Versions.vLatestPreview)
   diffDiskSettings?: DiffDiskProperties;
@@ -2225,6 +2229,7 @@ model SessionHostManagementProperties {
 
   /**
    * Parameters that apply when session hosts are provisioned.
+   * @Introduced in 2023-10-04-preview
    */
   @added(Versions.vLatestPreview)
   provisioning?: SessionHostProvisioningConfigurationProperties;
@@ -2294,12 +2299,14 @@ model SessionHostManagementPatchProperties {
 
   /**
    * Parameters that apply when session hosts are provisioned.
+   * @Introduced in 2023-10-04-preview
    */
   @added(Versions.vLatestPreview)
   provisioning?: SessionHostProvisioningConfigurationPatchProperties;
 
   /**
    * The policy that should be applied when the Session Host provisioning operation fails.
+   * @Introduced in 2025-03-01-preview
    */
   @added(Versions.vLatestPreview)
   failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
@@ -2365,6 +2372,7 @@ model ApplicationGroupProperties {
 
   /**
    * DeploymentScope type for ApplicationGroup.
+   * @Introduced in 2025-08-01-preview
    */
   @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
@@ -2681,18 +2689,21 @@ model HostPoolProperties {
 
   /**
    * The type of management for this hostpool, Automated or Standard. The default value is Automated.
+   * @Introduced in 2023-11-01-preview
    */
   @added(Versions.vLatestPreview)
   managementType?: ManagementType;
 
   /**
    * DeploymentScope type for HostPool.
+   * @Introduced in 2025-08-01-preview
    */
   @added(Versions.vLatestPreview)
   deploymentScope?: DeploymentScope;
 
   /**
    * Tenant that the resource is being requested on behalf of.
+   * @Introduced in 2025-08-01-preview
    */
   @added(Versions.vLatestPreview)
   oboTenantId?: string;
@@ -2907,12 +2918,14 @@ model ScalingSchedule {
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
   scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
 
   /**
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties;
@@ -4687,12 +4700,14 @@ model ScalingPlanPooledScheduleProperties {
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
   scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
 
   /**
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties;
@@ -4805,12 +4820,14 @@ model ScalingPlanPooledSchedulePatchProperties {
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
   scalingMethod?: ScalingMethodType;
 
   /**
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties;

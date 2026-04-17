@@ -29,6 +29,9 @@ model ActiveSessionHostConfiguration
   >;
 }
 
+/**
+ * Introduced in 2023-11-01-preview
+ */
 @added(Versions.vLatestPreview)
 @armResourceOperations
 interface ActiveSessionHostConfigurations {
