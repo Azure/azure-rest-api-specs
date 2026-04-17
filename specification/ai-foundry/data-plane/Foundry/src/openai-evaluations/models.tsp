@@ -563,6 +563,10 @@ model EvalRun is OpenAI.EvalRun {
     Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
   */
   properties?: Record<string>;
+
+  /** The level at which evaluation is performed. Defaults to 'trace' if not specified. */
+  @removed(Versions.v1)
+  evaluation_level?: EvaluationLevel = EvaluationLevel.trace;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
@@ -582,6 +586,10 @@ model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
     Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
   */
   properties?: Record<string>;
+
+  /** The level at which evaluation is performed. Defaults to 'trace' if not specified. */
+  @removed(Versions.v1)
+  evaluation_level?: EvaluationLevel = EvaluationLevel.trace;
 }
 
 model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {

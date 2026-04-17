@@ -16151,6 +16151,15 @@
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
+          },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "The level at which evaluation is performed. Defaults to 'trace' if not specified.",
+            "default": "trace"
           }
         },
         "title": "CreateEvalRunRequest"
@@ -17099,6 +17108,15 @@
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
+          },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "The level at which evaluation is performed. Defaults to 'trace' if not specified.",
+            "default": "trace"
           }
         },
         "description": "A schema representing an evaluation run.",
