@@ -16,7 +16,6 @@ import "./FabricAgentModel.tsp";
 import "./JobModel.tsp";
 import "./PolicyModel.tsp";
 import "./PrivateEndpointConnection.tsp";
-import "./PrivateEndpointConnectionProxy.tsp";
 import "./PrivateLinkResource.tsp";
 import "./ProtectedItemModel.tsp";
 import "./RecoveryPointModel.tsp";

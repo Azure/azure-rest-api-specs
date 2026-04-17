@@ -1,12 +1,15 @@
 // Tiles for STAC Items interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.stac.spec.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -20,7 +23,8 @@ model MosaicTileQueryParameters {
    * 1.0 = 258x258).
    */
   @query("buffer")
-  buffer?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  buffer?: float32;
 
   /**
    * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -43,6 +47,40 @@ model MosaicTileQueryParameters {
   /**
    * Pixel selection method.
    */
+  @query("pixel_selection")
+  pixelSelection?: PixelSelection = PixelSelection.first;
+}
+
+/**
+ * Query parameters for mosaic crop/feature/bbox operations (without buffer).
+ */
+@added(Versions.v2026_04_15)
+model MosaicCropQueryParameters {
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @added(Versions.v2026_04_15)
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * STAC Collection ID
+   */
+  @added(Versions.v2026_04_15)
+  @query("collection")
+  collection?: string;
+
+  /**
+   * Resampling method.
+   */
+  @added(Versions.v2026_04_15)
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Pixel selection method.
+   */
+  @added(Versions.v2026_04_15)
   @query("pixel_selection")
   pixelSelection?: PixelSelection = PixelSelection.first;
 }
@@ -77,6 +115,66 @@ union TerrainAlgorithm {
    * Encodes elevation data in Mapbox TerrainRGB format
    */
   terrainrgb: "terrainrgb",
+
+  /**
+   * Calculates slope from elevation data
+   */
+  @added(Versions.v2026_04_15)
+  slope: "slope",
+
+  /**
+   * Casts data to a different type
+   */
+  @added(Versions.v2026_04_15)
+  cast: "cast",
+
+  /**
+   * Rounds values up to the nearest integer
+   */
+  @added(Versions.v2026_04_15)
+  ceil: "ceil",
+
+  /**
+   * Rounds values down to the nearest integer
+   */
+  @added(Versions.v2026_04_15)
+  floor: "floor",
+
+  /**
+   * Computes the minimum value across bands
+   */
+  @added(Versions.v2026_04_15)
+  min: "min",
+
+  /**
+   * Computes the maximum value across bands
+   */
+  @added(Versions.v2026_04_15)
+  max: "max",
+
+  /**
+   * Computes the median value across bands
+   */
+  @added(Versions.v2026_04_15)
+  median: "median",
+
+  /**
+   * Computes the mean value across bands
+   */
+  @added(Versions.v2026_04_15)
+  mean: "mean",
+
+  /**
+   * Computes the standard deviation across bands
+   */
+  @added(Versions.v2026_04_15)
+  std: "std",
+
+  /**
+   * Computes the variance across bands
+   */
+  @added(Versions.v2026_04_15)
+  var: "var",
 }
 
 /**
@@ -236,12 +334,14 @@ model TilerStacSearchDefinition {
   /**
    * SQL WHERE clause representing the search filters
    */
+  @removed(Versions.v2026_04_15)
   @encodedName("application/json", "_where")
   where: string;
 
   /**
    * SQL ORDER BY clause for sorting results
    */
+  @removed(Versions.v2026_04_15)
   @encodedName("application/json", "orderby")
   orderBy: string;
 
@@ -286,35 +386,73 @@ model ApplicationJsonResponse {
  */
 model MosaicSearchQueryParameters {
   /**
-   * Return as soon as we scan N items (defaults to 10000 in PgSTAC).
+   * Return as soon as we scan N items (defaults to 10000).
    */
   @query("scan_limit")
   scanLimit?: int32;
 
   /**
-   * Return as soon as we have N items per geometry (defaults to 100 in PgSTAC).
+   * Return as soon as we have N items per geometry (defaults to 100).
    */
   @query("items_limit")
   itemsLimit?: int32;
 
   /**
-   * Return after N seconds to avoid long requests (defaults to 5 in PgSTAC).
+   * Return after N seconds to avoid long requests (defaults to 5).
    */
   @query("time_limit")
   timeLimit?: int32;
 
   /**
-   * Return as soon as the geometry is fully covered (defaults to True in PgSTAC).
+   * Return as soon as the geometry is fully covered (defaults to True).
    */
   @query("exitwhenfull")
   exitWhenFull?: boolean;
 
   /**
    * Skip any items that would show up completely under the previous items (defaults
-   * to True in PgSTAC).
+   * to True).
    */
   @query("skipcovered")
   skipCovered?: boolean;
+}
+
+/**
+ * Collection-level mosaic filter parameters (ids, bbox, query, sortby).
+ * These apply to collection mosaic endpoints but NOT to registered search endpoints
+ * (where the filter criteria are already baked into the search object).
+ */
+@added(Versions.v2026_04_15)
+model CollectionMosaicFilterQueryParameters {
+  /**
+   * Array of Item ids.
+   */
+  @query("ids")
+  ids?: string;
+
+  /**
+   * Bounding box (west, south, east, north).
+   */
+  @query("bbox")
+  bbox?: string;
+
+  /**
+   * JSON query expression for filtering items.
+   */
+  @query("query")
+  query?: string;
+
+  /**
+   * Sorting expression (e.g. +/-property).
+   */
+  @query("sortby")
+  sortby?: string;
+
+  /**
+   * Datetime filter expression (single datetime or range using `/` separator).
+   */
+  @query("datetime")
+  datetime?: string;
 }
 
 /**
