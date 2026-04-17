@@ -1452,8 +1452,9 @@ model AccessPolicyAssignmentProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
   @madeOptional(Versions.v2026_05_01_preview)
   accessPolicyName?: string;
