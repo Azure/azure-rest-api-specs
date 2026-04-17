@@ -1646,7 +1646,7 @@ interface PageBlob {
       ...TimeoutParameter;
 
       /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
-      @header("x-ms-range")
+      @header("Range")
       range: string;
 
       ...EncryptionKeyParameter;
