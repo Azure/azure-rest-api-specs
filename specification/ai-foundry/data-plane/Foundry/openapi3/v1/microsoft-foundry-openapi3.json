@@ -9093,13 +9093,13 @@
         }
       }
     },
-    "/skills/{skill_name}": {
+    "/skills/{name}": {
       "get": {
         "operationId": "Skills_getSkill",
         "description": "Retrieves a skill.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9166,7 +9166,7 @@
         "description": "Updates an existing skill.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9263,7 +9263,7 @@
         "description": "Deletes a skill.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9326,13 +9326,13 @@
         }
       }
     },
-    "/skills/{skill_name}:download": {
+    "/skills/{name}:download": {
       "get": {
         "operationId": "Skills_downloadSkill",
         "description": "Downloads a skill package.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9596,13 +9596,13 @@
         }
       }
     },
-    "/toolboxes/{toolbox_name}": {
+    "/toolboxes/{name}": {
       "get": {
         "operationId": "getToolbox",
         "description": "Retrieve a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to retrieve.",
@@ -9669,7 +9669,7 @@
         "description": "Update a toolbox to point to a specific version.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/UpdateToolboxRequest.toolbox_name"
+            "$ref": "#/components/parameters/UpdateToolboxRequest.name"
           },
           {
             "name": "Foundry-Features",
@@ -9740,7 +9740,7 @@
         "description": "Delete a toolbox and all its versions.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to delete.",
@@ -9796,13 +9796,13 @@
         }
       }
     },
-    "/toolboxes/{toolbox_name}/versions": {
+    "/toolboxes/{name}/versions": {
       "post": {
         "operationId": "createToolboxVersion",
         "description": "Create a new version of a toolbox. If the toolbox does not exist, it will be created.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox. If the toolbox does not exist, it will be created.",
@@ -9912,7 +9912,7 @@
         "description": "List all versions of a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to list versions for.",
@@ -10043,13 +10043,13 @@
         }
       }
     },
-    "/toolboxes/{toolbox_name}/versions/{version}": {
+    "/toolboxes/{name}/versions/{version}": {
       "get": {
         "operationId": "getToolboxVersion",
         "description": "Retrieve a specific version of a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox.",
@@ -10125,7 +10125,7 @@
         "description": "Delete a specific version of a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox.",
@@ -10220,8 +10220,8 @@
         },
         "explode": false
       },
-      "UpdateToolboxRequest.toolbox_name": {
-        "name": "toolbox_name",
+      "UpdateToolboxRequest.name": {
+        "name": "name",
         "in": "path",
         "required": true,
         "description": "The name of the toolbox to update.",
@@ -11180,6 +11180,14 @@
           "definition": {
             "$ref": "#/components/schemas/AgentDefinition"
           },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentVersionStatus"
+              }
+            ],
+            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness."
+          },
           "instance_identity": {
             "allOf": [
               {
@@ -11233,6 +11241,17 @@
             "readOnly": true
           }
         }
+      },
+      "AgentVersionStatus": {
+        "type": "string",
+        "enum": [
+          "creating",
+          "active",
+          "failed",
+          "deleting",
+          "deleted"
+        ],
+        "description": "The provisioning status of an agent version."
       },
       "AgenticIdentityPreviewCredentials": {
         "type": "object",
@@ -15875,6 +15894,50 @@
           ]
         }
       },
+      "HeaderTelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type",
+          "header_name",
+          "secret_id",
+          "secret_key"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "header"
+            ],
+            "description": "The authentication type, always 'header' for header-based secret authentication."
+          },
+          "header_name": {
+            "type": "string",
+            "description": "The name of the HTTP header to inject the secret value into.",
+            "example": "X-Otlp-Api-Key"
+          },
+          "secret_id": {
+            "type": "string",
+            "description": "The identifier of the secret store or connection.",
+            "example": "my-secret-store"
+          },
+          "secret_key": {
+            "type": "string",
+            "description": "The key within the secret to retrieve the authentication value.",
+            "example": "OTLP_KEY"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointAuth"
+          }
+        ],
+        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "HostedAgentDefinition": {
         "type": "object",
         "required": [
@@ -15990,6 +16053,14 @@
                 "CodeAgents=V1Preview"
               ]
             }
+          },
+          "telemetry_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryConfig"
+              }
+            ],
+            "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
           }
         },
         "allOf": [
@@ -37285,6 +37356,48 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "OtlpTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "endpoint",
+          "protocol"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ],
+            "description": "The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints."
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "The OTLP collector endpoint URL.",
+            "example": "https://my-collector.example.com/otlp"
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryTransportProtocol"
+              }
+            ],
+            "description": "The transport protocol for the OTLP endpoint.",
+            "example": "Http"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpoint"
+          }
+        ],
+        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -39091,6 +39204,185 @@
           }
         },
         "description": "Taxonomy sub-category definition."
+      },
+      "TelemetryConfig": {
+        "type": "object",
+        "required": [
+          "endpoints"
+        ],
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryEndpoint"
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "Customer-supplied telemetry export endpoint configurations."
+          }
+        },
+        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryDataKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          }
+        ],
+        "description": "The type of telemetry data to export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointKind"
+              }
+            ],
+            "description": "The telemetry export endpoint kind."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryDataKind"
+            },
+            "description": "Data types to export to this endpoint. Use an empty array to export no data.",
+            "example": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuth"
+              }
+            ],
+            "description": "Optional authentication configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "OTLP": "#/components/schemas/OtlpTelemetryEndpoint"
+          }
+        },
+        "description": "A telemetry export endpoint configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuthType"
+              }
+            ],
+            "description": "The authentication type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "header": "#/components/schemas/HeaderTelemetryEndpointAuth"
+          }
+        },
+        "description": "Authentication configuration for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuthType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "header"
+            ]
+          }
+        ],
+        "description": "The type of authentication for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ]
+          }
+        ],
+        "description": "The kind of telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryTransportProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Http",
+              "Grpc"
+            ]
+          }
+        ],
+        "description": "The transport protocol for telemetry export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
