@@ -87,18 +87,26 @@ The following behavioral corrections were made after the automated conversion to
 
 #### 1. LRO 202 Responses Restored (Device API)
 
-The converter did not emit the `202 Accepted` response on the device registration LRO operations. Explicit response models were added:
+The converter did not emit the `202 Accepted` response on the device registration LRO operations. To align with current TypeSpec LRO style guidance, the `200`/`202` responses are expressed as an inline anonymous union directly in each operation's response type (rather than as a shared named model alias). For example:
 
 ```typespec
-model RegistrationOperationStatus202 {
+{
+  @statusCode _: 200;
+  @body body: RegistrationOperationStatus;
+} | {
   @statusCode _: 202;
-  @header("retry-after") retryAfter?: int32;
-  @header("Location") location?: string;
+
+  @header("retry-after")
+  retryAfter?: int32;
+
+  @header("Location")
+  location?: string;
+
   @body body: RegistrationOperationStatus;
 }
 ```
 
-Both `registerDevice` and `registerDeviceAndIssueCertificate` return `RegistrationOperationStatus200 | RegistrationOperationStatus202`.
+This pattern is applied on `registerDevice`, `registerDeviceAndIssueCertificate`, and the `operationStatusLookup` polling GET, so each operation emits both `200` and `202` responses in swagger while preserving the original `RegistrationOperationStatus` body and `retry-after` / `Location` headers.
 
 #### 2. Error Type: `ProvisioningServiceErrorDetails`
 
