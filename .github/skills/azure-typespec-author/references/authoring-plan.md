@@ -19,8 +19,8 @@ Use **one or both** tools to build an authoring plan grounded in documentation:
 
 ### Case 3 — API Version Evolution
 
-> **Must** use Agentic Search (option 2 above) to build the plan — do not run the MCP tool.
+> **Must** use Agentic Search (option 2 above) to build the plan — do not call the MCP tool.
 
 1. Only one preview version allowed; decorate with `@previewVersion`.
-2. Copy `.json` files from latest version's `examples/` into new version's `examples/`. Update `api-version` in each file.
+2. Copy `.json` files from latest version's `examples/` into new version's `examples/`. Update `api-version` in each file. Delete old version's example folder if old version is no longer existed.
 3. Update `readme.md`.

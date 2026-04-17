@@ -2,11 +2,11 @@
 
 Run all sub-steps in order after applying changes.
 
-| Sub-step | Action | When |
-| -------- | ------ | ---- |
-| 5.1 | `azsdk_run_typespec_validation` | Always |
-| 5.2 | `tsp compile .` | Always |
-| 5.3 | Example verification | API version evolution only |
+| Sub-step | Action                          | When                       |
+| -------- | ------------------------------- | -------------------------- |
+| 5.1      | `azsdk_run_typespec_validation` | Always                     |
+| 5.2      | `tsp compile .`                 | Always                     |
+| 5.3      | Example verification            | API version evolution only |
 
 ### 5.1: TypeSpec Validation
 
