@@ -11107,6 +11107,9 @@
           "Create route table with ECMP route": {
             "$ref": "./examples/RouteTableCreateWithEcmpRoute.json"
           },
+          "Create route table with disable peering route": {
+            "$ref": "./examples/RouteTableCreateWithDisablePeeringRoute.json"
+          },
           "Create route table with route": {
             "$ref": "./examples/RouteTableCreateWithRoute.json"
           }
@@ -16368,6 +16371,10 @@
         "disableBgpRoutePropagation": {
           "type": "boolean",
           "description": "Whether to disable the routes learned by BGP on that route table. True means disable."
+        },
+        "disablePeeringRoute": {
+          "$ref": "./common.json#/definitions/Common.DisablePeeringRoute",
+          "description": "Whether to disable the routes learned by peering on the route table. 'None' means peering routes are enabled, 'All' means all peering routes are disabled."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
