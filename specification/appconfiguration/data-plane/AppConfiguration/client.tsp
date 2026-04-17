@@ -5,6 +5,10 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using AzureAppConfiguration;
 
+@client({
+  name: "AzureAppConfigurationClient",
+  service: AzureAppConfiguration,
+})
 namespace SdkCustomizations;
 
 // Java specific customizations

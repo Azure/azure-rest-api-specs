@@ -1,16 +1,11 @@
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./routes.tsp";
 
-using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@client({
-  name: "AzureAppConfigurationClient",
-})
 @service(#{ title: "Azure App Configuration" })
 @versioned(Versions)
 @useAuth(
