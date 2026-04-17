@@ -9,12 +9,20 @@ using Microsoft.Maintenance;
 );
 
 // csharp configurations
+@@clientName(ApplyUpdateOperationGroup,
+  "MaintenanceApplyUpdateParent",
+  "csharp"
+);
 @@clientName(ConfigurationAssignment,
   "MaintenanceConfigurationAssignment",
   "csharp"
 );
 @@clientName(ConfigurationAssignmentFilterProperties,
   "MaintenanceConfigurationAssignmentFilter",
+  "csharp"
+);
+@@clientName(ConfigurationAssignmentFilterProperties.osTypes,
+  "OSTypes",
   "csharp"
 );
 @@clientName(TagOperators, "MaintenanceVmTagOperator", "csharp");
@@ -35,6 +43,14 @@ using Microsoft.Maintenance;
 @@clientName(ApplyUpdateProperties.lastUpdateTime, "LastUpdatedOn", "csharp");
 @@clientName(InputPatchConfiguration,
   "MaintenancePatchConfiguration",
+  "csharp"
+);
+@@clientName(InputPatchConfiguration.linuxParameters,
+  "LinuxPatchSettings",
+  "csharp"
+);
+@@clientName(InputPatchConfiguration.windowsParameters,
+  "WindowsPatchSettings",
   "csharp"
 );
 @@clientName(InputWindowsParameters,
@@ -170,24 +186,5 @@ using Microsoft.Maintenance;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MaintenanceConfiguration,
   Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-
-// ========================
-// C# clientLocation overrides: redirect operations from string-named synthetic clients
-// (which lose @armResourceOperations) back to real ARM-decorated interfaces.
-// These override the unscoped @@clientLocation in back-compatible.tsp for C# only.
-// ========================
-
-// PublicMaintenanceConfigurations: move lifecycle `get` back to ARM interface
-// so the generator produces MaintenancePublicConfigurationResource/Collection.
-// NOTE: `list` is NOT moved back because it conflicts with
-// MaintenanceConfigurationOperationGroup.maintenanceConfigurationsList (renamed to "List"
-// by back-compatible.tsp), which is also on MaintenanceConfigurations ARM client.
-// Both produce CreateGetAllRequest(Guid subscriptionId) → REST client duplicate.
-// The `list` stays on "PublicMaintenanceConfigurations" synthetic client and
-// Collection.GetAll() is provided via custom code.
-@@clientLocation(MaintenanceConfigurations.get,
-  MaintenanceConfigurations,
   "csharp"
 );

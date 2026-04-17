@@ -157,7 +157,7 @@ interface ConfigurationAssignmentOperationGroupOps
           NamePattern = ""
         >>,
       },
-      "MaintenanceConfigurationAssignmentOperationGroup"
+      "MaintenanceGroupConfigurationAssignment"
     > {}
 
 @armResourceOperations
@@ -208,7 +208,7 @@ interface ConfigurationAssignmentsForSubscriptionOps
           NamePattern = ""
         >>,
       },
-      "MaintenanceConfigurationAssignmentForSubscription"
+      "MaintenanceSubscriptionConfigurationAssignment"
     > {}
 
 @armResourceOperations
@@ -278,7 +278,7 @@ interface ConfigurationAssignmentsForResourceGroupOps
           NamePattern = "^.+$"
         >>,
       },
-      "MaintenanceConfigurationAssignmentForResourceGroup"
+      "MaintenanceResourceGroupConfigurationAssignment"
     > {}
 
 @armResourceOperations
