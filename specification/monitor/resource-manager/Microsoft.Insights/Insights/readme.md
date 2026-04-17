@@ -48,13 +48,17 @@ input-file:
   - preview/2023-01-01-preview/activityLogAlerts_API.json
   - stable/2015-04-01/activityLogs_API.json
   - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2022-10-01/autoScale_API.json
-  - stable/2024-03-11/dataCollection_API.json
+  - stable/2022-10-01/autoscale_API.json
+  - stable/2024-03-11/dataCollectionEndpoints_API.json
+  - stable/2024-03-11/dataCollectionRuleAssociations_API.json
+  - stable/2024-03-11/dataCollectionRules_API.json
   - stable/2016-03-01/logProfiles_API.json
   - preview/2024-03-01-preview/metricAlert_API.json
   - stable/2019-03-01/metricBaselines_API.json
   - stable/2024-02-01/metrics_API.json
-  - stable/2021-10-01/networkSecurityPerimeter_API.json
+  - stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
+  - stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
+  - stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
   - preview/2023-06-01-preview/privateLinkScopes_API.json
   - preview/2025-01-01-preview/scheduledQueryRule_API.json
   - stable/2016-09-01/serviceDiagnosticsSettings_API.json
