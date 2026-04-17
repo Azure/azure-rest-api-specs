@@ -97,6 +97,56 @@ Post the approved review comments on PR #41405
 The agent will always present findings in chat first and wait for your
 explicit approval before posting anything to the PR.
 
+## Comment Tracking Marker
+
+Every comment posted by the agent includes a hidden HTML marker at the end
+of the comment body:
+
+```html
+<!-- posted-by: arm-api-reviewer-agent -->
+```
+
+This marker is invisible in the rendered PR view but is present in the raw
+comment body returned by the GitHub API. It serves two purposes:
+
+1. **Reconciliation** -- on repeat reviews, the agent uses the marker to
+   distinguish its own prior comments from those posted by human reviewers.
+   This determines whether the agent can resolve an outdated comment
+   (Scenario B) or must reply instead (Scenario C). See
+   [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) below.
+
+2. **Telemetry and querying** -- the marker enables querying all
+   agent-posted comments across PRs via the GitHub API. This is useful for
+   gathering metrics on review volume, rule violation frequency, and
+   resolution rates.
+
+### Example queries
+
+**List agent comments on a single PR:**
+
+```bash
+gh api repos/Azure/azure-rest-api-specs/pulls/{pr}/comments --paginate \
+  --jq '.[] | select(.body | contains("posted-by: arm-api-reviewer-agent"))
+    | {id, created_at, path, line}'
+```
+
+**Count agent comments on a PR:**
+
+```bash
+gh api repos/Azure/azure-rest-api-specs/pulls/{pr}/comments --paginate \
+  --jq '[.[] | select(.body | contains("posted-by: arm-api-reviewer-agent"))] | length'
+```
+
+**Find PRs with agent comments (requires iterating PR numbers or using
+the search API):**
+
+```bash
+gh search prs --repo Azure/azure-rest-api-specs --label ARMChangesRequested \
+  --json number,title --limit 50
+```
+
+Then iterate over the returned PR numbers with the per-PR query above.
+
 ## Comment Reconciliation on Repeat Reviews
 
 When the agent reviews a PR that already has review comments (from a prior run
