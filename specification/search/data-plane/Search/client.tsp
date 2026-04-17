@@ -3745,3 +3745,167 @@ namespace KnowledgeBaseRetrievalClient {
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
 @@clientOption(Search.acceptHeaderNone.accept, "clientRequired", true, "java");
+
+// Python-specific documentation overrides to remove hardcoded dedent values
+@@clientDoc(
+  SearchClient,
+  "Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.get,
+  "Retrieves a document from the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.autocompleteGet,
+  "Autocompletes incomplete query terms based on input text and matching terms in the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.autocompletePost,
+  "Autocompletes incomplete query terms based on input text and matching terms in the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.searchGet,
+  "Searches for documents in the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.searchPost,
+  "Searches for documents in the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.suggestGet,
+  "Suggests documents in the index that match the given partial query text.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.suggestPost,
+  "Suggests documents in the index that match the given partial query text.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchClient.index,
+  "Sends a batch of document write actions to the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.analyze,
+  "Shows how an analyzer breaks text into tokens.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.createOrUpdateAlias,
+  "Creates a new search alias or updates an alias if it already exists.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.createOrUpdateIndex,
+  "Creates a new search index or updates an index if it already exists.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.deleteAlias,
+  "Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.deleteIndex,
+  "Deletes a search index and all the documents it contains. This operation is permanent, with no recovery option. Make sure you have a master copy of your index definition, data ingestion code, and a backup of the primary data source in case you need to re-build the index.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.deleteSynonymMap,
+  "Deletes a synonym map.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.getIndex,
+  "Retrieves an index definition.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.getSynonymMap,
+  "Retrieves a synonym map definition.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexClient.listSynonymMaps,
+  "Lists all synonym maps available for a search service.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.deleteDataSource,
+  "Deletes a datasource.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.deleteIndexer,
+  "Deletes an indexer.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.getDataSource,
+  "Retrieves a datasource definition.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.listDataSources,
+  "Lists all datasources available for a search service.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.getIndexer,
+  "Retrieves an indexer definition.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.getIndexerStatus,
+  "Returns the current status and execution history of an indexer.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.listIndexers,
+  "Lists all indexers available for a search service.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.resetIndexer,
+  "Resets the change tracking state associated with an indexer.",
+  DocumentationMode.replace,
+  "python"
+);
+@@clientDoc(
+  SearchIndexerClient.runIndexer,
+  "Runs an indexer on-demand.",
+  DocumentationMode.replace,
+  "python"
+);
