@@ -10,14 +10,14 @@ union DataGenerationJobType {
   @doc("Simple question and answers between user and agent.")
   SimpleQnA: "SimpleQnA",
 
-  @doc("Single turn conversation between user and agent. The generated data contain a query with list of messages in the conversation as context and a response (last turn) from the agent.")
-  SingleTurn: "SingleTurn",
+  @doc("Single turn query and response from agent traces.")
+  Trace: "Trace",
 
   @doc("Tool calling conversation between user and agent.")
   ToolUse: "ToolUse",
 
-  @doc("Multi turn conversation between user and agent.")
-  MultiTurn: "MultiTurn",
+  @doc("Task helps in providing a scenario description for generating multi turn conversation between user and agent.")
+  Task: "Task",
 }
 
 @doc("LLM model options for data generation jobs.")
@@ -189,10 +189,10 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   question_types?: Array<SimpleQnAFineTuningQuestionType>;
 }
 
-@doc("The options for a data generation job with SingleTurn type.")
-model SingleTurnDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is SingleTurn for this model.")
-  type: "SingleTurn";
+@doc("The options for a data generation job with Trace type.")
+model TraceDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is Trace for this model.")
+  type: "Trace";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
@@ -202,10 +202,10 @@ model ToolUseFineTuningDataGenerationJobOptions
   type: "ToolUse";
 }
 
-@doc("The options for a data generation job with MultiTurn type.")
-model MultiTurnDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is MultiTurn for this model.")
-  type: "MultiTurn";
+@doc("The options for a data generation job with Task type.")
+model TaskDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is Task for this model.")
+  type: "Task";
 }
 
 @doc("The base source model for a data generation job.")

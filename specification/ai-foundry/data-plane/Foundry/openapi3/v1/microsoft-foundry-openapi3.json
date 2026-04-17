@@ -14146,9 +14146,9 @@
           "propertyName": "type",
           "mapping": {
             "SimpleQnA": "#/components/schemas/SimpleQnADataGenerationJobOptions",
-            "SingleTurn": "#/components/schemas/SingleTurnDataGenerationJobOptions",
+            "Trace": "#/components/schemas/TraceDataGenerationJobOptions",
             "ToolUse": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
-            "MultiTurn": "#/components/schemas/MultiTurnDataGenerationJobOptions"
+            "Task": "#/components/schemas/TaskDataGenerationJobOptions"
           }
         },
         "description": "Options for managing data generation jobs."
@@ -14286,9 +14286,9 @@
             "type": "string",
             "enum": [
               "SimpleQnA",
-              "SingleTurn",
+              "Trace",
               "ToolUse",
-              "MultiTurn"
+              "Task"
             ]
           }
         ],
@@ -18318,27 +18318,6 @@
           }
         ],
         "description": "Monthly recurrence schedule."
-      },
-      "MultiTurnDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "MultiTurn"
-            ],
-            "description": "The data generation job type, which is MultiTurn for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with MultiTurn type."
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -39525,27 +39504,6 @@
         ],
         "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
       },
-      "SingleTurnDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SingleTurn"
-            ],
-            "description": "The data generation job type, which is SingleTurn for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with SingleTurn type."
-      },
       "SkillObject": {
         "type": "object",
         "required": [
@@ -39901,6 +39859,27 @@
         },
         "description": "Base class for targets with discriminator support."
       },
+      "TaskDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Task"
+            ],
+            "description": "The data generation job type, which is Task for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with Task type."
+      },
       "TaxonomyCategory": {
         "type": "object",
         "required": [
@@ -40218,6 +40197,27 @@
           }
         },
         "description": "A specific version of a toolbox."
+      },
+      "TraceDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Trace"
+            ],
+            "description": "The data generation job type, which is Trace for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with Trace type."
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
