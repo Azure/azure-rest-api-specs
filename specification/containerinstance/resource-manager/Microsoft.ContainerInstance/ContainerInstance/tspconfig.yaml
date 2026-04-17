@@ -1,0 +1,54 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerinstance"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/containerInstance.json"
+    emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerinstance"
+    namespace: "azure.mgmt.containerinstance"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerinstance"
+    namespace: "com.azure.resourcemanager.containerinstance"
+    service-name: "ContainerInstance"
+    flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    float32-as-double: false
+    remove-inner: Container,Operation,CachedImages,Capabilities
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerinstance"
+    flavor: azure
+    experimental-extensible-enums: true
+    compatibility-lro: true
+    package-details:
+      name: "@azure/arm-containerinstance"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerinstance"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerinstance"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerinstance"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ContainerInstance"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

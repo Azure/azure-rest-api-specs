@@ -12,7 +12,7 @@ model WebPubSubClientOptions {
   hub: string;
 }
 
-@@clientInitialization(WebPubSub,
+@@clientInitialization(WebPubSubService,
   {
     parameters: WebPubSubClientOptions,
   }

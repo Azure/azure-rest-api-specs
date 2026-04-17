@@ -19,7 +19,7 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-managednetworkfabric"
     namespace: "com.azure.resourcemanager.managednetworkfabric"
-    service-name: "fileshares"
+    service-name: Managed Network Fabric
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/managednetworkfabric"
@@ -32,7 +32,10 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-ts":
+    typespec-title-map:
+      ManagedNetworkFabricClient: AzureNetworkFabricManagementServiceAPI
     emitter-output-dir: "{output-dir}/{service-dir}/arm-managednetworkfabric"
+    compatibility-lro: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

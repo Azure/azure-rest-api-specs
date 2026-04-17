@@ -7,11 +7,13 @@ options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/openapi.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.Resources.Policy"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-policy"
     namespace: "azure.mgmt.resource.policy"
@@ -24,6 +26,7 @@ options:
     service-name: "Policy"
     flavor: azure
   "@azure-tools/typespec-ts":
+    compatibility-lro: true
     service-dir: "sdk/policy"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-policy"
     flavor: azure

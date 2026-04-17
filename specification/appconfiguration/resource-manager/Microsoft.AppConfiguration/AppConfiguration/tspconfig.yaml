@@ -10,7 +10,6 @@ options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/appconfiguration.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
@@ -22,10 +21,10 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  "@azure-typespec/http-client-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.AppConfiguration"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.ResourceManager.AppConfiguration
-    model-namespace: false
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appconfiguration"
     package-details:

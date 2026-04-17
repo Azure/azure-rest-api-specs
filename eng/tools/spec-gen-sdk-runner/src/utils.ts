@@ -1,3 +1,4 @@
+import { getChangedFiles as getChangedFilesShared } from "@azure-tools/specs-shared/changed-files";
 import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -24,7 +25,7 @@ export async function resetGitRepo(repoPath: string): Promise<void> {
       logMessage(`Successfully reset git repo at ${repoPath}`, LogLevel.Info);
     }
   } catch (error) {
-    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`);
+    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`, { cause: error });
   }
 }
 
@@ -172,28 +173,18 @@ function isCommandAvailable(command: string): boolean {
   }
 }
 
-// Function to call Get-ChangedFiles from PowerShell script
-export function getChangedFiles(
+// Function to get changed files using simple-git via shared library
+export async function getChangedFiles(
   specRepoPath: string,
   baseCommitish: string = "HEAD^",
   targetCommitish: string = "HEAD",
-): string[] | undefined {
-  // set diff filter to include added, copied, modified, deleted, renamed, and type changed files
-  const diffFilter = "ACMDRT";
-  const scriptPath = path.resolve(specRepoPath, "eng/scripts/ChangedFiles-Functions.ps1");
-  const args = [
-    "-Command",
-    `& { . '${scriptPath}'; Get-ChangedFiles '${baseCommitish}' '${targetCommitish}' '${diffFilter}' }`,
-  ];
-
-  const output = runPowerShellScript(args);
-  if (output) {
-    return output
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0);
-  }
-  return undefined;
+): Promise<string[]> {
+  return getChangedFilesShared({
+    baseCommitish,
+    headCommitish: targetCommitish,
+    cwd: specRepoPath,
+    gitOptions: ["--diff-filter=ACMDRT"],
+  });
 }
 
 /**
@@ -234,15 +225,59 @@ export function findParentWithFile(
 }
 
 /**
+ * Searches upward from a starting path to find ALL parent directories containing a file matching the given pattern
+ * @param startPath - The directory path to start searching from
+ * @param searchFile - Regular expression pattern to match the target file name
+ * @param specRepoFolder - The root folder of the repository
+ * @param stopAtFolder - Optional boundary directory where the search should stop
+ * @returns Array of directory paths containing the matching file, ordered from nearest to farthest (child to parent)
+ */
+export function findAllParentsWithFile(
+  startPath: string,
+  searchFile: RegExp,
+  specRepoFolder: string,
+  stopAtFolder?: string,
+): string[] {
+  const results: string[] = [];
+  let currentPath = startPath;
+
+  while (currentPath) {
+    try {
+      const absolutePath = path.resolve(specRepoFolder, currentPath);
+      const files = fs.readdirSync(absolutePath);
+      if (files.some((file) => searchFile.test(file))) {
+        results.push(currentPath);
+      }
+    } catch (error) {
+      logMessage(`Error reading directory: ${currentPath} with ${inspect(error)}`, LogLevel.Warn);
+      return results;
+    }
+    currentPath = path.dirname(currentPath);
+    // Check if we've reached the root of the path (stopAtFolder) or
+    // if we've reached '.' which prevents infinite loops with path.dirname('.')
+    if ((stopAtFolder && currentPath === stopAtFolder) || currentPath === ".") {
+      break;
+    }
+  }
+  return results;
+}
+
+/**
  * Searches for parent directories containing specific files for a list of files
  * Optimizes the search by grouping files in the same directory to avoid redundant searches
  * @param files - Array of file paths to process
  * @param options - Search configuration options
+ * @param options.findAll - When true and path contains 'resource-manager' or 'data-plane', find all matching parent folders instead of just the nearest one
  * @returns Object mapping parent directory paths to arrays of related files
  */
 export function searchRelatedParentFolders(
   files: string[],
-  options: { searchFileRegex: RegExp; specRepoFolder: string; stopAtFolder?: string },
+  options: {
+    searchFileRegex: RegExp;
+    specRepoFolder: string;
+    stopAtFolder?: string;
+    findAll?: boolean;
+  },
 ): { [folderPath: string]: string[] } {
   const result: { [folderPath: string]: string[] } = {};
 
@@ -260,17 +295,38 @@ export function searchRelatedParentFolders(
 
   // Search parent folder only once per unique directory
   for (const [dir, dirFiles] of Object.entries(filesByDir)) {
-    const parentFolder = findParentWithFile(
-      dir,
-      options.searchFileRegex,
-      options.specRepoFolder,
-      options.stopAtFolder,
-    );
-    if (parentFolder) {
-      if (!result[parentFolder]) {
-        result[parentFolder] = [];
+    // Only use findAll for v2 folder structure paths (containing resource-manager or data-plane)
+    const isV2FolderStructure = dir.includes("resource-manager") || dir.includes("data-plane");
+    const shouldFindAll = options.findAll && isV2FolderStructure;
+
+    if (shouldFindAll) {
+      // Find ALL parent folders with matching file for v2 folder structure
+      const parentFolders = findAllParentsWithFile(
+        dir,
+        options.searchFileRegex,
+        options.specRepoFolder,
+        options.stopAtFolder,
+      );
+      for (const parentFolder of parentFolders) {
+        if (!result[parentFolder]) {
+          result[parentFolder] = [];
+        }
+        result[parentFolder].push(...dirFiles);
       }
-      result[parentFolder].push(...dirFiles);
+    } else {
+      // Find only the NEAREST parent folder (existing behavior)
+      const parentFolder = findParentWithFile(
+        dir,
+        options.searchFileRegex,
+        options.specRepoFolder,
+        options.stopAtFolder,
+      );
+      if (parentFolder) {
+        if (!result[parentFolder]) {
+          result[parentFolder] = [];
+        }
+        result[parentFolder].push(...dirFiles);
+      }
     }
   }
 
