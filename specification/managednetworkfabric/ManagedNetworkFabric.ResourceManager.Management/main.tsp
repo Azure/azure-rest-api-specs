@@ -29,6 +29,8 @@ import "./models/RoutePolicy.tsp";
 import "./models/NetworkMonitor.tsp";
 import "./models/NetworkBootstrapDevice.tsp";
 import "./models/NetworkBootstrapInterface.tsp";
+import "./models/EdgeConnector.tsp";
+import "./models/Fabric.tsp";
 import "./resources/AccessControlList.tsp";
 import "./resources/InternetGatewayRule.tsp";
 import "./resources/InternetGateway.tsp";
@@ -55,6 +57,8 @@ import "./resources/RoutePolicy.tsp";
 import "./resources/NetworkMonitor.tsp";
 import "./resources/NetworkBootstrapDevice.tsp";
 import "./resources/NetworkBootstrapInterface.tsp";
+import "./resources/EdgeConnector.tsp";
+import "./resources/Fabric.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
