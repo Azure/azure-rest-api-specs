@@ -212,12 +212,40 @@ The agent **does not**:
 
 ## Related Resources
 
+### External Guidelines
+
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
+- [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)
 - [Getting Started with OpenAPI Specifications](Getting%20started%20with%20OpenAPI%20specifications.md)
 - [Getting Started with TypeSpec Specifications](Getting-started-with-TypeSpec-specifications.md)
 - [Breaking Changes Guidelines](Breaking%20changes%20guidelines.md)
 - [CI Fix Guide](ci-fix.md)
 - [Directory Structure](directory-structure.md)
+
+### Agent Files (under `.github/`)
+
+| File                                            | Purpose                                                                                                                     |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                |
+| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (48+ RPC rule IDs)                                                                           |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                       |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                   |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                       |
+| `skills/azure-api-review/references/*.md`       | Cross-cutting rule references (secret detection, mutability, provisioning state, naming, enums, tracked resource lifecycle) |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                              |
+
+### Rule Maintenance
+
+The instruction files are derived from the authoritative upstream documents
+(RPC contract, Azure REST API Guidelines, TypeSpec Azure docs). Each file
+includes an `Upstream alignment` date in an HTML comment at the top,
+indicating when the rules were last verified against the upstream sources.
+
+Rules that overlap with existing linter checks are annotated with
+`(Also enforced by: ...)` so the agent avoids duplicating findings that
+CI linters already caught. See the "Maintenance & Upstream Alignment"
+section in `SKILL.md` for the full maintenance process.
 
 <!-- Link references -->
 

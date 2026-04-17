@@ -2,6 +2,17 @@
 applyTo: "specification/**/*.tsp"
 ---
 
+<!-- Upstream alignment: 2026-04-17
+     Rules derived from:
+       - Azure Resource Provider Contract (RPC) v1.0
+         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+       - Azure REST API Guidelines (vNext)
+         https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
+       - TypeSpec Azure library docs
+         https://azure.github.io/typespec-azure/docs/intro/
+     If an upstream document changes a rule, update this file to match.
+     When in doubt, the upstream document takes precedence. -->
+
 # TypeSpec Specification Review Instructions
 
 This file contains **review-specific** rules for TypeSpec (`.tsp`) API
@@ -39,6 +50,14 @@ it. Respond in markdown format.
 
 ### 2.1 Breaking Changes Across Versions
 
+> **Linter coverage:** Breaking changes between API versions are
+> partially detected by the `oad` (OpenAPI diff) CI check and the
+> `@azure-tools/typespec-azure-core` breaking-change rules. The agent
+> should check CI results before flagging these — if CI already caught
+> the same breaking change, do not duplicate the finding. The rules
+> below cover cases the linters may miss (e.g., semantic type changes
+> that pass syntactic checks).
+
 - **DO NOT** remove properties, operations, or models between API
   versions without using `@removed` with the correct version reference.
 - **DO NOT** change property types between versions without using
@@ -51,6 +70,7 @@ it. Respond in markdown format.
 - String properties with well-known formats **SHOULD** use appropriate
   scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
 - Datetime properties **MUST** use `utcDateTime` (not `string`).
+  (Also enforced by: `@azure-tools/typespec-azure-resource-manager/no-string-datetime`)
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
 - Integer properties with known valid ranges **SHOULD** use `@minValue`
   and `@maxValue` decorators.
@@ -58,6 +78,7 @@ it. Respond in markdown format.
   include a `@pattern` decorator with a maximum length limit, character
   set, and prevention of leading special characters.
   Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
+  (Also enforced by: `@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern`)
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
@@ -85,6 +106,7 @@ it. Respond in markdown format.
 
 - The `string` base type **SHOULD** be included in unions to make them
   extensible.
+  (Also enforced by: `@azure-tools/typespec-azure-core/no-enum`)
 - `provisioningState` **SHOULD** extend
   `Azure.ResourceManager.ResourceProvisioningState` for terminal states.
 
@@ -148,6 +170,7 @@ it. Respond in markdown format.
   #suppress "@azure-tools/typespec-azure-core/no-enum" "Justified: this enum is closed and will never change"
   ```
 - Suppressions of **errors** are not allowed — errors must be fixed.
+  (Also enforced by: CI pipeline — error suppressions cause CI failures)
 - Flag any unexplained or blanket suppressions.
 - Suppression reasons **MUST NOT** contain placeholder text such as `FIXME`, `TODO`, or `TBD`. These indicate the author deferred the justification and never returned to it.
 - Suppression reasons **MUST NOT** justify by reference to another resource's pattern (e.g., "Matching AiGateway pattern"). Each suppression must stand on its own with a technical justification for **why** the rule does not apply to this specific case.
@@ -196,6 +219,7 @@ Flag these issues when found:
 - The `@segment` decorator value for ARM resource types **MUST** use camelCase (e.g., `@segment("connectorGateways")`, `@segment("virtualMachines")`).
 - All-lowercase segment values (e.g., `@segment("connectorgateways")`) violate ARM path naming conventions and produce incorrect permanent resource type paths.
 - Once a resource type path is published (even in preview), changing it is a breaking change — catch casing issues before first publication.
+- (Not currently enforced by linters — manual review required)
 
 ### 6.2 PATCH Operation Naming (TSP-PATCH-NAME)
 

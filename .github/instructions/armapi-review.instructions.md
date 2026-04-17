@@ -2,6 +2,17 @@
 applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
+<!-- Upstream alignment: 2026-04-17
+     All rules derived from or aligned with:
+       - Azure Resource Provider Contract (RPC) v1.0
+         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+       - Azure REST API Guidelines (vNext)
+         https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
+       - ARM API Best Practices
+         https://eng.ms/docs/products/arm/api_contracts/guidelines/api_best_practices_and_design_choices
+     If an upstream document changes a rule, update this file to match.
+     When in doubt, the upstream document takes precedence over this file. -->
+
 # ARM-Specific OpenAPI (Swagger) Review Instructions
 
 This file contains **ARM control plane–specific** review rules that supplement the generic OpenAPI review instructions in `openapi-review.instructions.md`. All generic rules (versioning, naming, JSON conventions, enums, error handling, pagination, descriptions, x-ms extensions, etc.) are enforced by that file and are **not repeated here**. When reviewing ARM resource-manager swagger files, apply **both** instruction sets. If the Azure RPC contract conflicts with the generic guidelines, the ARM RPC rules below take precedence.
@@ -154,6 +165,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - PUT **MUST** be idempotent — sending the same PUT request multiple times must produce the same result (RPC-Put-V1-20).
 - A re-PUT (PUT to an existing resource with the same body) **MUST NOT** fail. ARM expects PUT to be idempotent and usable for both create and update.
 - PUT **MUST** return `201` for new resource creation and `200` for replacement of an existing resource (RPC-Put-V1-11). These status codes apply to both synchronous and asynchronous PUT operations.
+  (Also enforced by: `PutResponseCodes` linter rule)
 - PUT **MUST NOT** return `202` for async operations. The required async model for PUT is `201`/`200` with a `provisioningState` property. The `202` model for PUT is deprecated and no longer supported for new resource types.
 - PUT **MUST NOT** implicitly create other tracked resources — only the resource identified in the URL may be created (RPC-Put-V1-16). Implicit creation of other tracked resources means those resources won't be hydrated in ARM.
 - PUT **SHOULD NOT** implicitly create nested or other proxy resources (RPC-Put-V1-17).
@@ -177,6 +189,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 > **Reference:** [RPC -- PATCH Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/patch-resource.md) for complete PATCH contract details.
 
 - PATCH request body parameters **MUST NOT** have any properties marked as `required`, **MUST NOT** have `default` values, and **MUST NOT** have `x-ms-mutability` set to only `["create"]`.
+  (Also enforced by: `PatchBodyParametersSchema` linter rule)
 - PATCH **MUST NOT** update `id`, `name`, `type`, `location`, or `properties.provisioningState` (RPC-Patch-V1-02).
 - PATCH **MUST** follow JSON Merge Patch semantics ([RFC 7396](https://tools.ietf.org/html/rfc7396)) (RPC-Patch-V1-05).
 
@@ -221,6 +234,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   - `default` — error response
 - Do **not** return `404` for a resource that doesn't exist — return `204` instead.
 - DELETE response body **MUST** be empty (RPC-Delete-V1-04).
+  (Also enforced by: `DeleteResponseCodes` linter rule)
 - All tracked resources **MUST** support DELETE (RPC-Delete-V1-03). All proxy resources **SHOULD** support DELETE (RPC-Delete-V1-05).
 
 ### 5.2 DELETE Must Not Have a Request Body
@@ -269,6 +283,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements including terminal states, transition rules, invalid values, and format-specific guidance.
 
 - A resource with async PUT or PATCH **MUST** have a `provisioningState` property (readOnly) with terminal states `Succeeded`, `Failed`, and `Canceled` (single 'l'). It represents only the latest LRO status, not resource health. POST actions do **not** affect it.
+  (Also enforced by: `ProvisioningStateMustBeReadOnly` linter rule — but only checks readOnly, not terminal state completeness)
 - If a user includes `provisioningState` in a PUT request body, the RP **MUST** ignore it if the value matches, or reject with `400 Bad Request` if it does not.
 
 ### 6.6 `202` Response and Polling Headers (RPC-Async-V1-07, RPC-Async-V1-06, RPC-Async-V1-14)

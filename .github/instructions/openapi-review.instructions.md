@@ -2,6 +2,15 @@
 applyTo: "specification/**/*.json"
 ---
 
+<!-- Upstream alignment: 2026-04-17
+     Rules derived from:
+       - Azure REST API Guidelines (vNext)
+         https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
+       - Azure Resource Provider Contract (RPC) v1.0 (for ARM-related rules)
+         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+     If an upstream document changes a rule, update this file to match.
+     When in doubt, the upstream document takes precedence over this file. -->
+
 # Copilot Review Instructions for OpenAPI v2 (Swagger) Specification Files
 
 When performing a code review on OpenAPI v2 (Swagger) JSON definition files in this repository, validate the specification against the [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). This repository hosts all OpenAPI swagger definitions for Azure services. Each service team provides a swagger specification that **must** comply with the rules below.
@@ -25,6 +34,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 **Reference: [Azure Guidelines — API Versioning](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#api-versioning)**
 
 - The `info.version` field **MUST** follow the `YYYY-MM-DD` format (e.g. `"2025-04-01"`), with an optional `-preview` suffix for preview versions.
+  (Also enforced by: `VersionConvention` linter rule)
 - The `info.version` value **MUST** match the API version folder name the file resides in. For example, a file in `preview/2025-11-01-preview/` must have `"info": { "version": "2025-11-01-preview" }` — not a different version like `"2025-04-15"`. A mismatch indicates a copy-paste error from a prior version.
 - The API version suffix for pre-GA releases **MUST** be `-preview`. Suffixes like `-alpha`, `-beta`, `-privatepreview` are **not** permitted in the public spec repository.
 - Every operation **MUST** have an `api-version` query parameter (typically via `$ref` to common-types `ApiVersionParameter`).
@@ -118,6 +128,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Property names **MUST** be treated as case-sensitive.
 - Avoid abbreviations in property names unless they are industry-standard.
 - Property names with a plural noun (e.g., `deploymentErrors`) **MUST** be arrays. If the property is a scalar (string, object), use a singular name. Plural names on non-array types confuse SDK consumers and tooling.
+  (Also enforced by: `BodyTopLevelProperties`, `PropertyNaming` linter rules)
 
 ### Types & Formats
 

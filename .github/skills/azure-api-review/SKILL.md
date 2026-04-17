@@ -43,6 +43,37 @@ These external documents are the upstream authorities. When they conflict with e
 3. **[TypeSpec Azure library docs](https://azure.github.io/typespec-azure/docs/intro/)** -- TypeSpec-specific patterns for Azure
 4. **[ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html)** -- supplementary ARM guidance
 
+## Maintenance & Upstream Alignment
+
+The instruction files and reference files in this skill are **derived
+from** the authoritative external sources listed above. They are not
+replacements for those documents — they distill the most commonly
+violated rules into a structured format optimized for LLM-based review
+agents.
+
+**Why inline rules instead of raw document references:** LLM review
+agents produce more consistent, actionable findings when rules are
+codified with explicit rule IDs, severity levels, and fix suggestions.
+Raw upstream documents are prose-heavy and not structured for automated
+consumption.
+
+**Keeping rules current:**
+
+- Each instruction file includes an `Upstream alignment` date in an
+  HTML comment at the top. This date indicates when the rules were last
+  verified against the upstream documents.
+- When an upstream document changes a rule, the corresponding
+  instruction file **MUST** be updated to match. The upstream document
+  always takes precedence.
+- Rules that overlap with existing linter checks are annotated with
+  `(Also enforced by: ...)`. The review agent should check CI results
+  before flagging these to avoid duplicating linter findings.
+- To avoid conflicts with the
+  [azure-typespec-author](../../skills/azure-typespec-author/SKILL.md)
+  skill (used for TypeSpec code generation), coordinate rule changes
+  with that skill's maintainers. A rule flagged by the reviewer agent
+  should not contradict guidance given by the authoring agent.
+
 ## Repository Documentation
 
 These documents in this repo provide additional context:
