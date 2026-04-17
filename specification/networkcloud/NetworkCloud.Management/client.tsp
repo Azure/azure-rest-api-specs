@@ -4,36 +4,83 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.NetworkCloud;
 
+// --- go ---
+@@clientName(HugepagesSize.`1G`, "OneG", "go");
+@@clientName(HugepagesSize.`2M`, "TwoM", "go");
+@@alternateType(Azure.ResourceManager.Foundations.ExtendedLocation.type,
+  string,
+  "go"
+);
+
+// --- python ---
+@@clientName(Microsoft.NetworkCloud, "NetworkCloudMgmtClient", "python");
+@@clientName(HugepagesSize.`1G`, "ONE_G", "python");
+@@clientName(HugepagesSize.`2M`, "TWO_M", "python");
+
+// --- csharp ---
+@@scope(BareMetalMachines.createOrUpdate, "!csharp");
+@@scope(BareMetalMachines.delete, "!csharp");
+@@scope(Racks.createOrUpdate, "!csharp");
+@@scope(Racks.delete, "!csharp");
+@@scope(StorageAppliances.createOrUpdate, "!csharp");
+@@scope(StorageAppliances.delete, "!csharp");
+
+@@alternateType(AccessBridge.etag, eTag, "csharp");
+@@alternateType(AgentPool.etag, eTag, "csharp");
+@@alternateType(BareMetalMachine.etag, eTag, "csharp");
+@@alternateType(BareMetalMachineKeySet.etag, eTag, "csharp");
+@@alternateType(BmcKeySet.etag, eTag, "csharp");
+@@alternateType(CloudServicesNetwork.etag, eTag, "csharp");
+@@alternateType(Cluster.etag, eTag, "csharp");
+@@alternateType(ClusterManager.etag, eTag, "csharp");
+@@alternateType(ClusterMetricsConfiguration.etag, eTag, "csharp");
+@@alternateType(Console.etag, eTag, "csharp");
+@@alternateType(KubernetesCluster.etag, eTag, "csharp");
+@@alternateType(KubernetesVersion.etag, eTag, "csharp");
+@@alternateType(L2Network.etag, eTag, "csharp");
+@@alternateType(L3Network.etag, eTag, "csharp");
+@@alternateType(Rack.etag, eTag, "csharp");
+@@alternateType(StorageAppliance.etag, eTag, "csharp");
+@@alternateType(TrunkedNetwork.etag, eTag, "csharp");
+@@alternateType(VirtualMachine.etag, eTag, "csharp");
+@@alternateType(Volume.etag, eTag, "csharp");
+@@alternateType(KubernetesClusterFeature.etag, eTag, "csharp");
+@@alternateType(EntityTagProperty.eTag, eTag, "csharp");
+
 @@clientName(AgentOptions, "NetworkCloudAgentConfiguration", "csharp");
-
 @@alternateType(BareMetalMachineProperties.associatedResourceIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
-
 @@alternateType(BareMetalMachineProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
-
 @@alternateType(BareMetalMachineProperties.rackId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
-
 @@alternateType(BareMetalMachineProperties.oamIpv4Address,
-  Azure.Core.ipV4Address,
+  ipV4Address,
+  "csharp"
+);
+@@clientName(BareMetalMachineProperties.caCertificate,
+  "CACertificate",
   "csharp"
 );
 @@clientName(BareMetalMachineConfigurationData,
   "BareMetalMachineConfiguration",
   "csharp"
 );
+@@clientName(AccessBridge, "NetworkCloudAccessBridge", "csharp");
+@@clientName(KubernetesVersion, "NetworkCloudKubernetesVersion", "csharp");
+@@clientName(DeploymentType, "NetworkCloudDeploymentType", "csharp");
 @@clientName(BareMetalMachineKeySetProperties.expiration, "ExpireOn", "csharp");
 @@alternateType(BareMetalMachineKeySetProperties.jumpHostsAllowed,
-  Azure.Core.ipV4Address[],
+  ipV4Address[],
   "csharp"
 );
 @@clientName(BareMetalMachineKeySetProperties.lastValidation,
@@ -45,7 +92,7 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(BareMetalMachineKeySetPatchProperties.jumpHostsAllowed,
-  Azure.Core.ipV4Address,
+  ipV4Address,
   "csharp"
 );
 @@clientName(BmcKeySetProperties.expiration, "ExpireOn", "csharp");
@@ -53,15 +100,15 @@ using Microsoft.NetworkCloud;
 @@clientName(BmcKeySetPatchProperties.expiration, "ExpireOn", "csharp");
 @@clientName(BootstrapProtocol.PXE, "Pxe", "csharp");
 @@alternateType(ClusterProperties.analyticsWorkspaceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ClusterProperties.clusterManagerId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ClusterProperties.networkFabricId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(ClusterProperties.supportExpiryDate, "SupportExpireOn", "csharp");
@@ -75,40 +122,36 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(ClusterManagerProperties.analyticsWorkspaceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ClusterManagerProperties.fabricControllerId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(CloudServicesNetworkProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(CloudServicesNetworkProperties.associatedResourceIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(CloudServicesNetworkProperties.virtualMachinesAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
-
 @@alternateType(CloudServicesNetworkProperties.hybridAksClustersAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@clientName(Console, "NetworkCloudVirtualMachineConsole", "csharp");
 @@clientName(ConsoleProperties.expiration, "ExpireOn", "csharp");
 @@alternateType(ConsoleProperties.privateLinkServiceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ConsoleProperties.virtualMachineAccessId,
-  Azure.Core.uuid,
-  "csharp"
-);
+@@alternateType(ConsoleProperties.virtualMachineAccessId, uuid, "csharp");
 @@clientName(ConsolePatchProperties.expiration, "ExpireOn", "csharp");
 @@clientName(IdentitySelector, "ManagedServiceIdentitySelector", "csharp");
 @@clientName(ImageRepositoryCredentials.registryUrl,
@@ -116,15 +159,15 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(KubernetesClusterProperties.attachedNetworkIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(KubernetesClusterProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(KubernetesClusterProperties.connectedClusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(KubernetesClusterNode.agentPoolId, "AgentPoolArmId", "csharp");
@@ -133,47 +176,45 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(L2NetworkProperties.associatedResourceIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(L2NetworkProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(L2NetworkProperties.clusterId, armResourceIdentifier, "csharp");
 @@alternateType(L2NetworkProperties.hybridAksClustersAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
+  "csharp"
+);
+@@alternateType(L2NetworkProperties.l2IsolationDomainId,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(L2NetworkProperties.virtualMachinesAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(L2NetworkAttachmentConfiguration.networkId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(L3NetworkProperties.associatedResourceIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(L3NetworkProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(L3NetworkProperties.clusterId, armResourceIdentifier, "csharp");
 @@alternateType(L3NetworkProperties.hybridAksClustersAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(L3NetworkProperties.l3IsolationDomainId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(L3NetworkProperties.virtualMachinesAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(L3NetworkAttachmentConfiguration.networkId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(NetworkAttachment.attachedNetworkId,
@@ -185,48 +226,34 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(NetworkConfiguration.cloudServicesNetworkId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(NetworkConfiguration.cniNetworkId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
-@@alternateType(NetworkConfiguration.dnsServiceIp,
-  Azure.Core.ipV4Address,
-  "csharp"
-);
-@@alternateType(OperationStatusResult.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(NetworkConfiguration.dnsServiceIp, ipV4Address, "csharp");
+@@alternateType(OperationStatusResult.id, armResourceIdentifier, "csharp");
 @@clientName(OsDisk.diskSizeGb, "DiskSizeInGB", "csharp");
-@@alternateType(RackProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(RackProperties.rackSkuId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(RackDefinition.networkRackId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(RackDefinition.rackSkuId,
-  Azure.Core.armResourceIdentifier,
+@@alternateType(RackProperties.clusterId, armResourceIdentifier, "csharp");
+@@alternateType(RackProperties.rackSkuId, armResourceIdentifier, "csharp");
+@@alternateType(RackDefinition.networkRackId, armResourceIdentifier, "csharp");
+@@alternateType(RackDefinition.rackSkuId, armResourceIdentifier, "csharp");
+@@clientName(StorageApplianceProperties.caCertificate,
+  "CACertificate",
   "csharp"
 );
 @@alternateType(StorageApplianceProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(StorageApplianceProperties.managementIpv4Address,
-  Azure.Core.ipV4Address,
+  ipV4Address,
   "csharp"
 );
 @@alternateType(StorageApplianceProperties.rackId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(StorageApplianceConfigurationData,
@@ -234,47 +261,48 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(StorageProfile.volumeAttachments,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(TrunkedNetworkProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(TrunkedNetworkProperties.hybridAksClustersAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(TrunkedNetworkProperties.virtualMachinesAssociatedIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(TrunkedNetworkProperties.isolationDomainIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(TrunkedNetworkAttachmentConfiguration.networkId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(VirtualMachineProperties.bareMetalMachineId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(VirtualMachineProperties.clusterId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(VirtualMachineProperties.volumes,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@clientName(VirtualMachineProperties.memorySizeGb, "MemorySizeInGB", "csharp");
 @@alternateType(VirtualMachinePlacementHint.resourceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(VolumeProperties.sizeMiB, "SizeInMiB", "csharp");
+@@clientName(VolumeProperties.allocatedSizeMiB, "AllocatedInSizeMiB", "csharp");
 @@clientName(AadConfiguration, "NetworkCloudAadConfiguration", "csharp");
 @@clientName(AgentPoolMode, "NetworkCloudAgentPoolMode", "csharp");
 @@clientName(AgentPoolPatchParameters, "NetworkCloudAgentPoolPatch", "csharp");
@@ -300,7 +328,6 @@ using Microsoft.NetworkCloud;
   "NetworkCloudKubernetesClusterFeaturePatch",
   "csharp"
 );
-@@clientName(AgentPoolPatchParameters, "NetworkCloudAgentPoolPatch", "csharp");
 @@clientName(AgentPool, "NetworkCloudAgentPool", "csharp");
 @@clientName(KubernetesCluster, "NetworkCloudKubernetesCluster", "csharp");
 @@clientName(BareMetalMachine, "NetworkCloudBareMetalMachine", "csharp");
@@ -322,10 +349,6 @@ using Microsoft.NetworkCloud;
 @@clientName(TrunkedNetwork, "NetworkCloudTrunkedNetwork", "csharp");
 @@clientName(VirtualMachine, "NetworkCloudVirtualMachine", "csharp");
 @@clientName(Volume, "NetworkCloudVolume", "csharp");
-@@clientName(ClusterAvailableUpgradeVersion,
-  "NetworkCloudClusterAvailableUpgradeVersion",
-  "csharp"
-);
 @@clientName(KubernetesClusterFeature,
   "NetworkCloudKubernetesClusterFeature",
   "csharp"
@@ -341,10 +364,6 @@ using Microsoft.NetworkCloud;
 @@clientName(RackDefinition, "NetworkCloudRackDefinition", "csharp");
 @@clientName(SshPublicKey, "NetworkCloudSshPublicKey", "csharp");
 @@clientName(StorageProfile, "NetworkCloudStorageProfile", "csharp");
-@@clientName(ClusterAvailableUpgradeVersion,
-  "ClusterAvailableUpgradeVersion",
-  "csharp"
-);
 @@clientName(OperationStatusResult,
   "NetworkCloudOperationStatusResult",
   "csharp"
@@ -359,20 +378,16 @@ using Microsoft.NetworkCloud;
 @@clientName(KubernetesPluginType.IPVLAN, "Ipvlan", "csharp");
 @@clientName(KubernetesPluginType.MACVLAN, "Macvlan", "csharp");
 @@clientName(KubernetesPluginType.SRIOV, "Sriov", "csharp");
-@@alternateType(Azure.ResourceManager.EntityTagProperty.eTag,
-  Azure.Core.eTag,
-  "csharp"
-);
 @@alternateType(ClusterProperties.workloadResourceIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
-@@clientName(Foundations.ExtendedLocation.type,
+@@clientName(Azure.ResourceManager.Foundations.ExtendedLocation.type,
   "ExtendedLocationType",
   "csharp"
 );
 @@alternateType(BareMetalMachineKeySetPatchProperties.jumpHostsAllowed,
-  Azure.Core.ipV4Address[],
+  ipV4Address[],
   "csharp"
 );
 @@clientName(HugepagesSize.`1G`, "OneG", "csharp");
@@ -380,14 +395,8 @@ using Microsoft.NetworkCloud;
 @@clientName(HybridAksPluginType.DPDK, "Dpdk", "csharp");
 @@clientName(HybridAksPluginType.SRIOV, "Sriov", "csharp");
 @@clientName(MachineDisk.type, "DiskType", "csharp");
-@@scope(BareMetalMachines.createOrUpdate, "!csharp");
-@@scope(BareMetalMachines.delete, "!csharp");
-@@scope(Racks.createOrUpdate, "!csharp");
-@@scope(Racks.delete, "!csharp");
-@@scope(StorageAppliances.createOrUpdate, "!csharp");
-@@scope(StorageAppliances.delete, "!csharp");
 @@alternateType(ManagedResourceGroupConfiguration.location,
-  Azure.Core.azureLocation,
+  azureLocation,
   "csharp"
 );
 @@usage(Rack, Usage.input, "csharp");
@@ -395,6 +404,166 @@ using Microsoft.NetworkCloud;
 @@usage(BareMetalMachine, Usage.input, "csharp");
 @@usage(StorageAppliance, Usage.input, "csharp");
 
-@@clientName(HugepagesSize.`1G`, "OneG", "go");
-@@clientName(HugepagesSize.`2M`, "TwoM", "go");
-@@alternateType(Foundations.ExtendedLocation.type, string, "go");
+@@clientName(ActionState, "NetworkCloudActionState", "csharp");
+@@clientName(ActionState.endTime, "EndOn", "csharp");
+@@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");
+@@clientName(CertificateInfo, "NetworkCloudCertificateInfo", "csharp");
+@@clientName(StepState, "NetworkCloudStepState", "csharp");
+@@clientName(StepState.endTime, "EndOn", "csharp");
+@@clientName(StepState.startTime, "StartOn", "csharp");
+@@clientName(StepStateStatus, "NetworkCloudStepStateStatus", "csharp");
+@@alternateType(ActionState.endTime, utcDateTime, "csharp");
+@@alternateType(StepState.endTime, utcDateTime, "csharp");
+@@alternateType(StepState.startTime, utcDateTime, "csharp");
+@@clientName(BareMetalMachineCordonParameters,
+  "BareMetalMachineCordonContent",
+  "csharp"
+);
+@@clientName(BareMetalMachinePowerOffParameters,
+  "BareMetalMachinePowerOffContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineReplaceParameters,
+  "BareMetalMachineReplaceContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineRunCommandParameters,
+  "BareMetalMachineRunCommandContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineRunDataExtractsParameters,
+  "BareMetalMachineRunDataExtractsContent",
+  "csharp"
+);
+@@clientName(BareMetalMachineRunReadCommandsParameters,
+  "BareMetalMachineRunReadCommandsContent",
+  "csharp"
+);
+@@clientName(ClusterContinueUpdateVersionParameters,
+  "ClusterContinueUpdateVersionContent",
+  "csharp"
+);
+@@clientName(ClusterDeployParameters, "ClusterDeployContent", "csharp");
+@@clientName(ClusterScanRuntimeParameters,
+  "ClusterScanRuntimeContent",
+  "csharp"
+);
+@@clientName(ClusterUpdateVersionParameters,
+  "ClusterUpdateVersionContent",
+  "csharp"
+);
+@@clientName(KubernetesClusterRestartNodeParameters,
+  "KubernetesClusterRestartNodeContent",
+  "csharp"
+);
+@@clientName(StorageApplianceEnableRemoteVendorManagementParameters,
+  "StorageApplianceEnableRemoteVendorManagementContent",
+  "csharp"
+);
+@@clientName(StorageApplianceRunReadCommandsParameters,
+  "StorageApplianceRunReadCommandsContent",
+  "csharp"
+);
+@@clientName(VirtualMachineAssignRelayParameters,
+  "VirtualMachineAssignRelayContent",
+  "csharp"
+);
+@@clientName(VirtualMachinePowerOffParameters,
+  "VirtualMachinePowerOffContent",
+  "csharp"
+);
+@@clientName(CloudServicesNetworkEnableDefaultEgressEndpoints,
+  "CloudServicesNetworkEnableDefaultEgressEndpoint",
+  "csharp"
+);
+@@clientName(IpAddressPool, "IPAddressPool", "csharp");
+@@clientName(IpAllocationType, "IPAllocationType", "csharp");
+@@clientName(OsDiskCreateOption, "OSDiskCreateOption", "csharp");
+@@clientName(OsDiskDeleteOption, "OSDiskDeleteOption", "csharp");
+@@clientName(RelayType, "VirtualMachineAssignRelayType", "csharp");
+@@clientName(BareMetalMachineKeySetSpec.osGroupName, "OSGroupName", "csharp");
+@@clientName(BareMetalMachineStatus.oamIpv4Address, "OamIPv4Address", "csharp");
+@@clientName(BareMetalMachineStatus.oamIpv6Address, "OamIPv6Address", "csharp");
+@@clientName(BareMetalMachineStatus.osImage, "OSImage", "csharp");
+@@clientName(BgpAdvertisement.ipAddressPools, "IPAddressPools", "csharp");
+@@clientName(BgpServiceLoadBalancerConfiguration.ipAddressPools,
+  "IPAddressPools",
+  "csharp"
+);
+@@clientName(IpAddressPool.onlyUseHostIps, "OnlyUseHostIPs", "csharp");
+@@clientName(L3NetworkSpec.ipAllocationType, "IPAllocationType", "csharp");
+@@clientName(L3NetworkSpec.ipv4ConnectedPrefix,
+  "IPv4ConnectedPrefix",
+  "csharp"
+);
+@@clientName(L3NetworkSpec.ipv6ConnectedPrefix,
+  "IPv6ConnectedPrefix",
+  "csharp"
+);
+@@clientName(NetworkAttachment.ipAllocationMethod,
+  "IPAllocationMethod",
+  "csharp"
+);
+@@clientName(NetworkAttachment.ipv4Address, "IPv4Address", "csharp");
+@@clientName(NetworkAttachment.ipv6Address, "IPv6Address", "csharp");
+@@clientName(NetworkConfiguration.dnsServiceIp, "DnsServiceIP", "csharp");
+@@clientName(L2ServiceLoadBalancerConfiguration.ipAddressPools,
+  "L2ServiceLoadBalancerIPAddressPools",
+  "csharp"
+);
+@@clientName(StorageApplianceStatus.caCertificate, "CACertificate", "csharp");
+@@clientName(StorageApplianceStatus.managementIpv4Address,
+  "ManagementIPv4Address",
+  "csharp"
+);
+@@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(ClusterInspectParameters,
+  "NetworkCloudClusterInspectContent",
+  "csharp"
+);
+@@clientName(ClusterManagerUpdateRelayPrivateEndpointConnectionParameters,
+  "NetworkCloudClusterManagerRelayPrivateEndpointConnectionContent",
+  "csharp"
+);
+@@clientName(FilterDevices, "NetworkCloudFilterDevices", "csharp");
+@@clientName(TransportProtocol.TCP, "Tcp", "csharp");
+@@clientName(TransportProtocol.UDP, "Udp", "csharp");
+@@clientName(VolumeSpec.sizeMiB, "AllocatedInSizeMiB", "csharp");
+@@clientName(VolumeStatus.allocatedSizeMiB, "AllocatedInSizeMiB", "csharp");
+@@clientName(TransportProtocol, "NetworkCloudTransportProtocol", "csharp");
+@@clientName(SecurityRuleDirection,
+  "NetworkCloudSecurityRuleDirection",
+  "csharp"
+);
+@@clientName(RelayPrivateEndpointConnectionState,
+  "NetworkCloudRelayPrivateEndpointConnectionState",
+  "csharp"
+);
+@@clientName(KubernetesVersionProvisioningState,
+  "NetworkCloudKubernetesVersionProvisioningState",
+  "csharp"
+);
+@@clientName(KubernetesVersionValue,
+  "NetworkCloudKubernetesVersionValue",
+  "csharp"
+);
+@@clientName(AccessBridgeAllowedName,
+  "NetworkCloudAccessBridgeAllowedName",
+  "csharp"
+);
+@@clientName(AccessBridgeDetailedStatus,
+  "NetworkCloudAccessBridgeDetailedStatus",
+  "csharp"
+);
+@@clientName(AccessBridgeEndpoint,
+  "NetworkCloudAccessBridgeEndpoint",
+  "csharp"
+);
+@@clientName(AccessBridgeProvisioningState,
+  "NetworkCloudAccessBridgeProvisioningState",
+  "csharp"
+);
+@@clientName(AccessBridgeSecurityRule,
+  "NetworkCloudAccessBridgeSecurityRule",
+  "csharp"
+);

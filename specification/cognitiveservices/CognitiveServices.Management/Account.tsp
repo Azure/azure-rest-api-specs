@@ -223,18 +223,6 @@ interface Accounts {
       safetyProviderName: string;
     }
   >;
-
-  /**
-   * Provisions the managed network of a cognitive services account.
-   */
-  @tag("ManagedNetwork")
-  provisionManagedNetwork is AccountOps.ActionAsync<
-    Account,
-    Request = ManagedNetworkProvisionOptions,
-    Result = void,
-    Response = ArmResponse<ManagedNetworkProvisionStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus>>,
-    OptionalRequestBody = true
-  >;
 }
 @armResourceOperations
 interface DeletedAccountOps
@@ -297,10 +285,4 @@ interface DeletedAccounts {
 @@doc(Accounts.regenerateKey::parameters.body, "regenerate key parameters.");
 @@doc(Accounts.createOrUpdate::parameters.resource,
   "Properties describing the rai external safety provider."
-);
-@@doc(Accounts.provisionManagedNetwork::parameters.body,
-  "Managed Network Provisioning Options for a cognitive services account."
-);
-@@summary(Accounts.provisionManagedNetwork,
-  "Provisions the managed network of a cognitive services account."
 );

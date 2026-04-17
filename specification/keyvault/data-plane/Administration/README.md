@@ -26,7 +26,17 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2025-07-01
+tag: package-preview-2026-01-01-preview
+```
+
+### Tag: package-preview-2026-01-01-preview
+
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/administration.json
+```
 ```
 
 ### Tag: package-2025-07-01
@@ -327,8 +337,27 @@ directive:
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: rbac.json
     reason: / is a valid scope in this scenario.
+  - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
+    from: administration.json
+    reason: / is a valid scope in this scenario.
+  - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
+    from: GetRoleDefinition-example.json
+    reason: / is a valid scope in this scenario.
+  - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
+    from: DeleteRoleDefinition-example.json
+    reason: / is a valid scope in this scenario.
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: rbac.json
     where: $..parameters[?(@.name=='scope')]
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: administration.json
+    where: $..parameters[?(@.name=='scope')]
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: GetRoleDefinition-example.json
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: DeleteRoleDefinition-example.json
     reason: Suppress an invalid error caused by a bug in the linter.
 ```

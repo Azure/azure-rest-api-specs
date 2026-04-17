@@ -95,3 +95,23 @@ using Azure.Core;
 
 // Java SDK migration fixes
 @@clientName(AgentProperties.localIPAddress, "localIpAddress", "java");
+
+// C# naming fixes for review comments
+@@clientName(Frequency, "StorageMoverScheduleFrequency", "csharp");
+@@clientName(EndpointKind, "StorageMoverEndpointKind", "csharp");
+@@clientName(TriggerType, "StorageMoverJobTriggerType", "csharp");
+@@clientName(ScheduleInfo, "StorageMoverScheduleInfo", "csharp");
+@@clientName(DataIntegrityValidation,
+  "StorageMoverDataIntegrityValidation",
+  "csharp"
+);
+@@clientName(JobDefinitionProperties.preservePermissions,
+  "IsPermissionsPreserved",
+  "csharp"
+);
+@@clientName(S3WithHmacSourceType.MINIO, "Minio", "csharp");
+@@clientName(S3WithHmacSourceType.IBM, "Ibm", "csharp");
+@@clientName(S3WithHmacSourceType.GCS, "Gcs", "csharp");
+@@clientName(S3WithHmacSourceType.ALIBABA, "Alibaba", "csharp");
+@@clientName(S3WithHmacSourceType.DELL_EMC, "DellEmc", "csharp");
+@@clientName(S3WithHmacSourceType.OTHER, "Other", "csharp");

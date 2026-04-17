@@ -26,12 +26,10 @@ model MemoryStoreObject {
   id: string;
 
   @doc("The Unix timestamp (seconds) when the memory store was created.")
-  @encode("unixTimestamp", int32)
-  created_at: utcDateTime;
+  created_at: FoundryTimestamp;
 
   @doc("The Unix timestamp (seconds) when the memory store was last updated.")
-  @encode("unixTimestamp", int32)
-  updated_at: utcDateTime;
+  updated_at: FoundryTimestamp;
 
   @doc("The name of the memory store.")
   @maxLength(256)
@@ -121,6 +119,7 @@ model MemoryStoreOperationUsage {
 @doc("Status of a memory store update operation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreUpdateStatus {
+  string,
   queued: "queued",
   in_progress: "in_progress",
 
@@ -240,8 +239,7 @@ model MemoryItem {
   memory_id: string;
 
   @doc("The last update time of the memory item.")
-  @encode("unixTimestamp", int32)
-  updated_at: utcDateTime;
+  updated_at: FoundryTimestamp;
 
   @doc("The namespace that logically groups and isolates memories, such as a user ID.")
   scope: string;

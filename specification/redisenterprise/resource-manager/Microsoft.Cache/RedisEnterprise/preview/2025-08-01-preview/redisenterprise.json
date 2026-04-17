@@ -2070,6 +2070,62 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/validate": {
+      "post": {
+        "operationId": "Migrations_Validate",
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Validates if a source Azure Cache for Redis resource can be migrated to a target Azure Managed Redis resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Redis Enterprise cluster. Name must be 1-60 characters long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor consecutive hyphens",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to validate a migration operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseMigrationValidate": {
+            "$ref": "./examples/RedisEnterpriseMigrationValidate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_List",
@@ -2543,6 +2599,10 @@
         "skipDataMigration": {
           "type": "boolean",
           "description": "Sets whether the data is migrated from source to target or not. This property must be true during the preview."
+        },
+        "forceMigrate": {
+          "type": "boolean",
+          "description": "Sets whether to ignore warnings when performing validation of the migration request. If this property is true, warning-level disparities between the source and target resources will be ignored, and the request will only fail validation if there are error-level disparities. The default value is false."
         }
       },
       "required": [
@@ -2692,6 +2752,11 @@
           "items": {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
+          "readOnly": true
+        },
+        "migratedEndpoint": {
+          "type": "string",
+          "description": "The endpoint of the source resource that is currently pointing to this resource as a result of an ACR/ACRE to AMR migration.",
           "readOnly": true
         }
       }
@@ -3568,7 +3633,8 @@
         "Succeeded",
         "Failed",
         "Cancelling",
-        "Cancelled"
+        "Cancelled",
+        "CancellationFailed"
       ],
       "x-ms-enum": {
         "name": "MigrationProvisioningState",
@@ -3608,9 +3674,124 @@
             "name": "Cancelled",
             "value": "Cancelled",
             "description": "The migration operation has been cancelled."
+          },
+          {
+            "name": "CancellationFailed",
+            "value": "CancellationFailed",
+            "description": "The migration operation cancellation has failed."
           }
         ]
       }
+    },
+    "MigrationValidationDisparity": {
+      "type": "object",
+      "description": "Represents a specific validation issue found during migration validation.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "A localized string denoting the category of the validation issue. Examples are \"Region\", \"Data\", \"Identity\", \"Clustering Mode\", and \"TLS\"."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message describing the validation issue."
+        }
+      },
+      "required": [
+        "category",
+        "message"
+      ]
+    },
+    "MigrationValidationError": {
+      "type": "object",
+      "description": "Represents a validation error that prevents migration.",
+      "properties": {
+        "disparities": {
+          "type": "array",
+          "description": "List of specific disparities that cause this error.",
+          "items": {
+            "$ref": "#/definitions/MigrationValidationDisparity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "disparities"
+      ]
+    },
+    "MigrationValidationRequest": {
+      "type": "object",
+      "description": "Properties for validating migration from Azure Cache for Redis to Redis Enterprise.",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The source resource ID to validate migration from. This is the resource ID of the Azure Cache for Redis.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/redis"
+              }
+            ]
+          }
+        },
+        "skipDataMigration": {
+          "type": "boolean",
+          "description": "Sets whether the data is migrated from source to target or not. The default value is true."
+        },
+        "forceMigrate": {
+          "type": "boolean",
+          "description": "Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false."
+        }
+      },
+      "required": [
+        "sourceResourceId"
+      ]
+    },
+    "MigrationValidationResponse": {
+      "type": "object",
+      "description": "Response for migration validation operation.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether the migration validation passed."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of validation errors that prevent migration.",
+          "items": {
+            "$ref": "#/definitions/MigrationValidationError"
+          },
+          "x-ms-identifiers": []
+        },
+        "warnings": {
+          "type": "array",
+          "description": "List of validation warnings that may impact migration.",
+          "items": {
+            "$ref": "#/definitions/MigrationValidationWarning"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "isValid"
+      ]
+    },
+    "MigrationValidationWarning": {
+      "type": "object",
+      "description": "Represents a validation warning that may impact migration.",
+      "properties": {
+        "disparities": {
+          "type": "array",
+          "description": "List of specific disparities that cause this warning.",
+          "items": {
+            "$ref": "#/definitions/MigrationValidationDisparity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "disparities"
+      ]
     },
     "Module": {
       "type": "object",

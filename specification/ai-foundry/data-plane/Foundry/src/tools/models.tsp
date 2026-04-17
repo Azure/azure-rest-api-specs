@@ -17,6 +17,7 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
+    work_iq_preview: "work_iq_preview",
   }
 
   // General availability tools:
@@ -54,6 +55,8 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.WebSearchTool,
     {
+      ...ToolNameAndDescriptionExtension,
+
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
        * resource attached to the tool.
@@ -62,10 +65,46 @@ namespace Azure.AI.Projects {
     }
   );
 
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.CodeInterpreterTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.ImageGenTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.LocalShellToolParam,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.FunctionShellToolParam,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.FileSearchTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
   /**
    * A web search configuration for bing custom search
    */
   model WebSearchConfiguration {
+
     /**
      * Project connection id for grounding with bing custom search
      */
@@ -76,6 +115,21 @@ namespace Azure.AI.Projects {
      */
     instance_name: string;
   }
+
+  /**
+   * Optional name and description fields for tool definitions and nested tool configurations.
+   */
+  alias ToolNameAndDescriptionExtension = {
+    /**
+     * Optional user-defined name for this tool or configuration.
+     */
+      name?: string;
+
+    /**
+     * Optional user-defined description for this tool or configuration.
+     */
+    description?: string;
+  };
 
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
@@ -96,6 +150,7 @@ namespace Azure.AI.Projects {
    * The fabric data agent tool parameters.
    */
   model FabricDataAgentToolParameters {
+
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
@@ -123,6 +178,7 @@ namespace Azure.AI.Projects {
    * The sharepoint grounding tool parameters.
    */
   model SharepointGroundingToolParameters {
+
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
@@ -165,6 +221,7 @@ namespace Azure.AI.Projects {
    * A set of index resources used by the `azure_ai_search` tool.
    */
   model AzureAISearchToolResource {
+
     /**
      * The indices attached to this agent. There can be a maximum of 1 index
      * resource attached to the agent.
@@ -284,6 +341,7 @@ namespace Azure.AI.Projects {
    * Definition of input parameters for the Browser Automation Tool.
    */
   model BrowserAutomationToolParameters {
+
     /**
      * The project connection parameters associated with the Browser Automation Tool.
      */
@@ -294,6 +352,7 @@ namespace Azure.AI.Projects {
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
   model BrowserAutomationToolConnectionParameters {
+
     /**
      * The ID of the project connection to your Azure Playwright resource.
      */
@@ -491,6 +550,7 @@ namespace Azure.AI.Projects {
    * A project connection resource.
    */
   model ToolProjectConnection {
+
     /**
      * A project connection in a ToolProjectConnectionList attached to this tool.
      */
@@ -513,6 +573,7 @@ namespace Azure.AI.Projects {
    * Search configuration for Bing Grounding
    */
   model BingGroundingSearchConfiguration {
+
     /**
      * Project connection id for grounding with bing search
      */
@@ -543,6 +604,7 @@ namespace Azure.AI.Projects {
    * The bing grounding search tool parameters.
    */
   model BingGroundingSearchToolParameters {
+
     /**
      * The search configurations attached to this tool. There can be a maximum of 1
      * search configuration resource attached to the tool.
@@ -555,6 +617,7 @@ namespace Azure.AI.Projects {
    * The bing custom search tool parameters.
    */
   model BingCustomSearchToolParameters {
+
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
@@ -567,6 +630,7 @@ namespace Azure.AI.Projects {
    * A bing custom search configuration.
    */
   model BingCustomSearchConfiguration {
+
     /**
      * Project connection id for grounding with bing search
      */
@@ -662,6 +726,8 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The structured outputs to capture from the model.
      */
@@ -693,6 +759,33 @@ namespace Azure.AI.Projects {
      * The connection stores authentication and other connection details needed to connect to the A2A server.
      */
     project_connection_id?: string;
+  }
+
+  /**
+   * The WorkIQ tool parameters.
+   */
+  model WorkIQPreviewToolParameters {
+    /**
+     * The ID of the WorkIQ project connection.
+     */
+    project_connection_id: string;
+  }
+
+  /**
+   * A WorkIQ server-side tool.
+   */
+  model WorkIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'work_iq_preview'.
+     */
+    type: "work_iq_preview";
+
+    ...ToolNameAndDescriptionExtension;
+
+    /**
+     * The WorkIQ tool parameters.
+     */
+    work_iq_preview: WorkIQPreviewToolParameters;
   }
 
   /**
@@ -1118,3 +1211,4 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
   }
 }
+
