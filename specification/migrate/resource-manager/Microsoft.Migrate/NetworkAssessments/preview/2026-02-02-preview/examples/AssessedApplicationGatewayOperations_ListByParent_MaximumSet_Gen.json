@@ -1,0 +1,257 @@
+{
+  "title": "AssessedApplicationGatewayOperations_ListByParent_MaximumSet",
+  "operationId": "AssessedApplicationGatewayOperations_ListByParent",
+  "parameters": {
+    "api-version": "2026-02-02-preview",
+    "subscriptionId": "D5F31D22-3E2E-4A10-B63F-3E0C598D11FA",
+    "resourceGroupName": "rgnetworkAssessments",
+    "projectName": "contosoProject",
+    "assessmentName": "assessmentName",
+    "$filter": "properties/resourceName eq 'contoso-appgw'",
+    "pageSize": 10,
+    "continuationToken": "abc123",
+    "totalRecordCount": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "workloadType": "Network",
+              "linkages": [
+                {
+                  "workloadName": "contoso-vnet",
+                  "linkageType": "ConnectedTo",
+                  "kind": "VirtualNetwork",
+                  "armId": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/virtualNetworks/contoso-vnet"
+                }
+              ],
+              "recommendations": [
+                {
+                  "configuration": {
+                    "azureTarget": "AzureApplicationGateway",
+                    "sizingCriterion": "AsOnPremises"
+                  },
+                  "recommendedFor": {
+                    "strategies": [
+                      "PaaSPreferred"
+                    ]
+                  },
+                  "migrationPlatform": "IaaS",
+                  "confidenceScore": 4.5,
+                  "migrationSuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "securitySuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "totalCost": [
+                    {
+                      "costDetail": [
+                        {
+                          "name": "MonthlyComputeCost",
+                          "value": 120
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "totalSavings": [
+                    {
+                      "savingsDetail": [
+                        {
+                          "name": "MonthlyAzureHybridCostSavings",
+                          "value": 20
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "migrationIssues": [
+                    {
+                      "issueCode": "APPGW001",
+                      "issueCategory": "Warning",
+                      "issueDescription": "Application gateway uses WAF v2 SKU with custom rules that need review",
+                      "possibleCause": "Custom WAF rules may need reconfiguration in target environment",
+                      "recommendedActions": [
+                        "Review WAF custom rules post-migration"
+                      ],
+                      "moreInformation": [
+                        {
+                          "title": "Application Gateway WAF overview",
+                          "url": "https://learn.microsoft.com/azure/application-gateway/waf-overview"
+                        }
+                      ]
+                    }
+                  ],
+                  "skus": [
+                    {
+                      "kind": "Endpoint",
+                      "resourceUri": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/applicationGateways/appgw1",
+                      "displayName": "Standard v2 Application Gateway",
+                      "id": "standard-v2-appgw",
+                      "type": "ApplicationGateway",
+                      "sources": [
+                        {
+                          "name": "contoso-appgw",
+                          "migrationSuitability": {
+                            "readiness": "Suitable"
+                          }
+                        }
+                      ],
+                      "details": {
+                        "skuType": "Network",
+                        "skuName": "Standard_v2",
+                        "capabilities": [
+                          {
+                            "name": "autoscaling",
+                            "value": "supported"
+                          }
+                        ],
+                        "totalCost": [
+                          {
+                            "costDetail": [
+                              {
+                                "name": "MonthlyComputeCost",
+                                "value": 120
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ],
+                        "totalSavings": [
+                          {
+                            "savingsDetail": [
+                              {
+                                "name": "MonthlyAzureHybridCostSavings",
+                                "value": 20
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "migrationGuidelines": [
+                    {
+                      "guidelineId": "appgw-guideline-001",
+                      "migrationGuidelineCategory": "General",
+                      "migrationGuidelineContext": [
+                        {
+                          "contextKey": "skuMigration",
+                          "contextValue": "Standard_v2 recommended for production"
+                        }
+                      ]
+                    }
+                  ],
+                  "recommendationReasonings": [
+                    {
+                      "reasoningId": "appgw-reason-001",
+                      "reasoningString": "Standard_v2 SKU supports autoscaling and zone redundancy",
+                      "contextDetails": [
+                        "Autoscaling reduces cost and improves availability"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "resourceName": "contoso-appgw",
+              "extendedDetails": {
+                "sku": "Standard_v2",
+                "type": "Public",
+                "subnetName": "appgw-subnet",
+                "frontendIpConfigurations": [
+                  {
+                    "name": "appGwPublicFrontendIp",
+                    "type": "Public",
+                    "publicIpName": "contoso-appgw-pip",
+                    "ipAddress": "20.100.50.25"
+                  },
+                  {
+                    "name": "appGwPrivateFrontendIp",
+                    "type": "Private",
+                    "ipAddress": "10.0.1.10"
+                  }
+                ],
+                "backendAddressPools": [
+                  {
+                    "name": "backend-pool-1",
+                    "workloadIds": [
+                      "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Compute/virtualMachines/vm1",
+                      "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Compute/virtualMachines/vm2"
+                    ]
+                  }
+                ],
+                "backendSettingsCollection": [
+                  {
+                    "name": "backend-settings-1",
+                    "port": 443,
+                    "protocol": "Https",
+                    "requestTimeout": 30,
+                    "hostName": "contoso.com"
+                  }
+                ],
+                "listeners": [
+                  {
+                    "name": "listener-https",
+                    "frontendIpConfiguration": {
+                      "name": "appGwPublicFrontendIp",
+                      "type": "Public",
+                      "publicIpName": "contoso-appgw-pip",
+                      "ipAddress": "20.100.50.25"
+                    },
+                    "port": 443,
+                    "protocol": "Https",
+                    "hostName": "www.contoso.com"
+                  },
+                  {
+                    "name": "listener-http",
+                    "frontendIpConfiguration": {
+                      "name": "appGwPublicFrontendIp",
+                      "type": "Public",
+                      "publicIpName": "contoso-appgw-pip",
+                      "ipAddress": "20.100.50.25"
+                    },
+                    "port": 80,
+                    "protocol": "Http"
+                  }
+                ],
+                "probes": [
+                  {
+                    "name": "health-probe-1",
+                    "protocol": "Https",
+                    "host": "www.contoso.com",
+                    "path": "/health",
+                    "interval": 30,
+                    "timeout": 30,
+                    "port": 443
+                  }
+                ],
+                "autoscaleConfiguration": {
+                  "minCapacity": 2,
+                  "maxCapacity": 10
+                }
+              },
+              "createdTimestamp": "2025-09-07T16:22:10.208Z",
+              "updatedTimestamp": "2025-09-07T16:22:10.208Z"
+            },
+            "id": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedApplicationGateways/appgw1",
+            "name": "appgw1",
+            "type": "Microsoft.Migrate/assessmentProjects/networkAssessments/assessedApplicationGateways",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-09-07T16:22:10.208Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-07T16:22:10.208Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedApplicationGateways?api-version=2026-02-02-preview&continuationToken=def456"
+      }
+    }
+  }
+}
