@@ -161,6 +161,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2026-05-01-preview/appconfiguration.json
+  - $(this-folder)/stable/2024-09-01/appconfiguration.json
   - $(this-folder)/stable/2023-11-01/appconfiguration.json
   - $(this-folder)/stable/2023-10-01/appconfiguration.json
   - $(this-folder)/stable/1.0/appconfiguration.json

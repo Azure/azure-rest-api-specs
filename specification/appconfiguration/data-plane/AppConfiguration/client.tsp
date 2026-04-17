@@ -58,6 +58,6 @@ namespace SdkCustomizations;
 @@alternateType(FeatureFlagRevisionsRequestParams.select, string[], "csharp");
 @@alternateType(FeatureFlagsRequestParams.select, string[], "csharp");
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
-@@alternateType(FeatureFlagRevisionsRequestParams.select, string[], "csharp");
+@@alternateType(RevisionsRequestParams.select, string[], "csharp");
 
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
