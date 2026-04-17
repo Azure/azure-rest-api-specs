@@ -117,11 +117,11 @@ model FleetProperties {
    * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
    * Specifying different capacity type for Fleet Regular and Spot priority profiles is not allowed.
    */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_04_01_preview)
   capacityType?: CapacityType;
 
   /** Zone Allocation Policy for Fleet. */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_04_01_preview)
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
@@ -551,7 +551,7 @@ union FleetMode {
 }
 
 /** Capacity types for Compute Fleet. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 union CapacityType {
   string,
 
@@ -566,7 +566,7 @@ union CapacityType {
 }
 
 /** ZoneAllocationPolicy for Compute Fleet. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 model ZoneAllocationPolicy {
   /** Distribution strategy used for zone allocation policy. */
   distributionStrategy: ZoneDistributionStrategy;
@@ -577,7 +577,7 @@ model ZoneAllocationPolicy {
 }
 
 /** Distribution strategies for Compute Fleet zone allocation policy. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 union ZoneDistributionStrategy {
   string,
 
@@ -595,7 +595,7 @@ union ZoneDistributionStrategy {
 }
 
 /** Zone preferences for Compute Fleet zone allocation policy. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 model ZonePreference {
   /** Name of the zone. */
   zone: string;

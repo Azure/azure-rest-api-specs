@@ -76,15 +76,6 @@ input-file:
   - stable/2024-11-01/azurefleet.json
 ```
 
-### Tag: package-preview-2025-07
-
-These settings apply only when `--tag=package-preview-2025-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-07'
-input-file:
-  - preview/2025-07-01-preview/azurefleet.json
-```
-
 ### Tag: package-preview-2026-04-01
 
 These settings apply only when `--tag=package-preview-2026-04-01` is specified on the command line.
