@@ -14,9 +14,13 @@
           "description": "An application on critical recommendations",
           "conditionSets": [
             {
-              "operator": "Contains",
-              "property": "$.Id",
-              "value": "-bil-"
+              "conditions": [
+                {
+                  "operator": "contains",
+                  "property": "$.Id",
+                  "value": "-bil-"
+                }
+              ]
             }
           ],
           "displayName": "Admin's application",

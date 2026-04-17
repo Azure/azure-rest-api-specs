@@ -17,9 +17,13 @@
               "description": "An application on critical GCP recommendations",
               "conditionSets": [
                 {
-                  "operator": "Contains",
-                  "property": "$.Id",
-                  "value": "-bil-"
+                  "conditions": [
+                    {
+                      "operator": "contains",
+                      "property": "$.Id",
+                      "value": "-bil-"
+                    }
+                  ]
                 }
               ],
               "displayName": "Admin's GCP application",
@@ -34,9 +38,13 @@
               "description": "An application on critical GCP recommendations",
               "conditionSets": [
                 {
-                  "operator": "Contains",
-                  "property": "$.Id",
-                  "value": "-prod-"
+                  "conditions": [
+                    {
+                      "operator": "contains",
+                      "property": "$.Id",
+                      "value": "-prod-"
+                    }
+                  ]
                 }
               ],
               "displayName": "GCP Admin's application",
