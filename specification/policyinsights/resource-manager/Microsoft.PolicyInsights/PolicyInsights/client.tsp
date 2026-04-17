@@ -157,14 +157,6 @@ model QueryOptionsB {
   SkipToken?: string;
 }
 
-@@alternateType(QueryOptionsB, QueryOptions);
-@@alternateType(QueryOptionsC, QueryOptions);
-@@alternateType(QueryOptionsD, QueryOptions);
-@@alternateType(QueryOptionsE, QueryOptions);
-@@alternateType(QueryOptionsF, QueryOptions);
-@@alternateType(QueryOptionsG, QueryOptions);
-@@alternateType(QueryOptionsH, QueryOptions);
-
 /**
  * Group C: Query options for Summarize operations.
  * Params: $top, $from, $to, $filter
