@@ -163,7 +163,7 @@ namespace Microsoft.InsightsCombinedClient;
   "ActivityLogAlertAllOfCondition",
   "java"
 );
-@@clientName(Microsoft.ActivityLogAlerts.AlertRuleLeafCondition,
+@@clientName(Microsoft.ActivityLogAlerts.AlertRuleAnyOfOrLeafCondition,
   "ActivityLogAlertLeafCondition",
   "java"
 );
