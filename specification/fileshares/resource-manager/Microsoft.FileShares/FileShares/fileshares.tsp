@@ -371,7 +371,6 @@ model FileShareSnapshot
 @doc("FileShareSnapshot properties")
 model FileShareSnapshotProperties {
   // The FileShareSnapshot time of the file share FileShareSnapshot.
-  @visibility(Lifecycle.Read)
   @doc("The FileShareSnapshot time in UTC in string representation")
   snapshotTime?: string;
 
@@ -380,7 +379,6 @@ model FileShareSnapshotProperties {
   // - Users in Company A might use aliases.
   // - Users in company B might use email addresses.
   // - Automated systems like MAB might use resource identifier of Azure Backup Vault.
-  @visibility(Lifecycle.Read)
   @doc("The initiator of the FileShareSnapshot. This is a user-defined value.")
   initiatorId?: string;
 
