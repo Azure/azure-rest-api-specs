@@ -191,5 +191,3 @@ using Microsoft.Maintenance;
   MaintenanceConfigurations,
   "csharp"
 );
-
-// ConfigurationAssignment duplicate: see ConfigurationAssignment.tsp for inline decorators.
