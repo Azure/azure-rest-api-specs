@@ -13,14 +13,7 @@ namespace ComputeGallery;
  * Specifies information about the gallery image version that you want to create or update.
  */
 model CommunityGalleryImageVersion
-  is ProxyResourceCommunity<CommunityGalleryImageVersionProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = CommunityGalleryImageVersion,
-    KeyName = "galleryImageVersionName",
-    SegmentName = "versions",
-    NamePattern = ""
-  >;
-}
+  is ProxyResourceCommunity<CommunityGalleryImageVersionProperties>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Not an ARM resource - deprecated custom resource"
 interface CommunityGalleryImageVersions {
@@ -74,9 +67,6 @@ interface CommunityGalleryImageVersions {
   ): ArmResponse<CommunityGalleryImageVersionList> | Common.CloudError;
 }
 
-@@doc(CommunityGalleryImageVersion.name,
-  "The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
-);
 @@doc(CommunityGalleryImageVersion.properties,
   "Describes the properties of a gallery image version."
 );

@@ -11,14 +11,7 @@ namespace ComputeGallery;
 /**
  * Specifies information about the Community Gallery that you want to create or update.
  */
-model CommunityGallery is ProxyResourceCommunity<CommunityGalleryProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = CommunityGallery,
-    KeyName = "publicGalleryName",
-    SegmentName = "communityGalleries",
-    NamePattern = ""
-  >;
-}
+model CommunityGallery is ProxyResourceCommunity<CommunityGalleryProperties>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Not an ARM resource - deprecated custom resource"
 interface CommunityGalleries {
@@ -41,7 +34,6 @@ interface CommunityGalleries {
   ): ArmResponse<CommunityGallery> | Common.CloudError;
 }
 
-@@doc(CommunityGallery.name, "The public name of the community gallery.");
 @@doc(CommunityGallery.properties,
   "Describes the properties of a community gallery."
 );

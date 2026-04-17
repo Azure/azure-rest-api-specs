@@ -12,14 +12,7 @@ namespace ComputeGallery;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
-model SharedGalleryImage is ProxyResourceShared<SharedGalleryImageProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = SharedGalleryImage,
-    KeyName = "galleryImageName",
-    SegmentName = "images",
-    NamePattern = ""
-  >;
-}
+model SharedGalleryImage is ProxyResourceShared<SharedGalleryImageProperties>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Not an ARM resource - deprecated custom resource"
 interface SharedGalleryImages {
@@ -71,9 +64,6 @@ interface SharedGalleryImages {
   ): ArmResponse<SharedGalleryImageList> | Common.CloudError;
 }
 
-@@doc(SharedGalleryImage.name,
-  "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
-);
 @@doc(SharedGalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );

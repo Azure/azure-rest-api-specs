@@ -426,7 +426,10 @@ using Compute;
   "csharp"
 );
 @@clientName(UsageName, "ComputeUsageName", "csharp");
-@@clientName(OperatingSystemType, "SupportedOperatingSystemType", "csharp");
+// `OperatingSystemTypes` (closed enum, Windows/Linux) was named `SupportedOperatingSystemType`
+// in the old SDK; the union `OperatingSystemType` kept its spec name (extensible struct).
+// Preserve that mapping in csharp.
+@@clientName(OperatingSystemTypes, "SupportedOperatingSystemType", "csharp");
 @@clientName(ReservationType, "CapacityReservationType", "csharp");
 @@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
 @@clientName(VMGalleryApplication,
@@ -886,7 +889,6 @@ union PassName {
 
 @@alternateType(ComponentNames, ComponentName, "csharp");
 @@alternateType(PassNames, PassName, "csharp");
-// TODO: OperatingSystemTypes → extensible enum blocked by name collision with Compute.OperatingSystemType
 
 // ── VirtualMachineSizeType member casing fixes (65 members) ──
 // The generator lowercases size suffixes (s, m, r) differently from old SDK.

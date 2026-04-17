@@ -13,14 +13,7 @@ namespace ComputeGallery;
  * Specifies information about the gallery image definition that you want to create or update.
  */
 model CommunityGalleryImage
-  is ProxyResourceCommunity<CommunityGalleryImageProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = CommunityGalleryImage,
-    KeyName = "galleryImageName",
-    SegmentName = "images",
-    NamePattern = ""
-  >;
-}
+  is ProxyResourceCommunity<CommunityGalleryImageProperties>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Not an ARM resource - deprecated custom resource"
 interface CommunityGalleryImages {
@@ -66,9 +59,6 @@ interface CommunityGalleryImages {
   ): ArmResponse<CommunityGalleryImageList> | Common.CloudError;
 }
 
-@@doc(CommunityGalleryImage.name,
-  "The name of the community gallery image definition."
-);
 @@doc(CommunityGalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );

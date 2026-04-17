@@ -8,11 +8,20 @@ using ComputeGallery;
 @@clientName(GalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(GalleryImageProperties.osState, "OSState", "csharp");
 @@clientName(EncryptionImages.osDiskImage, "OSDiskImage", "csharp");
-@@clientName(GalleryImageVersionStorageProfile.osDiskImage, "OSDiskImage", "csharp");
-@@clientName(GalleryInVMAccessControlProfileProperties.osType, "OSType", "csharp");
+@@clientName(GalleryImageVersionStorageProfile.osDiskImage,
+  "OSDiskImage",
+  "csharp"
+);
+@@clientName(GalleryInVMAccessControlProfileProperties.osType,
+  "OSType",
+  "csharp"
+);
 @@clientName(SharedGalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(SharedGalleryImageProperties.osState, "OSState", "csharp");
-@@clientName(SharedGalleryImageVersionStorageProfile.osDiskImage, "OSDiskImage", "csharp");
+@@clientName(SharedGalleryImageVersionStorageProfile.osDiskImage,
+  "OSDiskImage",
+  "csharp"
+);
 @@clientName(CommunityGalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(CommunityGalleryImageProperties.osState, "OSState", "csharp");
 
@@ -136,48 +145,96 @@ using ComputeGallery;
 
 // Type renames for backward compatibility
 @@clientName(EndpointTypes, "ComputeGalleryEndpointType", "csharp");
-@@clientName(GallerySoftDeletedResource, "GallerySoftDeletedResourceDetails", "csharp");
+@@clientName(GallerySoftDeletedResource,
+  "GallerySoftDeletedResourceDetails",
+  "csharp"
+);
 @@clientName(PirResource, "PirResourceData", "csharp");
-@@clientName(PirSharedGalleryResource, "PirSharedGalleryResourceData", "csharp");
-@@clientName(PirCommunityGalleryResource, "PirCommunityGalleryResourceData", "csharp");
+@@clientName(PirSharedGalleryResource,
+  "PirSharedGalleryResourceData",
+  "csharp"
+);
+@@clientName(PirCommunityGalleryResource,
+  "PirCommunityGalleryResourceData",
+  "csharp"
+);
 
 // Rename gallery models to *Data for backward compatibility (they were ARM resources before)
 @@clientName(SharedGallery, "SharedGalleryData", "csharp");
 @@clientName(SharedGalleryImage, "SharedGalleryImageData", "csharp");
-@@clientName(SharedGalleryImageVersion, "SharedGalleryImageVersionData", "csharp");
+@@clientName(SharedGalleryImageVersion,
+  "SharedGalleryImageVersionData",
+  "csharp"
+);
 @@clientName(CommunityGallery, "CommunityGalleryData", "csharp");
 @@clientName(CommunityGalleryImage, "CommunityGalleryImageData", "csharp");
-@@clientName(CommunityGalleryImageVersion, "CommunityGalleryImageVersionData", "csharp");
+@@clientName(CommunityGalleryImageVersion,
+  "CommunityGalleryImageVersionData",
+  "csharp"
+);
 
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(ReplicationStatusTypes, "ReplicationStatusType", "csharp");
 @@clientName(SelectPermissions, "SelectPermission", "csharp");
 @@clientName(SharingProfileGroupTypes, "SharingProfileGroupType", "csharp");
-@@clientName(SharingUpdateOperationTypes, "SharingUpdateOperationType", "csharp");
-@@clientName(SoftDeletedArtifactTypes, "GallerySoftDeletedArtifactType", "csharp");
+@@clientName(SharingUpdateOperationTypes,
+  "SharingUpdateOperationType",
+  "csharp"
+);
+@@clientName(SoftDeletedArtifactTypes,
+  "GallerySoftDeletedArtifactType",
+  "csharp"
+);
 
 // ── VM→Vm casing renames (C# backward compat) ──
-@@clientName(ConfidentialVMEncryptionType, "ConfidentialVmEncryptionType", "csharp");
+@@clientName(ConfidentialVMEncryptionType,
+  "ConfidentialVmEncryptionType",
+  "csharp"
+);
 
 // ── Other renames (C# backward compat) ──
 @@clientName(GalleryExpandParams, "GalleryExpand", "csharp");
-@@clientName(PolicyViolationCategory, "GalleryImageVersionPolicyViolationCategory", "csharp");
+@@clientName(PolicyViolationCategory,
+  "GalleryImageVersionPolicyViolationCategory",
+  "csharp"
+);
 @@clientName(ReplicationState, "RegionalReplicationState", "csharp");
 
 // ── Property casing renames: acronym case normalization (C# backward compat) ──
-@@clientName(OSDiskImageSecurityProfile.confidentialVMEncryptionType, "ConfidentialVmEncryptionType", "csharp");
-@@clientName(OSDiskImageSecurityProfile.secureVMDiskEncryptionSetId, "SecureVmDiskEncryptionSetId", "csharp");
+@@clientName(OSDiskImageSecurityProfile.confidentialVMEncryptionType,
+  "ConfidentialVmEncryptionType",
+  "csharp"
+);
+@@clientName(OSDiskImageSecurityProfile.secureVMDiskEncryptionSetId,
+  "SecureVmDiskEncryptionSetId",
+  "csharp"
+);
 @@clientName(RecommendedMachineConfiguration.vCPUs, "VCpus", "csharp");
 
 // ── Is* prefix property renames (C# backward compat) ──
-@@clientName(GalleryApplicationCustomActionParameter.required, "IsRequired", "csharp");
-@@clientName(GalleryImageVersionSafetyProfile.blockDeletionBeforeEndOfLife, "IsBlockedDeletionBeforeEndOfLife", "csharp");
-@@clientName(GalleryImageVersionSafetyProfile.reportedForPolicyViolation, "IsReportedForPolicyViolation", "csharp");
+@@clientName(GalleryApplicationCustomActionParameter.required,
+  "IsRequired",
+  "csharp"
+);
+@@clientName(GalleryImageVersionSafetyProfile.blockDeletionBeforeEndOfLife,
+  "IsBlockedDeletionBeforeEndOfLife",
+  "csharp"
+);
+@@clientName(GalleryImageVersionSafetyProfile.reportedForPolicyViolation,
+  "IsReportedForPolicyViolation",
+  "csharp"
+);
 @@clientName(TargetRegion.excludeFromLatest, "IsExcludedFromLatest", "csharp");
-@@clientName(GalleryImageVersionProperties.restore, "IsRestoreEnabled", "csharp");
+@@clientName(GalleryImageVersionProperties.restore,
+  "IsRestoreEnabled",
+  "csharp"
+);
 
 // ── Qualified property name renames (C# backward compat) ──
-@@clientName(GalleryApplicationCustomActionParameter.type, "ParameterType", "csharp");
+@@clientName(GalleryApplicationCustomActionParameter.type,
+  "ParameterType",
+  "csharp"
+);
 @@clientName(GalleryExtendedLocation.type, "ExtendedLocationType", "csharp");
 @@clientName(ExecutedValidation.type, "ExecutedValidationType", "csharp");
 @@clientName(GalleryScriptParameter.type, "ParameterType", "csharp");
@@ -191,14 +248,23 @@ using ComputeGallery;
 // ── alternateType: string → Uri for C# (migration from AutoRest) ──
 @@alternateType(GalleryImageProperties.privacyStatementUri, url, "csharp");
 @@alternateType(GalleryImageProperties.releaseNoteUri, url, "csharp");
-@@alternateType(GalleryApplicationProperties.privacyStatementUri, url, "csharp");
+@@alternateType(GalleryApplicationProperties.privacyStatementUri,
+  url,
+  "csharp"
+);
 @@alternateType(GalleryApplicationProperties.releaseNoteUri, url, "csharp");
 @@alternateType(GalleryScriptProperties.privacyStatementUri, url, "csharp");
 @@alternateType(GalleryScriptProperties.releaseNoteUri, url, "csharp");
-@@alternateType(SharedGalleryImageProperties.privacyStatementUri, url, "csharp");
+@@alternateType(SharedGalleryImageProperties.privacyStatementUri,
+  url,
+  "csharp"
+);
 @@alternateType(CommunityGalleryInfo.publisherUri, url, "csharp");
 @@alternateType(CommunityGalleryMetadata.privacyStatementUri, url, "csharp");
-@@alternateType(CommunityGalleryImageProperties.privacyStatementUri, url, "csharp");
+@@alternateType(CommunityGalleryImageProperties.privacyStatementUri,
+  url,
+  "csharp"
+);
 @@alternateType(GalleryArtifactVersionSource.uri, url, "csharp");
 
 // ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
