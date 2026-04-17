@@ -239,3 +239,95 @@ alias SseResponseOf<T> = {
   @header("Content-Type") contentType: "text/event-stream";
   @body responseBody: T;
 };
+
+// ============================================================================
+// Shared Job Sources
+//
+// Source types shared across job types (evaluator generation, data generation,
+// and future job types such as optimization). Placed in common to avoid
+// duplication across job-specific model files.
+// ============================================================================
+
+@doc("The supported source types for jobs.")
+union JobSourceType {
+  string,
+
+  @doc("Prompt source — inline text provided by the user.")
+  Prompt: "Prompt",
+
+  @doc("Agent source — references an agent to fetch instructions and metadata from.")
+  Agent: "Agent",
+
+  @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
+  Traces: "Traces",
+
+  @doc("Dataset source — reference to a dataset.")
+  Dataset: "Dataset",
+}
+
+@doc("The base source model for jobs.")
+@discriminator("type")
+model JobSource {
+  @doc("The type of source.")
+  type: JobSourceType;
+
+  @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
+  purpose?: string;
+}
+
+@doc("Prompt source — inline text provided by the user.")
+model PromptJobSource extends JobSource {
+  @doc("The source type for this source, which is Prompt.")
+  type: "Prompt";
+
+  @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
+  prompt: string;
+}
+
+@doc("Agent source — references an agent to fetch instructions and metadata from. Optionally includes supplementary prompt text to augment the agent's instructions.")
+model AgentJobSource extends JobSource {
+  @doc("The source type for this source, which is Agent.")
+  type: "Agent";
+
+  @doc("The agent name to fetch instructions from.")
+  agent_name: string;
+
+  @doc("The agent version. If not specified, the latest version is used.")
+  agent_version?: string;
+
+  @doc("Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition).")
+  prompt?: string;
+}
+
+@doc("Traces source — conversation traces from Application Insights.")
+model TracesJobSource extends JobSource {
+  @doc("The source type for this source, which is Traces.")
+  type: "Traces";
+
+  @doc("The agent name to fetch traces for.")
+  agent_name: string;
+
+  @doc("The agent version. If not specified, the latest version is used.")
+  agent_version?: string;
+
+  @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
+  start_time?: FoundryTimestamp;
+
+  @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
+  end_time?: FoundryTimestamp;
+
+  @doc("Maximum number of traces to retrieve.")
+  max_traces?: int32 = 100;
+}
+
+@doc("Dataset source — reference to a dataset.")
+model DatasetJobSource extends JobSource {
+  @doc("The source type for this source, which is Dataset.")
+  type: "Dataset";
+
+  @doc("The name of the dataset.")
+  name: string;
+
+  @doc("The version of the dataset. If not specified, the latest version is used.")
+  version?: string;
+}
