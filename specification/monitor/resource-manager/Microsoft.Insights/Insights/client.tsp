@@ -277,6 +277,8 @@ model LogSettings {
   "java"
 );
 
+@@alternateType(AutoscaleNotification.operation, "Scale", "java");
+
 @@clientName(Microsoft.Metrics.MetricValue.timeStamp, "timestamp", "java");
 @@clientName(Microsoft.AutoScale.PredictiveValue.timeStamp,
   "timestamp",
