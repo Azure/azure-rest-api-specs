@@ -5395,6 +5395,11 @@
                 "type": "string",
                 "description": "The ETag contains a value that represents the version of the resource."
               },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -6651,6 +6656,11 @@
                 "type": "string",
                 "description": "The ETag contains a value that represents the version of the resource."
               },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -7757,6 +7767,11 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "An MD5 hash returned for the content."
+              },
               "Date": {
                 "type": "string",
                 "format": "date-time-rfc7231",

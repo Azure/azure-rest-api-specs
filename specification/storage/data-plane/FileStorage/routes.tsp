@@ -733,6 +733,7 @@ interface Directory {
     {
       ...EtagResponseHeader;
       ...RequestServerEncryptedResponseHeader;
+      ...LastModifiedResponseHeader;
     }
   >;
 
@@ -1048,6 +1049,7 @@ interface File {
     {
       ...EtagResponseHeader;
       ...RequestServerEncryptedResponseHeader;
+      ...LastModifiedResponseHeader;
     }
   >;
 
@@ -1237,6 +1239,7 @@ interface File {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
+      ...ContentMD5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileLastWriteTimeHeader<"The file last write time.">;
