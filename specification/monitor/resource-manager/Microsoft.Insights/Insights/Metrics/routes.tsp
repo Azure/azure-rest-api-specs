@@ -13,6 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Metrics;
 
+alias IntervalQueryParameter = {
+  /**
+   * The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.
+   * *Examples: PT15M, PT1H, P1D, FULL*
+   */
+  @query("interval")
+  interval?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MetricDefinitionsOperationGroup {
   /**
@@ -116,12 +125,7 @@ interface MetricsOperationGroup {
       @query("timespan")
       timespan?: string;
 
-      /**
-       * The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.
-       * *Examples: PT15M, PT1H, P1D, FULL*
-       */
-      @query("interval")
-      interval?: string;
+      ...IntervalQueryParameter;
 
       /**
        * The names of the metrics (comma separated) to retrieve. Limit 20 metrics.
@@ -215,12 +219,7 @@ interface MetricsOperationGroup {
       @query("timespan")
       timespan?: string;
 
-      /**
-       * The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.
-       * *Examples: PT15M, PT1H, P1D, FULL*
-       */
-      @query("interval")
-      interval?: string;
+      ...IntervalQueryParameter;
 
       /**
        * The names of the metrics (comma separated) to retrieve. Limit 20 metrics.
@@ -309,12 +308,7 @@ interface MetricsOperationGroup {
       @query("timespan")
       timespan?: string;
 
-      /**
-       * The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.
-       * *Examples: PT15M, PT1H, P1D, FULL*
-       */
-      @query("interval")
-      interval?: string;
+      ...IntervalQueryParameter;
 
       /**
        * The names of the metrics (comma separated) to retrieve. Limit 20 metrics.
