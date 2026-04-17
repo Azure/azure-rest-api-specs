@@ -26,7 +26,7 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
 
 @doc("The list credential result response.")
 model CredentialResults {
-  @doc("Base64-encoded Kubernetes configuration file.")
+  @doc("Array of credential results.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   kubeconfigs?: CredentialResult[];

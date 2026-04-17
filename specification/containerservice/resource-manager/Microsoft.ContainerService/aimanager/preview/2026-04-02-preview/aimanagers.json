@@ -894,7 +894,7 @@
     },
     "AIManagerNamespace": {
       "type": "object",
-      "description": "The AI Manager namespace.",
+      "description": "The AI Manager namespace resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AIManagerNamespaceProperties",
@@ -935,7 +935,7 @@
     },
     "AIManagerNamespaceProperties": {
       "type": "object",
-      "description": "The properties of an AI Manager namespace.",
+      "description": "AI Manager namespace properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
@@ -944,14 +944,14 @@
         },
         "labels": {
           "type": "object",
-          "description": "The labels for the namespace.",
+          "description": "Labels applied to the Kubernetes namespace.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "annotations": {
           "type": "object",
-          "description": "The annotations for the namespace.",
+          "description": "Annotations applied to the Kubernetes namespace.",
           "additionalProperties": {
             "type": "string"
           }
@@ -1036,6 +1036,11 @@
         "deletePolicy": {
           "$ref": "#/definitions/DeletePolicy",
           "description": "Delete options of the AI Manager."
+        },
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "The name of the managed resource group created by the AI Manager to hold underlying infrastructure resources.",
+          "readOnly": true
         }
       }
     },
@@ -1112,7 +1117,7 @@
       "properties": {
         "kubeconfigs": {
           "type": "array",
-          "description": "Base64-encoded Kubernetes configuration file.",
+          "description": "Array of credential results.",
           "items": {
             "$ref": "#/definitions/CredentialResult"
           },

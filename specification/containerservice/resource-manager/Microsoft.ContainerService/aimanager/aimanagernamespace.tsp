@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
-@doc("The AI Manager namespace.")
+@doc("The AI Manager namespace resource.")
 @resource("namespaces")
 @parentResource(AIManager)
 model AIManagerNamespace is ProxyResource<AIManagerNamespaceProperties> {
@@ -29,18 +29,18 @@ model AIManagerNamespace is ProxyResource<AIManagerNamespaceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
-@doc("The properties of an AI Manager namespace.")
+@doc("AI Manager namespace properties.")
 model AIManagerNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: AIManagerNamespaceProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("The labels for the namespace.")
+  @doc("Labels applied to the Kubernetes namespace.")
   labels?: Record<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("The annotations for the namespace.")
+  @doc("Annotations applied to the Kubernetes namespace.")
   annotations?: Record<string>;
 }
 
@@ -82,6 +82,7 @@ interface AIManagerNamespaces {
 
   @doc("Lists the credentials of an AI Manager namespace.")
   @post
+  @action("listCredential")
   listCredential is ArmResourceActionSync<
     AIManagerNamespace,
     void,

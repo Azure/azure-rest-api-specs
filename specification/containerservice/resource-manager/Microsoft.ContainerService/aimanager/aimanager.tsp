@@ -38,6 +38,10 @@ model AIManagerProperties {
 
   @doc("Delete options of the AI Manager.")
   deletePolicy?: DeletePolicy;
+
+  @visibility(Lifecycle.Read)
+  @doc("The name of the managed resource group created by the AI Manager to hold underlying infrastructure resources.")
+  managedResourceGroupName?: string;
 }
 
 @doc("Delete options of the AI Manager.")
@@ -102,7 +106,7 @@ interface AIManagers {
 
   @doc("Lists the credentials of an AI Manager.")
   @post
-  @action("ListCredential")
+  @action("listCredential")
   listCredential is ArmResourceActionSync<
     AIManager,
     void,
