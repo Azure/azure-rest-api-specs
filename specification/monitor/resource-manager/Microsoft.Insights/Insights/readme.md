@@ -56,6 +56,8 @@ input-file:
   - preview/2024-03-01-preview/metricAlert_API.json
   - stable/2019-03-01/metricBaselines_API.json
   - stable/2024-02-01/metrics_API.json
+  - stable/2024-02-01/metricNamespaces_API.json
+  - stable/2024-02-01/metricDefinitions_API.json
   - stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
   - stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
   - stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
