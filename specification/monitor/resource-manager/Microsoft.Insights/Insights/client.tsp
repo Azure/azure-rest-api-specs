@@ -262,15 +262,15 @@ model LogSettings {
 );
 
 @@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.getNSP,
-  NspScheduledQueryRule,
+  "NspScheduledQueryRule",
   "java"
 );
 @@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.listNSP,
-  NspScheduledQueryRule,
+  "NspScheduledQueryRule",
   "java"
 );
 @@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.reconcileNSP,
-  NspScheduledQueryRule,
+  "NspScheduledQueryRule",
   "java"
 );
 
