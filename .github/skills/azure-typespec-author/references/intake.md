@@ -4,9 +4,8 @@
 
 ## 2.1 General Intake (All Cases)
 
-1. Read [reference-document-links.md](reference-document-links.md) and select URLs relevant to the user's request and Step 1 results. If unsure, select all.
-2. Run [agentic search](agentic-search.md) with the selected URLs and a query derived from the user's request, to collect information from user interactively.
-3. Identify the case from the table below and gather more information if case matches. If no case matches, skip Step 2.2.
+1. Run [agentic search](agentic-search.md) using the Step 1 result and the user's request.
+2. Identify the case from the table below and gather more information if case matches. If no case matches, skip Step 2.2.
 
 | Case | Name                    | Description                                           | Service Type |
 | ---- | ----------------------- | ----------------------------------------------------- | ------------ |
