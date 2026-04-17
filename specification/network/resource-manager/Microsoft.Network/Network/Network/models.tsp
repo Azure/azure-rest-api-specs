@@ -26065,3 +26065,5 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(DisablePeeringRoute, Versions.v2025_07_01);
+@@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
