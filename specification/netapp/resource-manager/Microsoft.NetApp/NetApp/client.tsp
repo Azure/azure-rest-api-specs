@@ -665,6 +665,10 @@ using Microsoft.NetApp;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Microsoft.NetApp.BackupProperties.backupPolicyResourceId,
+  string,
+  "csharp"
+);
 @@alternateType(Microsoft.NetApp.VolumeSnapshotProperties.snapshotPolicyId,
   armResourceIdentifier,
   "csharp"
