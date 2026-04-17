@@ -27,7 +27,7 @@ model NGroup is ProxyResource<NGroupProperties> {
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  location?: azureLocation;
+  location?: string;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 

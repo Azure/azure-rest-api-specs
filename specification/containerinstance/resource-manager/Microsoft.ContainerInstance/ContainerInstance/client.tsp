@@ -173,6 +173,8 @@ using Microsoft.ContainerInstance;
 );
 
 // C# property type overrides: restore old SDK types for backward compatibility
+@@alternateType(ContainerGroupProfile.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(NGroup.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(ContainerAttachResponse.webSocketUri, url, "csharp");
 @@alternateType(ContainerExecResponse.webSocketUri, url, "csharp");
 @@alternateType(Capabilities.location, Azure.Core.azureLocation, "csharp");
