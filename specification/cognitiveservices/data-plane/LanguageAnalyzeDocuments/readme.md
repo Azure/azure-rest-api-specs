@@ -11,36 +11,10 @@ The current preview release of Language is 2026-05-15-preview.
 The current stable release of Language is 2026-05-01.
 
 ```yaml
-tag: release_2026-05-01
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-```
-
-### Release 2026-05-01
-
-These settings apply only when `--tag=release_2026-05-01` is specified on the command line.
-
-``` yaml $(tag) == 'release_2026-05-01'
-input-file:
-  - stable/2026-05-01/analyzedocuments.json
-title:
-  Microsoft Cognitive Language Service - Documents
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-```yaml
 tag: release_2026-05-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-  - suppress: R3016
-    where: $.definitions.CurrencyResolution.properties.ISO4217
-    reason: ISO should be upper case.
 ```
 
 ### Release 2026-05-15-preview
@@ -50,6 +24,19 @@ These settings apply only when `--tag=release_2026_05_15_preview` is specified o
 ``` yaml $(tag) == 'release_2026-05-15-preview'
 input-file:
   - preview/2026-05-15-preview/analyzedocuments.json
+title:
+  Microsoft Cognitive Language Service - Documents
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2026-05-01
+
+These settings apply only when `--tag=release_2026-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2026-05-01'
+input-file:
+  - stable/2026-05-01/analyzedocuments.json
 title:
   Microsoft Cognitive Language Service - Documents
 modelerfour:
