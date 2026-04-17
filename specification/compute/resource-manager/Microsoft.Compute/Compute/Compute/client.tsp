@@ -52,6 +52,10 @@ using Compute;
   "Microsoft-Windows-Shell-Setup",
   "go"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.Operation,
+  "OperationValue",
+  "go"
+);
 
 // Property case changes: diskIOPSReadWrite -> diskIopsReadWrite (retain old Java name)
 @@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
