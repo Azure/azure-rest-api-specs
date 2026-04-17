@@ -32,6 +32,12 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
 
+// Evaluator generation jobs → nested under Evaluators sub-client
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
+
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
 @@clientLocation(Azure.AI.Projects.Schedules.get, Schedules);
