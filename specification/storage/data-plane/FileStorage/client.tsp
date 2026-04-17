@@ -1,6 +1,8 @@
 import "./main.tsp";
+import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 
+using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using Storage.File;
 
@@ -431,3 +433,110 @@ model StorageServicePropertiesCsharp {
   "x-ms-meta-",
   "csharp"
 );
+
+// ===== Rust SDK customizations: required metadata overrides =====
+
+/** Metadata headers with metadata as required (for Rust overrides). */
+alias MetadataHeadersRequired = {
+  /** The metadata headers. */
+  @header("x-ms-meta")
+  metadata: Record<string>;
+};
+
+/** Sets one or more user-defined name-value pairs for the specified share (Rust override with required metadata). */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?restype=share&comp=metadata")
+op setMetadataRequiredMetadataShare is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...MetadataHeadersRequired;
+    ...LeaseIdOptionalParameter;
+    ...FileRequestIntentParameter;
+  },
+  {
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+  }
+>;
+
+@@override(Share.setMetadata, setMetadataRequiredMetadataShare, "rust");
+
+/** Sets one or more user-defined name-value pairs for the specified directory (Rust override with required metadata). */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?restype=directory&comp=metadata")
+op setMetadataRequiredMetadataDirectory is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...MetadataHeadersRequired;
+    ...AllowTrailingDotParameter;
+    ...FileRequestIntentParameter;
+  },
+  {
+    ...EtagResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+  }
+>;
+
+@@override(Directory.setMetadata, setMetadataRequiredMetadataDirectory, "rust");
+
+/** Sets one or more user-defined name-value pairs for the specified file (Rust override with required metadata). */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?comp=metadata")
+op setMetadataRequiredMetadataFile is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...MetadataHeadersRequired;
+    ...LeaseIdOptionalParameter;
+    ...FileRequestIntentParameter;
+    ...AllowTrailingDotParameter;
+  },
+  {
+    ...EtagResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+  }
+>;
+
+@@override(Storage.File.File.setMetadata,
+  setMetadataRequiredMetadataFile,
+  "rust"
+);
+
+// ===== Rust SDK customizations: required ACL body override =====
+
+/** Sets stored access policies for the share (Rust override with required shareAcl). */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?restype=share&comp=acl")
+op setAccessPolicyRequiredShareAcl is StorageOperationNoBody<
+  {
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType?: "application/xml";
+
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...FileRequestIntentParameter;
+
+    /** The ACL for the share. */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+    @body shareAcl: SignedIdentifiers;
+  },
+  {
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+  }
+>;
+
+@@override(Share.setAccessPolicy, setAccessPolicyRequiredShareAcl, "rust");
