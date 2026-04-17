@@ -240,23 +240,6 @@
         ]
       }
     },
-    "AzureResourceDetails": {
-      "type": "object",
-      "description": "Details of the Azure resource that was assessed",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure resource Id of the assessed resource",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Common.ResourceDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "Azure"
-    },
     "CVE": {
       "type": "object",
       "description": "CVE details",
@@ -648,7 +631,7 @@
           "$ref": "#/definitions/AdditionalData"
         }
       ],
-      "x-ms-discriminator-value": "ServerVulnerability"
+      "x-ms-discriminator-value": "ServerVulnerabilityAssessment"
     },
     "SqlServerVulnerabilityProperties": {
       "type": "object",

@@ -356,21 +356,5 @@ model ServerVulnerabilityProperties extends AdditionalData {
   /**
    * Sub-assessment resource type
    */
-  assessedResourceType: "ServerVulnerability";
-}
-
-/**
- * Details of the Azure resource that was assessed
- */
-model AzureResourceDetails extends ResourceDetails {
-  /**
-   * Azure resource Id of the assessed resource
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The platform where the assessed resource resides
-   */
-  source: "Azure";
+  assessedResourceType: "ServerVulnerabilityAssessment";
 }
