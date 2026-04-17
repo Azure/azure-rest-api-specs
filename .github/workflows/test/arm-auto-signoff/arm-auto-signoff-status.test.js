@@ -290,7 +290,6 @@ describe("getLabelActionImpl", () => {
 
   it.each([
     { labels: ["ARMAutoSignedOff-IncrementalTSP"] },
-    { labels: ["ARMAutoSignedOff-IncrementalTSP", "ARMReview", "NotReadyForARMReview"] },
     { labels: ["ARMAutoSignedOff-IncrementalTSP", "ARMReview", "SuppressionReviewRequired"] },
   ])("removes label if not all labels match ($labels)", async ({ labels }) => {
     const github = createMockGithub({ incrementalTypeSpec: true });
@@ -758,6 +757,66 @@ describe("getLabelActionImpl", () => {
     // Trivial label should be removed
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
     // Incremental TSP should also be removed
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
+  });
+
+  it("allows auto-signoff for incremental TSP even with NotReadyForARMReview label", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: true, isTrivial: false });
+
+    // PR has NotReadyForARMReview but is incremental TSP
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }, { name: "NotReadyForARMReview" }],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
+        { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // NotReadyForARMReview does not block auto-signoff
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
+  });
+
+  it("allows auto-signoff for trivial changes even with NotReadyForARMReview label", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: true });
+
+    // PR has NotReadyForARMReview and only trivial changes (not incremental TSP)
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }, { name: "NotReadyForARMReview" }],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
+        { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // NotReadyForARMReview does not block auto-signoff for trivial changes
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
   });
 });
