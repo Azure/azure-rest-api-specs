@@ -25,6 +25,16 @@ options:
     namespace: "com.azure.resourcemanager.monitor"
     service-name: "Monitor"
     flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    add-inner:
+      - AutoscaleProfile
+      - ScaleRule
+      - LocalizableString
+      - DiagnosticSettingsCategoryResourceCollection
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-monitor"
     flavor: azure
