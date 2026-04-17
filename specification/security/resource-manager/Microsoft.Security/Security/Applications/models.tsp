@@ -89,7 +89,7 @@ model ApplicationProperties {
    * The application conditionSets - see examples
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  conditionSets: ApplicationCondition[][];
+  conditionSets: unknown[];
 }
 
 /**
