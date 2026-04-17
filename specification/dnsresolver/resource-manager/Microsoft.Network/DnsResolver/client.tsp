@@ -101,27 +101,10 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-// Preserve WritableSubResource-based constructors/collections from old API surface
-@@alternateType(DnsResolverProperties.virtualNetwork,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
-@@alternateType(IpConfiguration.subnet,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
-@@alternateType(OutboundEndpointProperties.subnet,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
-@@alternateType(VirtualNetworkLinkProperties.virtualNetwork,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
-@@alternateType(DnsResolverPolicyVirtualNetworkLinkProperties.virtualNetwork,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
+// Replace simple ARM references with WritableSubResource across the C# surface.
+@@alternateType(SubResource, Azure.ResourceManager.Models.WritableSubResource, "csharp");
+
+// Preserve WritableSubResource-based collections from the old API surface.
 @@alternateType(DnsForwardingRulesetProperties.dnsResolverOutboundEndpoints,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
