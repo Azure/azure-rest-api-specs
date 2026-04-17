@@ -187,9 +187,18 @@ using Microsoft.ContainerInstance;
 
 // Fix missing/misnamed types in generated code
 @@clientName(HttpHeader, "ContainerHttpHeader", "csharp");
-@@clientName(InitContainerDefinition, "InitContainerDefinitionContent", "csharp");
-@@clientName(NGroupCGPropertyVolume, "NGroupContainerGroupPropertyVolume", "csharp");
-@@clientName(NGroupCGPropertyContainer, "NGroupContainerGroupPropertyContainer", "csharp");
+@@clientName(InitContainerDefinition,
+  "InitContainerDefinitionContent",
+  "csharp"
+);
+@@clientName(NGroupCGPropertyVolume,
+  "NGroupContainerGroupPropertyVolume",
+  "csharp"
+);
+@@clientName(NGroupCGPropertyContainer,
+  "NGroupContainerGroupPropertyContainer",
+  "csharp"
+);
 @@access(ContainerGroupProvisioningState, Access.public, "csharp");
 
 // Fix identity types to use ARM common ManagedServiceIdentity for backward compat
@@ -222,13 +231,19 @@ using Microsoft.ContainerInstance;
 // Category 4: Property type changes (Uri/ResourceIdentifier → string)
 @@alternateType(EncryptionProperties.vaultBaseUrl, url, "csharp");
 @@alternateType(ImageRegistryCredential.identityUrl, url, "csharp");
-@@alternateType(ApiEntityReference.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(IpAddress.ip, Azure.Core.ipV4Address, "csharp");
 
 // Category 5: Property renames
 @@clientName(IpAddress.type, "AddressType", "csharp");
 @@clientName(IpAddress.ip, "IP", "csharp");
-@@clientName(ContainerProbe.initialDelaySeconds, "InitialDelayInSeconds", "csharp");
+@@clientName(ContainerProbe.initialDelaySeconds,
+  "InitialDelayInSeconds",
+  "csharp"
+);
 @@clientName(ContainerProbe.periodSeconds, "PeriodInSeconds", "csharp");
 @@clientName(ContainerProbe.timeoutSeconds, "TimeoutInSeconds", "csharp");
 @@clientName(Event.type, "EventType", "csharp");
@@ -237,10 +252,22 @@ using Microsoft.ContainerInstance;
 @@clientName(Capabilities.ipAddressType, "IPAddressType", "csharp");
 
 // Category 5: Data property renames (flattened from ContainerGroupPropertiesProperties)
-@@clientName(ContainerGroupPropertiesProperties.osType, "ContainerGroupOSType", "csharp");
-@@clientName(ContainerGroupPropertiesProperties.ipAddress, "IPAddress", "csharp");
-@@clientName(ListResultContainerGroupPropertiesProperties.osType, "ContainerGroupOSType", "csharp");
-@@clientName(ListResultContainerGroupPropertiesProperties.ipAddress, "IPAddress", "csharp");
+@@clientName(ContainerGroupPropertiesProperties.osType,
+  "ContainerGroupOSType",
+  "csharp"
+);
+@@clientName(ContainerGroupPropertiesProperties.ipAddress,
+  "IPAddress",
+  "csharp"
+);
+@@clientName(ListResultContainerGroupPropertiesProperties.osType,
+  "ContainerGroupOSType",
+  "csharp"
+);
+@@clientName(ListResultContainerGroupPropertiesProperties.ipAddress,
+  "IPAddress",
+  "csharp"
+);
 
 // Category 5: ContainerGroupProfileData property renames (from ContainerGroupProfileProperties)
 // osType and ipAddress in ContainerGroupProfileProperties model at line ~1818
@@ -255,19 +282,43 @@ using Microsoft.ContainerInstance;
 @@clientName(ApiEntityReference.id, "ResourceId", "csharp");
 
 // Category B: Extension/Mocking method renames for backward compat
-@@clientName(LocationOperationGroup.listCachedImages, "GetCachedImagesWithLocation", "csharp");
-@@clientName(LocationOperationGroup.listCapabilities, "GetCapabilitiesWithLocation", "csharp");
-@@clientName(LocationOperationGroup.listUsage, "GetUsagesWithLocation", "csharp");
-@@clientName(SubnetServiceAssociationLinkOperationGroup.delete, "DeleteSubnetServiceAssociationLink", "csharp");
+@@clientName(LocationOperationGroup.listCachedImages,
+  "GetCachedImagesWithLocation",
+  "csharp"
+);
+@@clientName(LocationOperationGroup.listCapabilities,
+  "GetCapabilitiesWithLocation",
+  "csharp"
+);
+@@clientName(LocationOperationGroup.listUsage,
+  "GetUsagesWithLocation",
+  "csharp"
+);
+@@clientName(SubnetServiceAssociationLinkOperationGroup.delete,
+  "DeleteSubnetServiceAssociationLink",
+  "csharp"
+);
 
 // Category B: Fix location parameter type (string → AzureLocation) for backward compat
-@@alternateType(LocationOperationGroup.listCachedImages::parameters.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(LocationOperationGroup.listCapabilities::parameters.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(LocationOperationGroup.listUsage::parameters.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(LocationOperationGroup.listCachedImages::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(LocationOperationGroup.listCapabilities::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(LocationOperationGroup.listUsage::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 // Category C: Resource method renames for backward compat
 @@clientName(ContainerGroups.attach, "AttachContainer", "csharp");
-@@clientName(ContainerGroups.executeCommand, "ExecuteContainerCommand", "csharp");
+@@clientName(ContainerGroups.executeCommand,
+  "ExecuteContainerCommand",
+  "csharp"
+);
 @@clientName(ContainerGroups.listLogs, "GetContainerLogs", "csharp");
 
 // Category D: Property renames for backward compat

@@ -22,7 +22,6 @@ model ContainerGroupProfile is ProxyResource<ContainerGroupProfileProperties> {
     SegmentName = "containerGroupProfiles",
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
-
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The geo-location where the resource lives */
