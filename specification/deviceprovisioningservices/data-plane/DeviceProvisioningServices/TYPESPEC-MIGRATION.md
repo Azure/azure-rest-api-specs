@@ -182,6 +182,20 @@ op registerDevice ...
 op registerDeviceAndIssueCertificate ...
 ```
 
+#### 9. `@renamedFrom` for `BulkEnrollmentMode` (Service API)
+
+The original stable Swagger had the inline enum on `BulkEnrollmentOperation.mode` / `BulkEnrollmentGroupOperation.mode` named `OperationMode`; the original preview Swagger renamed it to `BulkEnrollmentMode`. To preserve both names exactly as they appeared in the respective original Swaggers (rather than unifying on a single name — which would rename the preview SDK type), the TypeSpec source declares the union as `BulkEnrollmentMode` and uses `@renamedFrom` to restore the older `OperationMode` name for the stable version:
+
+```typespec
+@renamedFrom(Versions.v2025_07_01_preview, "OperationMode")
+union BulkEnrollmentMode { ... }
+```
+
+Result:
+
+- `stable/2021-10-01/service.json` → `OperationMode` (original stable name)
+- `preview/2025-07-01-preview/service.json` → `BulkEnrollmentMode` (original preview name)
+
 ---
 
 ## Examples
@@ -293,10 +307,10 @@ TypeSpec promotes inline enums to top-level named definitions. The enum **values
 | `AttestationType`         | `AttestationMechanism.type`                                                                  | `none`, `tpm`, `x509`, `symmetricKey`                                                            |
 | `EnrollmentStatus`        | `DeviceRegistrationState.status` (service); `DeviceRegistrationResult.status` (device)       | `assigned`, `assigning`, `disabled`, `failed`, `unassigned`                                      |
 | `AssignedDeviceSubstatus` | `DeviceRegistrationState.substatus` (service); `DeviceRegistrationResult.substatus` (device) | `initialAssignment`, `deviceDataMigrated`, `deviceDataReset`, `reprovisionedToInitialAssignment` |
-| `OperationMode`           | `BulkEnrollmentOperation.mode`, `BulkEnrollmentGroupOperation.mode`                          | `create`, `update`, `updateIfMatchETag`, `delete`                                                |
+| `BulkEnrollmentMode`      | `BulkEnrollmentOperation.mode`, `BulkEnrollmentGroupOperation.mode`                          | `create`, `update`, `updateIfMatchETag`, `delete`                                                |
 | `ProvisioningStatus`      | `IndividualEnrollment.provisioningStatus`, `EnrollmentGroup.provisioningStatus`              | `enabled`, `disabled`                                                                            |
 
-> **Note (service only):** In the original preview Swagger, the inline enum was named `BulkEnrollmentMode`. The TypeSpec migration aligns it with the stable name `OperationMode`. Values are identical; only the SDK type name changes (acceptable for preview).
+> **Note (service only):** The original stable Swagger had this inline enum named `OperationMode`; the original preview Swagger had it renamed to `BulkEnrollmentMode`. The TypeSpec source uses `union BulkEnrollmentMode` with `@renamedFrom(Versions.v2025_07_01_preview, "OperationMode")` so the emitter produces `OperationMode` in `stable/2021-10-01/service.json` and `BulkEnrollmentMode` in `preview/2025-07-01-preview/service.json` — preserving the original names in both versions exactly.
 
 ### New TypeSpec Artifact Definitions (Device API Only)
 
@@ -368,16 +382,16 @@ All additions are **promoted inline enums** or **TypeSpec response envelope type
 
 **`stable/2021-10-01/service.json` and `preview/2025-07-01-preview/service.json`**
 
-| Definition                     | Property           | Change                                        | Breaking?                       |
-| ------------------------------ | ------------------ | --------------------------------------------- | ------------------------------- |
-| `IndividualEnrollment`         | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy`        | ❌ No — values identical        |
-| `EnrollmentGroup`              | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy`        | ❌ No — values identical        |
-| `AttestationMechanism`         | `type`             | Inline enum → `$ref: AttestationType`         | ❌ No — values identical        |
-| `BulkEnrollmentOperation`      | `mode`             | Inline enum → `$ref: OperationMode`           | ❌ No — values identical        |
-| `BulkEnrollmentGroupOperation` | `mode`             | Inline enum → `$ref: OperationMode`           | ❌ No — values identical        |
-| `DeviceRegistrationState`      | `status`           | Inline enum → `$ref: EnrollmentStatus`        | ❌ No — values identical        |
-| `DeviceRegistrationState`      | `substatus`        | Inline enum → `$ref: AssignedDeviceSubstatus` | ❌ No — values identical        |
-| `DeviceRegistrationState`      | `payload`          | Added `additionalProperties: {}`              | ❌ No — semantically equivalent |
+| Definition                     | Property           | Change                                                                                                            | Breaking?                       |
+| ------------------------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| `IndividualEnrollment`         | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy`                                                                            | ❌ No — values identical        |
+| `EnrollmentGroup`              | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy`                                                                            | ❌ No — values identical        |
+| `AttestationMechanism`         | `type`             | Inline enum → `$ref: AttestationType`                                                                             | ❌ No — values identical        |
+| `BulkEnrollmentOperation`      | `mode`             | Inline enum → `$ref: OperationMode` (stable) / `$ref: BulkEnrollmentMode` (preview), preserved via `@renamedFrom` | ❌ No — values identical        |
+| `BulkEnrollmentGroupOperation` | `mode`             | Inline enum → `$ref: OperationMode` (stable) / `$ref: BulkEnrollmentMode` (preview), preserved via `@renamedFrom` | ❌ No — values identical        |
+| `DeviceRegistrationState`      | `status`           | Inline enum → `$ref: EnrollmentStatus`                                                                            | ❌ No — values identical        |
+| `DeviceRegistrationState`      | `substatus`        | Inline enum → `$ref: AssignedDeviceSubstatus`                                                                     | ❌ No — values identical        |
+| `DeviceRegistrationState`      | `payload`          | Added `additionalProperties: {}`                                                                                  | ❌ No — semantically equivalent |
 
 **`preview/2025-07-01-preview/service.json` only**
 
