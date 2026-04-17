@@ -42,6 +42,39 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
+  /**
+   * Configuration for tool deferral behavior when tool search is enabled.
+   * Controls whether a tool or its sub-tools are deferred from tools/list and only
+   * discoverable via tool_search queries.
+   */
+  model ToolDeferConfig {
+    /**
+     * Whether deferral is enabled for this tool or its sub-tools.
+     * Default: true when a ToolSearchTool is present in the toolbox.
+     */
+    enabled?: boolean;
+
+    /**
+     * Optional deferral mode. Reserved for future use.
+     */
+    mode?: string;
+
+    /**
+     * List of tool names that are pinned (always visible in tools/list regardless of deferral).
+     */
+    pinned?: string[];
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.Tool,
+    {
+      /**
+       * Deferral settings for this tool when tool search is enabled.
+       */
+      defer?: ToolDeferConfig,
+    }
+  );
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
@@ -131,6 +164,40 @@ namespace Azure.AI.Projects {
      */
     description?: string;
   };
+
+  /**
+   * Configuration for the tool_search built-in tool.
+   */
+  model ToolSearchConfig {
+    /**
+     * Whether tools are deferred from tools/list by default.
+     * true: all other tools deferred unless they opt out.
+     * false: no tools deferred unless they opt in.
+     */
+    default_defer?: boolean;
+  }
+
+  /**
+   * Built-in tool that enables search over tools in a toolbox. When present, deferred tools are
+   * discoverable via tool_search queries instead of being listed in tools/list.
+   */
+  model ToolSearchTool {
+    /**
+     * The object type, which is always 'tool_search_preview'.
+     */
+    type: "tool_search_preview";
+
+    /**
+     * Optional user-defined description sent to the model. Should convey that
+     * additional tools are discoverable via search.
+     */
+    description?: string;
+
+    /**
+     * Configuration for the tool search tool.
+     */
+    config?: ToolSearchConfig;
+  }
 
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
