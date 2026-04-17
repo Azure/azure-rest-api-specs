@@ -49,6 +49,7 @@ input-file:
   - stable/2025-07-01/networkManager.json
   - stable/2025-07-01/networkSecurityPerimeter.json
   - stable/2025-07-01/networkWatcher.json
+  - stable/2025-07-01/privateEndpoint.json
   - stable/2025-07-01/serviceGateway.json
   - stable/2025-07-01/virtualNetwork.json
   - stable/2025-07-01/virtualNetworkAppliance.json
