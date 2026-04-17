@@ -44,20 +44,20 @@ These settings apply only when `--tag=package-2025-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-08'
 input-file:
-  - preview/2024-10-01-preview/actionGroups.json
+  - preview/2024-10-01-preview/actionGroups_API.json
   - preview/2023-01-01-preview/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs.json
-  - stable/2016-03-01/alertRulesIncidents.json
-  - stable/2022-10-01/autoScale.json
-  - stable/2024-03-11/dataCollection.json
-  - stable/2016-03-01/logProfiles.json
-  - preview/2024-03-01-preview/metricAlert.json
-  - stable/2019-03-01/metricBaselines.json
-  - stable/2024-02-01/metrics.json
-  - stable/2021-10-01/networkSecurityPerimeter.json
-  - preview/2023-06-01-preview/privateLinkScopes.json
+  - stable/2015-04-01/activityLogs_API.json
+  - stable/2016-03-01/alertRulesIncidents_API.json
+  - stable/2022-10-01/autoScale_API.json
+  - stable/2024-03-11/dataCollection_API.json
+  - stable/2016-03-01/logProfiles_API.json
+  - preview/2024-03-01-preview/metricAlert_API.json
+  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2024-02-01/metrics_API.json
+  - stable/2021-10-01/networkSecurityPerimeter_API.json
+  - preview/2023-06-01-preview/privateLinkScopes_API.json
   - preview/2025-01-01-preview/scheduledQueryRule_API.json
-  - stable/2016-09-01/serviceDiagnosticsSettings.json
+  - stable/2016-09-01/serviceDiagnosticsSettings_API.json
 ```
 
 ### Tag: package-2026-03-01
