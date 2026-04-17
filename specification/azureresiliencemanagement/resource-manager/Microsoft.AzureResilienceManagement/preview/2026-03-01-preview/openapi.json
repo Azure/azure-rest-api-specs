@@ -8784,7 +8784,7 @@
             "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
           },
           "x-ms-identifiers": [
-            "solutionProviderName"
+            "solutionDisplayName"
           ]
         },
         "serviceGroupMemberships": {
@@ -12197,16 +12197,22 @@
       "type": "string",
       "description": "Enum for the solution provider name of a high availability solution.",
       "enum": [
-        "Microsoft"
+        "ZonePinnedVmWithZrsDisk",
+        "VmInMultiZoneVmss"
       ],
       "x-ms-enum": {
         "name": "SolutionProviderName",
         "modelAsString": true,
         "values": [
           {
-            "name": "Microsoft",
-            "value": "Microsoft",
-            "description": "Microsoft solution provider."
+            "name": "ZonePinnedVmWithZrsDisk",
+            "value": "ZonePinnedVmWithZrsDisk",
+            "description": "Zone pinned VM with ZRS disk."
+          },
+          {
+            "name": "VmInMultiZoneVmss",
+            "value": "VmInMultiZoneVmss",
+            "description": "VM in multi-zone VMSS."
           }
         ]
       }
@@ -12556,7 +12562,7 @@
       "type": "object",
       "description": "Represents a user confirmation for a high availability solution.",
       "properties": {
-        "solutionProviderName": {
+        "solutionDisplayName": {
           "$ref": "#/definitions/SolutionProviderName",
           "description": "The solution provider name of the high availability solution."
         },
@@ -12570,7 +12576,7 @@
         }
       },
       "required": [
-        "solutionProviderName",
+        "solutionDisplayName",
         "confirmationStatus"
       ]
     },

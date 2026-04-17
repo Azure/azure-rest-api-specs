@@ -44,7 +44,7 @@ model GoalResourceProperties {
 
   @added(Versions.v2026_03_01_preview)
   @doc("List of user confirmations for high availability solutions.")
-  @identifiers(#["solutionProviderName"])
+  @identifiers(#["solutionDisplayName"])
   userConfirmationForHighAvailability?: UserConfirmationForHighAvailabilityItem[];
 
   @doc("List of service groups of which this resource is memberof.")

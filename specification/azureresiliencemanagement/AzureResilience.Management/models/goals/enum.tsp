@@ -98,8 +98,11 @@ union ConfirmationStatus {
 union SolutionProviderName {
   string,
 
-  @doc("Microsoft solution provider.")
-  Microsoft: "Microsoft",
+  @doc("Zone pinned VM with ZRS disk.")
+  ZonePinnedVmWithZrsDisk: "ZonePinnedVmWithZrsDisk",
+
+  @doc("VM in multi-zone VMSS.")
+  VmInMultiZoneVmss: "VmInMultiZoneVmss",
 }
 
 @added(Versions.v2026_03_01_preview)
@@ -118,7 +121,7 @@ union ReasonForRequestingConfirmation {
 @doc("Represents a user confirmation for a high availability solution.")
 model UserConfirmationForHighAvailabilityItem {
   @doc("The solution provider name of the high availability solution.")
-  solutionProviderName: SolutionProviderName;
+  solutionDisplayName: SolutionProviderName;
 
   @doc("The confirmation status of the high availability solution.")
   confirmationStatus: ConfirmationStatus;
