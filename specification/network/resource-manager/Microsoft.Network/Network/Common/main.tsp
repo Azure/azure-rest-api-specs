@@ -174,6 +174,19 @@ union RouteNextHopType {
 }
 
 /**
+ * Whether to disable the routes learned by peering on the route table.
+ */
+union DisablePeeringRoute {
+  string,
+
+  /** Peering routes are enabled. */
+  None: "None",
+
+  /** All peering routes are disabled. */
+  All: "All",
+}
+
+/**
  * Specifies the IP version type for the private IPs of the private endpoint. If not defined, this defaults to IPv4.
  */
 union PrivateEndpointIPVersionType {
@@ -3122,6 +3135,11 @@ model RouteTablePropertiesFormat {
    * Whether to disable the routes learned by BGP on that route table. True means disable.
    */
   disableBgpRoutePropagation?: boolean;
+
+  /**
+   * Whether to disable the routes learned by peering on the route table. 'None' means peering routes are enabled, 'All' means all peering routes are disabled.
+   */
+  disablePeeringRoute?: DisablePeeringRoute;
 
   /**
    * The provisioning state of the route table resource.
