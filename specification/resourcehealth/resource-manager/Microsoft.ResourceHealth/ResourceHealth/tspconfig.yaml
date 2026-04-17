@@ -1,0 +1,56 @@
+parameters:
+  "service-dir":
+    default: "sdk/resourcehealth"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/ResourceHealth.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resourcehealth"
+    namespace: "com.azure.resourcemanager.resourcehealth"
+    service-name: "ResourceHealth"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ResourceHealth"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/resourcehealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resourcehealth"
+    namespace: "azure.mgmt.resourcehealth"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/resourcehealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcehealth"
+    flavor: azure
+    compatibility-lro: true
+    typespec-title-map:
+      ResourceHealthClient: MicrosoftResourceHealth
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcehealth"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resourcehealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/armresourcehealth"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armresourcehealth"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

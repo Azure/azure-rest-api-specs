@@ -51,11 +51,21 @@
       }
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "general"
+    },
+    {
+      "name": "webpubsub"
+    }
+  ],
   "paths": {
     "/api/health": {
       "head": {
         "operationId": "GetServiceStatus",
+        "tags": [
+          "general"
+        ],
         "summary": "Get service health status.",
         "description": "Get service health status.",
         "parameters": [
@@ -64,8 +74,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The service is healthy."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -90,6 +100,9 @@
     "/api/hubs/{hub}/:addToGroups": {
       "post": {
         "operationId": "AddConnectionsToGroups",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Add filtered connections to multiple groups.",
         "description": "Add filtered connections to multiple groups.",
         "parameters": [
@@ -99,7 +112,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -115,8 +128,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -141,6 +154,9 @@
     "/api/hubs/{hub}/:closeConnections": {
       "post": {
         "operationId": "CloseAllConnections",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Close the connections in the hub.",
         "description": "Close the connections in the hub.",
         "parameters": [
@@ -150,7 +166,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -164,7 +180,7 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
             "name": "reason",
@@ -201,6 +217,9 @@
     "/api/hubs/{hub}/:generateToken": {
       "post": {
         "operationId": "GenerateClientToken",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Generate token for the client to connect Azure Web PubSub service.",
         "description": "Generate token for the client to connect Azure Web PubSub service.",
         "produces": [
@@ -214,7 +233,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -227,7 +246,7 @@
             "type": "string"
           },
           {
-            "name": "roles",
+            "name": "role",
             "in": "query",
             "description": "Roles that the connection with the generated token will have.",
             "required": false,
@@ -235,7 +254,7 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
             "name": "minutesToExpire",
@@ -248,7 +267,7 @@
             "minimum": 1
           },
           {
-            "name": "groups",
+            "name": "group",
             "in": "query",
             "description": "Groups that the connection will join when it connects.",
             "required": false,
@@ -256,12 +275,12 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
-            "name": "clientProtocol",
+            "name": "clientType",
             "in": "query",
-            "description": "The type of client. Case-insensitive. If not set, it's \"Default\". For Web\nPubSub for Socket.IO, only the default value is supported. For Web PubSub, the\nvalid values are 'Default' and 'MQTT'.",
+            "description": "The type of client. Case-insensitive. If not set, it's \"Default\". For Web PubSub for Socket.IO, only the default value is supported. For Web PubSub, the valid values are 'Default' and 'MQTT'.",
             "required": false,
             "type": "string",
             "default": "Default",
@@ -317,6 +336,9 @@
     "/api/hubs/{hub}/:removeFromGroups": {
       "post": {
         "operationId": "RemoveConnectionsFromGroups",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Remove filtered connections from multiple groups.",
         "description": "Remove filtered connections from multiple groups.",
         "parameters": [
@@ -326,7 +348,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -342,8 +364,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -368,6 +390,9 @@
     "/api/hubs/{hub}/:send": {
       "post": {
         "operationId": "SendToAll",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Broadcast content inside request body to all the connected client connections.",
         "description": "Broadcast content inside request body to all the connected client connections.",
         "consumes": [
@@ -382,7 +407,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -396,22 +421,23 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
             "name": "filter",
             "in": "query",
-            "description": "Following OData filter syntax to filter out the subscribers receiving the\nmessages.",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "required": false,
             "type": "string"
           },
           {
             "name": "messageTtlSeconds",
             "in": "query",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 300
           },
           {
@@ -426,8 +452,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -452,6 +478,9 @@
     "/api/hubs/{hub}/connections/{connectionId}": {
       "delete": {
         "operationId": "CloseConnection",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Close the client connection.",
         "description": "Close the client connection.",
         "parameters": [
@@ -461,7 +490,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -507,6 +536,9 @@
       },
       "head": {
         "operationId": "ConnectionExists",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Check if the connection with the given connectionId exists.",
         "description": "Check if the connection with the given connectionId exists.",
         "parameters": [
@@ -516,7 +548,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -560,6 +592,9 @@
     "/api/hubs/{hub}/connections/{connectionId}/:send": {
       "post": {
         "operationId": "SendToConnection",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Send content inside request body to the specific connection.",
         "description": "Send content inside request body to the specific connection.",
         "consumes": [
@@ -574,7 +609,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -590,10 +625,11 @@
           {
             "name": "messageTtlSeconds",
             "in": "query",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 300
           },
           {
@@ -608,8 +644,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -634,6 +670,9 @@
     "/api/hubs/{hub}/connections/{connectionId}/groups": {
       "delete": {
         "operationId": "RemoveConnectionFromAllGroups",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Remove a connection from all groups.",
         "description": "Remove a connection from all groups.",
         "parameters": [
@@ -643,7 +682,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -684,6 +723,9 @@
     "/api/hubs/{hub}/groups/{group}": {
       "head": {
         "operationId": "GroupExists",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Check if there are any client connections inside the given group",
         "description": "Check if there are any client connections inside the given group",
         "parameters": [
@@ -693,7 +735,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -739,6 +781,9 @@
     "/api/hubs/{hub}/groups/{group}/:closeConnections": {
       "post": {
         "operationId": "CloseGroupConnections",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Close connections in the specific group.",
         "description": "Close connections in the specific group.",
         "parameters": [
@@ -748,7 +793,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -772,7 +817,7 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
             "name": "reason",
@@ -809,6 +854,9 @@
     "/api/hubs/{hub}/groups/{group}/:send": {
       "post": {
         "operationId": "SendToGroup",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Send content inside request body to a group of connections.",
         "description": "Send content inside request body to a group of connections.",
         "consumes": [
@@ -823,7 +871,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -847,22 +895,23 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
             "name": "filter",
             "in": "query",
-            "description": "Following OData filter syntax to filter out the subscribers receiving the\nmessages.",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "required": false,
             "type": "string"
           },
           {
             "name": "messageTtlSeconds",
             "in": "query",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 300
           },
           {
@@ -877,8 +926,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -903,6 +952,9 @@
     "/api/hubs/{hub}/groups/{group}/connections": {
       "get": {
         "operationId": "ListConnectionsInGroup",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "List connections in a group.",
         "description": "List connections in a group.",
         "parameters": [
@@ -912,7 +964,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -930,7 +982,7 @@
           {
             "name": "maxpagesize",
             "in": "query",
-            "description": "The maximum number of connections to include in a single response. It should be\nbetween 1 and 200.",
+            "description": "The maximum number of connections to include in a single response. It should be between 1 and 200.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -940,7 +992,7 @@
           {
             "name": "top",
             "in": "query",
-            "description": "The maximum number of connections to return. If the value is not set, then all\nthe connections in a group are returned.",
+            "description": "The maximum number of connections to return. If the value is not set, then all the connections in a group are returned.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -950,7 +1002,7 @@
           {
             "name": "continuationToken",
             "in": "query",
-            "description": "A token that allows the client to retrieve the next page of results. This\nparameter is provided by the service in the response of a previous request when\nthere are additional results to be fetched. Clients should include the\ncontinuationToken in the next request to receive the subsequent page of data.\nIf this parameter is omitted, the server will return the first page of results.",
+            "description": "A token that allows the client to retrieve the next page of results. This parameter is provided by the service in the response of a previous request when there are additional results to be fetched. Clients should include the continuationToken in the next request to receive the subsequent page of data. If this parameter is omitted, the server will return the first page of results.",
             "required": false,
             "type": "string"
           }
@@ -988,6 +1040,9 @@
     "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
       "put": {
         "operationId": "AddConnectionToGroup",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Add a connection to the target group.",
         "description": "Add a connection to the target group.",
         "parameters": [
@@ -997,7 +1052,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1046,6 +1101,9 @@
       },
       "delete": {
         "operationId": "RemoveConnectionFromGroup",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Remove a connection from the target group.",
         "description": "Remove a connection from the target group.",
         "parameters": [
@@ -1055,7 +1113,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1106,6 +1164,9 @@
     "/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}": {
       "put": {
         "operationId": "GrantPermission",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Grant permission to the connection.",
         "description": "Grant permission to the connection.",
         "parameters": [
@@ -1115,7 +1176,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1158,7 +1219,7 @@
           {
             "name": "targetName",
             "in": "query",
-            "description": "The meaning of the target depends on the specific permission. For\njoinLeaveGroup and sendToGroup, targetName is a required parameter standing for\nthe group name.",
+            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
             "required": false,
             "type": "string"
           }
@@ -1188,6 +1249,9 @@
       },
       "delete": {
         "operationId": "RevokePermission",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Revoke permission for the connection.",
         "description": "Revoke permission for the connection.",
         "parameters": [
@@ -1197,7 +1261,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1240,7 +1304,7 @@
           {
             "name": "targetName",
             "in": "query",
-            "description": "The meaning of the target depends on the specific permission. For\njoinLeaveGroup and sendToGroup, targetName is a required parameter standing for\nthe group name.",
+            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
             "required": false,
             "type": "string"
           }
@@ -1270,6 +1334,9 @@
       },
       "head": {
         "operationId": "CheckPermission",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Check if a connection has permission to the specified action.",
         "description": "Check if a connection has permission to the specified action.",
         "parameters": [
@@ -1279,7 +1346,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1322,7 +1389,7 @@
           {
             "name": "targetName",
             "in": "query",
-            "description": "The meaning of the target depends on the specific permission. For\njoinLeaveGroup and sendToGroup, targetName is a required parameter standing for\nthe group name.",
+            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
             "required": false,
             "type": "string"
           }
@@ -1357,6 +1424,9 @@
     "/api/hubs/{hub}/users/{userId}": {
       "head": {
         "operationId": "UserExists",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Check if there are any client connections connected for the given user.",
         "description": "Check if there are any client connections connected for the given user.",
         "parameters": [
@@ -1366,7 +1436,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1410,6 +1480,9 @@
     "/api/hubs/{hub}/users/{userId}/:closeConnections": {
       "post": {
         "operationId": "CloseUserConnections",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Close connections for the specific user.",
         "description": "Close connections for the specific user.",
         "parameters": [
@@ -1419,7 +1492,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1441,7 +1514,7 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "multi"
           },
           {
             "name": "reason",
@@ -1478,6 +1551,9 @@
     "/api/hubs/{hub}/users/{userId}/:send": {
       "post": {
         "operationId": "SendToUser",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Send content inside request body to the specific user.",
         "description": "Send content inside request body to the specific user.",
         "consumes": [
@@ -1492,7 +1568,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1508,17 +1584,18 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Following OData filter syntax to filter out the subscribers receiving the\nmessages.",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "required": false,
             "type": "string"
           },
           {
             "name": "messageTtlSeconds",
             "in": "query",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "maximum": 300
           },
           {
@@ -1533,8 +1610,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1559,6 +1636,9 @@
     "/api/hubs/{hub}/users/{userId}/groups": {
       "delete": {
         "operationId": "RemoveUserFromAllGroups",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Remove a user from all groups.",
         "description": "Remove a user from all groups.",
         "parameters": [
@@ -1568,7 +1648,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1609,6 +1689,9 @@
     "/api/hubs/{hub}/users/{userId}/groups/{group}": {
       "put": {
         "operationId": "AddUserToGroup",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Add a user to the target group.",
         "description": "Add a user to the target group.",
         "parameters": [
@@ -1618,7 +1701,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1667,6 +1750,9 @@
       },
       "delete": {
         "operationId": "RemoveUserFromGroup",
+        "tags": [
+          "webpubsub"
+        ],
         "summary": "Remove a user from the target group.",
         "description": "Remove a user from the target group.",
         "parameters": [
@@ -1676,7 +1762,7 @@
           {
             "name": "hub",
             "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
@@ -1741,7 +1827,10 @@
           "type": "string",
           "description": "Following OData filter syntax to filter out the subscribers receiving the messages"
         }
-      }
+      },
+      "required": [
+        "groups"
+      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1828,7 +1917,10 @@
           "type": "string",
           "description": "Access token for the client to connect Azure Web PubSub service"
         }
-      }
+      },
+      "required": [
+        "token"
+      ]
     },
     "ContentType": {
       "type": "string",
@@ -1859,6 +1951,10 @@
           }
         ]
       }
+    },
+    "GetServiceStatusOkResponse": {
+      "type": "object",
+      "description": "The service is healthy."
     },
     "GroupMember": {
       "type": "object",
@@ -1892,7 +1988,10 @@
           "type": "string",
           "description": "The link to the next page of results"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MessageContentType": {
       "type": "string",
@@ -1939,7 +2038,10 @@
           "type": "string",
           "description": "Following OData filter syntax to filter out the subscribers receiving the messages"
         }
-      }
+      },
+      "required": [
+        "groups"
+      ]
     },
     "ResponseContentType": {
       "type": "string",
