@@ -52,7 +52,7 @@ union EvaluatorDefinitionType {
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 
-  @doc("Rubric-based evaluator definition produced by the generate API. Stores rubric criteria for both quality and safety evaluators.")
+  @doc("Rubric-based evaluator definition. Stores rubric criteria for both quality and safety evaluators. Can be created via the generate API or manually via createVersion.")
   rubrics: "rubrics",
 }
 
@@ -137,7 +137,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubrics;
 
   @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure.")
-  rubric_criteria?: RubricCriterion[];
+  rubric_criteria: RubricCriterion[];
 }
 
 // ============================================================================

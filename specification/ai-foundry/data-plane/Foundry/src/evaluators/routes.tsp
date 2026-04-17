@@ -237,7 +237,19 @@ interface EvaluatorGenerationJobs {
   >;
 
   /**
-   * Deletes an evaluator generation job by its ID.
+   * Cancels an evaluator generation job by its ID.
+   */
+  @summary("Cancels an evaluator generation job.")
+  @route("evaluator_generation_jobs/{jobId}:cancel")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  cancel is cancelJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Deletes an evaluator generation job by its ID. Deletes the job record only;
+   * the generated evaluator (if any) is preserved.
    */
   @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)

@@ -36,6 +36,7 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
 
 interface Schedules {}

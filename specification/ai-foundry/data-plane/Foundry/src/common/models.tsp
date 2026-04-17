@@ -118,8 +118,8 @@ union JobSourceType {
   @doc("Prompt source — inline text provided by the user.")
   Prompt: "Prompt",
 
-  @doc("Agent source — references a prompt agent to fetch instructions and metadata from.")
-  PromptAgent: "PromptAgent",
+  @doc("Agent source — references an agent to fetch instructions and metadata from.")
+  Agent: "Agent",
 
   @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
   Traces: "Traces",
@@ -147,10 +147,10 @@ model PromptJobSource extends JobSource {
   prompt: string;
 }
 
-@doc("Prompt agent source — references a prompt agent to fetch instructions from. Optionally includes supplementary prompt text to augment the agent's instructions. Note: only prompt-based agents are supported; hosted agents do not expose fetchable instructions.")
-model PromptAgentJobSource extends JobSource {
-  @doc("The source type for this source, which is PromptAgent.")
-  type: "PromptAgent";
+@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text.")
+model AgentJobSource extends JobSource {
+  @doc("The source type for this source, which is Agent.")
+  type: "Agent";
 
   @doc("The agent name to fetch instructions from.")
   agent_name: string;
