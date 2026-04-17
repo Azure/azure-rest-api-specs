@@ -733,6 +733,27 @@ model BlobServicePropertiesCsharp {
   @Xml.name("Cors") cors?: CorsRule[];
 }
 
+/** The type of blob deletions. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobDeleteTypeCsharp {
+  /** None. */
+  None: "None",
+
+  /** Permanently delete the blob. */
+  Permanent: "Permanent",
+}
+
+/** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum EncryptionAlgorithmTypeCsharp {
+  /** Deprecated */
+  None: "None",
+
+  /** AES256 */
+  AES256: "AES256",
+}
+
+@@alternateType(BlobDeleteType, BlobDeleteTypeCsharp, "csharp");
 @@alternateType(BlobServiceProperties, BlobServicePropertiesCsharp, "csharp");
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
@@ -750,6 +771,10 @@ model BlobServicePropertiesCsharp {
 @@alternateType(IfBlobMatchHeader.ifMatch, string, "csharp");
 @@alternateType(IfBlobNoneMatchHeader.ifNoneMatch, string, "csharp");
 @@alternateType(BlockIdParameter.blockid, string, "csharp");
+@@alternateType(EncryptionAlgorithmType,
+  EncryptionAlgorithmTypeCsharp,
+  "csharp"
+);
 
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "csharp");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
@@ -803,6 +828,11 @@ model BlobServicePropertiesCsharp {
   "transactionalContentMD5",
   "csharp"
 );
+@@clientName(BlobDeleteTypeCsharp, "BlobDeleteType", "csharp");
+@@clientName(EncryptionAlgorithmTypeCsharp,
+  "EncryptionAlgorithmType",
+  "csharp"
+);
 
 @@access(BlobProperties, Access.internal, "csharp");
 @@access(BlobItem, Access.internal, "csharp");
@@ -812,6 +842,7 @@ model BlobServicePropertiesCsharp {
 @@access(ContainerProperties, Access.internal, "csharp");
 @@access(DelimitedTextConfiguration, Access.internal, "csharp");
 @@access(JsonTextConfiguration, Access.internal, "csharp");
+@@access(BlobDeleteTypeCsharp, Access.internal, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(MetadataHeaders.metadata,
