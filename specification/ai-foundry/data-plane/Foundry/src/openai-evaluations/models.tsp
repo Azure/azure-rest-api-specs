@@ -349,6 +349,9 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   /** Collection of Agent trace identifiers that should be evaluated. */
   trace_ids?: string[];
 
+  /** Collection of conversation identifiers to filter traces by conversation. */
+  conversation_ids?: string[];
+
   /** The agent ID used to filter traces for evaluation. */
   agent_id?: string;
 
@@ -484,7 +487,7 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   type: ItemGenerationParamsType.conversationGenPreview;
 
   /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
-  model: string;
+  `model`: string;
 
   /** Maximum number of turns per simulated conversation. */
   max_turns?: int32;
