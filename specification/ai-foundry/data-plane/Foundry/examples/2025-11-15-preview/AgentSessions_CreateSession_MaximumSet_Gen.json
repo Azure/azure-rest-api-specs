@@ -1,0 +1,32 @@
+{
+  "title": "AgentSessions_CreateSession_MaximumSet",
+  "operationId": "Agents_CreateSession",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "agent_name": "my-agent",
+    "x-session-isolation-key": "sk-abc123",
+    "Foundry-Features": "AgentEndpoints=V1Preview",
+    "body": {
+      "agent_session_id": "my-session",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "3"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "agent_session_id": "my-session",
+        "version_indicator": {
+          "type": "version_ref",
+          "agent_version": "3"
+        },
+        "status": "Active",
+        "created_at": 1710234567,
+        "last_accessed_at": 1710234567,
+        "expires_at": 1712826567
+      }
+    }
+  }
+}

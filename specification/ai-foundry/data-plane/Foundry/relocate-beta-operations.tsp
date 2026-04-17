@@ -66,3 +66,36 @@ interface EvaluationTaxonomies {}
 @@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
+
+interface Toolboxes {}
+@@clientLocation(Azure.AI.Projects.Toolboxes.createToolboxVersion, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.updateToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.getToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxes, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxVersions, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.getToolboxVersion, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolboxVersion, Toolboxes);
+
+interface Skills {}
+@@clientLocation(Azure.AI.Projects.Skills.createSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.createSkillFromPackage, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.getSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.downloadSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.listSkills, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
+
+interface Agents {}
+// Move AgentSessionFiles
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
+// Move preview operations out of root Agent into Beta Agents
+@@clientLocation(Azure.AI.Projects.Agents.patchAgentObject, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.createSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);

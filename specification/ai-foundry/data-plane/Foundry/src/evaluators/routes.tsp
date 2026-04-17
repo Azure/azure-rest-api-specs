@@ -3,6 +3,10 @@ import "../servicepatterns.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
+using Http;
+using OpenAPI;
+using Rest;
+using TypeSpec.Versioning;
 
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
@@ -120,5 +124,60 @@ interface Evaluators {
       evaluatorVersion: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
+  >;
+
+  @removed(Versions.v1)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
+  @post
+  @route("/evaluators/{name}/versions/{version}/startPendingUpload")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
+  startPendingUpload is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @path
+      name: string;
+
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+
+      @doc("The pending upload request parameters")
+      @Http.bodyRoot
+      pendingUploadRequest: PendingUploadRequest;
+    },
+    PendingUploadResponse
+  >;
+
+  @removed(Versions.v1)
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
+  @post
+  @route("/evaluators/{name}/versions/{version}/credentials")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
+  getCredentials is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @path
+      name: string;
+
+      @doc("The credential request parameters")
+      @Http.bodyRoot
+      credentialRequest: EvaluatorCredentialRequest;
+
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
+    AssetCredentialResponse
   >;
 }

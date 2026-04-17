@@ -53,7 +53,8 @@ interface DiagnosticCategoryOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DiagnosticCategories {
   /**
    * Description for Get Diagnostics Category
@@ -104,7 +105,8 @@ interface DiagnosticCategoryOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DiagnosticCategoryOperationGroup {
   /**
    * Description for Get Diagnostics Category
