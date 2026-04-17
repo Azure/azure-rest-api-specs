@@ -58,6 +58,16 @@ model FileSystemClientParameters {
   "csharp"
 );
 
+/** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum EncryptionAlgorithmTypeCustom {
+  /** Deprecated */
+  None: "None",
+
+  /** AES256 */
+  AES256: "AES256",
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@Legacy.disablePageable(Storage.DataLake.Service.listFileSystems, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
@@ -70,10 +80,18 @@ model FileSystemClientParameters {
 @@clientName(Storage.DataLake.Path, "PathRestClient", "csharp");
 @@clientName(Storage.DataLake.LeaseAction, "DataLakeLeaseAction", "csharp");
 @@clientName(Storage.DataLake.PathItem, "Path", "csharp");
+@@clientName(EncryptionAlgorithmTypeCustom,
+  "EncryptionAlgorithmType",
+  "csharp"
+);
 
 @@alternateType(Storage.DataLake.PathItem.lastModified, utcDateTime, "csharp");
 @@alternateType(Storage.DataLake.PathItem.contentLength, string, "csharp");
 @@alternateType(Storage.DataLake.PathItem.isDirectory, string, "csharp");
+@@alternateType(Storage.DataLake.EncryptionAlgorithmType,
+  EncryptionAlgorithmTypeCustom,
+  "csharp"
+);
 
 @@access(Storage.DataLake.PathGetPropertiesAction, Access.`public`, "csharp");
 @@access(Storage.DataLake.PathLeaseAction, Access.`public`, "csharp");
