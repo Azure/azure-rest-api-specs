@@ -261,6 +261,19 @@ model LogSettings {
   "java"
 );
 
+@@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.getNSP,
+  NspScheduledQueryRule,
+  "java"
+);
+@@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.listNSP,
+  NspScheduledQueryRule,
+  "java"
+);
+@@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.reconcileNSP,
+  NspScheduledQueryRule,
+  "java"
+);
+
 @@clientName(AlertSeverity.`0`, "Zero", "go");
 @@clientName(AlertSeverity.`1`, "One", "go");
 @@clientName(AlertSeverity.`2`, "Two", "go");
