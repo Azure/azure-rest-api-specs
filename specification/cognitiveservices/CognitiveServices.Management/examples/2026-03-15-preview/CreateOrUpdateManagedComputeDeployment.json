@@ -1,0 +1,73 @@
+{
+  "operationId": "ManagedComputeDeployments_CreateOrUpdate",
+  "title": "CreateOrUpdateManagedComputeDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "myManagedComputeDeployment",
+    "api-version": "2026-03-15-preview",
+    "resource": {
+      "sku": {
+        "name": "GlobalManagedCompute",
+        "capacity": 1
+      },
+      "properties": {
+        "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+        "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+        "acceleratorType": "H100_80GB",
+        "versionUpgradeOption": "OnceNewDefaultVersionAvailable"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myManagedComputeDeployment",
+        "name": "myManagedComputeDeployment",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "sku": {
+          "name": "GlobalManagedCompute",
+          "capacity": 1
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+          "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+          "acceleratorType": "H100_80GB",
+          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "acceleratorsPerInstance": 8,
+          "totalAccelerators": 8,
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment provisioned successfully.",
+            "lastOperationTimestamp": "2026-03-15T12:00:00Z"
+          },
+          "routes": {
+            "chatCompletionsScoringPath": "/managedComputeDeployments/myManagedComputeDeployment/chat/completions",
+            "swagger": "/managedComputeDeployments/myManagedComputeDeployment/swagger.json",
+            "messagesApiScoringPath": "/managedComputeDeployments/myManagedComputeDeployment/messages"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myManagedComputeDeployment",
+        "name": "myManagedComputeDeployment",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "sku": {
+          "name": "GlobalManagedCompute",
+          "capacity": 1
+        },
+        "properties": {
+          "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+          "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+          "acceleratorType": "H100_80GB",
+          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

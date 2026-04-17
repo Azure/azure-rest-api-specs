@@ -3247,6 +3247,17 @@ model SkuResource {
 }
 
 /**
+ * The object being used to update sku of a resource, in general used for PATCH operations.
+ */
+@added(Versions.v2026_03_15_preview)
+model PatchResourceSku {
+  /**
+   * The resource model definition representing SKU
+   */
+  sku?: Sku;
+}
+
+/**
  * Properties of Cognitive Services account commitment plan.
  */
 model CommitmentPlanProperties {
@@ -5706,6 +5717,125 @@ model RaiPolicyListResult {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Properties of a Cognitive Services managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentProperties {
+  /**
+   * AzureML Registry model asset URI. Required on creation; immutable after creation.
+   * Example: azureml://registries/{registry}/models/{model}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  `model`: url;
+
+  /**
+   * AzureML Registry deployment template URI. Optional on creation.
+   * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  deploymentTemplate?: url;
+
+  /**
+   * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  acceleratorType?: string;
+
+  /**
+   * Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorsPerInstance?: int32;
+
+  /**
+   * Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.
+   */
+  @visibility(Lifecycle.Read)
+  totalAccelerators?: int32;
+
+  /**
+   * Read-only. Current provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Read-only. Status message and timestamp from the last provisioning operation.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningDetails?: ManagedComputeDeploymentProvisioningDetails;
+
+  /**
+   * Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  routes?: ManagedComputeDeploymentRoutes;
+}
+
+/**
+ * Provisioning status details for a managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentProvisioningDetails {
+  /**
+   * A human-readable status message from the last provisioning operation.
+   */
+  message?: string;
+
+  /**
+   * Timestamp of the last provisioning operation.
+   */
+  lastOperationTimestamp?: utcDateTime;
+}
+
+/**
+ * Inference route paths for a managed compute deployment, relative to the account endpoint.
+ * Populated when provisioningState is Succeeded.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentRoutes {
+  /**
+   * Relative path to the chat completions scoring endpoint.
+   */
+  chatCompletionsScoringPath?: string;
+
+  /**
+   * Relative path to the Swagger/OpenAPI endpoint.
+   */
+  swagger?: string;
+
+  /**
+   * Relative path to the messages API scoring endpoint.
+   */
+  messagesApiScoringPath?: string;
+}
+
+/**
+ * The list of managed compute deployments.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentListResult {
+  /**
+   * The link used to get the next page of managed compute deployments.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of managed compute deployments and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ManagedComputeDeployment[];
+}
 
 /**
  * Deployment detail within a managed compute usage entry.
