@@ -701,6 +701,8 @@ op calculateModelCapacityCustom(
 @@clientName(RuleAction, "ServiceTagOutboundRuleAction", "csharp");
 @@clientName(RuleCategory, "ServiceTagOutboundRuleCategory", "csharp");
 @@clientName(RuleStatus, "ServiceTagOutboundRuleStatus", "csharp");
+@@clientName(RaiSafetyProviderConfig.blocking, "IsBlocking", "csharp");
+@@clientName(RaiTopicConfig.blocking, "IsBlocking", "csharp");
 
 @@usage(NetworkSecurityPerimeterConfiguration,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
