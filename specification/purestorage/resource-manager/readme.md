@@ -42,7 +42,7 @@ suppressions:
   - code: PathContainsResourceType
     reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
   - code: OperationIdNounVerb
-    reason: Volumes and VolumeGroups have parent child relationship so this is expected. It is False positive.
+    reason: VolumeGroups_ListByStoragePool and Volumes_ListByVolumeGroup follow the required parent-scoped listing pattern for nested resources.
 ```
 
 ### Tag: package-2024-11-01
