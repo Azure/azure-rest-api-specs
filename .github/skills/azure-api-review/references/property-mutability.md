@@ -1,3 +1,5 @@
+<!-- Upstream alignment: 2026-04-15 -->
+
 # Property Mutability Rules (OAPI027, OAPI020, OAPI029)
 
 These rules govern how property visibility and mutability must be

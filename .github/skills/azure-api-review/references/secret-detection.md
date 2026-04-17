@@ -1,3 +1,5 @@
+<!-- Upstream alignment: 2026-04-15 -->
+
 # Proactive Secret Detection (SEC-SECRET-DETECT)
 
 Reviewers **MUST** proactively inspect every string property to

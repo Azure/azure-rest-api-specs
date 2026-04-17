@@ -25,14 +25,16 @@ Each reference file covers one cross-cutting rule area with:
 - Format-specific guidance for OpenAPI JSON and TypeSpec
 - Rule IDs for citation in review findings
 
-| Reference                                                                 | Rule Area                                                 | Key Rule IDs                     |
-| ------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------- |
-| [secret-detection.md](references/secret-detection.md)                     | Proactive secret detection in API properties              | SEC-SECRET-DETECT                |
-| [property-mutability.md](references/property-mutability.md)               | Write-only, conditional read-only, and immutability rules | OAPI027, OAPI020, OAPI029        |
-| [provisioning-state.md](references/provisioning-state.md)                 | `provisioningState` requirements for ARM resources        | RPC-Async-V1-02, RPC-Async-V1-03 |
-| [naming-conventions.md](references/naming-conventions.md)                 | Naming, casing, and Azure terminology                     | --                               |
-| [enum-best-practices.md](references/enum-best-practices.md)               | Enum extensibility and boolean alternatives               | --                               |
-| [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md) | Required CRUD operations for tracked ARM resources        | RPC-Put-V1-22, RPC-Get-V1-05     |
+| Reference                                                                   | Rule Area                                                       | Key Rule IDs                                                   |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------- |
+| [secret-detection.md](references/secret-detection.md)                       | Proactive secret detection in API properties                    | SEC-SECRET-DETECT                                              |
+| [property-mutability.md](references/property-mutability.md)                 | Write-only, conditional read-only, and immutability rules       | OAPI027, OAPI020, OAPI029                                      |
+| [provisioning-state.md](references/provisioning-state.md)                   | `provisioningState` requirements for ARM resources              | RPC-Async-V1-02, RPC-Async-V1-03                               |
+| [naming-conventions.md](references/naming-conventions.md)                   | Naming, casing, common names, and Azure terminology             | --                                                             |
+| [enum-best-practices.md](references/enum-best-practices.md)                 | Enum extensibility and boolean alternatives                     | --                                                             |
+| [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md)   | Required CRUD operations, singletons, and `x-ms-azure-resource` | RPC-Put-V1-22, RPC-Get-V1-05, RPC-ConstrainedCollections-V1-04 |
+| [lro-final-state-via.md](references/lro-final-state-via.md)                 | LRO polling behavior and `final-state-via` guidance             | --                                                             |
+| [suppression-review-criteria.md](references/suppression-review-criteria.md) | Suppression approval/rejection decision framework               | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                            |
 
 ## Authoritative External Sources
 

@@ -2,7 +2,7 @@
 applyTo: "specification/**/*.tsp"
 ---
 
-<!-- Upstream alignment: 2026-04-17
+<!-- Upstream alignment: 2026-04-15
      Rules derived from:
        - Azure Resource Provider Contract (RPC) v1.0
          https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0

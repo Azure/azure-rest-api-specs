@@ -1,3 +1,5 @@
+<!-- Upstream alignment: 2026-04-15 -->
+
 # Provisioning State Requirements
 
 The `provisioningState` property is a critical ARM contract element

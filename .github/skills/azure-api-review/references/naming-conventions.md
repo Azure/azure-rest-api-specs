@@ -1,3 +1,5 @@
+<!-- Upstream alignment: 2026-04-15 -->
+
 # Naming Conventions for Azure API Specifications
 
 Consistent naming across Azure APIs ensures a uniform developer experience in SDKs, documentation, and tooling.
@@ -59,6 +61,39 @@ documentation.
 - **MUST NOT** be code names, product abbreviations, or temporary names
 - RP names are permanent and visible in resource IDs, SDKs, and documentation
 - Choose a descriptive name that conveys what the RP does
+
+---
+
+## Common Property Names
+
+The [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#common-names)
+define preferred names for frequently used properties. Using these names
+ensures consistency across Azure SDKs and documentation.
+
+| Preferred name   | Purpose                                       | Antipatterns to flag                                          |
+| ---------------- | --------------------------------------------- | ------------------------------------------------------------- |
+| `createdAt`      | Date/time the resource was created            | `createTime`, `creationTime`, `timeCreated`, `createdDate`    |
+| `lastModifiedAt` | Date/time the resource was last modified      | `lastModifiedTime`, `timeLastModified`, `modifiedDate`        |
+| `deletedAt`      | Date/time the resource was deleted            | `deleteTime`, `deletionTime`, `timeDeleted`                   |
+| `kind`           | Discriminator value for polymorphic resources | `type` (inside properties bag), `discriminator`, `objectType` |
+| `etag`           | Entity tag for optimistic concurrency control | `eTag`, `ETag`, `e_tag`                                       |
+
+### Resource Identifier Properties
+
+- Properties that reference another ARM resource **MUST** use the suffix
+  `Id` (e.g., `storageAccountId`, `poolResourceId`).
+- **DO NOT** use suffix `Uri` or `Url` for ARM resource IDs -- these
+  are not URIs/URLs, they are ARM resource paths.
+- **DO NOT** use suffix `Name` alone when the full resource ID is
+  needed. A resource ID enables linked access checks and is unambiguous
+  across subscriptions.
+
+### Date/Time Format
+
+All date/time properties **MUST** use RFC 3339 format with
+`"format": "date-time"` (OpenAPI) or `utcDateTime` (TypeSpec). Do not
+use Unix timestamps, custom date formats, or unformatted strings for
+date/time values.
 
 ---
 

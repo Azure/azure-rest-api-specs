@@ -1,3 +1,5 @@
+<!-- Upstream alignment: 2026-04-15 -->
+
 # Enum Best Practices for Azure APIs
 
 Azure APIs should use extensible enums to allow new values to be added
