@@ -357,14 +357,16 @@ using Azure.ClientGenerator.Core;
 @@scope(VirtualMachines.restartHosts, "!csharp");
 @@scope(VirtualMachines.getAsyncOperationStatus, "!csharp");
 @@scope(Applications.getAzureAsyncOperationStatus, "!csharp");
-@@scope(Clusters.getAzureAsyncOperationStatus, "!csharp");
-@@scope(Extensions.getAzureAsyncOperationStatus, "!csharp");
+// @@scope(Clusters.getAzureAsyncOperationStatus, "!csharp");
+// @@scope(Extensions.getAzureAsyncOperationStatus, "!csharp");
 // Extensions.get returns ClusterMonitoringResponse but generator expects Cluster data type
 @@scope(Extensions.get, "!csharp");
 @@scope(Extensions.delete, "!csharp");
-@@scope(Extensions.create, "!csharp");
+// @@scope(Extensions.create, "!csharp");
 @@scope(ScriptActions.getExecutionAsyncOperationStatus, "!csharp");
 @@scope(ScriptActions.getExecutionDetail, "!csharp");
+// LRO polling operation - SDK provides native LRO polling
+@@scope(LocationsOperationGroup.getAzureAsyncOperationStatus, "!csharp");
 
 // C# operation name renames to match old SDK API surface
 @@clientName(Extensions.enableMonitoring,
@@ -417,6 +419,22 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(LocationsOperationGroup.validateClusterCreateRequest,
   "ValidateHDInsightClusterCreation",
+  "csharp"
+);
+@@clientName(Clusters.getAzureAsyncOperationStatus,
+  "GetAsyncOperationStatus",
+  "csharp"
+);
+@@clientName(Extensions.getAzureAsyncOperationStatus,
+  "GetExtensionAsyncOperationStatus",
+  "csharp"
+);
+@@clientName(ScriptActions.getExecutionAsyncOperationStatus,
+  "GetScriptActionExecutionAsyncOperationStatus",
+  "csharp"
+);
+@@clientName(VirtualMachines.getAsyncOperationStatus,
+  "GetVirtualMachineAsyncOperationStatus",
   "csharp"
 );
 
