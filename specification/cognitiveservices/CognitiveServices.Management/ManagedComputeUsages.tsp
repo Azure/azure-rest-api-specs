@@ -13,19 +13,19 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.CognitiveServices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'AcceleratorUsagesOperationGroup' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'ManagedComputeUsagesOperationGroup' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
 @added(Versions.v2026_03_15_preview)
-interface AcceleratorUsagesOperationGroup {
+interface ManagedComputeUsagesOperationGroup {
   /**
-   * List accelerator quota usages for a subscription and location.
+   * List managed compute quota usages for a subscription and location.
    */
   @autoRoute
   @get
-  @action("acceleratorUsages")
+  @action("managedComputeUsages")
   @list
-  @tag("AcceleratorUsages")
+  @tag("ManagedComputeUsages")
   list is ArmProviderActionSync<
-    Response = AcceleratorUsageListResult,
+    Response = ManagedComputeUsageListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;

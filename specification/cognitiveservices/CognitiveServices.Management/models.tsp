@@ -5708,10 +5708,10 @@ model RaiPolicyListResult {
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
 /**
- * Deployment detail within an accelerator usage entry.
+ * Deployment detail within a managed compute usage entry.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentInfo {
+model ManagedComputeDeploymentInfo {
   /**
    * Full ARM resource ID of the deployment.
    */
@@ -5739,13 +5739,13 @@ model AcceleratorDeploymentInfo {
 }
 
 /**
- * Accelerator quota usage for a specific SKU. Extends Usage with accelerator-specific properties.
+ * Managed compute quota usage for a specific SKU. Extends Usage with managed compute-specific properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'AcceleratorUsage' extends 'Usage' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'ManagedComputeUsage' extends 'Usage' using inheritance to match service-side object hierarchy"
 @added(Versions.v2026_03_15_preview)
-model AcceleratorUsage extends Usage {
+model ManagedComputeUsage extends Usage {
   /**
-   * Fully qualified resource ID for the accelerator usage.
+   * Fully qualified resource ID for the managed compute usage.
    */
   @visibility(Lifecycle.Read)
   id?: string;
@@ -5768,27 +5768,27 @@ model AcceleratorUsage extends Usage {
   offerScope?: string;
 
   /**
-   * Deployments consuming this accelerator quota.
+   * Deployments consuming this managed compute quota.
    */
   @identifiers(#["deploymentId"])
-  deployments?: AcceleratorDeploymentInfo[];
+  deployments?: ManagedComputeDeploymentInfo[];
 }
 
 /**
- * List of accelerator quota entries.
+ * List of managed compute quota entries.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorUsageListResult {
+model ManagedComputeUsageListResult {
   /**
-   * The link used to get the next page of accelerator usages.
+   * The link used to get the next page of managed compute usages.
    */
   @nextLink
   nextLink?: string;
 
   /**
-   * Per-SKU accelerator quota usage entries.
+   * Per-SKU managed compute quota usage entries.
    */
   @pageItems
   @identifiers(#["id"])
-  value?: AcceleratorUsage[];
+  value?: ManagedComputeUsage[];
 }
