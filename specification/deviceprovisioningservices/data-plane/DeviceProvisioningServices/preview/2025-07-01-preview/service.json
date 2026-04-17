@@ -1039,7 +1039,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/OperationMode",
+          "$ref": "#/definitions/BulkEnrollmentMode",
           "description": "Operation mode."
         }
       },
@@ -1595,42 +1595,6 @@
           "format": "int32",
           "description": "This is null for reported properties metadata and is not null for desired\nproperties metadata."
         }
-      }
-    },
-    "OperationMode": {
-      "type": "string",
-      "description": "Operation mode.",
-      "enum": [
-        "create",
-        "update",
-        "updateIfMatchETag",
-        "delete"
-      ],
-      "x-ms-enum": {
-        "name": "OperationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "create",
-            "value": "create",
-            "description": "create"
-          },
-          {
-            "name": "update",
-            "value": "update",
-            "description": "update"
-          },
-          {
-            "name": "updateIfMatchETag",
-            "value": "updateIfMatchETag",
-            "description": "updateIfMatchETag"
-          },
-          {
-            "name": "delete",
-            "value": "delete",
-            "description": "delete"
-          }
-        ]
       }
     },
     "ProvisioningServiceErrorDetails": {

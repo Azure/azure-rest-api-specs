@@ -158,35 +158,9 @@ union AllocationPolicy {
 }
 
 /**
- * Operation mode.
- */
-union OperationMode {
-  string,
-
-  /**
-   * create
-   */
-  create: "create",
-
-  /**
-   * update
-   */
-  update: "update",
-
-  /**
-   * updateIfMatchETag
-   */
-  updateIfMatchETag: "updateIfMatchETag",
-
-  /**
-   * delete
-   */
-  delete: "delete",
-}
-
-/**
  * Bulk enrollment operation mode.
  */
+@renamedFrom(Versions.v2025_07_01_preview, "OperationMode")
 union BulkEnrollmentMode {
   string,
 
@@ -884,7 +858,6 @@ model BulkEnrollmentOperation {
   /**
    * Operation mode.
    */
-  @typeChangedFrom(Versions.v2025_07_01_preview, OperationMode)
   mode: BulkEnrollmentMode;
 }
 
@@ -961,7 +934,7 @@ model BulkEnrollmentGroupOperation {
   /**
    * Operation mode.
    */
-  mode: OperationMode;
+  mode: BulkEnrollmentMode;
 }
 
 /**
