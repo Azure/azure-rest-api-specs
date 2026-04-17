@@ -61,6 +61,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
   getNSP is NSPOps.Read<
     NetworkSecurityPerimeterConfiguration,
@@ -70,6 +71,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a list of NSP configurations for specified workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
   listNSP is NSPOps.List<
     NetworkSecurityPerimeterConfiguration,
@@ -79,6 +81,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Reconcile network security perimeter configuration for Workspace resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("reconcile")
   @tag("NetworkSecurityPerimeterConfigurations")
   reconcileNSP is NSPOps.ActionAsync<

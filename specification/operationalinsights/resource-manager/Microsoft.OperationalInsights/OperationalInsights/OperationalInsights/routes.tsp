@@ -18,6 +18,7 @@ interface OperationStatusesOperationGroup {
   /**
    * Get the status of a long running azure asynchronous operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("asyncOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}")
   @get

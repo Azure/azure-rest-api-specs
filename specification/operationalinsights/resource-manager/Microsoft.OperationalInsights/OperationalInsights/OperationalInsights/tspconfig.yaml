@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/operationalInsights"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -7,7 +10,38 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.OperationalInsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-operationalInsights"
+    namespace: "azure.mgmt.operationalInsights"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-operationalInsights"
+    namespace: "com.azure.resourcemanager.operationalInsights"
+    service-name: "Operational Insights"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-operationalInsights"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-operationalInsights"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/operationalInsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/armoperationalInsights"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armoperationalInsights"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

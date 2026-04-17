@@ -395,7 +395,7 @@ union DataSourceKind {
 /**
  * The provisioning state of the linked service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union LinkedServiceEntityStatus {
   string,
 
@@ -617,7 +617,7 @@ union TableSubTypeEnum {
 /**
  * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union OperationalInsightsTableProvisioningState {
   string,
 
@@ -645,7 +645,7 @@ union OperationalInsightsTableProvisioningState {
 /**
  * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union ProvisioningStateEnum {
   string,
 
@@ -1012,7 +1012,7 @@ union TimeSelectorEnum {
 /**
  * Linked storage accounts type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DataSourceType {
   /**
    * CustomLogs
@@ -1043,7 +1043,7 @@ enum DataSourceType {
 /**
  * Type of managed service identity.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum IdentityType {
   /**
    * SystemAssigned
@@ -1115,6 +1115,7 @@ model ClusterSku {
   /**
    * The capacity reservation level in Gigabytes for this cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capacity?: int64 | null;
 
   /**
@@ -1223,7 +1224,7 @@ model AssociatedWorkspace {
   /**
    * Associated workspace immutable id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
   workspaceId?: string;
@@ -1333,7 +1334,7 @@ model ClusterPatch {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1373,7 +1374,7 @@ model DataExportListResult {
 /**
  * Data Export properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataExportProperties {
   /**
    * The data export rule ID.
@@ -1474,6 +1475,7 @@ model LinkedServiceProperties {
   /**
    * The provisioning state of the linked service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: LinkedServiceEntityStatus;
 }
 
@@ -1497,7 +1499,7 @@ model LinkedServiceListResult {
 /**
  * Linked storage accounts properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model LinkedStorageAccountsProperties {
   /**
    * Linked storage accounts type.
@@ -1683,11 +1685,12 @@ model OperationStatus {
 /**
  * Properties that define an Log Analytics QueryPack-Query resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model LogAnalyticsQueryPackQueryProperties {
   /**
    * The unique ID of your application. This field cannot be changed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -1734,12 +1737,14 @@ model LogAnalyticsQueryPackQueryProperties {
   /**
    * Tags associated with the query.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string[]>;
 
   /**
    * Additional properties that can be set for the query.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 }
 
@@ -1775,7 +1780,7 @@ model LogAnalyticsQueryPackQuerySearchProperties {
   /**
    * Tags associated with the query.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string[]>;
 }
 
@@ -1826,7 +1831,7 @@ model LogAnalyticsQueryPackProperties {
   /**
    * Current state of this QueryPack: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -1838,14 +1843,14 @@ model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
 /**
  * Value object for saved search results.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SavedSearchProperties {
   /**
    * The category of the saved search. This helps the user to find a saved search faster.
@@ -2113,18 +2118,20 @@ model SharedKeys {
   /**
    * The primary shared key of a workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   primarySharedKey?: string;
 
   /**
    * The secondary shared key of a workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secondarySharedKey?: string;
 }
 
 /**
  * Storage insight properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model StorageInsightProperties {
   /**
    * The names of the blob containers that the workspace should read
@@ -2160,6 +2167,7 @@ model StorageAccount {
   /**
    * The storage account key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key: string;
 }
 
@@ -2192,6 +2200,7 @@ model StorageInsightListResult {
    * The link (url) to the next page of results.
    */
   @nextLink
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.nextLink`?: string;
 }
 
@@ -2595,6 +2604,7 @@ model WorkspacePurgeBodyFilters {
   /**
    * the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: unknown;
 
   /**
@@ -2664,6 +2674,7 @@ model WorkspaceProperties {
   /**
    * The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   retentionInDays?: int32 | null;
 
   /**
@@ -2740,6 +2751,7 @@ model WorkspaceSku {
   /**
    * The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capacityReservationLevel?: int32 | null;
 
   /**
@@ -2796,31 +2808,37 @@ model WorkspaceFeatures {
   /**
    * Flag that indicate if data should be exported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableDataExport?: boolean | null;
 
   /**
    * Flag that describes if we want to remove the data after 30 days.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   immediatePurgeDataOn30Days?: boolean | null;
 
   /**
    * Flag that indicate which permission to use - resource or workspace or both.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableLogAccessUsingOnlyResourcePermissions?: boolean | null;
 
   /**
    * Dedicated LA cluster resourceId that is linked to the workspaces.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clusterResourceId?: string | null;
 
   /**
    * Disable Non-AAD based Auth.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disableLocalAuth?: boolean | null;
 
   /**
    * An indication if the specify workspace is limited to sentinel's unified billing model only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   unifiedSentinelBillingOnly?: boolean | null;
 
@@ -2909,7 +2927,7 @@ model Identity {
   /**
    * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserIdentityProperties>;
 }
 
@@ -2933,7 +2951,7 @@ model UserIdentityProperties {
 /**
  * The top level Workspace resource container.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model WorkspacePatch extends AzureEntityResource {
   /**
    * Workspace properties.
@@ -2948,7 +2966,7 @@ model WorkspacePatch extends AzureEntityResource {
   /**
    * Resource tags. Optional.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -3114,7 +3132,7 @@ model WorkspaceReplicationPatProperties {
 /**
  * ARM error response body.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @error
 model ARMErrorResponseBody {
   /**
@@ -3128,7 +3146,7 @@ model ARMErrorResponseBody {
   code?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ArmErrorResponse {
   /**
    * ARM error response body.
@@ -3136,13 +3154,13 @@ model ArmErrorResponse {
   error?: ARMErrorResponseBody;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @error
 model ArmNotFoundBodyResponse {
   @body error: ArmErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @doc("ignore")
 model ArmNotFoundResponse {
   ...Response<404>;
