@@ -249,85 +249,6 @@
       ],
       "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
     },
-    "AbstractiveSummarizationLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for an Abstractive Summarization task.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters",
-          "description": "Parameters for the Abstractive Summarization task."
-        }
-      },
-      "required": [
-        "parameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeDocumentsLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "AbstractiveSummarization"
-    },
-    "AbstractiveSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for the pre-built Abstractive Summarization task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "model version",
-          "default": "latest"
-        },
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "type": "string",
-          "description": "String index type",
-          "default": "TextElements_v8",
-          "enum": [
-            "TextElements_v8",
-            "UnicodeCodePoint",
-            "Utf16CodeUnit"
-          ],
-          "x-ms-enum": {
-            "name": "StringIndexType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TextElements_v8",
-                "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-              },
-              {
-                "name": "UnicodeCodePoint",
-                "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-              },
-              {
-                "name": "Utf16CodeUnit",
-                "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-              }
-            ]
-          }
-        },
-        "summaryLength": {
-          "$ref": "#/definitions/SummaryLengthBucket",
-          "description": "(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries."
-        },
-        "instruction": {
-          "type": "string",
-          "description": "(Optional) If provided, the instruction will be used to generate the summary."
-        }
-      }
-    },
     "AnalyzeDocumentJobsInput": {
       "type": "object",
       "description": "The input object for the analyze documents LRO.",
@@ -603,6 +524,52 @@
       ],
       "x-ms-discriminator-value": "AzureBlob"
     },
+    "AzureContainerDocumentLocation": {
+      "type": "object",
+      "description": "Document location for azure blob storage containers.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the document."
+        },
+        "managedIdentityClientId": {
+          "type": "string",
+          "description": "The user managed identity client Id to use to authenticate with the storage account"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentLocation"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureContainer"
+    },
+    "AzureContainerFolderDocumentLocation": {
+      "type": "object",
+      "description": "Document location for folders within azure blob storage containers.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the document."
+        },
+        "managedIdentityClientId": {
+          "type": "string",
+          "description": "The user managed identity client Id to use to authenticate with the storage account"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentLocation"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureContainerFolder"
+    },
     "BaseRedactionPolicy": {
       "type": "object",
       "description": "The abstract base class for RedactionPolicy.",
@@ -832,18 +799,25 @@
         "kind": {
           "$ref": "#/definitions/DocumentLocationKind",
           "description": "The kind of the document location."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the document."
         }
       },
       "discriminator": "kind",
       "required": [
-        "kind"
+        "kind",
+        "location"
       ]
     },
     "DocumentLocationKind": {
       "type": "string",
       "description": "Enumeration of supported document locations.",
       "enum": [
-        "AzureBlob"
+        "AzureBlob",
+        "AzureContainer",
+        "AzureContainerFolder"
       ],
       "x-ms-enum": {
         "name": "DocumentLocationKind",
@@ -853,6 +827,16 @@
             "name": "AzureBlob",
             "value": "AzureBlob",
             "description": "The document is a URL."
+          },
+          {
+            "name": "AzureContainer",
+            "value": "AzureContainer",
+            "description": "The document location is an Azure Blob Storage container."
+          },
+          {
+            "name": "AzureContainerFolder",
+            "value": "AzureContainerFolder",
+            "description": "The document location is a folder within an Azure Blob Storage container."
           }
         ]
       }
@@ -1112,123 +1096,6 @@
       "required": [
         "error"
       ]
-    },
-    "ExtractiveSummarizationLROResult": {
-      "type": "object",
-      "description": "An object representing the results for an Extractive Summarization task.",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/AnalyzeDocumentsResult",
-          "description": "Results of the document task."
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeDocumentsLROResult"
-        }
-      ],
-      "x-ms-discriminator-value": "ExtractiveSummarizationLROResults"
-    },
-    "ExtractiveSummarizationLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for an Extractive Summarization task.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/ExtractiveSummarizationTaskParameters",
-          "description": "Parameters for the Extractive Summarization task."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeDocumentsLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "ExtractiveSummarization"
-    },
-    "ExtractiveSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an Extractive Summarization task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "model version",
-          "default": "latest"
-        },
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies the number of sentences in the extracted summary.",
-          "default": 3
-        },
-        "sortBy": {
-          "type": "string",
-          "description": "Specifies how to sort the extracted summaries.",
-          "default": "Offset",
-          "enum": [
-            "Offset",
-            "Rank"
-          ],
-          "x-ms-enum": {
-            "name": "ExtractiveSummarizationSortingCriteria",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Offset",
-                "value": "Offset",
-                "description": "Indicates that results should be sorted in order of appearance in the text."
-              },
-              {
-                "name": "Rank",
-                "value": "Rank",
-                "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model."
-              }
-            ]
-          }
-        },
-        "stringIndexType": {
-          "type": "string",
-          "description": "Specifies the method used to interpret string offsets.",
-          "default": "TextElements_v8",
-          "enum": [
-            "TextElements_v8",
-            "UnicodeCodePoint",
-            "Utf16CodeUnit"
-          ],
-          "x-ms-enum": {
-            "name": "StringIndexType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TextElements_v8",
-                "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-              },
-              {
-                "name": "UnicodeCodePoint",
-                "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-              },
-              {
-                "name": "Utf16CodeUnit",
-                "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-              }
-            ]
-          }
-        },
-        "query": {
-          "type": "string",
-          "description": "(Optional) If provided, the query will be used to extract most relevant sentences from the document."
-        }
-      }
     },
     "InnerErrorCode": {
       "type": "string",
@@ -3652,10 +3519,6 @@
           "type": "boolean",
           "description": "Disable entity validation for PII entity recognition",
           "default": false
-        },
-        "excludeExtractionData": {
-          "type": "boolean",
-          "description": "Boolean to indicate if entities should be excluded from the response json stored in the customer's storage."
         }
       }
     },
@@ -3783,36 +3646,6 @@
             "name": "cancelling",
             "value": "cancelling",
             "description": "Cancelling status"
-          }
-        ]
-      }
-    },
-    "SummaryLengthBucket": {
-      "type": "string",
-      "description": "Enum that defines the length of the output summaries.",
-      "enum": [
-        "short",
-        "medium",
-        "long"
-      ],
-      "x-ms-enum": {
-        "name": "SummaryLengthBucket",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "short",
-            "value": "short",
-            "description": "Instructs model to generate shorter length summaries."
-          },
-          {
-            "name": "medium",
-            "value": "medium",
-            "description": "Instructs model to generate medium length summaries."
-          },
-          {
-            "name": "long",
-            "value": "long",
-            "description": "Instructs model to generate longer length summaries."
           }
         ]
       }
