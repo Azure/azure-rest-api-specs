@@ -1,0 +1,39 @@
+{
+  "operationId": "AcceleratorUsages_List",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "location": "global",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List Accelerator Usages",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "Accelerator.Global.FoundryH100",
+            "name": {
+              "value": "Accelerator.Global.FoundryH100",
+              "localizedValue": "Foundry H100 Accelerator Quota"
+            },
+            "type": "accelerator sku usage",
+            "offerScope": "Global",
+            "currentValue": 96,
+            "limit": 300,
+            "unit": "AcceleratorCount",
+            "scopeType": "SubscriptionOffer",
+            "deployments": [
+              {
+                "deploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount/deployments/gpt4-deploy",
+                "projectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount",
+                "modelId": "gpt-4o",
+                "gpuCount": 8,
+                "instanceCount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
