@@ -318,7 +318,8 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5pReadOnly, "IsKerberos5pReadOnly", "csharp");
 @@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5pReadWrite, "IsKerberos5pReadWrite", "csharp");
 @@clientName(Microsoft.NetApp.ExportPolicyRule.hasRootAccess, "HasRootAccess", "csharp");
-@@alternateType(Microsoft.NetApp.BackupsMigrationRequest.backupVaultId, armResourceIdentifier, "csharp");
+// BackupsMigrationRequest.backupVaultId: armResourceIdentifier → string (old API had string)
+@@alternateType(Microsoft.NetApp.BackupsMigrationRequest.backupVaultId, string, "csharp");
 
 // C# property renames for backward compat
 @@clientName(Microsoft.NetApp.VolumeRelocationProperties.relocationRequested, "IsRelocationRequested", "csharp");
@@ -452,13 +453,22 @@ using Microsoft.NetApp;
 );
 
 // --- Fix enum → extensible enum (NetAppProvisioningState) ---
-// TODO: Remove after microsoft/typespec#10397 area is resolved for enum handling
-union NetAppProvisioningStateReplacement {
-  Microsoft.NetApp.NetAppProvisioningState,
-  string,
+// The spec defines NetAppProvisioningState as a union (extensible), but the old SDK had it
+// as a closed enum. Replace with a closed enum for backward compat.
+enum NetAppProvisioningStateEnum {
+  Accepted: "Accepted",
+  Creating: "Creating",
+  Patching: "Patching",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Moving: "Moving",
+  Failed: "Failed",
+  Succeeded: "Succeeded",
+  Canceled: "Canceled",
+  Provisioning: "Provisioning",
 }
-@@alternateType(Microsoft.NetApp.NetAppProvisioningState, NetAppProvisioningStateReplacement, "csharp");
-@@clientName(NetAppProvisioningStateReplacement, "NetAppProvisioningState", "csharp");
+@@alternateType(Microsoft.NetApp.NetAppProvisioningState, NetAppProvisioningStateEnum, "csharp");
+@@clientName(NetAppProvisioningStateEnum, "NetAppProvisioningState", "csharp");
 
 // --- Fix property type mismatches via @@alternateType ---
 // ETag: string → Azure.Core.eTag
@@ -472,6 +482,33 @@ union NetAppProvisioningStateReplacement {
 
 // VolumeRevert.snapshotId: armResourceIdentifier → string (old API had string)
 @@clientName(Microsoft.NetApp.VolumeRevert.snapshotId, "SnapshotId", "csharp");
+@@alternateType(Microsoft.NetApp.VolumeRevert.snapshotId, string, "csharp");
+
+// VolumeProperties property type overrides for backward compat with old SDK
+@@alternateType(Microsoft.NetApp.VolumeProperties.snapshotId, string, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.backupId, string, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.capacityPoolResourceId, armResourceIdentifier, "csharp");
+
+// VolumeGroupDetails.location: string → azureLocation (old API had AzureLocation?)
+@@alternateType(Microsoft.NetApp.VolumeGroupDetails.location, azureLocation, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeGroup.location, azureLocation, "csharp");
+
+// --- Fix status model RelationshipStatus type to use unified NetAppRelationshipStatus ---
+// Old SDK had RelationshipStatus as NetAppRelationshipStatus? on all three status models.
+// Define replacement union matching old NetAppRelationshipStatus shape.
+union NetAppRelationshipStatusDef {
+  string,
+  Idle: "Idle",
+  Transferring: "Transferring",
+  Failed: "Failed",
+  Unknown: "Unknown",
+}
+@@clientName(NetAppRelationshipStatusDef, "NetAppRelationshipStatus", "csharp");
+@@alternateType(Microsoft.NetApp.BackupStatus.relationshipStatus, NetAppRelationshipStatusDef, "csharp");
+@@alternateType(Microsoft.NetApp.ReplicationStatus.relationshipStatus, NetAppRelationshipStatusDef, "csharp");
+@@alternateType(Microsoft.NetApp.RestoreStatus.relationshipStatus, NetAppRelationshipStatusDef, "csharp");
+// Also fix ReplicationObject.relationshipStatus
+@@alternateType(Microsoft.NetApp.ReplicationObject.relationshipStatus, NetAppRelationshipStatusDef, "csharp");
 
 // --- Fix missing setters via @@usage (Input | Output) ---
 @@usage(Microsoft.NetApp.RegionInfoAvailabilityZoneMappingsItem, Usage.input | Usage.output, "csharp");
