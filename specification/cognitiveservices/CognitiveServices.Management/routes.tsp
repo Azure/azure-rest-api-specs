@@ -13,23 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.CognitiveServices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'DeletedAccountsOperationGroup' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
-interface DeletedAccountsOperationGroup {
-  /**
-   * Returns all the resources of a particular type belonging to a subscription.
-   */
-  @autoRoute
-  @get
-  @action("deletedAccounts")
-  @list
-  @tag("CognitiveServicesAccounts")
-  list is ArmProviderActionSync<
-    Response = AccountListResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
 interface ResourceSkusOperationGroup {
   /**

@@ -234,7 +234,7 @@ stages:
             sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
           fi
 
-          if [ "${{ parameters.ApiVersion }}" != "" ]; then
+          if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
             optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
             sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
           fi
@@ -314,13 +314,14 @@ stages:
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
 
-        - pwsh: |
-            $currentTitle = "$(PrTitle)"
-            $updatedTitle = "Failed-$currentTitle"
-            Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
-            Write-Host "Updated PR Title to: '$updatedTitle'"
-          displayName: "Set PR title prefix on failures"
-          condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
+        - ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          - pwsh: |
+              $currentTitle = "$(PrTitle)"
+              $updatedTitle = "Failed-$currentTitle"
+              Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
+              Write-Host "Updated PR Title to: '$updatedTitle'"
+            displayName: "Set PR title prefix on failures"
+            condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
         - task: PowerShell@2
           displayName: Create pull request

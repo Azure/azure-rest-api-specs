@@ -33,7 +33,7 @@ namespace ComputeGallery {
   /**
    * Common LRO headers (Azure-AsyncOperation required Jan 2025). Keep Location + Retry-After for backward compatibility.
    */
-  alias GalleryScriptVersionLroHeaders = ArmAsyncOperationHeader<FinalResult = GalleryScriptVersion> &
+  alias GalleryScriptVersionLroHeaders<FinalResult = GalleryScriptVersion> = ArmAsyncOperationHeader<FinalResult = FinalResult> &
     ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader;
 
@@ -89,7 +89,7 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders> | ArmDeletedNoContentResponse
+      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders<void>> | ArmDeletedNoContentResponse
     >;
 
     /**

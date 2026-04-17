@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "jobAgentName": "agent1",
+    "jobExecutionId": "5A86BF65-43AC-F258-2524-9E92992F97CA",
+    "jobName": "job1",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "type": "Microsoft.Sql/servers/jobAgents/jobs/executions/steps/targets",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1/executions/5555-6666-7777-8888-999999999999/steps/step1/targets/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "properties": {
+              "createTime": "2017-07-01T04:33:17.5133333Z",
+              "currentAttemptStartTime": "2017-07-01T04:33:18.2391013Z",
+              "currentAttempts": 1,
+              "endTime": "2017-07-01T04:33:18.7031029Z",
+              "jobExecutionId": "5A86BF65-43AC-F258-2524-9E92992F97CA",
+              "jobVersion": 1,
+              "lastMessage": "Step 1 succeeded execution on target (server 'server1', database 'database1').",
+              "lifecycle": "Succeeded",
+              "provisioningState": "Succeeded",
+              "startTime": "2017-07-01T04:33:18.1230403Z",
+              "stepId": 1,
+              "stepName": "step1",
+              "target": {
+                "type": "SqlDatabase",
+                "databaseName": "database1",
+                "serverName": "server1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "JobTargetExecutions_ListByJobExecution",
+  "title": "List job step target executions"
+}
