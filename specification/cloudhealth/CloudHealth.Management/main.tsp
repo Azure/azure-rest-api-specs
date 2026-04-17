@@ -1333,7 +1333,7 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  @secret()
+  @secret
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
   continuationToken?: string;
 }
