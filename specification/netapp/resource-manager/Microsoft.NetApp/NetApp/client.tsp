@@ -759,26 +759,46 @@ using Microsoft.NetApp;
   "csharp"
 );
 
-// --- Fix enum → extensible enum (NetAppProvisioningState) ---
-// The spec defines NetAppProvisioningState as a union (extensible), but the old SDK had it
-// as a closed enum. Replace with a closed enum for backward compat.
-enum NetAppProvisioningStateEnum {
+// --- Preserve SDK-facing NetAppProvisioningState naming for backward compat ---
+/** Compatibility alias for NetApp provisioning state values. */
+union NetAppProvisioningStateDef {
+  string,
+
+  /** The request has been accepted. */
   Accepted: "Accepted",
+
+  /** The resource is being created. */
   Creating: "Creating",
+
+  /** The resource is being patched. */
   Patching: "Patching",
+
+  /** The resource is being updated. */
   Updating: "Updating",
+
+  /** The resource is being deleted. */
   Deleting: "Deleting",
+
+  /** The resource is being moved. */
   Moving: "Moving",
+
+  /** The operation failed. */
   Failed: "Failed",
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
+
+  /** The operation was canceled. */
   Canceled: "Canceled",
+
+  /** The resource is provisioning. */
   Provisioning: "Provisioning",
 }
 @@alternateType(Microsoft.NetApp.NetAppProvisioningState,
-  NetAppProvisioningStateEnum,
+  NetAppProvisioningStateDef,
   "csharp"
 );
-@@clientName(NetAppProvisioningStateEnum, "NetAppProvisioningState", "csharp");
+@@clientName(NetAppProvisioningStateDef, "NetAppProvisioningState", "csharp");
 
 // --- Fix property type mismatches via @@alternateType ---
 // ETag: string → Azure.Core.eTag
@@ -814,12 +834,20 @@ enum NetAppProvisioningStateEnum {
 
 // --- Fix status model RelationshipStatus type to use unified NetAppRelationshipStatus ---
 // Old SDK had RelationshipStatus as NetAppRelationshipStatus? on all three status models.
-// Define replacement union matching old NetAppRelationshipStatus shape.
+/** Compatibility alias for NetApp relationship status values. */
 union NetAppRelationshipStatusDef {
   string,
+
+  /** The relationship is idle. */
   Idle: "Idle",
+
+  /** The relationship is transferring data. */
   Transferring: "Transferring",
+
+  /** The relationship failed. */
   Failed: "Failed",
+
+  /** The relationship state is unknown. */
   Unknown: "Unknown",
 }
 @@clientName(NetAppRelationshipStatusDef, "NetAppRelationshipStatus", "csharp");
