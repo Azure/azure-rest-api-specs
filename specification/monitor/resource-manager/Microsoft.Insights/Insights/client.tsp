@@ -277,6 +277,16 @@ model LogSettings {
   "java"
 );
 
+@@clientName(Microsoft.Metrics.MetricValue.timeStamp, "timestamp", "java");
+@@clientName(Microsoft.AutoScale.PredictiveValue.timeStamp,
+  "timestamp",
+  "java"
+);
+@@clientName(Microsoft.MetricAlert.MetricAlertAction.webHookProperties,
+  "webhookProperties",
+  "java"
+);
+
 @@clientName(AlertSeverity.`0`, "Zero", "go");
 @@clientName(AlertSeverity.`1`, "One", "go");
 @@clientName(AlertSeverity.`2`, "Two", "go");
