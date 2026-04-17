@@ -2199,8 +2199,8 @@ model StorageInsightListResult {
   /**
    * The link (url) to the next page of results.
    */
-  @nextLink
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
   `@odata.nextLink`?: string;
 }
 
