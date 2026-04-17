@@ -198,6 +198,9 @@ union ItemGenerationParamsType {
 
   /** Parameters for synthetic data item generation. */
   syntheticDataGeneration: "synthetic_data_gen_preview",
+
+  /** Parameters for conversation simulation item generation. */
+  conversationGenPreview: "conversation_gen_preview",
 }
 
 /** The types of parameters for synthetic data generation item generation. */
@@ -473,6 +476,38 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
 
   /** The target configuration for the evaluation. */
   target: Target;
+}
+
+/** Represents the parameters for conversation simulation item generation. */
+model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
+  /** The type of item generation parameters, always `conversation_gen_preview`. */
+  type: ItemGenerationParamsType.conversationGenPreview;
+
+  /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
+  model: string;
+
+  /** Maximum number of turns per simulated conversation. */
+  max_turns?: int32;
+
+  /** Number of simulated conversations to generate per test scenario. */
+  num_conversations?: int32;
+}
+
+/** Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent. */
+model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_conversation_simulation_preview`. */
+  type: "azure_ai_conversation_simulation_preview";
+
+  /** The parameters for conversation generation. */
+  item_generation_params: ConversationGenPreviewItemGenerationParams;
+
+  /** The source of test scenarios, supporting file_id or file_content. */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
+
+  /** The target agent to simulate conversations against. */
+  target: AzureAIAgentTarget;
 }
 
 /** Represents a data source for benchmark evaluation runs. */

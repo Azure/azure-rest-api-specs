@@ -51,7 +51,7 @@ model Evaluation {
   data: InputData;
 
   @doc("The level at which evaluation is performed. Defaults to 'trace' if not specified.")
-  evaluation_level?: EvaluationLevel = EvaluationLevel.trace;
+  evaluation_level?: EvaluationLevel = EvaluationLevel.traces;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
@@ -221,10 +221,10 @@ model AssistantMessage extends Message {
 @removed(Versions.v1)
 union EvaluationLevel {
   @doc("Evaluation is performed at the trace level.")
-  trace: "trace",
+  traces: "traces",
 
   @doc("Evaluation is performed at the conversation level.")
-  conversation: "conversation",
+  conversations: "conversations",
 
   @doc("Evaluation is performed at individual levels.")
   levels: "levels",
