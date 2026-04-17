@@ -18,7 +18,7 @@ using TypeSpec.Versioning;
 /**
  * API for service operations with the Azure IoT Hub Device Provisioning Service
  */
-#suppress "@azure-tools/typespec-azure-core/auth-required" "DPS service API uses SAS tokens in the Authorization header; standard auth scheme definitions will be added in a follow-up"
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service(#{ title: "ProvisioningServiceClient" })
 @versioned(Versions)
 @server(

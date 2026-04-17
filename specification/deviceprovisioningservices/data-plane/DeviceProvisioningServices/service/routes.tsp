@@ -322,7 +322,7 @@ interface EnrollmentGroupOperationGroup {
       @bodyRoot
       body: QuerySpecification;
     },
-    QueryResponse<EnrollmentGroup>,
+    EnrollmentGroupQueryResponse,
     {},
     ProvisioningServiceErrorDetails
   >;

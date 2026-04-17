@@ -185,6 +185,33 @@ union OperationMode {
 }
 
 /**
+ * Bulk enrollment operation mode.
+ */
+union BulkEnrollmentMode {
+  string,
+
+  /**
+   * create
+   */
+  create: "create",
+
+  /**
+   * update
+   */
+  update: "update",
+
+  /**
+   * updateIfMatchETag
+   */
+  updateIfMatchETag: "updateIfMatchETag",
+
+  /**
+   * delete
+   */
+  delete: "delete",
+}
+
+/**
  * The device enrollment record.
  */
 model IndividualEnrollment {
@@ -713,6 +740,33 @@ model QueryResponse<T extends {}> {
 }
 
 /**
+ * Response model for enrollment group query operations.
+ * Uses int64 for x-ms-max-item-count in the preview version to match original behavior.
+ */
+model EnrollmentGroupQueryResponse {
+  @doc("HTTP 200 success status code.")
+  @statusCode
+  _: 200;
+
+  @header("x-ms-continuation")
+  @doc("The continuation token for getting the next page of results.")
+  xMsContinuation?: string;
+
+  @header("x-ms-max-item-count")
+  @doc("The maximum number of items returned in a page.")
+  @typeChangedFrom(Versions.v2025_07_01_preview, int32)
+  xMsMaxItemCount?: int64;
+
+  @header("x-ms-item-type")
+  @doc("The list of values returned from the query.")
+  xMsItemType?: string;
+
+  @doc("The list of enrollment groups.")
+  @body
+  body: EnrollmentGroup[];
+}
+
+/**
  * Enrollment group record.
  */
 model EnrollmentGroup {
@@ -830,7 +884,8 @@ model BulkEnrollmentOperation {
   /**
    * Operation mode.
    */
-  mode: OperationMode;
+  @typeChangedFrom(Versions.v2025_07_01_preview, OperationMode)
+  mode: BulkEnrollmentMode;
 }
 
 /**

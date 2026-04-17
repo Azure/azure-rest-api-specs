@@ -80,36 +80,6 @@ union AssignedDeviceSubstatus {
 }
 
 /**
- * 200 OK response for LRO operations returning RegistrationOperationStatus.
- */
-model RegistrationOperationStatus200 {
-  /** HTTP 200 status code. */
-  @statusCode _: 200;
-
-  /** The registration operation status. */
-  @body body: RegistrationOperationStatus;
-}
-
-/**
- * 202 Accepted response for LRO operations returning RegistrationOperationStatus.
- */
-model RegistrationOperationStatus202 {
-  /** HTTP 202 status code. */
-  @statusCode _: 202;
-
-  /** The retry interval in seconds. */
-  @header("retry-after")
-  retryAfter?: int32;
-
-  /** The location of the resource. */
-  @header("Location")
-  location?: string;
-
-  /** The registration operation status. */
-  @body body: RegistrationOperationStatus;
-}
-
-/**
  * Registration operation status.
  */
 model RegistrationOperationStatus {

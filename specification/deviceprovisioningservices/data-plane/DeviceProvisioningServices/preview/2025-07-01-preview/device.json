@@ -236,7 +236,8 @@
           "RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen": {
             "$ref": "./examples/RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -479,32 +480,6 @@
       },
       "required": [
         "operationId"
-      ]
-    },
-    "RegistrationOperationStatus200": {
-      "type": "object",
-      "description": "200 OK response for LRO operations returning RegistrationOperationStatus.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/RegistrationOperationStatus",
-          "description": "The registration operation status."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "RegistrationOperationStatus202": {
-      "type": "object",
-      "description": "202 Accepted response for LRO operations returning RegistrationOperationStatus.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/RegistrationOperationStatus",
-          "description": "The registration operation status."
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "SymmetricKeyRegistrationResult": {

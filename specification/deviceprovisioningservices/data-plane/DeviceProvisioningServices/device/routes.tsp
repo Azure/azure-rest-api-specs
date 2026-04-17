@@ -16,13 +16,66 @@ interface RuntimeRegistration {
   /**
    * Gets the registration operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving x-ms-long-running-operation extension on polling GET for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "The DPS device API uses a non-standard LRO pattern; status field is on the nested RegistrationOperationStatus body"
+  @removed(Versions.v2025_07_01_preview)
+  @sharedRoute
+  @extension("x-ms-long-running-operation", true)
   @summary("Gets the registration operation status.")
   @route("/{idScope}/registrations/{registrationId}/operations/{operationId}")
   @get
   operationStatusLookup is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Registration ID.
+       */
+      @path
+      registrationId: string;
+
+      /**
+       * Operation ID.
+       */
+      @path
+      operationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+    },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
+
+      @header("retry-after")
+      retryAfter?: int32;
+
+      @header("Location")
+      location?: string;
+
+      @body body: RegistrationOperationStatus;
+    },
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Gets the registration operation status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "The DPS device API uses a non-standard LRO pattern; status field is on the nested RegistrationOperationStatus body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for backward compatibility"
+  @added(Versions.v2025_07_01_preview)
+  @sharedRoute
+  @operationId("RuntimeRegistration_OperationStatusLookup")
+  @summary("Gets the registration operation status.")
+  @route("/{idScope}/registrations/{registrationId}/operations/{operationId}")
+  @get
+  operationStatusLookupPreview is Azure.Core.Foundations.Operation<
     {
       /**
        * Registration ID.
@@ -145,8 +198,9 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   @added(Versions.v2025_07_01_preview)
   @sharedRoute
+  @extension("x-ms-long-running-operation", true)
   @summary("Registers the devices and optionally issue operational certificates for IoT devices.")
-  @pollingOperation(RuntimeRegistration.operationStatusLookup)
+  @pollingOperation(RuntimeRegistration.operationStatusLookupPreview)
   @route("/{idScope}/registrations/{registrationId}/register")
   @put
   registerDeviceAndIssueCertificate is Azure.Core.Foundations.Operation<

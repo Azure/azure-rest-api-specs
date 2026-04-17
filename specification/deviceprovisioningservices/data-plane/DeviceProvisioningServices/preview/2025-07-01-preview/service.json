@@ -32,6 +32,18 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "tags": [],
   "paths": {
     "/enrollmentGroups": {
@@ -323,7 +335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Response model for query operations that includes pagination headers.",
+            "description": "Response model for enrollment group query operations.\nUses int64 for x-ms-max-item-count in the preview version to match original behavior.",
             "schema": {
               "type": "array",
               "items": {
@@ -341,7 +353,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -1082,6 +1094,42 @@
         "isSuccessful"
       ]
     },
+    "BulkEnrollmentMode": {
+      "type": "string",
+      "description": "Bulk enrollment operation mode.",
+      "enum": [
+        "create",
+        "update",
+        "updateIfMatchETag",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "BulkEnrollmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "create",
+            "value": "create",
+            "description": "create"
+          },
+          {
+            "name": "update",
+            "value": "update",
+            "description": "update"
+          },
+          {
+            "name": "updateIfMatchETag",
+            "value": "updateIfMatchETag",
+            "description": "updateIfMatchETag"
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "delete"
+          }
+        ]
+      }
+    },
     "BulkEnrollmentOperation": {
       "type": "object",
       "description": "Bulk enrollment operation.",
@@ -1094,7 +1142,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/OperationMode",
+          "$ref": "#/definitions/BulkEnrollmentMode",
           "description": "Operation mode."
         }
       },
@@ -1341,6 +1389,22 @@
       "required": [
         "enrollmentGroupId",
         "attestation"
+      ]
+    },
+    "EnrollmentGroupQueryResponse": {
+      "type": "object",
+      "description": "Response model for enrollment group query operations.\nUses int64 for x-ms-max-item-count in the preview version to match original behavior.",
+      "properties": {
+        "body": {
+          "type": "array",
+          "description": "The list of enrollment groups.",
+          "items": {
+            "$ref": "#/definitions/EnrollmentGroup"
+          }
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "EnrollmentStatus": {
