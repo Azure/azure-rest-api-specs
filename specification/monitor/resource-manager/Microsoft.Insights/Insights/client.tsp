@@ -191,9 +191,10 @@ namespace Microsoft.InsightsCombinedClient;
   "java"
 );
 
-// Response.interval - use Duration type (hand-written code expects Duration)
+// Response.interval - use Duration type
 @@alternateType(Microsoft.Metrics.Response.interval, duration, "java");
 
+// Request.interval - use Duration type
 @@alternateType(Microsoft.Metrics.IntervalQueryParameter.interval,
   duration,
   "java"
