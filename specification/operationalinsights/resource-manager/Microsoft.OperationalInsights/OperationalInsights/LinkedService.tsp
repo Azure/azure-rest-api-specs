@@ -59,7 +59,8 @@ interface LinkedServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     LinkedService,
-    Response = ArmResponse<LinkedService> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmResponse<LinkedService> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LinkedService> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

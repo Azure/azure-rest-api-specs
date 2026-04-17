@@ -39,12 +39,8 @@ interface SummaryLogsOperationGroup {
   createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
     SummaryLogs,
     Response = (ArmResourceUpdatedResponse<SummaryLogs> &
-      ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<
-      SummaryLogs,
-      LroHeaders = ArmCombinedLroHeaders &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+      ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
+      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<SummaryLogs>
   >;
 
   /**
@@ -73,7 +69,7 @@ interface SummaryLogsOperationGroup {
     SummaryLogs,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -93,7 +89,7 @@ interface SummaryLogsOperationGroup {
     SummaryLogs,
     SummaryLogsRetryBin,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 }

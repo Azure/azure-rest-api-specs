@@ -2771,7 +2771,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LinkedService"
         },
         "x-ms-long-running-operation": true
       }
@@ -4247,15 +4248,6 @@
               "$ref": "#/definitions/SummaryLogs"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4276,7 +4268,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SummaryLogs"
         },
         "x-ms-long-running-operation": true
       },
@@ -4434,8 +4427,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/SummaryLogs"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4509,8 +4501,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/SummaryLogs"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
