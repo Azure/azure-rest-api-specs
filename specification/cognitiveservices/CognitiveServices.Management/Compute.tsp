@@ -18,8 +18,6 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services compute resource. Supports polymorphic compute types
  * (Cluster, ContainerInstance) via the computeType discriminator in properties.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
@@ -33,39 +31,37 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The location of the compute resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'location' on the ProxyResource envelope to track compute region independently from the parent account"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'Compute' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'Compute' to support extensible key-value pairs matching service behavior"
   tags?: Record<string>;
 
   /**
    * The kind (type) of compute resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'kind' on the resource envelope to distinguish compute sub-types at the resource level"
   kind?: string;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'identity' on the resource envelope for managed identity support"
   identity?: Identity;
 }
 
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface Computes {

@@ -5840,8 +5840,6 @@ model ManagedComputeDeploymentListResult {
 /**
  * The provisioning state of a compute resource.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 union ComputeProvisioningState {
   string,
@@ -5883,8 +5881,6 @@ union ComputeProvisioningState {
 /**
  * VM priority for a compute pool.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 union VmPriority {
   string,
@@ -5899,8 +5895,6 @@ union VmPriority {
 /**
  * A compute pool configuration.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model Pool {
   /**
@@ -5927,8 +5921,6 @@ model Pool {
 /**
  * The type of compute resource.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 union ComputeType {
   string,
@@ -5944,8 +5936,6 @@ union ComputeType {
  * Base properties for all compute resource types.
  * The computeType discriminator determines the concrete property shape.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @discriminator("computeType")
 model ComputeProperties {
@@ -5976,8 +5966,6 @@ model ComputeProperties {
 /**
  * Properties for a Cluster (AKS-backed) compute resource.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ClusterComputeProperties extends ComputeProperties {
   /**
@@ -5999,8 +5987,6 @@ model ClusterComputeProperties extends ComputeProperties {
 /**
  * Properties for a Container Instance compute resource.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
@@ -6038,8 +6024,6 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
 /**
  * SSH configuration for a Container Instance compute.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model SshSettings {
   /**
@@ -6056,8 +6040,6 @@ model SshSettings {
 /**
  * Network connectivity endpoints for a Container Instance compute.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ConnectivityEndpoints {
   /**
@@ -6076,13 +6058,12 @@ model ConnectivityEndpoints {
 /**
  * The list of cognitive services computes operation response.
  */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute list.
    */
+  @nextLink
   nextLink?: string;
 
   /**
