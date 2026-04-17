@@ -44,7 +44,6 @@ These settings apply only when `--tag=package-2025-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-08'
 input-file:
-  input-file:
   - preview/2024-10-01-preview/actionGroups.json
   - preview/2023-01-01-preview/activityLogAlerts_API.json
   - stable/2015-04-01/activityLogs.json
