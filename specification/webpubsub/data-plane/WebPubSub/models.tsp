@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 
-namespace WebPubSub;
+namespace WebPubSubService;
 
 /**
  * Details about the client.
@@ -22,7 +22,7 @@ model ClientDetail {
  */
 model ClientTokenResponse {
   /** Access token for the client to connect Azure Web PubSub service */
-  token?: string;
+  token: string;
 }
 
 /**
@@ -30,7 +30,7 @@ model ClientTokenResponse {
  */
 model AddToGroupsRequest {
   /** Target groups */
-  groups?: string[];
+  groups: string[];
 
   /** Following OData filter syntax to filter out the subscribers receiving the messages */
   filter?: string;
@@ -41,7 +41,7 @@ model AddToGroupsRequest {
  */
 model RemoveFromGroupsRequest {
   /** Target groups */
-  groups?: string[];
+  groups: string[];
 
   /** Following OData filter syntax to filter out the subscribers receiving the messages */
   filter?: string;
@@ -123,7 +123,7 @@ model GroupMember {
 model GroupMemberPagedValues {
   /** The group members */
   @pageItems
-  value?: GroupMember[];
+  value: GroupMember[];
 
   /** The link to the next page of results */
   @nextLink
