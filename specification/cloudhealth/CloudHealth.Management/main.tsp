@@ -1319,6 +1319,7 @@ model GetDataAnnotationsRequest {
   @doc("Maximum number of annotations to return per page.")
   top?: int32;
 
+  @secret
   @doc("Continuation token from a previous response to retrieve the next page of results.")
   continuationToken?: string;
 }
