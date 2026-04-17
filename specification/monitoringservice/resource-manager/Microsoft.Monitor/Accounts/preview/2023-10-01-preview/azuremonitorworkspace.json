@@ -754,6 +754,93 @@
           }
         ]
       }
+    },
+    "RecordMap": {
+      "type": "object",
+      "description": "Record map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Record Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Record Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ResourceMap": {
+      "type": "object",
+      "description": "Resource map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Resource Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Resource Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "SchemaMap": {
+      "type": "object",
+      "description": "Schema map for azure monitor for logs.",
+      "properties": {
+        "recordMap": {
+          "type": "array",
+          "description": "Record Map.",
+          "items": {
+            "$ref": "#/definitions/RecordMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceMap": {
+          "type": "array",
+          "description": "Resource Map captures information about the entity for which telemetry is recorded. For example, metrics exposed by a Kubernetes container can be linked to a resource that specifies the cluster, namespace, pod, and container name.Resource may capture an entire hierarchy of entity identification. It may describe the host in the cloud and specific container or an application running in the process.",
+          "items": {
+            "$ref": "#/definitions/ResourceMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "scopeMap": {
+          "type": "array",
+          "description": "A scope map is a logical unit of the application code with which the emitted telemetry can be associated.",
+          "items": {
+            "$ref": "#/definitions/ScopeMap"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "recordMap"
+      ]
+    },
+    "ScopeMap": {
+      "type": "object",
+      "description": "Scope map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Scope Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Scope Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
     }
   },
   "parameters": {}
