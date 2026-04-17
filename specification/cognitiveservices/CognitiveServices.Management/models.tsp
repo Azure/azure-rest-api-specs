@@ -5869,11 +5869,10 @@ model ManagedComputeDeploymentInfo {
 }
 
 /**
- * Managed compute quota usage for a specific SKU. Extends Usage with managed compute-specific properties.
+ * Managed compute quota usage for a specific SKU.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'ManagedComputeUsage' extends 'Usage' using inheritance to match service-side object hierarchy"
 @added(Versions.v2026_03_15_preview)
-model ManagedComputeUsage extends Usage {
+model ManagedComputeUsage {
   /**
    * Fully qualified resource ID for the managed compute usage.
    */
@@ -5891,6 +5890,21 @@ model ManagedComputeUsage extends Usage {
    */
   @visibility(Lifecycle.Read)
   type?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  unit?: UnitType;
+
+  /**
+   * Maximum value for this metric.
+   */
+  limit?: float64;
+
+  /**
+   * Current value for this metric.
+   */
+  currentValue?: float64;
 
   /**
    * Offer scope (e.g., 'Global', 'Datazone-US').

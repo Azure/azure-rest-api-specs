@@ -14203,6 +14203,34 @@
         }
       ]
     },
+    "ManagedComputeDeploymentInfo": {
+      "type": "object",
+      "description": "Deployment detail within a managed compute usage entry.",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the deployment."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the account/project."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Model name (e.g., 'gpt-4o')."
+        },
+        "gpuCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of GPUs consumed by this deployment."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances for this deployment."
+        }
+      }
+    },
     "ManagedComputeDeploymentListResult": {
       "type": "object",
       "description": "The list of managed compute deployments.",
@@ -14324,37 +14352,9 @@
         }
       }
     },
-    "ManagedComputeDeploymentInfo": {
-      "type": "object",
-      "description": "Deployment detail within a managed compute usage entry.",
-      "properties": {
-        "deploymentId": {
-          "type": "string",
-          "description": "Full ARM resource ID of the deployment."
-        },
-        "projectId": {
-          "type": "string",
-          "description": "Full ARM resource ID of the account/project."
-        },
-        "modelId": {
-          "type": "string",
-          "description": "Model name (e.g., 'gpt-4o')."
-        },
-        "gpuCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of GPUs consumed by this deployment."
-        },
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of instances for this deployment."
-        }
-      }
-    },
     "ManagedComputeUsage": {
       "type": "object",
-      "description": "Managed compute quota usage for a specific SKU. Extends Usage with managed compute-specific properties.",
+      "description": "Managed compute quota usage for a specific SKU.",
       "properties": {
         "id": {
           "type": "string",
@@ -14371,6 +14371,20 @@
           "description": "The resource type.",
           "readOnly": true
         },
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value for this metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current value for this metric."
+        },
         "offerScope": {
           "type": "string",
           "description": "Offer scope (e.g., 'Global', 'Datazone-US')."
@@ -14385,12 +14399,7 @@
             "deploymentId"
           ]
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Usage"
-        }
-      ]
+      }
     },
     "ManagedComputeUsageListResult": {
       "type": "object",
