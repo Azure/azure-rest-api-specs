@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
 using Microsoft.Insights;
 using Microsoft.ScheduledQueryRule;
 using Microsoft.AutoScale;
+
 @client({
   name: "CombineClient",
   service: [
@@ -197,6 +198,66 @@ namespace Microsoft.InsightsCombinedClient;
 // Request.interval - use Duration type
 @@alternateType(Microsoft.Metrics.IntervalQueryParameter.interval,
   duration,
+  "java"
+);
+
+/**
+ * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.
+ */
+model MetricSettings {
+  /**
+   * the timegrain of the metric in ISO8601 format.
+   */
+  timeGrain?: duration;
+
+  /**
+   * Name of a Diagnostic Metric category for a resource type this setting is applied to. To obtain the list of Diagnostic metric categories for a resource, first perform a GET diagnostic settings operation.
+   */
+  category?: string;
+
+  /**
+   * a value indicating whether this category is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * the retention policy for this category.
+   */
+  retentionPolicy?: Microsoft.ServiceDiagnosticsSettings.RetentionPolicy;
+}
+
+@@alternateType(Microsoft.ServiceDiagnosticsSettings.MetricSettings,
+  MetricSettings,
+  "java"
+);
+
+/**
+ * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.
+ */
+model LogSettings {
+  /**
+   * Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation.
+   */
+  category?: string;
+
+  /**
+   * Name of a Diagnostic Log category group for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation.
+   */
+  categoryGroup?: string;
+
+  /**
+   * a value indicating whether this log is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * the retention policy for this log.
+   */
+  retentionPolicy?: Microsoft.ServiceDiagnosticsSettings.RetentionPolicy;
+}
+
+@@alternateType(Microsoft.ServiceDiagnosticsSettings.LogSettings,
+  LogSettings,
   "java"
 );
 
