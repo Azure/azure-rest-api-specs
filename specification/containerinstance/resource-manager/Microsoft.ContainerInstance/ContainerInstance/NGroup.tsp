@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -15,14 +16,19 @@ namespace Microsoft.ContainerInstance;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model NGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NGroupProperties> {
+model NGroup is ProxyResource<NGroupProperties> {
   ...ResourceNameParameter<
     Resource = NGroup,
     KeyName = "ngroupsName",
     SegmentName = "ngroups",
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
