@@ -1333,7 +1333,7 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret, only valid in the context of this request."
+  @secret()
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
   continuationToken?: string;
 }
