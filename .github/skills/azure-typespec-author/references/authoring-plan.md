@@ -2,9 +2,9 @@
 
 > Prerequisite: Steps 1 (Analyze Project) and 2 (Intake) must be complete.
 
-## General (All Cases)
+## 3.1 General (All Cases)
 
-Use **one or both** tools to build an authoring plan grounded in documentation:
+Use **one or both** tools to build an authoring plan:
 
 1. **MCP Tool** — call `azsdk_typespec_generate_authoring_plan` with:
    - `request`: user request (verbatim)
@@ -15,7 +15,7 @@ Use **one or both** tools to build an authoring plan grounded in documentation:
 
 ---
 
-## Case-Specific Authoring Plan
+## 3.2 Case-Specific Authoring Plan
 
 ### Case 3 — API Version Evolution
 

@@ -1,6 +1,6 @@
 # Reference Document Links
 
-## API Version Evolution
+## API Version Evolution (ARM)
 
 - [Preview version overview](https://azure.github.io/typespec-azure/docs/howtos/versioning/01-preview-version): Overview of how preview API versions work in TypeSpec Azure.
 - [preview → preview](https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/02-preview-after-preview/): How to add a new preview version after an existing preview version.

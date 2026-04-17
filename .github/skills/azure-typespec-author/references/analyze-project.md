@@ -21,7 +21,7 @@ Display the results before proceeding to Step 2:
 ```
 TypeSpec project root: /path/to/project
 tspconfig.yaml:  /path/to/project/tspconfig.yaml
-Service Type:    ARM
+Service Type:    ARM/Dataplane
 API Versions:    2024-01-01 (stable), 2024-06-01-preview (preview)
 Latest Version:  2024-06-01-preview
 Working Version: [TBD]
