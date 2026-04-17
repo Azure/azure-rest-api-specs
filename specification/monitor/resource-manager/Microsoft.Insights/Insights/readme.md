@@ -47,6 +47,8 @@ input-file:
   - preview/2024-10-01-preview/actionGroups_API.json
   - preview/2023-01-01-preview/activityLogAlerts_API.json
   - stable/2015-04-01/activityLogs_API.json
+  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/eventCategories_API.json
   - stable/2016-03-01/alertRulesIncidents_API.json
   - stable/2022-10-01/autoscale_API.json
   - stable/2024-03-11/dataCollectionEndpoints_API.json
