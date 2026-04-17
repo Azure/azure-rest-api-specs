@@ -298,6 +298,238 @@ model QueryOptionsH {
   Filter?: string;
 }
 
+// QueryOptions for operations
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyTrackedResourcesListQueryResultsForManagementGroupQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyTrackedResourcesListQueryResultsForSubscriptionQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyTrackedResourcesListQueryResultsForResourceGroupQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyTrackedResourcesListQueryResultsForResourceQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForManagementGroupQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForSubscriptionQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForResourceGroupQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForResourceQueryOptions {
+  ...QueryOptions;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForPolicySetDefinitionQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForPolicyDefinitionQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForManagementGroupQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForManagementGroupQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForSubscriptionQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForSubscriptionQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForResourceGroupQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForResourceGroupQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForResourceQueryOptions {
+  ...QueryOptions;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForResourceQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForPolicySetDefinitionQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForPolicySetDefinitionQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForPolicyDefinitionQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForPolicyDefinitionQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsB;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsC;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PolicyMetadataListQueryOptions {
+  ...QueryOptionsG;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComponentPolicyStatesListQueryResultsForSubscriptionQueryOptions {
+  ...QueryOptionsD;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComponentPolicyStatesListQueryResultsForResourceGroupQueryOptions {
+  ...QueryOptionsD;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComponentPolicyStatesListQueryResultsForResourceQueryOptions {
+  ...QueryOptionsE;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComponentPolicyStatesListQueryResultsForPolicyDefinitionQueryOptions {
+  ...QueryOptionsD;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsD;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions {
+  ...QueryOptionsD;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListDeploymentsAtManagementGroupQueryOptions {
+  ...QueryOptionsG;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListForManagementGroupQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListDeploymentsAtSubscriptionQueryOptions {
+  ...QueryOptionsG;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListForSubscriptionQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListDeploymentsAtResourceGroupQueryOptions {
+  ...QueryOptionsG;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListForResourceGroupQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListDeploymentsAtResourceQueryOptions {
+  ...QueryOptionsG;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RemediationsListForResourceQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AttestationsListForSubscriptionQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AttestationsListForResourceGroupQueryOptions {
+  ...QueryOptionsH;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AttestationsListForResourceQueryOptions {
+  ...QueryOptionsH;
+}
+
 // PolicyTrackedResources overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -314,7 +546,7 @@ op policyTrackedResourcesListQueryResultsForManagementGroup(
   @path
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: PolicyTrackedResourcesListQueryResultsForManagementGroupQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup,
   policyTrackedResourcesListQueryResultsForManagementGroup
@@ -338,7 +570,7 @@ op policyTrackedResourcesListQueryResultsForSubscription(
   @segment("policyTrackedResources")
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: PolicyTrackedResourcesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
   policyTrackedResourcesListQueryResultsForSubscription
@@ -357,7 +589,7 @@ op policyTrackedResourcesListQueryResultsForResourceGroup(
   @segment("policyTrackedResources")
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: PolicyTrackedResourcesListQueryResultsForResourceGroupQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup,
   policyTrackedResourcesListQueryResultsForResourceGroup
@@ -374,7 +606,7 @@ op policyTrackedResourcesListQueryResultsForResource(
   @path
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: PolicyTrackedResourcesListQueryResultsForResourceQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResource,
   policyTrackedResourcesListQueryResultsForResource
@@ -396,7 +628,7 @@ op policyEventsListQueryResultsForManagementGroup(
   @path
   managementGroupName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForManagementGroupQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
   policyEventsListQueryResultsForManagementGroup
@@ -420,7 +652,7 @@ op policyEventsListQueryResultsForSubscription(
   @segment("policyEvents")
   policyEventsResource: PolicyEventsResourceType,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForSubscriptionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscription,
   policyEventsListQueryResultsForSubscription
@@ -439,7 +671,7 @@ op policyEventsListQueryResultsForResourceGroup(
   @segment("policyEvents")
   policyEventsResource: PolicyEventsResourceType,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForResourceGroupQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
   policyEventsListQueryResultsForResourceGroup
@@ -456,7 +688,7 @@ op policyEventsListQueryResultsForResource(
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: PolicyEventsListQueryResultsForResourceQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResource,
   policyEventsListQueryResultsForResource
@@ -477,7 +709,7 @@ op policyEventsListQueryResultsForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForPolicySetDefinitionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   policyEventsListQueryResultsForPolicySetDefinition
@@ -498,7 +730,7 @@ op policyEventsListQueryResultsForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForPolicyDefinitionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
   policyEventsListQueryResultsForPolicyDefinition
@@ -519,7 +751,7 @@ op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment
@@ -543,7 +775,7 @@ op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment
@@ -565,7 +797,7 @@ op policyStatesListQueryResultsForManagementGroup(
   @path
   managementGroupName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForManagementGroupQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
   policyStatesListQueryResultsForManagementGroup
@@ -585,7 +817,7 @@ op policyStatesSummarizeForManagementGroup(
   @path
   managementGroupName: string,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForManagementGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForManagementGroup,
   policyStatesSummarizeForManagementGroup
@@ -609,7 +841,7 @@ op policyStatesListQueryResultsForSubscription(
   @segment("policyStates")
   policyStatesResource: PolicyStatesResource,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscription,
   policyStatesListQueryResultsForSubscription
@@ -633,7 +865,7 @@ op policyStatesSummarizeForSubscription(
   @segment("policyStates")
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForSubscriptionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscription,
   policyStatesSummarizeForSubscription
@@ -652,7 +884,7 @@ op policyStatesListQueryResultsForResourceGroup(
   @segment("policyStates")
   policyStatesResource: PolicyStatesResource,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForResourceGroupQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   policyStatesListQueryResultsForResourceGroup
@@ -671,7 +903,7 @@ op policyStatesSummarizeForResourceGroup(
   @segment("policyStates")
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForResourceGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroup,
   policyStatesSummarizeForResourceGroup
@@ -688,7 +920,7 @@ op policyStatesListQueryResultsForResource(
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: PolicyStatesListQueryResultsForResourceQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResource,
   policyStatesListQueryResultsForResource
@@ -705,7 +937,7 @@ op policyStatesSummarizeForResource(
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForResourceQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResource,
   policyStatesSummarizeForResource
@@ -726,7 +958,7 @@ op policyStatesListQueryResultsForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForPolicySetDefinitionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
   policyStatesListQueryResultsForPolicySetDefinition
@@ -747,7 +979,7 @@ op policyStatesSummarizeForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForPolicySetDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
   policyStatesSummarizeForPolicySetDefinition
@@ -768,7 +1000,7 @@ op policyStatesListQueryResultsForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForPolicyDefinitionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   policyStatesListQueryResultsForPolicyDefinition
@@ -789,7 +1021,7 @@ op policyStatesSummarizeForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForPolicyDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
   policyStatesSummarizeForPolicyDefinition
@@ -810,7 +1042,7 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
@@ -831,7 +1063,7 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
   policyStatesSummarizeForSubscriptionLevelPolicyAssignment
@@ -855,7 +1087,7 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptionsB,
+  queryOptions?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
@@ -879,7 +1111,7 @@ op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptionsC,
+  queryOptions?: PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
   policyStatesSummarizeForResourceGroupLevelPolicyAssignment
@@ -894,7 +1126,7 @@ op policyMetadataList(
   ...TenantActionScope,
   ...ProviderNamespace<TenantActionScope>,
   body: void,
-  queryOptions?: QueryOptionsG,
+  queryOptions?: PolicyMetadataListQueryOptions,
 ): PolicyMetadataCollection | PolicyInsightsApi.ErrorResponse;
 @@override(PolicyMetadataNonResourceOperationGroup.list, policyMetadataList);
 
@@ -918,7 +1150,7 @@ op componentPolicyStatesListQueryResultsForSubscription(
   @segment("componentPolicyStates")
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptionsD,
+  queryOptions?: ComponentPolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   componentPolicyStatesListQueryResultsForSubscription
@@ -937,7 +1169,7 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
   @segment("componentPolicyStates")
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptionsD,
+  queryOptions?: ComponentPolicyStatesListQueryResultsForResourceGroupQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   componentPolicyStatesListQueryResultsForResourceGroup
@@ -954,7 +1186,7 @@ op componentPolicyStatesListQueryResultsForResource(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptionsE,
+  queryOptions?: ComponentPolicyStatesListQueryResultsForResourceQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
   componentPolicyStatesListQueryResultsForResource
@@ -978,7 +1210,7 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptionsD,
+  queryOptions?: ComponentPolicyStatesListQueryResultsForPolicyDefinitionQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   componentPolicyStatesListQueryResultsForPolicyDefinition
@@ -1002,7 +1234,7 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptionsD,
+  queryOptions?: ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
@@ -1029,7 +1261,7 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptionsD,
+  queryOptions?: ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
@@ -1051,7 +1283,7 @@ op remediationsListDeploymentsAtManagementGroup(
   @path
   remediationName: string,
 
-  queryOptions?: QueryOptionsG,
+  queryOptions?: RemediationsListDeploymentsAtManagementGroupQueryOptions,
 ): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
   remediationsListDeploymentsAtManagementGroup
@@ -1068,7 +1300,7 @@ op remediationsListForManagementGroup(
   @path
   managementGroupId: string,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: RemediationsListForManagementGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Remediations.listForManagementGroup,
   remediationsListForManagementGroup
@@ -1090,7 +1322,7 @@ op remediationsListDeploymentsAtSubscription(
   @key
   remediationName: string,
 
-  queryOptions?: QueryOptionsG,
+  queryOptions?: RemediationsListDeploymentsAtSubscriptionQueryOptions,
   body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
@@ -1108,7 +1340,7 @@ op remediationsListForSubscription(
   @key
   providerNamespace: "Microsoft.PolicyInsights",
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: RemediationsListForSubscriptionQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listForSubscription,
   remediationsListForSubscription
@@ -1127,7 +1359,7 @@ op remediationsListDeploymentsAtResourceGroup(
   @key
   remediationName: string,
 
-  queryOptions?: QueryOptionsG,
+  queryOptions?: RemediationsListDeploymentsAtResourceGroupQueryOptions,
   body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
@@ -1141,7 +1373,7 @@ op remediationsListForResourceGroup(
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  queryOptions?: QueryOptionsH,
+  queryOptions?: RemediationsListForResourceGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listForResourceGroup,
   remediationsListForResourceGroup
@@ -1158,7 +1390,7 @@ op remediationsListDeploymentsAtResource(
   @path
   remediationName: string,
 
-  queryOptions?: QueryOptionsG,
+  queryOptions?: RemediationsListDeploymentsAtResourceQueryOptions,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource
@@ -1172,7 +1404,7 @@ op remediationsListForResource(
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listForResource,
   remediationsListForResource
@@ -1191,7 +1423,7 @@ op attestationsListForSubscription(
   @key
   providerNamespace: "Microsoft.PolicyInsights",
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: AttestationsListForSubscriptionQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Attestations.listForSubscription, attestationsListForSubscription);
 
@@ -1202,7 +1434,7 @@ op attestationsListForResourceGroup(
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  queryOptions?: QueryOptionsH,
+  queryOptions?: AttestationsListForResourceGroupQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationResourceGroupOperations.listForResourceGroup,
   attestationsListForResourceGroup
@@ -1216,7 +1448,7 @@ op attestationsListForResource(
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptionsH,
+  queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationOperationGroup.listForResource,
   attestationsListForResource
