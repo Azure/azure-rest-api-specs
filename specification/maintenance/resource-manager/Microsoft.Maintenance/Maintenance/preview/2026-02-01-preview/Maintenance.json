@@ -3158,7 +3158,12 @@
           "type": "string",
           "description": "Version to update to."
         }
-      }
+      },
+      "required": [
+        "startTimeUTC",
+        "endTimeUTC",
+        "updateScope"
+      ]
     },
     "MaintenancePlansState": {
       "type": "string",
@@ -3189,40 +3194,101 @@
       "type": "string",
       "description": "Maintenance Plan Update Scope.",
       "enum": [
+        "FlightingNodeFirmwareUpdates",
+        "FlightingRackFirmwareUpdates",
+        "QualifiedNodeFirmwareUpdates",
+        "QualifiedRackFirmwareUpdates",
+        "QualifiedNodeAllUpdates",
+        "QualifiedRackAllUpdates",
+        "CriticalNodeImpactlessUpdates",
+        "CriticalRackImpactlessUpdates",
+        "CriticalNodeImpactfulUpdates",
+        "CriticalRackImpactfulUpdates",
+        "Custom",
         "FlightingNodeFirmwareUpdatesOnly",
-        "AllQualifiedUpdates",
         "QualifiedNodeFirmwareUpdatesOnly",
         "CriticalImpactlessUpdatesOnly",
-        "CriticalImpactfulUpdatesOnly"
+        "CriticalImpactfulUpdatesOnly",
+        "AllQualifiedUpdates"
       ],
       "x-ms-enum": {
         "name": "MaintenancePlansUpdateScope",
         "modelAsString": false,
         "values": [
           {
-            "name": "FlightingNodeFirmwareUpdatesOnly",
-            "value": "FlightingNodeFirmwareUpdatesOnly",
-            "description": "Apply only flighting firmware updates to nodes."
+            "name": "FlightingNodeFirmwareUpdates",
+            "value": "FlightingNodeFirmwareUpdates",
+            "description": "Apply flighting firmware updates on the node."
           },
           {
-            "name": "AllQualifiedUpdates",
-            "value": "AllQualifiedUpdates",
-            "description": "Apply all updates that are qualified for the supercomputer."
+            "name": "FlightingRackFirmwareUpdates",
+            "value": "FlightingRackFirmwareUpdates",
+            "description": "Apply flighting firmware updates on rack components."
+          },
+          {
+            "name": "QualifiedNodeFirmwareUpdates",
+            "value": "QualifiedNodeFirmwareUpdates",
+            "description": "Apply qualified firmware updates on the node."
+          },
+          {
+            "name": "QualifiedRackFirmwareUpdates",
+            "value": "QualifiedRackFirmwareUpdates",
+            "description": "Apply qualified firmware updates on rack components."
+          },
+          {
+            "name": "QualifiedNodeAllUpdates",
+            "value": "QualifiedNodeAllUpdates",
+            "description": "Apply all qualified updates on the node."
+          },
+          {
+            "name": "QualifiedRackAllUpdates",
+            "value": "QualifiedRackAllUpdates",
+            "description": "Apply all qualified updates on rack components."
+          },
+          {
+            "name": "CriticalNodeImpactlessUpdates",
+            "value": "CriticalNodeImpactlessUpdates",
+            "description": "Apply all critical impactless updates on the node."
+          },
+          {
+            "name": "CriticalRackImpactlessUpdates",
+            "value": "CriticalRackImpactlessUpdates",
+            "description": "Apply all critical impactless updates on rack components."
+          },
+          {
+            "name": "CriticalNodeImpactfulUpdates",
+            "value": "CriticalNodeImpactfulUpdates",
+            "description": "Apply all critical impactful updates on the node."
+          },
+          {
+            "name": "CriticalRackImpactfulUpdates",
+            "value": "CriticalRackImpactfulUpdates",
+            "description": "Apply all critical impactful updates on rack components."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Customer specifies via versionToUpdate what package they want us to update."
+          },
+          {
+            "name": "FlightingNodeFirmwareUpdatesOnly",
+            "value": "FlightingNodeFirmwareUpdatesOnly"
           },
           {
             "name": "QualifiedNodeFirmwareUpdatesOnly",
-            "value": "QualifiedNodeFirmwareUpdatesOnly",
-            "description": "Apply only qualified firmware updates."
+            "value": "QualifiedNodeFirmwareUpdatesOnly"
           },
           {
             "name": "CriticalImpactlessUpdatesOnly",
-            "value": "CriticalImpactlessUpdatesOnly",
-            "description": "Apply only critical updates that are impactless."
+            "value": "CriticalImpactlessUpdatesOnly"
           },
           {
             "name": "CriticalImpactfulUpdatesOnly",
-            "value": "CriticalImpactfulUpdatesOnly",
-            "description": "Apply critical updates that may have visible customer impact."
+            "value": "CriticalImpactfulUpdatesOnly"
+          },
+          {
+            "name": "AllQualifiedUpdates",
+            "value": "AllQualifiedUpdates"
           }
         ]
       }

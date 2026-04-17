@@ -98,11 +98,8 @@ union ConfirmationStatus {
 union SolutionProviderName {
   string,
 
-  @doc("Zone pinned VM with ZRS disk.")
-  ZonePinnedVmWithZrsDisk: "ZonePinnedVmWithZrsDisk",
-
-  @doc("VM in multi-zone VMSS.")
-  VmInMultiZoneVmss: "VmInMultiZoneVmss",
+  @doc("Microsoft solution provider.")
+  Microsoft: "Microsoft",
 }
 
 @added(Versions.v2026_03_01_preview)
