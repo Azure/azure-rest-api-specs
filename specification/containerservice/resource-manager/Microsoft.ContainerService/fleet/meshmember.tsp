@@ -45,9 +45,6 @@ model CiliumProperties {
 union MeshMemberState {
   string,
 
-  @doc("The member is not connected to the mesh.")
-  NotConnected: "NotConnected",
-
   @doc("The member is connecting to the mesh.")
   Connecting: "Connecting",
 
