@@ -13,72 +13,56 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 
-alias ClusterVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...Legacy.Provider;
-    ...LocationResourceParameter;
-  },
-  {
-    /**
-     * The cluster code version.
-     */
-    @path
-    @segment("clusterVersions")
-    clusterVersion: string;
-  },
-  ErrorModel
->;
-
-alias ClusterVersionEnvOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...Legacy.Provider;
-    ...LocationResourceParameter;
-  },
-  {
-    /**
-     * The operating system of the cluster. The default means all.
-     */
-    @path
-    @segment("environments")
-    @key
-    environment: ClusterVersionsEnvironment;
-
-    /**
-     * The cluster code version.
-     */
-    @path
-    @segment("clusterVersions")
-    @key
-    clusterVersion: string;
-  },
-  ErrorModel
->;
-
 @armResourceOperations(#{ omitTags: true })
 interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
   @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
-  get is ClusterVersionOps.Read<
-    Cluster,
-    Response = ArmResponse<ResourceListResult<ClusterCodeVersions>>
-  >;
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...Legacy.Provider,
+    ...LocationResourceParameter,
+
+    /**
+     * The cluster code version.
+     */
+    @path
+    @segment("clusterVersions")
+    clusterVersion: string,
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
+
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
   @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
   @get
-  getByEnvironment is ClusterVersionEnvOps.Read<
-    Cluster,
-    Response = ArmResponse<ResourceListResult<ClusterCodeVersions>>
-  >;
+  getByEnvironment(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...Legacy.Provider,
+    ...LocationResourceParameter,
+
+    /**
+     * The operating system of the cluster. The default means all.
+     */
+    @path
+    @segment("environments")
+    environment: ClusterVersionsEnvironment,
+
+    /**
+     * The cluster code version.
+     */
+    @path
+    @segment("clusterVersions")
+    clusterVersion: string,
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
 
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
