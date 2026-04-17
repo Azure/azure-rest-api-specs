@@ -80,6 +80,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(AaddsResourceDetails.ldapsEnabled, "IsLdapsEnabled", "csharp");
 @@clientName(AsyncOperationResult, "HDInsightAsyncOperationResult", "csharp");
+@@clientName(AsyncOperationResult.error, "ErrorInfo", "csharp");
 @@clientName(AsyncOperationState, "HDInsightAsyncOperationState", "csharp");
 @@clientName(Autoscale, "HDInsightAutoScaleConfiguration", "csharp");
 @@clientName(AutoscaleCapacity, "HDInsightAutoScaleCapacity", "csharp");
@@ -302,7 +303,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Configurations.get, "GetConfiguration", "csharp");
 @@clientName(ScriptExecutionHistory.listByCluster,
-  "GetScriptExecutionHistory",
+  "GetScriptExecutionHistories",
   "csharp"
 );
 @@clientName(ScriptExecutionHistory.promote,
@@ -345,22 +346,86 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(JsonWebKeyEncryptionAlgorithm.RSA1_5, "Rsa15", "csharp");
 
-// Suppress async polling operations to prevent phantom ARM resources and duplicate methods in C#
+// Suppress operations that create phantom sub-resources with mismatched data types.
+// ArmResourceRead operations with extra path segments (e.g., /azureasyncoperations/{operationId})
+// generate phantom resource types with wrong response types, causing CS1503 errors.
+// These operations must be re-implemented as custom code on the correct resource classes.
+@@scope(Configurations.update, "!csharp");
+@@scope(Configurations.get, "!csharp");
+// VirtualMachines.restartHosts must stay suppressed — generator bug with string[] body
+// produces invalid code: IEnumerable<string>.ToRequestContent(hosts)
+@@scope(VirtualMachines.restartHosts, "!csharp");
+@@scope(VirtualMachines.getAsyncOperationStatus, "!csharp");
 @@scope(Applications.getAzureAsyncOperationStatus, "!csharp");
 @@scope(Clusters.getAzureAsyncOperationStatus, "!csharp");
 @@scope(Extensions.getAzureAsyncOperationStatus, "!csharp");
-@@scope(ScriptActions.getExecutionAsyncOperationStatus, "!csharp");
-// @@scope(ScriptActions.getExecutionDetail, "!csharp");
-@@scope(VirtualMachines.getAsyncOperationStatus, "!csharp");
-
-// Suppress operations that use ArmResourceRead<Cluster> with extra path segments,
-// which cause phantom ConfigurationResource and ExtensionResource generation.
-// Extensions.create (PUT) is kept so the Extension model generates as HDInsightClusterCreateExtensionContent.
-@@scope(Configurations.get, "!csharp");
-@@scope(Configurations.update, "!csharp");
+// Extensions.get returns ClusterMonitoringResponse but generator expects Cluster data type
 @@scope(Extensions.get, "!csharp");
 @@scope(Extensions.delete, "!csharp");
-@@scope(VirtualMachines.restartHosts, "!csharp");
+@@scope(Extensions.create, "!csharp");
+@@scope(ScriptActions.getExecutionAsyncOperationStatus, "!csharp");
+@@scope(ScriptActions.getExecutionDetail, "!csharp");
+
+// C# operation name renames to match old SDK API surface
+@@clientName(Extensions.enableMonitoring,
+  "EnableClusterMonitoringExtension",
+  "csharp"
+);
+@@clientName(Extensions.disableMonitoring,
+  "DisableClusterMonitoringExtension",
+  "csharp"
+);
+@@clientName(Extensions.getMonitoringStatus,
+  "GetClusterMonitoringExtensionStatus",
+  "csharp"
+);
+@@clientName(Extensions.enableAzureMonitor,
+  "EnableAzureMonitorExtension",
+  "csharp"
+);
+@@clientName(Extensions.disableAzureMonitor,
+  "DisableAzureMonitorExtension",
+  "csharp"
+);
+@@clientName(Extensions.getAzureMonitorStatus,
+  "GetAzureMonitorExtensionStatus",
+  "csharp"
+);
+@@clientName(Extensions.create, "CreateExtension", "csharp");
+@@clientName(VirtualMachines.listHosts, "GetVirtualMachineHosts", "csharp");
+@@clientName(VirtualMachines.restartHosts,
+  "RestartVirtualMachineHosts",
+  "csharp"
+);
+@@clientName(Configurations.list, "GetConfiguration", "csharp");
+@@clientName(ScriptActions.listByCluster, "GetScriptActions", "csharp");
+@@clientName(LocationsOperationGroup.getCapabilities,
+  "GetHDInsightCapabilities",
+  "csharp"
+);
+@@clientName(LocationsOperationGroup.listBillingSpecs,
+  "GetHDInsightBillingSpecs",
+  "csharp"
+);
+@@clientName(LocationsOperationGroup.listUsages,
+  "GetHDInsightUsages",
+  "csharp"
+);
+@@clientName(LocationsOperationGroup.checkNameAvailability,
+  "CheckHDInsightNameAvailability",
+  "csharp"
+);
+@@clientName(LocationsOperationGroup.validateClusterCreateRequest,
+  "ValidateHDInsightClusterCreation",
+  "csharp"
+);
+
+// Mark listUsages as pageable to match old SDK's Pageable<HDInsightUsage> return type
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  LocationsOperationGroup.listUsages,
+  "csharp"
+);
 
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
@@ -472,7 +537,6 @@ using Azure.ClientGenerator.Core;
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "csharp"
 );
-
 @@usage(Cluster, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(ClusterGetProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
