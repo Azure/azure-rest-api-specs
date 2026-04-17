@@ -17,8 +17,8 @@ model DataPlaneResourceBase {
   name: string;
 
   /** The UUID of this capability resource. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  uuid: string;
+  @visibility(Lifecycle.Read)
+  uuid?: string;
 
   /** The type of the resource. */
   @visibility(Lifecycle.Create, Lifecycle.Read)

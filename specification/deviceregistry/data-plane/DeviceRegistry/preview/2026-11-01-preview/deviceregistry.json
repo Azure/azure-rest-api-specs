@@ -1038,9 +1038,9 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/groups:getGroupMemberships": {
+    "/namespaces/{namespaceUuid}/groups:getGroupsForDevice": {
       "post": {
-        "operationId": "Groups_GetGroupMemberships",
+        "operationId": "Groups_GetGroupsForDevice",
         "tags": [
           "Groups"
         ],
@@ -1064,7 +1064,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GetGroupMembershipsResult"
+              "$ref": "#/definitions/GetGroupsForDeviceResult"
             }
           },
           "default": {
@@ -1082,7 +1082,7 @@
         },
         "x-ms-examples": {
           "Get group memberships for a device": {
-            "$ref": "./examples/Groups_GetGroupMemberships.json"
+            "$ref": "./examples/Groups_GetGroupsForDevice.json"
           }
         }
       }
@@ -1285,10 +1285,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -1311,7 +1308,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },
@@ -1331,10 +1327,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -1361,7 +1354,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },
@@ -1405,10 +1397,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -1435,7 +1424,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },
@@ -1449,14 +1437,6 @@
           "x-ms-mutability": [
             "read",
             "update",
-            "create"
-          ]
-        },
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
             "create"
           ]
         },
@@ -1779,10 +1759,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -1809,7 +1786,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },
@@ -1820,10 +1796,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -1858,7 +1831,6 @@
         }
       },
       "required": [
-        "uuid",
         "type",
         "name"
       ]
@@ -1867,14 +1839,6 @@
       "type": "object",
       "description": "A device state resource.",
       "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
@@ -1992,10 +1956,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -2018,11 +1979,10 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },
-    "GetGroupMembershipsResult": {
+    "GetGroupsForDeviceResult": {
       "type": "object",
       "description": "Result of querying group memberships for a device.",
       "properties": {
@@ -2038,10 +1998,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -2071,7 +2028,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type",
         "groups"
       ]
@@ -2092,10 +2048,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -2122,7 +2075,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },
@@ -2413,10 +2365,7 @@
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -2439,7 +2388,6 @@
       },
       "required": [
         "name",
-        "uuid",
         "type"
       ]
     },

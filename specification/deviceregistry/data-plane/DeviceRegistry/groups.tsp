@@ -59,7 +59,7 @@ model GroupReference {
 }
 
 /** Result of querying group memberships for a device. */
-model GetGroupMembershipsResult {
+model GetGroupsForDeviceResult {
   ...DataPlaneResourceBase;
 
   /** The groups that this device belongs to. */
@@ -81,9 +81,9 @@ interface Groups {
   >;
 
   /** Returns the groups that a device belongs to. */
-  getGroupMemberships is ResourceOperations.ResourceCollectionAction<
+  getGroupsForDevice is ResourceOperations.ResourceCollectionAction<
     Group,
     GetGroupByUuidRequest,
-    GetGroupMembershipsResult
+    GetGroupsForDeviceResult
   >;
 }
