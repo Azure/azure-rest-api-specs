@@ -571,6 +571,14 @@ op calculateModelCapacityCustom(
   "CognitiveServicesManagedNetworkSettingsContent",
   "csharp"
 );
+@@clientName(ManagedNetworkSettings,
+  "CognitiveServicesManagedNetworkConfiguration",
+  "csharp"
+);
+@@clientName(ManagedNetworkSettingsEx,
+  "CognitiveServicesManagedNetworkConfigurationExtended",
+  "csharp"
+);
 @@clientName(ManagedNetworkStatus,
   "CognitiveServicesManagedNetworkStatus",
   "csharp"
@@ -688,6 +696,11 @@ op calculateModelCapacityCustom(
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(ReplacementConfig, "ModelReplacementConfiguration", "csharp");
+@@clientName(RoutingMode, "CognitiveServicesRoutingMode", "csharp");
+@@clientName(RuleAction, "ServiceTagOutboundRuleAction", "csharp");
+@@clientName(RuleCategory, "ServiceTagOutboundRuleCategory", "csharp");
+@@clientName(RuleStatus, "ServiceTagOutboundRuleStatus", "csharp");
 
 @@usage(NetworkSecurityPerimeterConfiguration,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
