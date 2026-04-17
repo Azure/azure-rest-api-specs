@@ -11,7 +11,7 @@ union DataGenerationJobType {
   SimpleQnA: "SimpleQnA",
 
   @doc("Single turn query and response from agent traces.")
-  Trace: "Trace",
+  Traces: "Traces",
 
   @doc("Tool calling conversation between user and agent.")
   ToolUse: "ToolUse",
@@ -189,10 +189,10 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   question_types?: Array<SimpleQnAFineTuningQuestionType>;
 }
 
-@doc("The options for a data generation job with Trace type.")
-model TraceDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is Trace for this model.")
-  type: "Trace";
+@doc("The options for a data generation job with Traces type.")
+model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is Traces for this model.")
+  type: "Traces";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")

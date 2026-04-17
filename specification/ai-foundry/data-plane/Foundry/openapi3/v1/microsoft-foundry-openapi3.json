@@ -14146,7 +14146,7 @@
           "propertyName": "type",
           "mapping": {
             "SimpleQnA": "#/components/schemas/SimpleQnADataGenerationJobOptions",
-            "Trace": "#/components/schemas/TraceDataGenerationJobOptions",
+            "Traces": "#/components/schemas/TracesDataGenerationJobOptions",
             "ToolUse": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
             "Task": "#/components/schemas/TaskDataGenerationJobOptions"
           }
@@ -14286,7 +14286,7 @@
             "type": "string",
             "enum": [
               "SimpleQnA",
-              "Trace",
+              "Traces",
               "ToolUse",
               "Task"
             ]
@@ -40198,7 +40198,7 @@
         },
         "description": "A specific version of a toolbox."
       },
-      "TraceDataGenerationJobOptions": {
+      "TracesDataGenerationJobOptions": {
         "type": "object",
         "required": [
           "type"
@@ -40207,9 +40207,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "Trace"
+              "Traces"
             ],
-            "description": "The data generation job type, which is Trace for this model."
+            "description": "The data generation job type, which is Traces for this model."
           }
         },
         "allOf": [
@@ -40217,7 +40217,7 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with Trace type."
+        "description": "The options for a data generation job with Traces type."
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
