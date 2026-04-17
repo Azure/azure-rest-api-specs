@@ -3,20 +3,6 @@ description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability               # capability | regression
 
-# Root-level environment (merged into all stimuli)
-environment:
-  skills:
-    - ../../SKILL.md
-  files:
-    - src: ../start-mcp.ps1
-      dest: start-mcp.ps1
-  mcpServers:
-    azure-sdk-mcp:
-      type: stdio
-      command: pwsh
-      args: ["./start-mcp.ps1"]
-      timeout: 60000
-
 # Execution configuration
 config:
   runs: 1                      # Trials per stimulus
@@ -106,7 +92,7 @@ stimuli:
     config:
       scoring: scale_1_5
       threshold: 1.0
-      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      prompt: 'Evaluate only the semantic interpretation of the request: the excluded feature is the default value 21 on age, while age itself should remain as optional int32 (not removed). Also check the agent clearly explains this rationale. Do not re-evaluate version renaming, old version removal, oldAge removal, or example folder/file changes, since those are already covered by file-based graders.'
       model: claude-opus-4.6-1m
 scoring:
   weights:
