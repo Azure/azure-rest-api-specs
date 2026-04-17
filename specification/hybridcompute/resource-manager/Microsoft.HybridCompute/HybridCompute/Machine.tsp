@@ -133,8 +133,7 @@ interface Machines {
   @tag("machines")
   delete is ArmResourceDeleteWithoutOkAsync<
     Machine,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmCombinedLroHeaders<FinalResult = Machine>
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader & ArmCombinedLroHeaders
   >;
 
   /**
@@ -188,8 +187,7 @@ interface Machines {
     Machine,
     MachineExtensionUpgrade,
     OkResponse,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmCombinedLroHeaders<FinalResult = MachineExtensionUpgrade>
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader & ArmCombinedLroHeaders
   >;
 
   /**

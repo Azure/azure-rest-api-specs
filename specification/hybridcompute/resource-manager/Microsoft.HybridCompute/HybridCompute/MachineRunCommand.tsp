@@ -58,8 +58,7 @@ interface MachineRunCommands {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     MachineRunCommand,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmCombinedLroHeaders<FinalResult = MachineRunCommand>
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader & ArmCombinedLroHeaders
   >;
 
   /**

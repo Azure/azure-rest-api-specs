@@ -53,8 +53,7 @@ interface Gateways {
   @tag("gateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     Gateway,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmCombinedLroHeaders<FinalResult = Gateway>
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader & ArmCombinedLroHeaders
   >;
 
   /**

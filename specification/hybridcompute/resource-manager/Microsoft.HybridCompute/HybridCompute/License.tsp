@@ -63,7 +63,7 @@ interface Licenses {
   delete is ArmResourceDeleteWithoutOkAsync<
     License,
     Response = (ArmDeletedResponse &
-      ArmLroLocationHeader<FinalResult = License> &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader) | ArmDeletedNoContentResponse
   >;
 
