@@ -29,7 +29,7 @@ compatibility:
 
 ### Step 1: Analyze Project
 
-See [analyze-project-and-classify-task.md](references/analyze-project-and-classify-task.md).
+See [analyze-project.md](references/analyze-project.md).
 
 ### Step 2: Intake
 
@@ -55,7 +55,7 @@ Output all referenced document URLs from Step 3. This gives the user direct link
 
 | File | Purpose |
 | ---- | ------- |
-| [analyze-project-and-classify-task.md](references/analyze-project-and-classify-task.md) | Step 1: project analysis |
+| [analyze-project.md](references/analyze-project.md) | Step 1: project analysis |
 | [intake.md](references/intake.md) | Step 2: general + case-specific intake |
 | [authoring-plan.md](references/authoring-plan.md) | Step 3: build authoring plan (Option A + B) |
 | [agentic-search.md](references/agentic-search.md) | Procedure: fetch URLs → extract guidance |

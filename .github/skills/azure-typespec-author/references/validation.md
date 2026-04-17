@@ -21,3 +21,5 @@ Run `tsp compile .` from the project root. Verify `.json` output under `{project
 ### 5.3: Example Verification
 
 Verify `{project-root}/{version-status}/{target-version}/examples/` exists with `.json` files using the correct `api-version`. If missing, copy from the previous version's examples and update `api-version`.
+
+Verify that any example folder for an API version that no longer exists in the `Versions` enum has been deleted. For each folder under `{project-root}/{version-status}/`, check that the folder name matches an entry in the `Versions` enum. If a folder exists for a removed version, delete it.
