@@ -305,33 +305,43 @@
       "discriminator": "assessedResourceType",
       "properties": {
         "assessedResourceType": {
-          "type": "string",
-          "description": "Sub-assessment resource type",
-          "enum": [
-            "SqlServerVulnerability",
-            "ContainerRegistryVulnerability",
-            "ServerVulnerability"
-          ],
-          "x-ms-enum": {
-            "name": "AssessedResourceType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "SqlServerVulnerability"
-              },
-              {
-                "value": "ContainerRegistryVulnerability"
-              },
-              {
-                "value": "ServerVulnerability"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AssessedResourceType",
+          "description": "Sub-assessment resource type"
         }
       },
       "required": [
         "assessedResourceType"
       ]
+    },
+    "AssessedResourceType": {
+      "type": "string",
+      "description": "Sub-assessment resource type",
+      "enum": [
+        "SqlServerVulnerability",
+        "ContainerRegistryVulnerability",
+        "ServerVulnerability"
+      ],
+      "x-ms-enum": {
+        "name": "AssessedResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SqlServerVulnerability",
+            "value": "SqlServerVulnerability",
+            "description": "SqlServerVulnerability"
+          },
+          {
+            "name": "ContainerRegistryVulnerability",
+            "value": "ContainerRegistryVulnerability",
+            "description": "ContainerRegistryVulnerability"
+          },
+          {
+            "name": "ServerVulnerability",
+            "value": "ServerVulnerability",
+            "description": "ServerVulnerability"
+          }
+        ]
+      }
     },
     "SubAssessmentStatus": {
       "type": "object",
