@@ -2494,9 +2494,9 @@
       "properties": {
         "annotationDetails": {
           "type": "object",
-          "description": "Annotation details as a dynamic key-value pair bag",
+          "description": "Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation (enforced server-side); this cap exists to prevent misuse of the API as a general-purpose time-series store.",
           "additionalProperties": {
-            "$ref": "#/definitions/string4096"
+            "$ref": "#/definitions/string256"
           }
         },
         "description": {
@@ -2526,9 +2526,9 @@
       "properties": {
         "annotationDetails": {
           "type": "object",
-          "description": "Annotation details as a dynamic key-value pair bag",
+          "description": "Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation (enforced server-side); this cap exists to prevent misuse of the API as a general-purpose time-series store.",
           "additionalProperties": {
-            "$ref": "#/definitions/string4096"
+            "$ref": "#/definitions/string256"
           }
         },
         "description": {
@@ -4452,6 +4452,11 @@
       "type": "string",
       "description": "Type for signal name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "string256": {
+      "type": "string",
+      "description": "String with max length validation of 256 characters",
+      "maxLength": 256
     },
     "string4096": {
       "type": "string",

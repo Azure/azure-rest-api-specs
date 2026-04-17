@@ -45,6 +45,10 @@ alias proxyResourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
 @doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
 
+@maxLength(256)
+@doc("String with max length validation of 256 characters")
+scalar string256 extends string;
+
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
@@ -1285,8 +1289,8 @@ model HealthReportRequest {
 @doc("Request body for adding a data annotation to an entity")
 model DataAnnotationRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
-  @doc("Annotation details as a dynamic key-value pair bag")
-  annotationDetails: Record<string4096>;
+  @doc("Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation (enforced server-side); this cap exists to prevent misuse of the API as a general-purpose time-series store.")
+  annotationDetails: Record<string256>;
 
   @doc("Optional description of the annotation")
   description?: string4096;
