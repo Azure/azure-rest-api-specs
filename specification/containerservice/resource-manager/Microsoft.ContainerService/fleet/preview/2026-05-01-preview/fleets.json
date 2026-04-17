@@ -3633,8 +3633,9 @@
       "description": "Cluster mesh state.",
       "enum": [
         "NotConnected",
-        "Connecting",
+        "Applying",
         "Connected",
+        "Degraded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -3647,14 +3648,19 @@
             "description": "The mesh is not connected."
           },
           {
-            "name": "Connecting",
-            "value": "Connecting",
-            "description": "The mesh is connecting."
+            "name": "Applying",
+            "value": "Applying",
+            "description": "The mesh is applying."
           },
           {
             "name": "Connected",
             "value": "Connected",
             "description": "The mesh is connected."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The mesh is degraded."
           },
           {
             "name": "Failed",
@@ -4936,7 +4942,6 @@
       "type": "string",
       "description": "Mesh member state.",
       "enum": [
-        "NotConnected",
         "Connecting",
         "Connected",
         "Disconnecting",
@@ -4946,11 +4951,6 @@
         "name": "MeshMemberState",
         "modelAsString": true,
         "values": [
-          {
-            "name": "NotConnected",
-            "value": "NotConnected",
-            "description": "The member is not connected to the mesh."
-          },
           {
             "name": "Connecting",
             "value": "Connecting",
