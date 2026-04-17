@@ -188,3 +188,8 @@ using ComputeDisk;
 @@alternateType(KeyVaultAndKeyReference.keyUrl, url, "csharp");
 @@alternateType(KeyVaultAndSecretReference.secretUrl, url, "csharp");
 @@alternateType(ShareInfoElement.vmUri, url, "csharp");
+
+// Mark non-pageable list operations as pageable for backward compatibility
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(DiskAccesses.getPrivateLinkResources,
+  "csharp"
+);

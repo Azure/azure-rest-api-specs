@@ -521,6 +521,9 @@ using Compute;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(VirtualMachineScaleSetVMExtensions.list,
   "csharp"
 );
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(VirtualMachineImagesOperationGroup.listByEdgeZone,
+  "csharp"
+);
 
 // ── Type renames for backward compatibility (batch) ──
 @@clientName(PublicIPAddressSku, "ComputePublicIPAddressSku", "csharp");
@@ -880,3 +883,71 @@ union PassName {
 @@alternateType(ComponentNames, ComponentName, "csharp");
 @@alternateType(PassNames, PassName, "csharp");
 // TODO: OperatingSystemTypes → extensible enum blocked by name collision with Compute.OperatingSystemType
+
+// ── VirtualMachineSizeType member casing fixes (65 members) ──
+// The generator lowercases size suffixes (s, m, r) differently from old SDK.
+@@clientName(VirtualMachineSizeTypes.`Standard_A2m_v2`, "StandardA2MV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_A4m_v2`, "StandardA4MV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_A8m_v2`, "StandardA8MV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_B1ms`, "StandardB1Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_B1s`, "StandardB1S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_B2ms`, "StandardB2Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_B2s`, "StandardB2S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_B4ms`, "StandardB4Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_B8ms`, "StandardB8Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_D16s_v3`, "StandardD16SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_D2s_v3`, "StandardD2SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_D32s_v3`, "StandardD32SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_D4s_v3`, "StandardD4SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_D64s_v3`, "StandardD64SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_D8s_v3`, "StandardD8SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E16s_v3`, "StandardE16SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E2s_v3`, "StandardE2SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E32-8s_v3`, "StandardE328SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E32s_v3`, "StandardE32SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E4s_v3`, "StandardE4SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E64-16s_v3`, "StandardE6416SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E64-32s_v3`, "StandardE6432SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E64s_v3`, "StandardE64SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_E8s_v3`, "StandardE8SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F16s`, "StandardF16S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F16s_v2`, "StandardF16SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F1s`, "StandardF1S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F2s`, "StandardF2S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F2s_v2`, "StandardF2SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F32s_v2`, "StandardF32SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F4s`, "StandardF4S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F4s_v2`, "StandardF4SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F64s_v2`, "StandardF64SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F72s_v2`, "StandardF72SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F8s`, "StandardF8S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_F8s_v2`, "StandardF8SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_H16m`, "StandardH16M", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_H16mr`, "StandardH16Mr", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_H16r`, "StandardH16R", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_H8m`, "StandardH8M", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_L16s`, "StandardL16S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_L32s`, "StandardL32S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_L4s`, "StandardL4S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_L8s`, "StandardL8S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M128-32ms`, "StandardM12832Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M128-64ms`, "StandardM12864Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M128ms`, "StandardM128Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M128s`, "StandardM128S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M64-16ms`, "StandardM6416Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M64-32ms`, "StandardM6432Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M64ms`, "StandardM64Ms", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_M64s`, "StandardM64S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC12s_v2`, "StandardNC12SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC12s_v3`, "StandardNC12SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC24r`, "StandardNC24R", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC24rs_v2`, "StandardNC24RsV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC24rs_v3`, "StandardNC24RsV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC24s_v2`, "StandardNC24SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC24s_v3`, "StandardNC24SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC6s_v2`, "StandardNC6SV2", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_NC6s_v3`, "StandardNC6SV3", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_ND12s`, "StandardND12S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_ND24rs`, "StandardND24Rs", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_ND24s`, "StandardND24S", "csharp");
+@@clientName(VirtualMachineSizeTypes.`Standard_ND6s`, "StandardND6S", "csharp");
