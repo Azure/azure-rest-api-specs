@@ -43,7 +43,10 @@ using Microsoft.AutoScale;
 })
 namespace Microsoft.InsightsCombinedClient;
 
-@@clientName(Microsoft.InsightsCombinedClient, "MonitorClient", "java");
+@@clientName(Microsoft.InsightsCombinedClient,
+  "MonitorClient",
+  "java,javascript"
+);
 
 // Fix duplicate client names when merging all services into CombineClient
 
