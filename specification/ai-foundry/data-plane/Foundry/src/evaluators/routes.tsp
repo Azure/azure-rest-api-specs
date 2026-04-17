@@ -121,22 +121,79 @@ interface Evaluators {
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
+}
 
-  // POST /evaluators/{evaluatorName}/versions:generate
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Generate a rubric-based evaluator from source materials (synchronous). By default (persist=true), saves as a new evaluator version and returns the saved EvaluatorVersion. Set persist=false to return an unsaved preview.")
-  @Rest.action("versions:generate")
-  @Rest.actionSeparator("/")
-  @Http.post
-  generate is Azure.Core.StandardResourceOperations.ResourceAction<
-    EvaluatorVersion,
+// ============================================================================
+// Evaluator Generation Jobs (LRO — follows DataGenerationJobs pattern)
+// ============================================================================
+
+const EvaluatorGenerationJobsRequiredPreviews = #{
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.evaluations_v1_preview
+  ],
+};
+
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+@tag("EvaluatorGenerationJobs")
+interface EvaluatorGenerationJobs {
+  /**
+   * Creates an evaluator generation job. The service generates rubric-based evaluator
+   * definitions from the provided source materials asynchronously.
+   */
+  @summary("Creates an evaluator generation job.")
+  @route("evaluator_generation/jobs")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  create is postJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Gets the details of an evaluator generation job by its ID.
+   */
+  @summary("Get info about an evaluator generation job.")
+  @route("evaluator_generation/jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  get is queryJobStatusPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Returns a list of evaluator generation jobs.
+   */
+  @summary("Returns a list of evaluator generation jobs.")
+  @route("evaluator_generation/jobs")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  list is listJobsPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob,
     {
-      ...EvaluatorsPreviewHeader;
+      @doc("Filter evaluator generation jobs by category.")
+      @query
+      category?: EvaluatorCategory;
+    }
+  >;
 
-      @Http.bodyRoot
-      body: GenerateEvaluatorRequest;
-    },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
+  /**
+   * Cancels an evaluator generation job by its ID.
+   */
+  @summary("Cancels an evaluator generation job.")
+  @route("evaluator_generation/jobs/{jobId}:cancel")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  cancel is cancelJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Deletes an evaluator generation job by its ID.
+   */
+  @route("evaluator_generation/jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  delete is deleteJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview
   >;
 }

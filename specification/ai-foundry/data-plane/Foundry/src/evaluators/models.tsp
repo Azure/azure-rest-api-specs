@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 
@@ -85,47 +86,44 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   prompt_text: string;
 }
 
-@doc("The supported source types for evaluator generation jobs, aligned with DataGenerationJobSourceType.")
-union EvaluatorGenerationJobSourceType {
+// ============================================================================
+// Shared Generation Job Sources
+//
+// These source types are shared between evaluator generation and data generation
+// jobs. The type union and base model use "GenerationJobSource" naming to
+// indicate they are reusable across generation job types.
+// ============================================================================
+
+@doc("The supported source types for generation jobs (shared by evaluator generation and data generation).")
+union GenerationJobSourceType {
   string,
 
-  @doc("Prompt source — inline text describing the agent, or agent name to fetch instructions from.")
+  @doc("Prompt source — inline text or agent name to fetch instructions from.")
   Prompt: "Prompt",
 
   @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
   Traces: "Traces",
 
-  @doc("Dataset source — reference to a dataset containing policies, rules, or supplementary context.")
+  @doc("Dataset source — reference to a dataset.")
   Dataset: "Dataset",
 }
 
-@doc("The role of a source in evaluator generation — helps the pipeline interpret inputs.")
-union EvaluatorGenerationJobSourceRole {
-  string,
-
-  @doc("Describes the agent's purpose, tools, and behaviors.")
-  agent_description: "agent_description",
-
-  @doc("Describes what the evaluator should measure — supplementary criteria context, business rules, policies.")
-  evaluator_description: "evaluator_description",
-}
-
-@doc("The base source model for an evaluator generation job.")
+@doc("The base source model for generation jobs. Shared across evaluator generation and data generation.")
 @discriminator("type")
-model EvaluatorGenerationJobSource {
+model GenerationJobSource {
   @doc("The type of source.")
-  type: EvaluatorGenerationJobSourceType;
+  type: GenerationJobSourceType;
 
-  @doc("The role of this source: 'agent_description' (what the agent does) or 'evaluator_description' (what to measure).")
-  role?: EvaluatorGenerationJobSourceRole;
+  @doc("Optional description of what this source represents — helps the generation pipeline interpret its content (e.g., 'Agent system prompt describing a travel booking assistant' or 'Company policy document for refund handling').")
+  purpose?: string;
 }
 
-@doc("Prompt source for evaluator generation — inline text, agent reference, or both. At least one of prompt or agent_name must be specified. When both are provided, agent instructions are merged with the supplementary prompt text as combined input for generation.")
-model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+@doc("Prompt source — inline text, agent reference, or both. At least one of prompt or agent_name must be specified. When both are provided, agent instructions are merged with the supplementary prompt text as combined input for generation.")
+model PromptGenerationJobSource extends GenerationJobSource {
   @doc("The source type for this job, which is Prompt.")
   type: "Prompt";
 
-  @doc("Inline prompt text describing the agent's purpose, behavior, and supplementary context. Can be combined with agent_name. At least one of prompt or agent_name is required.")
+  @doc("Inline prompt text. Can be combined with agent_name. At least one of prompt or agent_name is required.")
   prompt?: string;
 
   @doc("The agent name to fetch instructions from. Can be combined with prompt for additional context. At least one of prompt or agent_name is required.")
@@ -135,8 +133,8 @@ model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   agent_version?: string;
 }
 
-@doc("Traces source for evaluator generation — conversation traces from Application Insights.")
-model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+@doc("Traces source — conversation traces from Application Insights.")
+model TracesGenerationJobSource extends GenerationJobSource {
   @doc("The source type for this job, which is Traces.")
   type: "Traces";
 
@@ -147,17 +145,17 @@ model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   agent_version?: string;
 
   @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
-  start_time?: int64;
+  start_time?: FoundryTimestamp;
 
   @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
-  end_time?: int64;
+  end_time?: FoundryTimestamp;
 
   @doc("Maximum number of traces to retrieve.")
   max_traces?: int32 = 100;
 }
 
-@doc("Dataset source for evaluator generation — reference to a dataset containing policies, rules, or supplementary context.")
-model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+@doc("Dataset source — reference to a dataset containing policies, rules, or supplementary context.")
+model DatasetGenerationJobSource extends GenerationJobSource {
   @doc("The source type for this job, which is Dataset.")
   type: "Dataset";
 
@@ -167,6 +165,10 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   @doc("The version of the dataset. If not specified, the latest version is used.")
   version?: string;
 }
+
+// ============================================================================
+// Rubric Criteria + Rubric-based Evaluator Definition
+// ============================================================================
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
@@ -186,27 +188,75 @@ model RubricCriterion {
   always_applicable?: boolean;
 }
 
-@doc("Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators. By default, generate persists the evaluator immediately; set persist=false for preview mode.")
+@doc("Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.")
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubrics;
 
-  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include a non-editable residual criterion with rubric_id 'general_policy_compliance'. Both quality and safety use the same rubric structure.")
+  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure.")
   rubric_criteria?: RubricCriterion[];
 }
 
-@doc("Request body for evaluator generation. If an evaluator with this name already exists, the service automatically retrieves the latest version's criteria as context for improvement.")
-model GenerateEvaluatorRequest {
-  @doc("Source materials for generation — agent prompts or datasets.")
-  sources: EvaluatorGenerationJobSource[];
+// ============================================================================
+// Evaluator Generation Job (LRO — follows DataGenerationJob pattern)
+// ============================================================================
+
+@doc("Caller-supplied inputs for an evaluator generation job.")
+model EvaluatorGenerationInputs {
+  @doc("Display name for this generation job.")
+  name: string;
+
+  @doc("Source materials for generation — agent prompts, traces, or datasets.")
+  sources: GenerationJobSource[];
 
   @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure.")
   category?: EvaluatorCategory = EvaluatorCategory.quality;
 
-  @doc("When true (default), the generated evaluator is saved as a new version immediately. When false, returns an unsaved preview for experimentation — call createVersion to persist.")
+  @doc("When true (default), the generated evaluator is saved as a new version immediately on job completion. When false, result contains an unsaved preview — call createVersion to persist.")
   persist?: boolean = true;
 
-  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity. This avoids LLM capacity constraints, reduces 429 retries, and aligns with Foundry's deployment-less model selection.")
+  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
   model: string;
+
+  @doc("The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.")
+  evaluator_name: string;
+}
+
+@doc("Result produced by a successful evaluator generation job.")
+model EvaluatorGenerationResult {
+  @doc("The generated evaluator version. Present when the job completes successfully.")
+  @visibility(Lifecycle.Read)
+  evaluator?: EvaluatorVersion;
+
+  @doc("Token usage information for the generation job.")
+  @visibility(Lifecycle.Read)
+  token_usage?: TokenUsage;
+}
+
+@doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials.")
+model EvaluatorGenerationJob
+  is JobLike<EvaluatorGenerationResult, EvaluatorGenerationInputs> {
+  @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
+  @visibility(Lifecycle.Read)
+  created_at: FoundryTimestamp;
+
+  @doc("The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).")
+  @visibility(Lifecycle.Read)
+  finished_at?: FoundryTimestamp;
+}
+
+@doc("Token usage information for a generation job.")
+model TokenUsage {
+  @doc("The number of prompt tokens used.")
+  @visibility(Lifecycle.Read)
+  prompt_tokens?: int64;
+
+  @doc("The number of completion tokens generated.")
+  @visibility(Lifecycle.Read)
+  completion_tokens?: int64;
+
+  @doc("Total number of tokens used.")
+  @visibility(Lifecycle.Read)
+  total_tokens?: int64;
 }
 
 @doc("Evaluator Definition")
