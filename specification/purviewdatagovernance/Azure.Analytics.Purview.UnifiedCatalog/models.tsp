@@ -123,9 +123,6 @@ model CatalogModelContactsValueInner {
   description?: string;
 }
 
-@doc("A list of contacts for catalog entities.")
-model ContactsValueInnerList is CatalogModelContactsValueInner[];
-
 @doc("A dictionary of contact lists keyed by contact type (e.g., 'Owner', 'Expert').")
 model ContactsMap {
   @doc("List of owner contacts.")
@@ -405,7 +402,7 @@ model CriticalDataElementProperties {
 @doc("Properties for data asset relationships.")
 @resource("relationships")
 @parentResource(DataAsset)
-model DataAssetProperties {
+model DataAssetRelationship {
   @doc("Description of the relationship.")
   description?: string;
 
@@ -452,7 +449,7 @@ model SystemData {
 @doc("CDC Relationship information between entities.")
 @resource("relationships")
 @parentResource(CriticalDataElement)
-model CdeRelationshipwithSystemData {
+model CdeRelationshipWithSystemData {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
@@ -579,6 +576,7 @@ model DataAsset {
   openInUrl?: url;
 }
 
+#suppress "@azure-tools/typespec-azure-core/spread-discriminated-model" "DataAssetWithLineage has its own discriminator hierarchy separate from DataAsset."
 @doc("Data asset model that includes lineage details for GetById responses.")
 @discriminator("type")
 model DataAssetWithLineage {
@@ -613,6 +611,12 @@ model DataAssetWithLineageGeneral extends DataAssetWithLineage {
   type: "General";
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
+@doc("Lineage information object containing entity relationships and graph data.")
+model LineageObject {
+  ...Record<unknown>;
+}
+
 @doc("Data asset of type Azure SQL Table.")
 model DataAssetAzureSqlTable extends DataAsset {
   @doc("Type of the data asset.")
@@ -637,39 +641,6 @@ model DataAssetGeneral extends DataAsset {
   type: "General";
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
-@doc("Lineage information object containing entity relationships and graph data.")
-model LineageObject {
-  ...Record<unknown>;
-}
-
-@doc("DataAsset.")
-@resource("dataAssets")
-model DataAssetResponse is DataAsset;
-
-@doc("Data asset response of type Azure SQL Table.")
-model DataAssetResponseAzureSqlTable extends DataAssetResponse {
-  @doc("Type of the data asset.")
-  type: "AzureSqlTable";
-
-  @doc("Type properties of the Azure SQL table asset.")
-  typeProperties?: DataAssetAzureSqlTableTypeProperties;
-}
-
-@doc("Data asset response of type ADLS Gen2 Path.")
-model DataAssetResponseAdlsGen2Path extends DataAssetResponse {
-  @doc("Type of the data asset.")
-  type: "ADLSGen2Path";
-
-  @doc("Type properties of the ADLS Gen2 path asset.")
-  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
-}
-
-@doc("Data asset response of type General.")
-model DataAssetResponseGeneral extends DataAssetResponse {
-  @doc("Type of the data asset.")
-  type: "General";
-}
 @doc("DataAsset.")
 model DataAssetRequest {
   @doc("Source of the asset.")
@@ -732,7 +703,7 @@ model CriticalDataElementsResponse {
 model DataAssetsResponse {
   @doc("The list of data assets.")
   @pageItems
-  value: DataAssetResponse[];
+  value: DataAsset[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -1564,17 +1535,6 @@ model CatalogModelKeyResult {
   max?: float64;
 }
 
-@doc("Response containing a list of key results.")
-model CatalogModelKeyResultResponse {
-  @doc("The list of key results.")
-  @pageItems
-  value: CatalogModelKeyResult[];
-
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
-
 alias CriticalDataElementIdParameters = {
   @doc("The unique identifier of the critical data element.")
   criticalDataElementId: uuid;
@@ -1621,7 +1581,7 @@ model CreateDataAssetResponse {
 
   @doc("The request body containing query criteria.")
   @bodyRoot
-  body: DataAssetResponse;
+  body: DataAsset;
 }
 
 alias DataAssetIdParameter = {
@@ -2077,4 +2037,22 @@ model DataColumnCreateRelationshipResponse {
 
   @doc("System metadata including creation and modification information.")
   systemData?: SystemData;
+}
+
+@doc("Request model for querying duplicate.")
+model DuplicateQueryRequest {
+  @doc("The keyword to search for duplicate elements by name.")
+  nameKeyword: string;
+}
+
+@doc("Request model for querying duplicate objectives/OKRs.")
+model DuplicateOkrQueryRequest {
+  @doc("The keyword to search for duplicate objectives/OKRs by name.")
+  definition: string;
+}
+
+@doc(" Response model for duplicate critical data element query, containing the count of duplicate entities.")
+model EntityCount {
+  @doc("Count of entities which exist.")
+  count: int64;
 }

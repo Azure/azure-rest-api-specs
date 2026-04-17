@@ -112,7 +112,7 @@ interface CriticalDataElements {
       @bodyRoot
       relationship: DataElementProperties;
     },
-    CdeRelationshipwithSystemData
+    CdeRelationshipWithSystemData
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -164,6 +164,21 @@ interface CriticalDataElements {
     },
     FacetsResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  @tag("CriticalDataElements")
+  @doc("Retrieves the count of duplicate critical data elements by passing namekeyword.")
+  @route("/criticalDataElements/query/count")
+  @post
+  Count is RpcOperation<
+    {
+      @doc("The request body containing query criteria.")
+      @bodyRoot
+      request: DuplicateQueryRequest;
+    },
+    EntityCount
+  >;
 }
 
 interface DataAssets {
@@ -173,7 +188,7 @@ interface DataAssets {
   @doc("Lists data assets with optional ordering and pagination.")
   @get
   List is UnifiedCatalogOperations.ResourceList<
-    DataAssetResponse,
+    DataAsset,
     ListQueryParametersTrait<{
       @doc("Include extended properties in the response.")
       @query
@@ -248,7 +263,7 @@ interface DataAssets {
       @bodyRoot
       dataAsset: DataAssetRequest;
     },
-    DataAssetResponse
+    DataAsset
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -256,7 +271,7 @@ interface DataAssets {
   @tag("DataAsset")
   @doc("Deletes a data asset by its unique identifier.")
   @delete
-  DeleteById is UnifiedCatalogOperations.ResourceDelete<DataAssetResponse>;
+  DeleteById is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -264,7 +279,7 @@ interface DataAssets {
   @doc("Lists relationships for a data asset filtered by entity category.")
   @get
   ListRelationships is UnifiedCatalogOperations.ResourceList<
-    DataAssetProperties,
+    DataAssetRelationship,
     ListQueryParametersTrait<{
       @doc("Required entity category to list relationships for.")
       @query
@@ -286,7 +301,7 @@ interface DataAssets {
 
       @doc("Relationship payload as JSON (required).")
       @bodyRoot
-      relationship: DataAssetProperties;
+      relationship: DataAssetRelationship;
     },
     Relationship
   >;
@@ -460,6 +475,21 @@ interface DataProducts {
       entityId: uuid;
     },
     DeleteResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  @tag("DataProduct")
+  @doc("Retrieves the count of duplicate DataProduct by passing namekeyword.")
+  @route("/DataProduct/query/count")
+  @post
+  Count is RpcOperation<
+    {
+      @doc("The request body containing query criteria.")
+      @bodyRoot
+      request: DuplicateQueryRequest;
+    },
+    EntityCount
   >;
 }
 
@@ -702,6 +732,21 @@ interface Terms {
       relationshipType?: TermRelationshipType;
     }>
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  @tag("Term")
+  @doc("Retrieves the count of duplicate Term by passing namekeyword.")
+  @route("/terms/query/count")
+  @post
+  Count is RpcOperation<
+    {
+      @doc("The request body containing query criteria.")
+      @bodyRoot
+      request: DuplicateQueryRequest;
+    },
+    EntityCount
+  >;
 }
 
 interface Okr {
@@ -838,7 +883,6 @@ interface Okr {
   @tag("OKR")
   @doc("Updates a key result under the specified objective.")
   @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
-  @list
   @put
   UpdateKeyResult is RpcOperation<
     GetKeyResultParameter & {
@@ -846,7 +890,7 @@ interface Okr {
       @bodyRoot
       keyResult: CatalogModelKeyResult;
     },
-    CatalogModelKeyResultResponse
+    CatalogModelKeyResult
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -856,6 +900,21 @@ interface Okr {
   @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
   @delete
   DeleteKeyResult is RpcOperation<GetKeyResultParameter, DeleteResponse>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  @tag("OKR")
+  @doc("Retrieves the count of duplicate objectives/OKRs by passing definition.")
+  @route("/objectives/query/count")
+  @post
+  Count is RpcOperation<
+    {
+      @doc("The request body containing query criteria.")
+      @bodyRoot
+      request: DuplicateOkrQueryRequest;
+    },
+    EntityCount
+  >;
 }
 
 interface Policies {
@@ -915,13 +974,6 @@ interface DataColumns {
     DataColumn
   >;
 
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  // @tag("DataColumn")
-  // @doc("Deletes a data column by identifier.")
-  // @delete
-  // Delete is UnifiedCatalogOperations.ResourceDelete<DataColumn>;
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataColumn")
@@ -958,6 +1010,7 @@ interface DataColumns {
   @tag("DataColumn")
   @route("/dataColumns/{dataColumnId}/relationships")
   @doc("Lists related entities for a data column by category and optional relationship type.")
+  @list
   @get
   ListRelatedEntities is RpcOperation<
     DataColumnIdForRelationship & {

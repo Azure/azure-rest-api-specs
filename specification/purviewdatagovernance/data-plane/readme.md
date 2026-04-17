@@ -1,7 +1,6 @@
 # Azure Purview Catalog
 
 > This service has been migrated to TypeSpec. For the latest specification, see the TypeSpec project at `../Azure.Analytics.Purview.UnifiedCatalog/`.
-
 > see https://aka.ms/autorest
 
 This is the legacy AutoRest configuration file for Purview Catalog.
