@@ -5706,3 +5706,89 @@ model RaiPolicyListResult {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Deployment detail within an accelerator usage entry.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentInfo {
+  /**
+   * Full ARM resource ID of the deployment.
+   */
+  deploymentId?: string;
+
+  /**
+   * Full ARM resource ID of the account/project.
+   */
+  projectId?: string;
+
+  /**
+   * Model name (e.g., 'gpt-4o').
+   */
+  modelId?: string;
+
+  /**
+   * Number of GPUs consumed by this deployment.
+   */
+  gpuCount?: int64;
+
+  /**
+   * Number of instances for this deployment.
+   */
+  instanceCount?: int32;
+}
+
+/**
+ * Accelerator quota usage for a specific SKU. Extends Usage with accelerator-specific properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'AcceleratorUsage' extends 'Usage' using inheritance to match service-side object hierarchy"
+@added(Versions.v2026_03_15_preview)
+model AcceleratorUsage extends Usage {
+  /**
+   * Fully qualified resource ID for the accelerator usage.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: MetricName;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Offer scope (e.g., 'Global', 'Datazone-US').
+   */
+  offerScope?: string;
+
+  /**
+   * Deployments consuming this accelerator quota.
+   */
+  @identifiers(#["deploymentId"])
+  deployments?: AcceleratorDeploymentInfo[];
+}
+
+/**
+ * List of accelerator quota entries.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorUsageListResult {
+  /**
+   * The link used to get the next page of accelerator usages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Per-SKU accelerator quota usage entries.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  value?: AcceleratorUsage[];
+}
