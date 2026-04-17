@@ -124,6 +124,9 @@
       "name": "ComputeOperations"
     },
     {
+      "name": "ManagedComputeUsages"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -516,6 +519,48 @@
           "GetComputeOperationStatus": {
             "$ref": "./examples/GetComputeOperationStatus.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/managedComputeUsages": {
+      "get": {
+        "operationId": "ManagedComputeUsagesOperationGroup_List",
+        "tags": [
+          "ManagedComputeUsages"
+        ],
+        "description": "List managed compute quota usages for a subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeUsageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Managed Compute Usages": {
+            "$ref": "./examples/ListManagedComputeUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13770,6 +13815,94 @@
         }
       ],
       "x-ms-discriminator-value": "Managed"
+    },
+    "ManagedComputeDeploymentInfo": {
+      "type": "object",
+      "description": "Deployment detail within a managed compute usage entry.",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the deployment."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the account/project."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Model name (e.g., 'gpt-4o')."
+        },
+        "gpuCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of GPUs consumed by this deployment."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances for this deployment."
+        }
+      }
+    },
+    "ManagedComputeUsage": {
+      "type": "object",
+      "description": "Managed compute quota usage for a specific SKU. Extends Usage with managed compute-specific properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the managed compute usage.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "offerScope": {
+          "type": "string",
+          "description": "Offer scope (e.g., 'Global', 'Datazone-US')."
+        },
+        "deployments": {
+          "type": "array",
+          "description": "Deployments consuming this managed compute quota.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeDeploymentInfo"
+          },
+          "x-ms-identifiers": [
+            "deploymentId"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Usage"
+        }
+      ]
+    },
+    "ManagedComputeUsageListResult": {
+      "type": "object",
+      "description": "List of managed compute quota entries.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of managed compute usages."
+        },
+        "value": {
+          "type": "array",
+          "description": "Per-SKU managed compute quota usage entries.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeUsage"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
     },
     "ManagedIdentityAuthTypeConnectionProperties": {
       "type": "object",
