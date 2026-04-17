@@ -236,11 +236,67 @@
           "description": "The date and time the sub-assessment was generated"
         },
         "resourceDetails": {
-          "$ref": "./common/v1/types.json#/definitions/ResourceDetails"
+          "$ref": "#/definitions/Common.ResourceDetails"
         },
         "additionalData": {
           "$ref": "#/definitions/AdditionalData"
         }
+      }
+    },
+    "Common.ResourceDetails": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/Common.Source",
+          "description": "The platform where the assessed resource resides"
+        }
+      },
+      "discriminator": "source",
+      "required": [
+        "source"
+      ]
+    },
+    "Common.Source": {
+      "type": "string",
+      "description": "The platform where the assessed resource resides",
+      "enum": [
+        "Azure",
+        "OnPremise",
+        "OnPremiseSql",
+        "Aws",
+        "Gcp"
+      ],
+      "x-ms-enum": {
+        "name": "Source",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Resource is in Azure"
+          },
+          {
+            "name": "OnPremise",
+            "value": "OnPremise",
+            "description": "Resource in an on premise machine connected to Azure cloud"
+          },
+          {
+            "name": "OnPremiseSql",
+            "value": "OnPremiseSql",
+            "description": "SQL Resource in an on premise machine connected to Azure cloud"
+          },
+          {
+            "name": "Aws",
+            "value": "Aws",
+            "description": "Aws"
+          },
+          {
+            "name": "Gcp",
+            "value": "Gcp",
+            "description": "Gcp"
+          }
+        ]
       }
     },
     "AdditionalData": {
