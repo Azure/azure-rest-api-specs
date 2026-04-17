@@ -1159,11 +1159,6 @@ model GalleryArtifactVersionSource {
    * The id of the gallery artifact version source.
    */
   id?: string;
-
-  /**
-   * The uri of the gallery artifact version source. Currently used to specify vhd/blob source.
-   */
-  uri?: string;
 }
 
 /**
@@ -1199,6 +1194,11 @@ model GalleryDiskImage {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryDiskImageSource extends GalleryArtifactVersionSource {
+  /**
+   * The uri of the gallery artifact version source. Currently used to specify vhd/blob source.
+   */
+  uri?: string;
+
   /**
    * The Storage Account Id that contains the vhd blob being used as a source for this artifact version.
    */
