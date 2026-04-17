@@ -23,7 +23,6 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
-
   @removed(Versions.v2026_05_01)
   redactionPolicy?: BaseRedactionPolicy;
 
