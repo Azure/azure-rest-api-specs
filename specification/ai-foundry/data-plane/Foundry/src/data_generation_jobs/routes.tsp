@@ -20,7 +20,7 @@ interface DataGenerationJobs {
    * Gets the details of a data generation job by its ID.
    */
   @summary("Get info about a data generation job.")
-  @route("data_generation/jobs/{jobId}")
+  @route("data_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   get is queryJobStatusPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
@@ -31,7 +31,7 @@ interface DataGenerationJobs {
    * Returns a list of data generation jobs.
    */
   @summary("Returns a list of data generation jobs")
-  @route("data_generation/jobs")
+  @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
@@ -51,7 +51,7 @@ interface DataGenerationJobs {
    * Creates a data generation job.
    */
   @summary("Creates a data generation job.")
-  @route("data_generation/jobs")
+  @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
@@ -62,7 +62,7 @@ interface DataGenerationJobs {
    * Cancels a data generation job by its ID.
    */
   @summary("Cancels a data generation job.")
-  @route("data_generation/jobs/{jobId}:cancel")
+  @route("data_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
@@ -72,9 +72,7 @@ interface DataGenerationJobs {
   /**
    * Deletes a data generation job by its ID.
    */
-  @route("data_generation/jobs/{jobId}")
+  @route("data_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
-  >;
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;
 }

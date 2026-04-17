@@ -3292,7 +3292,7 @@
         ]
       }
     },
-    "/data_generation/jobs": {
+    "/data_generation_jobs": {
       "get": {
         "operationId": "DataGenerationJobs_list",
         "summary": "Returns a list of data generation jobs",
@@ -3527,7 +3527,7 @@
         }
       }
     },
-    "/data_generation/jobs/{jobId}": {
+    "/data_generation_jobs/{jobId}": {
       "get": {
         "operationId": "DataGenerationJobs_get",
         "summary": "Get info about a data generation job.",
@@ -3667,7 +3667,7 @@
         }
       }
     },
-    "/data_generation/jobs/{jobId}:cancel": {
+    "/data_generation_jobs/{jobId}:cancel": {
       "post": {
         "operationId": "DataGenerationJobs_cancel",
         "summary": "Cancels a data generation job.",
@@ -16515,45 +16515,6 @@
         ],
         "description": "Daily recurrence schedule."
       },
-      "DataGenerationInputs": {
-        "type": "object",
-        "required": [
-          "name",
-          "sources",
-          "options",
-          "scenario"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The display name of the data generation job."
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGenerationJobSource"
-            },
-            "description": "The sources used for the data generation job."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for the data generation job."
-          },
-          "scenario": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobScenario"
-              }
-            ],
-            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
-          }
-        },
-        "description": "Caller-supplied inputs for a data generation job."
-      },
       "DataGenerationJob": {
         "type": "object",
         "required": [
@@ -16570,7 +16531,7 @@
           "inputs": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DataGenerationInputs"
+                "$ref": "#/components/schemas/DataGenerationJobInputs"
               }
             ],
             "description": "Caller-supplied inputs."
@@ -16578,7 +16539,7 @@
           "result": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DataGenerationResult"
+                "$ref": "#/components/schemas/DataGenerationJobResult"
               }
             ],
             "description": "Result produced on success.",
@@ -16622,6 +16583,45 @@
           }
         },
         "description": "Data Generation Job resource."
+      },
+      "DataGenerationJobInputs": {
+        "type": "object",
+        "required": [
+          "name",
+          "sources",
+          "options",
+          "scenario"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the data generation job."
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobSource"
+            },
+            "description": "The sources used for the data generation job."
+          },
+          "options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOptions"
+              }
+            ],
+            "description": "The options for the data generation job."
+          },
+          "scenario": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobScenario"
+              }
+            ],
+            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
+          }
+        },
+        "description": "Caller-supplied inputs for a data generation job."
       },
       "DataGenerationJobOptions": {
         "type": "object",
@@ -16706,6 +16706,32 @@
           }
         ],
         "description": "The supported output file types for a data generation job."
+      },
+      "DataGenerationJobResult": {
+        "type": "object",
+        "properties": {
+          "outputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobOutput"
+            },
+            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
+          },
+          "generated_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of samples actually generated."
+          },
+          "token_usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenUsage"
+              }
+            ],
+            "description": "The token usage information for the data generation job."
+          }
+        },
+        "description": "Result produced by a successful data generation job."
       },
       "DataGenerationJobScenario": {
         "anyOf": [
@@ -16795,32 +16821,6 @@
           }
         },
         "description": "LLM model options for data generation jobs."
-      },
-      "DataGenerationResult": {
-        "type": "object",
-        "properties": {
-          "outputs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGenerationJobOutput"
-            },
-            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
-          },
-          "generated_samples": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of samples actually generated."
-          },
-          "token_usage": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TokenUsage"
-              }
-            ],
-            "description": "The token usage information for the data generation job."
-          }
-        },
-        "description": "Result produced by a successful data generation job."
       },
       "DataSourceConfig": {
         "type": "object",
