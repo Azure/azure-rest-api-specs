@@ -743,6 +743,7 @@ union ToolsetMCPJsonRpcResult {
   ToolsetMCPGetTaskResult,
   ToolsetMCPCancelTaskResult,
   ToolsetMCPListTasksResult,
+  ToolsetMCPToolSearchResult,
 }
 
 /**
@@ -997,3 +998,30 @@ alias ToolsetMCPInvokeRequest = {
    */
   params?: ToolsetMCPInvokeRequestParams;
 };
+
+/**
+ * A tool returned from a tool_search call, with an optional relevance score.
+ */
+model ToolsetMCPToolSearchResultItem {
+  ...ToolsetMCPTool;
+
+  /**
+   * Relevance score for this tool relative to the search query.
+   */
+  relevance?: float64;
+}
+
+/**
+ * Result payload for a tool_search call.
+ */
+model ToolsetMCPToolSearchResult {
+  /**
+   * Optional metadata for protocol-level extensions.
+   */
+  _meta?: ToolsetMCPMeta;
+
+  /**
+   * The matched tools.
+   */
+  tools: ToolsetMCPToolSearchResultItem[];
+}
