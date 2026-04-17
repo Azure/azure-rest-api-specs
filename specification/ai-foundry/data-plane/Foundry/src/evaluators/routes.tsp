@@ -143,7 +143,7 @@ interface EvaluatorGenerationJobs {
    * definitions from the provided source materials asynchronously.
    */
   @summary("Creates an evaluator generation job.")
-  @route("evaluator_generation/jobs")
+  @route("evaluator_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -154,7 +154,7 @@ interface EvaluatorGenerationJobs {
    * Gets the details of an evaluator generation job by its ID.
    */
   @summary("Get info about an evaluator generation job.")
-  @route("evaluator_generation/jobs/{jobId}")
+  @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   get is queryJobStatusPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -165,7 +165,7 @@ interface EvaluatorGenerationJobs {
    * Returns a list of evaluator generation jobs.
    */
   @summary("Returns a list of evaluator generation jobs.")
-  @route("evaluator_generation/jobs")
+  @route("evaluator_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -181,7 +181,7 @@ interface EvaluatorGenerationJobs {
    * Cancels an evaluator generation job by its ID.
    */
   @summary("Cancels an evaluator generation job.")
-  @route("evaluator_generation/jobs/{jobId}:cancel")
+  @route("evaluator_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -191,7 +191,7 @@ interface EvaluatorGenerationJobs {
   /**
    * Deletes an evaluator generation job by its ID.
    */
-  @route("evaluator_generation/jobs/{jobId}")
+  @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview
