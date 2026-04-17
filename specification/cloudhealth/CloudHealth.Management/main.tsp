@@ -1310,17 +1310,17 @@ model DataAnnotation is DataAnnotationRequest {
 @added(Versions.v2026_05_01_preview)
 @doc("Request body for querying data annotations")
 model GetDataAnnotationsRequest {
-  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when continuationValue is specified.")
+  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified.")
   startAt?: utcDateTime;
 
-  @doc("End of UTC time range. Defaults to now if not specified. Must be omitted when continuationValue is specified.")
+  @doc("End of UTC time range. Defaults to now if not specified. Must be omitted when continuationToken is specified.")
   endAt?: utcDateTime;
 
   @doc("Maximum number of annotations to return per page.")
   top?: int32;
 
-  @doc("Continuation value from a previous response to retrieve the next page of results.")
-  continuationValue?: string;
+  @doc("Continuation token from a previous response to retrieve the next page of results.")
+  continuationToken?: string;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1333,8 +1333,9 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  @doc("Continuation value to retrieve the next page of results. Null if there are no more results.")
-  continuationValue?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret, only valid in the context of this request."
+  @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
+  continuationToken?: string;
 }
 
 @added(Versions.v2026_01_01_preview)
