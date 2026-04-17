@@ -344,6 +344,9 @@ op OperationsStatusGetCustomized(
 
 @@override(OperationsStatus.get, OperationsStatusGetCustomized, "python,go");
 
+// Core lib supports query operation status, so scope out this operation for .NET.
+@@scope(OperationsStatus.get, "!csharp");
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
