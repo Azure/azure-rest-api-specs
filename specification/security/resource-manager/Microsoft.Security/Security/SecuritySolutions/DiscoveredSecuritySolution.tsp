@@ -14,7 +14,7 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace SecuritySolutionsAPI;
 
-@parentResource(ResourceGroupLocationResource)
+@parentResource(ArmLocationResource)
 model DiscoveredSecuritySolution
   is Azure.ResourceManager.ProxyResource<
     DiscoveredSecuritySolutionProperties,
@@ -42,13 +42,11 @@ interface DiscoveredSecuritySolutions {
   /**
    * Gets a specific discovered Security Solution.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<DiscoveredSecuritySolution, Error = CloudError>;
 
   /**
    * Gets a list of discovered Security Solutions for the subscription and location.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
     Azure.ResourceManager.Extension.Subscription,
     DiscoveredSecuritySolution,

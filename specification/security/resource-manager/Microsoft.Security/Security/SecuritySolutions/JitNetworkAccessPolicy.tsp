@@ -18,7 +18,7 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace SecuritySolutionsAPI;
 
-@parentResource(ResourceGroupLocationResource)
+@parentResource(ArmLocationResource)
 model JitNetworkAccessPolicy
   is Azure.ResourceManager.ProxyResource<
     JitNetworkAccessPolicyProperties,
@@ -81,14 +81,12 @@ interface JitNetworkAccessPolicies {
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<JitNetworkAccessPolicy, Error = CloudError>;
 
   /**
    * Create a policy for protecting resources using Just-in-Time access control
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     JitNetworkAccessPolicy,
     Response = ArmResourceUpdatedResponse<JitNetworkAccessPolicy>,
@@ -98,13 +96,11 @@ interface JitNetworkAccessPolicies {
   /**
    * Delete a Just-in-Time access control policy.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   delete is ArmResourceDeleteSync<JitNetworkAccessPolicy, Error = CloudError>;
 
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByResourceGroupAndRegion is ArmResourceListByParent<
     JitNetworkAccessPolicy,
     Response = ArmResponse<JitNetworkAccessPoliciesList>,
@@ -114,7 +110,6 @@ interface JitNetworkAccessPolicies {
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByRegion is Azure.ResourceManager.Extension.ListByTarget<
     Azure.ResourceManager.Extension.Subscription,
     JitNetworkAccessPolicy,

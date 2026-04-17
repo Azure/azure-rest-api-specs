@@ -16,7 +16,7 @@ namespace SecuritySolutionsAPI;
 /**
  * The resource whose properties describes the allowed traffic between Azure resources
  */
-@parentResource(ResourceGroupLocationResource)
+@parentResource(ArmLocationResource)
 model AllowedConnectionsResource
   is Azure.ResourceManager.ProxyResource<AllowedConnectionsResourceProperties> {
   ...ResourceNameParameter<
@@ -35,6 +35,20 @@ model AllowedConnectionsResource
   location: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armVirtualResource
+@resourceBaseType("ResourceGroup")
+model ArmLocationResource {
+  /**
+   * The location where ASC stores the data of the subscription. can be retrieved from Get locations
+   */
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  @segment("locations")
+  @key
+  ascLocation: string;
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @tag("AllowedConnections")
@@ -42,13 +56,11 @@ interface AllowedConnectionsResources {
   /**
    * Gets the list of all possible traffic between resources for the subscription and location, based on connection type.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<AllowedConnectionsResource, Error = CloudError>;
 
   /**
    * Gets the list of all possible traffic between resources for the subscription and location.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
     Azure.ResourceManager.Extension.Subscription,
     AllowedConnectionsResource,

@@ -14,7 +14,7 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace SecuritySolutionsAPI;
 
-@parentResource(ResourceGroupLocationResource)
+@parentResource(ArmLocationResource)
 model TopologyResource
   is Azure.ResourceManager.ProxyResource<TopologyResourceProperties> {
   ...ResourceNameParameter<
@@ -39,13 +39,23 @@ interface TopologyResources {
   /**
    * Gets a specific topology component.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  get is ArmResourceRead<TopologyResource, Error = CloudError>;
+  get is ArmResourceRead<
+    TopologyResource,
+    BaseParameters = {
+      ...CommonTypes.ApiVersionParameter;
+
+      // unless tenant or extension
+      ...CommonTypes.SubscriptionIdParameter;
+
+      // unless tenant, subscription, location, or extension
+      ...CommonTypes.ResourceGroupNameParameter;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Gets a list that allows to build a topology view of a subscription and location.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
     Azure.ResourceManager.Extension.Subscription,
     TopologyResource,

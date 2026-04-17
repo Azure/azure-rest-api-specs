@@ -21,7 +21,7 @@ namespace SecuritySolutionsAPI;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@parentResource(ResourceGroupLocationResource)
+@parentResource(ArmLocationResource)
 @discriminator("kind")
 model ExternalSecuritySolution is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -52,13 +52,11 @@ interface ExternalSecuritySolutions {
   /**
    * Gets a specific external Security Solution.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<ExternalSecuritySolution, Error = CloudError>;
 
   /**
    * Gets a list of external Security Solutions for the subscription and location.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
     Azure.ResourceManager.Extension.Subscription,
     ExternalSecuritySolution,

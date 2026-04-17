@@ -14,7 +14,7 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace SecuritySolutionsAPI;
 
-@parentResource(ResourceGroupLocationResource)
+@parentResource(ArmLocationResource)
 model SecuritySolution
   is Azure.ResourceManager.ProxyResource<SecuritySolutionProperties> {
   ...ResourceNameParameter<
@@ -39,7 +39,6 @@ interface SecuritySolutions {
   /**
    * Gets a specific Security Solution.
    */
-  @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
   get is ArmResourceRead<SecuritySolution, Error = CloudError>;
 }
 
