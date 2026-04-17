@@ -1424,15 +1424,15 @@ model StorageServiceProperties {
    */
   @Xml.name("MinuteMetrics") minuteMetrics?: Metrics;
 
+    /**
+   * Protocol settings
+   */
+  @Xml.name("ProtocolSettings") protocol?: ShareProtocolSettings;
+
   /**
    * The set of CORS rules.
    */
   @Xml.name("Cors") cors?: CorsRule[];
-
-  /**
-   * Protocol settings
-   */
-  @Xml.name("ProtocolSettings") protocol?: ShareProtocolSettings;
 }
 
 /**

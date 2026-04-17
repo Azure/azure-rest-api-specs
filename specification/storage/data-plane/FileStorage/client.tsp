@@ -362,50 +362,12 @@ model DirectoryClientParameters {
   "csharp"
 );
 
-// Defining an override for backward compatibility for C# since the XML payload was serialized with the
-// elements/properties in a different order than defined in the swagger.
-
-/**
- * Storage service properties.
- */
-@Xml.name("StorageServiceProperties")
-model StorageServicePropertiesCsharp {
-  /**
-   * A summary of request statistics grouped by API in hourly aggregates for files.
-   */
-  @Xml.name("HourMetrics") hourMetrics?: StorageServiceProperties.hourMetrics;
-
-  /**
-   * A summary of request statistics grouped by API in minute aggregates for files.
-   */
-  @Xml.name("MinuteMetrics")
-  minuteMetrics?: StorageServiceProperties.minuteMetrics;
-
-  /**
-   * Protocol settings
-   */
-  @Xml.name("ProtocolSettings") protocol?: StorageServiceProperties.protocol;
-
-  /**
-   * The set of CORS rules.
-   */
-  @Xml.name("Cors") cors?: CorsRule[];
-}
-
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
 @@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
 @@alternateType(FileProperty.eTag, string, "csharp");
-@@alternateType(StorageServiceProperties,
-  StorageServicePropertiesCsharp,
-  "csharp"
-);
 @@alternateType(ShareStats.shareUsageBytes, int64, "csharp");
 
-@@clientName(StorageServicePropertiesCsharp,
-  "StorageServiceProperties",
-  "csharp"
-);
 @@clientName(Storage.File, "ShareClient", "csharp");
 @@clientName(AccessPolicy.start, "PolicyStartsOn", "csharp");
 @@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "csharp");
