@@ -4252,7 +4252,7 @@
       "type": "object",
       "description": "The resources needed for the user request with the correlationId",
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The resource ids used for the request",
@@ -4264,14 +4264,14 @@
             ]
           }
         },
-        "context": {
+        "operationContext": {
           "type": "string",
           "description": "The operational context of the resourceId"
         }
       },
       "required": [
-        "id",
-        "context"
+        "resourceId",
+        "operationContext"
       ]
     },
     "Resources": {
@@ -4303,16 +4303,19 @@
       "type": "object",
       "description": "The resources needed for the user request with the context for tracking purposes",
       "properties": {
-        "ids": {
+        "resources": {
           "type": "array",
           "description": "The resource ids used for the request",
           "items": {
             "$ref": "#/definitions/ResourceWithContext"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       },
       "required": [
-        "ids"
+        "resources"
       ]
     },
     "RetryPolicy": {
