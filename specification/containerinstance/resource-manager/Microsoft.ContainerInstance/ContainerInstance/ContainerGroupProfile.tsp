@@ -131,7 +131,8 @@ alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     revisionNumber: string;
   },
-  CloudError
+  CloudError,
+  "ContainerGroupProfileRevision"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"

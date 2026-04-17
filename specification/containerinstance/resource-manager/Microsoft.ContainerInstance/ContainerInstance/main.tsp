@@ -18,6 +18,7 @@ import "./ContainerGroup.tsp";
 import "./NGroup.tsp";
 import "./ContainerGroupProfile.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
