@@ -1,0 +1,64 @@
+{
+  "title": "Evals_getEvalRun_ConversationSimulation",
+  "operationId": "Evals_getEvalRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+    "run_id": "evalrun_67e57965b480819094274e3a32235e4c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "eval.run",
+        "id": "evalrun_67e57965b480819094274e3a32235e4c",
+        "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+        "status": "completed",
+        "name": "agent target eval run - file scenarios",
+        "created_at": 1743092069,
+        "report_url": "https://ai.azure.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c",
+        "result_counts": {
+          "total": 9,
+          "errored": 0,
+          "failed": 2,
+          "passed": 7
+        },
+        "per_model_usage": [
+          {
+            "model_id": "connection-name/gpt-4o",
+            "invocation_count": 15,
+            "prompt_tokens": 4500,
+            "completion_tokens": 1200,
+            "total_tokens": 5700
+          }
+        ],
+        "per_testing_criteria_results": [
+          {
+            "testing_criteria": "customer_satisfaction",
+            "passed": 7,
+            "failed": 2
+          }
+        ],
+        "data_source": {
+          "type": "azure_ai_conversation_simulation_preview",
+          "item_generation_params": {
+            "type": "conversation_gen_preview",
+            "model": "connection-name/gpt-4o",
+            "max_turns": 5,
+            "num_conversations": 3
+          },
+          "source": {
+            "type": "file_id",
+            "id": "azureai://accounts/my-account/projects/my-project/data/conversation-eval-test-scenarios"
+          },
+          "target": {
+            "type": "azure_ai_agent",
+            "name": "my-support-agent",
+            "version": "2"
+          }
+        },
+        "error": null,
+        "metadata": {}
+      }
+    }
+  }
+}

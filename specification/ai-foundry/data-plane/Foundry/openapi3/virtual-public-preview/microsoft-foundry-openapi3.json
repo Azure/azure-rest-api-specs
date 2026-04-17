@@ -15583,6 +15583,93 @@
         ],
         "description": "Evaluation rule action for continuous evaluation."
       },
+      "ConversationGenPreviewItemGenerationParams": {
+        "type": "object",
+        "required": [
+          "type",
+          "model"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation_gen_preview"
+            ],
+            "description": "The type of item generation parameters, always `conversation_gen_preview`."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'."
+          },
+          "max_turns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of turns per simulated conversation."
+          },
+          "num_conversations": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of simulated conversations to generate per test scenario."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemGenerationParams"
+          }
+        ],
+        "description": "Represents the parameters for conversation simulation item generation."
+      },
+      "ConversationSimulationPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_generation_params",
+          "source",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_conversation_simulation_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_conversation_simulation_preview`."
+          },
+          "item_generation_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
+              }
+            ],
+            "description": "The parameters for conversation generation."
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+              }
+            ],
+            "description": "The source of test scenarios, supporting file_id or file_content."
+          },
+          "target": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureAIAgentTarget"
+              }
+            ],
+            "description": "The target agent to simulate conversations against."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent."
+      },
       "CosmosDBIndex": {
         "type": "object",
         "required": [
@@ -17042,6 +17129,7 @@
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
+            "azure_ai_conversation_simulation_preview": "#/components/schemas/ConversationSimulationPreviewEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource"
           }
         },
@@ -17373,6 +17461,15 @@
             ],
             "description": "Data for evaluation."
           },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "The level at which evaluation is performed. Defaults to 'trace' if not specified.",
+            "default": "trace"
+          },
           "displayName": {
             "type": "string",
             "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
@@ -17490,6 +17587,22 @@
           }
         ],
         "description": "Insights from the evaluation comparison."
+      },
+      "EvaluationLevel": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "trace",
+              "conversation",
+              "levels"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The level at which evaluation is performed."
       },
       "EvaluationResultSample": {
         "type": "object",
@@ -19402,7 +19515,8 @@
             "red_team": "#/components/schemas/RedTeamItemGenerationParams",
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
-            "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams"
+            "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams",
+            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -19419,7 +19533,8 @@
               "response_retrieval",
               "red_team_seed_prompts",
               "red_team_taxonomy",
-              "synthetic_data_gen_preview"
+              "synthetic_data_gen_preview",
+              "conversation_gen_preview"
             ]
           }
         ],
@@ -42586,6 +42701,13 @@
               "type": "string"
             },
             "description": "Collection of Agent trace identifiers that should be evaluated."
+          },
+          "conversation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of conversation identifiers to filter traces by conversation."
           },
           "agent_id": {
             "type": "string",
