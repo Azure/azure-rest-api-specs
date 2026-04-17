@@ -5840,6 +5840,9 @@
       "type": "object",
       "description": "Datasources under OMS Workspace.",
       "properties": {
+        "properties": {
+          "description": "The data source properties in raw json format, each kind of data source have it's own schema."
+        },
         "etag": {
           "type": "string",
           "description": "The ETag of the data source."
@@ -5862,6 +5865,7 @@
         }
       },
       "required": [
+        "properties",
         "kind"
       ],
       "allOf": [

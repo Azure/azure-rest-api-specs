@@ -14,14 +14,19 @@ namespace Microsoft.OperationalInsights;
 /**
  * Datasources under OMS Workspace.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
-model DataSource is Azure.ResourceManager.ProxyResource<never> {
-  ...ResourceNameParameter<
-    Resource = DataSource,
-    KeyName = "dataSourceName",
-    SegmentName = "dataSources",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model DataSource extends Foundations.ProxyResource {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties: unknown;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("dataSourceName")
+  @segment("dataSources")
+  name: string;
 
   /**
    * The ETag of the data source.
