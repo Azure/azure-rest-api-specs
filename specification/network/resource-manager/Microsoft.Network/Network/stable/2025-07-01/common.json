@@ -3044,6 +3044,7 @@
         "VnetLocal",
         "Internet",
         "VirtualAppliance",
+        "VirtualApplianceEcmp",
         "None"
       ],
       "x-ms-enum": {
@@ -3071,9 +3072,14 @@
             "description": "VirtualAppliance"
           },
           {
+            "name": "VirtualApplianceEcmp",
+            "value": "VirtualApplianceEcmp",
+            "description": "Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses."
+          },
+          {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "No next hop type."
           }
         ]
       }
@@ -6191,6 +6197,7 @@
         "VirtualNetworkGateway",
         "VnetLocal",
         "HyperNetGateway",
+        "VirtualApplianceEcmp",
         "None"
       ],
       "x-ms-enum": {
@@ -6223,9 +6230,14 @@
             "description": "HyperNetGateway"
           },
           {
+            "name": "VirtualApplianceEcmp",
+            "value": "VirtualApplianceEcmp",
+            "description": "Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses."
+          },
+          {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "No next hop type."
           }
         ]
       }
