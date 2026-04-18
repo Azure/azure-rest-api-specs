@@ -116,8 +116,7 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
-  @doc("Stable, human-readable slug assigned by the service on first generation. When editing criteria and saving as a new version, clients must echo the existing rubric_id to preserve identity across versions. Service-generated on first creation; client-echoed on subsequent saves.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @doc("Short name / slug for this rubric criterion. For generated evaluators, the service assigns a default slug derived from the description. For manually created rubric evaluators, users set this directly. Users can edit this field when saving new versions.")
   rubric_id?: string;
 
   @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
@@ -156,7 +155,7 @@ model EvaluatorGenerationInputs {
   category?: EvaluatorCategory = EvaluatorCategory.quality;
 
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
-  model: string;
+  `model`: string;
 
   @doc("The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.")
   evaluator_name: string;
