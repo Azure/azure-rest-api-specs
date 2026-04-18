@@ -2920,7 +2920,13 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
-   * None
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
+   * No next hop type.
    */
   None: "None",
 }
@@ -6253,6 +6259,24 @@ model ApplicationGatewaySku {
 }
 
 /**
+ * Managed HSM properties of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_07_01)
+model ApplicationGatewayManagedHsm {
+  /**
+   * Key identifier of a key stored in Managed HSM.
+   */
+  keyId?: url;
+
+  /**
+   * Base-64 encoded value of a base-64 public certificate.
+   */
+  publicCertData?: string;
+}
+
+/**
  * Application Gateway Ssl policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6660,6 +6684,12 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
    * Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
    */
   keyVaultSecretId?: string;
+
+  /**
+   * Managed HSM properties of the Application Gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  hsm?: ApplicationGatewayManagedHsm;
 
   /**
    * The provisioning state of the SSL certificate resource.
@@ -26022,3 +26052,5 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(DisablePeeringRoute, Versions.v2025_07_01);
+@@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
