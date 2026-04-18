@@ -65,8 +65,9 @@ model NamespaceProperties {
   @added(Versions.v2026_02_01_preview)
   management?: Management;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @added(Versions.v2026_11_01_preview)
-  @doc("The DPS instance that provisions devices in this namespace.")
+  @doc("The provisioning endpoints associated with this namespace.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   provisioning?: NamespaceProvisioning;
 
@@ -88,14 +89,14 @@ model MessagingEndpoint {
 
   @added(Versions.v2025_07_01_preview)
   @madeOptional(Versions.v2026_11_01_preview)
-  @doc("The service-facing endpoint address of the IoT Hub.")
+  @doc("The service-facing endpoint address to connect to.")
   address?: string;
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
 
   @added(Versions.v2026_11_01_preview)
-  @doc("The device-facing endpoint address of the IoT Hub.")
+  @doc("The device-facing endpoint address to connect to.")
   @visibility(Lifecycle.Read)
   deviceAddress?: string;
 
@@ -152,7 +153,7 @@ union MessagingEndpointAvailability {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("The DPS provisioning configuration for the namespace.")
+@doc("The provisioning endpoints associated with this namespace.")
 model NamespaceProvisioning {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @doc("Dictionary of provisioning endpoints.")
@@ -160,7 +161,7 @@ model NamespaceProvisioning {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("Namespace provisioning endpoint model for a linked DPS instance.")
+@doc("A provisioning service endpoint linked to this namespace.")
 model ProvisioningEndpoint {
   @doc("Type of provisioning resource.")
   endpointType?: string;

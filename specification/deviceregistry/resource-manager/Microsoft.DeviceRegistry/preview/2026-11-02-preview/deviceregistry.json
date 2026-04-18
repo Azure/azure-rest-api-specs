@@ -9348,7 +9348,7 @@
         },
         "address": {
           "type": "string",
-          "description": "The service-facing endpoint address of the IoT Hub."
+          "description": "The service-facing endpoint address to connect to."
         },
         "resourceId": {
           "type": "string",
@@ -9356,7 +9356,7 @@
         },
         "deviceAddress": {
           "type": "string",
-          "description": "The device-facing endpoint address of the IoT Hub.",
+          "description": "The device-facing endpoint address to connect to.",
           "readOnly": true
         },
         "inboundCallerIdentity": {
@@ -11681,7 +11681,7 @@
         },
         "provisioning": {
           "$ref": "#/definitions/NamespaceProvisioning",
-          "description": "The DPS instance that provisions devices in this namespace.",
+          "description": "The provisioning endpoints associated with this namespace.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -11696,7 +11696,7 @@
     },
     "NamespaceProvisioning": {
       "type": "object",
-      "description": "The DPS provisioning configuration for the namespace.",
+      "description": "The provisioning endpoints associated with this namespace.",
       "properties": {
         "endpoints": {
           "type": "object",
@@ -11993,7 +11993,7 @@
     },
     "ProvisioningEndpoint": {
       "type": "object",
-      "description": "Namespace provisioning endpoint model for a linked DPS instance.",
+      "description": "A provisioning service endpoint linked to this namespace.",
       "properties": {
         "endpointType": {
           "type": "string",
