@@ -9156,6 +9156,7 @@ model AzureFirewallPropertiesFormat {
 /**
  * AFC configuration for the Azure Firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "AfcConfiguration is a firewall-specific model and must be emitted to firewall.json"
 @added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AfcConfiguration {
