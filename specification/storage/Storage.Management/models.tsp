@@ -2136,7 +2136,7 @@ model FileShareLimits {
   /**
    * The IO scalar used for guardrail calculations for a file share in the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name uses IO abbreviation for Input Output"
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   guardrailIOScalar?: float64;
