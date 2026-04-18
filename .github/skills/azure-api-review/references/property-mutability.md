@@ -1,4 +1,12 @@
-# Property Mutability Rules (OAPI027, OAPI020, OAPI029)
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
+     Derived from:
+       - Azure Resource Provider Contract (RPC) v1.0 — PUT Resource
+       - Azure REST API Guidelines (vNext) — JSON
+       - ARM Wiki: api_contracts/guidelines/openapi.md (OAPI027, OAPI020, OAPI029, OAPI030, OAPI031, OAPI034)
+     The upstream documents always take precedence if there is a conflict. -->
+
+# Property Mutability Rules (OAPI027, OAPI020, OAPI029, OAPI030, OAPI031, OAPI034)
 
 These rules govern how property visibility and mutability must be
 consistently applied across Azure API specifications. They prevent ARM
@@ -130,6 +138,108 @@ and Azure Policy.
 @visibility(Lifecycle.Create, Lifecycle.Read)
 location?: string;
 ```
+
+---
+
+## OAPI030: PUT/PATCH Must Ignore Immutable Properties When Value Is Unchanged
+
+When a PUT or PATCH request includes an immutable property whose value
+matches the current value of the resource, the service **MUST** accept
+the request without error.
+
+**Why:** Clients commonly round-trip the GET response back into a PUT
+(e.g., ARM template re-deployments). If the service rejects a PUT
+because it contains an immutable property — even though the value has
+not changed — template re-deployments will fail unnecessarily.
+
+### OAPI030 OpenAPI JSON
+
+```json
+// Immutable property — service must accept re-PUT with same value
+"location": {
+  "type": "string",
+  "x-ms-mutability": ["create", "read"]
+}
+```
+
+### OAPI030 TypeSpec
+
+```tsp
+// Immutable property — service must accept re-PUT with same value
+@visibility(Lifecycle.Create, Lifecycle.Read)
+location?: string;
+```
+
+**Severity:** Required
+
+---
+
+## OAPI031: PUT/PATCH Must Reject Changes to Immutable Properties
+
+When a PUT or PATCH request attempts to **change** the value of an
+immutable property, the service **MUST** reject the request with an
+appropriate error (typically `400 Bad Request` or `409 Conflict`).
+
+**Why:** Immutable properties are contractually set-once. Silently
+ignoring a change request would cause the GET response to differ from
+what the user intended, leading to What-If noise and customer
+confusion.
+
+### How OAPI030 and OAPI031 Work Together
+
+| Scenario                          | Expected Behavior    |
+| --------------------------------- | -------------------- |
+| Immutable prop in PUT, same value | Accept (ignore prop) |
+| Immutable prop in PUT, new value  | Reject with error    |
+| Immutable prop absent from PUT    | Accept (no change)   |
+
+**Severity:** Required
+
+---
+
+## OAPI034: Clear Field Ownership
+
+Every property **MUST** have clear ownership — either server-owned
+(`readOnly`) or client-owned.
+
+- **Server-owned** properties are computed by the service and **MUST**
+  be `readOnly`. The service sets the value; the client reads it.
+- **Client-owned** properties are set by the user. The service **MUST
+  NOT** silently overwrite or modify client-owned field values.
+
+**Anti-pattern:** A property `size` that the user sets to `100` on
+PUT, but the service auto-increases to `200` based on usage. This
+overwrites the user's intent and causes What-If to report a false
+difference on every deployment.
+
+**Fix:** Use separate properties for each concern:
+
+### OAPI034 OpenAPI JSON
+
+```json
+// GOOD — separate client-owned and server-owned properties
+"maxSize": {
+  "type": "integer",
+  "description": "Maximum size configured by the user."
+},
+"currentSize": {
+  "type": "integer",
+  "readOnly": true,
+  "description": "Current size as reported by the service."
+}
+```
+
+### OAPI034 TypeSpec
+
+```tsp
+// GOOD — separate client-owned and server-owned properties
+maxSize?: int32;
+
+@visibility(Lifecycle.Read)
+currentSize?: int32;
+```
+
+**Severity:** Required
 
 ---
 

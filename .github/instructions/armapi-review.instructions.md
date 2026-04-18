@@ -2,7 +2,8 @@
 applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
-<!-- Upstream alignment: 2026-04-17
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
      All rules derived from or aligned with:
        - Azure Resource Provider Contract (RPC) v1.0
          https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
@@ -63,6 +64,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - This GET operation **MUST** return an `OperationListResult` with `x-ms-pageable` and a `nextLinkName`.
 - The operations list **MUST** use the common-types `OperationListResult` and `Operation` definitions. Do not define custom Operation types.
 - If the operations endpoint is missing from the spec, flag it as an ARM Error.
+- When adding new API versions, the operations list **MUST** include ALL operations across all API versions. Do not remove existing operations from the operations list — only add new ones.
 
 ### 1.5 ARM URL Pattern Compliance
 
@@ -113,6 +115,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Nested resources **MUST** have a List operation under their parent.
 - Nested resources **MUST NOT** be embedded inline in the parent resource's GET response body (see Azure Resource Graph guideline ARG001 below). Return a resource ID reference instead.
 - For singleton nested resources (only one instance exists), the resource name **SHOULD** be `default`. The collection GET (`/parent/{parentName}/children`) and singleton GET (`/parent/{parentName}/children/default`) must both exist.
+- All child (nested) resource types — including singletons — **MUST** support both a collection GET under the parent and a point GET for a single instance (PLCY008). Without both operations, Azure Policy compliance data cannot be populated for the child resource type.
 
 ### 2.4 Resource References Between Resources
 
@@ -139,6 +142,17 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   - `tags` (for tracked resources)
 - If any of these appear inside `properties`, flag it as an ARM Error and instruct the author to move them to the top level.
 - Conversely, properties that are **not** in this top-level set (e.g. `classification`, domain-specific configuration) **MUST** be inside the `properties` bag and not at the resource root.
+
+#### 2.6.1 Standard SKU Schema
+
+- The `sku` top-level property **MUST** follow the standard ARM SKU schema with these sub-properties:
+  - `name` (string, required) — the SKU identifier (e.g., `"Standard_LRS"`)
+  - `tier` (string, recommended) — the SKU tier (e.g., `"Standard"`, `"Premium"`)
+  - `size` (string, optional) — the SKU size
+  - `family` (string, optional) — the SKU family
+  - `capacity` (integer, optional) — scale unit count
+- The SKU definition **SHOULD** reference the common-types SKU model where available.
+- The internal SKU link API (used by ARM to discover regional SKU availability) **MUST NOT** be exposed in the public swagger specification.
 
 ### 2.7 Every Resource Must Have a Point GET
 
@@ -172,7 +186,13 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - The API path for PUT **MUST** have an even number of segments (alternating type/name) (RPC-Put-V1-02).
 - The PUT request and response body **MUST** use the same model (RPC-Put-V1-25). The response of PUT **MUST** match the response of GET and PATCH for the same resource (RPC-Put-V1-12).
 
-### 3.2 PUT Must Not Expose Secrets in Response
+### 3.2 PUT Must Not Exhibit PATCH Semantics (WHATIF-004)
+
+- Omitting a property from a PUT request body **MUST NOT** preserve the current value of that property. PUT is a full resource replacement, not a partial update.
+- If existing API versions exhibit PATCH-like behavior on PUT (preserving omitted properties), this **MUST** be corrected in new API versions.
+- **Why:** ARM Template What-If compares the PUT request body (from the template) with the GET response (current state). If PUT silently preserves omitted properties, What-If reports false differences because the template omits properties that the service secretly retains.
+
+### 3.3 PUT Must Not Expose Secrets in Response
 
 - The response of a PUT operation **MUST NOT** return secret values (e.g. passwords, keys, connection strings).
 - If a secret is accepted on write (e.g. `administratorPassword`), the response **MUST** return `null` or omit the property entirely.
@@ -201,6 +221,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - For tracked resources, the PATCH operation **MUST** support updating `tags` at minimum.
 - Ideally, all mutable properties should be patchable for a better customer experience.
+- PATCH on `tags` follows **replace-all** semantics: sending `{ "tags": { "tag3": "v3" } }` to a resource with `tag1` and `tag2` replaces the entire tag set — the result has only `tag3`. Tags are not merged additively (RPC007).
 
 ### 4.4 PATCH Must Not Expose Secrets in Response
 
@@ -330,6 +351,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 ### 7.2 x-ms-secret Annotation
 
 - Any property that contains a secret in **any** operation (PUT, PATCH, GET, or POST) **MUST** be annotated with `"x-ms-secret": true` in the swagger definition.
+- Without this annotation, ARM Template What-If treats the property as a normal value and reports a **false create** when the template includes the secret but the GET response omits it (WHATIF-003).
 
 ### 7.3 Proactive Secret Detection (SEC-SECRET-DETECT)
 
@@ -389,6 +411,9 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 with format-specific examples and mutability guidelines.
 
 - Create-only properties **MUST** use `x-ms-mutability: ["create", "read"]`. Response-only properties **MUST** use `"readOnly": true` or `x-ms-mutability: ["read"]`. Fully mutable properties do not need annotation.
+- Every server-computed property **MUST** be annotated `readOnly` (WHATIF-001). Without this annotation, ARM Template What-If interprets the property as client-owned and reports a **false delete** when the template omits it.
+
+> **Full What-If noise taxonomy:** See [`.github/skills/azure-api-review/references/what-if-preflight-compliance.md`](../skills/azure-api-review/references/what-if-preflight-compliance.md) for WHATIF-001 through WHATIF-005.
 
 ### 8.7 Avoid Writable Circular Dependencies
 
@@ -433,10 +458,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - If a property must accept multiple types for backward compatibility, the service **MUST** preserve the user-provided data type and formatting in the PUT response and subsequent GETs. Do not normalize between types.
 - Mixed-type properties cause noise in ARM Template What-If and ARM Change Analysis. Prefer rejecting the incorrect type with `400 Bad Request`.
 
-### 8.15 Default Values Must Be Static (OAPI022)
+### 8.15 Default Values Must Be Static and Declared (OAPI022, WHATIF-002)
 
 - Properties with `default` values **MUST** use the same default value on every similar PUT request. Do not derive the default value from other properties in the resource or from external state.
 - The `default` annotation in the swagger **MUST** specify the actual default value so that clients, documentation, and policy can discover it.
+- Every **optional** property where the service applies a default value when the property is omitted from PUT **MUST** declare that default value in the swagger spec. Without the annotation, ARM Template What-If reports a false delete for the property (the template omits it, but GET returns the service-applied default).
 
 ### 8.16 Service Must Preserve Array Ordering (OAPI024)
 
@@ -452,6 +478,27 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - If a PUT or PATCH payload contains properties that the RP does not recognize, the service **MUST** reject the request with `400 Bad Request` and an appropriate ARM error response body.
 - Do not silently discard unknown properties — the user must be informed that their payload is incorrect. Silent discarding causes the GET response to differ from the PUT request, leading to What-If noise and customer confusion.
+
+### 8.19 PUT/PATCH Must Tolerate Read-Only Properties (OAPI021)
+
+- PUT and PATCH operations **MUST NOT** fail when the request body includes read-only properties with their current values.
+- Automation tools (CLI, Terraform, Bicep) commonly GET a resource, modify a few properties, and PUT the entire payload back. If the service rejects the request because it contains read-only properties (e.g., `provisioningState`, `id`), these tools break.
+- **Fix:** Ignore read-only properties in the request body silently, or if the value differs from the current value, reject with a descriptive `400 Bad Request` error.
+
+### 8.20 Immutable Property Tolerance and Enforcement (OAPI030, OAPI031)
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI030 and OAPI031.
+
+- If a PUT or PATCH request includes an immutable property with the **same value** it already has, the service **MUST NOT** fail the request (OAPI030). This allows tools to round-trip payloads without stripping immutable fields.
+- If a PUT or PATCH request attempts to **change** an immutable property, the service **MUST** reject with `400 Bad Request` and an error message identifying the property (OAPI031). Do not silently ignore the change.
+
+### 8.21 Fields Must Have Clear Ownership — Server or Client (OAPI034)
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI034. See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for value preservation rules OAPI024, OAPI025, and OAPI026.
+
+- Every property **MUST** have a clear owner: either the **server** (read-only, computed) or the **client** (set by user, preserved by server).
+- A property **MUST NOT** be writable by the client yet silently overwritten or auto-updated by the server. This anti-pattern causes the GET response to diverge from the last PUT, generating noise in What-If, Terraform drift detection, and Change Analysis.
+- **Fix:** Use separate properties for client-specified and server-computed values (e.g., `requestedVersion` + `currentVersion` instead of a single `version` that the server auto-bumps).
 
 ---
 
@@ -478,10 +525,16 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   - Inconsistencies if both representations are not kept in sync
   - Complications with Azure Resource Graph integration
 
-### 9.4 Private Endpoint Connection Antipatterns
+### 9.4 Private Endpoint Connection Requirements
 
 - Do not document **internal** private link contracts (e.g. private endpoint connections between internal services) as **external** ARM APIs.
 - Private endpoint connection definitions **MUST** either come from ARM common types or be defined in a dedicated file (e.g. `privateEndpointConnections.json`). Do not define them inline in the main resource file.
+- Resources with private endpoint support **MUST** define three nested resource types:
+  - `privateEndpointConnectionProxies` (async PUT/DELETE)
+  - `privateEndpointConnections` (async PUT/DELETE)
+  - `privateLinkResources` (GET only)
+- The parent resource **MUST** include a `publicNetworkAccess` property (enum: `Enabled` / `Disabled`) and a `privateEndpointConnections` array property in its model.
+- Private endpoint connection types **MUST** come from ARM common types (`common-types/resource-management/vX/privatelinks.json`).
 
 ---
 
@@ -526,12 +579,13 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Suppressions **MUST** include specific `from` and `where` clauses to target the exact file and JSON path of the violation. Blanket suppressions that suppress an entire file without specifying the path are not allowed — they mask other violations that may be introduced later.
 
 
-### 10A.3 Do Not Suppress Warnings in readme.md (RPC-SUPPRESS-WARN)
+### 10A.2 Do Not Suppress Warnings in readme.md (RPC-SUPPRESS-WARN)
 
 - Warnings (e.g., `EnumInsteadOfBoolean`, `AvoidAdditionalProperties`) **SHOULD NOT** be suppressed in `readme.md`. Only errors require suppression to unblock CI.
 - If a warning is being suppressed in `readme.md`, flag it -- the author should either fix the underlying issue or leave the warning unsuppressed. Warnings do not block the pipeline.
 - When a suppression for a warning is justified (rare), use `where` clauses instead of blanket suppression to avoid masking future valid warnings in the same file.
-### 10A.2 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
+
+### 10A.3 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
 
 - For ARM RPs, the `operations.json` (or equivalent operations API spec) **MUST** be included in every published package tag's input-file list.
 - If a new tag only includes the service resource swagger but omits the operations API, flag it — the resulting SDK will be missing the operations endpoint.
@@ -606,6 +660,298 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ---
 
+## 14. Azure Policy Compatibility
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/policy-compatibility.md`](../skills/azure-api-review/references/policy-compatibility.md) for rules PLCY001–PLCY009.
+
+### 14.1 Property Design for Policy Auditability (PLCY001)
+
+- Properties **MUST** be designed so that customers can restrict or audit configurations at creation time. Break composite values into individual properties rather than packing multiple concepts into a single string.
+
+### 14.2 Read-Only Post-Creation Properties (PLCY003)
+
+- Minimize properties that are read-only and only populated **after** initial creation. Azure Policy deny rules evaluate the PUT request body — properties absent from the request cannot be evaluated.
+
+### 14.3 Free-Form Objects (PLCY005)
+
+- `type: object` with no defined schema (free-form objects) **SHOULD NOT** be used for service-owned properties. Azure Policy cannot create aliases for dynamic property names.
+
+### 14.4 PUT/PATCH Semantics for Policy (PLCY006)
+
+- PUT **MUST** accept all compliance-relevant properties in the request body. If PUT is implemented as a partial update, deny policies may fail silently because the request body lacks the properties Policy needs to evaluate.
+
+### 14.5 Collection GET for Compliance Data (PLCY007, PLCY008)
+
+- Top-level tracked resources **MUST** have collection GETs at both subscription and resource group level (PLCY007).
+- All child resource types — including singletons — **MUST** have both a collection GET and a point GET (PLCY008).
+- Without these operations, Azure Policy compliance data cannot be populated.
+
+### 14.6 POST Operations Not Supported by Policy (PLCY009)
+
+- Azure Policy **cannot** evaluate POST operations. If a configuration requires Policy enforcement (deny, audit, modify), model it in the PUT request body and GET response — not as a POST action.
+
+---
+
+## 15. ARM Template Deployment Compatibility
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/template-deployment.md`](../skills/azure-api-review/references/template-deployment.md) for rules TD001–TD003. See [`.github/skills/azure-api-review/references/what-if-preflight-compliance.md`](../skills/azure-api-review/references/what-if-preflight-compliance.md) for WHATIF-001–005 and PREFLIGHT-001–005.
+
+### 15.1 PUT Required for Template Deployment (TD001)
+
+- The ARM Template Deployment engine provisions resources using PUT. Resources that are only creatable via POST **cannot** be deployed via ARM Templates, Bicep, or Terraform AzAPI.
+
+### 15.2 PUT Idempotency for Template Re-Deployment (TD002)
+
+- PUT operations **MUST** be idempotent. The deployment engine retries failed PUTs and re-executes deployments. A non-idempotent PUT causes deployment failures on retry.
+
+### 15.3 Preflight Validation Support (TD003)
+
+- Resource providers **MUST** support the Preflight API. The deployment engine calls Preflight before executing a deployment to detect errors early (syntax, naming, quotas, capacity, SKU availability, region restrictions).
+
+### 15.4 Preflight Response Contract (PREFLIGHT-001, PREFLIGHT-002)
+
+- Preflight **MUST** always return `200 OK`, even when reporting validation errors. A non-200 response indicates a **service failure**, not a user input problem.
+- Each validation error in the response **MUST** include:
+  - `code` — a unique, searchable error code
+  - `message` — an actionable, human-readable description
+  - `target` — the fully qualified ARM resource ID of the problematic resource
+
+### 15.5 Preflight Must Handle Template Language Expressions (PREFLIGHT-003)
+
+- Preflight **MUST** accept Template Language Expressions (TLEs) — strings starting with `[` and ending with `]` — and skip validation on properties containing them. TLEs are resolved at deployment time, not at preflight time.
+
+### 15.6 No Existence Checks in Preflight (PREFLIGHT-004)
+
+- Preflight **MUST NOT** perform existence checks for resource IDs referenced in the payload. The referenced resource may be created later in the same deployment, and existence checks can leak information about resources the caller may not have access to.
+
+### 15.7 Static Validations Enforced by ARM (PREFLIGHT-005)
+
+- ARM performs static validations automatically during preflight. The spec must support these by using correct property definitions:
+  - **Resource names:** not empty, ≤260 characters (≤90 for resource groups), must not end with `.` or whitespace.
+  - **Resource group names:** only alphanumerics, `-`, `_`, `.`, `(`, `)`.
+  - **`plan` and `identity`:** if specified on a tracked resource, the resource type must support them per the ARM manifest.
+  - **`location`, `plan`, `identity`:** these are **immutable** — ARM rejects update attempts that change them.
+  - **`zones`:** resource type must support availability zones; no duplicate zone values allowed.
+
+---
+
+## 16. Resource Move Requirements (RPC003)
+
+- All **top-level tracked resource types** **MUST** support resource move — the ability to move a resource across resource groups or across subscriptions within the same AAD tenant.
+- Child resources move with the parent automatically.
+- Move does not change the resource's physical location or region.
+- If a resource type **cannot** support move, it must be explicitly blocked with documented technical justification. Blocking move without justification is a poor customer experience.
+- Resource types that support move **MUST** handle the ARM move callback and update internal state (e.g., resource group references in stored data).
+
+---
+
+## 17. Availability Zones
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/availability-zones.md`](../skills/azure-api-review/references/availability-zones.md) for the full zones property contract.
+
+### 17.1 Zones Property Placement
+
+- The `zones` property **MUST** be a top-level property (alongside `id`, `name`, `type`, `location`), not inside the `properties` bag.
+- The property type **MUST** be `array` of `string` (logical zone names).
+
+### 17.2 Zone Immutability
+
+- A resource's zone assignment **MUST NOT** be changed after creation. The RP **MUST** validate zone consistency on update requests and reject changes.
+- The `zones` property **MUST** be annotated as immutable: `"x-ms-mutability": ["create", "read"]` (OpenAPI) or `@visibility(Lifecycle.Create, Lifecycle.Read)` (TypeSpec).
+
+### 17.3 Zone Semantics
+
+- **Zonal resources** (single-zoned): `zones` contains logical zone IDs (e.g., `["1"]`).
+- **Zone-redundant resources** (multi-zoned): `zones` is `null` or absent in the response.
+- Empty array `[]` means the RP selects the zone. `["*"]` means the resource must deploy to a zone and the RP should fail if zone placement is unavailable.
+- Property descriptions **SHOULD** document these semantics for the specific resource type.
+
+### 17.4 Zone Discoverability
+
+- RPs that support zones **MUST** ensure zone information is discoverable via the `GET /providers/Microsoft.{Namespace}` API, which returns `zoneMappings` per resource type.
+
+---
+
+## 18. Extended Locations
+
+### 18.1 Extended Location Property
+
+- Resources that support extended locations (e.g., Edge Zones) **MUST** use the `extendedLocation` top-level property (not inside `properties`).
+- The property is an object with two required fields:
+  - `type` — the extended location type (currently only `"EdgeZone"` is supported)
+  - `name` — the extended location name (max 128 characters; forbidden characters: `<>%&:\?/` and control characters)
+
+### 18.2 Extended Location Immutability
+
+- `extendedLocation` **MUST NOT** be added to an existing resource after creation.
+- `extendedLocation` **MUST NOT** be removed from a resource after creation.
+- Once set, `extendedLocation` **MUST** be included on all subsequent PUT requests to the resource.
+
+---
+
+## 19. ETag and Concurrency Control
+
+### 19.1 Supported Concurrency Headers
+
+- ARM supports the `If-Match` header for write and delete concurrency control.
+- `If-None-Match` and wildcard values (`*`) are **NOT** supported.
+- Read concurrency (conditional GET) is not supported.
+
+### 19.2 ETag in Responses
+
+- Every successful CRUD operation **SHOULD** return an `ETag` header in the response.
+- Clients may use the returned ETag in subsequent `If-Match` headers for optimistic concurrency.
+
+### 19.3 If-Match Behavior
+
+| Header Value         | Behavior                                                     |
+| -------------------- | ------------------------------------------------------------ |
+| Absent / empty       | Allow the operation (no concurrency check)                   |
+| `If-Match: "xyz"`    | Check resource exists and ETag matches; `412` if mismatch    |
+
+---
+
+## 20. systemData Requirements
+
+### 20.1 systemData Property
+
+- `systemData` is a **required top-level property** on all tracked resources for new API versions. It contains `createdBy`, `createdByType`, `createdAt`, `lastModifiedBy`, `lastModifiedByType`, `lastModifiedAt`.
+- All `systemData` properties **MUST** be `readOnly`.
+- `systemData` **MUST** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). Do not define a custom `systemData` model.
+- `systemData` **MUST NOT** be placed inside the `properties` bag — it is a top-level ARM envelope property.
+- `*ByType` values (`User`, `Application`, `ManagedIdentity`, `Key`) **MUST** be stored as strings (not enums) to support future identity types without breaking changes.
+
+### 20.2 systemData Lifecycle Rules
+
+- **DO NOT** add `systemData` to an existing (current) API version — this is a breaking change. Add it with a new API version only.
+- **DO NOT** update `systemData` when child resources change — only update for changes to the resource itself.
+- **DO NOT** update `systemData` on synchronously rejected requests (e.g., `400 Bad Request`).
+- For long-running operations, `systemData` **MUST** reflect the values from when the operation was **triggered**, not when it completed. Keep trigger-time values even if the async operation fails or is canceled.
+- Internal admin operations **MUST NOT** update `systemData` unless user-modifiable control-plane properties change.
+
+---
+
+## 21. Check Name Availability
+
+### 21.1 API Pattern
+
+- Resource providers **SHOULD** implement a check name availability API:
+  - **Global uniqueness:** `POST /subscriptions/{id}/providers/{namespace}/checkNameAvailability`
+  - **Local uniqueness:** `POST /subscriptions/{id}/providers/{namespace}/locations/{location}/checkNameAvailability`
+- Check name availability **does NOT reserve** names. Concurrent operations can create a resource with the same name between the check and the PUT.
+
+### 21.2 Request and Response Contract (CNA-002)
+
+- The request body **MUST** include:
+  - `name` (string) — the proposed resource name
+  - `type` (string) — the fully qualified resource type (e.g., `Microsoft.Storage/storageAccounts`)
+- The response body **MUST** include:
+  - `nameAvailable` (boolean) — whether the name is available
+  - `reason` (enum: `AlreadyExists` | `Invalid`) — why the name is unavailable
+  - `message` (string) — a human-readable explanation
+- Do not use checkNameAvailability as a gate — implement retry logic in resource creation.
+
+---
+
+## 22. managedBy Property
+
+### 22.1 Purpose and Format
+
+- `managedBy` is a **top-level** ARM envelope property containing a fully qualified ARM resource ID or a regional shorthand. It indicates that another resource manages this resource's lifecycle.
+- `managedByExtended` is an array variant for multiple managing resources.
+- Both `managedBy` and `managedByExtended` are **immutable** — once set during creation, they cannot be changed.
+
+### 22.2 Impact on Platform Behavior
+
+- Resources with `managedBy` set are **skipped during complete-mode deployment deletions** (ARM does not delete managed resources).
+- During resource group or bulk deletion, the managing resource is deleted first, then the managed resource.
+- `managedBy` **MUST NOT** be used as a property name inside the `properties` bag — it is reserved for the ARM envelope.
+
+---
+
+## 23. API Deprecation Policy
+
+### 23.1 GA API Retirement
+
+- GA APIs require a minimum of **36 months notice** before retirement.
+- The deprecation notice period begins when customers are formally notified (not when the decision is made internally).
+
+### 23.2 Preview API Lifecycle
+
+- Preview APIs **MUST NOT** remain in preview for more than **12 months** — they must be promoted to GA or retired.
+- Preview API retirement requires a minimum of **90 days notice** to customers.
+
+### 23.3 Deprecation in Swagger
+
+- Deprecated API versions, operations, or properties **MUST** be marked with the OpenAPI `"deprecated": true` keyword.
+- Update REST API documentation, SDK packages, CLI, and PowerShell with deprecation messages and migration guidance.
+- **Impact on Azure Policy:** Removing properties or API versions breaks existing Azure Policy alias references. Always coordinate with the Azure Policy team before deprecation.
+
+---
+
+## 24. Async Operation Signing and Validation
+
+### 24.1 Protected Async Operation Polling
+
+- Resource types that expose async operations **SHOULD** enable `ProtectedAsyncOperationPolling` in the RP manifest. This ensures ARM validates the caller's identity on polling URIs, preventing low-privileged users from accessing operation results they did not initiate.
+
+### 24.2 Reserved Query Parameters
+
+- The query parameters `t`, `c`, `s`, and `h` are **reserved** by ARM for async operation URI signing. RPs **MUST NOT** use these parameter names in their `Location` or `Azure-AsyncOperation` polling URIs.
+
+### 24.3 Polling URI Length
+
+- Polling URIs (with ARM signing parameters) can reach 3–4 KB in length. RPs and SDKs **MUST** support URIs up to at least **4 KB**. Do not add unnecessary data to polling URIs that increases their length.
+
+---
+
+## 25. Usages API Contract
+
+### 25.1 Endpoints
+
+- **Resource-level usage:** `GET {resource-identifier}/usages?api-version={version}`
+- **Location-level usage:** `GET /subscriptions/{id}/providers/{namespace}/locations/{location}/usages?api-version={version}`
+
+### 25.2 Response Structure
+
+- Response **MUST** be a paged JSON object with a `value` array. Each item **MUST** include:
+  - `unit` (required): `Count`, `Bytes`, `Seconds`, `Percent`, `CountPerSecond`, or `BytesPerSecond`
+  - `limit` (required): Maximum permitted value (`-1` if no limit)
+  - `currentValue` (required): Current usage value
+  - `id` (required): Fully qualified ARM resource ID
+  - `name` (required): `LocalizableString` with `value` and `localizedValue`
+
+### 25.3 Filter Syntax
+
+- The `$filter` query parameter supports only `name eq <value>` clauses separated by `or`. No other filter syntax is supported.
+
+---
+
+## 26. Schema Evolution Between API Versions
+
+### 26.1 Allowed Schema Changes
+
+Between API versions, the following changes are **allowed**:
+
+- Adding **optional** properties.
+- Removing **optional** properties (but see ARG003 — carry forward properties until usage is fully deprecated).
+- Renaming properties (keep both old and new names for backward compatibility during a transition period).
+
+### 26.2 Forbidden Schema Changes
+
+The following changes are **forbidden**:
+
+- **Changing the type** of an existing property (e.g., `string` → `object`). If the type must change, introduce a **new property name** and deprecate the old one.
+- Adding a **required** property to an existing model (breaks clients sending the old schema).
+- Removing a **required** property from an existing model.
+- Changing a property from **optional to required** or vice versa.
+
+### 26.3 DELETE Must Never Fail for API Version Mismatch
+
+- The DELETE operation **MUST NOT** fail because a resource was created with a different API version than the one used for deletion. A user must be able to delete any resource regardless of which API version created it.
+
+---
+
 ## ARM Review Checklist Summary
 
 When reviewing ARM resource-manager swagger files, verify:
@@ -619,9 +965,12 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Extension resources use the correct scope pattern
 - ✅ Operations API endpoint exists using common-types `OperationListResult` and `Operation` definitions (RPC-Operations-V1)
 
+- ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
+
 ### Resource Model
 - ✅ Top-level ARM property names (`id`, `name`, `type`, `systemData`) NOT reused inside `properties` bag (RPC-Put-V1-09)
 - ✅ `zones`, `sku`, `kind`, `plan`, `identity`, `tags` are top-level properties (not inside `properties`)
+- ✅ `sku` follows standard schema (`name`, `tier`, `size`, `family`, `capacity`); internal SKU link API not in public swagger
 - ✅ Non-ARM-envelope properties are inside the `properties` bag
 - ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions
 - ✅ Every resource type has a point GET; singleton resources named "default"
@@ -649,6 +998,7 @@ When reviewing ARM resource-manager swagger files, verify:
 
 ### Security & Secrets
 - ✅ No secrets in GET/PUT/PATCH responses; secrets annotated with `x-ms-secret: true`
+- ✅ Missing `x-ms-secret` causes What-If false creates — annotation required on all secret properties (WHATIF-003)
 - ✅ Secret retrieval exposed via `list*` POST action, not GET
 - ✅ Proactive secret detection (SEC-SECRET-DETECT) applied to all string properties
 
@@ -664,6 +1014,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Operation IDs are globally unique GUIDs — not derived from hashes of resource properties (RPC-BestPractice-08)
 
 ### Property Design (Properties Bag Review)
+- ✅ All server-computed properties marked `readOnly` — missing annotation causes What-If false deletes (WHATIF-001)
 - ✅ String properties actively reviewed — enums used for finite/limited value sets
 - ✅ String properties actively reviewed — specific formats used (`date-time`, `uri`, `uuid`, `duration`, etc.)
 - ✅ No freeform `type: object` with no schema; no plain untyped string for structured values
@@ -679,6 +1030,11 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ No CSV-encoded strings representing collections — use JSON arrays (PLCY004)
 - ✅ Properties do not accept multiple data types; data types preserved in responses (OAPI025)
 - ✅ Default values are static constants, not derived from other properties (OAPI022)
+- ✅ PUT/PATCH tolerates read-only properties with unchanged values (OAPI021)
+- ✅ Immutable properties: unchanged values accepted, changed values rejected with 400 (OAPI030, OAPI031)
+- ✅ Fields have clear ownership — server-owned (readOnly) or client-owned (preserved exactly); no server auto-updates of client fields (OAPI034)
+- ✅ Array ordering preserved in PUT/PATCH responses (OAPI024)
+- ✅ Property value casing and formatting preserved — no normalization (OAPI026)
 
 ### List APIs
 - ✅ List APIs return `{ value: [...], nextLink }` wrapper; `nextLink` has `format: uri`; marked with `x-ms-pageable`
@@ -694,14 +1050,56 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Properties not removed between API versions; all prior-version types carried forward (ARG003)
 
 ### Nested & Inline Resources
-- ✅ Singleton nested resources use `default` pattern with both collection and singleton GET
-- ✅ Private endpoint connections use common-types or dedicated file
+- ✅ Nested resources (including singletons) have both collection GET and point GET (PLCY008)
+- ✅ Private endpoint connections: three nested types defined; `publicNetworkAccess` property on parent; common-types used
 - ✅ Collections not modeled as both inline array and nested resource
 - ✅ Inline arrays not used for unbounded/very large collections; large arrays risk exceeding ARM payload size limits
 
-### Versioning & Suppressions
+### Azure Policy Compatibility
+- ✅ Properties designed for Policy auditability — composite values broken into individual fields (PLCY001)
+- ✅ Minimal read-only properties that only appear post-creation; prefer values settable on PUT (PLCY003)
+- ✅ No free-form `type: object` with dynamic keys for service-owned properties (PLCY005)
+- ✅ PUT accepts all compliance-relevant properties; not implemented as partial update (PLCY006)
+- ✅ Collection GETs at subscription + RG level for tracked resources (PLCY007)
+- ✅ Policy-enforced configurations modeled in PUT/GET, not as POST actions (PLCY009)
+
+### Template Deployment & What-If Compatibility
+- ✅ Resources created via PUT (not POST) for template engine compatibility (TD001)
+- ✅ PUT is idempotent; re-PUT with same body does not fail (TD002)
+- ✅ PUT is a full replacement — omitting a property does not preserve current value; no PATCH semantics on PUT (WHATIF-004)
+- ✅ Preflight API supported; returns `200 OK` even for validation errors; errors include `code`, `message`, `target` (TD003, PREFLIGHT-001/002)
+- ✅ Preflight accepts Template Language Expressions (TLEs) without validation (PREFLIGHT-003)
+- ✅ Preflight does not perform existence checks on referenced resource IDs (PREFLIGHT-004)
+- ✅ Spec supports ARM static validations: resource name constraints, immutable `location`/`plan`/`identity`, zone support declared (PREFLIGHT-005)
+- ✅ Every optional property with a service-applied default declares `"default"` in the spec (WHATIF-002)
+
+### Resource Move & Lifecycle
+- ✅ Top-level tracked resources support resource move across RG/subscription (RPC003)
+- ✅ `managedBy` / `managedByExtended` are immutable top-level properties; not inside `properties` bag
+- ✅ `systemData` is readOnly, added only with new API versions; `*ByType` stored as string not enum
+- ✅ `systemData` referenced from common-types; no custom systemData model defined
+- ✅ `systemData` not updated for child resource changes, rejected requests, or internal admin operations
+
+### Availability Zones & Extended Locations
+- ✅ `zones` property is top-level `array` of `string`; annotated `x-ms-mutability: ["create", "read"]`; immutable after creation
+- ✅ `extendedLocation` property is top-level, immutable after creation; must be included on all subsequent PUTs
+
+### API Versioning & Deprecation
 - ✅ Uniform API versioning across all resource types in the service; no mixed versions in a single package tag
 - ✅ API version parity across clouds — same functionality per API version in Public, Mooncake, Fairfax (RPC-BestPractice-15)
+- ✅ GA APIs: 36 months notice before retirement; Preview: 12 months max lifespan, 90 days notice
+- ✅ Deprecated versions/operations/properties marked with `"deprecated": true`; Azure Policy team consulted
+
+### Schema Evolution
+- ✅ No type changes on existing properties between API versions (introduce new property name + deprecate old)
+- ✅ No required properties added to or removed from existing models between API versions
+- ✅ DELETE never fails due to API version mismatch with creation version
+
+### Long-Running Operation Security
+- ✅ Polling URIs do not use reserved query params `t`, `c`, `s`, `h`
+- ✅ Polling URIs supported up to 4 KB length
+
+### Versioning & Suppressions
 - ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)

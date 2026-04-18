@@ -1,3 +1,10 @@
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
+     Derived from:
+       - Azure Resource Provider Contract (RPC) v1.0 — Asynchronous Operations
+       - ARM Wiki: api_contracts/guidelines/rpc.md (RPC005)
+     The upstream documents always take precedence if there is a conflict. -->
+
 # Provisioning State Requirements
 
 The `provisioningState` property is a critical ARM contract element

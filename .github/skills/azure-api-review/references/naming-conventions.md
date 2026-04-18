@@ -1,3 +1,10 @@
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
+     Derived from:
+       - Azure REST API Guidelines (vNext) — Naming
+       - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-01)
+     The upstream documents always take precedence if there is a conflict. -->
+
 # Naming Conventions for Azure API Specifications
 
 Consistent naming across Azure APIs ensures a uniform developer experience in SDKs, documentation, and tooling.

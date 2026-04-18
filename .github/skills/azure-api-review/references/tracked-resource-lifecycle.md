@@ -1,3 +1,11 @@
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
+     Derived from:
+       - Azure Resource Provider Contract (RPC) v1.0 — Resource API Reference, PUT Resource
+       - ARM Wiki: api_contracts/guidelines/rpc.md (RPC003, RPC006)
+       - ARM Wiki: rp_onboarding/tracked_vs_proxy_resources.md
+     The upstream documents always take precedence if there is a conflict. -->
+
 # Tracked Resource Lifecycle -- Required Operations
 
 ARM tracked resources (resources with `location` as a required
@@ -57,6 +65,29 @@ GET /providers/Microsoft.{Namespace}/operations
 ```
 
 Using the common-types `OperationListResult` and `Operation` definitions.
+
+---
+
+## Resource Move (RPC003)
+
+All top-level tracked resource types **MUST** support resource move —
+the ability to move a resource across resource groups or across
+subscriptions within the same AAD tenant.
+
+- Child resources move with the parent automatically; they do not need
+  to be included in the move request.
+- Move does not change the resource's physical location.
+- If a resource type **cannot** support move, it must be explicitly
+  blocked in the RP manifest (`linkedOperationRules` with mode
+  `Blocked`).
+- If a resource type supports move, the RP must handle the ARM move
+  callback and update internal state (e.g., resource group references).
+
+**Why:** Customers need to consolidate or reorganize resources across
+resource groups and subscriptions. Blocking move without a documented
+technical justification is a poor customer experience.
+
+**Severity:** Required
 
 ---
 

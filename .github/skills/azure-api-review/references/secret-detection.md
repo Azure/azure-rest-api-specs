@@ -1,3 +1,10 @@
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
+     Derived from:
+       - Azure Resource Provider Contract (RPC) v1.0 — PUT Resource
+       - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-03)
+     The upstream documents always take precedence if there is a conflict. -->
+
 # Proactive Secret Detection (SEC-SECRET-DETECT)
 
 Reviewers **MUST** proactively inspect every string property to

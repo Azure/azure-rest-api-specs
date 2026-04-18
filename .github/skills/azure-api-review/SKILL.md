@@ -25,14 +25,19 @@ Each reference file covers one cross-cutting rule area with:
 - Format-specific guidance for OpenAPI JSON and TypeSpec
 - Rule IDs for citation in review findings
 
-| Reference                                                                 | Rule Area                                                 | Key Rule IDs                     |
-| ------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------- |
-| [secret-detection.md](references/secret-detection.md)                     | Proactive secret detection in API properties              | SEC-SECRET-DETECT                |
-| [property-mutability.md](references/property-mutability.md)               | Write-only, conditional read-only, and immutability rules | OAPI027, OAPI020, OAPI029        |
-| [provisioning-state.md](references/provisioning-state.md)                 | `provisioningState` requirements for ARM resources        | RPC-Async-V1-02, RPC-Async-V1-03 |
-| [naming-conventions.md](references/naming-conventions.md)                 | Naming, casing, and Azure terminology                     | --                               |
-| [enum-best-practices.md](references/enum-best-practices.md)               | Enum extensibility and boolean alternatives               | --                               |
-| [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md) | Required CRUD operations for tracked ARM resources        | RPC-Put-V1-22, RPC-Get-V1-05     |
+| Reference                                                                     | Rule Area                                                                                    | Key Rule IDs                                         |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [secret-detection.md](references/secret-detection.md)                         | Proactive secret detection in API properties                                                 | SEC-SECRET-DETECT                                    |
+| [property-mutability.md](references/property-mutability.md)                   | Write-only, conditional read-only, immutability, update tolerance, and field ownership rules | OAPI027, OAPI020, OAPI029, OAPI030, OAPI031, OAPI034 |
+| [provisioning-state.md](references/provisioning-state.md)                     | `provisioningState` requirements for ARM resources                                           | RPC-Async-V1-02, RPC-Async-V1-03                     |
+| [naming-conventions.md](references/naming-conventions.md)                     | Naming, casing, and Azure terminology                                                        | --                                                   |
+| [enum-best-practices.md](references/enum-best-practices.md)                   | Enum extensibility and boolean alternatives                                                  | --                                                   |
+| [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md)     | Required CRUD operations and resource move for tracked ARM resources                         | RPC-Put-V1-22, RPC-Get-V1-05, RPC003                 |
+| [policy-compatibility.md](references/policy-compatibility.md)                 | Azure Policy compatibility rules for API design                                              | PLCY001–PLCY009                                      |
+| [template-deployment.md](references/template-deployment.md)                   | ARM Template Deployment engine compatibility                                                 | TD001–TD003                                          |
+| [availability-zones.md](references/availability-zones.md)                     | Availability zone property contract and zone immutability                                    | --                                                   |
+| [field-ownership.md](references/field-ownership.md)                           | Value preservation (array ordering, data types, casing)                                      | OAPI024, OAPI025, OAPI026                            |
+| [what-if-preflight-compliance.md](references/what-if-preflight-compliance.md) | What-If noise prevention and preflight validation contract                                   | WHATIF-001–005, PREFLIGHT-001–005                    |
 
 ## Authoritative External Sources
 

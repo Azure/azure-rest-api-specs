@@ -1,3 +1,11 @@
+<!-- NOTE: This comment is for file maintainers only and is not rendered.
+     Upstream alignment: 2026-04-15
+     Derived from:
+       - Azure REST API Guidelines (vNext) — Enums
+       - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-10, RPC-BestPractice-12)
+       - ARM Wiki: api_contracts/guidelines/openapi.md (OAPI015)
+     The upstream documents always take precedence if there is a conflict. -->
+
 # Enum Best Practices for Azure APIs
 
 Azure APIs should use extensible enums to allow new values to be added
