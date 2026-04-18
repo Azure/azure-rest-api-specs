@@ -125,6 +125,7 @@ input-file:
   - stable/2025-05-01/expressRoute.json
   - stable/2025-05-01/firewall.json
   - stable/2025-05-01/firewallPolicy.json
+  - stable/2025-05-01/smartGroup.json
   - stable/2025-05-01/loadBalancer.json
   - stable/2025-05-01/networkGateway.json
   - stable/2025-05-01/networkingOperations.json
