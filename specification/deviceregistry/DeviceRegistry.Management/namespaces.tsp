@@ -164,10 +164,10 @@ model NamespaceProvisioning {
 @doc("A provisioning service endpoint linked to this namespace.")
 model ProvisioningEndpoint {
   @doc("Type of provisioning resource.")
-  endpointType?: string;
+  endpointType: string;
 
   @doc("The provisioning endpoint Azure resource Id.")
-  resourceId?: string;
+  resourceId: string;
 
   @doc("The identity the linked resource uses to call the ADR namespace.")
   inboundCallerIdentity?: InboundCallerIdentity;
