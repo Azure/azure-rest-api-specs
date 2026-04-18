@@ -15,35 +15,32 @@ parameters:
 
 steps:
   - pwsh: |
+      $artifactName = "${{ parameters.ArtifactName }}"
+      $skipPublish = "false"
+
       if ($env:AGENT_JOBSTATUS -eq "Failed") {
-        Write-Host "Setting artifact name to ${{ parameters.ArtifactName }}-FailedAttempt$(System.JobAttempt) because there were failures." 
-        Write-Host "##vso[task.setvariable variable=PublishArtifactName;]${{ parameters.ArtifactName }}-FailedAttempt$(System.JobAttempt)"
-        Write-Host "##vso[task.setvariable variable=SkipArtifactPublish;]false"
+        $artifactName = "${{ parameters.ArtifactName }}-FailedAttempt$(System.JobAttempt)"
+        Write-Host "Setting artifact name to $artifactName because there were failures."
       } else {
         # Check if the artifact already exists from a previous job attempt (re-run scenario).
         # This avoids the "Artifact <name> already exists for build" error when re-running failed jobs.
-        $artifactName = "${{ parameters.ArtifactName }}"
         $headers = @{ Authorization = "Bearer $(System.AccessToken)" }
         $url = "$(System.CollectionUri)$(System.TeamProject)/_apis/build/builds/$(Build.BuildId)/artifacts?artifactName=$artifactName&api-version=7.0"
         try {
           $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Get -MaximumRetryCount 3 -RetryIntervalSec 5 -ErrorAction Stop
           if ($response -and $response.name) {
             Write-Host "Artifact '$artifactName' already exists from a previous attempt. Skipping publish."
-            Write-Host "##vso[task.setvariable variable=SkipArtifactPublish;]true"
-            Write-Host "##vso[task.setvariable variable=PublishArtifactName;]$artifactName"
-          } else {
-            Write-Host "Setting artifact name to $artifactName"
-            Write-Host "##vso[task.setvariable variable=PublishArtifactName;]$artifactName"
-            Write-Host "##vso[task.setvariable variable=SkipArtifactPublish;]false"
+            $skipPublish = "true"
           }
         } catch {
           Write-Host "Failed to check if artifact '$artifactName' exists. Proceeding with publish."
-          Write-Host "##vso[task.setvariable variable=PublishArtifactName;]$artifactName"
-          Write-Host "##vso[task.setvariable variable=SkipArtifactPublish;]false"
         }
       }
+
+      Write-Host "##vso[task.setvariable variable=PublishArtifactName;]$artifactName"
+      Write-Host "##vso[task.setvariable variable=SkipArtifactPublish;]$skipPublish"
     condition: and(succeededOrFailed(), ${{ parameters.CustomCondition }})
-    displayName: Set Artifact Name 
+    displayName: Set Artifact Variables
 
   - task: 1ES.PublishPipelineArtifact@1
     condition: and(succeededOrFailed(), ${{ parameters.CustomCondition }}, ne(variables['SkipArtifactPublish'], 'true'))
