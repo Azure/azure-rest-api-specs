@@ -33,7 +33,7 @@ steps:
             $skipPublish = "true"
           }
         } catch {
-          Write-Host "Failed to check if artifact '$artifactName' exists. Proceeding with publish."
+          Write-Host "Failed to check if artifact '$artifactName' exists: $_. Proceeding with publish."
         }
       }
 
