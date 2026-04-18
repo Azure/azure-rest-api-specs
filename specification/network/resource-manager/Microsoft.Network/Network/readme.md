@@ -43,7 +43,7 @@ input-file:
   - stable/2025-07-01/expressRoute.json
   - stable/2025-07-01/firewall.json
   - stable/2025-07-01/firewallPolicy.json
-  - stable/2025-07-01/kubeSelectorGroup.json
+  - stable/2025-07-01/smartGroup.json
   - stable/2025-07-01/loadBalancer.json
   - stable/2025-07-01/networkGateway.json
   - stable/2025-07-01/networkingOperations.json
@@ -125,7 +125,6 @@ input-file:
   - stable/2025-05-01/expressRoute.json
   - stable/2025-05-01/firewall.json
   - stable/2025-05-01/firewallPolicy.json
-  - stable/2025-05-01/kubeSelectorGroup.json
   - stable/2025-05-01/loadBalancer.json
   - stable/2025-05-01/networkGateway.json
   - stable/2025-05-01/networkingOperations.json
