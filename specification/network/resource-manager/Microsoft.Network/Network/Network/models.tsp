@@ -2920,7 +2920,13 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
-   * None
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
+   * No next hop type.
    */
   None: "None",
 }
@@ -6253,6 +6259,24 @@ model ApplicationGatewaySku {
 }
 
 /**
+ * Managed HSM properties of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_07_01)
+model ApplicationGatewayManagedHsm {
+  /**
+   * Key identifier of a key stored in Managed HSM.
+   */
+  keyId?: url;
+
+  /**
+   * Base-64 encoded value of a base-64 public certificate.
+   */
+  publicCertData?: string;
+}
+
+/**
  * Application Gateway Ssl policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6660,6 +6684,12 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
    * Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
    */
   keyVaultSecretId?: string;
+
+  /**
+   * Managed HSM properties of the Application Gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  hsm?: ApplicationGatewayManagedHsm;
 
   /**
    * The provisioning state of the SSL certificate resource.
@@ -25925,13 +25955,21 @@ model VirtualNetworkAppliancePropertiesFormat {
   /**
    * Bandwidth of the VirtualNetworkAppliance resource in Gbps.
    */
-  bandwidthInGbps?: string;
+  @typeChangedFrom(Versions.v2025_07_01, string)
+  bandwidthInGbps?: float64;
 
   /**
    * A list of IPConfigurations of the virtual network appliance.
    */
   @visibility(Lifecycle.Read)
   ipConfigurations?: VirtualNetworkApplianceIpConfiguration[];
+
+  /**
+   * Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties"
+  @added(Versions.v2025_07_01)
+  privateIPAddressVersion?: VirtualNetworkApplianceIpVersionType;
 
   /**
    * The provisioning state of the virtual network appliance resource.
@@ -25949,6 +25987,20 @@ model VirtualNetworkAppliancePropertiesFormat {
    * The reference to the subnet resource.
    */
   subnet?: Subnet;
+}
+
+/**
+ * IP address version.
+ */
+@added(Versions.v2025_07_01)
+union VirtualNetworkApplianceIpVersionType {
+  string,
+
+  /** IPv4 version */
+  IPv4: "IPv4",
+
+  /** Dual Stack version */
+  DualStack: "DualStack",
 }
 
 /**
@@ -26020,3 +26072,5 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(DisablePeeringRoute, Versions.v2025_07_01);
+@@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
