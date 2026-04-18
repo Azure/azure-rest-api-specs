@@ -294,11 +294,17 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 ## 14. Operation IDs
 
 - Every operation **MUST** have a unique `operationId`.
+  (Also enforced by: `OperationIdRequired` linter rule R4004)
 - ARM operation IDs **MUST** follow the `{ResourceType}_{Action}` pattern (e.g. `VirtualMachines_Get`, `VirtualMachines_CreateOrUpdate`, `VirtualMachines_List`).
+  (Also enforced by: `OperationIdNounVerb` linter rule R1001)
 - The Operations API response `display` object **MUST** use camelCase property names: `provider`, `resource`, `operation`, `description` — not PascalCase (`Provider`, `Resource`, `Operation`, `Description`). This applies to both the swagger schema and example files.
 - Use standard verb suffixes: GET → `Get` / `List`, PUT → `CreateOrUpdate`, PATCH → `Update`, DELETE → `Delete`, POST → `<ActionName>`.
+  (Also enforced by: `GetInOperationName` R1005, `PutInOperationName` R1006, `PatchInOperationName` R1007, `DeleteInOperationName` R1009, `ListInOperationName` R1003, `PostOperationIdContainsUrlVerb` R2066)
 - The noun part in `operationId` **SHOULD NOT** repeat inside the verb part.
 - There **MUST** be exactly one underscore in the `operationId`.
+  (Also enforced by: `OneUnderscoreInOperationId` linter rule R2055)
+- The noun part of the `operationId` **MUST NOT** conflict with model definition names in the spec. This causes naming collisions in generated SDK code.
+  (Also enforced by: `OperationIdNounConflictingModelNames` linter rule R2063)
 
 ## 15. Parameters
 

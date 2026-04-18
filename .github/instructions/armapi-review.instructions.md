@@ -382,6 +382,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - If a property value has a well-defined or structured format (e.g. a JSON blob encoded as a string, a connection string with multiple components), model it as an object, not a free-form string.
 - Free-form strings prevent client-side validation and make SDK generation less useful.
 - **No freeform `type: object` either** — if a property is typed as `type: object` with no additional schema properties defined (an "empty object" or "any"), flag it. Every object property **MUST** have its schema defined with explicit properties.
+- **Avoid excessive nesting depth** — properties **SHOULD NOT** be nested more than 3 levels deep inside the `properties` bag. Deep nesting hinders SDK usability and makes the schema hard to navigate. Flatten where possible.
+  (Also enforced by: `AvoidNestedProperties` linter rule R2001)
 
 ### 8.3 Use Enums for Finite Value Sets (ACTIVELY REVIEW)
 

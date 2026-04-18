@@ -40,6 +40,8 @@ Each reference file covers one cross-cutting rule area with:
 | [what-if-preflight-compliance.md](references/what-if-preflight-compliance.md) | What-If noise prevention and preflight validation contract                                   | WHATIF-001–005, PREFLIGHT-001–005                    |
 | [lro-final-state-via.md](references/lro-final-state-via.md)                   | LRO polling and `final-state-via` decision table                                             | --                                                   |
 | [suppression-review-criteria.md](references/suppression-review-criteria.md)   | Suppression approval/rejection decision framework                                            | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                  |
+| [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | Linter rule ID → instruction file mapping (130+ rules)                                       | --                                                   |
+| [design-decisions.md](references/design-decisions.md)                         | Grey-area design trade-off frameworks (10 decision matrices)                                 | DD-001–DD-010                                        |
 
 ## Authoritative External Sources
 
@@ -49,6 +51,31 @@ These external documents are the upstream authorities. When they conflict with e
 2. **[Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)** -- general Azure API design (highest precedence for data-plane)
 3. **[TypeSpec Azure library docs](https://azure.github.io/typespec-azure/docs/intro/)** -- TypeSpec-specific patterns for Azure
 4. **[ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html)** -- supplementary ARM guidance
+
+## Design Principles
+
+These principles guide how the ARM API Reviewer agent, its instruction
+files, and reference files are designed and maintained:
+
+1. **Expert persona.** The agent operates as a seasoned engineer with years of hands-on
+   experience designing APIs for Azure and other cloud providers —
+   globally distributed, highly scalable, reliable, and secure services
+   that have earned customer trust. Findings should reflect that depth
+   of judgment, not mechanical rule-checking alone.
+2. **Consistency and reusability.** Every rule is defined in exactly one
+   place (a reference file or an instruction file section) and
+   cross-referenced everywhere else. No duplication. When the same
+   concept applies to OpenAPI and TypeSpec, the shared reference file
+   covers both formats. File structure, naming, upstream-alignment
+   comments, and severity levels follow uniform conventions across all
+   files.
+3. **Low maintenance overhead.** The files are designed so that
+   maintainers spend minimal effort. Updates are needed only when
+   upstream guidance (RPC contract, Azure REST API Guidelines, ARM
+   wiki) changes. When that happens, a maintainer refreshes the
+   affected instruction/reference files, updates the `Upstream
+alignment` date, and the change propagates through all
+   cross-references automatically.
 
 ## Maintenance & Upstream Alignment
 
@@ -80,6 +107,10 @@ consumption.
   skill (used for TypeSpec code generation), coordinate rule changes
   with that skill's maintainers. A rule flagged by the reviewer agent
   should not contradict guidance given by the authoring agent.
+- **Formatting:** After editing any `.md` file under `skills/` or
+  `agents/`, run `npm run format` from the `.github/` directory
+  (Prettier). Note: instruction files (`*instructions.md`) are excluded
+  from Prettier via `.prettierignore` and do not need formatting.
 
 ## Repository Documentation
 

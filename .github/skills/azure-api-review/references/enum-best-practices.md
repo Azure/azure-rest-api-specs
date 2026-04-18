@@ -40,16 +40,25 @@ Use `x-ms-enum` with `modelAsString: true`:
 ```
 
 - Every enum **MUST** have `x-ms-enum` with a unique `name` property.
+  (Also enforced by: `XmsEnumValidation` R2018, `UniqueXmsEnumName` R4005)
 - `modelAsString: true` **SHOULD** be set unless the set of values will provably never change.
 - Enum `name` values **MUST** be unique across the entire specification.
+  (Also enforced by: `UniqueXmsEnumName` linter rule R4005)
 - Enum values **MUST NOT** be empty strings.
+  (Also enforced by: `EnumMustNotHaveEmptyValue` linter rule R3029)
 - Enum values **SHOULD** use PascalCase.
 - `default` values for enum properties **MUST** be one of the defined enum values.
+  (Also enforced by: `DefaultMustBeInEnum` linter rule R2027)
 - **DO NOT** remove existing enum values -- this is a breaking change.
 - The **first member** of an enum **SHOULD** be the default or initial state value.
 - Enum values **MUST** be semantically distinct.
   Do not define overlapping or synonymous values
   (e.g., `InProgress` and `Running` in the same enum).
+  (Also enforced by: `EnumUniqueValue` linter rule R3024)
+- Enum properties **MUST** declare the `type` field (typically `"type": "string"`).
+  (Also enforced by: `EnumMustHaveType` linter rule R3015)
+- Enum values **MUST** match the declared type of the property.
+  (Also enforced by: `EnumMustRespectType` linter rule R4040)
 
 ### TypeSpec
 
