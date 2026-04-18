@@ -307,10 +307,10 @@ After presenting the review findings to the human reviewer for approval:
    The existing comment already covers the exact same rule violation on the same file and line. **Skip posting.** No action needed.
 
    **Scenario B - Same finding, different line, comment was from _this agent or the same engineer running the agent_:**
-   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_").
+   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_"). To identify whether an existing comment was posted by this agent, check if its body contains the hidden marker `<!-- posted-by: arm-api-reviewer-agent -->`. Comments with this marker are agent-posted; comments without it are from human reviewers (apply Scenario C instead).
 
    **Scenario C - Same finding, different line, comment was from a _different_ human reviewer:**
-   Another ARM reviewer (not this agent) posted the comment at the old line. Do **not** resolve their comment - it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._" This helps the author and reviewer find the right code without creating duplicate threads.
+   Another ARM reviewer (not this agent) posted the comment at the old line -- i.e., the comment body does **not** contain `<!-- posted-by: arm-api-reviewer-agent -->`. Do **not** resolve their comment - it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._" This helps the author and reviewer find the right code without creating duplicate threads.
 
    **Scenario D - No new findings beyond what existing comments already cover:**
    If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "_All findings from this review are already covered by existing comments on the PR. No new comments are needed - the existing threads already highlight the required changes._" List the existing comment threads that match, **including the comment URL** for each so the reviewer can click through and verify.
@@ -326,15 +326,16 @@ After presenting the review findings to the human reviewer for approval:
 5. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR - this property did not exist in the previous version").
 6. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
 7. Use the format: ``**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` or ``**[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` followed by the classification reasoning and suggested fix.
-8. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
-9. **Report a reconciliation summary** to the human reviewer before posting:
-   - Findings to **post as new comments** (with line numbers)
-   - Existing comments to **resolve and re-post** (Scenario B - line shifted, same author)
-   - Existing comments to **reply to** (Scenario C - line shifted, different author)
-   - Findings **already covered** by existing comments (skipped)
-   - Existing comments whose violations have been **fixed** - propose resolving (Scenario E)
-   - Wait for the reviewer to approve the plan before executing.
-10. Do NOT post comments without the human reviewer's approval.
+8. Every posted comment **MUST** end with the hidden HTML marker `<!-- posted-by: arm-api-reviewer-agent -->` as the very last line of the comment body. This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API and distinguishing them from manually posted comments during reconciliation. Do not omit this marker.
+9. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
+10. **Report a reconciliation summary** to the human reviewer before posting:
+    - Findings to **post as new comments** (with line numbers)
+    - Existing comments to **resolve and re-post** (Scenario B - line shifted, same author)
+    - Existing comments to **reply to** (Scenario C - line shifted, different author)
+    - Findings **already covered** by existing comments (skipped)
+    - Existing comments whose violations have been **fixed** - propose resolving (Scenario E)
+    - Wait for the reviewer to approve the plan before executing.
+11. Do NOT post comments without the human reviewer's approval.
 
 ### Step 8: Update PR Labels
 

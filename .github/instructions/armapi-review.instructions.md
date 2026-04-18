@@ -100,6 +100,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - The `200` and `201` response models for a PUT operation **MUST** have `x-ms-azure-resource: true` set somewhere in their schema hierarchy (typically inherited from the common-types `Resource` base).
 - If missing, flag it and instruct the author to ensure the response model extends a common-types resource base.
+- `x-ms-azure-resource: true` **MUST** only be set on top-level resource envelope models. It **MUST NOT** be applied to nested or child models within a resource definition. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for details.
 
 ### 2.2 Tracked Resource Requirements
 
@@ -159,6 +160,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Every resource type **MUST** have a corresponding point GET operation that retrieves a single instance by its resource path.
 - If a List operation exists but no corresponding GET for a single instance, flag it as an ARM Error.
 - **Singleton resources MUST be named "default"** (lowercase). Names like "Experimentation", "config", or any other non-"default" value for a singleton are not allowed unless explicitly approved.
+- Singleton and constrained-collection resource names **MUST** be represented as an **enum path parameter** with `x-ms-enum` and `modelAsString: true` -- not as a static literal in the URI path. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the correct pattern (RPC-ConstrainedCollections-V1-04).
+  (Also enforced by: `ReservedResourceNamesModelAsEnum` linter rule -- warning level)
 
 ### 2.8 Common Type Definitions Must Be Used
 
@@ -318,11 +321,14 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - A `202` response with no declared headers in the swagger (empty `"202": { "description": "Accepted" }`) makes the LRO contract ambiguous for ARM and SDKs — flag it.
 - All asynchronous operations **MUST** have `x-ms-long-running-operation` set to `true` in the swagger (RPC-Async-V1-15).
 
-### 6.7 Polling Behavior
+### 6.7 Polling Behavior and `final-state-via`
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the complete `final-state-via` decision table and anti-patterns.
 
 - **`Location` header polling**: The polling URL returns `202` (with no body) while the operation is in progress and returns the **exact same response** as the synchronous completion when the operation finishes. For DELETE, the final response is `200` or `204`. For PATCH, the final response is `200` with the updated resource body. For POST, the final response is `200` or `204`.
 - **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the *status*, not a failure of the underlying operation.
 - The `Azure-AsyncOperation` status object **MUST** include `status` (Required) with terminal values `Succeeded`, `Failed`, or `Canceled`. If `status` is `Failed` or `Canceled`, `error.code` and `error.message` are **Required**.
+- For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `x-ms-long-running-operation-options` / `final-state-via` -- the default SDK behavior is correct. Only specify `"final-state-via": "location"` for POST LROs with a response schema.
 
 ### 6.8 Operation Results Placement
 
@@ -388,6 +394,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - Properties that are arrays **MUST** have plural names (e.g., `scopes`, `rules`, `addresses`) -- not singular (e.g., `scope`, `rule`, `address`). Singular names suggest a single value, not a collection.
 ### 8.4 Use Specific Types Instead of Generic Strings (ACTIVELY REVIEW)
+
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for common property names (e.g., `createdAt`, `lastModifiedAt`, `deletedAt`) and resource identifier naming rules (use `Id` suffix, not `Uri` or `Name`).
 
 - **Actively examine every `string` property** for opportunities to use a more precise type:
   - Properties that represent a date, time, or timestamp **MUST** use `"type": "string", "format": "date-time"` (ISO 8601). Do not use a plain unformatted string for timestamps.
@@ -564,13 +572,16 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 10A. `readme.md` Suppression Scoping & Tag Coverage
 
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, including when to approve, when to push back, and when to escalate to peer review.
+
 ### 10A.0 Suppression Rigor for GA vs. Preview (RPC-SUPPRESS-GA)
 
 - Suppressions carried forward from **preview** API versions are **not automatically acceptable** in **GA (stable)** versions.
 - For GA releases, reviewers **MUST** challenge each suppression: can the underlying violation now be fixed? Preview was the time let it slide; GA is the deadline to fix.
 - `PathForResourceAction` suppressions in GA versions are **blocking** because they can prevent proper RBAC action registration.
 - `LroLocationHeader` suppressions in GA versions are **blocking** because they indicate incorrect async patterns.
-- Suppression reasons that say "back-compat with preview" are not sufficient for GA \u2014 provide a concrete technical justification for each suppression.
+- Suppression reasons that say "back-compat with preview" are not sufficient for GA -- provide a concrete technical justification for each suppression.
+- **Lack of time is not a valid reason for suppressions.** If the author cites deadlines, ask them to remove the suppression and file a work item instead.
 
 ### 10A.1 Suppression Must Be Under Correct Tag (RPC-SUPPRESS-SCOPE)
 
@@ -639,12 +650,35 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - This exception does **not** apply to tracked resources — they **MUST** always use PUT.
 - Prefer allowing customers to specify their own resource names (via PUT) as this is more compatible with ARM templates and Policy.
 
-### 12.3 Version or Catalog Listings as Proxy Resources (RPC-LIST-VERSIONS)
+### 12.3 POST to Retrieve Data (Exception)
+
+- POST may be used to retrieve data (instead of GET) **only** when:
+  - **Retrieving a secret value** -- use a `list*` prefixed POST action for ARM template compatibility.
+  - **The P99 latency of the equivalent GET would exceed 2 seconds** -- model it as an async POST. Verify that the data cannot be cached at creation time.
+- In all other cases, steer authors toward **OData filters on the corresponding resource collection GET** rather than POST.
+- POST actions used for data retrieval **MUST NOT** have `$filter`, `$top`, or other query parameters -- all parameters belong in the request body (RPC-POST-V1-05).
+  (Also enforced by: `ParametersInPost` linter rule)
+- **POST pagination**: SDKs do not natively support POST-based pagination. If a POST returns paginated results, the client must re-POST with the same filter body and the `nextLink` for each page. This must be documented. Prefer GET with OData filters to avoid this limitation.
+
+### 12.4 Version or Catalog Listings as Proxy Resources (RPC-LIST-VERSIONS)
 
 - When a service needs to expose a list of available versions, SKUs, offerings, or other catalog-like data, model them as **proxy resource GET collections** — not as custom action endpoints or ad-hoc GET operations.
 - The pattern is: `GET .../providers/Microsoft.{Namespace}/locations/{location}/{catalogResourceType}` returning a paginated list of proxy resources.
 - Each item in the list **MUST** be modeled as a proper ARM proxy resource (with `id`, `name`, `type`, and `properties`).
 - **DO NOT** model version/catalog listings as non-resource GET endpoints that return bare arrays or non-ARM-shaped responses — these cannot be tracked by ARM, are not compatible with RBAC, and the AKS-style `orchestrators` pattern is discouraged for new services.
+
+---
+
+## 12A. Tenant-Level APIs (RPC-Uri-V1-11)
+
+When a PR introduces APIs at the tenant or provider level (outside subscription scope), apply extra scrutiny:
+
+- **Evaluate scope**: Can the requirements be met by modeling the API at subscription or resource group scope instead? Tenant-level APIs should be the exception, not the default.
+- **Check for unauthorized actions**: If the service intends to bypass standard RBAC by adding `allowUnauthorizedActions` in the ARM manifest, this has security implications and requires approval from the PAS team (Security RBAC).
+- The linter rule `TenantLevelAPIsNotAllowed` fires on such PRs. The suppression requires:
+  - (A) ARM API review office hours sign-off, **AND**
+  - (B) Either acknowledgment that no unauthorized actions are involved, or PAS team approval for the unauthorized actions.
+  (Also enforced by: `TenantLevelAPIsNotAllowed` linter rule)
 
 ---
 
@@ -973,7 +1007,8 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `sku` follows standard schema (`name`, `tier`, `size`, `family`, `capacity`); internal SKU link API not in public swagger
 - ✅ Non-ARM-envelope properties are inside the `properties` bag
 - ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions
-- ✅ Every resource type has a point GET; singleton resources named "default"
+- ✅ Every resource type has a point GET; singleton resources named "default" using enum path parameters (RPC-ConstrainedCollections-V1-04)
+- ✅ `x-ms-azure-resource: true` only on top-level resource models, not nested models
 - ✅ PUT request and response schemas are identical; PUT response matches GET and PATCH (RPC-Put-V1-12, RPC-Put-V1-25)
 - ✅ PUT returns `201` (create) or `200` (replace) — never `202` for async PUT (RPC-Put-V1-11)
 - ✅ PUT does not implicitly create other tracked resources (RPC-Put-V1-16)
@@ -1012,6 +1047,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
 - ✅ Operation statuses at subscription scope for new services; no sensitive data in operation status properties
 - ✅ Operation IDs are globally unique GUIDs — not derived from hashes of resource properties (RPC-BestPractice-08)
+- ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
 
 ### Property Design (Properties Bag Review)
 - ✅ All server-computed properties marked `readOnly` — missing annotation causes What-If false deletes (WHATIF-001)
@@ -1042,7 +1078,12 @@ When reviewing ARM resource-manager swagger files, verify:
 ### POST Actions
 - ✅ POST actions have action name in URL, params in body, correct response codes (RPC-POST-V1-01, RPC-POST-V1-05)
 - ✅ POST actions used only for non-CRUD operations
+- ✅ POST for data retrieval only when retrieving secrets or P99 latency > 2s; prefer OData filters on GET
 - ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (RPC-LIST-VERSIONS)
+
+### Tenant-Level APIs
+- ✅ Tenant-level APIs evaluated for whether subscription/RG scope would suffice (RPC-Uri-V1-11)
+- ✅ Unauthorized actions require PAS team approval
 
 ### ARG Compatibility
 - ✅ No embedded child resources or child counts in parent GET response (ARG001)
@@ -1102,6 +1143,11 @@ When reviewing ARM resource-manager swagger files, verify:
 ### Versioning & Suppressions
 - ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
+- ✅ Suppressions evaluated per decision framework: approve only for false alarms or pre-existing violations; push to fix for new resources
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)
+
+### Naming
+- ✅ Timestamp properties use common names (`createdAt`, `lastModifiedAt`, `deletedAt`) — not `createTime`, `creationTime`, etc.
+- ✅ Resource ID reference properties use `Id` suffix — not `Uri`, `Url`, or `Name` suffix
 
 Flag all violations clearly with JSON path references, the specific RPC rule ID where applicable, and a concrete fix suggestion.

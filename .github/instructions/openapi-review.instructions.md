@@ -2,7 +2,12 @@
 applyTo: "specification/**/*.json"
 ---
 
-<!-- Upstream alignment: 2026-04-17
+<!-- Upstream alignment: 2026-04-15
+     This date is for maintainers of this file only -- it records when
+     rules were last verified against upstream docs. No action is needed
+     by spec authors or PR reviewers. The upstream documents always take
+     precedence if there is a conflict.
+
      Rules derived from:
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
@@ -223,7 +228,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - If an operation can take more than 1 second at the 99th percentile, it **MUST** be implemented as an LRO.
 - Mark LRO operations with `"x-ms-long-running-operation": true`.
-- Specify the polling strategy with `x-ms-long-running-operation-options` (e.g. `"final-state-via": "azure-async-operation"` or `"location"`).
+- For POST LROs with a response schema, specify `"x-ms-long-running-operation-options"` with `"final-state-via": "location"` (or `"azure-async-operation"` only if the status monitor itself contains the result). For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `final-state-via` -- the default SDK behavior is already correct. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the full decision table.
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
 - Status monitor responses **MUST** include `id`, `status` (one of `NotStarted`, `Running`, `Succeeded`, `Failed`, `Canceled`), and `error` (on failure).
 - LRO responses **SHOULD** include a `retry-after` header when the operation is not complete.
@@ -406,7 +411,7 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 
 ### 22.5 LRO Example Headers (EX-LRO-HEADERS)
 
-- LRO response examples (typically `202`) **MUST** include the appropriate polling headers (`Azure-AsyncOperation`, `Location`, or both) matching the operation's `final-state-via` setting.
+- LRO response examples (typically `202`) **MUST** include the appropriate polling headers (`Azure-AsyncOperation`, `Location`, or both) matching the operation's LRO configuration. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for when `final-state-via` should be specified.
 - Do not leave `202` response examples as empty objects (`"202": {}`) — include the polling headers.
 - Header names in examples **MUST** use correct PascalCase: `Azure-AsyncOperation` (not `azure-AsyncOperation`), `Location` (not `location`), `Retry-After` (not `retry-after`).
 - The `api-version` in LRO polling URLs **MUST** match the example's own `api-version`. Do not carry over stale versions from previous API versions (e.g., `api-version=2022-09-01` in a `2026-01-07-preview` example is wrong). Ensure the `-preview` suffix is included if the API version is a preview (e.g., `api-version=2025-02-01-preview` not `api-version=2025-02-01`).

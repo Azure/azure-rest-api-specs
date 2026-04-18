@@ -56,6 +56,61 @@ If **any** of these operations are missing for a tracked resource, flag it as an
   resource's GET response body. Return a resource ID reference instead.
 - Singleton nested resources **SHOULD** be named `default`. Both the collection GET and singleton GET must exist.
 
+## Singleton and Constrained Collection Resources (RPC-ConstrainedCollections-V1-04)
+
+When a resource has a **service-defined name** (e.g., `default`,
+`current`, or a fixed set of names), the name **MUST** be represented
+as an **enum path parameter** with `x-ms-enum` and
+`modelAsString: true`. It **MUST NOT** be a static literal string
+baked into the URI path segment.
+
+This enables SDK code generation to produce a typed enum parameter and
+allows future extensibility if additional names are added.
+
+**Correct (OpenAPI JSON):**
+
+```json
+{
+  "name": "configName",
+  "in": "path",
+  "required": true,
+  "type": "string",
+  "enum": ["default"],
+  "x-ms-enum": { "name": "ConfigName", "modelAsString": true }
+}
+```
+
+**Incorrect -- static literal in path:**
+
+```text
+/providers/Microsoft.Example/resources/{name}/configs/default
+```
+
+(Also enforced by: `ReservedResourceNamesModelAsEnum` linter rule --
+warning level)
+
+**Correct (TypeSpec):**
+
+```tsp
+// TypeSpec singleton resources use the @singleton decorator which
+// handles the enum representation automatically
+@singleton
+model MyConfig is ProxyResource<MyConfigProperties> {
+  @key("configName")
+  @segment("configs")
+  name: string;
+}
+```
+
+## `x-ms-azure-resource` Placement
+
+`x-ms-azure-resource: true` **MUST** only be set on **top-level
+resource envelope models** (models that define the ARM resource with
+`id`, `name`, `type`). It **MUST NOT** be applied to nested or child
+models within a resource definition. Applying it to non-resource models
+causes SDK code generators to incorrectly treat those models as
+independent ARM resources.
+
 ## Operations API
 
 Every resource provider **MUST** expose an operations API at:
