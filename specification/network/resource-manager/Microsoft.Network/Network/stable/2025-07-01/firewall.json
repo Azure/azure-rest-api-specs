@@ -667,6 +667,17 @@
     }
   },
   "definitions": {
+    "AfcConfiguration": {
+      "type": "object",
+      "description": "AFC configuration for the Azure Firewall.",
+      "properties": {
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "The endpoint URL of the AFC control plane associated with this Azure Firewall.",
+          "readOnly": true
+        }
+      }
+    },
     "AzureFirewall": {
       "type": "object",
       "description": "Azure Firewall resource.",
@@ -1362,7 +1373,7 @@
           "description": "Properties to provide a custom autoscale configuration to this azure firewall."
         },
         "afcConfiguration": {
-          "$ref": "./common.json#/definitions/AfcConfiguration",
+          "$ref": "#/definitions/AfcConfiguration",
           "description": "AFC configuration for the Azure Firewall.",
           "readOnly": true
         }

@@ -9127,6 +9127,7 @@ model AzureFirewallPropertiesFormat {
  * AFC configuration for the Azure Firewall.
  */
 @added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AfcConfiguration {
   /**
    * The endpoint URL of the AFC control plane associated with this Azure Firewall.
