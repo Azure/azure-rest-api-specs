@@ -38,6 +38,8 @@ Each reference file covers one cross-cutting rule area with:
 | [availability-zones.md](references/availability-zones.md)                     | Availability zone property contract and zone immutability                                    | --                                                   |
 | [field-ownership.md](references/field-ownership.md)                           | Value preservation (array ordering, data types, casing)                                      | OAPI024, OAPI025, OAPI026                            |
 | [what-if-preflight-compliance.md](references/what-if-preflight-compliance.md) | What-If noise prevention and preflight validation contract                                   | WHATIF-001–005, PREFLIGHT-001–005                    |
+| [lro-final-state-via.md](references/lro-final-state-via.md)                   | LRO polling and `final-state-via` decision table                                             | --                                                   |
+| [suppression-review-criteria.md](references/suppression-review-criteria.md)   | Suppression approval/rejection decision framework                                            | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                  |
 
 ## Authoritative External Sources
 
