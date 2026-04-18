@@ -68,7 +68,6 @@ model NamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning endpoints associated with this namespace.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   provisioning?: NamespaceProvisioning;
 
   @doc("Provisioning state of the resource.")
