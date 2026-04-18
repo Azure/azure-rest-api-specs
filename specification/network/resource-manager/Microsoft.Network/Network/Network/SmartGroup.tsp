@@ -16,22 +16,22 @@ using Common;
 namespace Microsoft.Network;
 
 /**
- * KubeSelectorGroup resource.
+ * SmartGroup resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "New resource type for grouping Kubernetes pod selectors with AKS clusters"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "New resource type for grouping multiple source selectors (KubeSelector, GeoLocation, etc.)"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheriting from Resource for consistency with existing Network top-level resources"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Using custom resource model for consistency with existing Network resources"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2025_07_01)
-model KubeSelectorGroup extends Common.Resource {
-  properties?: KubeSelectorGroupProperties;
+model SmartGroup extends Common.Resource {
+  properties?: SmartGroupProperties;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("kubeSelectorGroupName")
-  @segment("kubeSelectorGroups")
+  @key("smartGroupName")
+  @segment("smartGroups")
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
@@ -41,59 +41,54 @@ model KubeSelectorGroup extends Common.Resource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @added(Versions.v2025_07_01)
 @armResourceOperations
-interface KubeSelectorGroups {
+interface SmartGroups {
   /**
-   * Gets the specified KubeSelectorGroup.
+   * Gets the specified SmartGroup.
    */
-  get is ArmResourceRead<KubeSelectorGroup, Error = CloudError>;
+  get is ArmResourceRead<SmartGroup, Error = CloudError>;
 
   /**
-   * Creates or updates a KubeSelectorGroup.
+   * Creates or updates a SmartGroup.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    KubeSelectorGroup,
+    SmartGroup,
     Error = CloudError
   >;
 
   /**
-   * Updates tags of a KubeSelectorGroup resource.
+   * Updates tags of a SmartGroup resource.
    */
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
-    KubeSelectorGroup,
+    SmartGroup,
     PatchModel = TagsObject,
     Error = CloudError
   >;
 
   /**
-   * Deletes the specified KubeSelectorGroup.
+   * Deletes the specified SmartGroup.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    KubeSelectorGroup,
-    Error = CloudError
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SmartGroup, Error = CloudError>;
 
   /**
-   * Gets all the KubeSelectorGroups in a resource group.
+   * Gets all the SmartGroups in a resource group.
    */
-  list is ArmResourceListByParent<KubeSelectorGroup, Error = CloudError>;
+  list is ArmResourceListByParent<SmartGroup, Error = CloudError>;
 
   /**
-   * Gets all the KubeSelectorGroups in a subscription.
+   * Gets all the SmartGroups in a subscription.
    */
-  listAll is ArmListBySubscription<KubeSelectorGroup, Error = CloudError>;
+  listAll is ArmListBySubscription<SmartGroup, Error = CloudError>;
 }
 
-@@doc(KubeSelectorGroup.name, "The name of the KubeSelectorGroup.");
-@@doc(KubeSelectorGroup.properties,
-  "Properties of the KubeSelectorGroup resource."
+@@doc(SmartGroup.name, "The name of the SmartGroup.");
+@@doc(SmartGroup.properties, "Properties of the SmartGroup resource.");
+@@doc(SmartGroups.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update SmartGroup operation."
 );
-@@doc(KubeSelectorGroups.createOrUpdate::parameters.resource,
-  "Parameters supplied to the create or update KubeSelectorGroup operation."
-);
-@@doc(KubeSelectorGroups.updateTags::parameters.properties,
-  "Parameters supplied to update KubeSelectorGroup tags."
+@@doc(SmartGroups.updateTags::parameters.properties,
+  "Parameters supplied to update SmartGroup tags."
 );

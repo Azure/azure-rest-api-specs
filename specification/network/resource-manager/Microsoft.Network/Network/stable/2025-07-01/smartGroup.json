@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "KubeSelectorGroups"
+      "name": "SmartGroups"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/kubeSelectorGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/smartGroups": {
       "get": {
-        "operationId": "KubeSelectorGroups_ListAll",
+        "operationId": "SmartGroups_ListAll",
         "tags": [
-          "KubeSelectorGroups"
+          "SmartGroups"
         ],
-        "description": "Gets all the KubeSelectorGroups in a subscription.",
+        "description": "Gets all the SmartGroups in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroupListResult"
+              "$ref": "#/definitions/SmartGroupListResult"
             }
           },
           "default": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "List KubeSelectorGroups by Subscription": {
-            "$ref": "./examples/KubeSelectorGroupListBySubscription.json"
+          "List SmartGroups by Subscription": {
+            "$ref": "./examples/SmartGroupListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/kubeSelectorGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups": {
       "get": {
-        "operationId": "KubeSelectorGroups_List",
+        "operationId": "SmartGroups_List",
         "tags": [
-          "KubeSelectorGroups"
+          "SmartGroups"
         ],
-        "description": "Gets all the KubeSelectorGroups in a resource group.",
+        "description": "Gets all the SmartGroups in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroupListResult"
+              "$ref": "#/definitions/SmartGroupListResult"
             }
           },
           "default": {
@@ -116,8 +116,8 @@
           }
         },
         "x-ms-examples": {
-          "List KubeSelectorGroups by Resource Group": {
-            "$ref": "./examples/KubeSelectorGroupListByResourceGroup.json"
+          "List SmartGroups by Resource Group": {
+            "$ref": "./examples/SmartGroupListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -125,13 +125,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/kubeSelectorGroups/{kubeSelectorGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups/{smartGroupName}": {
       "get": {
-        "operationId": "KubeSelectorGroups_Get",
+        "operationId": "SmartGroups_Get",
         "tags": [
-          "KubeSelectorGroups"
+          "SmartGroups"
         ],
-        "description": "Gets the specified KubeSelectorGroup.",
+        "description": "Gets the specified SmartGroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -143,9 +143,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "kubeSelectorGroupName",
+            "name": "smartGroupName",
             "in": "path",
-            "description": "The name of the KubeSelectorGroup.",
+            "description": "The name of the SmartGroup.",
             "required": true,
             "type": "string"
           }
@@ -154,7 +154,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroup"
+              "$ref": "#/definitions/SmartGroup"
             }
           },
           "default": {
@@ -165,17 +165,17 @@
           }
         },
         "x-ms-examples": {
-          "Get KubeSelectorGroup": {
-            "$ref": "./examples/KubeSelectorGroupGet.json"
+          "Get SmartGroup": {
+            "$ref": "./examples/SmartGroupGet.json"
           }
         }
       },
       "put": {
-        "operationId": "KubeSelectorGroups_CreateOrUpdate",
+        "operationId": "SmartGroups_CreateOrUpdate",
         "tags": [
-          "KubeSelectorGroups"
+          "SmartGroups"
         ],
-        "description": "Creates or updates a KubeSelectorGroup.",
+        "description": "Creates or updates a SmartGroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -187,33 +187,33 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "kubeSelectorGroupName",
+            "name": "smartGroupName",
             "in": "path",
-            "description": "The name of the KubeSelectorGroup.",
+            "description": "The name of the SmartGroup.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "Parameters supplied to the create or update KubeSelectorGroup operation.",
+            "description": "Parameters supplied to the create or update SmartGroup operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroup"
+              "$ref": "#/definitions/SmartGroup"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'KubeSelectorGroup' update operation succeeded",
+            "description": "Resource 'SmartGroup' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroup"
+              "$ref": "#/definitions/SmartGroup"
             }
           },
           "201": {
-            "description": "Resource 'KubeSelectorGroup' create operation succeeded",
+            "description": "Resource 'SmartGroup' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroup"
+              "$ref": "#/definitions/SmartGroup"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -235,22 +235,22 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update KubeSelectorGroup": {
-            "$ref": "./examples/KubeSelectorGroupPut.json"
+          "Create or Update SmartGroup": {
+            "$ref": "./examples/SmartGroupPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/KubeSelectorGroup"
+          "final-state-schema": "#/definitions/SmartGroup"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "KubeSelectorGroups_UpdateTags",
+        "operationId": "SmartGroups_UpdateTags",
         "tags": [
-          "KubeSelectorGroups"
+          "SmartGroups"
         ],
-        "description": "Updates tags of a KubeSelectorGroup resource.",
+        "description": "Updates tags of a SmartGroup resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -262,16 +262,16 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "kubeSelectorGroupName",
+            "name": "smartGroupName",
             "in": "path",
-            "description": "The name of the KubeSelectorGroup.",
+            "description": "The name of the SmartGroup.",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "Parameters supplied to update KubeSelectorGroup tags.",
+            "description": "Parameters supplied to update SmartGroup tags.",
             "required": true,
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
@@ -282,7 +282,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/KubeSelectorGroup"
+              "$ref": "#/definitions/SmartGroup"
             }
           },
           "default": {
@@ -293,17 +293,17 @@
           }
         },
         "x-ms-examples": {
-          "Update KubeSelectorGroup Tags": {
-            "$ref": "./examples/KubeSelectorGroupUpdateTags.json"
+          "Update SmartGroup Tags": {
+            "$ref": "./examples/SmartGroupUpdateTags.json"
           }
         }
       },
       "delete": {
-        "operationId": "KubeSelectorGroups_Delete",
+        "operationId": "SmartGroups_Delete",
         "tags": [
-          "KubeSelectorGroups"
+          "SmartGroups"
         ],
-        "description": "Deletes the specified KubeSelectorGroup.",
+        "description": "Deletes the specified SmartGroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -315,9 +315,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "kubeSelectorGroupName",
+            "name": "smartGroupName",
             "in": "path",
-            "description": "The name of the KubeSelectorGroup.",
+            "description": "The name of the SmartGroup.",
             "required": true,
             "type": "string"
           }
@@ -348,8 +348,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete KubeSelectorGroup": {
-            "$ref": "./examples/KubeSelectorGroupDelete.json"
+          "Delete SmartGroup": {
+            "$ref": "./examples/SmartGroupDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -360,47 +360,6 @@
     }
   },
   "definitions": {
-    "KubeSelectorGroup": {
-      "type": "object",
-      "description": "KubeSelectorGroup resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/KubeSelectorGroupProperties",
-          "description": "Properties of the KubeSelectorGroup resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Common.Resource"
-        }
-      ]
-    },
-    "KubeSelectorGroupListResult": {
-      "type": "object",
-      "description": "The response of a KubeSelectorGroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The KubeSelectorGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/KubeSelectorGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "KubeSelectorGroupNamespaceSelector": {
       "type": "object",
       "description": "Namespace selector for scoping by namespace labels.",
@@ -421,36 +380,6 @@
           "x-ms-identifiers": [
             "key"
           ]
-        }
-      }
-    },
-    "KubeSelectorGroupProperties": {
-      "type": "object",
-      "description": "Properties of the KubeSelectorGroup resource.",
-      "properties": {
-        "clusterIds": {
-          "type": "array",
-          "description": "The ARM resource IDs of the managedClusters associated with this KubeSelectorGroup.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "selector": {
-          "$ref": "#/definitions/KubeSelectorGroupSelector",
-          "description": "The label selector for matching Kubernetes pods."
-        },
-        "firewallPolicyIds": {
-          "type": "array",
-          "description": "The firewall policy IDs referencing this KubeSelectorGroup. System-managed, read-only.",
-          "items": {
-            "$ref": "./common.json#/definitions/Common.SubResource"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/Common.ProvisioningState",
-          "description": "The provisioning state of the KubeSelectorGroup resource.",
-          "readOnly": true
         }
       }
     },
@@ -499,6 +428,111 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "SmartGroup": {
+      "type": "object",
+      "description": "SmartGroup resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SmartGroupProperties",
+          "description": "Properties of the SmartGroup resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.Resource"
+        }
+      ]
+    },
+    "SmartGroupEntry": {
+      "type": "object",
+      "description": "A single entry in a SmartGroup. Each entry has a name, a discriminator type, and type-specific properties.\nCurrently supported types: KubeSelector.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this group entry."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type discriminator (e.g. \"KubeSelector\")."
+        },
+        "properties": {
+          "$ref": "#/definitions/SmartGroupEntryProperties",
+          "description": "The type-specific properties for this group entry."
+        }
+      }
+    },
+    "SmartGroupEntryProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a SmartGroupEntry. Currently only KubeSelector fields are populated.",
+      "properties": {
+        "clusterIds": {
+          "type": "array",
+          "description": "The ARM resource IDs of the managedClusters. Used when type is KubeSelector.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selector": {
+          "$ref": "#/definitions/KubeSelectorGroupSelector",
+          "description": "The label selector for matching Kubernetes pods. Used when type is KubeSelector."
+        }
+      }
+    },
+    "SmartGroupListResult": {
+      "type": "object",
+      "description": "The response of a SmartGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SmartGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/SmartGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SmartGroupProperties": {
+      "type": "object",
+      "description": "Properties of the SmartGroup resource.",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "The collection of group entries. Each entry has a name, type, and type-specific properties.",
+          "items": {
+            "$ref": "#/definitions/SmartGroupEntry"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "firewallPolicyIds": {
+          "type": "array",
+          "description": "The firewall policy IDs referencing this SmartGroup. System-managed, read-only.",
+          "items": {
+            "$ref": "./common.json#/definitions/Common.SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the SmartGroup resource.",
+          "readOnly": true
         }
       }
     }

@@ -26024,40 +26024,78 @@ model VirtualNetworkApplianceIpConfigurationProperties {
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
 
 /**
- * Properties of the KubeSelectorGroup resource.
+ * Properties of the SmartGroup resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @added(Versions.v2025_07_01)
-model KubeSelectorGroupProperties {
+model SmartGroupProperties {
   /**
-   * The ARM resource IDs of the managedClusters associated with this KubeSelectorGroup.
+   * The collection of group entries. Each entry has a name, type, and type-specific properties.
    */
-  clusterIds?: string[];
+  @identifiers(#["name"])
+  groups?: SmartGroupEntry[];
 
   /**
-   * The label selector for matching Kubernetes pods.
-   */
-  selector?: KubeSelectorGroupSelector;
-
-  /**
-   * The firewall policy IDs referencing this KubeSelectorGroup. System-managed, read-only.
+   * The firewall policy IDs referencing this SmartGroup. System-managed, read-only.
    */
   @visibility(Lifecycle.Read)
   firewallPolicyIds?: SubResource[];
 
   /**
-   * The provisioning state of the KubeSelectorGroup resource.
+   * The provisioning state of the SmartGroup resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 /**
+ * A single entry in a SmartGroup. Each entry has a name, a discriminator type, and type-specific properties.
+ * Currently supported types: KubeSelector.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
+@added(Versions.v2025_07_01)
+model SmartGroupEntry {
+  /**
+   * The name of this group entry.
+   */
+  name?: string;
+
+  /**
+   * The type discriminator (e.g. "KubeSelector").
+   */
+  type?: string;
+
+  /**
+   * The type-specific properties for this group entry.
+   */
+  properties?: SmartGroupEntryProperties;
+}
+
+/**
+ * Type-specific properties for a SmartGroupEntry. Currently only KubeSelector fields are populated.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
+@added(Versions.v2025_07_01)
+model SmartGroupEntryProperties {
+  /**
+   * The ARM resource IDs of the managedClusters. Used when type is KubeSelector.
+   */
+  clusterIds?: string[];
+
+  /**
+   * The label selector for matching Kubernetes pods. Used when type is KubeSelector.
+   */
+  selector?: KubeSelectorGroupSelector;
+}
+
+/**
  * Label selector for matching Kubernetes pods.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @added(Versions.v2025_07_01)
 model KubeSelectorGroupSelector {
   /**
@@ -26082,7 +26120,7 @@ model KubeSelectorGroupSelector {
  * Namespace selector for scoping by namespace labels.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @added(Versions.v2025_07_01)
 model KubeSelectorGroupNamespaceSelector {
   /**
@@ -26102,7 +26140,7 @@ model KubeSelectorGroupNamespaceSelector {
  * A set-based label selector requirement for matching Kubernetes labels.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @added(Versions.v2025_07_01)
 model KubeSelectorMatchExpression {
   /**
@@ -26126,7 +26164,7 @@ model KubeSelectorMatchExpression {
  * The operator for a KubeSelectorMatchExpression.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
-@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@Azure.ResourceManager.Legacy.feature(Features.smartGroup)
 @added(Versions.v2025_07_01)
 union KubeSelectorMatchExpressionOperator {
   string,

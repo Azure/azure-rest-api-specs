@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "SmartGroup1",
+            "type": "Microsoft.Network/smartGroups",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/smartGroups/SmartGroup1",
+            "location": "West US",
+            "tags": {
+              "key1": "value1"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "groups": [
+                {
+                  "name": "kube-web",
+                  "type": "KubeSelector",
+                  "properties": {
+                    "clusterIds": [
+                      "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+                    ],
+                    "selector": {
+                      "matchLabels": {
+                        "app": "web"
+                      }
+                    }
+                  }
+                }
+              ],
+              "firewallPolicyIds": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SmartGroups_ListAll",
+  "title": "List SmartGroups by Subscription"
+}
