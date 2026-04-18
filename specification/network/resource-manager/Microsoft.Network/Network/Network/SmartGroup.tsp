@@ -32,6 +32,7 @@ model SmartGroup extends Common.Resource {
   @path
   @key("smartGroupName")
   @segment("smartGroups")
+  @pattern("^[a-zA-Z0-9_.-]*$")
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */

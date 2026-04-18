@@ -63,6 +63,26 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: smartGroup.json
+    reason: provisioningState is correctly marked readOnly in SmartGroupProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups/{smartGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups/{smartGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups/{smartGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups/{smartGroupName}"].patch.responses["200"].schema
+  - code: AvoidAdditionalProperties
+    from: smartGroup.json
+    reason: matchLabels is a free-form key-value map of Kubernetes labels, additionalProperties is the correct OpenAPI representation.
+    where:
+      - $.definitions.KubeSelectorGroupSelector.properties.matchLabels
+      - $.definitions.KubeSelectorGroupNamespaceSelector.properties.matchLabels
+  - code: RequiredPropertiesMissingInResourceModel
+    from: smartGroup.json
+    reason: SmartGroup extends Common.Resource which includes id, name, and type via allOf. The linter does not follow allOf chains.
+    where:
+      - $.definitions.SmartGroup
+      - $.definitions.SmartGroupListResult
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
