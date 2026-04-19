@@ -54,12 +54,13 @@ interface MSDeployStatusOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MSDeployStatuses {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -131,12 +132,13 @@ interface MSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -206,12 +208,13 @@ interface MSDeployStatusSlotOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -285,13 +288,14 @@ interface InstanceMSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.

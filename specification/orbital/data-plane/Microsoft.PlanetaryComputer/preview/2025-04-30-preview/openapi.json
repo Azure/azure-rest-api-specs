@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "MPCPro Ingestion and Management API",
+    "title": "Microsoft Planetary Computer Pro",
     "version": "2025-04-30-preview",
     "x-typespec-generated": [
       {
@@ -12,6 +12,21 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "GeoCatalog endpoint, e.g. https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
@@ -55,13 +70,13 @@
       "name": "Tiles for STAC Collections Mosaics"
     },
     {
+      "name": "Tiles for STAC Searches"
+    },
+    {
       "name": "Tile Matrix Sets"
     },
     {
-      "name": "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
-    },
-    {
-      "name": "Sign an HREF for read access"
+      "name": "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
     },
     {
       "name": "Ingestion Management"
@@ -77,8 +92,8 @@
         "tags": [
           "Image Exports for STAC Collections"
         ],
-        "summary": "Create Static Image",
-        "description": "Create a new image export.",
+        "summary": "Create Static Image (Deprecated)",
+        "description": "Create a new image export.\n\nNote: This endpoint has been deprecated and will be removed in a future API version.\nPlease use `/data/collections/{collectionId}/bbox` for image generation instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -122,6 +137,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerStaticImages_Create": {
             "$ref": "./examples/TilerStaticImages_Create.json"
@@ -135,8 +151,8 @@
         "tags": [
           "Image Exports for STAC Collections"
         ],
-        "summary": "Get Static Image",
-        "description": "Fetch an existing image export by ID",
+        "summary": "Get Static Image (Deprecated)",
+        "description": "Fetch an existing image export by ID.\n\nNote: This endpoint has been deprecated and will be removed in a future API version.\nPlease use `/data/collections/{collectionId}/bbox` for image generation instead.",
         "produces": [
           "image/png",
           "application/json"
@@ -184,6 +200,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerStaticImages_Get": {
             "$ref": "./examples/TilerStaticImages_Get.json"
@@ -197,8 +214,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Wmts Tilematrixsetid As Path",
-        "description": "OGC WMTS endpoint.",
+        "summary": "Wmts Tilematrixsetid As Path (Deprecated)",
+        "description": "OGC WMTS endpoint.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead.",
         "produces": [
           "application/xml",
           "application/json"
@@ -381,6 +398,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerWmtsTileMatrixSets_GetCapabilitiesXml": {
             "$ref": "./examples/TilerWmtsTileMatrixSets_GetCapabilitiesXml.json"
@@ -394,8 +412,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "TileJson Tilematrixsetid As Path",
-        "description": "Return the TileJson Tilematrixsetid As a path",
+        "summary": "TileJson Tilematrixsetid As Path (Deprecated)",
+        "description": "Return the TileJson Tilematrixsetid As a path\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -573,6 +591,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerTileJsonTileMatrixSets_Get": {
             "$ref": "./examples/TilerTileJsonTileMatrixSets_Get.json"
@@ -586,8 +605,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Wmts",
-        "description": "OGC WMTS endpoint.",
+        "summary": "Wmts (Deprecated)",
+        "description": "OGC WMTS endpoint.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead.",
         "produces": [
           "application/xml",
           "application/json"
@@ -843,6 +862,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerWmts_GetCapabilitiesXml": {
             "$ref": "./examples/TilerWmts_GetCapabilitiesXml.json"
@@ -856,8 +876,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Asset Statistics",
-        "description": "Per Asset statistics",
+        "summary": "Asset Statistics (Deprecated)",
+        "description": "Per Asset statistics\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -940,6 +960,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerAssetStatistics_GetAll": {
             "$ref": "./examples/TilerAssetStatistics_GetAll.json"
@@ -953,8 +974,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Available Assets",
-        "description": "Return a list of supported assets.",
+        "summary": "Available Assets (Deprecated)",
+        "description": "Return a list of supported assets.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1001,6 +1022,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerAvailableAssets_GetAll": {
             "$ref": "./examples/TilerAvailableAssets_GetAll.json"
@@ -1014,8 +1036,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Bounds",
-        "description": "Return all Bounds",
+        "summary": "Bounds (Deprecated)",
+        "description": "Return all Bounds\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1059,6 +1081,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerBound_GetAll": {
             "$ref": "./examples/TilerBound_GetAll.json"
@@ -1072,8 +1095,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Part",
-        "description": "Create image from part of a dataset.",
+        "summary": "Part (Deprecated)",
+        "description": "Create image from part of a dataset.\n\nNote: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1294,6 +1317,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerParts_GetCroppedToBoundingBox": {
             "$ref": "./examples/TilerParts_GetCroppedToBoundingBox.json"
@@ -1307,8 +1331,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Geojson Crop",
-        "description": "Create image from a geojson feature.",
+        "summary": "Geojson Crop (Deprecated)",
+        "description": "Create image from a geojson feature.\n\nNote: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature/{width}x{height}.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1528,6 +1552,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerGeoJsons_CropWidthByHeightFormat": {
             "$ref": "./examples/TilerGeoJsons_CropWidthByHeightFormat.json"
@@ -1541,8 +1566,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Part",
-        "description": "Create image from part of a dataset.",
+        "summary": "Part (Deprecated)",
+        "description": "Create image from part of a dataset.\n\nNote: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1773,6 +1798,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerParts_GetCroppedToBoundingBoxWidthByHeight": {
             "$ref": "./examples/TilerParts_GetCroppedToBoundingBoxWidthByHeight.json"
@@ -1786,8 +1812,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Geojson Crop",
-        "description": "Create image from a geojson feature.",
+        "summary": "Geojson Crop (Deprecated)",
+        "description": "Create image from a geojson feature.\n\nNote: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -1997,6 +2023,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerGeoJsons_CropFormat": {
             "$ref": "./examples/TilerGeoJsons_CropFormat.json"
@@ -2010,8 +2037,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Info",
-        "description": "Return dataset's basic info.",
+        "summary": "Info (Deprecated)",
+        "description": "Return dataset's basic info.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2066,6 +2093,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerInfoOperations_Get": {
             "$ref": "./examples/TilerInfoOperations_Get.json"
@@ -2079,8 +2107,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Info Geojson",
-        "description": "Return Info Geojson",
+        "summary": "Info Geojson (Deprecated)",
+        "description": "Return Info Geojson\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2135,6 +2163,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerInfoGeoJsonOperations_Get": {
             "$ref": "./examples/TilerInfoGeoJsonOperations_Get.json"
@@ -2148,8 +2177,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Point",
-        "description": "Get Point value for a dataset.",
+        "summary": "Point (Deprecated)",
+        "description": "Get Point value for a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2305,6 +2334,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerPoints_GetPoint": {
             "$ref": "./examples/TilerPoints_GetPoint.json"
@@ -2318,8 +2348,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Preview",
-        "description": "Create preview of a dataset.",
+        "summary": "Preview (Deprecated)",
+        "description": "Create preview of a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -2574,6 +2604,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerPreviews_Get": {
             "$ref": "./examples/TilerPreviews_Get.json"
@@ -2587,8 +2618,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Preview",
-        "description": "Create preview of a dataset.",
+        "summary": "Preview (Deprecated)",
+        "description": "Create preview of a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -2789,6 +2820,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerPreviews_GetFormat": {
             "$ref": "./examples/TilerPreviews_GetFormat.json"
@@ -2802,8 +2834,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Statistics",
-        "description": "Merged assets statistics.",
+        "summary": "Statistics (Deprecated)",
+        "description": "Merged assets statistics.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2886,6 +2918,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerStatistics_GetAll": {
             "$ref": "./examples/TilerStatistics_GetAll.json"
@@ -2897,8 +2930,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Geojson Statistics",
-        "description": "Get Statistics from a geojson feature.",
+        "summary": "Geojson Statistics (Deprecated)",
+        "description": "Get Statistics from a geojson feature.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2998,6 +3031,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerGeoJsonStatistics_Get": {
             "$ref": "./examples/TilerGeoJsonStatistics_Get.json"
@@ -3011,8 +3045,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "TileJson",
-        "description": "Return TileJson",
+        "summary": "TileJson (Deprecated)",
+        "description": "Return TileJson\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3263,6 +3297,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerTileJsonOperations_Get": {
             "$ref": "./examples/TilerTileJsonOperations_Get.json"
@@ -3276,8 +3311,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Tile",
-        "description": "Create map tile from a dataset.",
+        "summary": "Tile (Deprecated)",
+        "description": "Create map tile from a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -3490,6 +3525,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerTiles_GetZxyScaleByFormat": {
             "$ref": "./examples/TilerTiles_GetZxyScaleByFormat.json"
@@ -3503,8 +3539,8 @@
         "tags": [
           "Tiles for STAC Items"
         ],
-        "summary": "Tile Tilematrixsetid As Path",
-        "description": "Create map tile from a dataset.",
+        "summary": "Tile Tilematrixsetid As Path (Deprecated)",
+        "description": "Create map tile from a dataset.\n\nNote: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -3644,6 +3680,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "TilerTileMatrixSets_GetZxyScaleByFormat": {
             "$ref": "./examples/TilerTileMatrixSets_GetZxyScaleByFormat.json"
@@ -3890,8 +3927,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Wmts Tilematrixsetid As Path",
-        "description": "OGC WMTS endpoint.",
+        "summary": "Wmts Tilematrixsetid As Path (Deprecated)",
+        "description": "OGC WMTS endpoint.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "application/xml",
           "application/json"
@@ -4065,6 +4102,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsWmtsMosaicsTileMatrixSets_GetCapabilitiesXml": {
             "$ref": "./examples/MosaicsWmtsMosaicsTileMatrixSets_GetCapabilitiesXml.json"
@@ -4078,8 +4116,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Assets For Point",
-        "description": "Return a list of assets for a given point.",
+        "summary": "Assets For Point (Deprecated)",
+        "description": "Return a list of assets for a given point.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{longitude},{latitude}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4156,6 +4194,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsAssetsForPoints_GetPointAssets": {
             "$ref": "./examples/MosaicsAssetsForPoints_GetPointAssets.json"
@@ -4169,8 +4208,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "TileJson Tilematrixsetid As Path",
-        "description": "Return TileJSON document for a searchId.",
+        "summary": "TileJson Tilematrixsetid As Path (Deprecated)",
+        "description": "Return TileJSON document for a searchId.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4359,6 +4398,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTileMatrixSetsTileJson_Get": {
             "$ref": "./examples/MosaicsTileMatrixSetsTileJson_Get.json"
@@ -4372,8 +4412,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Wmts",
-        "description": "OGC WMTS endpoint.",
+        "summary": "Wmts (Deprecated)",
+        "description": "OGC WMTS endpoint.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/WMTSCapabilities.xml` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "application/xml",
           "application/json"
@@ -4620,6 +4660,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsWmtsMosaics_GetCapabilitiesXml": {
             "$ref": "./examples/MosaicsWmtsMosaics_GetCapabilitiesXml.json"
@@ -4633,8 +4674,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Info Search",
-        "description": "Get Search query metadata.",
+        "summary": "Info Search (Deprecated)",
+        "description": "Get Search query metadata.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/info` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4669,6 +4710,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsInfoSearch_Get": {
             "$ref": "./examples/MosaicsInfoSearch_Get.json"
@@ -4682,8 +4724,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "TileJson",
-        "description": "Return TileJSON document for a searchId.",
+        "summary": "TileJson (Deprecated)",
+        "description": "Return TileJSON document for a searchId.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tilejson.json` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6463,6 +6505,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTileJsonOperations_Get": {
             "$ref": "./examples/MosaicsTileJsonOperations_Get.json"
@@ -6476,8 +6519,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Tile",
-        "description": "Create map tile.",
+        "summary": "Tile (Deprecated)",
+        "description": "Create map tile.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -6696,6 +6739,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTiles_GetZxyScaleByFormat": {
             "$ref": "./examples/MosaicsTiles_GetZxyScaleByFormat.json"
@@ -6709,8 +6753,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Tile Tilematrixsetid As Path",
-        "description": "Create map tile.",
+        "summary": "Tile Tilematrixsetid As Path (Deprecated)",
+        "description": "Create map tile.\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -6856,6 +6900,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsTileMatrixSets_GetZxyScaleByFormat": {
             "$ref": "./examples/MosaicsTileMatrixSets_GetZxyScaleByFormat.json"
@@ -6869,8 +6914,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Assets For Tile Tilematrixsetid As Path",
-        "description": "Return a list of assets which overlap a given tile",
+        "summary": "Assets For Tile Tilematrixsetid As Path (Deprecated)",
+        "description": "Return a list of assets which overlap a given tile\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6951,6 +6996,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsAssetsForTileMatrixSets_GetZxyAssets": {
             "$ref": "./examples/MosaicsAssetsForTileMatrixSets_GetZxyAssets.json"
@@ -6964,8 +7010,8 @@
         "tags": [
           "Tiles for STAC Collections Mosaics"
         ],
-        "summary": "Assets For Tile",
-        "description": "Return a list of assets which overlap a given tile",
+        "summary": "Assets For Tile (Deprecated)",
+        "description": "Return a list of assets which overlap a given tile\n\nNote: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7107,6 +7153,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "MosaicsAssetsForTiles_GetZxyAssets": {
             "$ref": "./examples/MosaicsAssetsForTiles_GetZxyAssets.json"
@@ -7118,7 +7165,7 @@
       "post": {
         "operationId": "MosaicsRegisterSearch_Register",
         "tags": [
-          "Tiles for STAC Collections Mosaics"
+          "Tiles for STAC Searches"
         ],
         "summary": "Register Search",
         "description": "Register a Search query",
@@ -8195,7 +8242,7 @@
       "get": {
         "operationId": "Sas_GetSign",
         "tags": [
-          "Sign an HREF for read access"
+          "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
         ],
         "summary": "sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse",
         "description": "Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).\nIf the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.",
@@ -8252,7 +8299,7 @@
       "get": {
         "operationId": "Sas_GetToken",
         "tags": [
-          "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
+          "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
         ],
         "summary": "generate a SAS Token for the given Azure Blob storage account and container.",
         "description": "Generate a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor the given storage account and container. The storage account and container\nmust be associated with a Planetary Computer dataset indexed by the STAC API.",
@@ -8308,7 +8355,7 @@
       "post": {
         "operationId": "Sas_RevokeToken",
         "tags": [
-          "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
+          "Shared Access Signature (SAS) Tokens for GeoCatalog Asset Access"
         ],
         "summary": "Revoke SAS token for the managed storage account of this GeoCatalog.",
         "description": "Revoke a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor managed storage account of this GeoCatalog.",
@@ -12399,7 +12446,6 @@
         "properties": {
           "type": "object",
           "description": "Feature properties",
-          "default": {},
           "additionalProperties": {}
         }
       },
@@ -18442,7 +18488,7 @@
     "MosaicSearchQueryParameters.exitWhenFull": {
       "name": "exitwhenfull",
       "in": "query",
-      "description": "Return as soon as the geometry is fully covered (defaults to True in PgSTAC).",
+      "description": "Return as soon as the geometry is fully covered (defaults to True).",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method",
@@ -18451,7 +18497,7 @@
     "MosaicSearchQueryParameters.itemsLimit": {
       "name": "items_limit",
       "in": "query",
-      "description": "Return as soon as we have N items per geometry (defaults to 100 in PgSTAC).",
+      "description": "Return as soon as we have N items per geometry (defaults to 100).",
       "required": false,
       "type": "integer",
       "format": "int32",
@@ -18461,7 +18507,7 @@
     "MosaicSearchQueryParameters.scanLimit": {
       "name": "scan_limit",
       "in": "query",
-      "description": "Return as soon as we scan N items (defaults to 10000 in PgSTAC).",
+      "description": "Return as soon as we scan N items (defaults to 10000).",
       "required": false,
       "type": "integer",
       "format": "int32",
@@ -18471,7 +18517,7 @@
     "MosaicSearchQueryParameters.skipCovered": {
       "name": "skipcovered",
       "in": "query",
-      "description": "Skip any items that would show up completely under the previous items (defaults\nto True in PgSTAC).",
+      "description": "Skip any items that would show up completely under the previous items (defaults\nto True).",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method",
@@ -18480,7 +18526,7 @@
     "MosaicSearchQueryParameters.timeLimit": {
       "name": "time_limit",
       "in": "query",
-      "description": "Return after N seconds to avoid long requests (defaults to 5 in PgSTAC).",
+      "description": "Return after N seconds to avoid long requests (defaults to 5).",
       "required": false,
       "type": "integer",
       "format": "int32",

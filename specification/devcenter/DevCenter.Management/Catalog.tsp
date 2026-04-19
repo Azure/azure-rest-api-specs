@@ -140,7 +140,8 @@ interface CatalogOperationGroupOps
         @minLength(3)
         @maxLength(63)
         catalogName: string,
-      }
+      },
+      ResourceName = "DevCenterCatalog"
     > {}
 
 @armResourceOperations

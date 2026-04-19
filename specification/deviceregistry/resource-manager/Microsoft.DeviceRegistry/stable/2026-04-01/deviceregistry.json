@@ -4819,6 +4819,11 @@
           "$ref": "#/definitions/StatusError",
           "description": "Defines the error related to this endpoint.",
           "readOnly": true
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of the endpoint.",
+          "readOnly": true
         }
       }
     },
@@ -5198,6 +5203,73 @@
             "name": "Delta_1_0",
             "value": "Delta/1.0",
             "description": "Delta format"
+          }
+        ]
+      }
+    },
+    "HealthState": {
+      "type": "object",
+      "description": "Represents the health state of a resource.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/HealthStatus",
+          "description": "The high-level health status of the resource.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "description": "The timestamp (RFC3339) when the health status last changed.",
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The timestamp (RFC3339) when the health status was last updated, even if the status did not change.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message describing the last transition.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "Unique, CamelCase reason code describing the cause of the last health state transition.",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "Defines the health state of the resource.",
+      "enum": [
+        "Unknown",
+        "Available",
+        "Degraded",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Resource state is unknown."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Resource is Available and functioning as expected."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Resource health is degraded."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Resource is not functioning as expected."
           }
         ]
       }
@@ -6113,6 +6185,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "The details about the runtime health state of the asset.",
+          "readOnly": true
         }
       }
     },
