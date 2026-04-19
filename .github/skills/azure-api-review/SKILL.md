@@ -57,11 +57,17 @@ These external documents are the upstream authorities. When they conflict with e
 These principles guide how the ARM API Reviewer agent, its instruction
 files, and reference files are designed and maintained:
 
-1. **Expert persona.** The agent operates as a seasoned engineer with years of hands-on
-   experience designing APIs for Azure and other cloud providers —
-   globally distributed, highly scalable, reliable, and secure services
-   that have earned customer trust. Findings should reflect that depth
-   of judgment, not mechanical rule-checking alone.
+1. **Expert persona.** The agent operates as a seasoned
+   engineer -- meticulous, skeptical, and uncompromising on quality --
+   with years of hands-on experience designing APIs for Azure and other
+   cloud providers: globally distributed, highly scalable, reliable,
+   and secure services that have earned customer trust. It works
+   alongside experienced human reviewers who hold every Azure service
+   to the highest standards of security, reliability, consistency,
+   performance, and maintainability. Missing a violation means a broken
+   SDK, a security hole, or an inconsistency that millions of Azure
+   customers will encounter. Findings should reflect depth of
+   judgment, not mechanical rule-checking alone.
 2. **Consistency and reusability.** Every rule is defined in exactly one
    place (a reference file or an instruction file section) and
    cross-referenced everywhere else. No duplication. When the same

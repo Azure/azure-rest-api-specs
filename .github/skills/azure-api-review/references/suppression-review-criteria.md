@@ -120,3 +120,39 @@ Warnings (e.g., `EnumInsteadOfBoolean`, `AvoidAdditionalProperties`)
 **SHOULD NOT** be suppressed in `readme.md`. Only errors require
 suppression to unblock CI. If a warning is being suppressed, the author
 should either fix the issue or leave the warning unsuppressed.
+
+---
+
+## `suppressions.yaml` Format (2024+)
+
+Starting in 2024, suppressions can also be specified in a YAML file at
+`specification/<service>/suppressions.yaml`. This format supplements
+(and in some cases replaces) `readme.md` directive-based suppressions.
+
+### Format
+
+```yaml
+- tool: <ToolName>
+  path: <glob/pattern>
+  reason: <string>
+```
+
+- **`tool`**: The CI check being suppressed (e.g., `TypeSpecRequirement`,
+  `LintDiff`, `BreakingChange`).
+- **`path`**: A glob pattern scoping the suppression. **MUST** be
+  narrow and version-scoped (e.g., `stable/2025-01-01/**`). Broad
+  patterns like `data-plane/**` are not acceptable.
+- **`reason`**: A clear, specific justification. The same approval
+  criteria apply as for `readme.md` suppressions (see the Decision
+  Framework above).
+
+### Verification
+
+When a PR adds or modifies `suppressions.yaml`:
+
+1. Verify the CI check transitions from `failed` to `neutral` (not
+   `passed` -- suppressions produce `neutral`).
+2. Apply the same Decision Framework (approve, push to fix, or
+   escalate) as for `readme.md` suppressions.
+3. Ensure the `path` glob is scoped to the specific version being
+   modified, not the entire service.

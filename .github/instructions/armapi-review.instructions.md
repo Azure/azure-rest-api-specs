@@ -603,6 +603,20 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - For ARM RPs, the `operations.json` (or equivalent operations API spec) **MUST** be included in every published package tag's input-file list.
 - If a new tag only includes the service resource swagger but omits the operations API, flag it — the resulting SDK will be missing the operations endpoint.
 
+### 10A.4 `suppressions.yaml` Format (2024+)
+
+- Starting in 2024, suppressions can also be specified in a YAML file at `specification/<service>/suppressions.yaml` (in addition to `readme.md` directives).
+- Each entry uses the format:
+  ```yaml
+  - tool: <ToolName>
+    path: <glob/pattern>
+    reason: <string>
+  ```
+- The `tool` field identifies the CI check being suppressed (e.g., `TypeSpecRequirement`, `LintDiff`).
+- The `path` field **MUST** use narrow, version-scoped globs (e.g., `stable/2025-01-01/**`) -- not broad patterns like `data-plane/**`.
+- The `reason` field **MUST** provide a clear, specific justification (same rules as readme.md suppressions -- see suppression-review-criteria.md).
+- When reviewing a PR that adds or modifies `suppressions.yaml`, apply the same approval criteria as for `readme.md` suppressions (§10A.0 through §10A.2).
+
 ---
 
 ## 11. API Version Practices (ARM-Specific)
@@ -965,6 +979,12 @@ When a PR introduces APIs at the tenant or provider level (outside subscription 
 
 ## 26. Schema Evolution Between API Versions
 
+### 26.0 Published API Versions Are Immutable
+
+- Once an API version is published (merged to `main` in either the public or private spec repo), its schema is **immutable**. No changes -- not even adding an optional property -- are allowed to that version.
+- Any modification to a published API version requires creating a **new api-version** (with a later date). This applies to both GA and preview versions.
+- If a PR modifies a swagger file under a version folder that was already merged to `main`, verify that the PR also introduces a new api-version folder. If it only modifies the existing version, flag it.
+
 ### 26.1 Allowed Schema Changes
 
 Between API versions, the following changes are **allowed**:
@@ -1134,6 +1154,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Deprecated versions/operations/properties marked with `"deprecated": true`; Azure Policy team consulted
 
 ### Schema Evolution
+- ✅ Published API versions are immutable — no changes (even optional properties) without a new api-version
 - ✅ No type changes on existing properties between API versions (introduce new property name + deprecate old)
 - ✅ No required properties added to or removed from existing models between API versions
 - ✅ DELETE never fails due to API version mismatch with creation version
@@ -1146,6 +1167,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Suppressions evaluated per decision framework: approve only for false alarms or pre-existing violations; push to fix for new resources
+- ✅ `suppressions.yaml` entries use narrow, version-scoped globs and clear justifications (same criteria as readme.md)
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)
 
 ### Naming

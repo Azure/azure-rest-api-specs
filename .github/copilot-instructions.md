@@ -10,9 +10,10 @@
 # New TypeSpec projects
 
 Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.instructions.md) for detailed steps on:
- - how to create a new TypeSpec project.
- - converting a specification from swagger to typespec
- - troubleshooting tsp compile errors
+
+- how to create a new TypeSpec project.
+- converting a specification from swagger to typespec
+- troubleshooting tsp compile errors
 
 # Adding Language Emitters to Existing TypeSpec Projects
 
@@ -63,7 +64,6 @@ Cross-cutting review rules (secret detection, property mutability, naming conven
 # GitHub Actions Development
 
 Follow [github-actions.instructions.md](./instructions/github-actions.instructions.md) for instructions on developing and maintaining GitHub Actions code in this repository. This includes workflows, composite actions, and shared utilities.
-
 
 <!-- LINKS -->
 

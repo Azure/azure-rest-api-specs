@@ -264,6 +264,36 @@ Flag these issues when found:
 
 ---
 
+## 8. TypeSpec Conversion Reviews
+
+### 8.1 Horizontal Conversion Only
+
+- When a PR converts an existing OpenAPI specification to TypeSpec, the conversion **MUST** be horizontal -- no API changes are allowed during the conversion.
+- The generated OpenAPI output from the TypeSpec source **MUST** be functionally identical to the original OpenAPI specification.
+- If the PR introduces both a TypeSpec conversion and API changes (new properties, new operations, version bump), flag it -- these should be separate PRs.
+
+### 8.2 Validation
+
+- The conversion should be validated using `tsp-client compare` (or equivalent diff tool) to confirm the generated OpenAPI matches the original.
+- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing `x-ms-*` extensions.
+
+### 8.3 SDK Generation Cutover
+
+- When converting to TypeSpec, the PR **MUST** also disable OpenAPI-based SDK generation by removing language entries from `swagger-to-sdk` in `readme.md` and deleting `readme.{language}.md` files that are no longer needed.
+- Verify that `tspconfig.yaml` includes the correct emitter configuration for all target languages.
+
+---
+
+## 9. TypeSpec Adoption Requirements
+
+### 9.1 TypeSpec Mandate
+
+- As of March 30, 2026, all brownfield services are expected to have migrated to TypeSpec.
+- Starting Q4 FY26, new API version PRs without TypeSpec source will be blocked from merge, and SDK releases from non-TypeSpec specifications will be blocked.
+- If a PR introduces a new API version using hand-authored OpenAPI (without TypeSpec source), flag it and ask whether TypeSpec migration is in progress.
+
+---
+
 ## TypeSpec Review Checklist Summary
 
 When reviewing TypeSpec files, verify:
@@ -298,6 +328,9 @@ When reviewing TypeSpec files, verify:
 - ✅ Suppression reasons are factually accurate and technically justified
 - ✅ No duplicate `@added` decorators on the same symbol
 - ✅ `@added` version targeting is correct — features don't leak into earlier API version outputs
+- ✅ TypeSpec conversion PRs: no API changes (horizontal only); generated OpenAPI matches original
+- ✅ TypeSpec conversion PRs: `swagger-to-sdk` entries removed; `readme.{language}.md` files deleted
+- ✅ New API version PRs use TypeSpec source (hand-authored OpenAPI flagged post-Q4 FY26)
 - ✅ No polymorphic-format properties — use separate typed properties or discriminated unions
 - ✅ Numeric properties use numeric types, not string (TSP-NUMERIC-TYPE)
 - ✅ No `Record<>` usage when typed models can be defined
