@@ -40,13 +40,17 @@ instruction files.
 
 ## PUT / PATCH / GET Contract Rules
 
-| Linter Rule ID | Name                                     | Instruction Coverage                 | Status       |
-| -------------- | ---------------------------------------- | ------------------------------------ | ------------ |
-| R2016          | PatchBodyParametersSchema                | armapi-review §4.1 (RPC-Patch-V1-10) | ✅ Annotated |
-| R2017          | PutRequestResponseScheme                 | armapi-review §3.1 (RPC-Put-V1-25)   | ✅ Covered   |
-| R3007          | PutGetPatchResponseSchema                | armapi-review §3.1 (RPC-Put-V1-12)   | ✅ Covered   |
-| --             | PatchPropertiesCorrespondToPutProperties | armapi-review §4                     | ✅ Covered   |
-| R2062          | XmsResourceInPutResponse                 | armapi-review §2.1 (RPC-Put-V1-12)   | ✅ Covered   |
+| Linter Rule ID | Name                                     | Instruction Coverage                  | Status       |
+| -------------- | ---------------------------------------- | ------------------------------------- | ------------ |
+| R2016          | PatchBodyParametersSchema                | armapi-review §4.1 (RPC-Patch-V1-10)  | ✅ Annotated |
+| --             | PatchSkuProperty                         | armapi-review §4.3b (RPC-Patch-V1-09) | ✅ Annotated |
+| --             | PatchIdentityProperty                    | armapi-review §4.3b (RPC-Patch-V1-11) | ✅ Annotated |
+| R2017          | PutRequestResponseScheme                 | armapi-review §3.1 (RPC-Put-V1-25)    | ✅ Covered   |
+| R3007          | PutGetPatchResponseSchema                | armapi-review §3.1 (RPC-Put-V1-12)    | ✅ Covered   |
+| --             | PatchPropertiesCorrespondToPutProperties | armapi-review §4                      | ✅ Covered   |
+| R2062          | XmsResourceInPutResponse                 | armapi-review §2.1 (RPC-Put-V1-12)    | ✅ Covered   |
+| --             | ConsistentResponseSchemaForPut           | armapi-review §3.1 (RPC-Put-V1-29)    | ✅ Annotated |
+| --             | ConsistentPatchProperties                | armapi-review §4.3a (RPC-Patch-V1-01) | ✅ Annotated |
 
 ## Resource Lifecycle Rules
 
@@ -63,6 +67,7 @@ instruction files.
 | R3010          | TrackedResourceListByImmediateParent         | armapi-review §2.3                                               | ✅ Covered   |
 | --             | MissingSegmentsInNestedResourceListOperation | armapi-review §2.3                                               | ✅ Covered   |
 | --             | AllProxyResourcesShouldHaveDelete            | armapi-review §5.1 (RPC-Delete-V1-05)                            | ✅ Covered   |
+| --             | TrackedExtensionResourcesAreNotAllowed       | armapi-review §1.2 (RPC-Uri-V1-12)                               | ✅ Annotated |
 | --             | ReservedResourceNamesModelAsEnum             | tracked-resource-lifecycle.md (RPC-ConstrainedCollections-V1-04) | ✅ Annotated |
 
 ## Resource Model & Properties Rules
@@ -142,23 +147,25 @@ instruction files.
 
 ## Pagination Rules
 
-| Linter Rule ID | Name                                     | Instruction Coverage | Status     |
-| -------------- | ---------------------------------------- | -------------------- | ---------- |
-| R2025          | NextLinkPropertyMustExist                | armapi-review §13.1  | ✅ Covered |
-| R2029          | PageableOperation                        | armapi-review §13.1  | ✅ Covered |
-| R2060          | PageableRequires200Response              | armapi-review §13.1  | ✅ Covered |
-| R4012          | XmsPageableMustHaveCorrespondingResponse | armapi-review §13.1  | ✅ Covered |
-| R4019          | GetCollectionResponseSchema              | armapi-review §13.1  | ✅ Covered |
-| R3060          | XmsPageableListByRGAndSubscriptions      | armapi-review §2.2   | ✅ Covered |
-| R3008          | CollectionObjectPropertiesNaming         | armapi-review §13.1  | ✅ Covered |
+| Linter Rule ID | Name                                     | Instruction Coverage               | Status       |
+| -------------- | ---------------------------------------- | ---------------------------------- | ------------ |
+| R2025          | NextLinkPropertyMustExist                | armapi-review §13.1                | ✅ Covered   |
+| R2029          | PageableOperation                        | armapi-review §13.1                | ✅ Covered   |
+| R2060          | PageableRequires200Response              | armapi-review §13.1                | ✅ Covered   |
+| R4012          | XmsPageableMustHaveCorrespondingResponse | armapi-review §13.1                | ✅ Covered   |
+| R4019          | GetCollectionResponseSchema              | armapi-review §13.1                | ✅ Covered   |
+| R3060          | XmsPageableListByRGAndSubscriptions      | armapi-review §2.2                 | ✅ Covered   |
+| R3008          | CollectionObjectPropertiesNaming         | armapi-review §13.1                | ✅ Covered   |
+| --             | QueryParametersInCollectionGet           | armapi-review §2.2 (RPC-Get-V1-15) | ✅ Annotated |
 
 ## Operations API Rules
 
-| Linter Rule ID | Name                               | Instruction Coverage                   | Status     |
-| -------------- | ---------------------------------- | -------------------------------------- | ---------- |
-| R3023          | OperationsAPIImplementation        | armapi-review §1.4 (RPC-Operations-V1) | ✅ Covered |
-| R4018          | OperationsApiResponseSchema        | armapi-review §1.4                     | ✅ Covered |
-| --             | OperationsApiSchemaUsesCommonTypes | armapi-review §1.4, §2.8               | ✅ Covered |
+| Linter Rule ID | Name                               | Instruction Coverage                      | Status       |
+| -------------- | ---------------------------------- | ----------------------------------------- | ------------ |
+| R3023          | OperationsAPIImplementation        | armapi-review §1.4 (RPC-Operations-V1)    | ✅ Covered   |
+| R4018          | OperationsApiResponseSchema        | armapi-review §1.4                        | ✅ Covered   |
+| --             | OperationsApiSchemaUsesCommonTypes | armapi-review §1.4, §2.8                  | ✅ Covered   |
+| --             | OperationsApiTenantLevelOnly       | armapi-review §1.4 (RPC-Operations-V1-02) | ✅ Annotated |
 
 ## Description & Documentation Rules
 
@@ -200,6 +207,7 @@ instruction files.
 | --             | PathParameterSchema                   | openapi-review §4                    | ⚠️ Implicit  |
 | --             | PathContainsResourceType              | armapi-review §1.5                   | ✅ Covered   |
 | R4038          | ExtensionResourcePathPattern          | armapi-review §1.2                   | ✅ Covered   |
+| --             | NoDuplicatePathsForScopeParameter     | armapi-review §1.2 (RPC-Uri-V1-10)   | ✅ Annotated |
 | --             | EvenSegmentedPathForPutOperation      | armapi-review §3.1 (RPC-Put-V1-02)   | ✅ Covered   |
 
 ## Error Handling Rules
@@ -259,7 +267,7 @@ instruction files.
 | Status       | Count | Meaning                                                            |
 | ------------ | ----- | ------------------------------------------------------------------ |
 | ✅ Covered   | ~95   | Rule has explicit instruction file section                         |
-| ✅ Annotated | ~10   | Rule has `(Also enforced by:)` annotation                          |
+| ✅ Annotated | ~18   | Rule has `(Also enforced by:)` annotation                          |
 | ⚠️ Implicit  | ~18   | Instruction covers the concept but doesn't cite the linter rule ID |
 | ❌ GAP       | ~3    | No instruction coverage at all                                     |
 

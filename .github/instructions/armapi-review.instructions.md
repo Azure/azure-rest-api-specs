@@ -48,6 +48,10 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Extension resources use the pattern: `/{scope}/providers/Microsoft.{Namespace}/{resourceType}/{resourceName}` where `{scope}` is a target resource ID.
 - **Proxy resources MUST use `ProxyResource` as their base type, NOT `Resource`.** If a proxy or extension resource extends `Resource` instead of `ProxyResource`, flag it as an error.
 - **Proxy resources MUST NOT have `tags`.** Tags are a property of tracked resources only. If tags appear on a proxy resource, flag it and instruct the author to remove them.
+- **Extension resources MUST always be proxy.** An extension resource (one whose path uses the `/{scope}/providers/...` pattern) **MUST NOT** have `location` as a required property. If a resource model for an extension resource path includes a required `location` property, it is incorrectly modeled as a tracked resource — flag it as an ARM Error and instruct the author to remove `location` (RPC-Uri-V1-12).
+  (Also enforced by: `TrackedExtensionResourcesAreNotAllowed` linter rule)
+- **No duplicate paths when using `{scope}` parameter (RPC-Uri-V1-10).** If an API uses the `{scope}` path parameter to support multiple scopes (tenant, management group, subscription, resource group), the spec **MUST NOT** also include explicitly-scoped paths for the same resource type (e.g., both `/{scope}/providers/Microsoft.Bakery/breads` and `/subscriptions/{subscriptionId}/providers/Microsoft.Bakery/breads`). Either use `{scope}` or use explicit scope paths, but not both.
+  (Also enforced by: `NoDuplicatePathsForScopeParameter` linter rule)
 
 ### 1.3 Resource Provider Namespace Consistency (RPC-Put-V1-06)
 
@@ -64,6 +68,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - This GET operation **MUST** return an `OperationListResult` with `x-ms-pageable` and a `nextLinkName`.
 - The operations list **MUST** use the common-types `OperationListResult` and `Operation` definitions. Do not define custom Operation types.
 - If the operations endpoint is missing from the spec, flag it as an ARM Error.
+- The operations API endpoint **MUST** be scoped at the tenant level only (`/providers/Microsoft.{Namespace}/operations`). Operations **MUST NOT** vary per subscription — do not define the operations API under `/subscriptions/{subscriptionId}/...` (RPC-Operations-V1-02).
+  (Also enforced by: `OperationsApiTenantLevelOnly` linter rule)
 - When adding new API versions, the operations list **MUST** include ALL operations across all API versions. Do not remove existing operations from the operations list — only add new ones.
 
 ### 1.5 ARM URL Pattern Compliance
@@ -73,14 +79,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 1.6 Resource Type Naming
 
-- Resource type names in URL paths **MUST** be:
-  - **camelCase** (e.g. `openShiftClusters`, not `OpenShiftClusters` or `openshiftclusters`).
-  - **Plural** (e.g. `virtualMachines`, not `virtualMachine`) and must match the corresponding collection GET API path segment.
-  - **Specific** — avoid generic names like `resourceName` or `childResourceName`. Use a meaningful, domain-specific name.
-- Flag any resource type name that is PascalCase, singular-only (when a collection GET exists), or overly generic.
-- Resource type names **MUST NOT** collide with well-known Azure concepts. For example, `Microsoft.AzureCis/subscriptions` is confusing because "subscriptions" is an ARM first-class concept. Use a more specific name like `cisSubscriptions` or `managedSubscriptions`.
-- Resource type names **MUST NOT** repeat the resource provider namespace. For example, if the namespace is `Microsoft.Contoso`, the resource type should be `httpsServices` not `contosoHttpsServices`. The namespace already provides the context.
-- Resource provider namespace names **MUST NOT** be code names, product abbreviations, or temporary names. RP names are permanent and visible to all customers in resource IDs, SDKs, and documentation. Choose a descriptive name that conveys what the RP does.
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for comprehensive resource type naming rules, RP namespace naming, and casing conventions.
+
+- Resource type names in URL paths **MUST** be **camelCase**, **plural**, and **specific** (not generic names like `resourceName`).
+- Resource type names **MUST NOT** collide with well-known Azure concepts (e.g., `subscriptions`, `resourceGroups`).
+- Resource type names **MUST NOT** repeat the resource provider namespace.
+- Resource provider namespace names **MUST NOT** be code names, product abbreviations, or temporary names.
 
 ### 1.7 Client-Facing Text Must Not Use Internal Terminology
 
@@ -109,6 +113,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - A **tracked resource** (has `location` as required property) **MUST** implement GET, PUT, PATCH, DELETE, List by Resource Group, and List by Subscription. If any are missing, flag it as an ARM Error.
 - Point GET operations **MUST NOT** have query parameters other than `api-version` (RPC-Get-V1-08).
 - Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties; `nextLink` **MUST** use `"format": "uri"` (RPC-Get-V1-09, RPC-Get-V1-13).
+- Collection GET operations **MUST NOT** have query parameters other than `api-version` and OData `$filter` (RPC-Get-V1-15). Custom query parameters on collection GETs are not supported by ARM.
+  (Also enforced by: `QueryParametersInCollectionGet` linter rule — staging only)
 - The model in the `value` array of a collection GET **MUST** be the same model as the point GET response (RPC-Get-V1-10).
 
 ### 2.3 Nested Resources
@@ -188,6 +194,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - PUT **SHOULD NOT** implicitly create nested or other proxy resources (RPC-Put-V1-17).
 - The API path for PUT **MUST** have an even number of segments (alternating type/name) (RPC-Put-V1-02).
 - The PUT request and response body **MUST** use the same model (RPC-Put-V1-25). The response of PUT **MUST** match the response of GET and PATCH for the same resource (RPC-Put-V1-12).
+- The PUT `200` and `201` response schemas **MUST** be identical — both must represent the same resource model. A PUT that returns a different schema for `201` (creation) vs `200` (replacement) is incorrect (RPC-Put-V1-29).
+  (Also enforced by: `ConsistentResponseSchemaForPut` linter rule — staging only)
 
 ### 3.2 PUT Must Not Exhibit PATCH Semantics (WHATIF-004)
 
@@ -225,6 +233,18 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - For tracked resources, the PATCH operation **MUST** support updating `tags` at minimum.
 - Ideally, all mutable properties should be patchable for a better customer experience.
 - PATCH on `tags` follows **replace-all** semantics: sending `{ "tags": { "tag3": "v3" } }` to a resource with `tag1` and `tag2` replaces the entire tag set — the result has only `tag3`. Tags are not merged additively (RPC007).
+
+### 4.3a PATCH Body Must Mirror Resource Model Layout (RPC-Patch-V1-01)
+
+- The properties in the PATCH request body **MUST** be present in the corresponding resource model (PUT/GET response) and **MUST** follow the same nesting layout. For example, if `propertyA` is inside `properties` in the resource model, it must also appear inside `properties` in the PATCH body — not at the top level.
+  (Also enforced by: `ConsistentPatchProperties` linter rule)
+
+### 4.3b PATCH Should Support Updating Envelope Properties (RPC-Patch-V1-09, RPC-Patch-V1-11)
+
+- If the resource model defines the `sku` top-level property and the service allows SKU changes after creation, the PATCH body **SHOULD** include `sku`. If SKU is immutable, it must be annotated with `x-ms-mutability: ["create", "read"]` (RPC-Patch-V1-09).
+  (Also enforced by: `PatchSkuProperty` linter rule — warning level)
+- If the resource model defines the `identity` top-level property and the service allows identity updates, the PATCH body **SHOULD** include `identity`. If identity is immutable, it must be annotated with `x-ms-mutability: ["create", "read"]` (RPC-Patch-V1-11).
+  (Also enforced by: `PatchIdentityProperty` linter rule)
 
 ### 4.4 PATCH Must Not Expose Secrets in Response
 
@@ -454,19 +474,13 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.12 No Conditional Read-Only or Conditional Immutable Properties (OAPI020, OAPI029)
 
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI020 and OAPI029 with format-specific examples.
+
 - `readOnly` and immutable properties **MUST** always retain that status. Use separate properties for conditionally mutable cases.
 
 ### 8.13 Avoid CSV-Encoded Values in Properties (PLCY004)
 
-- Properties **MUST NOT** use comma-separated value (CSV) strings to represent collections or multiple values. Use a JSON array instead.
-- CSV-encoded strings prevent Azure Policy from evaluating individual values and make writing template or policy logic very difficult or impossible.
-- If a property's description or examples suggest comma-separated values (e.g., `"values": "East US, West US, Central US"`), flag it and instruct the author to model the property as an array of strings.
-
-### 8.14 Avoid Properties That Accept Multiple Data Types (OAPI025)
-
-- Properties **SHOULD NOT** accept values of different JSON types (e.g., both `"42"` and `42`, or both `true` and `"true"`).
-- If a property must accept multiple types for backward compatibility, the service **MUST** preserve the user-provided data type and formatting in the PUT response and subsequent GETs. Do not normalize between types.
-- Mixed-type properties cause noise in ARM Template What-If and ARM Change Analysis. Prefer rejecting the incorrect type with `400 Bad Request`.
+> Rules PLCY004 and OAPI025 are defined in `openapi-review.instructions.md` and [`.github/skills/azure-api-review/references/policy-compatibility.md`](../skills/azure-api-review/references/policy-compatibility.md). They apply to all specs including ARM. Do not use CSV strings for collections (use JSON arrays) and do not accept mixed data types for the same property.
 
 ### 8.15 Default Values Must Be Static and Declared (OAPI022, WHATIF-002)
 
@@ -476,15 +490,19 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.16 Service Must Preserve Array Ordering (OAPI024)
 
-- The order of items in array properties from a PUT or PATCH request **MUST** be preserved in the PUT/PATCH response and subsequent GET responses.
-- Do not reorder, sort, or normalize array contents. Reordering breaks tools that diff resource payloads over time (ARM Template What-If, ARM Change Analysis).
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for OAPI024, OAPI025, and OAPI026 with examples.
+
+- The order of items in array properties from a PUT or PATCH request **MUST** be preserved in responses. Reordering breaks ARM Template What-If and Change Analysis.
 
 ### 8.17 Service Must Preserve Property Value Casing (OAPI026)
 
-- The value of string properties from a PUT/PATCH request **MUST** match the corresponding value in the PUT/PATCH response and subsequent GETs. Do not normalize casing, location formats, or IP address representations.
-- Examples of incorrect normalization: `"westus"` → `"West US"`, `"::1"` → `"0:0:0:0:0:0:0:1"`, case changes on resource IDs.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for OAPI026 with normalization examples.
+
+- String property values from PUT/PATCH requests **MUST** match in responses. Do not normalize casing, location formats, or IP address representations.
 
 ### 8.18 Service Must Reject Unknown Properties (OAPI018)
+
+> **See also:** [`.github/skills/azure-api-review/references/what-if-preflight-compliance.md`](../skills/azure-api-review/references/what-if-preflight-compliance.md) WHATIF-005 for the What-If implications of this rule.
 
 - If a PUT or PATCH payload contains properties that the RP does not recognize, the service **MUST** reject the request with `400 Bad Request` and an appropriate ARM error response body.
 - Do not silently discard unknown properties — the user must be informed that their payload is incorrect. Silent discarding causes the GET response to differ from the PUT request, leading to What-If noise and customer confusion.
@@ -576,27 +594,9 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, including when to approve, when to push back, and when to escalate to peer review.
 
-### 10A.0 Suppression Rigor for GA vs. Preview (RPC-SUPPRESS-GA)
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, GA vs. preview rigor (RPC-SUPPRESS-GA), scoping rules (RPC-SUPPRESS-SCOPE), and when suppressions are never valid.
 
-- Suppressions carried forward from **preview** API versions are **not automatically acceptable** in **GA (stable)** versions.
-- For GA releases, reviewers **MUST** challenge each suppression: can the underlying violation now be fixed? Preview was the time let it slide; GA is the deadline to fix.
-- `PathForResourceAction` suppressions in GA versions are **blocking** because they can prevent proper RBAC action registration.
-- `LroLocationHeader` suppressions in GA versions are **blocking** because they indicate incorrect async patterns.
-- Suppression reasons that say "back-compat with preview" are not sufficient for GA -- provide a concrete technical justification for each suppression.
-- **Lack of time is not a valid reason for suppressions.** If the author cites deadlines, ask them to remove the suppression and file a work item instead.
-
-### 10A.1 Suppression Must Be Under Correct Tag (RPC-SUPPRESS-SCOPE)
-
-- Suppressions in `readme.md` are scoped to the tag block they appear in. A suppression under `package-2025-03-01` does **not** apply to `package-2025-07-01`.
-- When a PR adds a new swagger file to a **new** package tag, verify any carried-over suppressions are duplicated/moved to the new tag's `suppressions` list — or they will not take effect and CI will fail.
-- Suppressions **MUST** include specific `from` and `where` clauses to target the exact file and JSON path of the violation. Blanket suppressions that suppress an entire file without specifying the path are not allowed — they mask other violations that may be introduced later.
-
-
-### 10A.2 Do Not Suppress Warnings in readme.md (RPC-SUPPRESS-WARN)
-
-- Warnings (e.g., `EnumInsteadOfBoolean`, `AvoidAdditionalProperties`) **SHOULD NOT** be suppressed in `readme.md`. Only errors require suppression to unblock CI.
-- If a warning is being suppressed in `readme.md`, flag it -- the author should either fix the underlying issue or leave the warning unsuppressed. Warnings do not block the pipeline.
-- When a suppression for a warning is justified (rare), use `where` clauses instead of blanket suppression to avoid masking future valid warnings in the same file.
+Apply the decision framework from the reference file when evaluating suppressions. Key points: suppressions from preview are not automatically acceptable in GA; suppressions must have specific `from`/`where` clauses (not blanket); warnings should not be suppressed; lack of time is never valid.
 
 ### 10A.3 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
 
@@ -605,17 +605,9 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 10A.4 `suppressions.yaml` Format (2024+)
 
-- Starting in 2024, suppressions can also be specified in a YAML file at `specification/<service>/suppressions.yaml` (in addition to `readme.md` directives).
-- Each entry uses the format:
-  ```yaml
-  - tool: <ToolName>
-    path: <glob/pattern>
-    reason: <string>
-  ```
-- The `tool` field identifies the CI check being suppressed (e.g., `TypeSpecRequirement`, `LintDiff`).
+- Starting in 2024, suppressions can also be specified in a YAML file at `specification/<service>/suppressions.yaml` (in addition to `readme.md` directives). Entries use `tool`/`path`/`reason` format.
 - The `path` field **MUST** use narrow, version-scoped globs (e.g., `stable/2025-01-01/**`) -- not broad patterns like `data-plane/**`.
-- The `reason` field **MUST** provide a clear, specific justification (same rules as readme.md suppressions -- see suppression-review-criteria.md).
-- When reviewing a PR that adds or modifies `suppressions.yaml`, apply the same approval criteria as for `readme.md` suppressions (§10A.0 through §10A.2).
+- Apply the same approval criteria from `suppression-review-criteria.md` for `suppressions.yaml` entries.
 
 ---
 
@@ -712,33 +704,9 @@ When a PR introduces APIs at the tenant or provider level (outside subscription 
 
 ## 14. Azure Policy Compatibility
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/policy-compatibility.md`](../skills/azure-api-review/references/policy-compatibility.md) for rules PLCY001–PLCY009.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/policy-compatibility.md`](../skills/azure-api-review/references/policy-compatibility.md) for all rules PLCY001–PLCY009 with examples and fix guidance.
 
-### 14.1 Property Design for Policy Auditability (PLCY001)
-
-- Properties **MUST** be designed so that customers can restrict or audit configurations at creation time. Break composite values into individual properties rather than packing multiple concepts into a single string.
-
-### 14.2 Read-Only Post-Creation Properties (PLCY003)
-
-- Minimize properties that are read-only and only populated **after** initial creation. Azure Policy deny rules evaluate the PUT request body — properties absent from the request cannot be evaluated.
-
-### 14.3 Free-Form Objects (PLCY005)
-
-- `type: object` with no defined schema (free-form objects) **SHOULD NOT** be used for service-owned properties. Azure Policy cannot create aliases for dynamic property names.
-
-### 14.4 PUT/PATCH Semantics for Policy (PLCY006)
-
-- PUT **MUST** accept all compliance-relevant properties in the request body. If PUT is implemented as a partial update, deny policies may fail silently because the request body lacks the properties Policy needs to evaluate.
-
-### 14.5 Collection GET for Compliance Data (PLCY007, PLCY008)
-
-- Top-level tracked resources **MUST** have collection GETs at both subscription and resource group level (PLCY007).
-- All child resource types — including singletons — **MUST** have both a collection GET and a point GET (PLCY008).
-- Without these operations, Azure Policy compliance data cannot be populated.
-
-### 14.6 POST Operations Not Supported by Policy (PLCY009)
-
-- Azure Policy **cannot** evaluate POST operations. If a configuration requires Policy enforcement (deny, audit, modify), model it in the PUT request body and GET response — not as a POST action.
+When reviewing ARM resources, verify that properties are designed for Policy auditability (PLCY001), minimize read-only post-creation properties (PLCY003), avoid free-form objects (PLCY005), accept compliance-relevant properties in PUT (PLCY006), provide collection GETs at subscription and resource group level (PLCY007/PLCY008), and do not rely on POST actions for configurations that need Policy enforcement (PLCY009). See the reference file for details on each rule.
 
 ---
 
@@ -746,42 +714,7 @@ When a PR introduces APIs at the tenant or provider level (outside subscription 
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/template-deployment.md`](../skills/azure-api-review/references/template-deployment.md) for rules TD001–TD003. See [`.github/skills/azure-api-review/references/what-if-preflight-compliance.md`](../skills/azure-api-review/references/what-if-preflight-compliance.md) for WHATIF-001–005 and PREFLIGHT-001–005.
 
-### 15.1 PUT Required for Template Deployment (TD001)
-
-- The ARM Template Deployment engine provisions resources using PUT. Resources that are only creatable via POST **cannot** be deployed via ARM Templates, Bicep, or Terraform AzAPI.
-
-### 15.2 PUT Idempotency for Template Re-Deployment (TD002)
-
-- PUT operations **MUST** be idempotent. The deployment engine retries failed PUTs and re-executes deployments. A non-idempotent PUT causes deployment failures on retry.
-
-### 15.3 Preflight Validation Support (TD003)
-
-- Resource providers **MUST** support the Preflight API. The deployment engine calls Preflight before executing a deployment to detect errors early (syntax, naming, quotas, capacity, SKU availability, region restrictions).
-
-### 15.4 Preflight Response Contract (PREFLIGHT-001, PREFLIGHT-002)
-
-- Preflight **MUST** always return `200 OK`, even when reporting validation errors. A non-200 response indicates a **service failure**, not a user input problem.
-- Each validation error in the response **MUST** include:
-  - `code` — a unique, searchable error code
-  - `message` — an actionable, human-readable description
-  - `target` — the fully qualified ARM resource ID of the problematic resource
-
-### 15.5 Preflight Must Handle Template Language Expressions (PREFLIGHT-003)
-
-- Preflight **MUST** accept Template Language Expressions (TLEs) — strings starting with `[` and ending with `]` — and skip validation on properties containing them. TLEs are resolved at deployment time, not at preflight time.
-
-### 15.6 No Existence Checks in Preflight (PREFLIGHT-004)
-
-- Preflight **MUST NOT** perform existence checks for resource IDs referenced in the payload. The referenced resource may be created later in the same deployment, and existence checks can leak information about resources the caller may not have access to.
-
-### 15.7 Static Validations Enforced by ARM (PREFLIGHT-005)
-
-- ARM performs static validations automatically during preflight. The spec must support these by using correct property definitions:
-  - **Resource names:** not empty, ≤260 characters (≤90 for resource groups), must not end with `.` or whitespace.
-  - **Resource group names:** only alphanumerics, `-`, `_`, `.`, `(`, `)`.
-  - **`plan` and `identity`:** if specified on a tracked resource, the resource type must support them per the ARM manifest.
-  - **`location`, `plan`, `identity`:** these are **immutable** — ARM rejects update attempts that change them.
-  - **`zones`:** resource type must support availability zones; no duplicate zone values allowed.
+When reviewing ARM resources, verify: resources are created via PUT for template engine compatibility (TD001), PUT is idempotent for re-deployments (TD002), the RP supports the Preflight API (TD003), preflight returns `200 OK` even for validation errors (PREFLIGHT-001/002), preflight accepts Template Language Expressions without validation (PREFLIGHT-003), preflight does not perform existence checks (PREFLIGHT-004), and the spec supports ARM static validations -- resource name constraints, immutable `location`/`plan`/`identity`, zone support (PREFLIGHT-005). See the reference files for full details.
 
 ---
 
@@ -797,28 +730,9 @@ When a PR introduces APIs at the tenant or provider level (outside subscription 
 
 ## 17. Availability Zones
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/availability-zones.md`](../skills/azure-api-review/references/availability-zones.md) for the full zones property contract.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/availability-zones.md`](../skills/azure-api-review/references/availability-zones.md) for the full zones property contract including placement, immutability, zone semantics, discoverability, and format-specific code examples.
 
-### 17.1 Zones Property Placement
-
-- The `zones` property **MUST** be a top-level property (alongside `id`, `name`, `type`, `location`), not inside the `properties` bag.
-- The property type **MUST** be `array` of `string` (logical zone names).
-
-### 17.2 Zone Immutability
-
-- A resource's zone assignment **MUST NOT** be changed after creation. The RP **MUST** validate zone consistency on update requests and reject changes.
-- The `zones` property **MUST** be annotated as immutable: `"x-ms-mutability": ["create", "read"]` (OpenAPI) or `@visibility(Lifecycle.Create, Lifecycle.Read)` (TypeSpec).
-
-### 17.3 Zone Semantics
-
-- **Zonal resources** (single-zoned): `zones` contains logical zone IDs (e.g., `["1"]`).
-- **Zone-redundant resources** (multi-zoned): `zones` is `null` or absent in the response.
-- Empty array `[]` means the RP selects the zone. `["*"]` means the resource must deploy to a zone and the RP should fail if zone placement is unavailable.
-- Property descriptions **SHOULD** document these semantics for the specific resource type.
-
-### 17.4 Zone Discoverability
-
-- RPs that support zones **MUST** ensure zone information is discoverable via the `GET /providers/Microsoft.{Namespace}` API, which returns `zoneMappings` per resource type.
+When reviewing resources that support availability zones, verify: `zones` is a top-level `array` of `string` (not inside `properties`), it is annotated as immutable (`x-ms-mutability: ["create", "read"]`), and zone information is discoverable via the provider metadata API. See the reference file for zone semantics (zonal vs. zone-redundant), empty array behavior, and nested resource rules.
 
 ---
 
@@ -1018,9 +932,10 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Resource type names are camelCase, plural, and specific (not generic)
 - ✅ ARM `type/{instance}/type/{instance}` URL pattern followed
 - ✅ Proxy resources use `ProxyResource` base type (not `Resource`); proxy resources do NOT have `tags`
-- ✅ Extension resources use the correct scope pattern
+- ✅ Extension resources use the correct scope pattern; extension resources are always proxy (never tracked) (RPC-Uri-V1-12)
+- ✅ No duplicate paths when using `{scope}` parameter — no explicitly-scoped duplicates (RPC-Uri-V1-10)
 - ✅ Operations API endpoint exists using common-types `OperationListResult` and `Operation` definitions (RPC-Operations-V1)
-
+- ✅ Operations API is tenant-scoped only — not per-subscription (RPC-Operations-V1-02)
 - ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
 
 ### Resource Model
@@ -1032,12 +947,14 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Every resource type has a point GET; singleton resources named "default" using enum path parameters (RPC-ConstrainedCollections-V1-04)
 - ✅ `x-ms-azure-resource: true` only on top-level resource models, not nested models
 - ✅ PUT request and response schemas are identical; PUT response matches GET and PATCH (RPC-Put-V1-12, RPC-Put-V1-25)
+- ✅ PUT 200 and 201 response schemas are identical (RPC-Put-V1-29)
 - ✅ PUT returns `201` (create) or `200` (replace) — never `202` for async PUT (RPC-Put-V1-11)
 - ✅ PUT does not implicitly create other tracked resources (RPC-Put-V1-16)
 - ✅ Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)
 - ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14)
 - ✅ Point GET has no query params other than `api-version` (RPC-Get-V1-08)
 - ✅ Collection GET has only `value` and `nextLink` at top level with `x-ms-pageable`; `nextLink` has `format: uri` (RPC-Get-V1-09, RPC-Get-V1-13)
+- ✅ Collection GET has no query parameters other than `api-version` and OData `$filter` (RPC-Get-V1-15)
 - ✅ `provisioningState` includes `Succeeded`, `Failed`, `Canceled` (single 'l') terminal states; no operational states like `Stopped` (RPC-Async-V1-02, RPC-Async-V1-03)
 
 ### PATCH Operations
@@ -1045,6 +962,8 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ PATCH does not update `id`, `name`, `type`, `location`, or `provisioningState` (RPC-Patch-V1-02)
 - ✅ PATCH follows JSON Merge Patch (RFC 7396) semantics (RPC-Patch-V1-05)
 - ✅ PATCH for tracked resources supports at least tag updates (RPC-Patch-V1-03)
+- ✅ PATCH body properties match resource model layout (RPC-Patch-V1-01)
+- ✅ PATCH includes `sku` and `identity` if resource supports updating them; otherwise marked immutable (RPC-Patch-V1-09, RPC-Patch-V1-11)
 - ✅ **PATCH is NOT required to be long-running** — do NOT flag synchronous PATCH as a violation
 - ✅ No non-`api-version` query parameters on PATCH
 

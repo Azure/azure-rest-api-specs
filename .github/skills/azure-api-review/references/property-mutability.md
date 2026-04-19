@@ -94,7 +94,7 @@ and policy evaluation failures.
 
 **Fix:** Use separate properties for each case rather than making a single property conditionally read-only.
 
-### OAPI020 OpenAPI JSON
+### OAPI020 TypeSpec
 
 ```tsp
 // BAD - conditionally read-only
