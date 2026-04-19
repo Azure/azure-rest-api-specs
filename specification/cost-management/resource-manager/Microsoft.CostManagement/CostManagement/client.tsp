@@ -185,13 +185,11 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@alternateType(KpiProperties.id, Azure.Core.armResourceIdentifier, "csharp");
 
-// Mark getExecutionHistory as pageable so it generates Pageable<ExportRun> / AsyncPageable<ExportRun>
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Exports.getExecutionHistory,
   "csharp"
 );
 
-// Mark Exports.list as pageable so GetAll generates Pageable<CostManagementExportResource>
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Exports.list, "csharp");
 
@@ -242,7 +240,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@clientName(Status, "ReportOperationStatus", "csharp");
 
-// Rename to remove banned 'Definition' suffix (comment #21, #25, #26)
 @@clientName(CostAllocationRuleDefinition, "CostAllocationRule", "csharp");
 @@clientName(GenerateCostDetailsReportRequestDefinition,
   "GenerateCostDetailsReportContent",
@@ -280,7 +277,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   "csharp"
 );
 
-// Operation renames to match baseline method names
 @@clientName(DimensionsOperationGroup.list, "GetDimensions", "csharp");
 @@clientName(DimensionsOperationGroup.byExternalCloudProviderType,
   "ByExternalCloudProviderTypeDimensions",
@@ -383,7 +379,10 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(BlobInfo, "ExportBlobInfo", "csharp");
 @@clientName(Notification, "BudgetNotification", "csharp");
 @@clientName(MCAPriceSheetProperties, "McaPriceSheetProperties", "csharp");
-@@clientName(PricesheetDownloadProperties, "PriceSheetDownloadProperties", "csharp");
+@@clientName(PricesheetDownloadProperties,
+  "PriceSheetDownloadProperties",
+  "csharp"
+);
 @@clientName(ExportRunRequest, "ExportRunContent", "csharp");
 
 @@alternateType(Export.identity,
@@ -391,7 +390,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   "csharp"
 );
 
-// Property renames for backward compatibility
 @@clientName(MetricType.AHUB, "Ahub", "csharp");
 @@clientName(KpiProperties.type, "KpiType", "csharp");
 @@clientName(PivotProperties.type, "PivotType", "csharp");
@@ -399,7 +397,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(QueryColumn.type, "QueryColumnType", "csharp");
 @@clientName(ReportConfigDefinition.type, "TypePropertiesQueryType", "csharp");
 
-// Fix ETag and Location type mismatches (string → ETag/AzureLocation)
 @@alternateType(CostManagementResource.eTag, Azure.Core.eTag, "csharp");
 @@alternateType(CostManagementResource.location,
   Azure.Core.azureLocation,
@@ -407,7 +404,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@alternateType(CostManagementProxyResource.eTag, Azure.Core.eTag, "csharp");
 
-// @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
 /** Result of forecast. It contains all columns listed under groupings and aggregation. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model ForecastResultReplacement
@@ -418,7 +414,6 @@ model ForecastResultReplacement
 @@clientName(ForecastResult, "ForecastResultTemp", "csharp");
 @@clientName(ForecastResultReplacement, "ForecastResult", "csharp");
 
-// @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
 /** List of Dimension. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
@@ -428,7 +423,6 @@ model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@clientName(Dimension, "DimensionTemp", "csharp");
 @@clientName(DimensionReplacement, "CostManagementDimension", "csharp");
 
-// @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
 /** Result of query. It contains all columns listed under groupings and aggregation. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model QueryResultReplacement
@@ -439,7 +433,6 @@ model QueryResultReplacement
 @@clientName(QueryResult, "QueryResultTemp", "csharp");
 @@clientName(QueryResultReplacement, "QueryResult", "csharp");
 
-// @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
 /** An export run. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
@@ -454,13 +447,15 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   "csharp"
 );
 
-// Keep ExportDeliveryInfo public in C# (baseline ApiCompat).
 @@access(ExportDeliveryInfo, Access.public, "csharp");
 
-// Baseline exposed Timeframe / TypePropertiesQueryType as nullable on CostManagementViewData (via flattening).
-// Make the source properties nullable in C# so the flattened C# accessors are nullable too.
-@@alternateType(ReportConfigDefinition.timeframe, ReportTimeframeType | null, "csharp");
+@@alternateType(ReportConfigDefinition.timeframe,
+  ReportTimeframeType | null,
+  "csharp"
+);
 @@alternateType(ReportConfigDefinition.type, ReportType | null, "csharp");
 
-// Baseline exposed Status as nullable on ScheduledActionData (via flattening).
-@@alternateType(ScheduledActionProperties.status, ScheduledActionStatus | null, "csharp");
+@@alternateType(ScheduledActionProperties.status,
+  ScheduledActionStatus | null,
+  "csharp"
+);
