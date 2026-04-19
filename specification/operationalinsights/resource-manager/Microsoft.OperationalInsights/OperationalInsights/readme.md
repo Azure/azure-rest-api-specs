@@ -35,9 +35,41 @@ title: LogAnalyticsManagementClient
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2025-07-01
+tag: package-2026-03-01
 ```
 
+
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - stable/2026-03-01/AvailableServiceTiers.json
+  - stable/2026-03-01/Clusters.json
+  - stable/2026-03-01/DataExports.json
+  - stable/2026-03-01/DataSources.json
+  - stable/2026-03-01/Gateways.json
+  - stable/2026-03-01/IntelligencePacks.json
+  - stable/2026-03-01/LinkedServices.json
+  - stable/2026-03-01/LinkedStorageAccounts.json
+  - stable/2026-03-01/ManagementGroups.json
+  - stable/2026-03-01/Operations.json
+  - stable/2026-03-01/OperationStatuses.json
+  - stable/2026-03-01/QueryPackQueries.json
+  - stable/2026-03-01/QueryPacks.json
+  - stable/2026-03-01/SavedSearches.json
+  - stable/2026-03-01/Schema.json
+  - stable/2026-03-01/SharedKeys.json
+  - stable/2026-03-01/StorageInsightConfigs.json
+  - stable/2026-03-01/SummaryLogs.json
+  - stable/2026-03-01/Tables.json
+  - stable/2026-03-01/Usages.json
+  - stable/2026-03-01/WorkspacePurge.json
+  - stable/2026-03-01/Workspaces.json
+  - stable/2026-03-01/WorkspacesFailover.json
+  - stable/2026-03-01/Workspaces_NetworkSecurityPerimeter_API.json
+```
 
 ### Tag: package-2025-07-01
 
