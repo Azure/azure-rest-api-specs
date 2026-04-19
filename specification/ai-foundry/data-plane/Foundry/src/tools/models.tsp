@@ -42,6 +42,39 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
+  /**
+   * Configuration for tool deferral behavior when tool search is enabled.
+   * Controls whether a tool or its sub-tools are deferred from tools/list and only
+   * discoverable via tool_search queries.
+   */
+  model ToolDeferConfig {
+    /**
+     * Whether deferral is enabled for this tool or its sub-tools.
+     * Default: true when a tool_search tool is present in the toolbox.
+     */
+    enabled?: boolean;
+
+    /**
+     * Optional deferral mode. Reserved for future use.
+     */
+    mode?: string;
+
+    /**
+     * List of tool names that are pinned (always visible in tools/list regardless of deferral).
+     */
+    pinned?: string[];
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.Tool,
+    {
+      /**
+       * Deferral settings for this tool when tool search is enabled.
+       */
+      defer?: ToolDeferConfig,
+    }
+  );
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
