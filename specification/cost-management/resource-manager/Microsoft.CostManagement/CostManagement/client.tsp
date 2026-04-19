@@ -385,6 +385,17 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@clientName(ExportRunRequest, "ExportRunContent", "csharp");
 
+@@clientName(BenefitResource, "BenefitDetails", "csharp");
+@@clientName(CostAllocationResource, "CostAllocationEntity", "csharp");
+@@clientName(SourceCostAllocationResource,
+  "SourceCostAllocationEntity",
+  "csharp"
+);
+@@clientName(TargetCostAllocationResource,
+  "TargetCostAllocationEntity",
+  "csharp"
+);
+
 @@alternateType(Export.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
