@@ -378,6 +378,18 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 
 @@clientName(Alert, "CostManagementAlert", "csharp");
 @@clientName(Export, "CostManagementExport", "csharp");
+@@clientName(Setting, "CostManagementSetting", "csharp");
+@@clientName(SettingType, "CostManagementSettingType", "csharp");
+@@clientName(BlobInfo, "ExportBlobInfo", "csharp");
+@@clientName(Notification, "BudgetNotification", "csharp");
+@@clientName(MCAPriceSheetProperties, "McaPriceSheetProperties", "csharp");
+@@clientName(PricesheetDownloadProperties, "PriceSheetDownloadProperties", "csharp");
+@@clientName(ExportRunRequest, "ExportRunContent", "csharp");
+
+@@alternateType(Export.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 
 // Property renames for backward compatibility
 @@clientName(MetricType.AHUB, "Ahub", "csharp");
