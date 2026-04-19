@@ -63,7 +63,7 @@ match the corresponding value in the response and subsequent GETs. Do
 | `"westus"`     | `"West US"`             | `"westus"`       |
 | `"West US"`    | `"westus"`              | `"West US"`      |
 | `"::1"` (IPv6) | `"0:0:0:0:0:0:0:1"`     | `"::1"`          |
-| `"MyValue"`    | `"myvalue"`             | `"MyValue"`      |
+| `"Test Value"` | `"test value"`          | `"TestValue"`    |
 
 **Why:** Normalization causes the GET response to differ from the PUT
 request, which generates noise in What-If, Change Analysis, Terraform

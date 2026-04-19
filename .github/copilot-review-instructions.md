@@ -165,7 +165,7 @@ Every comment **MUST** include:
 
 ```
 **[NEW] 🔴 Blocking** **[RPC-Put-V1-11]** `specification/foo/resource-manager/stable/2025-01-01/foo.json` - line 42
-JSON path: `$.paths['/subscriptions/{subscriptionId}/.../foos/{fooName}'].put.responses`
+JSON path: `$.paths['/subscriptions/{subscriptionId}/.../foo/{fooName}'].put.responses`
 
 PUT operation is missing `201` response for resource creation. ARM PUT must return
 `201` for new resource creation and `200` for replacement.
