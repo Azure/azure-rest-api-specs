@@ -441,3 +441,14 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportDataset.configuration,
   "csharp"
 );
+
+// Keep ExportDeliveryInfo public in C# (baseline ApiCompat).
+@@access(ExportDeliveryInfo, Access.public, "csharp");
+
+// Baseline exposed Timeframe / TypePropertiesQueryType as nullable on CostManagementViewData (via flattening).
+// Make the source properties nullable in C# so the flattened C# accessors are nullable too.
+@@alternateType(ReportConfigDefinition.timeframe, ReportTimeframeType | null, "csharp");
+@@alternateType(ReportConfigDefinition.type, ReportType | null, "csharp");
+
+// Baseline exposed Status as nullable on ScheduledActionData (via flattening).
+@@alternateType(ScheduledActionProperties.status, ScheduledActionStatus | null, "csharp");
