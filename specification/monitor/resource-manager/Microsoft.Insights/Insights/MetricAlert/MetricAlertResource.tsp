@@ -122,8 +122,6 @@ interface MetricAlertResources {
   /**
    * Retrieve an alert rule status.
    */
-  @list
-  @get
   @action("status")
   @tag("MetricAlertsStatus")
   @segment("")
@@ -144,8 +142,6 @@ interface MetricAlertResources {
   /**
    * Retrieve an alert rule status.
    */
-  @list
-  @get
   @tag("MetricAlertsStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}")
   listByName is MetricAlertResourcesOps.ListSinglePage<
