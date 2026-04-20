@@ -38,7 +38,20 @@ namespace Microsoft.Education;
 alias billingAccountExternalResource = Extension.ExternalResource<
   "Microsoft.Billing",
   "billingAccounts",
-  "{billingAccountName}"
+  "billingAccountName",
+  ParentType = "Tenant"
+>;
+
+alias billingProfileExternalResource = Extension.ExternalChildResource<
+  billingAccountExternalResource,
+  "billingProfiles",
+  "billingProfileName"
+>;
+
+alias invoiceSectionExternalResource = Extension.ExternalChildResource<
+  billingProfileExternalResource,
+  "invoiceSections",
+  "invoiceSectionName"
 >;
 
 /**
@@ -51,4 +64,12 @@ enum Versions {
   v2021_12_01_preview: "2021-12-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      DefaultErrorResponse
+    > {}
+
+@@doc(Operations.list,
+  "Lists all of the available Microsoft.Education API operations."
+);

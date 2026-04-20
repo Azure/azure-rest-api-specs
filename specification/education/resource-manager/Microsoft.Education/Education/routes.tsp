@@ -11,12 +11,23 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Education;
 
+@doc("code redeemed")
+model RedeemCodeResponse {
+  ...OkResponse;
+}
+
 /**
  * Redeem invite code to join a redeemable lab
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@tag("JoinRequest")
 @autoRoute
 op redeemInvitationCode is ArmProviderActionSync<
   Request = RedeemRequest,
-  Response = void
+  Response = RedeemCodeResponse,
+  Error = DefaultErrorResponse
 >;
+
+@@Azure.ClientGenerator.Core.clientName(redeemInvitationCode::parameters.body,
+  "parameters"
+);

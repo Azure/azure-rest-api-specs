@@ -31,7 +31,8 @@ interface StudentLabs {
    */
   get is ArmResourceRead<
     StudentLabDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -39,7 +40,9 @@ interface StudentLabs {
    */
   listAll is ArmResourceListByParent<
     StudentLabDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<StudentLabListResult>,
+    Error = DefaultErrorResponse
   >;
 }
 

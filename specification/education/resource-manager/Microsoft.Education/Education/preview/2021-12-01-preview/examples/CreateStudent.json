@@ -4,63 +4,65 @@
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
     "invoiceSectionName": "{invoiceSectionName}",
-    "studentAlias": "{studentAlias}",
     "parameters": {
       "properties": {
-        "firstName": "test",
-        "lastName": "user",
-        "email": "test@contoso.com",
-        "role": "Student",
         "budget": {
           "currency": "USD",
           "value": 100
         },
-        "expirationDate": "2021-11-09T22:13:21.795Z"
+        "email": "test@contoso.com",
+        "expirationDate": "2021-11-09T22:13:21.795Z",
+        "firstName": "test",
+        "lastName": "user",
+        "role": "Student"
       }
-    }
+    },
+    "studentAlias": "{studentAlias}"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
         "name": "{studentAlias}",
         "type": "Microsoft.Education/Students",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
         "properties": {
-          "firstName": "test",
-          "lastName": "user",
-          "email": "test@contoso.com",
-          "role": "Student",
           "budget": {
             "currency": "USD",
             "value": 100
           },
-          "subscriptionId": "000000000-0000-0000-0000-00000000000000",
+          "effectiveDate": "2021-11-09T21:43:54.161Z",
+          "email": "test@contoso.com",
           "expirationDate": "2022-11-09T21:43:54.161Z",
+          "firstName": "test",
+          "lastName": "user",
+          "role": "Student",
           "status": "Active",
-          "effectiveDate": "2021-11-09T21:43:54.161Z"
+          "subscriptionId": "000000000-0000-0000-0000-00000000000000"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
         "name": "{studentAlias}",
         "type": "Microsoft.Education/Students",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
         "properties": {
-          "firstName": "test",
-          "lastName": "user",
-          "email": "test@contoso.com",
-          "role": "Student",
           "budget": {
             "currency": "USD",
             "value": 100
           },
-          "subscriptionId": "000000000-0000-0000-0000-00000000000000",
+          "effectiveDate": "2021-11-09T21:43:54.161Z",
+          "email": "test@contoso.com",
           "expirationDate": "2022-11-09T21:43:54.161Z",
+          "firstName": "test",
+          "lastName": "user",
+          "role": "Student",
           "status": "Active",
-          "effectiveDate": "2021-11-09T21:43:54.161Z"
+          "subscriptionId": "000000000-0000-0000-0000-00000000000000"
         }
       }
     }
-  }
+  },
+  "operationId": "Students_CreateOrUpdate",
+  "title": "Student"
 }

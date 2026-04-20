@@ -24,27 +24,83 @@ model StudentDetails is Azure.ResourceManager.ProxyResource<StudentProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing invoice-section Student paths for backward compatibility."
+alias InvoiceSectionStudentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The billing provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    billingProviderNamespace: "Microsoft.Billing";
+
+    /** The name of the billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    billingAccountName: string;
+
+    /** The name of the billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    billingProfileName: string;
+
+    /** The name of the invoice section. */
+    @path
+    @segment("invoiceSections")
+    @key
+    invoiceSectionName: string;
+
+    ...Legacy.Provider;
+
+    /** The lab name. */
+    @path
+    @segment("labs")
+    @key("lab")
+    lab: "default";
+  },
+  {},
+  {
+    /** The student alias. */
+    @path
+    @segment("students")
+    @key("studentAlias")
+    studentAlias: string;
+  }
+>;
+
 @armResourceOperations
 interface Students {
   /**
    * Get the details for a specific student in the specified lab by student alias
    */
-  get is ArmResourceRead<StudentDetails>;
+  get is InvoiceSectionStudentOps.Read<
+    StudentDetails,
+    ErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Create and add a new student to the specified lab or update the details of an existing student in a lab. Note the student must have a valid tenant to accept the lab after they have been added to lab.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<StudentDetails>;
+  createOrUpdate is InvoiceSectionStudentOps.CreateOrUpdateSync<
+    StudentDetails,
+    ErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Delete the specified student based on the student alias.
    */
-  delete is ArmResourceDeleteSync<StudentDetails>;
+  delete is InvoiceSectionStudentOps.DeleteSync<
+    StudentDetails,
+    ErrorType = DeleteErrorResponse
+  >;
 
   /**
    * Get a list of details about students that are associated with the specified lab.
    */
-  list is ArmResourceListByParent<
+  list is InvoiceSectionStudentOps.List<
     StudentDetails,
     Parameters = {
       /**
@@ -52,7 +108,9 @@ interface Students {
        */
       @query("includeDeleted")
       includeDeleted?: boolean;
-    }
+    },
+    Response = ArmResponse<StudentListResult>,
+    ErrorType = DefaultErrorResponse
   >;
 }
 

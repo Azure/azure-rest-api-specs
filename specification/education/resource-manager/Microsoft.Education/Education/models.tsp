@@ -249,9 +249,100 @@ model ErrorResponse {
 }
 
 /**
+ * Describes the error if the operation is not successful.
+ */
+@error
+model DefaultErrorResponse {
+  /**
+   * The error response body.
+   */
+  @body
+  error: ErrorResponseBody;
+}
+
+/**
+ * Error response describing why the operation failed.
+ */
+@error
+model DeleteErrorResponse {
+  /**
+   * The error response body.
+   */
+  @body
+  error: ErrorResponseBody;
+}
+
+/**
  * List of Grants info.
  */
-model GrantListResponse is Azure.Core.Page<GrantDetails>;
+model GrantListResponse {
+  /**
+   * The GrantDetails items on this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: GrantDetails[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of Labs info.
+ */
+model LabListResult {
+  /**
+   * The LabDetails items on this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: LabDetails[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of Students info.
+ */
+model StudentListResult {
+  /**
+   * The StudentDetails items on this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: StudentDetails[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of Student Labs info.
+ */
+model StudentLabListResult {
+  /**
+   * The StudentLabDetails items on this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: StudentLabDetails[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Grant detail properties
@@ -390,7 +481,20 @@ model InviteCodeGenerateRequest {
 /**
  * list of join requests.
  */
-model JoinRequestList is Azure.Core.Page<JoinRequestDetails>;
+model JoinRequestList {
+  /**
+   * The JoinRequestDetails items on this page.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: JoinRequestDetails[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Join request properties.

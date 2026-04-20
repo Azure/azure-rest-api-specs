@@ -6,52 +6,54 @@
     "invoiceSectionName": "{invoiceSectionName}",
     "parameters": {
       "properties": {
-        "displayName": "example lab",
+        "description": "example lab description",
         "budgetPerStudent": {
           "currency": "USD",
           "value": 100
         },
-        "description": "example lab description",
+        "displayName": "example lab",
         "expirationDate": "2021-12-09T22:11:29.422Z"
       }
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
         "name": "default",
         "type": "Microsoft.Education/Labs",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
         "properties": {
-          "displayName": "example lab",
+          "description": "example lab description",
           "budgetPerStudent": {
             "currency": "USD",
             "value": 100
           },
-          "description": "example lab description",
-          "expirationDate": "2021-12-09T21:25:56.838Z",
+          "displayName": "example lab",
           "effectiveDate": "2021-11-09T21:25:56.838Z",
+          "expirationDate": "2021-12-09T21:25:56.838Z",
           "status": "Active"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
         "name": "default",
         "type": "Microsoft.Education/Labs",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
         "properties": {
-          "displayName": "example lab",
+          "description": "example lab description",
           "budgetPerStudent": {
             "currency": "USD",
             "value": 100
           },
-          "description": "example lab description",
-          "expirationDate": "2021-12-09T21:25:56.838Z",
+          "displayName": "example lab",
           "effectiveDate": "2021-11-09T21:25:56.838Z",
+          "expirationDate": "2021-12-09T21:25:56.838Z",
           "status": "Active"
         }
       }
     }
-  }
+  },
+  "operationId": "Labs_CreateOrUpdate",
+  "title": "CreateLab"
 }
