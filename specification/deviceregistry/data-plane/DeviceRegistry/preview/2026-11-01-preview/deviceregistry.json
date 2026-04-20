@@ -1057,7 +1057,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/GetGroupByUuidRequest"
+            "$ref": "#/parameters/GetGroupsForDeviceRequest"
           }
         ],
         "responses": {
@@ -2533,6 +2533,14 @@
       "name": "groupUuid",
       "in": "query",
       "description": "The unique identifier of the group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetGroupsForDeviceRequest": {
+      "name": "deviceUuid",
+      "in": "query",
+      "description": "The unique identifier of the device.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

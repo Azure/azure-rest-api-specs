@@ -52,6 +52,13 @@ model GetGroupByUuidRequest {
   groupUuid: string;
 }
 
+/** Request for looking up a device's groups. */
+model GetGroupsForDeviceRequest {
+  /** The unique identifier of the device. */
+  @query
+  deviceUuid: string;
+}
+
 /** A reference to a group that a device belongs to. */
 model GroupReference {
   /** The unique identifier of the group. */
@@ -83,7 +90,7 @@ interface Groups {
   /** Returns the groups that a device belongs to. */
   getGroupsForDevice is ResourceOperations.ResourceCollectionAction<
     Group,
-    GetGroupByUuidRequest,
+    GetGroupsForDeviceRequest,
     GetGroupsForDeviceResult
   >;
 }
