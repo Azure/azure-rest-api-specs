@@ -97,12 +97,21 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
-@@alternateType(CopyStatusResponseHeaders.copyCompletionTime, utcDateTime, "go");
+@@alternateType(CopyStatusResponseHeaders.copyCompletionTime,
+  utcDateTime,
+  "go"
+);
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
 @@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");
-@@alternateType(FileCreationTimeResponseHeader.fileCreationTime, utcDateTime, "go");
-@@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime, utcDateTime, "go");
+@@alternateType(FileCreationTimeResponseHeader.fileCreationTime,
+  utcDateTime,
+  "go"
+);
+@@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime,
+  utcDateTime,
+  "go"
+);
 @@alternateType(FileProperty.changeTime, utcDateTime, "go");
 @@alternateType(FileProperty.creationTime, utcDateTime, "go");
 @@alternateType(FileProperty.lastAccessTime, utcDateTime, "go");
@@ -114,14 +123,26 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(LinkCountResponseHeader.linkCount, int64, "go");
 @@alternateType(ListFilesAndDirectoriesSegmentResponse.prefix, string, "go");
 @@alternateType(NfsTimestampResponseHeaders.fileChangeTime, utcDateTime, "go");
-@@alternateType(NfsTimestampResponseHeaders.fileCreationTime, utcDateTime, "go");
-@@alternateType(NfsTimestampResponseHeaders.fileLastWriteTime, utcDateTime, "go");
+@@alternateType(NfsTimestampResponseHeaders.fileCreationTime,
+  utcDateTime,
+  "go"
+);
+@@alternateType(NfsTimestampResponseHeaders.fileLastWriteTime,
+  utcDateTime,
+  "go"
+);
 @@alternateType(ShareStats.shareUsageBytes, int64, "go");
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@alternateType(ShareProvisioningResponseHeaders.quota, int64, "go");
 @@alternateType(ShareProvisioningResponseHeaders.provisionedIops, int64, "go");
-@@alternateType(ShareProvisioningResponseHeaders.provisionedBandwidthMibps, int64, "go");
-@@alternateType(ShareProvisioningResponseHeaders.includedBurstIops, int64, "go");
+@@alternateType(ShareProvisioningResponseHeaders.provisionedBandwidthMibps,
+  int64,
+  "go"
+);
+@@alternateType(ShareProvisioningResponseHeaders.includedBurstIops,
+  int64,
+  "go"
+);
 @@alternateType(ShareQuotaOptionalHeader.quota, int64, "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
@@ -170,7 +191,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
-@@clientName(ShareSmbSettingsEncryptionInTransit, "SMBEncryptionInTransit", "go");
+@@clientName(ShareSmbSettingsEncryptionInTransit,
+  "SMBEncryptionInTransit",
+  "go"
+);
 @@clientName(ShareUsageResponseHeader.shareUsageBytes,
   "FileShareUsageBytes",
   "go"

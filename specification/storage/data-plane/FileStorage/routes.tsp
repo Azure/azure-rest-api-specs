@@ -181,8 +181,10 @@ interface Share {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
+
       /** Specifies the maximum size of the share, in gigabytes. */
       @header("x-ms-share-quota") quota?: int32;
+
       ...ShareAccessTierRequestHeader;
       ...EnabledProtocolsHeader;
       ...ShareRootSquashRequestHeader;
@@ -224,12 +226,12 @@ interface Share {
       ...MetadataHeaders;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      
+
       /** Specifies the maximum size of the share, in gigabytes. */
       @header("x-ms-share-quota") quota?: int32;
 
       /** The provisioned IOPS for the share. */
-      @header("x-ms-share-provisioned-iops") 
+      @header("x-ms-share-provisioned-iops")
       @alternateType(int32, "go")
       provisionedIops?: int64;
 
@@ -262,7 +264,7 @@ interface Share {
       @header("x-ms-access-tier") accessTier?: string;
 
       /** The access tier change time. */
-      @header("x-ms-access-tier-change-time") 
+      @header("x-ms-access-tier-change-time")
       @alternateType(utcDateTime, "go")
       accessTierChangeTime?: string;
 
@@ -274,7 +276,7 @@ interface Share {
       @header("x-ms-enabled-protocols") enabledProtocols?: string;
 
       /** The root squash mode for the share. */
-      @header("x-ms-root-squash") 
+      @header("x-ms-root-squash")
       @alternateType(ShareRootSquash, "go")
       rootSquash?: string;
 
@@ -508,8 +510,10 @@ interface Share {
   setProperties is StorageOperationNoBody<
     {
       ...TimeoutParameter;
+
       /** Specifies the maximum size of the share, in gigabytes. */
       @header("x-ms-share-quota") quota?: int32;
+
       ...ShareAccessTierRequestHeader;
       ...LeaseIdOptionalParameter;
       ...ShareRootSquashRequestHeader;
