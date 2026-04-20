@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Microsoft.Common;
 
 namespace Microsoft.ActionGroups;
 /**
@@ -61,14 +62,17 @@ interface ActionGroupResources {
   /**
    * Get an action group.
    */
-  get is ArmResourceRead<ActionGroupResource, Error = ErrorResponse>;
+  get is ArmResourceRead<
+    ActionGroupResource,
+    Error = Microsoft.Common.ErrorResponse
+  >;
 
   /**
    * Create a new action group or update an existing one.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ActionGroupResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -78,13 +82,16 @@ interface ActionGroupResources {
   update is ArmCustomPatchSync<
     ActionGroupResource,
     PatchModel = ActionGroupPatchBody,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
    * Delete an action group.
    */
-  delete is ArmResourceDeleteSync<ActionGroupResource, Error = ErrorResponse>;
+  delete is ArmResourceDeleteSync<
+    ActionGroupResource,
+    Error = Microsoft.Common.ErrorResponse
+  >;
 
   /**
    * Get a list of all action groups in a resource group.
@@ -92,7 +99,7 @@ interface ActionGroupResources {
   listByResourceGroup is ArmResourceListByParent<
     ActionGroupResource,
     Response = ArmResponse<ActionGroupList>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -101,7 +108,7 @@ interface ActionGroupResources {
   listBySubscriptionId is ArmListBySubscription<
     ActionGroupResource,
     Response = ArmResponse<ActionGroupList>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -112,7 +119,7 @@ interface ActionGroupResources {
     ActionGroupResource,
     NotificationRequestBody,
     Response = TestNotificationDetailsResponse,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -124,7 +131,7 @@ interface ActionGroupResources {
     ActionGroupResource,
     void,
     Response = TestNotificationDetailsResponse,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -136,7 +143,7 @@ interface ActionGroupResources {
     ActionGroupResource,
     EnableRequest,
     Response = OkResponse | ArmConflictErrorResponse,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 

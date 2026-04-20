@@ -52,10 +52,18 @@ interface PrivateEndpointConnections {
    * Gets all private endpoint connections on a private link scope.
    */
   #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listByPrivateLinkScope is PrivateEndpointOperations.ListByParent<
-    AzureMonitorPrivateLinkScope,
+  @action("privateEndpointConnections")
+  listByPrivateLinkScope is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>,
+    Parameters = {
+      /**
+       * The name of the Azure Monitor PrivateLinkScope resource.
+       */
+      @path
+      @segment("privateLinkScopes")
+      scopeName: string;
+    }
   >;
 }
 

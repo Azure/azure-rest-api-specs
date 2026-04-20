@@ -66,10 +66,7 @@ interface MetricAlertResources {
    * Retrieve an alert rule definition.
    */
   @tag("MetricAlerts")
-  get is ArmResourceRead<
-    MetricAlertResource,
-    Error = Microsoft.Common.ErrorResponse
-  >;
+  get is ArmResourceRead<MetricAlertResource, Error = MetricAlertErrorResponse>;
 
   /**
    * Create or update an metric alert definition.
@@ -79,7 +76,7 @@ interface MetricAlertResources {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
     Response = ArmResourceUpdatedResponse<MetricAlertResource>,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -90,7 +87,7 @@ interface MetricAlertResources {
   update is ArmCustomPatchSync<
     MetricAlertResource,
     PatchModel = MetricAlertResourcePatch,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -99,7 +96,7 @@ interface MetricAlertResources {
   @tag("MetricAlerts")
   delete is ArmResourceDeleteSync<
     MetricAlertResource,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -109,7 +106,7 @@ interface MetricAlertResources {
   listByResourceGroup is ArmResourceListByParent<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertResourceCollection>,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -119,7 +116,7 @@ interface MetricAlertResources {
   listBySubscription is ArmListBySubscription<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertResourceCollection>,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -129,11 +126,19 @@ interface MetricAlertResources {
   @get
   @action("status")
   @tag("MetricAlertsStatus")
-  list is ArmResourceActionSync<
+  @segment("")
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     MetricAlertResource,
-    void,
-    ArmResponse<MetricAlertStatusCollection>,
-    Error = Microsoft.Common.ErrorResponse
+    Response = ArmResponse<MetricAlertStatusCollection>,
+    Parameters = {
+      /**
+       * The name of the rule.
+       */
+      @path
+      @segment("metricAlerts")
+      ruleName: string;
+    },
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -143,11 +148,18 @@ interface MetricAlertResources {
   @get
   @tag("MetricAlertsStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}")
-  listByName is MetricAlertResourcesOps.ActionSync<
+  listByName is MetricAlertResourcesOps.ListSinglePage<
     MetricAlertResource,
-    void,
-    ArmResponse<MetricAlertStatusCollection>,
-    OverrideErrorType = Microsoft.Common.ErrorResponse
+    Response = ArmResponse<MetricAlertStatusCollection>,
+    Parameters = {
+      /**
+       * The name of the status.
+       */
+      @path
+      @segment("status")
+      statusName: string;
+    },
+    OverrideErrorType = MetricAlertErrorResponse
   >;
 }
 
