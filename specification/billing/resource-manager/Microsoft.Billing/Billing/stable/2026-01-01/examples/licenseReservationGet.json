@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "billingAccountName": "123456",
+    "licenseReservationName": "3456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/123456/licenseReservations/3456",
+        "name": "3456",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "lineItems": [
+            {
+              "skuId": "1C9-00002",
+              "skuDescription": "OLS License Type",
+              "quantity": 4,
+              "usageCountry": "IN"
+            },
+            {
+              "skuId": "JFQ-00001",
+              "skuDescription": "OLS License Type",
+              "quantity": 2,
+              "usageCountry": "US"
+            }
+          ],
+          "termStartDate": "2025-04-01T00:00:00Z",
+          "status": "Reconciled",
+          "reservedBy": "Test User1",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2025-04-01T00:00:00Z"
+          }
+        },
+        "type": "Microsoft.Billing/billingAccounts/licenseReservations",
+        "systemData": {
+          "createdAt": "2025-04-01T00:00:00Z",
+          "lastModifiedAt": "2025-04-01T00:00:00Z"
+        }
+      }
+    }
+  }
+}
