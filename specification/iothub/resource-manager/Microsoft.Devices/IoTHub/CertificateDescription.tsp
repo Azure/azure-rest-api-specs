@@ -82,7 +82,7 @@ interface CertificateDescriptions {
    */
   @summary("Get the certificate list.")
   @tag("Certificates")
-  listByIotHub is ArmResourceListByParent<
+  listByIotHub is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     CertificateDescription,
     Response = ArmResponse<CertificateListDescription>,
     Error = ErrorDetails
