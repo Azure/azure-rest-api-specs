@@ -69,7 +69,11 @@ using Microsoft.HybridCompute;
 @@clientName(Machines.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Machines.update::parameters.properties, "parameters");
 @@clientName(Machines.installPatches::parameters.body, "installPatchesInput");
-@@clientLocation(Machines.upgradeExtensions, "");
+@@clientLocation(Machines.upgradeExtensions, "", "!javascript");
+@@clientLocation(Machines.upgradeExtensions,
+  "Microsoft.HybridCompute",
+  "javascript"
+);
 @@clientName(Machines.upgradeExtensions::parameters.body,
   "extensionUpgradeParameters"
 );
