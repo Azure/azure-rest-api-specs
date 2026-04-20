@@ -2866,19 +2866,9 @@
           "readOnly": true
         },
         "readinessState": {
-          "type": "string",
+          "$ref": "./common.json#/definitions/NspReadinessState",
           "description": "The readiness state of the resource type for NSP support.",
-          "readOnly": true,
-          "enum": [
-            "Onboarding",
-            "Preview",
-            "GA",
-            "NotReady"
-          ],
-          "x-ms-enum": {
-            "name": "NspReadinessState",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "outboundSupported": {
           "type": "boolean",
