@@ -242,6 +242,32 @@ using TypeSpec.Versioning;
   "csharp"
 );
 
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+  "AutomaticallyApproveRedeploy",
+  "csharp"
+);
+@@clientName(UserInitiatedReboot.automaticallyApprove,
+  "AutomaticallyApproveReboot",
+  "csharp"
+);
+@@clientName(AllInstancesDown.automaticallyApprove,
+  "AutomaticallyApproveAllInstancesDown",
+  "csharp"
+);
+
+@@clientName(DiskEncryptionSetParameters,
+  "ComputeScheduleDiskEncryptionSetConfig",
+  "csharp"
+);
+@@clientName(ManagedDiskParameters,
+  "ComputeScheduleManagedDiskConfig",
+  "csharp"
+);
+@@clientName(VirtualMachineReimageParameters,
+  "ComputeScheduleVirtualMachineReimageConfig",
+  "csharp"
+);
+
 @@clientName(OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
   "csharp"
@@ -318,3 +344,10 @@ model ResourcePatchRequestInput {
   ResourcePatchRequestInput,
   "javascript"
 );
+
+// =====================================================================
+// Fix: NetworkApiVersion enum members with dashes cause Python SyntaxError
+// (ENUM_2020 - 11 - 01 instead of ENUM_2020_11_01)
+// =====================================================================
+@@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
+@@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");

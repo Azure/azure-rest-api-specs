@@ -15,6 +15,7 @@ namespace Microsoft.NetApp;
  * Bucket resource
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 @parentResource(Volume)
 model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
   ...ResourceNameParameter<
@@ -29,12 +30,14 @@ model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
  * List of volume bucket resources
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketList is Azure.Core.Page<Bucket>;
 
 /**
  * Bucket resource properties
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketProperties {
   /**
    * The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.
@@ -83,7 +86,6 @@ model BucketProperties {
    * 1. If a bucket certificate was previously provided directly using the certificateObject property, it is possible to subsequently use the Azure Key Vault for certificate management by using these 'akvDetails' properties. However, once Azure Key Vault is configured, it is no longer possible to provide the certificate directly via the certificateObject property.
    * 2. These properties are mutually exclusive with the server.certificateObject property.
    */
-  @added(Versions.v2025_12_15_preview)
   akvDetails?: AzureKeyVaultDetails;
 }
 
@@ -91,6 +93,7 @@ model BucketProperties {
  * File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model FileSystemUser {
   /**
    * The effective NFS User ID and Group ID when accessing the volume data.
@@ -107,6 +110,7 @@ model FileSystemUser {
  * The effective NFS User ID and Group ID when accessing the volume data.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model NfsUser {
   /**
    * The NFS user's UID
@@ -123,6 +127,7 @@ model NfsUser {
  * The effective CIFS username when accessing the volume data.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model CifsUser {
   /**
    * The CIFS user's username
@@ -134,6 +139,7 @@ model CifsUser {
  * Properties of the server managing the lifecycle of volume buckets
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketServerProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -166,6 +172,7 @@ model BucketServerProperties {
    * Note: This is only used when Azure Key Vault is not configured. This property is mutually exclusive with the Azure Key Vault 'akv' properties.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @maxLength(20480)
   @minLength(1)
   @secret
@@ -177,6 +184,7 @@ model BucketServerProperties {
    * Possible values include: 'Update', 'Fail'
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   onCertificateConflictAction?: OnCertificateConflictAction;
 }
 
@@ -192,6 +200,7 @@ model BucketServerProperties {
  * 2. These properties are mutually exclusive with the server.certificateObject property.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model AzureKeyVaultDetails {
   /**
    * Specifies the Azure Key Vault settings for retrieving the bucket server certificate.
@@ -208,6 +217,7 @@ model AzureKeyVaultDetails {
  * Specifies the Azure Key Vault settings for retrieving the bucket server certificate.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model CertificateAkvDetails {
   /**
    * The base URI of the Azure Key Vault that is used when retrieving the bucket certificate.
@@ -228,6 +238,7 @@ model CertificateAkvDetails {
  * Specifies the Azure Key Vault settings for storing the bucket credentials.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model CredentialsAkvDetails {
   /**
    * The base URI of the Azure Key Vault that is used when storing the bucket credentials.
@@ -254,6 +265,7 @@ model CredentialsAkvDetails {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Bucket properties
@@ -265,6 +277,7 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
  * Bucket resource properties for a Patch operation
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketPatchProperties {
   /**
    * File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both.
@@ -298,6 +311,7 @@ model BucketPatchProperties {
    * 2. These properties are mutually exclusive with the server.certificateObject property.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   akvDetails?: AzureKeyVaultDetails;
 }
 
@@ -305,6 +319,7 @@ model BucketPatchProperties {
  * Properties of the server managing the lifecycle of volume buckets
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketServerPatchProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -316,6 +331,7 @@ model BucketServerPatchProperties {
    * Note: This is only used when Azure Key Vault is not configured. This property is mutually exclusive with the Azure Key Vault 'akv' properties.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @maxLength(20480)
   @minLength(1)
   @secret
@@ -327,6 +343,7 @@ model BucketServerPatchProperties {
    * Possible values include: 'Update', 'Fail'
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   onCertificateConflictAction?: OnCertificateConflictAction;
 }
 
@@ -334,6 +351,7 @@ model BucketServerPatchProperties {
  * The bucket's Access and Secret key pair Expiry Time expressed as the number of days from now.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketCredentialsExpiry {
   /**
    * The number of days from now until the newly generated Access and Secret key pair will expire.
@@ -346,6 +364,7 @@ model BucketCredentialsExpiry {
  * Bucket Access Key, Secret Key, and Expiry date and time of the key pair
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 model BucketGenerateCredentials {
   /**
    * The Access Key that is required along with the Secret Key to access the bucket.
@@ -377,6 +396,7 @@ model BucketGenerateCredentials {
  * "Active": The certificate has been installed and credentials are unexpired.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 union CredentialsStatus {
   string,
 
@@ -400,6 +420,7 @@ union CredentialsStatus {
  * Access permissions for the bucket. Either ReadOnly or ReadWrite. The default is ReadOnly if no value is provided during bucket creation.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 union BucketPermissions {
   string,
 
@@ -418,6 +439,7 @@ union BucketPermissions {
  * Access permissions for the bucket. Either ReadOnly or ReadWrite.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 union BucketPatchPermissions {
   string,
 
@@ -438,6 +460,7 @@ union BucketPatchPermissions {
  * Note: This applies both to certificates provided directly via the certificateObject property and to those retrieved from Azure Key Vault. Details for the latter case are specified in the akvDetails.certificateAkvDetails section.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 union OnCertificateConflictAction {
   string,
 
@@ -453,6 +476,7 @@ union OnCertificateConflictAction {
 }
 
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 @armResourceOperations
 interface Buckets {
   /**
@@ -504,6 +528,7 @@ interface Buckets {
    * Generate the access key and secret key used for accessing the specified volume bucket and store in Azure Key Vault.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @Azure.Core.useFinalStateVia("azure-async-operation")
   generateAkvCredentials is ArmResourceActionNoResponseContentAsync<
     Bucket,
@@ -516,6 +541,7 @@ interface Buckets {
    * This operation will fetch the certificate from Azure Key Vault and install it on the bucket server.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @Azure.Core.useFinalStateVia("azure-async-operation")
   refreshCertificate is ArmResourceActionNoResponseContentAsync<
     Bucket,

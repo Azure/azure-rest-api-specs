@@ -9464,7 +9464,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11015,7 +11015,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -12414,21 +12414,6 @@
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
-    },
-    "CustomTopicConfig": {
-      "type": "object",
-      "description": "Gets or sets the source to which filter applies.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource",
-          "description": "Content source to apply the Content Filters."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RaiTopicConfig"
-        }
-      ]
     },
     "DefenderForAISetting": {
       "type": "object",
@@ -14742,7 +14727,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -15776,14 +15761,6 @@
           },
           "x-ms-identifiers": []
         },
-        "customTopics": {
-          "type": "array",
-          "description": "The list of custom rai topics.",
-          "items": {
-            "$ref": "#/definitions/CustomTopicConfig"
-          },
-          "x-ms-identifiers": []
-        },
         "safetyProviders": {
           "type": "array",
           "description": "The list of Safety Providers.",
@@ -15969,20 +15946,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "RaiTopicConfig": {
-      "type": "object",
-      "description": "Azure OpenAI RAI topic config.",
-      "properties": {
-        "topicName": {
-          "type": "string",
-          "description": "Name of RAI topic."
-        },
-        "blocking": {
-          "type": "boolean",
-          "description": "If blocking would occur."
-        }
-      }
     },
     "RaiTopicProperties": {
       "type": "object",
