@@ -733,6 +733,7 @@ model AccessPolicy {
  * APIs in a different domain; CORS provides a secure way to allow one domain (the
  * origin domain) to call APIs in another domain.
  */
+@Xml.name("CorsRule")
 model CorsRule {
   /**
    * The origin domains that are permitted to make a request against the storage
@@ -1705,9 +1706,9 @@ alias FileSmtPropertyRequestHeaders = {
   /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
   @header("x-ms-file-attributes") fileAttributes?: string;
 
-  ...FileCreationTimeHeader<"Creation time for the file/directory. Default value: Now.">;
-  ...FileLastWriteTimeHeader<"Last write time for the file/directory. Default value: Now.">;
-  ...FileChangeTimeHeader<"Change time for the file/directory. Default value: Now.">;
+  ...FileCreationTimeParameter<"Creation time for the file/directory. Default value: Now.">;
+  ...FileLastWriteTimeParameter<"Last write time for the file/directory. Default value: Now.">;
+  ...FileChangeTimeParameter<"Change time for the file/directory. Default value: Now.">;
 };
 
 /** File permission format parameter. */
@@ -1725,9 +1726,9 @@ alias FileSmtPropertyResponseHeaders = {
   /** Attributes set for the file/directory. */
   @header("x-ms-file-attributes") fileAttributes?: string;
 
-  ...FileCreationTimeHeader<"Creation time for the file/directory.">;
-  ...FileLastWriteTimeHeader<"Last write time for the file/directory.">;
-  ...FileChangeTimeHeader<"Change time for the file/directory.">;
+  ...FileCreationTimeResponseHeader<"Creation time for the file/directory.">;
+  ...FileLastWriteTimeResponseHeader<"Last write time for the file/directory.">;
+  ...FileChangeTimeResponseHeader<"Change time for the file/directory.">;
 
   /** The fileId of the directory/file. */
   @header("x-ms-file-id") fileId?: string;
@@ -2296,9 +2297,9 @@ alias FileContentMD5ResponseHeader = {
 
 /** NFS timestamp response headers for symbolic link and hard link operations. */
 alias NfsTimestampResponseHeaders = {
-  ...FileCreationTimeHeader<"The file creation time.">;
-  ...FileLastWriteTimeHeader<"The file last write time.">;
-  ...FileChangeTimeHeader<"The file change time.">;
+  ...FileCreationTimeResponseHeader<"The file creation time.">;
+  ...FileLastWriteTimeResponseHeader<"The file last write time.">;
+  ...FileChangeTimeResponseHeader<"The file change time.">;
 
   /** The fileId of the file. */
   @header("x-ms-file-id") fileId?: string;
@@ -2367,7 +2368,17 @@ alias FileHttpContentResponseHeaders = {
 // --- Template aliases (doc-only differences across operations) ---
 
 /** File creation time header (string type, for rename/copy/symlink operations). */
-alias FileCreationTimeHeader<TDoc extends valueof string> = {
+alias FileCreationTimeParameter<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
+  @doc(TDoc)
+  @encode("rfc3999-fixed-width")
+  @header("x-ms-file-creation-time")
+  fileCreationTime?: utcDateTime;
+};
+
+/** File creation time header (string type, for rename/copy/symlink operations). */
+alias FileCreationTimeResponseHeader<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
@@ -2377,7 +2388,17 @@ alias FileCreationTimeHeader<TDoc extends valueof string> = {
 };
 
 /** File last write time header (string type, for rename/copy/symlink operations). */
-alias FileLastWriteTimeHeader<TDoc extends valueof string> = {
+alias FileLastWriteTimeParameter<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
+  @doc(TDoc)
+  @encode("rfc3999-fixed-width")
+  @header("x-ms-file-last-write-time")
+  fileLastWriteTime?: utcDateTime;
+};
+
+/** File last write time header (string type, for rename/copy/symlink operations). */
+alias FileLastWriteTimeResponseHeader<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
@@ -2387,7 +2408,17 @@ alias FileLastWriteTimeHeader<TDoc extends valueof string> = {
 };
 
 /** File change time header (string type, for rename/copy operations). */
-alias FileChangeTimeHeader<TDoc extends valueof string> = {
+alias FileChangeTimeParameter<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
+  @doc(TDoc)
+  @encode("rfc3999-fixed-width")
+  @header("x-ms-file-change-time")
+  fileChangeTime?: utcDateTime;
+};
+
+/** File change time header (string type, for rename/copy operations). */
+alias FileChangeTimeResponseHeader<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)

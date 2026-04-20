@@ -8,15 +8,27 @@ using Storage.File;
 
 namespace Customizations;
 
-@@alternateType(FileCreationTimeHeader.fileCreationTime,
+@@alternateType(FileCreationTimeParameter.fileCreationTime,
+  string,
+  "python,csharp,javascript,go"
+);
+@@alternateType(FileLastWriteTimeParameter.fileLastWriteTime,
+  string,
+  "python,csharp,javascript,go"
+);
+@@alternateType(FileChangeTimeParameter.fileChangeTime,
+  string,
+  "python,csharp,javascript,go"
+);
+@@alternateType(FileCreationTimeResponseHeader.fileCreationTime,
   string,
   "python,csharp,javascript"
 );
-@@alternateType(FileLastWriteTimeHeader.fileLastWriteTime,
+@@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime,
   string,
   "python,csharp,javascript"
 );
-@@alternateType(FileChangeTimeHeader.fileChangeTime,
+@@alternateType(FileChangeTimeResponseHeader.fileChangeTime,
   string,
   "python,csharp,javascript"
 );
@@ -86,11 +98,31 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
+@@alternateType(CopyStatusResponseHeaders.copyCompletionTime, utcDateTime, "go");
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
+@@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");
+@@alternateType(FileCreationTimeResponseHeader.fileCreationTime, utcDateTime, "go");
+@@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime, utcDateTime, "go");
+@@alternateType(FileProperty.changeTime, utcDateTime, "go");
+@@alternateType(FileProperty.creationTime, utcDateTime, "go");
+@@alternateType(FileProperty.lastAccessTime, utcDateTime, "go");
+@@alternateType(FileProperty.lastWriteTime, utcDateTime, "go");
 @@alternateType(HandleItem.path, string, "go");
+@@alternateType(LeaseResponseHeaders.leaseDuration, LeaseDurationType, "go");
+@@alternateType(LeaseResponseHeaders.leaseState, LeaseStateType, "go");
+@@alternateType(LeaseResponseHeaders.leaseStatus, LeaseStatusType, "go");
+@@alternateType(LinkCountResponseHeader.linkCount, int64, "go");
 @@alternateType(ListFilesAndDirectoriesSegmentResponse.prefix, string, "go");
+@@alternateType(NfsTimestampResponseHeaders.fileChangeTime, utcDateTime, "go");
+@@alternateType(NfsTimestampResponseHeaders.fileCreationTime, utcDateTime, "go");
+@@alternateType(NfsTimestampResponseHeaders.fileLastWriteTime, utcDateTime, "go");
+@@alternateType(ShareStats.shareUsageBytes, int64, "go");
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
+@@alternateType(ShareProvisioningResponseHeaders.quota, int64, "go");
+@@alternateType(ShareProvisioningResponseHeaders.provisionedIops, int64, "go");
+@@alternateType(ShareProvisioningResponseHeaders.provisionedBandwidthMibps, int64, "go");
+@@alternateType(ShareProvisioningResponseHeaders.includedBurstIops, int64, "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
 @@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
@@ -108,7 +140,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@clientName(FilesAndDirectoriesListSegment.fileItems, "Files", "go");
+@@clientName(FileSmtPropertyResponseHeaders.fileId, "ID", "go");
+@@clientName(FileSmtPropertyResponseHeaders.fileParentId, "ParentID", "go");
 @@clientName(HandleItem, "Handle", "go");
+@@clientName(HandleItem.handleId, "ID", "go");
+@@clientName(KeyInfo.delegatedUserTid, "DelegatedUserTenantID", "go");
 @@clientName(ListHandlesResponse.handleList, "Handles", "go");
 @@clientName(ListSharesResponse.shareItems, "Shares", "go");
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
@@ -122,6 +158,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "IsServerEncrypted",
   "go"
 );
+@@clientName(ShareProtocolSettings.nfs, "NFS", "go");
 
 @@clientName(ShareItemInternal, "Share", "go");
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");

@@ -820,9 +820,9 @@ interface Directory {
       ...RenameRequestHeaders;
       ...DestinationLeaseIdParameter;
       ...FileAttributesStringHeader;
-      ...FileCreationTimeHeader<"Creation time for the directory.">;
-      ...FileLastWriteTimeHeader<"Last write time for the directory.">;
-      ...FileChangeTimeHeader<"Change time for the directory.">;
+      ...FileCreationTimeParameter<"Creation time for the directory.">;
+      ...FileLastWriteTimeParameter<"Last write time for the directory.">;
+      ...FileChangeTimeParameter<"Change time for the directory.">;
       ...FilePermissionOptionalHeader<"If specified the permission shall be set for the directory.">;
       ...FilePermissionFormatParameter;
       ...FilePermissionKeyOptionalStringHeader;
@@ -1189,7 +1189,7 @@ interface File {
       ...LastModifiedResponseHeader;
       ...ContentMD5ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
-      ...FileLastWriteTimeHeader<"The file last write time.">;
+      ...FileLastWriteTimeResponseHeader<"The file last write time.">;
       ...StructuredBodyResponseHeader;
     }
   >;
@@ -1242,7 +1242,7 @@ interface File {
       ...ContentMD5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
-      ...FileLastWriteTimeHeader<"The file last write time.">;
+      ...FileLastWriteTimeResponseHeader<"The file last write time.">;
     }
   >;
 
@@ -1286,9 +1286,9 @@ interface File {
       ...FilePermissionCopyModeHeader;
       ...IgnoreReadOnlyHeader;
       ...FileAttributesStringHeader;
-      ...FileCreationTimeHeader<"Creation time for the file.">;
-      ...FileLastWriteTimeHeader<"Last write time for the file.">;
-      ...FileChangeTimeHeader<"Change time for the file.">;
+      ...FileCreationTimeParameter<"Creation time for the file.">;
+      ...FileLastWriteTimeParameter<"Last write time for the file.">;
+      ...FileChangeTimeParameter<"Change time for the file.">;
       ...SetArchiveAttributeHeader;
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1382,9 +1382,9 @@ interface File {
       ...RenameRequestHeaders;
       ...DestinationLeaseIdParameter;
       ...FileAttributesStringHeader;
-      ...FileCreationTimeHeader<"Creation time for the file.">;
-      ...FileLastWriteTimeHeader<"Last write time for the file.">;
-      ...FileChangeTimeHeader<"Change time for the file.">;
+      ...FileCreationTimeParameter<"Creation time for the file.">;
+      ...FileLastWriteTimeParameter<"Last write time for the file.">;
+      ...FileChangeTimeParameter<"Change time for the file.">;
       ...FilePermissionOptionalHeader<"If specified the permission shall be set for the file.">;
       ...FilePermissionFormatParameter;
       ...FilePermissionKeyOptionalStringHeader;
@@ -1414,8 +1414,8 @@ interface File {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
-      ...FileCreationTimeHeader<"Creation time for the file.">;
-      ...FileLastWriteTimeHeader<"Last write time for the file.">;
+      ...FileCreationTimeParameter<"Creation time for the file.">;
+      ...FileLastWriteTimeParameter<"Last write time for the file.">;
       ...LeaseIdOptionalParameter;
       ...NfsOwnerGroupHeaders;
       ...LinkTextHeader;
