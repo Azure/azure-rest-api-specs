@@ -192,7 +192,9 @@ model LogSettings {
 
 @@alternateType(AutoscaleNotification.operation, "Scale", "go");
 
-// we add this model  in order to replace subscriptions model in CommonTypes with this model via alternateType decorator
+/**
+ * we add this model  in order to replace subscriptions model in CommonTypes with this model via alternateType decorator
+ */
 model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
