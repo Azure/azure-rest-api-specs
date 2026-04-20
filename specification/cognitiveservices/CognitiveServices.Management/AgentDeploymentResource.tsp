@@ -105,7 +105,8 @@ interface AgentDeploymentResourcesOps
         @segment("agentDeployments")
         @key
         deploymentName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesAgentDeployment"
     > {}
 
 @armResourceOperations(#{ omitTags: true })
