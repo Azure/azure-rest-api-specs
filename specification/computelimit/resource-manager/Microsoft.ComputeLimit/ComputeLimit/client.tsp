@@ -17,3 +17,6 @@ using Microsoft.ComputeLimit;
   "ComputeLimitSharedLimitProperties",
   "csharp"
 );
+@@clientName(Feature, "ComputeLimitFeature", "csharp");
+@@clientName(FeatureProperties, "ComputeLimitFeatureProperties", "csharp");
+@@clientName(FeatureState, "ComputeLimitFeatureState", "csharp");
