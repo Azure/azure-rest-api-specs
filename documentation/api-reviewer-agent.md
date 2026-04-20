@@ -3,6 +3,9 @@
 The **ARM API Reviewer** is a Visual Studio Code Copilot agent that reviews Azure REST API
 specification PRs for conformance to the [Azure REST API Guidelines][api-guidelines],
 ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conventions.
+It validates OpenAPI (Swagger), TypeSpec, and example files against 100+ codified rules
+derived from the RPC, Azure REST API Guidelines, and patterns identified by analyzing
+review comments from tens of thousands of PRs across both repos.
 
 ## Prerequisites
 
@@ -274,16 +277,16 @@ The agent **does not**:
 
 ### Agent Files (under `.github/`)
 
-| File                                            | Purpose                                                                                                                     |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                |
-| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (48+ RPC rule IDs)                                                                           |
-| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                |
-| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                       |
-| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                   |
-| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                       |
-| `skills/azure-api-review/references/*.md`       | Cross-cutting rule references (secret detection, mutability, provisioning state, naming, enums, tracked resource lifecycle) |
-| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                              |
+| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                              |
+| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                          |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                              |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                     |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                 |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                     |
+| `skills/azure-api-review/references/*.md`       | 15 cross-cutting rule references (secret detection, property mutability, provisioning state, naming conventions, enum best practices, tracked resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight compliance, LRO final-state-via, suppression review criteria, linter rule coverage, design decisions) |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                            |
 
 ### Rule Maintenance
 
