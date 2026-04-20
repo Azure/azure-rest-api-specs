@@ -82,54 +82,6 @@
     }
   ],
   "paths": {
-    "/DataProduct/query/count": {
-      "post": {
-        "operationId": "DataProducts_Count",
-        "tags": [
-          "DataProduct"
-        ],
-        "description": "Retrieves the count of duplicate DataProduct by passing namekeyword.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "The request body containing query criteria.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DuplicateQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EntityCount"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataProducts_Count": {
-            "$ref": "./examples/DataProducts_Count_Gen.json"
-          }
-        }
-      }
-    },
     "/businessdomains": {
       "get": {
         "operationId": "BusinessDomain_Enumerate",
@@ -142,12 +94,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "$skipToken",
+            "name": "skipToken",
             "in": "query",
-            "description": "skiptoken",
+            "description": "Optional continuation token for pagination.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
+            "type": "string"
           },
           {
             "name": "writeOnly",
@@ -3417,6 +3368,54 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/dataProducts/query/count": {
+      "post": {
+        "operationId": "DataProducts_Count",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Retrieves the count of duplicate DataProduct by passing namekeyword.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body containing query criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DuplicateQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityCount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProducts_Count": {
+            "$ref": "./examples/DataProducts_Count_Gen.json"
+          }
         }
       }
     },

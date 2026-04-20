@@ -481,7 +481,7 @@ interface DataProducts {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataProduct")
   @doc("Retrieves the count of duplicate DataProduct by passing namekeyword.")
-  @route("/DataProduct/query/count")
+  @route("/dataProducts/query/count")
   @post
   Count is RpcOperation<
     {
@@ -502,8 +502,8 @@ interface BusinessDomain {
   Enumerate is UnifiedCatalogOperations.ResourceList<
     Domain,
     ListQueryParametersTrait<{
-      @doc("skiptoken")
-      @query("$skipToken")
+      @doc("Optional continuation token for pagination.")
+      @query
       skipToken?: string;
 
       @doc("writeOnly")
