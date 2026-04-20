@@ -209,9 +209,9 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ArmErrorDetail",
-  "javascript"
+  "javascript,python"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
-  "javascript"
+  "javascript,python"
 );
