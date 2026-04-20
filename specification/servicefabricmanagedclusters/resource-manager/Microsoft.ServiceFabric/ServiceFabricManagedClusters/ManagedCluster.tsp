@@ -97,7 +97,7 @@ interface ManagedClusters {
    * Gets a fault simulation by the simulationId.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
@@ -109,7 +109,7 @@ interface ManagedClusters {
    * Gets the list of recent fault simulations for the cluster.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -122,7 +122,7 @@ interface ManagedClusters {
    * Starts a fault simulation on the cluster.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -136,7 +136,7 @@ interface ManagedClusters {
    * Stops a fault simulation on the cluster.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -168,7 +168,7 @@ interface ManagedApplyMaintenanceWindow {
    * Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
-  @removed(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_05_01_preview)
   @action("applyMaintenanceWindow")
   @sharedRoute
   @operationId("managedApplyMaintenanceWindow_Post")
@@ -178,7 +178,7 @@ interface ManagedApplyMaintenanceWindow {
    * Action to Apply Maintenance window on the Service Fabric Managed Clusters. Any pending update will be applied.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @action("applyMaintenanceWindow")
   @sharedRoute
   @operationId("managedApplyMaintenanceWindow_Post")
@@ -1082,7 +1082,7 @@ model ManagedMaintenanceWindowStatusContent {
 /**
  * Describes the request to apply a maintenance window on a Service Fabric Managed Cluster.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_05_01_preview)
 model ApplyMaintenanceWindowRequest {
   /**
    * Effective start date of the maintenance window in yyyy-MM-dd HH:mm format. If not provided, defaults to the current time.

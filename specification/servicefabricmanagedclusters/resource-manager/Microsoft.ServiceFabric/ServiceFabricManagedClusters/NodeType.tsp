@@ -140,7 +140,7 @@ interface NodeTypes {
    * Starts a fault simulation on the node type.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -154,7 +154,7 @@ interface NodeTypes {
    * Stops a fault simulation on the node type.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -168,7 +168,7 @@ interface NodeTypes {
    * Gets a fault simulation by the simulationId.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
@@ -180,7 +180,7 @@ interface NodeTypes {
    * Gets the list of recent fault simulations for the node type.
    */
   @removed(Versions.v2026_02_01)
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -563,13 +563,13 @@ model NodeTypeProperties {
   /**
    * Specifies the scale in policy for the node type, which will be used when scale in happens on the cluster. If not specified, the default is Default which means the platform will decide which nodes to remove during scale in.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   scaleInPolicy?: ScaleInPolicy;
 
   /**
    * Specifies the settings for the proxy agent on the node type.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   proxyAgentSettings?: ProxyAgentSettings;
 }
 
