@@ -94,7 +94,6 @@ interface ShareClient extends Storage.File.Share {}
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
 
-@@clientName(NfsTimestampResponseHeaders.fileParentId, "ParentID", "go");
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
@@ -123,6 +122,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ShareProvisioningResponseHeaders.provisionedIops, int64, "go");
 @@alternateType(ShareProvisioningResponseHeaders.provisionedBandwidthMibps, int64, "go");
 @@alternateType(ShareProvisioningResponseHeaders.includedBurstIops, int64, "go");
+@@alternateType(ShareQuotaOptionalHeader.quota, int64, "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
 @@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
@@ -150,6 +150,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
 @@clientName(NfsFileType, "NFSFileType", "go");
 @@clientName(NfsResponseHeaders.nfsFileType, "NFSFileType", "go");
+@@clientName(NfsTimestampResponseHeaders.fileId, "ID", "go");
+@@clientName(NfsTimestampResponseHeaders.fileParentId, "ParentID", "go");
 @@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted,
   "IsServerEncrypted",
   "go"
@@ -161,12 +163,14 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(ShareProtocolSettings.nfs, "NFS", "go");
 
 @@clientName(ShareItemInternal, "Share", "go");
+@@clientName(ShareNfsSettings, "ShareNFSSettings", "go");
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");
 @@clientName(SharePropertiesInternal.enableSmbDirectoryLease,
   "EnableSMBDirectoryLease",
   "go"
 );
 @@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
+@@clientName(ShareSmbSettingsEncryptionInTransit, "SMBEncryptionInTransit", "go");
 @@clientName(ShareUsageResponseHeader.shareUsageBytes,
   "FileShareUsageBytes",
   "go"

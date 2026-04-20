@@ -181,7 +181,8 @@ interface Share {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
-      ...ShareQuotaOptionalHeader;
+      /** Specifies the maximum size of the share, in gigabytes. */
+      @header("x-ms-share-quota") quota?: int32;
       ...ShareAccessTierRequestHeader;
       ...EnabledProtocolsHeader;
       ...ShareRootSquashRequestHeader;
@@ -223,19 +224,25 @@ interface Share {
       ...MetadataHeaders;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...ShareQuotaOptionalHeader;
+      
+      /** Specifies the maximum size of the share, in gigabytes. */
+      @header("x-ms-share-quota") quota?: int32;
 
       /** The provisioned IOPS for the share. */
-      @header("x-ms-share-provisioned-iops") provisionedIops?: int64;
+      @header("x-ms-share-provisioned-iops") 
+      @alternateType(int32, "go")
+      provisionedIops?: int64;
 
       /** The provisioned ingress for the share. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-ingress-mbps")
+      @alternateType(int32, "go")
       provisionedIngressMBps?: int64;
 
       /** The provisioned egress for the share. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-egress-mbps")
+      @alternateType(int32, "go")
       provisionedEgressMBps?: int64;
 
       /** The next allowed quota downgrade time. */
@@ -246,6 +253,7 @@ interface Share {
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
       @clientName("ProvisionedBandwidthMiBps", "go")
+      @alternateType(int32, "go")
       provisionedBandwidthMibps?: int64;
 
       ...LeaseResponseHeaders;
@@ -254,7 +262,9 @@ interface Share {
       @header("x-ms-access-tier") accessTier?: string;
 
       /** The access tier change time. */
-      @header("x-ms-access-tier-change-time") accessTierChangeTime?: string;
+      @header("x-ms-access-tier-change-time") 
+      @alternateType(utcDateTime, "go")
+      accessTierChangeTime?: string;
 
       /** The access tier transition state. */
       @header("x-ms-access-tier-transition-state")
@@ -264,7 +274,9 @@ interface Share {
       @header("x-ms-enabled-protocols") enabledProtocols?: string;
 
       /** The root squash mode for the share. */
-      @header("x-ms-root-squash") rootSquash?: string;
+      @header("x-ms-root-squash") 
+      @alternateType(ShareRootSquash, "go")
+      rootSquash?: string;
 
       /** Whether snapshot virtual directory access is enabled. */
       @header("x-ms-enable-snapshot-virtual-directory-access")
@@ -496,7 +508,8 @@ interface Share {
   setProperties is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-      ...ShareQuotaOptionalHeader;
+      /** Specifies the maximum size of the share, in gigabytes. */
+      @header("x-ms-share-quota") quota?: int32;
       ...ShareAccessTierRequestHeader;
       ...LeaseIdOptionalParameter;
       ...ShareRootSquashRequestHeader;
