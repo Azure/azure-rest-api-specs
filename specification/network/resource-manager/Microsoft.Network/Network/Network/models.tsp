@@ -2676,22 +2676,22 @@ union NspReadinessState {
   string,
 
   /**
-   * Onboarding
+   * Resource Provider is actively being onboarded to NSP
    */
   Onboarding: "Onboarding",
 
   /**
-   * Preview
+   * Resource Provider supports NSP in Preview
    */
   Preview: "Preview",
 
   /**
-   * GA
+   * Resource Provider is generally available for NSP Integration
    */
   GA: "GA",
 
   /**
-   * NotReady
+   * NSP Onboarding is not started or not Supported
    */
   NotReady: "NotReady",
 }
