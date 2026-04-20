@@ -9885,7 +9885,7 @@
           "minimum": 0
         },
         "rampDownActionOnLogoff": {
-          "$ref": "#/definitions/SessionHandlingOperationWithHibernate",
+          "$ref": "#/definitions/SessionHandlingOperation",
           "description": "Action to be taken after a logoff during the ramp down period."
         },
         "rampDownMinutesToWaitOnLogoff": {
@@ -9924,7 +9924,7 @@
           }
         },
         "offPeakActionOnDisconnect": {
-          "$ref": "#/definitions/SessionHandlingOperationWithHibernate",
+          "$ref": "#/definitions/SessionHandlingOperation",
           "description": "Action to be taken after a user disconnect during the off-peak period."
         },
         "offPeakMinutesToWaitOnDisconnect": {
@@ -9934,7 +9934,7 @@
           "minimum": 0
         },
         "offPeakActionOnLogoff": {
-          "$ref": "#/definitions/SessionHandlingOperationWithHibernate",
+          "$ref": "#/definitions/SessionHandlingOperation",
           "description": "Action to be taken after a logoff during the off-peak period."
         },
         "offPeakMinutesToWaitOnLogoff": {
@@ -10098,7 +10098,7 @@
           "minimum": 0
         },
         "rampDownActionOnLogoff": {
-          "$ref": "#/definitions/SessionHandlingOperationWithHibernate",
+          "$ref": "#/definitions/SessionHandlingOperation",
           "description": "Action to be taken after a logoff during the ramp down period."
         },
         "rampDownMinutesToWaitOnLogoff": {
@@ -10137,7 +10137,7 @@
           }
         },
         "offPeakActionOnDisconnect": {
-          "$ref": "#/definitions/SessionHandlingOperationWithHibernate",
+          "$ref": "#/definitions/SessionHandlingOperation",
           "description": "Action to be taken after a user disconnect during the off-peak period."
         },
         "offPeakMinutesToWaitOnDisconnect": {
@@ -10147,7 +10147,7 @@
           "minimum": 0
         },
         "offPeakActionOnLogoff": {
-          "$ref": "#/definitions/SessionHandlingOperationWithHibernate",
+          "$ref": "#/definitions/SessionHandlingOperation",
           "description": "Action to be taken after a logoff during the off-peak period."
         },
         "offPeakMinutesToWaitOnLogoff": {
@@ -10755,36 +10755,6 @@
       ],
       "x-ms-enum": {
         "name": "SessionHandlingOperation",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No action will be taken after disconnect"
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Session Host will be deallocated after disconnect"
-          },
-          {
-            "name": "Hibernate",
-            "value": "Hibernate",
-            "description": "Session Host will hibernate after disconnect"
-          }
-        ]
-      }
-    },
-    "SessionHandlingOperationWithHibernate": {
-      "type": "string",
-      "description": "Action to be taken after a user disconnect. Includes hibernate support for all versions.",
-      "enum": [
-        "None",
-        "Deallocate",
-        "Hibernate"
-      ],
-      "x-ms-enum": {
-        "name": "SessionHandlingOperationWithHibernate",
         "modelAsString": true,
         "values": [
           {
