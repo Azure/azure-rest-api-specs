@@ -88,7 +88,7 @@ model MessagingEndpoint {
 
   @added(Versions.v2025_07_01_preview)
   @madeOptional(Versions.v2026_11_01_preview)
-  @doc("The service-facing endpoint address to connect to.")
+  @doc("The endpoint address to connect to.")
   address?: string;
 
   @doc("The messaging endpoint Azure resource Id.")
