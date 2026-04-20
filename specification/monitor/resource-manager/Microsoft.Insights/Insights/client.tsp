@@ -58,6 +58,14 @@ namespace Microsoft.InsightsCombinedClient;
 @@Legacy.markAsPageable(Microsoft.PrivateLinkScopes.PrivateEndpointConnections.listByPrivateLinkScope,
   "java"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
+@@Legacy.markAsPageable(Microsoft.MetricAlert.MetricAlertResources.list,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
+@@Legacy.markAsPageable(Microsoft.MetricAlert.MetricAlertResources.listByName,
+  "java"
+);
 
 // ActivityLogAlerts - rename back to match fluent SDK expected names
 @@clientName(Microsoft.ActivityLogAlerts.AlertRuleAllOfCondition,
