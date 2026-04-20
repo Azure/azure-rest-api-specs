@@ -73,12 +73,6 @@ model ModelAssetCredentialRequest {
   generateBlobLevelReadSas?: boolean;
 }
 
-@doc("Response containing credentials for a model asset.")
-model ModelAssetCredentialResponse {
-  @doc("Blob reference with credentials.")
-  blobReference?: BlobReference;
-}
-
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;

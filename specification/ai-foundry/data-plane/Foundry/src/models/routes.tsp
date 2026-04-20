@@ -76,6 +76,6 @@ interface Models
       @bodyRoot
       body: ModelAssetCredentialRequest;
     },
-    ModelAssetCredentialResponse
+    AssetCredentialResponse
   >;
 }
