@@ -60,6 +60,9 @@
       "name": "Schedules"
     },
     {
+      "name": "EvaluationSuiteGenerationJobs"
+    },
+    {
       "name": "Skills"
     },
     {
@@ -2972,19 +2975,19 @@
             "name": "agentName",
             "in": "query",
             "required": false,
-            "description": "Filter by associated agent name.",
+            "description": "Filter by associated Foundry agent name.",
             "schema": {
               "type": "string"
             },
             "explode": false
           },
           {
-            "name": "kind",
+            "name": "agentId",
             "in": "query",
             "required": false,
-            "description": "Filter by evaluation suite kind (dataset_backed or evaluator_only).",
+            "description": "Filter by associated 3P agent identifier.",
             "schema": {
-              "$ref": "#/components/schemas/EvaluationSuiteKind"
+              "type": "string"
             },
             "explode": false
           }
@@ -3016,6 +3019,67 @@
                 "schema": {
                   "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluationSuites/{name}/run": {
+      "post": {
+        "operationId": "EvaluationSuites_run",
+        "description": "Run an evaluation using the suite's testing criteria and dataset.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteRunResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationSuiteRunRequest"
               }
             }
           }
@@ -3309,6 +3373,432 @@
             }
           },
           "description": "The EvaluationSuiteVersion to create or update."
+        }
+      }
+    },
+    "/evaluation_suite_generation/jobs": {
+      "get": {
+        "operationId": "EvaluationSuiteGenerationJobs_list",
+        "summary": "Returns a list of evaluation suite generation jobs.",
+        "description": "List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "post": {
+        "operationId": "EvaluationSuiteGenerationJobs_create",
+        "summary": "Creates an evaluation suite generation job.",
+        "description": "Create a new job (preview). Includes optional Foundry-Features header.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+              }
+            }
+          },
+          "description": "The job to create."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation_suite_generation/jobs/{jobId}": {
+      "get": {
+        "operationId": "EvaluationSuiteGenerationJobs_get",
+        "summary": "Get info about an evaluation suite generation job.",
+        "description": "Get a job by ID (preview). Includes optional Foundry-Features header.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationSuiteGenerationJobs_delete",
+        "summary": "Deletes an evaluation suite generation job.",
+        "description": "Delete a job (preview). Returns 204 No Content.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation_suite_generation/jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "EvaluationSuiteGenerationJobs_cancel",
+        "summary": "Cancels an evaluation suite generation job.",
+        "description": "Cancel a running job (preview). Returns 200 with the updated job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
         }
       }
     },
@@ -15453,44 +15943,264 @@
         ],
         "description": "Evaluation task for the schedule."
       },
-      "EvaluationSuiteEvaluator": {
+      "EvaluationSuiteAgentReference": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Foundry agent name. Mutually exclusive with id."
+          },
+          "id": {
+            "type": "string",
+            "description": "3P agent identifier. Mutually exclusive with name."
+          }
+        },
+        "description": "Reference to an agent for an evaluation suite.\nProvide either name (for Foundry agents) or id (for 3P agents), not both."
+      },
+      "EvaluationSuiteGenerationJob": {
         "type": "object",
         "required": [
+          "id",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobResult"
+              }
+            ],
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobStatus"
+              }
+            ],
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was created, represented in Unix time.",
+            "readOnly": true
+          },
+          "finished_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job finished, represented in Unix time.",
+            "readOnly": true
+          }
+        },
+        "description": "Evaluation suite generation job resource."
+      },
+      "EvaluationSuiteGenerationJobInputs": {
+        "type": "object",
+        "required": [
+          "name",
+          "agentReference"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The suite name to create."
+          },
+          "agentReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteAgentReference"
+              }
+            ],
+            "description": "Agent reference — the agent to generate evaluators and dataset for."
+          },
+          "initializationParameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Optional initialization parameters applied to all generated evaluators.\nFor example, deployment_name for LLM judge model, default threshold."
+          },
+          "dataMapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional data mapping applied to all generated evaluators.\nAuto-inferred from evaluator data schema if not provided."
+          }
+        },
+        "description": "Caller-supplied inputs for an evaluation suite generation job."
+      },
+      "EvaluationSuiteGenerationJobResult": {
+        "type": "object",
+        "required": [
+          "suiteName",
+          "suiteVersion",
+          "evaluatorName",
+          "evaluatorVersion"
+        ],
+        "properties": {
+          "suiteName": {
+            "type": "string",
+            "description": "The created suite name."
+          },
+          "suiteVersion": {
+            "type": "string",
+            "description": "The created suite version."
+          },
+          "evaluatorName": {
+            "type": "string",
+            "description": "The generated evaluator name."
+          },
+          "evaluatorVersion": {
+            "type": "string",
+            "description": "The generated evaluator version."
+          },
+          "datasetName": {
+            "type": "string",
+            "description": "The generated dataset name."
+          },
+          "datasetVersion": {
+            "type": "string",
+            "description": "The generated dataset version."
+          }
+        },
+        "description": "Result produced by a successful evaluation suite generation job."
+      },
+      "EvaluationSuiteRunRequest": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "description": "Name for the eval group. Default: '{suiteName}-runs'."
+          },
+          "suiteVersion": {
+            "type": "string",
+            "description": "Suite version to run. Default: latest."
+          },
+          "evaluationLevel": {
+            "type": "string",
+            "description": "Evaluation level: 'turn' or 'conversation'. Optional."
+          }
+        },
+        "description": "Request body for running an evaluation from a suite."
+      },
+      "EvaluationSuiteRunResponse": {
+        "type": "object",
+        "required": [
+          "evaluationId",
+          "runId",
+          "groupName",
+          "suiteName",
+          "suiteVersion",
+          "status",
+          "createdAt"
+        ],
+        "properties": {
+          "evaluationId": {
+            "type": "string",
+            "description": "The evaluation (group) ID created."
+          },
+          "runId": {
+            "type": "string",
+            "description": "The eval run ID created."
+          },
+          "groupName": {
+            "type": "string",
+            "description": "The eval group name."
+          },
+          "suiteName": {
+            "type": "string",
+            "description": "The suite name used."
+          },
+          "suiteVersion": {
+            "type": "string",
+            "description": "The suite version resolved."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the run."
+          },
+          "createdAt": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp when the run was created."
+          }
+        },
+        "description": "Response from running an evaluation suite."
+      },
+      "EvaluationSuiteTestingCriteria": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
           "evaluatorName"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "description": "The grader type. Always 'azure_ai_evaluator' for Foundry evaluators."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name for this testing criteria entry. Must be unique within the suite."
+          },
           "evaluatorName": {
             "type": "string",
-            "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. coherence, fluency, task_adherence)\nand custom evaluators registered in the catalog."
+            "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. builtin.relevance, builtin.task_adherence)\nand custom evaluators registered in the catalog."
           },
-          "threshold": {
-            "type": "number",
-            "format": "double",
-            "description": "Pass/fail threshold. Scores >= threshold pass.\nOmit for informational-only evaluators that report a score\nwithout gating the evaluation suite result."
+          "evaluatorVersion": {
+            "type": "string",
+            "description": "Evaluator version. Omit to use the latest version."
+          },
+          "initializationParameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Initialization parameters for the evaluator.\nIncludes deployment_name (LLM judge model), threshold (pass/fail score), and\nany evaluator-specific parameters."
+          },
+          "dataMapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Maps dataset columns to evaluator inputs.\nFor example, {\"query\": \"{{item.query}}\", \"response\": \"{{item.response}}\"}."
           }
         },
-        "description": "Configuration for an evaluator within an evaluation suite."
-      },
-      "EvaluationSuiteKind": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "dataset_backed",
-              "evaluator_only"
-            ]
-          }
-        ],
-        "description": "The kind of evaluation suite, determining its composition."
+        "description": "A testing criteria entry within an evaluation suite.\nSame shape as testing criteria on eval groups (azure_ai_evaluator grader type)."
       },
       "EvaluationSuiteVersion": {
         "type": "object",
         "required": [
-          "kind",
-          "evaluators",
+          "testingCriteria",
           "name",
           "version"
         ],
@@ -15499,33 +16209,29 @@
             "type": "string",
             "description": "Human-readable display name.\nDoes not need to be unique. Shown in portal list views and eval reports."
           },
-          "kind": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EvaluationSuiteKind"
-              }
-            ],
-            "description": "Evaluation suite kind.\nBatch: requires a dataset reference; evaluators run against dataset rows.\nContinuous: evaluators only; data comes from live production traces."
-          },
           "dataset": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/DatasetReference"
               }
             ],
-            "description": "Dataset reference for offline evaluation.\nRequired when kind is batch. Must be null when kind is continuous.\nThe referenced dataset must exist in the project's dataset registry."
+            "description": "Dataset reference for evaluation.\nOptional — omit for evaluator-only suites where data comes from\nlive production traces or is provided at run time.\nThe referenced dataset must exist in the project's dataset registry."
           },
-          "evaluators": {
+          "testingCriteria": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteEvaluator"
+              "$ref": "#/components/schemas/EvaluationSuiteTestingCriteria"
             },
             "minItems": 1,
-            "description": "Evaluator configurations. At least one is required."
+            "description": "Testing criteria. At least one entry is required."
           },
-          "agentName": {
-            "type": "string",
-            "description": "Name of the agent this evaluation suite is associated with.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
+          "agentReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteAgentReference"
+              }
+            ],
+            "description": "Agent reference for this evaluation suite.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks).\nProvide either name (Foundry agents) or id (3P agents), not both."
           },
           "id": {
             "type": "string",
@@ -15543,26 +16249,17 @@
             "readOnly": true
           }
         },
-        "description": "An evaluation suite bundles evaluation criteria — an optional dataset, one or more\nevaluators, and pass/fail thresholds — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
       },
       "EvaluationSuiteVersionUpdate": {
         "type": "object",
         "required": [
-          "kind",
-          "evaluators"
+          "testingCriteria"
         ],
         "properties": {
           "displayName": {
             "type": "string",
             "description": "Human-readable display name.\nDoes not need to be unique. Shown in portal list views and eval reports."
-          },
-          "kind": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EvaluationSuiteKind"
-              }
-            ],
-            "description": "Evaluation suite kind.\nBatch: requires a dataset reference; evaluators run against dataset rows.\nContinuous: evaluators only; data comes from live production traces."
           },
           "dataset": {
             "allOf": [
@@ -15570,19 +16267,23 @@
                 "$ref": "#/components/schemas/DatasetReference"
               }
             ],
-            "description": "Dataset reference for offline evaluation.\nRequired when kind is batch. Must be null when kind is continuous.\nThe referenced dataset must exist in the project's dataset registry."
+            "description": "Dataset reference for evaluation.\nOptional — omit for evaluator-only suites where data comes from\nlive production traces or is provided at run time.\nThe referenced dataset must exist in the project's dataset registry."
           },
-          "evaluators": {
+          "testingCriteria": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteEvaluator"
+              "$ref": "#/components/schemas/EvaluationSuiteTestingCriteria"
             },
             "minItems": 1,
-            "description": "Evaluator configurations. At least one is required."
+            "description": "Testing criteria. At least one entry is required."
           },
-          "agentName": {
-            "type": "string",
-            "description": "Name of the agent this evaluation suite is associated with.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
+          "agentReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteAgentReference"
+              }
+            ],
+            "description": "Agent reference for this evaluation suite.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks).\nProvide either name (Foundry agents) or id (3P agents), not both."
           },
           "description": {
             "type": "string",
@@ -15596,7 +16297,7 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "An evaluation suite bundles evaluation criteria — an optional dataset, one or more\nevaluators, and pass/fail thresholds — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
       },
       "EvaluationTaxonomy": {
         "type": "object",
@@ -17062,6 +17763,24 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "JobStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "queued",
+              "in_progress",
+              "succeeded",
+              "failed",
+              "canceled"
+            ]
+          }
+        ],
+        "description": "Extensible status values shared by Foundry jobs."
       },
       "ManagedAgentIdentityBlueprintReference": {
         "type": "object",
