@@ -1,10 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -138,6 +142,23 @@ union AllowedEndpointRecordType {
   IPv6Address: "IPv6Address",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Any: "Any",
+}
+
+/**
+ * When record type is set, a traffic manager profile will allow only endpoints that match this type.
+ */
+@added(Versions.v2024_04_01_preview)
+union RecordType {
+  string,
+
+  /** A record type. */
+  A: "A",
+
+  /** AAAA record type. */
+  AAAA: "AAAA",
+
+  /** CNAME record type. */
+  CNAME: "CNAME",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -282,7 +303,7 @@ model ProxyResource extends Resource {}
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
@@ -457,6 +478,12 @@ model ProfileProperties {
    * Maximum number of endpoints to be returned for MultiValue routing type.
    */
   maxReturn?: int64;
+
+  /**
+   * When record type is set, a traffic manager profile will allow only endpoints that match this type.
+   */
+  @added(Versions.v2024_04_01_preview)
+  recordType?: RecordType;
 }
 
 /**
@@ -711,4 +738,132 @@ model UserMetricsProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: If this is a value that should be kept private, mark it with the @secret decorator"
   key?: string;
+}
+
+/**
+ * Parameters supplied to update a Traffic Manager profile.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Update model for PATCH operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Update model for PATCH operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Update model for PATCH operation"
+@added(Versions.v2024_04_01_preview)
+model ProfileUpdate {
+  /**
+   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: armResourceIdentifier;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  ...ArmTagsProperty;
+
+  /**
+   * The Azure Region where the resource lives
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * The properties of the Traffic Manager profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is needed for SDK compatibility"
+  @extension("x-ms-client-flatten", true)
+  properties?: ProfilePropertiesUpdate;
+}
+
+/**
+ * Class representing the Traffic Manager profile properties for update operations.
+ */
+@added(Versions.v2024_04_01_preview)
+model ProfilePropertiesUpdate {
+  /**
+   * The status of the Traffic Manager profile.
+   */
+  profileStatus?: ProfileStatus;
+
+  /**
+   * The traffic routing method of the Traffic Manager profile.
+   */
+  trafficRoutingMethod?: TrafficRoutingMethod;
+
+  /**
+   * The DNS settings of the Traffic Manager profile.
+   */
+  dnsConfig?: DnsConfig;
+
+  /**
+   * The endpoint monitoring settings of the Traffic Manager profile.
+   */
+  monitorConfig?: MonitorConfig;
+
+  /**
+   * The list of endpoints in the Traffic Manager profile.
+   */
+  endpoints?: EndpointUpdate[];
+
+  /**
+   * Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage profile.
+   */
+  trafficViewEnrollmentStatus?: TrafficViewEnrollmentStatus;
+
+  /**
+   * The list of allowed endpoint record types.
+   */
+  allowedEndpointRecordTypes?: AllowedEndpointRecordType[];
+
+  /**
+   * Maximum number of endpoints to be returned for MultiValue routing type.
+   */
+  maxReturn?: int64;
+
+  /**
+   * When record type is set, a traffic manager profile will allow only endpoints that match this type.
+   */
+  @added(Versions.v2024_04_01_preview)
+  recordType?: RecordType;
+}
+
+/**
+ * Class representing a Traffic Manager endpoint for update operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Update model for PATCH operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Update model for PATCH operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Update model for PATCH operation"
+@added(Versions.v2024_04_01_preview)
+model EndpointUpdate {
+  /**
+   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: armResourceIdentifier;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The properties of the Traffic Manager endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is needed for SDK compatibility"
+  @extension("x-ms-client-flatten", true)
+  properties?: EndpointProperties;
 }
