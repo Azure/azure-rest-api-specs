@@ -81,6 +81,19 @@ using PrivateLinksAPI;
 })
 namespace SecurityManagementClient;
 
+@@clientName(SecurityOperatorsAPI.SecurityOperator,
+  "ArmSecurityOperator",
+  "go"
+);
+@@clientName(SecurityStandardsAPI.SecurityStandard,
+  "ArmSecurityStandard",
+  "go"
+);
+@@clientName(SecurityStandardsAPI.SecurityStandardProperties,
+  "ArmSecurityStandardProperties",
+  "go"
+);
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model `private-link-parameters` {
