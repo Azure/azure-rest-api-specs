@@ -13,67 +13,75 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Necessary to avoid standard routing"
+@armResourceOperations(#{ omitTags: true })
 interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
+  @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}")
+  @get
   get(
     ...ApiVersionParameter,
-    ...LocationResourceParameter,
     ...SubscriptionIdParameter,
+    ...Legacy.Provider,
+    ...LocationResourceParameter,
 
     /**
      * The cluster code version.
      */
     @path
+    @segment("clusterVersions")
     clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
 
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
+  @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}")
   @get
   getByEnvironment(
     ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...Legacy.Provider,
     ...LocationResourceParameter,
 
     /**
      * The operating system of the cluster. The default means all.
      */
     @path
+    @segment("environments")
     environment: ClusterVersionsEnvironment,
-
-    ...SubscriptionIdParameter,
 
     /**
      * The cluster code version.
      */
     @path
+    @segment("clusterVersions")
     clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
 
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
    */
+  @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
-  @autoRoute
   @get
   @action("clusterVersions")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ClusterCodeVersions>,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = ErrorModel
   >;
   /**
    * Gets all available code versions for Service Fabric cluster resources by environment.
    */
+  @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
-  @autoRoute
   @get
   @action("clusterVersions")
   listByEnvironment is ArmProviderActionSync<
@@ -88,16 +96,35 @@ interface ClusterVersionsOperationGroup {
       @path
       @segment("environments")
       environment: ClusterVersionsEnvironment;
-    }
+    },
+    Error = ErrorModel
   >;
 }
 
 /**
  * The result of the Service Fabric runtime versions
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility with existing API."
-model ClusterCodeVersions is ProxyResource<ClusterVersionDetails> {
-  ...ResourceNameParameter<ClusterCodeVersions>;
+model ClusterCodeVersions {
+  /**
+   * The identification of the result
+   */
+  id?: string;
+
+  /**
+   * The name of the result
+   */
+  name?: string;
+
+  /**
+   * The result resource type
+   */
+  type?: string;
+
+  /**
+   * The detail of the Service Fabric runtime version result
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "x-ms-client-flatten requires exact property name"
+  properties?: ClusterVersionDetails;
 }
 
 /**

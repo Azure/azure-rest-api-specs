@@ -3,11 +3,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./virtualMachineProfile.tsp";
+import "./virtualMachineExtension.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
@@ -186,16 +190,58 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
+@doc("Specifies the configuration for a virtual machine operation")
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+model BulkVMConfiguration {
+  @doc("Identifier for created virtual machine. If not passed, it will be created from resource prefix.")
+  name?: string;
+
+  @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
+  computeApiVersion?: string;
+
+  @doc("Resource group name for the virtual machine.")
+  resourceGroupName?: string;
+
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The marketplace image plan used for the virtual machine.")
+  plan?: Plan;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The identity of the virtual machine, if configured.")
+  identity?: VirtualMachineIdentity;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The extended location of the Virtual Machine.")
+  extendedLocation?: ExtendedLocation;
+
+  @doc("Placement constraints for virtual machine hardware placement.")
+  placement?: Placement;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("Resource tags to apply to the virtual machines created by this bulk action.")
+  tags?: Record<string>;
+
+  @doc("Specifies the properties of the virtual machine to be created.")
+  properties?: BulkActionVMProperties;
+
+  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
+  vmExtensions?: BulkActionVMExtension[];
+}
+
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("JSON object that contains VM properties that are common across all VMs in this batch (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
-  baseProfile?: Record<unknown>;
+  @doc("Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
+  @renamedFrom(Versions.`2026-04-15-preview`, "baseProfile")
+  virtualMachineBaseProfile?: BulkVMConfiguration;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("JSON array, that contains VM properties that should to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
-  resourceOverrides?: Record<unknown>[];
+  @doc("Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
+  @renamedFrom(Versions.`2026-04-15-preview`, "resourceOverrides")
+  virtualMachineOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
@@ -612,13 +658,15 @@ model FlexProperties {
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
 @doc("Resource creation data model for flex VM provisioning")
 model ResourceProvisionFlexPayload {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON object that contains VM properties that are common across all VMs in this batch")
-  baseProfile?: Record<unknown>;
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
+  @renamedFrom(Versions.`2026-04-15-preview`, "baseProfile")
+  virtualMachineBaseProfile?: BulkVMConfiguration;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
-  resourceOverrides?: Record<unknown>[];
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
+  @renamedFrom(Versions.`2026-04-15-preview`, "resourceOverrides")
+  virtualMachineOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
