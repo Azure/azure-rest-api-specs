@@ -57,6 +57,8 @@ input-file:
 suppressions:
   - code: ParametersInPointGet
     from: loadBalancer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
     reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
   - code: ProvisioningStateMustBeReadOnly
     from: networkManager.json
