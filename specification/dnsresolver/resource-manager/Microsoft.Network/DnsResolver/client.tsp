@@ -102,7 +102,10 @@ namespace Azure.ResourceManager.Models {
 }
 
 // Replace simple ARM references with WritableSubResource across the C# surface.
-@@alternateType(SubResource, Azure.ResourceManager.Models.WritableSubResource, "csharp");
+@@alternateType(SubResource,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
 
 // Preserve WritableSubResource-based collections from the old API surface.
 @@alternateType(DnsForwardingRulesetProperties.dnsResolverOutboundEndpoints,
