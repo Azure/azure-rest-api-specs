@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "CreateAgentFromManifestRequest.json",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+        },
+        "metadata": {
+            "$ref": "#/$defs/RecordString",
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters."
+        },
+        "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+        },
+        "manifest_id": {
+            "type": "string",
+            "description": "The manifest ID to import the agent version from."
+        },
+        "parameter_values": {
+            "$ref": "#/$defs/RecordUnknown",
+            "description": "The inputs to the manifest that will result in a fully materialized Agent."
+        }
+    },
+    "required": [
+        "name",
+        "manifest_id",
+        "parameter_values"
+    ],
+    "$defs": {
+        "RecordString": {
+            "type": "object",
+            "properties": {},
+            "unevaluatedProperties": {
+                "type": "string"
+            }
+        },
+        "RecordUnknown": {
+            "type": "object",
+            "properties": {},
+            "unevaluatedProperties": {}
+        }
+    }
+}
