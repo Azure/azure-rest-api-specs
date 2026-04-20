@@ -7621,7 +7621,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ModelPendingUploadRequest"
+                "$ref": "#/components/schemas/PendingUploadRequest"
               }
             }
           }
@@ -20493,27 +20493,6 @@
           }
         ],
         "description": "Model Deployment Definition"
-      },
-      "ModelPendingUploadRequest": {
-        "type": "object",
-        "required": [
-          "pendingUploadType"
-        ],
-        "properties": {
-          "pendingUploadId": {
-            "type": "string",
-            "description": "Optional pending upload ID. If provided, retrieves the existing pending upload."
-          },
-          "pendingUploadType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PendingUploadType"
-              }
-            ],
-            "description": "Type of pending upload."
-          }
-        },
-        "description": "Request to start or retrieve a pending upload for a model version."
       },
       "ModelSamplingParams": {
         "type": "object",
@@ -40960,21 +40939,6 @@
           }
         },
         "description": "Represents the response for a pending upload request"
-      },
-      "PendingUploadType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "None",
-              "BlobReference"
-            ]
-          }
-        ],
-        "description": "The type of pending upload."
       },
       "PromptAgentDefinition": {
         "type": "object",

@@ -43,15 +43,6 @@ model DerivedModelInformation {
   baseModel: string;
 }
 
-@doc("Request to start or retrieve a pending upload for a model version.")
-model ModelPendingUploadRequest {
-  @doc("Optional pending upload ID. If provided, retrieves the existing pending upload.")
-  pendingUploadId?: string;
-
-  @doc("Type of pending upload.")
-  pendingUploadType: PendingUploadType;
-}
-
 @doc("Request to fetch credentials for a model asset.")
 model ModelAssetCredentialRequest {
   @doc("Blob URI of the asset to fetch credentials for.")

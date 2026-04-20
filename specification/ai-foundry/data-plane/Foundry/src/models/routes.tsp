@@ -54,7 +54,7 @@ interface Models
       version: string;
 
       @bodyRoot
-      body: ModelPendingUploadRequest;
+      body: PendingUploadRequest;
     },
     PendingUploadResponse
   >;
