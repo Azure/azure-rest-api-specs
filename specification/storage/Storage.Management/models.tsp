@@ -4225,6 +4225,11 @@ model BlobRestoreParameters {
    */
   @identifiers(#[])
   blobRanges: BlobRestoreRange[];
+
+  /**
+   * Blob restore options. Defaults to "ContainerLevel" if not specified.
+   */
+  options?: BlobRestoreOptions;
 }
 
 /**
@@ -4242,6 +4247,20 @@ model BlobRestoreRange {
   endRange: string;
 }
 
+/**
+ * Blob restore options. Supports flag combinations. Consists of mutually exclusive base types and modifiers that can be combined with the base types.
+ * - Base types: (ContainerLevel, AccountLevel) are mutually exclusive.
+ * - Modifiers: (PartialRestore) must be combined with a base type.
+ */
+union BlobRestoreOptions {
+  string,
+
+  /** Container-level restore (default) */
+  ContainerLevel: "ContainerLevel",
+
+  /** Container-level with best-effort restore */
+  ContainerLevelPartial: "ContainerLevel,PartialRestore",
+}
 /**
  * This defines the sku conversion status object for asynchronous sku conversions.
  */

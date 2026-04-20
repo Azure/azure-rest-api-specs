@@ -7423,6 +7423,30 @@
         "rules"
       ]
     },
+    "BlobRestoreOptions": {
+      "type": "string",
+      "description": "Blob restore options. Supports flag combinations. Consists of mutually exclusive base types and modifiers that can be combined with the base types.\n- Base types: (ContainerLevel, AccountLevel) are mutually exclusive.\n- Modifiers: (PartialRestore) must be combined with a base type.",
+      "enum": [
+        "ContainerLevel",
+        "ContainerLevel,PartialRestore"
+      ],
+      "x-ms-enum": {
+        "name": "BlobRestoreOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContainerLevel",
+            "value": "ContainerLevel",
+            "description": "Container-level restore (default)"
+          },
+          {
+            "name": "ContainerLevelPartial",
+            "value": "ContainerLevel,PartialRestore",
+            "description": "Container-level with best-effort restore"
+          }
+        ]
+      }
+    },
     "BlobRestoreParameters": {
       "type": "object",
       "description": "Blob restore parameters",
@@ -7439,6 +7463,10 @@
             "$ref": "#/definitions/BlobRestoreRange"
           },
           "x-ms-identifiers": []
+        },
+        "options": {
+          "$ref": "#/definitions/BlobRestoreOptions",
+          "description": "Blob restore options. Defaults to \"ContainerLevel\" if not specified."
         }
       },
       "required": [
