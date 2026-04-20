@@ -1,0 +1,59 @@
+parameters:
+  "service-dir":
+    default: "sdk/testedgeactions"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+output-dir: "{project-root}/preview/2025-09-01-preview"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{output-dir}"
+    output-file: "openapi.json"
+    azure-resource-provider-folder: "resource-manager"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    new-line: lf
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-testedgeactions"
+    namespace: "azure.mgmt.testedgeactions"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-testedgeactions"
+    namespace: "com.azure.resourcemanager.testedgeactions"
+    service-name: "TestEdgeActions"
+    service-dir: "sdk/testedgeactions"
+    enable-sync-stack: false
+    premium: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/testedgeactions
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-testedgeactions"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-testedgeactions"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/testedgeactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/armtestedgeactions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armtestedgeactions"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-csharp":
+    service-dir: "sdk/testedgeactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.TestEdgeActions"
+    namespace: "Azure.ResourceManager.TestEdgeActions"
+    flavor: "azure"
+    clear-output-folder: true
+    generate-sample-project: true
+    generate-test-project: true

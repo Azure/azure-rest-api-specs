@@ -1,0 +1,2061 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Cdn/TestEdgeAction",
+    "version": "2025-09-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "TestEdgeActions"
+    },
+    {
+      "name": "TestEdgeActionVersions"
+    },
+    {
+      "name": "TestEdgeActionExecutionFilters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/testEdgeActions": {
+      "get": {
+        "operationId": "TestEdgeActions_ListBySubscription",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "List TestEdgeAction resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestEdgeActionsBySubscription": {
+            "$ref": "./examples/TestEdgeActions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions": {
+      "get": {
+        "operationId": "TestEdgeActions_ListByResourceGroup",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "List TestEdgeAction resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestEdgeActionsByResourceGroup": {
+            "$ref": "./examples/TestEdgeActions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}": {
+      "get": {
+        "operationId": "TestEdgeActions_Get",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "Get a TestEdgeAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestEdgeAction": {
+            "$ref": "./examples/TestEdgeActions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TestEdgeActions_Create",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "Create a TestEdgeAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeAction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TestEdgeAction' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeAction"
+            }
+          },
+          "201": {
+            "description": "Resource 'TestEdgeAction' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeAction"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateTestEdgeAction": {
+            "$ref": "./examples/TestEdgeActions_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TestEdgeActions_Update",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "Update a TestEdgeAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeAction"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTestEdgeAction": {
+            "$ref": "./examples/TestEdgeActions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TestEdgeActions_Delete",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "Delete a TestEdgeAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestEdgeAction": {
+            "$ref": "./examples/TestEdgeActions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/addAttachment": {
+      "post": {
+        "operationId": "TestEdgeActions_AddAttachment",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionAttachment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionAttachmentResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddAttachment": {
+            "$ref": "./examples/TestEdgeActions_AddAttachment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/deleteAttachment": {
+      "post": {
+        "operationId": "TestEdgeActions_DeleteAttachment",
+        "tags": [
+          "TestEdgeActions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionAttachment"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAttachment": {
+            "$ref": "./examples/TestEdgeActions_DeleteAttachment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/executionFilters": {
+      "get": {
+        "operationId": "TestEdgeActionExecutionFilters_ListByTestEdgeAction",
+        "tags": [
+          "TestEdgeActionExecutionFilters"
+        ],
+        "description": "List TestEdgeActionExecutionFilter resources by TestEdgeAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestEdgeActionsExecutionFiltersByTestEdgeAction": {
+            "$ref": "./examples/TestEdgeActionExecutionFilters_ListByTestEdgeAction.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/executionFilters/{executionFilter}": {
+      "get": {
+        "operationId": "TestEdgeActionExecutionFilters_Get",
+        "tags": [
+          "TestEdgeActionExecutionFilters"
+        ],
+        "description": "Get a TestEdgeActionExecutionFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilter"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestEdgeActionExecutionFilters": {
+            "$ref": "./examples/TestEdgeActionExecutionFilters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TestEdgeActionExecutionFilters_Create",
+        "tags": [
+          "TestEdgeActionExecutionFilters"
+        ],
+        "description": "Create a TestEdgeActionExecutionFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TestEdgeActionExecutionFilter' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilter"
+            }
+          },
+          "201": {
+            "description": "Resource 'TestEdgeActionExecutionFilter' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilter"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateTestEdgeActionExecutionFilters": {
+            "$ref": "./examples/TestEdgeActionExecutionFilters_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TestEdgeActionExecutionFilters_Update",
+        "tags": [
+          "TestEdgeActionExecutionFilters"
+        ],
+        "description": "Update a TestEdgeActionExecutionFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionExecutionFilter"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTestEdgeActionExecutionFilters": {
+            "$ref": "./examples/TestEdgeActionExecutionFilters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TestEdgeActionExecutionFilters_Delete",
+        "tags": [
+          "TestEdgeActionExecutionFilters"
+        ],
+        "description": "Delete a TestEdgeActionExecutionFilter",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "executionFilter",
+            "in": "path",
+            "description": "The name of the execution filter",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestEdgeActionExecutionFilters": {
+            "$ref": "./examples/TestEdgeActionExecutionFilters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/versions": {
+      "get": {
+        "operationId": "TestEdgeActionVersions_ListByTestEdgeAction",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "List TestEdgeActionVersion resources by TestEdgeAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestEdgeActionVersionsByTestEdgeAction": {
+            "$ref": "./examples/TestEdgeActionVersions_ListByTestEdgeAction.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/versions/{version}": {
+      "get": {
+        "operationId": "TestEdgeActionVersions_Get",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "Get a TestEdgeActionVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestEdgeActionVersion": {
+            "$ref": "./examples/TestEdgeActionVersions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TestEdgeActionVersions_Create",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "Create a TestEdgeActionVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TestEdgeActionVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'TestEdgeActionVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateTestEdgeActionVersion": {
+            "$ref": "./examples/TestEdgeActionVersions_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TestEdgeActionVersions_Update",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "Update a TestEdgeActionVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersion"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTestEdgeActionVersion": {
+            "$ref": "./examples/TestEdgeActionVersions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TestEdgeActionVersions_Delete",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "Delete a TestEdgeActionVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestEdgeActionVersion": {
+            "$ref": "./examples/TestEdgeActionVersions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/versions/{version}/deployVersionCode": {
+      "post": {
+        "operationId": "TestEdgeActionVersions_DeployVersionCode",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestVersionCode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestEdgeActionVersionProperties"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeployVersionCode": {
+            "$ref": "./examples/TestEdgeActionVersions_DeployVersionCode.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/versions/{version}/getVersionCode": {
+      "post": {
+        "operationId": "TestEdgeActionVersions_GetVersionCode",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "Get the version code for the test edge action version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestVersionCode"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVersionCode": {
+            "$ref": "./examples/TestEdgeActionVersions_GetVersionCode.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/testEdgeActions/{testEdgeActionName}/versions/{version}/swapDefault": {
+      "post": {
+        "operationId": "TestEdgeActionVersions_SwapDefault",
+        "tags": [
+          "TestEdgeActionVersions"
+        ],
+        "description": "Swap the default version for the test edge action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testEdgeActionName",
+            "in": "path",
+            "description": "The name of the Test Edge Action",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The name of the Test Edge Action version",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Swap Default Version": {
+            "$ref": "./examples/TestEdgeActionVersions_SwapDefault.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "TestAttachedResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource identifier for attached routes",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Cdn/Profiles/afdEndpoints/routes"
+          }
+        ]
+      }
+    },
+    "TestEdgeAction": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestEdgeActionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/TestSkuType",
+          "description": "The sku type of the test edge action"
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TestEdgeActionAttachment": {
+      "type": "object",
+      "description": "Test edge action attachment information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The test edge action attachment id",
+          "readOnly": true
+        },
+        "attachedResourceId": {
+          "$ref": "#/definitions/TestAttachedResourceId",
+          "description": "The attached resource Id",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "attachedResourceId"
+      ]
+    },
+    "TestEdgeActionAttachmentResponse": {
+      "type": "object",
+      "description": "Test edge action attachment response",
+      "properties": {
+        "testEdgeActionId": {
+          "type": "string",
+          "description": "Non changing guid to identity test edge action",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "testEdgeActionId"
+      ]
+    },
+    "TestEdgeActionExecutionFilter": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestEdgeActionExecutionFilterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TestEdgeActionExecutionFilterListResult": {
+      "type": "object",
+      "description": "The response of a TestEdgeActionExecutionFilter list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestEdgeActionExecutionFilter items on this page",
+          "items": {
+            "$ref": "#/definitions/TestEdgeActionExecutionFilter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TestEdgeActionExecutionFilterProperties": {
+      "type": "object",
+      "description": "Properties for test edge action execution filter",
+      "properties": {
+        "versionId": {
+          "$ref": "#/definitions/TestEdgeActionVersionId",
+          "description": "The referenced versionId of the test edge action version",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time in UTC for the execution filter",
+          "readOnly": true
+        },
+        "executionFilterIdentifierHeaderName": {
+          "type": "string",
+          "description": "Custom Header Key associated with the execution filter",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "executionFilterIdentifierHeaderValue": {
+          "type": "string",
+          "description": "Custom Header Value associated with the execution filter",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/TestProvisioningState",
+          "description": "The provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "versionId",
+        "lastUpdateTime",
+        "executionFilterIdentifierHeaderName",
+        "executionFilterIdentifierHeaderValue"
+      ]
+    },
+    "TestEdgeActionExecutionFilterUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the TestEdgeActionExecutionFilter.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TestEdgeActionExecutionFilterUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "TestEdgeActionExecutionFilterUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the TestEdgeActionExecutionFilter.",
+      "properties": {
+        "versionId": {
+          "$ref": "#/definitions/TestEdgeActionVersionId",
+          "description": "The referenced versionId of the test edge action version",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "executionFilterIdentifierHeaderName": {
+          "type": "string",
+          "description": "Custom Header Key associated with the execution filter",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "executionFilterIdentifierHeaderValue": {
+          "type": "string",
+          "description": "Custom Header Value associated with the execution filter",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "TestEdgeActionIsDefaultVersion": {
+      "type": "string",
+      "description": "Indicates whether this is the default version",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "TestEdgeActionIsDefaultVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "True",
+            "description": "This is the default version"
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "This is not the default version"
+          }
+        ]
+      }
+    },
+    "TestEdgeActionListResult": {
+      "type": "object",
+      "description": "The response of a TestEdgeAction list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestEdgeAction items on this page",
+          "items": {
+            "$ref": "#/definitions/TestEdgeAction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TestEdgeActionProperties": {
+      "type": "object",
+      "description": "Represents a test edge action properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TestProvisioningState",
+          "description": "The provisioning state of the test edge action",
+          "readOnly": true
+        },
+        "attachments": {
+          "type": "array",
+          "description": "A list of attachments for the test edge action",
+          "items": {
+            "$ref": "#/definitions/TestEdgeActionAttachment"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "attachments"
+      ]
+    },
+    "TestEdgeActionPropertiesUpdate": {
+      "type": "object",
+      "description": "Represents a test edge action properties"
+    },
+    "TestEdgeActionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the TestEdgeAction.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestEdgeActionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/TestSkuType",
+          "description": "The sku type of the test edge action"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TestEdgeActionVersion": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestEdgeActionVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TestEdgeActionVersionDeploymentType": {
+      "type": "string",
+      "description": "The deployment type for test edge action versions",
+      "enum": [
+        "zip",
+        "file",
+        "others"
+      ],
+      "x-ms-enum": {
+        "name": "TestEdgeActionVersionDeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "zip",
+            "value": "zip",
+            "description": "ZIP file deployment"
+          },
+          {
+            "name": "file",
+            "value": "file",
+            "description": "Single file deployment"
+          },
+          {
+            "name": "others",
+            "value": "others",
+            "description": "Other deployment types"
+          }
+        ]
+      }
+    },
+    "TestEdgeActionVersionId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource identifier for test edge action versions",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Cdn/testEdgeActions/versions"
+          }
+        ]
+      }
+    },
+    "TestEdgeActionVersionListResult": {
+      "type": "object",
+      "description": "The response of a TestEdgeActionVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestEdgeActionVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/TestEdgeActionVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TestEdgeActionVersionProperties": {
+      "type": "object",
+      "description": "Represents a test edge action version",
+      "properties": {
+        "deploymentType": {
+          "$ref": "#/definitions/TestEdgeActionVersionDeploymentType",
+          "description": "The deployment type",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/TestEdgeActionVersionValidationStatus",
+          "description": "The validation status",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/TestProvisioningState",
+          "description": "The provisioning state",
+          "readOnly": true
+        },
+        "isDefaultVersion": {
+          "$ref": "#/definitions/TestEdgeActionIsDefaultVersion",
+          "description": "The active state",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "lastPackageUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time in UTC for package update",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deploymentType",
+        "validationStatus",
+        "isDefaultVersion",
+        "lastPackageUpdateTime"
+      ]
+    },
+    "TestEdgeActionVersionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the TestEdgeActionVersion.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TestEdgeActionVersionUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "TestEdgeActionVersionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the TestEdgeActionVersion.",
+      "properties": {
+        "deploymentType": {
+          "$ref": "#/definitions/TestEdgeActionVersionDeploymentType",
+          "description": "The deployment type",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "isDefaultVersion": {
+          "$ref": "#/definitions/TestEdgeActionIsDefaultVersion",
+          "description": "The active state",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "TestEdgeActionVersionValidationStatus": {
+      "type": "string",
+      "description": "The validation status for test edge action versions",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "TestEdgeActionVersionValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation failed"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TestProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Upgrading"
+      ],
+      "x-ms-enum": {
+        "name": "TestProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Upgrading",
+            "value": "Upgrading",
+            "description": "Upgrade in progress"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TestSkuType": {
+      "type": "object",
+      "description": "The SKU type for the test edge action",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU"
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the SKU"
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    },
+    "TestVersionCode": {
+      "type": "object",
+      "description": "Version code information for test edge action",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The version code deployment content ",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The version code name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "content",
+        "name"
+      ]
+    }
+  },
+  "parameters": {}
+}
