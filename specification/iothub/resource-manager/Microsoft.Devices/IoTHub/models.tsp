@@ -2115,7 +2115,20 @@ model IotHubNameAvailabilityInfo {
 /**
  * Json-serialized array of User subscription quota response
  */
-model UserSubscriptionQuotaListResult is Azure.Core.Page<UserSubscriptionQuota>;
+model UserSubscriptionQuotaListResult {
+  /**
+   * The UserSubscriptionQuota items on this page
+   */
+  @pageItems
+  value?: UserSubscriptionQuota[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * User subscription quota response

@@ -52,7 +52,7 @@ interface GroupIdInformations {
    */
   @summary("List private link resources")
   @tag("GET")
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     GroupIdInformation,
     Response = ArmResponse<PrivateLinkResources>,
     Error = ErrorDetails
