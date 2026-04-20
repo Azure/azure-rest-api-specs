@@ -6,9 +6,13 @@ import "./routes.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-autorest/unsupported-auth" "NoAuth is supported"
 @service(#{ title: "Text Translation" })
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+  NoAuth | ApiKeyAuth<
+    ApiKeyLocation.header,
+    "Ocp-Apim-Subscription-Key"
+  > | OAuth2Auth<[
     {
       type: OAuth2FlowType.authorizationCode,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
