@@ -323,7 +323,7 @@ interface ManagedClusters {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-      @added(Versions.v2026_01_02_preview)
+      @added(Versions.v2026_02_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
     }
@@ -572,7 +572,7 @@ interface ManagedClusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_02_preview)
   rebalanceLoadBalancers is ArmResourceActionAsync<
     ManagedCluster,
     RebalanceLoadBalancersRequestBody,
@@ -625,7 +625,7 @@ interface ManagedClusters {
   @list
   @get
   @action("operations")
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_02_preview)
   operationStatusResultList is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -638,7 +638,7 @@ interface ManagedClusters {
   @tag("ManagedClusters")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/operations/{operationId}")
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_02_02_preview)
   operationStatusResultGet is ManagedClusterOps.ActionSync<
     ManagedCluster,
     void,
