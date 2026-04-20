@@ -20,3 +20,5 @@ using Microsoft.ComputeLimit;
 @@clientName(Feature, "ComputeLimitFeature", "csharp");
 @@clientName(FeatureProperties, "ComputeLimitFeatureProperties", "csharp");
 @@clientName(FeatureState, "ComputeLimitFeatureState", "csharp");
+@@clientName(VmFamily, "ComputeLimitVmFamily", "csharp");
+@@clientName(VmFamilyProperties, "ComputeLimitVmFamilyProperties", "csharp");
