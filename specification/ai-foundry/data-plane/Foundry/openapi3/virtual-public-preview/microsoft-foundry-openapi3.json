@@ -4384,20 +4384,8 @@
       "get": {
         "operationId": "EvaluationSuiteGenerationJobs_list",
         "summary": "Returns a list of evaluation suite generation jobs.",
-        "description": "List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.",
+        "description": "List jobs with cursor-based pagination and optional filters.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "limit",
             "in": "query",
@@ -4501,30 +4489,13 @@
         },
         "tags": [
           "EvaluationSuiteGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       },
       "post": {
         "operationId": "EvaluationSuiteGenerationJobs_create",
         "summary": "Creates an evaluation suite generation job.",
-        "description": "Create a new job (preview). Includes optional Foundry-Features header.",
+        "description": "Create a new job. Returns 201 + Operation-Location + Location headers.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "api-version",
             "in": "query",
@@ -4587,11 +4558,6 @@
             }
           },
           "description": "The job to create."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
         }
       }
     },
@@ -4599,20 +4565,8 @@
       "get": {
         "operationId": "EvaluationSuiteGenerationJobs_get",
         "summary": "Get info about an evaluation suite generation job.",
-        "description": "Get a job by ID (preview). Includes optional Foundry-Features header.",
+        "description": "Get a job by ID with an optional Retry-After header for polling guidance.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -4667,30 +4621,13 @@
         },
         "tags": [
           "EvaluationSuiteGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "EvaluationSuiteGenerationJobs_delete",
         "summary": "Deletes an evaluation suite generation job.",
-        "description": "Delete a job (preview). Returns 204 No Content.",
+        "description": "Delete a job. Returns 204 No Content.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -4728,32 +4665,15 @@
         },
         "tags": [
           "EvaluationSuiteGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluation_suite_generation/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "EvaluationSuiteGenerationJobs_cancel",
         "summary": "Cancels an evaluation suite generation job.",
-        "description": "Cancel a running job (preview). Returns 200 with the updated job.",
+        "description": "Cancel a running job. Returns 200 with the updated job.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -4798,12 +4718,7 @@
         },
         "tags": [
           "EvaluationSuiteGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluationrules": {

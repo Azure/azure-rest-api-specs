@@ -59,12 +59,6 @@ interface EvaluationSuites
 // Generate API (LRO jobs pattern)
 // ---------------------------------------------------------------------------
 
-const EvaluationSuiteGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  ],
-};
-
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
@@ -72,40 +66,21 @@ const EvaluationSuiteGenerationJobsRequiredPreviews = #{
 interface EvaluationSuiteGenerationJobs {
   @summary("Get info about an evaluation suite generation job.")
   @route("evaluation_suite_generation/jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluationSuiteGenerationJob
-  >;
+  get is queryJobStatus<EvaluationSuiteGenerationJob>;
 
   @summary("Returns a list of evaluation suite generation jobs.")
   @route("evaluation_suite_generation/jobs")
-  @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluationSuiteGenerationJob
-  >;
+  list is listJobs<EvaluationSuiteGenerationJob>;
 
   @summary("Creates an evaluation suite generation job.")
   @route("evaluation_suite_generation/jobs")
-  @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluationSuiteGenerationJob
-  >;
+  create is postJob<EvaluationSuiteGenerationJob>;
 
   @summary("Cancels an evaluation suite generation job.")
   @route("evaluation_suite_generation/jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluationSuiteGenerationJob
-  >;
+  cancel is cancelJob<EvaluationSuiteGenerationJob>;
 
   @summary("Deletes an evaluation suite generation job.")
   @route("evaluation_suite_generation/jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  >;
+  delete is deleteJob<EvaluationSuiteGenerationJob>;
 }
