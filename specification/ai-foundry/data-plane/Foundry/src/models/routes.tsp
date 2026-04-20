@@ -56,7 +56,7 @@ interface Models
       @bodyRoot
       body: ModelPendingUploadRequest;
     },
-    ModelTemporaryDataReference
+    PendingUploadResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential fetch action"

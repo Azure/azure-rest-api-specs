@@ -7588,7 +7588,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ModelTemporaryDataReference"
+                  "$ref": "#/components/schemas/PendingUploadResponse"
                 }
               }
             }
@@ -20572,35 +20572,6 @@
           }
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
-      },
-      "ModelTemporaryDataReference": {
-        "type": "object",
-        "required": [
-          "pendingUploadType"
-        ],
-        "properties": {
-          "blobReferenceForConsumption": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BlobReference"
-              }
-            ],
-            "description": "Blob reference for consumption with temporary credentials."
-          },
-          "pendingUploadId": {
-            "type": "string",
-            "description": "Pending upload ID."
-          },
-          "pendingUploadType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PendingUploadType"
-              }
-            ],
-            "description": "Type of pending upload."
-          }
-        },
-        "description": "Temporary data reference returned for a pending upload."
       },
       "ModelVersion": {
         "type": "object",

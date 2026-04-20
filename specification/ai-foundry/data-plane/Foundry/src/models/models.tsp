@@ -52,18 +52,6 @@ model ModelPendingUploadRequest {
   pendingUploadType: PendingUploadType;
 }
 
-@doc("Temporary data reference returned for a pending upload.")
-model ModelTemporaryDataReference {
-  @doc("Blob reference for consumption with temporary credentials.")
-  blobReferenceForConsumption?: BlobReference;
-
-  @doc("Pending upload ID.")
-  pendingUploadId?: string;
-
-  @doc("Type of pending upload.")
-  pendingUploadType: PendingUploadType;
-}
-
 @doc("Request to fetch credentials for a model asset.")
 model ModelAssetCredentialRequest {
   @doc("Blob URI of the asset to fetch credentials for.")
