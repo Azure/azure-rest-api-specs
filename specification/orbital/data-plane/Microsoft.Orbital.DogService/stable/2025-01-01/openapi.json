@@ -1,0 +1,370 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dog Service",
+    "version": "2025-01-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "westus2.dog.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/bark/{level}/{pitch}": {
+      "post": {
+        "operationId": "DogOperations_Bark",
+        "description": "Make the dog bark at a specified level",
+        "parameters": [
+          {
+            "name": "level",
+            "in": "path",
+            "description": "Bark volume level in dB",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "pitch",
+            "in": "path",
+            "description": "Pitch in Hz",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BarkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dog bark at loud level": {
+            "$ref": "./examples/Dogs_Bark.json"
+          }
+        }
+      }
+    },
+    "/run/{speed}": {
+      "post": {
+        "operationId": "DogOperations_Run",
+        "description": "Make the dog run at a specified speed",
+        "parameters": [
+          {
+            "name": "speed",
+            "in": "path",
+            "description": "The speed at which the dog should run (in km/h)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dog run at speed 30.0": {
+            "$ref": "./examples/Dogs_Run.json"
+          }
+        }
+      }
+    },
+    "/uploadMedicalRecord": {
+      "post": {
+        "operationId": "DogOperations_UploadMedicalRecord",
+        "description": "Upload a medical record for the dog",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "medicalRecord",
+            "in": "formData",
+            "description": "PDF medical record file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UploadMedicalRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload dog medical record": {
+            "$ref": "./examples/Dogs_UploadMedicalRecord.json"
+          }
+        }
+      }
+    },
+    "/uploadPicture": {
+      "post": {
+        "operationId": "DogOperations_UploadPicture",
+        "description": "Upload a picture of the dog",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "JPEG image file to upload",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UploadPictureResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload dog picture": {
+            "$ref": "./examples/Dogs_UploadPicture.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BarkResponse": {
+      "type": "object",
+      "description": "Dog bark response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The bark message"
+        },
+        "level": {
+          "type": "number",
+          "format": "double",
+          "description": "The level at which the dog barked"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the bark"
+        }
+      },
+      "required": [
+        "message",
+        "level",
+        "timestamp"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "RunResponse": {
+      "type": "object",
+      "description": "Dog run response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The run message"
+        },
+        "speed": {
+          "type": "number",
+          "format": "double",
+          "description": "The speed at which the dog ran"
+        },
+        "distance": {
+          "type": "number",
+          "format": "float",
+          "description": "Distance covered in meters"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the run"
+        }
+      },
+      "required": [
+        "message",
+        "speed",
+        "timestamp"
+      ]
+    },
+    "UploadMedicalRecordResponse": {
+      "type": "object",
+      "description": "Medical record upload response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Upload confirmation message"
+        },
+        "recordId": {
+          "type": "string",
+          "description": "Unique identifier for the uploaded medical record"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "File size in bytes"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the upload"
+        }
+      },
+      "required": [
+        "message",
+        "recordId",
+        "fileSize",
+        "timestamp"
+      ]
+    },
+    "UploadPictureResponse": {
+      "type": "object",
+      "description": "Picture upload response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Upload confirmation message"
+        },
+        "pictureId": {
+          "type": "string",
+          "description": "Unique identifier for the uploaded picture"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "File size in bytes"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the upload"
+        }
+      },
+      "required": [
+        "message",
+        "pictureId",
+        "fileSize",
+        "timestamp"
+      ]
+    }
+  },
+  "parameters": {}
+}
