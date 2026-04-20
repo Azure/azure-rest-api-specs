@@ -92,7 +92,6 @@ enum Features {
   virtualNetworkAppliance,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2025_07_01)
   smartGroup,
 }
 
