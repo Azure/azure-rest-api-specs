@@ -149,7 +149,7 @@ model AcsChatThreadCreatedWithUserEventData
   ...AcsChatThreadBaseEventData;
 
   /** The retention policy for the chat. */
-  retentionPolicy?: AcsChatRetentionPolicy;
+  retentionPolicy?: AcsChatThreadRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadCreatedExample)
@@ -160,7 +160,7 @@ model AcsChatThreadCreatedEventData
   ...AcsChatThreadBaseEventData;
 
   /** The retention policy for the chat. */
-  retentionPolicy?: AcsChatRetentionPolicy;
+  retentionPolicy?: AcsChatThreadRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadWithUserDeletedExample)
@@ -179,7 +179,7 @@ model AcsChatThreadDeletedEventData
   ...AcsChatThreadDeletedBaseEventData;
 
   /** The chat thread deletion reason. */
-  reason?: AcsChatThreadDeletedReasonType;
+  reason?: AcsChatThreadDeletedReason;
 }
 
 // @example(MicrosoftCommunicationChatThreadPropertiesUpdatedPerUserExample)
@@ -203,7 +203,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   properties: Record<unknown>;
 
   /** The retention policy for the chat. */
-  retentionPolicy?: AcsChatRetentionPolicy;
+  retentionPolicy?: AcsChatThreadRetentionPolicy;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -214,7 +214,7 @@ model AcsChatThreadPropertiesUpdatedEventData
   ...AcsChatThreadPropertiesBaseEventData;
 
   /** The retention policy for the chat. */
-  retentionPolicy?: AcsChatRetentionPolicy;
+  retentionPolicy?: AcsChatThreadRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
@@ -1596,9 +1596,9 @@ model AcsMessageChannelEventError {
 }
 
 /** Schema of common properties of all chat retention policy */
-model AcsChatRetentionPolicy {
+model AcsChatThreadRetentionPolicy {
   /** The chat retention policy kind. */
-  kind?: AcsChatRetentionPolicyKind;
+  kind?: AcsChatThreadRetentionPolicyKind;
 
   /** The delete thread after number of days. */
   deleteThreadAfterDays?: int32;
@@ -1619,7 +1619,7 @@ union AcsInteractiveReplyKind {
 }
 
 /** Chat Retention Policy kind */
-union AcsChatRetentionPolicyKind {
+union AcsChatThreadRetentionPolicyKind {
   /** None */
   "none",
 
@@ -1630,7 +1630,7 @@ union AcsChatRetentionPolicyKind {
 }
 
 /** Chat Thread Deletion Reason Type */
-union AcsChatThreadDeletedReasonType {
+union AcsChatThreadDeletedReason {
   /** DeletedByUser */
   "deletedByUser",
 
