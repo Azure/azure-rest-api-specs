@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -114,7 +114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -163,7 +163,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -237,7 +237,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -323,7 +323,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -367,7 +367,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -413,7 +413,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -466,7 +466,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/MetricAlertErrorResponse"
             }
           }
         },
@@ -695,6 +695,15 @@
         "odata.type"
       ],
       "additionalProperties": {}
+    },
+    "MetricAlertErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.ErrorResponseError"
+        }
+      }
     },
     "MetricAlertMultipleResourceMultipleMetricCriteria": {
       "type": "object",
@@ -1129,17 +1138,87 @@
         ]
       }
     },
-    "Microsoft.Common.ErrorResponse": {
+    "Microsoft.Common.ErrorDetail": {
       "type": "object",
-      "description": "Describes the format of Error response.",
+      "description": "Describes details of an error response.",
       "properties": {
         "code": {
           "type": "string",
-          "description": "Error code"
+          "description": "Unlocalized string which can be used to programmatically identify the error."
         },
         "message": {
           "type": "string",
-          "description": "Error message indicating why the operation failed."
+          "description": "Describes the error in detail and provides debugging information."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorDetailAdditionalInfoItem"
+          }
+        }
+      }
+    },
+    "Microsoft.Common.ErrorDetailAdditionalInfoItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of additional information."
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional information specific to the type.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponseError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Unlocalized string which can be used to programmatically identify the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of additional nested error response info objects, as described by this contract.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorDetail"
+          }
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorResponseErrorAdditionalInfoItem"
+          }
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponseErrorAdditionalInfoItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of additional information."
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional information specific to the type.",
+          "additionalProperties": {}
         }
       }
     },

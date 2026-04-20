@@ -79,22 +79,6 @@ model Resource {
 }
 
 /**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
-}
-
-/**
  * The log profile resource for patch operations.
  */
 model LogProfileResourcePatch {

@@ -62,7 +62,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/ActivityLogAlertErrorResponse"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/ActivityLogAlertErrorResponse"
             }
           }
         },
@@ -148,7 +148,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/ActivityLogAlertErrorResponse"
             }
           }
         },
@@ -205,7 +205,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/ActivityLogAlertErrorResponse"
             }
           }
         },
@@ -265,7 +265,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/ActivityLogAlertErrorResponse"
             }
           }
         },
@@ -307,7 +307,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+              "$ref": "#/definitions/ActivityLogAlertErrorResponse"
             }
           }
         },
@@ -362,6 +362,22 @@
       "required": [
         "actionGroupId"
       ]
+    },
+    "ActivityLogAlertErrorResponse": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message indicating why the operation failed.",
+          "readOnly": true
+        }
+      }
     },
     "ActivityLogAlertResource": {
       "type": "object",
@@ -541,20 +557,6 @@
         "condition",
         "actions"
       ]
-    },
-    "Microsoft.Common.ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed."
-        }
-      }
     }
   },
   "parameters": {}
