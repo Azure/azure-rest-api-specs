@@ -757,6 +757,47 @@ model AgentPoolNetworkProfile {
       type: "Microsoft.Network/applicationSecurityGroups";
     }
   ]>[];
+
+  /**
+   * The list of secondary network interface configurations for the agent pool.
+   */
+  @added(Versions.v2026_03_02_preview)
+  @identifiers(#[])
+  secondaryNetworkInterfaces?: AgentPoolNetworkInterface[];
+}
+
+/**
+ * The type of a secondary network interface.
+ */
+@added(Versions.v2026_03_02_preview)
+union AgentPoolNetworkInterfaceType {
+  string,
+
+  /** Standard NIC attached to a customer-specified subnet with platform-allocated IPs. */
+  Standard: "Standard",
+
+  /** NIC with delegated IP allocation from a third-party orchestrator. */
+  Dynamic: "Dynamic",
+}
+
+/**
+ * A secondary network interface configuration for an agent pool.
+ */
+@added(Versions.v2026_03_02_preview)
+model AgentPoolNetworkInterface {
+  /** The type of the network interface. */
+  type?: AgentPoolNetworkInterfaceType;
+
+  /** The ID of the subnet which the secondary NIC will join. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  vnetSubnetID?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /** Whether to enable accelerated networking on the secondary NIC. */
+  enableAcceleratedNetworking?: boolean;
 }
 
 /**

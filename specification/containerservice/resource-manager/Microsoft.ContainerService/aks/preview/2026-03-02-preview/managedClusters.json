@@ -6820,6 +6820,56 @@
         ]
       }
     },
+    "AgentPoolNetworkInterface": {
+      "type": "object",
+      "description": "A secondary network interface configuration for an agent pool.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AgentPoolNetworkInterfaceType",
+          "description": "The type of the network interface."
+        },
+        "vnetSubnetID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the subnet which the secondary NIC will join.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Whether to enable accelerated networking on the secondary NIC."
+        }
+      }
+    },
+    "AgentPoolNetworkInterfaceType": {
+      "type": "string",
+      "description": "The type of a secondary network interface.",
+      "enum": [
+        "Standard",
+        "Dynamic"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPoolNetworkInterfaceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard NIC attached to a customer-specified subnet with platform-allocated IPs."
+          },
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "NIC with delegated IP allocation from a third-party orchestrator."
+          }
+        ]
+      }
+    },
     "AgentPoolNetworkProfile": {
       "type": "object",
       "description": "Network settings of an agent pool.",
@@ -6855,6 +6905,14 @@
               ]
             }
           }
+        },
+        "secondaryNetworkInterfaces": {
+          "type": "array",
+          "description": "The list of secondary network interface configurations for the agent pool.",
+          "items": {
+            "$ref": "#/definitions/AgentPoolNetworkInterface"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
