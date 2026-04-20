@@ -1424,7 +1424,7 @@ model StorageServiceProperties {
    */
   @Xml.name("MinuteMetrics") minuteMetrics?: Metrics;
 
-    /**
+  /**
    * Protocol settings
    */
   @Xml.name("ProtocolSettings") protocol?: ShareProtocolSettings;
