@@ -2671,6 +2671,7 @@ union NspLinkProvisioningState {
 /**
  * The readiness state of the resource type for NSP support.
  */
+@added(Versions.v2025_07_01)
 union NspReadinessState {
   string,
 
@@ -15329,24 +15330,28 @@ model PerimeterAssociableResourceProperties {
   /**
    * Service tags associated with the resource provider.
    */
+  @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   serviceTags?: string[];
 
   /**
    * The readiness state of the resource type for NSP support.
    */
+  @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   readinessState?: NspReadinessState;
 
   /**
    * Indicates whether the resource type supports outbound scenario.
    */
+  @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   outboundSupported?: boolean;
 
   /**
    * Description of the PaaS resource type.
    */
+  @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   description?: string;
 }
