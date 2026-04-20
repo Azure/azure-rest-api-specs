@@ -1,11 +1,14 @@
 // Tiles for STAC Items interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -37,7 +40,8 @@ model StatisticsQueryParameters {
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("c")
   @query(#{ explode: true })
-  categoriesPixels?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string[])
+  categoriesPixels?: int32[];
 
   /**
    * List of percentile values (default to [2, 98]).
@@ -89,7 +93,8 @@ model TileMatrixSetQueryParameters {
    * 1.0 = 258x258).
    */
   @query("buffer")
-  buffer?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  buffer?: float32;
 
   /**
    * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -102,6 +107,38 @@ model TileMatrixSetQueryParameters {
    */
   @query("resampling")
   resampling?: Resampling = Resampling.nearest;
+}
+
+/**
+ * Xarray indexing method to use for inexact matches
+ */
+@added(Versions.v2026_04_15)
+union SelMethod {
+  string,
+
+  /** Nearest neighbor method */
+  nearest: "nearest",
+
+  /** Linear interpolation */
+  linear: "linear",
+
+  /** Bilinear interpolation */
+  bilinear: "bilinear",
+
+  /** Cubic interpolation */
+  cubic: "cubic",
+
+  /** Cubic spline interpolation */
+  cubic_spline: "cubic_spline",
+
+  /** Lanczos interpolation */
+  lanczos: "lanczos",
+
+  /** Area-weighted interpolation */
+  area: "area",
+
+  /** Mode (most common) value */
+  mode: "mode",
 }
 
 /**
@@ -118,7 +155,81 @@ model SubDatasetQueryParameters {
    * The index of a subdataset band within the asset.
    */
   @query("subdataset_bands")
-  subdatasetBands?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string[])
+  subdatasetBands?: int32[];
+
+  /**
+   * Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("crs")
+  crs?: string;
+
+  /**
+   * Datetime to use for subsetting the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("datetime")
+  datetime?: string;
+
+  /**
+   * Xarray Indexing using dimension names `{dimension}={value}`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  sel?: string[];
+
+  /**
+   * Xarray indexing method to use for inexact matches.
+   */
+  @added(Versions.v2026_04_15)
+  @query("sel_method")
+  selMethod?: SelMethod;
+}
+
+/**
+ * Subdataset query parameters for collection-level mosaic operations.
+ * Same as SubDatasetQueryParameters but without datetime (which is already
+ * provided by CollectionMosaicFilterQueryParameters).
+ */
+@added(Versions.v2026_04_15)
+model CollectionSubDatasetQueryParameters {
+  /**
+   * The name of a subdataset within the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("subdataset_name")
+  subdatasetName?: string;
+
+  /**
+   * The index of a subdataset band within the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("subdataset_bands")
+  subdatasetBands?: int32[];
+
+  /**
+   * Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("crs")
+  crs?: string;
+
+  /**
+   * Xarray Indexing using dimension names `{dimension}={value}`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  sel?: string[];
+
+  /**
+   * Xarray indexing method to use for inexact matches.
+   */
+  @added(Versions.v2026_04_15)
+  @query("sel_method")
+  selMethod?: SelMethod;
 }
 
 /**
