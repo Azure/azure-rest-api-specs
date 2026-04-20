@@ -546,22 +546,6 @@ model AzureResource {
 }
 
 /**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
-}
-
-/**
  * An action group object for the body of patch operations.
  */
 model ActionGroupPatchBody {

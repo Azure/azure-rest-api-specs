@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
 namespace Microsoft.MetricAlert;
 
@@ -68,23 +69,6 @@ union Operator {
    * LessThanOrEqual
    */
   LessThanOrEqual: "LessThanOrEqual",
-}
-
-/**
- * Specifies the type of threshold criteria. Previously undocumented values might be returned
- */
-union CriterionType {
-  string,
-
-  /**
-   * StaticThresholdCriterion
-   */
-  StaticThresholdCriterion: "StaticThresholdCriterion",
-
-  /**
-   * DynamicThresholdCriterion
-   */
-  DynamicThresholdCriterion: "DynamicThresholdCriterion",
 }
 
 /**
@@ -161,27 +145,6 @@ union DynamicThresholdSensitivity {
    * High
    */
   High: "High",
-}
-
-/**
- * Type of managed service identity. Previously undocumented values might be returned
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum IdentityType {
-  /**
-   * SystemAssigned
-   */
-  SystemAssigned,
-
-  /**
-   * UserAssigned
-   */
-  UserAssigned,
-
-  /**
-   * None
-   */
-  None,
 }
 
 /**
@@ -378,141 +341,12 @@ model Resource {
 }
 
 /**
- * Identity for the resource.
- */
-model Identity {
-  /**
-   * The principal ID of resource identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant ID of resource.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity. Previously undocumented values might be returned
-   */
-  type: IdentityType;
-
-  /**
-   * The list of user identities associated with the resource. The user identity dictionary key references will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserIdentityProperties>;
-}
-
-/**
- * Properties of the user assigned identity.
- */
-model UserIdentityProperties {
-  /**
-   * The principal ID of resource identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client ID of resource identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
-}
-
-/**
  * Describes the format of Error response.
  */
 @error
-model ErrorResponse {
+model MetricAlertErrorResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorResponseError;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ErrorResponseError {
-  /**
-   * Unlocalized string which can be used to programmatically identify the error.
-   */
-  code?: string;
-
-  /**
-   * Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language.
-   */
-  message?: string;
-
-  /**
-   * The target of the particular error (for example, the name of the property in error).
-   */
-  target?: string;
-
-  /**
-   * An array of additional nested error response info objects, as described by this contract.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  details?: ErrorDetail[];
-
-  /**
-   * An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  additionalInfo?: ErrorResponseErrorAdditionalInfoItem[];
-}
-
-/**
- * Describes details of an error response.
- */
-model ErrorDetail {
-  /**
-   * Unlocalized string which can be used to programmatically identify the error.
-   */
-  code?: string;
-
-  /**
-   * Describes the error in detail and provides debugging information.
-   */
-  message?: string;
-
-  /**
-   * The target of the particular error (for example, the name of the property in error).
-   */
-  target?: string;
-
-  /**
-   * An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  additionalInfo?: ErrorDetailAdditionalInfoItem[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ErrorDetailAdditionalInfoItem {
-  /**
-   * The type of additional information.
-   */
-  type?: string;
-
-  /**
-   * The additional information specific to the type.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  info?: Record<unknown>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ErrorResponseErrorAdditionalInfoItem {
-  /**
-   * The type of additional information.
-   */
-  type?: string;
-
-  /**
-   * The additional information specific to the type.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  info?: Record<unknown>;
 }
 
 /**
@@ -721,7 +555,7 @@ model MetricCriteria extends MultiMetricCriteria {
   /**
    * Specifies the type of threshold criteria. Previously undocumented values might be returned
    */
-  criterionType: "StaticThresholdCriterion";
+  criterionType: CriterionType.StaticThresholdCriterion;
 }
 
 /**

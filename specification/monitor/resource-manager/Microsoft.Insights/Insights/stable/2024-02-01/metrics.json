@@ -82,7 +82,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/MetricsErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse"
             }
           }
         },
@@ -232,7 +232,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/MetricsErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse"
             }
           }
         },
@@ -286,7 +286,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -339,7 +339,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -490,7 +490,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -648,7 +648,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -715,53 +715,12 @@
         ]
       }
     },
-    "ErrorContract": {
-      "type": "object",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/MetricsErrorResponse",
-          "description": "The error object."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed."
-        }
-      }
-    },
-    "LocalizableString": {
-      "type": "object",
-      "description": "The localizable string class.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The display name."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MetadataValue": {
       "type": "object",
       "description": "Represents a metric metadata value.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "The name of the metadata."
         },
         "value": {
@@ -783,7 +742,7 @@
           "description": "The resource type of the metric resource."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
@@ -942,7 +901,7 @@
           "description": "The namespace the metric belongs to."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "The name and the display name of the metric, i.e. it is a localizable string."
         },
         "displayDescription": {
@@ -990,7 +949,7 @@
           "type": "array",
           "description": "The name and the display name of the dimension, i.e. it is a localizable string.",
           "items": {
-            "$ref": "#/definitions/LocalizableString"
+            "$ref": "#/definitions/Microsoft.Common.LocalizableString"
           },
           "x-ms-identifiers": [
             "value"
@@ -1227,7 +1186,7 @@
         "timeStamp"
       ]
     },
-    "MetricsErrorResponse": {
+    "Microsoft.Common.CommonErrorResponse": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
       "properties": {
@@ -1250,7 +1209,7 @@
           "type": "array",
           "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/MetricsErrorResponse"
+            "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -1268,6 +1227,47 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "Microsoft.Common.ErrorContract": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse",
+          "description": "The error object."
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.LocalizableString": {
+      "type": "object",
+      "description": "The localizable string class.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NamespaceClassification": {
       "type": "string",
@@ -1355,7 +1355,7 @@
           "description": "The namespace the metric belongs to."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "The name and the display name of the metric, i.e. it is a localizable string."
         },
         "displayDescription": {
@@ -1403,7 +1403,7 @@
           "type": "array",
           "description": "The name and the display name of the dimension, i.e. it is a localizable string.",
           "items": {
-            "$ref": "#/definitions/LocalizableString"
+            "$ref": "#/definitions/Microsoft.Common.LocalizableString"
           },
           "x-ms-identifiers": [
             "value"

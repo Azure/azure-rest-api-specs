@@ -49,22 +49,6 @@ model Incident {
 }
 
 /**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
-}
-
-/**
  * The List incidents operation response.
  */
 model IncidentListResult {

@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Microsoft.Common;
 
 namespace Microsoft.MetricAlert;
 /**
@@ -65,7 +66,10 @@ interface MetricAlertResources {
    * Retrieve an alert rule definition.
    */
   @tag("MetricAlerts")
-  get is ArmResourceRead<MetricAlertResource, Error = ErrorResponse>;
+  get is ArmResourceRead<
+    MetricAlertResource,
+    Error = Microsoft.Common.ErrorResponse
+  >;
 
   /**
    * Create or update an metric alert definition.
@@ -75,7 +79,7 @@ interface MetricAlertResources {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
     Response = ArmResourceUpdatedResponse<MetricAlertResource>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -86,14 +90,17 @@ interface MetricAlertResources {
   update is ArmCustomPatchSync<
     MetricAlertResource,
     PatchModel = MetricAlertResourcePatch,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
    * Delete an alert rule definition.
    */
   @tag("MetricAlerts")
-  delete is ArmResourceDeleteSync<MetricAlertResource, Error = ErrorResponse>;
+  delete is ArmResourceDeleteSync<
+    MetricAlertResource,
+    Error = Microsoft.Common.ErrorResponse
+  >;
 
   /**
    * Retrieve alert rule definitions in a resource group.
@@ -102,7 +109,7 @@ interface MetricAlertResources {
   listByResourceGroup is ArmResourceListByParent<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertResourceCollection>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -112,7 +119,7 @@ interface MetricAlertResources {
   listBySubscription is ArmListBySubscription<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertResourceCollection>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -126,7 +133,7 @@ interface MetricAlertResources {
     MetricAlertResource,
     void,
     ArmResponse<MetricAlertStatusCollection>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -140,7 +147,7 @@ interface MetricAlertResources {
     MetricAlertResource,
     void,
     ArmResponse<MetricAlertStatusCollection>,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = Microsoft.Common.ErrorResponse
   >;
 }
 

@@ -74,7 +74,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -122,7 +122,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -167,7 +167,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -180,20 +180,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed."
-        }
-      }
-    },
     "LogSettings": {
       "type": "object",
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.",
@@ -207,7 +193,7 @@
           "description": "a value indicating whether this log is enabled."
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy",
+          "$ref": "#/definitions/Microsoft.Common.RetentionPolicy",
           "description": "the retention policy for this log."
         }
       },
@@ -229,7 +215,7 @@
           "description": "a value indicating whether this timegrain is enabled."
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy",
+          "$ref": "#/definitions/Microsoft.Common.RetentionPolicy",
           "description": "the retention policy for this timegrain."
         }
       },
@@ -238,7 +224,21 @@
         "enabled"
       ]
     },
-    "RetentionPolicy": {
+    "Microsoft.Common.ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.RetentionPolicy": {
       "type": "object",
       "description": "Specifies the retention policy for the log.",
       "properties": {

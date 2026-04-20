@@ -50,7 +50,7 @@ interface ServiceDiagnosticSettingsResources {
   get is Extension.Read<
     Extension.ScopeParameter,
     ServiceDiagnosticSettingsResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -62,7 +62,7 @@ interface ServiceDiagnosticSettingsResources {
     Extension.ScopeParameter,
     ServiceDiagnosticSettingsResource,
     Response = ArmResourceUpdatedResponse<ServiceDiagnosticSettingsResource>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -73,7 +73,7 @@ interface ServiceDiagnosticSettingsResources {
     Extension.ScopeParameter,
     ServiceDiagnosticSettingsResource,
     PatchModel = ServiceDiagnosticSettingsResourcePatch,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 

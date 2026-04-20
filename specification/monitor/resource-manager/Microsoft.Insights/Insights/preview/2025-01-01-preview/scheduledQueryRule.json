@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -111,7 +111,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -161,7 +161,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -221,7 +221,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -287,7 +287,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -332,7 +332,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/Microsoft.Common.ErrorContract"
             }
           }
         },
@@ -419,7 +419,7 @@
       "description": "A condition of the scheduled query rule.",
       "properties": {
         "criterionType": {
-          "$ref": "#/definitions/CriterionType",
+          "$ref": "#/definitions/Microsoft.Common.CriterionType",
           "description": "Specifies the type of threshold criteria"
         },
         "query": {
@@ -545,30 +545,6 @@
         ]
       }
     },
-    "CriterionType": {
-      "type": "string",
-      "description": "Specifies the type of threshold criteria",
-      "enum": [
-        "StaticThresholdCriterion",
-        "DynamicThresholdCriterion"
-      ],
-      "x-ms-enum": {
-        "name": "CriterionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "StaticThresholdCriterion",
-            "value": "StaticThresholdCriterion",
-            "description": "StaticThresholdCriterion"
-          },
-          {
-            "name": "DynamicThresholdCriterion",
-            "value": "DynamicThresholdCriterion",
-            "description": "DynamicThresholdCriterion"
-          }
-        ]
-      }
-    },
     "Dimension": {
       "type": "object",
       "description": "Dimension splitting and filtering definition",
@@ -619,17 +595,113 @@
         ]
       }
     },
-    "ErrorContract": {
+    "Kind": {
+      "type": "string",
+      "description": "Indicates the type of scheduled query rule. The default is LogAlert.",
+      "enum": [
+        "LogAlert",
+        "SimpleLogAlert",
+        "LogToMetric"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogAlert",
+            "value": "LogAlert",
+            "description": "LogAlert"
+          },
+          {
+            "name": "SimpleLogAlert",
+            "value": "SimpleLogAlert",
+            "description": "SimpleLogAlert"
+          },
+          {
+            "name": "LogToMetric",
+            "value": "LogToMetric",
+            "description": "LogToMetric"
+          }
+        ]
+      }
+    },
+    "Microsoft.Common.CommonErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Microsoft.Common.CriterionType": {
+      "type": "string",
+      "description": "Specifies the type of threshold criteria. Previously undocumented values might be returned",
+      "enum": [
+        "StaticThresholdCriterion",
+        "DynamicThresholdCriterion"
+      ],
+      "x-ms-enum": {
+        "name": "CriterionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StaticThresholdCriterion",
+            "value": "StaticThresholdCriterion",
+            "description": "StaticThresholdCriterion"
+          },
+          {
+            "name": "DynamicThresholdCriterion",
+            "value": "DynamicThresholdCriterion",
+            "description": "DynamicThresholdCriterion"
+          }
+        ]
+      }
+    },
+    "Microsoft.Common.ErrorContract": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
       "properties": {
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse",
           "description": "The error object."
         }
       }
     },
-    "Identity": {
+    "Microsoft.Common.Identity": {
       "type": "object",
       "description": "Identity for the resource.",
       "properties": {
@@ -644,14 +716,14 @@
           "readOnly": true
         },
         "type": {
-          "$ref": "#/definitions/IdentityType",
+          "$ref": "#/definitions/Microsoft.Common.IdentityType",
           "description": "Type of managed service identity."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
+            "$ref": "#/definitions/Microsoft.Common.UserIdentityProperties"
           }
         }
       },
@@ -659,7 +731,7 @@
         "type"
       ]
     },
-    "IdentityType": {
+    "Microsoft.Common.IdentityType": {
       "type": "string",
       "description": "Type of managed service identity.",
       "enum": [
@@ -689,34 +761,20 @@
         ]
       }
     },
-    "Kind": {
-      "type": "string",
-      "description": "Indicates the type of scheduled query rule. The default is LogAlert.",
-      "enum": [
-        "LogAlert",
-        "SimpleLogAlert",
-        "LogToMetric"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LogAlert",
-            "value": "LogAlert",
-            "description": "LogAlert"
-          },
-          {
-            "name": "SimpleLogAlert",
-            "value": "SimpleLogAlert",
-            "description": "SimpleLogAlert"
-          },
-          {
-            "name": "LogToMetric",
-            "value": "LogToMetric",
-            "description": "LogToMetric"
-          }
-        ]
+    "Microsoft.Common.UserIdentityProperties": {
+      "type": "object",
+      "description": "Properties of the user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity.",
+          "readOnly": true
+        }
       }
     },
     "RuleResolveConfiguration": {
@@ -853,7 +911,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/Microsoft.Common.Identity",
           "description": "The identity of the resource."
         },
         "tags": {
@@ -922,7 +980,7 @@
       "description": "The scheduled query rule resource for patch operations.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/Microsoft.Common.Identity",
           "description": "The identity of the resource."
         },
         "tags": {
@@ -979,22 +1037,6 @@
             "description": "Total"
           }
         ]
-      }
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "description": "User assigned identity properties.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of user assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client id of user assigned identity.",
-          "readOnly": true
-        }
       }
     }
   },

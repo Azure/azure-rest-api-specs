@@ -62,7 +62,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -148,7 +148,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -205,7 +205,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -265,7 +265,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -307,7 +307,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -320,7 +320,23 @@
     }
   },
   "definitions": {
-    "ActionGroup": {
+    "ActionList": {
+      "type": "object",
+      "description": "A list of Activity Log Alert rule actions.",
+      "properties": {
+        "actionGroups": {
+          "type": "array",
+          "description": "The list of the Action Groups.",
+          "items": {
+            "$ref": "#/definitions/ActivityLogAlertActionGroup"
+          },
+          "x-ms-identifiers": [
+            "actionGroupId"
+          ]
+        }
+      }
+    },
+    "ActivityLogAlertActionGroup": {
       "type": "object",
       "description": "A pointer to an Azure Action Group.",
       "properties": {
@@ -346,22 +362,6 @@
       "required": [
         "actionGroupId"
       ]
-    },
-    "ActionList": {
-      "type": "object",
-      "description": "A list of Activity Log Alert rule actions.",
-      "properties": {
-        "actionGroups": {
-          "type": "array",
-          "description": "The list of the Action Groups.",
-          "items": {
-            "$ref": "#/definitions/ActionGroup"
-          },
-          "x-ms-identifiers": [
-            "actionGroupId"
-          ]
-        }
-      }
     },
     "ActivityLogAlertResource": {
       "type": "object",
@@ -542,19 +542,17 @@
         "actions"
       ]
     },
-    "ErrorResponse": {
+    "Microsoft.Common.ErrorResponse": {
       "type": "object",
-      "description": "The error response.",
+      "description": "Describes the format of Error response.",
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code.",
-          "readOnly": true
+          "description": "Error code"
         },
         "message": {
           "type": "string",
-          "description": "The error message indicating why the operation failed.",
-          "readOnly": true
+          "description": "Error message indicating why the operation failed."
         }
       }
     }

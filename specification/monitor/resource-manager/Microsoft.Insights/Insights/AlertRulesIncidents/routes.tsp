@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Microsoft.Common;
 
 namespace Microsoft.AlertRulesIncidents;
 
@@ -39,7 +40,7 @@ interface AlertRuleIncidentsOperationGroup {
     incidentName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<Incident> | ErrorResponse;
+  ): ArmResponse<Incident> | Microsoft.Common.ErrorResponse;
 
   /**
    * Gets a list of incidents associated to an alert rule

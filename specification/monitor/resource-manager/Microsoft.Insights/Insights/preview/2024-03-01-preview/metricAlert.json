@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -114,7 +114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -163,7 +163,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -237,7 +237,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -323,7 +323,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -367,7 +367,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -413,7 +413,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -466,7 +466,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -517,30 +517,6 @@
             "name": "Total",
             "value": "Total",
             "description": "Total"
-          }
-        ]
-      }
-    },
-    "CriterionType": {
-      "type": "string",
-      "description": "Specifies the type of threshold criteria. Previously undocumented values might be returned",
-      "enum": [
-        "StaticThresholdCriterion",
-        "DynamicThresholdCriterion"
-      ],
-      "x-ms-enum": {
-        "name": "CriterionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "StaticThresholdCriterion",
-            "value": "StaticThresholdCriterion",
-            "description": "StaticThresholdCriterion"
-          },
-          {
-            "name": "DynamicThresholdCriterion",
-            "value": "DynamicThresholdCriterion",
-            "description": "DynamicThresholdCriterion"
           }
         ]
       }
@@ -684,159 +660,6 @@
             "name": "High",
             "value": "High",
             "description": "High"
-          }
-        ]
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "Describes details of an error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Unlocalized string which can be used to programmatically identify the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Describes the error in detail and provides debugging information."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error (for example, the name of the property in error)."
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetailAdditionalInfoItem"
-          }
-        }
-      }
-    },
-    "ErrorDetailAdditionalInfoItem": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of additional information."
-        },
-        "info": {
-          "type": "object",
-          "description": "The additional information specific to the type.",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseError"
-        }
-      }
-    },
-    "ErrorResponseError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Unlocalized string which can be used to programmatically identify the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error (for example, the name of the property in error)."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of additional nested error response info objects, as described by this contract.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseErrorAdditionalInfoItem"
-          }
-        }
-      }
-    },
-    "ErrorResponseErrorAdditionalInfoItem": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of additional information."
-        },
-        "info": {
-          "type": "object",
-          "description": "The additional information specific to the type.",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "Identity": {
-      "type": "object",
-      "description": "Identity for the resource.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID of resource identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of resource.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "Type of managed service identity. Previously undocumented values might be returned"
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "IdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity. Previously undocumented values might be returned",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "SystemAssigned"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "UserAssigned"
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
           }
         ]
       }
@@ -1094,7 +917,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/Microsoft.Common.Identity",
           "description": "The identity of the resource."
         }
       },
@@ -1139,7 +962,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/Microsoft.Common.Identity",
           "description": "The identity of the resource."
         },
         "properties": {
@@ -1282,12 +1105,126 @@
         "values"
       ]
     },
+    "Microsoft.Common.CriterionType": {
+      "type": "string",
+      "description": "Specifies the type of threshold criteria. Previously undocumented values might be returned",
+      "enum": [
+        "StaticThresholdCriterion",
+        "DynamicThresholdCriterion"
+      ],
+      "x-ms-enum": {
+        "name": "CriterionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StaticThresholdCriterion",
+            "value": "StaticThresholdCriterion",
+            "description": "StaticThresholdCriterion"
+          },
+          {
+            "name": "DynamicThresholdCriterion",
+            "value": "DynamicThresholdCriterion",
+            "description": "DynamicThresholdCriterion"
+          }
+        ]
+      }
+    },
+    "Microsoft.Common.ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Microsoft.Common.IdentityType",
+          "description": "Type of managed service identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Microsoft.Common.UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Microsoft.Common.IdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "UserAssigned"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          }
+        ]
+      }
+    },
+    "Microsoft.Common.UserIdentityProperties": {
+      "type": "object",
+      "description": "Properties of the user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity.",
+          "readOnly": true
+        }
+      }
+    },
     "MultiMetricCriteria": {
       "type": "object",
       "description": "The types of conditions for a multi resource alert.",
       "properties": {
         "criterionType": {
-          "$ref": "#/definitions/CriterionType",
+          "$ref": "#/definitions/Microsoft.Common.CriterionType",
           "description": "Specifies the type of threshold criteria. Previously undocumented values might be returned"
         },
         "name": {
@@ -1335,7 +1272,7 @@
       "description": "The types of conditions for a multi query metric alert.",
       "properties": {
         "criterionType": {
-          "$ref": "#/definitions/CriterionType",
+          "$ref": "#/definitions/Microsoft.Common.CriterionType",
           "description": "Specifies the type of threshold criteria. Previously undocumented values might be returned"
         },
         "name": {
@@ -1498,22 +1435,6 @@
         }
       ],
       "x-ms-discriminator-value": "StaticThresholdCriterion"
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "description": "Properties of the user assigned identity.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID of resource identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client ID of resource identity.",
-          "readOnly": true
-        }
-      }
     },
     "WebtestLocationAvailabilityCriteria": {
       "type": "object",

@@ -39,7 +39,7 @@ interface ActivityLogsOperationGroup {
       @query("$select")
       $select?: string;
     },
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 
@@ -55,7 +55,7 @@ interface EventCategoriesOperationGroup {
   @list
   list is ArmProviderActionSync<
     Response = EventCategoryCollection,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 
@@ -84,6 +84,6 @@ interface TenantActivityLogsOperationGroup {
       @query("$select")
       $select?: string;
     },
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }

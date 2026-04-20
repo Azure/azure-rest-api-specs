@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Microsoft.Common;
 
 namespace Microsoft.Metrics;
 
@@ -59,7 +60,7 @@ interface MetricDefinitionsOperationGroup {
       @query("metricnamespace")
       metricnamespace?: string;
     },
-    Error = MetricsErrorResponse
+    Error = CommonErrorResponse
   >;
 }
 
@@ -88,7 +89,7 @@ interface MetricNamespacesOperationGroup {
      */
     @query("startTime")
     startTime?: string,
-  ): MetricNamespaceCollection | ErrorResponse;
+  ): MetricNamespaceCollection | Microsoft.Common.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -383,6 +384,6 @@ interface MetricsOperationGroup {
       @query("rollupby")
       rollupby?: string;
     },
-    Error = MetricsErrorResponse
+    Error = CommonErrorResponse
   >;
 }

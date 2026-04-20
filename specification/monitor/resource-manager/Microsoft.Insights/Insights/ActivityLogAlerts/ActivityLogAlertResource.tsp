@@ -29,14 +29,17 @@ interface ActivityLogAlertResources {
   /**
    * Get an Activity Log Alert rule.
    */
-  get is ArmResourceRead<ActivityLogAlertResource, Error = ErrorResponse>;
+  get is ArmResourceRead<
+    ActivityLogAlertResource,
+    Error = Microsoft.Common.ErrorResponse
+  >;
 
   /**
    * Create a new Activity Log Alert rule or update an existing one.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ActivityLogAlertResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -46,7 +49,7 @@ interface ActivityLogAlertResources {
   update is ArmCustomPatchSync<
     ActivityLogAlertResource,
     PatchModel = AlertRulePatchObject,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -54,7 +57,7 @@ interface ActivityLogAlertResources {
    */
   delete is ArmResourceDeleteSync<
     ActivityLogAlertResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -63,7 +66,7 @@ interface ActivityLogAlertResources {
   listByResourceGroup is ArmResourceListByParent<
     ActivityLogAlertResource,
     Response = ArmResponse<AlertRuleList>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -72,7 +75,7 @@ interface ActivityLogAlertResources {
   listBySubscriptionId is ArmListBySubscription<
     ActivityLogAlertResource,
     Response = ArmResponse<AlertRuleList>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 

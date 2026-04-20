@@ -830,31 +830,6 @@ union KnownDataCollectionRuleResourceKind {
   Windows: "Windows",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union IdentityType {
-  string,
-
-  /**
-   * none
-   */
-  none: "none",
-
-  /**
-   * systemAssigned
-   */
-  systemAssigned: "systemAssigned",
-
-  /**
-   * userAssigned
-   */
-  userAssigned: "userAssigned",
-
-  /**
-   * SystemAssigned, UserAssigned
-   */
-  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
-}
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

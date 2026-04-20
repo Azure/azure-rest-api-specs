@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
 namespace Microsoft.LogProfiles;
 
@@ -40,22 +41,6 @@ model LogProfileProperties {
    * the retention policy for the events in the log.
    */
   retentionPolicy: RetentionPolicy;
-}
-
-/**
- * Specifies the retention policy for the log.
- */
-model RetentionPolicy {
-  /**
-   * a value indicating whether the retention policy is enabled.
-   */
-  enabled: boolean;
-
-  /**
-   * the number of days for the retention in days. A value of 0 will retain the events indefinitely.
-   */
-  @minValue(0)
-  days: int32;
 }
 
 /**

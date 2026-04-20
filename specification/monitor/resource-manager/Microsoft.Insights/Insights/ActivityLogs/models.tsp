@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
 namespace Microsoft.ActivityLogs;
 
@@ -229,21 +230,6 @@ model SenderAuthorization {
 }
 
 /**
- * The localizable string class.
- */
-model LocalizableString {
-  /**
-   * the invariant value.
-   */
-  value: string;
-
-  /**
-   * the locale specific value.
-   */
-  localizedValue?: string;
-}
-
-/**
  * The Http request info.
  */
 model HttpRequestInfo {
@@ -266,22 +252,6 @@ model HttpRequestInfo {
    * the Uri.
    */
   uri?: string;
-}
-
-/**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
 }
 
 /**

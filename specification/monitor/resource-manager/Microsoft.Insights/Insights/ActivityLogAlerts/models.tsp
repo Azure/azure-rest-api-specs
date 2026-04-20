@@ -106,13 +106,13 @@ model ActionList {
    * The list of the Action Groups.
    */
   @identifiers(#["actionGroupId"])
-  actionGroups?: ActionGroup[];
+  actionGroups?: ActivityLogAlertActionGroup[];
 }
 
 /**
  * A pointer to an Azure Action Group.
  */
-model ActionGroup {
+model ActivityLogAlertActionGroup {
   /**
    * The resource ID of the Action Group. This cannot be null or empty.
    */
@@ -170,7 +170,7 @@ model AzureResource {
  * The error response.
  */
 @error
-model ErrorResponse {
+model ActivityLogAlertErrorResponse {
   /**
    * The error code.
    */

@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -122,7 +122,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -184,7 +184,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -203,20 +203,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed."
-        }
-      }
-    },
     "EventCategoryCollection": {
       "type": "object",
       "description": "A collection of event categories. Currently possible values are: Administrative, Security, ServiceHealth, Alert, Recommendation, Policy.",
@@ -225,7 +211,7 @@
           "type": "array",
           "description": "the list that includes the Azure event categories.",
           "items": {
-            "$ref": "#/definitions/LocalizableString"
+            "$ref": "#/definitions/Microsoft.Common.LocalizableString"
           },
           "x-ms-identifiers": [
             "value"
@@ -283,12 +269,12 @@
           "readOnly": true
         },
         "eventName": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "the event name. This value should not be confused with OperationName. For practical purposes, OperationName might be more appealing to end users.",
           "readOnly": true
         },
         "category": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "the event category.",
           "readOnly": true
         },
@@ -311,7 +297,7 @@
           }
         },
         "resourceProviderName": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "the resource provider name of the impacted resource.",
           "readOnly": true,
           "externalDocs": {
@@ -327,7 +313,7 @@
           }
         },
         "resourceType": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "the resource type",
           "readOnly": true,
           "externalDocs": {
@@ -340,7 +326,7 @@
           "readOnly": true
         },
         "operationName": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "the operation name.",
           "readOnly": true
         },
@@ -353,12 +339,12 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "a string describing the status of the operation. Some typical values are: Started, In progress, Succeeded, Failed, Resolved.",
           "readOnly": true
         },
         "subStatus": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
           "description": "the event sub status. Most of the time, when included, this captures the HTTP status code of the REST call. Common values are: OK (HTTP Status Code: 200), Created (HTTP Status Code: 201), Accepted (HTTP Status Code: 202), No Content (HTTP Status Code: 204), Bad Request(HTTP Status Code: 400), Not Found (HTTP Status Code: 404), Conflict (HTTP Status Code: 409), Internal Server Error (HTTP Status Code: 500), Service Unavailable (HTTP Status Code:503), Gateway Timeout (HTTP Status Code: 504)",
           "readOnly": true
         },
@@ -471,7 +457,21 @@
         }
       }
     },
-    "LocalizableString": {
+    "Microsoft.Common.ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.LocalizableString": {
       "type": "object",
       "description": "The localizable string class.",
       "properties": {

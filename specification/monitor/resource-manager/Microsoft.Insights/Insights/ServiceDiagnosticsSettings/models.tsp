@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
 namespace Microsoft.ServiceDiagnosticsSettings;
 
@@ -68,22 +69,6 @@ model MetricSettings {
 }
 
 /**
- * Specifies the retention policy for the log.
- */
-model RetentionPolicy {
-  /**
-   * a value indicating whether the retention policy is enabled.
-   */
-  enabled: boolean;
-
-  /**
-   * the number of days for the retention in days. A value of 0 will retain the events indefinitely.
-   */
-  @minValue(0)
-  days: int32;
-}
-
-/**
  * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.
  */
 model LogSettings {
@@ -136,22 +121,6 @@ model Resource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
-}
-
-/**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
 }
 
 /**

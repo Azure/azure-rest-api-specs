@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Microsoft.Common;
 
 namespace Microsoft.ScheduledQueryRule;
 
@@ -89,23 +90,6 @@ union AlertSeverity {
    * 4
    */
   `4`: 4,
-}
-
-/**
- * Specifies the type of threshold criteria
- */
-union CriterionType {
-  string,
-
-  /**
-   * StaticThresholdCriterion
-   */
-  StaticThresholdCriterion: "StaticThresholdCriterion",
-
-  /**
-   * DynamicThresholdCriterion
-   */
-  DynamicThresholdCriterion: "DynamicThresholdCriterion",
 }
 
 /**
@@ -195,76 +179,10 @@ union ConditionOperator {
 }
 
 /**
- * Type of managed service identity.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum IdentityType {
-  /**
-   * SystemAssigned
-   */
-  SystemAssigned,
-
-  /**
-   * UserAssigned
-   */
-  UserAssigned,
-
-  /**
-   * None
-   */
-  None,
-}
-
-/**
  * Represents a collection of scheduled query rule resources.
  */
 model ScheduledQueryRuleResourceCollection
   is Azure.Core.Page<ScheduledQueryRuleResource>;
-
-/**
- * Identity for the resource.
- */
-model Identity {
-  /**
-   * The principal ID of resource identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant ID of resource.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity.
-   */
-  type: IdentityType;
-
-  /**
-   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserIdentityProperties>;
-}
-
-/**
- * User assigned identity properties.
- */
-model UserIdentityProperties {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
-}
 
 /**
  * scheduled query rule Definition
@@ -523,17 +441,6 @@ model RuleResolveConfiguration {
    * The duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format.
    */
   timeToResolve?: duration;
-}
-
-/**
- * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
- */
-@error
-model ErrorContract {
-  /**
-   * The error object.
-   */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 /**

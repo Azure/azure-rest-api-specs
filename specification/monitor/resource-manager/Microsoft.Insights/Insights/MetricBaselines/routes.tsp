@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Microsoft.Common;
 
 namespace Microsoft.MetricBaselines;
 
@@ -76,6 +77,6 @@ interface BaselinesOperationGroup {
       @query("resultType")
       resultType?: ResultType;
     },
-    Error = ErrorResponse
+    Error = MetricBaselinesErrorResponse
   >;
 }

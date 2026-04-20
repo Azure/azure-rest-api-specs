@@ -135,7 +135,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
             }
           }
         },
@@ -148,20 +148,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed."
-        }
-      }
-    },
     "Incident": {
       "type": "object",
       "description": "An alert incident indicates the activation status of an alert rule.",
@@ -212,6 +198,20 @@
         "nextLink": {
           "type": "string",
           "description": "the URL to get the next set of results."
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
         }
       }
     }
