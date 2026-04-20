@@ -46,8 +46,6 @@ using Azure.ClientGenerator.Core;
 );
 
 // C# client name decorators for backward compatibility
-// Rename local ErrorResponse to avoid TCGC duplicate-client-name with common-types ErrorResponse,
-// and mark it internal so C# SDK uses Azure.ResourceManager common-types ErrorResponse instead.
 @@clientName(ErrorResponse, "HDInsightErrorDetail", "csharp");
 @@access(ErrorResponse, Access.internal, "csharp");
 @@clientName(Application, "HDInsightApplication", "csharp");
