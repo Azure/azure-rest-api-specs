@@ -55,7 +55,7 @@ interface PrivateEndpointConnections {
   @action("privateEndpointConnections")
   listByPrivateLinkScope is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>,
+    Response = ArmResponse<PrivateEndpointConnectionListResult>,
     Parameters = {
       /**
        * The name of the Azure Monitor PrivateLinkScope resource.

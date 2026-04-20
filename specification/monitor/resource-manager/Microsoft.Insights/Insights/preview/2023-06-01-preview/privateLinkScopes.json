@@ -411,7 +411,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1164,6 +1164,19 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "description": "The error detail of the operation if any.",
           "x-nullable": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "List of private endpoint connection associated with the specified storage account",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         }
       }
     },

@@ -33,7 +33,7 @@ interface LogProfileResources {
   get is ArmResourceRead<
     LogProfileResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -45,7 +45,7 @@ interface LogProfileResources {
     LogProfileResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResourceUpdatedResponse<LogProfileResource>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -56,7 +56,7 @@ interface LogProfileResources {
     LogProfileResource,
     PatchModel = LogProfileResourcePatch,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -68,7 +68,7 @@ interface LogProfileResources {
     LogProfileResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmDeletedResponse,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -79,7 +79,7 @@ interface LogProfileResources {
     LogProfileResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<LogProfileCollection>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 

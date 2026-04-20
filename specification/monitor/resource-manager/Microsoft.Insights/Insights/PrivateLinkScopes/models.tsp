@@ -263,3 +263,13 @@ model ScopedResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ScopedResourceProvisioningState;
 }
+
+/**
+ * List of private endpoint connection associated with the specified storage account
+ */
+model PrivateEndpointConnectionListResult {
+  /**
+   * Array of private endpoint connections
+   */
+  value?: PrivateEndpointConnection[];
+}
