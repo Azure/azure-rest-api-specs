@@ -7038,6 +7038,44 @@
         }
       }
     },
+    "InboundCallerIdentity": {
+      "type": "object",
+      "description": "The identity a linked resource uses for inbound calls to the ADR namespace.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InboundCallerIdentityType",
+          "description": "The type of managed identity. SystemAssigned or UserAssigned."
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the user-assigned managed identity. Required when type is UserAssigned."
+        }
+      }
+    },
+    "InboundCallerIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for inbound caller identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "InboundCallerIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "InboundEndpoints": {
       "type": "object",
       "description": "An endpoint to connect to the device.",
@@ -7397,16 +7435,31 @@
         },
         "address": {
           "type": "string",
-          "description": "The endpoint address to connect to."
+          "description": "The endpoint address used by services."
         },
         "resourceId": {
           "type": "string",
           "description": "The messaging endpoint Azure resource Id."
+        },
+        "deviceAddress": {
+          "type": "string",
+          "description": "The endpoint address used by devices.",
+          "readOnly": true
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "The identity the linked resource uses to call the ADR namespace."
+        },
+        "linkingState": {
+          "$ref": "#/definitions/NamespaceLinkingStateValue",
+          "description": "The linking state of this messaging endpoint.",
+          "readOnly": true
+        },
+        "provisioning": {
+          "$ref": "#/definitions/MessagingEndpointProvisioning",
+          "description": "The provisioning configuration for this messaging endpoint."
         }
-      },
-      "required": [
-        "address"
-      ]
+      }
     },
     "MessagingEndpointAvailability": {
       "type": "string",
@@ -9570,6 +9623,37 @@
         "name"
       ]
     },
+    "NamespaceLinkingStateValue": {
+      "type": "string",
+      "description": "The linking state values for namespace endpoint entries.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "NamespaceLinkingStateValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Linking is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Linking succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Linking failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "NamespaceListResult": {
       "type": "object",
       "description": "The response of a Namespace list operation.",
@@ -9674,11 +9758,7 @@
         },
         "provisioning": {
           "$ref": "#/definitions/NamespaceProvisioning",
-          "description": "The DPS instance that provisions devices in this namespace.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The provisioning endpoints associated with this namespace."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -9689,11 +9769,14 @@
     },
     "NamespaceProvisioning": {
       "type": "object",
-      "description": "The DPS provisioning configuration for the namespace.",
+      "description": "The provisioning endpoints associated with this namespace.",
       "properties": {
-        "dpsResourceId": {
-          "type": "string",
-          "description": "The Azure resource ID of the DPS instance that provisions devices in this namespace."
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of provisioning endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ProvisioningEndpoint"
+          }
         }
       }
     },
@@ -9979,6 +10062,33 @@
         {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
+      ]
+    },
+    "ProvisioningEndpoint": {
+      "type": "object",
+      "description": "A provisioning service endpoint linked to this namespace.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of provisioning resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The provisioning endpoint Azure resource Id."
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "The identity the linked resource uses to call the ADR namespace."
+        },
+        "linkingState": {
+          "$ref": "#/definitions/NamespaceLinkingStateValue",
+          "description": "The linking state of this provisioning endpoint.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "endpointType",
+        "resourceId"
       ]
     },
     "ProvisioningState": {

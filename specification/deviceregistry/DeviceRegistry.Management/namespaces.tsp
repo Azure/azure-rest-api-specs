@@ -65,9 +65,9 @@ model NamespaceProperties {
   @added(Versions.v2026_02_01_preview)
   management?: Management;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @added(Versions.v2026_11_01_preview)
-  @doc("The DPS instance that provisions devices in this namespace.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The provisioning endpoints associated with this namespace.")
   provisioning?: NamespaceProvisioning;
 
   @doc("Provisioning state of the resource.")
@@ -87,11 +87,30 @@ model MessagingEndpoint {
   endpointType?: string;
 
   @added(Versions.v2025_07_01_preview)
-  @doc("The endpoint address to connect to.")
-  address: string;
+  @madeOptional(Versions.v2026_11_01_preview)
+  @doc("The endpoint address used by services.")
+  address?: string;
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The endpoint address used by devices.")
+  @visibility(Lifecycle.Read)
+  deviceAddress?: string;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The identity the linked resource uses to call the ADR namespace.")
+  inboundCallerIdentity?: InboundCallerIdentity;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The linking state of this messaging endpoint.")
+  @visibility(Lifecycle.Read)
+  linkingState?: NamespaceLinkingStateValue;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The provisioning configuration for this messaging endpoint.")
+  provisioning?: MessagingEndpointProvisioning;
 }
 
 @added(Versions.v2026_02_01_preview)
@@ -133,10 +152,65 @@ union MessagingEndpointAvailability {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("The DPS provisioning configuration for the namespace.")
+@doc("The provisioning endpoints associated with this namespace.")
 model NamespaceProvisioning {
-  @doc("The Azure resource ID of the DPS instance that provisions devices in this namespace.")
-  dpsResourceId?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Dictionary of provisioning endpoints.")
+  endpoints?: Record<ProvisioningEndpoint>;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("A provisioning service endpoint linked to this namespace.")
+model ProvisioningEndpoint {
+  @doc("Type of provisioning resource.")
+  endpointType: string;
+
+  @doc("The provisioning endpoint Azure resource Id.")
+  resourceId: string;
+
+  @doc("The identity the linked resource uses to call the ADR namespace.")
+  inboundCallerIdentity?: InboundCallerIdentity;
+
+  @doc("The linking state of this provisioning endpoint.")
+  @visibility(Lifecycle.Read)
+  linkingState?: NamespaceLinkingStateValue;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The linking state values for namespace endpoint entries.")
+union NamespaceLinkingStateValue {
+  string,
+
+  @doc("Linking is in progress.")
+  InProgress: "InProgress",
+
+  @doc("Linking succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("Linking failed.")
+  Failed: "Failed",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The identity a linked resource uses for inbound calls to the ADR namespace.")
+model InboundCallerIdentity {
+  @doc("The type of managed identity. SystemAssigned or UserAssigned.")
+  type?: InboundCallerIdentityType;
+
+  @doc("The resource ID of the user-assigned managed identity. Required when type is UserAssigned.")
+  userAssignedIdentity?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The type of managed identity for inbound caller identity.")
+union InboundCallerIdentityType {
+  string,
+
+  @doc("System-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
