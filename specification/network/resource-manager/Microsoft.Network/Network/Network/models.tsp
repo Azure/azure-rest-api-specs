@@ -2012,6 +2012,16 @@ union IpAllocationType {
 }
 
 /**
+ * Controls verbosity of the returned load balancer resource.
+ */
+union LoadBalancerDetailLevel {
+  string,
+
+  /** When set to 'Reduced', read-only reference collections may be omitted. */
+  Reduced: "Reduced",
+}
+
+/**
  * Who created the route.
  */
 union EffectiveRouteSource {
