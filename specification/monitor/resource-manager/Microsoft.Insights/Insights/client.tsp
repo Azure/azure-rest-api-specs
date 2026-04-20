@@ -49,6 +49,10 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorClient",
   "java,javascript"
 );
+@@clientName(Microsoft.InsightsCombinedClient,
+  "MonitorManagementClient",
+  "python"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Legacy.markAsPageable(Microsoft.PrivateLinkScopes.PrivateEndpointConnections.listByPrivateLinkScope,
