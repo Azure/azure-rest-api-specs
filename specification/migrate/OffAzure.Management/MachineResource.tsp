@@ -83,18 +83,14 @@ interface MachineResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MachinesController_Start")
-  start is ArmResourceActionAsync<
-    MachineResource,
-    void,
-    ArmResponse<AnyObject>
-  >;
+  start is ArmResourceActionAsync<MachineResource, void, ArmResponse<unknown>>;
 
   /**
    * Method to stop a machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MachinesController_Stop")
-  stop is ArmResourceActionAsync<MachineResource, void, ArmResponse<AnyObject>>;
+  stop is ArmResourceActionAsync<MachineResource, void, ArmResponse<unknown>>;
 }
 
 @@doc(MachineResource.name, "Machine name");

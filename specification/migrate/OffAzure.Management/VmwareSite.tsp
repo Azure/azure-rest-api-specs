@@ -98,7 +98,7 @@ interface VmwareSites {
   exportApplications is ArmResourceActionAsync<
     VmwareSite,
     unknown,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -110,7 +110,7 @@ interface VmwareSites {
   exportMachineErrors is ArmResourceActionAsync<
     VmwareSite,
     ExportMachineErrorsRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -122,7 +122,7 @@ interface VmwareSites {
   exportMachines is ArmResourceActionAsync<
     VmwareSite,
     ExportMachinesRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -156,7 +156,7 @@ interface VmwareSites {
   clientGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -167,7 +167,7 @@ interface VmwareSites {
   exportDependencies is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -178,7 +178,7 @@ interface VmwareSites {
   generateCoarseMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -189,7 +189,7 @@ interface VmwareSites {
   generateDetailedMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -200,7 +200,7 @@ interface VmwareSites {
   serverGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -234,7 +234,7 @@ interface VmwareSites {
   updateDependencyMapStatus is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineDepMapStatus,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -245,7 +245,7 @@ interface VmwareSites {
   updateProperties is ArmResourceActionAsync<
     VmwareSite,
     MachineMetadataCollection,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -257,7 +257,7 @@ interface VmwareSites {
   updateRunAsAccount is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineRunAsAccount,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -269,7 +269,7 @@ interface VmwareSites {
   updateTags is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineTags,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 }
 

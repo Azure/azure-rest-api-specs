@@ -84,7 +84,7 @@ interface WebAppSites {
   exportInventory is ArmResourceActionAsync<
     WebAppSite,
     ExportWebAppsRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -95,7 +95,7 @@ interface WebAppSites {
   refresh is ArmResourceActionAsync<
     WebAppSite,
     ProxySiteRefreshBody,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -118,7 +118,7 @@ interface WebAppSites {
   updateProperties is ArmResourceActionAsync<
     WebAppSite,
     WebAppPropertiesCollection,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**

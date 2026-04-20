@@ -93,7 +93,7 @@ interface HypervSites {
   exportApplications is ArmResourceActionAsync<
     HypervSite,
     unknown,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -105,7 +105,7 @@ interface HypervSites {
   exportMachineErrors is ArmResourceActionAsync<
     HypervSite,
     ExportMachineErrorsRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -139,7 +139,7 @@ interface HypervSites {
   clientGroupMembers is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -150,7 +150,7 @@ interface HypervSites {
   exportDependencies is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -161,7 +161,7 @@ interface HypervSites {
   generateCoarseMap is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -172,7 +172,7 @@ interface HypervSites {
   generateDetailedMap is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -183,7 +183,7 @@ interface HypervSites {
   serverGroupMembers is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -195,7 +195,7 @@ interface HypervSites {
   updateDependencyMapStatus is ArmResourceActionAsync<
     HypervSite,
     UpdateMachineDepMapStatus,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -207,7 +207,7 @@ interface HypervSites {
   updateProperties is ArmResourceActionAsync<
     HypervSite,
     MachineMetadataCollection,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**

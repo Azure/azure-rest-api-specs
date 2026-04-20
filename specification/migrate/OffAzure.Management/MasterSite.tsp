@@ -90,7 +90,7 @@ interface MasterSites {
   refreshArcStatus is ArmResourceActionAsync<
     MasterSite,
     void,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**

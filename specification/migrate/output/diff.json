@@ -1,0 +1,6071 @@
+{
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareinventories__deleted": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "description": "List HypervVmSoftwareInventory resources by HypervMachine",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}__deleted": {
+      "get": {
+        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
+        "tags": [
+          "HypervOperationsStatusController"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/operationsStatus/{operationStatusName}__deleted": {
+      "get": {
+        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
+        "tags": [
+          "MasterSitesOperationsStatusController"
+        ],
+        "description": "A operation status resource belonging to a master site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/operationsStatus/{operationStatusName}__deleted": {
+      "get": {
+        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
+        "tags": [
+          "SqlOperationsStatusController"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareinventories__deleted": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_ListByServer",
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "description": "List ServerSoftwareInventory resources by Server",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}__deleted": {
+      "get": {
+        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
+        "tags": [
+          "ServerOperationsStatusController"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareinventories__deleted": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_ListByMachineResource",
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "description": "List VmwareMachineSoftwareInventory resources by MachineResource",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/operationsStatus/{operationStatusName}__deleted": {
+      "get": {
+        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
+        "tags": [
+          "VmwareOperationsStatus"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/{operationStatusName}/{operationStatusName}__added": {
+      "get": {
+        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
+        "tags": [
+          "HypervSites"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories__added": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
+        "tags": [
+          "HypervVmSoftwareInventories"
+        ],
+        "description": "List HypervVmSoftwareInventory resources by HypervMachine",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/{operationStatusName}/{operationStatusName}__added": {
+      "get": {
+        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
+        "tags": [
+          "MasterSites"
+        ],
+        "description": "A operation status resource belonging to a master site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/{operationStatusName}/{operationStatusName}__added": {
+      "get": {
+        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
+        "tags": [
+          "SqlSites"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/{operationStatusName}/{operationStatusName}__added": {
+      "get": {
+        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
+        "tags": [
+          "ServerSiteResources"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories__added": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_ListByServer",
+        "tags": [
+          "ServerSoftwareInventories"
+        ],
+        "description": "List ServerSoftwareInventory resources by Server",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/{operationStatusName}/{operationStatusName}__added": {
+      "get": {
+        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
+        "tags": [
+          "VmwareSites"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories__added": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_ListByMachineResource",
+        "tags": [
+          "VmwareMachineSoftwareInventories"
+        ],
+        "description": "List VmwareMachineSoftwareInventory resources by MachineResource",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/hypervSites": {
+      "get": {
+        "summary__deleted": "Get all hyperv  sites."
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/importSites": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/masterSites": {
+      "get": {
+        "summary__deleted": "Get all the sites in the subscription.",
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/serverSites": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/vmwareSites": {
+      "get": {
+        "summary__deleted": "Get all vmware sites.",
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites": {
+      "get": {
+        "summary__deleted": "Get all hyperv sites."
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clientGroupMembers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervDependencyMapController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clusters": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervClusterController"
+          ],
+          [
+            "+",
+            "HypervClusters"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clusters/{clusterName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervClusterController"
+          ],
+          [
+            "+",
+            "HypervClusters"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "HypervClusterController"
+          ],
+          [
+            "+",
+            "HypervClusters"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "HypervClusterController"
+          ],
+          [
+            "+",
+            "HypervClusters"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/computeErrorSummary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/computeusage": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/exportApplications": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
+          "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
+        },
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/exportDependencies": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervDependencyMapController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/exportMachineErrors": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
+          "__new": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/generateCoarseMap": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervDependencyMapController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/generateDetailedMap": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervDependencyMapController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/hosts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervHostController"
+          ],
+          [
+            "+",
+            "HypervHosts"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/hosts/{hostName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervHostController"
+          ],
+          [
+            "+",
+            "HypervHosts"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "HypervHostController"
+          ],
+          [
+            "+",
+            "HypervHosts"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "HypervHostController"
+          ],
+          [
+            "+",
+            "HypervHosts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/listHealthSummary": {
+      "post": {
+        "x-ms-pageable__added": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervMachinesController"
+          ],
+          [
+            "+",
+            "HypervMachines"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervMachinesController"
+          ],
+          [
+            "+",
+            "HypervMachines"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "HypervMachinesController"
+          ],
+          [
+            "+",
+            "HypervMachines"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervSoftwareInventoriesController"
+          ],
+          [
+            "+",
+            "HypervVmSoftwareInventories"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervRunAsAccountsController"
+          ],
+          [
+            "+",
+            "HypervRunAsAccountResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervRunAsAccountsController"
+          ],
+          [
+            "+",
+            "HypervRunAsAccountResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/serverGroupMembers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervDependencyMapController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervSitesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/updateDependencyMapStatus": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervDependencyMapController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to enable disable dependency map status for machines\r\n            in a site.",
+          "__new": "Method to enable disable dependency map status for machines\nin a site."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/updateProperties": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "HypervMachinesController"
+          ],
+          [
+            "+",
+            "HypervSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to update custom properties for HYPERV machines\r\n            in a site.",
+          "__new": "Method to update custom properties for HYPERV machines\nin a site."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/deleteImportedMachines": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/deleteJobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "DeleteImportMachinesJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/deleteJobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "DeleteImportMachinesJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/exportJobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "ExportImportedMachinesJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/exportJobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "ExportImportedMachinesJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/exportUri": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/importJobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "ImportMachinesJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/importJobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "ImportMachinesJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/importUri": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ImportSitesController"
+          ],
+          [
+            "+",
+            "ImportSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "ImportJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportJobsController"
+          ],
+          [
+            "+",
+            "ImportJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportMachinesController"
+          ],
+          [
+            "+",
+            "ImportMachines"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ImportMachinesController"
+          ],
+          [
+            "+",
+            "ImportMachines"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "ImportMachinesController"
+          ],
+          [
+            "+",
+            "ImportMachines"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites": {
+      "get": {
+        "summary__deleted": "Get all sites.",
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}": {
+      "get": {
+        "summary__deleted": "Method to get a master site.",
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/errorSummary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "PrivateEndpointConnectionController"
+          ],
+          [
+            "+",
+            "PrivateEndpointConnections"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections/{peConnectionName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "PrivateEndpointConnectionController"
+          ],
+          [
+            "+",
+            "PrivateEndpointConnections"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "PrivateEndpointConnectionController"
+          ],
+          [
+            "+",
+            "PrivateEndpointConnections"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "PrivateEndpointConnectionController"
+          ],
+          [
+            "+",
+            "PrivateEndpointConnections"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "PrivateLinkResourcesController"
+          ],
+          [
+            "+",
+            "PrivateLinkResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "PrivateLinkResourcesController"
+          ],
+          [
+            "+",
+            "PrivateLinkResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/refreshArcStatus": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "MasterSitesController"
+          ],
+          [
+            "+",
+            "MasterSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/discoverySiteDataSources": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlDiscoverySiteDataSourceController"
+          ],
+          [
+            "+",
+            "SqlDiscoverySiteDataSources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/discoverySiteDataSources/{discoverySiteDataSourceName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlDiscoverySiteDataSourceController"
+          ],
+          [
+            "+",
+            "SqlDiscoverySiteDataSources"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "SqlDiscoverySiteDataSourceController"
+          ],
+          [
+            "+",
+            "SqlDiscoverySiteDataSources"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "SqlDiscoverySiteDataSourceController"
+          ],
+          [
+            "+",
+            "SqlDiscoverySiteDataSources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/errorSummary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportSqlServerErrors": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportSqlServers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportUri": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importJobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlImportJobsController"
+          ],
+          [
+            "+",
+            "ImportSqlInventoryJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importJobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlImportJobsController"
+          ],
+          [
+            "+",
+            "ImportSqlInventoryJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importUri": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL to retrieve the status of the asynchronous operation. This must be a full absolute URI and a public-facing endpoint.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/jobs": {
+      "get": {
+        "summary__deleted": "Gets the sql Jobs.",
+        "tags": [
+          [
+            "-",
+            "SqlJobsController"
+          ],
+          [
+            "+",
+            "SqlJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/jobs/{jobName}": {
+      "get": {
+        "summary__deleted": "Gets the sql Job.",
+        "tags": [
+          [
+            "-",
+            "SqlJobsController"
+          ],
+          [
+            "+",
+            "SqlJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/refresh": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/runAsAccounts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlRunAsAccountsController"
+          ],
+          [
+            "+",
+            "SqlRunAsAccounts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/runAsAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlRunAsAccountsController"
+          ],
+          [
+            "+",
+            "SqlRunAsAccounts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlAvailabilityGroups": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlAvailabilityGroupsController"
+          ],
+          [
+            "+",
+            "SqlAvailabilityGroups"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "sqlSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "sqlSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlAvailabilityGroups/{sqlAvailabilityGroupName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlAvailabilityGroupsController"
+          ],
+          [
+            "+",
+            "SqlAvailabilityGroups"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlDatabases": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlDatabasesController"
+          ],
+          [
+            "+",
+            "SqlDatabaseV2s"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "sqlSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "sqlSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlDatabases/{sqlDatabaseName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlDatabasesController"
+          ],
+          [
+            "+",
+            "SqlDatabaseV2s"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlServers": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlServersController"
+          ],
+          [
+            "+",
+            "SqlServerV2s"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "sqlSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "sqlSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlServers/{sqlServerName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SqlServersController"
+          ],
+          [
+            "+",
+            "SqlServerV2s"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "SqlServersController"
+          ],
+          [
+            "+",
+            "SqlServerV2s"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/summary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/validateAndImportUri": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SqlSitesController"
+          ],
+          [
+            "+",
+            "SqlSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/discoverySiteDataSources": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppDiscoverySiteDataSourcesController"
+          ],
+          [
+            "+",
+            "DiscoverySiteDataSources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/discoverySiteDataSources/{discoverySiteDataSourceName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppDiscoverySiteDataSourcesController"
+          ],
+          [
+            "+",
+            "DiscoverySiteDataSources"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "WebAppDiscoverySiteDataSourcesController"
+          ],
+          [
+            "+",
+            "DiscoverySiteDataSources"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "WebAppDiscoverySiteDataSourcesController"
+          ],
+          [
+            "+",
+            "DiscoverySiteDataSources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/errorSummary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/exportInventory": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/extendedMachines": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppExtendedMachinesController"
+          ],
+          [
+            "+",
+            "WebAppExtendedMachines"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/extendedMachines/{extendedMachineName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppExtendedMachinesController"
+          ],
+          [
+            "+",
+            "WebAppExtendedMachines"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/iisWebApplications": {
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/iisWebServers": {
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/refresh": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/runasaccounts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppRunAsAccountsController"
+          ],
+          [
+            "+",
+            "WebAppRunAsAccounts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/runasaccounts/{accountName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebAppRunAsAccountsController"
+          ],
+          [
+            "+",
+            "WebAppRunAsAccounts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/summary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "WebAppSitesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications": {
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications/{webApplicationName}": {
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/TomcatWebApplicationsUpdate",
+                  "__new": "#/definitions/TomcatWebApplicationsTagsUpdate"
+                }
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebServers": {
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/updateProperties": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "WebAppPropertiesController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to update properties for web applications.\n            in a site.",
+          "__new": "Method to update properties for web applications.\nin a site."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/webApplications": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebApplicationsController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/webServers": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "WebServersController"
+          ],
+          [
+            "+",
+            "WebAppSites"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "webAppSiteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/clientGroupMembers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerDependencyMapController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/computeErrorSummary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/computeusage": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/exportApplications": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
+          "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
+        },
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/exportDependencies": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerDependencyMapController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/exportMachineErrors": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
+          "__new": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/generateCoarseMap": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerDependencyMapController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/generateDetailedMap": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerDependencyMapController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerJobsController"
+          ],
+          [
+            "+",
+            "ServerJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerJobsController"
+          ],
+          [
+            "+",
+            "ServerJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/listHealthSummary": {
+      "post": {
+        "x-ms-pageable__added": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServersController"
+          ],
+          [
+            "+",
+            "Servers"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServersController"
+          ],
+          [
+            "+",
+            "Servers"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "ServersController"
+          ],
+          [
+            "+",
+            "Servers"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "ServersController"
+          ],
+          [
+            "+",
+            "Servers"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerSoftwareInventoriesController"
+          ],
+          [
+            "+",
+            "ServerSoftwareInventories"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/runAsAccounts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerRunAsAccountsController"
+          ],
+          [
+            "+",
+            "ServerRunAsAccounts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/runAsAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "ServerRunAsAccountsController"
+          ],
+          [
+            "+",
+            "ServerRunAsAccounts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/serverGroupMembers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerDependencyMapController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/updateDependencyMapStatus": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "description": {
+          "__old": "Method to enable disable dependency map status for machines\r\n            in a site.",
+          "__new": "Method to enable disable dependency map status for machines\nin a site."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/updateProperties": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "ServerSitesController"
+          ],
+          [
+            "+",
+            "ServerSiteResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites": {
+      "get": {
+        "summary__deleted": "Get all vmware sites.",
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/clientGroupMembers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "DependencyMapController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/computeErrorSummary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/computeusage": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportApplications": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
+          "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
+        },
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "type__deleted": "object"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportDependencies": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "DependencyMapController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportMachineErrors": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
+          "__new": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportMachines": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.",
+          "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/generateCoarseMap": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "DependencyMapController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/generateDetailedMap": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "DependencyMapController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/hosts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "VmwareHostController"
+          ],
+          [
+            "+",
+            "VmwareHosts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/hosts/{hostName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "VmwareHostController"
+          ],
+          [
+            "+",
+            "VmwareHosts"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervJobsController"
+          ],
+          [
+            "+",
+            "VmwareJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "HypervJobsController"
+          ],
+          [
+            "+",
+            "VmwareJobs"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/listHealthSummary": {
+      "post": {
+        "x-ms-pageable__added": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "MachinesController"
+          ],
+          [
+            "+",
+            "MachineResources"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "MachinesController"
+          ],
+          [
+            "+",
+            "MachineResources"
+          ]
+        ]
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "MachinesController"
+          ],
+          [
+            "+",
+            "MachineResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "VmwareSoftwareInventoriesController"
+          ],
+          [
+            "+",
+            "VmwareMachineSoftwareInventories"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/start": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "MachinesController"
+          ],
+          [
+            "+",
+            "MachineResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/stop": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "MachinesController"
+          ],
+          [
+            "+",
+            "MachineResources"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "RunAsAccountsController"
+          ],
+          [
+            "+",
+            "VmwareRunAsAccountResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "RunAsAccountsController"
+          ],
+          [
+            "+",
+            "VmwareRunAsAccountResources"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/serverGroupMembers": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "DependencyMapController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "SitesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateDependencyMapStatus": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "VmwarePropertiesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to enable disable dependency map status for machines\n            in a\nsite.",
+          "__new": "Method to enable disable dependency map status for machines\nin a\nsite."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateProperties": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "VmwarePropertiesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateRunAsAccount": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "VmwarePropertiesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to associate Run as account to machine\r\n            in a site.",
+          "__new": "Method to associate Run as account to machine\nin a site."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateTags": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "VmwarePropertiesController"
+          ],
+          [
+            "+",
+            "VmwareSites"
+          ]
+        ],
+        "description": {
+          "__old": "Method to associate Run as account to machine\r\n            in a site.",
+          "__new": "Method to associate Run as account to machine\nin a site."
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "object"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/vcenters": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "VcenterController"
+          ],
+          [
+            "+",
+            "Vcenters"
+          ]
+        ],
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "siteName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/vcenters/{vcenterName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "VcenterController"
+          ],
+          [
+            "+",
+            "Vcenters"
+          ]
+        ]
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "VcenterController"
+          ],
+          [
+            "+",
+            "Vcenters"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "VcenterController"
+          ],
+          [
+            "+",
+            "Vcenters"
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.Object__deleted": {
+      "type": "object",
+      "description": "object model"
+    },
+    "DeleteImportMachinesJobCollection__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/DeleteImportMachinesJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HypervOperationsStatusResource__deleted": {
+      "type": "object",
+      "description": "A cluster resource belonging to a site resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HypervClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MachineResourceId__deleted": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HybridCompute/machines"
+          }
+        ]
+      }
+    },
+    "Object__deleted": {
+      "type": "object",
+      "description": "object model"
+    },
+    "TomcatWebApplicationsUpdate__deleted": {
+      "type": "object",
+      "description": "The type used for update operations of the TomcatWebApplications."
+    },
+    "V20180501PreviewVmwareRunAsAccount__deleted": {
+      "type": "object",
+      "description": "Run as account REST Resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Relative URL to get this run as account.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the Name of the Run as account.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Handled by resource provider. Type =\nMicrosoft.OffAzure/VMWareSites/RunAsAccounts.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RunAsAccountProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "V20180501PreviewVmwareRunAsAccountVmwareRunAsAccountCollection__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/V20180501PreviewVmwareRunAsAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "Azure.ResourceManager.ArmResponse<unknown>__added": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "TomcatWebApplicationsTagsUpdate__added": {
+      "type": "object",
+      "description": "The type used for updating tags in TomcatWebApplications resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationDiscovery": {
+      "properties": {
+        "hydratedRunAsAccountId": {
+          "description": {
+            "__old": "Gets the run as account ID with which feature worked successfully.\n           \nIt is discovered by the agent from the list of credentials.",
+            "__new": "Gets the run as account ID with which feature worked successfully.\n\nIt is discovered by the agent from the list of credentials."
+          }
+        }
+      }
+    },
+    "ArcDiscovery": {
+      "properties": {
+        "machineResourceId": {
+          "description": {
+            "__old": "A type definition that refers the id to an ARM resource.",
+            "__new": "Machine Resource Id."
+          }
+        }
+      }
+    },
+    "ArcScopeProperties": {
+      "properties": {
+        "subscriptionOrResourceGroupIds": {
+          "items": {
+            "description__added": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
+    "ArcScopePropertiesUpdate": {
+      "properties": {
+        "subscriptionOrResourceGroupIds": {
+          "items": {
+            "description": {
+              "__old": "An array of ARM resource IDs for subscriptions or resource groups.",
+              "__new": "A type definition that refers the id to an Azure Resource Manager resource."
+            }
+          }
+        }
+      }
+    },
+    "DeleteImportMachinesJob": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "DependencyMapDiscovery": {
+      "properties": {
+        "hydratedRunAsAccountId": {
+          "description": {
+            "__old": "Gets the run as account ID with which feature worked successfully.\n           \nIt is discovered by the agent from the list of credentials.",
+            "__new": "Gets the run as account ID with which feature worked successfully.\n\nIt is discovered by the agent from the list of credentials."
+          }
+        }
+      }
+    },
+    "DependencyMapMachineInput": {
+      "properties": {
+        "isDependencyMapToBeEnabled": {
+          "description": {
+            "__old": "Gets or sets a value indicating whether\n            dependency mapping is to\nbe enabled or not.",
+            "__new": "Gets or sets a value indicating whether\ndependency mapping is to\nbe enabled or not."
+          }
+        }
+      }
+    },
+    "DependencyMapServiceMapextensionsClientGroupMembersRequest": {
+      "properties": {
+        "processGroupName": {
+          "description": {
+            "__old": "process group name ",
+            "__new": "process group name"
+          }
+        }
+      }
+    },
+    "DiscoverySiteDataSource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ExportImportedMachinesJob": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "type__deleted": {
+          "type": "string",
+          "description": "Type name for export job.",
+          "readOnly": true
+        },
+        "id__deleted": {
+          "type": "string",
+          "description": "Gets or sets the relative ARM name to get job."
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "Gets or sets the Job ID."
+        }
+      }
+    },
+    "ExportImportedMachinesJobEntityProperties": {
+      "description": {
+        "__old": " Export Imported Machines JobEntity Properties ",
+        "__new": "Export Imported Machines JobEntity Properties"
+      }
+    },
+    "GuestOsDetails": {
+      "description": {
+        "__old": "Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object. ",
+        "__new": "Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object."
+      }
+    },
+    "HypervCluster": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "HypervHost": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "HypervJob": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "HypervMachine": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "HypervMachineProperties": {
+      "properties": {
+        "managementServerType": {
+          "description": {
+            "__old": "Management server type captured as a string representation of the\n           \n{Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType}\nenumeration.",
+            "__new": "Management server type captured as a string representation of the\n\n{Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType}\nenumeration."
+          }
+        },
+        "guestOsDetails": {
+          "description": {
+            "__old": "Operating System Details extracted from the guest             bu executing script inside the guest VM. ",
+            "__new": "Operating System Details extracted from the guest             bu executing script inside the guest VM."
+          }
+        },
+        "guestDetailsDiscoveryTimestamp": {
+          "description": {
+            "__old": "The last time at which the Guest Details was discovered\n            or the\nerror while discovering guest details based discovery\n            of the\nmachine.",
+            "__new": "The last time at which the Guest Details was discovered\nor the\nerror while discovering guest details based discovery\nof the\nmachine."
+          }
+        },
+        "isGuestDetailsDiscoveryInProgress": {
+          "description": {
+            "__old": "Whether Refresh Fabric Layout Guest Details has been completed once.\n         \n  Portal will show discovery in progress, if this value is true.",
+            "__new": "Whether Refresh Fabric Layout Guest Details has been completed once.\n\nPortal will show discovery in progress, if this value is true."
+          }
+        },
+        "dependencyMapping": {
+          "description": {
+            "__old": "Gets or sets if dependency mapping feature is enabled or not\n            for\nthe VM.",
+            "__new": "Gets or sets if dependency mapping feature is enabled or not\nfor\nthe VM."
+          }
+        },
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        }
+      }
+    },
+    "HypervMachineUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the HypervMachine."
+        }
+      }
+    },
+    "HypervMachineUpdateProperties": {
+      "properties": {
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        }
+      }
+    },
+    "HypervRunAsAccountResource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "HypervSite": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "HypervSiteUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the HypervSite."
+        }
+      }
+    },
+    "HypervSiteUpdateProperties": {
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "description": {
+            "__old": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service.",
+            "__new": "Gets or sets the service principal identity details used by agent for\ncommunication\nto the service."
+          }
+        }
+      }
+    },
+    "HypervVmSoftwareInventory": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "IisWebApplications": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "IisWebApplicationsUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the IisWebApplications."
+        }
+      }
+    },
+    "IisWebServers": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ImportJob": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ImportMachine": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ImportMachineProperties": {
+      "properties": {
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        },
+        "discoverySource": {
+          "enum": [
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "ImportCsvServer"
+            ],
+            [
+              "+",
+              "ImportRvTools"
+            ]
+          ]
+        }
+      }
+    },
+    "ImportMachinesJob": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "type__deleted": {
+          "type": "string",
+          "description": "Handled by resource provider. Type =\nMicrosoft.OffAzure/ImportSites/jobs/importJobs.",
+          "readOnly": true
+        },
+        "id__deleted": {
+          "type": "string",
+          "description": "Gets or sets the relative ARM name to get job."
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "Gets or sets the Job ID."
+        }
+      }
+    },
+    "ImportSite": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ImportSiteUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the ImportSite."
+        }
+      }
+    },
+    "ImportSqlInventoryJob": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "Resource Name",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "Resource Type",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportSqlInventoryJobProperties": {
+      "properties": {
+        "blobSasUri": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "MachineResource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "MachineResourceUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the MachineResource."
+        }
+      }
+    },
+    "MachineResourceUpdateProperties": {
+      "properties": {
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        }
+      }
+    },
+    "MasterSite": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "MasterSiteProperties": {
+      "properties": {
+        "sites": {
+          "description": {
+            "__old": "Gets or sets the sites that are a part of Master Site.\n            The key\nshould contain the Site ARM name.",
+            "__new": "Gets or sets the sites that are a part of Master Site.\nThe key\nshould contain the Site ARM name."
+          }
+        }
+      }
+    },
+    "MasterSiteUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the MasterSite."
+        }
+      }
+    },
+    "MasterSiteUpdateProperties": {
+      "properties": {
+        "sites": {
+          "description": {
+            "__old": "Gets or sets the sites that are a part of Master Site.\n            The key\nshould contain the Site ARM name.",
+            "__new": "Gets or sets the sites that are a part of Master Site.\nThe key\nshould contain the Site ARM name."
+          }
+        }
+      }
+    },
+    "OperationStatus": {
+      "properties": {
+        "status": {
+          "description": {
+            "__old": "Gets the status of the operation. ARM expects the terminal status to be one\nof\n            Succeeded/ Failed/ Canceled. All other values imply that the\noperation is still running.",
+            "__new": "Gets the status of the operation. ARM expects the terminal status to be one\nof\nSucceeded/ Failed/ Canceled. All other values imply that the\noperation is still running."
+          }
+        }
+      }
+    },
+    "PagedDeleteImportMachinesJob": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "PagedExportImportedMachinesJob": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "PagedImportMachinesJob": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "PagedImportSqlInventoryJob": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SasUriResponse": {
+      "properties": {
+        "importType": {
+          "default__deleted": "AzureMigrateCSV"
+        }
+      }
+    },
+    "Server": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ServerJob": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ServerProperties": {
+      "properties": {
+        "displayName": {
+          "description": {
+            "__old": "Gets the Display name of the machine.\n            For server entity hydrated\nFQDN is set as display name\n            as the server id and server name are\nsame.",
+            "__new": "Gets the Display name of the machine.\nFor server entity hydrated\nFQDN is set as display name\nas the server id and server name are\nsame."
+          }
+        },
+        "guestOsDetails": {
+          "description": {
+            "__old": "Operating System Details extracted from the guest\n            bu executing\nscript inside the guest VM.",
+            "__new": "Operating System Details extracted from the guest\nbu executing\nscript inside the guest VM."
+          }
+        },
+        "guestDetailsDiscoveryTimestamp": {
+          "description": {
+            "__old": "The last time at which the Guest Details was discovered\n            or the\nerror while discovering guest details based discovery\n            of the\nmachine.",
+            "__new": "The last time at which the Guest Details was discovered\nor the\nerror while discovering guest details based discovery\nof the\nmachine."
+          }
+        },
+        "isGuestDetailsDiscoveryInProgress": {
+          "description": {
+            "__old": "Whether Refresh Fabric Layout Guest Details has been completed once.\n         \n  Portal will show discovery in progress, if this value is true.",
+            "__new": "Whether Refresh Fabric Layout Guest Details has been completed once.\n\nPortal will show discovery in progress, if this value is true."
+          }
+        },
+        "dependencyMapping": {
+          "description": {
+            "__old": "Gets or sets if dependency mapping feature is enabled or not\n            for\nthe VM.",
+            "__new": "Gets or sets if dependency mapping feature is enabled or not\nfor\nthe VM."
+          }
+        },
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        },
+        "tags": {
+          "additionalProperties": {
+            "$ref__deleted": "#/definitions/Azure.ResourceManager.Object"
+          }
+        },
+        "discoverySource": {
+          "enum": [
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "ImportCsvServer"
+            ],
+            [
+              "+",
+              "ImportRvTools"
+            ]
+          ]
+        }
+      }
+    },
+    "ServerRunAsAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ServerSiteResource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ServerSiteResourceUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the ServerSiteResource."
+        }
+      }
+    },
+    "ServerSiteResourceUpdateProperties": {
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "description": {
+            "__old": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service.",
+            "__new": "Gets or sets the service principal identity details used by agent for\ncommunication\nto the service."
+          }
+        }
+      }
+    },
+    "ServerSoftwareInventory": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "ServerUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the Server."
+        }
+      }
+    },
+    "ServerUpdateProperties": {
+      "properties": {
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        },
+        "tags": {
+          "additionalProperties": {
+            "$ref__deleted": "#/definitions/Azure.ResourceManager.Object"
+          }
+        }
+      }
+    },
+    "SiteApplianceProperties": {
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "description": {
+            "__old": " Gets or sets the service principal identity details used by agent for  communication              to the service.  ",
+            "__new": "Gets or sets the service principal identity details used by agent for  communication              to the service."
+          }
+        }
+      }
+    },
+    "SiteHealthSummaryCollection": {
+      "properties": {
+        "value": {
+          "x-ms-identifiers__deleted": [
+            "applianceName"
+          ]
+        }
+      }
+    },
+    "SiteProperties": {
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "description": {
+            "__old": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service.",
+            "__new": "Gets or sets the service principal identity details used by agent for\ncommunication\nto the service."
+          }
+        }
+      }
+    },
+    "SiteSpnProperties": {
+      "properties": {
+        "tenantId": {
+          "description": {
+            "__old": "Gets or sets the tenant Id for the service principal with which the\non-premise\n            management/data plane components would communicate with\nour Azure services.",
+            "__new": "Gets or sets the tenant Id for the service principal with which the\non-premise\nmanagement/data plane components would communicate with\nour Azure services."
+          }
+        },
+        "applicationId": {
+          "description": {
+            "__old": "Gets or sets the application/client Id for the service principal with which\nthe\n            on-premise management/data plane components would communicate\nwith our Azure \n            services.",
+            "__new": "Gets or sets the application/client Id for the service principal with which\nthe\non-premise management/data plane components would communicate\nwith our Azure\nservices."
+          }
+        },
+        "objectId": {
+          "description": {
+            "__old": "Gets or sets the object Id of the service principal with which the on-premise\n\n           management/data plane components would communicate with our Azure\nservices.",
+            "__new": "Gets or sets the object Id of the service principal with which the on-premise\n\nmanagement/data plane components would communicate with our Azure\nservices."
+          }
+        },
+        "aadAuthority": {
+          "description": {
+            "__old": "Gets or sets the AAD Authority URL which was used to request the token for\nthe\n            service principal.",
+            "__new": "Gets or sets the AAD Authority URL which was used to request the token for\nthe\nservice principal."
+          }
+        },
+        "machineResourceId": {
+          "description": {
+            "__old": "A type definition that refers the id to an ARM resource.",
+            "__new": "Gets or sets the ARM ID of the arc for servers resource."
+          }
+        }
+      }
+    },
+    "SitesProperties": {
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "description": {
+            "__old": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service.",
+            "__new": "Gets or sets the service principal identity details used by agent for\ncommunication\nto the service."
+          }
+        }
+      }
+    },
+    "SqlAvailabilityGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlAvailabilityGroupProperties": {
+      "properties": {
+        "parentReplicaOverviewList": {
+          "description": {
+            "__old": "Gets the parent availability replica overview if any.\n            This would be\nset with details of parent AG and AR for cases where this availability group is\na part of a distributed AG.\n            Currently, we do not populate this\nsince discovery and linking of DAG(Distributed Availability Group) is not\nimplemented.",
+            "__new": "Gets the parent availability replica overview if any.\nThis would be\nset with details of parent AG and AR for cases where this availability group is\na part of a distributed AG.\nCurrently, we do not populate this\nsince discovery and linking of DAG(Distributed Availability Group) is not\nimplemented."
+          }
+        },
+        "discoverySource": {
+          "enum": [
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "ImportCsvServer"
+            ],
+            [
+              "+",
+              "ImportRvTools"
+            ]
+          ]
+        }
+      }
+    },
+    "SqlAvailabilityReplicaProperties": {
+      "properties": {
+        "sqlDatabaseReplicaInfo": {
+          "description": {
+            "__old": "Gets or sets the Availability Replica object if Replica is of type database.\nThis is null in case Replica is\n            of type AG. This is to be populated\nin case of normal AG.",
+            "__new": "Gets or sets the Availability Replica object if Replica is of type database.\nThis is null in case Replica is\nof type AG. This is to be populated\nin case of normal AG."
+          }
+        },
+        "sqlAvailabilityGroupReplicaInfo": {
+          "description": {
+            "__old": "Gets or sets the Availability Replica object if Replica is of type AG. This is\nnull in case Replica is\n            of type database. This is to be populated\nin case AG is of type DAG.",
+            "__new": "Gets or sets the Availability Replica object if Replica is of type AG. This is\nnull in case Replica is\nof type database. This is to be populated\nin case AG is of type DAG."
+          }
+        }
+      }
+    },
+    "SqlDatabasePropertiesV2": {
+      "properties": {
+        "discoverySource": {
+          "enum": [
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "ImportCsvServer"
+            ],
+            [
+              "+",
+              "ImportRvTools"
+            ]
+          ]
+        }
+      }
+    },
+    "SqlDatabaseV2": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlDiscovery": {
+      "properties": {
+        "successfullyDiscoveredServerCount": {
+          "description": {
+            "__old": " successfully Discovered ServerCount",
+            "__new": "successfully Discovered ServerCount"
+          }
+        }
+      }
+    },
+    "SqlDiscoverySiteDataSource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlFciProperties": {
+      "properties": {
+        "state": {
+          "description": {
+            "__old": "fci instance state ",
+            "__new": "fci instance state"
+          }
+        }
+      }
+    },
+    "SqlJob": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlMachineOverview": {
+      "properties": {
+        "fciRole": {
+          "description": {
+            "__old": "sql fci role ",
+            "__new": "sql fci role"
+          }
+        }
+      }
+    },
+    "SqlRunAsAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlServerProperties": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "$ref__deleted": "#/definitions/Azure.ResourceManager.Object"
+          }
+        },
+        "discoverySource": {
+          "enum": [
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "ImportCsvServer"
+            ],
+            [
+              "+",
+              "ImportRvTools"
+            ]
+          ]
+        }
+      }
+    },
+    "SqlServerV2": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlServerV2Update": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the SqlServerV2."
+        }
+      }
+    },
+    "SqlServerV2UpdateProperties": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "$ref__deleted": "#/definitions/Azure.ResourceManager.Object"
+          }
+        }
+      }
+    },
+    "SqlSite": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "SqlSiteProperties": {
+      "properties": {
+        "siteAppliancePropertiesCollection": {
+          "description": {
+            "__old": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
+            "__new": "Gets or sets the appliance details used by service to communicate\n\nto the appliance."
+          }
+        }
+      }
+    },
+    "SqlSiteUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the SqlSite."
+        }
+      }
+    },
+    "SqlSiteUpdateProperties": {
+      "properties": {
+        "siteAppliancePropertiesCollection": {
+          "description": {
+            "__old": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
+            "__new": "Gets or sets the appliance details used by service to communicate\n\nto the appliance."
+          }
+        }
+      }
+    },
+    "StaticDiscovery": {
+      "properties": {
+        "hydratedRunAsAccountId": {
+          "description": {
+            "__old": "Gets the run as account ID with which feature worked successfully.\n           \nIt is discovered by the agent from the list of credentials.",
+            "__new": "Gets the run as account ID with which feature worked successfully.\n\nIt is discovered by the agent from the list of credentials."
+          }
+        }
+      }
+    },
+    "TomcatWebApplications": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "TomcatWebServers": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "UpdateMachineDepMapStatus": {
+      "description": {
+        "__old": "Defines class that represents input to enable or disable DMP on machine\n      \n      for cosmos entity operation.",
+        "__new": "Defines class that represents input to enable or disable DMP on machine\n\nfor cosmos entity operation."
+      }
+    },
+    "UpdateMachineRunAsAccount": {
+      "description": {
+        "__old": "Defines class that represents input to update RunAsAccount on machine\n      \n      for cosmos entity operation.",
+        "__new": "Defines class that represents input to update RunAsAccount on machine\n\nfor cosmos entity operation."
+      }
+    },
+    "UpdateMachineTags": {
+      "description": {
+        "__old": "Defines class that represents input to update Tags on machine\n      \n      for cosmos entity operation.",
+        "__new": "Defines class that represents input to update Tags on machine\n\nfor cosmos entity operation."
+      }
+    },
+    "Vcenter": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VmwareDisk": {
+      "properties": {
+        "diskProvisioningPolicy": {
+          "description": {
+            "__old": "The provisioning policy of the disk.\n            It is Thin or Thick or\nUnknown for the VMWare VMDK.",
+            "__new": "The provisioning policy of the disk.\nIt is Thin or Thick or\nUnknown for the VMWare VMDK."
+          }
+        },
+        "diskScrubbingPolicy": {
+          "description": {
+            "__old": "The scrubbing policy of disks which can be\n            eagerly zeroed or\nlazily zeroed.",
+            "__new": "The scrubbing policy of disks which can be\neagerly zeroed or\nlazily zeroed."
+          }
+        }
+      }
+    },
+    "VmwareHost": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VmwareJob": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VmwareMachineProperties": {
+      "properties": {
+        "guestOsDetails": {
+          "description": {
+            "__old": "Operating System Details extracted from the guest\n            bu executing\nscript inside the guest VM.",
+            "__new": "Operating System Details extracted from the guest\nbu executing\nscript inside the guest VM."
+          }
+        },
+        "guestDetailsDiscoveryTimestamp": {
+          "description": {
+            "__old": "The last time at which the Guest Details was discovered\n            or the\nerror while discovering guest details based discovery\n            of the\nmachine.",
+            "__new": "The last time at which the Guest Details was discovered\nor the\nerror while discovering guest details based discovery\nof the\nmachine."
+          }
+        },
+        "isGuestDetailsDiscoveryInProgress": {
+          "description": {
+            "__old": "Whether Refresh Fabric Layout Guest Details has been completed once.\n         \n  Portal will show discovery in progress, if this value is true.",
+            "__new": "Whether Refresh Fabric Layout Guest Details has been completed once.\n\nPortal will show discovery in progress, if this value is true."
+          }
+        },
+        "dependencyMapping": {
+          "description": {
+            "__old": "Gets or sets if dependency mapping feature is enabled or not\n            for\nthe VM.",
+            "__new": "Gets or sets if dependency mapping feature is enabled or not\nfor\nthe VM."
+          }
+        },
+        "numberOfProcessorCore": {
+          "description": {
+            "__old": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine.",
+            "__new": "Gets or sets the Number of Processor Cores\nallocated for the\nmachine."
+          }
+        }
+      }
+    },
+    "VmwareMachineSoftwareInventory": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VmwareRunAsAccountResource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VmwareSite": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VmwareSiteUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the VmwareSite."
+        }
+      }
+    },
+    "VmwareSiteUpdateProperties": {
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "description": {
+            "__old": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service.",
+            "__new": "Gets or sets the service principal identity details used by agent for\ncommunication\nto the service."
+          }
+        }
+      }
+    },
+    "WebAppExtendedMachine": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "WebAppRunAsAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "WebAppSite": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "WebAppSiteProperties": {
+      "properties": {
+        "siteAppliancePropertiesCollection": {
+          "description": {
+            "__old": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
+            "__new": "Gets or sets the appliance details used by service to communicate\n\nto the appliance."
+          }
+        }
+      }
+    },
+    "WebAppSiteUpdate": {
+      "properties": {
+        "properties": {
+          "description__added": "The updatable properties of the WebAppSite."
+        }
+      }
+    },
+    "WebAppSiteUpdateProperties": {
+      "properties": {
+        "siteAppliancePropertiesCollection": {
+          "description": {
+            "__old": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
+            "__new": "Gets or sets the appliance details used by service to communicate\n\nto the appliance."
+          }
+        }
+      }
+    },
+    "WebApplicationDirectoryUnit": {
+      "properties": {
+        "isEditable": {
+          "description": {
+            "__old": "Gets or sets a value indicating whether the directory object is editable.\n     \n      True when the directory is added as an optional directory, false when\ndiscovery is done\n            manually.",
+            "__new": "Gets or sets a value indicating whether the directory object is editable.\n\nTrue when the directory is added as an optional directory, false when\ndiscovery is done\nmanually."
+          }
+        }
+      }
+    }
+  }
+}

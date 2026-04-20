@@ -91,7 +91,7 @@ interface SqlSites {
   exportSqlServerErrors is ArmResourceActionAsync<
     SqlSite,
     unknown,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -102,7 +102,7 @@ interface SqlSites {
   exportSqlServers is ArmResourceActionAsync<
     SqlSite,
     ExportSqlServersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -113,7 +113,7 @@ interface SqlSites {
   refresh is ArmResourceActionAsync<
     SqlSite,
     SqlSiteRefreshBody,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**

@@ -105,7 +105,7 @@ interface ServerSiteResources {
   exportApplications is ArmResourceActionAsync<
     ServerSiteResource,
     unknown,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -117,7 +117,7 @@ interface ServerSiteResources {
   exportMachineErrors is ArmResourceActionAsync<
     ServerSiteResource,
     ExportMachineErrorsRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -140,7 +140,7 @@ interface ServerSiteResources {
   refreshSite is ArmResourceActionAsync<
     ServerSiteResource,
     void,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -163,7 +163,7 @@ interface ServerSiteResources {
   updateDependencyMapStatus is ArmResourceActionAsync<
     ServerSiteResource,
     UpdateMachineDepMapStatus,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -174,7 +174,7 @@ interface ServerSiteResources {
   updateProperties is ArmResourceActionAsync<
     ServerSiteResource,
     MachineMetadataCollection,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -185,7 +185,7 @@ interface ServerSiteResources {
   clientGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -196,7 +196,7 @@ interface ServerSiteResources {
   exportDependencies is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -207,7 +207,7 @@ interface ServerSiteResources {
   generateCoarseMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -218,7 +218,7 @@ interface ServerSiteResources {
   generateDetailedMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
@@ -229,7 +229,7 @@ interface ServerSiteResources {
   serverGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**
