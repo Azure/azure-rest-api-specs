@@ -29,9 +29,6 @@ title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
 tag: package-2025-07-01
-directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: The vmssNetwork.json (2018-10-01) is required in the default tag alongside 2025-07-01 swaggers for backward compatibility.
 ```
 
 ### Tag: package-2025-07-01
@@ -60,8 +57,6 @@ input-file:
 suppressions:
   - code: ParametersInPointGet
     from: loadBalancer.json
-    where:
-      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}'].get
     reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
   - code: ProvisioningStateMustBeReadOnly
     from: networkManager.json
