@@ -15884,37 +15884,13 @@
           "blobReference": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ModelBlobReferenceForConsumption"
+                "$ref": "#/components/schemas/BlobReference"
               }
             ],
             "description": "Blob reference with credentials."
           }
         },
         "description": "Response containing credentials for a model asset."
-      },
-      "ModelBlobReferenceForConsumption": {
-        "type": "object",
-        "properties": {
-          "blobUri": {
-            "type": "string",
-            "format": "uri",
-            "description": "The blob URI."
-          },
-          "credential": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SasCredential"
-              }
-            ],
-            "description": "Credential for accessing the blob."
-          },
-          "storageAccountArmId": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "ARM resource ID of the storage account."
-          }
-        },
-        "description": "A blob reference with temporary credentials for consumption."
       },
       "ModelDeployment": {
         "type": "object",
@@ -16067,7 +16043,7 @@
           "blobReferenceForConsumption": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ModelBlobReferenceForConsumption"
+                "$ref": "#/components/schemas/BlobReference"
               }
             ],
             "description": "Blob reference for consumption with temporary credentials."

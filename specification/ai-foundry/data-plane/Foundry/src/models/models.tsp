@@ -52,22 +52,10 @@ model ModelPendingUploadRequest {
   pendingUploadType: PendingUploadType;
 }
 
-@doc("A blob reference with temporary credentials for consumption.")
-model ModelBlobReferenceForConsumption {
-  @doc("The blob URI.")
-  blobUri?: url;
-
-  @doc("Credential for accessing the blob.")
-  credential?: SasCredential;
-
-  @doc("ARM resource ID of the storage account.")
-  storageAccountArmId?: Azure.Core.armResourceIdentifier<[{ type: "Microsoft.Storage/storageAccounts" }]>;
-}
-
 @doc("Temporary data reference returned for a pending upload.")
 model ModelTemporaryDataReference {
   @doc("Blob reference for consumption with temporary credentials.")
-  blobReferenceForConsumption?: ModelBlobReferenceForConsumption;
+  blobReferenceForConsumption?: BlobReference;
 
   @doc("Pending upload ID.")
   pendingUploadId?: string;
@@ -88,7 +76,7 @@ model ModelAssetCredentialRequest {
 @doc("Response containing credentials for a model asset.")
 model ModelAssetCredentialResponse {
   @doc("Blob reference with credentials.")
-  blobReference?: ModelBlobReferenceForConsumption;
+  blobReference?: BlobReference;
 }
 
 @doc("Accepted response for asynchronous model version creation, with polling location.")
