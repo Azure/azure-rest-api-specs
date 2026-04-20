@@ -88,14 +88,14 @@ model MessagingEndpoint {
 
   @added(Versions.v2025_07_01_preview)
   @madeOptional(Versions.v2026_11_01_preview)
-  @doc("The service-facing endpoint address.")
+  @doc("The endpoint address used by services.")
   address?: string;
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
 
   @added(Versions.v2026_11_01_preview)
-  @doc("The device-facing endpoint address.")
+  @doc("The endpoint address used by devices.")
   @visibility(Lifecycle.Read)
   deviceAddress?: string;
 
