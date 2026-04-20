@@ -1,3 +1,7 @@
+# SDK Workflow
+
+For anything related to SDK generation/development/verification/release see [here](../eng/common/instructions/azsdk-tools/)
+
 # New TypeSpec projects
 
 Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.instructions.md) for detailed steps on:
