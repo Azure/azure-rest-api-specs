@@ -263,12 +263,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 // GO SPECIFICATION
 /** The type of blob deletions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
-enum BlobDeleteTypeGo {
+enum BlobDeleteTypeCustom {
+  /** None. */
+  None: "None",
+
   /** Permanently delete the blob. */
   Permanent: "Permanent",
-
-  /** Deprecated */
-  None: "None",
 }
 /** Represents a blob prefix. */
 @Xml.name("BlobPrefix")
@@ -444,12 +444,12 @@ model BlobPropertiesGo {
 }
 /** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
-enum EncryptionAlgorithmTypeGo {
-  /** The AES256 encryption algorithm. */
-  AES256: "AES256",
-
+enum EncryptionAlgorithmTypeCustom {
   /** Deprecated */
   None: "None",
+
+  /** AES256 */
+  AES256: "AES256",
 }
 /** The list blob includes parameter values. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
@@ -501,7 +501,7 @@ enum ImmutabilityPolicySetting {
 model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
-@@alternateType(BlobDeleteType, BlobDeleteTypeGo, "go");
+@@alternateType(BlobDeleteType, BlobDeleteTypeCustom, "go");
 @@alternateType(BlobItem.name, string, "go");
 @@alternateType(BlobItem.metadata, Record<string>, "go");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "go");
@@ -515,7 +515,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ConditionalRequestHeaders.ifMatch, Azure.Core.eTag, "go");
 @@alternateType(ConditionalRequestHeaders.ifNoneMatch, Azure.Core.eTag, "go");
 @@alternateType(EncryptionAlgorithmParameter.encryptionAlgorithm,
-  EncryptionAlgorithmTypeGo,
+  EncryptionAlgorithmTypeCustom,
   "go"
 );
 @@alternateType(ExpiryTimeParameter.expiresOn, string, "go");
@@ -524,7 +524,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@alternateType(SourceEncryptionAlgorithmParameter.sourceEncryptionAlgorithm,
-  EncryptionAlgorithmTypeGo,
+  EncryptionAlgorithmTypeCustom,
   "go"
 );
 @@alternateType(ListBlobsIncludeParameter.include,
@@ -539,7 +539,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(BlobCopySourceTags.Copy, "COPY", "go");
 @@clientName(BlobCopySourceTags.Replace, "REPLACE", "go");
 @@clientName(BlobServiceClient, "ServiceClient", "go");
-@@clientName(BlobDeleteTypeGo, "DeleteType", "go");
+@@clientName(BlobDeleteTypeCustom, "DeleteType", "go");
 @@clientName(BlobExpiryOptions, "ExpiryOptions", "go");
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "go");
 @@clientName(BlobPublicAccessResponseHeader.access, "BlobPublicAccess", "go");
@@ -552,7 +552,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@clientName(Error, "StorageError", "go");
-@@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
+@@clientName(EncryptionAlgorithmTypeCustom, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");
 @@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyExpiresOn,
   "ImmutabilityPolicyExpiry",
@@ -733,6 +733,7 @@ model BlobServicePropertiesCsharp {
   @Xml.name("Cors") cors?: CorsRule[];
 }
 
+@@alternateType(BlobDeleteType, BlobDeleteTypeCustom, "csharp");
 @@alternateType(BlobServiceProperties, BlobServicePropertiesCsharp, "csharp");
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
@@ -750,6 +751,10 @@ model BlobServicePropertiesCsharp {
 @@alternateType(IfBlobMatchHeader.ifMatch, string, "csharp");
 @@alternateType(IfBlobNoneMatchHeader.ifNoneMatch, string, "csharp");
 @@alternateType(BlockIdParameter.blockid, string, "csharp");
+@@alternateType(EncryptionAlgorithmType,
+  EncryptionAlgorithmTypeCustom,
+  "csharp"
+);
 
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "csharp");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
@@ -803,6 +808,11 @@ model BlobServicePropertiesCsharp {
   "transactionalContentMD5",
   "csharp"
 );
+@@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "csharp");
+@@clientName(EncryptionAlgorithmTypeCustom,
+  "EncryptionAlgorithmType",
+  "csharp"
+);
 
 @@access(BlobProperties, Access.internal, "csharp");
 @@access(BlobItem, Access.internal, "csharp");
@@ -812,6 +822,7 @@ model BlobServicePropertiesCsharp {
 @@access(ContainerProperties, Access.internal, "csharp");
 @@access(DelimitedTextConfiguration, Access.internal, "csharp");
 @@access(JsonTextConfiguration, Access.internal, "csharp");
+@@access(BlobDeleteTypeCustom, Access.internal, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(MetadataHeaders.metadata,
