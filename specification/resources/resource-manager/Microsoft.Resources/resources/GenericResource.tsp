@@ -79,15 +79,15 @@ model GenericResource extends Foundations.ProxyResource {
 }
 
 alias genericOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {},
   {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing parameter from original swagger"
+    @path(#{ allowReserved: true }) @key resourceId: string;
+
     /** The API version to use for this operation. */
     @apiVersion(false)
     @query("api-version")
     apiVersion: string;
-  },
-  {
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing parameter from original swagger"
-    @path(#{ allowReserved: true }) @key resourceId: string;
   },
   CloudError
 >;
@@ -133,11 +133,6 @@ interface Resources {
 
 alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
-    /** The API version to use for this operation. */
-    @apiVersion(false)
-    @query("api-version")
-    apiVersion: string;
-
     ...SubscriptionIdParameter;
 
     /**
@@ -168,6 +163,11 @@ alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @key
     resourceName: string;
+
+    /** The API version to use for this operation. */
+    @apiVersion(false)
+    @query("api-version")
+    apiVersion: string;
   },
   CloudError
 >;

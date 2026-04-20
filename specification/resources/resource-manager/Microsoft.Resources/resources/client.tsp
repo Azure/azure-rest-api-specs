@@ -7,7 +7,10 @@ using Azure.ClientGenerator.Core;
   "ResourceManagementClient",
   "javascript,python,java"
 );
+
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
   "python"
 );
+
+@@clientName(Microsoft.Resources.ErrorResponse, "ArmErrorResponse", "java");
