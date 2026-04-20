@@ -301,6 +301,7 @@ using Azure.ClientGenerator.Core;
   "PrivateIPAddress",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Configurations.get, "GetConfiguration", "csharp");
 @@clientName(ScriptExecutionHistory.listByCluster,
   "GetScriptExecutionHistories",
@@ -346,29 +347,50 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(JsonWebKeyEncryptionAlgorithm.RSA1_5, "Rsa15", "csharp");
 
-// Suppress operations that create phantom sub-resources with mismatched data types.
-// ArmResourceRead operations with extra path segments (e.g., /azureasyncoperations/{operationId})
-// generate phantom resource types with wrong response types, causing CS1503 errors.
-// These operations must be re-implemented as custom code on the correct resource classes.
+/*
+ * @@scope suppressions for C# SDK generation.
+ *
+ * The HDInsight ARM resource hierarchy has exactly 4 resource types
+ * (see https://learn.microsoft.com/en-us/azure/templates/microsoft.hdinsight):
+ *   - Microsoft.HDInsight/clusters
+ *   - Microsoft.HDInsight/clusters/applications
+ *   - Microsoft.HDInsight/clusters/privateEndpointConnections
+ *   - Microsoft.HDInsight/clusters/privateLinkResources
+ *
+ * Operations below are NOT standalone ARM resources — they are action endpoints
+ * or sub-operations on the Cluster resource. Without suppression, the MPG generator
+ * would create phantom resource types (e.g., clusters/azureasyncoperations,
+ * clusters/extensions) due to extra path segments being interpreted as child resources.
+ *
+ * These operations are implemented as custom code in the SDK (Customize/ folder)
+ * with manual HTTP request building to preserve backward API compatibility.
+ */
+
+// Configurations: action endpoints on Cluster for getting/updating Hadoop config maps
 @@scope(Configurations.update, "!csharp");
 @@scope(Configurations.get, "!csharp");
-// VirtualMachines.restartHosts must stay suppressed — generator bug with string[] body
-// produces invalid code: IEnumerable<string>.ToRequestContent(hosts)
+
+// VirtualMachines: action endpoints on Cluster for host restart and its async status
 @@scope(VirtualMachines.restartHosts, "!csharp");
 @@scope(VirtualMachines.getAsyncOperationStatus, "!csharp");
+
+// Async operation status polling endpoints — not real resources, just GET on
+// /azureasyncoperations/{operationId} paths under clusters, applications, extensions
 @@scope(Applications.getAzureAsyncOperationStatus, "!csharp");
-// @@scope(Clusters.getAzureAsyncOperationStatus, "!csharp");
-// @@scope(Extensions.getAzureAsyncOperationStatus, "!csharp");
-// Extensions.get returns ClusterMonitoringResponse but generator expects Cluster data type
+@@scope(Clusters.getAzureAsyncOperationStatus, "!csharp");
+@@scope(Extensions.getAzureAsyncOperationStatus, "!csharp");
+
+// Extensions: CRUD-like endpoints on Cluster but NOT a real ARM resource type
 @@scope(Extensions.get, "!csharp");
 @@scope(Extensions.delete, "!csharp");
-// @@scope(Extensions.create, "!csharp");
+
+// ScriptActions: action endpoints on Cluster for script execution history
 @@scope(ScriptActions.getExecutionAsyncOperationStatus, "!csharp");
 @@scope(ScriptActions.getExecutionDetail, "!csharp");
-// LRO polling operation - SDK provides native LRO polling
+
+// Locations: regional async operation status — not a child resource
 @@scope(LocationsOperationGroup.getAzureAsyncOperationStatus, "!csharp");
 
-// C# operation name renames to match old SDK API surface
 @@clientName(Extensions.enableMonitoring,
   "EnableClusterMonitoringExtension",
   "csharp"
@@ -394,11 +416,24 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(Extensions.create, "CreateExtension", "csharp");
+@@clientName(Extensions.disableAzureMonitorAgent,
+  "DisableAzureMonitorAgentExtension",
+  "csharp"
+);
+@@clientName(Extensions.enableAzureMonitorAgent,
+  "EnableAzureMonitorAgentExtension",
+  "csharp"
+);
+@@clientName(Extensions.getAzureMonitorAgentStatus,
+  "GetAzureMonitorAgentStatusExtension",
+  "csharp"
+);
 @@clientName(VirtualMachines.listHosts, "GetVirtualMachineHosts", "csharp");
 @@clientName(VirtualMachines.restartHosts,
   "RestartVirtualMachineHosts",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Configurations.list, "GetConfiguration", "csharp");
 @@clientName(ScriptActions.listByCluster, "GetScriptActions", "csharp");
 @@clientName(LocationsOperationGroup.getCapabilities,
@@ -440,8 +475,7 @@ using Azure.ClientGenerator.Core;
 
 // Mark listUsages as pageable to match old SDK's Pageable<HDInsightUsage> return type
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  LocationsOperationGroup.listUsages,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(LocationsOperationGroup.listUsages,
   "csharp"
 );
 
