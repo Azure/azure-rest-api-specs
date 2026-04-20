@@ -34,6 +34,9 @@ model WidgetSuite {
   @doc("The ID of the widget's manufacturer.")
   manufacturerId: string;
 
+  @doc("The service name.")
+  serviceName?: string;
+
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
 }
