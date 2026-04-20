@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.EdgeMarketplace;
 
@@ -254,19 +255,35 @@ model AccessTokenRequest {
   publisherName?: string;
 
   @doc("The region where the disk will be created.")
+  @removed(Versions.v2026_01_01_preview)
   edgeMarketPlaceRegion: string;
 
   @doc("The region where the disk will be created.")
+  @added(Versions.v2026_01_01_preview)
+  edgeMarketplaceRegion: string;
+
+  @doc("The region where the disk will be created.")
+  @removed(Versions.v2026_01_01_preview)
   egeMarketPlaceResourceId?: string;
 
   @doc("The hyperv version.")
   hypervGeneration?: string;
 
   @doc("The marketplace sku.")
+  @removed(Versions.v2026_01_01_preview)
   marketPlaceSku?: string;
 
+  @doc("The marketplace sku.")
+  @added(Versions.v2026_01_01_preview)
+  marketplaceSku?: string;
+
   @doc("The marketplace sku version.")
+  @removed(Versions.v2026_01_01_preview)
   marketPlaceSkuVersion?: string;
+
+  @doc("The marketplace sku version.")
+  @added(Versions.v2026_01_01_preview)
+  marketplaceSkuVersion?: string;
 
   @doc("The device sku.")
   deviceSku?: string;
