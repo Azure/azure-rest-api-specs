@@ -290,3 +290,16 @@ op privateLinkResourcesGetCustomization(
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization
 );
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+  "ArmActionType",
+  "python"
+);
