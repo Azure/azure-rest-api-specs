@@ -18,6 +18,7 @@ namespace Azure.AI.Projects {
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
+    tool_search_preview: "tool_search_preview",
   }
 
   // General availability tools:
@@ -50,14 +51,9 @@ namespace Azure.AI.Projects {
   model ToolDeferConfig {
     /**
      * Whether deferral is enabled for this tool or its sub-tools.
-     * Default: true when a tool_search tool is present in the toolbox.
+     * Default: true when a ToolSearchTool is present in the toolbox.
      */
     enabled?: boolean;
-
-    /**
-     * Optional deferral mode. Reserved for future use.
-     */
-    mode?: string;
 
     /**
      * List of tool names that are pinned (always visible in tools/list regardless of deferral).
@@ -65,6 +61,7 @@ namespace Azure.AI.Projects {
     pinned?: string[];
   }
 
+  // Add defer to the base Tool class so all tools inherit it.
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.Tool,
     {
@@ -912,6 +909,25 @@ namespace Azure.AI.Projects {
     update_delay?: int32 = 300;
   }
 
+  /**
+   * A tool for enabling semantic search over the agent's toolbox.
+   * When present, other tools may be deferred and only discoverable via tool_search queries.
+   */
+  model ToolSearchTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `tool_search_preview`.
+     */
+    type: "tool_search_preview";
+
+    ...ToolNameAndDescriptionExtension;
+
+    /**
+     * Default deferral configuration applied to all tools in the toolbox.
+     * Individual tools can override this via their own `defer` property.
+     */
+    default_defer?: ToolDeferConfig;
+  }
+
   alias MemorySearchToolCallItemBase = {
     @doc("The results returned from the memory search.")
     results?: MemorySearchItem[] | null;
@@ -919,6 +935,7 @@ namespace Azure.AI.Projects {
 
   model MemorySearchToolCallItemParam extends OpenAI.Item {
     type: "memory_search_call";
+
     ...MemorySearchToolCallItemBase;
   }
 
