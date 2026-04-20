@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./workspace.models.tsp";
+import "./common.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -158,10 +159,10 @@ model ScenarioAction {
   duration: duration;
 
   /**
-   * Action-specific parameters.
+   * Action-specific parameter values.
    */
-  @identifiers(#["name"])
-  parameters?: ScenarioParameter[];
+  @identifiers(#["key"])
+  parameters?: KeyValuePair[];
 
   /**
    * Action dependencies that control when this action starts.
