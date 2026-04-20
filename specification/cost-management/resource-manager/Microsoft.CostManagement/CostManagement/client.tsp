@@ -416,11 +416,7 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@alternateType(CostManagementProxyResource.eTag, Azure.Core.eTag, "csharp");
 
 // @@hierarchyBuilding(ForecastResult, CommonTypes.Resource) cannot be used here: `ForecastResult`
-// extends `CostManagementResource`, which defines `id`/`name`/`type` as plain `string` (not
-// `armResourceIdentifier`) and does not define `systemData`. TCGC's `isPropertySuperset` check
-// therefore fails (property-missing for `systemData`, type-mismatch on `id`) and the decorator
-// silently has no effect. The replacement model pattern is required to change the C# base type
-// to ResourceData for backward compatibility.
+// extends `CostManagementResource`, which does not define `systemData`.The replacement model pattern is required to change the C# base type to ResourceData for backward compatibility.
 /** Result of forecast. It contains all columns listed under groupings and aggregation. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model ForecastResultReplacement
@@ -431,12 +427,8 @@ model ForecastResultReplacement
 @@clientName(ForecastResult, "ForecastResultTemp", "csharp");
 @@clientName(ForecastResultReplacement, "ForecastResult", "csharp");
 
-// @@hierarchyBuilding(Dimension, CommonTypes.Resource) cannot be used here: `Dimension` extends
-// `CostManagementResource`, which defines `id`/`name`/`type` as plain `string` (not
-// `armResourceIdentifier`) and does not define `systemData`. TCGC's `isPropertySuperset` check
-// therefore fails (property-missing for `systemData`, type-mismatch on `id`) and the decorator
-// silently has no effect. The replacement model pattern is required to change the C# base type
-// to ResourceData for backward compatibility.
+// @@hierarchyBuilding(Dimension, CommonTypes.Resource) cannot be used here: `Dimension`
+// extends `CostManagementResource`, which does not define `systemData`. The replacement model pattern is required to change the C# base type to ResourceData for backward compatibility.
 /** List of Dimension. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
@@ -446,12 +438,8 @@ model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@clientName(Dimension, "DimensionTemp", "csharp");
 @@clientName(DimensionReplacement, "CostManagementDimension", "csharp");
 
-// @@hierarchyBuilding(QueryResult, CommonTypes.Resource) cannot be used here: `QueryResult` extends
-// `CostManagementResource`, which defines `id`/`name`/`type` as plain `string` (not
-// `armResourceIdentifier`) and does not define `systemData`. TCGC's `isPropertySuperset` check
-// therefore fails (property-missing for `systemData`, type-mismatch on `id`) and the decorator
-// silently has no effect. The replacement model pattern is required to change the C# base type
-// to ResourceData for backward compatibility.
+// @@hierarchyBuilding(QueryResult, CommonTypes.Resource) cannot be used here: `QueryResult`
+// extends `CostManagementResource`, which does not define `systemData`. The replacement model pattern is required to change the C# base type to ResourceData for backward compatibility.
 /** Result of query. It contains all columns listed under groupings and aggregation. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model QueryResultReplacement
@@ -462,12 +450,8 @@ model QueryResultReplacement
 @@clientName(QueryResult, "QueryResultTemp", "csharp");
 @@clientName(QueryResultReplacement, "QueryResult", "csharp");
 
-// @@hierarchyBuilding(ExportRun, CommonTypes.Resource) cannot be used here: `ExportRun` extends
-// `CostManagementProxyResource`, which defines `id`/`name`/`type` as plain `string` (not
-// `armResourceIdentifier`) and does not define `systemData`. TCGC's `isPropertySuperset` check
-// therefore fails (property-missing for `systemData`, type-mismatch on `id`) and the decorator
-// silently has no effect. The replacement model pattern is required to change the C# base type
-// to ResourceData for backward compatibility.
+// @@hierarchyBuilding(ExportRun, CommonTypes.Resource) cannot be used here: `ExportRun`
+// extends `CostManagementProxyResource`, which does not define `systemData`. The replacement model pattern is required to change the C# base type to ResourceData for backward compatibility.
 /** An export run. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
