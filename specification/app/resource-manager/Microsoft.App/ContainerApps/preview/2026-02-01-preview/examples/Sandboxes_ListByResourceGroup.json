@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "api-version": "2026-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sandboxes/testSandbox0",
+            "name": "testSandbox0",
+            "type": "Microsoft.App/sandboxes",
+            "properties": {
+              "id": "sandbox-12345",
+              "createdAt": "2026-01-15T10:30:00Z",
+              "state": "Running",
+              "snapshotId": "snapshot-67890",
+              "ports": [
+                {
+                  "name": "http",
+                  "port": 8080,
+                  "url": "https://testsandbox0-8080.sandbox.eastus.azurecontainerapps.io",
+                  "activationMode": "Manual"
+                }
+              ],
+              "labels": {
+                "environment": "dev",
+                "team": "platform"
+              },
+              "vmmType": "firecracker",
+              "entrypoint": [
+                "/bin/sh"
+              ],
+              "cmd": [
+                "-c",
+                "npm start"
+              ],
+              "sourcesRef": {
+                "type": "Image",
+                "image": "mcr.microsoft.com/azuredocs/aci-helloworld:latest"
+              },
+              "resources": {
+                "cpu": 1.0,
+                "memory": "2Gi",
+                "disk": "10Gi"
+              },
+              "connections": [
+                "conn-123"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sandboxes/testSandbox1",
+            "name": "testSandbox1",
+            "type": "Microsoft.App/sandboxes",
+            "properties": {
+              "id": "sandbox-54321",
+              "createdAt": "2026-01-16T14:20:00Z",
+              "state": "Stopped",
+              "snapshotId": null,
+              "ports": [],
+              "labels": {
+                "environment": "prod",
+                "team": "backend"
+              },
+              "vmmType": "firecracker",
+              "entrypoint": [
+                "/usr/bin/python3"
+              ],
+              "cmd": [
+                "app.py"
+              ],
+              "sourcesRef": {
+                "type": "Snapshot",
+                "snapshotId": "snapshot-11111"
+              },
+              "resources": {
+                "cpu": 2.0,
+                "memory": "4Gi",
+                "disk": "20Gi"
+              },
+              "connections": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}
