@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-04-01",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "HR"
+      },
+      "sku": {
+        "name": "Standard_D2s_v3",
+        "capacity": 1
+      },
+      "properties": {
+        "scheduleProfile": {
+          "start": "2026-04-01T00:00:00Z",
+          "end": "2026-04-02T00:00:00Z",
+          "duration": "PT2H30M"
+        }
+      },
+      "zones": []
+    },
+    "capacityReservationGroupName": "deferredSpotCapacityReservationGroup",
+    "capacityReservationName": "deferredSpotCapacityReservation"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "deferredSpotCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_D2s_v3",
+          "capacity": 1
+        },
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
+          "scheduleProfile": {
+            "start": "2026-04-01T00:00:00+00:00",
+            "end": "2026-04-02T00:00:00+00:00",
+            "duration": "PT2H30M"
+          },
+          "provisioningTime": "2026-03-30T01:02:38.3138469+00:00"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "deferredSpotCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_D2s_v3",
+          "capacity": 1
+        },
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
+          "scheduleProfile": {
+            "start": "2026-04-01T00:00:00+00:00",
+            "end": "2026-04-02T00:00:00+00:00",
+            "duration": "PT2H30M"
+          },
+          "provisioningTime": "2026-03-30T01:02:38.3138469+00:00"
+        }
+      }
+    }
+  },
+  "operationId": "CapacityReservations_CreateOrUpdate",
+  "title": "Create or update a deferred spot capacity reservation."
+}

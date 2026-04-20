@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-03-01",
+    "capacityReservationGroupName": "deferredSpotCapacityReservationGroup",
+    "capacityReservationName": "deferredSpotCapacityReservation",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation",
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningTime": "2026-03-30T01:02:38.3138469+00:00",
+          "virtualMachinesAssociated": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "utilizationInfo": {
+              "currentCapacity": 5,
+              "virtualMachinesAllocated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ]
+            },
+            "reservationStateInfo": {
+              "reservationState": "Confirmed",
+              "activeFrom": "2026-04-01T05:00:00+00:00",
+              "activeUntil": "2026-04-01T07:30:00+00:00"
+            },
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
+              }
+            ]
+          },
+          "scheduleProfile": {
+            "start": "2026-04-01T00:00:00+00:00",
+            "end": "2026-04-02T00:00:00+00:00",
+            "duration": "PT2H30M"
+          },
+          "timeCreated": "2026-03-30T01:02:38.3138469+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_D2s_v3",
+          "capacity": 1
+        },
+        "name": "deferredSpotCapacityReservation"
+      }
+    }
+  }
+}

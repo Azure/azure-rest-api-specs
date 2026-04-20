@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "capacityReservationGroupName": "deferredSpotCapacityReservationGroup",
+    "api-version": "2026-03-01",
+    "$expand": "virtualMachines/$ref"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{capacityReservationName}",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/CapacityReservation/{capacityReservationName}",
+            "type": "Microsoft.Compute/CapacityReservations",
+            "location": "West US",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "reservationId": "{GUID}",
+              "provisioningTime": "2026-03-30T01:02:38.3138469+00:00",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "scheduleProfile": {
+                "start": "2026-04-01T00:00:00+00:00",
+                "end": "2026-04-02T00:00:00+00:00",
+                "duration": "PT2H30M"
+              }
+            },
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "capacity": 1
+            }
+          },
+          {
+            "name": "{capacityReservationName}",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/CapacityReservation/{capacityReservationName}",
+            "type": "Microsoft.Compute/CapacityReservations",
+            "location": "West US",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "reservationId": "{GUID}",
+              "provisioningTime": "2026-03-30T01:02:38.3138469+00:00",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "scheduleProfile": {
+                "start": "2026-04-01T00:00:00+00:00",
+                "end": "2026-04-02T00:00:00+00:00",
+                "duration": "PT2H30M"
+              }
+            },
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "capacity": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -8197,12 +8197,12 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block and DeferredSpot capacity reservations do not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
 
   /**
-   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations, 'DeferredSpot' for deferred spot capacity reservations, and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
    */
   @added(Versions.v2025_04_01)
   reservationType?: ReservationType;
@@ -8248,6 +8248,12 @@ model CapacityReservationInstanceView {
   utilizationInfo?: CapacityReservationUtilization;
 
   /**
+   * The current state and active schedule for Deferred Spot capacity reservations. 
+   */
+   @added(Versions.v2026_03_01)
+  reservationStateInfo?: CapacityReservationStateInfo;
+
+  /**
    * The resource status information.
    */
   @identifiers(#[])
@@ -8255,19 +8261,25 @@ model CapacityReservationInstanceView {
 }
 
 /**
- * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+ * Defines the schedule for Block and DeferredSpot capacity reservations. For Block reservations, specifies the schedule during which the capacity reservation is active and VM or VMSS resources can be allocated. For DeferredSpot reservations, start and end define a time window within which a confirmed active schedule of the specified duration will be set. For Block reservations, the scheduleProfile, start, and end fields are immutable after creation. For DeferredSpot reservations, the duration can be updated when the reservation state is not Confirmed. Start, end, and duration can all be updated when the reservation state is Expired or Declined, which resets the state to Pending. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
  */
 @added(Versions.v2025_04_01)
 model ScheduleProfile {
   /**
-   * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
+   * The required start date or time for the capacity reservation schedule. For Block reservations, this is the start date and must be today or within 56 days in the future; for same-day scheduling, requests must be submitted before 11:30 AM UTC. For DeferredSpot reservations, this is the start of the time window within which a confirmed active schedule will be set. Example: 2025-06-27.
    */
   start?: string;
 
   /**
-   * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
+   * The required end date or time for the capacity reservation schedule. For Block reservations, this must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. For DeferredSpot reservations, this is the end of the time window within which a confirmed active schedule will be set. Example: 2025-06-28.
    */
   end?: string;
+
+  /**
+   * The desired duration for deferred spot capacity reservations. Minimum 2 hours, maximum 4 hours. Must be less than or equal to the total time between start and end. Must be in ISO 8601 format. Example: PT2H30M (2 hours 30 minutes)
+   */
+  @added(Versions.v2026_03_01)
+  duration?: string;
 }
 
 /**
@@ -8314,6 +8326,58 @@ union ReservationType {
    * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
    */
   Block: "Block",
+
+  /**
+   * To consume scheduled allocated deferred spot capacity reservation when a capacity reservation group is provided.
+   */
+  @added(Versions.v2026_03_01)
+  DeferredSpot: "DeferredSpot",
+}
+
+/**
+ * The current state of a deferred spot capacity reservation.
+ */
+@added(Versions.v2026_03_01)
+union ReservationState {
+  /**
+   * The reservation request has been created and is awaiting confirmation.
+   */
+  Pending: "Pending",
+
+  /**
+   * The reservation has been confirmed and is scheduled for activation.
+   */
+  Confirmed: "Confirmed",
+
+  /**
+   * The reservation request could not be fulfilled.
+   */
+  Declined: "Declined",
+
+  /**
+   * The reservation is no longer active because its end time has passed.
+   */
+  Expired: "Expired",
+}
+
+/**
+ * The current state and confirmed active schedule for a deferred spot capacity reservation. 
+@added(Versions.v2026_03_01)
+model CapacityReservationStateInfo {
+  /**
+   * The current state of the capacity reservation.
+   */
+  reservationState?: ReservationState;
+
+  /**
+   * The date and time in UTC when the capacity reservation becomes active.
+   */
+  activeFrom?: utcDateTime;
+
+  /**
+   * The date and time in UTC when the capacity reservation expires.
+   */
+  activeUntil?: utcDateTime;
 }
 
 /**
@@ -8389,7 +8453,7 @@ model CapacityReservationProperties {
   timeCreated?: utcDateTime;
 
   /**
-   * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+   * Defines the schedule for Block and DeferredSpot capacity reservations. For Block reservations, specifies the schedule during which the capacity reservation is active and VM or VMSS resources can be allocated. For DeferredSpot reservations, start and end define a time window within which a confirmed active schedule of the specified duration will be set. For Block reservations, the scheduleProfile, start, and end fields are immutable after creation. For DeferredSpot reservations, the duration can be updated when the reservation state is not Confirmed, and start, end, and duration can all be updated when the reservation state is Expired or Declined, which resets the state to Pending. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
    */
   @added(Versions.v2025_04_01)
   scheduleProfile?: ScheduleProfile;

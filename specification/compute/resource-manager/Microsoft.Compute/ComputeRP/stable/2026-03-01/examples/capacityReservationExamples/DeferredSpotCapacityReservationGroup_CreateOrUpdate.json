@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-03-01",
+    "capacityReservationGroupName": "deferredSpotCapacityReservationGroup",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "finance"
+      },
+      "zones": [],
+      "properties": {
+        "reservationType": "DeferredSpot"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "deferredSpotCapacityReservationGroup",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/deferredSpotCapacityReservationGroup",
+        "tags": {
+          "department": "finance"
+        },
+        "properties": {
+          "reservationType": "DeferredSpot"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "location": "westus",
+        "tags": {
+          "department": "finance",
+          "owner": "myCompany"
+        },
+        "name": "deferredSpotCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/deferredSpotCapacityReservationGroup",
+        "properties": {
+          "reservationType": "DeferredSpot"
+        }
+      }
+    }
+  }
+}
