@@ -106,7 +106,7 @@ model MessagingEndpoint {
   @added(Versions.v2026_11_01_preview)
   @doc("The linking state of this messaging endpoint.")
   @visibility(Lifecycle.Read)
-  linkingState?: NamespaceLinkingState;
+  linkingState?: NamespaceLinkingStateValue;
 
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning configuration for this messaging endpoint.")
@@ -173,14 +173,7 @@ model ProvisioningEndpoint {
 
   @doc("The linking state of this provisioning endpoint.")
   @visibility(Lifecycle.Read)
-  linkingState?: NamespaceLinkingState;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("The linking state of a namespace endpoint entry.")
-model NamespaceLinkingState {
-  @doc("The current linking state value.")
-  state?: NamespaceLinkingStateValue;
+  linkingState?: NamespaceLinkingStateValue;
 }
 
 @added(Versions.v2026_11_01_preview)

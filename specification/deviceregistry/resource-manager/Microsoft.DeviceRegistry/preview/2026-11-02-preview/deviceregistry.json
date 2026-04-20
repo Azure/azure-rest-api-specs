@@ -9364,7 +9364,7 @@
           "description": "The identity the linked resource uses to call the ADR namespace."
         },
         "linkingState": {
-          "$ref": "#/definitions/NamespaceLinkingState",
+          "$ref": "#/definitions/NamespaceLinkingStateValue",
           "description": "The linking state of this messaging endpoint.",
           "readOnly": true
         },
@@ -11536,16 +11536,6 @@
         "name"
       ]
     },
-    "NamespaceLinkingState": {
-      "type": "object",
-      "description": "The linking state of a namespace endpoint entry.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/NamespaceLinkingStateValue",
-          "description": "The current linking state value."
-        }
-      }
-    },
     "NamespaceLinkingStateValue": {
       "type": "string",
       "description": "The linking state values for namespace endpoint entries.",
@@ -12004,7 +11994,7 @@
           "description": "The identity the linked resource uses to call the ADR namespace."
         },
         "linkingState": {
-          "$ref": "#/definitions/NamespaceLinkingState",
+          "$ref": "#/definitions/NamespaceLinkingStateValue",
           "description": "The linking state of this provisioning endpoint.",
           "readOnly": true
         }
