@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -3574,6 +3575,12 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_01_01_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**
@@ -3964,6 +3971,12 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_01_01_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**
