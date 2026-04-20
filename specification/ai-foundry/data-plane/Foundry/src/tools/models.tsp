@@ -65,17 +65,15 @@ namespace Azure.AI.Projects {
     pinned?: string[];
   }
 
-  /**
-   * Intermediate model for tools that support deferral.
-   * Tools that can be deferred from tools/list should extend this model
-   * instead of OpenAI.Tool directly.
-   */
-  model DeferrableTool extends OpenAI.Tool {
-    /**
-     * Deferral settings for this tool when tool search is enabled.
-     */
-    defer?: ToolDeferConfig;
-  }
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.Tool,
+    {
+      /**
+       * Deferral settings for this tool when tool search is enabled.
+       */
+      defer?: ToolDeferConfig,
+    }
+  );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
@@ -170,7 +168,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
-  model BingGroundingTool extends DeferrableTool {
+  model BingGroundingTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'bing_grounding'.
      */
@@ -201,7 +199,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Microsoft Fabric tool as used to configure an agent.
    */
-  model MicrosoftFabricPreviewTool extends DeferrableTool {
+  model MicrosoftFabricPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'fabric_dataagent_preview'.
      */
@@ -232,7 +230,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a sharepoint tool as used to configure an agent.
    */
-  model SharepointPreviewTool extends DeferrableTool {
+  model SharepointPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'sharepoint_grounding_preview'.
      */
@@ -249,7 +247,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for an Azure AI search tool as used to configure an agent.
    */
-  model AzureAISearchTool extends DeferrableTool {
+  model AzureAISearchTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'azure_ai_search'.
      */
@@ -343,7 +341,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for an OpenAPI tool as used to configure an agent.
    */
-  model OpenApiTool extends DeferrableTool {
+  model OpenApiTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'openapi'.
      */
@@ -358,7 +356,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Bing custom search tool as used to configure an agent.
    */
-  model BingCustomSearchPreviewTool extends DeferrableTool {
+  model BingCustomSearchPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'bing_custom_search_preview'.
      */
@@ -375,7 +373,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
    */
-  model BrowserAutomationPreviewTool extends DeferrableTool {
+  model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'browser_automation_preview'.
      */
@@ -416,7 +414,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for an Azure Function Tool, as used to configure an Agent.
    */
-  model AzureFunctionTool extends DeferrableTool {
+  model AzureFunctionTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'browser_automation'.
      */
@@ -779,7 +777,7 @@ namespace Azure.AI.Projects {
   /**
    * A tool for capturing structured outputs
    */
-  model CaptureStructuredOutputsTool extends DeferrableTool {
+  model CaptureStructuredOutputsTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `capture_structured_outputs`.
      */
@@ -794,7 +792,7 @@ namespace Azure.AI.Projects {
   /**
    * An agent implementing the A2A protocol.
    */
-  model A2APreviewTool extends DeferrableTool {
+  model A2APreviewTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `"a2a_preview`.
      */
@@ -833,7 +831,7 @@ namespace Azure.AI.Projects {
   /**
    * A WorkIQ server-side tool.
    */
-  model WorkIQPreviewTool extends DeferrableTool {
+  model WorkIQPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'work_iq_preview'.
      */
@@ -848,7 +846,7 @@ namespace Azure.AI.Projects {
   /**
    * A tool for integrating memories into the agent.
    */
-  model MemorySearchPreviewTool extends DeferrableTool {
+  model MemorySearchPreviewTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `memory_search_preview`.
      */
@@ -883,7 +881,7 @@ namespace Azure.AI.Projects {
    * A tool for integrating memories into the agent.
    */
   @removed(Versions.v1)
-  model MemorySearchTool extends DeferrableTool {
+  model MemorySearchTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `memory_search_preview`.
      */
