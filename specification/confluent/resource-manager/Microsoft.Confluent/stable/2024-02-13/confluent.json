@@ -33,48 +33,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements": {
-      "get": {
-        "tags": [
-          "Agreements"
-        ],
-        "summary": "List Confluent marketplace agreements in the subscription.",
-        "operationId": "MarketplaceAgreements_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConfluentAgreementResourceListResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "MarketplaceAgreements_List": {
-            "$ref": "./examples/MarketplaceAgreements_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/default": {
       "put": {
         "tags": [
