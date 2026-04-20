@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -20,7 +22,7 @@ namespace Microsoft.Network;
 @summary("ExpressRoute Port")
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRoutePort extends Resource {
+model ExpressRoutePort extends Common.Resource {
   properties?: ExpressRoutePortPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -38,7 +40,7 @@ model ExpressRoutePort extends Resource {
    * The identity of ExpressRoutePort, if configured.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: ManagedServiceIdentity;
+  identity?: Common.ManagedServiceIdentity;
 }
 
 alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<

@@ -1148,7 +1148,8 @@
               "values": [
                 {
                   "name": "Default",
-                  "value": "Default"
+                  "value": "Default",
+                  "description": "Default advanced threat protection settings."
                 }
               ]
             }
@@ -1215,7 +1216,8 @@
               "values": [
                 {
                   "name": "Default",
-                  "value": "Default"
+                  "value": "Default",
+                  "description": "Default advanced threat protection settings."
                 }
               ]
             }
@@ -2829,11 +2831,13 @@
               "values": [
                 {
                   "name": "Active",
-                  "value": "Active"
+                  "value": "Active",
+                  "description": "Only active (in-progress) migrations."
                 },
                 {
                   "name": "All",
-                  "value": "All"
+                  "value": "All",
+                  "description": "All migrations."
                 }
               ]
             }
@@ -3961,11 +3965,13 @@
               "values": [
                 {
                   "name": "index",
-                  "value": "index"
+                  "value": "index",
+                  "description": "Index related recommendations."
                 },
                 {
                   "name": "table",
-                  "value": "table"
+                  "value": "table",
+                  "description": "Table related recommendations."
                 }
               ]
             }
@@ -4035,11 +4041,13 @@
               "values": [
                 {
                   "name": "index",
-                  "value": "index"
+                  "value": "index",
+                  "description": "Index related recommendations."
                 },
                 {
                   "name": "table",
-                  "value": "table"
+                  "value": "table",
+                  "description": "Table related recommendations."
                 }
               ]
             }
@@ -4063,23 +4071,28 @@
               "values": [
                 {
                   "name": "CreateIndex",
-                  "value": "CreateIndex"
+                  "value": "CreateIndex",
+                  "description": "Recommendation to create an index to improve query performance."
                 },
                 {
                   "name": "DropIndex",
-                  "value": "DropIndex"
+                  "value": "DropIndex",
+                  "description": "Recommendation to drop an existing index because it's duplicate or unused."
                 },
                 {
                   "name": "ReIndex",
-                  "value": "ReIndex"
+                  "value": "ReIndex",
+                  "description": "Recommendation to reindex an existing invalid index."
                 },
                 {
                   "name": "AnalyzeTable",
-                  "value": "AnalyzeTable"
+                  "value": "AnalyzeTable",
+                  "description": "Recommendation to analyze a table to update statistics for the query optimizer."
                 },
                 {
                   "name": "VacuumTable",
-                  "value": "VacuumTable"
+                  "value": "VacuumTable",
+                  "description": "Recommendation to vacuum a table to reclaim storage and optimize performance."
                 }
               ]
             }
@@ -4734,11 +4747,13 @@
             "values": [
               {
                 "name": "Enabled",
-                "value": "Enabled"
+                "value": "Enabled",
+                "description": "Server supports password based authentication."
               },
               {
                 "name": "Disabled",
-                "value": "Disabled"
+                "value": "Disabled",
+                "description": "Server does not support password based authentication."
               }
             ]
           }
@@ -4793,59 +4808,73 @@
         "values": [
           {
             "name": "P1",
-            "value": "P1"
+            "value": "P1",
+            "description": "Entry-level SSD for minimal IOPS, ideal for light development or testing workloads."
           },
           {
             "name": "P2",
-            "value": "P2"
+            "value": "P2",
+            "description": "Slightly higher IOPS for small-scale applications needing consistent low latency."
           },
           {
             "name": "P3",
-            "value": "P3"
+            "value": "P3",
+            "description": "Balanced performance for basic production workloads with moderate throughput."
           },
           {
             "name": "P4",
-            "value": "P4"
+            "value": "P4",
+            "description": "Enhanced IOPS for growing apps with predictable performance needs."
           },
           {
             "name": "P6",
-            "value": "P6"
+            "value": "P6",
+            "description": "Mid-tier SSD for steady workloads requiring reliable throughput and latency."
           },
           {
             "name": "P10",
-            "value": "P10"
+            "value": "P10",
+            "description": "Popular choice for general-purpose production workloads with scalable performance."
           },
           {
             "name": "P15",
-            "value": "P15"
+            "value": "P15",
+            "description": "High IOPS tier for demanding apps with frequent read/write operations."
           },
           {
             "name": "P20",
-            "value": "P20"
+            "value": "P20",
+            "description": "Entry point for high-performance Solid State Disks (SSDs), suitable for small-scale I/O-intensive workloads."
           },
           {
             "name": "P30",
-            "value": "P30"
+            "value": "P30",
+            "description": "Balanced tier for moderate throughput and latency-sensitive applications."
           },
           {
             "name": "P40",
-            "value": "P40"
+            "value": "P40",
+            "description": "Enhanced performance for growing production workloads with consistent IOPS demands."
           },
           {
             "name": "P50",
-            "value": "P50"
+            "value": "P50",
+            "description": "Optimized for enterprise-grade applications needing sustained high throughput."
           },
           {
             "name": "P60",
-            "value": "P60"
+            "value": "P60",
+            "description": "High-capacity tier for large databases and analytics workloads with elevated IOPS."
           },
           {
             "name": "P70",
-            "value": "P70"
+            "value": "P70",
+            "description": "Designed for mission-critical systems requiring ultra-low latency and high concurrency."
           },
           {
             "name": "P80",
-            "value": "P80"
+            "value": "P80",
+            "description": "Top-tier SSD for maximum IOPS and throughput, ideal for the most demanding workloads."
           }
         ]
       }
@@ -4874,11 +4903,13 @@
             "values": [
               {
                 "name": "Enabled",
-                "value": "Enabled"
+                "value": "Enabled",
+                "description": "Server is configured to create geographically redundant backups."
               },
               {
                 "name": "Disabled",
-                "value": "Disabled"
+                "value": "Disabled",
+                "description": "Server is not configured to create geographically redundant backups."
               }
             ]
           },
@@ -4988,7 +5019,7 @@
     },
     "BackupSettings": {
       "type": "object",
-      "description": "The settings for the long term backup.",
+      "description": "Settings for the long term backup.",
       "properties": {
         "backupName": {
           "type": "string",
@@ -5028,11 +5059,13 @@
         "values": [
           {
             "name": "Full",
-            "value": "Full"
+            "value": "Full",
+            "description": "A full backup taken automatically by the service. These backups are retained for a period of time as defined by the backup retention policy, and they cannot be deleted by the customer."
           },
           {
             "name": "Customer On-Demand",
-            "value": "Customer On-Demand"
+            "value": "Customer On-Demand",
+            "description": "A full backup triggered by the customer. These backups are retained for a period of time as defined by the backup retention policy, and they can also be deleted by the customer."
           }
         ]
       }
@@ -5055,11 +5088,11 @@
     },
     "BackupsLongTermRetentionRequest": {
       "type": "object",
-      "description": "The request that is made for a long term retention backup.",
+      "description": "Request made for a long term retention backup.",
       "properties": {
         "targetDetails": {
           "$ref": "#/definitions/BackupStoreDetails",
-          "description": "Backup store detail for target server"
+          "description": "Backup store detail for target server."
         }
       },
       "required": [
@@ -5109,11 +5142,13 @@
         "values": [
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "Cancel must be triggered for the entire migration."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "Cancel must not be triggered for the entire migration."
           }
         ]
       }
@@ -5218,12 +5253,12 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/CapabilityStatus",
-          "description": "The status of the capability.",
+          "description": "Status of the capability.",
           "readOnly": true
         },
         "reason": {
           "type": "string",
-          "description": "The reason for the capability not being available.",
+          "description": "Reason for the capability not being available.",
           "readOnly": true
         }
       }
@@ -5255,7 +5290,7 @@
     },
     "CapabilityStatus": {
       "type": "string",
-      "description": "The status of the capability.",
+      "description": "Status of the capability.",
       "enum": [
         "Visible",
         "Available",
@@ -5382,27 +5417,33 @@
         "values": [
           {
             "name": "Boolean",
-            "value": "Boolean"
+            "value": "Boolean",
+            "description": "A boolean value."
           },
           {
             "name": "Numeric",
-            "value": "Numeric"
+            "value": "Numeric",
+            "description": "A numeric value."
           },
           {
             "name": "Integer",
-            "value": "Integer"
+            "value": "Integer",
+            "description": "An integer value."
           },
           {
             "name": "Enumeration",
-            "value": "Enumeration"
+            "value": "Enumeration",
+            "description": "An enumeration value."
           },
           {
             "name": "String",
-            "value": "String"
+            "value": "String",
+            "description": "A string value."
           },
           {
             "name": "Set",
-            "value": "Set"
+            "value": "Set",
+            "description": "A set of values."
           }
         ]
       }
@@ -5516,31 +5557,38 @@
         "values": [
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "If the operation is triggered on a non-existing server, it's equivalent to 'Create'. If the operation is triggered on an existing server, it's equivalent to 'Update'."
           },
           {
             "name": "Create",
-            "value": "Create"
+            "value": "Create",
+            "description": "Operation creates a new server."
           },
           {
             "name": "Update",
-            "value": "Update"
+            "value": "Update",
+            "description": "Operation updates an existing server."
           },
           {
             "name": "PointInTimeRestore",
-            "value": "PointInTimeRestore"
+            "value": "PointInTimeRestore",
+            "description": "Operation restores an existing backup of an existing server. This operation creates a new server, and then restores on it the backup of an existing server at a specific point in time."
           },
           {
             "name": "GeoRestore",
-            "value": "GeoRestore"
+            "value": "GeoRestore",
+            "description": "Operation restores an existing backup of an existing server, on the paired region of the existing server. This operation creates a new server on the paired region of the existing server, and then restores on it the backup of an existing server at a specific point in time, in a different region. This operation is only supported on existing servers that were created with geographically redundant backups enabled."
           },
           {
             "name": "Replica",
-            "value": "Replica"
+            "value": "Replica",
+            "description": "Operation creates a replica of an existing server. This operation creates a new server, restores a base backup of the existing server (referred to as primary), and configures physical replication to asynchronously stream all changes which are recorded in the transaction log of the primary."
           },
           {
             "name": "ReviveDropped",
-            "value": "ReviveDropped"
+            "value": "ReviveDropped",
+            "description": "Operation creates a new server, initialized with the backup of a server that was recently deleted."
           }
         ]
       }
@@ -5558,11 +5606,13 @@
         "values": [
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "It's equivalent to 'Update'."
           },
           {
             "name": "Update",
-            "value": "Update"
+            "value": "Update",
+            "description": "Operation updates an existing server."
           }
         ]
       }
@@ -5616,11 +5666,13 @@
         "values": [
           {
             "name": "SystemManaged",
-            "value": "SystemManaged"
+            "value": "SystemManaged",
+            "description": "Encryption managed by Azure using platform managed keys for simplicity and compliance."
           },
           {
             "name": "AzureKeyVault",
-            "value": "AzureKeyVault"
+            "value": "AzureKeyVault",
+            "description": "Encryption using customer managed keys stored in Azure Key Vault for enhanced control and security."
           }
         ]
       }
@@ -5842,18 +5894,20 @@
         "values": [
           {
             "name": "Valid",
-            "value": "Valid"
+            "value": "Valid",
+            "description": "Key is valid and can be used for encryption."
           },
           {
             "name": "Invalid",
-            "value": "Invalid"
+            "value": "Invalid",
+            "description": "Key is invalid and cannot be used for encryption. Possible causes include key deletion, permission changes, key being disabled, key type not supported, or current date being outside of validity period associated to the key."
           }
         ]
       }
     },
     "ExecutionStatus": {
       "type": "string",
-      "description": "Service-set extensible enum indicating the status of operation",
+      "description": "Service-set extensible enumeration indicating the status of operation.",
       "enum": [
         "Running",
         "Cancelled",
@@ -5866,19 +5920,23 @@
         "values": [
           {
             "name": "Running",
-            "value": "Running"
+            "value": "Running",
+            "description": "Operation is currently running."
           },
           {
             "name": "Cancelled",
-            "value": "Cancelled"
+            "value": "Cancelled",
+            "description": "Operation has been cancelled."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Operation has failed."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Operation has succeeded."
           }
         ]
       }
@@ -5898,19 +5956,23 @@
         "values": [
           {
             "name": "PlannedFailover",
-            "value": "PlannedFailover"
+            "value": "PlannedFailover",
+            "description": "Trigger a failover from primary to standby without killing the primary database process first. This is a graceful failover that attempts to preserve data consistency."
           },
           {
             "name": "ForcedFailover",
-            "value": "ForcedFailover"
+            "value": "ForcedFailover",
+            "description": "Terminate the primary database process first, then triggers the failover. This is more aggressive and used when the primary is unresponsive or in an unhealthy state."
           },
           {
             "name": "PlannedSwitchover",
-            "value": "PlannedSwitchover"
+            "value": "PlannedSwitchover",
+            "description": "Similar to 'PlannedFailover' but prefers a switch over operation where roles are swapped between primary and standby."
           },
           {
             "name": "ForcedSwitchover",
-            "value": "ForcedSwitchover"
+            "value": "ForcedSwitchover",
+            "description": "Terminate the primary database process first, and then triggers a switch over with role swapping."
           }
         ]
       }
@@ -5966,11 +6028,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Fast provisioning is supported."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Fast provisioning is not supported."
           }
         ]
       }
@@ -5988,11 +6052,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Feature is enabled."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Feature is disabled."
           }
         ]
       }
@@ -6070,18 +6136,20 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Server is configured to create geographically redundant backups."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Server is not configured to create geographically redundant backups."
           }
         ]
       }
     },
     "GeographicallyRedundantBackupSupport": {
       "type": "string",
-      "description": "Indicates if geographically redundant backups are supported in this location. 'Enabled' means geographically redundant backups are supported. 'Disabled' stands for geographically redundant backup is not supported. Will be deprecated in the future. Look to Supported Features for 'GeoBackup'.",
+      "description": "Indicates if geographically redundant backups are supported in this location. Will be deprecated in the future. Look to Supported Features for 'GeoBackup'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -6092,11 +6160,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Geographically redundant backups are supported in this location."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Geographically redundant backups are not supported in this location."
           }
         ]
       }
@@ -6120,15 +6190,18 @@
             "values": [
               {
                 "name": "Disabled",
-                "value": "Disabled"
+                "value": "Disabled",
+                "description": "High availability is disabled for the server."
               },
               {
                 "name": "ZoneRedundant",
-                "value": "ZoneRedundant"
+                "value": "ZoneRedundant",
+                "description": "High availability is enabled for the server, with standby server in a different availability zone than that of the primary."
               },
               {
                 "name": "SameZone",
-                "value": "SameZone"
+                "value": "SameZone",
+                "description": "High availability is enabled for the server, with standby server in the same availability zone as the primary."
               }
             ]
           }
@@ -6167,7 +6240,7 @@
     },
     "HighAvailabilityMode": {
       "type": "string",
-      "description": "Modes of high availability supported for this compute.",
+      "description": "Mode of high availability supported for this compute.",
       "enum": [
         "ZoneRedundant",
         "SameZone"
@@ -6178,11 +6251,13 @@
         "values": [
           {
             "name": "ZoneRedundant",
-            "value": "ZoneRedundant"
+            "value": "ZoneRedundant",
+            "description": "High availability is supported for this compute, with standby server in a different availability zone than that of the primary."
           },
           {
             "name": "SameZone",
-            "value": "SameZone"
+            "value": "SameZone",
+            "description": "High availability is supported for this compute, with standby server in the same availability zone as the primary."
           }
         ]
       }
@@ -6204,27 +6279,33 @@
         "values": [
           {
             "name": "NotEnabled",
-            "value": "NotEnabled"
+            "value": "NotEnabled",
+            "description": "High availability is not enabled for the server."
           },
           {
             "name": "CreatingStandby",
-            "value": "CreatingStandby"
+            "value": "CreatingStandby",
+            "description": "Standby server is being created."
           },
           {
             "name": "ReplicatingData",
-            "value": "ReplicatingData"
+            "value": "ReplicatingData",
+            "description": "Data is being replicated to the standby server."
           },
           {
             "name": "FailingOver",
-            "value": "FailingOver"
+            "value": "FailingOver",
+            "description": "Failover operation to the standby server is in progress."
           },
           {
             "name": "Healthy",
-            "value": "Healthy"
+            "value": "Healthy",
+            "description": "Standby server is healthy and ready to take over in case of a failover."
           },
           {
             "name": "RemovingStandby",
-            "value": "RemovingStandby"
+            "value": "RemovingStandby",
+            "description": "Standby server is being removed."
           }
         ]
       }
@@ -6244,19 +6325,23 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "No managed identity is assigned to the server."
           },
           {
             "name": "UserAssigned",
-            "value": "UserAssigned"
+            "value": "UserAssigned",
+            "description": "One or more managed identities provided by the user are assigned to the server."
           },
           {
             "name": "SystemAssigned",
-            "value": "SystemAssigned"
+            "value": "SystemAssigned",
+            "description": "Azure automatically creates and manages the identity associated to the lifecycle of the server."
           },
           {
             "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned"
+            "value": "SystemAssigned,UserAssigned",
+            "description": "Both system-assigned and user-assigned identities are assigned to the server."
           }
         ]
       }
@@ -6287,7 +6372,7 @@
     },
     "LocationRestricted": {
       "type": "string",
-      "description": "Indicates if this location is restricted. 'Enabled' means location is restricted. 'Disabled' stands for location is not restricted. Will be deprecated in the future. Look to Supported Features for 'Restricted'.",
+      "description": "Indicates if this location is restricted. Will be deprecated in the future. Look to Supported Features for 'Restricted'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -6298,11 +6383,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Location is restricted."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Location is not restricted."
           }
         ]
       }
@@ -6338,11 +6425,13 @@
         "values": [
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "Logical replication will be set up on the source server."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "Logical replication will not be set up on the source server."
           }
         ]
       }
@@ -6354,24 +6443,24 @@
         "datasourceSizeInBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Size of datasource in bytes"
+          "description": "Size of datasource in bytes."
         },
         "dataTransferredInBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Data transferred in bytes"
+          "description": "Data transferred in bytes."
         },
         "backupName": {
           "type": "string",
-          "description": "Name of Backup operation"
+          "description": "Name of Backup operation."
         },
         "backupMetadata": {
           "type": "string",
-          "description": "Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc"
+          "description": "Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc."
         },
         "status": {
           "$ref": "#/definitions/ExecutionStatus",
-          "description": "Service-set extensible enum indicating the status of operation"
+          "description": "Service-set extensible enum indicating the status of operation."
         },
         "startTime": {
           "type": "string",
@@ -6386,18 +6475,18 @@
         "percentComplete": {
           "type": "number",
           "format": "double",
-          "description": "PercentageCompleted",
+          "description": "Percentage completed.",
           "minimum": 0,
           "maximum": 100
         },
         "errorCode": {
           "type": "string",
-          "description": "The error code.",
+          "description": "Error code.",
           "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message.",
+          "description": "Error message.",
           "readOnly": true
         }
       },
@@ -6417,7 +6506,7 @@
     },
     "LtrPreBackupResponse": {
       "type": "object",
-      "description": "Response for the LTR pre-backup API call",
+      "description": "Response for the LTR pre-backup API call.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupsLongTermRetentionResponseProperties",
@@ -6561,34 +6650,36 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Server supports Microsoft Entra authentication."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Server does not support Microsoft Entra authentication."
           }
         ]
       }
     },
     "MigrateNetworkStatus": {
       "type": "object",
-      "description": "The status of a network migration operation.",
+      "description": "Status of a network migration operation.",
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description": "The ID of the subscription."
+          "description": "Identifier of the subscription."
         },
         "resourceGroupName": {
           "type": "string",
-          "description": "The name of the resource group."
+          "description": "Name of the resource group."
         },
         "serverName": {
           "type": "string",
-          "description": "The name of the server."
+          "description": "Name of the server."
         },
         "state": {
           "$ref": "#/definitions/NetworkMigrationState",
-          "description": "The state of the network migration operation.",
+          "description": "State of the network migration operation.",
           "readOnly": true
         }
       }
@@ -6606,11 +6697,13 @@
         "values": [
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "Roles and permissions will be migrated."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "Roles and permissions will not be migrated."
           }
         ]
       }
@@ -6648,27 +6741,33 @@
         "values": [
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "Migration is in progress for the database."
           },
           {
             "name": "WaitingForCutoverTrigger",
-            "value": "WaitingForCutoverTrigger"
+            "value": "WaitingForCutoverTrigger",
+            "description": "Migration is waiting for cutover trigger for the database."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Migration has failed for the database."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Migration has been canceled for the database."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Migration has succeeded for the database."
           },
           {
             "name": "Canceling",
-            "value": "Canceling"
+            "value": "Canceling",
+            "description": "Migration is being canceled for the database."
           }
         ]
       }
@@ -6697,7 +6796,7 @@
     },
     "MigrationMode": {
       "type": "string",
-      "description": "Mode used to perform the migration: Online or Offline.",
+      "description": "Mode used to perform the migration.",
       "enum": [
         "Offline",
         "Online"
@@ -6708,11 +6807,13 @@
         "values": [
           {
             "name": "Offline",
-            "value": "Offline"
+            "value": "Offline",
+            "description": "Offline migration mode."
           },
           {
             "name": "Online",
-            "value": "Online"
+            "value": "Online",
+            "description": "Online migration mode."
           }
         ]
       }
@@ -6763,18 +6864,20 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid"
+            "value": "Invalid",
+            "description": "Migration name is invalid."
           },
           {
             "name": "AlreadyExists",
-            "value": "AlreadyExists"
+            "value": "AlreadyExists",
+            "description": "Migration name already exists."
           }
         ]
       }
     },
     "MigrationOption": {
       "type": "string",
-      "description": "Supported option for a migration",
+      "description": "Supported option for a migration.",
       "enum": [
         "Validate",
         "Migrate",
@@ -6786,15 +6889,18 @@
         "values": [
           {
             "name": "Validate",
-            "value": "Validate"
+            "value": "Validate",
+            "description": "Validate the migration without performing it."
           },
           {
             "name": "Migrate",
-            "value": "Migrate"
+            "value": "Migrate",
+            "description": "Perform the migration."
           },
           {
             "name": "ValidateAndMigrate",
-            "value": "ValidateAndMigrate"
+            "value": "ValidateAndMigrate",
+            "description": "Validate and perform the migration."
           }
         ]
       }
@@ -7099,31 +7205,38 @@
         "values": [
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "Migration is in progress."
           },
           {
             "name": "WaitingForUserAction",
-            "value": "WaitingForUserAction"
+            "value": "WaitingForUserAction",
+            "description": "Migration is waiting for user action."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Migration has been canceled."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Migration has failed."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Migration has succeeded."
           },
           {
             "name": "ValidationFailed",
-            "value": "ValidationFailed"
+            "value": "ValidationFailed",
+            "description": "Validation for migration has failed."
           },
           {
             "name": "CleaningUp",
-            "value": "CleaningUp"
+            "value": "CleaningUp",
+            "description": "Migration is cleaning up resources."
           }
         ]
       }
@@ -7172,51 +7285,63 @@
         "values": [
           {
             "name": "PerformingPreRequisiteSteps",
-            "value": "PerformingPreRequisiteSteps"
+            "value": "PerformingPreRequisiteSteps",
+            "description": "Performing pre-requisite steps for migration."
           },
           {
             "name": "WaitingForLogicalReplicationSetupRequestOnSourceDB",
-            "value": "WaitingForLogicalReplicationSetupRequestOnSourceDB"
+            "value": "WaitingForLogicalReplicationSetupRequestOnSourceDB",
+            "description": "Waiting for logical replication setup request on source database."
           },
           {
             "name": "WaitingForDBsToMigrateSpecification",
-            "value": "WaitingForDBsToMigrateSpecification"
+            "value": "WaitingForDBsToMigrateSpecification",
+            "description": "Waiting for databases to migrate specification."
           },
           {
             "name": "WaitingForTargetDBOverwriteConfirmation",
-            "value": "WaitingForTargetDBOverwriteConfirmation"
+            "value": "WaitingForTargetDBOverwriteConfirmation",
+            "description": "Waiting for target database overwrite confirmation."
           },
           {
             "name": "WaitingForDataMigrationScheduling",
-            "value": "WaitingForDataMigrationScheduling"
+            "value": "WaitingForDataMigrationScheduling",
+            "description": "Waiting for data migration scheduling."
           },
           {
             "name": "WaitingForDataMigrationWindow",
-            "value": "WaitingForDataMigrationWindow"
+            "value": "WaitingForDataMigrationWindow",
+            "description": "Waiting for data migration window."
           },
           {
             "name": "MigratingData",
-            "value": "MigratingData"
+            "value": "MigratingData",
+            "description": "Migrating data."
           },
           {
             "name": "WaitingForCutoverTrigger",
-            "value": "WaitingForCutoverTrigger"
+            "value": "WaitingForCutoverTrigger",
+            "description": "Waiting for cutover trigger."
           },
           {
             "name": "CompletingMigration",
-            "value": "CompletingMigration"
+            "value": "CompletingMigration",
+            "description": "Completing migration."
           },
           {
             "name": "Completed",
-            "value": "Completed"
+            "value": "Completed",
+            "description": "Migration completed."
           },
           {
             "name": "CancelingRequestedDBMigrations",
-            "value": "CancelingRequestedDBMigrations"
+            "value": "CancelingRequestedDBMigrations",
+            "description": "Canceling requested database migrations."
           },
           {
             "name": "ValidationInProgress",
-            "value": "ValidationInProgress"
+            "value": "ValidationInProgress",
+            "description": "Validation in progress."
           }
         ]
       }
@@ -7312,7 +7437,7 @@
     },
     "NetworkMigrationState": {
       "type": "string",
-      "description": "The state of the network migration operation.",
+      "description": "State of the network migration operation.",
       "enum": [
         "Pending",
         "InProgress",
@@ -7328,32 +7453,32 @@
           {
             "name": "Pending",
             "value": "Pending",
-            "description": "The network migration is pending."
+            "description": "Network migration is pending."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The network migration is in progress."
+            "description": "Network migration is in progress."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The network migration succeeded."
+            "description": "Network migration succeeded."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The network migration failed."
+            "description": "Network migration failed."
           },
           {
             "name": "CancelInProgress",
             "value": "CancelInProgress",
-            "description": "The network migration cancellation is in progress."
+            "description": "Network migration cancellation is in progress."
           },
           {
             "name": "Cancelled",
             "value": "Cancelled",
-            "description": "The network migration was cancelled."
+            "description": "Network migration was cancelled."
           }
         ]
       }
@@ -7545,7 +7670,7 @@
     },
     "OnlineStorageResizeSupport": {
       "type": "string",
-      "description": "Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. 'Enabled' means resizing the storage without interrupting the operation of the database engine is supported. 'Disabled' means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.",
+      "description": "Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -7556,11 +7681,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Resizing the storage without interrupting the operation of the database engine is supported."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Resizing the storage without interrupting the operation of the database engine is not supported."
           }
         ]
       }
@@ -7684,7 +7811,7 @@
     },
     "OverwriteDatabasesOnTargetServer": {
       "type": "string",
-      "description": "Indicates if databases on the target server can be overwritten when already present. If set to 'False', when the migration workflow detects that the database already exists on the target server, it will wait for a confirmation.",
+      "description": "Indicates if databases on the target server can be overwritten when already present.",
       "enum": [
         "True",
         "False"
@@ -7695,11 +7822,13 @@
         "values": [
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "Databases on the target server can be overwritten when already present."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "Databases on the target server cannot be overwritten when already present. When the migration workflow detects that the database already exists on the target server, it will wait for a confirmation."
           }
         ]
       }
@@ -7717,18 +7846,20 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Server supports password based authentication."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Server does not support password based authentication."
           }
         ]
       }
     },
     "PostgreSqlFlexibleServerHighAvailabilityMode": {
       "type": "string",
-      "description": "Modes of high availability supported for this compute.",
+      "description": "Mode of high availability supported for this compute.",
       "enum": [
         "Disabled",
         "ZoneRedundant",
@@ -7740,15 +7871,18 @@
         "values": [
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "High availability is disabled for the server."
           },
           {
             "name": "ZoneRedundant",
-            "value": "ZoneRedundant"
+            "value": "ZoneRedundant",
+            "description": "High availability is enabled for the server, with standby server in a different availability zone than that of the primary."
           },
           {
             "name": "SameZone",
-            "value": "SameZone"
+            "value": "SameZone",
+            "description": "High availability is enabled for the server, with standby server in the same availability zone as the primary."
           }
         ]
       }
@@ -7772,35 +7906,43 @@
         "values": [
           {
             "name": "18",
-            "value": "18"
+            "value": "18",
+            "description": "PostgreSQL 18."
           },
           {
             "name": "17",
-            "value": "17"
+            "value": "17",
+            "description": "PostgreSQL 17."
           },
           {
             "name": "16",
-            "value": "16"
+            "value": "16",
+            "description": "PostgreSQL 16."
           },
           {
             "name": "15",
-            "value": "15"
+            "value": "15",
+            "description": "PostgreSQL 15."
           },
           {
             "name": "14",
-            "value": "14"
+            "value": "14",
+            "description": "PostgreSQL 14."
           },
           {
             "name": "13",
-            "value": "13"
+            "value": "13",
+            "description": "PostgreSQL 13."
           },
           {
             "name": "12",
-            "value": "12"
+            "value": "12",
+            "description": "PostgreSQL 12."
           },
           {
             "name": "11",
-            "value": "11"
+            "value": "11",
+            "description": "PostgreSQL 11."
           }
         ]
       }
@@ -7821,7 +7963,7 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The principal type is not known or not specified."
+            "description": "Principal type is not known or not specified."
           },
           {
             "name": "User",
@@ -7836,7 +7978,7 @@
           {
             "name": "ServicePrincipal",
             "value": "ServicePrincipal",
-            "description": "A Microsoft Entra service principal, typically representing an application or service identity"
+            "description": "A Microsoft Entra service principal, typically representing an application or service identity."
           }
         ]
       }
@@ -7961,7 +8103,7 @@
     },
     "ReadReplicaPromoteMode": {
       "type": "string",
-      "description": "Type of operation to apply on the read replica. This property is write only. Standalone means that the read replica will be promoted to a standalone server, and will become a completely independent entity from the replication set. Switchover means that the read replica will roles with the primary server.",
+      "description": "Type of operation to apply on the read replica. This property is write only.",
       "enum": [
         "Standalone",
         "Switchover"
@@ -7973,7 +8115,7 @@
           {
             "name": "Standalone",
             "value": "Standalone",
-            "description": "Read replica will become an independent server."
+            "description": "Read replica will become an independent server, and a completely independent entity from the replication set."
           },
           {
             "name": "Switchover",
@@ -7997,12 +8139,12 @@
           {
             "name": "Planned",
             "value": "Planned",
-            "description": "The operation will wait for data in the read replica to be fully synchronized with its source server, before it initiates the operation."
+            "description": "Wait for data in the read replica to be fully synchronized with its source server before it initiates the operation."
           },
           {
             "name": "Forced",
             "value": "Forced",
-            "description": "The operation will not wait for data in the read replica to be synchronized with its source server, before it initiates the operation."
+            "description": "Initiate the operation immediately, without waiting for data in the read replica to be synchronized with its source server."
           }
         ]
       }
@@ -8023,23 +8165,28 @@
         "values": [
           {
             "name": "CreateIndex",
-            "value": "CreateIndex"
+            "value": "CreateIndex",
+            "description": "Recommendation to create an index to improve query performance."
           },
           {
             "name": "DropIndex",
-            "value": "DropIndex"
+            "value": "DropIndex",
+            "description": "Recommendation to drop an existing index because it's duplicate or unused."
           },
           {
             "name": "ReIndex",
-            "value": "ReIndex"
+            "value": "ReIndex",
+            "description": "Recommendation to reindex an existing invalid index."
           },
           {
             "name": "AnalyzeTable",
-            "value": "AnalyzeTable"
+            "value": "AnalyzeTable",
+            "description": "Recommendation to analyze a table to update statistics for the query optimizer."
           },
           {
             "name": "VacuumTable",
-            "value": "VacuumTable"
+            "value": "VacuumTable",
+            "description": "Recommendation to vacuum a table to reclaim storage and optimize performance."
           }
         ]
       }
@@ -8094,26 +8241,30 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "No replication role assigned; the server operates independently."
           },
           {
             "name": "Primary",
-            "value": "Primary"
+            "value": "Primary",
+            "description": "Acts as the source server for replication to one or more replicas."
           },
           {
             "name": "AsyncReplica",
-            "value": "AsyncReplica"
+            "value": "AsyncReplica",
+            "description": "Receives data asynchronously from a primary server within the same region."
           },
           {
             "name": "GeoAsyncReplica",
-            "value": "GeoAsyncReplica"
+            "value": "GeoAsyncReplica",
+            "description": "Receives data asynchronously from a primary server in a different region for geographical redundancy."
           }
         ]
       }
     },
     "ReplicationState": {
       "type": "string",
-      "description": "Indicates the replication state of a read replica. This property is returned only when the target server is a read replica. Possible  values are Active, Broken, Catchup, Provisioning, Reconfiguring, and Updating",
+      "description": "Indicates the replication state of a read replica. This property is returned only when the target server is a read replica.",
       "enum": [
         "Active",
         "Catchup",
@@ -8129,22 +8280,22 @@
           {
             "name": "Active",
             "value": "Active",
-            "description": "The read replica server is fully synchronized and actively replicating data from the primary server."
+            "description": "Read replica server is fully synchronized and actively replicating data from the primary server."
           },
           {
             "name": "Catchup",
             "value": "Catchup",
-            "description": "The read replica server is behind the primary server and is currently catching up with pending changes."
+            "description": "Read replica server is behind the primary server and is currently catching up with pending changes."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The read replica server is being created and is in process of getting initialized."
+            "description": "Read replica server is being created and is in process of getting initialized."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The read replica server is undergoing some changes it can be changing compute size of promoting it to primary server."
+            "description": "Read replica server is undergoing some changes it can be changing compute size of promoting it to primary server."
           },
           {
             "name": "Broken",
@@ -8154,7 +8305,7 @@
           {
             "name": "Reconfiguring",
             "value": "Reconfiguring",
-            "description": "The read replica server is being reconfigured, possibly due to changes in source or settings."
+            "description": "Read replica server is being reconfigured, possibly due to changes in source or settings."
           }
         ]
       }
@@ -8539,11 +8690,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Public network access is enabled. This allows the server to be accessed from the public internet, provided the necessary firewall rule that allows incoming traffic originating from the connecting client is in place. This is compatible with the use of private endpoints to connect to this server."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Public network access is disabled. This means the server cannot be accessed from the public internet, but only via private endpoints."
           }
         ]
       }
@@ -8630,7 +8783,7 @@
     },
     "ServerState": {
       "type": "string",
-      "description": "Possible states of a server.",
+      "description": "State of a server.",
       "enum": [
         "Ready",
         "Dropping",
@@ -8649,43 +8802,53 @@
         "values": [
           {
             "name": "Ready",
-            "value": "Ready"
+            "value": "Ready",
+            "description": "Server is healthy and not undergoing any operations at the management or control plane level. This doesn't mean that the server is fully operational at the data plane level."
           },
           {
             "name": "Dropping",
-            "value": "Dropping"
+            "value": "Dropping",
+            "description": "Server is being deleted."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Server is disabled. Typical reasons include: the subscription on which the server is deployed is explicitly disabled or canceled by the administrator, the spending limit has been reached, or the bill is past due. May also happen when the server is being moved to another resource group or subscription."
           },
           {
             "name": "Starting",
-            "value": "Starting"
+            "value": "Starting",
+            "description": "PostgreSQL database engine is being restarted."
           },
           {
             "name": "Stopping",
-            "value": "Stopping"
+            "value": "Stopping",
+            "description": "Compute resources associated with the server are being stopped and deallocated. If the server has high availability enabled, the compute resources of the standby server are also stopped and deallocated."
           },
           {
             "name": "Stopped",
-            "value": "Stopped"
+            "value": "Stopped",
+            "description": "Compute resources associated with the server are being stopped and deallocated."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Server is undergoing some changes which may or may not impact the availability of the PostgreSQL database engine. For example, the compute resources of the server are being scaled up or down, which may cause temporary unavailability of the database engine. Or, for example, a firewall rule is being added or removed, which doesn't cause any unavailability of the database engine."
           },
           {
             "name": "Restarting",
-            "value": "Restarting"
+            "value": "Restarting",
+            "description": "PostgreSQL database engine is being restarted."
           },
           {
             "name": "Inaccessible",
-            "value": "Inaccessible"
+            "value": "Inaccessible",
+            "description": "Server isn't accessible, because the key provided to encrypt and decrypt the data is in invalid state."
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Server is in the process of being created."
           }
         ]
       }
@@ -8799,22 +8962,25 @@
         "values": [
           {
             "name": "Burstable",
-            "value": "Burstable"
+            "value": "Burstable",
+            "description": "Cost-effective tier for infrequent CPU usage, ideal for development and testing workloads with low performance requirements."
           },
           {
             "name": "GeneralPurpose",
-            "value": "GeneralPurpose"
+            "value": "GeneralPurpose",
+            "description": "Balanced compute and memory for most workloads, offering scalable performance and I/O throughput."
           },
           {
             "name": "MemoryOptimized",
-            "value": "MemoryOptimized"
+            "value": "MemoryOptimized",
+            "description": "High memory-to-core ratio for demanding workloads needing fast in-memory processing and high concurrency."
           }
         ]
       }
     },
     "SourceType": {
       "type": "string",
-      "description": "Source server type used for the migration: ApsaraDB_RDS, AWS, AWS_AURORA, AWS_EC2, AWS_RDS, AzureVM, Crunchy_PostgreSQL, Digital_Ocean_Droplets, Digital_Ocean_PostgreSQL, EDB, EDB_Oracle_Server, EDB_PostgreSQL, GCP, GCP_AlloyDB, GCP_CloudSQL, GCP_Compute, Heroku_PostgreSQL, Huawei_Compute, Huawei_RDS, OnPremises, PostgreSQLCosmosDB, PostgreSQLFlexibleServer, PostgreSQLSingleServer, or Supabase_PostgreSQL",
+      "description": "Source server type used for the migration.",
       "enum": [
         "OnPremises",
         "AWS",
@@ -8847,99 +9013,123 @@
         "values": [
           {
             "name": "OnPremises",
-            "value": "OnPremises"
+            "value": "OnPremises",
+            "description": "On-premises PostgreSQL server."
           },
           {
             "name": "AWS",
-            "value": "AWS"
+            "value": "AWS",
+            "description": "Amazon Web Services PostgreSQL server."
           },
           {
             "name": "GCP",
-            "value": "GCP"
+            "value": "GCP",
+            "description": "Google Cloud Platform PostgreSQL server."
           },
           {
             "name": "AzureVM",
-            "value": "AzureVM"
+            "value": "AzureVM",
+            "description": "Azure Virtual Machine PostgreSQL server."
           },
           {
             "name": "PostgreSQLSingleServer",
-            "value": "PostgreSQLSingleServer"
+            "value": "PostgreSQLSingleServer",
+            "description": "Azure Database for PostgreSQL single server."
           },
           {
             "name": "AWS_RDS",
-            "value": "AWS_RDS"
+            "value": "AWS_RDS",
+            "description": "Amazon RDS for PostgreSQL."
           },
           {
             "name": "AWS_AURORA",
-            "value": "AWS_AURORA"
+            "value": "AWS_AURORA",
+            "description": "Amazon Aurora for PostgreSQL."
           },
           {
             "name": "AWS_EC2",
-            "value": "AWS_EC2"
+            "value": "AWS_EC2",
+            "description": "Amazon EC2 for PostgreSQL."
           },
           {
             "name": "GCP_CloudSQL",
-            "value": "GCP_CloudSQL"
+            "value": "GCP_CloudSQL",
+            "description": "Google Cloud SQL for PostgreSQL."
           },
           {
             "name": "GCP_AlloyDB",
-            "value": "GCP_AlloyDB"
+            "value": "GCP_AlloyDB",
+            "description": "Google Cloud AlloyDB for PostgreSQL."
           },
           {
             "name": "GCP_Compute",
-            "value": "GCP_Compute"
+            "value": "GCP_Compute",
+            "description": "Google Compute Engine for PostgreSQL."
           },
           {
             "name": "EDB",
-            "value": "EDB"
+            "value": "EDB",
+            "description": "EnterpriseDB PostgreSQL server."
           },
           {
             "name": "EDB_Oracle_Server",
-            "value": "EDB_Oracle_Server"
+            "value": "EDB_Oracle_Server",
+            "description": "EnterpriseDB Oracle Server."
           },
           {
             "name": "EDB_PostgreSQL",
-            "value": "EDB_PostgreSQL"
+            "value": "EDB_PostgreSQL",
+            "description": "EnterpriseDB PostgreSQL server."
           },
           {
             "name": "PostgreSQLFlexibleServer",
-            "value": "PostgreSQLFlexibleServer"
+            "value": "PostgreSQLFlexibleServer",
+            "description": "Azure Database for PostgreSQL flexible server."
           },
           {
             "name": "PostgreSQLCosmosDB",
-            "value": "PostgreSQLCosmosDB"
+            "value": "PostgreSQLCosmosDB",
+            "description": ".NET Cosmos DB for PostgreSQL"
           },
           {
             "name": "Huawei_RDS",
-            "value": "Huawei_RDS"
+            "value": "Huawei_RDS",
+            "description": "Huawei RDS for PostgreSQL"
           },
           {
             "name": "Huawei_Compute",
-            "value": "Huawei_Compute"
+            "value": "Huawei_Compute",
+            "description": "Huawei Compute for PostgreSQL"
           },
           {
             "name": "Heroku_PostgreSQL",
-            "value": "Heroku_PostgreSQL"
+            "value": "Heroku_PostgreSQL",
+            "description": "Heroku PostgreSQL"
           },
           {
             "name": "Crunchy_PostgreSQL",
-            "value": "Crunchy_PostgreSQL"
+            "value": "Crunchy_PostgreSQL",
+            "description": "Crunchy PostgreSQL"
           },
           {
             "name": "ApsaraDB_RDS",
-            "value": "ApsaraDB_RDS"
+            "value": "ApsaraDB_RDS",
+            "description": "ApsaraDB RDS for PostgreSQL"
           },
           {
             "name": "Digital_Ocean_Droplets",
-            "value": "Digital_Ocean_Droplets"
+            "value": "Digital_Ocean_Droplets",
+            "description": "Digital Ocean Droplets for PostgreSQL"
           },
           {
             "name": "Digital_Ocean_PostgreSQL",
-            "value": "Digital_Ocean_PostgreSQL"
+            "value": "Digital_Ocean_PostgreSQL",
+            "description": "Digital Ocean PostgreSQL"
           },
           {
             "name": "Supabase_PostgreSQL",
-            "value": "Supabase_PostgreSQL"
+            "value": "Supabase_PostgreSQL",
+            "description": "Supabase PostgreSQL"
           }
         ]
       }
@@ -8959,19 +9149,23 @@
         "values": [
           {
             "name": "Prefer",
-            "value": "Prefer"
+            "value": "Prefer",
+            "description": "Prefer SSL connection. If the server does not support SSL, the connection will be established without SSL."
           },
           {
             "name": "Require",
-            "value": "Require"
+            "value": "Require",
+            "description": "Require SSL connection. If the server does not support SSL, the connection will fail."
           },
           {
             "name": "VerifyCA",
-            "value": "VerifyCA"
+            "value": "VerifyCA",
+            "description": "Require SSL connection and verify the server certificate against the CA certificate."
           },
           {
             "name": "VerifyFull",
-            "value": "VerifyFull"
+            "value": "VerifyFull",
+            "description": "Require SSL connection, verify the server certificate against the CA certificate, and verify that the server hostname matches the certificate."
           }
         ]
       }
@@ -8989,11 +9183,13 @@
         "values": [
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "Data migration must start right away."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "Data migration must not start right away."
           }
         ]
       }
@@ -9033,7 +9229,7 @@
     },
     "StorageAutoGrow": {
       "type": "string",
-      "description": "Flag to enable or disable the automatic growth of storage size of a server when available space is nearing zero and conditions allow for automatically growing storage size.",
+      "description": "Indicates if the server is configured to automatically grow storage size when available space is nearing zero and conditions allow for automatic growing storage size.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -9044,18 +9240,20 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Server should automatically grow storage size when available space is nearing zero and conditions allow for automatically growing storage size."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Server should not automatically grow storage size when available space is nearing zero."
           }
         ]
       }
     },
     "StorageAutoGrowthSupport": {
       "type": "string",
-      "description": "Indicates if storage autogrow is supported in this location. 'Enabled' means storage autogrow is supported. 'Disabled' stands for storage autogrow is not supported. Will be deprecated in the future. Look to Supported Features for 'StorageAutoGrowth'.",
+      "description": "Indicates if storage autogrow is supported in this location. Will be deprecated in the future. Look to Supported Features for 'StorageAutoGrowth'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -9066,11 +9264,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Storage autogrow is supported."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Storage autogrow is not supported."
           }
         ]
       }
@@ -9195,7 +9395,7 @@
     },
     "StorageType": {
       "type": "string",
-      "description": "Type of storage assigned to a server. Allowed values are Premium_LRS, PremiumV2_LRS, or UltraSSD_LRS. If not specified, it defaults to Premium_LRS.",
+      "description": "Type of storage assigned to a server. If not specified, it defaults to Premium_LRS.",
       "enum": [
         "Premium_LRS",
         "PremiumV2_LRS",
@@ -9207,15 +9407,18 @@
         "values": [
           {
             "name": "Premium_LRS",
-            "value": "Premium_LRS"
+            "value": "Premium_LRS",
+            "description": "Standard Solid State Disk (SSD) backed storage offering consistent performance for general purpose workloads."
           },
           {
             "name": "PremiumV2_LRS",
-            "value": "PremiumV2_LRS"
+            "value": "PremiumV2_LRS",
+            "description": "Next generation Solid State Disk (SSD) storage with improved scalability and performance for demanding enterprise workloads."
           },
           {
             "name": "UltraSSD_LRS",
-            "value": "UltraSSD_LRS"
+            "value": "UltraSSD_LRS",
+            "description": "High-end Solid State Disk (SSD) storage designed for extreme IOPS and latency-sensitive applications."
           }
         ]
       }
@@ -9261,11 +9464,13 @@
         "values": [
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "Cutover must be triggered for the entire migration."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "Cutover must not be triggered for the entire migration."
           }
         ]
       }
@@ -9417,7 +9622,7 @@
     },
     "ValidationState": {
       "type": "string",
-      "description": "Validation status for migration.",
+      "description": "Validation state for migration.",
       "enum": [
         "Failed",
         "Succeeded",
@@ -9429,15 +9634,18 @@
         "values": [
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Validation has failed."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Validation has succeeded."
           },
           {
             "name": "Warning",
-            "value": "Warning"
+            "value": "Warning",
+            "description": "Validation has succeeded with warnings."
           }
         ]
       }
@@ -9528,7 +9736,8 @@
         "values": [
           {
             "name": "ReadWrite",
-            "value": "ReadWrite"
+            "value": "ReadWrite",
+            "description": "Read-write endpoint."
           }
         ]
       }
@@ -9592,7 +9801,7 @@
     },
     "ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport": {
       "type": "string",
-      "description": "Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. 'Enabled' means high availability with zone redundancy is supported in conjunction with geographically redundant backups is supported. 'Disabled' stands for high availability with zone redundancy is supported in conjunction with geographically redundant backups is not supported. Will be deprecated in the future. Look to Supported Features for 'ZoneRedundantHaAndGeoBackup'.",
+      "description": "Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. Will be deprecated in the future. Look to Supported Features for 'ZoneRedundantHaAndGeoBackup'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -9603,18 +9812,20 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "High availability with zone redundancy is supported in conjunction with geographically redundant backups."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "High availability with zone redundancy is not supported in conjunction with geographically redundant backups."
           }
         ]
       }
     },
     "ZoneRedundantHighAvailabilitySupport": {
       "type": "string",
-      "description": "Indicates if high availability with zone redundancy is supported in this location. 'Enabled' means high availability with zone redundancy is supported. 'Disabled' stands for high availability with zone redundancy is not supported. Will be deprecated in the future. Look to Supported Features for  'ZoneRedundantHa'.",
+      "description": "Indicates if high availability with zone redundancy is supported in this location. Will be deprecated in the future. Look to Supported Features for  'ZoneRedundantHa'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -9625,11 +9836,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "High availability with zone redundancy is supported."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "High availability with zone redundancy is not supported."
           }
         ]
       }

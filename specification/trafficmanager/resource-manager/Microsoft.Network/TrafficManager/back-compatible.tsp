@@ -7,12 +7,14 @@ using Microsoft.Network;
 
 @@clientName(Endpoints.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Endpoints.update::parameters.properties, "parameters");
+@@clientName(Endpoints.updateV2::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Endpoint.properties);
 
 @@clientName(Profiles.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Profiles.update::parameters.properties, "parameters");
+@@clientName(Profiles.updateV2::parameters.properties, "parameters");
 
 @@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
   "parameters"
