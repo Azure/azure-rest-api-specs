@@ -104,7 +104,7 @@ model PreparedImageSpecificationScript {
   scriptType: ScriptType;
 
   @doc("The script content to be executed in plain text. Do not include secrets.")
-  @example("touch /hello_world.txt")
+  @example("echo 'initializing node'")
   script?: string;
 
   @doc("Whether the node should reboot after successful script execution.")
@@ -126,7 +126,7 @@ model PreparedImageSpecificationScriptUpdate {
   scriptType?: ScriptType;
 
   @doc("The script content to be executed in plain text. Do not include secrets.")
-  @example("touch /hello_world.txt")
+  @example("echo 'initializing node'")
   script?: string;
 
   @doc("Whether the node should reboot after successful script execution.")

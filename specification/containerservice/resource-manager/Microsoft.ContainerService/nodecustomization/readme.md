@@ -69,7 +69,4 @@ directive:
   - suppress: LatestVersionOfCommonTypesMustBeUsed
     from: nodecustomization.json
     reason: Existing API versions continue using previously released common-types references for compatibility.
-  - suppress: EnumInsteadOfBoolean
-    from: nodecustomization.json
-    reason: This boolean contract is established in prior preview versions and must remain stable.
 ```

@@ -8,7 +8,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ContainerService;
 
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "built-in conditional request includes time based conditional headers"
 alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-Match")
   @doc("The request should only proceed if the targeted resource's etag matches the value provided.")
