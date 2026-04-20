@@ -1442,7 +1442,7 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   /** Optional. The BSUID of the recipient. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "toBSUID")
-  toBSUId?: string;
+  toBsuid?: string;
 
   /** The updated message status */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1466,7 +1466,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** Optional. The BSUID of the sender. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "fromBSUID")
-  fromBSUId?: string;
+  fromBsuid?: string;
 
   /** Required. The message channel type */
   @madeRequired(ServiceApiVersions.v2024_01_01)
