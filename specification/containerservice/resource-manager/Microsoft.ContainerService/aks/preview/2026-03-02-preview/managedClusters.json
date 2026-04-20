@@ -6832,6 +6832,23 @@
           },
           "x-ms-identifiers": []
         },
+        "nodePublicIPPrefixIDs": {
+          "type": "array",
+          "description": "The resource IDs of public IP prefixes for node public IPs.\nAt most one IPv4 and one IPv6 prefix may be specified. Order does not matter;\nthe RP determines IP version from the referenced resource's publicIPAddressVersion.\nRequires enableNodePublicIP to be true on the agent pool.\nMutually exclusive with the top-level nodePublicIPPrefixID property.\nImmutable after node pool creation. To change prefixes, delete and recreate the node pool.\nFor more information, see https://aka.ms/aks/ipv6-ilpip",
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/publicIPPrefixes"
+                }
+              ]
+            }
+          }
+        },
         "allowedHostPorts": {
           "type": "array",
           "description": "The port ranges that are allowed to access. The specified ranges are allowed to overlap.",

@@ -744,6 +744,24 @@ model AgentPoolNetworkProfile {
   nodePublicIPTags?: IPTag[];
 
   /**
+   * The resource IDs of public IP prefixes for node public IPs.
+   * At most one IPv4 and one IPv6 prefix may be specified. Order does not matter;
+   * the RP determines IP version from the referenced resource's publicIPAddressVersion.
+   * Requires enableNodePublicIP to be true on the agent pool.
+   * Mutually exclusive with the top-level nodePublicIPPrefixID property.
+   * Immutable after node pool creation. To change prefixes, delete and recreate the node pool.
+   * For more information, see https://aka.ms/aks/ipv6-ilpip
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_03_02_preview)
+  @maxItems(2)
+  nodePublicIPPrefixIDs?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPPrefixes";
+    }
+  ]>[];
+
+  /**
    * The port ranges that are allowed to access. The specified ranges are allowed to overlap.
    */
   @identifiers(#[])
