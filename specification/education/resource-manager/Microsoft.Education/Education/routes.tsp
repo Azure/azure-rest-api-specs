@@ -5,19 +5,18 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-
 namespace Microsoft.Education;
 
-
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 /**
-* Redeem invite code to join a redeemable lab
-*/
+ * Redeem invite code to join a redeemable lab
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @autoRoute
-redeemInvitationCode is ArmProviderActionSync<Request = RedeemRequest,Response = void>
+op redeemInvitationCode is ArmProviderActionSync<
+  Request = RedeemRequest,
+  Response = void
+>;

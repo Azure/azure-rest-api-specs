@@ -35,6 +35,12 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Education;
 
+alias billingAccountExternalResource = Extension.ExternalResource<
+  "Microsoft.Billing",
+  "billingAccounts",
+  "{billingAccountName}"
+>;
+
 /**
  * The available API versions.
  */

@@ -24,12 +24,6 @@ model GrantDetails
   >;
 }
 
-alias billingAccountExternalResource = Extension.ExternalResource<
-  "Microsoft.Billing",
-  "billingAccounts",
-  "{billingAccountName}"
->;
-
 @armResourceOperations
 interface Grants {
   /**

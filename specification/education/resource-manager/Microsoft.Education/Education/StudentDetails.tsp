@@ -24,12 +24,6 @@ model StudentDetails is Azure.ResourceManager.ProxyResource<StudentProperties> {
   >;
 }
 
-alias billingAccountExternalResource = Extension.ExternalResource<
-  "Microsoft.Billing",
-  "billingAccounts",
-  "{billingAccountName}"
->;
-
 @armResourceOperations
 interface Students {
   /**

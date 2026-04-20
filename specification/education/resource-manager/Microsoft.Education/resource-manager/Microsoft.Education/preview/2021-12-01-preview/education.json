@@ -1,0 +1,1591 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EducationManagementClient",
+    "version": "2021-12-01-preview",
+    "description": "Education client provides access to education resources for Azure subscriptions.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Grants"
+    },
+    {
+      "name": "Labs"
+    },
+    {
+      "name": "JoinRequests"
+    },
+    {
+      "name": "Students"
+    },
+    {
+      "name": "StudentLabs"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Education/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Education/redeemInvitationCode": {
+      "post": {
+        "operationId": "RedeemInvitationCode",
+        "description": "Redeem invite code to join a redeemable lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedeemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedeemCode": {
+            "$ref": "./examples/RedeemCode.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Education/studentLabs": {
+      "get": {
+        "operationId": "StudentLabs_ListAll",
+        "tags": [
+          "StudentLabs"
+        ],
+        "description": "Get a list of all labs associated with the caller of the API.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StudentLabDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StudentLabList": {
+            "$ref": "./examples/StudentLabList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Education/studentLabs/{studentLabName}": {
+      "get": {
+        "operationId": "StudentLabs_Get",
+        "tags": [
+          "StudentLabs"
+        ],
+        "description": "Get the details for a specified lab associated with the student lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "studentLabName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a student lab.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StudentLabDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StudentLab": {
+            "$ref": "./examples/StudentLab.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/grants": {
+      "get": {
+        "operationId": "Grants_List",
+        "tags": [
+          "Grants"
+        ],
+        "description": "Get details for a specific grant linked to the provided billing account and billing profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeAllocatedBudget",
+            "in": "query",
+            "description": "May be used to include information about budget that has been allocated.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GrantListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GrantList": {
+            "$ref": "./examples/GrantDefaultList.json"
+          },
+          "GrantListIncludeAllocatedBudget": {
+            "$ref": "./examples/GrantDefaultListIncludeAllocatedBudget.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/grants/default": {
+      "get": {
+        "operationId": "Grants_Get",
+        "tags": [
+          "Grants"
+        ],
+        "description": "Get details for a specific grant linked to the provided billing account and billing profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeAllocatedBudget",
+            "in": "query",
+            "description": "May be used to include information about budget that has been allocated.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GrantDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grant": {
+            "$ref": "./examples/Grant.json"
+          },
+          "GrantIncludeAllocatedBudget": {
+            "$ref": "./examples/GrantIncludeAllocatedBudget.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs": {
+      "get": {
+        "operationId": "Labs_ListAll",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Get a list of labs associated with the provided billing account name and billing profile name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeBudget",
+            "in": "query",
+            "description": "May be used to include budget information.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "includeDeleted",
+            "in": "query",
+            "description": "May be used to show deleted items.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabList": {
+            "$ref": "./examples/LabList.json"
+          },
+          "LabListIncludeBudget": {
+            "$ref": "./examples/LabListIncludeBudget.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default": {
+      "get": {
+        "operationId": "Labs_Get",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Get the details for a specific lab associated with the provided billing account name, billing profile name, and invoice section name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeBudget",
+            "in": "query",
+            "description": "May be used to include budget information.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lab": {
+            "$ref": "./examples/Lab.json"
+          },
+          "LabIncludeBudget": {
+            "$ref": "./examples/LabIncludeBudget.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Labs_CreateOrUpdate",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Create a new lab or update a previously created lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request parameters that are provided to create lab resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LabDetails' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "201": {
+            "description": "Resource 'LabDetails' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateLab": {
+            "$ref": "./examples/CreateLab.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Labs_Delete",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Delete a specific lab associated with the provided billing account name, billing profile name, and invoice section name. Note all students must be removed from the lab in order to delete the lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteLab": {
+            "$ref": "./examples/DeleteLab.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/generateInviteCode": {
+      "post": {
+        "operationId": "Labs_GenerateInviteCode",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Generate invite code for a lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onlyUpdateStudentCountParameter",
+            "in": "query",
+            "description": "set this flag to true if you want to update student count without generating a new invite code",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request parameters that are provided to generate invite code.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InviteCodeGenerateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateLab": {
+            "$ref": "./examples/GenerateInviteCode.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/joinRequests": {
+      "get": {
+        "operationId": "JoinRequests_List",
+        "tags": [
+          "JoinRequests"
+        ],
+        "description": "get student join requests",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeDenied",
+            "in": "query",
+            "description": "Include denied",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JoinRequestList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JoinRequestList": {
+            "$ref": "./examples/JoinRequestList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/joinRequests/{joinRequestName}": {
+      "get": {
+        "operationId": "JoinRequests_Get",
+        "tags": [
+          "JoinRequests"
+        ],
+        "description": "get student join requests",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "joinRequestName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a join request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JoinRequestDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JoinRequest": {
+            "$ref": "./examples/JoinRequest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/joinRequests/{joinRequestName}/approve": {
+      "post": {
+        "operationId": "JoinRequests_Approve",
+        "tags": [
+          "JoinRequests"
+        ],
+        "description": "Approve student joining the redeemable lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "joinRequestName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a join request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/joinRequests/{joinRequestName}/deny": {
+      "post": {
+        "operationId": "JoinRequests_Deny",
+        "tags": [
+          "JoinRequests"
+        ],
+        "description": "Deny student joining the redeemable lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "joinRequestName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a join request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JoinRequestDeny": {
+            "$ref": "./examples/JoinRequestApproveAndDeny.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/students": {
+      "get": {
+        "operationId": "Students_List",
+        "tags": [
+          "Students"
+        ],
+        "description": "Get a list of details about students that are associated with the specified lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeDeleted",
+            "in": "query",
+            "description": "May be used to show deleted items.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StudentDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StudentList": {
+            "$ref": "./examples/StudentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Education/labs/default/students/{studentAlias}": {
+      "get": {
+        "operationId": "Students_Get",
+        "tags": [
+          "Students"
+        ],
+        "description": "Get the details for a specific student in the specified lab by student alias",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentAlias",
+            "in": "path",
+            "description": "Student alias.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Student": {
+            "$ref": "./examples/Student.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Students_CreateOrUpdate",
+        "tags": [
+          "Students"
+        ],
+        "description": "Create and add a new student to the specified lab or update the details of an existing student in a lab. Note the student must have a valid tenant to accept the lab after they have been added to lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentAlias",
+            "in": "path",
+            "description": "Student alias.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request parameters that are provided to update student properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StudentDetails' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          },
+          "201": {
+            "description": "Resource 'StudentDetails' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StudentDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Student": {
+            "$ref": "./examples/CreateStudent.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Students_Delete",
+        "tags": [
+          "Students"
+        ],
+        "description": "Delete the specified student based on the student alias.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentAlias",
+            "in": "path",
+            "description": "Student alias.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteLab": {
+            "$ref": "./examples/DeleteStudent.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Amount": {
+      "type": "object",
+      "description": "The amount.",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The type of currency being used for the value."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "Amount value."
+        }
+      }
+    },
+    "GrantDetailProperties": {
+      "type": "object",
+      "description": "Grant detail properties",
+      "properties": {
+        "offerCap": {
+          "$ref": "#/definitions/Amount",
+          "description": "Offer Cap",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Grant Effective Date",
+          "readOnly": true
+        },
+        "offerType": {
+          "$ref": "#/definitions/GrantType",
+          "description": "Grant Offer Type",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration Date",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/GrantStatus",
+          "description": "Grant status",
+          "readOnly": true
+        },
+        "allocatedBudget": {
+          "$ref": "#/definitions/Amount",
+          "description": "allocated budget",
+          "readOnly": true
+        }
+      }
+    },
+    "GrantDetails": {
+      "type": "object",
+      "description": "Grant details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GrantDetailProperties",
+          "description": "Grant detail properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GrantListResponse": {
+      "type": "object",
+      "description": "List of Grants info.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GrantDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/GrantDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GrantStatus": {
+      "type": "string",
+      "description": "Grant status",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "GrantStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Inactive"
+          }
+        ]
+      }
+    },
+    "GrantType": {
+      "type": "string",
+      "description": "Grant Offer Type",
+      "enum": [
+        "Student",
+        "Academic"
+      ],
+      "x-ms-enum": {
+        "name": "GrantType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Student",
+            "value": "Student",
+            "description": "Student"
+          },
+          {
+            "name": "Academic",
+            "value": "Academic",
+            "description": "Academic"
+          }
+        ]
+      }
+    },
+    "InviteCodeGenerateRequest": {
+      "type": "object",
+      "description": "invite code generate request.",
+      "properties": {
+        "maxStudentCount": {
+          "type": "number",
+          "format": "float",
+          "description": "the total number of students that can be accepted to the lab."
+        }
+      }
+    },
+    "JoinRequestDetails": {
+      "type": "object",
+      "description": "join requests.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JoinRequestProperties",
+          "description": "join request properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JoinRequestList": {
+      "type": "object",
+      "description": "list of join requests.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JoinRequestDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/JoinRequestDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JoinRequestProperties": {
+      "type": "object",
+      "description": "Join request properties.",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last Name"
+        },
+        "email": {
+          "type": "string",
+          "description": "join request email"
+        },
+        "status": {
+          "$ref": "#/definitions/JoinRequestStatus",
+          "description": "Join request status"
+        }
+      }
+    },
+    "JoinRequestStatus": {
+      "type": "string",
+      "description": "Join request status",
+      "enum": [
+        "Pending",
+        "Denied"
+      ],
+      "x-ms-enum": {
+        "name": "JoinRequestStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          },
+          {
+            "name": "Denied",
+            "value": "Denied",
+            "description": "Denied"
+          }
+        ]
+      }
+    },
+    "LabDetails": {
+      "type": "object",
+      "description": "Lab details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabProperties",
+          "description": "Get lab response properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LabDetailsListResult": {
+      "type": "object",
+      "description": "The response of a LabDetails list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LabDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/LabDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabProperties": {
+      "type": "object",
+      "description": "Lab detail result properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Lab Display Name"
+        },
+        "budgetPerStudent": {
+          "$ref": "#/definitions/Amount",
+          "description": "Default monetary cap for each student in this lab",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Detail description of this lab"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Default expiration date for each student in this lab"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Lab creation date",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LabStatus",
+          "description": "The status of this lab",
+          "readOnly": true
+        },
+        "maxStudentCount": {
+          "type": "number",
+          "format": "float",
+          "description": "the total number of students that can be accepted to the lab.",
+          "readOnly": true
+        },
+        "invitationCode": {
+          "type": "string",
+          "description": "invitation code for redeemable lab",
+          "readOnly": true
+        },
+        "totalBudget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Total budget",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "totalAllocatedBudget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Total allocated budget",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "displayName",
+        "budgetPerStudent",
+        "description",
+        "expirationDate"
+      ]
+    },
+    "LabStatus": {
+      "type": "string",
+      "description": "The status of this lab",
+      "enum": [
+        "Active",
+        "Deleted",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "LabStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          }
+        ]
+      }
+    },
+    "RedeemRequest": {
+      "type": "object",
+      "description": "redeem request.",
+      "properties": {
+        "redeemCode": {
+          "type": "string",
+          "description": "redeem code"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "first name of requester"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "last name of requester"
+        }
+      },
+      "required": [
+        "redeemCode",
+        "firstName",
+        "lastName"
+      ]
+    },
+    "StudentDetails": {
+      "type": "object",
+      "description": "Student details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StudentProperties",
+          "description": "Get student response properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StudentDetailsListResult": {
+      "type": "object",
+      "description": "The response of a StudentDetails list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StudentDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/StudentDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StudentLabDetails": {
+      "type": "object",
+      "description": "Student lab details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StudentLabProperties",
+          "description": "Student lab properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StudentLabDetailsListResult": {
+      "type": "object",
+      "description": "The response of a StudentLabDetails list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StudentLabDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/StudentLabDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StudentLabProperties": {
+      "type": "object",
+      "description": "Student lab detail properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Student lab Display Name",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Detail description of this lab",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date the lab will expire and by default will be the expiration date for each student in this lab",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/StudentRole",
+          "description": "Student Role",
+          "readOnly": true
+        },
+        "budget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Student Budget",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/StudentLabStatus",
+          "description": "Student Lab Status",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "User Added Date",
+          "readOnly": true
+        },
+        "labScope": {
+          "type": "string",
+          "description": "Lab Scope. /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
+          "readOnly": true
+        }
+      }
+    },
+    "StudentLabStatus": {
+      "type": "string",
+      "description": "Student Lab Status",
+      "enum": [
+        "Active",
+        "Disabled",
+        "Expired",
+        "Pending",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "StudentLabStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Expired"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted"
+          }
+        ]
+      }
+    },
+    "StudentProperties": {
+      "type": "object",
+      "description": "Student detail properties",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last Name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Student Email",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "role": {
+          "$ref": "#/definitions/StudentRole",
+          "description": "Student Role"
+        },
+        "budget": {
+          "$ref": "#/definitions/Amount",
+          "description": "Student Budget"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date this student is set to expire from the lab."
+        },
+        "status": {
+          "$ref": "#/definitions/StudentLabStatus",
+          "description": "Student Lab Status",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date student was added to the lab",
+          "readOnly": true
+        },
+        "subscriptionAlias": {
+          "type": "string",
+          "description": "Subscription alias"
+        },
+        "subscriptionInviteLastSentDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "subscription invite last sent date"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "role",
+        "budget",
+        "expirationDate"
+      ]
+    },
+    "StudentRole": {
+      "type": "string",
+      "description": "Student Role",
+      "enum": [
+        "Student",
+        "Admin"
+      ],
+      "x-ms-enum": {
+        "name": "StudentRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Student",
+            "value": "Student",
+            "description": "Student"
+          },
+          {
+            "name": "Admin",
+            "value": "Admin",
+            "description": "Admin"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

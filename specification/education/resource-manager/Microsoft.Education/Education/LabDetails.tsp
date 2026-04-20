@@ -23,12 +23,6 @@ model LabDetails is Azure.ResourceManager.ProxyResource<LabProperties> {
   >;
 }
 
-alias billingAccountExternalResource = Extension.ExternalResource<
-  "Microsoft.Billing",
-  "billingAccounts",
-  "{billingAccountName}"
->;
-
 @armResourceOperations
 interface Labs {
   /**

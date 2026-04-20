@@ -25,12 +25,6 @@ model JoinRequestDetails
   >;
 }
 
-alias billingAccountExternalResource = Extension.ExternalResource<
-  "Microsoft.Billing",
-  "billingAccounts",
-  "{billingAccountName}"
->;
-
 @armResourceOperations
 interface JoinRequests {
   /**
