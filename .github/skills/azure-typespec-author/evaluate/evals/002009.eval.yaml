@@ -5,16 +5,14 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
 
 # Execution configuration
@@ -27,13 +25,10 @@ config:
 # Test cases
 stimuli:
 - prompt: |
-    In the specification/widget/resource-manager/Microsoft.Widget/Widget project, add a patch operation to an existing ARM resource named 'Employee'
+    In the Widget project, add a patch operation to an existing ARM resource named 'Employee'
   name: 002009-arm-add-patch-operation-to-resource
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -50,6 +45,11 @@ stimuli:
     - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
       dest: tspconfig.yaml
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
   - type: file-matches
     config:
       path: employee.tsp
@@ -62,6 +62,7 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
     file-matches: 1
   threshold: 1.0

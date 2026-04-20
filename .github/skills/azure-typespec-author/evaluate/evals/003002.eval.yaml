@@ -5,18 +5,15 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
-
 # Execution configuration
 config:
   runs: 1                      # Trials per stimulus
@@ -31,9 +28,6 @@ stimuli:
   name: 003002-arm-action-lro
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -50,18 +44,34 @@ stimuli:
     - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
       dest: tspconfig.yaml
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
+  # VP1: Async move action using ArmResourceActionAsync
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: move is ArmResourceAction<|move is ArmResourceActionAsync<
+      path: employee.tsp
+      pattern: 'move is ArmResourceActionAsync<Employee,'
+  # VP2: MoveRequest input and MoveResponse output
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: model MoveRequest
+      path: employee.tsp
+      pattern: 'ArmResourceActionAsync<Employee,\s*MoveRequest,\s*MoveResponse'
+  # VP3: Combined LRO headers with FinalResult and RetryAfterHeader
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: model MoveResponse
+      path: employee.tsp
+      pattern: 'LroHeaders = ArmCombinedLroHeaders'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'FinalResult\s*=\s*MoveResponse'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'RetryAfterHeader'
   - type: prompt
     config:
       scoring: scale_1_5
@@ -70,8 +80,7 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
-    file-matches: 3
+    file-matches: 5
   threshold: 1.0
-
-

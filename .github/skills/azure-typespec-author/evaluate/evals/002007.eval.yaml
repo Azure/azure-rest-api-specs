@@ -5,16 +5,14 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
 
 # Execution configuration
@@ -27,13 +25,10 @@ config:
 # Test cases
 stimuli:
 - prompt: |
-    Add an additional POST action called "/notify" to the standard operations of Employee. Ensure the definition meets TypeSpec Azure design guidelines.
+    Add an additional POST action called "/notify" to the standard operations of Employee. Request body: message content (string) and priority (enum with values Low, Medium, High). Response body: notification identifier (string) and status (string). Ensure the definition meets TypeSpec Azure design guidelines.
   name: 002007-ARM-define-custom-action
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -50,18 +45,59 @@ stimuli:
       - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
         dest: tspconfig.yaml
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
+  # VP1: Extensible enum for notification priority levels (Low, Medium, High)
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: notify is ArmResourceAction|move is ArmResourceAction|ArmResourceActionSync<
+      path: 'employee.tsp'
+      pattern: union.*Priority|enum.*Priority
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: model .*Request
+      path: 'employee.tsp'
+      pattern: 'Low|"Low"'
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: model .*Response
+      path: 'employee.tsp'
+      pattern: 'Medium|"Medium"'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'High|"High"'
+  # VP2: Request model with message content (string) and priority fields
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: model.*Notify.*Request|model.*Notification.*Request
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'message.*:\s*string|content.*:\s*string'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'priority.*:\s*.*Priority'
+  # VP3: Response model with notification identifier (string) and status (string)
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: model.*Notify.*Response|model.*Notification.*Response
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'notificationId.*:\s*string|identifier.*:\s*string'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'status.*:\s*string'
+  # VP4: Synchronous notify action on Employees interface
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'notify is ArmResourceActionSync<|notify is ArmResourceActionAsync<|notify is ArmResourceAction<'
   - type: prompt
     config:
       scoring: scale_1_5
@@ -70,8 +106,7 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
-    file-matches: 3
+    file-matches: 11
   threshold: 1.0
-
-

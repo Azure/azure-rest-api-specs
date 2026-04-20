@@ -5,16 +5,14 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
 
 # Execution configuration
@@ -31,9 +29,6 @@ stimuli:
   name: 002001-ARM-change-resource-type
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -50,6 +45,11 @@ stimuli:
     - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
       dest: tspconfig.yaml
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
   - type: file-matches
     config:
       path: '*.tsp'
@@ -61,18 +61,20 @@ stimuli:
   - type: file-matches
     config:
       path: '*.tsp'
-      pattern: Extension\.Read<|Extension\.CreateOrUpdate<|Extension\.ListByScope<
+      pattern: Extension\.Read<|Extension\.CreateOrReplaceAsync<|Extension\.CustomPatch(Sync|Async)<|Extension\.DeleteWithoutOkAsync<|Extension\.ListByTarget<
   - type: prompt
     config:
       scoring: scale_1_5
       threshold: 1.0
-      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      prompt: 'The original separate list-by-resource-group and list-by-subscription operations should be consolidated into a single list operation using the extension list template. A scope-parameterized interface should be defined to allow the extension resource to be scoped to any parent resource.'
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
     file-not-matches: 1
     file-matches: 2
   threshold: 1.0
+
 
 

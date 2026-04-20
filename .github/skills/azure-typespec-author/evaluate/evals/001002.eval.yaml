@@ -5,14 +5,14 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
 
 # Execution configuration
@@ -29,9 +29,6 @@ stimuli:
   name: 001002-version-default-value
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -48,6 +45,11 @@ stimuli:
     - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
       dest: tspconfig.yaml
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
   - type: file-matches
     config:
       path: employee.tsp
@@ -72,8 +74,7 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
     file-matches: 4
   threshold: 1.0
-
-

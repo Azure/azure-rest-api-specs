@@ -5,18 +5,15 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
-
 # Execution configuration
 config:
   runs: 1                      # Trials per stimulus
@@ -31,9 +28,6 @@ stimuli:
   name: 004003-delete-and-restore-operationId-decorator
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -60,14 +54,43 @@ stimuli:
     - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnSiteLinkConnection.tsp
       dest: VpnSiteLinkConnection.tsp
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
+  # VP1: Underscore operationIds should be removed (e.g. BgpConnection has only underscore ones)
   - type: file-not-matches
     config:
-      path: '*.tsp'
-      pattern: '#suppress.*operationId|#suppress.*operation-id'
+      path: BgpConnection.tsp
+      pattern: '@operationId\('
+  - type: file-not-matches
+    config:
+      path: NetworkInterface.tsp
+      pattern: '@operationId\('
+  # VP2: Non-standard PascalCase operationIds restored with @operationId
   - type: file-matches
     config:
-      path: '*.tsp'
-      pattern: '@operationId\('
+      path: BastionHost.tsp
+      pattern: '@operationId\("PutBastionShareableLink"\)'
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '@operationId\("GetActiveSessions"\)'
+  - type: file-matches
+    config:
+      path: ExpressRouteProviderPort.tsp
+      pattern: '@operationId\("ExpressRouteProviderPort"\)'
+  # VP3: Restored operationIds keep their #suppress comment
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '#suppress.*no-openapi|#suppress.*operationId'
+  # Underscore one in ExpressRouteProviderPort should be removed
+  - type: file-not-matches
+    config:
+      path: ExpressRouteProviderPort.tsp
+      pattern: '@operationId\("ExpressRouteProviderPortsLocation_List"\)'
   - type: prompt
     config:
       scoring: scale_1_5
@@ -76,9 +99,8 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
-    file-not-matches: 1
-    file-matches: 1
+    file-not-matches: 3
+    file-matches: 4
   threshold: 1.0
-
-

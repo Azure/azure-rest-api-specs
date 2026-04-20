@@ -5,16 +5,14 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
 
 # Execution configuration
@@ -31,9 +29,6 @@ stimuli:
   name: 003001-dataplane-async-delete-op
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -42,14 +37,30 @@ stimuli:
     - src: ../fixtures/003001-dataplane-async-delete-op/package.json
       dest: package.json
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
+  # VP1: Async delete added to StacItems namespace
   - type: file-matches
     config:
       path: inma.tsp
-      pattern: delete
+      pattern: 'interface StacItems'
   - type: file-matches
     config:
       path: inma.tsp
-      pattern: '@pollingLocation|Lro|LongRunning'
+      pattern: 'LongRunningResourceDelete<StacItem>'
+  # VP2: Uses StandardResourceOperations alias
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: 'alias StandardResourceOperations|StandardResourceOperations\.LongRunningResourceDelete'
+  # VP3: Linked to existing polling operation
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: '@pollingOperation\(IngestionOperations\.get\)'
   - type: prompt
     config:
       scoring: scale_1_5
@@ -58,8 +69,7 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
-    file-matches: 2
+    file-matches: 4
   threshold: 1.0
-
-

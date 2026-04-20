@@ -22,5 +22,9 @@ if (-not (Test-Path $exe)) {
     }
 }
 
+# Ensure MCP tools can reach the local KB endpoint used by evals.
+$env:AZURE_SDK_KB_ENDPOINT = 'http://localhost:8088'
+
+#Start mcp
 & $exe mcp
 exit $LASTEXITCODE

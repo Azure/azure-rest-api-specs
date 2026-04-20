@@ -3,6 +3,18 @@ description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability               # capability | regression
 
+# Root-level environment
+environment:
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["./start-mcp.ps1"]
+      timeout: 60000
+
 # Execution configuration
 config:
   runs: 1                      # Trials per stimulus
@@ -17,9 +29,6 @@ stimuli:
   name: 001005-version-add-preview-after-preview
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -70,6 +79,11 @@ stimuli:
     - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
       dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
   - type: file-exists
     config:
       path: examples/2025-05-04-preview/Employees_Get_MaximumSet_Gen.json
@@ -96,13 +110,10 @@ stimuli:
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
     file-matches: 1
     file-not-matches: 2
     file-exists: 1
     file-not-exists: 1
   threshold: 1.0
-
-
-
-

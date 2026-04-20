@@ -5,18 +5,15 @@ type: capability               # capability | regression
 
 # Root-level environment (merged into all stimuli)
 environment:
-  skills:
-    - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      env: {
-        AZURE_SDK_KB_ENDPOINT: http://localhost:8088
-      }
+      args: ["./start-mcp.ps1"]
       timeout: 60000
-
 # Execution configuration
 config:
   runs: 1                      # Trials per stimulus
@@ -27,13 +24,10 @@ config:
 # Test cases
 stimuli:
 - prompt: |
-    Define a Azure resource "User" under the namespace "Microsoft.Contoso" using TypeSpec. Ensure the definition meets TypeSpec Azure design guidelines.
+    Define a Azure resource "Employee" under the namespace "Microsoft.Widget" using TypeSpec. Properties: age (int32, optional), city (string, optional), profile (bytes, optional), provisioningState (enum, optional, read-only). Ensure the definition meets TypeSpec Azure design guidelines.
   name: 002005-ARM-define-the-resource
   constraints:
     max_turns: 10
-    expect_tools:
-    - edit
-    - azsdk_run_typespec_validation
     max_tokens: 5000
   environment:
     files:
@@ -48,28 +42,51 @@ stimuli:
     - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
       dest: tspconfig.yaml
   graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azsdk_run_typespec_validation
   - type: file-matches
     config:
-      path: main.tsp
+      path: employee.tsp
       pattern: model Employee is TrackedResource<EmployeeProperties>
+  # Point 3: EmployeeProperties has age, city, profile, and read-only provisioningState
   - type: file-matches
     config:
-      path: main.tsp
+      path: 'employee.tsp'
+      pattern: 'age\?: int32'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: '@visibility\(Lifecycle\.Read\)'
+  # Point 4: ProvisioningState union includes standard ARM states
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: ResourceProvisioningState
+  # Point 5: CRUD + listByResourceGroup + listBySubscription
+  - type: file-matches
+    config:
+      path: employee.tsp
       pattern: ArmResourceCreateOrReplaceAsync<Employee>|ArmResourceCreateOrUpdateAsync<Employee>
   - type: file-matches
     config:
-      path: main.tsp
+      path: employee.tsp
+      pattern: ArmResourceListByParent<Employee>
+  - type: file-matches
+    config:
+      path: employee.tsp
       pattern: ArmListBySubscription<Employee>
   - type: prompt
     config:
       scoring: scale_1_5
       threshold: 1.0
-      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      prompt: 'Verify all five aspects: (1) Employee resource definition is written into a TSP file; (2) Employee model uses TrackedResource<EmployeeProperties> under Microsoft.Widget namespace; (3) EmployeeProperties includes age, city, profile, and a read-only provisioningState; (4) ProvisioningState is a union type incorporating standard ARM ResourceProvisioningState; (5) Employees interface includes full CRUD operations (get, create, update, delete) plus listByResourceGroup and listBySubscription.'
       model: claude-opus-4.6-1m
 scoring:
   weights:
+    tool-calls: 1
     prompt: 1
-    file-matches: 3
+    file-matches: 7
   threshold: 1.0
-
-
