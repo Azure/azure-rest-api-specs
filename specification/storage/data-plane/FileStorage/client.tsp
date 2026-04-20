@@ -373,7 +373,7 @@ model DirectoryClientParameters {
 @@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "csharp");
 @@clientName(AccessPolicy.permission, "Permissions", "csharp");
 @@clientName(Directory, "DirectoryRestClient", "csharp");
-@@clientName(File, "FileRestClient", "csharp");
+@@clientName(Storage.File.File, "FileRestClient", "csharp");
 @@clientName(Service, "ServiceRestClient", "csharp");
 @@clientName(Share, "ShareRestClient", "csharp");
 @@clientName(StorageErrorCode, "ShareErrorCode", "csharp");
