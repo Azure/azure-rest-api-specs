@@ -11104,6 +11104,12 @@
           "Create route table": {
             "$ref": "./examples/RouteTableCreate.json"
           },
+          "Create route table with ECMP route": {
+            "$ref": "./examples/RouteTableCreateWithEcmpRoute.json"
+          },
+          "Create route table with disable peering route": {
+            "$ref": "./examples/RouteTableCreateWithDisablePeeringRoute.json"
+          },
           "Create route table with route": {
             "$ref": "./examples/RouteTableCreateWithRoute.json"
           }
@@ -11403,6 +11409,9 @@
           }
         },
         "x-ms-examples": {
+          "Create ECMP route": {
+            "$ref": "./examples/RouteTableRouteCreateEcmp.json"
+          },
           "Create route": {
             "$ref": "./examples/RouteTableRouteCreate.json"
           }
@@ -16266,6 +16275,24 @@
         }
       ]
     },
+    "Common.RouteNextHopEcmp": {
+      "type": "object",
+      "description": "The next hop definition for ECMP routes containing multiple next hop IP addresses.",
+      "properties": {
+        "nextHopIpAddresses": {
+          "type": "array",
+          "description": "List of next hop IP addresses for ECMP routing. Must contain between 2 and 64 IP addresses.",
+          "minItems": 2,
+          "maxItems": 64,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "nextHopIpAddresses"
+      ]
+    },
     "Common.RoutePropertiesFormat": {
       "type": "object",
       "description": "Route resource.",
@@ -16281,6 +16308,10 @@
         "nextHopIpAddress": {
           "type": "string",
           "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
+        },
+        "nextHop": {
+          "$ref": "#/definitions/Common.RouteNextHopEcmp",
+          "description": "The next hop definition containing ECMP next hop IP addresses. Only allowed when nextHopType is VirtualApplianceEcmp."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
@@ -16340,6 +16371,10 @@
         "disableBgpRoutePropagation": {
           "type": "boolean",
           "description": "Whether to disable the routes learned by BGP on that route table. True means disable."
+        },
+        "disablePeeringRoute": {
+          "$ref": "./common.json#/definitions/Common.DisablePeeringRoute",
+          "description": "Whether to disable the routes learned by peering on the route table. 'None' means peering routes are enabled, 'All' means all peering routes are disabled."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",

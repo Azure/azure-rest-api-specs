@@ -2124,6 +2124,30 @@
         ]
       }
     },
+    "Common.DisablePeeringRoute": {
+      "type": "string",
+      "description": "Whether to disable the routes learned by peering on the route table.",
+      "enum": [
+        "None",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "DisablePeeringRoute",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Peering routes are enabled."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All peering routes are disabled."
+          }
+        ]
+      }
+    },
     "Common.ExtendedLocation": {
       "type": "object",
       "description": "ExtendedLocation complex type.",
@@ -3009,6 +3033,7 @@
         "VnetLocal",
         "Internet",
         "VirtualAppliance",
+        "VirtualApplianceEcmp",
         "None"
       ],
       "x-ms-enum": {
@@ -3036,9 +3061,14 @@
             "description": "VirtualAppliance"
           },
           {
+            "name": "VirtualApplianceEcmp",
+            "value": "VirtualApplianceEcmp",
+            "description": "Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses."
+          },
+          {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "No next hop type."
           }
         ]
       }
@@ -6156,6 +6186,7 @@
         "VirtualNetworkGateway",
         "VnetLocal",
         "HyperNetGateway",
+        "VirtualApplianceEcmp",
         "None"
       ],
       "x-ms-enum": {
@@ -6188,9 +6219,14 @@
             "description": "HyperNetGateway"
           },
           {
+            "name": "VirtualApplianceEcmp",
+            "value": "VirtualApplianceEcmp",
+            "description": "Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses."
+          },
+          {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "No next hop type."
           }
         ]
       }
