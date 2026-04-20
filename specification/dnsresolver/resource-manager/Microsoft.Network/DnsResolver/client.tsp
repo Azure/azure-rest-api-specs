@@ -89,23 +89,18 @@ using Microsoft.Network;
 );
 @@alternateType(TargetDnsServer.ipAddress, Azure.Core.ipV4Address, "csharp");
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@access(SubResource, Access.internal, "csharp");
 @@alternateType(VirtualNetworkDnsForwardingRuleset.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-// Define WritableSubResource in the ARM namespace to allow @@alternateType substitution
+// Define WritableSubResource in the ARM namespace for collection compatibility.
 namespace Azure.ResourceManager.Models {
   model WritableSubResource {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-
-// Replace simple ARM references with WritableSubResource across the C# surface.
-@@alternateType(SubResource,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
 
 // Preserve WritableSubResource-based collections from the old API surface.
 @@alternateType(DnsForwardingRulesetProperties.dnsResolverOutboundEndpoints,
@@ -121,6 +116,10 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@alternateType(DnsSecurityRulePatchProperties.dnsResolverDomainLists,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(SubResourceListResult.value,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
