@@ -2,6 +2,7 @@ import "@typespec/openapi";
 
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
+import "../openai-evaluations/models.tsp";
 
 using TypeSpec.Rest;
 using OpenAPI;
@@ -22,18 +23,6 @@ model DatasetReference {
 
   @doc("Dataset version. Omit to use the latest version.")
   datasetVersion?: string;
-}
-
-@doc("""
-  Reference to an agent for an evaluation suite.
-  Provide either name (for Foundry agents) or id (for 3P agents), not both.
-  """)
-model EvaluationSuiteAgentReference {
-  @doc("Foundry agent name. Mutually exclusive with id.")
-  name?: string;
-
-  @doc("3P agent identifier. Mutually exclusive with name.")
-  id?: string;
 }
 
 @doc("""
@@ -101,12 +90,11 @@ model EvaluationSuiteVersion {
   testingCriteria: EvaluationSuiteTestingCriteria[];
 
   @doc("""
-    Agent reference for this evaluation suite.
-    Optional — allows evaluation suites to exist before being linked to an agent,
-    or to be used as shared baselines (e.g. safety checks).
-    Provide either name (Foundry agents) or id (3P agents), not both.
+    Target for this evaluation suite. Uses the existing Target discriminated type
+    from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+    Optional — allows suites to exist without a target.
     """)
-  agentReference?: EvaluationSuiteAgentReference;
+  target?: Target;
 
   // AssetBase provides: name (string, @key), version (string, read-only),
   // id (string, read-only), description (string, optional), tags (Record<string>, optional)
@@ -157,25 +145,47 @@ model EvaluationSuiteRunResponse {
 // Generate API (LRO) models
 // ---------------------------------------------------------------------------
 
+@doc("Source for evaluation suite generation. Discriminated by type.")
+@discriminator("type")
+model EvaluationSuiteGenerationSource {
+  @doc("The type of source.")
+  type: string;
+}
+
+@doc("Prompt source for evaluation suite generation.")
+model PromptEvaluationSuiteGenerationSource extends EvaluationSuiteGenerationSource {
+  @doc("The source type, which is Prompt.")
+  type: "Prompt";
+
+  @doc("The agent name to fetch agent instructions for generation.")
+  agent_name: string;
+
+  @doc("The agent version. If not specified, the latest version is used.")
+  agent_version?: string;
+
+  @doc("Optional prompt providing additional evaluation guidance.")
+  prompt?: string;
+}
+
 @doc("Caller-supplied inputs for an evaluation suite generation job.")
 model EvaluationSuiteGenerationJobInputs {
   @doc("The suite name to create.")
   name: string;
 
-  @doc("Agent reference — the agent to generate evaluators and dataset for.")
-  agentReference: EvaluationSuiteAgentReference;
+  @doc("Source materials for generation — agent descriptions, prompts.")
+  sources: EvaluationSuiteGenerationSource[];
+
+  @doc("The LLM model to use for generation (e.g., 'gpt-4o').")
+  `model`: string;
+
+  @doc("Category: 'quality' (default) or 'safety'.")
+  category?: string;
 
   @doc("""
     Optional initialization parameters applied to all generated evaluators.
     For example, deployment_name for LLM judge model, default threshold.
     """)
   initializationParameters?: Record<unknown>;
-
-  @doc("""
-    Optional data mapping applied to all generated evaluators.
-    Auto-inferred from evaluator data schema if not provided.
-    """)
-  dataMapping?: Record<string>;
 }
 
 @doc("Result produced by a successful evaluation suite generation job.")
