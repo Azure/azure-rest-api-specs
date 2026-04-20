@@ -50,7 +50,10 @@ namespace Microsoft.InsightsCombinedClient;
   "java,javascript"
 );
 
-// Fix duplicate client names when merging all services into CombineClient
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
+@@Legacy.markAsPageable(Microsoft.PrivateLinkScopes.PrivateEndpointConnections.listByPrivateLinkScope,
+  "java"
+);
 
 // ActivityLogAlerts - rename back to match fluent SDK expected names
 @@clientName(Microsoft.ActivityLogAlerts.AlertRuleAllOfCondition,
