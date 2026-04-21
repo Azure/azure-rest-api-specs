@@ -382,6 +382,38 @@ For data plane (non-ARM) swagger files, additionally verify:
 
 Example files referenced by `x-ms-examples` are a critical part of the spec — they serve as documentation, SDK test cases, and validation inputs. Validate every example file in the PR against the following rules.
 
+### 22.0 Example Validation Process (EX-PROCESS)
+
+For each example file changed or added in a PR, perform the following validation steps in order:
+
+1. **Trace the example to its operation.** Follow the `x-ms-examples` reference in the spec to identify the parent operation (path + HTTP method + operationId). Every example file **MUST** be referenced by exactly one `x-ms-examples` entry. An orphaned example file (not referenced by any operation) **MUST** be flagged.
+
+2. **Validate parameters against the operation definition.**
+   - Every `required` path, query, and body parameter defined on the operation **MUST** be present in the example's `parameters` section.
+   - Each parameter value **MUST** match the declared `type`, `format`, and `enum` constraints. For example, if the operation defines `api-version` as a string enum with value `2025-07-01`, the example **MUST** use that exact value.
+   - Path parameter values in the `parameters` section **MUST** match the corresponding segments in the example URL (e.g., `"resourceGroupName": "myRG"` must appear as `/resourceGroups/myRG/` in the URL).
+
+3. **Validate the request body against the operation's request schema.**
+   - If the operation defines a `body` parameter with a schema, the example request body **MUST** include all `required` properties defined in that schema.
+   - Property names and types **MUST** match the schema. Extra properties not defined in the schema **SHOULD** be flagged as potential errors.
+   - For PUT operations, the example **SHOULD** include `location` and `tags` if the resource is a tracked (top-level) ARM resource.
+
+4. **Validate the response body against the operation's response schema.**
+   - For each response status code in the example (e.g., `200`, `201`, `202`), verify that the status code is defined on the operation.
+   - The response body **MUST** include all `required` properties from the response schema.
+   - Property names, types, and nesting **MUST** match the schema. A list operation returning `OperationListResult` must include `"value": [...]`, not just `{}`.
+
+5. **Cross-reference URL segments with request and response bodies.**
+   - Subscription ID, resource group name, resource name, and other path segments in the URL **MUST** be consistent across the request parameters, request body, and response body (including the `id` field in the response).
+   - For example, if the URL contains `/virtualMachines/myVM`, the response `id` must contain the same value, and the response `name` must be `"myVM"`.
+
+6. **Check example coverage for the operation.**
+   - PUT and PATCH operations **SHOULD** have at least two examples: one with the minimum required properties and one with the full/maximum property set.
+   - Operations with multiple possible request shapes (e.g., polymorphic discriminators, mutually exclusive property groups) **SHOULD** have separate examples for each variant.
+   - LRO operations **SHOULD** have examples showing both the initial response (e.g., `202`) and the final response (e.g., `200`).
+
+7. **Apply the individual EX-* rules below** (22.1 through 22.10) to catch specific violations.
+
 ### 22.1 Example Title Accuracy (EX-TITLE)
 
 - The `"title"` field in each example **MUST** accurately describe the operation it demonstrates.
@@ -456,6 +488,25 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 
 - Example files **SHOULD** be kept to a reasonable size. Extremely large examples (>500 lines) make review difficult and add repo bloat.
 - For "maximum set" examples, include a representative subset of fields rather than thousands of lines of repetitive data.
+
+### 22.10 Descriptive Example Values (EX-DESCRIPTIVE-VALUES)
+
+- Example values **MUST** be realistic and descriptive. Examples are published in Microsoft's public Azure documentation and embedded in SDK samples -- they are often the first thing a customer reads when learning how to use an API.
+- **Resource names** in URLs and request/response bodies **MUST** use recognizable, human-readable names (e.g., `"myVmScaleSet"`, `"testVault"`, `"myResourceGroup"`) -- not random strings or repeated characters.
+- **Property values** (instance IDs, SKU names, locations, tags, etc.) **MUST** reflect realistic usage that helps the reader understand the parameter's purpose (e.g., `"0"`, `"1"` for VMSS instance IDs; `"Standard_DS1_v2"` for a VM size; `"eastus"` for a location; `{"env": "production"}` for tags).
+- **Specifically forbidden patterns:**
+  - Repeated single characters: `"aaaaaaa"`, `"xxxxxxx"`, `"zzzzzzz"`, `"bbbbbbb"`
+  - Bare generic filler: `"string"` as a value for a property where a meaningful example exists (acceptable only when the property has no well-known values and the schema provides no further guidance)
+  - Excessively long meaningless names: resource names of 20+ characters composed of a single repeated character (e.g., `"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"`)
+  - Numeric-looking garbage: `"12345"` or `"11111"` for a property that represents a real-world concept (e.g., a resource name, a display name)
+- **Acceptable generic values:**
+  - Subscription IDs, tenant IDs, principal IDs, and other GUIDs: stylized placeholders like `"00000000-0000-0000-0000-000000000000"` or `"subid"` per existing convention
+  - Operation IDs in LRO polling URLs: `"00000000-0000-0000-0000-000000000000"` is acceptable
+  - Properties with no well-known values where the schema description is the primary guidance: a short descriptive string like `"my-value"` is acceptable
+- **Fix:** Replace filler values with short, meaningful names that help the reader understand what the parameter represents. For example:
+  - `"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"` → `"myVmScaleSet"`
+  - `"aaaaaaaaaaaaaaaaa"` (instance ID) → `"0"`
+  - `"string"` (location) → `"eastus"`
 
 ---
 
@@ -538,7 +589,7 @@ When reviewing, systematically check:
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values (EX-*)
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string` (EX-*)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
 - ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
