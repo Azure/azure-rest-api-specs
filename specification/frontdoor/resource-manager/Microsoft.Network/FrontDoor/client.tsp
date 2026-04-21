@@ -14,7 +14,10 @@ using TypeSpec.Rest;
 @@clientName(Experiment, "FrontDoorExperiment", "csharp");
 @@clientName(Profile, "FrontDoorNetworkExperimentProfile", "csharp");
 @@clientName(RulesEngine, "FrontDoorRulesEngine", "csharp");
-@@clientName(WebApplicationFirewallPolicy, "FrontDoorWebApplicationFirewallPolicy", "csharp");
+@@clientName(WebApplicationFirewallPolicy,
+  "FrontDoorWebApplicationFirewallPolicy",
+  "csharp"
+);
 
 @@clientName(MinimumTLSVersion.`1.0`, "ONE0", "python");
 @@clientName(MinimumTLSVersion.`1.2`, "ONE2", "python");
@@ -86,7 +89,6 @@ interface ProfilesOverrides {
   "go,javascript,python"
 );
 
-
 @@clientName(State, "FrontDoorExperimentState", "csharp");
 @@clientName(Endpoint, "FrontDoorExperimentEndpointProperties", "csharp");
 @@clientName(ExperimentProperties.endpointA, "ExperimentEndpointA", "csharp");
@@ -94,33 +96,87 @@ interface ProfilesOverrides {
 @@clientName(Timeseries, "FrontDoorTimeSeriesInfo", "csharp");
 @@clientName(TimeseriesProperties.startDateTimeUTC, "StartOn", "csharp");
 @@clientName(TimeseriesProperties.endDateTimeUTC, "EndOn", "csharp");
-@@clientName(WebApplicationFirewallPolicyProperties.customRules, "CustomRuleList", "csharp");
-@@clientName(HealthProbeSettingsModel, "FrontDoorHealthProbeSettingsData", "csharp");
-@@clientName(LoadBalancingSettingsModel, "FrontDoorLoadBalancingSettingsData", "csharp");
+@@clientName(WebApplicationFirewallPolicyProperties.customRules,
+  "CustomRuleList",
+  "csharp"
+);
+@@clientName(HealthProbeSettingsModel,
+  "FrontDoorHealthProbeSettingsData",
+  "csharp"
+);
+@@clientName(LoadBalancingSettingsModel,
+  "FrontDoorLoadBalancingSettingsData",
+  "csharp"
+);
 @@clientName(RoutingRule, "RoutingRuleData", "csharp");
 @@clientName(PurgeParameters, "FrontDoorEndpointPurgeContent", "csharp");
-@@clientName(ValidateCustomDomainInput, "FrontDoorValidateCustomDomainContent", "csharp");
-@@clientName(ValidateCustomDomainOutput, "FrontDoorValidateCustomDomainResult", "csharp");
-@@clientName(ValidateCustomDomainOutput.customDomainValidated, "IsCustomDomainValidated", "csharp");
-@@clientName(CustomHttpsProvisioningState, "FrontendEndpointCustomHttpsProvisioningState", "csharp");
-@@clientName(CustomHttpsProvisioningSubstate, "FrontendEndpointCustomHttpsProvisioningSubstate", "csharp");
-@@clientName(ProfileUpdateModel, "FrontDoorNetworkExperimentProfilePatch", "csharp");
-@@clientName(PolicySettings, "FrontDoorWebApplicationFirewallPolicySettings", "csharp");
-@@clientName(PolicyResourceState, "FrontDoorWebApplicationFirewallPolicyResourceState", "csharp");
+@@clientName(ValidateCustomDomainInput,
+  "FrontDoorValidateCustomDomainContent",
+  "csharp"
+);
+@@clientName(ValidateCustomDomainOutput,
+  "FrontDoorValidateCustomDomainResult",
+  "csharp"
+);
+@@clientName(ValidateCustomDomainOutput.customDomainValidated,
+  "IsCustomDomainValidated",
+  "csharp"
+);
+@@clientName(CustomHttpsProvisioningState,
+  "FrontendEndpointCustomHttpsProvisioningState",
+  "csharp"
+);
+@@clientName(CustomHttpsProvisioningSubstate,
+  "FrontendEndpointCustomHttpsProvisioningSubstate",
+  "csharp"
+);
+@@clientName(ProfileUpdateModel,
+  "FrontDoorNetworkExperimentProfilePatch",
+  "csharp"
+);
+@@clientName(PolicySettings,
+  "FrontDoorWebApplicationFirewallPolicySettings",
+  "csharp"
+);
+@@clientName(PolicyResourceState,
+  "FrontDoorWebApplicationFirewallPolicyResourceState",
+  "csharp"
+);
 @@clientName(CustomRule, "WebApplicationCustomRule", "csharp");
-@@clientName(CheckNameAvailabilityInput, "FrontDoorNameAvailabilityContent", "csharp");
+@@clientName(CheckNameAvailabilityInput,
+  "FrontDoorNameAvailabilityContent",
+  "csharp"
+);
 @@clientName(CheckNameAvailabilityInput.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityOutput, "FrontDoorNameAvailabilityResult", "csharp");
+@@clientName(CheckNameAvailabilityOutput,
+  "FrontDoorNameAvailabilityResult",
+  "csharp"
+);
 @@clientName(ActionType, "RuleMatchActionType", "csharp");
 @@clientName(Availability, "FrontDoorNameAvailabilityState", "csharp");
 @@clientName(Backend, "FrontDoorBackend", "csharp");
-@@alternateType(Backend.privateLinkResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(Backend.privateLinkLocation, Azure.Core.azureLocation, "csharp");
+@@alternateType(Backend.privateLinkResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Backend.privateLinkLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(PrivateEndpointStatus, "BackendPrivateEndpointStatus", "csharp");
 @@clientName(BackendPool, "FrontDoorBackendPool", "csharp");
-@@clientName(BackendPoolsSettings.sendRecvTimeoutSeconds, "SendRecvTimeoutInSeconds", "csharp");
-@@clientName(FrontDoorCertificateType, "FrontDoorEndpointConnectionCertificateType", "csharp");
-@@clientName(CustomHttpsProvisioningSubstate.PendingDomainControlValidationREquestApproval, "PendingDomainControlValidationRequestApproval", "csharp");
+@@clientName(BackendPoolsSettings.sendRecvTimeoutSeconds,
+  "SendRecvTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(FrontDoorCertificateType,
+  "FrontDoorEndpointConnectionCertificateType",
+  "csharp"
+);
+@@clientName(CustomHttpsProvisioningSubstate.PendingDomainControlValidationREquestApproval,
+  "PendingDomainControlValidationRequestApproval",
+  "csharp"
+);
 @@clientName(MatchCondition, "WebApplicationRuleMatchCondition", "csharp");
 @@clientName(MatchCondition.negateCondition, "IsNegateCondition", "csharp");
 @@clientName(MatchVariable, "WebApplicationRuleMatchVariable", "csharp");
@@ -135,49 +191,91 @@ interface ProfilesOverrides {
 @@clientName(HeaderActionType, "RulesEngineHeaderActionType", "csharp");
 @@clientName(LatencyScorecardProperties.id, "LatencyScorecardId", "csharp");
 @@clientName(LatencyScorecardProperties.name, "LatencyScorecardName", "csharp");
-@@clientName(LatencyScorecardProperties.endpointA, "ScorecardEndpointA", "csharp");
-@@clientName(LatencyScorecardProperties.endpointB, "ScorecardEndpointB", "csharp");
+@@clientName(LatencyScorecardProperties.endpointA,
+  "ScorecardEndpointA",
+  "csharp"
+);
+@@clientName(LatencyScorecardProperties.endpointB,
+  "ScorecardEndpointB",
+  "csharp"
+);
 @@clientName(LatencyScorecardProperties.startDateTimeUTC, "StartOn", "csharp");
 @@clientName(LatencyScorecardProperties.endDateTimeUTC, "EndOn", "csharp");
 @@clientName(PolicyMode, "FrontDoorWebApplicationFirewallPolicyMode", "csharp");
-@@clientName(RulesEngineMatchCondition.negateCondition, "IsNegateCondition", "csharp");
+@@clientName(RulesEngineMatchCondition.negateCondition,
+  "IsNegateCondition",
+  "csharp"
+);
 @@clientName(Transform, "RulesEngineMatchTransform", "csharp");
 @@clientName(Transform.UrlDecode, "UriDecode", "csharp");
 @@clientName(Transform.UrlEncode, "UriEncode", "csharp");
 @@clientName(ResourceType, "FrontDoorResourceType", "csharp");
 @@clientName(MinimumTLSVersion, "FrontDoorRequiredMinimumTlsVersion", "csharp");
 @@clientName(LatencyMetric.endDateTimeUTC, "EndOn", "csharp");
-@@clientName(AggregationInterval, "FrontDoorTimeSeriesInfoAggregationInterval", "csharp");
-@@clientName(TimeseriesAggregationInterval, "FrontDoorTimeSeriesAggregationInterval", "csharp");
+@@clientName(AggregationInterval,
+  "FrontDoorTimeSeriesInfoAggregationInterval",
+  "csharp"
+);
+@@clientName(TimeseriesAggregationInterval,
+  "FrontDoorTimeSeriesAggregationInterval",
+  "csharp"
+);
 @@clientName(CacheConfiguration, "FrontDoorCacheConfiguration", "csharp");
 @@clientName(EndpointType, "FrontDoorEndpointType", "csharp");
 @@clientName(EndpointType.AFD, "AzureFrontDoor", "csharp");
 @@clientName(EndpointType.ATM, "AzureTrafficManager", "csharp");
 @@clientName(TimeseriesDataPoint, "FrontDoorTimeSeriesDataPoint", "csharp");
 @@clientName(TimeseriesType, "FrontDoorTimeSeriesType", "csharp");
-@@clientName(VariableName, "FrontDoorWebApplicationFirewallPolicyGroupByVariableName", "csharp");
-@@clientName(GroupByVariable, "FrontDoorWebApplicationFirewallPolicyGroupByVariable", "csharp");
+@@clientName(VariableName,
+  "FrontDoorWebApplicationFirewallPolicyGroupByVariableName",
+  "csharp"
+);
+@@clientName(GroupByVariable,
+  "FrontDoorWebApplicationFirewallPolicyGroupByVariable",
+  "csharp"
+);
 @@alternateType(ExperimentProperties.scriptFileUri, url, "csharp");
 
 @@alternateType(TimeseriesProperties.endpoint, url, "csharp");
 @@alternateType(LatencyScorecardProperties.endpointA, url, "csharp");
 @@alternateType(LatencyScorecardProperties.endpointB, url, "csharp");
-@@clientName(ManagedRuleExclusionSelectorMatchOperator.Equals, "EqualsValue", "csharp");
+@@clientName(ManagedRuleExclusionSelectorMatchOperator.Equals,
+  "EqualsValue",
+  "csharp"
+);
 @@clientName(ScrubbingRuleEntryMatchOperator.Equals, "EqualsValue", "csharp");
 @@clientName(ExceptionSelectorMatchOperator.Equals, "EqualsValue", "csharp");
 @@clientName(ExceptionValueMatchOperator.Equals, "EqualsValue", "csharp");
 
-@@clientName(FrontDoorNameAvailabilityOperationGroup.check, "CheckFrontDoorNameAvailability", "csharp");
-@@clientName(FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check, "CheckFrontDoorNameAvailability", "csharp");
+@@clientName(FrontDoorNameAvailabilityOperationGroup.check,
+  "CheckFrontDoorNameAvailability",
+  "csharp"
+);
+@@clientName(FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check,
+  "CheckFrontDoorNameAvailability",
+  "csharp"
+);
 @@clientName(EndpointType.CDN, "Cdn", "csharp");
 @@clientName(FrontDoorHealthProbeMethod.HEAD, "Head", "csharp");
 @@clientName(TimeseriesDataPoint.dateTimeUTC, "DateTimeUtc", "csharp");
 @@clientName(ActionType.CAPTCHA, "Captcha", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(Microsoft.Network.Resource.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(ResourcewithSettableName.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ResourcewithSettableName.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(BasicResource.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(BasicResourceWithSettableIDName.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(BasicResourceWithSettableIDName.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 // Category D — output-only models need public constructors
 @@usage(TimeseriesDataPoint, Usage.input | Usage.output, "csharp");
@@ -194,10 +292,101 @@ interface ProfilesOverrides {
 @@clientName(SubResource, "FrontDoorSubResource", "csharp");
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
 // Category C — BasicResourceWithSettableIDName is the actual FrontDoorResourceData base type
-@@clientName(BasicResourceWithSettableIDName, "FrontDoorResourceData", "csharp");
-@@alternateType(RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(KeyVaultCertificateSourceParametersVault.id, Azure.Core.armResourceIdentifier, "csharp");
+@@clientName(BasicResourceWithSettableIDName,
+  "FrontDoorResourceData",
+  "csharp"
+);
+@@alternateType(RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(KeyVaultCertificateSourceParametersVault.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Category C (continued) — swap base class via replacement models so C# inherits from
+// FrontDoorResourceData (BasicResourceWithSettableIDName) instead of FrontDoorSubResource (SubResource).
+// hierarchyBuilding cannot be used here: the validator requires the base's properties (id) to be
+// directly on the target, but our models inherit `id` from SubResource.
+// Keeps models.tsp untouched (no swagger change) — replacements are C#-only constructs.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
+@doc("A routing rule represents a specification for traffic to treat and where to send it, along with health probe information.")
+model RoutingRuleReplacement extends BasicResourceWithSettableIDName {
+  @doc("Properties of the Front Door Routing Rule")
+  properties?: RoutingRuleProperties;
+}
+@@alternateType(RoutingRule, RoutingRuleReplacement, "csharp");
+@@clientName(RoutingRuleReplacement, "RoutingRuleData", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RoutingRuleReplacement.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
+@doc("Load balancing settings for a backend pool")
+model LoadBalancingSettingsModelReplacement
+  extends BasicResourceWithSettableIDName {
+  @doc("Properties of the load balancing settings")
+  properties?: LoadBalancingSettingsProperties;
+}
+@@alternateType(LoadBalancingSettingsModel,
+  LoadBalancingSettingsModelReplacement,
+  "csharp"
+);
+@@clientName(LoadBalancingSettingsModelReplacement,
+  "FrontDoorLoadBalancingSettingsData",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadBalancingSettingsModelReplacement.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
+@doc("Load balancing settings for a backend pool")
+model HealthProbeSettingsModelReplacement
+  extends BasicResourceWithSettableIDName {
+  @doc("Properties of the health probe settings")
+  properties?: HealthProbeSettingsProperties;
+}
+@@alternateType(HealthProbeSettingsModel,
+  HealthProbeSettingsModelReplacement,
+  "csharp"
+);
+@@clientName(HealthProbeSettingsModelReplacement,
+  "FrontDoorHealthProbeSettingsData",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HealthProbeSettingsModelReplacement.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
+@doc("A backend pool is a collection of backends that can be routed to.")
+model BackendPoolReplacement extends BasicResourceWithSettableIDName {
+  @doc("Properties of the Front Door Backend Pool")
+  properties?: BackendPoolProperties;
+}
+@@alternateType(BackendPool, BackendPoolReplacement, "csharp");
+@@clientName(BackendPoolReplacement, "FrontDoorBackendPool", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendPoolReplacement.properties,
+  "csharp"
+);
 
 // Category F — ETag and Uri type fixes
 @@alternateType(Profile.etag, Azure.Core.eTag, "csharp");
@@ -206,19 +395,46 @@ interface ProfilesOverrides {
 
 // Category A — CRUD resource Data classes need correct base type via alternateType on local base models
 // + explicit customAzureResource so resources are still generated after base swap
-@@alternateType(Microsoft.Network.Resource, Azure.ResourceManager.Foundations.TrackedResource, "csharp");
-@@alternateType(ResourcewithSettableName, Azure.ResourceManager.Foundations.TrackedResource, "csharp");
-@@alternateType(BasicResource, Azure.ResourceManager.Foundations.ProxyResource, "csharp");
-@@Azure.ResourceManager.Legacy.customAzureResource(FrontDoor, #{ isAzureResource: true });
-@@Azure.ResourceManager.Legacy.customAzureResource(Experiment, #{ isAzureResource: true });
-@@Azure.ResourceManager.Legacy.customAzureResource(Profile, #{ isAzureResource: true });
-@@Azure.ResourceManager.Legacy.customAzureResource(RulesEngine, #{ isAzureResource: true });
-@@Azure.ResourceManager.Legacy.customAzureResource(WebApplicationFirewallPolicy, #{ isAzureResource: true });
+@@alternateType(Microsoft.Network.Resource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+@@alternateType(ResourcewithSettableName,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+@@alternateType(BasicResource,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield migration: preserve autorest-generated resource treatment."
+@@Azure.ResourceManager.Legacy.customAzureResource(FrontDoor,
+  #{ isAzureResource: true }
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield migration: preserve autorest-generated resource treatment."
+@@Azure.ResourceManager.Legacy.customAzureResource(Experiment,
+  #{ isAzureResource: true }
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield migration: preserve autorest-generated resource treatment."
+@@Azure.ResourceManager.Legacy.customAzureResource(Profile,
+  #{ isAzureResource: true }
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield migration: preserve autorest-generated resource treatment."
+@@Azure.ResourceManager.Legacy.customAzureResource(RulesEngine,
+  #{ isAzureResource: true }
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield migration: preserve autorest-generated resource treatment."
+@@Azure.ResourceManager.Legacy.customAzureResource(WebApplicationFirewallPolicy,
+  #{ isAzureResource: true }
+);
 
 // Category H — TLS enum member name fixes handled in Customized/ (Tls10->Tls1_0 aliases)
 // Note: @@clientName strips underscores (Tls1_0 → Tls10), so Customized/ adds the aliases.
 
-@@alternateType(GetLatencyScorecardsParameters.endDateTimeUTC, utcDateTime, "csharp");
+@@alternateType(GetLatencyScorecardsParameters.endDateTimeUTC,
+  utcDateTime,
+  "csharp"
+);
 
 // Category G — string → DateTimeOffset? for UTC datetime properties on model types
 @@alternateType(TimeseriesProperties.startDateTimeUTC, utcDateTime, "csharp");
@@ -231,7 +447,10 @@ interface ProfilesOverrides {
 @@clientName(TimeseriesProperties.timeseriesData, "TimeSeriesData", "csharp");
 
 // G1 — FrontendEndpointData.SessionAffinityTtlInSeconds: rename TtlSeconds → TtlInSeconds
-@@clientName(FrontendEndpointUpdateParameters.sessionAffinityTtlSeconds, "SessionAffinityTtlInSeconds", "csharp");
+@@clientName(FrontendEndpointUpdateParameters.sessionAffinityTtlSeconds,
+  "SessionAffinityTtlInSeconds",
+  "csharp"
+);
 
 // G2 — RulesEngineRule.MatchConditions needs a setter (input usage produces { get; set; } on list properties)
 @@usage(RulesEngineRule, Usage.input | Usage.output, "csharp");
@@ -248,14 +467,38 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-@@alternateType(RoutingRuleUpdateParameters.frontendEndpoints, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
-@@alternateType(WebApplicationFirewallPolicyProperties.frontendEndpointLinks, Azure.ResourceManager.Models.SubResource[], "csharp");
-@@alternateType(WebApplicationFirewallPolicyProperties.routingRuleLinks, Azure.ResourceManager.Models.SubResource[], "csharp");
-@@alternateType(WebApplicationFirewallPolicyProperties.securityPolicyLinks, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(RoutingRuleUpdateParameters.frontendEndpoints,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(WebApplicationFirewallPolicyProperties.frontendEndpointLinks,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(WebApplicationFirewallPolicyProperties.routingRuleLinks,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(WebApplicationFirewallPolicyProperties.securityPolicyLinks,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 
 // Category J — Restore baseline operation method names
-@@clientName(Experiments.getLatencyScorecards, "GetLatencyScorecardsReport", "csharp");
+@@clientName(Experiments.getLatencyScorecards,
+  "GetLatencyScorecardsReport",
+  "csharp"
+);
 @@clientName(Experiments.getTimeseries, "GetTimeSeriesReport", "csharp");
-@@clientName(WebApplicationFirewallPolicies.listBySubscription, "GetFrontDoorWebApplicationFirewallPoliciesByFrontDoorWebApplicationFirewallPolicy", "csharp");
-@@clientName(Profiles.preconfiguredEndpointsList, "GetPreconfiguredEndpoints", "csharp");
-@@clientName(ManagedRuleSetsOperationGroup.list, "GetManagedRuleSets", "csharp");
+@@clientName(WebApplicationFirewallPolicies.listBySubscription,
+  "GetFrontDoorWebApplicationFirewallPoliciesByFrontDoorWebApplicationFirewallPolicy",
+  "csharp"
+);
+@@clientName(Profiles.preconfiguredEndpointsList,
+  "GetPreconfiguredEndpoints",
+  "csharp"
+);
+@@clientName(ManagedRuleSetsOperationGroup.list,
+  "GetManagedRuleSets",
+  "csharp"
+);
