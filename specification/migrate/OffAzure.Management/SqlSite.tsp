@@ -32,12 +32,14 @@ interface SqlSiteOperationsStatusOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("masterSites")
         @key
         @pattern("^[a-zA-Z0-9-]{3,24}$")
         siteName: string,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("sqlSites")
         @key
@@ -45,6 +47,7 @@ interface SqlSiteOperationsStatusOps
         sqlSiteName: string,
       },
       {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("operationsStatus")
         @key

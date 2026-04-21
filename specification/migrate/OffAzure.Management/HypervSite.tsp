@@ -30,6 +30,7 @@ interface HypervOperationsStatusOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("hypervSites")
         @key
@@ -37,6 +38,7 @@ interface HypervOperationsStatusOps
         siteName: string,
       },
       {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("operationsStatus")
         @key

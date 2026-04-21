@@ -1555,6 +1555,7 @@ model SiteProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -1692,6 +1693,7 @@ model ImportSiteProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -2117,6 +2119,7 @@ model HypervClusterProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -2397,6 +2400,7 @@ model HypervHostProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -3019,6 +3023,7 @@ model HypervDisk {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
   isOSDisk?: string;
 
   /**
@@ -4166,6 +4171,7 @@ model DeleteImportedMachinesJobProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -4450,6 +4456,7 @@ model ImportMachineProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -4729,6 +4736,7 @@ model SqlDiscoverySiteDataSourceProperties {
 /**
  * SQL Inventory Import URI response object model.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
 model SQLInventoryImportBody {
   /**
    * Gets or sets the job ARM ID.
@@ -5159,6 +5167,7 @@ model SqlDatabasePropertiesV2 {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 
   /**
@@ -5457,6 +5466,7 @@ model SqlServerProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 
   /**
@@ -7323,6 +7333,7 @@ model ServerProperties {
   /**
    * Provisioning state of the server resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 
   /**
@@ -7417,6 +7428,7 @@ model ServerDisk {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
   isOSDisk?: string;
 
   /**
@@ -8155,6 +8167,7 @@ model VmwareDisk {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
   isOSDisk?: string;
 
   /**
@@ -8389,6 +8402,7 @@ model VcenterProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 

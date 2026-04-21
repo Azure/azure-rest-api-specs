@@ -31,6 +31,7 @@ interface MasterSitesOperationsStatusOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("masterSites")
         @key
@@ -38,6 +39,7 @@ interface MasterSitesOperationsStatusOps
         siteName: string,
       },
       {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("operationsStatus")
         @key

@@ -31,6 +31,7 @@ interface ServerSiteOperationsStatusOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("serverSites")
         @key
@@ -38,6 +39,7 @@ interface ServerSiteOperationsStatusOps
         siteName: string,
       },
       {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "Backward compatibility"
         @path
         @segment("operationsStatus")
         @key
