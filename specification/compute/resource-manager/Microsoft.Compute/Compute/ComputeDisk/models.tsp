@@ -690,6 +690,29 @@ model DiskPurchasePlan {
 }
 
 /**
+ * Direct virtualization scheduler type.
+ */
+@added(Versions.v2026_03_02)
+union DirectVirtualizationSchedulerType {
+  string,
+
+  /**
+   * No direct virtualization scheduler.
+   */
+  None: "None",
+
+  /**
+   * Azure managed direct virtualization scheduler.
+   */
+  AzureManaged: "AzureManaged",
+
+  /**
+   * Guest managed direct virtualization scheduler.
+   */
+  GuestManaged: "GuestManaged",
+}
+
+/**
  * List of supported capabilities persisted on the disk resource for VM use.
  */
 model SupportedCapabilities {
@@ -713,6 +736,18 @@ model SupportedCapabilities {
    */
   @added(Versions.v2025_01_02)
   supportedSecurityOption?: SupportedSecurityOption;
+
+  /**
+   * Virtualization capabilities supported by the disk.
+   */
+  @added(Versions.v2026_03_02)
+  virtualizationTypes?: string;
+
+  /**
+   * Direct virtualization scheduler type supported by the disk.
+   */
+  @added(Versions.v2026_03_02)
+  directVirtualizationSchedulerType?: DirectVirtualizationSchedulerType;
 }
 
 /**
