@@ -47,4 +47,8 @@ enum Versions {
 
   /** Azure Cosmos DB for Mongo vCore clusters api version 2025-09-01. */
   v2025_09_01: "2025-09-01",
+
+  /** Azure Cosmos DB for Mongo vCore clusters api version 2026-02-01-preview. */
+  @Azure.Core.previewVersion
+  v2026_02_01_preview: "2026-02-01-preview",
 }

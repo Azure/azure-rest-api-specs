@@ -213,6 +213,10 @@ model MongoClusterProperties {
   /** The encryption configuration for the cluster. Depends on identity being configured. */
   @added(Versions.v2025_08_01_preview)
   encryption?: EncryptionProperties;
+
+  /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows Azure Cosmos DB service to bypass network restrictions. */
+  @added(Versions.v2026_02_01_preview)
+  networkBypassMode?: NetworkBypassMode;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -609,4 +613,16 @@ model KeyEncryptionKeyIdentity {
   /** The user assigned identity resource id. */
   @madeOptional(Versions.v2025_08_01_preview)
   userAssignedIdentityResourceId?: string;
+}
+
+/** The network bypass mode for the Mongo cluster. */
+@added(Versions.v2026_02_01_preview)
+union NetworkBypassMode {
+  string,
+
+  /** No network bypass is enabled. */
+  "None",
+
+  /** Allows Azure Cosmos DB service to bypass network restrictions. */
+  "AzureCosmosDB",
 }
