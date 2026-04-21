@@ -326,10 +326,17 @@ union NetworkApiVersion {
 }
 
 /**
- * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+ * Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a Standard value starting API version 2025-11-01.
  */
 union SecurityTypes {
   string,
+
+  /**
+   * Indicates a VM without UEFI features such as SecureBoot or vTPM; returned as the default value when securityType is not specified.
+   */
+  @added(Versions.v2025_11_01)
+  Standard: "Standard",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -433,6 +440,10 @@ union ZonalPlatformFaultDomainAlignMode {
   Aligned: "Aligned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
+
+  /** Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned. */
+  @added(Versions.v2025_11_01)
+  BestEffortAligned: "BestEffortAligned",
 }
 
 /**
@@ -887,6 +898,34 @@ union DiskControllerTypes {
 }
 
 /**
+ * Specifies the storage fault domain alignment type for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageFaultDomainAlignmentType {
+  string,
+
+  /** Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains. */
+  Aligned: "Aligned",
+
+  /** Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains. */
+  BestEffortAligned: "BestEffortAligned",
+}
+
+/**
+ * Specifies the storage alignment status for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageAlignmentStatus {
+  string,
+
+  /** Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile. */
+  Unaligned: "Unaligned",
+
+  /** Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain. */
+  Aligned: "Aligned",
+}
+
+/**
  * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
 union IPVersions {
@@ -1097,6 +1136,199 @@ union HighSpeedInterconnectPlacement {
 
   /** Trunk high speed interconnect placement */
   Trunk: "Trunk",
+}
+
+/**
+ * The action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.
+ */
+@added(Versions.v2025_11_01)
+union LifecycleHookAction {
+  string,
+
+  /** The lifecycle hook of a target resource in a lifecycle hook event will be approved. */
+  Approve: "Approve",
+
+  /** The lifecycle hook of a target resource in a lifecycle hook event will be rejected. */
+  Reject: "Reject",
+}
+
+/**
+ * Describes a lifecycle hook.
+ */
+@added(Versions.v2025_11_01)
+model LifecycleHook {
+  /**
+   * Specifies the type of the lifecycle hook.
+   */
+  type?: VMScaleSetLifecycleHookEventType;
+
+  /**
+   * Specifies the time duration a virtual machine scale set lifecycle hook event sent to the customer waits for a response from the customer. It should be in ISO 8601 format.
+   */
+  waitDuration?: duration;
+
+  /**
+   * Specifies the action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.
+   */
+  defaultAction?: LifecycleHookAction;
+}
+
+/**
+ * Specifies the lifecycle hooks profile for the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model LifecycleHooksProfile {
+  /**
+   * Specifies the lifecycle hooks configured for the virtual machine scale set.
+   */
+  @identifiers(#["type"])
+  lifecycleHooks?: LifecycleHook[];
+}
+
+/**
+ * Approval status of a target resource in a virtual machine scale set lifecycle hook event.
+ */
+@added(Versions.v2025_11_01)
+union LifecycleHookActionState {
+  string,
+
+  /** The lifecycle hook for the target resource is waiting for approval. */
+  Waiting: "Waiting",
+
+  /** The lifecycle hook for the target resource is approved. */
+  Approved: "Approved",
+
+  /** The lifecycle hook for the target resource is rejected. */
+  Rejected: "Rejected",
+}
+
+/**
+ * The states that a virtual machine scale set lifecycle hook event can be in. This is not settable by the customer. It is set only by the platform.
+ */
+@added(Versions.v2025_11_01)
+union VMScaleSetLifecycleHookEventState {
+  string,
+
+  /** The lifecycle hook event is active. E.g., waiting on a response from the customer. */
+  Active: "Active",
+
+  /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
+  Completed: "Completed",
+}
+
+/**
+ * Define a single target ARM resource in a virtual machine scale set lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventTargetResource {
+  /**
+   * Specifies the target ARM resource. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
+   */
+  resource?: ApiEntityReference;
+
+  /**
+   * State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state.
+   */
+  actionState?: LifecycleHookActionState;
+}
+
+/**
+ * Defines the virtual machine scale set lifecycle hook event properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventProperties {
+  /**
+   * Defines the type or scenario for sending a virtual machine scale set lifecycle hook event to the customer.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
+  type?: VMScaleSetLifecycleHookEventType;
+
+  /**
+   * Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event.
+   */
+  waitUntil?: string;
+
+  /**
+   * Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this.
+   */
+  @visibility(Lifecycle.Read)
+  maxWaitUntil?: string;
+
+  /**
+   * The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity.
+   */
+  @visibility(Lifecycle.Read)
+  timeCreated?: string;
+
+  /**
+   * Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.
+   */
+  @visibility(Lifecycle.Read)
+  defaultAction?: LifecycleHookAction;
+
+  /**
+   * List of target resources which are getting processed in the virtual machine scale set lifecycle hook event.
+   */
+  @identifiers(#["resource"])
+  targetResources?: VMScaleSetLifecycleHookEventTargetResource[];
+
+  /**
+   * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+   * The keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.
+   * For example, for a lifecycle hook event with UpgradeAutoOSScheduling type,
+   * the additional context can contain the key "priority" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalContext?: VMScaleSetLifecycleHookEventAdditionalContext;
+
+  /**
+   * Specifies the state of the virtual machine scale set lifecycle hook event.
+   */
+  @visibility(Lifecycle.Read)
+  state?: VMScaleSetLifecycleHookEventState;
+}
+
+/**
+ * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+ * The keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.
+ * For example, for a lifecycle hook event with UpgradeAutoOSScheduling type,
+ * the additional context can contain the key "priority" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventAdditionalContext {
+  /**
+   * Can only be present for a lifecycle hook event of type "UpgradeAutoOSScheduling".
+   * Denotes the priority of the virtual machine scale set lifecycle hook event for the Auto OS Upgrade scheduled on the virtual machine scale set.
+   */
+  priority?: string;
+}
+
+/**
+ * Specifies the scenario for which the customer is interested in receiving virtual machine scale set lifecycle hook events.
+ */
+@added(Versions.v2025_11_01)
+union VMScaleSetLifecycleHookEventType {
+  string,
+
+  /** Lifecycle hook event sent to the customer before an Auto OS Upgrade operation starts on the virtual machine scale set. */
+  UpgradeAutoOSScheduling: "UpgradeAutoOSScheduling",
+
+  /** Lifecycle hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation. */
+  UpgradeAutoOSRollingBatchStarting: "UpgradeAutoOSRollingBatchStarting",
+}
+
+/**
+ * Specifies information about the virtual machine scale set lifecycle hook event.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventUpdate {
+  /**
+   * virtual machine scale set lifecycle hook event properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: VMScaleSetLifecycleHookEventProperties;
 }
 
 /**
@@ -1695,6 +1927,18 @@ model VirtualMachineScaleSetProperties {
    */
   @added(Versions.v2025_04_01)
   highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
+
+  /**
+   * Specifies the lifecycle hooks profile for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  lifecycleHooksProfile?: LifecycleHooksProfile;
+
+  /**
+   * Specifies the external health policy for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  externalHealthPolicy?: ExternalHealthPolicy;
 }
 
 /**
@@ -1893,6 +2137,27 @@ model AutomaticRepairsPolicy {
    * Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.
    */
   repairAction?: RepairAction;
+}
+
+/**
+ * Specifies the external health policy for the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model ExternalHealthPolicy {
+  /**
+   * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as "unknown". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H).
+   */
+  expiryDuration?: duration;
+
+  /**
+   * Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H).
+   */
+  gracePeriod?: duration;
 }
 
 /**
@@ -2416,6 +2681,12 @@ model VirtualMachineScaleSetOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
    */
   osType?: OperatingSystemTypes;
@@ -2454,6 +2725,12 @@ model DiffDiskSettings {
    * Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk,** **NvmeDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** or **NvmeDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Minimum api-version for NvmeDisk: 2024-03-01.
    */
   placement?: DiffDiskPlacement;
+
+  /**
+   * Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages
+   */
+  @added(Versions.v2025_11_01)
+  enableFullCaching?: boolean;
 }
 
 /**
@@ -2541,6 +2818,12 @@ model VirtualMachineScaleSetDataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -2876,7 +3159,7 @@ model SecurityProfile {
   encryptionAtHost?: boolean;
 
   /**
-   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. If not specified, Standard will be returned starting api version 2025-11-01.
    */
   securityType?: SecurityTypes;
 
@@ -3326,7 +3609,7 @@ model PriorityMixPolicy {
 }
 
 /**
- * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.
+ * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy, ResilientVMDeletionPolicy and OperationRecoverySettings (version > 2025-11-01).
  */
 model ResiliencyPolicy {
   /**
@@ -3349,6 +3632,12 @@ model ResiliencyPolicy {
    */
   @added(Versions.v2025_04_01)
   zoneAllocationPolicy?: ZoneAllocationPolicy;
+
+  /**
+   * The configuration parameters used for operation recovery settings.
+   */
+  @added(Versions.v2025_11_01)
+  operationRecoverySettings?: OperationRecoverySettings;
 }
 
 /**
@@ -3367,6 +3656,60 @@ model ResilientVMCreationPolicy {
 model ResilientVMDeletionPolicy {
   /**
    * Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used for operation recovery settings on a virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model OperationRecoverySettings {
+  /**
+   * The configuration parameters used for restart recovery policy.
+   */
+  restartRecoveryPolicy?: RestartRecoveryPolicy;
+
+  /**
+   * The configuration parameters used for start recovery policy.
+   */
+  startRecoveryPolicy?: StartRecoveryPolicy;
+
+  /**
+   * The configuration parameters used for reimage recovery policy.
+   */
+  reimageRecoveryPolicy?: ReimageRecoveryPolicy;
+}
+
+/**
+ * The configuration parameters used while performing restart recovery.
+ */
+@added(Versions.v2025_11_01)
+model RestartRecoveryPolicy {
+  /**
+   * Specifies whether restart recovery should be enabled. The default value is false.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used while performing start recovery.
+ */
+@added(Versions.v2025_11_01)
+model StartRecoveryPolicy {
+  /**
+   * Specifies whether start recovery should be enabled. The default value is false.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used while performing reimage recovery.
+ */
+@added(Versions.v2025_11_01)
+model ReimageRecoveryPolicy {
+  /**
+   * Specifies whether reimage recovery should be enabled. The default value is false.
    */
   enabled?: boolean;
 }
@@ -3526,6 +3869,12 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
    * The virtual machine scale set zones.
    */
   zones?: string[];
+
+  /**
+   * User-defined constraints for virtual machine scale set hardware placement.
+   */
+  @added(Versions.v2025_11_01)
+  placement?: Placement;
 }
 
 /**
@@ -3601,6 +3950,12 @@ model VirtualMachineScaleSetUpdateProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the lifecycle hooks profile for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  lifecycleHooksProfile?: LifecycleHooksProfile;
 }
 
 /**
@@ -3744,6 +4099,12 @@ model VirtualMachineScaleSetUpdateOSDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
@@ -4712,6 +5073,17 @@ model VirtualMachineScaleSetVMProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Specifies the ARM resource ID of the standalone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01.
+   */
+  @added(Versions.v2025_11_01)
+  @visibility(Lifecycle.Read)
+  virtualMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
 }
 
 /**
@@ -4906,6 +5278,12 @@ model DiskInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * Specifies the storage alignment status for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageAlignmentStatus?: StorageAlignmentStatus;
 }
 
 /**
@@ -5056,6 +5434,28 @@ model StorageProfile {
 }
 
 /**
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
+}
+
+/**
  * Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
  */
 model OSDisk {
@@ -5108,6 +5508,12 @@ model OSDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -5184,6 +5590,12 @@ model DataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -6054,6 +6466,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**
