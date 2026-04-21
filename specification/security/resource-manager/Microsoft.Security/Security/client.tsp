@@ -317,15 +317,28 @@ op privateLinkResourcesGetCustomization(
   "python"
 );
 
-@@clientName(Common.ErrorAdditionalInfo,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "java"
 );
-@@clientName(PrivateLinksAPI.PrivateEndpointConnection,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "java"
 );
-@@clientName(Common.ActionType,
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+  "ArmActionType",
+  "java"
+);
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "java"
 );
