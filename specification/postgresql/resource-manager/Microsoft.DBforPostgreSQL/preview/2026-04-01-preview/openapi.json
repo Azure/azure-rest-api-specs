@@ -6160,6 +6160,14 @@
           "$ref": "#/definitions/EncryptionKeyStatus",
           "description": "Status of key used by a server configured with data encryption based on customer managed key, to encrypt the geographically redundant storage associated to the server when it is configured to support geographically redundant backups.",
           "readOnly": true
+        },
+        "primaryFederatedIdentityClientId": {
+          "type": "string",
+          "description": "Client id of multi-tenant Microsoft Entra application."
+        },
+        "geoBackupFederatedIdentityClientId": {
+          "type": "string",
+          "description": "Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups."
         }
       }
     },
@@ -6781,7 +6789,9 @@
         "ReplicatingData",
         "FailingOver",
         "Healthy",
-        "RemovingStandby"
+        "RemovingStandby",
+        "RecreatingStandby",
+        "ComputeUpdatingByFailover"
       ],
       "x-ms-enum": {
         "name": "HighAvailabilityState",
@@ -6816,6 +6826,16 @@
             "name": "RemovingStandby",
             "value": "RemovingStandby",
             "description": "Standby server is being removed."
+          },
+          {
+            "name": "RecreatingStandby",
+            "value": "RecreatingStandby",
+            "description": "Standby server is being recreated."
+          },
+          {
+            "name": "ComputeUpdatingByFailover",
+            "value": "ComputeUpdatingByFailover",
+            "description": "Compute is being updated due to a failover."
           }
         ]
       }

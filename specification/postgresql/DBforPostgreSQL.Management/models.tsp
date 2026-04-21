@@ -3159,6 +3159,15 @@ model DataEncryption {
    */
   @visibility(Lifecycle.Read)
   geoBackupEncryptionKeyStatus?: EncryptionKeyStatus;
+
+  @doc("Client id of multi-tenant Microsoft Entra application.")
+  @added(Versions.v2026_04_01)
+  primaryFederatedIdentityClientId?: string;
+
+  @doc("Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups.")
+  @added(Versions.v2026_04_01)
+  geoBackupFederatedIdentityClientId?: string;
+  
 }
 
 /**
