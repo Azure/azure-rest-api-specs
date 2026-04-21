@@ -96,6 +96,12 @@ model EvaluationSuiteVersion {
     """)
   target?: Target;
 
+  @doc("""
+    Default evaluation level for this suite. Can be overridden at run time.
+    Exact values TBD.
+    """)
+  evaluationLevel?: string;
+
   // AssetBase provides: name (string, @key), version (string, read-only),
   // id (string, read-only), description (string, optional), tags (Record<string>, optional)
   ...AssetBase;
@@ -113,7 +119,7 @@ model EvaluationSuiteRunRequest {
   @doc("Suite version to run. Default: latest.")
   suiteVersion?: string;
 
-  @doc("Evaluation level: 'turn' or 'conversation'. Optional.")
+  @doc("Overrides the suite's default evaluation level. If omitted, uses the level from the suite.")
   evaluationLevel?: string;
 }
 

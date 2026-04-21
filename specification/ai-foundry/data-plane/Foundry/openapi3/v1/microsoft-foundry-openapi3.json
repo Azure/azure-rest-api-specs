@@ -16105,7 +16105,7 @@
           },
           "evaluationLevel": {
             "type": "string",
-            "description": "Evaluation level: 'turn' or 'conversation'. Optional."
+            "description": "Overrides the suite's default evaluation level. If omitted, uses the level from the suite."
           }
         },
         "description": "Request body for running an evaluation from a suite."
@@ -16229,6 +16229,10 @@
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
           },
+          "evaluationLevel": {
+            "type": "string",
+            "description": "Default evaluation level for this suite. Can be overridden at run time.\nExact values TBD."
+          },
           "id": {
             "type": "string",
             "description": "Asset ID, a unique identifier for the asset",
@@ -16280,6 +16284,10 @@
               }
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
+          },
+          "evaluationLevel": {
+            "type": "string",
+            "description": "Default evaluation level for this suite. Can be overridden at run time.\nExact values TBD."
           },
           "description": {
             "type": "string",
