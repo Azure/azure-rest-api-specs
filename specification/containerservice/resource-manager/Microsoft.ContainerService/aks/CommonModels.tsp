@@ -2045,6 +2045,12 @@ model ManagedClusterProperties {
   controlPlaneScalingProfile?: ManagedClusterControlPlaneScalingProfile;
 
   /**
+ * Node disruption profile for a managed cluster.
+ */
+  @added(Versions.v2026_03_02_preview)
+  nodeDisruptionProfile?: NodeDisruptionProfile;
+
+  /**
    * Contains read-only information about the Managed Cluster.
    */
   status?: ManagedClusterStatus;
@@ -4341,4 +4347,38 @@ model ManagedClusterControlPlaneScalingProfile {
    * The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.
    */
   scalingSize: ControlPlaneScalingSize;
+}
+
+/**
+ * The policy configuration for when to allow certain operations which require node reimage and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy"
+ */
+@added(Versions.v2026_03_02_preview)
+union NodeDisruptionPolicy {
+  string,
+
+  /**
+   * Allows operations that will require node reimage and trigger redeployment.
+   */
+  Allow: "Allow",
+
+  /**
+   * Blocks certain operations that will require node reimage and trigger redeployment unless within the aksManagedNodeOSUpgradeSchedule maintenance window. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy . For more information on using the aksManagedNodeOSUpgradeSchedule maintenance window, please see https://learn.microsoft.com/azure/aks/planned-maintenance?tabs=azure-cli
+   */
+  AllowDuringMaintenanceWindow: "AllowDuringMaintenanceWindow",
+
+  /**
+   * Blocks certain operations that will require node reimage and trigger redeployment. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy
+   */
+  Block: "Block",
+}
+
+/**
+ * Node disruption profile for a managed cluster.
+ */
+@added(Versions.v2026_03_02_preview)
+model NodeDisruptionProfile {
+  /**
+ * The policy configuration for when to allow certain operations which require node reimage and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy"
+ */
+  nodeDisruptionPolicy?: NodeDisruptionPolicy;
 }

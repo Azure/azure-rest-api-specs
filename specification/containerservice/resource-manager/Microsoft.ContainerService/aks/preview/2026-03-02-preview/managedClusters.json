@@ -11845,6 +11845,10 @@
           "$ref": "#/definitions/ManagedClusterControlPlaneScalingProfile",
           "description": "Profile for providing scaled and performance guaranteed control plane capacity to deliver consistent performance under high workload. Requires Kubernetes version 1.33.0 or later."
         },
+        "nodeDisruptionProfile": {
+          "$ref": "#/definitions/NodeDisruptionProfile",
+          "description": "Node disruption profile for a managed cluster."
+        },
         "status": {
           "$ref": "#/definitions/ManagedClusterStatus",
           "description": "Contains read-only information about the Managed Cluster."
@@ -13357,6 +13361,46 @@
             "description": "The default Ingress Controller will not be created. It will not be deleted by the system if it exists. Users should delete the default NginxIngressController Custom Resource manually if desired."
           }
         ]
+      }
+    },
+    "NodeDisruptionPolicy": {
+      "type": "string",
+      "description": "The policy configuration for when to allow certain operations which require node reimage and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy\"",
+      "enum": [
+        "Allow",
+        "AllowDuringMaintenanceWindow",
+        "Block"
+      ],
+      "x-ms-enum": {
+        "name": "NodeDisruptionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allows operations that will require node reimage and trigger redeployment."
+          },
+          {
+            "name": "AllowDuringMaintenanceWindow",
+            "value": "AllowDuringMaintenanceWindow",
+            "description": "Blocks certain operations that will require node reimage and trigger redeployment unless within the aksManagedNodeOSUpgradeSchedule maintenance window. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy . For more information on using the aksManagedNodeOSUpgradeSchedule maintenance window, please see https://learn.microsoft.com/azure/aks/planned-maintenance?tabs=azure-cli"
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Blocks certain operations that will require node reimage and trigger redeployment. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy"
+          }
+        ]
+      }
+    },
+    "NodeDisruptionProfile": {
+      "type": "object",
+      "description": "Node disruption profile for a managed cluster.",
+      "properties": {
+        "nodeDisruptionPolicy": {
+          "$ref": "#/definitions/NodeDisruptionPolicy",
+          "description": "The policy configuration for when to allow certain operations which require node reimage and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy\""
+        }
       }
     },
     "NodeImageVersion": {
