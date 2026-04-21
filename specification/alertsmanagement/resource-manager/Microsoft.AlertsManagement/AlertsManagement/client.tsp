@@ -22,7 +22,6 @@ using Http;
   "statusUrl",
   "java"
 );
-
 @@clientName(Microsoft.AlertsManagement.AlertsMetaData,
   "AlertsMetadata",
   "java"
@@ -58,6 +57,7 @@ using Http;
 @@clientName(SignalType, "ServiceAlertSignalType", "csharp");
 @@clientName(Identifier, "RetrievedInformationIdentifier", "csharp");
 @@clientName(AlertModificationEvent, "ServiceAlertModificationEvent", "csharp");
+@@clientName(NotificationResult.statusURL, "StatusUrl", "csharp");
 @@clientName(AlertModificationItem,
   "ServiceAlertModificationItemInfo",
   "csharp"
@@ -112,9 +112,13 @@ using Http;
   "GetServiceAlertMetadata",
   "csharp"
 );
+@@clientName(PrometheusRangeQuery.start, "StartOn", "csharp");
+@@clientName(PrometheusRangeQuery.end, "EndOn", "csharp");
+
 @@alternateType(Essentials.smartGroupId, Azure.Core.uuid, "csharp");
 @@alternateType(AlertModificationProperties.alertId, Azure.Core.uuid, "csharp");
 @@alternateType(AlertIdParameter.alertId, Azure.Core.uuid, "csharp");
+
 @@usage(Essentials, Usage.input, "csharp");
 @@usage(AlertModification, Usage.input, "csharp");
 @@usage(AlertModificationItem, Usage.input, "csharp");
