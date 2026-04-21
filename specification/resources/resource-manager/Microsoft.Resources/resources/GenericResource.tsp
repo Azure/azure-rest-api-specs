@@ -16,16 +16,9 @@ namespace Microsoft.Resources;
 /**
  * Resource information.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model GenericResource extends Foundations.ProxyResource {
-  /**
-   * The resource properties.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
-  properties?: unknown;
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+model GenericResource
+  is Azure.ResourceManager.Legacy.GenericResource<unknown, true> {
   /**
    * The plan of the resource.
    */
