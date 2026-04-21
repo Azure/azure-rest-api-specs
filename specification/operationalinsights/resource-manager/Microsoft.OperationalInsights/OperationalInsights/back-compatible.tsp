@@ -162,3 +162,14 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(KeyVaultProperties, "keyVaultProperties");
 @@clientName(SearchGetSchemaResponse.metadata, "Metadata");
+/**
+ * we add this model  in order to replace subscriptions model in CommonTypes with this model via alternateType decorator
+ */
+model AccessRulePropertiesSubscriptionsItem {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
+}
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  Microsoft.OperationalInsights.AccessRulePropertiesSubscriptionsItem,
+  "go"
+);
