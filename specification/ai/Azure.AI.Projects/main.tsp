@@ -12,6 +12,7 @@ import "./insights/routes.tsp";
 import "./deployments/routes.tsp";
 import "./red-teams/routes.tsp";
 import "./schedules/routes.tsp";
+import "./humanannotation/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
