@@ -32,7 +32,9 @@ jobs:
         uses: actions/checkout@v6
         with:
           sparse-checkout: |
-            .github
+            .github/actions
+            .github/shared
+            .github/workflows
 
       - if: ${{ matrix.folder == '.github' }}
         name: Install dependencies for github-script actions

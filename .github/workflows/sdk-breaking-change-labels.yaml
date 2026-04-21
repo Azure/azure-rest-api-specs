@@ -21,7 +21,9 @@ jobs:
       - uses: actions/checkout@v6
         with:
           sparse-checkout: |
-            .github
+            .github/actions
+            .github/shared
+            .github/workflows
 
       # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'

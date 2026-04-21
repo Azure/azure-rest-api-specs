@@ -38,7 +38,9 @@ jobs:
       - uses: actions/checkout@v6
         with:
           sparse-checkout: |
-            .github
+            .github/actions
+            .github/shared
+            .github/workflows
             eng
             ${{ inputs.sparse-checkout-paths }}
 

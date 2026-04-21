@@ -52,7 +52,9 @@ jobs:
           # Uses the .github folder from the PR base branch (pull_request_target trigger),
           # or the repo default branch (other triggers).
           sparse-checkout: |
-            .github
+            .github/actions
+            .github/shared
+            .github/workflows
 
       - name: "Set Status"
         uses: actions/github-script@v8

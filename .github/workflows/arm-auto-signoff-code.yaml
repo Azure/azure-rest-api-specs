@@ -34,7 +34,9 @@ jobs:
           # Check only needs to view contents of changed files as a string, so can use
           # "git show" on specific files instead of cloning whole repo
           sparse-checkout: |
-            .github
+            .github/actions
+            .github/shared
+            .github/workflows
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
