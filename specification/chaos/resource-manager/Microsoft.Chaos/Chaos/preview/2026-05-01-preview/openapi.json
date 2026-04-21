@@ -6629,8 +6629,7 @@
         },
         "duration": {
           "type": "string",
-          "format": "duration",
-          "description": "ISO 8601 duration for how long the action runs (e.g., PT30M for 30 minutes)."
+          "description": "ISO 8601 duration for how long the action runs (e.g., PT30M for 30 minutes). Supports template macro syntax (%%\\{parameters.\\<name\\>\\}%%)."
         },
         "parameters": {
           "type": "array",
@@ -6648,13 +6647,11 @@
         },
         "waitBefore": {
           "type": "string",
-          "format": "duration",
-          "description": "ISO 8601 duration to wait before action starts (e.g., PT30S for 30 seconds)."
+          "description": "ISO 8601 duration to wait before action starts (e.g., PT30S for 30 seconds). Supports template macro syntax."
         },
         "timeout": {
           "type": "string",
-          "format": "duration",
-          "description": "ISO 8601 duration for maximum action execution time (for actions without inherent duration)."
+          "description": "ISO 8601 duration for maximum action execution time. Supports template macro syntax."
         },
         "externalResource": {
           "$ref": "#/definitions/ExternalResource",

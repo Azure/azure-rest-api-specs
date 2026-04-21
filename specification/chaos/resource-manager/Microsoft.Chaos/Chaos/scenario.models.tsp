@@ -154,9 +154,9 @@ model ScenarioAction {
   description?: string;
 
   /**
-   * ISO 8601 duration for how long the action runs (e.g., PT30M for 30 minutes).
+   * ISO 8601 duration for how long the action runs (e.g., PT30M for 30 minutes). Supports template macro syntax (%%\{parameters.\<name\>\}%%).
    */
-  duration: duration;
+  duration: string;
 
   /**
    * Action-specific parameter values.
@@ -170,14 +170,14 @@ model ScenarioAction {
   runAfter?: RunAfter;
 
   /**
-   * ISO 8601 duration to wait before action starts (e.g., PT30S for 30 seconds).
+   * ISO 8601 duration to wait before action starts (e.g., PT30S for 30 seconds). Supports template macro syntax.
    */
-  waitBefore?: duration;
+  waitBefore?: string;
 
   /**
-   * ISO 8601 duration for maximum action execution time (for actions without inherent duration).
+   * ISO 8601 duration for maximum action execution time. Supports template macro syntax.
    */
-  timeout?: duration;
+  timeout?: string;
 
   /**
    * External resource reference for the action.
