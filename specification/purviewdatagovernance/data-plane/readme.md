@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-  - Azure.Analytics.Purview.DataAccess/preview/2023-10-01-preview/DataAccessApiService.json
+  - DataAccess/preview/2023-10-01-preview/DataAccessApiService.json
 ```
 
 ---
