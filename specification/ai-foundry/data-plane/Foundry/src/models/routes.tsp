@@ -59,11 +59,11 @@ interface Models
     PendingUploadResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential fetch action"
-  @doc("Fetch credentials for a model version asset.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential action"
+  @doc("Get credentials for a model version asset.")
   @route("/models/{name}/versions/{version}/credentials")
   @post
-  fetchCredentials is Azure.Core.Foundations.Operation<
+  getCredentials is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the model.")
       @path
