@@ -228,10 +228,109 @@ using Azure.ResourceManager;
 @@clientName(DeploymentVersion, "CdnDeploymentVersion", "csharp");
 @@clientName(MatchCondition, "CustomRuleMatchCondition", "csharp");
 @@clientName(KeyGroup, "CdnKeyGroup", "csharp");
+@@clientName(KnowledgeSource, "CdnWebAgentKnowledgeSource", "csharp");
+@@clientName(ProfileAgent, "CdnProfileAgent", "csharp");
+@@clientName(WebAgent, "CdnWebAgent", "csharp");
+@@clientName(AgentPath, "CdnWebAgentPath", "csharp");
+@@clientName(AgentPathType, "CdnWebAgentPathType", "csharp");
+@@clientName(AfdUrlSigningActionParameters,
+  "FrontDoorUrlSigningActionContent",
+  "csharp"
+);
+@@clientName(CompareDeploymentVersionsParameter,
+  "CompareDeploymentVersionsContent",
+  "csharp"
+);
+@@clientName(DeliveryRuleEdgeActionParameters,
+  "DeliveryRuleEdgeActionProperties",
+  "csharp"
+);
+@@clientName(ApprovalStatus, "DeploymentVersiongApprovalStatus", "csharp");
 @@clientName(ResourceUsageUnit, "CdnUsageUnit", "csharp");
 @@clientName(PolicySettings, "WafPolicySettings", "csharp");
+@@clientName(AfdSecretMtlsCertificateChain,
+  "FrontDoorSecretMtlsCertificateChain",
+  "csharp"
+);
+@@clientName(AfdUrlSigningAction, "FrontDoorUrlSigningAction", "csharp");
+@@clientName(CustomRuleAfd, "FrontDoorCustomRule", "csharp");
+@@clientName(ManagedRuleGroupOverrideAfd,
+  "FrontDoorManagedRuleGroupOverride",
+  "csharp"
+);
+@@clientName(ManagedRuleOverrideAfd, "FrontDoorManagedRuleOverride", "csharp");
+@@clientName(ManagedRuleSetAfd, "FrontDoorManagedRuleSet", "csharp");
+@@clientName(MatchConditionAfd, "FrontDoorMatchCondition", "csharp");
+@@clientName(PolicySettingsAfd, "FrontDoorPolicySettings", "csharp");
 @@clientName(ManagedRuleSet, "WafPolicyManagedRuleSet", "csharp");
 @@clientName(UrlSigningKeyParameters, "UriSigningKeyProperties", "csharp");
+@@clientName(DeploymentStages, "CdnDeploymentStages", "csharp");
+@@clientName(DeploymentRolloutStatus, "CdnDeploymentRolloutStatus", "csharp");
+@@clientName(DeploymentVersionChange, "CdnDeploymentVersionChange", "csharp");
+@@clientName(DeploymentVersionAFDOriginChange,
+  "CdnDeploymentVersionFrontDoorOriginChange",
+  "csharp"
+);
+@@clientName(DeploymentVersionAFDOriginGroupChange,
+  "CdnDeploymentVersionFrontDoorOriginGroupChange",
+  "csharp"
+);
+@@clientName(DeploymentVersionRouteChange,
+  "CdnDeploymentVersionRouteChange",
+  "csharp"
+);
+@@clientName(DeploymentVersionRuleChange,
+  "CdnDeploymentVersionRuleChange",
+  "csharp"
+);
+@@clientName(DeploymentVersionRuleSetChange,
+  "CdnDeploymentVersionRuleSetChange",
+  "csharp"
+);
+@@clientName(DeploymentVersionSecurityPolicyChange,
+  "CdnDeploymentVersionSecurityPolicyChange",
+  "csharp"
+);
+@@clientName(EdgeAction, "CdnEdgeAction", "csharp");
+@@clientName(GroupByVariable, "RateLimitGroupByVariable", "csharp");
+@@clientName(InvocationPoint, "EdgeActionInvocationPoint", "csharp");
+@@clientName(KnowledgeSourceUpdateParameters,
+  "WebAgentKnowledgeSourcePatch",
+  "csharp"
+);
+@@clientName(KnowledgeSourceProvisioningState,
+  "WebAgentKnowledgeSourceProvisioningState",
+  "csharp"
+);
+@@clientName(KnowledgeSourceType, "WebAgentKnowledgeSourceType", "csharp");
+@@clientName(KnowledgeSourceUpdateFrequency,
+  "WebAgentKnowledgeSourceUpdateFrequency",
+  "csharp"
+);
+@@clientName(MatchVariable, "DeliveryRuleMatchVariable", "csharp");
+@@clientName(OriginCapacityResourceProperties,
+  "AfdOriginCapacitySettings",
+  "csharp"
+);
+@@clientName(ProfileAgentUpdateParameters, "CdnProfileAgentPatch", "csharp");
+@@clientName(ProfileAgentProvisioningState,
+  "CdnProfileAgentProvisioningState",
+  "csharp"
+);
+@@clientName(ResourceReference, "CdnResourceReference", "csharp");
+@@clientName(RouteProperties, "CdnRouteProperties", "csharp");
+@@clientName(RoutingRuleLink, "CdnRoutingRuleLink", "csharp");
+@@clientName(RuleProperties, "CdnRuleProperties", "csharp");
+@@clientName(RuleSetProperties, "CdnRuleSetProperties", "csharp");
+@@clientName(RuleType, "CdnRuleType", "csharp");
+@@clientName(SecurityPolicyLink, "CdnSecurityPolicyLink", "csharp");
+@@clientName(TypeName, "UrlSigningActionTypeName", "csharp");
+@@clientName(VariableName, "RateLimitGroupByVariableName", "csharp");
+@@clientName(WebAgentUpdateParameters, "CdnWebAgentPatch", "csharp");
+@@clientName(WebAgentProvisioningState,
+  "CdnWebAgentProvisioningState",
+  "csharp"
+);
 @@clientName(EndpointProvisioningState,
   "CdnEndpointProvisioningState",
   "csharp"
@@ -342,8 +441,8 @@ using Azure.ResourceManager;
   "ManagedCertificateProperties",
   "csharp"
 );
-@@clientName(SecretProperties, "SecretDetails", "csharp");
-@@clientName(SecurityPolicyProperties, "SecurityPolicyDetails", "csharp");
+@@clientName(SecretProperties, "CdnSecretProperties", "csharp");
+@@clientName(SecurityPolicyProperties, "CdnSecurityPolicyProperties", "csharp");
 @@clientName(SecurityPolicyPropertiesParameters,
   "SecurityPolicyProperties",
   "csharp"
@@ -460,7 +559,7 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(AFDDomainMtlsParameters,
-  "FrontDoorCustomDomainMtlsParameters",
+  "FrontDoorCustomDomainMtlsSettings",
   "csharp"
 );
 @@clientName(AFDEndpoint, "FrontDoorEndpoint", "csharp");
@@ -883,6 +982,7 @@ using Azure.ResourceManager;
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
+@@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(SsoUri.ssoUriValue, url, "csharp");
 @@alternateType(ValidateProbeInput.probeURL, url, "csharp");
 @@alternateType(ResourceReference.id,
