@@ -1,0 +1,49 @@
+{
+  "title": "Workflows_CreateOrUpdate",
+  "operationId": "Workflows_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+    "body": {
+      "name": "Data Access Request Workflow",
+      "triggerType": "DataAccessRequestSubmitted",
+      "isEnabled": true,
+      "description": "Workflow for approving data access requests.",
+      "actions": [
+        {
+          "actionType": "Approval",
+          "approvers": [
+            {
+              "objectId": "11111111-2222-3333-4444-555555555555",
+              "displayName": "Approver User"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+        "name": "Data Access Request Workflow",
+        "triggerType": "DataAccessRequestSubmitted",
+        "isEnabled": true,
+        "description": "Workflow for approving data access requests.",
+        "actions": [
+          {
+            "actionType": "Approval",
+            "approvers": [
+              {
+                "objectId": "11111111-2222-3333-4444-555555555555",
+                "displayName": "Approver User"
+              }
+            ]
+          }
+        ],
+        "createdDate": "2024-01-01T00:00:00Z",
+        "lastModifiedDate": "2024-01-01T00:00:00Z"
+      }
+    }
+  }
+}
