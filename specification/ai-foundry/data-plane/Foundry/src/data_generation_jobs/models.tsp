@@ -147,23 +147,6 @@ union DataGenerationJobScenario {
   Evaluation: "Evaluation",
 }
 
-@doc("The supported source types for a data generation job.")
-union DataGenerationJobSourceType {
-  string,
-
-  @doc("Traces source type. Data is generated based on input traces such as conversations, tool calls, etc retrieved from the project connected Application Insights.")
-  Traces: "Traces",
-
-  @doc("Prompt source type. Data is generated based on input prompts provided by the user or will be extracted from the given Agent. Applicable only for evaluation scenario.")
-  Prompt: "Prompt",
-
-  @doc("File source type. Data is generated based on Azure OpenAI file.")
-  File: "File",
-
-  @doc("Dataset source type. Data is generated based on dataset.")
-  Dataset: "Dataset",
-}
-
 @doc("Options for managing data generation jobs.")
 @discriminator("type")
 model DataGenerationJobOptions {
@@ -208,67 +191,19 @@ model TaskDataGenerationJobOptions extends DataGenerationJobOptions {
   type: "Task";
 }
 
-@doc("The base source model for a data generation job.")
-@discriminator("type")
-model DataGenerationJobSource {
-  @doc("The type of source.")
-  type: DataGenerationJobSourceType;
-}
-
-@doc("The options for a data generation job with Traces source used for Evaluation and Fine-tuning scenarios, which includes the agent name and the time window for fetching traces.")
-model TracesDataGenerationJobSource extends DataGenerationJobSource {
-  @doc("The source type for this job, which is Traces.")
-  type: "Traces";
-
-  @doc("The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window.")
-  agent_name: string;
-
-  @doc("The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used.")
-  agent_version?: string;
-
-  @doc("The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")
-  start_time: FoundryTimestamp;
-
-  @doc("The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation.")
-  end_time?: FoundryTimestamp;
-
-  @doc("Sampling limit applied to traces retrieved for data generation.")
-  max_traces?: int32 = 1000;
-}
-
-@doc("The options for a data generation job with Prompt source used for Evaluation scenario, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation.")
-model PromptDataGenerationJobSource extends DataGenerationJobSource {
-  @doc("The source type for this job, which is Prompt.")
-  type: "Prompt";
-
-  @doc("The prompt used for data generation. Required if agent name is not specified.")
-  prompt?: string;
-
-  @doc("The agent name to fetch the agent instructions for data generation. Required if prompt is not specified.")
-  agent_name: string;
-
-  @doc("The agent version to fetch the agent instructions for data generation. If not specified, the latest version of the agent will be used.")
-  agent_version?: string;
+@doc("The supported job source types for data generation.")
+union DataGenerationJobSource {
+  JobSource,
+  FileDataGenerationJobSource,
 }
 
 @doc("The options for a data generation job with File source, which includes the input files for data generation.")
-model FileDataGenerationJobSource extends DataGenerationJobSource {
+model FileDataGenerationJobSource {
   @doc("The source type for this job, which is File.")
   type: "File";
 
   @doc("Input Azure Open AI file id used for data generation.")
   id: string;
-}
-
-model DatasetDataGenerationJobSource extends DataGenerationJobSource {
-  @doc("The source type for this job, which is Dataset.")
-  type: "Dataset";
-
-  @doc("Input dataset name used for data generation.")
-  name: string;
-
-  @doc("Input dataset version used for data generation. If not specified, the latest version of the dataset will be used.")
-  version?: string;
 }
 
 @doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.")

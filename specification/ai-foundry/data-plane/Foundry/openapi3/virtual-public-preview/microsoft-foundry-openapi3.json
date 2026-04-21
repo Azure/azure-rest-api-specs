@@ -13374,6 +13374,40 @@
           ]
         }
       },
+      "AgentJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Agent"
+            ],
+            "description": "The source type for this source, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobSource"
+          }
+        ],
+        "description": "Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text."
+      },
       "AgentKind": {
         "anyOf": [
           {
@@ -16750,47 +16784,15 @@
         "description": "The supported scenarios for a data generation job."
       },
       "DataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobSourceType"
-              }
-            ],
-            "description": "The type of source."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "Traces": "#/components/schemas/TracesDataGenerationJobSource",
-            "Prompt": "#/components/schemas/PromptDataGenerationJobSource",
-            "File": "#/components/schemas/FileDataGenerationJobSource",
-            "Dataset": "#/components/schemas/DatasetDataGenerationJobSource"
-          }
-        },
-        "description": "The base source model for a data generation job."
-      },
-      "DataGenerationJobSourceType": {
         "anyOf": [
           {
-            "type": "string"
+            "$ref": "#/components/schemas/JobSource"
           },
           {
-            "type": "string",
-            "enum": [
-              "Traces",
-              "Prompt",
-              "File",
-              "Dataset"
-            ]
+            "$ref": "#/components/schemas/FileDataGenerationJobSource"
           }
         ],
-        "description": "The supported source types for a data generation job."
+        "description": "The supported job source types for data generation."
       },
       "DataGenerationJobType": {
         "anyOf": [
@@ -16890,7 +16892,7 @@
           }
         ]
       },
-      "DatasetDataGenerationJobSource": {
+      "DatasetJobSource": {
         "type": "object",
         "required": [
           "type",
@@ -16902,22 +16904,23 @@
             "enum": [
               "Dataset"
             ],
-            "description": "The source type for this job, which is Dataset."
+            "description": "The source type for this source, which is Dataset."
           },
           "name": {
             "type": "string",
-            "description": "Input dataset name used for data generation."
+            "description": "The name of the dataset."
           },
           "version": {
             "type": "string",
-            "description": "Input dataset version used for data generation. If not specified, the latest version of the dataset will be used."
+            "description": "The version of the dataset. If not specified, the latest version is used."
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
+            "$ref": "#/components/schemas/JobSource"
           }
-        ]
+        ],
+        "description": "Dataset source — reference to a dataset."
       },
       "DatasetType": {
         "anyOf": [
@@ -19186,11 +19189,6 @@
             "description": "Input Azure Open AI file id used for data generation."
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
         "description": "The options for a data generation job with File source, which includes the input files for data generation."
       },
       "FileDatasetVersion": {
@@ -20111,6 +20109,53 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "JobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobSourceType"
+              }
+            ],
+            "description": "The type of source."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Prompt": "#/components/schemas/PromptJobSource",
+            "Agent": "#/components/schemas/AgentJobSource",
+            "Traces": "#/components/schemas/TracesJobSource",
+            "Dataset": "#/components/schemas/DatasetJobSource"
+          }
+        },
+        "description": "The base source model for jobs."
+      },
+      "JobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Prompt",
+              "Agent",
+              "Traces",
+              "Dataset"
+            ]
+          }
+        ],
+        "description": "The supported source types for jobs."
       },
       "JobStatus": {
         "anyOf": [
@@ -41471,11 +41516,11 @@
         ],
         "description": "Prompt-based evaluator"
       },
-      "PromptDataGenerationJobSource": {
+      "PromptJobSource": {
         "type": "object",
         "required": [
           "type",
-          "agent_name"
+          "prompt"
         ],
         "properties": {
           "type": {
@@ -41483,27 +41528,19 @@
             "enum": [
               "Prompt"
             ],
-            "description": "The source type for this job, which is Prompt."
+            "description": "The source type for this source, which is Prompt."
           },
           "prompt": {
             "type": "string",
-            "description": "The prompt used for data generation. Required if agent name is not specified."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch the agent instructions for data generation. Required if prompt is not specified."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version to fetch the agent instructions for data generation. If not specified, the latest version of the agent will be used."
+            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
+            "$ref": "#/components/schemas/JobSource"
           }
         ],
-        "description": "The options for a data generation job with Prompt source used for Evaluation scenario, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation."
+        "description": "Prompt source — inline text provided by the user."
       },
       "ProtocolVersionRecord": {
         "type": "object",
@@ -43167,12 +43204,11 @@
         ],
         "description": "The options for a data generation job with Traces type."
       },
-      "TracesDataGenerationJobSource": {
+      "TracesJobSource": {
         "type": "object",
         "required": [
           "type",
-          "agent_name",
-          "start_time"
+          "agent_name"
         ],
         "properties": {
           "type": {
@@ -43180,15 +43216,15 @@
             "enum": [
               "Traces"
             ],
-            "description": "The source type for this job, which is Traces."
+            "description": "The source type for this source, which is Traces."
           },
           "agent_name": {
             "type": "string",
-            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window."
+            "description": "The agent name to fetch traces for."
           },
           "agent_version": {
             "type": "string",
-            "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
+            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
           },
           "start_time": {
             "allOf": [
@@ -43196,7 +43232,7 @@
                 "$ref": "#/components/schemas/FoundryTimestamp"
               }
             ],
-            "description": "The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation."
+            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
           },
           "end_time": {
             "allOf": [
@@ -43204,21 +43240,21 @@
                 "$ref": "#/components/schemas/FoundryTimestamp"
               }
             ],
-            "description": "The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation."
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
           },
           "max_traces": {
             "type": "integer",
             "format": "int32",
-            "description": "Sampling limit applied to traces retrieved for data generation.",
-            "default": 1000
+            "description": "Maximum number of traces to retrieve.",
+            "default": 100
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
+            "$ref": "#/components/schemas/JobSource"
           }
         ],
-        "description": "The options for a data generation job with Traces source used for Evaluation and Fine-tuning scenarios, which includes the agent name and the time window for fetching traces."
+        "description": "Traces source — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
