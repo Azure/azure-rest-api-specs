@@ -1821,6 +1821,29 @@
         }
       }
     },
+    "BaseResource__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the relative ARM name to get job."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the Job ID."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type name for export job.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
     "ApplicationDiscovery": {
       "properties": {
         "hydratedRunAsAccountId": {
@@ -1895,7 +1918,7 @@
     "ExportImportedMachinesJob": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BaseResource"
         }
       ],
       "properties": {
@@ -2038,7 +2061,7 @@
     "ImportMachinesJob": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BaseResource"
         }
       ],
       "properties": {

@@ -13299,6 +13299,30 @@
         ]
       }
     },
+    "BaseResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the relative ARM name to get job."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the Job ID."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type name for export job.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "x-ms-azure-resource": true
+    },
     "BizTalkServer": {
       "type": "object",
       "description": "BizTalkServer in the guest virtual machine.",
@@ -14131,7 +14155,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BaseResource"
         }
       ]
     },
@@ -16303,7 +16327,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BaseResource"
         }
       ]
     },

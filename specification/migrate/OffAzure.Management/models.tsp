@@ -10,6 +10,29 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.OffAzure;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model BaseResource {
+  /**
+   * Gets or sets the relative ARM name to get job.
+   */
+  id: string;
+
+  /**
+   * Gets or sets the Job ID.
+   */
+  name: string;
+
+  /**
+   * Type name for export job.
+   */
+  @visibility(Lifecycle.Read)
+  type: string;
+}
+
 /**
  * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
  */

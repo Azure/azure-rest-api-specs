@@ -153,6 +153,12 @@
 |------|------------|-------|
 | `definitions.V20180501PreviewVmwareRunAsAccountVmwareRunAsAccountCollection__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
+### Changes for `BaseResource`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BaseResource__added` | added | `{"type":"object","properties":{"id":{"type":"string","description":"Gets or sets the relative ARM na...` |
+
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -175,8 +181,8 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ExportImportedMachinesJob.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"}...` |
-| `definitions.ImportMachinesJob.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"}...` |
+| `definitions.ExportImportedMachinesJob.allOf__added` | added | `[{"$ref":"#/definitions/BaseResource"}]` |
+| `definitions.ImportMachinesJob.allOf__added` | added | `[{"$ref":"#/definitions/BaseResource"}]` |
 | `definitions.ImportSqlInventoryJob.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"}...` |
 
 ### Changes for `id`
