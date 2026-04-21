@@ -229,7 +229,12 @@ interface ExpressRouteCircuits {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/stopCircuitLinkFailoverTest")
   stopCircuitLinkFailoverTest is CircuitLinkFailoverOps.ActionAsync<
     ExpressRouteCircuit,
-    ExpressRouteLinkFailoverStopApiParameters,
+    {
+      /**
+       * ExpressRoute Circuit stop simulation parameters supplied to stop failover simulation on express route circuit.
+       */
+      @bodyRoot stopParameters: ExpressRouteLinkFailoverStopApiParameters;
+    },
     void,
     Response = ArmResponse<{
       @body body: {};
@@ -248,7 +253,4 @@ interface ExpressRouteCircuits {
 );
 @@doc(ExpressRouteCircuits.updateTags::parameters.properties,
   "Parameters supplied to update express route circuit tags."
-);
-@@doc(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters.body,
-  "ExpressRoute Circuit stop simulation parameters supplied to stop failover simulation on express route circuit."
 );
