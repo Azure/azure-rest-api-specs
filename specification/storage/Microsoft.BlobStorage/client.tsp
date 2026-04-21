@@ -558,6 +558,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "ImmutabilityPolicyExpiry",
   "go"
 );
+@@clientName(KeyInfo.delegatedUserTid, "DelegatedUserTenantID", "go");
 @@clientName(LeaseDuration, "LeaseDurationType", "go");
 @@clientName(LeaseDurationResponseHeader.duration, "LeaseDuration", "go");
 @@clientName(LeaseState, "LeaseStateType", "go");
@@ -578,10 +579,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@clientName(Storage.Blob.Service.findBlobsByTags, "FilterBlobs", "go");
-@@clientName(UserDelegationKey.signedDelegatedUserTid,
-  "SignedDelegatedUserTID",
-  "go"
-);
+@@clientName(UserDelegationKey.signedDelegatedUserTid, "SignedDelegatedUserTenantID", "go");
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
