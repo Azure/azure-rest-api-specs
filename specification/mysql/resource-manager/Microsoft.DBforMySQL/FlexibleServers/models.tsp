@@ -415,6 +415,69 @@ union replicationMode {
 }
 
 /**
+ * Specifies the health status of the read replica, whether it is healthy or unhealthy.
+ */
+union ReaderEndpointReplicaState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Healthy: "Healthy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unhealthy: "Unhealthy",
+}
+
+/**
+ * Specifies the routing method for a request, whether it is rotational or performance-based.
+ */
+union ReaderEndpointRoutingMethod {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rotational: "Rotational",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Performance: "Performance",
+}
+
+/**
+ * Indicates whether should add source server to reader endpoint in case of failures.
+ */
+union FailoverOnPrimary {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates whether new replicas should automatically be added to the reader endpoint.
+ */
+union AutoAddNewReplicas {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+}
+
+/**
+ * The current provisioning state.
+ */
+union ReaderEndpointProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+}
+
+/**
  * The operation status
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2445,3 +2508,74 @@ union Origin {
 
   string,
 }
+
+/**
+ * Properties of a reader endpoint resource.
+ */
+model ReaderEndpointProperties {
+  /**
+   * The fully qualified domain name of a reader endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  fullyQualifiedDomainName?: string;
+
+  /**
+   * The list of replicas in the reader endpoint of a server.
+   */
+  @identifiers(#["replicaName"])
+  readerEndpointConnections?: ReaderEndpointReplicaInfo[];
+
+  /**
+   * Specifies the routing method when a request comes to reader endpoint.
+   */
+  routingMethod?: ReaderEndpointRoutingMethod;
+
+  /**
+   * Indicates whether should add source server to reader endpoint in case of failures.
+   */
+  failoverOnPrimary?: FailoverOnPrimary;
+
+  /**
+   * Indicates whether new replicas should automatically be added to the reader endpoint.
+   */
+  autoAddNewReplicas?: AutoAddNewReplicas;
+
+  /**
+   * TTL for the caching of DNS based load balancer.
+   */
+  @minValue(10)
+  dnsTtl?: int32;
+
+  /**
+   * The maximum amount of lag allowed between source server and replica server in seconds.
+   */
+  @minValue(60)
+  permissibleReplicationLag?: int32;
+
+  /**
+   * Provisioning state of the reader endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ReaderEndpointProvisioningState;
+}
+
+/**
+ * Information about the replica associated with reader endpoint.
+ */
+model ReaderEndpointReplicaInfo {
+  /**
+   * Name of the replica server.
+   */
+  replicaName?: string;
+
+  /**
+   * Health status of the read replica server
+   */
+  @visibility(Lifecycle.Read)
+  status?: ReaderEndpointReplicaState;
+}
+
+/**
+ * A list of the server's reader endpoints.
+ */
+model ReaderEndpointList is Azure.Core.Page<ReaderEndpoint>;

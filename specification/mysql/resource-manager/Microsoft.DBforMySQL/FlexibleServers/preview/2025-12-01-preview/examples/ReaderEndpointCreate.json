@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "parameters": {
+      "properties": {
+        "autoAddNewReplicas": true,
+        "dnsTtl": 20,
+        "failoverOnPrimary": false,
+        "permissibleReplicationLag": 60,
+        "readerEndpointConnections": [
+          {
+            "replicaName": "replica1.database.mysql.azure.com"
+          },
+          {
+            "replicaName": "replica2.database.mysql.azure.com"
+          }
+        ],
+        "routingMethod": "Rotational"
+      }
+    },
+    "readerEndpointName": "readerEndpoint1",
+    "resourceGroupName": "testrg",
+    "serverName": "mysqltestserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "readerEndpoint1",
+        "type": "Microsoft.DBforMySQL/flexibleServers/readerEndpoints",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/readerEndpoints/readerEndpoint1",
+        "properties": {
+          "autoAddNewReplicas": true,
+          "dnsTtl": 20,
+          "failoverOnPrimary": false,
+          "fullyQualifiedDomainName": "readerEndpoint1.reader.mysql.database.azure.com",
+          "permissibleReplicationLag": 60,
+          "provisioningState": "Provisioning",
+          "readerEndpointConnections": [
+            {
+              "replicaName": "replica1.database.mysql.azure.com",
+              "status": "Healthy"
+            },
+            {
+              "replicaName": "replica2.database.mysql.azure.com",
+              "status": "Healthy"
+            }
+          ],
+          "routingMethod": "Rotational"
+        },
+        "systemData": {
+          "createdAt": "2025-07-21T16:41:33.937Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-07-21T16:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "readerEndpoint1",
+        "type": "Microsoft.DBforMySQL/flexibleServers/readerEndpoints",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/readerEndpoints/readerEndpoint1",
+        "properties": {
+          "autoAddNewReplicas": true,
+          "dnsTtl": 20,
+          "failoverOnPrimary": false,
+          "fullyQualifiedDomainName": "readerEndpoint1.reader.mysql.database.azure.com",
+          "permissibleReplicationLag": 60,
+          "provisioningState": "Provisioning",
+          "readerEndpointConnections": [
+            {
+              "replicaName": "replica1.database.mysql.azure.com",
+              "status": "Healthy"
+            },
+            {
+              "replicaName": "replica2.database.mysql.azure.com",
+              "status": "Healthy"
+            }
+          ],
+          "routingMethod": "Rotational"
+        },
+        "systemData": {
+          "createdAt": "2025-07-21T16:41:33.937Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-07-21T16:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview"
+      }
+    }
+  },
+  "operationId": "ReaderEndpoints_UpdatePut",
+  "title": "Create a server's Reader Endpoint"
+}
