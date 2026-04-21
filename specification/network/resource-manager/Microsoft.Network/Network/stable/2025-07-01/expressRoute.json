@@ -1574,38 +1574,8 @@
             "in": "query",
             "description": "The type of failover test",
             "required": true,
-            "type": "string",
-            "enum": [
-              "SingleSiteFailover",
-              "MultiSiteFailover",
-              "All",
-              "LinkFailover"
-            ],
-            "x-ms-enum": {
-              "name": "ExpressRouteFailoverTestType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "SingleSiteFailover",
-                  "value": "SingleSiteFailover",
-                  "description": "Single site failover test type."
-                },
-                {
-                  "name": "MultiSiteFailover",
-                  "value": "MultiSiteFailover",
-                  "description": "Multi site failover test type."
-                },
-                {
-                  "name": "All",
-                  "value": "All",
-                  "description": "All failover test types."
-                },
-                {
-                  "name": "LinkFailover",
-                  "value": "LinkFailover",
-                  "description": "Link failover test type."
-                }
-              ]
+            "schema": {
+              "$ref": "./common.json#/definitions/ExpressRouteFailoverTestType"
             }
           },
           {
@@ -1693,26 +1663,8 @@
             "in": "query",
             "description": "The type of link on which failover test was performed",
             "required": true,
-            "type": "string",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
-            "x-ms-enum": {
-              "name": "ExpressRouteFailoverLinkType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Primary",
-                  "value": "Primary",
-                  "description": "Primary link type."
-                },
-                {
-                  "name": "Secondary",
-                  "value": "Secondary",
-                  "description": "Secondary link type."
-                }
-              ]
+            "schema": {
+              "$ref": "./common.json#/definitions/ExpressRouteFailoverLinkType"
             }
           },
           {
@@ -1720,26 +1672,8 @@
             "in": "query",
             "description": "The type of maintenance test category",
             "required": true,
-            "type": "string",
-            "enum": [
-              "BgpDisconnect",
-              "ASPathPrepend"
-            ],
-            "x-ms-enum": {
-              "name": "MaintenanceTestCategory",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "BgpDisconnect",
-                  "value": "BgpDisconnect",
-                  "description": "BGP disconnect maintenance test."
-                },
-                {
-                  "name": "ASPathPrepend",
-                  "value": "ASPathPrepend",
-                  "description": "AS path prepend maintenance test."
-                }
-              ]
+            "schema": {
+              "$ref": "./common.json#/definitions/MaintenanceTestCategory"
             }
           }
         ],
@@ -2753,26 +2687,8 @@
             "in": "query",
             "description": "The type of link on which failover test was performed",
             "required": true,
-            "type": "string",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
-            "x-ms-enum": {
-              "name": "ExpressRouteFailoverLinkType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Primary",
-                  "value": "Primary",
-                  "description": "Primary link type."
-                },
-                {
-                  "name": "Secondary",
-                  "value": "Secondary",
-                  "description": "Secondary link type."
-                }
-              ]
+            "schema": {
+              "$ref": "./common.json#/definitions/ExpressRouteFailoverLinkType"
             }
           },
           {
@@ -2780,35 +2696,14 @@
             "in": "query",
             "description": "The type of maintenance that can occur during an ExpressRoute Circuit failover test",
             "required": true,
-            "type": "string",
-            "enum": [
-              "BgpDisconnect",
-              "ASPathPrepend"
-            ],
-            "x-ms-enum": {
-              "name": "MaintenanceTestCategory",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "BgpDisconnect",
-                  "value": "BgpDisconnect",
-                  "description": "BGP disconnect maintenance test."
-                },
-                {
-                  "name": "ASPathPrepend",
-                  "value": "ASPathPrepend",
-                  "description": "AS path prepend maintenance test."
-                }
-              ]
+            "schema": {
+              "$ref": "./common.json#/definitions/MaintenanceTestCategory"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2925,10 +2820,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
