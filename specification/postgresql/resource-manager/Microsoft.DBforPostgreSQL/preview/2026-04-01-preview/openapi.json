@@ -3112,7 +3112,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MajorVersionUpgradePrecheckResource"
+              "$ref": "#/definitions/MajorVersionUpgradePrecheckResponse"
             }
           },
           "202": {
@@ -3148,7 +3148,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/MajorVersionUpgradePrecheckResource"
+          "final-state-schema": "#/definitions/MajorVersionUpgradePrecheckResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -7407,6 +7407,25 @@
       "required": [
         "subscriptionId"
       ]
+    },
+    "MajorVersionUpgradePrecheckResponse": {
+      "type": "object",
+      "description": "Response model for creating a major version upgrade precheck.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The precheck validation ID."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the precheck was created."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the precheck validation."
+        }
+      }
     },
     "MetricSpecification": {
       "type": "object",

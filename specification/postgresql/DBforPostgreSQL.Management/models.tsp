@@ -3167,7 +3167,6 @@ model DataEncryption {
   @doc("Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups.")
   @added(Versions.v2026_04_01)
   geoBackupFederatedIdentityClientId?: string;
-  
 }
 
 /**
@@ -4133,6 +4132,19 @@ model MajorVersionUpgradePrecheckResourceProperties {
 model MajorVersionUpgradePrecheckCreateRequest {
   @doc("The target major version to upgrade to.")
   targetVersion: PostgresMajorVersion;
+}
+
+@doc("Response model for creating a major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+model MajorVersionUpgradePrecheckResponse {
+  @doc("The precheck validation ID.")
+  name?: string;
+
+  @doc("The time when the precheck was created.")
+  createTime?: utcDateTime;
+
+  @doc("The status of the precheck validation.")
+  status?: string;
 }
 
 @doc("Maintenance event resource for a PostgreSQL flexible server.")

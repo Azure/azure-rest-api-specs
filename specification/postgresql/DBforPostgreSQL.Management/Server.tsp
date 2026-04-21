@@ -223,9 +223,9 @@ interface Servers {
   majorVersionUpgradePrecheck is ArmResourceActionAsyncBase<
     Server,
     MajorVersionUpgradePrecheckCreateRequest,
-    ArmResponse<MajorVersionUpgradePrecheckResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MajorVersionUpgradePrecheckResource> &
+    ArmResponse<MajorVersionUpgradePrecheckResponse> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MajorVersionUpgradePrecheckResponse> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MajorVersionUpgradePrecheckResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MajorVersionUpgradePrecheckResponse>
   >;
 }
 
