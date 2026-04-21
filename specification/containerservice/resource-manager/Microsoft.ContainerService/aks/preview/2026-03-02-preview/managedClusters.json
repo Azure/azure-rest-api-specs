@@ -13365,7 +13365,7 @@
     },
     "NodeDisruptionPolicy": {
       "type": "string",
-      "description": "The policy configuration for when to allow certain operations which require node reimage and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy\"",
+      "description": "The policy configuration for when to allow certain operations which require node re-image and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy\"",
       "enum": [
         "Allow",
         "AllowDuringMaintenanceWindow",
@@ -13378,17 +13378,17 @@
           {
             "name": "Allow",
             "value": "Allow",
-            "description": "Allows operations that will require node reimage and trigger redeployment."
+            "description": "Allows operations that will require node re-image and trigger redeployment."
           },
           {
             "name": "AllowDuringMaintenanceWindow",
             "value": "AllowDuringMaintenanceWindow",
-            "description": "Blocks certain operations that will require node reimage and trigger redeployment unless within the aksManagedNodeOSUpgradeSchedule maintenance window. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy . For more information on using the aksManagedNodeOSUpgradeSchedule maintenance window, please see https://learn.microsoft.com/azure/aks/planned-maintenance?tabs=azure-cli"
+            "description": "Blocks certain operations that will require node re-image and trigger redeployment unless within the aksManagedNodeOSUpgradeSchedule maintenance window. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy . For more information on using the aksManagedNodeOSUpgradeSchedule maintenance window, please see https://learn.microsoft.com/azure/aks/planned-maintenance?tabs=azure-cli"
           },
           {
             "name": "Block",
             "value": "Block",
-            "description": "Blocks certain operations that will require node reimage and trigger redeployment. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy"
+            "description": "Blocks certain operations that will require node re-image and trigger redeployment. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy"
           }
         ]
       }
@@ -13399,7 +13399,7 @@
       "properties": {
         "nodeDisruptionPolicy": {
           "$ref": "#/definitions/NodeDisruptionPolicy",
-          "description": "The policy configuration for when to allow certain operations which require node reimage and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy\""
+          "description": "The policy configuration for when to allow certain operations which require node re-image and trigger redeployment. For example, some operations, such as updating the .properties.ManagedClusterSecurityProfile.customCATrustCertificates field on an existing managed cluster, trigger rolling updates of the nodes. This setting allows control over when such updates are accepted. The default is 'Allow'. For a full list of covered operations see aka.ms/aks/nodedisruptionpolicy\""
         }
       }
     },
