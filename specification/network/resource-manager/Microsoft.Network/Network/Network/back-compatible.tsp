@@ -1291,6 +1291,9 @@ using TypeSpec.Versioning;
 @@clientName(VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
   "stopParameters"
 );
+@@clientName(ExpressRouteGateways.stopSiteFailoverTest::parameters.body,
+  "stopParameters"
+);
 @@clientName(VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
   "request"
 );

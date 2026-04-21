@@ -861,6 +861,460 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails": {
+      "post": {
+        "operationId": "ExpressRouteGateways_GetFailoverAllTestsDetails",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "description": "Retrieves the details of all the failover tests performed on the ExpressRoute gateway for different peering locations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "description": "The name of the ExpressRoute gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of failover test.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fetchLatest",
+            "in": "query",
+            "description": "Fetch only the latest tests for each peering location.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./networkGateway.json#/definitions/ExpressRouteFailoverTestDetails"
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayGetFailoverAllTestsDetails": {
+            "$ref": "./examples/ExpressRouteGatewayGetFailoverAllTestsDetails.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./networkGateway.json#/definitions/ExpressRouteFailoverTestDetailsArray"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails": {
+      "post": {
+        "operationId": "ExpressRouteGateways_GetFailoverSingleTestDetails",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "description": "Retrieves the details of a particular failover test performed on the ExpressRoute gateway based on the test Guid.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "description": "The name of the ExpressRoute gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "description": "Peering location of the test.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverTestId",
+            "in": "query",
+            "description": "The unique Guid value which identifies the test.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./networkGateway.json#/definitions/ExpressRouteFailoverSingleTestDetails"
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayGetFailoverSingleTestDetails": {
+            "$ref": "./examples/ExpressRouteGatewayGetFailoverSingleTestDetails.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./networkGateway.json#/definitions/ExpressRouteFailoverSingleTestDetailsArray"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation": {
+      "post": {
+        "operationId": "ExpressRouteGateways_GetResiliencyInformation",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "description": "Retrieves the resiliency information for the ExpressRoute gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "description": "The name of the ExpressRoute gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "description": "Whether to attempt a refresh of the resiliency information.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./networkGateway.json#/definitions/GatewayResiliencyInformation"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayGetResiliencyInformation": {
+            "$ref": "./examples/ExpressRouteGatewayGetResiliencyInformation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./networkGateway.json#/definitions/GatewayResiliencyInformation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation": {
+      "post": {
+        "operationId": "ExpressRouteGateways_GetRoutesInformation",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "description": "Retrieves the route sets information for the ExpressRoute gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "description": "The name of the ExpressRoute gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "description": "Whether to attempt a refresh of the route sets.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./networkGateway.json#/definitions/GatewayRouteSetsInformation"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayGetRoutesInformation": {
+            "$ref": "./examples/ExpressRouteGatewayGetRoutesInformation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./networkGateway.json#/definitions/GatewayRouteSetsInformation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest": {
+      "post": {
+        "operationId": "ExpressRouteGateways_StartSiteFailoverTest",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "description": "Starts failover simulation on the ExpressRoute gateway for the specified peering location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "description": "The name of the ExpressRoute gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "description": "Peering location of the test.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayStartSiteFailoverTest": {
+            "$ref": "./examples/ExpressRouteGatewayStartSiteFailoverTest.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./common.json#/definitions/stringApplicationJson"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest": {
+      "post": {
+        "operationId": "ExpressRouteGateways_StopSiteFailoverTest",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "description": "Stops failover simulation on the ExpressRoute gateway for the specified peering location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "description": "The name of the ExpressRoute gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stopParameters",
+            "in": "body",
+            "description": "Parameters supplied to stop the failover simulation on the ExpressRoute gateway.",
+            "required": true,
+            "schema": {
+              "$ref": "./networkGateway.json#/definitions/ExpressRouteFailoverStopApiParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayStopSiteFailoverTest": {
+            "$ref": "./examples/ExpressRouteGatewayStopSiteFailoverTest.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./common.json#/definitions/stringApplicationJson"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections": {
       "get": {
         "operationId": "NetworkVirtualApplianceConnections_List",

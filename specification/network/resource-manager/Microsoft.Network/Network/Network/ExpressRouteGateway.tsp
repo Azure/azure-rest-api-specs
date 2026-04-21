@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -218,6 +220,152 @@ interface ExpressRouteGateways {
     ArmResponse<ExpressRouteConnectionList>,
     Error = CloudError
   >;
+
+  /**
+   * Retrieves the details of all the failover tests performed on the ExpressRoute gateway for different peering locations.
+   */
+  @tag("ExpressRouteGateways")
+  @action("getFailoverAllTestsDetails")
+  @added(Versions.v2025_07_01)
+  getFailoverAllTestsDetails is ArmResourceActionAsync<
+    ExpressRouteGateway,
+    void,
+    Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: ExpressRouteFailoverAllTestDetails;
+    },
+    Parameters = {
+      /**
+       * The type of failover test.
+       */
+      @query("type")
+      type?: string;
+
+      /**
+       * Fetch only the latest tests for each peering location.
+       */
+      @query("fetchLatest")
+      fetchLatest?: boolean;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteFailoverAllTestDetails> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Retrieves the details of a particular failover test performed on the ExpressRoute gateway based on the test Guid.
+   */
+  @tag("ExpressRouteGateways")
+  @added(Versions.v2025_07_01)
+  getFailoverSingleTestDetails is ArmResourceActionAsync<
+    ExpressRouteGateway,
+    void,
+    Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: ExpressRouteFailoverSingleTestDetailsObject;
+    },
+    Parameters = {
+      /**
+       * Peering location of the test.
+       */
+      @query("peeringLocation")
+      peeringLocation: string;
+
+      /**
+       * The unique Guid value which identifies the test.
+       */
+      @query("failoverTestId")
+      failoverTestId: string;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteFailoverSingleTestDetailsObject> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Starts failover simulation on the ExpressRoute gateway for the specified peering location.
+   */
+  @tag("ExpressRouteGateways")
+  @action("startSiteFailoverTest")
+  @added(Versions.v2025_07_01)
+  startSiteFailoverTest is ArmResourceActionAsync<
+    ExpressRouteGateway,
+    void,
+    {
+      @body body: stringApplicationJson;
+    },
+    Parameters = {
+      /**
+       * Peering location of the test.
+       */
+      @query("peeringLocation")
+      peeringLocation: string;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Stops failover simulation on the ExpressRoute gateway for the specified peering location.
+   */
+  @tag("ExpressRouteGateways")
+  @action("stopSiteFailoverTest")
+  @added(Versions.v2025_07_01)
+  stopSiteFailoverTest is ArmResourceActionAsync<
+    ExpressRouteGateway,
+    ExpressRouteFailoverStopApiParameters,
+    {
+      @body body: stringApplicationJson;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Retrieves the route sets information for the ExpressRoute gateway.
+   */
+  @tag("ExpressRouteGateways")
+  @action("getRoutesInformation")
+  @added(Versions.v2025_07_01)
+  getRoutesInformation is ArmResourceActionAsync<
+    ExpressRouteGateway,
+    void,
+    ArmResponse<GatewayRouteSetsInformation>,
+    Parameters = {
+      /**
+       * Whether to attempt a refresh of the route sets.
+       */
+      @query("attemptRefresh")
+      attemptRefresh?: boolean;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = GatewayRouteSetsInformation> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Retrieves the resiliency information for the ExpressRoute gateway.
+   */
+  @tag("ExpressRouteGateways")
+  @action("getResiliencyInformation")
+  @added(Versions.v2025_07_01)
+  getResiliencyInformation is ArmResourceActionAsync<
+    ExpressRouteGateway,
+    void,
+    ArmResponse<GatewayResiliencyInformation>,
+    Parameters = {
+      /**
+       * Whether to attempt a refresh of the resiliency information.
+       */
+      @query("attemptRefresh")
+      attemptRefresh?: boolean;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = GatewayResiliencyInformation> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 }
 
 @@doc(ExpressRouteGateway.name, "The name of the ExpressRoute gateway.");
@@ -232,4 +380,7 @@ interface ExpressRouteGateways {
 );
 @@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "Parameters required in an ExpressRouteConnection PUT operation."
+);
+@@doc(ExpressRouteGateways.stopSiteFailoverTest::parameters.body,
+  "Parameters supplied to stop the failover simulation on the ExpressRoute gateway."
 );

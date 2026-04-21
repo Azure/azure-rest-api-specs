@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "peeringLocation": "Vancouver",
+    "failoverTestId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "expressRouteGatewayName": "ergw1"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "peeringLocation": "Hong Kong",
+          "startTimeUtc": "2026-02-11T07:37:04Z",
+          "endTimeUtc": "2026-02-11T08:41:50Z",
+          "status": "Completed",
+          "wasSimulationSuccessful": true,
+          "redundantRoutes": [
+            {
+              "peeringLocations": ["Atlanta", "Silicon Valley"],
+              "routes": ["10.0.0.0/24"]
+            }
+          ],
+          "nonRedundantRoutes": ["10.10.0.0/16", "10.11.0.0/24"],
+          "failoverConnectionDetails": [
+            {
+              "failoverConnectionName": "conn1",
+              "failoverLocation": "Hong Kong2",
+              "isVerified": true
+            }
+          ]
+        }
+      ]
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    }
+  },
+  "operationId": "ExpressRouteGateways_GetFailoverSingleTestDetails",
+  "title": "ExpressRouteGatewayGetFailoverSingleTestDetails"
+}
