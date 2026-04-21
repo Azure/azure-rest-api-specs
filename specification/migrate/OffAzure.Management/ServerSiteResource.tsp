@@ -53,17 +53,13 @@ interface ServerSiteResources {
   /**
    * Get a ServerSiteResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_Get")
   get is ArmResourceRead<ServerSiteResource>;
 
   /**
    * Create a ServerSiteResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ServerSiteResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ServerSiteResource> &
@@ -73,9 +69,7 @@ interface ServerSiteResources {
   /**
    * Update a ServerSiteResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ServerSiteResource,
@@ -85,33 +79,25 @@ interface ServerSiteResources {
   /**
    * Delete a ServerSiteResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_Delete")
   delete is ArmResourceDeleteSync<ServerSiteResource>;
 
   /**
    * List ServerSiteResource resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ServerSiteResource>;
 
   /**
    * List ServerSiteResource resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_ListBySubscription")
   listBySubscription is ArmListBySubscription<ServerSiteResource>;
 
   /**
    * Get the error summary for a server site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_ComputeErrorSummary")
   computeErrorSummary is ArmResourceActionSync<
     ServerSiteResource,
     unknown,
@@ -121,9 +107,7 @@ interface ServerSiteResources {
   /**
    * Get a serve site usage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_Computeusage")
   computeusage is ArmResourceActionSync<
     ServerSiteResource,
     unknown,
@@ -134,9 +118,7 @@ interface ServerSiteResources {
    * Method to generate report containing
    *             machine and the deep discovery of the application installed in the machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_ExportApplications")
   exportApplications is ArmResourceActionAsync<
     ServerSiteResource,
     unknown,
@@ -147,9 +129,7 @@ interface ServerSiteResources {
    * Method to generate report containing
    *             machine and the errors encountered during guest discovery of the machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_ExportMachineErrors")
   exportMachineErrors is ArmResourceActionAsync<
     ServerSiteResource,
     ExportMachineErrorsRequest,
@@ -159,9 +139,7 @@ interface ServerSiteResources {
   /**
    * Method to get site health summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_ListHealthSummary")
   listHealthSummary is ArmResourceActionSync<
     ServerSiteResource,
     void,
@@ -171,9 +149,7 @@ interface ServerSiteResources {
   /**
    * Operation to refresh a site
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_RefreshSite")
   refreshSite is ArmResourceActionAsync<
     ServerSiteResource,
     void,
@@ -183,9 +159,7 @@ interface ServerSiteResources {
   /**
    * Method to get site usage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_Summary")
   summary is ArmResourceActionSync<
     ServerSiteResource,
     void,
@@ -196,9 +170,7 @@ interface ServerSiteResources {
    * Method to enable disable dependency map status for machines
    *             in a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_UpdateDependencyMapStatus")
   updateDependencyMapStatus is ArmResourceActionAsync<
     ServerSiteResource,
     UpdateMachineDepMapStatus,
@@ -208,9 +180,7 @@ interface ServerSiteResources {
   /**
    * Operation to update custom properties for servers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSitesController")
-  @operationId("ServerSitesController_UpdateProperties")
   updateProperties is ArmResourceActionAsync<
     ServerSiteResource,
     MachineMetadataCollection,
@@ -220,9 +190,7 @@ interface ServerSiteResources {
   /**
    * API to list client group members for the selected client group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerDependencyMapController")
-  @operationId("ServerDependencyMapController_ClientGroupMembers")
   clientGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
@@ -232,9 +200,7 @@ interface ServerSiteResources {
   /**
    * API to generate report containing agentless dependencies.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerDependencyMapController")
-  @operationId("ServerDependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
@@ -244,9 +210,7 @@ interface ServerSiteResources {
   /**
    * API to generate coarse map for the list of machines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerDependencyMapController")
-  @operationId("ServerDependencyMapController_GenerateCoarseMap")
   generateCoarseMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsScopeMapRequest,
@@ -256,9 +220,7 @@ interface ServerSiteResources {
   /**
    * API to generate detailed map for a selected machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerDependencyMapController")
-  @operationId("ServerDependencyMapController_GenerateDetailedMap")
   generateDetailedMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
@@ -268,9 +230,7 @@ interface ServerSiteResources {
   /**
    * API to list server group members for the selected server group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerDependencyMapController")
-  @operationId("ServerDependencyMapController_ServerGroupMembers")
   serverGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
@@ -280,9 +240,7 @@ interface ServerSiteResources {
   /**
    * A operation status resource belonging to a site resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerOperationsStatusController")
-  @operationId("ServerOperationsStatusController_GetServerSiteOperationsStatus")
   getServerSiteOperationsStatus is ServerSiteOperationsStatusOps.Read<
     OperationStatus,
     OverrideErrorType = ErrorResponse

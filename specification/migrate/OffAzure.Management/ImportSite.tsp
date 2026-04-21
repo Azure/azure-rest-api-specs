@@ -27,58 +27,44 @@ interface ImportSites {
   /**
    * Get a ImportSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_Get")
   get is ArmResourceRead<ImportSite>;
 
   /**
    * Create a ImportSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_Create")
   create is ArmResourceCreateOrReplaceSync<ImportSite>;
 
   /**
    * Update a ImportSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ImportSite, PatchModel = ImportSiteUpdate>;
 
   /**
    * Delete a ImportSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_Delete")
   delete is ArmResourceDeleteSync<ImportSite>;
 
   /**
    * Get all import sites.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ImportSite>;
 
   /**
    * List ImportSite resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_ListBySubscription")
   listBySubscription is ArmListBySubscription<ImportSite>;
 
   /**
    * Deletes the imported machines for site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_DeleteImportedMachines")
   deleteImportedMachines is ArmResourceActionSync<
     ImportSite,
     unknown,
@@ -88,9 +74,7 @@ interface ImportSites {
   /**
    * Method to export  a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_ExportUri")
   exportUri is ArmResourceActionSync<
     ImportSite,
     SasUriResponse,
@@ -100,9 +84,7 @@ interface ImportSites {
   /**
    * Method to import a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportSitesController")
-  @operationId("ImportSitesController_ImportUri")
   importUri is ArmResourceActionSync<
     ImportSite,
     SasUriResponse,

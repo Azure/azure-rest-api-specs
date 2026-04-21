@@ -53,60 +53,46 @@ interface VmwareSites {
   /**
    * Get a VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_Get")
   get is ArmResourceRead<VmwareSite>;
 
   /**
    * Create a VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_Create")
   create is ArmResourceCreateOrReplaceSync<VmwareSite>;
 
   /**
    * Update a VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<VmwareSite, PatchModel = VmwareSiteUpdate>;
 
   /**
    * Delete a VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_Delete")
   delete is ArmResourceDeleteSync<VmwareSite>;
 
   /**
    * Get all the vmware sites in the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get all vmware sites.")
   @tag("SitesController")
-  @operationId("SitesController_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<VmwareSite>;
 
   /**
    * Get all the vmware sites in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get all vmware sites.")
   @tag("SitesController")
-  @operationId("SitesController_ListBySubscription")
   listBySubscription is ArmListBySubscription<VmwareSite>;
 
   /**
    * Method to get site error summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_ComputeErrorSummary")
   computeErrorSummary is ArmResourceActionSync<
     VmwareSite,
     unknown,
@@ -116,9 +102,7 @@ interface VmwareSites {
   /**
    * Method to get site error summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_Computeusage")
   computeusage is ArmResourceActionSync<
     VmwareSite,
     unknown,
@@ -129,9 +113,7 @@ interface VmwareSites {
    * Method to generate report containing
    *             machine and the deep discovery of the application installed in the machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_ExportApplications")
   exportApplications is ArmResourceActionAsync<
     VmwareSite,
     unknown,
@@ -142,9 +124,7 @@ interface VmwareSites {
    * Method to generate report containing
    *             machine and the errors encountered during guest discovery of the machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_ExportMachineErrors")
   exportMachineErrors is ArmResourceActionAsync<
     VmwareSite,
     ExportMachineErrorsRequest,
@@ -155,9 +135,7 @@ interface VmwareSites {
    * Method to generate report containing
    *             machine and the deep discovery of the application installed in the machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_ExportMachines")
   exportMachines is ArmResourceActionAsync<
     VmwareSite,
     ExportMachinesRequest,
@@ -167,9 +145,7 @@ interface VmwareSites {
   /**
    * Method to get site health summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_ListHealthSummary")
   listHealthSummary is ArmResourceActionSync<
     VmwareSite,
     void,
@@ -179,9 +155,7 @@ interface VmwareSites {
   /**
    * Method to get site usage/summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SitesController")
-  @operationId("SitesController_Summary")
   summary is ArmResourceActionSync<
     VmwareSite,
     void,
@@ -191,9 +165,7 @@ interface VmwareSites {
   /**
    * API to list client group members for the selected client group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DependencyMapController")
-  @operationId("DependencyMapController_ClientGroupMembers")
   clientGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
@@ -203,9 +175,7 @@ interface VmwareSites {
   /**
    * API to generate report containing agentless dependencies.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DependencyMapController")
-  @operationId("DependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
@@ -215,9 +185,7 @@ interface VmwareSites {
   /**
    * API to generate coarse map for the list of machines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DependencyMapController")
-  @operationId("DependencyMapController_GenerateCoarseMap")
   generateCoarseMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
@@ -227,9 +195,7 @@ interface VmwareSites {
   /**
    * API to generate detailed map for a selected machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DependencyMapController")
-  @operationId("DependencyMapController_GenerateDetailedMap")
   generateDetailedMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
@@ -239,9 +205,7 @@ interface VmwareSites {
   /**
    * API to list server group members for the selected server group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DependencyMapController")
-  @operationId("DependencyMapController_ServerGroupMembers")
   serverGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
@@ -251,9 +215,7 @@ interface VmwareSites {
   /**
    * A operation status resource belonging to a site resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwareOperationsStatus")
-  @operationId("VmwareOperationsStatus_GetVmwareOperationStatus")
   getVmwareOperationStatus is VmwareSiteOperationsStatusOps.Read<
     OperationStatus,
     OverrideErrorType = ErrorResponse
@@ -264,9 +226,7 @@ interface VmwareSites {
    *             in a
    * site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwarePropertiesController")
-  @operationId("VmwarePropertiesController_UpdateDependencyMapStatus")
   updateDependencyMapStatus is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineDepMapStatus,
@@ -276,9 +236,7 @@ interface VmwareSites {
   /**
    * Method to update properties for machines   in a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwarePropertiesController")
-  @operationId("VmwarePropertiesController_UpdateProperties")
   updateProperties is ArmResourceActionAsync<
     VmwareSite,
     MachineMetadataCollection,
@@ -289,9 +247,7 @@ interface VmwareSites {
    * Method to associate Run as account to machine
    *             in a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwarePropertiesController")
-  @operationId("VmwarePropertiesController_UpdateRunAsAccount")
   updateRunAsAccount is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineRunAsAccount,
@@ -302,9 +258,7 @@ interface VmwareSites {
    * Method to associate Run as account to machine
    *             in a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwarePropertiesController")
-  @operationId("VmwarePropertiesController_UpdateTags")
   updateTags is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineTags,
