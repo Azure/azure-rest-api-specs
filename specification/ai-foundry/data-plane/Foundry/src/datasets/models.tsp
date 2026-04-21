@@ -114,3 +114,9 @@ model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
 }
+
+@doc("Request to fetch credentials for an asset.")
+model AssetCredentialRequest {
+  @doc("Blob URI of the asset to fetch credentials for.")
+  blobUri: url;
+}

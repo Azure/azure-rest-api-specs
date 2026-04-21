@@ -157,7 +157,7 @@ interface Evaluators {
 
       @doc("The credential request parameters")
       @Http.bodyRoot
-      credentialRequest: EvaluatorCredentialRequest;
+      credentialRequest: AssetCredentialRequest;
 
       @doc("The specific version id of the EvaluatorVersion to operate on.")
       @Rest.segment("versions")

@@ -126,11 +126,7 @@ model EvaluatorVersion {
   ...AssetBase;
 }
 
-@doc("Request body for getting evaluator credentials")
-model EvaluatorCredentialRequest {
-  @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
-  blobUri: url;
-}
+
 
 @doc("Evaluator Metric")
 model EvaluatorMetric {

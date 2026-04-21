@@ -43,15 +43,6 @@ model DerivedModelInformation {
   baseModel: string;
 }
 
-@doc("Request to fetch credentials for a model asset.")
-model ModelAssetCredentialRequest {
-  @doc("Blob URI of the asset to fetch credentials for.")
-  blobUri: url;
-
-  @doc("If true, generates blob-level read SAS instead of container-level.")
-  generateBlobLevelReadSas?: boolean;
-}
-
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;
