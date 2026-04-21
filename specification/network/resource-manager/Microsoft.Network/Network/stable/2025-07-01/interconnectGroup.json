@@ -627,20 +627,6 @@
         }
       }
     },
-    "LogicalToPhysicalAvailabilityZoneMapping": {
-      "type": "object",
-      "description": "Logical to physical availability zone mapping.",
-      "properties": {
-        "logicalZone": {
-          "type": "string",
-          "description": "The logical availability zone."
-        },
-        "physicalZone": {
-          "type": "string",
-          "description": "The physical availability zone."
-        }
-      }
-    },
     "Subgroup": {
       "type": "object",
       "description": "A subgroup in an interconnect group.",
@@ -734,11 +720,6 @@
         "internalSubgroupId": {
           "type": "string",
           "description": "The unique identifier defined by downstream services.",
-          "readOnly": true
-        },
-        "logicalToPhysicalAvailabilityZoneMapping": {
-          "$ref": "#/definitions/LogicalToPhysicalAvailabilityZoneMapping",
-          "description": "The availability zone mapping for the subgroup.",
           "readOnly": true
         },
         "interconnectBlock": {
