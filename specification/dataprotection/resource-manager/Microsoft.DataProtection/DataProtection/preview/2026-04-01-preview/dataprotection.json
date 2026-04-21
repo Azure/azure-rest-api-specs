@@ -1781,7 +1781,7 @@
           }
         },
         "x-ms-examples": {
-          "ResumeProtection": {
+          "Resume Protection OF BI with User Assigned Identity": {
             "$ref": "./examples/BackupInstanceOperations/ResumeProtection.json"
           }
         },
@@ -6855,8 +6855,10 @@
         },
         "blobSasKey": {
           "type": "string",
+          "format": "password",
           "description": "SAS key to access the blob.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "excelFileBlobUrl": {
           "type": "string",
@@ -6865,8 +6867,10 @@
         },
         "excelFileBlobSasKey": {
           "type": "string",
+          "format": "password",
           "description": "SAS key to access the ExcelFile blob.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
