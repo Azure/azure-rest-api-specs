@@ -122,6 +122,7 @@ interface InterconnectGroups {
   /**
    * Gets node availability for all subgroups in the specified interconnect group.
    */
+  @action("nodeAvailability")
   getNodeAvailability is ArmResourceActionAsync<
     InterconnectGroup,
     void,
