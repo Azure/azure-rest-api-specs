@@ -618,7 +618,7 @@ union TableSubTypeEnum {
  * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union ProvisioningStateEnum {
+union OperationalInsightsTableProvisioningState {
   string,
 
   /**
@@ -2258,7 +2258,7 @@ model TableProperties {
    * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: OperationalInsightsTableProvisioningState;
 
   /**
    * True - Value originates from workspace retention in days, False - Customer specific.
@@ -2958,7 +2958,6 @@ model AccessRulePropertiesSubscriptionsItem {
   id?: Azure.Core.armResourceIdentifier;
 }
 
-
 /**
  * Summary rule properties.
  */
@@ -2994,7 +2993,7 @@ model SummaryLogsProperties {
    * Summary rule is in provisioning state. If set to 'updating' or 'deleting', indicates a resource lock due to an ongoing operation, preventing any update to the Summary rule until the operation is complete.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: OperationalInsightsTableProvisioningState;
 
   /**
    * Rule definition parameters.
