@@ -23,12 +23,13 @@ model ServerJob is Azure.ResourceManager.ProxyResource<JobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServerJobs {
   /**
    * Get a ServerJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerJobsController")
   @operationId("ServerJobsController_Get")
   get is ArmResourceRead<ServerJob>;
 
@@ -36,6 +37,7 @@ interface ServerJobs {
    * List ServerJob resources by ServerSiteResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerJobsController")
   @operationId("ServerJobsController_ListByServerSiteResource")
   listByServerSiteResource is ArmResourceListByParent<ServerJob>;
 }

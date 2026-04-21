@@ -22,7 +22,7 @@ model MasterSite
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MasterSitesOperationsStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -46,12 +46,14 @@ interface MasterSitesOperationsStatusOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MasterSites {
   /**
    * Get a MasterSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Method to get a master site.")
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_Get")
   get is ArmResourceRead<MasterSite>;
 
@@ -59,6 +61,7 @@ interface MasterSites {
    * Method to create or update a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     MasterSite,
@@ -70,6 +73,7 @@ interface MasterSites {
    * Method to update an existing site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<MasterSite, PatchModel = MasterSiteUpdate>;
@@ -78,6 +82,7 @@ interface MasterSites {
    * Method to delete a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_Delete")
   delete is ArmResourceDeleteSync<MasterSite>;
 
@@ -85,6 +90,8 @@ interface MasterSites {
    * Get all the sites in the resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get all sites.")
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<MasterSite>;
 
@@ -92,6 +99,8 @@ interface MasterSites {
    * List MasterSite resources by subscription ID
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get all the sites in the subscription.")
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_ListBySubscription")
   listBySubscription is ArmListBySubscription<MasterSite>;
 
@@ -99,6 +108,7 @@ interface MasterSites {
    * Method to get error summary from master site for an appliance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_ErrorSummary")
   errorSummary is ArmResourceActionSync<
     MasterSite,
@@ -110,6 +120,7 @@ interface MasterSites {
    * Method to refresh arc status from master site for an appliance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MasterSitesController")
   @operationId("MasterSitesController_RefreshArcStatus")
   refreshArcStatus is ArmResourceActionAsync<
     MasterSite,
@@ -121,6 +132,7 @@ interface MasterSites {
    * A operation status resource belonging to a master site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MasterSitesOperationsStatusController")
   @operationId("MasterSitesOperationsStatusController_GetVmwareOperationStatus")
   getVmwareOperationStatus is MasterSitesOperationsStatusOps.Read<
     OperationStatus,

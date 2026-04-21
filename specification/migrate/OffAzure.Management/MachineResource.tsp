@@ -24,12 +24,13 @@ model MachineResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MachineResources {
   /**
    * Get a MachineResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MachinesController")
   @operationId("MachinesController_Get")
   get is ArmResourceRead<MachineResource>;
 
@@ -37,6 +38,7 @@ interface MachineResources {
    * Update a MachineResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MachinesController")
   @operationId("MachinesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -48,6 +50,7 @@ interface MachineResources {
    * List MachineResource resources by VmwareSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MachinesController")
   @operationId("MachinesController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<
     MachineResource,
@@ -82,6 +85,7 @@ interface MachineResources {
    * Method to start a machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MachinesController")
   @operationId("MachinesController_Start")
   start is ArmResourceActionAsync<MachineResource, void, ArmResponse<unknown>>;
 
@@ -89,6 +93,7 @@ interface MachineResources {
    * Method to stop a machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("MachinesController")
   @operationId("MachinesController_Stop")
   stop is ArmResourceActionAsync<MachineResource, void, ArmResponse<unknown>>;
 }

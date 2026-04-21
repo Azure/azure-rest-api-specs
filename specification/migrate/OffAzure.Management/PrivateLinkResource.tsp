@@ -24,12 +24,13 @@ model PrivateLinkResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface PrivateLinkResources {
   /**
    * Gets the private link resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("PrivateLinkResourcesController")
   @operationId("PrivateLinkResourcesController_Get")
   get is ArmResourceRead<PrivateLinkResource>;
 
@@ -37,6 +38,7 @@ interface PrivateLinkResources {
    * Gets the private link resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("PrivateLinkResourcesController")
   @operationId("PrivateLinkResourcesController_ListByMasterSite")
   listByMasterSite is ArmResourceListByParent<PrivateLinkResource>;
 }

@@ -23,12 +23,13 @@ model HypervHost is Azure.ResourceManager.ProxyResource<HypervHostProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HypervHosts {
   /**
    * Get a HypervHost
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervHostController")
   @operationId("HypervHostController_Get")
   get is ArmResourceRead<HypervHost>;
 
@@ -36,6 +37,7 @@ interface HypervHosts {
    * Create a HypervHost
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervHostController")
   @operationId("HypervHostController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     HypervHost,
@@ -48,6 +50,7 @@ interface HypervHosts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("HypervHostController")
   @operationId("HypervHostController_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HypervHost,
@@ -58,6 +61,7 @@ interface HypervHosts {
    * List HypervHost resources by HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervHostController")
   @operationId("HypervHostController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<
     HypervHost,

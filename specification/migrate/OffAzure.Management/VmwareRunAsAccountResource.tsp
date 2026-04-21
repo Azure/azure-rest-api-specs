@@ -24,12 +24,13 @@ model VmwareRunAsAccountResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface VmwareRunAsAccountResources {
   /**
    * Get a VmwareRunAsAccountResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("RunAsAccountsController")
   @operationId("RunAsAccountsController_Get")
   get is ArmResourceRead<VmwareRunAsAccountResource>;
 
@@ -37,6 +38,7 @@ interface VmwareRunAsAccountResources {
    * List VmwareRunAsAccountResource resources by VmwareSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("RunAsAccountsController")
   @operationId("RunAsAccountsController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<VmwareRunAsAccountResource>;
 }

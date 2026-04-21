@@ -23,12 +23,13 @@ model Server is Azure.ResourceManager.ProxyResource<ServerProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Servers {
   /**
    * Get a Server
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServersController")
   @operationId("ServersController_GetMachine")
   getMachine is ArmResourceRead<Server>;
 
@@ -36,6 +37,7 @@ interface Servers {
    * Update a Server machine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServersController")
   @operationId("ServersController_UpdateMachine")
   @patch(#{ implicitOptionality: false })
   updateMachine is ArmCustomPatchSync<Server, PatchModel = ServerUpdate>;
@@ -44,6 +46,7 @@ interface Servers {
    * Delete a Server
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServersController")
   @operationId("ServersController_DeleteMachine")
   deleteMachine is ArmResourceDeleteSync<Server>;
 
@@ -51,6 +54,7 @@ interface Servers {
    * Get all machines in a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServersController")
   @operationId("ServersController_ListByServerSiteResource")
   listByServerSiteResource is ArmResourceListByParent<
     Server,

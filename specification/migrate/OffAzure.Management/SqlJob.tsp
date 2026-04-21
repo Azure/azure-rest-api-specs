@@ -23,12 +23,14 @@ model SqlJob is Azure.ResourceManager.ProxyResource<JobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlJobs {
   /**
    * Get a SqlJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets the sql Job.")
+  @tag("SqlJobsController")
   @operationId("SqlJobsController_Get")
   get is ArmResourceRead<SqlJob>;
 
@@ -36,6 +38,8 @@ interface SqlJobs {
    * List SqlJob resources by SqlSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets the sql Jobs.")
+  @tag("SqlJobsController")
   @operationId("SqlJobsController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<SqlJob>;
 }

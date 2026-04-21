@@ -22,12 +22,13 @@ model ImportSite
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImportSites {
   /**
    * Get a ImportSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_Get")
   get is ArmResourceRead<ImportSite>;
 
@@ -35,6 +36,7 @@ interface ImportSites {
    * Create a ImportSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_Create")
   create is ArmResourceCreateOrReplaceSync<ImportSite>;
 
@@ -42,6 +44,7 @@ interface ImportSites {
    * Update a ImportSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ImportSite, PatchModel = ImportSiteUpdate>;
@@ -50,6 +53,7 @@ interface ImportSites {
    * Delete a ImportSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_Delete")
   delete is ArmResourceDeleteSync<ImportSite>;
 
@@ -57,6 +61,7 @@ interface ImportSites {
    * Get all import sites.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ImportSite>;
 
@@ -64,6 +69,7 @@ interface ImportSites {
    * List ImportSite resources by subscription ID
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_ListBySubscription")
   listBySubscription is ArmListBySubscription<ImportSite>;
 
@@ -71,6 +77,7 @@ interface ImportSites {
    * Deletes the imported machines for site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_DeleteImportedMachines")
   deleteImportedMachines is ArmResourceActionSync<
     ImportSite,
@@ -82,6 +89,7 @@ interface ImportSites {
    * Method to export  a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_ExportUri")
   exportUri is ArmResourceActionSync<
     ImportSite,
@@ -93,6 +101,7 @@ interface ImportSites {
    * Method to import a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportSitesController")
   @operationId("ImportSitesController_ImportUri")
   importUri is ArmResourceActionSync<
     ImportSite,

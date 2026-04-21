@@ -24,17 +24,19 @@ model IisWebApplications
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface IisWebApplicationsController {
   /**
    * Method to get an IIS web application.
    */
+  @tag("IisWebApplicationsController")
   get is ArmResourceRead<IisWebApplications>;
 
   /**
    * Method to update tags on IIS web application.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("IisWebApplicationsController")
   update is ArmCustomPatchSync<
     IisWebApplications,
     PatchModel = IisWebApplicationsUpdate
@@ -43,6 +45,7 @@ interface IisWebApplicationsController {
   /**
    * Method to get all IIS web application.
    */
+  @tag("IisWebApplicationsController")
   listByWebAppSite is ArmResourceListByParent<
     IisWebApplications,
     Parameters = {

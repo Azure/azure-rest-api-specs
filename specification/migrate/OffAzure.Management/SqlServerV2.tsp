@@ -23,12 +23,13 @@ model SqlServerV2 is Azure.ResourceManager.ProxyResource<SqlServerProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlServerV2s {
   /**
    * Gets the sql server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlServersController")
   @operationId("SqlServersController_Get")
   get is ArmResourceRead<SqlServerV2>;
 
@@ -36,6 +37,7 @@ interface SqlServerV2s {
    * Updates the sql server tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlServersController")
   @operationId("SqlServersController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<SqlServerV2, PatchModel = SqlServerV2Update>;
@@ -44,6 +46,7 @@ interface SqlServerV2s {
    * Gets the sql servers.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlServersController")
   @operationId("SqlServersController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<
     SqlServerV2,

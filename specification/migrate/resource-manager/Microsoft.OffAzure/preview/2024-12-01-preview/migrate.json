@@ -43,91 +43,121 @@
       "name": "Operations"
     },
     {
-      "name": "ImportSites"
+      "name": "ImportSitesController"
     },
     {
-      "name": "MasterSites"
+      "name": "MasterSitesController"
     },
     {
-      "name": "ServerSiteResources"
+      "name": "MasterSitesOperationsStatusController"
     },
     {
-      "name": "VmwareSites"
+      "name": "ServerSitesController"
+    },
+    {
+      "name": "ServerDependencyMapController"
+    },
+    {
+      "name": "ServerOperationsStatusController"
+    },
+    {
+      "name": "SitesController"
+    },
+    {
+      "name": "DependencyMapController"
+    },
+    {
+      "name": "VmwareOperationsStatus"
+    },
+    {
+      "name": "VmwarePropertiesController"
+    },
+    {
+      "name": "HypervSitesController"
     },
     {
       "name": "HypervSites"
     },
     {
-      "name": "HypervClusters"
+      "name": "HypervDependencyMapController"
     },
     {
-      "name": "HypervHosts"
+      "name": "HypervMachinesController"
+    },
+    {
+      "name": "HypervOperationsStatusController"
+    },
+    {
+      "name": "HypervClusterController"
+    },
+    {
+      "name": "HypervHostController"
     },
     {
       "name": "HypervJobs"
     },
     {
-      "name": "HypervMachines"
+      "name": "HypervSoftwareInventoriesController"
     },
     {
-      "name": "HypervVmSoftwareInventories"
+      "name": "HypervRunAsAccountsController"
     },
     {
-      "name": "HypervRunAsAccountResources"
+      "name": "ImportJobsController"
     },
     {
-      "name": "DeleteImportMachinesJobs"
+      "name": "ImportMachinesController"
     },
     {
-      "name": "ExportImportedMachinesJobs"
+      "name": "PrivateEndpointConnectionController"
     },
     {
-      "name": "ImportMachinesJobs"
+      "name": "PrivateLinkResourcesController"
     },
     {
-      "name": "ImportJobs"
+      "name": "SqlSitesController"
     },
     {
-      "name": "ImportMachines"
+      "name": "SqlOperationsStatusController"
     },
     {
-      "name": "PrivateEndpointConnections"
+      "name": "SqlDiscoverySiteDataSourceController"
     },
     {
-      "name": "PrivateLinkResources"
+      "name": "SqlImportJobsController"
     },
     {
-      "name": "SqlSites"
+      "name": "SqlJobsController"
     },
     {
-      "name": "SqlDiscoverySiteDataSources"
+      "name": "SqlRunAsAccountsController"
     },
     {
-      "name": "ImportSqlInventoryJobs"
+      "name": "SqlAvailabilityGroupsController"
     },
     {
-      "name": "SqlJobs"
+      "name": "SqlDatabasesController"
     },
     {
-      "name": "SqlRunAsAccounts"
+      "name": "SqlServersController"
     },
     {
-      "name": "SqlAvailabilityGroups"
+      "name": "WebAppSitesController"
     },
     {
-      "name": "SqlDatabaseV2s"
+      "name": "WebAppPropertiesController"
     },
     {
-      "name": "SqlServerV2s"
+      "name": "WebApplicationsController"
     },
     {
-      "name": "WebAppSites"
+      "name": "WebServersController"
     },
     {
-      "name": "DiscoverySiteDataSources"
+      "name": "WebAppDiscoverySiteDataSourcesController"
     },
     {
-      "name": "WebAppExtendedMachines"
+      "name": "WebAppExtendedMachinesController"
     },
     {
       "name": "IisWebApplicationsController"
@@ -136,7 +166,7 @@
       "name": "IisWebServersController"
     },
     {
-      "name": "WebAppRunAsAccounts"
+      "name": "WebAppRunAsAccountsController"
     },
     {
       "name": "TomcatWebApplicationsController"
@@ -145,34 +175,34 @@
       "name": "TomcatWebServersController"
     },
     {
-      "name": "ServerJobs"
+      "name": "ServerJobsController"
     },
     {
-      "name": "Servers"
+      "name": "ServersController"
     },
     {
-      "name": "ServerSoftwareInventories"
+      "name": "ServerSoftwareInventoriesController"
     },
     {
-      "name": "ServerRunAsAccounts"
+      "name": "ServerRunAsAccountsController"
     },
     {
-      "name": "VmwareHosts"
+      "name": "VmwareHostController"
     },
     {
-      "name": "VmwareJobs"
+      "name": "HypervJobsController"
     },
     {
-      "name": "MachineResources"
+      "name": "MachinesController"
     },
     {
-      "name": "VmwareMachineSoftwareInventories"
+      "name": "VmwareSoftwareInventoriesController"
     },
     {
-      "name": "VmwareRunAsAccountResources"
+      "name": "RunAsAccountsController"
     },
     {
-      "name": "Vcenters"
+      "name": "VcenterController"
     }
   ],
   "paths": {
@@ -218,6 +248,7 @@
         "tags": [
           "HypervSites"
         ],
+        "summary": "Get all hyperv  sites.",
         "description": "Get all the hyperv  sites in the subscription.",
         "parameters": [
           {
@@ -255,7 +286,7 @@
       "get": {
         "operationId": "ImportSitesController_ListBySubscription",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "List ImportSite resources by subscription ID",
         "parameters": [
@@ -294,8 +325,9 @@
       "get": {
         "operationId": "MasterSitesController_ListBySubscription",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
+        "summary": "Get all the sites in the subscription.",
         "description": "List MasterSite resources by subscription ID",
         "parameters": [
           {
@@ -333,7 +365,7 @@
       "get": {
         "operationId": "ServerSitesController_ListBySubscription",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "List ServerSiteResource resources by subscription ID",
         "parameters": [
@@ -372,8 +404,9 @@
       "get": {
         "operationId": "SitesController_ListBySubscription",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
+        "summary": "Get all vmware sites.",
         "description": "Get all the vmware sites in the subscription.",
         "parameters": [
           {
@@ -413,6 +446,7 @@
         "tags": [
           "HypervSites"
         ],
+        "summary": "Get all hyperv sites.",
         "description": "Get all the hyperv sites in the subscription.",
         "parameters": [
           {
@@ -453,7 +487,7 @@
       "get": {
         "operationId": "HypervSitesController_Get",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Get a HypervSite",
         "parameters": [
@@ -498,7 +532,7 @@
       "put": {
         "operationId": "HypervSitesController_Create",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Create a HypervSite",
         "parameters": [
@@ -558,7 +592,7 @@
       "patch": {
         "operationId": "HypervSitesController_Update",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Update a HypervSite",
         "parameters": [
@@ -612,7 +646,7 @@
       "delete": {
         "operationId": "HypervSitesController_Delete",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Delete a HypervSite",
         "parameters": [
@@ -659,7 +693,7 @@
       "post": {
         "operationId": "HypervDependencyMapController_ClientGroupMembers",
         "tags": [
-          "HypervSites"
+          "HypervDependencyMapController"
         ],
         "description": "API to list client group members for the selected client group.",
         "parameters": [
@@ -732,7 +766,7 @@
       "get": {
         "operationId": "HypervClusterController_ListByHypervSite",
         "tags": [
-          "HypervClusters"
+          "HypervClusterController"
         ],
         "description": "List HypervCluster resources by HypervSite",
         "parameters": [
@@ -789,7 +823,7 @@
       "get": {
         "operationId": "HypervClusterController_GetCluster",
         "tags": [
-          "HypervClusters"
+          "HypervClusterController"
         ],
         "description": "Method to get a Hyper-V cluster.",
         "parameters": [
@@ -842,7 +876,7 @@
       "put": {
         "operationId": "HypervClusterController_CreateCluster",
         "tags": [
-          "HypervClusters"
+          "HypervClusterController"
         ],
         "description": "Method to create or update a Hyper-V cluster.",
         "parameters": [
@@ -926,7 +960,7 @@
       "delete": {
         "operationId": "HypervClusterController_Delete",
         "tags": [
-          "HypervClusters"
+          "HypervClusterController"
         ],
         "description": "Delete a HypervCluster",
         "parameters": [
@@ -981,7 +1015,7 @@
       "post": {
         "operationId": "HypervSitesController_ComputeErrorSummary",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Method to get site error summary.",
         "parameters": [
@@ -1035,7 +1069,7 @@
       "post": {
         "operationId": "HypervSitesController_Computeusage",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Get a hyperv site usage.",
         "parameters": [
@@ -1089,7 +1123,7 @@
       "post": {
         "operationId": "HypervSitesController_ExportApplications",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine.",
         "parameters": [
@@ -1160,7 +1194,7 @@
       "post": {
         "operationId": "HypervDependencyMapController_ExportDependencies",
         "tags": [
-          "HypervSites"
+          "HypervDependencyMapController"
         ],
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
@@ -1233,7 +1267,7 @@
       "post": {
         "operationId": "HypervSitesController_ExportMachineErrors",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine.",
         "parameters": [
@@ -1306,7 +1340,7 @@
       "post": {
         "operationId": "HypervDependencyMapController_GenerateCoarseMap",
         "tags": [
-          "HypervSites"
+          "HypervDependencyMapController"
         ],
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
@@ -1379,7 +1413,7 @@
       "post": {
         "operationId": "HypervDependencyMapController_GenerateDetailedMap",
         "tags": [
-          "HypervSites"
+          "HypervDependencyMapController"
         ],
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
@@ -1452,7 +1486,7 @@
       "get": {
         "operationId": "HypervHostController_ListByHypervSite",
         "tags": [
-          "HypervHosts"
+          "HypervHostController"
         ],
         "description": "List HypervHost resources by HypervSite",
         "parameters": [
@@ -1509,7 +1543,7 @@
       "get": {
         "operationId": "HypervHostController_Get",
         "tags": [
-          "HypervHosts"
+          "HypervHostController"
         ],
         "description": "Get a HypervHost",
         "parameters": [
@@ -1562,7 +1596,7 @@
       "put": {
         "operationId": "HypervHostController_Create",
         "tags": [
-          "HypervHosts"
+          "HypervHostController"
         ],
         "description": "Create a HypervHost",
         "parameters": [
@@ -1646,7 +1680,7 @@
       "delete": {
         "operationId": "HypervHostController_Delete",
         "tags": [
-          "HypervHosts"
+          "HypervHostController"
         ],
         "description": "Delete a HypervHost",
         "parameters": [
@@ -1824,7 +1858,7 @@
       "post": {
         "operationId": "HypervSitesController_ListHealthSummary",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Method to get site health summary.",
         "parameters": [
@@ -1874,7 +1908,7 @@
       "get": {
         "operationId": "HypervMachinesController_ListByHypervSite",
         "tags": [
-          "HypervMachines"
+          "HypervMachinesController"
         ],
         "description": "List HypervMachine resources by HypervSite",
         "parameters": [
@@ -1954,7 +1988,7 @@
       "get": {
         "operationId": "HypervMachinesController_Get",
         "tags": [
-          "HypervMachines"
+          "HypervMachinesController"
         ],
         "description": "Get a HypervMachine",
         "parameters": [
@@ -2007,7 +2041,7 @@
       "patch": {
         "operationId": "HypervMachinesController_Update",
         "tags": [
-          "HypervMachines"
+          "HypervMachinesController"
         ],
         "description": "Update a HypervMachine",
         "parameters": [
@@ -2071,7 +2105,7 @@
       "get": {
         "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
         "tags": [
-          "HypervVmSoftwareInventories"
+          "HypervSoftwareInventoriesController"
         ],
         "description": "List HypervVmSoftwareInventory resources by HypervMachine",
         "parameters": [
@@ -2129,7 +2163,7 @@
       "get": {
         "operationId": "HypervSoftwareInventoriesController_GetMachineSoftwareInventory",
         "tags": [
-          "HypervVmSoftwareInventories"
+          "HypervSoftwareInventoriesController"
         ],
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
@@ -2205,7 +2239,7 @@
       "get": {
         "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
         "tags": [
-          "HypervSites"
+          "HypervOperationsStatusController"
         ],
         "description": "Method to get operation status.",
         "parameters": [
@@ -2258,7 +2292,7 @@
       "get": {
         "operationId": "HypervRunAsAccountsController_ListByHypervSite",
         "tags": [
-          "HypervRunAsAccountResources"
+          "HypervRunAsAccountsController"
         ],
         "description": "List HypervRunAsAccountResource resources by HypervSite",
         "parameters": [
@@ -2308,7 +2342,7 @@
       "get": {
         "operationId": "HypervRunAsAccountsController_Get",
         "tags": [
-          "HypervRunAsAccountResources"
+          "HypervRunAsAccountsController"
         ],
         "description": "Get a HypervRunAsAccountResource",
         "parameters": [
@@ -2363,7 +2397,7 @@
       "post": {
         "operationId": "HypervDependencyMapController_ServerGroupMembers",
         "tags": [
-          "HypervSites"
+          "HypervDependencyMapController"
         ],
         "description": "API to list server group members for the selected server group.",
         "parameters": [
@@ -2436,7 +2470,7 @@
       "post": {
         "operationId": "HypervSitesController_Summary",
         "tags": [
-          "HypervSites"
+          "HypervSitesController"
         ],
         "description": "Method to get site usage.",
         "parameters": [
@@ -2483,7 +2517,7 @@
       "post": {
         "operationId": "HypervDependencyMapController_UpdateDependencyMapStatus",
         "tags": [
-          "HypervSites"
+          "HypervDependencyMapController"
         ],
         "description": "Method to enable disable dependency map status for machines\nin a site.",
         "parameters": [
@@ -2556,7 +2590,7 @@
       "post": {
         "operationId": "HypervMachinesController_UpdateProperties",
         "tags": [
-          "HypervSites"
+          "HypervMachinesController"
         ],
         "description": "Method to update custom properties for HYPERV machines\nin a site.",
         "parameters": [
@@ -2629,7 +2663,7 @@
       "get": {
         "operationId": "ImportSitesController_ListByResourceGroup",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Get all import sites.",
         "parameters": [
@@ -2671,7 +2705,7 @@
       "get": {
         "operationId": "ImportSitesController_Get",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Get a ImportSite",
         "parameters": [
@@ -2716,7 +2750,7 @@
       "put": {
         "operationId": "ImportSitesController_Create",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Create a ImportSite",
         "parameters": [
@@ -2776,7 +2810,7 @@
       "patch": {
         "operationId": "ImportSitesController_Update",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Update a ImportSite",
         "parameters": [
@@ -2830,7 +2864,7 @@
       "delete": {
         "operationId": "ImportSitesController_Delete",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Delete a ImportSite",
         "parameters": [
@@ -2877,7 +2911,7 @@
       "post": {
         "operationId": "ImportSitesController_DeleteImportedMachines",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Deletes the imported machines for site.",
         "parameters": [
@@ -2931,7 +2965,7 @@
       "get": {
         "operationId": "ImportJobsController_ListDeletejobs",
         "tags": [
-          "DeleteImportMachinesJobs"
+          "ImportJobsController"
         ],
         "description": "Method to get all delete import machines job for the given site.",
         "parameters": [
@@ -2981,7 +3015,7 @@
       "get": {
         "operationId": "ImportJobsController_GetDeletejob",
         "tags": [
-          "DeleteImportMachinesJobs"
+          "ImportJobsController"
         ],
         "description": "Gets the delete imported machines job with the given job name.",
         "parameters": [
@@ -3036,7 +3070,7 @@
       "get": {
         "operationId": "ImportJobsController_ListExportjobs",
         "tags": [
-          "ExportImportedMachinesJobs"
+          "ImportJobsController"
         ],
         "description": "Method to get all export import machines job for the given site.",
         "parameters": [
@@ -3086,7 +3120,7 @@
       "get": {
         "operationId": "ImportJobsController_GetExportjob",
         "tags": [
-          "ExportImportedMachinesJobs"
+          "ImportJobsController"
         ],
         "description": "Gets the export imported machines job with the given job name.",
         "parameters": [
@@ -3141,7 +3175,7 @@
       "post": {
         "operationId": "ImportSitesController_ExportUri",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Method to export  a site.",
         "parameters": [
@@ -3197,7 +3231,7 @@
       "get": {
         "operationId": "ImportJobsController_ListImportjobs",
         "tags": [
-          "ImportMachinesJobs"
+          "ImportJobsController"
         ],
         "description": "Method to get all import machines job for the given site.",
         "parameters": [
@@ -3247,7 +3281,7 @@
       "get": {
         "operationId": "ImportJobsController_GetImportjob",
         "tags": [
-          "ImportMachinesJobs"
+          "ImportJobsController"
         ],
         "description": "Gets the import job with the given job name.",
         "parameters": [
@@ -3302,7 +3336,7 @@
       "post": {
         "operationId": "ImportSitesController_ImportUri",
         "tags": [
-          "ImportSites"
+          "ImportSitesController"
         ],
         "description": "Method to import a site.",
         "parameters": [
@@ -3358,7 +3392,7 @@
       "get": {
         "operationId": "ImportJobsController_ListByImportSite",
         "tags": [
-          "ImportJobs"
+          "ImportJobsController"
         ],
         "description": "List ImportJob resources by ImportSite",
         "parameters": [
@@ -3408,7 +3442,7 @@
       "get": {
         "operationId": "ImportJobsController_Get",
         "tags": [
-          "ImportJobs"
+          "ImportJobsController"
         ],
         "description": "Get a ImportJob",
         "parameters": [
@@ -3463,7 +3497,7 @@
       "get": {
         "operationId": "ImportMachinesController_ListByImportSite",
         "tags": [
-          "ImportMachines"
+          "ImportMachinesController"
         ],
         "description": "List ImportMachine resources by ImportSite",
         "parameters": [
@@ -3542,7 +3576,7 @@
       "get": {
         "operationId": "ImportMachinesController_Get",
         "tags": [
-          "ImportMachines"
+          "ImportMachinesController"
         ],
         "description": "Get a ImportMachine",
         "parameters": [
@@ -3595,7 +3629,7 @@
       "delete": {
         "operationId": "ImportMachinesController_Delete",
         "tags": [
-          "ImportMachines"
+          "ImportMachinesController"
         ],
         "description": "Delete a ImportMachine",
         "parameters": [
@@ -3650,8 +3684,9 @@
       "get": {
         "operationId": "MasterSitesController_ListByResourceGroup",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
+        "summary": "Get all sites.",
         "description": "Get all the sites in the resource group.",
         "parameters": [
           {
@@ -3692,8 +3727,9 @@
       "get": {
         "operationId": "MasterSitesController_Get",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
+        "summary": "Method to get a master site.",
         "description": "Get a MasterSite",
         "parameters": [
           {
@@ -3737,7 +3773,7 @@
       "put": {
         "operationId": "MasterSitesController_Create",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
         "description": "Method to create or update a site.",
         "parameters": [
@@ -3813,7 +3849,7 @@
       "patch": {
         "operationId": "MasterSitesController_Update",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
         "description": "Method to update an existing site.",
         "parameters": [
@@ -3886,7 +3922,7 @@
       "delete": {
         "operationId": "MasterSitesController_Delete",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
         "description": "Method to delete a site.",
         "parameters": [
@@ -3933,7 +3969,7 @@
       "post": {
         "operationId": "MasterSitesController_ErrorSummary",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
         "description": "Method to get error summary from master site for an appliance.",
         "parameters": [
@@ -3989,7 +4025,7 @@
       "get": {
         "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
         "tags": [
-          "MasterSites"
+          "MasterSitesOperationsStatusController"
         ],
         "description": "A operation status resource belonging to a master site resource.",
         "parameters": [
@@ -4042,7 +4078,7 @@
       "get": {
         "operationId": "PrivateEndpointConnectionController_ListByMasterSite",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnectionController"
         ],
         "description": "Gets the private link resource.",
         "parameters": [
@@ -4092,7 +4128,7 @@
       "get": {
         "operationId": "PrivateEndpointConnectionController_Get",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnectionController"
         ],
         "description": "Gets the private link resource.",
         "parameters": [
@@ -4145,7 +4181,7 @@
       "put": {
         "operationId": "PrivateEndpointConnectionController_Create",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnectionController"
         ],
         "description": "Gets the private link resource.",
         "parameters": [
@@ -4213,7 +4249,7 @@
       "delete": {
         "operationId": "PrivateEndpointConnectionController_Delete",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnectionController"
         ],
         "description": "Deletes the private link resource.",
         "parameters": [
@@ -4268,7 +4304,7 @@
       "get": {
         "operationId": "PrivateLinkResourcesController_ListByMasterSite",
         "tags": [
-          "PrivateLinkResources"
+          "PrivateLinkResourcesController"
         ],
         "description": "Gets the private link resource.",
         "parameters": [
@@ -4318,7 +4354,7 @@
       "get": {
         "operationId": "PrivateLinkResourcesController_Get",
         "tags": [
-          "PrivateLinkResources"
+          "PrivateLinkResourcesController"
         ],
         "description": "Gets the private link resource.",
         "parameters": [
@@ -4373,7 +4409,7 @@
       "post": {
         "operationId": "MasterSitesController_RefreshArcStatus",
         "tags": [
-          "MasterSites"
+          "MasterSitesController"
         ],
         "description": "Method to refresh arc status from master site for an appliance.",
         "parameters": [
@@ -4440,7 +4476,7 @@
       "get": {
         "operationId": "SqlSitesController_ListByMasterSite",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to get all sites.",
         "parameters": [
@@ -4490,7 +4526,7 @@
       "get": {
         "operationId": "SqlSitesController_Get",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to get a site.",
         "parameters": [
@@ -4543,7 +4579,7 @@
       "put": {
         "operationId": "SqlSitesController_Create",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to create a SQL site.",
         "parameters": [
@@ -4611,7 +4647,7 @@
       "patch": {
         "operationId": "SqlSitesController_Update",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to update an existing site.",
         "parameters": [
@@ -4692,7 +4728,7 @@
       "delete": {
         "operationId": "SqlSitesController_Delete",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Deletes the SQL site.",
         "parameters": [
@@ -4747,7 +4783,7 @@
       "get": {
         "operationId": "SqlDiscoverySiteDataSourceController_ListBySqlSite",
         "tags": [
-          "SqlDiscoverySiteDataSources"
+          "SqlDiscoverySiteDataSourceController"
         ],
         "description": "List SqlDiscoverySiteDataSource resources by SqlSite",
         "parameters": [
@@ -4805,7 +4841,7 @@
       "get": {
         "operationId": "SqlDiscoverySiteDataSourceController_Get",
         "tags": [
-          "SqlDiscoverySiteDataSources"
+          "SqlDiscoverySiteDataSourceController"
         ],
         "description": "Get a SqlDiscoverySiteDataSource",
         "parameters": [
@@ -4866,7 +4902,7 @@
       "put": {
         "operationId": "SqlDiscoverySiteDataSourceController_Create",
         "tags": [
-          "SqlDiscoverySiteDataSources"
+          "SqlDiscoverySiteDataSourceController"
         ],
         "description": "Create a SqlDiscoverySiteDataSource",
         "parameters": [
@@ -4958,7 +4994,7 @@
       "delete": {
         "operationId": "SqlDiscoverySiteDataSourceController_Delete",
         "tags": [
-          "SqlDiscoverySiteDataSources"
+          "SqlDiscoverySiteDataSourceController"
         ],
         "description": "Delete a SqlDiscoverySiteDataSource",
         "parameters": [
@@ -5021,7 +5057,7 @@
       "post": {
         "operationId": "SqlSitesController_ErrorSummary",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to get error summary from SQL site.",
         "parameters": [
@@ -5085,7 +5121,7 @@
       "post": {
         "operationId": "SqlSitesController_ExportSqlServerErrors",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to generate report containing SQL servers.",
         "parameters": [
@@ -5164,7 +5200,7 @@
       "post": {
         "operationId": "SqlSitesController_ExportSqlServers",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to generate report containing SQL servers.",
         "parameters": [
@@ -5245,7 +5281,7 @@
       "post": {
         "operationId": "SqlSitesController_ExportUri",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to generate export/read SAS uri for import.",
         "parameters": [
@@ -5309,7 +5345,7 @@
       "get": {
         "operationId": "SqlImportJobsController_ListImportjobs",
         "tags": [
-          "ImportSqlInventoryJobs"
+          "SqlImportJobsController"
         ],
         "description": "Method to get all import SQL inventory job for the given site.",
         "parameters": [
@@ -5367,7 +5403,7 @@
       "get": {
         "operationId": "SqlImportJobsController_GetImportjob",
         "tags": [
-          "ImportSqlInventoryJobs"
+          "SqlImportJobsController"
         ],
         "description": "Gets the SQL inventory import job with the given job name.",
         "parameters": [
@@ -5430,7 +5466,7 @@
       "post": {
         "operationId": "SqlSitesController_ImportUri",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Initiates SQL inventory import process. This is an asynchronous operation that returns a 202 Accepted response and requires polling for completion status.",
         "parameters": [
@@ -5506,8 +5542,9 @@
       "get": {
         "operationId": "SqlJobsController_ListBySqlSite",
         "tags": [
-          "SqlJobs"
+          "SqlJobsController"
         ],
+        "summary": "Gets the sql Jobs.",
         "description": "List SqlJob resources by SqlSite",
         "parameters": [
           {
@@ -5564,8 +5601,9 @@
       "get": {
         "operationId": "SqlJobsController_Get",
         "tags": [
-          "SqlJobs"
+          "SqlJobsController"
         ],
+        "summary": "Gets the sql Job.",
         "description": "Get a SqlJob",
         "parameters": [
           {
@@ -5627,7 +5665,7 @@
       "get": {
         "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
         "tags": [
-          "SqlSites"
+          "SqlOperationsStatusController"
         ],
         "description": "Method to get operation status.",
         "parameters": [
@@ -5687,7 +5725,7 @@
       "post": {
         "operationId": "SqlSitesController_Refresh",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to refresh a site.",
         "parameters": [
@@ -5768,7 +5806,7 @@
       "get": {
         "operationId": "SqlRunAsAccountsController_ListBySqlSite",
         "tags": [
-          "SqlRunAsAccounts"
+          "SqlRunAsAccountsController"
         ],
         "description": "List SqlRunAsAccount resources by SqlSite",
         "parameters": [
@@ -5826,7 +5864,7 @@
       "get": {
         "operationId": "SqlRunAsAccountsController_Get",
         "tags": [
-          "SqlRunAsAccounts"
+          "SqlRunAsAccountsController"
         ],
         "description": "Get a SqlRunAsAccount",
         "parameters": [
@@ -5889,7 +5927,7 @@
       "get": {
         "operationId": "SqlAvailabilityGroupsController_ListBySqlSite",
         "tags": [
-          "SqlAvailabilityGroups"
+          "SqlAvailabilityGroupsController"
         ],
         "description": "Gets the sql availability groups.",
         "parameters": [
@@ -5976,7 +6014,7 @@
       "get": {
         "operationId": "SqlAvailabilityGroupsController_Get",
         "tags": [
-          "SqlAvailabilityGroups"
+          "SqlAvailabilityGroupsController"
         ],
         "description": "Gets the sql availability group.",
         "parameters": [
@@ -6039,7 +6077,7 @@
       "get": {
         "operationId": "SqlDatabasesController_ListBySqlSite",
         "tags": [
-          "SqlDatabaseV2s"
+          "SqlDatabasesController"
         ],
         "description": "Gets the sql Databases.",
         "parameters": [
@@ -6126,7 +6164,7 @@
       "get": {
         "operationId": "SqlDatabasesController_Get",
         "tags": [
-          "SqlDatabaseV2s"
+          "SqlDatabasesController"
         ],
         "description": "Gets the sql Database.",
         "parameters": [
@@ -6189,7 +6227,7 @@
       "get": {
         "operationId": "SqlServersController_ListBySqlSite",
         "tags": [
-          "SqlServerV2s"
+          "SqlServersController"
         ],
         "description": "Gets the sql servers.",
         "parameters": [
@@ -6276,7 +6314,7 @@
       "get": {
         "operationId": "SqlServersController_Get",
         "tags": [
-          "SqlServerV2s"
+          "SqlServersController"
         ],
         "description": "Gets the sql server.",
         "parameters": [
@@ -6337,7 +6375,7 @@
       "patch": {
         "operationId": "SqlServersController_Update",
         "tags": [
-          "SqlServerV2s"
+          "SqlServersController"
         ],
         "description": "Updates the sql server tags.",
         "parameters": [
@@ -6409,7 +6447,7 @@
       "post": {
         "operationId": "SqlSitesController_Summary",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Method to get site usage/summary.",
         "parameters": [
@@ -6464,7 +6502,7 @@
       "post": {
         "operationId": "SqlSitesController_ValidateAndImportUri",
         "tags": [
-          "SqlSites"
+          "SqlSitesController"
         ],
         "description": "Validates SQL inventory data for format and correctness before attempting import. This is a safer alternative to direct import as it prevents failed imports due to invalid data. The operation performs validation checks first and only proceeds with import if all checks pass.",
         "parameters": [
@@ -6528,7 +6566,7 @@
       "get": {
         "operationId": "WebAppSitesController_ListByMasterSite",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to get all sites.",
         "parameters": [
@@ -6578,7 +6616,7 @@
       "get": {
         "operationId": "WebAppSitesController_Get",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to get a site.",
         "parameters": [
@@ -6631,7 +6669,7 @@
       "put": {
         "operationId": "WebAppSitesController_Create",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to create a WebApp site.",
         "parameters": [
@@ -6699,7 +6737,7 @@
       "patch": {
         "operationId": "WebAppSitesController_Update",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to update an existing site.",
         "parameters": [
@@ -6780,7 +6818,7 @@
       "delete": {
         "operationId": "WebAppSitesController_Delete",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Deletes the WebApp site.",
         "parameters": [
@@ -6853,7 +6891,7 @@
       "get": {
         "operationId": "WebAppDiscoverySiteDataSourcesController_ListByWebAppSite",
         "tags": [
-          "DiscoverySiteDataSources"
+          "WebAppDiscoverySiteDataSourcesController"
         ],
         "description": "Method to get all Web app data sources in site.",
         "parameters": [
@@ -6911,7 +6949,7 @@
       "get": {
         "operationId": "WebAppDiscoverySiteDataSourcesController_Get",
         "tags": [
-          "DiscoverySiteDataSources"
+          "WebAppDiscoverySiteDataSourcesController"
         ],
         "description": "Method to get a Web app data source in site.",
         "parameters": [
@@ -6972,7 +7010,7 @@
       "put": {
         "operationId": "WebAppDiscoverySiteDataSourcesController_Create",
         "tags": [
-          "DiscoverySiteDataSources"
+          "WebAppDiscoverySiteDataSourcesController"
         ],
         "description": "Method to create or update a Web app data source in site.",
         "parameters": [
@@ -7064,7 +7102,7 @@
       "delete": {
         "operationId": "WebAppDiscoverySiteDataSourcesController_Delete",
         "tags": [
-          "DiscoverySiteDataSources"
+          "WebAppDiscoverySiteDataSourcesController"
         ],
         "description": "Method to delete a Web app data source in site.",
         "parameters": [
@@ -7145,7 +7183,7 @@
       "post": {
         "operationId": "WebAppSitesController_ErrorSummary",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "MMethod to get error summary from web app  site.",
         "parameters": [
@@ -7209,7 +7247,7 @@
       "post": {
         "operationId": "WebAppSitesController_ExportInventory",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to generate report containing web app inventory.",
         "parameters": [
@@ -7290,7 +7328,7 @@
       "get": {
         "operationId": "WebAppExtendedMachinesController_ListByWebAppSite",
         "tags": [
-          "WebAppExtendedMachines"
+          "WebAppExtendedMachinesController"
         ],
         "description": "Method to get all extended machines.",
         "parameters": [
@@ -7377,7 +7415,7 @@
       "get": {
         "operationId": "WebAppExtendedMachinesController_Get",
         "tags": [
-          "WebAppExtendedMachines"
+          "WebAppExtendedMachinesController"
         ],
         "description": "Method to get a extended machine.",
         "parameters": [
@@ -7810,7 +7848,7 @@
       "post": {
         "operationId": "WebAppSitesController_Refresh",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to refresh a site.",
         "parameters": [
@@ -7891,7 +7929,7 @@
       "get": {
         "operationId": "WebAppRunAsAccountsController_ListByWebAppSite",
         "tags": [
-          "WebAppRunAsAccounts"
+          "WebAppRunAsAccountsController"
         ],
         "description": "Method to get all run as accounts.",
         "parameters": [
@@ -7949,7 +7987,7 @@
       "get": {
         "operationId": "WebAppRunAsAccountsController_Get",
         "tags": [
-          "WebAppRunAsAccounts"
+          "WebAppRunAsAccountsController"
         ],
         "description": "Method to get run as account.",
         "parameters": [
@@ -8012,7 +8050,7 @@
       "post": {
         "operationId": "WebAppSitesController_Summary",
         "tags": [
-          "WebAppSites"
+          "WebAppSitesController"
         ],
         "description": "Method to get site usage/summary.",
         "parameters": [
@@ -8437,7 +8475,7 @@
       "post": {
         "operationId": "WebAppPropertiesController_UpdateProperties",
         "tags": [
-          "WebAppSites"
+          "WebAppPropertiesController"
         ],
         "description": "Method to update properties for web applications.\nin a site.",
         "parameters": [
@@ -8518,7 +8556,7 @@
       "get": {
         "operationId": "WebApplicationsController_ListByWebAppSite",
         "tags": [
-          "WebAppSites"
+          "WebApplicationsController"
         ],
         "description": "Method to get all IIS web applications.",
         "parameters": [
@@ -8605,7 +8643,7 @@
       "get": {
         "operationId": "WebServersController_ListByWebAppSite",
         "tags": [
-          "WebAppSites"
+          "WebServersController"
         ],
         "description": "Method to get all web servers.",
         "parameters": [
@@ -8692,7 +8730,7 @@
       "get": {
         "operationId": "ServerSitesController_ListByResourceGroup",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "List ServerSiteResource resources by resource group",
         "parameters": [
@@ -8734,7 +8772,7 @@
       "get": {
         "operationId": "ServerSitesController_Get",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Get a ServerSiteResource",
         "parameters": [
@@ -8779,7 +8817,7 @@
       "put": {
         "operationId": "ServerSitesController_Create",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Create a ServerSiteResource",
         "parameters": [
@@ -8855,7 +8893,7 @@
       "patch": {
         "operationId": "ServerSitesController_Update",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Update a ServerSiteResource",
         "parameters": [
@@ -8909,7 +8947,7 @@
       "delete": {
         "operationId": "ServerSitesController_Delete",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Delete a ServerSiteResource",
         "parameters": [
@@ -8956,7 +8994,7 @@
       "post": {
         "operationId": "ServerDependencyMapController_ClientGroupMembers",
         "tags": [
-          "ServerSiteResources"
+          "ServerDependencyMapController"
         ],
         "description": "API to list client group members for the selected client group.",
         "parameters": [
@@ -9029,7 +9067,7 @@
       "post": {
         "operationId": "ServerSitesController_ComputeErrorSummary",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Get the error summary for a server site.",
         "parameters": [
@@ -9083,7 +9121,7 @@
       "post": {
         "operationId": "ServerSitesController_Computeusage",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Get a serve site usage.",
         "parameters": [
@@ -9137,7 +9175,7 @@
       "post": {
         "operationId": "ServerSitesController_ExportApplications",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine.",
         "parameters": [
@@ -9208,7 +9246,7 @@
       "post": {
         "operationId": "ServerDependencyMapController_ExportDependencies",
         "tags": [
-          "ServerSiteResources"
+          "ServerDependencyMapController"
         ],
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
@@ -9281,7 +9319,7 @@
       "post": {
         "operationId": "ServerSitesController_ExportMachineErrors",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine.",
         "parameters": [
@@ -9354,7 +9392,7 @@
       "post": {
         "operationId": "ServerDependencyMapController_GenerateCoarseMap",
         "tags": [
-          "ServerSiteResources"
+          "ServerDependencyMapController"
         ],
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
@@ -9427,7 +9465,7 @@
       "post": {
         "operationId": "ServerDependencyMapController_GenerateDetailedMap",
         "tags": [
-          "ServerSiteResources"
+          "ServerDependencyMapController"
         ],
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
@@ -9500,7 +9538,7 @@
       "get": {
         "operationId": "ServerJobsController_ListByServerSiteResource",
         "tags": [
-          "ServerJobs"
+          "ServerJobsController"
         ],
         "description": "List ServerJob resources by ServerSiteResource",
         "parameters": [
@@ -9550,7 +9588,7 @@
       "get": {
         "operationId": "ServerJobsController_Get",
         "tags": [
-          "ServerJobs"
+          "ServerJobsController"
         ],
         "description": "Get a ServerJob",
         "parameters": [
@@ -9605,7 +9643,7 @@
       "post": {
         "operationId": "ServerSitesController_ListHealthSummary",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Method to get site health summary.",
         "parameters": [
@@ -9655,7 +9693,7 @@
       "get": {
         "operationId": "ServersController_ListByServerSiteResource",
         "tags": [
-          "Servers"
+          "ServersController"
         ],
         "description": "Get all machines in a site.",
         "parameters": [
@@ -9734,7 +9772,7 @@
       "get": {
         "operationId": "ServersController_GetMachine",
         "tags": [
-          "Servers"
+          "ServersController"
         ],
         "description": "Get a Server",
         "parameters": [
@@ -9787,7 +9825,7 @@
       "patch": {
         "operationId": "ServersController_UpdateMachine",
         "tags": [
-          "Servers"
+          "ServersController"
         ],
         "description": "Update a Server machine",
         "parameters": [
@@ -9849,7 +9887,7 @@
       "delete": {
         "operationId": "ServersController_DeleteMachine",
         "tags": [
-          "Servers"
+          "ServersController"
         ],
         "description": "Delete a Server",
         "parameters": [
@@ -9904,7 +9942,7 @@
       "get": {
         "operationId": "ServerSoftwareInventoriesController_ListByServer",
         "tags": [
-          "ServerSoftwareInventories"
+          "ServerSoftwareInventoriesController"
         ],
         "description": "List ServerSoftwareInventory resources by Server",
         "parameters": [
@@ -9962,7 +10000,7 @@
       "get": {
         "operationId": "ServerSoftwareInventoriesController_GetMachineSoftwareInventory",
         "tags": [
-          "ServerSoftwareInventories"
+          "ServerSoftwareInventoriesController"
         ],
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
@@ -10038,7 +10076,7 @@
       "get": {
         "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
         "tags": [
-          "ServerSiteResources"
+          "ServerOperationsStatusController"
         ],
         "description": "A operation status resource belonging to a site resource.",
         "parameters": [
@@ -10091,7 +10129,7 @@
       "post": {
         "operationId": "ServerSitesController_RefreshSite",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Operation to refresh a site",
         "parameters": [
@@ -10155,7 +10193,7 @@
       "get": {
         "operationId": "ServerRunAsAccountsController_ListByServerSiteResource",
         "tags": [
-          "ServerRunAsAccounts"
+          "ServerRunAsAccountsController"
         ],
         "description": "List ServerRunAsAccount resources by ServerSiteResource",
         "parameters": [
@@ -10205,7 +10243,7 @@
       "get": {
         "operationId": "ServerRunAsAccountsController_Get",
         "tags": [
-          "ServerRunAsAccounts"
+          "ServerRunAsAccountsController"
         ],
         "description": "Get a ServerRunAsAccount",
         "parameters": [
@@ -10260,7 +10298,7 @@
       "post": {
         "operationId": "ServerDependencyMapController_ServerGroupMembers",
         "tags": [
-          "ServerSiteResources"
+          "ServerDependencyMapController"
         ],
         "description": "API to list server group members for the selected server group.",
         "parameters": [
@@ -10333,7 +10371,7 @@
       "post": {
         "operationId": "ServerSitesController_Summary",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Method to get site usage.",
         "parameters": [
@@ -10380,7 +10418,7 @@
       "post": {
         "operationId": "ServerSitesController_UpdateDependencyMapStatus",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Method to enable disable dependency map status for machines\nin a site.",
         "parameters": [
@@ -10453,7 +10491,7 @@
       "post": {
         "operationId": "ServerSitesController_UpdateProperties",
         "tags": [
-          "ServerSiteResources"
+          "ServerSitesController"
         ],
         "description": "Operation to update custom properties for servers",
         "parameters": [
@@ -10526,8 +10564,9 @@
       "get": {
         "operationId": "SitesController_ListByResourceGroup",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
+        "summary": "Get all vmware sites.",
         "description": "Get all the vmware sites in the resource group.",
         "parameters": [
           {
@@ -10568,7 +10607,7 @@
       "get": {
         "operationId": "SitesController_Get",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Get a VmwareSite",
         "parameters": [
@@ -10613,7 +10652,7 @@
       "put": {
         "operationId": "SitesController_Create",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Create a VmwareSite",
         "parameters": [
@@ -10673,7 +10712,7 @@
       "patch": {
         "operationId": "SitesController_Update",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Update a VmwareSite",
         "parameters": [
@@ -10727,7 +10766,7 @@
       "delete": {
         "operationId": "SitesController_Delete",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Delete a VmwareSite",
         "parameters": [
@@ -10774,7 +10813,7 @@
       "post": {
         "operationId": "DependencyMapController_ClientGroupMembers",
         "tags": [
-          "VmwareSites"
+          "DependencyMapController"
         ],
         "description": "API to list client group members for the selected client group.",
         "parameters": [
@@ -10847,7 +10886,7 @@
       "post": {
         "operationId": "SitesController_ComputeErrorSummary",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to get site error summary.",
         "parameters": [
@@ -10901,7 +10940,7 @@
       "post": {
         "operationId": "SitesController_Computeusage",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to get site error summary.",
         "parameters": [
@@ -10955,7 +10994,7 @@
       "post": {
         "operationId": "SitesController_ExportApplications",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine.",
         "parameters": [
@@ -11026,7 +11065,7 @@
       "post": {
         "operationId": "DependencyMapController_ExportDependencies",
         "tags": [
-          "VmwareSites"
+          "DependencyMapController"
         ],
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
@@ -11099,7 +11138,7 @@
       "post": {
         "operationId": "SitesController_ExportMachineErrors",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine.",
         "parameters": [
@@ -11172,7 +11211,7 @@
       "post": {
         "operationId": "SitesController_ExportMachines",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine.",
         "parameters": [
@@ -11245,7 +11284,7 @@
       "post": {
         "operationId": "DependencyMapController_GenerateCoarseMap",
         "tags": [
-          "VmwareSites"
+          "DependencyMapController"
         ],
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
@@ -11318,7 +11357,7 @@
       "post": {
         "operationId": "DependencyMapController_GenerateDetailedMap",
         "tags": [
-          "VmwareSites"
+          "DependencyMapController"
         ],
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
@@ -11391,7 +11430,7 @@
       "get": {
         "operationId": "VmwareHostController_ListByVmwareSite",
         "tags": [
-          "VmwareHosts"
+          "VmwareHostController"
         ],
         "description": "List VmwareHost resources by VmwareSite",
         "parameters": [
@@ -11441,7 +11480,7 @@
       "get": {
         "operationId": "VmwareHostController_Get",
         "tags": [
-          "VmwareHosts"
+          "VmwareHostController"
         ],
         "description": "Get a VmwareHost",
         "parameters": [
@@ -11496,7 +11535,7 @@
       "get": {
         "operationId": "HypervJobsController_ListByVmwareSite",
         "tags": [
-          "VmwareJobs"
+          "HypervJobsController"
         ],
         "description": "List VmwareJob resources by VmwareSite",
         "parameters": [
@@ -11546,7 +11585,7 @@
       "get": {
         "operationId": "HypervJobsController_Get",
         "tags": [
-          "VmwareJobs"
+          "HypervJobsController"
         ],
         "description": "Get a VmwareJob",
         "parameters": [
@@ -11601,7 +11640,7 @@
       "post": {
         "operationId": "SitesController_ListHealthSummary",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to get site health summary.",
         "parameters": [
@@ -11651,7 +11690,7 @@
       "get": {
         "operationId": "MachinesController_ListByVmwareSite",
         "tags": [
-          "MachineResources"
+          "MachinesController"
         ],
         "description": "List MachineResource resources by VmwareSite",
         "parameters": [
@@ -11731,7 +11770,7 @@
       "get": {
         "operationId": "MachinesController_Get",
         "tags": [
-          "MachineResources"
+          "MachinesController"
         ],
         "description": "Get a MachineResource",
         "parameters": [
@@ -11784,7 +11823,7 @@
       "patch": {
         "operationId": "MachinesController_Update",
         "tags": [
-          "MachineResources"
+          "MachinesController"
         ],
         "description": "Update a MachineResource",
         "parameters": [
@@ -11848,7 +11887,7 @@
       "get": {
         "operationId": "VmwareSoftwareInventoriesController_ListByMachineResource",
         "tags": [
-          "VmwareMachineSoftwareInventories"
+          "VmwareSoftwareInventoriesController"
         ],
         "description": "List VmwareMachineSoftwareInventory resources by MachineResource",
         "parameters": [
@@ -11906,7 +11945,7 @@
       "get": {
         "operationId": "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory",
         "tags": [
-          "VmwareMachineSoftwareInventories"
+          "VmwareSoftwareInventoriesController"
         ],
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
@@ -11982,7 +12021,7 @@
       "post": {
         "operationId": "MachinesController_Start",
         "tags": [
-          "MachineResources"
+          "MachinesController"
         ],
         "description": "Method to start a machine.",
         "parameters": [
@@ -12054,7 +12093,7 @@
       "post": {
         "operationId": "MachinesController_Stop",
         "tags": [
-          "MachineResources"
+          "MachinesController"
         ],
         "description": "Method to stop a machine.",
         "parameters": [
@@ -12126,7 +12165,7 @@
       "get": {
         "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
         "tags": [
-          "VmwareSites"
+          "VmwareOperationsStatus"
         ],
         "description": "A operation status resource belonging to a site resource.",
         "parameters": [
@@ -12179,7 +12218,7 @@
       "get": {
         "operationId": "RunAsAccountsController_ListByVmwareSite",
         "tags": [
-          "VmwareRunAsAccountResources"
+          "RunAsAccountsController"
         ],
         "description": "List VmwareRunAsAccountResource resources by VmwareSite",
         "parameters": [
@@ -12229,7 +12268,7 @@
       "get": {
         "operationId": "RunAsAccountsController_Get",
         "tags": [
-          "VmwareRunAsAccountResources"
+          "RunAsAccountsController"
         ],
         "description": "Get a VmwareRunAsAccountResource",
         "parameters": [
@@ -12284,7 +12323,7 @@
       "post": {
         "operationId": "DependencyMapController_ServerGroupMembers",
         "tags": [
-          "VmwareSites"
+          "DependencyMapController"
         ],
         "description": "API to list server group members for the selected server group.",
         "parameters": [
@@ -12357,7 +12396,7 @@
       "post": {
         "operationId": "SitesController_Summary",
         "tags": [
-          "VmwareSites"
+          "SitesController"
         ],
         "description": "Method to get site usage/summary.",
         "parameters": [
@@ -12404,7 +12443,7 @@
       "post": {
         "operationId": "VmwarePropertiesController_UpdateDependencyMapStatus",
         "tags": [
-          "VmwareSites"
+          "VmwarePropertiesController"
         ],
         "description": "Method to enable disable dependency map status for machines\nin a\nsite.",
         "parameters": [
@@ -12477,7 +12516,7 @@
       "post": {
         "operationId": "VmwarePropertiesController_UpdateProperties",
         "tags": [
-          "VmwareSites"
+          "VmwarePropertiesController"
         ],
         "description": "Method to update properties for machines   in a site.",
         "parameters": [
@@ -12550,7 +12589,7 @@
       "post": {
         "operationId": "VmwarePropertiesController_UpdateRunAsAccount",
         "tags": [
-          "VmwareSites"
+          "VmwarePropertiesController"
         ],
         "description": "Method to associate Run as account to machine\nin a site.",
         "parameters": [
@@ -12623,7 +12662,7 @@
       "post": {
         "operationId": "VmwarePropertiesController_UpdateTags",
         "tags": [
-          "VmwareSites"
+          "VmwarePropertiesController"
         ],
         "description": "Method to associate Run as account to machine\nin a site.",
         "parameters": [
@@ -12696,7 +12735,7 @@
       "get": {
         "operationId": "VcenterController_ListByVmwareSite",
         "tags": [
-          "Vcenters"
+          "VcenterController"
         ],
         "description": "List Vcenter resources by VmwareSite",
         "parameters": [
@@ -12753,7 +12792,7 @@
       "get": {
         "operationId": "VcenterController_Get",
         "tags": [
-          "Vcenters"
+          "VcenterController"
         ],
         "description": "Get a Vcenter",
         "parameters": [
@@ -12806,7 +12845,7 @@
       "put": {
         "operationId": "VcenterController_Create",
         "tags": [
-          "Vcenters"
+          "VcenterController"
         ],
         "description": "Create a Vcenter",
         "parameters": [
@@ -12890,7 +12929,7 @@
       "delete": {
         "operationId": "VcenterController_Delete",
         "tags": [
-          "Vcenters"
+          "VcenterController"
         ],
         "description": "Delete a Vcenter",
         "parameters": [

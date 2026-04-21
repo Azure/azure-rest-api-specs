@@ -24,12 +24,13 @@ model SqlDatabaseV2
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlDatabaseV2s {
   /**
    * Gets the sql Database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlDatabasesController")
   @operationId("SqlDatabasesController_Get")
   get is ArmResourceRead<SqlDatabaseV2>;
 
@@ -37,6 +38,7 @@ interface SqlDatabaseV2s {
    * Gets the sql Databases.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlDatabasesController")
   @operationId("SqlDatabasesController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<
     SqlDatabaseV2,

@@ -23,12 +23,13 @@ model VmwareJob is Azure.ResourceManager.ProxyResource<JobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface VmwareJobs {
   /**
    * Get a VmwareJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervJobsController")
   @operationId("HypervJobsController_Get")
   get is ArmResourceRead<VmwareJob>;
 
@@ -36,6 +37,7 @@ interface VmwareJobs {
    * List VmwareJob resources by VmwareSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervJobsController")
   @operationId("HypervJobsController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<VmwareJob>;
 }

@@ -23,16 +23,18 @@ model HypervJob is Azure.ResourceManager.ProxyResource<JobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HypervJobs {
   /**
    * Get a HypervJob
    */
+  @tag("HypervJobs")
   get is ArmResourceRead<HypervJob>;
 
   /**
    * List HypervJob resources by HypervSite
    */
+  @tag("HypervJobs")
   listByHypervSite is ArmResourceListByParent<HypervJob>;
 }
 

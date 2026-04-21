@@ -23,12 +23,13 @@ model Vcenter is Azure.ResourceManager.ProxyResource<VcenterProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Vcenters {
   /**
    * Get a Vcenter
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("VcenterController")
   @operationId("VcenterController_Get")
   get is ArmResourceRead<Vcenter>;
 
@@ -36,6 +37,7 @@ interface Vcenters {
    * Create a Vcenter
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("VcenterController")
   @operationId("VcenterController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     Vcenter,
@@ -47,6 +49,7 @@ interface Vcenters {
    * Delete a Vcenter
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("VcenterController")
   @operationId("VcenterController_Delete")
   delete is ArmResourceDeleteSync<Vcenter>;
 
@@ -54,6 +57,7 @@ interface Vcenters {
    * List Vcenter resources by VmwareSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("VcenterController")
   @operationId("VcenterController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<
     Vcenter,

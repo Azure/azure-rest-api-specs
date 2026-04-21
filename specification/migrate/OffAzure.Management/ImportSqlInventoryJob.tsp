@@ -24,12 +24,13 @@ model ImportSqlInventoryJob
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImportSqlInventoryJobs {
   /**
    * Gets the SQL inventory import job with the given job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlImportJobsController")
   @operationId("SqlImportJobsController_GetImportjob")
   getImportjob is ArmResourceRead<ImportSqlInventoryJob>;
 
@@ -37,6 +38,7 @@ interface ImportSqlInventoryJobs {
    * Method to get all import SQL inventory job for the given site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlImportJobsController")
   @operationId("SqlImportJobsController_ListImportjobs")
   listImportjobs is ArmResourceListByParent<
     ImportSqlInventoryJob,

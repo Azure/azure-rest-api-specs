@@ -24,12 +24,13 @@ model HypervRunAsAccountResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HypervRunAsAccountResources {
   /**
    * Get a HypervRunAsAccountResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervRunAsAccountsController")
   @operationId("HypervRunAsAccountsController_Get")
   get is ArmResourceRead<HypervRunAsAccountResource>;
 
@@ -37,6 +38,7 @@ interface HypervRunAsAccountResources {
    * List HypervRunAsAccountResource resources by HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervRunAsAccountsController")
   @operationId("HypervRunAsAccountsController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<HypervRunAsAccountResource>;
 }

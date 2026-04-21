@@ -22,7 +22,7 @@ model ServerSiteResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServerSiteOperationsStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -46,12 +46,13 @@ interface ServerSiteOperationsStatusOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServerSiteResources {
   /**
    * Get a ServerSiteResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_Get")
   get is ArmResourceRead<ServerSiteResource>;
 
@@ -59,6 +60,7 @@ interface ServerSiteResources {
    * Create a ServerSiteResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ServerSiteResource,
@@ -70,6 +72,7 @@ interface ServerSiteResources {
    * Update a ServerSiteResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -81,6 +84,7 @@ interface ServerSiteResources {
    * Delete a ServerSiteResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_Delete")
   delete is ArmResourceDeleteSync<ServerSiteResource>;
 
@@ -88,6 +92,7 @@ interface ServerSiteResources {
    * List ServerSiteResource resources by resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ServerSiteResource>;
 
@@ -95,6 +100,7 @@ interface ServerSiteResources {
    * List ServerSiteResource resources by subscription ID
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_ListBySubscription")
   listBySubscription is ArmListBySubscription<ServerSiteResource>;
 
@@ -102,6 +108,7 @@ interface ServerSiteResources {
    * Get the error summary for a server site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_ComputeErrorSummary")
   computeErrorSummary is ArmResourceActionSync<
     ServerSiteResource,
@@ -113,6 +120,7 @@ interface ServerSiteResources {
    * Get a serve site usage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_Computeusage")
   computeusage is ArmResourceActionSync<
     ServerSiteResource,
@@ -125,6 +133,7 @@ interface ServerSiteResources {
    *             machine and the deep discovery of the application installed in the machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_ExportApplications")
   exportApplications is ArmResourceActionAsync<
     ServerSiteResource,
@@ -137,6 +146,7 @@ interface ServerSiteResources {
    *             machine and the errors encountered during guest discovery of the machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_ExportMachineErrors")
   exportMachineErrors is ArmResourceActionAsync<
     ServerSiteResource,
@@ -148,6 +158,7 @@ interface ServerSiteResources {
    * Method to get site health summary.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_ListHealthSummary")
   @list
   listHealthSummary is ArmResourceActionSync<
@@ -160,6 +171,7 @@ interface ServerSiteResources {
    * Operation to refresh a site
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_RefreshSite")
   refreshSite is ArmResourceActionAsync<
     ServerSiteResource,
@@ -171,6 +183,7 @@ interface ServerSiteResources {
    * Method to get site usage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_Summary")
   summary is ArmResourceActionSync<
     ServerSiteResource,
@@ -183,6 +196,7 @@ interface ServerSiteResources {
    *             in a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_UpdateDependencyMapStatus")
   updateDependencyMapStatus is ArmResourceActionAsync<
     ServerSiteResource,
@@ -194,6 +208,7 @@ interface ServerSiteResources {
    * Operation to update custom properties for servers
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerSitesController")
   @operationId("ServerSitesController_UpdateProperties")
   updateProperties is ArmResourceActionAsync<
     ServerSiteResource,
@@ -205,6 +220,7 @@ interface ServerSiteResources {
    * API to list client group members for the selected client group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerDependencyMapController")
   @operationId("ServerDependencyMapController_ClientGroupMembers")
   clientGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
@@ -216,6 +232,7 @@ interface ServerSiteResources {
    * API to generate report containing agentless dependencies.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerDependencyMapController")
   @operationId("ServerDependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionAsync<
     ServerSiteResource,
@@ -227,6 +244,7 @@ interface ServerSiteResources {
    * API to generate coarse map for the list of machines.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerDependencyMapController")
   @operationId("ServerDependencyMapController_GenerateCoarseMap")
   generateCoarseMap is ArmResourceActionAsync<
     ServerSiteResource,
@@ -238,6 +256,7 @@ interface ServerSiteResources {
    * API to generate detailed map for a selected machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerDependencyMapController")
   @operationId("ServerDependencyMapController_GenerateDetailedMap")
   generateDetailedMap is ArmResourceActionAsync<
     ServerSiteResource,
@@ -249,6 +268,7 @@ interface ServerSiteResources {
    * API to list server group members for the selected server group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerDependencyMapController")
   @operationId("ServerDependencyMapController_ServerGroupMembers")
   serverGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
@@ -260,6 +280,7 @@ interface ServerSiteResources {
    * A operation status resource belonging to a site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ServerOperationsStatusController")
   @operationId("ServerOperationsStatusController_GetServerSiteOperationsStatus")
   getServerSiteOperationsStatus is ServerSiteOperationsStatusOps.Read<
     OperationStatus,

@@ -48,12 +48,13 @@ model ExportImportedMachinesJob
   displayName?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExportImportedMachinesJobs {
   /**
    * Gets the export imported machines job with the given job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportJobsController")
   @operationId("ImportJobsController_GetExportjob")
   getExportjob is ArmResourceRead<ExportImportedMachinesJob>;
 
@@ -61,6 +62,7 @@ interface ExportImportedMachinesJobs {
    * Method to get all export import machines job for the given site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportJobsController")
   @operationId("ImportJobsController_ListExportjobs")
   listExportjobs is ArmResourceListByParent<
     ExportImportedMachinesJob,

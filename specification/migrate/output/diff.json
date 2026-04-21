@@ -1,135 +1,7 @@
 {
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/hypervSites": {
-      "get": {
-        "summary__deleted": "Get all hyperv  sites."
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/importSites": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/masterSites": {
-      "get": {
-        "summary__deleted": "Get all the sites in the subscription.",
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/serverSites": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/vmwareSites": {
-      "get": {
-        "summary__deleted": "Get all vmware sites.",
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites": {
-      "get": {
-        "summary__deleted": "Get all hyperv sites."
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clientGroupMembers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervDependencyMapController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -141,16 +13,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clusters": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "HypervClusterController"
-          ],
-          [
-            "+",
-            "HypervClusters"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -179,29 +41,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clusters/{clusterName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervClusterController"
-          ],
-          [
-            "+",
-            "HypervClusters"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "HypervClusterController"
-          ],
-          [
-            "+",
-            "HypervClusters"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -212,32 +52,10 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "HypervClusterController"
-          ],
-          [
-            "+",
-            "HypervClusters"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/computeErrorSummary": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -255,16 +73,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/computeusage": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -282,16 +90,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/exportApplications": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
           "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
@@ -320,16 +118,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/exportDependencies": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervDependencyMapController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -341,16 +129,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/exportMachineErrors": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
           "__new": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine."
@@ -366,16 +144,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/generateCoarseMap": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervDependencyMapController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -387,16 +155,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/generateDetailedMap": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervDependencyMapController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -408,16 +166,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/hosts": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "HypervHostController"
-          ],
-          [
-            "+",
-            "HypervHosts"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -446,29 +194,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/hosts/{hostName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervHostController"
-          ],
-          [
-            "+",
-            "HypervHosts"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "HypervHostController"
-          ],
-          [
-            "+",
-            "HypervHosts"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -479,49 +205,17 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "HypervHostController"
-          ],
-          [
-            "+",
-            "HypervHosts"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/listHealthSummary": {
       "post": {
         "x-ms-pageable__added": {
           "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "HypervMachinesController"
-          ],
-          [
-            "+",
-            "HypervMachines"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -558,114 +252,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervMachinesController"
-          ],
-          [
-            "+",
-            "HypervMachines"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "HypervMachinesController"
-          ],
-          [
-            "+",
-            "HypervMachines"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervSoftwareInventoriesController"
-          ],
-          [
-            "+",
-            "HypervVmSoftwareInventories"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervSoftwareInventoriesController"
-          ],
-          [
-            "+",
-            "HypervVmSoftwareInventories"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervOperationsStatusController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervRunAsAccountsController"
-          ],
-          [
-            "+",
-            "HypervRunAsAccountResources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts/{accountName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervRunAsAccountsController"
-          ],
-          [
-            "+",
-            "HypervRunAsAccountResources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/serverGroupMembers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervDependencyMapController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -675,32 +263,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/summary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "HypervSitesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/updateDependencyMapStatus": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervDependencyMapController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "description": {
           "__old": "Method to enable disable dependency map status for machines\r\n            in a site.",
           "__new": "Method to enable disable dependency map status for machines\nin a site."
@@ -716,16 +280,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/updateProperties": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "HypervMachinesController"
-          ],
-          [
-            "+",
-            "HypervSites"
-          ]
-        ],
         "description": {
           "__old": "Method to update custom properties for HYPERV machines\r\n            in a site.",
           "__new": "Method to update custom properties for HYPERV machines\nin a site."
@@ -739,82 +293,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/deleteImportedMachines": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -830,158 +310,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/deleteJobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "DeleteImportMachinesJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/deleteJobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "DeleteImportMachinesJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/exportJobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "ExportImportedMachinesJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/exportJobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "ExportImportedMachinesJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/exportUri": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/importJobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "ImportMachinesJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/importJobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "ImportMachinesJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/importUri": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "ImportSitesController"
-          ],
-          [
-            "+",
-            "ImportSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/jobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "ImportJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/jobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportJobsController"
-          ],
-          [
-            "+",
-            "ImportJobs"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/machines": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "ImportMachinesController"
-          ],
-          [
-            "+",
-            "ImportMachines"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1018,72 +348,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/importSites/{siteName}/machines/{machineName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ImportMachinesController"
-          ],
-          [
-            "+",
-            "ImportMachines"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "ImportMachinesController"
-          ],
-          [
-            "+",
-            "ImportMachines"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites": {
-      "get": {
-        "summary__deleted": "Get all sites.",
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}": {
-      "get": {
-        "summary__deleted": "Method to get a master site.",
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1094,152 +360,10 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/errorSummary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/operationsStatus/{operationStatusName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "MasterSitesOperationsStatusController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "PrivateEndpointConnectionController"
-          ],
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections/{peConnectionName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "PrivateEndpointConnectionController"
-          ],
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "PrivateEndpointConnectionController"
-          ],
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "PrivateEndpointConnectionController"
-          ],
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "PrivateLinkResourcesController"
-          ],
-          [
-            "+",
-            "PrivateLinkResources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "PrivateLinkResourcesController"
-          ],
-          [
-            "+",
-            "PrivateLinkResources"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/refreshArcStatus": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "MasterSitesController"
-          ],
-          [
-            "+",
-            "MasterSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -1261,108 +385,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/discoverySiteDataSources": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlDiscoverySiteDataSourceController"
-          ],
-          [
-            "+",
-            "SqlDiscoverySiteDataSources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/discoverySiteDataSources/{discoverySiteDataSourceName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlDiscoverySiteDataSourceController"
-          ],
-          [
-            "+",
-            "SqlDiscoverySiteDataSources"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "SqlDiscoverySiteDataSourceController"
-          ],
-          [
-            "+",
-            "SqlDiscoverySiteDataSources"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1373,46 +397,10 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "SqlDiscoverySiteDataSourceController"
-          ],
-          [
-            "+",
-            "SqlDiscoverySiteDataSources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/errorSummary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportSqlServerErrors": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -1440,16 +428,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportSqlServers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -1459,60 +437,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportUri": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importJobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlImportJobsController"
-          ],
-          [
-            "+",
-            "ImportSqlInventoryJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importJobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlImportJobsController"
-          ],
-          [
-            "+",
-            "ImportSqlInventoryJobs"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importUri": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1527,62 +453,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/jobs": {
-      "get": {
-        "summary__deleted": "Gets the sql Jobs.",
-        "tags": [
-          [
-            "-",
-            "SqlJobsController"
-          ],
-          [
-            "+",
-            "SqlJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/jobs/{jobName}": {
-      "get": {
-        "summary__deleted": "Gets the sql Job.",
-        "tags": [
-          [
-            "-",
-            "SqlJobsController"
-          ],
-          [
-            "+",
-            "SqlJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/operationsStatus/{operationStatusName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlOperationsStatusController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/refresh": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -1592,46 +464,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/runAsAccounts": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlRunAsAccountsController"
-          ],
-          [
-            "+",
-            "SqlRunAsAccounts"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/runAsAccounts/{accountName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlRunAsAccountsController"
-          ],
-          [
-            "+",
-            "SqlRunAsAccounts"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlAvailabilityGroups": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "SqlAvailabilityGroupsController"
-          ],
-          [
-            "+",
-            "SqlAvailabilityGroups"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1684,36 +518,12 @@
               "type": "string",
               "pattern": "^[a-zA-Z0-9-]{3,24}$"
             }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlAvailabilityGroups/{sqlAvailabilityGroupName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlAvailabilityGroupsController"
-          ],
-          [
-            "+",
-            "SqlAvailabilityGroups"
           ]
         ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlDatabases": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "SqlDatabasesController"
-          ],
-          [
-            "+",
-            "SqlDatabaseV2s"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1766,36 +576,12 @@
               "type": "string",
               "pattern": "^[a-zA-Z0-9-]{3,24}$"
             }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlDatabases/{sqlDatabaseName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlDatabasesController"
-          ],
-          [
-            "+",
-            "SqlDatabaseV2s"
           ]
         ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlServers": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "SqlServersController"
-          ],
-          [
-            "+",
-            "SqlServerV2s"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1852,162 +638,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/sqlServers/{sqlServerName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SqlServersController"
-          ],
-          [
-            "+",
-            "SqlServerV2s"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "SqlServersController"
-          ],
-          [
-            "+",
-            "SqlServerV2s"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/summary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/validateAndImportUri": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "SqlSitesController"
-          ],
-          [
-            "+",
-            "SqlSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/discoverySiteDataSources": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppDiscoverySiteDataSourcesController"
-          ],
-          [
-            "+",
-            "DiscoverySiteDataSources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/discoverySiteDataSources/{discoverySiteDataSourceName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppDiscoverySiteDataSourcesController"
-          ],
-          [
-            "+",
-            "DiscoverySiteDataSources"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "WebAppDiscoverySiteDataSourcesController"
-          ],
-          [
-            "+",
-            "DiscoverySiteDataSources"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2018,46 +650,10 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "WebAppDiscoverySiteDataSourcesController"
-          ],
-          [
-            "+",
-            "DiscoverySiteDataSources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/errorSummary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/exportInventory": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2069,16 +665,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/extendedMachines": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppExtendedMachinesController"
-          ],
-          [
-            "+",
-            "WebAppExtendedMachines"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -2131,20 +717,6 @@
               "type": "string",
               "pattern": "^[a-zA-Z0-9-]{3,24}$"
             }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/extendedMachines/{extendedMachineName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppExtendedMachinesController"
-          ],
-          [
-            "+",
-            "WebAppExtendedMachines"
           ]
         ]
       }
@@ -2267,16 +839,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/refresh": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2284,48 +846,6 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/runasaccounts": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppRunAsAccountsController"
-          ],
-          [
-            "+",
-            "WebAppRunAsAccounts"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/runasaccounts/{accountName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "WebAppRunAsAccountsController"
-          ],
-          [
-            "+",
-            "WebAppRunAsAccounts"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/summary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "WebAppSitesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications": {
@@ -2472,16 +992,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/updateProperties": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "WebAppPropertiesController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ],
         "description": {
           "__old": "Method to update properties for web applications.\n            in a site.",
           "__new": "Method to update properties for web applications.\nin a site."
@@ -2497,16 +1007,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/webApplications": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "WebApplicationsController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -2565,16 +1065,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/webServers": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "WebServersController"
-          ],
-          [
-            "+",
-            "WebAppSites"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -2631,44 +1121,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2679,44 +1133,10 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/clientGroupMembers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerDependencyMapController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2728,16 +1148,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/computeErrorSummary": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -2755,16 +1165,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/computeusage": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -2782,16 +1182,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/exportApplications": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
           "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
@@ -2820,16 +1210,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/exportDependencies": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerDependencyMapController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2841,16 +1221,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/exportMachineErrors": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
           "__new": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine."
@@ -2866,16 +1236,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/generateCoarseMap": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerDependencyMapController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2887,16 +1247,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/generateDetailedMap": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerDependencyMapController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2906,63 +1256,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/jobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerJobsController"
-          ],
-          [
-            "+",
-            "ServerJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/jobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerJobsController"
-          ],
-          [
-            "+",
-            "ServerJobs"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/listHealthSummary": {
       "post": {
         "x-ms-pageable__added": {
           "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "ServersController"
-          ],
-          [
-            "+",
-            "Servers"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -2999,98 +1301,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServersController"
-          ],
-          [
-            "+",
-            "Servers"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "ServersController"
-          ],
-          [
-            "+",
-            "Servers"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "ServersController"
-          ],
-          [
-            "+",
-            "Servers"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerSoftwareInventoriesController"
-          ],
-          [
-            "+",
-            "ServerSoftwareInventories"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerSoftwareInventoriesController"
-          ],
-          [
-            "+",
-            "ServerSoftwareInventories"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerOperationsStatusController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3112,46 +1324,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/runAsAccounts": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerRunAsAccountsController"
-          ],
-          [
-            "+",
-            "ServerRunAsAccounts"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/runAsAccounts/{accountName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "ServerRunAsAccountsController"
-          ],
-          [
-            "+",
-            "ServerRunAsAccounts"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/serverGroupMembers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerDependencyMapController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3161,32 +1335,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/summary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/updateDependencyMapStatus": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "description": {
           "__old": "Method to enable disable dependency map status for machines\r\n            in a site.",
           "__new": "Method to enable disable dependency map status for machines\nin a site."
@@ -3202,16 +1352,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/updateProperties": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ServerSitesController"
-          ],
-          [
-            "+",
-            "ServerSiteResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3221,83 +1361,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites": {
-      "get": {
-        "summary__deleted": "Get all vmware sites.",
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/clientGroupMembers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "DependencyMapController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3309,16 +1374,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/computeErrorSummary": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -3336,16 +1391,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/computeusage": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -3363,16 +1408,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportApplications": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
           "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
@@ -3401,16 +1436,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportDependencies": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "DependencyMapController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3422,16 +1447,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportMachineErrors": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
           "__new": "Method to generate report containing\nmachine and the errors encountered during guest discovery of the machine."
@@ -3447,16 +1462,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/exportMachines": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "description": {
           "__old": "Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.",
           "__new": "Method to generate report containing\nmachine and the deep discovery of the application installed in the machine."
@@ -3472,16 +1477,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/generateCoarseMap": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "DependencyMapController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3493,16 +1488,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/generateDetailedMap": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "DependencyMapController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3512,91 +1497,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/hosts": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VmwareHostController"
-          ],
-          [
-            "+",
-            "VmwareHosts"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/hosts/{hostName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VmwareHostController"
-          ],
-          [
-            "+",
-            "VmwareHosts"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/jobs": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervJobsController"
-          ],
-          [
-            "+",
-            "VmwareJobs"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/jobs/{jobName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "HypervJobsController"
-          ],
-          [
-            "+",
-            "VmwareJobs"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/listHealthSummary": {
       "post": {
         "x-ms-pageable__added": {
           "nextLinkName": "nextLink"
-        },
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "MachinesController"
-          ],
-          [
-            "+",
-            "MachineResources"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -3633,72 +1542,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "MachinesController"
-          ],
-          [
-            "+",
-            "MachineResources"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "MachinesController"
-          ],
-          [
-            "+",
-            "MachineResources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VmwareSoftwareInventoriesController"
-          ],
-          [
-            "+",
-            "VmwareMachineSoftwareInventories"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VmwareSoftwareInventoriesController"
-          ],
-          [
-            "+",
-            "VmwareMachineSoftwareInventories"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/start": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "MachinesController"
-          ],
-          [
-            "+",
-            "MachineResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3722,16 +1567,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/stop": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "MachinesController"
-          ],
-          [
-            "+",
-            "MachineResources"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3753,60 +1588,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/operationsStatus/{operationStatusName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VmwareOperationsStatus"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "RunAsAccountsController"
-          ],
-          [
-            "+",
-            "VmwareRunAsAccountResources"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts/{accountName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "RunAsAccountsController"
-          ],
-          [
-            "+",
-            "VmwareRunAsAccountResources"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/serverGroupMembers": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "DependencyMapController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3816,32 +1599,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/summary": {
-      "post": {
-        "tags": [
-          [
-            "-",
-            "SitesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateDependencyMapStatus": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "VmwarePropertiesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "description": {
           "__old": "Method to enable disable dependency map status for machines\n            in a\nsite.",
           "__new": "Method to enable disable dependency map status for machines\nin a\nsite."
@@ -3869,16 +1628,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateProperties": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "VmwarePropertiesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -3890,16 +1639,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateRunAsAccount": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "VmwarePropertiesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "description": {
           "__old": "Method to associate Run as account to machine\r\n            in a site.",
           "__new": "Method to associate Run as account to machine\nin a site."
@@ -3927,16 +1666,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateTags": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "VmwarePropertiesController"
-          ],
-          [
-            "+",
-            "VmwareSites"
-          ]
-        ],
         "description": {
           "__old": "Method to associate Run as account to machine\r\n            in a site.",
           "__new": "Method to associate Run as account to machine\nin a site."
@@ -3964,16 +1693,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/vcenters": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "VcenterController"
-          ],
-          [
-            "+",
-            "Vcenters"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -4002,29 +1721,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/vcenters/{vcenterName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VcenterController"
-          ],
-          [
-            "+",
-            "Vcenters"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "VcenterController"
-          ],
-          [
-            "+",
-            "Vcenters"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -4035,18 +1732,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "VcenterController"
-          ],
-          [
-            "+",
-            "Vcenters"
-          ]
-        ]
       }
     }
   },

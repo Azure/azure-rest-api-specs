@@ -24,22 +24,25 @@ model TomcatWebApplications
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TomcatWebApplicationsController {
   /**
    * Method to get an Tomcat web application.
    */
+  @tag("TomcatWebApplicationsController")
   get is ArmResourceRead<TomcatWebApplications>;
 
   /**
    * Updates the Tomcat web application tags.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("TomcatWebApplicationsController")
   update is ArmCustomPatchSync<TomcatWebApplications>;
 
   /**
    * Method to get all Tomcat web application.
    */
+  @tag("TomcatWebApplicationsController")
   listByWebAppSite is ArmResourceListByParent<
     TomcatWebApplications,
     Parameters = {

@@ -24,12 +24,13 @@ model DiscoverySiteDataSource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DiscoverySiteDataSources {
   /**
    * Method to get a Web app data source in site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("WebAppDiscoverySiteDataSourcesController")
   @operationId("WebAppDiscoverySiteDataSourcesController_Get")
   get is ArmResourceRead<DiscoverySiteDataSource>;
 
@@ -37,6 +38,7 @@ interface DiscoverySiteDataSources {
    * Method to create or update a Web app data source in site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("WebAppDiscoverySiteDataSourcesController")
   @operationId("WebAppDiscoverySiteDataSourcesController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     DiscoverySiteDataSource,
@@ -49,6 +51,7 @@ interface DiscoverySiteDataSources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("WebAppDiscoverySiteDataSourcesController")
   @operationId("WebAppDiscoverySiteDataSourcesController_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DiscoverySiteDataSource,
@@ -59,6 +62,7 @@ interface DiscoverySiteDataSources {
    * Method to get all Web app data sources in site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("WebAppDiscoverySiteDataSourcesController")
   @operationId("WebAppDiscoverySiteDataSourcesController_ListByWebAppSite")
   listByWebAppSite is ArmResourceListByParent<DiscoverySiteDataSource>;
 }

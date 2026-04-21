@@ -24,12 +24,13 @@ model DeleteImportMachinesJob
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DeleteImportMachinesJobs {
   /**
    * Gets the delete imported machines job with the given job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportJobsController")
   @operationId("ImportJobsController_GetDeletejob")
   getDeletejob is ArmResourceRead<DeleteImportMachinesJob>;
 
@@ -37,6 +38,7 @@ interface DeleteImportMachinesJobs {
    * Method to get all delete import machines job for the given site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportJobsController")
   @operationId("ImportJobsController_ListDeletejobs")
   listDeletejobs is ArmResourceListByParent<
     DeleteImportMachinesJob,

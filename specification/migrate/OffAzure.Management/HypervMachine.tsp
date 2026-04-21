@@ -24,12 +24,13 @@ model HypervMachine
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HypervMachines {
   /**
    * Get a HypervMachine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervMachinesController")
   @operationId("HypervMachinesController_Get")
   get is ArmResourceRead<HypervMachine>;
 
@@ -37,6 +38,7 @@ interface HypervMachines {
    * Update a HypervMachine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervMachinesController")
   @operationId("HypervMachinesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<HypervMachine, PatchModel = HypervMachineUpdate>;
@@ -45,6 +47,7 @@ interface HypervMachines {
    * List HypervMachine resources by HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervMachinesController")
   @operationId("HypervMachinesController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<
     HypervMachine,

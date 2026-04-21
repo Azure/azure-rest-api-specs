@@ -24,16 +24,18 @@ model IisWebServers
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface IisWebServersController {
   /**
    * Method to get an IIS web server.
    */
+  @tag("IisWebServersController")
   get is ArmResourceRead<IisWebServers>;
 
   /**
    * Method to get all IIS web servers.
    */
+  @tag("IisWebServersController")
   listByWebAppSite is ArmResourceListByParent<
     IisWebServers,
     Parameters = {

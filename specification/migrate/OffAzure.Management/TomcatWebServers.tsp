@@ -24,16 +24,18 @@ model TomcatWebServers
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TomcatWebServersController {
   /**
    * Method to get an Tomcat web server.
    */
+  @tag("TomcatWebServersController")
   get is ArmResourceRead<TomcatWebServers>;
 
   /**
    * Method to get all Tomcat web servers.
    */
+  @tag("TomcatWebServersController")
   listByWebAppSite is ArmResourceListByParent<
     TomcatWebServers,
     Parameters = {

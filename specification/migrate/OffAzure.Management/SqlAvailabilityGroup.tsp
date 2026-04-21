@@ -24,12 +24,13 @@ model SqlAvailabilityGroup
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlAvailabilityGroups {
   /**
    * Gets the sql availability group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlAvailabilityGroupsController")
   @operationId("SqlAvailabilityGroupsController_Get")
   get is ArmResourceRead<SqlAvailabilityGroup>;
 
@@ -37,6 +38,7 @@ interface SqlAvailabilityGroups {
    * Gets the sql availability groups.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("SqlAvailabilityGroupsController")
   @operationId("SqlAvailabilityGroupsController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<
     SqlAvailabilityGroup,

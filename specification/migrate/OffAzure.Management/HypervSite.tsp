@@ -21,7 +21,7 @@ model HypervSite is Azure.ResourceManager.TrackedResource<SiteProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HypervOperationsStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -45,12 +45,13 @@ interface HypervOperationsStatusOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HypervSites {
   /**
    * Get a HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_Get")
   get is ArmResourceRead<HypervSite>;
 
@@ -58,6 +59,7 @@ interface HypervSites {
    * Create a HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_Create")
   create is ArmResourceCreateOrReplaceSync<HypervSite>;
 
@@ -65,6 +67,7 @@ interface HypervSites {
    * Update a HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<HypervSite, PatchModel = HypervSiteUpdate>;
@@ -73,23 +76,29 @@ interface HypervSites {
    * Delete a HypervSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_Delete")
   delete is ArmResourceDeleteSync<HypervSite>;
 
   /**
    * Get all the hyperv sites in the subscription.
    */
+  @summary("Get all hyperv sites.")
+  @tag("HypervSites")
   listByResourceGroup is ArmResourceListByParent<HypervSite>;
 
   /**
    * Get all the hyperv  sites in the subscription.
    */
+  @summary("Get all hyperv  sites.")
+  @tag("HypervSites")
   listBySubscription is ArmListBySubscription<HypervSite>;
 
   /**
    * Method to get site error summary.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_ComputeErrorSummary")
   computeErrorSummary is ArmResourceActionSync<
     HypervSite,
@@ -101,6 +110,7 @@ interface HypervSites {
    * Get a hyperv site usage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_Computeusage")
   computeusage is ArmResourceActionSync<
     HypervSite,
@@ -113,6 +123,7 @@ interface HypervSites {
    *             machine and the deep discovery of the application installed in the machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_ExportApplications")
   exportApplications is ArmResourceActionAsync<
     HypervSite,
@@ -125,6 +136,7 @@ interface HypervSites {
    *             machine and the errors encountered during guest discovery of the machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_ExportMachineErrors")
   exportMachineErrors is ArmResourceActionAsync<
     HypervSite,
@@ -136,6 +148,7 @@ interface HypervSites {
    * Method to get site health summary.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_ListHealthSummary")
   @list
   listHealthSummary is ArmResourceActionSync<
@@ -148,6 +161,7 @@ interface HypervSites {
    * Method to get site usage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervSitesController")
   @operationId("HypervSitesController_Summary")
   summary is ArmResourceActionSync<
     HypervSite,
@@ -159,6 +173,7 @@ interface HypervSites {
    * API to list client group members for the selected client group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervDependencyMapController")
   @operationId("HypervDependencyMapController_ClientGroupMembers")
   clientGroupMembers is ArmResourceActionAsync<
     HypervSite,
@@ -170,6 +185,7 @@ interface HypervSites {
    * API to generate report containing agentless dependencies.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervDependencyMapController")
   @operationId("HypervDependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionAsync<
     HypervSite,
@@ -181,6 +197,7 @@ interface HypervSites {
    * API to generate coarse map for the list of machines.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervDependencyMapController")
   @operationId("HypervDependencyMapController_GenerateCoarseMap")
   generateCoarseMap is ArmResourceActionAsync<
     HypervSite,
@@ -192,6 +209,7 @@ interface HypervSites {
    * API to generate detailed map for a selected machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervDependencyMapController")
   @operationId("HypervDependencyMapController_GenerateDetailedMap")
   generateDetailedMap is ArmResourceActionAsync<
     HypervSite,
@@ -203,6 +221,7 @@ interface HypervSites {
    * API to list server group members for the selected server group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervDependencyMapController")
   @operationId("HypervDependencyMapController_ServerGroupMembers")
   serverGroupMembers is ArmResourceActionAsync<
     HypervSite,
@@ -215,6 +234,7 @@ interface HypervSites {
    *             in a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervDependencyMapController")
   @operationId("HypervDependencyMapController_UpdateDependencyMapStatus")
   updateDependencyMapStatus is ArmResourceActionAsync<
     HypervSite,
@@ -227,6 +247,7 @@ interface HypervSites {
    *             in a site.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervMachinesController")
   @operationId("HypervMachinesController_UpdateProperties")
   updateProperties is ArmResourceActionAsync<
     HypervSite,
@@ -238,6 +259,7 @@ interface HypervSites {
    * Method to get operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("HypervOperationsStatusController")
   @operationId("HypervOperationsStatusController_GetHypervOperationsStatus")
   getHypervOperationsStatus is HypervOperationsStatusOps.Read<
     OperationStatus,

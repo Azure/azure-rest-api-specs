@@ -23,12 +23,13 @@ model ImportJob is Azure.ResourceManager.ProxyResource<JobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImportJobs {
   /**
    * Get a ImportJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportJobsController")
   @operationId("ImportJobsController_Get")
   get is ArmResourceRead<ImportJob>;
 
@@ -36,6 +37,7 @@ interface ImportJobs {
    * List ImportJob resources by ImportSite
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ImportJobsController")
   @operationId("ImportJobsController_ListByImportSite")
   listByImportSite is ArmResourceListByParent<ImportJob>;
 }
