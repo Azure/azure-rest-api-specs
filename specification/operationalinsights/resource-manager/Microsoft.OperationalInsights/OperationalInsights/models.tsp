@@ -618,7 +618,7 @@ union TableSubTypeEnum {
  * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union OperationalInsightsTableProvisioningState {
+union ProvisioningStateEnum {
   string,
 
   /**
@@ -630,29 +630,6 @@ union OperationalInsightsTableProvisioningState {
    * Table schema is stable and without changes, table data is being updated.
    */
   InProgress: "InProgress",
-
-  /**
-   * Table state is stable and without changes, table is unlocked and open for new updates.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Table state is deleting.
-   */
-  Deleting: "Deleting",
-}
-
-/**
- * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union ProvisioningStateEnum {
-  string,
-
-  /**
-   * Table schema is still being built and updated, table is currently locked for any changes till the procedure is done.
-   */
-  Updating: "Updating",
 
   /**
    * Table state is stable and without changes, table is unlocked and open for new updates.
@@ -2281,7 +2258,7 @@ model TableProperties {
    * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: OperationalInsightsTableProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   /**
    * True - Value originates from workspace retention in days, False - Customer specific.
@@ -2980,6 +2957,8 @@ model AccessRulePropertiesSubscriptionsItem {
    */
   id?: Azure.Core.armResourceIdentifier;
 }
+
+@@clientName(AccessRulePropertiesSubscriptionsItem, "AccessRulePropertiesSubscriptionsItem", "go");
 
 /**
  * Summary rule properties.
