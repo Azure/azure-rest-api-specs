@@ -4,7 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Devices;
 
-@@clientName(Microsoft.Devices, "IotHubClient", "javascript");
+@@clientName(Microsoft.Devices, "IotHubClient", "javascript,java");
 @@clientName(IotHubDescriptions.getEndpointHealth,
   "listEndpointHealth",
   "javascript"
