@@ -46,11 +46,15 @@ using TypeSpec.Rest;
   "endDateTimeUtc",
   "java"
 );
+@@clientName(GetLatencyScorecardsParameters.endDateTimeUTC, "endOn", "csharp");
 @@clientName(GetTimeseriesParameters.startDateTimeUTC,
   "startDateTimeUtc",
   "java"
 );
 @@clientName(GetTimeseriesParameters.endDateTimeUTC, "endDateTimeUtc", "java");
+@@clientName(GetTimeseriesParameters.startDateTimeUTC, "startOn", "csharp");
+@@clientName(GetTimeseriesParameters.endDateTimeUTC, "endOn", "csharp");
+@@clientName(GetTimeseriesParameters.timeseriesType, "timeSeriesType", "csharp");
 
 @@clientName(MinimumTLSVersion.`1.0`, "One0", "go");
 @@clientName(MinimumTLSVersion.`1.2`, "One2", "go");
@@ -97,7 +101,11 @@ interface ProfilesOverrides {
 @@clientName(TimeseriesProperties.startDateTimeUTC, "StartOn", "csharp");
 @@clientName(TimeseriesProperties.endDateTimeUTC, "EndOn", "csharp");
 @@clientName(WebApplicationFirewallPolicyProperties.customRules,
-  "CustomRuleList",
+  "RulesList",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten managedRules into parent; baseline 1.4.1 exposed ManagedRuleSets directly on Data."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WebApplicationFirewallPolicyProperties.managedRules,
   "csharp"
 );
 @@clientName(HealthProbeSettingsModel,
@@ -290,6 +298,11 @@ interface ProfilesOverrides {
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(BasicResourceWithSettableIDName,
   "FrontDoorResourceData",
+  "csharp"
+);
+@@clientName(BasicResourceWithSettableIDName.type, "ResourceType", "csharp");
+@@alternateType(BasicResourceWithSettableIDName.type,
+  Azure.Core.armResourceType,
   "csharp"
 );
 @@alternateType(RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id,
