@@ -282,6 +282,23 @@ union DiskSecurityTypes {
 }
 
 /**
+ * Indicates the version of Confidential VM for the resource.
+ */
+union ConfidentialVMVersion {
+  string,
+
+  /**
+   * V1 indicates the resource does not have an associated Virtual Machine Metadata.
+   */
+  V1: "V1",
+
+  /**
+   * V2 indicates the resource has an associated Virtual Machine Metadata.
+   */
+  V2: "V2",
+}
+
+/**
  * Policy for controlling export on the disk.
  */
 union PublicNetworkAccess {
@@ -946,6 +963,14 @@ model DiskSecurityProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   secureVMDiskEncryptionSetId?: string;
+
+  /**
+   * Indicates the version of Confidential VM for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_02)
+  confidentialVMVersion?: ConfidentialVMVersion;
 }
 
 /**

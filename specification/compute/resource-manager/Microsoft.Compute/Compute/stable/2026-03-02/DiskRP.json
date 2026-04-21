@@ -1258,6 +1258,9 @@
           }
         },
         "x-ms-examples": {
+          "get inforamtion about a ConfidentialVM disk with confidentialVMVersion.": {
+            "$ref": "./examples/diskExamples/Disk_Get_WithConfidentialVMVersion.json"
+          },
           "get information about a managed disk.": {
             "$ref": "./examples/diskExamples/Disk_Get.json"
           }
@@ -1829,6 +1832,9 @@
           }
         },
         "x-ms-examples": {
+          "get a ConfidentialVM incremental disk restorePoint resource with confidentialVMVersion.": {
+            "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_Get_WithConfidentialVMVersion.json"
+          },
           "get an incremental disk restorePoint resource.": {
             "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_Get.json"
           },
@@ -2082,6 +2088,9 @@
           }
         },
         "x-ms-examples": {
+          "Get information about a ConfidentialVM snapshot with confidentialVMVersion": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Get_WithConfidentialVMVersion.json"
+          },
           "Get information about a snapshot.": {
             "$ref": "./examples/snapshotExamples/Snapshot_Get.json"
           },
@@ -2651,6 +2660,30 @@
           "description": "The client id of user assigned identity.",
           "readOnly": true
         }
+      }
+    },
+    "ConfidentialVMVersion": {
+      "type": "string",
+      "description": "Indicates the version of Confidential VM for the resource.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVMVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1",
+            "description": "V1 indicates the resource does not have an associated Virtual Machine Metadata."
+          },
+          {
+            "name": "V2",
+            "value": "V2",
+            "description": "V2 indicates the resource has an associated Virtual Machine Metadata."
+          }
+        ]
       }
     },
     "CopyCompletionError": {
@@ -3487,6 +3520,11 @@
         "secureVMDiskEncryptionSetId": {
           "type": "string",
           "description": "ResourceId of the disk encryption set associated to Confidential VM supported disk encrypted with customer managed key"
+        },
+        "confidentialVMVersion": {
+          "$ref": "#/definitions/ConfidentialVMVersion",
+          "description": "Indicates the version of Confidential VM for the resource.",
+          "readOnly": true
         }
       }
     },
