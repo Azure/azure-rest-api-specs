@@ -1,0 +1,278 @@
+{
+  "info": {
+    "description__added": "Monitor Management Client"
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service": {
+      "get": {
+        "responses": {
+          "200": {
+            "examples__deleted": {
+              "application/json": {
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "location": "",
+                "name": "service",
+                "properties": {
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "metrics": [
+                    {
+                      "timeGrain": "PT1M",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ],
+                  "logs": [
+                    {
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ]
+                },
+                "tags": null,
+                "type": ""
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "examples__deleted": {
+              "application/json": {
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "location": "",
+                "name": "service",
+                "properties": {
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "eventHubAuthorizationRuleId": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/authorizationrules/myrule",
+                  "metrics": [
+                    {
+                      "timeGrain": "PT1M",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ],
+                  "logs": [
+                    {
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ]
+                },
+                "tags": null,
+                "type": ""
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Resource__deleted": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "RetentionPolicy__deleted": {
+      "type": "object",
+      "description": "Specifies the retention policy for the log.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "days",
+        "enabled"
+      ]
+    },
+    "Microsoft.Common.ErrorResponse__added": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.RetentionPolicy__added": {
+      "type": "object",
+      "description": "Specifies the retention policy for the log.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "days",
+        "enabled"
+      ]
+    },
+    "LogSettings": {
+      "properties": {
+        "retentionPolicy": {
+          "$ref": {
+            "__old": "#/definitions/RetentionPolicy",
+            "__new": "#/definitions/Microsoft.Common.RetentionPolicy"
+          }
+        }
+      }
+    },
+    "MetricSettings": {
+      "properties": {
+        "retentionPolicy": {
+          "$ref": {
+            "__old": "#/definitions/RetentionPolicy",
+            "__new": "#/definitions/Microsoft.Common.RetentionPolicy"
+          }
+        }
+      }
+    },
+    "ServiceDiagnosticSettingsResource": {
+      "required__added": [
+        "location"
+      ],
+      "properties": {
+        "location__added": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

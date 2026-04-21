@@ -1,0 +1,406 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "version": "2019-03-01",
+    "description": "Monitor Management Client"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/{resourceUri}/providers/microsoft.Insights/metricBaselines": {
+      "get": {
+        "operationId": "Baselines_List",
+        "tags": [
+          "Baseline",
+          "Metric"
+        ],
+        "description": "**Lists the metric baseline values for a resource**.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "metricnames",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "metricnamespace",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "timespan",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "type": "string",
+            "format": "duration"
+          },
+          {
+            "name": "aggregation",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sensitivities",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "resultType",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "Data",
+              "Metadata"
+            ],
+            "x-ms-enum": {
+              "name": "ResultType",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MetricBaselinesResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MetricBaselinesErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric baselines": {
+            "$ref": "./examples/metricBaselines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BaselineMetadata": {
+      "type": "object",
+      "description": "Represents a baseline metadata value.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the baseline metadata."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the baseline metadata."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "MetricBaselinesErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.ErrorResponseError"
+        }
+      }
+    },
+    "MetricBaselinesProperties": {
+      "type": "object",
+      "description": "The response to a metric baselines query.",
+      "properties": {
+        "timespan": {
+          "type": "string",
+          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the metrics been queried."
+        },
+        "baselines": {
+          "type": "array",
+          "description": "The baseline for each time series that was queried.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesBaseline"
+          }
+        }
+      },
+      "required": [
+        "baselines",
+        "interval",
+        "timespan"
+      ]
+    },
+    "MetricBaselinesResponse": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SingleMetricBaseline"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "MetricSingleDimension": {
+      "type": "object",
+      "description": "The metric dimension name and value.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the dimension."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "Microsoft.Common.ErrorDetail": {
+      "type": "object",
+      "description": "Describes details of an error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Unlocalized string which can be used to programmatically identify the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Describes the error in detail and provides debugging information."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorDetailAdditionalInfoItem"
+          }
+        }
+      }
+    },
+    "Microsoft.Common.ErrorDetailAdditionalInfoItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of additional information."
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional information specific to the type.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponseError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Unlocalized string which can be used to programmatically identify the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of additional nested error response info objects, as described by this contract.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorDetail"
+          }
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorResponseErrorAdditionalInfoItem"
+          }
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponseErrorAdditionalInfoItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of additional information."
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional information specific to the type.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SingleBaseline": {
+      "type": "object",
+      "description": "The baseline values for a single sensitivity value.",
+      "properties": {
+        "sensitivity": {
+          "type": "string",
+          "description": "the sensitivity of the baseline.",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "BaselineSensitivity",
+            "modelAsString": true
+          }
+        },
+        "lowThresholds": {
+          "type": "array",
+          "description": "The low thresholds of the baseline.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "highThresholds": {
+          "type": "array",
+          "description": "The high thresholds of the baseline.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "required": [
+        "highThresholds",
+        "lowThresholds",
+        "sensitivity"
+      ]
+    },
+    "SingleMetricBaseline": {
+      "type": "object",
+      "description": "The baseline results of a single metric.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The metric baseline Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the metric baseline resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the metric for which the baselines were retrieved."
+        },
+        "properties": {
+          "$ref": "#/definitions/MetricBaselinesProperties",
+          "description": "The metric baseline properties of the metric.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "properties",
+        "type"
+      ]
+    },
+    "TimeSeriesBaseline": {
+      "type": "object",
+      "description": "The baseline values for a single time series.",
+      "properties": {
+        "aggregation": {
+          "type": "string",
+          "description": "The aggregation type of the metric."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of this time series.",
+          "items": {
+            "$ref": "#/definitions/MetricSingleDimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "timestamps": {
+          "type": "array",
+          "description": "The list of timestamps of the baselines.",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "data": {
+          "type": "array",
+          "description": "The baseline values for each sensitivity.",
+          "items": {
+            "$ref": "#/definitions/SingleBaseline"
+          }
+        },
+        "metadataValues": {
+          "type": "array",
+          "description": "The baseline metadata values.",
+          "items": {
+            "$ref": "#/definitions/BaselineMetadata"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "aggregation",
+        "data",
+        "timestamps"
+      ]
+    }
+  },
+  "parameters": {}
+}

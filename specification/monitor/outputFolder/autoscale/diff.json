@@ -1,0 +1,118 @@
+{
+  "info": {
+    "description__added": "Monitor Management Client"
+  },
+  "definitions": {
+    "Resource__deleted": {
+      "type": "object",
+      "description": "The autoscale setting resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system metadata related to the response.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "AutoscaleErrorResponseError__added": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "details": {
+          "type": "string",
+          "description": "A human-readable representation of the error's details."
+        }
+      }
+    },
+    "AutoscaleErrorResponse": {
+      "properties": {
+        "error": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "code": {
+              "type": "string",
+              "description": "One of a server-defined set of error codes."
+            },
+            "message": {
+              "type": "string",
+              "description": "A human-readable representation of the error."
+            },
+            "target": {
+              "type": "string",
+              "description": "The target of the particular error."
+            },
+            "details": {
+              "type": "string",
+              "description": "A human-readable representation of the error's details."
+            }
+          },
+          "$ref__added": "#/definitions/AutoscaleErrorResponseError"
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+            "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+          }
+        }
+      }
+    },
+    "AutoscaleSettingResource": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

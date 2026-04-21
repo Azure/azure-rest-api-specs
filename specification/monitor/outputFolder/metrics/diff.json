@@ -1,0 +1,868 @@
+{
+  "paths": {
+    "/{resourceUri}/providers/microsoft.Insights/metricDefinitions": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "metricnamespace",
+              "in": "query",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.CommonErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/microsoft.Insights/metrics": {
+      "get": {
+        "x-ms-odata__deleted": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/MetadataValue",
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/AggregationsParameter"
+            }
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/TopParameter"
+            }
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/OrderByParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "aggregation",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "orderby",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "metricnamespace",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/RollUpByParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "rollupby",
+              "in": "query",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.CommonErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/microsoft.insights/metricNamespaces": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/metricDefinitions": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./common-types/v2/commonMonitoringTypes.json#/parameters/RegionParameter",
+              "name__added": "region",
+              "in__added": "query",
+              "required__added": true,
+              "type__added": "string"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "./common-types/v2/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter",
+              "name__added": "metricnamespace",
+              "in__added": "query",
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/metrics": {
+      "get": {
+        "x-ms-odata__deleted": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/MetadataValue",
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/RegionParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "region",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/AggregationsParameter"
+            }
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/TopParameter"
+            }
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/OrderByParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "aggregation",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "orderby",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "metricnamespace",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/RollUpByParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "rollupby",
+              "in": "query",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "x-ms-odata__deleted": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/MetadataValue",
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/RegionParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "region",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/AggregationsParameter"
+            }
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/TopParameter"
+            }
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/OrderByParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "aggregation",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "orderby",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "metricnamespace",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "./common-types/v2/commonMonitoringTypes.json#/parameters/RollUpByParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "rollupby",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post request for subscription level metric data": {
+            "$ref": {
+              "__old": "./examples/GetMultiResourceMetric.json",
+              "__new": "./examples/PostMultiResourceMetric.json"
+            }
+          },
+          "Post request for subscription level metric metadata": {
+            "$ref": {
+              "__old": "./examples/GetMultiResourceMetricMetadata.json",
+              "__new": "./examples/PostMultiResourceMetricMetadata.json"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "MetadataValue__added": {
+      "type": "object",
+      "description": "Represents a metric metadata value.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
+          "description": "The name of the metadata."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the metadata."
+        }
+      }
+    },
+    "Metric__added": {
+      "type": "object",
+      "description": "The result data of a query.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The metric Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the metric resource."
+        },
+        "name": {
+          "$ref": "#/definitions/Microsoft.Common.LocalizableString",
+          "description": "The name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of the metric.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "Percent",
+            "MilliSeconds",
+            "ByteSeconds",
+            "Unspecified",
+            "Cores",
+            "MilliCores",
+            "NanoCores",
+            "BitsPerSecond"
+          ],
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": true
+          }
+        },
+        "timeseries": {
+          "type": "array",
+          "description": "The time series returned when a data query is performed.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesElement"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "timeseries",
+        "type",
+        "unit"
+      ]
+    },
+    "MetricValue__added": {
+      "type": "object",
+      "description": "Represents a metric value.",
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for the metric value in ISO 8601 format."
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "description": "The average value in the time range."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "The least value in the time range."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "The greatest value in the time range."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "The sum of all of the values in the time range."
+        },
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+        }
+      },
+      "required": [
+        "timeStamp"
+      ]
+    },
+    "Microsoft.Common.CommonErrorResponse__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Microsoft.Common.ErrorContract__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse",
+          "description": "The error object."
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponse__added": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.LocalizableString__added": {
+      "type": "object",
+      "description": "The localizable string class.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TimeSeriesElement__added": {
+      "type": "object",
+      "description": "A time series result type. The discriminator value is always TimeSeries in this case.",
+      "properties": {
+        "metadatavalues": {
+          "type": "array",
+          "description": "The metadata values returned if $filter was specified in the call.",
+          "items": {
+            "$ref": "#/definitions/MetadataValue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "data": {
+          "type": "array",
+          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified.",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "x-ms-identifiers": [
+            "timeStamp"
+          ]
+        }
+      }
+    },
+    "MetricDefinition": {
+      "properties": {
+        "name": {
+          "$ref": {
+            "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "unit": {
+          "$ref__deleted": "./common-types/v2/commonMonitoringTypes.json#/definitions/Unit",
+          "type__added": "string",
+          "enum__added": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "Percent",
+            "MilliSeconds",
+            "ByteSeconds",
+            "Unspecified",
+            "Cores",
+            "MilliCores",
+            "NanoCores",
+            "BitsPerSecond"
+          ],
+          "x-ms-enum__added": {
+            "name": "MetricUnit",
+            "modelAsString": true
+          }
+        },
+        "dimensions": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
+              "__new": "#/definitions/Microsoft.Common.LocalizableString"
+            }
+          }
+        }
+      }
+    },
+    "MetricDefinitionCollection": {
+      "description": {
+        "__old": "Represents collection of metric definitions.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "The values for the metric definitions.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
+    "MetricNamespaceCollection": {
+      "description": {
+        "__old": "Represents collection of metric namespaces.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "The values for the metric namespaces.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
+    "Response": {
+      "properties": {
+        "cost": {
+          "type": {
+            "__old": "number",
+            "__new": "integer"
+          }
+        },
+        "interval": {
+          "description": {
+            "__old": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*). \nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified. This is not present if a metadata request was made.",
+            "__new": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*).\nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified. This is not present if a metadata request was made."
+          }
+        },
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/Metric",
+              "__new": "#/definitions/Metric"
+            }
+          }
+        }
+      }
+    },
+    "SubscriptionScopeMetricDefinition": {
+      "properties": {
+        "name": {
+          "$ref": {
+            "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "unit": {
+          "$ref__deleted": "./common-types/v2/commonMonitoringTypes.json#/definitions/Unit",
+          "type__added": "string",
+          "enum__added": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "Percent",
+            "MilliSeconds",
+            "ByteSeconds",
+            "Unspecified",
+            "Cores",
+            "MilliCores",
+            "NanoCores",
+            "BitsPerSecond"
+          ],
+          "x-ms-enum__added": {
+            "name": "MetricUnit",
+            "modelAsString": true
+          }
+        },
+        "dimensions": {
+          "items": {
+            "$ref": {
+              "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
+              "__new": "#/definitions/Microsoft.Common.LocalizableString"
+            }
+          }
+        }
+      }
+    },
+    "SubscriptionScopeMetricDefinitionCollection": {
+      "description": {
+        "__old": "Represents collection of metric definitions.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "The values for the metric definitions.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    }
+  }
+}

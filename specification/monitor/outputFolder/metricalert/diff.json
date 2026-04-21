@@ -1,0 +1,601 @@
+{
+  "info": {
+    "x-ms-code-generation-settings__deleted": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/metricAlerts": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/metricAlerts": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List metric alert rules": {
+            "$ref": {
+              "__old": "./examples/listMetricAlert.json",
+              "__new": "./examples/listByResourceGroupMetricAlert.json"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/metricAlerts/{ruleName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/metricAlerts/{ruleName}/status": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/MetricAlertErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetail__deleted": {
+      "type": "object",
+      "description": "Describes details of an error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Unlocalized string which can be used to programmatically identify the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Describes the error in detail and provides debugging information."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of additional information."
+              },
+              "info": {
+                "type": "object",
+                "description": "The additional information specific to the type.",
+                "additionalProperties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Unlocalized string which can be used to programmatically identify the error."
+            },
+            "message": {
+              "type": "string",
+              "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language."
+            },
+            "target": {
+              "type": "string",
+              "description": "The target of the particular error (for example, the name of the property in error)."
+            },
+            "details": {
+              "type": "array",
+              "description": "An array of additional nested error response info objects, as described by this contract.",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              }
+            },
+            "additionalInfo": {
+              "type": "array",
+              "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The type of additional information."
+                  },
+                  "info": {
+                    "type": "object",
+                    "description": "The additional information specific to the type.",
+                    "additionalProperties": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Identity__deleted": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity. Previously undocumented values might be returned",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Resource__deleted": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "UserIdentityProperties__deleted": {
+      "type": "object",
+      "description": "Properties of the user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricAlertErrorResponse__added": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.ErrorResponseError"
+        }
+      }
+    },
+    "Microsoft.Common.ErrorDetail__added": {
+      "type": "object",
+      "description": "Describes details of an error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Unlocalized string which can be used to programmatically identify the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Describes the error in detail and provides debugging information."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorDetailAdditionalInfoItem"
+          }
+        }
+      }
+    },
+    "Microsoft.Common.ErrorDetailAdditionalInfoItem__added": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of additional information."
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional information specific to the type.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponseError__added": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Unlocalized string which can be used to programmatically identify the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Describes the error in detail and provides debugging information. If Accept-Language is set in the request, it must be localized to that language."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of additional nested error response info objects, as described by this contract.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorDetail"
+          }
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.ErrorResponseErrorAdditionalInfoItem"
+          }
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponseErrorAdditionalInfoItem__added": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of additional information."
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional information specific to the type.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Microsoft.Common.Identity__added": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Microsoft.Common.UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Microsoft.Common.UserIdentityProperties__added": {
+      "type": "object",
+      "description": "Properties of the user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "DynamicMetricCriteria": {
+      "properties": {
+        "failingPeriods": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "DynamicThresholdFailingPeriods": {
+      "properties": {
+        "numberOfEvaluationPeriods": {
+          "format__added": "float"
+        },
+        "minFailingPeriodsToAlert": {
+          "format__added": "float"
+        }
+      }
+    },
+    "MetricAlertAction": {
+      "properties": {
+        "webHookProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
+          }
+        }
+      }
+    },
+    "MetricAlertCriteria": {
+      "additionalProperties": {
+        "type__deleted": "object"
+      }
+    },
+    "MetricAlertProperties": {
+      "properties": {
+        "customProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
+          }
+        },
+        "actionProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of action properties to include with the post operation. This data customizes the actions."
+          }
+        }
+      }
+    },
+    "MetricAlertPropertiesPatch": {
+      "properties": {
+        "customProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
+          }
+        },
+        "actionProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of action properties to include with the post operation. This data customizes the actions."
+          }
+        }
+      }
+    },
+    "MetricAlertResource": {
+      "properties": {
+        "identity__added": {
+          "$ref": "#/definitions/Microsoft.Common.Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "MetricAlertResourceCollection": {
+      "description": {
+        "__old": "Represents a collection of alert rule resources.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "The values for the alert rule resources.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
+    "MetricAlertResourcePatch": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "#/definitions/Identity",
+            "__new": "#/definitions/Microsoft.Common.Identity"
+          }
+        }
+      }
+    },
+    "MetricAlertSingleResourceMultipleMetricCriteria": {
+      "properties": {
+        "allOf": {
+          "description": {
+            "__old": "The list of metric criteria for this 'all of' operation. ",
+            "__new": "The list of metric criteria for this 'all of' operation."
+          }
+        }
+      }
+    },
+    "MetricAlertStatus": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten__deleted": false
+        }
+      }
+    },
+    "MultiMetricCriteria": {
+      "additionalProperties": {
+        "type__deleted": "object"
+      }
+    },
+    "PromQLCriteria": {
+      "properties": {
+        "failingPeriods": {
+          "description__added": "Configuration for failing periods in query-based alerts."
+        }
+      }
+    },
+    "StaticPromQLCriteria": {
+      "properties__deleted": {}
+    },
+    "WebtestLocationAvailabilityCriteria": {
+      "properties": {
+        "failedLocationCount": {
+          "format__added": "float"
+        }
+      }
+    }
+  }
+}

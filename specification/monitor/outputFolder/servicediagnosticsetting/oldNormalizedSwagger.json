@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "version": "2016-09-01"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service": {
+      "get": {
+        "operationId": "ServiceDiagnosticSettings_Get",
+        "tags": [
+          "ServiceDiagnosticSettings"
+        ],
+        "description": "Gets the active diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "location": "",
+                "name": "service",
+                "properties": {
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "metrics": [
+                    {
+                      "timeGrain": "PT1M",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ],
+                  "logs": [
+                    {
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ]
+                },
+                "tags": null,
+                "type": ""
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get service diagnostic setting": {
+            "$ref": "./examples/getServiceDiagnosticSetting.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceDiagnosticSettings_CreateOrUpdate",
+        "tags": [
+          "ServiceDiagnosticSettings"
+        ],
+        "description": "Create or update new diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "location": "",
+                "name": "service",
+                "properties": {
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "eventHubAuthorizationRuleId": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/authorizationrules/myrule",
+                  "metrics": [
+                    {
+                      "timeGrain": "PT1M",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ],
+                  "logs": [
+                    {
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ]
+                },
+                "tags": null,
+                "type": ""
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a service diagnostic setting": {
+            "$ref": "./examples/createOrUpdateServiceDiagnosticSetting.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ServiceDiagnosticSettings_Update",
+        "description": "Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceDiagnosticSettingsResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a service diagnostic setting": {
+            "$ref": "./examples/updateServiceDiagnosticSetting.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "LogSettings": {
+      "type": "object",
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether this log is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "the retention policy for this log."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "MetricSettings": {
+      "type": "object",
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "format": "duration",
+          "description": "the timegrain of the metric in ISO8601 format."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether this timegrain is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "the retention policy for this timegrain."
+        }
+      },
+      "required": [
+        "enabled",
+        "timeGrain"
+      ]
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "RetentionPolicy": {
+      "type": "object",
+      "description": "Specifies the retention policy for the log.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "days",
+        "enabled"
+      ]
+    },
+    "ServiceDiagnosticSettings": {
+      "type": "object",
+      "description": "The diagnostic settings for service.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming Diagnostic Logs. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'."
+        },
+        "eventHubAuthorizationRuleId": {
+          "type": "string",
+          "description": "The resource Id for the event hub namespace authorization rule."
+        },
+        "metrics": {
+          "type": "array",
+          "description": "the list of metric settings.",
+          "items": {
+            "$ref": "#/definitions/MetricSettings"
+          }
+        },
+        "logs": {
+          "type": "array",
+          "description": "the list of logs settings.",
+          "items": {
+            "$ref": "#/definitions/LogSettings"
+          }
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        }
+      }
+    },
+    "ServiceDiagnosticSettingsResource": {
+      "type": "object",
+      "description": "Description of a service diagnostic setting",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceDiagnosticSettings",
+          "description": "The service diagnostics settings of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ServiceDiagnosticSettingsResourcePatch": {
+      "type": "object",
+      "description": "Service diagnostic setting resource for patch operations",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServiceDiagnosticSettings",
+          "description": "The service diagnostics settings for an update operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
