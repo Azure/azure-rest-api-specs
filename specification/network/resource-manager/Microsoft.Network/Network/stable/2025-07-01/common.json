@@ -4536,6 +4536,90 @@
         ]
       }
     },
+    "ExpressRouteFailoverBgpStatusAddressFamily": {
+      "type": "string",
+      "description": "The BGP address family type",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverBgpStatusAddressFamily",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6"
+          }
+        ]
+      }
+    },
+    "ExpressRouteFailoverLinkType": {
+      "type": "string",
+      "description": "The type of link on which failover test was performed",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverLinkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "Primary"
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "Secondary"
+          }
+        ]
+      }
+    },
+    "ExpressRouteFailoverTestType": {
+      "type": "string",
+      "description": "The type of failover test",
+      "enum": [
+        "SingleSiteFailover",
+        "MultiSiteFailover",
+        "All",
+        "LinkFailover"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverTestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleSiteFailover",
+            "value": "SingleSiteFailover",
+            "description": "SingleSiteFailover"
+          },
+          {
+            "name": "MultiSiteFailover",
+            "value": "MultiSiteFailover",
+            "description": "MultiSiteFailover"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
+          },
+          {
+            "name": "LinkFailover",
+            "value": "LinkFailover",
+            "description": "LinkFailover"
+          }
+        ]
+      }
+    },
     "ExpressRouteLinkAdminState": {
       "type": "string",
       "description": "Administrative state of the physical port.",
@@ -4580,6 +4664,36 @@
             "name": "SC",
             "value": "SC",
             "description": "SC"
+          }
+        ]
+      }
+    },
+    "ExpressRouteLinkFailoverBgpStatus": {
+      "type": "string",
+      "description": "The BGP status of ExpressRoute link failover",
+      "enum": [
+        "Undefined",
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLinkFailoverBgpStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Undefined",
+            "value": "Undefined",
+            "description": "Undefined"
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Disconnected"
           }
         ]
       }
@@ -6068,6 +6182,30 @@
             "name": "Platform",
             "value": "Platform",
             "description": "Platform"
+          }
+        ]
+      }
+    },
+    "MaintenanceTestCategory": {
+      "type": "string",
+      "description": "The type of maintenance test category",
+      "enum": [
+        "BgpDisconnect",
+        "ASPathPrepend"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceTestCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BgpDisconnect",
+            "value": "BgpDisconnect",
+            "description": "BgpDisconnect"
+          },
+          {
+            "name": "ASPathPrepend",
+            "value": "ASPathPrepend",
+            "description": "ASPathPrepend"
           }
         ]
       }

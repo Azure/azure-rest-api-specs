@@ -1544,6 +1544,243 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverAllTestsDetails": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_GetCircuitLinkFailoverAllTestsDetails",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "description": "This operation retrieves the details of all the failover tests performed on the ExpressRoute circuit for different peering locations",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteCircuitName",
+            "in": "path",
+            "description": "The name of the express route circuit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverTestType",
+            "in": "query",
+            "description": "The type of failover test",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "SingleSiteFailover",
+              "MultiSiteFailover",
+              "All",
+              "LinkFailover"
+            ],
+            "x-ms-enum": {
+              "name": "ExpressRouteFailoverTestType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "SingleSiteFailover",
+                  "value": "SingleSiteFailover",
+                  "description": "SingleSiteFailover"
+                },
+                {
+                  "name": "MultiSiteFailover",
+                  "value": "MultiSiteFailover",
+                  "description": "MultiSiteFailover"
+                },
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "All"
+                },
+                {
+                  "name": "LinkFailover",
+                  "value": "LinkFailover",
+                  "description": "LinkFailover"
+                }
+              ]
+            }
+          },
+          {
+            "name": "fetchLatest",
+            "in": "query",
+            "description": "Fetch only the latest tests for each peering location",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverAllTestsDetails"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
+            "$ref": "./examples/ExpressRouteCircuitLinkFailoverAllTestsDetails.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ExpressRouteCircuitLinkFailoverAllTestsDetails"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverSingleTestDetails": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_GetCircuitLinkFailoverSingleTestDetails",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "description": "This operation retrieves the details of a particular failover test performed on the circuit based on the test Guid",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteCircuitName",
+            "in": "path",
+            "description": "The name of the express route circuit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverTestId",
+            "in": "query",
+            "description": "The unique Guid value which identifies the test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkType",
+            "in": "query",
+            "description": "The type of link on which failover test was performed",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Primary",
+              "Secondary"
+            ],
+            "x-ms-enum": {
+              "name": "ExpressRouteFailoverLinkType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Primary",
+                  "value": "Primary",
+                  "description": "Primary"
+                },
+                {
+                  "name": "Secondary",
+                  "value": "Secondary",
+                  "description": "Secondary"
+                }
+              ]
+            }
+          },
+          {
+            "name": "circuitMaintenanceCategory",
+            "in": "query",
+            "description": "The type of maintenance test category",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "BgpDisconnect",
+              "ASPathPrepend"
+            ],
+            "x-ms-enum": {
+              "name": "MaintenanceTestCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "BgpDisconnect",
+                  "value": "BgpDisconnect",
+                  "description": "BgpDisconnect"
+                },
+                {
+                  "name": "ASPathPrepend",
+                  "value": "ASPathPrepend",
+                  "description": "ASPathPrepend"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetailsObject"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCircuitLinkFailoverSingleTestDetails": {
+            "$ref": "./examples/ExpressRouteCircuitLinkFailoverSingleTestDetails.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetailsObject"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings": {
       "get": {
         "operationId": "ExpressRouteCircuitPeerings_List",
@@ -2484,6 +2721,124 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/startCircuitLinkFailoverTest": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_StartCircuitLinkFailoverTest",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "description": "This operation starts failover simulation on the circuit for the specified link type",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteCircuitName",
+            "in": "path",
+            "description": "The name of the express route circuit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkType",
+            "in": "query",
+            "description": "The type of link on which failover test was performed",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Primary",
+              "Secondary"
+            ],
+            "x-ms-enum": {
+              "name": "ExpressRouteFailoverLinkType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Primary",
+                  "value": "Primary",
+                  "description": "Primary"
+                },
+                {
+                  "name": "Secondary",
+                  "value": "Secondary",
+                  "description": "Secondary"
+                }
+              ]
+            }
+          },
+          {
+            "name": "circuitMaintenanceCategory",
+            "in": "query",
+            "description": "The type of maintenance that can occur during an ExpressRoute Circuit failover test",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "BgpDisconnect",
+              "ASPathPrepend"
+            ],
+            "x-ms-enum": {
+              "name": "MaintenanceTestCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "BgpDisconnect",
+                  "value": "BgpDisconnect",
+                  "description": "BgpDisconnect"
+                },
+                {
+                  "name": "ASPathPrepend",
+                  "value": "ASPathPrepend",
+                  "description": "ASPathPrepend"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCircuitStartLinkFailoverSimulation": {
+            "$ref": "./examples/ExpressRouteCircuitStartLinkFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
       "get": {
         "operationId": "ExpressRouteCircuits_GetStats",
@@ -2528,6 +2883,79 @@
             "$ref": "./examples/ExpressRouteCircuitStats.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/stopCircuitLinkFailoverTest": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_StopCircuitLinkFailoverTest",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "description": "This operation stops an ongoing failover simulation on the circuit for the specified link type",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteCircuitName",
+            "in": "path",
+            "description": "The name of the express route circuit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "ExpressRoute Circuit stop simulation parameters supplied to stop failover simulation on express route circuit.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLinkFailoverStopApiParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCircuitStopLinkFailoverSimulation": {
+            "$ref": "./examples/ExpressRouteCircuitStopLinkFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections": {
@@ -4571,368 +4999,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverAllTestsDetails": {
-      "post": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_GetCircuitLinkFailoverAllTestsDetails",
-        "description": "This operation retrieves the details of all the failover tests performed on the ExpressRoute circuit for different peering locations",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "expressRouteCircuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "failoverTestType",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The type of failover test",
-            "enum": [
-              "SingleSiteFailover",
-              "MultiSiteFailover",
-              "All",
-              "LinkFailover"
-            ],
-            "x-ms-enum": {
-              "name": "ExpressRouteFailoverTestType",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "fetchLatest",
-            "in": "query",
-            "required": true,
-            "type": "boolean",
-            "description": "Fetch only the latest tests for each peering location"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Failover test details for the circuit.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverAllTestsDetails"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
-            "$ref": "./examples/ExpressRouteCircuitLinkFailoverAllTestsDetails.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverSingleTestDetails": {
-      "post": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_GetCircuitLinkFailoverSingleTestDetails",
-        "description": "This operation retrieves the details of a particular failover test performed on the circuit based on the test Guid",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "expressRouteCircuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "failoverTestId",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The unique Guid value which identifies the test"
-          },
-          {
-            "name": "linkType",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
-            "x-ms-enum": {
-              "name": "ExpressRouteFailoverLinkType",
-              "modelAsString": true
-            },
-            "description": "The type of link on which failover test was performed"
-          },
-          {
-            "name": "circuitMaintenanceCategory",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The type of maintenance test category",
-            "enum": [
-              "BgpDisconnect",
-              "ASPathPrepend"
-            ],
-            "x-ms-enum": {
-              "name": "MaintenanceTestCategory",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Failover test details for the circuit.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetailsObject"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCircuitLinkFailoverSingleTestDetails": {
-            "$ref": "./examples/ExpressRouteCircuitLinkFailoverSingleTestDetails.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/startCircuitLinkFailoverTest": {
-      "post": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_StartCircuitLinkFailoverTest",
-        "description": "This operation starts failover simulation on the circuit for the specified link type",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "expressRouteCircuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "linkType",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
-            "x-ms-enum": {
-              "name": "ExpressRouteFailoverLinkType",
-              "modelAsString": true
-            },
-            "description": "The type of link on which failover test was performed"
-          },
-          {
-            "name": "circuitMaintenanceCategory",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "BgpDisconnect",
-              "ASPathPrepend"
-            ],
-            "x-ms-enum": {
-              "name": "MaintenanceTestCategory",
-              "modelAsString": true
-            },
-            "description": "The type of maintenance that can occur during an ExpressRoute Circuit failover test"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "200": {
-            "description": "Request successful. The operation start failover simulation started on virtual network gateway.",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCircuitStartLinkFailoverSimulation": {
-            "$ref": "./examples/ExpressRouteCircuitStartLinkFailoverSimulation.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/stopCircuitLinkFailoverTest": {
-      "post": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_StopCircuitLinkFailoverTest",
-        "description": "This operation stops an ongoing failover simulation on the circuit for the specified link type",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "expressRouteCircuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "stopParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteLinkFailoverStopApiParameters"
-            },
-            "description": "ExpressRoute Circuit stop simulation parameters supplied to stop failover simulation on express route circuit."
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "200": {
-            "description": "Request successful. The operation stops failover simulation on virtual network gateway.",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCircuitStopLinkFailoverSimulation": {
-            "$ref": "./examples/ExpressRouteCircuitStopLinkFailoverSimulation.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
     }
   },
   "definitions": {
@@ -5349,6 +5415,157 @@
         "provisioningState": {
           "$ref": "./common.json#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the express route circuit connection resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
+      "type": "object",
+      "description": "Circuit Failover All Test Details Object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Circuit Failover All Test Details",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
+          }
+        }
+      }
+    },
+    "ExpressRouteCircuitLinkFailoverSingleTestDetails": {
+      "type": "object",
+      "description": "ExpressRoute failover single test details",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/FailoverTestStatus",
+          "description": "The current status of the test",
+          "readOnly": true
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
+        },
+        "linkType": {
+          "$ref": "./common.json#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed",
+          "readOnly": true
+        },
+        "circuitTestCategory": {
+          "$ref": "./common.json#/definitions/MaintenanceTestCategory",
+          "description": "The type of maintenance test category",
+          "readOnly": true
+        },
+        "isSimulationVerified": {
+          "type": "boolean",
+          "description": "Whether the customer was able to establish connectivity through this failover connection or not",
+          "readOnly": true
+        },
+        "redundantRoutes": {
+          "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
+          "description": "List of routes received from this peering as well as some other peering location",
+          "readOnly": true
+        },
+        "nonRedundantRoutes": {
+          "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
+          "description": "List of all the routes that were received only from this peering location",
+          "readOnly": true
+        },
+        "bgpStatus": {
+          "type": "array",
+          "description": "BGP status information captured during the ExpressRoute link failover test",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLinkFailoverTestBgpStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteCircuitLinkFailoverSingleTestDetailsObject": {
+      "type": "object",
+      "description": "Circuit Failover Single Test Details Object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Circuit Failover Single Test Details",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
+          }
+        }
+      }
+    },
+    "ExpressRouteCircuitLinkFailoverTestDetails": {
+      "type": "object",
+      "description": "ExpressRoute Circuit link failover test details",
+      "properties": {
+        "status": {
+          "$ref": "./common.json#/definitions/FailoverTestStatus",
+          "description": "The current status of the test.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
+          "readOnly": true
+        },
+        "testType": {
+          "$ref": "./common.json#/definitions/ExpressRouteFailoverTestType",
+          "description": "The type of failover test",
+          "readOnly": true
+        },
+        "testGuid": {
+          "type": "string",
+          "description": "The unique GUID associated with the test",
+          "readOnly": true
+        },
+        "issues": {
+          "type": "array",
+          "description": "A list of all issues with the test",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
+        },
+        "circuitTestCategory": {
+          "$ref": "./common.json#/definitions/MaintenanceTestCategory",
+          "description": "The type of maintenance test category",
+          "readOnly": true
+        },
+        "linkType": {
+          "$ref": "./common.json#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed",
+          "readOnly": true
+        },
+        "bgpStatus": {
+          "type": "array",
+          "description": "BGP status information captured during the ExpressRoute link failover test",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLinkFailoverTestBgpStatus"
+          },
           "readOnly": true
         }
       }
@@ -6130,6 +6347,102 @@
           "$ref": "./common.json#/definitions/Common.SubResource"
         }
       ]
+    },
+    "ExpressRouteLinkFailoverRoute": {
+      "type": "object",
+      "description": "Represents a failover route for an ExpressRoute link",
+      "properties": {
+        "route": {
+          "type": "string",
+          "description": "The IP prefix of the route"
+        },
+        "nextHop": {
+          "type": "string",
+          "description": "The next hop for the route"
+        },
+        "primaryASPath": {
+          "type": "string",
+          "description": "The AS path for the primary link"
+        },
+        "secondaryASPath": {
+          "type": "string",
+          "description": "The AS path for the secondary link"
+        }
+      }
+    },
+    "ExpressRouteLinkFailoverRouteList": {
+      "type": "object",
+      "description": "Represents a list of failover routes for an ExpressRoute link",
+      "properties": {
+        "beforeSimulation": {
+          "type": "array",
+          "description": "Routes before the failover simulation",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLinkFailoverRoute"
+          }
+        },
+        "duringSimulation": {
+          "type": "array",
+          "description": "Routes during the failover simulation",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLinkFailoverRoute"
+          }
+        }
+      }
+    },
+    "ExpressRouteLinkFailoverStopApiParameters": {
+      "type": "object",
+      "description": "Parameters required to stop an ExpressRoute link failover simulation.",
+      "properties": {
+        "circuitTestCategory": {
+          "$ref": "./common.json#/definitions/MaintenanceTestCategory",
+          "description": "The type of maintenance test category"
+        },
+        "linkType": {
+          "$ref": "./common.json#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed"
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Whether the customer was able to establish connectivity through this failover link or not"
+        }
+      },
+      "required": [
+        "circuitTestCategory",
+        "linkType",
+        "wasSimulationSuccessful",
+        "isVerified"
+      ]
+    },
+    "ExpressRouteLinkFailoverTestBgpStatus": {
+      "type": "object",
+      "description": "Represents the BGP status of an ExpressRoute link failover test",
+      "properties": {
+        "bgpStatusType": {
+          "$ref": "./common.json#/definitions/ExpressRouteFailoverBgpStatusAddressFamily",
+          "description": "The BGP address family type",
+          "readOnly": true
+        },
+        "link": {
+          "$ref": "./common.json#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed"
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/ExpressRouteLinkFailoverBgpStatus",
+          "description": "The BGP status of ExpressRoute link failover",
+          "readOnly": true
+        },
+        "checkTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when the BGP status was checked. Example - 1/6/2026 9:23:21 AM",
+          "readOnly": true
+        }
+      }
     },
     "ExpressRouteLinkListResult": {
       "type": "object",
@@ -7071,327 +7384,6 @@
       "required": [
         "value"
       ]
-    },
-    "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
-          },
-          "description": "List of Circuit Failover All Test Details"
-        }
-      },
-      "description": "Circuit Failover All Test Details Object"
-    },
-    "ExpressRouteFailoverTestType": {
-      "type": "string",
-      "description": "The type of failover test",
-      "enum": [
-        "SingleSiteFailover",
-        "MultiSiteFailover",
-        "All",
-        "LinkFailover"
-      ],
-      "x-ms-enum": {
-        "name": "ExpressRouteFailoverTestType",
-        "modelAsString": true
-      }
-    },
-    "FailoverTestStatus": {
-      "type": "string",
-      "description": "The current status of the test",
-      "enum": [
-        "NotStarted",
-        "Starting",
-        "Running",
-        "StartFailed",
-        "Stopping",
-        "Completed",
-        "StopFailed",
-        "Invalid",
-        "Expired"
-      ],
-      "x-ms-enum": {
-        "name": "FailoverTestStatus",
-        "modelAsString": true
-      }
-    },
-    "ExpressRouteCircuitLinkFailoverTestDetails": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/FailoverTestStatus",
-          "description": "The current status of the test.",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
-          "readOnly": true
-        },
-        "testType": {
-          "$ref": "#/definitions/ExpressRouteFailoverTestType",
-          "description": "The type of failover test",
-          "readOnly": true
-        },
-        "testGuid": {
-          "type": "string",
-          "description": "The unique GUID associated with the test",
-          "readOnly": true
-        },
-        "issues": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of all issues with the test",
-          "readOnly": true
-        },
-        "wasSimulationSuccessful": {
-          "type": "boolean",
-          "description": "Whether the failover simulation was successful or not",
-          "readOnly": true
-        },
-        "circuitTestCategory": {
-          "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category",
-          "readOnly": true
-        },
-        "linkType": {
-          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed",
-          "readOnly": true
-        },
-        "bgpStatus": {
-          "type": "array",
-          "description": "BGP status information captured during the ExpressRoute link failover test",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteLinkFailoverTestBgpStatus"
-          },
-          "readOnly": true
-        }
-      },
-      "description": "ExpressRoute Circuit link failover test details"
-    },
-    "ExpressRouteCircuitLinkFailoverSingleTestDetailsObject": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
-          },
-          "description": "List of Circuit Failover Single Test Details"
-        }
-      },
-      "description": "Circuit Failover Single Test Details Object"
-    },
-    "ExpressRouteCircuitLinkFailoverSingleTestDetails": {
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/FailoverTestStatus",
-          "description": "The current status of the test",
-          "readOnly": true
-        },
-        "wasSimulationSuccessful": {
-          "type": "boolean",
-          "description": "Whether the failover simulation was successful or not",
-          "readOnly": true
-        },
-        "linkType": {
-          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed",
-          "readOnly": true
-        },
-        "circuitTestCategory": {
-          "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category",
-          "readOnly": true
-        },
-        "isSimulationVerified": {
-          "type": "boolean",
-          "description": "Whether the customer was able to establish connectivity through this failover connection or not",
-          "readOnly": true
-        },
-        "redundantRoutes": {
-          "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
-          "description": "List of routes received from this peering as well as some other peering location",
-          "readOnly": true
-        },
-        "nonRedundantRoutes": {
-          "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
-          "description": "List of all the routes that were received only from this peering location",
-          "readOnly": true
-        },
-        "bgpStatus": {
-          "type": "array",
-          "description": "BGP status information captured during the ExpressRoute link failover test",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteLinkFailoverTestBgpStatus"
-          },
-          "readOnly": true
-        }
-      },
-      "description": "ExpressRoute failover single test details"
-    },
-    "MaintenanceTestCategory": {
-      "type": "string",
-      "description": "The type of maintenance test category",
-      "enum": [
-        "BgpDisconnect",
-        "ASPathPrepend"
-      ],
-      "x-ms-enum": {
-        "name": "MaintenanceTestCategory",
-        "modelAsString": true
-      }
-    },
-    "ExpressRouteLinkFailoverRouteList": {
-      "type": "object",
-      "description": "Represents a list of failover routes for an ExpressRoute link",
-      "properties": {
-        "beforeSimulation": {
-          "type": "array",
-          "description": "Routes before the failover simulation",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteLinkFailoverRoute"
-          }
-        },
-        "duringSimulation": {
-          "type": "array",
-          "description": "Routes during the failover simulation",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteLinkFailoverRoute"
-          }
-        }
-      }
-    },
-    "ExpressRouteLinkFailoverRoute": {
-      "type": "object",
-      "description": "Represents a failover route for an ExpressRoute link",
-      "properties": {
-        "route": {
-          "type": "string",
-          "description": "The IP prefix of the route"
-        },
-        "nextHop": {
-          "type": "string",
-          "description": "The next hop for the route"
-        },
-        "primaryASPath": {
-          "type": "string",
-          "description": "The AS path for the primary link"
-        },
-        "secondaryASPath": {
-          "type": "string",
-          "description": "The AS path for the secondary link"
-        }
-      }
-    },
-    "ExpressRouteFailoverLinkType": {
-      "type": "string",
-      "description": "The type of link on which failover test was performed",
-      "enum": [
-        "Primary",
-        "Secondary"
-      ],
-      "x-ms-enum": {
-        "name": "ExpressRouteFailoverLinkType",
-        "modelAsString": true
-      }
-    },
-    "ExpressRouteLinkFailoverTestBgpStatus": {
-      "type": "object",
-      "description": "Represents the BGP status of an ExpressRoute link failover test",
-      "properties": {
-        "bgpStatusType": {
-          "type": "string",
-          "description": "The BGP address family type",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteFailoverBgpStatusAddressFamily",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "link": {
-          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed"
-        },
-        "status": {
-          "type": "string",
-          "description": "The BGP status of ExpressRoute link failover",
-          "enum": [
-            "Undefined",
-            "Connected",
-            "Disconnected"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteLinkFailoverBgpStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "checkTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC time when the BGP status was checked. Example - 1/6/2026 9:23:21 AM",
-          "readOnly": true
-        }
-      }
-    },
-    "ExpressRouteLinkFailoverStopApiParameters": {
-      "type": "object",
-      "required": [
-        "circuitTestCategory",
-        "linkType",
-        "wasSimulationSuccessful",
-        "isVerified"
-      ],
-      "properties": {
-        "circuitTestCategory": {
-          "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category"
-        },
-        "linkType": {
-          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed"
-        },
-        "wasSimulationSuccessful": {
-          "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
-        },
-        "isVerified": {
-          "type": "boolean",
-          "description": "Whether the customer was able to establish connectivity through this failover link or not"
-        }
-      },
-      "description": "Parameters required to stop an ExpressRoute link failover simulation."
     }
   },
   "parameters": {}

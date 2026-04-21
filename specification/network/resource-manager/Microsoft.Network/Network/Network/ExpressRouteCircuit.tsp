@@ -43,9 +43,27 @@ model ExpressRouteCircuit extends Common.Resource {
   sku?: ExpressRouteCircuitSku;
 }
 
+alias CircuitLinkFailoverOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /** The name of the express route circuit. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    expressRouteCircuitName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}",
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteCircuits {
   /**
    * Gets information about the specified express route circuit.
@@ -108,6 +126,117 @@ interface ExpressRouteCircuits {
     ArmResponse<ExpressRouteCircuitStats>,
     Error = CloudError
   >;
+
+  /**
+   * This operation retrieves the details of all the failover tests performed on the ExpressRoute circuit for different peering locations
+   */
+  @tag("ExpressRouteCircuits")
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverAllTestsDetails")
+  getCircuitLinkFailoverAllTestsDetails is CircuitLinkFailoverOps.ActionAsync<
+    ExpressRouteCircuit,
+    void,
+    void,
+    Response = ArmResponse<ExpressRouteCircuitLinkFailoverAllTestsDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitLinkFailoverAllTestsDetails> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Parameters = {
+      /**
+       * The type of failover test
+       */
+      @query("failoverTestType")
+      failoverTestType: ExpressRouteFailoverTestType;
+
+      /**
+       * Fetch only the latest tests for each peering location
+       */
+      @query("fetchLatest")
+      fetchLatest: boolean;
+    },
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * This operation retrieves the details of a particular failover test performed on the circuit based on the test Guid
+   */
+  @tag("ExpressRouteCircuits")
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverSingleTestDetails")
+  getCircuitLinkFailoverSingleTestDetails is CircuitLinkFailoverOps.ActionAsync<
+    ExpressRouteCircuit,
+    void,
+    void,
+    Response = ArmResponse<ExpressRouteCircuitLinkFailoverSingleTestDetailsObject> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitLinkFailoverSingleTestDetailsObject> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Parameters = {
+      /**
+       * The unique Guid value which identifies the test
+       */
+      @query("failoverTestId")
+      failoverTestId: string;
+
+      /**
+       * The type of link on which failover test was performed
+       */
+      @query("linkType")
+      linkType: ExpressRouteFailoverLinkType;
+
+      /**
+       * The type of maintenance test category
+       */
+      @query("circuitMaintenanceCategory")
+      circuitMaintenanceCategory: MaintenanceTestCategory;
+    },
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * This operation starts failover simulation on the circuit for the specified link type
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matching existing swagger response"
+  @tag("ExpressRouteCircuits")
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/startCircuitLinkFailoverTest")
+  startCircuitLinkFailoverTest is CircuitLinkFailoverOps.ActionAsync<
+    ExpressRouteCircuit,
+    void,
+    void,
+    Response = ArmResponse<{
+      @body body: {};
+    }> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Parameters = {
+      /**
+       * The type of link on which failover test was performed
+       */
+      @query("linkType")
+      linkType: ExpressRouteFailoverLinkType;
+
+      /**
+       * The type of maintenance that can occur during an ExpressRoute Circuit failover test
+       */
+      @query("circuitMaintenanceCategory")
+      circuitMaintenanceCategory: MaintenanceTestCategory;
+    },
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * This operation stops an ongoing failover simulation on the circuit for the specified link type
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matching existing swagger response"
+  @tag("ExpressRouteCircuits")
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/stopCircuitLinkFailoverTest")
+  stopCircuitLinkFailoverTest is CircuitLinkFailoverOps.ActionAsync<
+    ExpressRouteCircuit,
+    ExpressRouteLinkFailoverStopApiParameters,
+    void,
+    Response = ArmResponse<{
+      @body body: {};
+    }> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
+  >;
 }
 
 @@doc(ExpressRouteCircuit.name, "The name of express route circuit.");
@@ -119,4 +248,7 @@ interface ExpressRouteCircuits {
 );
 @@doc(ExpressRouteCircuits.updateTags::parameters.properties,
   "Parameters supplied to update express route circuit tags."
+);
+@@doc(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters.body,
+  "ExpressRoute Circuit stop simulation parameters supplied to stop failover simulation on express route circuit."
 );

@@ -21227,6 +21227,360 @@ model FailoverConnectionDetails {
 }
 
 /**
+ * The type of failover test
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+union ExpressRouteFailoverTestType {
+  string,
+
+  /** SingleSiteFailover */
+  SingleSiteFailover: "SingleSiteFailover",
+
+  /** MultiSiteFailover */
+  MultiSiteFailover: "MultiSiteFailover",
+
+  /** All */
+  All: "All",
+
+  /** LinkFailover */
+  LinkFailover: "LinkFailover",
+}
+
+/**
+ * The type of link on which failover test was performed
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+union ExpressRouteFailoverLinkType {
+  string,
+
+  /** Primary */
+  Primary: "Primary",
+
+  /** Secondary */
+  Secondary: "Secondary",
+}
+
+/**
+ * The type of maintenance test category
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+union MaintenanceTestCategory {
+  string,
+
+  /** BgpDisconnect */
+  BgpDisconnect: "BgpDisconnect",
+
+  /** ASPathPrepend */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger value"
+  ASPathPrepend: "ASPathPrepend",
+}
+
+/**
+ * The BGP address family type
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+union ExpressRouteFailoverBgpStatusAddressFamily {
+  string,
+
+  /** IPv4 */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger value"
+  IPv4: "IPv4",
+
+  /** IPv6 */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger value"
+  IPv6: "IPv6",
+}
+
+/**
+ * The BGP status of ExpressRoute link failover
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+union ExpressRouteLinkFailoverBgpStatus {
+  string,
+
+  /** Undefined */
+  Undefined: "Undefined",
+
+  /** Connected */
+  Connected: "Connected",
+
+  /** Disconnected */
+  Disconnected: "Disconnected",
+}
+
+/**
+ * Represents the BGP status of an ExpressRoute link failover test
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteLinkFailoverTestBgpStatus {
+  /**
+   * The BGP address family type
+   */
+  @visibility(Lifecycle.Read)
+  bgpStatusType?: ExpressRouteFailoverBgpStatusAddressFamily;
+
+  /**
+   * The type of link on which failover test was performed
+   */
+  link?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The BGP status of ExpressRoute link failover
+   */
+  @visibility(Lifecycle.Read)
+  status?: ExpressRouteLinkFailoverBgpStatus;
+
+  /**
+   * The UTC time when the BGP status was checked. Example - 1/6/2026 9:23:21 AM
+   */
+  @visibility(Lifecycle.Read)
+  checkTime?: utcDateTime;
+}
+
+/**
+ * Represents a failover route for an ExpressRoute link
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteLinkFailoverRoute {
+  /**
+   * The IP prefix of the route
+   */
+  route?: string;
+
+  /**
+   * The next hop for the route
+   */
+  nextHop?: string;
+
+  /**
+   * The AS path for the primary link
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger property name"
+  primaryASPath?: string;
+
+  /**
+   * The AS path for the secondary link
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger property name"
+  secondaryASPath?: string;
+}
+
+/**
+ * Represents a list of failover routes for an ExpressRoute link
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteLinkFailoverRouteList {
+  /**
+   * Routes before the failover simulation
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifying properties"
+  beforeSimulation?: ExpressRouteLinkFailoverRoute[];
+
+  /**
+   * Routes during the failover simulation
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifying properties"
+  duringSimulation?: ExpressRouteLinkFailoverRoute[];
+}
+
+/**
+ * ExpressRoute Circuit link failover test details
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteCircuitLinkFailoverTestDetails {
+  /**
+   * The current status of the test.
+   */
+  @visibility(Lifecycle.Read)
+  status?: FailoverTestStatus;
+
+  /**
+   * Time when the test was started. Example - 1/6/2026 9:23:21 AM
+   */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /**
+   * Time when the test was completed. Example - 1/6/2026 9:23:21 AM
+   */
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  /**
+   * The type of failover test
+   */
+  @visibility(Lifecycle.Read)
+  testType?: ExpressRouteFailoverTestType;
+
+  /**
+   * The unique GUID associated with the test
+   */
+  @visibility(Lifecycle.Read)
+  testGuid?: string;
+
+  /**
+   * A list of all issues with the test
+   */
+  @visibility(Lifecycle.Read)
+  issues?: string[];
+
+  /**
+   * Whether the failover simulation was successful or not
+   */
+  @visibility(Lifecycle.Read)
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * The type of maintenance test category
+   */
+  @visibility(Lifecycle.Read)
+  circuitTestCategory?: MaintenanceTestCategory;
+
+  /**
+   * The type of link on which failover test was performed
+   */
+  @visibility(Lifecycle.Read)
+  linkType?: ExpressRouteFailoverLinkType;
+
+  /**
+   * BGP status information captured during the ExpressRoute link failover test
+   */
+  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifying properties"
+  bgpStatus?: ExpressRouteLinkFailoverTestBgpStatus[];
+}
+
+/**
+ * Circuit Failover All Test Details Object
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteCircuitLinkFailoverAllTestsDetails {
+  /**
+   * List of Circuit Failover All Test Details
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifying properties"
+  value?: ExpressRouteCircuitLinkFailoverTestDetails[];
+}
+
+/**
+ * ExpressRoute failover single test details
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteCircuitLinkFailoverSingleTestDetails {
+  /**
+   * Time when the test was started. Example - 1/6/2026 9:23:21 AM
+   */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /**
+   * Time when the test was completed. Example - 1/6/2026 9:23:21 AM
+   */
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  /**
+   * The current status of the test
+   */
+  @visibility(Lifecycle.Read)
+  status?: FailoverTestStatus;
+
+  /**
+   * Whether the failover simulation was successful or not
+   */
+  @visibility(Lifecycle.Read)
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * The type of link on which failover test was performed
+   */
+  @visibility(Lifecycle.Read)
+  linkType?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The type of maintenance test category
+   */
+  @visibility(Lifecycle.Read)
+  circuitTestCategory?: MaintenanceTestCategory;
+
+  /**
+   * Whether the customer was able to establish connectivity through this failover connection or not
+   */
+  @visibility(Lifecycle.Read)
+  isSimulationVerified?: boolean;
+
+  /**
+   * List of routes received from this peering as well as some other peering location
+   */
+  @visibility(Lifecycle.Read)
+  redundantRoutes?: ExpressRouteLinkFailoverRouteList;
+
+  /**
+   * List of all the routes that were received only from this peering location
+   */
+  @visibility(Lifecycle.Read)
+  nonRedundantRoutes?: ExpressRouteLinkFailoverRouteList;
+
+  /**
+   * BGP status information captured during the ExpressRoute link failover test
+   */
+  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifying properties"
+  bgpStatus?: ExpressRouteLinkFailoverTestBgpStatus[];
+}
+
+/**
+ * Circuit Failover Single Test Details Object
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteCircuitLinkFailoverSingleTestDetailsObject {
+  /**
+   * List of Circuit Failover Single Test Details
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifying properties"
+  value?: ExpressRouteCircuitLinkFailoverSingleTestDetails[];
+}
+
+/**
+ * Parameters required to stop an ExpressRoute link failover simulation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model ExpressRouteLinkFailoverStopApiParameters {
+  /**
+   * The type of maintenance test category
+   */
+  circuitTestCategory: MaintenanceTestCategory;
+
+  /**
+   * The type of link on which failover test was performed
+   */
+  linkType: ExpressRouteFailoverLinkType;
+
+  /**
+   * Whether the failover simulation was successful or not
+   */
+  wasSimulationSuccessful: boolean;
+
+  /**
+   * Whether the customer was able to establish connectivity through this failover link or not
+   */
+  isVerified: boolean;
+}
+
+/**
  * Start packet capture parameters on virtual network gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
