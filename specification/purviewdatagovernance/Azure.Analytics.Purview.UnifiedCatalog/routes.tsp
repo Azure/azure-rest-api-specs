@@ -503,7 +503,7 @@ interface BusinessDomain {
     Domain,
     ListQueryParametersTrait<{
       @doc("Optional continuation token for pagination.")
-      @query
+      @query("$skipToken")
       skipToken?: string;
 
       @doc("writeOnly")
@@ -927,7 +927,7 @@ interface Policies {
   List is RpcOperation<
     {
       @doc("Optional continuation token.")
-      @query("$skipToken")
+      @query
       skipToken?: string;
     },
     CatalogResponse
