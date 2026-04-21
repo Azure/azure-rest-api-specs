@@ -28,7 +28,7 @@ interface VmwareJobs {
   /**
    * Get a VmwareJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervJobsController")
   @operationId("HypervJobsController_Get")
   get is ArmResourceRead<VmwareJob>;
@@ -36,7 +36,7 @@ interface VmwareJobs {
   /**
    * List VmwareJob resources by VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervJobsController")
   @operationId("HypervJobsController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<VmwareJob>;

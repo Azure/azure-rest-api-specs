@@ -28,7 +28,7 @@ interface WebAppSites {
   /**
    * Method to get a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_Get")
   get is ArmResourceRead<WebAppSite>;
@@ -36,7 +36,7 @@ interface WebAppSites {
   /**
    * Method to create a WebApp site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_Create")
   create is ArmResourceCreateOrReplaceSync<WebAppSite>;
@@ -44,7 +44,7 @@ interface WebAppSites {
   /**
    * Method to update an existing site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_Update")
   @patch(#{ implicitOptionality: false })
@@ -53,8 +53,8 @@ interface WebAppSites {
   /**
    * Deletes the WebApp site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -65,7 +65,7 @@ interface WebAppSites {
   /**
    * Method to get all sites.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_ListByMasterSite")
   listByMasterSite is ArmResourceListByParent<WebAppSite>;
@@ -73,7 +73,7 @@ interface WebAppSites {
   /**
    * MMethod to get error summary from web app  site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_ErrorSummary")
   errorSummary is ArmResourceActionSync<
@@ -85,7 +85,7 @@ interface WebAppSites {
   /**
    * Method to generate report containing web app inventory.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_ExportInventory")
   exportInventory is ArmResourceActionAsync<
@@ -97,7 +97,7 @@ interface WebAppSites {
   /**
    * Method to refresh a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_Refresh")
   refresh is ArmResourceActionAsync<
@@ -109,7 +109,7 @@ interface WebAppSites {
   /**
    * Method to get site usage/summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppSitesController")
   @operationId("WebAppSitesController_Summary")
   summary is ArmResourceActionSync<
@@ -122,7 +122,7 @@ interface WebAppSites {
    * Method to update properties for web applications.
    *             in a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppPropertiesController")
   @operationId("WebAppPropertiesController_UpdateProperties")
   updateProperties is ArmResourceActionAsync<
@@ -134,7 +134,7 @@ interface WebAppSites {
   /**
    * Method to get all IIS web applications.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebApplicationsController")
   @operationId("WebApplicationsController_ListByWebAppSite")
   @list
@@ -174,7 +174,7 @@ interface WebAppSites {
   /**
    * Method to get all web servers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebServersController")
   @operationId("WebServersController_ListByWebAppSite")
   @list

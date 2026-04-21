@@ -29,7 +29,7 @@ interface ImportMachines {
   /**
    * Get a ImportMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportMachinesController")
   @operationId("ImportMachinesController_Get")
   get is ArmResourceRead<ImportMachine>;
@@ -37,7 +37,7 @@ interface ImportMachines {
   /**
    * Delete a ImportMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportMachinesController")
   @operationId("ImportMachinesController_Delete")
   delete is ArmResourceDeleteSync<ImportMachine>;
@@ -45,7 +45,7 @@ interface ImportMachines {
   /**
    * List ImportMachine resources by ImportSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportMachinesController")
   @operationId("ImportMachinesController_ListByImportSite")
   listByImportSite is ArmResourceListByParent<

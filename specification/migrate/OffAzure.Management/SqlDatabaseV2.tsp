@@ -29,7 +29,7 @@ interface SqlDatabaseV2s {
   /**
    * Gets the sql Database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlDatabasesController")
   @operationId("SqlDatabasesController_Get")
   get is ArmResourceRead<SqlDatabaseV2>;
@@ -37,7 +37,7 @@ interface SqlDatabaseV2s {
   /**
    * Gets the sql Databases.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlDatabasesController")
   @operationId("SqlDatabasesController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<

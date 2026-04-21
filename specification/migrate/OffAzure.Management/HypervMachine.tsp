@@ -29,7 +29,7 @@ interface HypervMachines {
   /**
    * Get a HypervMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervMachinesController")
   @operationId("HypervMachinesController_Get")
   get is ArmResourceRead<HypervMachine>;
@@ -37,7 +37,7 @@ interface HypervMachines {
   /**
    * Update a HypervMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervMachinesController")
   @operationId("HypervMachinesController_Update")
   @patch(#{ implicitOptionality: false })
@@ -46,7 +46,7 @@ interface HypervMachines {
   /**
    * List HypervMachine resources by HypervSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervMachinesController")
   @operationId("HypervMachinesController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<

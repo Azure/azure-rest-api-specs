@@ -28,7 +28,7 @@ interface ServerJobs {
   /**
    * Get a ServerJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerJobsController")
   @operationId("ServerJobsController_Get")
   get is ArmResourceRead<ServerJob>;
@@ -36,7 +36,7 @@ interface ServerJobs {
   /**
    * List ServerJob resources by ServerSiteResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerJobsController")
   @operationId("ServerJobsController_ListByServerSiteResource")
   listByServerSiteResource is ArmResourceListByParent<ServerJob>;

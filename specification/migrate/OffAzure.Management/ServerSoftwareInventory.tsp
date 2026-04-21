@@ -31,7 +31,7 @@ interface ServerSoftwareInventories {
   /**
    * Method to get a machines software inventory like applications and roles.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSoftwareInventoriesController")
   @operationId("ServerSoftwareInventoriesController_GetMachineSoftwareInventory")
   getMachineSoftwareInventory is ArmResourceRead<ServerSoftwareInventory>;
@@ -39,7 +39,7 @@ interface ServerSoftwareInventories {
   /**
    * List ServerSoftwareInventory resources by Server
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerSoftwareInventoriesController")
   @operationId("ServerSoftwareInventoriesController_ListByServer")
   listByServer is ArmResourceListByParent<ServerSoftwareInventory>;

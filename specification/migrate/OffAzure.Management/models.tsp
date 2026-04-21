@@ -794,7 +794,7 @@ union AzureArcStatus {
   Enabled: "Enabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union Default {
   string,
 
@@ -1555,7 +1555,7 @@ model SiteProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -1693,7 +1693,7 @@ model ImportSiteProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -1968,7 +1968,7 @@ model HypervSiteUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -2119,7 +2119,7 @@ model HypervClusterProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -2136,7 +2136,7 @@ model HealthErrorDetails {
   /**
    * Gets the message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   messageParameters?: Record<string>;
 
@@ -2400,7 +2400,7 @@ model HypervHostProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -2962,7 +2962,7 @@ model HypervMachineProperties {
   /**
    * Gets or sets tags on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -3023,7 +3023,7 @@ model HypervDisk {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isOSDisk?: string;
 
   /**
@@ -3829,7 +3829,7 @@ model HypervMachineUpdateProperties {
   /**
    * Gets or sets tags on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -4053,7 +4053,7 @@ model MachineMetadata {
   /**
    * machine tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags: Record<string>;
 }
 
@@ -4064,7 +4064,7 @@ model ImportSiteUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4171,7 +4171,7 @@ model DeleteImportedMachinesJobProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -4184,7 +4184,7 @@ model PagedExportImportedMachinesJob
 /**
  *  Export Imported Machines JobEntity Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExportImportedMachinesJobEntityProperties {
   /**
    * blob name
@@ -4205,7 +4205,7 @@ model PagedImportMachinesJob is Azure.Core.Page<ImportMachinesJob>;
 /**
  * ImportMachines JobProperties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ImportMachinesJobProperties {
   /**
    * blob name
@@ -4450,13 +4450,13 @@ model ImportMachineProperties {
   /**
    * machine tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags: Record<string>;
 
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -4546,7 +4546,7 @@ model MasterSiteUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4736,7 +4736,7 @@ model SqlDiscoverySiteDataSourceProperties {
 /**
  * SQL Inventory Import URI response object model.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SQLInventoryImportBody {
   /**
    * Gets or sets the job ARM ID.
@@ -4781,7 +4781,7 @@ model PagedImportSqlInventoryJob is Azure.Core.Page<ImportSqlInventoryJob>;
 /**
  * Import SQL inventory job properties web model
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ImportSqlInventoryJobProperties {
   /**
    * Gets the Blob name for the blob to fetch Import file from.
@@ -5167,7 +5167,7 @@ model SqlDatabasePropertiesV2 {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 
   /**
@@ -5226,7 +5226,7 @@ model Errors {
   /**
    * Gets the message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   messageParameters?: Record<string>;
 
@@ -5440,7 +5440,7 @@ model SqlServerProperties {
   /**
    * Gets or sets tags on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<unknown>;
 
   /**
@@ -5466,7 +5466,7 @@ model SqlServerProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 
   /**
@@ -5661,7 +5661,7 @@ model SqlServerV2UpdateProperties {
   /**
    * Gets or sets tags on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<unknown>;
 
   /**
@@ -5944,7 +5944,7 @@ model IisWebApplicationProperties {
   /**
    * Gets or sets tags on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -6226,7 +6226,7 @@ model IisWebApplicationsUpdateProperties {
   /**
    * Gets or sets tags on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -6437,7 +6437,7 @@ model TomcatWebApplicationProperties {
   /**
    * Gets tags that can be used with ODATA.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
@@ -6746,14 +6746,14 @@ model WebAppProperties {
   /**
    * Gets or sets Tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Web application REST Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WebApplication extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The resource-specific properties for this resource.
@@ -6833,7 +6833,7 @@ model WebApplicationProperties {
   /**
    * Gets tags that can be used with ODATA.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
@@ -6901,7 +6901,7 @@ model WebApplicationProperties {
 /**
  * Web application REST Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WebServer extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The resource-specific properties for this resource.
@@ -7012,7 +7012,7 @@ model ServerSiteResourceUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -7321,7 +7321,7 @@ model ServerProperties {
   /**
    * Gets or sets tags on the Server machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<unknown>;
 
   /**
@@ -7333,7 +7333,7 @@ model ServerProperties {
   /**
    * Provisioning state of the server resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 
   /**
@@ -7428,7 +7428,7 @@ model ServerDisk {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isOSDisk?: string;
 
   /**
@@ -7542,7 +7542,7 @@ model ServerUpdateProperties {
   /**
    * Gets or sets tags on the Server machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<unknown>;
 
   /**
@@ -7573,7 +7573,7 @@ model VmwareSiteUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -8078,7 +8078,7 @@ model VmwareMachineProperties {
   /**
    * Gets or sets tags on the VMware machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -8167,7 +8167,7 @@ model VmwareDisk {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isOSDisk?: string;
 
   /**
@@ -8278,7 +8278,7 @@ model MachineResourceUpdateProperties {
   /**
    * Gets or sets tags on the VMware machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8335,7 +8335,7 @@ model TagsMachineInput {
   /**
    * run as AccountId
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -8402,7 +8402,7 @@ model VcenterProperties {
   /**
    * The status of the last operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ProvisioningState;
 }
 
@@ -8415,7 +8415,7 @@ model DeleteImportMachinesJobCollection
 /**
  * A cluster resource belonging to a site resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HypervOperationsStatusResource
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**

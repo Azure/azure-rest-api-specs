@@ -31,7 +31,7 @@ interface HypervVmSoftwareInventories {
   /**
    * Method to get a machines software inventory like applications and roles.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervSoftwareInventoriesController")
   @operationId("HypervSoftwareInventoriesController_GetMachineSoftwareInventory")
   getMachineSoftwareInventory is ArmResourceRead<HypervVmSoftwareInventory>;
@@ -39,7 +39,7 @@ interface HypervVmSoftwareInventories {
   /**
    * List HypervVmSoftwareInventory resources by HypervMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervSoftwareInventoriesController")
   @operationId("HypervSoftwareInventoriesController_ListByHypervMachine")
   listByHypervMachine is ArmResourceListByParent<HypervVmSoftwareInventory>;

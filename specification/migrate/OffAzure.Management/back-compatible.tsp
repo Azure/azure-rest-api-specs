@@ -3,49 +3,49 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.OffAzure;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervSiteUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervMachineUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportSiteUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MasterSiteUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlSiteUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlServerV2Update.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppSiteUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IisWebApplicationsUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebApplication.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebServer.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerSiteResourceUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareSiteUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MachineResourceUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervOperationsStatusResource.properties);
 
 @@clientLocation(HypervSites.get, "HypervSitesController");
@@ -91,7 +91,7 @@ using Microsoft.OffAzure;
 @@clientLocation(HypervSites.getHypervOperationsStatus,
   "HypervOperationsStatusController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervSite.properties);
 
 @@clientLocation(ImportSites.get, "ImportSitesController");
@@ -105,7 +105,7 @@ using Microsoft.OffAzure;
 @@clientLocation(ImportSites.deleteImportedMachines, "ImportSitesController");
 @@clientLocation(ImportSites.exportUri, "ImportSitesController");
 @@clientLocation(ImportSites.importUri, "ImportSitesController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportSite.properties);
 
 @@clientLocation(MasterSites.get, "MasterSitesController");
@@ -120,7 +120,7 @@ using Microsoft.OffAzure;
 @@clientLocation(MasterSites.getVmwareOperationStatus,
   "MasterSitesOperationsStatusController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MasterSite.properties);
 
 @@clientLocation(PrivateEndpointConnections.get,
@@ -136,7 +136,7 @@ using Microsoft.OffAzure;
 @@clientLocation(PrivateEndpointConnections.listByMasterSite,
   "PrivateEndpointConnectionController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ServerSiteResources.get, "ServerSitesController");
@@ -207,7 +207,7 @@ using Microsoft.OffAzure;
 @@clientLocation(ServerSiteResources.getServerSiteOperationsStatus,
   "ServerOperationsStatusController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerSiteResource.properties);
 
 @@clientLocation(VmwareSites.get, "SitesController");
@@ -252,7 +252,7 @@ using Microsoft.OffAzure;
 );
 @@clientLocation(VmwareSites.updateTags, "VmwarePropertiesController");
 @@clientName(VmwareSites.updateTags::parameters.body, "updateMachineTags");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareSite.properties);
 
 @@clientLocation(HypervClusters.getCluster, "HypervClusterController");
@@ -260,7 +260,7 @@ using Microsoft.OffAzure;
 @@clientName(HypervClusters.createCluster::parameters.resource, "body");
 @@clientLocation(HypervClusters.delete, "HypervClusterController");
 @@clientLocation(HypervClusters.listByHypervSite, "HypervClusterController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervCluster.properties);
 
 @@clientLocation(HypervHosts.get, "HypervHostController");
@@ -268,17 +268,17 @@ using Microsoft.OffAzure;
 @@clientName(HypervHosts.create::parameters.resource, "body");
 @@clientLocation(HypervHosts.delete, "HypervHostController");
 @@clientLocation(HypervHosts.listByHypervSite, "HypervHostController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervHost.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervJob.properties);
 
 @@clientLocation(HypervMachines.get, "HypervMachinesController");
 @@clientLocation(HypervMachines.update, "HypervMachinesController");
 @@clientName(HypervMachines.update::parameters.properties, "body");
 @@clientLocation(HypervMachines.listByHypervSite, "HypervMachinesController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervMachine.properties);
 
 @@clientLocation(HypervVmSoftwareInventories.getMachineSoftwareInventory,
@@ -287,7 +287,7 @@ using Microsoft.OffAzure;
 @@clientLocation(HypervVmSoftwareInventories.listByHypervMachine,
   "HypervSoftwareInventoriesController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervVmSoftwareInventory.properties);
 
 @@clientLocation(HypervRunAsAccountResources.get,
@@ -296,14 +296,14 @@ using Microsoft.OffAzure;
 @@clientLocation(HypervRunAsAccountResources.listByHypervSite,
   "HypervRunAsAccountsController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervRunAsAccountResource.properties);
 
 @@clientLocation(DeleteImportMachinesJobs.getDeletejob, "ImportJobsController");
 @@clientLocation(DeleteImportMachinesJobs.listDeletejobs,
   "ImportJobsController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DeleteImportMachinesJob.properties);
 
 @@clientLocation(ExportImportedMachinesJobs.getExportjob,
@@ -318,20 +318,20 @@ using Microsoft.OffAzure;
 
 @@clientLocation(ImportJobs.get, "ImportJobsController");
 @@clientLocation(ImportJobs.listByImportSite, "ImportJobsController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportJob.properties);
 
 @@clientLocation(ImportMachines.get, "ImportMachinesController");
 @@clientLocation(ImportMachines.delete, "ImportMachinesController");
 @@clientLocation(ImportMachines.listByImportSite, "ImportMachinesController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportMachine.properties);
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResourcesController");
 @@clientLocation(PrivateLinkResources.listByMasterSite,
   "PrivateLinkResourcesController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
 @@clientLocation(SqlSites.get, "SqlSitesController");
@@ -351,7 +351,7 @@ using Microsoft.OffAzure;
 @@clientLocation(SqlSites.getSqlOperationStatus,
   "SqlOperationsStatusController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlSite.properties);
 
 @@clientLocation(SqlDiscoverySiteDataSources.get,
@@ -367,7 +367,7 @@ using Microsoft.OffAzure;
 @@clientLocation(SqlDiscoverySiteDataSources.listBySqlSite,
   "SqlDiscoverySiteDataSourceController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDiscoverySiteDataSource.properties);
 
 @@clientLocation(ImportSqlInventoryJobs.getImportjob,
@@ -379,31 +379,31 @@ using Microsoft.OffAzure;
 
 @@clientLocation(SqlJobs.get, "SqlJobsController");
 @@clientLocation(SqlJobs.listBySqlSite, "SqlJobsController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlJob.properties);
 
 @@clientLocation(SqlRunAsAccounts.get, "SqlRunAsAccountsController");
 @@clientLocation(SqlRunAsAccounts.listBySqlSite, "SqlRunAsAccountsController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRunAsAccount.properties);
 
 @@clientLocation(SqlAvailabilityGroups.get, "SqlAvailabilityGroupsController");
 @@clientLocation(SqlAvailabilityGroups.listBySqlSite,
   "SqlAvailabilityGroupsController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlAvailabilityGroup.properties);
 
 @@clientLocation(SqlDatabaseV2s.get, "SqlDatabasesController");
 @@clientLocation(SqlDatabaseV2s.listBySqlSite, "SqlDatabasesController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseV2.properties);
 
 @@clientLocation(SqlServerV2s.get, "SqlServersController");
 @@clientLocation(SqlServerV2s.update, "SqlServersController");
 @@clientName(SqlServerV2s.update::parameters.properties, "body");
 @@clientLocation(SqlServerV2s.listBySqlSite, "SqlServersController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlServerV2.properties);
 
 @@clientLocation(WebAppSites.get, "WebAppSitesController");
@@ -424,7 +424,7 @@ using Microsoft.OffAzure;
 @@clientName(WebAppSites.webServersControllerListByWebAppSite,
   "ListByWebAppSite"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppSite.properties);
 
 @@clientLocation(DiscoverySiteDataSources.get,
@@ -440,7 +440,7 @@ using Microsoft.OffAzure;
 @@clientLocation(DiscoverySiteDataSources.listByWebAppSite,
   "WebAppDiscoverySiteDataSourcesController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DiscoverySiteDataSource.properties);
 
 @@clientLocation(WebAppExtendedMachines.get,
@@ -449,37 +449,37 @@ using Microsoft.OffAzure;
 @@clientLocation(WebAppExtendedMachines.listByWebAppSite,
   "WebAppExtendedMachinesController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppExtendedMachine.properties);
 
 @@clientName(IisWebApplicationsController.update::parameters.properties,
   "body"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IisWebApplications.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IisWebServers.properties);
 
 @@clientLocation(WebAppRunAsAccounts.get, "WebAppRunAsAccountsController");
 @@clientLocation(WebAppRunAsAccounts.listByWebAppSite,
   "WebAppRunAsAccountsController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppRunAsAccount.properties);
 
 @@clientName(TomcatWebApplicationsController.update::parameters.properties,
   "body"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TomcatWebApplications.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TomcatWebServers.properties);
 
 @@clientLocation(ServerJobs.get, "ServerJobsController");
 @@clientLocation(ServerJobs.listByServerSiteResource, "ServerJobsController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerJob.properties);
 
 @@clientLocation(Servers.getMachine, "ServersController");
@@ -487,7 +487,7 @@ using Microsoft.OffAzure;
 @@clientName(Servers.updateMachine::parameters.properties, "body");
 @@clientLocation(Servers.deleteMachine, "ServersController");
 @@clientLocation(Servers.listByServerSiteResource, "ServersController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Server.properties);
 
 @@clientLocation(ServerSoftwareInventories.getMachineSoftwareInventory,
@@ -496,24 +496,24 @@ using Microsoft.OffAzure;
 @@clientLocation(ServerSoftwareInventories.listByServer,
   "ServerSoftwareInventoriesController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerSoftwareInventory.properties);
 
 @@clientLocation(ServerRunAsAccounts.get, "ServerRunAsAccountsController");
 @@clientLocation(ServerRunAsAccounts.listByServerSiteResource,
   "ServerRunAsAccountsController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerRunAsAccount.properties);
 
 @@clientLocation(VmwareHosts.get, "VmwareHostController");
 @@clientLocation(VmwareHosts.listByVmwareSite, "VmwareHostController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareHost.properties);
 
 @@clientLocation(VmwareJobs.get, "HypervJobsController");
 @@clientLocation(VmwareJobs.listByVmwareSite, "HypervJobsController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareJob.properties);
 
 @@clientLocation(MachineResources.get, "MachinesController");
@@ -522,7 +522,7 @@ using Microsoft.OffAzure;
 @@clientLocation(MachineResources.listByVmwareSite, "MachinesController");
 @@clientLocation(MachineResources.start, "MachinesController");
 @@clientLocation(MachineResources.stop, "MachinesController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MachineResource.properties);
 
 @@clientLocation(VmwareMachineSoftwareInventories.getMachineSoftwareInventory,
@@ -531,14 +531,14 @@ using Microsoft.OffAzure;
 @@clientLocation(VmwareMachineSoftwareInventories.listByMachineResource,
   "VmwareSoftwareInventoriesController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareMachineSoftwareInventory.properties);
 
 @@clientLocation(VmwareRunAsAccountResources.get, "RunAsAccountsController");
 @@clientLocation(VmwareRunAsAccountResources.listByVmwareSite,
   "RunAsAccountsController"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareRunAsAccountResource.properties);
 
 @@clientLocation(Vcenters.get, "VcenterController");
@@ -546,7 +546,7 @@ using Microsoft.OffAzure;
 @@clientName(Vcenters.create::parameters.resource, "body");
 @@clientLocation(Vcenters.delete, "VcenterController");
 @@clientLocation(Vcenters.listByVmwareSite, "VcenterController");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Vcenter.properties);
 
 @@visibility(DeleteImportMachinesJob.properties,

@@ -28,7 +28,7 @@ interface VmwareHosts {
   /**
    * Get a VmwareHost
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwareHostController")
   @operationId("VmwareHostController_Get")
   get is ArmResourceRead<VmwareHost>;
@@ -36,7 +36,7 @@ interface VmwareHosts {
   /**
    * List VmwareHost resources by VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwareHostController")
   @operationId("VmwareHostController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<VmwareHost>;

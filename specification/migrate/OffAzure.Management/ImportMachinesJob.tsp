@@ -26,25 +26,25 @@ model ImportMachinesJob
   /**
    * Gets or sets the Job status.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   status?: string;
 
   /**
    * Gets or sets the Job start time.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: string;
 
   /**
    * Gets or sets the Job end time.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endTime?: string;
 
   /**
    * Gets or sets the Display name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   displayName?: string;
 }
 
@@ -53,7 +53,7 @@ interface ImportMachinesJobs {
   /**
    * Gets the import job with the given job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
   @operationId("ImportJobsController_GetImportjob")
   getImportjob is ArmResourceRead<ImportMachinesJob>;
@@ -61,7 +61,7 @@ interface ImportMachinesJobs {
   /**
    * Method to get all import machines job for the given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
   @operationId("ImportJobsController_ListImportjobs")
   listImportjobs is ArmResourceListByParent<

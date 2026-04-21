@@ -71,14 +71,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}'].put.responses.201.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/vcenters/{vcenterName}'].put.responses.201.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/listHealthSummary'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/listHealthSummary'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/listHealthSummary'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-
 ### Changes for `location`
 
 | Path | Change Type | Value |
