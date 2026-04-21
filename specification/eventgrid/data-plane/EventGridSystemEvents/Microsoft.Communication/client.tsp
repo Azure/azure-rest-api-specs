@@ -629,22 +629,22 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicy,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicy,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicy,
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicy,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyKind,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyKind,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyKind,
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyKind,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReason,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReasonType,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReason,
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReasonType,
   Access.public
 );
 

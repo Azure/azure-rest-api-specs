@@ -51,6 +51,16 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
+@@clientName(AcsChatRetentionPolicy, "AcsChatThreadRetentionPolicy", "java");
+@@clientName(AcsChatRetentionPolicyKind,
+  "AcsChatThreadRetentionPolicyKind",
+  "java"
+);
+@@clientName(AcsChatThreadDeletedReasonType,
+  "AcsChatThreadDeletedReason",
+  "java"
+);
+
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "java"
