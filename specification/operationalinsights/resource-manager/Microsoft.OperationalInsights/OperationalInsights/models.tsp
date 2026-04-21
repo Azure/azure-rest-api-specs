@@ -1911,6 +1911,7 @@ model SavedSearchesListResult {
   /**
    * The array of result values.
    */
+  @pageItems
   value?: SavedSearch[];
 }
 
@@ -1926,6 +1927,7 @@ model SearchGetSchemaResponse {
   /**
    * The array of result values.
    */
+  @pageItems
   @identifiers(#["name"])
   value?: SearchSchemaValue[];
 }
