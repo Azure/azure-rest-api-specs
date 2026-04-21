@@ -54,7 +54,10 @@ using TypeSpec.Rest;
 @@clientName(GetTimeseriesParameters.endDateTimeUTC, "endDateTimeUtc", "java");
 @@clientName(GetTimeseriesParameters.startDateTimeUTC, "startOn", "csharp");
 @@clientName(GetTimeseriesParameters.endDateTimeUTC, "endOn", "csharp");
-@@clientName(GetTimeseriesParameters.timeseriesType, "timeSeriesType", "csharp");
+@@clientName(GetTimeseriesParameters.timeseriesType,
+  "timeSeriesType",
+  "csharp"
+);
 
 @@clientName(MinimumTLSVersion.`1.0`, "One0", "go");
 @@clientName(MinimumTLSVersion.`1.2`, "One2", "go");
