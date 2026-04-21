@@ -630,9 +630,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSChatThreadRetentionPolicyKind",
   "go"
 );
-@@clientName(AcsChatThreadDeletedReason,
-  "ACSChatThreadDeletedReason",
-  "go"
-);
+@@clientName(AcsChatThreadDeletedReason, "ACSChatThreadDeletedReason", "go");
 
 // [END] ACS renames (and acronym casing)
