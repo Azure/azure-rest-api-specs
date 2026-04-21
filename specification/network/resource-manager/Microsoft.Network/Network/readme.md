@@ -43,6 +43,7 @@ input-file:
   - stable/2025-07-01/expressRoute.json
   - stable/2025-07-01/firewall.json
   - stable/2025-07-01/firewallPolicy.json
+  - stable/2025-07-01/interconnectGroup.json
   - stable/2025-07-01/loadBalancer.json
   - stable/2025-07-01/networkGateway.json
   - stable/2025-07-01/networkingOperations.json
@@ -53,7 +54,6 @@ input-file:
   - stable/2025-07-01/virtualNetwork.json
   - stable/2025-07-01/virtualNetworkAppliance.json
   - stable/2025-07-01/virtualWan.json
-  - stable/2025-07-01/interconnectGroup.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
   - code: ParametersInPointGet
@@ -130,6 +130,7 @@ input-file:
   - stable/2025-05-01/expressRoute.json
   - stable/2025-05-01/firewall.json
   - stable/2025-05-01/firewallPolicy.json
+  - stable/2025-05-01/interconnectGroup.json
   - stable/2025-05-01/loadBalancer.json
   - stable/2025-05-01/networkGateway.json
   - stable/2025-05-01/networkingOperations.json
@@ -137,7 +138,6 @@ input-file:
   - stable/2025-05-01/networkSecurityPerimeter.json
   - stable/2025-05-01/networkWatcher.json
   - stable/2025-05-01/serviceGateway.json
-  - stable/2025-05-01/interconnectGroup.json
   - stable/2025-05-01/virtualNetwork.json
   - stable/2025-05-01/virtualNetworkAppliance.json
   - stable/2025-05-01/virtualWan.json
