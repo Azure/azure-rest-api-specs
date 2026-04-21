@@ -452,3 +452,8 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   sqlResourcesGetSqlRoleDefinitionCustomized,
   "go,java"
 );
+
+@@clientName(ManagedServiceIdentityUserAssignedIdentities,
+  "Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties",
+  "javascript"
+);
