@@ -31,15 +31,17 @@ model Identity {
 }
 
 @doc("The type of identity.")
-enum IdentityType {
+union IdentityType {
+  string,
+
   @doc("A user identity.")
-  User,
+  User: "User",
 
   @doc("A group identity.")
-  Group,
+  Group: "Group",
 
   @doc("A service principal identity.")
-  ServicePrincipal,
+  ServicePrincipal: "ServicePrincipal",
 }
 
 // ============================================================
@@ -125,24 +127,26 @@ model DataSubscription {
 }
 
 @doc("The status of a data subscription.")
-enum DataSubscriptionStatus {
+union DataSubscriptionStatus {
+  string,
+
   @doc("Subscription is pending approval.")
-  Pending,
+  Pending: "Pending",
 
   @doc("Subscription has been approved.")
-  Approved,
+  Approved: "Approved",
 
   @doc("Access has been granted.")
-  Granted,
+  Granted: "Granted",
 
   @doc("Subscription has been declined.")
-  Declined,
+  Declined: "Declined",
 
   @doc("Access has been revoked.")
-  Revoked,
+  Revoked: "Revoked",
 
   @doc("Subscription process is complete.")
-  Completed,
+  Completed: "Completed",
 }
 
 @doc("Policy set values associated with a data subscription.")
@@ -178,6 +182,7 @@ model DataAssetValues {
 model Workflow {
   @key("workflowId")
   @doc("The unique identifier of the workflow.")
+  @visibility(Lifecycle.Read)
   workflowId: uuid;
 
   @doc("The type of workflow.")
@@ -220,15 +225,17 @@ model Trigger {
 }
 
 @doc("The type of trigger that activates a workflow.")
-enum TriggerType {
+union TriggerType {
+  string,
+
   @doc("Triggered when a data access request is submitted.")
-  DataAccessRequestSubmitted,
+  DataAccessRequestSubmitted: "DataAccessRequestSubmitted",
 
   @doc("Triggered when a data product is published.")
-  DataProductPublish,
+  DataProductPublish: "DataProductPublish",
 
   @doc("Triggered when a term is published.")
-  TermPublish,
+  TermPublish: "TermPublish",
 }
 
 @doc("An action step in a workflow.")
@@ -347,15 +354,17 @@ model ApproverDecision {
 }
 
 @doc("The status of an approver's decision.")
-enum ApproverDecisionStatus {
+union ApproverDecisionStatus {
+  string,
+
   @doc("Approved the request.")
-  Approved,
+  Approved: "Approved",
 
   @doc("Rejected the request.")
-  Rejected,
+  Rejected: "Rejected",
 
   @doc("Decision is pending.")
-  Pending,
+  Pending: "Pending",
 }
 
 @doc("Represents an approval record for a workflow run.")
@@ -409,12 +418,14 @@ model TargetResource {
 }
 
 @doc("The kind of policy set.")
-enum PolicySetKind {
+union PolicySetKind {
+  string,
+
   @doc("Applied policy set.")
-  Applied,
+  Applied: "Applied",
 
   @doc("Effective policy set.")
-  Effective,
+  Effective: "Effective",
 }
 
 @doc("Data product access policies.")

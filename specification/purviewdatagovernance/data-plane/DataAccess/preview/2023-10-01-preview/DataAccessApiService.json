@@ -2509,7 +2509,7 @@
       ],
       "x-ms-enum": {
         "name": "ApproverDecisionStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Approved",
@@ -2851,7 +2851,7 @@
       ],
       "x-ms-enum": {
         "name": "DataSubscriptionStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Pending",
@@ -2922,7 +2922,7 @@
       ],
       "x-ms-enum": {
         "name": "IdentityType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "User",
@@ -3016,7 +3016,7 @@
       ],
       "x-ms-enum": {
         "name": "PolicySetKind",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Applied",
@@ -3098,7 +3098,7 @@
       ],
       "x-ms-enum": {
         "name": "TriggerType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "DataAccessRequestSubmitted",
@@ -3124,7 +3124,8 @@
       "properties": {
         "workflowId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the workflow."
+          "description": "The unique identifier of the workflow.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
