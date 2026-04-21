@@ -19,7 +19,7 @@ using ComputeSku;
     service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
     autoMergeService: true,
   },
-  "!python"
+  "!(javascript, python)"
 )
 @client(
   {
@@ -27,7 +27,7 @@ using ComputeSku;
     service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
     autoMergeService: true,
   },
-  "python"
+  "javascript, python"
 )
 namespace ComputeCombine;
 

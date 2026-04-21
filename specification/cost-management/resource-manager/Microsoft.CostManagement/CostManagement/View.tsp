@@ -48,7 +48,8 @@ interface ViewOps
         @segment("views")
         @key
         viewName: string,
-      }
+      },
+      ResourceName = "TenantsCostManagementViews"
     > {}
 
 @armResourceOperations
@@ -110,7 +111,8 @@ interface ViewOperationGroupOps
         @segment("views")
         @key
         viewName: string,
-      }
+      },
+      ResourceName = "CostManagementViews"
     > {}
 
 @armResourceOperations
