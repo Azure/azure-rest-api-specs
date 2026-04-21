@@ -33,25 +33,22 @@ namespace Customizations;
   "python,csharp,javascript"
 );
 
-@@clientNamespace(Storage.File,
-  "Azure.Storage.Files.Shares",
-  "!csharp,!python,!go"
-);
+@@clientNamespace(Storage.File, "Azure.Storage.Files.Shares", "javascript");
 @@clientNamespace(Storage.File.Service,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python,!go"
+  "javascript"
 );
 @@clientNamespace(Storage.File.Share,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python,!go"
+  "javascript"
 );
 @@clientNamespace(Storage.File.Directory,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python,!go"
+  "javascript"
 );
 @@clientNamespace(Storage.File.File,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python,!go"
+  "javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
