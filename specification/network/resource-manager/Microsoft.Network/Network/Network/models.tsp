@@ -26219,4 +26219,3 @@ model SubgroupNodeAvailabilityEntry {
   /** The total node count for the subgroup. */
   count?: int32;
 }
-
