@@ -29,17 +29,13 @@ interface SqlDiscoverySiteDataSources {
   /**
    * Get a SqlDiscoverySiteDataSource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlDiscoverySiteDataSourceController")
-  @operationId("SqlDiscoverySiteDataSourceController_Get")
   get is ArmResourceRead<SqlDiscoverySiteDataSource>;
 
   /**
    * Create a SqlDiscoverySiteDataSource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlDiscoverySiteDataSourceController")
-  @operationId("SqlDiscoverySiteDataSourceController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     SqlDiscoverySiteDataSource,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlDiscoverySiteDataSource> &
@@ -49,17 +45,13 @@ interface SqlDiscoverySiteDataSources {
   /**
    * Delete a SqlDiscoverySiteDataSource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlDiscoverySiteDataSourceController")
-  @operationId("SqlDiscoverySiteDataSourceController_Delete")
   delete is ArmResourceDeleteSync<SqlDiscoverySiteDataSource>;
 
   /**
    * List SqlDiscoverySiteDataSource resources by SqlSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlDiscoverySiteDataSourceController")
-  @operationId("SqlDiscoverySiteDataSourceController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<SqlDiscoverySiteDataSource>;
 }
 

@@ -28,17 +28,13 @@ interface HypervHosts {
   /**
    * Get a HypervHost
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervHostController")
-  @operationId("HypervHostController_Get")
   get is ArmResourceRead<HypervHost>;
 
   /**
    * Create a HypervHost
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervHostController")
-  @operationId("HypervHostController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     HypervHost,
     LroHeaders = ArmLroLocationHeader<FinalResult = HypervHost> &
@@ -48,10 +44,8 @@ interface HypervHosts {
   /**
    * Delete a HypervHost
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervHostController")
-  @operationId("HypervHostController_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HypervHost,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -60,9 +54,7 @@ interface HypervHosts {
   /**
    * List HypervHost resources by HypervSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervHostController")
-  @operationId("HypervHostController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<
     HypervHost,
     Parameters = {

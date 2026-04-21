@@ -29,17 +29,13 @@ interface DeleteImportMachinesJobs {
   /**
    * Gets the delete imported machines job with the given job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
-  @operationId("ImportJobsController_GetDeletejob")
   getDeletejob is ArmResourceRead<DeleteImportMachinesJob>;
 
   /**
    * Method to get all delete import machines job for the given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
-  @operationId("ImportJobsController_ListDeletejobs")
   listDeletejobs is ArmResourceListByParent<
     DeleteImportMachinesJob,
     Response = ArmResponse<PagedDeleteImportMachinesJob>

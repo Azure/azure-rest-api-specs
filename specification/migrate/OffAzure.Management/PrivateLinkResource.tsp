@@ -29,17 +29,13 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateLinkResourcesController")
-  @operationId("PrivateLinkResourcesController_Get")
   get is ArmResourceRead<PrivateLinkResource>;
 
   /**
    * Gets the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateLinkResourcesController")
-  @operationId("PrivateLinkResourcesController_ListByMasterSite")
   listByMasterSite is ArmResourceListByParent<PrivateLinkResource>;
 }
 

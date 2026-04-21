@@ -53,17 +53,13 @@ interface ImportMachinesJobs {
   /**
    * Gets the import job with the given job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
-  @operationId("ImportJobsController_GetImportjob")
   getImportjob is ArmResourceRead<ImportMachinesJob>;
 
   /**
    * Method to get all import machines job for the given site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
-  @operationId("ImportJobsController_ListImportjobs")
   listImportjobs is ArmResourceListByParent<
     ImportMachinesJob,
     Response = ArmResponse<PagedImportMachinesJob>

@@ -29,17 +29,13 @@ interface WebAppRunAsAccounts {
   /**
    * Method to get run as account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppRunAsAccountsController")
-  @operationId("WebAppRunAsAccountsController_Get")
   get is ArmResourceRead<WebAppRunAsAccount>;
 
   /**
    * Method to get all run as accounts.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppRunAsAccountsController")
-  @operationId("WebAppRunAsAccountsController_ListByWebAppSite")
   listByWebAppSite is ArmResourceListByParent<WebAppRunAsAccount>;
 }
 

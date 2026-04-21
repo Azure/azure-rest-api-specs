@@ -61,50 +61,38 @@ interface SqlSites {
   /**
    * Method to get a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_Get")
   get is ArmResourceRead<SqlSite>;
 
   /**
    * Method to create a SQL site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_Create")
   create is ArmResourceCreateOrReplaceSync<SqlSite>;
 
   /**
    * Method to update an existing site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<SqlSite, PatchModel = SqlSiteUpdate>;
 
   /**
    * Deletes the SQL site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_Delete")
   delete is ArmResourceDeleteSync<SqlSite>;
 
   /**
    * Method to get all sites.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ListByMasterSite")
   listByMasterSite is ArmResourceListByParent<SqlSite>;
 
   /**
    * Method to get error summary from SQL site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ErrorSummary")
   errorSummary is ArmResourceActionSync<
     SqlSite,
     ErrorSummaryRequest,
@@ -114,9 +102,7 @@ interface SqlSites {
   /**
    * Method to generate export/read SAS uri for import.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ExportUri")
   exportUri is ArmResourceActionSync<
     SqlSite,
     SQLInventoryImportBody,
@@ -126,9 +112,7 @@ interface SqlSites {
   /**
    * Method to generate report containing SQL servers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ExportSqlServerErrors")
   exportSqlServerErrors is ArmResourceActionAsync<
     SqlSite,
     unknown,
@@ -138,9 +122,7 @@ interface SqlSites {
   /**
    * Method to generate report containing SQL servers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ExportSqlServers")
   exportSqlServers is ArmResourceActionAsync<
     SqlSite,
     ExportSqlServersRequest,
@@ -150,9 +132,7 @@ interface SqlSites {
   /**
    * Method to refresh a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_Refresh")
   refresh is ArmResourceActionAsync<
     SqlSite,
     SqlSiteRefreshBody,
@@ -162,17 +142,13 @@ interface SqlSites {
   /**
    * Method to get site usage/summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_Summary")
   summary is ArmResourceActionSync<SqlSite, void, ArmResponse<SqlSiteUsage>>;
 
   /**
    * Initiates SQL inventory import process. This is an asynchronous operation that returns a 202 Accepted response and requires polling for completion status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ImportUri")
   importUri is ArmResourceActionAsyncBase<
     SqlSite,
     SQLInventoryImportBody,
@@ -183,9 +159,7 @@ interface SqlSites {
   /**
    * Validates SQL inventory data for format and correctness before attempting import. This is a safer alternative to direct import as it prevents failed imports due to invalid data. The operation performs validation checks first and only proceeds with import if all checks pass.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlSitesController")
-  @operationId("SqlSitesController_ValidateAndImportUri")
   validateAndImportUri is ArmResourceActionSync<
     SqlSite,
     SQLInventoryImportBody,
@@ -195,9 +169,7 @@ interface SqlSites {
   /**
    * Method to get operation status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlOperationsStatusController")
-  @operationId("SqlOperationsStatusController_GetSqlOperationStatus")
   getSqlOperationStatus is SqlSiteOperationsStatusOps.Read<
     OperationStatus,
     OverrideErrorType = ErrorResponse

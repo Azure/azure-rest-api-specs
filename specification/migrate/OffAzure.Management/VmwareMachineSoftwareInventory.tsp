@@ -31,17 +31,13 @@ interface VmwareMachineSoftwareInventories {
   /**
    * Method to get a machines software inventory like applications and roles.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwareSoftwareInventoriesController")
-  @operationId("VmwareSoftwareInventoriesController_GetMachineSoftwareInventory")
   getMachineSoftwareInventory is ArmResourceRead<VmwareMachineSoftwareInventory>;
 
   /**
    * List VmwareMachineSoftwareInventory resources by MachineResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VmwareSoftwareInventoriesController")
-  @operationId("VmwareSoftwareInventoriesController_ListByMachineResource")
   listByMachineResource is ArmResourceListByParent<VmwareMachineSoftwareInventory>;
 }
 

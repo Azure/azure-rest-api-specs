@@ -28,17 +28,13 @@ interface Vcenters {
   /**
    * Get a Vcenter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VcenterController")
-  @operationId("VcenterController_Get")
   get is ArmResourceRead<Vcenter>;
 
   /**
    * Create a Vcenter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VcenterController")
-  @operationId("VcenterController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     Vcenter,
     LroHeaders = ArmLroLocationHeader<FinalResult = Vcenter> &
@@ -48,17 +44,13 @@ interface Vcenters {
   /**
    * Delete a Vcenter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VcenterController")
-  @operationId("VcenterController_Delete")
   delete is ArmResourceDeleteSync<Vcenter>;
 
   /**
    * List Vcenter resources by VmwareSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VcenterController")
-  @operationId("VcenterController_ListByVmwareSite")
   listByVmwareSite is ArmResourceListByParent<
     Vcenter,
     Parameters = {

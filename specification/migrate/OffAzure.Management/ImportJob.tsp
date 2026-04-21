@@ -28,17 +28,13 @@ interface ImportJobs {
   /**
    * Get a ImportJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
-  @operationId("ImportJobsController_Get")
   get is ArmResourceRead<ImportJob>;
 
   /**
    * List ImportJob resources by ImportSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ImportJobsController")
-  @operationId("ImportJobsController_ListByImportSite")
   listByImportSite is ArmResourceListByParent<ImportJob>;
 }
 

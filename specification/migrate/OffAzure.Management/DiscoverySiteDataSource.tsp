@@ -29,17 +29,13 @@ interface DiscoverySiteDataSources {
   /**
    * Method to get a Web app data source in site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppDiscoverySiteDataSourcesController")
-  @operationId("WebAppDiscoverySiteDataSourcesController_Get")
   get is ArmResourceRead<DiscoverySiteDataSource>;
 
   /**
    * Method to create or update a Web app data source in site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppDiscoverySiteDataSourcesController")
-  @operationId("WebAppDiscoverySiteDataSourcesController_Create")
   create is ArmResourceCreateOrReplaceAsync<
     DiscoverySiteDataSource,
     LroHeaders = ArmLroLocationHeader<FinalResult = DiscoverySiteDataSource> &
@@ -49,10 +45,8 @@ interface DiscoverySiteDataSources {
   /**
    * Method to delete a Web app data source in site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppDiscoverySiteDataSourcesController")
-  @operationId("WebAppDiscoverySiteDataSourcesController_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DiscoverySiteDataSource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -61,9 +55,7 @@ interface DiscoverySiteDataSources {
   /**
    * Method to get all Web app data sources in site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("WebAppDiscoverySiteDataSourcesController")
-  @operationId("WebAppDiscoverySiteDataSourcesController_ListByWebAppSite")
   listByWebAppSite is ArmResourceListByParent<DiscoverySiteDataSource>;
 }
 

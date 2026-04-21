@@ -28,34 +28,26 @@ interface Servers {
   /**
    * Get a Server
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServersController")
-  @operationId("ServersController_GetMachine")
   getMachine is ArmResourceRead<Server>;
 
   /**
    * Update a Server machine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServersController")
-  @operationId("ServersController_UpdateMachine")
   @patch(#{ implicitOptionality: false })
   updateMachine is ArmCustomPatchSync<Server, PatchModel = ServerUpdate>;
 
   /**
    * Delete a Server
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServersController")
-  @operationId("ServersController_DeleteMachine")
   deleteMachine is ArmResourceDeleteSync<Server>;
 
   /**
    * Get all machines in a site.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServersController")
-  @operationId("ServersController_ListByServerSiteResource")
   listByServerSiteResource is ArmResourceListByParent<
     Server,
     Parameters = {

@@ -29,17 +29,13 @@ interface SqlRunAsAccounts {
   /**
    * Get a SqlRunAsAccount
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlRunAsAccountsController")
-  @operationId("SqlRunAsAccountsController_Get")
   get is ArmResourceRead<SqlRunAsAccount>;
 
   /**
    * List SqlRunAsAccount resources by SqlSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SqlRunAsAccountsController")
-  @operationId("SqlRunAsAccountsController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<SqlRunAsAccount>;
 }
 

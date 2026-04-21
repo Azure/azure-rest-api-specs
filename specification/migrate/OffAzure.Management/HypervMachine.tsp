@@ -29,26 +29,20 @@ interface HypervMachines {
   /**
    * Get a HypervMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervMachinesController")
-  @operationId("HypervMachinesController_Get")
   get is ArmResourceRead<HypervMachine>;
 
   /**
    * Update a HypervMachine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervMachinesController")
-  @operationId("HypervMachinesController_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<HypervMachine, PatchModel = HypervMachineUpdate>;
 
   /**
    * List HypervMachine resources by HypervSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervMachinesController")
-  @operationId("HypervMachinesController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<
     HypervMachine,
     Parameters = {

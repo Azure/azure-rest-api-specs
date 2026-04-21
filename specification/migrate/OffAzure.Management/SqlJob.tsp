@@ -28,19 +28,15 @@ interface SqlJobs {
   /**
    * Get a SqlJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the sql Job.")
   @tag("SqlJobsController")
-  @operationId("SqlJobsController_Get")
   get is ArmResourceRead<SqlJob>;
 
   /**
    * List SqlJob resources by SqlSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the sql Jobs.")
   @tag("SqlJobsController")
-  @operationId("SqlJobsController_ListBySqlSite")
   listBySqlSite is ArmResourceListByParent<SqlJob>;
 }
 

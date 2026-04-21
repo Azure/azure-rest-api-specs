@@ -29,17 +29,13 @@ interface HypervClusters {
   /**
    * Method to get a Hyper-V cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervClusterController")
-  @operationId("HypervClusterController_GetCluster")
   getCluster is ArmResourceRead<HypervCluster>;
 
   /**
    * Method to create or update a Hyper-V cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervClusterController")
-  @operationId("HypervClusterController_CreateCluster")
   createCluster is ArmResourceCreateOrReplaceAsync<
     HypervCluster,
     LroHeaders = ArmLroLocationHeader<FinalResult = HypervCluster> &
@@ -49,17 +45,13 @@ interface HypervClusters {
   /**
    * Delete a HypervCluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervClusterController")
-  @operationId("HypervClusterController_Delete")
   delete is ArmResourceDeleteSync<HypervCluster>;
 
   /**
    * List HypervCluster resources by HypervSite
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("HypervClusterController")
-  @operationId("HypervClusterController_ListByHypervSite")
   listByHypervSite is ArmResourceListByParent<
     HypervCluster,
     Parameters = {

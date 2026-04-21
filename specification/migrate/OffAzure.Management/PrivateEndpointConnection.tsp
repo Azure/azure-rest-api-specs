@@ -29,33 +29,25 @@ interface PrivateEndpointConnections {
   /**
    * Gets the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateEndpointConnectionController")
-  @operationId("PrivateEndpointConnectionController_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Gets the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateEndpointConnectionController")
-  @operationId("PrivateEndpointConnectionController_Create")
   create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
   /**
    * Deletes the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateEndpointConnectionController")
-  @operationId("PrivateEndpointConnectionController_Delete")
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
    * Gets the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateEndpointConnectionController")
-  @operationId("PrivateEndpointConnectionController_ListByMasterSite")
   listByMasterSite is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

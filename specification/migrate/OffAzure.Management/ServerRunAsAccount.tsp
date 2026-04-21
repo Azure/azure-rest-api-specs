@@ -29,17 +29,13 @@ interface ServerRunAsAccounts {
   /**
    * Get a ServerRunAsAccount
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerRunAsAccountsController")
-  @operationId("ServerRunAsAccountsController_Get")
   get is ArmResourceRead<ServerRunAsAccount>;
 
   /**
    * List ServerRunAsAccount resources by ServerSiteResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerRunAsAccountsController")
-  @operationId("ServerRunAsAccountsController_ListByServerSiteResource")
   listByServerSiteResource is ArmResourceListByParent<ServerRunAsAccount>;
 }
 
