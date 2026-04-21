@@ -21234,16 +21234,16 @@ model FailoverConnectionDetails {
 union ExpressRouteFailoverTestType {
   string,
 
-  /** SingleSiteFailover */
+  /** Single site failover test type. */
   SingleSiteFailover: "SingleSiteFailover",
 
-  /** MultiSiteFailover */
+  /** Multi site failover test type. */
   MultiSiteFailover: "MultiSiteFailover",
 
-  /** All */
+  /** All failover test types. */
   All: "All",
 
-  /** LinkFailover */
+  /** Link failover test type. */
   LinkFailover: "LinkFailover",
 }
 
@@ -21255,10 +21255,10 @@ union ExpressRouteFailoverTestType {
 union ExpressRouteFailoverLinkType {
   string,
 
-  /** Primary */
+  /** Primary link type. */
   Primary: "Primary",
 
-  /** Secondary */
+  /** Secondary link type. */
   Secondary: "Secondary",
 }
 
@@ -21270,10 +21270,10 @@ union ExpressRouteFailoverLinkType {
 union MaintenanceTestCategory {
   string,
 
-  /** BgpDisconnect */
+  /** BGP disconnect maintenance test. */
   BgpDisconnect: "BgpDisconnect",
 
-  /** ASPathPrepend */
+  /** AS path prepend maintenance test. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger value"
   ASPathPrepend: "ASPathPrepend",
 }
@@ -21286,11 +21286,11 @@ union MaintenanceTestCategory {
 union ExpressRouteFailoverBgpStatusAddressFamily {
   string,
 
-  /** IPv4 */
+  /** IPv4 address family. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger value"
   IPv4: "IPv4",
 
-  /** IPv6 */
+  /** IPv6 address family. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching existing swagger value"
   IPv6: "IPv6",
 }
@@ -21303,13 +21303,13 @@ union ExpressRouteFailoverBgpStatusAddressFamily {
 union ExpressRouteLinkFailoverBgpStatus {
   string,
 
-  /** Undefined */
+  /** BGP status is undefined. */
   Undefined: "Undefined",
 
-  /** Connected */
+  /** BGP is connected. */
   Connected: "Connected",
 
-  /** Disconnected */
+  /** BGP is disconnected. */
   Disconnected: "Disconnected",
 }
 

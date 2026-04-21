@@ -51,6 +51,7 @@ alias CircuitLinkFailoverOps = Azure.ResourceManager.Legacy.RoutedOperations<
   },
   {
     /** The name of the express route circuit. */
+    @pattern("^[a-zA-Z0-9_.-]*$")
     @path
     @segment("expressRouteCircuits")
     @key
