@@ -227,3 +227,41 @@ model AccessRulePropertiesSubscriptionsItem {
   "ArmErrorResponse",
   "javascript,python"
 );
+
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`ISO 8601`,
+  "ISO8601",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`YYYY-MM-DD HH:MM:SS`,
+  "YYYY_MM_DD_HH_MM_SS",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`M/D/YYYY HH:MM:SS AM/PM`,
+  "M_D_YYYY_HH_MM_SS_AM_PM",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`Mon DD, YYYY HH:MM:SS`,
+  "MON_DD_YYYY_HH_MM_SS",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyMMdd HH:mm:ss`,
+  "YY_M_MDD_HH_MM_SS",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`ddMMyy HH:mm:ss`,
+  "DD_M_MYY_HH_MM_SS",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`MMM d hh:mm:ss`,
+  "MMM_D_HH_MM_SS",
+  "python"
+);
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
+  "DD_MMM_YYYY_HH_MM_SS_ZZZ",
+  "python"
+);
+@@clientName(AlertSeverity.`0`, "ZERO", "python");
+@@clientName(AlertSeverity.`1`, "ONE", "python");
+@@clientName(AlertSeverity.`2`, "TWO", "python");
+@@clientName(AlertSeverity.`3`, "THREE", "python");
+@@clientName(AlertSeverity.`4`, "FOUR", "python");
