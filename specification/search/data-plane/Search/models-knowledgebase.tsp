@@ -64,6 +64,10 @@ model KnowledgeBaseRetrievalResponse {
 
   /** The references for the retrieval data used in the response. */
   references?: KnowledgeBaseReference[];
+
+  /** The sensitivity label information for the overall response. */
+  @added(Versions.v2026_05_01_preview)
+  responseSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Base type for reasoning effort. */
