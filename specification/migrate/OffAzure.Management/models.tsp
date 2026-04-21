@@ -4791,6 +4791,7 @@ model ImportSqlInventoryJobProperties {
   /**
    * Gets the blob SAS Uri of the input import file.
    */
+  @secret
   blobSasUri?: string;
 
   /**

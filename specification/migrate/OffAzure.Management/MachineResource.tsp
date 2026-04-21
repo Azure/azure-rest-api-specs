@@ -79,13 +79,13 @@ interface MachineResources {
    * Method to start a machine.
    */
   @tag("MachinesController")
-  start is ArmResourceActionAsync<MachineResource, void, ArmResponse<unknown>>;
+  start is ArmResourceActionAsync<MachineResource, void, unknown>;
 
   /**
    * Method to stop a machine.
    */
   @tag("MachinesController")
-  stop is ArmResourceActionAsync<MachineResource, void, ArmResponse<unknown>>;
+  stop is ArmResourceActionAsync<MachineResource, void, unknown>;
 }
 
 @@doc(MachineResource.name, "Machine name");

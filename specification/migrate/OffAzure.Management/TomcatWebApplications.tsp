@@ -37,7 +37,7 @@ interface TomcatWebApplicationsController {
    */
   @patch(#{ implicitOptionality: false })
   @tag("TomcatWebApplicationsController")
-  update is ArmCustomPatchSync<TomcatWebApplications>;
+  update is ArmCustomPatchSync<TomcatWebApplications, PatchModel = {}>;
 
   /**
    * Method to get all Tomcat web application.

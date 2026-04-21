@@ -122,7 +122,7 @@ interface ServerSiteResources {
   exportApplications is ArmResourceActionAsync<
     ServerSiteResource,
     unknown,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -133,7 +133,7 @@ interface ServerSiteResources {
   exportMachineErrors is ArmResourceActionAsync<
     ServerSiteResource,
     ExportMachineErrorsRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -150,11 +150,7 @@ interface ServerSiteResources {
    * Operation to refresh a site
    */
   @tag("ServerSitesController")
-  refreshSite is ArmResourceActionAsync<
-    ServerSiteResource,
-    void,
-    ArmResponse<unknown>
-  >;
+  refreshSite is ArmResourceActionAsync<ServerSiteResource, void, unknown>;
 
   /**
    * Method to get site usage.
@@ -174,7 +170,7 @@ interface ServerSiteResources {
   updateDependencyMapStatus is ArmResourceActionAsync<
     ServerSiteResource,
     UpdateMachineDepMapStatus,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -184,7 +180,7 @@ interface ServerSiteResources {
   updateProperties is ArmResourceActionAsync<
     ServerSiteResource,
     MachineMetadataCollection,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -194,7 +190,7 @@ interface ServerSiteResources {
   clientGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -204,7 +200,7 @@ interface ServerSiteResources {
   exportDependencies is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -214,7 +210,7 @@ interface ServerSiteResources {
   generateCoarseMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -224,7 +220,7 @@ interface ServerSiteResources {
   generateDetailedMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -234,7 +230,7 @@ interface ServerSiteResources {
   serverGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**

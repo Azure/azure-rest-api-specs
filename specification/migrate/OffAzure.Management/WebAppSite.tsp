@@ -77,18 +77,14 @@ interface WebAppSites {
   exportInventory is ArmResourceActionAsync<
     WebAppSite,
     ExportWebAppsRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
    * Method to refresh a site.
    */
   @tag("WebAppSitesController")
-  refresh is ArmResourceActionAsync<
-    WebAppSite,
-    ProxySiteRefreshBody,
-    ArmResponse<unknown>
-  >;
+  refresh is ArmResourceActionAsync<WebAppSite, ProxySiteRefreshBody, unknown>;
 
   /**
    * Method to get site usage/summary.
@@ -108,7 +104,7 @@ interface WebAppSites {
   updateProperties is ArmResourceActionAsync<
     WebAppSite,
     WebAppPropertiesCollection,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**

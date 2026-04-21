@@ -27,6 +27,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/refresh'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/exportInventory'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/refresh'].post.responses.200.schema.type__deleted` | deleted | `object` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications/{webApplicationName}'].patch.parameters[3].schema.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/updateProperties'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/clientGroupMembers'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/computeErrorSummary'].post.parameters[1].schema.type__deleted` | deleted | `object` |
@@ -95,6 +96,16 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateRunAsAccount'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/updateTags'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 
+### Changes for `$ref`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServerProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
+| `definitions.ServerUpdateProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
+| `definitions.SqlServerProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
+| `definitions.SqlServerV2UpdateProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications/{webApplicationName}'].patch.parameters[3].schema.$ref__deleted` | deleted | `#/definitions/TomcatWebApplicationsUpdate` |
+
 ### Changes for `Azure.ResourceManager.Object`
 
 | Path | Change Type | Value |
@@ -143,17 +154,11 @@
 |------|------------|-------|
 | `definitions.V20180501PreviewVmwareRunAsAccountVmwareRunAsAccountCollection__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `Azure.ResourceManager.ArmResponse<unknown>`
+### Changes for `unknown`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<unknown>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"desc...` |
-
-### Changes for `TomcatWebApplicationsTagsUpdate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TomcatWebApplicationsTagsUpdate__added` | added | `{"type":"object","description":"The type used for updating tags in TomcatWebApplications resources."...` |
+| `definitions.unknown__added` | added | `{}` |
 
 ### Changes for `description`
 
@@ -197,11 +202,11 @@
 | `definitions.ImportMachinesJob.properties.name__deleted` | deleted | `{"type":"string","description":"Gets or sets the Job ID."}` |
 | `definitions.ImportSqlInventoryJob.properties.name__deleted` | deleted | `{"type":"string","description":"Resource Name","readOnly":true}` |
 
-### Changes for `x-ms-secret`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImportSqlInventoryJobProperties.properties.blobSasUri['x-ms-secret__deleted']` | deleted | `true` |
+| `definitions.ImportSqlInventoryJobProperties.properties.blobSasUri.format__added` | added | `password` |
 
 ### Changes for `required`
 
@@ -226,15 +231,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.SasUriResponse.properties.importType.default__deleted` | deleted | `AzureMigrateCSV` |
-
-### Changes for `$ref`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ServerProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
-| `definitions.ServerUpdateProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
-| `definitions.SqlServerProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
-| `definitions.SqlServerV2UpdateProperties.properties.tags.additionalProperties.$ref__deleted` | deleted | `#/definitions/Azure.ResourceManager.Object` |
 
 ### Changes for `x-ms-identifiers`
 
@@ -559,7 +555,6 @@ in a site.` |
             in a site.` | `Method to update custom properties for HYPERV machines
 in a site.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importUri'].post.responses.202.headers.Location.description` | `The URL to retrieve the status of the asynchronous operation. This must be a full absolute URI and a public-facing endpoint.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications/{webApplicationName}'].patch.parameters[3].schema.$ref` | `#/definitions/TomcatWebApplicationsUpdate` | `#/definitions/TomcatWebApplicationsTagsUpdate` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/updateProperties'].post.description` | `Method to update properties for web applications.
             in a site.` | `Method to update properties for web applications.
 in a site.` |

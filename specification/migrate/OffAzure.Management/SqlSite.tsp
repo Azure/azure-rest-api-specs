@@ -113,11 +113,7 @@ interface SqlSites {
    * Method to generate report containing SQL servers.
    */
   @tag("SqlSitesController")
-  exportSqlServerErrors is ArmResourceActionAsync<
-    SqlSite,
-    unknown,
-    ArmResponse<unknown>
-  >;
+  exportSqlServerErrors is ArmResourceActionAsync<SqlSite, unknown, unknown>;
 
   /**
    * Method to generate report containing SQL servers.
@@ -126,18 +122,14 @@ interface SqlSites {
   exportSqlServers is ArmResourceActionAsync<
     SqlSite,
     ExportSqlServersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
    * Method to refresh a site.
    */
   @tag("SqlSitesController")
-  refresh is ArmResourceActionAsync<
-    SqlSite,
-    SqlSiteRefreshBody,
-    ArmResponse<unknown>
-  >;
+  refresh is ArmResourceActionAsync<SqlSite, SqlSiteRefreshBody, unknown>;
 
   /**
    * Method to get site usage/summary.

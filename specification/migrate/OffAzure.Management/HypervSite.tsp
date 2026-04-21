@@ -113,11 +113,7 @@ interface HypervSites {
    *             machine and the deep discovery of the application installed in the machine.
    */
   @tag("HypervSitesController")
-  exportApplications is ArmResourceActionAsync<
-    HypervSite,
-    unknown,
-    ArmResponse<unknown>
-  >;
+  exportApplications is ArmResourceActionAsync<HypervSite, unknown, unknown>;
 
   /**
    * Method to generate report containing
@@ -127,7 +123,7 @@ interface HypervSites {
   exportMachineErrors is ArmResourceActionAsync<
     HypervSite,
     ExportMachineErrorsRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -157,7 +153,7 @@ interface HypervSites {
   clientGroupMembers is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -167,7 +163,7 @@ interface HypervSites {
   exportDependencies is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -177,7 +173,7 @@ interface HypervSites {
   generateCoarseMap is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -187,7 +183,7 @@ interface HypervSites {
   generateDetailedMap is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -197,7 +193,7 @@ interface HypervSites {
   serverGroupMembers is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -208,7 +204,7 @@ interface HypervSites {
   updateDependencyMapStatus is ArmResourceActionAsync<
     HypervSite,
     UpdateMachineDepMapStatus,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -219,7 +215,7 @@ interface HypervSites {
   updateProperties is ArmResourceActionAsync<
     HypervSite,
     MachineMetadataCollection,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**

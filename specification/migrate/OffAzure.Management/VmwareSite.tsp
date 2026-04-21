@@ -114,11 +114,7 @@ interface VmwareSites {
    *             machine and the deep discovery of the application installed in the machine.
    */
   @tag("SitesController")
-  exportApplications is ArmResourceActionAsync<
-    VmwareSite,
-    unknown,
-    ArmResponse<unknown>
-  >;
+  exportApplications is ArmResourceActionAsync<VmwareSite, unknown, unknown>;
 
   /**
    * Method to generate report containing
@@ -128,7 +124,7 @@ interface VmwareSites {
   exportMachineErrors is ArmResourceActionAsync<
     VmwareSite,
     ExportMachineErrorsRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -139,7 +135,7 @@ interface VmwareSites {
   exportMachines is ArmResourceActionAsync<
     VmwareSite,
     ExportMachinesRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -169,7 +165,7 @@ interface VmwareSites {
   clientGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -179,7 +175,7 @@ interface VmwareSites {
   exportDependencies is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -189,7 +185,7 @@ interface VmwareSites {
   generateCoarseMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -199,7 +195,7 @@ interface VmwareSites {
   generateDetailedMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -209,7 +205,7 @@ interface VmwareSites {
   serverGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -230,7 +226,7 @@ interface VmwareSites {
   updateDependencyMapStatus is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineDepMapStatus,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -240,7 +236,7 @@ interface VmwareSites {
   updateProperties is ArmResourceActionAsync<
     VmwareSite,
     MachineMetadataCollection,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -251,7 +247,7 @@ interface VmwareSites {
   updateRunAsAccount is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineRunAsAccount,
-    ArmResponse<unknown>
+    unknown
   >;
 
   /**
@@ -259,11 +255,7 @@ interface VmwareSites {
    *             in a site.
    */
   @tag("VmwarePropertiesController")
-  updateTags is ArmResourceActionAsync<
-    VmwareSite,
-    UpdateMachineTags,
-    ArmResponse<unknown>
-  >;
+  updateTags is ArmResourceActionAsync<VmwareSite, UpdateMachineTags, unknown>;
 }
 
 @@doc(VmwareSite.name, "Site name");

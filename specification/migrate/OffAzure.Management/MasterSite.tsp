@@ -108,11 +108,7 @@ interface MasterSites {
    * Method to refresh arc status from master site for an appliance.
    */
   @tag("MasterSitesController")
-  refreshArcStatus is ArmResourceActionAsync<
-    MasterSite,
-    void,
-    ArmResponse<unknown>
-  >;
+  refreshArcStatus is ArmResourceActionAsync<MasterSite, void, unknown>;
 
   /**
    * A operation status resource belonging to a master site resource.
