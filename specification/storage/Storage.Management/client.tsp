@@ -1063,15 +1063,15 @@ enum ProvisioningStateEnum {
 );
 
 // CSharp SDK: Preserve API compatibility — output-only models were previously round-trip
-@@usage(ImmutabilityPolicyProperties, Usage.input, "csharp");
-@@usage(BlobRestoreStatus, Usage.input, "csharp");
-@@usage(GeoReplicationStats, Usage.input, "csharp");
-@@usage(LegalHoldProperties, Usage.input, "csharp");
-@@usage(TagProperty, Usage.input, "csharp");
-@@usage(ProtectedAppendWritesHistory, Usage.input, "csharp");
-@@usage(Endpoints, Usage.input, "csharp");
-@@usage(StorageAccountInternetEndpoints, Usage.input, "csharp");
-@@usage(StorageAccountIpv6Endpoints, Usage.input, "csharp");
-@@usage(KeyCreationTime, Usage.input, "csharp");
-@@usage(StorageAccountMicrosoftEndpoints, Usage.input, "csharp");
-@@usage(UpdateHistoryProperty, Usage.input, "csharp");
+@@usage(ImmutabilityPolicyProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(BlobRestoreStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(GeoReplicationStats, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(LegalHoldProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(TagProperty, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ProtectedAppendWritesHistory, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(Endpoints, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(StorageAccountInternetEndpoints, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(StorageAccountIpv6Endpoints, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(KeyCreationTime, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(StorageAccountMicrosoftEndpoints, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(UpdateHistoryProperty, Azure.ClientGenerator.Core.Usage.input, "csharp");
