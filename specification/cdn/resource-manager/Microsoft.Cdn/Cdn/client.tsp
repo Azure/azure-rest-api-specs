@@ -921,10 +921,6 @@ using Azure.ResourceManager;
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(MigrationParameters.classicResourceReference,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
 @@alternateType(OriginGroupUpdatePropertiesParameters.origins,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
