@@ -1061,3 +1061,17 @@ enum ProvisioningStateEnum {
   ProvisioningStateEnum,
   "java"
 );
+
+// CSharp SDK: Preserve API compatibility — output-only models were previously round-trip
+@@usage(ImmutabilityPolicyProperties, Usage.input, "csharp");
+@@usage(BlobRestoreStatus, Usage.input, "csharp");
+@@usage(GeoReplicationStats, Usage.input, "csharp");
+@@usage(LegalHoldProperties, Usage.input, "csharp");
+@@usage(TagProperty, Usage.input, "csharp");
+@@usage(ProtectedAppendWritesHistory, Usage.input, "csharp");
+@@usage(Endpoints, Usage.input, "csharp");
+@@usage(StorageAccountInternetEndpoints, Usage.input, "csharp");
+@@usage(StorageAccountIpv6Endpoints, Usage.input, "csharp");
+@@usage(KeyCreationTime, Usage.input, "csharp");
+@@usage(StorageAccountMicrosoftEndpoints, Usage.input, "csharp");
+@@usage(UpdateHistoryProperty, Usage.input, "csharp");

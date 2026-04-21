@@ -1120,6 +1120,11 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   "SearchServiceNetworkSecurityPerimeter",
   "csharp"
 );
+// CSharp SDK: Preserve API compatibility — output-only model was previously round-trip
+@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+  Usage.input,
+  "csharp"
+);
 @@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
   azureLocation,
   "csharp"
