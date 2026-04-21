@@ -35,25 +35,6 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Education;
 
-alias billingAccountExternalResource = Extension.ExternalResource<
-  "Microsoft.Billing",
-  "billingAccounts",
-  "billingAccountName",
-  ParentType = "Tenant"
->;
-
-alias billingProfileExternalResource = Extension.ExternalChildResource<
-  billingAccountExternalResource,
-  "billingProfiles",
-  "billingProfileName"
->;
-
-alias invoiceSectionExternalResource = Extension.ExternalChildResource<
-  billingProfileExternalResource,
-  "invoiceSections",
-  "invoiceSectionName"
->;
-
 /**
  * The available API versions.
  */
@@ -64,11 +45,22 @@ enum Versions {
   v2021_12_01_preview: "2021-12-01-preview",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<OperationListResult>,
-      DefaultErrorResponse
-    > {}
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @armResourceList(OperationListResult)
+  @get
+  list(
+    ...CommonTypes.ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.Education",
+  ): ArmResponse<OperationListResult> | DefaultErrorResponse;
+}
 
 @@doc(Operations.list,
   "Lists all of the available Microsoft.Education API operations."
