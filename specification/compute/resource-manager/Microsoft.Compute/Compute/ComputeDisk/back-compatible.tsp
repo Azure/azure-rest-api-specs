@@ -92,6 +92,8 @@ using ComputeDisk;
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
+@@clientName(Disks.claimResource::parameters.body, "claimResourceRequest");
+@@clientName(Disks.unclaimResource::parameters.body, "unclaimResourceRequest");
 
 @@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
 @@clientLocation(DiskRestorePoints.listByRestorePoint,

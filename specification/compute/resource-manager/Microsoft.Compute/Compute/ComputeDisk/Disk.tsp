@@ -131,12 +131,7 @@ interface Disks {
    */
   @added(Versions.v2026_03_02)
   @action("claimResource")
-  claimResource is ComputeResourceActionAsync<
-    Disk,
-    ClaimResourceRequest,
-    Disk,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = Disk>
-  >;
+  claimResource is ComputeResourceActionAsync<Disk, ClaimResourceRequest, Disk>;
 
   /**
    * Unclaims a disk from an existing owner resource.
@@ -146,8 +141,7 @@ interface Disks {
   unclaimResource is ComputeResourceActionAsync<
     Disk,
     UnclaimResourceRequest,
-    Disk,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = Disk>
+    Disk
   >;
 }
 
