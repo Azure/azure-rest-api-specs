@@ -5,3 +5,10 @@
 - tool: TagsAreNotAllowedForProxyResources
   path: Microsoft.Migrate/AssessmentProjects/preview/2023-05-01-preview/**/*.json
   reason: Adding this supression as this is a false positive alert
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs added as folder structure v1, not yet converted to v2
+  paths:
+    - ../OffAzure.Management
