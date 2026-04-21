@@ -2958,7 +2958,6 @@ model AccessRulePropertiesSubscriptionsItem {
   id?: Azure.Core.armResourceIdentifier;
 }
 
-@@clientName(AccessRulePropertiesSubscriptionsItem, "AccessRulePropertiesSubscriptionsItem", "go");
 
 /**
  * Summary rule properties.

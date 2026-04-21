@@ -19,6 +19,8 @@ using Microsoft.OperationalInsights;
 
 @@clientName(StorageInsightListResult.`@odata.nextLink`, "odataNextLink");
 
+@@clientName(AccessRulePropertiesSubscriptionsItem, "AccessRulePropertiesSubscriptionsItem", "go");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkspacePatch.properties);
 
