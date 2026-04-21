@@ -2,6 +2,20 @@
 applyTo: "specification/**/*.json"
 ---
 
+<!-- Upstream alignment: 2026-04-15
+     This date is for maintainers of this file only -- it records when
+     rules were last verified against upstream docs. No action is needed
+     by spec authors or PR reviewers. The upstream documents always take
+     precedence if there is a conflict.
+
+     Rules derived from:
+       - Azure REST API Guidelines (vNext)
+         https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
+       - Azure Resource Provider Contract (RPC) v1.0 (for ARM-related rules)
+         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+     If an upstream document changes a rule, update this file to match.
+     When in doubt, the upstream document takes precedence over this file. -->
+
 # Copilot Review Instructions for OpenAPI v2 (Swagger) Specification Files
 
 When performing a code review on OpenAPI v2 (Swagger) JSON definition files in this repository, validate the specification against the [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). This repository hosts all OpenAPI swagger definitions for Azure services. Each service team provides a swagger specification that **must** comply with the rules below.
@@ -18,12 +32,16 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Stable API versions **MUST** be in a `/stable/` directory; preview versions in `/preview/`.
 - Example JSON files **MUST** reside in an `examples/` subdirectory relative to the spec.
 - The file **MUST** be valid JSON (no trailing commas, no comments, proper encoding).
+- JSON example files **MUST** use spaces for indentation, not tabs.
 
 ## 2. API Versioning
 
 **Reference: [Azure Guidelines — API Versioning](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#api-versioning)**
 
 - The `info.version` field **MUST** follow the `YYYY-MM-DD` format (e.g. `"2025-04-01"`), with an optional `-preview` suffix for preview versions.
+  (Also enforced by: `VersionConvention` linter rule)
+- The `info.version` value **MUST** match the API version folder name the file resides in. For example, a file in `preview/2025-11-01-preview/` must have `"info": { "version": "2025-11-01-preview" }` — not a different version like `"2025-04-15"`. A mismatch indicates a copy-paste error from a prior version.
+- The API version suffix for pre-GA releases **MUST** be `-preview`. Suffixes like `-alpha`, `-beta`, `-privatepreview` are **not** permitted in the public spec repository.
 - Every operation **MUST** have an `api-version` query parameter (typically via `$ref` to common-types `ApiVersionParameter`).
 - **DO NOT** include a version number segment in operation URL paths (e.g. `/v1/` or `/v2/` in the path is forbidden).
 - The GA version date **MUST** be later than any preceding preview version date.
@@ -31,10 +49,12 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Verify no breaking changes are introduced within the same API version. Breaking changes include:
   - Removing or renaming properties, operations, or parameters
   - Changing property types (e.g. `boolean` → `string`)
+  - Removing or changing a property's `format` (e.g. removing `"format": "uuid"` from a string property is a breaking change for SDKs that relied on the format for type generation)
   - Removing enum values
   - Making an optional property required
   - Changing the URL path format
   - Changing required/optional status of parameters
+  - Renaming a model definition without adding `x-ms-client-name` to preserve the SDK-facing name
 
 ## 3. Security Definitions
 
@@ -67,6 +87,12 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Resource provider namespace in paths **MUST** use PascalCase (e.g. `Microsoft.Compute`).
 - Resource type names in paths **MUST** use camelCase (e.g. `virtualMachines`).
 - Path parameters **SHOULD** use full resource name, not abbreviations (e.g. `{virtualMachineName}` not `{vmName}`).
+- Path parameter names **MUST** be descriptive of the resource they identify (e.g., `{syncSetName}` not `{childResourceName}`, `{configurationName}` not `{name}`).
+- Resource name path parameters **SHOULD** include a `pattern` constraint with:
+  - A maximum length limit (e.g., `{1,128}` or `{1,64}`) to prevent excessively long names.
+  - Prevention of leading special characters (e.g., `^(?![.-])`) — resource names should not start with `.` or `-`.
+  - Allowed character set (e.g., `[A-Za-z0-9_.-]`) that matches the service's actual validation.
+  - Example: `"pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"`
 - For action operations on a resource, the URL pattern **SHOULD** be: `/<resource-collection>/<resource-id>:<action>`.
 - For action operations on a collection: `/<resource-collection>:<action>`.
 - **DO NOT** use action URLs for standard CRUD operations that map naturally to GET/PUT/PATCH/DELETE.
@@ -88,8 +114,11 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - Long-running operations **MUST** return `202-Accepted` and include `x-ms-long-running-operation: true`.
 - **DO** return the resource body on PUT, PATCH, POST, and GET operations with `200` or `201`.
+- The `ProvisioningState` async pattern (returning 200/201 with a `provisioningState` field that transitions from `Creating`/`Updating` to `Succeeded`/`Failed`) **MUST NOT** be combined with `202` responses. If the operation returns `202`, it **MUST** use `Location` or `Azure-AsyncOperation` header-based polling -- not `ProvisioningState`. Mixing `202` with `ProvisioningState` is an incorrect async pattern. See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState rules.
 - DELETE operations **MUST** return `204-No Content` with no response body. Do not return `404` for missing resources on DELETE.
 - POST action operations **MUST** return `200` with a response body (even if empty, to allow future extension).
+- POST actions that intentionally return no content **SHOULD** use `204 No Content` instead of `200` with an empty body. An empty `200` response is ambiguous — `204` explicitly signals no content.
+- POST action responses that return the full parent resource body should be reviewed carefully — this can inadvertently expose resource state to callers who only have permission to invoke the action, not read the resource.
 - All operations **MUST** include a `"default"` error response.
 
 ## 6. JSON Property & Schema Rules
@@ -98,24 +127,39 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 ### Naming
 
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for comprehensive naming and Azure terminology rules.
+
 - All JSON property names **MUST** use camelCase. Do not upper-case acronyms (use `resourceId`, not `ResourceID` or `resourceID`).
 - Property names **MUST** be treated as case-sensitive.
 - Avoid abbreviations in property names unless they are industry-standard.
+- Property names with a plural noun (e.g., `deploymentErrors`) **MUST** be arrays. If the property is a scalar (string, object), use a singular name. Plural names on non-array types confuse SDK consumers and tooling.
+  (Also enforced by: `BodyTopLevelProperties`, `PropertyNaming` linter rules)
 
 ### Types & Formats
 
 - Integer properties **MUST** specify `format` as `int32` or `int64`.
 - Object definitions **MUST** have `"type": "object"`.
+- Object definitions **MUST NOT** be free-form (i.e., `"type": "object"` with no `properties` defined and no `$ref`). Every object must have a defined schema. If the service truly needs to accept arbitrary key-value data, use `additionalProperties` with explicit justification.
 - Array properties **MUST** have an `items` schema defined.
 - Date/time properties **MUST** use `"format": "date-time"` (RFC 3339).
 - UUID properties **MUST** use `"format": "uuid"` (RFC 4122).
+- ARM resource ID properties **SHOULD** use `"format": "arm-id"` to enable ARM-aware tooling and SDK generation.
+- URI/URL properties **MUST** use `"format": "uri"` to enable SDK validation and proper typing.
 - Duration properties **SHOULD** use fixed time intervals with the unit in the property name (e.g. `backupTimeInMinutes`, `ttlSeconds`). Use ISO 8601 durations only when variable calendar intervals are needed.
+- A property that specifies `format` **MUST** also specify the corresponding `type` (e.g., `"format": "int64"` requires `"type": "integer"`; `"format": "uuid"` requires `"type": "string"`). A `format` without a `type` may be ignored by tooling.
 - Boolean properties deserve scrutiny — consider if an extensible enum would be more future-proof.
+- Integer properties **SHOULD** specify `minimum` and/or `maximum` constraints when the valid range is known (e.g., percentage fields: `"minimum": 0, "maximum": 100`; port numbers: `"minimum": 1, "maximum": 65535`). This enables client-side validation and improves documentation.
+- Enum values **MUST** be semantically distinct. Do not define overlapping or synonymous values (e.g., `InProgress` and `Running` in the same enum). Each value must represent a clearly different state.
 
 ### Field Mutability
 
+> **Full rule definitions:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 with format-specific examples.
+
 - Read-only properties **MUST** be marked `"readOnly": true` (e.g. `id`, `name`, `type`, `systemData`, computed properties).
+- If a property is `readOnly`, it **MUST** always be `readOnly`. Do not make the same property conditionally read-only (OAPI020).
+- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable (OAPI029).
 - Use `x-ms-mutability` to specify `["create", "read"]`, `["read"]`, or `["create", "update", "read"]` behavior.
+- Write-only properties (`x-ms-mutability: ["create", "update"]` without `"read"`) are **NOT allowed** (OAPI027). The only exception is secret properties annotated with `x-ms-secret: true`.
 - Required read-only properties **MUST NOT** be required in request bodies. Check that `"required"` arrays don't include read-only fields for request schemas.
 
 ### Schema Consistency
@@ -123,7 +167,11 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - **MUST** use the same JSON schema for PUT request/response, PATCH response, GET response, and POST request/response on a given URL path.
 - PATCH request schema **SHOULD** have all the same fields as the resource schema but with no required fields (to support partial update).
 - **DO NOT** return secret/sensitive fields in GET responses (e.g. `administratorPassword`). Secrets **MAY** only be returned via POST if absolutely necessary.
+- Proactively check every `"type": "string"` property for secret indicators -- see [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for the full **SEC-SECRET-DETECT** rule, detection signals, keyword list, and fix guidance.
 - **DO NOT** include fields whose values are trivially computable from other fields.
+- Properties with `default` values **MUST** use a static constant — the same default on every similar PUT request. Do not derive defaults from other properties in the resource. The `default` annotation in the swagger must specify the actual constant value.
+- Properties **MUST NOT** use comma-separated value (CSV) strings to represent collections. Use a JSON array instead. CSV-encoded strings prevent Azure Policy from evaluating individual values (PLCY004).
+- Properties **SHOULD NOT** accept values of different JSON types (e.g., both `"42"` and `42`). If backward-compatibility forces this, the service must preserve the user's data type in responses. Prefer rejecting incorrect types with `400 Bad Request` (OAPI025).
 
 ### Null Values
 
@@ -132,21 +180,17 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 ## 7. Enumerations
 
-**Reference: [Azure Guidelines — Enums & SDKs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#enums--sdks-client-libraries)**
+**Reference: [Azure Guidelines -- Enums & SDKs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#enums--sdks-client-libraries)**
 
-- Every enum **MUST** have the `x-ms-enum` extension with a `name` property:
-  ```json
-  "x-ms-enum": {
-    "name": "MyEnumName",
-    "modelAsString": true
-  }
-  ```
-- **YOU SHOULD** set `"modelAsString": true` (extensible enum) unless the set of values will provably never change. This allows new values to be added without breaking clients.
+> **Full rule definitions:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum and boolean-to-enum guidance.
+
+- Every enum **MUST** have the `x-ms-enum` extension with a `name` property and `"modelAsString": true` (extensible enum).
 - Enum `name` values **MUST** be unique across the entire specification.
-- Enum values **MUST NOT** be empty strings.
-- Enum values **SHOULD** use PascalCase.
+- Enum values **MUST NOT** be empty strings; **SHOULD** use PascalCase.
+- Enum values **MUST** be semantically distinct (no overlapping synonyms like `InProgress` and `Running`).
+- Enum values replacing booleans **MUST** carry semantic meaning beyond `True`/`False`.
 - `default` values for enum properties **MUST** be one of the defined enum values.
-- **DO NOT** remove existing enum values — this is a breaking change.
+- **DO NOT** remove existing enum values -- this is a breaking change.
 - Document that customers should expect new enum values may appear in the future.
 
 ## 8. Polymorphic Types
@@ -184,9 +228,8 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - If an operation can take more than 1 second at the 99th percentile, it **MUST** be implemented as an LRO.
 - Mark LRO operations with `"x-ms-long-running-operation": true`.
-- Specify the polling strategy with `x-ms-long-running-operation-options` (e.g. `"final-state-via": "azure-async-operation"` or `"location"`).
+- For POST LROs with a response schema, specify `"x-ms-long-running-operation-options"` with `"final-state-via": "location"` (or `"azure-async-operation"` only if the status monitor itself contains the result). For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `final-state-via` -- the default SDK behavior is already correct. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the full decision table.
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
-- **DO NOT** implement PATCH as an LRO. Use an LRO POST action pattern instead.
 - Status monitor responses **MUST** include `id`, `status` (one of `NotStarted`, `Running`, `Succeeded`, `Failed`, `Canceled`), and `error` (on failure).
 - LRO responses **SHOULD** include a `retry-after` header when the operation is not complete.
 
@@ -202,6 +245,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
     "schema": { "$ref": "...common-types/.../types.json#/definitions/ErrorResponse" }
   }
   ```
+- The default error `description` **MUST** be generic (e.g., "Error response describing why the operation failed.") — not specific to one error type (e.g., "Bad request" is wrong because the default error covers all error codes, not just 400).
 - The error schema **MUST** follow this structure:
   ```json
   {
@@ -219,6 +263,8 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 ## 12. Common-Types Usage (ARM Specs)
 
+> **Reference:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0) -- ARM common-types are defined by the RPC contract.
+
 - ARM specs **MUST** reference the appropriate `common-types` version (v3, v4, v5, or v6) for standard definitions:
   - Resource types: `Resource`, `TrackedResource`, `ProxyResource`, `ExtensionResource`
   - Error types: `ErrorResponse`, `ErrorDetail`
@@ -226,9 +272,13 @@ Flag every violation clearly with the file path, the JSON path or line number, t
   - System metadata: `systemData`
 - Use `$ref` to common-types instead of redefining standard ARM structures inline.
 - Verify the `$ref` path is valid and points to the correct common-types version file.
+- Definition names **MUST** be unique across all swagger files included in the same package tag. Duplicate definitions (e.g., `ErrorResponse` defined in both `foo.json` and `bar.json`) cause SDK generation conflicts. Use `$ref` to a single shared definition or common-types instead.
 - All ARM resources **MUST** include `systemData` as a read-only property.
 
 ## 13. ARM Resource Model Requirements
+
+> **See also:** [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements and operations API rules.
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for naming and terminology rules.
 
 - Resource model name **MUST** match the singular form of the resource type (e.g. `VirtualMachine` for `virtualMachines`).
 - Model definitions **MUST** use PascalCase.
@@ -236,15 +286,25 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Nested resources **MUST** define a List operation.
 - ARM resources **MUST** have top-level body properties limited to: `id`, `name`, `type`, `location`, `tags`, `plan`, `sku`, `etag`, `managedBy`, `identity`, `systemData`, `properties`, and `zones`.
 - The `properties` object should contain service-specific fields — do not put custom fields at the resource top level.
+- Properties inside the `properties` bag **MUST NOT** reuse ARM top-level property names (`id`, `name`, `type`, `location`, `tags`). These generic names create ambiguity about whether they refer to the resource itself or a sub-component. Use qualified names instead (e.g., `agentId`, `deploymentType`, `ruleName`).
+- For proxy resources, do **not** recreate ARM `tags` functionality inside `properties`. The `tags` name is reserved for ARM tags (V1 and future V2). If tag-like metadata is needed on a proxy resource, use a different name (e.g., `labels`, `resourceTags`).
+- Properties named generically (e.g., `id`, `type`) inside a `properties` bag **SHOULD** have their `format` constrained (e.g., `format: uuid` for GUID-style IDs) and their description **MUST** clarify what kind of identifier it is, how it's created (client vs. server-generated), and its uniqueness scope.
 - The resource provider namespace in the path **MUST** match the namespace declared in the spec.
 
 ## 14. Operation IDs
 
 - Every operation **MUST** have a unique `operationId`.
+  (Also enforced by: `OperationIdRequired` linter rule R4004)
 - ARM operation IDs **MUST** follow the `{ResourceType}_{Action}` pattern (e.g. `VirtualMachines_Get`, `VirtualMachines_CreateOrUpdate`, `VirtualMachines_List`).
+  (Also enforced by: `OperationIdNounVerb` linter rule R1001)
+- The Operations API response `display` object **MUST** use camelCase property names: `provider`, `resource`, `operation`, `description` — not PascalCase (`Provider`, `Resource`, `Operation`, `Description`). This applies to both the swagger schema and example files.
 - Use standard verb suffixes: GET → `Get` / `List`, PUT → `CreateOrUpdate`, PATCH → `Update`, DELETE → `Delete`, POST → `<ActionName>`.
+  (Also enforced by: `GetInOperationName` R1005, `PutInOperationName` R1006, `PatchInOperationName` R1007, `DeleteInOperationName` R1009, `ListInOperationName` R1003, `PostOperationIdContainsUrlVerb` R2066)
 - The noun part in `operationId` **SHOULD NOT** repeat inside the verb part.
 - There **MUST** be exactly one underscore in the `operationId`.
+  (Also enforced by: `OneUnderscoreInOperationId` linter rule R2055)
+- The noun part of the `operationId` **MUST NOT** conflict with model definition names in the spec. This causes naming collisions in generated SDK code.
+  (Also enforced by: `OperationIdNounConflictingModelNames` linter rule R2063)
 
 ## 15. Parameters
 
@@ -254,6 +314,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Common parameters (subscriptionId, resourceGroupName, api-version) **SHOULD** use `$ref` to common-types.
 - Parameters defined in the `parameters` section **MUST** have `x-ms-parameter-location` set to `"method"` or `"client"`.
 - Body parameters **MUST NOT** be anonymous — they must reference a named definition.
+- Body parameters **MUST NOT** use `"type": "array"` as the top-level schema. ARM does not allow array-typed request bodies. Wrap the array in an object model (e.g., `{ "value": [...] }`).
 - DELETE operations **MUST NOT** have a request body.
 - Validate all query parameters and request headers; fail with `400-Bad Request` if invalid.
 - The `name` property **MUST** be defined for all parameters.
@@ -264,6 +325,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - `x-ms-pageable`: **MUST** be used on all list/collection operations.
 - `x-ms-long-running-operation`: **MUST** be `true` on all async operations.
 - `x-ms-enum`: **MUST** be present on all enum types with `name` and `modelAsString`.
+- `x-ms-client-flatten`: **DO NOT** add `x-ms-client-flatten` to new specs. It is discouraged and creates SDK issues. Existing usages may remain for backward compatibility.
 - `x-ms-mutability`: **SHOULD** be specified on properties with create-only or read-only semantics.
 - `x-ms-client-name`: If used, the value **MUST NOT** be empty.
 - `x-ms-paths`: If used, entries **MUST** overload (be equivalent to) existing paths with different query parameters.
@@ -273,8 +335,10 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Every operation, parameter, property, model definition, and enum value **MUST** have a non-empty `description`.
 - Property descriptions **MUST NOT** simply repeat the property name (e.g. `"name": { "description": "name" }` is not acceptable).
 - Operation descriptions **SHOULD** start with a verb and end with a period (e.g. `"Gets the specified virtual machine."`).
+- PUT operation descriptions **MUST NOT** imply non-idempotent behavior. Avoid language like "Creates a new..." or "This will create a new version" — instead use "Creates or updates..." or "Creates or replaces..." to reflect PUT's idempotent, upsert semantics.
 - Start descriptions with a capital letter.
 - Specify units for quantifiable properties (e.g. "The timeout in seconds.", "The size in megabytes.").
+- Property names for temporal or measurement values **SHOULD** encode the unit when the type alone does not make it clear (e.g., `startTimeInUTC`, `durationInMs`, `throughputMiBPerSec`, `backupTimeInMinutes`). This is especially important when not using `format: date-time` or ISO 8601 duration.
 - Avoid: "Gets or sets...", "Gets...", "Sets..." in property descriptions — describe what the property represents.
 - Use correct acronym capitalization in descriptions: "URL" not "Url", "ID" not "Id", "VM" not "Vm".
 
@@ -310,31 +374,180 @@ For data plane (non-ARM) swagger files, additionally verify:
 - An `api-version` query parameter is present and required on all operations.
 - The `host` and `basePath` are correctly defined for the data plane endpoint pattern.
 - Security definitions are appropriate for the service (may use API keys, bearer tokens, or other schemes instead of ARM OAuth2).
+- Data-plane LROs **MUST** use `Operation-Location` header for polling, **not** `Azure-AsyncOperation` (which is ARM-specific). 
 - Action operations follow the `:<action>` URL suffix pattern where applicable.
 - The spec includes `"produces": ["application/json"]` and `"consumes": ["application/json"]` (or appropriate media types).
+
+## 22. Example File Validation (EX-*)
+
+Example files referenced by `x-ms-examples` are a critical part of the spec — they serve as documentation, SDK test cases, and validation inputs. Validate every example file in the PR against the following rules.
+
+### 22.1 Example Title Accuracy (EX-TITLE)
+
+- The `"title"` field in each example **MUST** accurately describe the operation it demonstrates.
+- A GET-single-resource example **MUST NOT** have a "List" title; a list example **MUST NOT** have a "Get" title.
+- The title **SHOULD** match the operationId verb: GET → "Get..." or "List...", PUT → "Create or Update...", DELETE → "Delete...", PATCH → "Update...", POST → the action name.
+
+### 22.2 Resource Identity Consistency (EX-RESOURCE-ID)
+
+- Every ARM resource in an example response **MUST** have a valid, fully-qualified `id` field:
+  - The `id` **MUST** be an absolute path starting with `/` (e.g., `/subscriptions/...`). Do not use relative paths like `providers/Microsoft.EventGrid/...`.
+  - Contains `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Namespace}/...`.
+  - Uses `/resourceGroups/` (plural, PascalCase 'G') — not `/resourceGroup/` or `/resourcegroup/`.
+  - The RP namespace casing **MUST** match the canonical casing (e.g., `Microsoft.DocumentDB` not `Microsoft.DocumentDb`).
+  - The resource segments in the `id` **MUST NOT** be truncated (e.g., ending at `/providers/Microsoft.ExtendedLocation/` without the resource type and name).
+  <!-- cSpell:ignore hvirtual Nameub -->
+  - Values **MUST NOT** contain stray/garbled characters (e.g., trailing single quotes `bastionhosttenant'`, corrupted names like `hvirtualHubNameub1` instead of `virtualHubName`).
+- The `name` field **MUST** match the last segment of the resource `id`.
+- The `type` field **MUST** be the ARM resource type **without** the `providers/` prefix (e.g., `Microsoft.EventGrid/extensionTopics` — not `providers/Microsoft.EventGrid/extensionTopics`).
+- The `type` field **MUST** match the full ARM resource type derived from the `id` (e.g., for nested resources `/.../monitors/{name}/tagRules/{ruleName}`, the `type` must be `Dynatrace.Observability/monitors/tagRules`, not `Dynatrace.Observability/monitors`).
+- For nested resource operations, the response **MUST NOT** use the parent resource's `id`/`name`/`type`.
+
+### 22.3 Request-Response Parameter Consistency (EX-PARAM-CONSISTENCY)
+
+- Response `id` fields **MUST** be consistent with the request parameters. For example, if the request has `"resourceGroupName": "rg1"`, the response `id` must contain `/resourceGroups/rg1/` — not `/resourceGroups/Default/` or any other value.
+- Request query parameters and response body properties for the same concept **MUST** be consistent (e.g., if request sets `observationMetric` to `cpu`, the response should not show `duration`).
+
+### 22.4 Pagination Examples (EX-PAGINATION)
+
+- Pageable response examples **MUST NOT** set `nextLink` to `null`. On the last page, omit `nextLink` entirely.
+- If `nextLink` is present, it **MUST** be a valid URL string (not `null`, not an empty string).
+- The `nextLink` URL **MUST** be a well-formed URL that includes the `api-version=` query parameter with the correct value (e.g., `?api-version=2025-11-15-preview&...` — not `?2025-11-15-preview&...` with the `api-version=` key omitted).
+- The `nextLink` URL **MUST** point to the same operation endpoint as the operation being demonstrated (e.g., a TagRules list `nextLink` must not point to a monitors collection URL).
+
+### 22.5 LRO Example Headers (EX-LRO-HEADERS)
+
+- LRO response examples (typically `202`) **MUST** include the appropriate polling headers (`Azure-AsyncOperation`, `Location`, or both) matching the operation's LRO configuration. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for when `final-state-via` should be specified.
+- Do not leave `202` response examples as empty objects (`"202": {}`) — include the polling headers.
+- Header names in examples **MUST** use correct PascalCase: `Azure-AsyncOperation` (not `azure-AsyncOperation`), `Location` (not `location`), `Retry-After` (not `retry-after`).
+- The `api-version` in LRO polling URLs **MUST** match the example's own `api-version`. Do not carry over stale versions from previous API versions (e.g., `api-version=2022-09-01` in a `2026-01-07-preview` example is wrong). Ensure the `-preview` suffix is included if the API version is a preview (e.g., `api-version=2025-02-01-preview` not `api-version=2025-02-01`).
+- LRO polling URLs and `nextLink` URLs **MUST** use `https://management.azure.com/...` — not the legacy `https://management.windowsazure.com/...` endpoint.
+- LRO polling URLs in examples **MUST NOT** use placeholder domains (e.g., `https://contoso.com/operationstatus`). They must use realistic `https://management.azure.com/subscriptions/{subId}/providers/{namespace}/locations/{location}/operationStatuses/{operationId}?api-version={version}` URLs.
+- For LRO POST operations that return a result body (e.g., export actions), examples **SHOULD** include both the `202` (Accepted with polling headers) and `200` (final response with result body) to show the complete LRO lifecycle. Omitting the `200` final response leaves consumers guessing about the result shape.
+
+### 22.6 Timestamp & Format Consistency (EX-FORMAT)
+
+- Date/time values in examples **MUST** use ISO-8601/RFC3339 format (e.g., `2025-02-06T08:00:00Z`) — not locale-specific formats like `02/06/2025 08:00:00`.
+- UUID values in examples **MUST** follow the 8-4-4-4-12 hex-digit format (e.g., `11111111-1111-1111-1111-111111111111`).
+- Values in examples **MUST** match the schema's declared `format` (if `format: date-time`, use RFC3339; if `format: uuid`, use valid GUID).
+
+### 22.7 Example Payload Correctness (EX-PAYLOAD)
+
+- Example response bodies **MUST** validate against the operation's response schema. A list operation returning `OperationListResult` must include at least `"value": []`, not just `{}`.
+- The `id` field in examples **MUST NOT** be an empty string (`"id": ""`). Empty resource IDs crash ModelValidation tooling and are never valid ARM resource identifiers.
+- String values **MUST NOT** have malformed content (e.g., extra closing braces `"{value}}"`, duplicate prefixes like `"$filter=$filter=..."`, stray trailing quotes or garbled characters).
+- The example response key **MUST** be `"headers"` (plural) — not `"header"` (singular).
+- `type` casing in examples must match the RP/type exactly: `Microsoft.Security/securityConnectors` not `Microsoft.Security/securityconnectors`.
+- ARM properties that are objects (`tags`, `systemData`, etc.) **MUST NOT** be set to `null` in examples. Either omit the property or provide a valid object. Setting known ARM object properties to `null` fails schema validation.
+- DELETE 200/204 response examples **SHOULD** have empty bodies (`"200": {}`, `"204": {}`). Do not include unexpected content like `message` fields in DELETE response bodies.
+
+### 22.8 Example Secret & Credential Placeholders (EX-SECRET-PLACEHOLDER)
+
+- Example files **MUST NOT** contain actual or realistic-looking secrets, tokens, SSH keys, passwords, connection strings, or API keys.
+- Use clearly identifiable string placeholders instead:
+  - SSH keys: `"{ssh-rsa public key}"` or `"ssh-rsa AAAA...{example}"`
+  - Passwords: `"********"` or `"{password}"`
+  - Connection strings: `"{connection-string}"`
+  - API keys/tokens: `"00000000-0000-0000-0000-000000000000"` or `"{api-key}"`
+- Base64-encoded blobs that look like real secrets **MUST** be replaced with clearly fake placeholder values or truncated with `...{example}`.
+- **Rationale:** Examples are published in documentation and SDK test fixtures. Realistic-looking secrets cause security scanner false positives and may lead customers to believe they need similar-looking values.
+
+### 22.9 Example File Size (EX-SIZE)
+
+- Example files **SHOULD** be kept to a reasonable size. Extremely large examples (>500 lines) make review difficult and add repo bloat.
+- For "maximum set" examples, include a representative subset of fields rather than thousands of lines of repetitive data.
+
+---
+
+## 23. Unused & Orphaned Definitions (SCHEMA-UNUSED-DEF)
+
+- Every model definition in the `definitions` section **MUST** be referenced by at least one `$ref` in the same file or by another file in the same package tag.
+- Definitions that are defined but never referenced (orphaned) add spec bloat, confuse SDK generators, and may trigger "unused definition" validation warnings.
+- Common causes: copy-paste from a template, a PATCH model that was refactored but the old definition was not removed, or a definition intended for a future version that was accidentally included.
+- **Fix:** Remove the orphaned definition if it is genuinely unused. If it was intended as the PATCH body, wire the PATCH operation to reference it.
+
+---
+
+## 24. JSON Schema Correctness
+
+### 24.1 `$ref` Must Not Have Sibling Keywords (SCHEMA-REF-SIBLINGS)
+
+- In OpenAPI 2.0 / JSON Schema draft-04, keywords alongside `$ref` (e.g., `type`, `description`, `readOnly`) are **ignored** by compliant tooling.
+- If a `$ref` is used alongside sibling properties, flag it — the sibling properties will not take effect and may cause incorrect SDK/docs generation.
+- **Fix:** Use `allOf` to combine the reference with additional constraints:
+  ```json
+  "allOf": [
+    { "$ref": "...#/definitions/MyType" }
+  ],
+  "description": "Additional description",
+  "readOnly": true
+  ```
+
+### 24.2 Consistent common-types Version (SCHEMA-COMMON-TYPES-VERSION)
+
+- A single swagger file **SHOULD** reference a single version of common-types (e.g., all `$ref` paths use `v5`).
+- Mixing common-types versions within the same file (e.g., `v3` for parameters and `v5` for resource types) can lead to subtle schema incompatibilities.
+- If different common-types versions are used, flag it and recommend aligning to the newest version used in the file.
+- Common-types version `v2` is outdated — prefer `v5` or `v6` for new specs.
+
+### 24.3 Proactive Format Detection (SCHEMA-FORMAT-DETECT)
+
+- If a string property's description mentions ISO-8601, datetime, or timestamp concepts but the schema lacks `"format": "date-time"`, flag it.
+- If a string property's name or examples suggest GUID/UUID values (e.g., `tenantId`, `objectId`, `clientId`) but the schema lacks `"format": "uuid"`, flag it.
+- If a string property contains what appears to be an ARM resource ID (from name or description), recommend using a `$ref` to a common resource ID type or adding appropriate `format`/`pattern` annotations.
+
+### 24.4 `nextLink` Should Be Read-Only (SCHEMA-NEXTLINK-READONLY)
+
+- The `nextLink` property in list result schemas **SHOULD** be marked `"readOnly": true` to indicate it is server-generated and response-only.
+
+### 24.5 Semantic Type Correctness (SCHEMA-SEMANTIC-TYPE)
+
+- Properties whose names or descriptions clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`, `memoryInMB`, `maxRetries`) **SHOULD** use `integer` or `number` types, not `string`.
+- When a numeric property is modeled as `string` for backward-compatibility reasons, the description **MUST** document the expected format and units (e.g., "RAM in megabytes, as a numeric string").
+- Properties whose names or descriptions suggest a known finite set of values **SHOULD** use `enum` with `x-ms-enum`. Reviewers **SHOULD** ask whether strings like `category`, `diskType`, `meterType` have a finite value set that warrants enum modeling.
+
+---
 
 ## Review Checklist Summary
 
 When reviewing, systematically check:
 
 - ✅ Valid JSON, correct directory placement, and proper file organization
-- ✅ API version follows `YYYY-MM-DD` format, no version in URL path
+- ✅ API version follows `YYYY-MM-DD` format (only `-preview` suffix allowed); no version in URL path
 - ✅ No breaking changes vs. previous version of the same API
 - ✅ Security definitions present and applied to all operations
 - ✅ All property names in camelCase, model names in PascalCase
-- ✅ `readOnly`, `required`, and `x-ms-mutability` correctly applied
-- ✅ Common-types referenced (not redefined) for ARM standard types
+- ✅ `readOnly`, `required`, and `x-ms-mutability` correctly applied; no write-only properties (OAPI027); no conditional read-only or immutable properties (OAPI020, OAPI029)
+- ✅ Common-types referenced (not redefined) for ARM standard types; no duplicate definitions across files in same tag
 - ✅ All CRUD operations and List operations present for ARM resources
 - ✅ `x-ms-pageable` on list operations with correct `nextLinkName`
-- ✅ `x-ms-long-running-operation` on async operations with polling config
+- ✅ `x-ms-long-running-operation` on async operations with polling config; no ProvisioningState + 202 mixing
 - ✅ `x-ms-enum` with `modelAsString: true` on all enums
 - ✅ `x-ms-examples` on every operation with valid example files
 - ✅ `operationId` follows `{Resource}_{Verb}` pattern with exactly one underscore
+- ✅ Path parameter names are descriptive (`{syncSetName}` not `{childResourceName}`)
 - ✅ Default error response references standard `ErrorResponse` schema
 - ✅ Every operation, parameter, property, and model has a clear description
-- ✅ Integer types have `format` specified; objects have `"type": "object"`
-- ✅ No anonymous body parameter types; no request body on DELETE
+- ✅ Integer types have `format` specified; objects have `"type": "object"`; integers have `minimum`/`maximum` when range is known
+- ✅ Enum values are semantically distinct (no overlapping synonyms)
+- ✅ No anonymous body parameter types; no request body on DELETE; no array-typed request bodies; no free-form objects
 - ✅ Consistent resource schema across PUT/GET/PATCH responses
 - ✅ No `null` values in response schemas; no secrets in GET responses
+- ✅ No CSV-encoded strings representing collections — use JSON arrays (PLCY004)
+- ✅ Default values are static constants, not derived from other properties (OAPI022)
+- ✅ Plural property names are arrays; scalar properties use singular names
+- ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
+- ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values (EX-*)
+- ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
+- ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
+- ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
+- ✅ `nextLink` properties marked `readOnly: true` (SCHEMA-NEXTLINK-READONLY)
+- ✅ Numeric properties use integer/number types, not string (SCHEMA-SEMANTIC-TYPE)
+- ✅ No unused/orphaned definitions in `definitions` section (SCHEMA-UNUSED-DEF)
+- ✅ Example files use string placeholders for secrets, SSH keys, and credentials — no realistic-looking sensitive values (EX-SECRET-PLACEHOLDER)
+- ✅ Resource name path parameters include `pattern` constraints with length limits and character restrictions
+- ✅ PUT operation descriptions use idempotent language ("Creates or updates..." not "Creates a new...")
+- ✅ Operations API display object uses camelCase property names (`provider`, `resource`, `operation`, `description`)
 
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.

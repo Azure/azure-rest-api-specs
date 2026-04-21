@@ -6182,7 +6182,9 @@
         "ReplicatingData",
         "FailingOver",
         "Healthy",
-        "RemovingStandby"
+        "RemovingStandby",
+        "RecreatingStandby",
+        "ComputeUpdatingByFailover"
       ],
       "x-ms-enum": {
         "name": "HighAvailabilityState",
@@ -6217,6 +6219,16 @@
             "name": "RemovingStandby",
             "value": "RemovingStandby",
             "description": "Standby server is being removed."
+          },
+          {
+            "name": "RecreatingStandby",
+            "value": "RecreatingStandby",
+            "description": "Standby server is being recreated."
+          },
+          {
+            "name": "ComputeUpdatingByFailover",
+            "value": "ComputeUpdatingByFailover",
+            "description": "Compute is being updated due to a failover."
           }
         ]
       }
