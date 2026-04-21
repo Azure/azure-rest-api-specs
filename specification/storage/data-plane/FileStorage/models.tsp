@@ -1631,6 +1631,7 @@ alias MetadataHeaders = {
 alias EtagResponseHeader = {
   /** The ETag contains a value that represents the version of the resource. */
   @header("ETag")
+  @clientName("ETag", "go")
   etag: Azure.Core.eTag;
 };
 
@@ -1656,6 +1657,21 @@ alias ContentLengthParameter = {
   /** The number of bytes of data in the request body. */
   @header("Content-Length")
   contentLength: int64;
+};
+
+alias ContentLengthParameterOptional = {
+  /** Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero." */
+  @header("Content-Length") contentLength?: int64;
+};
+
+alias ContentLengthResponseHeader = {
+  /** Content length of the file. */
+  @header("Content-Length") contentLength?: int64;
+};
+
+alias ShareQuotaHeader = {
+  /** Specifies the maximum size of the share, in gigabytes. */
+  @header("x-ms-share-quota") quota?: int32;
 };
 
 /** Range header. */
@@ -1712,8 +1728,8 @@ alias FileSmtPropertyRequestHeaders = {
 };
 
 /** File permission format parameter. */
-alias FilePermissionFormatParameter = {
-  /** Optional. Used to set permission format. */
+alias FilePermissionFormatParameter<TDoc extends valueof string = "Optional. Used to set permission format."> = {
+  @doc(TDoc)
   @header("x-ms-file-permission-format")
   filePermissionFormat?: FilePermissionFormat;
 };
@@ -1739,31 +1755,39 @@ alias FileSmtPropertyResponseHeaders = {
 
 /** NFS owner and group request headers (subset without file mode). */
 alias NfsOwnerGroupHeaders = {
-  /** Optional, NFS only. The owner of the file or directory. */
-  @header("x-ms-owner") owner?: string;
-
-  /** Optional, NFS only. The owning group of the file or directory. */
-  @header("x-ms-group") group?: string;
+  ...NfsOwnerHeader<"Optional, NFS only. The owner of the file or directory.">;
+  ...NfsGroupHeader<"Optional, NFS only. The owning group of the file or directory.">;
 };
 
 /** NFS property request headers (owner, group, mode). */
 alias NfsRequestHeaders = {
   ...NfsOwnerGroupHeaders;
+  ...NfsModeHeader<"Optional, NFS only. The file mode of the file or directory.">;
+};
 
-  /** Optional, NFS only. The file mode of the file or directory. */
-  @header("x-ms-mode") fileMode?: string;
+alias NfsModeHeader<TDoc extends valueof string = "NFS only. The file mode."> = {
+  @doc(TDoc)
+  @header("x-ms-mode")
+  fileMode?: string;
+};
+
+alias NfsOwnerHeader<TDoc extends valueof string = "NFS only. The owner."> = {
+  @doc(TDoc)
+  @header("x-ms-owner")
+  owner?: string;
+};
+
+alias NfsGroupHeader<TDoc extends valueof string = "NFS only. The owning group."> = {
+  @doc(TDoc)
+  @header("x-ms-group")
+  group?: string;
 };
 
 /** NFS property response headers. */
 alias NfsResponseHeaders = {
-  /** NFS only. The file mode. */
-  @header("x-ms-mode") fileMode?: string;
-
-  /** NFS only. The owner. */
-  @header("x-ms-owner") owner?: string;
-
-  /** NFS only. The owning group. */
-  @header("x-ms-group") group?: string;
+  ...NfsModeHeader;
+  ...NfsOwnerHeader;
+  ...NfsGroupHeader;
 
   /** NFS only. The file type. */
   @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
@@ -2316,12 +2340,17 @@ alias ShareProvisioningResponseHeaders = {
   /** The share provisioned IOPS. */
   @header("x-ms-share-provisioned-iops") provisionedIops?: int64;
 
-  /** The share provisioned bandwidth in mebibytes per second. */
-  @header("x-ms-share-provisioned-bandwidth-mibps")
-  provisionedBandwidthMibps?: int64;
-
+  ...ProvisionedBandwidthMibpsHeader;
   ...IncludedBurstIopsOptionalHeader;
   ...MaxBurstCreditsForIopsOptionalHeader;
+};
+
+alias ProvisionedBandwidthMibpsHeader = {
+  /** The share provisioned bandwidth in mebibytes per second. */
+  @header("x-ms-share-provisioned-bandwidth-mibps")
+  @clientName("ProvisionedBandwidthMiBps", "go")
+  @alternateType(int32, "go")
+  provisionedBandwidthMibps?: int64;
 };
 
 /** Share downgrade time response headers. Used in getProperties and setProperties responses. */

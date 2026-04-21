@@ -181,10 +181,7 @@ interface Share {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
-
-      /** Specifies the maximum size of the share, in gigabytes. */
-      @header("x-ms-share-quota") quota?: int32;
-
+      ...ShareQuotaHeader;
       ...ShareAccessTierRequestHeader;
       ...EnabledProtocolsHeader;
       ...ShareRootSquashRequestHeader;
@@ -226,9 +223,7 @@ interface Share {
       ...MetadataHeaders;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** Specifies the maximum size of the share, in gigabytes. */
-      @header("x-ms-share-quota") quota?: int32;
+      ...ShareQuotaHeader;
 
       /** The provisioned IOPS for the share. */
       @header("x-ms-share-provisioned-iops")
@@ -252,12 +247,7 @@ interface Share {
       @header("x-ms-share-next-allowed-quota-downgrade-time")
       nextAllowedQuotaDowngradeTime?: utcDateTime;
 
-      /** The provisioned bandwidth for the share. */
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      @clientName("ProvisionedBandwidthMiBps", "go")
-      @alternateType(int32, "go")
-      provisionedBandwidthMibps?: int64;
-
+      ...ProvisionedBandwidthMibpsHeader;
       ...LeaseResponseHeaders;
 
       /** The access tier of the share. */
@@ -265,8 +255,9 @@ interface Share {
 
       /** The access tier change time. */
       @header("x-ms-access-tier-change-time")
+      @encode("rfc7231")
       @alternateType(utcDateTime, "go")
-      accessTierChangeTime?: string;
+      accessTierChangeTime?: utcDateTime;
 
       /** The access tier transition state. */
       @header("x-ms-access-tier-transition-state")
@@ -488,11 +479,7 @@ interface Share {
     {
       ...FilePermissionKeyRequestHeader;
       ...TimeoutParameter;
-
-      /** Optional. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary. */
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
+      ...FilePermissionFormatParameter<"Optional. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary.">;
       ...FileRequestIntentParameter;
     },
     {
@@ -510,10 +497,7 @@ interface Share {
   setProperties is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-
-      /** Specifies the maximum size of the share, in gigabytes. */
-      @header("x-ms-share-quota") quota?: int32;
-
+      ...ShareQuotaHeader;
       ...ShareAccessTierRequestHeader;
       ...LeaseIdOptionalParameter;
       ...ShareRootSquashRequestHeader;
@@ -728,9 +712,9 @@ interface Directory {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      @header("x-ms-mode") fileMode?: string;
-      @header("x-ms-owner") owner?: string;
-      @header("x-ms-group") group?: string;
+      ...NfsModeHeader;
+      ...NfsOwnerHeader;
+      ...NfsGroupHeader;
     }
   >;
 
@@ -876,8 +860,8 @@ interface File {
       @header("Content-Type")
       contentType?: "application/octet-stream";
 
-      /** Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero. */
-      @header("x-ms-content-length") contentLength: int64;
+      /** Specifies the maximum size for the file, up to 4 TB. */
+      @header("x-ms-content-length") fileContentLength: int64;
 
       ...TimeoutParameter;
       ...FileTypeParameter;
@@ -897,10 +881,7 @@ interface File {
 
       ...ContentMD5RequestHeader;
       ...FilePropertySemanticsHeader;
-
-      /** Optional. Specifies the content length of the file. */
-      @header("Content-Length") optionalContentLength?: int64;
-
+      ...ContentLengthParameterOptional;
       ...StructuredBodyRequestHeaders;
       ...OptionalBody;
     },
@@ -912,10 +893,7 @@ interface File {
       ...FileSmtPropertyResponseHeaders;
       ...NfsResponseHeaders;
       ...ContentMD5ResponseHeader;
-
-      /** Content length of the file. */
-      @header("Content-Length") contentLength?: int64;
-
+      ...ContentLengthResponseHeader;
       ...StructuredBodyResponseHeader;
     }
   >;
@@ -940,13 +918,9 @@ interface File {
       @statusCode statusCode: 200 | 206;
       ...LastModifiedResponseHeader;
       ...MetadataHeaders;
-      @header("Content-Length") contentLength: int64;
+      ...ContentLengthResponseHeader;
       @header("Content-Range") contentRange?: string;
-
-      @header("ETag")
-      @clientName("ETag", "go")
-      etag: Azure.Core.eTag;
-
+      ...EtagResponseHeader;
       ...FileHttpContentResponseHeaders;
       @header("Accept-Ranges") acceptRanges?: string;
       ...CopyStatusResponseHeaders;
@@ -981,14 +955,10 @@ interface File {
       /** Dummy type header, must be "file". */
       @header("x-ms-type") fileType: "File";
 
-      @header("Content-Length") contentLength: int64;
+      ...ContentLengthResponseHeader;
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
-
-      @header("ETag")
-      @clientName("ETag", "go")
-      etag: Azure.Core.eTag;
-
+      ...EtagResponseHeader;
       ...FileHttpContentResponseHeaders;
       ...CopyStatusResponseHeaders;
       ...ServerEncryptedResponseHeader;
@@ -1042,9 +1012,9 @@ interface File {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      @header("x-ms-mode") fileMode?: string;
-      @header("x-ms-owner") owner?: string;
-      @header("x-ms-group") group?: string;
+      ...NfsModeHeader;
+      ...NfsOwnerHeader;
+      ...NfsGroupHeader;
       ...LinkCountResponseHeader;
     }
   >;

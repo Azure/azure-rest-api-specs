@@ -180,7 +180,8 @@
               },
               "Content-Length": {
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "description": "Content length of the file."
               },
               "Content-MD5": {
                 "type": "string",
@@ -197,7 +198,7 @@
               },
               "ETag": {
                 "type": "string",
-                "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+                "description": "The ETag contains a value that represents the version of the resource."
               },
               "Last-Modified": {
                 "type": "string",
@@ -414,7 +415,8 @@
               },
               "Content-Length": {
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "description": "Content length of the file."
               },
               "Content-MD5": {
                 "type": "string",
@@ -431,7 +433,7 @@
               },
               "ETag": {
                 "type": "string",
-                "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+                "description": "The ETag contains a value that represents the version of the resource."
               },
               "Last-Modified": {
                 "type": "string",
@@ -673,11 +675,11 @@
           {
             "name": "x-ms-content-length",
             "in": "header",
-            "description": "Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero.",
+            "description": "Specifies the maximum size for the file, up to 4 TB.",
             "required": true,
             "type": "integer",
             "format": "int64",
-            "x-ms-client-name": "contentLength"
+            "x-ms-client-name": "fileContentLength"
           },
           {
             "name": "timeout",
@@ -974,11 +976,11 @@
           {
             "name": "Content-Length",
             "in": "header",
-            "description": "Optional. Specifies the content length of the file.",
+            "description": "Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero.\"",
             "required": false,
             "type": "integer",
             "format": "int64",
-            "x-ms-client-name": "optionalContentLength"
+            "x-ms-client-name": "contentLength"
           },
           {
             "name": "x-ms-structured-body",
@@ -1376,7 +1378,8 @@
               },
               "Content-Length": {
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "description": "Content length of the file."
               },
               "Content-MD5": {
                 "type": "string",
@@ -1393,7 +1396,7 @@
               },
               "ETag": {
                 "type": "string",
-                "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+                "description": "The ETag contains a value that represents the version of the resource."
               },
               "Last-Modified": {
                 "type": "string",
@@ -3354,7 +3357,8 @@
                 "description": "Key of the permission set for the directory/file."
               },
               "x-ms-group": {
-                "type": "string"
+                "type": "string",
+                "description": "NFS only. The owning group."
               },
               "x-ms-link-count": {
                 "type": "integer",
@@ -3362,10 +3366,12 @@
                 "description": "NFS only. The link count."
               },
               "x-ms-mode": {
-                "type": "string"
+                "type": "string",
+                "description": "NFS only. The file mode."
               },
               "x-ms-owner": {
-                "type": "string"
+                "type": "string",
+                "description": "NFS only. The owner."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -5605,13 +5611,16 @@
                 "description": "Key of the permission set for the directory/file."
               },
               "x-ms-group": {
-                "type": "string"
+                "type": "string",
+                "description": "NFS only. The owning group."
               },
               "x-ms-mode": {
-                "type": "string"
+                "type": "string",
+                "description": "NFS only. The file mode."
               },
               "x-ms-owner": {
-                "type": "string"
+                "type": "string",
+                "description": "NFS only. The owner."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -6700,6 +6709,7 @@
               },
               "x-ms-access-tier-change-time": {
                 "type": "string",
+                "format": "date-time-rfc7231",
                 "description": "The access tier change time."
               },
               "x-ms-access-tier-transition-state": {
@@ -6788,7 +6798,7 @@
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
                 "format": "int64",
-                "description": "The provisioned bandwidth for the share."
+                "description": "The share provisioned bandwidth in mebibytes per second."
               },
               "x-ms-share-provisioned-egress-mbps": {
                 "type": "integer",
