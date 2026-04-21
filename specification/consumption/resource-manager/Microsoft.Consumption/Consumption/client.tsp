@@ -274,6 +274,8 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@alternateType(Marketplace.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(CreditSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(PriceSheetResult.etag, Azure.Core.EtagProperty.etag, "csharp");
 
 @@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
 // Rename the operation to match the contract's expected method name (GetPriceSheet)
