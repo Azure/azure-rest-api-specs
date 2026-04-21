@@ -291,10 +291,7 @@ op privateLinkResourcesGetCustomization(
   privateLinkResourcesGetCustomization
 );
 
-@@clientName(SecurityOperatorsAPI.SecurityOperator,
-  "ArmSecurityOperator",
-  "go"
-);
+@@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
 @@clientName(SecurityStandardsAPI.SecurityStandard,
   "ArmSecurityStandard",
   "go"
