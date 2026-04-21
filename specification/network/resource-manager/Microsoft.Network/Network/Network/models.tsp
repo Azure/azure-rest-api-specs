@@ -26126,7 +26126,7 @@ union SubgroupProfileScope {
 @added(Versions.v2025_07_01)
 model SubgroupProfile {
   /** VM size of the subgroup profile of the interconnect group resource. */
-  vmSize?: string;
+  vmSize: string;
 
   /** Scope of the subgroup profile of the interconnect group resource. */
   scope?: SubgroupProfileScope;
@@ -26159,7 +26159,7 @@ model InterconnectGroupPropertiesFormat {
   resourceGuid?: string;
 
   /** The subgroup profile of the interconnect group resource. */
-  subgroupProfile?: SubgroupProfile;
+  subgroupProfile: SubgroupProfile;
 }
 
 /**
