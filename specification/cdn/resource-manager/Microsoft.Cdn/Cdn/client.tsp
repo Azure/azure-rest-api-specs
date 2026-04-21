@@ -225,7 +225,9 @@ using Azure.ResourceManager;
   "FrontDoorActivatedResourceInfo",
   "csharp"
 );
+@@clientName(DeploymentVersion, "CdnDeploymentVersion", "csharp");
 @@clientName(MatchCondition, "CustomRuleMatchCondition", "csharp");
+@@clientName(KeyGroup, "CdnKeyGroup", "csharp");
 @@clientName(ResourceUsageUnit, "CdnUsageUnit", "csharp");
 @@clientName(PolicySettings, "WafPolicySettings", "csharp");
 @@clientName(ManagedRuleSet, "WafPolicyManagedRuleSet", "csharp");
