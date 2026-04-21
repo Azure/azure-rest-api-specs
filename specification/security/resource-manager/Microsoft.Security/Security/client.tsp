@@ -301,6 +301,8 @@ op privateLinkResourcesGetCustomization(
   "go"
 );
 
+@@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "go");
+
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "python"
