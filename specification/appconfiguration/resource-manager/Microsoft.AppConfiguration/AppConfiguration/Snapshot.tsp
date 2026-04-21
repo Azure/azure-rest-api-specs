@@ -1,27 +1,34 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@typespec/versioning";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ConfigurationStore.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
+using Versioning;
 
 namespace Microsoft.AppConfiguration;
+
+@@visibility(Snapshot.name, Lifecycle.Read);
+
 /**
  * The snapshot resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage"
 @parentResource(ConfigurationStore)
-model Snapshot is Azure.ResourceManager.ProxyResource<SnapshotProperties> {
+model Snapshot is Azure.ResourceManager.Legacy.CustomAzureProxyResource<false> {
   ...ResourceNameParameter<
     Resource = Snapshot,
     KeyName = "snapshotName",
     SegmentName = "snapshots",
     NamePattern = "^[^\\x00-\\x1F\\x7F]+$"
   >;
+
+  @madeRequired(Versions.v2025_08_01_preview)
+  properties: SnapshotProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource 'Snapshot' must have a delete operation."
