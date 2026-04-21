@@ -2,9 +2,54 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
-using Azure.Core;
+using TypeSpec.Http;
 
 namespace WebPubSubService;
+
+/**
+ * Inner error detail.
+ */
+model ErrorInner {
+  /** One of a server-defined set of error codes. */
+  code?: string;
+
+  /** Inner error. */
+  inner?: ErrorInner;
+}
+
+/**
+ * The error detail object.
+ */
+model ErrorDetail {
+  /** One of a server-defined set of error codes. */
+  code?: string;
+
+  /** A human-readable representation of the error. */
+  message?: string;
+
+  /** The target of the error. */
+  target?: string;
+
+  /** An array of details about specific errors that led to this reported error. */
+  details?: ErrorDetail[];
+
+  /** An object containing more specific information about the error. */
+  inner?: ErrorInner;
+}
+
+/**
+ * The error response.
+ */
+@error
+model ErrorResponse {
+  /** The error detail body. */
+  @body
+  body: ErrorDetail;
+
+  /** The error code. */
+  @header("x-ms-error-code")
+  errorCode?: string;
+}
 
 /**
  * Details about the client.
@@ -95,6 +140,11 @@ union MessageContentType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
 union ResponseContentType {
+  /**
+   * Content Type 'text/plain'
+   */
+  "text/plain",
+
   /**
    * Content Type 'application/json'
    */
