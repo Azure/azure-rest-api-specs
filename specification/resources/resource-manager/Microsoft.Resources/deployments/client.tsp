@@ -10,6 +10,9 @@ using Microsoft.Resources;
 @@clientName(DeploymentOperation, "ArmDeploymentOperation", "csharp");
 @@clientName(DeploymentExtensionDefinition, "ArmDeploymentExtensionDefinition", "csharp");
 @@clientName(DeploymentParameter, "DeploymentParameterValue", "csharp");
+// Rename resource model and its input body to clean SDK names for C#
+@@clientName(Deployment, "DeploymentContent", "csharp");
+@@clientName(DeploymentExtended, "Deployment", "csharp");
 
 // C# SDK: Use the generic at-scope interface (DeploymentExtendeds) for all scopes.
 // Suppress per-scope @armResourceOperations interfaces from C# to eliminate duplicate
