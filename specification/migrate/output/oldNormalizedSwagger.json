@@ -1487,6 +1487,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories": {
+      "get": {
+        "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "description": "List HypervVmSoftwareInventory resources by HypervMachine",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "operationId": "HypervSoftwareInventoriesController_GetMachineSoftwareInventory",
@@ -1541,53 +1588,6 @@
           "HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
             "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareinventories": {
-      "get": {
-        "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
-        "tags": [
-          "HypervSoftwareInventoriesController"
-        ],
-        "description": "List HypervVmSoftwareInventory resources by HypervMachine",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7638,6 +7638,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories": {
+      "get": {
+        "operationId": "ServerSoftwareInventoriesController_ListByServer",
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "description": "List ServerSoftwareInventory resources by Server",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServerSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "operationId": "ServerSoftwareInventoriesController_GetMachineSoftwareInventory",
@@ -7692,53 +7739,6 @@
           "ServerSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
             "$ref": "./examples/ServerSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareinventories": {
-      "get": {
-        "operationId": "ServerSoftwareInventoriesController_ListByServer",
-        "tags": [
-          "ServerSoftwareInventoriesController"
-        ],
-        "description": "List ServerSoftwareInventory resources by Server",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ServerSoftwareInventoryListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen": {
-            "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9152,6 +9152,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories": {
+      "get": {
+        "operationId": "VmwareSoftwareInventoriesController_ListByMachineResource",
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "description": "List VmwareMachineSoftwareInventory resources by MachineResource",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "operationId": "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory",
@@ -9206,53 +9253,6 @@
           "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
             "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareinventories": {
-      "get": {
-        "operationId": "VmwareSoftwareInventoriesController_ListByMachineResource",
-        "tags": [
-          "VmwareSoftwareInventoriesController"
-        ],
-        "description": "List VmwareMachineSoftwareInventory resources by MachineResource",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VmwareMachineSoftwareInventoryListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },

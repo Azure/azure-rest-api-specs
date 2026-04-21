@@ -23,6 +23,30 @@ model VmwareSite is Azure.ResourceManager.TrackedResource<SitesProperties> {
 }
 
 @armResourceOperations
+interface VmwareSiteOperationsStatusOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @path
+        @segment("vmwareSites")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        siteName: string,
+      },
+      {
+        @path
+        @segment("operationsStatus")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        operationStatusName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface VmwareSites {
   /**
    * Get a VmwareSite
@@ -208,20 +232,9 @@ interface VmwareSites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VmwareOperationsStatus_GetVmwareOperationStatus")
-  @get
-  @action("{operationStatusName}")
-  getVmwareOperationStatus is ArmResourceActionSync<
-    VmwareSite,
-    void,
-    ArmResponse<OperationStatus>,
-    Parameters = {
-      /**
-       * Operation status  Arm Name.
-       */
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      @path
-      operationStatusName: string;
-    }
+  getVmwareOperationStatus is VmwareSiteOperationsStatusOps.Read<
+    OperationStatus,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**

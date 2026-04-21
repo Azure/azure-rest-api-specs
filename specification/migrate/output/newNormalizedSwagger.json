@@ -400,50 +400,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
-        "tags": [
-          "HypervSites"
-        ],
-        "description": "Method to get operation status.",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/clientGroupMembers": {
       "post": {
         "operationId": "HypervDependencyMapController_ClientGroupMembers",
@@ -1624,6 +1580,50 @@
         "x-ms-examples": {
           "HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
             "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
+        "tags": [
+          "HypervSites"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -2933,50 +2933,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
-        "tags": [
-          "MasterSites"
-        ],
-        "description": "A operation status resource belonging to a master site resource.",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/errorSummary": {
       "post": {
         "operationId": "MasterSitesController_ErrorSummary",
@@ -3018,6 +2974,50 @@
         "x-ms-examples": {
           "MasterSitesController_ErrorSummary_MaximumSet_Gen": {
             "$ref": "./examples/MasterSitesController_ErrorSummary_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
+        "tags": [
+          "MasterSites"
+        ],
+        "description": "A operation status resource belonging to a master site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -3574,57 +3574,6 @@
         "x-ms-examples": {
           "SqlSitesController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/SqlSitesController_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
-        "tags": [
-          "SqlSites"
-        ],
-        "description": "Method to get operation status.",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "sqlSiteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -4316,6 +4265,57 @@
         "x-ms-examples": {
           "SqlJobsController_Get_MaximumSet_Gen": {
             "$ref": "./examples/SqlJobsController_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
+        "tags": [
+          "SqlSites"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -6889,50 +6889,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
-        "tags": [
-          "ServerSiteResources"
-        ],
-        "description": "A operation status resource belonging to a site resource.",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/clientGroupMembers": {
       "post": {
         "operationId": "ServerDependencyMapController_ClientGroupMembers",
@@ -7760,6 +7716,50 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
+        "tags": [
+          "ServerSiteResources"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
       "post": {
         "operationId": "ServerSitesController_RefreshSite",
@@ -8277,50 +8277,6 @@
         "x-ms-examples": {
           "SitesController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/SitesController_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
-        "tags": [
-          "VmwareSites"
-        ],
-        "description": "A operation status resource belonging to a site resource.",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -9350,6 +9306,50 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
+        "tags": [
+          "VmwareSites"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts": {

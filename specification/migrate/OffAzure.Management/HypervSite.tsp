@@ -22,6 +22,30 @@ model HypervSite is Azure.ResourceManager.TrackedResource<SiteProperties> {
 }
 
 @armResourceOperations
+interface HypervOperationsStatusOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @path
+        @segment("hypervSites")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        siteName: string,
+      },
+      {
+        @path
+        @segment("operationsStatus")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        operationStatusName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface HypervSites {
   /**
    * Get a HypervSite
@@ -215,20 +239,9 @@ interface HypervSites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HypervOperationsStatusController_GetHypervOperationsStatus")
-  @get
-  @action("{operationStatusName}")
-  getHypervOperationsStatus is ArmResourceActionSync<
-    HypervSite,
-    void,
-    ArmResponse<OperationStatus>,
-    Parameters = {
-      /**
-       * Operation status  Arm Name.
-       */
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      @path
-      operationStatusName: string;
-    }
+  getHypervOperationsStatus is HypervOperationsStatusOps.Read<
+    OperationStatus,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

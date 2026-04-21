@@ -655,61 +655,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
-        "tags": [
-          "HypervSites"
-        ],
-        "description": "Method to get operation status.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "description": "Operation status  Arm Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clientGroupMembers": {
       "post": {
         "operationId": "HypervDependencyMapController_ClientGroupMembers",
@@ -2252,6 +2197,59 @@
         "x-ms-examples": {
           "HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
             "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
+        "tags": [
+          "HypervSites"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -3931,61 +3929,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
-        "tags": [
-          "MasterSites"
-        ],
-        "description": "A operation status resource belonging to a master site resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "description": "Operation status  Arm Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/errorSummary": {
       "post": {
         "operationId": "MasterSitesController_ErrorSummary",
@@ -4038,6 +3981,59 @@
         "x-ms-examples": {
           "MasterSitesController_ErrorSummary_MaximumSet_Gen": {
             "$ref": "./examples/MasterSitesController_ErrorSummary_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
+        "tags": [
+          "MasterSites"
+        ],
+        "description": "A operation status resource belonging to a master site resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -4743,69 +4739,6 @@
         "x-ms-examples": {
           "SqlSitesController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/SqlSitesController_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
-        "tags": [
-          "SqlSites"
-        ],
-        "description": "Method to get operation status.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "sqlSiteName",
-            "in": "path",
-            "description": "SQL site name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "description": "Operation status  Arm Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -5686,6 +5619,66 @@
         "x-ms-examples": {
           "SqlJobsController_Get_MaximumSet_Gen": {
             "$ref": "./examples/SqlJobsController_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
+        "tags": [
+          "SqlSites"
+        ],
+        "description": "Method to get operation status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -8959,61 +8952,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
-        "tags": [
-          "ServerSiteResources"
-        ],
-        "description": "A operation status resource belonging to a site resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "description": "Operation status  Arm Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/clientGroupMembers": {
       "post": {
         "operationId": "ServerDependencyMapController_ClientGroupMembers",
@@ -10096,6 +10034,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
+        "tags": [
+          "ServerSiteResources"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
       "post": {
         "operationId": "ServerSitesController_RefreshSite",
@@ -10775,61 +10766,6 @@
         "x-ms-examples": {
           "SitesController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/SitesController_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/{operationStatusName}/{operationStatusName}": {
-      "get": {
-        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
-        "tags": [
-          "VmwareSites"
-        ],
-        "description": "A operation status resource belonging to a site resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "description": "Operation status  Arm Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -12184,6 +12120,59 @@
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cunknown%3E"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/operationsStatus/{operationStatusName}": {
+      "get": {
+        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
+        "tags": [
+          "VmwareSites"
+        ],
+        "description": "A operation status resource belonging to a site resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts": {

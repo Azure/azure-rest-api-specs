@@ -23,6 +23,30 @@ model ServerSiteResource
 }
 
 @armResourceOperations
+interface ServerSiteOperationsStatusOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @path
+        @segment("serverSites")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        siteName: string,
+      },
+      {
+        @path
+        @segment("operationsStatus")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        operationStatusName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface ServerSiteResources {
   /**
    * Get a ServerSiteResource
@@ -237,20 +261,9 @@ interface ServerSiteResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ServerOperationsStatusController_GetServerSiteOperationsStatus")
-  @get
-  @action("{operationStatusName}")
-  getServerSiteOperationsStatus is ArmResourceActionSync<
-    ServerSiteResource,
-    void,
-    ArmResponse<OperationStatus>,
-    Parameters = {
-      /**
-       * Operation status  Arm Name.
-       */
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      @path
-      operationStatusName: string;
-    }
+  getServerSiteOperationsStatus is ServerSiteOperationsStatusOps.Read<
+    OperationStatus,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

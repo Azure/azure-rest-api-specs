@@ -23,6 +23,30 @@ model MasterSite
 }
 
 @armResourceOperations
+interface MasterSitesOperationsStatusOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @path
+        @segment("masterSites")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        siteName: string,
+      },
+      {
+        @path
+        @segment("operationsStatus")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        operationStatusName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface MasterSites {
   /**
    * Get a MasterSite
@@ -98,20 +122,9 @@ interface MasterSites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MasterSitesOperationsStatusController_GetVmwareOperationStatus")
-  @get
-  @action("{operationStatusName}")
-  getVmwareOperationStatus is ArmResourceActionSync<
-    MasterSite,
-    void,
-    ArmResponse<OperationStatus>,
-    Parameters = {
-      /**
-       * Operation status  Arm Name.
-       */
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      @path
-      operationStatusName: string;
-    }
+  getVmwareOperationStatus is MasterSitesOperationsStatusOps.Read<
+    OperationStatus,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

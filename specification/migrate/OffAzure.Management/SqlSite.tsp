@@ -24,6 +24,36 @@ model SqlSite is Azure.ResourceManager.ProxyResource<SqlSiteProperties> {
 }
 
 @armResourceOperations
+interface SqlSiteOperationsStatusOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @path
+        @segment("masterSites")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        siteName: string,
+
+        @path
+        @segment("sqlSites")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        sqlSiteName: string,
+      },
+      {
+        @path
+        @segment("operationsStatus")
+        @key
+        @pattern("^[a-zA-Z0-9-]{3,24}$")
+        operationStatusName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface SqlSites {
   /**
    * Method to get a site.
@@ -151,20 +181,9 @@ interface SqlSites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlOperationsStatusController_GetSqlOperationStatus")
-  @get
-  @action("{operationStatusName}")
-  getSqlOperationStatus is ArmResourceActionSync<
-    SqlSite,
-    void,
-    ArmResponse<OperationStatus>,
-    Parameters = {
-      /**
-       * Operation status  Arm Name.
-       */
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      @path
-      operationStatusName: string;
-    }
+  getSqlOperationStatus is SqlSiteOperationsStatusOps.Read<
+    OperationStatus,
+    OverrideErrorType = ErrorResponse
   >;
 }
 
