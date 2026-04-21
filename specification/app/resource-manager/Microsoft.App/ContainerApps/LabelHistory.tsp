@@ -9,11 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Container App Label History.
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @parentResource(ContainerApp)
 model LabelHistory
   is Azure.ResourceManager.ProxyResource<LabelHistoryProperties> {
@@ -50,6 +53,8 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = DefaultErrorResponse
 >;
 
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface ContainerAppsLabelHistory {
   /**
