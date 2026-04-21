@@ -14,6 +14,4 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Microsoft.Resources.ErrorResponse, "ArmErrorResponse", "java");
-
-#suppress ...
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(##, CommonTypes.TrackedResource, "java");
