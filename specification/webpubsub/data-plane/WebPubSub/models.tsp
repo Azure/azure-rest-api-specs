@@ -9,16 +9,16 @@ namespace WebPubSubService;
 /**
  * Inner error detail.
  */
-model ErrorInner {
-  /** One of a server-defined set of error codes. */
+model InnerError {
+  /** A more specific error code than was provided by the containing error. */
   code?: string;
 
   /** Inner error. */
-  inner?: ErrorInner;
+  inner?: InnerError;
 }
 
 /**
- * The error detail object.
+ * The error object.
  */
 model ErrorDetail {
   /** One of a server-defined set of error codes. */
@@ -34,7 +34,7 @@ model ErrorDetail {
   details?: ErrorDetail[];
 
   /** An object containing more specific information about the error. */
-  inner?: ErrorInner;
+  inner?: InnerError;
 }
 
 /**
