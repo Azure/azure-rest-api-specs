@@ -160,9 +160,9 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.OutputItemCodeInterpreterToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemCompactionBody, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemComputerToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemComputerToolCallOutputResource, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemCustomToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemCustomToolCallOutput, Usage.input | Usage.output);
+  @@usage(OpenAI.OutputItemComputerToolCallOutput, Usage.input | Usage.output);
+  @@usage(OpenAI.CustomToolCallResource, Usage.input | Usage.output);
+  @@usage(OpenAI.CustomToolCallOutputResource, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFileSearchToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFunctionShellCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFunctionShellCallOutput, Usage.input | Usage.output);
@@ -179,7 +179,7 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.OutputItemOutputMessage, Access.internal);
   @@usage(OpenAI.OutputItemReasoningItem, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemWebSearchToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.FunctionToolCallOutputResource, Usage.input | Usage.output);
+  @@usage(OpenAI.OutputItemFunctionToolCallOutput, Usage.input | Usage.output);
 
   // --- OutputContent subtypes (3 concrete types) ---
   @@usage(OpenAI.OutputContentOutputTextContent, Usage.input | Usage.output);
