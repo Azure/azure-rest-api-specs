@@ -759,7 +759,16 @@ model AgentPoolNetworkProfile {
   ]>[];
 
   /**
-   * The list of secondary network interface configurations for the agent pool.
+   * Secondary network interface configurations for each VM in the agent pool.
+   * Each entry is a template: one physical NIC per entry is provisioned on every
+   * VM instance. These interfaces are created at agent pool creation time and
+   * are immutable.
+   * The length of the list must be less than the NIC capacity minus 1 for the
+   * VM size of the agent pool (AKS manages the primary NIC). For example, a
+   * Standard_D8a_v4 VM supports up to 4 NICs, so the maximum number of secondary
+   * interfaces allowed is 3. For mixed-SKU VM pools the effective capacity is the
+   * minimum across all SKUs: count(secondaryNetworkInterfaces) + 1 <= min(maxNICs).
+   * For more information, see https://aka.ms/aks/multi-nic
    */
   @added(Versions.v2026_03_02_preview)
   @identifiers(#[])
@@ -767,36 +776,56 @@ model AgentPoolNetworkProfile {
 }
 
 /**
- * The type of a secondary network interface.
+ * Type of network interface to be provisioned on each virtual machine instance.
+ * For more information, see https://aka.ms/aks/multi-nic
  */
 @added(Versions.v2026_03_02_preview)
 union AgentPoolNetworkInterfaceType {
   string,
 
-  /** Standard NIC attached to a customer-specified subnet with platform-allocated IPs. */
+  /**
+   * A standard network interface programmed with an IP from a specified VNet subnet.
+   * Must be used with `vnetSubnetId` set in the AgentPoolNetworkInterface.
+   * IP address family (IPv4/IPv6/Dual-stack) is determined by the subnet.
+   */
   Standard: "Standard",
 
-  /** NIC with delegated IP allocation from a third-party orchestrator. */
+  /**
+   * A secondary network interface created without IP configuration or subnet
+   * attachment. The interface is provisioned in an uninitialized state and the
+   * subnet is attached during workload creation. `vnetSubnetId` must be set to
+   * an empty string (`""`).
+   */
   Dynamic: "Dynamic",
 }
 
 /**
- * A secondary network interface configuration for an agent pool.
+ * Configuration of a secondary network interface provisioned on each VM
+ * instance in the agent pool.
+ * For more information, see https://aka.ms/aks/multi-nic
  */
 @added(Versions.v2026_03_02_preview)
 model AgentPoolNetworkInterface {
-  /** The type of the network interface. */
+  /**
+   * Type of NIC to be provisioned on the VM.
+   */
   type?: AgentPoolNetworkInterfaceType;
 
-  /** The ID of the subnet which the secondary NIC will join. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  vnetSubnetID?: Azure.Core.armResourceIdentifier<[
+  /**
+   * The resource ID of the subnet which will be attached to the secondary
+   * network interface. Required when `type` is `Standard`; must be an empty
+   * string (`""`) when `type` is `Dynamic`.
+   */
+  vnetSubnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
 
-  /** Whether to enable accelerated networking on the secondary NIC. */
+  /**
+   * Whether accelerated networking is enabled on this secondary NIC.
+   * Default: true.
+   */
   enableAcceleratedNetworking?: boolean;
 }
 
