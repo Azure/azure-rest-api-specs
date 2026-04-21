@@ -1,19 +1,5 @@
 ## Swagger Changes
 
-### Changes for `summary`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/hypervSites'].get.summary__deleted` | deleted | `Get all hyperv  sites.` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/masterSites'].get.summary__deleted` | deleted | `Get all the sites in the subscription.` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OffAzure/vmwareSites'].get.summary__deleted` | deleted | `Get all vmware sites.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/hypervSites'].get.summary__deleted` | deleted | `Get all hyperv sites.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites'].get.summary__deleted` | deleted | `Get all sites.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}'].get.summary__deleted` | deleted | `Method to get a master site.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/jobs'].get.summary__deleted` | deleted | `Gets the sql Jobs.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/jobs/{jobName}'].get.summary__deleted` | deleted | `Gets the sql Job.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/vmwareSites'].get.summary__deleted` | deleted | `Get all vmware sites.` |
-
 ### Changes for `type`
 
 | Path | Change Type | Value |
@@ -194,52 +180,6 @@
 | `definitions.SqlSiteUpdate.properties.properties.description__added` | added | `The updatable properties of the SqlSite.` |
 | `definitions.VmwareSiteUpdate.properties.properties.description__added` | added | `The updatable properties of the VmwareSite.` |
 | `definitions.WebAppSiteUpdate.properties.properties.description__added` | added | `The updatable properties of the WebAppSite.` |
-
-### Changes for `x-ms-mutability`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeleteImportMachinesJob.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.DiscoverySiteDataSource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervCluster.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervHost.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervJob.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervMachine.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervRunAsAccountResource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervSite.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.HypervVmSoftwareInventory.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.IisWebApplications.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.IisWebServers.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ImportJob.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ImportMachine.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ImportSite.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.MachineResource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.MasterSite.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.PrivateEndpointConnection.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.PrivateLinkResource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.Server.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ServerJob.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ServerRunAsAccount.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ServerSiteResource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.ServerSoftwareInventory.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlAvailabilityGroup.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlDatabaseV2.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlDiscoverySiteDataSource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlJob.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlRunAsAccount.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlServerV2.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.SqlSite.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.TomcatWebApplications.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.TomcatWebServers.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.Vcenter.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.VmwareHost.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.VmwareJob.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.VmwareMachineSoftwareInventory.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.VmwareRunAsAccountResource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.VmwareSite.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.WebAppExtendedMachine.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.WebAppRunAsAccount.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.WebAppSite.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
 
 ### Changes for `allOf`
 

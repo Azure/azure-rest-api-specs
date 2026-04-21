@@ -548,3 +548,78 @@ using Microsoft.OffAzure;
 @@clientLocation(Vcenters.listByVmwareSite, "VcenterController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Vcenter.properties);
+
+@@visibility(DeleteImportMachinesJob.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(DiscoverySiteDataSource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(HypervCluster.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(HypervHost.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(HypervJob.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(HypervMachine.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(HypervRunAsAccountResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(HypervSite.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(HypervVmSoftwareInventory.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(IisWebApplications.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(IisWebServers.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ImportJob.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ImportMachine.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ImportSite.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(MachineResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(MasterSite.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(PrivateEndpointConnection.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(PrivateLinkResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(Server.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ServerJob.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ServerRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ServerSiteResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(ServerSoftwareInventory.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(SqlAvailabilityGroup.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(SqlDatabaseV2.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(SqlDiscoverySiteDataSource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(SqlJob.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(SqlRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(SqlServerV2.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(SqlSite.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(TomcatWebApplications.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(TomcatWebServers.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(Vcenter.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(VmwareHost.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(VmwareJob.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(VmwareMachineSoftwareInventory.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(VmwareRunAsAccountResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(VmwareSite.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(WebAppExtendedMachine.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(WebAppRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(WebAppSite.properties, Lifecycle.Read, Lifecycle.Create);
