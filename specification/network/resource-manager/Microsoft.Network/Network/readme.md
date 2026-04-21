@@ -79,6 +79,18 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: ProvisioningStateMustBeReadOnly
+    from: interconnectGroup.json
+    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
+  - code: DeleteResponseCodes
+    from: interconnectGroup.json
+    reason: LRO delete supports response code 200 in addition to 202, 204, and default. Consistent with other Network RP resources.
+  - code: ResourceNameRestriction
+    from: interconnectGroup.json
+    reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: interconnectGroup.json
+    reason: name, id and type properties are inherited from the upper level
   - code: PatchIdentityProperty
     reason: False alarm.
     where:
