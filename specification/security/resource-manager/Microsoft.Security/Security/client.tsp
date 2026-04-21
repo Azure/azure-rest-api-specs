@@ -291,6 +291,19 @@ op privateLinkResourcesGetCustomization(
   privateLinkResourcesGetCustomization
 );
 
+@@clientName(SecurityOperatorsAPI.SecurityOperator,
+  "ArmSecurityOperator",
+  "go"
+);
+@@clientName(SecurityStandardsAPI.SecurityStandard,
+  "ArmSecurityStandard",
+  "go"
+);
+@@clientName(SecurityStandardsAPI.SecurityStandardProperties,
+  "ArmSecurityStandardProperties",
+  "go"
+);
+
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "python"
