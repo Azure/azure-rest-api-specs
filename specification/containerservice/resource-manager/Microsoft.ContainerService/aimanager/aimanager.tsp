@@ -12,19 +12,15 @@ using Azure.Core;
 
 namespace Microsoft.ContainerService;
 
-@doc("The AI Manager resource.")
+@doc("The AI Manager resource. For more information, see https://aka.ms/aks/aimanager.")
 @resource("aiManagers")
 model AIManager is TrackedResource<AIManagerProperties> {
-  @doc("The name of the AI Manager resource.")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-  @minLength(1)
-  @maxLength(63)
-  @key("aiManagerName")
-  @path
-  @segment("aiManagers")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  name: string;
-
+  ...ResourceNameParameter<
+    Resource = AIManager,
+    KeyName = "aiManagerName",
+    SegmentName = "aiManagers",
+    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+  >;
   ...EntityTagProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
@@ -36,7 +32,7 @@ model AIManagerProperties {
   @doc("The status of the last operation.")
   provisioningState?: AIManagerProvisioningState;
 
-  @doc("Delete options of the AI Manager.")
+  @doc("Delete options of the AI Manager. Defaults to `Keep` if not specified.")
   deletePolicy?: DeletePolicy;
 
   @visibility(Lifecycle.Read)
@@ -113,3 +109,7 @@ interface AIManagers {
     ArmResponse<CredentialResults>
   >;
 }
+
+@@maxLength(AIManager.name, 63);
+@@minLength(AIManager.name, 1);
+@@doc(AIManager.name, "The name of the AI Manager resource.");

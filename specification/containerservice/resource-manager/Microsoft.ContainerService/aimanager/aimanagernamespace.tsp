@@ -15,16 +15,12 @@ namespace Microsoft.ContainerService;
 @resource("namespaces")
 @parentResource(AIManager)
 model AIManagerNamespace is ProxyResource<AIManagerNamespaceProperties> {
-  @doc("The name of the AI Manager namespace resource.")
-  @key("namespaceName")
-  @segment("namespaces")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-  @minLength(1)
-  @maxLength(63)
-  @path
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  name: string;
-
+  ...ResourceNameParameter<
+    Resource = AIManagerNamespace,
+    KeyName = "namespaceName",
+    SegmentName = "namespaces",
+    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+  >;
   ...EntityTagProperty;
 }
 
@@ -89,3 +85,9 @@ interface AIManagerNamespaces {
     ArmResponse<CredentialResults>
   >;
 }
+
+@@maxLength(AIManagerNamespace.name, 63);
+@@minLength(AIManagerNamespace.name, 1);
+@@doc(AIManagerNamespace.name,
+  "The name of the AI Manager namespace resource."
+);
