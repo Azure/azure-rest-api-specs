@@ -300,6 +300,7 @@ op privateLinkResourcesGetCustomization(
   "ArmSecurityStandardProperties",
   "go"
 );
+@@usage(IoTSecurityAPI.CustomAlertRule, Usage.input | Usage.output, "go");
 
 @@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "go");
 
