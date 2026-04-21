@@ -21,6 +21,7 @@ This file contains **ARM control plane–specific** review rules that supplement
 **Authoritative source for ARM control-plane rules:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0). The RPC defines the contract between ARM and resource providers for PUT, PATCH, DELETE, GET, POST, and async operations. All rules in this file are derived from or aligned with the RPC. When in doubt, consult the RPC contract directly.
 
 **Supplementary references:**
+
 - [ARM API Best Practices & Design Choices](https://eng.ms/docs/products/arm/api_contracts/guidelines/api_best_practices_and_design_choices)
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
 
@@ -228,6 +229,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - Synchronous PATCH **MUST** return `200`; async PATCH **MUST** return `202` (plus `200` in swagger for SDK discovery). PATCH **MUST** return `404` if resource does not exist (RPC-Patch-V1-07).
 
+> **Async PATCH uniquely requires BOTH `202` AND `200` in the swagger definition.**
+> The `200` is not the initial response -- it represents the final synchronous
+> response schema that SDKs use to deserialize the completed result. Without `200`
+> defined, SDKs cannot discover the response type. This is different from async
+> DELETE, which does NOT require `200`.
+
 ### 4.3 Tracked Resource PATCH Must Support Tags (RPC-Patch-V1-03)
 
 - For tracked resources, the PATCH operation **MUST** support updating `tags` at minimum.
@@ -276,6 +283,13 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   - `202` — accepted for async processing
   - `204` — resource does not exist / already deleted (no body)
   - `default` — error response
+
+> **⚠️ Common false positive -- do NOT conflate sync and async DELETE response codes.**
+> Async DELETE requires `202` + `204` + `default` only. It does **NOT** require `200`.
+> The `200` code belongs exclusively to synchronous DELETE. Section 6.3 mentions `200`
+> for the Location polling URL's terminal response, which is a different context -- do
+> not flag an async DELETE operation for missing `200`.
+
 - Do **not** return `404` for a resource that doesn't exist — return `204` instead.
 - DELETE response body **MUST** be empty (RPC-Delete-V1-04).
   (Also enforced by: `DeleteResponseCodes` linter rule)
@@ -315,6 +329,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Async DELETE **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header.
 - If the resource has a `provisioningState` property, it **MUST** transition to a non-terminal state (e.g., `"Deleting"`).
 - The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return `200` (OK) or `204` (NoContent) and the resource **MUST** no longer exist.
+- **Note:** The `200` / `204` here refers to the **polling URL's terminal response**, not the initial DELETE response codes. The initial async DELETE response is `202` + `204` (see section 5.1).
 
 ### 6.4 Async POST Action Model (RPC-Async-V1-11)
 
@@ -346,7 +361,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the complete `final-state-via` decision table and anti-patterns.
 
 - **`Location` header polling**: The polling URL returns `202` (with no body) while the operation is in progress and returns the **exact same response** as the synchronous completion when the operation finishes. For DELETE, the final response is `200` or `204`. For PATCH, the final response is `200` with the updated resource body. For POST, the final response is `200` or `204`.
-- **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the *status*, not a failure of the underlying operation.
+- **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the _status_, not a failure of the underlying operation.
 - The `Azure-AsyncOperation` status object **MUST** include `status` (Required) with terminal values `Succeeded`, `Failed`, or `Canceled`. If `status` is `Failed` or `Canceled`, `error.code` and `error.message` are **Required**.
 - For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `x-ms-long-running-operation-options` / `final-state-via` -- the default SDK behavior is correct. Only specify `"final-state-via": "location"` for POST LROs with a response schema.
 
@@ -411,10 +426,10 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - **Actively examine every `string` property** for enum candidates (e.g., "status", "mode", "tier"). If a property's description lists valid values, it **MUST** be an enum with `"x-ms-enum": { "name": "<EnumName>", "modelAsString": true }`.
 
-
 ### 8.3a Array Property Names Must Be Plural
 
 - Properties that are arrays **MUST** have plural names (e.g., `scopes`, `rules`, `addresses`) -- not singular (e.g., `scope`, `rule`, `address`). Singular names suggest a single value, not a collection.
+
 ### 8.4 Use Specific Types Instead of Generic Strings (ACTIVELY REVIEW)
 
 > **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for common property names (e.g., `createdAt`, `lastModifiedAt`, `deletedAt`) and resource identifier naming rules (use `Id` suffix, not `Uri` or `Name`).
@@ -686,7 +701,7 @@ When a PR introduces APIs at the tenant or provider level (outside subscription 
 - The linter rule `TenantLevelAPIsNotAllowed` fires on such PRs. The suppression requires:
   - (A) ARM API review office hours sign-off, **AND**
   - (B) Either acknowledgment that no unauthorized actions are involved, or PAS team approval for the unauthorized actions.
-  (Also enforced by: `TenantLevelAPIsNotAllowed` linter rule)
+    (Also enforced by: `TenantLevelAPIsNotAllowed` linter rule)
 
 ---
 
@@ -768,10 +783,10 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 ### 19.3 If-Match Behavior
 
-| Header Value         | Behavior                                                     |
-| -------------------- | ------------------------------------------------------------ |
-| Absent / empty       | Allow the operation (no concurrency check)                   |
-| `If-Match: "xyz"`    | Check resource exists and ETag matches; `412` if mismatch    |
+| Header Value      | Behavior                                                  |
+| ----------------- | --------------------------------------------------------- |
+| Absent / empty    | Allow the operation (no concurrency check)                |
+| `If-Match: "xyz"` | Check resource exists and ETag matches; `412` if mismatch |
 
 ---
 
@@ -927,6 +942,7 @@ The following changes are **forbidden**:
 When reviewing ARM resource-manager swagger files, verify:
 
 ### Resource Structure & Paths
+
 - ✅ Tracked resource paths include `/subscriptions/` and `/resourceGroups/` segments; even-segmented paths (RPC-Put-V1-01, RPC-Put-V1-02)
 - ✅ Tracked resources not nested beyond third level (RPC-Put-V1-19)
 - ✅ Resource type names are camelCase, plural, and specific (not generic)
@@ -939,6 +955,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
 
 ### Resource Model
+
 - ✅ Top-level ARM property names (`id`, `name`, `type`, `systemData`) NOT reused inside `properties` bag (RPC-Put-V1-09)
 - ✅ `zones`, `sku`, `kind`, `plan`, `identity`, `tags` are top-level properties (not inside `properties`)
 - ✅ `sku` follows standard schema (`name`, `tier`, `size`, `family`, `capacity`); internal SKU link API not in public swagger
@@ -958,6 +975,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `provisioningState` includes `Succeeded`, `Failed`, `Canceled` (single 'l') terminal states; no operational states like `Stopped` (RPC-Async-V1-02, RPC-Async-V1-03)
 
 ### PATCH Operations
+
 - ✅ PATCH body has no required properties, no defaults, no create-only mutability (RPC-Patch-V1-10)
 - ✅ PATCH does not update `id`, `name`, `type`, `location`, or `provisioningState` (RPC-Patch-V1-02)
 - ✅ PATCH follows JSON Merge Patch (RFC 7396) semantics (RPC-Patch-V1-05)
@@ -968,17 +986,20 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ No non-`api-version` query parameters on PATCH
 
 ### DELETE Operations
+
 - ✅ Sync DELETE defines `200` + `204`; async DELETE defines `202` + `204`; DELETE body is empty (RPC-Delete-V1-01, RPC-Delete-V1-04)
 - ✅ No request body on DELETE
 - ✅ No non-`api-version` query parameters on DELETE
 
 ### Security & Secrets
+
 - ✅ No secrets in GET/PUT/PATCH responses; secrets annotated with `x-ms-secret: true`
 - ✅ Missing `x-ms-secret` causes What-If false creates — annotation required on all secret properties (WHATIF-003)
 - ✅ Secret retrieval exposed via `list*` POST action, not GET
 - ✅ Proactive secret detection (SEC-SECRET-DETECT) applied to all string properties
 
 ### Long-Running Operations
+
 - ✅ Resources with async PUT/PATCH have `provisioningState` (readOnly) with terminal states Succeeded/Failed/Canceled (RPC-Async-V1-02, RPC-Async-V1-03)
 - ✅ Async PUT returns `201`/`200` + provisioningState — never `202`; returns `409` if resource already in non-terminal state (RPC-Async-V1-01)
 - ✅ Async PATCH/DELETE/POST return `202` with both `Location` and `Azure-AsyncOperation` headers; `202` body is empty (RPC-Async-V1-08/09/11/14)
@@ -991,6 +1012,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
 
 ### Property Design (Properties Bag Review)
+
 - ✅ All server-computed properties marked `readOnly` — missing annotation causes What-If false deletes (WHATIF-001)
 - ✅ String properties actively reviewed — enums used for finite/limited value sets
 - ✅ String properties actively reviewed — specific formats used (`date-time`, `uri`, `uuid`, `duration`, etc.)
@@ -1014,30 +1036,36 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Property value casing and formatting preserved — no normalization (OAPI026)
 
 ### List APIs
+
 - ✅ List APIs return `{ value: [...], nextLink }` wrapper; `nextLink` has `format: uri`; marked with `x-ms-pageable`
 
 ### POST Actions
+
 - ✅ POST actions have action name in URL, params in body, correct response codes (RPC-POST-V1-01, RPC-POST-V1-05)
 - ✅ POST actions used only for non-CRUD operations
 - ✅ POST for data retrieval only when retrieving secrets or P99 latency > 2s; prefer OData filters on GET
 - ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (RPC-LIST-VERSIONS)
 
 ### Tenant-Level APIs
+
 - ✅ Tenant-level APIs evaluated for whether subscription/RG scope would suffice (RPC-Uri-V1-11)
 - ✅ Unauthorized actions require PAS team approval
 
 ### ARG Compatibility
+
 - ✅ No embedded child resources or child counts in parent GET response (ARG001)
 - ✅ No customer data in control plane properties (ARG002)
 - ✅ Properties not removed between API versions; all prior-version types carried forward (ARG003)
 
 ### Nested & Inline Resources
+
 - ✅ Nested resources (including singletons) have both collection GET and point GET (PLCY008)
 - ✅ Private endpoint connections: three nested types defined; `publicNetworkAccess` property on parent; common-types used
 - ✅ Collections not modeled as both inline array and nested resource
 - ✅ Inline arrays not used for unbounded/very large collections; large arrays risk exceeding ARM payload size limits
 
 ### Azure Policy Compatibility
+
 - ✅ Properties designed for Policy auditability — composite values broken into individual fields (PLCY001)
 - ✅ Minimal read-only properties that only appear post-creation; prefer values settable on PUT (PLCY003)
 - ✅ No free-form `type: object` with dynamic keys for service-owned properties (PLCY005)
@@ -1046,6 +1074,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Policy-enforced configurations modeled in PUT/GET, not as POST actions (PLCY009)
 
 ### Template Deployment & What-If Compatibility
+
 - ✅ Resources created via PUT (not POST) for template engine compatibility (TD001)
 - ✅ PUT is idempotent; re-PUT with same body does not fail (TD002)
 - ✅ PUT is a full replacement — omitting a property does not preserve current value; no PATCH semantics on PUT (WHATIF-004)
@@ -1056,6 +1085,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Every optional property with a service-applied default declares `"default"` in the spec (WHATIF-002)
 
 ### Resource Move & Lifecycle
+
 - ✅ Top-level tracked resources support resource move across RG/subscription (RPC003)
 - ✅ `managedBy` / `managedByExtended` are immutable top-level properties; not inside `properties` bag
 - ✅ `systemData` is readOnly, added only with new API versions; `*ByType` stored as string not enum
@@ -1063,26 +1093,31 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `systemData` not updated for child resource changes, rejected requests, or internal admin operations
 
 ### Availability Zones & Extended Locations
+
 - ✅ `zones` property is top-level `array` of `string`; annotated `x-ms-mutability: ["create", "read"]`; immutable after creation
 - ✅ `extendedLocation` property is top-level, immutable after creation; must be included on all subsequent PUTs
 
 ### API Versioning & Deprecation
+
 - ✅ Uniform API versioning across all resource types in the service; no mixed versions in a single package tag
 - ✅ API version parity across clouds — same functionality per API version in Public, Mooncake, Fairfax (RPC-BestPractice-15)
 - ✅ GA APIs: 36 months notice before retirement; Preview: 12 months max lifespan, 90 days notice
 - ✅ Deprecated versions/operations/properties marked with `"deprecated": true`; Azure Policy team consulted
 
 ### Schema Evolution
+
 - ✅ Published API versions are immutable — no changes (even optional properties) without a new api-version
 - ✅ No type changes on existing properties between API versions (introduce new property name + deprecate old)
 - ✅ No required properties added to or removed from existing models between API versions
 - ✅ DELETE never fails due to API version mismatch with creation version
 
 ### Long-Running Operation Security
+
 - ✅ Polling URIs do not use reserved query params `t`, `c`, `s`, `h`
 - ✅ Polling URIs supported up to 4 KB length
 
 ### Versioning & Suppressions
+
 - ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Suppressions evaluated per decision framework: approve only for false alarms or pre-existing violations; push to fix for new resources
@@ -1090,6 +1125,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)
 
 ### Naming
+
 - ✅ Timestamp properties use common names (`createdAt`, `lastModifiedAt`, `deletedAt`) — not `createTime`, `creationTime`, etc.
 - ✅ Resource ID reference properties use `Id` suffix — not `Uri`, `Url`, or `Name` suffix
 
