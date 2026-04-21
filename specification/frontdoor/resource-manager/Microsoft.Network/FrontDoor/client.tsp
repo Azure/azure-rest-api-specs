@@ -109,6 +109,7 @@ interface ProfilesOverrides {
 @@clientName(PolicyResourceState, "FrontDoorWebApplicationFirewallPolicyResourceState", "csharp");
 @@clientName(CustomRule, "WebApplicationCustomRule", "csharp");
 @@clientName(CheckNameAvailabilityInput, "FrontDoorNameAvailabilityContent", "csharp");
+@@clientName(CheckNameAvailabilityInput.type, "ResourceType", "csharp");
 @@clientName(CheckNameAvailabilityOutput, "FrontDoorNameAvailabilityResult", "csharp");
 @@clientName(ActionType, "RuleMatchActionType", "csharp");
 @@clientName(Availability, "FrontDoorNameAvailabilityState", "csharp");
@@ -183,8 +184,17 @@ interface ProfilesOverrides {
 @@usage(LatencyMetric, Usage.input | Usage.output, "csharp");
 @@usage(RouteConfiguration, Usage.input | Usage.output, "csharp");
 
+// Category B — plain TrackedResource response models need input usage for public ctors + setters
+@@usage(Timeseries, Usage.input | Usage.output, "csharp");
+@@usage(LatencyScorecard, Usage.input | Usage.output, "csharp");
+@@usage(ManagedRuleSetDefinition, Usage.input | Usage.output, "csharp");
+@@usage(PreconfiguredEndpoint, Usage.input | Usage.output, "csharp");
+
 // Category E — ResourceIdentifier type on nested id fields
+@@clientName(SubResource, "FrontDoorSubResource", "csharp");
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+// Category C — BasicResourceWithSettableIDName is the actual FrontDoorResourceData base type
+@@clientName(BasicResourceWithSettableIDName, "FrontDoorResourceData", "csharp");
 @@alternateType(RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(KeyVaultCertificateSourceParametersVault.id, Azure.Core.armResourceIdentifier, "csharp");
@@ -194,6 +204,58 @@ interface ProfilesOverrides {
 @@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(PolicySettings.redirectUrl, url, "csharp");
 
+// Category A — CRUD resource Data classes need correct base type via alternateType on local base models
+// + explicit customAzureResource so resources are still generated after base swap
+@@alternateType(Microsoft.Network.Resource, Azure.ResourceManager.Foundations.TrackedResource, "csharp");
+@@alternateType(ResourcewithSettableName, Azure.ResourceManager.Foundations.TrackedResource, "csharp");
+@@alternateType(BasicResource, Azure.ResourceManager.Foundations.ProxyResource, "csharp");
+@@Azure.ResourceManager.Legacy.customAzureResource(FrontDoor, #{ isAzureResource: true });
+@@Azure.ResourceManager.Legacy.customAzureResource(Experiment, #{ isAzureResource: true });
+@@Azure.ResourceManager.Legacy.customAzureResource(Profile, #{ isAzureResource: true });
+@@Azure.ResourceManager.Legacy.customAzureResource(RulesEngine, #{ isAzureResource: true });
+@@Azure.ResourceManager.Legacy.customAzureResource(WebApplicationFirewallPolicy, #{ isAzureResource: true });
+
 // Category H — TLS enum member name fixes handled in Customized/ (Tls10->Tls1_0 aliases)
 // Note: @@clientName strips underscores (Tls1_0 → Tls10), so Customized/ adds the aliases.
 
+@@alternateType(GetLatencyScorecardsParameters.endDateTimeUTC, utcDateTime, "csharp");
+
+// Category G — string → DateTimeOffset? for UTC datetime properties on model types
+@@alternateType(TimeseriesProperties.startDateTimeUTC, utcDateTime, "csharp");
+@@alternateType(TimeseriesProperties.endDateTimeUTC, utcDateTime, "csharp");
+@@alternateType(TimeseriesDataPoint.dateTimeUTC, utcDateTime, "csharp");
+@@alternateType(LatencyMetric.endDateTimeUTC, utcDateTime, "csharp");
+
+// Category G — fix camelCase → PascalCase property name casing
+@@clientName(TimeseriesProperties.timeseriesType, "TimeSeriesType", "csharp");
+@@clientName(TimeseriesProperties.timeseriesData, "TimeSeriesData", "csharp");
+
+// G1 — FrontendEndpointData.SessionAffinityTtlInSeconds: rename TtlSeconds → TtlInSeconds
+@@clientName(FrontendEndpointUpdateParameters.sessionAffinityTtlSeconds, "SessionAffinityTtlInSeconds", "csharp");
+
+// G2 — RulesEngineRule.MatchConditions needs a setter (input usage produces { get; set; } on list properties)
+@@usage(RulesEngineRule, Usage.input | Usage.output, "csharp");
+
+// G3 — RoutingRuleData.FrontendEndpoints must be IList<WritableSubResource>.
+// G4c — WAF link types (FrontendEndpointLinks, RoutingRuleLinks, SecurityPolicyLinks) must be IReadOnlyList<SubResource>.
+// WritableSubResource and SubResource don't exist in TypeSpec; define them in the ARM Models namespace so the
+// C# generator maps them to Azure.ResourceManager.Resources.Models.{Writable}SubResource.
+namespace Azure.ResourceManager.Models {
+  model WritableSubResource {
+    id?: Azure.Core.armResourceIdentifier;
+  }
+  model SubResource {
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+@@alternateType(RoutingRuleUpdateParameters.frontendEndpoints, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(WebApplicationFirewallPolicyProperties.frontendEndpointLinks, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(WebApplicationFirewallPolicyProperties.routingRuleLinks, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(WebApplicationFirewallPolicyProperties.securityPolicyLinks, Azure.ResourceManager.Models.SubResource[], "csharp");
+
+// Category J — Restore baseline operation method names
+@@clientName(Experiments.getLatencyScorecards, "GetLatencyScorecardsReport", "csharp");
+@@clientName(Experiments.getTimeseries, "GetTimeSeriesReport", "csharp");
+@@clientName(WebApplicationFirewallPolicies.listBySubscription, "GetFrontDoorWebApplicationFirewallPoliciesByFrontDoorWebApplicationFirewallPolicy", "csharp");
+@@clientName(Profiles.preconfiguredEndpointsList, "GetPreconfiguredEndpoints", "csharp");
+@@clientName(ManagedRuleSetsOperationGroup.list, "GetManagedRuleSets", "csharp");

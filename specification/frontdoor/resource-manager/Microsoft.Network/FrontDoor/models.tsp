@@ -2694,22 +2694,11 @@ model FrontDoorUpdateParameters {
  * A routing rule represents a specification for traffic to treat and where to send it, along with health probe information.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RoutingRule extends SubResource {
+model RoutingRule extends BasicResourceWithSettableIDName {
   /**
    * Properties of the Front Door Routing Rule
    */
   properties?: RoutingRuleProperties;
-
-  /**
-   * Resource name.
-   */
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 }
 
 /**
@@ -2789,22 +2778,11 @@ model RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink {
  * Load balancing settings for a backend pool
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model LoadBalancingSettingsModel extends SubResource {
+model LoadBalancingSettingsModel extends BasicResourceWithSettableIDName {
   /**
    * Properties of the load balancing settings
    */
   properties?: LoadBalancingSettingsProperties;
-
-  /**
-   * Resource name.
-   */
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 }
 
 /**
@@ -2845,22 +2823,11 @@ model LoadBalancingSettingsUpdateParameters {
  * Load balancing settings for a backend pool
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HealthProbeSettingsModel extends SubResource {
+model HealthProbeSettingsModel extends BasicResourceWithSettableIDName {
   /**
    * Properties of the health probe settings
    */
   properties?: HealthProbeSettingsProperties;
-
-  /**
-   * Resource name.
-   */
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 }
 
 /**
@@ -2911,22 +2878,11 @@ model HealthProbeSettingsUpdateParameters {
  * A backend pool is a collection of backends that can be routed to.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BackendPool extends SubResource {
+model BackendPool extends BasicResourceWithSettableIDName {
   /**
    * Properties of the Front Door Backend Pool
    */
   properties?: BackendPoolProperties;
-
-  /**
-   * Resource name.
-   */
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 }
 
 /**
