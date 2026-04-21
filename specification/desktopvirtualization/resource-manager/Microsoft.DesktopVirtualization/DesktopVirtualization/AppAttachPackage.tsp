@@ -54,6 +54,7 @@ interface AppAttachPackages {
     Parameters = {
       /**
        * Allows force delete
+       * @Introduced in 2023-10-04-preview
        */
       @added(Versions.vLatestPreview)
       @query("force")

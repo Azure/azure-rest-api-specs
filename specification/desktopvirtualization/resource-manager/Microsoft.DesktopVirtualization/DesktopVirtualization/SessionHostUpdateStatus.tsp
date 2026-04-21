@@ -15,10 +15,12 @@ namespace Microsoft.DesktopVirtualization;
 
 /**
  * Schema for SessionHostManagementUpdateStatus properties.
+ * @Introduced in 2024-04-08-preview
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
 @parentResource(SessionHostManagement)
 @singleton("default")
+@added(Versions.vLatestPreview)
 model SessionHostManagementUpdateStatus {
   /** Fully qualified ID for the async operation. */
   id?: Azure.Core.armResourceIdentifier;

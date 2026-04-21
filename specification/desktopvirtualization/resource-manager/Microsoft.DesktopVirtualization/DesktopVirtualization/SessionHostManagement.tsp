@@ -17,7 +17,9 @@ using Versioning;
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for SessionHostManagement properties.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
 model SessionHostManagement
@@ -31,6 +33,9 @@ model SessionHostManagement
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
 }
+/**
+ * @Introduced in 2023-11-01-preview
+ */
 @added(Versions.vLatestPreview)
 @armResourceOperations
 interface InitiateSessionHostUpdate {

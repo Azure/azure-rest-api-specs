@@ -16,7 +16,9 @@ using TypeSpec.Versioning;
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for SessionHostConfiguration properties.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
 model SessionHostConfiguration
@@ -32,6 +34,9 @@ model SessionHostConfiguration
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
+/**
+ * @Introduced in 2023-11-01-preview
+ */
 @added(Versions.vLatestPreview)
 @armResourceOperations
 interface SessionHostConfigurations {
