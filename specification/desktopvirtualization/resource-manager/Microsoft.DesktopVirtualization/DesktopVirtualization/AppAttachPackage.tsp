@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -39,7 +41,10 @@ interface AppAttachPackages {
    * Update an App Attach Package
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<AppAttachPackage, AppAttachPackagePatch>;
+  update is ArmCustomPatchSyncWithOptionalBody<
+    AppAttachPackage,
+    AppAttachPackagePatch
+  >;
 
   /**
    * Remove an App Attach Package.
@@ -95,4 +100,7 @@ interface AppAttachPackages {
 );
 @@doc(AppAttachPackages.createOrUpdate::parameters.resource,
   "Object containing App Attach Package definitions."
+);
+@@clientName(AppAttachPackages.update::parameters.body,
+  "appAttachPackagePatch"
 );

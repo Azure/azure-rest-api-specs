@@ -59,10 +59,6 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(MSIXPackages.update::parameters.properties, "msixPackage");
 
-@@clientName(AppAttachPackages.update::parameters.properties,
-  "appAttachPackagePatch"
-);
-
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
