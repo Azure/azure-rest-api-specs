@@ -503,7 +503,7 @@ interface BusinessDomain {
     Domain,
     ListQueryParametersTrait<{
       @doc("Optional continuation token for pagination.")
-      @query
+      @query("$skipToken")
       skipToken?: string;
 
       @doc("writeOnly")

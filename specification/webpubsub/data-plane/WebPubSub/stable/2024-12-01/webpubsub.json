@@ -78,14 +78,14 @@
             "description": "The service is healthy."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -132,14 +132,14 @@
             "description": "The request has succeeded."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -195,14 +195,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -223,6 +223,7 @@
         "summary": "Generate token for the client to connect Azure Web PubSub service.",
         "description": "Generate token for the client to connect Azure Web PubSub service.",
         "produces": [
+          "text/plain",
           "application/json",
           "text/json"
         ],
@@ -314,14 +315,14 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -368,14 +369,14 @@
             "description": "The request has succeeded."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -456,14 +457,14 @@
             "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -516,14 +517,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -570,14 +571,14 @@
             "description": "The server cannot find the requested resource."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -648,14 +649,14 @@
             "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -701,14 +702,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -759,14 +760,14 @@
             "description": "The server cannot find the requested resource."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -832,14 +833,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -930,14 +931,14 @@
             "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1015,14 +1016,14 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1081,14 +1082,14 @@
             "description": "The request has succeeded."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1142,14 +1143,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1229,14 +1230,14 @@
             "description": "The request has succeeded."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1314,14 +1315,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1402,14 +1403,14 @@
             "description": "The server cannot find the requested resource."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1458,14 +1459,14 @@
             "description": "The server cannot find the requested resource."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1529,14 +1530,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1614,14 +1615,14 @@
             "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1667,14 +1668,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1730,14 +1731,14 @@
             "description": "The request has succeeded."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1791,14 +1792,14 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "The error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The error code."
               }
             }
           }
@@ -1831,66 +1832,6 @@
       "required": [
         "groups"
       ]
-    },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
     },
     "ClientDetail": {
       "type": "object",
@@ -1952,6 +1893,48 @@
         ]
       }
     },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "inner": {
+          "$ref": "#/definitions/InnerError",
+          "description": "An object containing more specific information about the error."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error detail body."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "GetServiceStatusOkResponse": {
       "type": "object",
       "description": "The service is healthy."
@@ -1992,6 +1975,20 @@
       "required": [
         "value"
       ]
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "Inner error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A more specific error code than was provided by the containing error."
+        },
+        "inner": {
+          "$ref": "#/definitions/InnerError",
+          "description": "Inner error."
+        }
+      }
     },
     "MessageContentType": {
       "type": "string",
@@ -2047,6 +2044,7 @@
       "type": "string",
       "description": "Content type for response headers (closed union for HTTP compliance)",
       "enum": [
+        "text/plain",
         "application/json",
         "text/json"
       ],
@@ -2054,6 +2052,11 @@
         "name": "ResponseContentType",
         "modelAsString": false,
         "values": [
+          {
+            "name": "text/plain",
+            "value": "text/plain",
+            "description": "Content Type 'text/plain'"
+          },
           {
             "name": "application/json",
             "value": "application/json",
