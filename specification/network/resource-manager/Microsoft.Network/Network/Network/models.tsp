@@ -21356,11 +21356,13 @@ model ExpressRouteLinkFailoverRoute {
   /**
    * The AS path for primary link.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name must match C# model ExpressRouteLinkFailoverRoute.PrimaryASPath"
   primaryASPath?: string;
 
   /**
    * The AS path for secondary link.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name must match C# model ExpressRouteLinkFailoverRoute.SecondaryASPath"
   secondaryASPath?: string;
 }
 
