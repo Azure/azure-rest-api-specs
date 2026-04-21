@@ -210,9 +210,6 @@
           "Get Azure Firewall": {
             "$ref": "./examples/AzureFirewallGet.json"
           },
-          "Get Azure Firewall With AFC Control Plane": {
-            "$ref": "./examples/AzureFirewallGetWithAfcConfiguration.json"
-          },
           "Get Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
           },
@@ -249,13 +246,6 @@
             "description": "The name of the Azure Firewall.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "createAfcControlPlane",
-            "in": "query",
-            "description": "When set to true, creates an AFC control plane for the Azure Firewall.",
-            "required": false,
-            "type": "boolean"
           },
           {
             "name": "parameters",
@@ -301,9 +291,6 @@
         "x-ms-examples": {
           "Create Azure Firewall": {
             "$ref": "./examples/AzureFirewallPut.json"
-          },
-          "Create Azure Firewall With AFC Control Plane": {
-            "$ref": "./examples/AzureFirewallPutWithAfcConfiguration.json"
           },
           "Create Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
@@ -667,17 +654,6 @@
     }
   },
   "definitions": {
-    "AfcConfiguration": {
-      "type": "object",
-      "description": "AFC configuration for the Azure Firewall.",
-      "properties": {
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "The endpoint URL of the AFC control plane associated with this Azure Firewall.",
-          "readOnly": true
-        }
-      }
-    },
     "AzureFirewall": {
       "type": "object",
       "description": "Azure Firewall resource.",
@@ -1371,11 +1347,6 @@
         "autoscaleConfiguration": {
           "$ref": "#/definitions/AzureFirewallAutoscaleConfiguration",
           "description": "Properties to provide a custom autoscale configuration to this azure firewall."
-        },
-        "afcConfiguration": {
-          "$ref": "#/definitions/AfcConfiguration",
-          "description": "AFC configuration for the Azure Firewall.",
-          "readOnly": true
         }
       }
     },

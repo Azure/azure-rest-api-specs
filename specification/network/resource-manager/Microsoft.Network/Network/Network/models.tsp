@@ -2012,16 +2012,6 @@ union IpAllocationType {
 }
 
 /**
- * Controls verbosity of the returned load balancer resource.
- */
-union LoadBalancerDetailLevel {
-  string,
-
-  /** When set to 'Reduced', read-only reference collections may be omitted. */
-  Reduced: "Reduced",
-}
-
-/**
  * Who created the route.
  */
 union EffectiveRouteSource {
@@ -9154,27 +9144,6 @@ model AzureFirewallPropertiesFormat {
    * Properties to provide a custom autoscale configuration to this azure firewall.
    */
   autoscaleConfiguration?: AzureFirewallAutoscaleConfiguration;
-
-  /**
-   * AFC configuration for the Azure Firewall.
-   */
-  @added(Versions.v2025_07_01)
-  @visibility(Lifecycle.Read)
-  afcConfiguration?: AfcConfiguration;
-}
-
-/**
- * AFC configuration for the Azure Firewall.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "AfcConfiguration is a firewall-specific model and must be emitted to firewall.json"
-@added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
-model AfcConfiguration {
-  /**
-   * The endpoint URL of the AFC control plane associated with this Azure Firewall.
-   */
-  @visibility(Lifecycle.Read)
-  serviceEndpoint?: string;
 }
 
 /**
