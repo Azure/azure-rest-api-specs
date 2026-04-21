@@ -70,7 +70,7 @@ using Common;
 @@clientLocation(SecuritySolutionsOperationGroup.list, SecuritySolutions);
 
 @@clientLocation(SecuritySolutionsReferenceDataOperationGroup.list,
-  "securitySolutionsReferenceData"
+  "SecuritySolutionsReferenceData"
 );
 @@clientLocation(SecuritySolutionsReferenceDataOperationGroup.listByHomeRegion,
   "SecuritySolutionsReferenceData"
