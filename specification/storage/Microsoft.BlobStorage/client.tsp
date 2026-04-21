@@ -523,6 +523,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   ImmutabilityPolicySetting,
   "go"
 );
+@@alternateType(RehydratePriorityResponseHeader.rehydratePriority,
+  string,
+  "go"
+);
 @@alternateType(SourceEncryptionAlgorithmParameter.sourceEncryptionAlgorithm,
   EncryptionAlgorithmTypeCustom,
   "go"
@@ -579,7 +583,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@clientName(Storage.Blob.Service.findBlobsByTags, "FilterBlobs", "go");
-@@clientName(UserDelegationKey.signedDelegatedUserTid, "SignedDelegatedUserTenantID", "go");
+@@clientName(UserDelegationKey.signedDelegatedUserTid,
+  "SignedDelegatedUserTenantID",
+  "go"
+);
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"

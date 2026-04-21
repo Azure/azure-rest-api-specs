@@ -898,7 +898,7 @@ interface Blob {
       ...TagCountResponseHeader;
       ...ExpiryTimeResponseHeader;
       ...IsSealedResponseHeader;
-      ...RehydratePriorityHeader;
+      ...RehydratePriorityResponseHeader;
       ...LastAccessedResponseHeader;
       ...ImmutabilityPolicyExpiresOnResponseHeader;
       ...ImmutabilityPolicyModeResponseHeader;
@@ -1262,7 +1262,7 @@ interface Blob {
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...AccessTierHeader;
-      ...RehydratePriorityHeader;
+      ...RehydratePriorityParameter;
       ...SourceIfModifiedSinceParameter;
       ...SourceIfUnmodifiedSinceParameter;
       ...SourceIfMatchParameter;
@@ -1389,7 +1389,7 @@ interface Blob {
       @header("x-ms-access-tier")
       tier: AccessTier;
 
-      ...RehydratePriorityHeader;
+      ...RehydratePriorityParameter;
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
     },
