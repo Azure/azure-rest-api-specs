@@ -1125,6 +1125,14 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   Usage.input,
   "csharp"
 );
+@@usage(Azure.ResourceManager.CommonTypes.AccessRule,
+  Usage.input,
+  "csharp"
+);
+@@usage(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+  Usage.input,
+  "csharp"
+);
 @@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
   azureLocation,
   "csharp"

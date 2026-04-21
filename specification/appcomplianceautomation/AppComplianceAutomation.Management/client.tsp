@@ -233,3 +233,5 @@ using Microsoft.AppComplianceAutomation;
 @@usage(RecommendationSolution, Usage.input, "csharp");
 @@usage(OverviewStatus, Usage.input, "csharp");
 @@usage(ResponsibilityResource, Usage.input, "csharp");
+@@usage(ControlFamily, Usage.input, "csharp");
+@@usage(ComplianceResult, Usage.input, "csharp");
