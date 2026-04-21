@@ -91,7 +91,7 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
 
-  /** InterconnectGroup feature flag for swagger output file splitting. */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   interconnectGroup,
 }
 
@@ -4284,15 +4284,3 @@ union VirtualNetworkPeeringLevel {
   "ManagedServiceIdentityUserAssignedIdentities",
   "!javascript"
 );
-
-/**
- * Defines the interconnect group profile for a VM or VMSS network profile.
- */
-@added(Versions.v2025_07_01)
-model InterconnectGroupProfile {
-  /** The reference to the interconnect group resource. */
-  interconnectGroup?: SubResource;
-
-  /** The list of subgroup references. */
-  subgroups?: SubResource[];
-}

@@ -26173,10 +26173,6 @@ model SubgroupProperties {
   @visibility(Lifecycle.Read)
   internalSubgroupId?: string;
 
-  /** The availability zone mapping for the subgroup. */
-  @visibility(Lifecycle.Read)
-  logicalToPhysicalAvailabilityZoneMapping?: LogicalToPhysicalAvailabilityZoneMapping;
-
   /** The reference to an interconnect block resource. */
   @visibility(Lifecycle.Read)
   interconnectBlock?: SubResource;
@@ -26188,20 +26184,6 @@ model SubgroupProperties {
   /** The provisioning state of the subgroup. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-/**
- * Logical to physical availability zone mapping.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
-@added(Versions.v2025_07_01)
-model LogicalToPhysicalAvailabilityZoneMapping {
-  /** The logical availability zone. */
-  logicalZone?: string;
-
-  /** The physical availability zone. */
-  physicalZone?: string;
 }
 
 /**
