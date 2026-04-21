@@ -29,7 +29,7 @@ interface RunOutputs {
   /**
    * Get the specified run output for the specified image template resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualMachineImageTemplates_GetRunOutput")
   @tag("VirtualMachineImageTemplate")
   getRunOutput is ArmResourceRead<RunOutput>;
@@ -37,7 +37,7 @@ interface RunOutputs {
   /**
    * List all run outputs for the specified Image Template resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualMachineImageTemplates_ListRunOutputs")
   @tag("VirtualMachineImageTemplate")
   listRunOutputs is ArmResourceListByParent<

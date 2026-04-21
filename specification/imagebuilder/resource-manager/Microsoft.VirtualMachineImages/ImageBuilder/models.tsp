@@ -178,7 +178,7 @@ union ReplicationMode {
 /**
  * Enabling this field will improve VM boot time by optimizing the final customized image output.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum VMBootOptimizationState {
   /**
    * Enabled
@@ -194,7 +194,7 @@ enum VMBootOptimizationState {
 /**
  * Enabling this field will optimize vm images for specific workloads.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum WorkloadOptimizationState {
   /**
    * Workload optimization is enabled
@@ -210,7 +210,7 @@ enum WorkloadOptimizationState {
 /**
  * Provisioning state of the resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ProvisioningState {
   /**
    * Creating
@@ -246,7 +246,7 @@ enum ProvisioningState {
 /**
  * State of the last run
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RunState {
   /**
    * Running
@@ -282,7 +282,7 @@ enum RunState {
 /**
  * Sub-state of the last run
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RunSubState {
   /**
    * Queued
@@ -318,7 +318,7 @@ enum RunSubState {
 /**
  * Enabling this field will trigger an automatic build on image template creation or update.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AutoRunState {
   /**
    * Autorun is enabled
@@ -334,7 +334,7 @@ enum AutoRunState {
 /**
  * The type of identity used for the image template. The type 'None' will remove any identities from the image template.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   /**
    * UserAssigned
@@ -416,6 +416,7 @@ model ImageTemplateProperties {
   /**
    * Optional array of additional data disks to be added to the image.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalDataDisks?: DataDisk[];
 
   /**
@@ -437,7 +438,7 @@ model ImageTemplateProperties {
   /**
    * Tags that will be applied to the resource group and/or resources created by the service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedResourceTags?: Record<string>;
 }
@@ -450,6 +451,7 @@ model ImageTemplateSource {
   /**
    * Specifies the type of source image you want to start with.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -461,6 +463,7 @@ model ImageTemplateCustomizer {
   /**
    * The type of customization tool you want to use on the Image. For example, "Shell" can be shell customizer
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -531,6 +534,7 @@ model ImageTemplatePropertiesValidate {
   /**
    * List of validations to be performed.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   inVMValidations?: ImageTemplateInVMValidator[];
 }
@@ -543,6 +547,7 @@ model ImageTemplateInVMValidator {
   /**
    * The type of validation you want to use on the Image. For example, "Shell" can be shell validation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -559,6 +564,7 @@ model ImageTemplateDistributor {
   /**
    * Type of distribution.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -570,7 +576,7 @@ model ImageTemplateDistributor {
   /**
    * Tags that will be applied to the artifact once it has been created/updated by the distributor.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   artifactTags?: Record<string>;
 }
 
@@ -648,6 +654,7 @@ model ImageTemplateVmProfile {
   /**
    * Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
   osDiskSizeGB?: int32 = 0;
 
@@ -689,6 +696,7 @@ model DataDisk {
   /**
    * Size of the data disk in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(0)
   sizeGB?: int32;
 }
@@ -715,7 +723,7 @@ model ImageTemplateIdentity {
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -748,7 +756,7 @@ model ImageTemplateUpdateParameters {
   /**
    * The user-specified tags associated with the image template.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -812,6 +820,7 @@ model TriggerProperties {
   /**
    * The kind of trigger.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: string;
 
@@ -874,6 +883,7 @@ model Operation {
   /**
    * Properties of the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 
   /**
@@ -1330,6 +1340,7 @@ model DistributeVersioner {
   /**
    * Version numbering scheme to be used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scheme: string;
 }
 
