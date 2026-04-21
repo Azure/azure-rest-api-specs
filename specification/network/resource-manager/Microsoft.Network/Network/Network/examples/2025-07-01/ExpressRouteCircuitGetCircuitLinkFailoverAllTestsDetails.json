@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "failoverTestType": "SingleSiteFailover",
+    "fetchLatest": "true",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "circuitName": "circuit1"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "status": "Completed",
+          "startTime": "2025-01-01T00:00:00Z",
+          "endTime": "2025-01-01T01:00:00Z",
+          "testGuid": "00000000-0000-0000-0000-000000000001",
+          "testType": "SingleSiteFailover",
+          "issues": [],
+          "wasSimulationSuccessful": true,
+          "circuitTestCategory": "BgpDisconnect",
+          "linkType": "Primary",
+          "bgpStatus": [
+            {
+              "type": "IPv4",
+              "link": "Primary",
+              "status": "Connected",
+              "checkTimeUtc": "2025-01-01T00:30:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_GetCircuitLinkFailoverAllTestsDetails",
+  "title": "ExpressRouteCircuitGetCircuitLinkFailoverAllTestsDetails"
+}

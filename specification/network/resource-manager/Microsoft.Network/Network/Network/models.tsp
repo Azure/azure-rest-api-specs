@@ -4620,6 +4620,91 @@ union FailoverTestStatusForSingleTest {
 }
 
 /**
+ * The link on which the failover test is being performed.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union ExpressRouteFailoverLinkType {
+  string,
+
+  /**
+   * Primary link.
+   */
+  Primary: "Primary",
+
+  /**
+   * Secondary link.
+   */
+  Secondary: "Secondary",
+}
+
+/**
+ * The type of maintenance that can occur during an ExpressRoute failover test.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union MaintenanceTestCategory {
+  string,
+
+  /**
+   * BGP disconnect test category.
+   */
+  BgpDisconnect: "BgpDisconnect",
+
+  /**
+   * AS path prepend test category.
+   */
+  ASPathPrepend: "ASPathPrepend",
+}
+
+/**
+ * The address family type for BGP status.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union ExpressRouteFailoverBgpStatusAddressFamily {
+  string,
+
+  /**
+   * IPv4 address family.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * IPv6 address family.
+   */
+  IPv6: "IPv6",
+}
+
+/**
+ * The BGP status of an ExpressRoute link failover.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union ExpressRouteLinkFailoverBgpStatus {
+  string,
+
+  /**
+   * Undefined status.
+   */
+  Undefined: "Undefined",
+
+  /**
+   * Connected status.
+   */
+  Connected: "Connected",
+
+  /**
+   * Disconnected status.
+   */
+  Disconnected: "Disconnected",
+}
+
+/**
  * Gateway connection authentication type.
  */
 union ConnectionAuthenticationType {
@@ -21252,6 +21337,228 @@ model ExpressRouteFailoverStopApiParameters {
 }
 
 /**
+ * Represents a failover route for an ExpressRoute link.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverRoute {
+  /**
+   * The route.
+   */
+  route?: string;
+
+  /**
+   * The next hop.
+   */
+  nextHop?: string;
+
+  /**
+   * The AS path for primary link.
+   */
+  primaryASPath?: string;
+
+  /**
+   * The AS path for secondary link.
+   */
+  secondaryASPath?: string;
+}
+
+/**
+ * Represents a list of failover routes for an ExpressRoute link.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverRouteList {
+  /**
+   * The routes before the simulation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  beforeSimulation?: ExpressRouteLinkFailoverRoute[];
+
+  /**
+   * The routes during the simulation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  duringSimulation?: ExpressRouteLinkFailoverRoute[];
+}
+
+/**
+ * Represents the BGP status of an ExpressRoute link failover test.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverTestBgpStatus {
+  /**
+   * The address family type.
+   */
+  type?: ExpressRouteFailoverBgpStatusAddressFamily;
+
+  /**
+   * The link type.
+   */
+  link?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The BGP status.
+   */
+  status?: ExpressRouteLinkFailoverBgpStatus;
+
+  /**
+   * The check time in UTC.
+   */
+  checkTimeUtc?: string;
+}
+
+/**
+ * ExpressRoute circuit link failover test details for all tests.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverAllTestsDetails {
+  /**
+   * The current status of the test.
+   */
+  status?: FailoverTestStatus;
+
+  /**
+   * Time when the test was started.
+   */
+  startTime?: string;
+
+  /**
+   * Time when the test was completed.
+   */
+  endTime?: string;
+
+  /**
+   * The unique GUID associated with the test.
+   */
+  testGuid?: string;
+
+  /**
+   * The type of failover test.
+   */
+  testType?: FailoverTestType;
+
+  /**
+   * A list of all issues with the test.
+   */
+  issues?: string[];
+
+  /**
+   * Whether the failover simulation was successful or not.
+   */
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * The maintenance test category.
+   */
+  circuitTestCategory?: MaintenanceTestCategory;
+
+  /**
+   * The link type.
+   */
+  linkType?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The BGP status details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  bgpStatus?: ExpressRouteLinkFailoverTestBgpStatus[];
+}
+
+/**
+ * ExpressRoute circuit link failover single test details.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverSingleTestDetails {
+  /**
+   * Time when the test was started in UTC.
+   */
+  startTimeUtc?: string;
+
+  /**
+   * Time when the test was completed in UTC.
+   */
+  endTimeUtc?: string;
+
+  /**
+   * The current status of the test.
+   */
+  status?: FailoverTestStatus;
+
+  /**
+   * Whether the failover simulation was successful or not.
+   */
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * The link type.
+   */
+  linkType?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The circuit test category.
+   */
+  circuitTestCategory?: MaintenanceTestCategory;
+
+  /**
+   * Whether the simulation was verified.
+   */
+  isSimulationVerified?: boolean;
+
+  /**
+   * The redundant routes for link failover tests.
+   */
+  redundantRoutes?: ExpressRouteLinkFailoverRouteList;
+
+  /**
+   * The non-redundant routes for link failover tests.
+   */
+  nonRedundantRoutes?: ExpressRouteLinkFailoverRouteList;
+
+  /**
+   * The BGP status details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  bgpStatus?: ExpressRouteLinkFailoverTestBgpStatus[];
+}
+
+/**
+ * Parameters for stopping an ExpressRoute circuit link failover test.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverStopApiParameters {
+  /**
+   * The category of the circuit test.
+   */
+  circuitTestCategory?: string;
+
+  /**
+   * The type of the link.
+   */
+  linkType?: string;
+
+  /**
+   * Whether the simulation was successful.
+   */
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * Whether the link is verified.
+   */
+  isVerified?: boolean;
+}
+
+/**
  * VirtualNetworkGatewayConnection properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -25557,6 +25864,16 @@ alias ExpressRouteFailoverAllTestDetails = ExpressRouteFailoverTestDetails[];
  * Gateway Failover Single Test Details Object
  */
 alias ExpressRouteFailoverSingleTestDetailsObject = ExpressRouteFailoverSingleTestDetails[];
+
+/**
+ * Circuit Link Failover All Test Details
+ */
+alias ExpressRouteLinkFailoverAllTestsDetailsList = ExpressRouteLinkFailoverAllTestsDetails[];
+
+/**
+ * Circuit Link Failover Single Test Details
+ */
+alias ExpressRouteLinkFailoverSingleTestDetailsList = ExpressRouteLinkFailoverSingleTestDetails[];
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
