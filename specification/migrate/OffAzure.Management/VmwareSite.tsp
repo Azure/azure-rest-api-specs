@@ -114,7 +114,13 @@ interface VmwareSites {
    *             machine and the deep discovery of the application installed in the machine.
    */
   @tag("SitesController")
-  exportApplications is ArmResourceActionAsync<VmwareSite, unknown, unknown>;
+  exportApplications is ArmResourceActionAsync<
+    VmwareSite,
+    unknown,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to generate report containing
@@ -124,7 +130,9 @@ interface VmwareSites {
   exportMachineErrors is ArmResourceActionAsync<
     VmwareSite,
     ExportMachineErrorsRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -135,7 +143,9 @@ interface VmwareSites {
   exportMachines is ArmResourceActionAsync<
     VmwareSite,
     ExportMachinesRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -165,7 +175,9 @@ interface VmwareSites {
   clientGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -175,7 +187,9 @@ interface VmwareSites {
   exportDependencies is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -185,7 +199,9 @@ interface VmwareSites {
   generateCoarseMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -195,7 +211,9 @@ interface VmwareSites {
   generateDetailedMap is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -205,7 +223,9 @@ interface VmwareSites {
   serverGroupMembers is ArmResourceActionAsync<
     VmwareSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -226,7 +246,9 @@ interface VmwareSites {
   updateDependencyMapStatus is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineDepMapStatus,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -236,7 +258,9 @@ interface VmwareSites {
   updateProperties is ArmResourceActionAsync<
     VmwareSite,
     MachineMetadataCollection,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -247,7 +271,9 @@ interface VmwareSites {
   updateRunAsAccount is ArmResourceActionAsync<
     VmwareSite,
     UpdateMachineRunAsAccount,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -255,7 +281,13 @@ interface VmwareSites {
    *             in a site.
    */
   @tag("VmwarePropertiesController")
-  updateTags is ArmResourceActionAsync<VmwareSite, UpdateMachineTags, unknown>;
+  updateTags is ArmResourceActionAsync<
+    VmwareSite,
+    UpdateMachineTags,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(VmwareSite.name, "Site name");

@@ -113,7 +113,13 @@ interface SqlSites {
    * Method to generate report containing SQL servers.
    */
   @tag("SqlSitesController")
-  exportSqlServerErrors is ArmResourceActionAsync<SqlSite, unknown, unknown>;
+  exportSqlServerErrors is ArmResourceActionAsync<
+    SqlSite,
+    unknown,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to generate report containing SQL servers.
@@ -122,14 +128,22 @@ interface SqlSites {
   exportSqlServers is ArmResourceActionAsync<
     SqlSite,
     ExportSqlServersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Method to refresh a site.
    */
   @tag("SqlSitesController")
-  refresh is ArmResourceActionAsync<SqlSite, SqlSiteRefreshBody, unknown>;
+  refresh is ArmResourceActionAsync<
+    SqlSite,
+    SqlSiteRefreshBody,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to get site usage/summary.

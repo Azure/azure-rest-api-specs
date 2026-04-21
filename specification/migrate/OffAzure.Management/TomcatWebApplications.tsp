@@ -35,9 +35,16 @@ interface TomcatWebApplicationsController {
   /**
    * Updates the Tomcat web application tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("TomcatWebApplicationsController")
-  update is ArmCustomPatchSync<TomcatWebApplications, PatchModel = {}>;
+  update is ArmCustomPatchSync<
+    TomcatWebApplications,
+    PatchModel = {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: unknown;
+    }
+  >;
 
   /**
    * Method to get all Tomcat web application.

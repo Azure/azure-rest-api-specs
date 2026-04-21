@@ -108,7 +108,13 @@ interface MasterSites {
    * Method to refresh arc status from master site for an appliance.
    */
   @tag("MasterSitesController")
-  refreshArcStatus is ArmResourceActionAsync<MasterSite, void, unknown>;
+  refreshArcStatus is ArmResourceActionAsync<
+    MasterSite,
+    void,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * A operation status resource belonging to a master site resource.

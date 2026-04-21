@@ -6350,9 +6350,7 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "schema": {
-              "type": "object"
-            }
+            "schema": {}
           }
         ],
         "responses": {
@@ -13799,17 +13797,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/DeleteImportMachinesJob"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PagedExportImportedMachinesJob": {
       "type": "object",
@@ -13820,17 +13816,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ExportImportedMachinesJob"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PagedImportMachinesJob": {
       "type": "object",
@@ -13841,17 +13835,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ImportMachinesJob"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PagedImportSqlInventoryJob": {
       "type": "object",
@@ -13862,17 +13854,15 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ImportSqlInventoryJob"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateEndpointConnection": {
       "type": "object",
@@ -14295,7 +14285,8 @@
         },
         "importType": {
           "type": "string",
-          "description": "ImportTypeValues enum.",
+          "description": "Gets or sets the import type.",
+          "default": "AzureMigrateCSV",
           "enum": [
             "AzureMigrateCSV",
             "RVToolsXlsx"
@@ -19355,8 +19346,7 @@
           "readOnly": true
         }
       }
-    },
-    "unknown": {}
+    }
   },
   "parameters": {}
 }

@@ -77,14 +77,22 @@ interface WebAppSites {
   exportInventory is ArmResourceActionAsync<
     WebAppSite,
     ExportWebAppsRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Method to refresh a site.
    */
   @tag("WebAppSitesController")
-  refresh is ArmResourceActionAsync<WebAppSite, ProxySiteRefreshBody, unknown>;
+  refresh is ArmResourceActionAsync<
+    WebAppSite,
+    ProxySiteRefreshBody,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to get site usage/summary.
@@ -104,7 +112,9 @@ interface WebAppSites {
   updateProperties is ArmResourceActionAsync<
     WebAppSite,
     WebAppPropertiesCollection,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

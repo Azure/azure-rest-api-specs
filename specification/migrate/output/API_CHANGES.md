@@ -27,7 +27,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/refresh'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/exportInventory'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/refresh'].post.responses.200.schema.type__deleted` | deleted | `object` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/tomcatWebApplications/{webApplicationName}'].patch.parameters[3].schema.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/updateProperties'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/clientGroupMembers'].post.responses.200.schema.type__deleted` | deleted | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OffAzure/serverSites/{siteName}/computeErrorSummary'].post.parameters[1].schema.type__deleted` | deleted | `object` |
@@ -154,12 +153,6 @@
 |------|------------|-------|
 | `definitions.V20180501PreviewVmwareRunAsAccountVmwareRunAsAccountCollection__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `unknown`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.unknown__added` | added | `{}` |
-
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -207,30 +200,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ImportSqlInventoryJobProperties.properties.blobSasUri.format__added` | added | `password` |
-
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PagedDeleteImportMachinesJob.required__added` | added | `["value"]` |
-| `definitions.PagedExportImportedMachinesJob.required__added` | added | `["value"]` |
-| `definitions.PagedImportMachinesJob.required__added` | added | `["value"]` |
-| `definitions.PagedImportSqlInventoryJob.required__added` | added | `["value"]` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PagedDeleteImportMachinesJob.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.PagedExportImportedMachinesJob.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.PagedImportMachinesJob.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.PagedImportSqlInventoryJob.properties.value.readOnly__deleted` | deleted | `true` |
-
-### Changes for `default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SasUriResponse.properties.importType.default__deleted` | deleted | `AzureMigrateCSV` |
 
 ### Changes for `x-ms-identifiers`
 
@@ -331,6 +300,7 @@ operation is still running.` | `Gets the status of the operation. ARM expects th
 of
 Succeeded/ Failed/ Canceled. All other values imply that the
 operation is still running.` |
+| `definitions.SasUriResponse.properties.importType.description` | `ImportTypeValues enum.` | `Gets or sets the import type.` |
 | `definitions.ServerProperties.properties.dependencyMapping.description` | `Gets or sets if dependency mapping feature is enabled or not
             for
 the VM.` | `Gets or sets if dependency mapping feature is enabled or not

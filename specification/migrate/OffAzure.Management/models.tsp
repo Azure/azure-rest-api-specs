@@ -699,7 +699,7 @@ union ShallowDiscoveryStatus {
 /**
  * esu Status
  */
-union EsuStatus {
+union esuStatus {
   string,
 
   /**
@@ -721,7 +721,7 @@ union EsuStatus {
 /**
  * support status
  */
-union SupportStatus {
+union supportStatus {
   string,
 
   /**
@@ -743,7 +743,7 @@ union SupportStatus {
 /**
  * esu year
  */
-union EsuYear {
+union esuYear {
   string,
 
   /**
@@ -3690,12 +3690,12 @@ model ProductSupportStatus {
   /**
    * esu status.
    */
-  esuStatus?: EsuStatus;
+  esuStatus?: esuStatus;
 
   /**
    * support status.
    */
-  supportStatus?: SupportStatus;
+  supportStatus?: supportStatus;
 
   /**
    * support end date.
@@ -3706,7 +3706,7 @@ model ProductSupportStatus {
   /**
    * esu year.
    */
-  esuYear?: EsuYear;
+  esuYear?: esuYear;
 }
 
 /**
@@ -4105,13 +4105,26 @@ model SasUriResponse {
   /**
    * Gets or sets the import type.
    */
-  importType?: ImportTypeValues;
+  importType?: ImportTypeValues = ImportTypeValues.AzureMigrateCSV;
 }
 
 /**
  * Paged collection of DeleteImportMachinesJob items
  */
-model PagedDeleteImportMachinesJob is Azure.Core.Page<DeleteImportMachinesJob>;
+model PagedDeleteImportMachinesJob {
+  /**
+   * The DeleteImportMachinesJob items on this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DeleteImportMachinesJob[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Delete Imported Machines Job Properties
@@ -4178,8 +4191,20 @@ model DeleteImportedMachinesJobProperties {
 /**
  * Paged collection of ExportImportedMachinesJob items
  */
-model PagedExportImportedMachinesJob
-  is Azure.Core.Page<ExportImportedMachinesJob>;
+model PagedExportImportedMachinesJob {
+  /**
+   * The ExportImportedMachinesJob items on this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ExportImportedMachinesJob[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  *  Export Imported Machines JobEntity Properties
@@ -4200,7 +4225,20 @@ model ExportImportedMachinesJobEntityProperties {
 /**
  * Paged collection of ImportMachinesJob items
  */
-model PagedImportMachinesJob is Azure.Core.Page<ImportMachinesJob>;
+model PagedImportMachinesJob {
+  /**
+   * The ImportMachinesJob items on this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ImportMachinesJob[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * ImportMachines JobProperties
@@ -4776,7 +4814,20 @@ model ExportSqlServersRequest {
 /**
  * Paged collection of ImportSqlInventoryJob items
  */
-model PagedImportSqlInventoryJob is Azure.Core.Page<ImportSqlInventoryJob>;
+model PagedImportSqlInventoryJob {
+  /**
+   * The ImportSqlInventoryJob items on this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ImportSqlInventoryJob[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Import SQL inventory job properties web model

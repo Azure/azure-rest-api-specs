@@ -122,7 +122,9 @@ interface ServerSiteResources {
   exportApplications is ArmResourceActionAsync<
     ServerSiteResource,
     unknown,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -133,7 +135,9 @@ interface ServerSiteResources {
   exportMachineErrors is ArmResourceActionAsync<
     ServerSiteResource,
     ExportMachineErrorsRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -150,7 +154,13 @@ interface ServerSiteResources {
    * Operation to refresh a site
    */
   @tag("ServerSitesController")
-  refreshSite is ArmResourceActionAsync<ServerSiteResource, void, unknown>;
+  refreshSite is ArmResourceActionAsync<
+    ServerSiteResource,
+    void,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to get site usage.
@@ -170,7 +180,9 @@ interface ServerSiteResources {
   updateDependencyMapStatus is ArmResourceActionAsync<
     ServerSiteResource,
     UpdateMachineDepMapStatus,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -180,7 +192,9 @@ interface ServerSiteResources {
   updateProperties is ArmResourceActionAsync<
     ServerSiteResource,
     MachineMetadataCollection,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -190,7 +204,9 @@ interface ServerSiteResources {
   clientGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -200,7 +216,9 @@ interface ServerSiteResources {
   exportDependencies is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -210,7 +228,9 @@ interface ServerSiteResources {
   generateCoarseMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -220,7 +240,9 @@ interface ServerSiteResources {
   generateDetailedMap is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -230,7 +252,9 @@ interface ServerSiteResources {
   serverGroupMembers is ArmResourceActionAsync<
     ServerSiteResource,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

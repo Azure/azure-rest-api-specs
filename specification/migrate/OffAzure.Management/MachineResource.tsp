@@ -79,13 +79,25 @@ interface MachineResources {
    * Method to start a machine.
    */
   @tag("MachinesController")
-  start is ArmResourceActionAsync<MachineResource, void, unknown>;
+  start is ArmResourceActionAsync<
+    MachineResource,
+    void,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to stop a machine.
    */
   @tag("MachinesController")
-  stop is ArmResourceActionAsync<MachineResource, void, unknown>;
+  stop is ArmResourceActionAsync<
+    MachineResource,
+    void,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(MachineResource.name, "Machine name");

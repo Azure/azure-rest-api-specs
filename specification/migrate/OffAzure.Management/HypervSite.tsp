@@ -113,7 +113,13 @@ interface HypervSites {
    *             machine and the deep discovery of the application installed in the machine.
    */
   @tag("HypervSitesController")
-  exportApplications is ArmResourceActionAsync<HypervSite, unknown, unknown>;
+  exportApplications is ArmResourceActionAsync<
+    HypervSite,
+    unknown,
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Method to generate report containing
@@ -123,7 +129,9 @@ interface HypervSites {
   exportMachineErrors is ArmResourceActionAsync<
     HypervSite,
     ExportMachineErrorsRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -153,7 +161,9 @@ interface HypervSites {
   clientGroupMembers is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -163,7 +173,9 @@ interface HypervSites {
   exportDependencies is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -173,7 +185,9 @@ interface HypervSites {
   generateCoarseMap is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -183,7 +197,9 @@ interface HypervSites {
   generateDetailedMap is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -193,7 +209,9 @@ interface HypervSites {
   serverGroupMembers is ArmResourceActionAsync<
     HypervSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -204,7 +222,9 @@ interface HypervSites {
   updateDependencyMapStatus is ArmResourceActionAsync<
     HypervSite,
     UpdateMachineDepMapStatus,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -215,7 +235,9 @@ interface HypervSites {
   updateProperties is ArmResourceActionAsync<
     HypervSite,
     MachineMetadataCollection,
-    unknown
+    unknown,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
