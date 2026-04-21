@@ -9,14 +9,21 @@
     "200": {
       "body": {
         "policySetId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
-        "entityId": "22222222-3333-4444-5555-666666666666",
-        "entityType": "DataProduct",
-        "policies": {
-          "selfServiceAccessEnabled": true,
-          "workflowEnabled": true
+        "targetResource": {
+          "resourceId": "22222222-3333-4444-5555-666666666666",
+          "resourceType": "DataProduct"
         },
-        "createdDate": "2024-01-01T00:00:00Z",
-        "lastModifiedDate": "2024-01-02T00:00:00Z"
+        "policySetKind": "Effective",
+        "dataProductPolicies": {
+          "approvalTimeline": "P7D",
+          "permittedUseCases": [
+            "Analytics",
+            "Reporting"
+          ],
+          "termsOfUseRequired": true,
+          "partnerSharingPermitted": false,
+          "skipWorkflow": false
+        }
       }
     }
   }

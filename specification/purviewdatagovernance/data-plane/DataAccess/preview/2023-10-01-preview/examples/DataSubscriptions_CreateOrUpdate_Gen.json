@@ -5,39 +5,37 @@
     "api-version": "2023-10-01-preview",
     "dataSubscriptionId": "a0a0a0a0-bbbb-cccc-dddd-e0e0e0e0e0e0",
     "dataSubscription": {
-      "requestType": "Subscribe",
-      "businessJustification": "Need access for analytics.",
+      "useWorkflow": true,
+      "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
       "subscriberIdentity": {
+        "identityType": "User",
         "objectId": "11111111-2222-3333-4444-555555555555",
-        "upn": "user@contoso.com",
-        "displayName": "Test User"
+        "displayName": "Test User",
+        "email": "user@contoso.com"
       },
-      "targetBusinessConcept": {
-        "id": "22222222-3333-4444-5555-666666666666",
-        "name": "Sales Data Product",
-        "type": "DataProduct"
-      }
+      "dataProductId": "22222222-3333-4444-5555-666666666666",
+      "dataProductName": "Sales Data Product",
+      "globalComment": "Need access for analytics."
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "a0a0a0a0-bbbb-cccc-dddd-e0e0e0e0e0e0",
-        "status": "PendingApproval",
-        "requestType": "Subscribe",
-        "businessJustification": "Need access for analytics.",
+        "dataSubscriptionId": "a0a0a0a0-bbbb-cccc-dddd-e0e0e0e0e0e0",
+        "subscriptionStatus": "Pending",
+        "useWorkflow": true,
+        "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
         "subscriberIdentity": {
+          "identityType": "User",
           "objectId": "11111111-2222-3333-4444-555555555555",
-          "upn": "user@contoso.com",
-          "displayName": "Test User"
+          "displayName": "Test User",
+          "email": "user@contoso.com"
         },
-        "targetBusinessConcept": {
-          "id": "22222222-3333-4444-5555-666666666666",
-          "name": "Sales Data Product",
-          "type": "DataProduct"
-        },
-        "createdDate": "2024-01-01T00:00:00Z",
-        "lastModifiedDate": "2024-01-01T00:00:00Z"
+        "dataProductId": "22222222-3333-4444-5555-666666666666",
+        "dataProductName": "Sales Data Product",
+        "globalComment": "Need access for analytics.",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "createdBy": "admin@contoso.com"
       }
     }
   }
