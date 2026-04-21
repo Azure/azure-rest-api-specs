@@ -146,6 +146,13 @@ union ConfidentialVMEncryptionType {
   EncryptedWithCmk: "EncryptedWithCmk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NonPersistedTPM: "NonPersistedTPM",
+
+  /**
+   * Confidential VM Encryption Type which should be used for encrypting the data disks with customer managed keys. This Encryption type should only be used for data disks, and should not be used for OS disk encryption. When this encryption type is used for data disk encryption.
+   * Subscriptions need to be enrolled for Confidential VM with data encryption through following AFEC - Microsoft.Compute/ConfidentialVMDataDiskEncryptionPreview
+   */
+  @added(Versions.v2026_03_03)
+  DataDiskEncryptedWithCmk: "DataDiskEncryptedWithCmk",
 }
 
 /**
@@ -1038,6 +1045,22 @@ model OSDiskImageSecurityProfile {
 }
 
 /**
+ * Contains security profile for a DataDisk image.
+ */
+@added(Versions.v2026_03_03)
+model DataDiskImageSecurityProfile {
+  /**
+   * confidential VM encryption types
+   */
+  confidentialVMEncryptionType?: ConfidentialVMEncryptionType;
+
+  /**
+   * secure VM disk encryption set id
+   */
+  secureVMDiskEncryptionSetId?: string;
+}
+
+/**
  * This is the disk image encryption base class.
  */
 model DiskImageEncryption {
@@ -1052,6 +1075,12 @@ model DiskImageEncryption {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DataDiskImageEncryption extends DiskImageEncryption {
+  /**
+   * This property specifies the security profile of a data disk image.
+   */
+  @added(Versions.v2026_03_03)
+  securityProfile?: DataDiskImageSecurityProfile;
+
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
    */

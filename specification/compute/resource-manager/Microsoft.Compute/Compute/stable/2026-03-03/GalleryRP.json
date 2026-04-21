@@ -2494,11 +2494,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
+          "Create or update a Gallery Image Version with CVM Data Disk Encryption using customer-managed key.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithCVMDataDiskEncryption.json"
+          },
           "Create or update a simple Gallery Image Version using VM as source.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVmAsSource.json"
           },
@@ -4842,7 +4845,8 @@
         "EncryptedVMGuestStateOnlyWithPmk",
         "EncryptedWithPmk",
         "EncryptedWithCmk",
-        "NonPersistedTPM"
+        "NonPersistedTPM",
+        "DataDiskEncryptedWithCmk"
       ],
       "x-ms-enum": {
         "name": "ConfidentialVMEncryptionType",
@@ -4863,6 +4867,11 @@
           {
             "name": "NonPersistedTPM",
             "value": "NonPersistedTPM"
+          },
+          {
+            "name": "DataDiskEncryptedWithCmk",
+            "value": "DataDiskEncryptedWithCmk",
+            "description": "Confidential VM Encryption Type which should be used for encrypting the data disks with customer managed keys. This Encryption type should only be used for data disks, and should not be used for OS disk encryption. When this encryption type is used for data disk encryption.\nSubscriptions need to be enrolled for Confidential VM with data encryption through following AFEC - Microsoft.Compute/ConfidentialVMDataDiskEncryptionPreview"
           }
         ]
       }
@@ -4871,6 +4880,10 @@
       "type": "object",
       "description": "Contains encryption settings for a data disk image.",
       "properties": {
+        "securityProfile": {
+          "$ref": "#/definitions/DataDiskImageSecurityProfile",
+          "description": "This property specifies the security profile of a data disk image."
+        },
         "lun": {
           "type": "integer",
           "format": "int32",
@@ -4885,6 +4898,20 @@
           "$ref": "#/definitions/DiskImageEncryption"
         }
       ]
+    },
+    "DataDiskImageSecurityProfile": {
+      "type": "object",
+      "description": "Contains security profile for a DataDisk image.",
+      "properties": {
+        "confidentialVMEncryptionType": {
+          "$ref": "#/definitions/ConfidentialVMEncryptionType",
+          "description": "confidential VM encryption types"
+        },
+        "secureVMDiskEncryptionSetId": {
+          "type": "string",
+          "description": "secure VM disk encryption set id"
+        }
+      }
     },
     "Disallowed": {
       "type": "object",
