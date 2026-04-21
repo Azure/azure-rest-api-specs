@@ -1,30 +1,20 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
     "api-version": "2025-10-01",
     "imageTemplateName": "myImageTemplate",
     "parameters": {
-      "location": "westus",
-      "tags": {
-        "imagetemplate_tag1": "IT_T1",
-        "imagetemplate_tag2": "IT_T2"
-      },
       "identity": {
         "type": "UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {}
         }
       },
+      "location": "westus",
       "properties": {
-        "source": {
-          "type": "ManagedImage",
-          "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
-        },
         "customize": [
           {
-            "type": "PowerShell",
             "name": "PowerShell (inline) Customizer Example",
+            "type": "PowerShell",
             "inline": [
               "Powershell command-1",
               "Powershell command-2",
@@ -32,8 +22,8 @@
             ]
           },
           {
-            "type": "PowerShell",
             "name": "PowerShell (inline) Customizer Elevated user Example",
+            "type": "PowerShell",
             "inline": [
               "Powershell command-1",
               "Powershell command-2",
@@ -42,91 +32,100 @@
             "runElevated": true
           },
           {
-            "type": "PowerShell",
             "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+            "type": "PowerShell",
             "inline": [
               "Powershell command-1",
               "Powershell command-2",
               "Powershell command-3"
             ],
-            "runElevated": true,
-            "runAsSystem": true
-          },
-          {
-            "type": "PowerShell",
-            "name": "PowerShell (script) Customizer Example",
-            "scriptUri": "https://example.com/path/to/script.ps1",
-            "validExitCodes": [
-              0,
-              1
-            ]
-          },
-          {
-            "type": "PowerShell",
-            "name": "PowerShell (script) Customizer Elevated Local System user Example",
-            "scriptUri": "https://example.com/path/to/script.ps1",
-            "runElevated": true,
-            "validExitCodes": [
-              0,
-              1
-            ]
-          },
-          {
-            "type": "PowerShell",
-            "name": "PowerShell (script) Customizer Elevated Local System user Example",
-            "scriptUri": "https://example.com/path/to/script.ps1",
-            "runElevated": true,
             "runAsSystem": true,
+            "runElevated": true
+          },
+          {
+            "name": "PowerShell (script) Customizer Example",
+            "type": "PowerShell",
+            "scriptUri": "https://example.com/path/to/script.ps1",
             "validExitCodes": [
               0,
               1
             ]
           },
           {
-            "type": "WindowsRestart",
+            "name": "PowerShell (script) Customizer Elevated Local System user Example",
+            "type": "PowerShell",
+            "runElevated": true,
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
+            "name": "PowerShell (script) Customizer Elevated Local System user Example",
+            "type": "PowerShell",
+            "runAsSystem": true,
+            "runElevated": true,
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
             "name": "Restart Customizer Example",
-            "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+            "type": "WindowsRestart",
             "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+            "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
             "restartTimeout": "10m"
           },
           {
-            "type": "WindowsUpdate",
             "name": "Windows Update Customizer Example",
-            "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
+            "type": "WindowsUpdate",
             "filters": [
               "$_.BrowseOnly"
             ],
+            "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
             "updateLimit": 100
           }
         ],
         "distribute": [
           {
             "type": "ManagedImage",
-            "location": "1_location",
-            "runOutputName": "image_it_pir_1",
-            "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
             "artifactTags": {
               "tagName": "value"
-            }
+            },
+            "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+            "location": "1_location",
+            "runOutputName": "image_it_pir_1"
           }
         ],
+        "source": {
+          "type": "ManagedImage",
+          "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
+        },
         "vmProfile": {
-          "vmSize": "Standard_D2s_v3",
           "osDiskSizeGB": 64,
+          "vmSize": "Standard_D2s_v3",
           "vnetConfig": {
             "subnetId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet_name/subnets/subnet_name"
           }
         }
+      },
+      "tags": {
+        "imagetemplate_tag1": "IT_T1",
+        "imagetemplate_tag2": "IT_T2"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
         "name": "myImageTemplate",
-        "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -136,237 +135,240 @@
             }
           }
         },
+        "location": "westus",
         "properties": {
-          "source": {
-            "type": "ManagedImage",
-            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
-          },
           "customize": [
             {
-              "type": "PowerShell",
               "name": "PowerShell (inline) Customizer Example",
+              "type": "PowerShell",
               "inline": [
                 "Powershell command-1",
                 "Powershell command-2",
                 "Powershell command-3"
               ],
-              "runElevated": false,
-              "runAsSystem": false
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (inline) Customizer Elevated user Example",
-              "inline": [
-                "Powershell command-1",
-                "Powershell command-2",
-                "Powershell command-3"
-              ],
-              "runElevated": true,
-              "runAsSystem": false
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (inline) Customizer Elevated Local System user Example",
-              "inline": [
-                "Powershell command-1",
-                "Powershell command-2",
-                "Powershell command-3"
-              ],
-              "runElevated": true,
-              "runAsSystem": true
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (script) Customizer Example",
-              "scriptUri": "https://example.com/path/to/script.ps1",
-              "validExitCodes": [
-                0,
-                1
-              ],
-              "runElevated": false,
-              "runAsSystem": false
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (script) Customizer Elevated Local System user Example",
-              "scriptUri": "https://example.com/path/to/script.ps1",
-              "runElevated": true,
               "runAsSystem": false,
-              "validExitCodes": [
-                0,
-                1
-              ]
+              "runElevated": false
             },
             {
+              "name": "PowerShell (inline) Customizer Elevated user Example",
               "type": "PowerShell",
-              "name": "PowerShell (script) Customizer Elevated Local System user Example",
-              "scriptUri": "https://example.com/path/to/script.ps1",
-              "runElevated": true,
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runAsSystem": false,
+              "runElevated": true
+            },
+            {
+              "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+              "type": "PowerShell",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
               "runAsSystem": true,
+              "runElevated": true
+            },
+            {
+              "name": "PowerShell (script) Customizer Example",
+              "type": "PowerShell",
+              "runAsSystem": false,
+              "runElevated": false,
+              "scriptUri": "https://example.com/path/to/script.ps1",
               "validExitCodes": [
                 0,
                 1
               ]
             },
             {
-              "type": "WindowsRestart",
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "type": "PowerShell",
+              "runAsSystem": false,
+              "runElevated": true,
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "type": "PowerShell",
+              "runAsSystem": true,
+              "runElevated": true,
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
               "name": "Restart Customizer Example",
-              "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+              "type": "WindowsRestart",
               "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+              "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
               "restartTimeout": "10m"
             },
             {
-              "type": "WindowsUpdate",
               "name": "Windows Update Customizer Example",
-              "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
+              "type": "WindowsUpdate",
               "filters": [
                 "$_.BrowseOnly"
               ],
+              "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
               "updateLimit": 100
             }
           ],
           "distribute": [
             {
               "type": "ManagedImage",
-              "location": "1_location",
-              "runOutputName": "image_it_pir_1",
-              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
               "artifactTags": {
                 "tagName": "value"
-              }
+              },
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1"
             }
           ],
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
+          },
           "vmProfile": {
-            "vmSize": "Standard_D2s_v3",
             "osDiskSizeGB": 64,
+            "vmSize": "Standard_D2s_v3"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImageTemplate",
+        "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "location": "westus",
+        "properties": {
+          "customize": [
+            {
+              "name": "PowerShell (inline) Customizer Example",
+              "type": "PowerShell",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runAsSystem": false,
+              "runElevated": false
+            },
+            {
+              "name": "PowerShell (inline) Customizer Elevated user Example",
+              "type": "PowerShell",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runAsSystem": false,
+              "runElevated": true
+            },
+            {
+              "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+              "type": "PowerShell",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runAsSystem": true,
+              "runElevated": true
+            },
+            {
+              "name": "PowerShell (script) Customizer Example",
+              "type": "PowerShell",
+              "runAsSystem": false,
+              "runElevated": false,
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "type": "PowerShell",
+              "runAsSystem": false,
+              "runElevated": true,
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "type": "PowerShell",
+              "runAsSystem": true,
+              "runElevated": true,
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "name": "Restart Customizer Example",
+              "type": "WindowsRestart",
+              "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+              "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+              "restartTimeout": "10m"
+            },
+            {
+              "name": "Windows Update Customizer Example",
+              "type": "WindowsUpdate",
+              "filters": [
+                "$_.BrowseOnly"
+              ],
+              "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
+              "updateLimit": 100
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "artifactTags": {
+                "tagName": "value"
+              },
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1"
+            }
+          ],
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
+          },
+          "vmProfile": {
+            "osDiskSizeGB": 64,
+            "vmSize": "Standard_D2s_v3",
             "vnetConfig": {
               "subnetId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet_name/subnets/subnet_name"
             }
           }
         }
       }
-    },
-    "200": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
-        "name": "myImageTemplate",
-        "location": "westus",
-        "type": "Microsoft.VirtualMachineImages/imageTemplates",
-        "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
-              "clientId": "00000000-0000-0000-0000-000000000000",
-              "principalId": "00000000-0000-0000-0000-000000000000"
-            }
-          }
-        },
-        "properties": {
-          "source": {
-            "type": "ManagedImage",
-            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
-          },
-          "customize": [
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (inline) Customizer Example",
-              "inline": [
-                "Powershell command-1",
-                "Powershell command-2",
-                "Powershell command-3"
-              ],
-              "runElevated": false,
-              "runAsSystem": false
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (inline) Customizer Elevated user Example",
-              "inline": [
-                "Powershell command-1",
-                "Powershell command-2",
-                "Powershell command-3"
-              ],
-              "runElevated": true,
-              "runAsSystem": false
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (inline) Customizer Elevated Local System user Example",
-              "inline": [
-                "Powershell command-1",
-                "Powershell command-2",
-                "Powershell command-3"
-              ],
-              "runElevated": true,
-              "runAsSystem": true
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (script) Customizer Example",
-              "scriptUri": "https://example.com/path/to/script.ps1",
-              "validExitCodes": [
-                0,
-                1
-              ],
-              "runElevated": false,
-              "runAsSystem": false
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (script) Customizer Elevated Local System user Example",
-              "scriptUri": "https://example.com/path/to/script.ps1",
-              "runElevated": true,
-              "runAsSystem": false,
-              "validExitCodes": [
-                0,
-                1
-              ]
-            },
-            {
-              "type": "PowerShell",
-              "name": "PowerShell (script) Customizer Elevated Local System user Example",
-              "scriptUri": "https://example.com/path/to/script.ps1",
-              "runElevated": true,
-              "runAsSystem": true,
-              "validExitCodes": [
-                0,
-                1
-              ]
-            },
-            {
-              "type": "WindowsRestart",
-              "name": "Restart Customizer Example",
-              "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
-              "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
-              "restartTimeout": "10m"
-            },
-            {
-              "type": "WindowsUpdate",
-              "name": "Windows Update Customizer Example",
-              "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
-              "filters": [
-                "$_.BrowseOnly"
-              ],
-              "updateLimit": 100
-            }
-          ],
-          "distribute": [
-            {
-              "type": "ManagedImage",
-              "location": "1_location",
-              "runOutputName": "image_it_pir_1",
-              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
-              "artifactTags": {
-                "tagName": "value"
-              }
-            }
-          ],
-          "vmProfile": {
-            "vmSize": "Standard_D2s_v3",
-            "osDiskSizeGB": 64
-          }
-        }
-      }
     }
-  }
+  },
+  "operationId": "VirtualMachineImageTemplates_CreateOrUpdate",
+  "title": "Create an Image Template for Windows."
 }

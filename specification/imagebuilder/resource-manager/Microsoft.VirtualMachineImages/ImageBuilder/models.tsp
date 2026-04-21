@@ -405,7 +405,8 @@ model ImageTemplateProperties {
    * Maximum duration to wait while building the image template (includes all customizations, optimization, validations, and distributions). Omit or specify 0 to use the default (4 hours).
    */
   @maxValue(960)
-  buildTimeoutInMinutes?: int32;
+  @minValue(0)
+  buildTimeoutInMinutes?: int32 = 0;
 
   /**
    * Describes how virtual machine is set up to build images
@@ -520,12 +521,12 @@ model ImageTemplatePropertiesValidate {
   /**
    * If validation fails and this field is set to false, output image(s) will not be distributed. This is the default behavior. If validation fails and this field is set to true, output image(s) will still be distributed. Please use this option with caution as it may result in bad images being distributed for use. In either case (true or false), the end to end image run will be reported as having failed in case of a validation failure. [Note: This field has no effect if validation succeeds.]
    */
-  continueDistributeOnFailure?: boolean;
+  continueDistributeOnFailure?: boolean = false;
 
   /**
    * If this field is set to true, the image specified in the 'source' section will directly be validated. No separate build will be run to generate and then validate a customized image.
    */
-  sourceValidationOnly?: boolean;
+  sourceValidationOnly?: boolean = false;
 
   /**
    * List of validations to be performed.
@@ -647,7 +648,8 @@ model ImageTemplateVmProfile {
   /**
    * Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size.
    */
-  osDiskSizeGB?: int32;
+  @minValue(0)
+  osDiskSizeGB?: int32 = 0;
 
   /**
    * Optional array of resource IDs of user assigned managed identities to be configured on the build VM and validation VM. This may include the identity of the image template.
@@ -687,6 +689,7 @@ model DataDisk {
   /**
    * Size of the data disk in GB.
    */
+  @minValue(0)
   sizeGB?: int32;
 }
 
@@ -1048,12 +1051,12 @@ model ImageTemplatePowerShellValidator extends ImageTemplateInVMValidator {
   /**
    * If specified, the PowerShell script will be run with elevated privileges
    */
-  runElevated?: boolean;
+  runElevated?: boolean = false;
 
   /**
    * If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true.
    */
-  runAsSystem?: boolean;
+  runAsSystem?: boolean = false;
 
   /**
    * Valid exit codes for the PowerShell script. [Default: 0]
@@ -1158,7 +1161,8 @@ model ImageTemplateWindowsUpdateCustomizer extends ImageTemplateCustomizer {
   /**
    * Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)
    */
-  updateLimit?: int32;
+  @minValue(0)
+  updateLimit?: int32 = 0;
 
   /**
    * The type of customization tool you want to use on the Image. For example, "Shell" can be shell customizer
@@ -1188,12 +1192,12 @@ model ImageTemplatePowerShellCustomizer extends ImageTemplateCustomizer {
   /**
    * If specified, the PowerShell script will be run with elevated privileges
    */
-  runElevated?: boolean;
+  runElevated?: boolean = false;
 
   /**
    * If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true.
    */
-  runAsSystem?: boolean;
+  runAsSystem?: boolean = false;
 
   /**
    * Valid exit codes for the PowerShell script. [Default: 0]
@@ -1268,7 +1272,7 @@ model ImageTemplateSharedImageDistributor extends ImageTemplateDistributor {
   /**
    * Flag that indicates whether created image version should be excluded from latest. Omit to use the default (false).
    */
-  excludeFromLatest?: boolean;
+  excludeFromLatest?: boolean = false;
 
   /**
    * [Deprecated] Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS). This field can be specified only if replicationRegions is specified. This field is deprecated - use targetRegions instead.
@@ -1378,4 +1382,22 @@ model DistributeVersionerSource extends DistributeVersioner {
    * Version numbering scheme to be used.
    */
   scheme: "Source";
+}
+
+/**
+ * Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.
+ */
+model OperationListResult {
+  /**
+   * The list of operations supported by the resource provider.
+   */
+  @identifiers(#[])
+  @pageItems
+  value: Operation[];
+
+  /**
+   * The URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  nextLink?: string;
 }

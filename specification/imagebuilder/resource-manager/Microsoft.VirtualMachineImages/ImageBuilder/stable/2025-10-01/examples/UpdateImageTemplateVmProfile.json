@@ -1,9 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
-    "imageTemplateName": "myImageTemplate",
     "api-version": "2025-10-01",
+    "imageTemplateName": "myImageTemplate",
     "parameters": {
       "properties": {
         "vmProfile": {
@@ -15,44 +13,43 @@
           }
         }
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
         "name": "myImageTemplate",
-        "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
         "identity": {
           "type": "None"
         },
-        "tags": {
-          "tag": "tag-value"
-        },
+        "location": "westus",
         "properties": {
-          "source": {
-            "type": "ManagedImage",
-            "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
-          },
           "customize": [
             {
-              "type": "Shell",
               "name": "Shell customization example",
+              "type": "Shell",
               "scriptUri": "https://example.com/path/to/script.sh"
             }
           ],
           "distribute": [
             {
               "type": "ManagedImage",
-              "location": "1_location",
-              "runOutputName": "image_it_pir_1",
-              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
               "artifactTags": {
                 "tagName": "value"
-              }
+              },
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1"
             }
           ],
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
+          },
           "vmProfile": {
             "osDiskSizeGB": 127,
             "vmSize": "{updated_vmsize}",
@@ -61,6 +58,9 @@
               "subnetId": "{updated_aci_subnet}"
             }
           }
+        },
+        "tags": {
+          "tag": "tag-value"
         }
       }
     },
@@ -69,5 +69,7 @@
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2025-10-01"
       }
     }
-  }
+  },
+  "operationId": "VirtualMachineImageTemplates_Update",
+  "title": "Update parameters for vm profile."
 }

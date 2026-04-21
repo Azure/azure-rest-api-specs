@@ -24,5 +24,13 @@ using Microsoft.VirtualMachineImages;
 @@Legacy.flattenProperty(RunOutput.properties);
 
 @@clientName(Triggers.createOrUpdate::parameters.resource, "parameters");
+/*
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Trigger.properties);
+*/
+@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
+  "The URL to query for the status of the asynchronous operation."
+);
+@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+  "The URL to query for the result of the asynchronous operation."
+);

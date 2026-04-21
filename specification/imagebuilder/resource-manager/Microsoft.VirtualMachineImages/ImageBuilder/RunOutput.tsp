@@ -24,13 +24,14 @@ model RunOutput is Azure.ResourceManager.ProxyResource<RunOutputProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface RunOutputs {
   /**
    * Get the specified run output for the specified image template resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_GetRunOutput")
+  @tag("VirtualMachineImageTemplate")
   getRunOutput is ArmResourceRead<RunOutput>;
 
   /**
@@ -38,6 +39,7 @@ interface RunOutputs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_ListRunOutputs")
+  @tag("VirtualMachineImageTemplate")
   listRunOutputs is ArmResourceListByParent<
     RunOutput,
     Response = ArmResponse<RunOutputCollection>

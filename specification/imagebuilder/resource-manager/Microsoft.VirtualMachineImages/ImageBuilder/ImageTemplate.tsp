@@ -29,13 +29,14 @@ model ImageTemplate
   identity: ImageTemplateIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImageTemplates {
   /**
    * Get information about a virtual machine image template
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_Get")
+  @tag("VirtualMachineImageTemplate")
   get is ArmResourceRead<ImageTemplate>;
 
   /**
@@ -43,6 +44,7 @@ interface ImageTemplates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_CreateOrUpdate")
+  @tag("VirtualMachineImageTemplate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ImageTemplate>;
 
   /**
@@ -51,10 +53,12 @@ interface ImageTemplates {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_Update")
   @patch(#{ implicitOptionality: false })
+  @tag("VirtualMachineImageTemplate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     ImageTemplate,
     PatchModel = ImageTemplateUpdateParameters,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ImageTemplate> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ImageTemplate> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -63,6 +67,7 @@ interface ImageTemplates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_Delete")
+  @tag("VirtualMachineImageTemplate")
   delete is ArmResourceDeleteWithoutOkAsync<ImageTemplate>;
 
   /**
@@ -70,6 +75,7 @@ interface ImageTemplates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_ListByResourceGroup")
+  @tag("VirtualMachineImageTemplate")
   listByResourceGroup is ArmResourceListByParent<ImageTemplate>;
 
   /**
@@ -77,6 +83,7 @@ interface ImageTemplates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_List")
+  @tag("VirtualMachineImageTemplate")
   list is ArmListBySubscription<ImageTemplate>;
 
   /**
@@ -84,12 +91,13 @@ interface ImageTemplates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_Run")
+  @tag("VirtualMachineImageTemplate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   run is ArmResourceActionAsync<
     ImageTemplate,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -97,12 +105,13 @@ interface ImageTemplates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImageTemplates_Cancel")
+  @tag("VirtualMachineImageTemplate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   cancel is ArmResourceActionAsync<
     ImageTemplate,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

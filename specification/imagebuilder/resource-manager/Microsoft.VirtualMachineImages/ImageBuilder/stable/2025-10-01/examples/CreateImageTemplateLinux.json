@@ -1,61 +1,60 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
     "api-version": "2025-10-01",
     "imageTemplateName": "myImageTemplate",
     "parameters": {
-      "location": "westus",
-      "tags": {
-        "imagetemplate_tag1": "IT_T1",
-        "imagetemplate_tag2": "IT_T2"
-      },
       "identity": {
         "type": "UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {}
         }
       },
+      "location": "westus",
       "properties": {
-        "source": {
-          "type": "ManagedImage",
-          "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
-        },
         "customize": [
           {
-            "type": "Shell",
             "name": "Shell Customizer Example",
+            "type": "Shell",
             "scriptUri": "https://example.com/path/to/script.sh"
           }
         ],
         "distribute": [
           {
             "type": "ManagedImage",
-            "location": "1_location",
-            "runOutputName": "image_it_pir_1",
-            "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
             "artifactTags": {
               "tagName": "value"
-            }
+            },
+            "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+            "location": "1_location",
+            "runOutputName": "image_it_pir_1"
           }
         ],
+        "source": {
+          "type": "ManagedImage",
+          "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
+        },
         "vmProfile": {
-          "vmSize": "Standard_D2s_v3",
           "osDiskSizeGB": 64,
+          "vmSize": "Standard_D2s_v3",
           "vnetConfig": {
             "subnetId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet_name/subnets/subnet_name"
           }
         }
+      },
+      "tags": {
+        "imagetemplate_tag1": "IT_T1",
+        "imagetemplate_tag2": "IT_T2"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
         "name": "myImageTemplate",
-        "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -65,83 +64,86 @@
             }
           }
         },
+        "location": "westus",
         "properties": {
-          "source": {
-            "type": "ManagedImage",
-            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
-          },
           "customize": [
             {
-              "type": "Shell",
               "name": "Shell Customizer Example",
+              "type": "Shell",
               "scriptUri": "https://example.com/path/to/script.sh"
             }
           ],
           "distribute": [
             {
               "type": "ManagedImage",
-              "location": "1_location",
-              "runOutputName": "image_it_pir_1",
-              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
               "artifactTags": {
                 "tagName": "value"
-              }
+              },
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1"
             }
           ],
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
+          },
           "vmProfile": {
-            "vmSize": "Standard_D2s_v3",
             "osDiskSizeGB": 64,
+            "vmSize": "Standard_D2s_v3"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImageTemplate",
+        "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "location": "westus",
+        "properties": {
+          "customize": [
+            {
+              "name": "Shell Customizer Example",
+              "type": "Shell",
+              "scriptUri": "https://example.com/path/to/script.sh"
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "artifactTags": {
+                "tagName": "value"
+              },
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1"
+            }
+          ],
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
+          },
+          "vmProfile": {
+            "osDiskSizeGB": 64,
+            "vmSize": "Standard_D2s_v3",
             "vnetConfig": {
               "subnetId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet_name/subnets/subnet_name"
             }
           }
         }
       }
-    },
-    "200": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
-        "name": "myImageTemplate",
-        "location": "westus",
-        "type": "Microsoft.VirtualMachineImages/imageTemplates",
-        "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
-              "clientId": "00000000-0000-0000-0000-000000000000",
-              "principalId": "00000000-0000-0000-0000-000000000000"
-            }
-          }
-        },
-        "properties": {
-          "source": {
-            "type": "ManagedImage",
-            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
-          },
-          "customize": [
-            {
-              "type": "Shell",
-              "name": "Shell Customizer Example",
-              "scriptUri": "https://example.com/path/to/script.sh"
-            }
-          ],
-          "distribute": [
-            {
-              "type": "ManagedImage",
-              "location": "1_location",
-              "runOutputName": "image_it_pir_1",
-              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
-              "artifactTags": {
-                "tagName": "value"
-              }
-            }
-          ],
-          "vmProfile": {
-            "vmSize": "Standard_D2s_v3",
-            "osDiskSizeGB": 64
-          }
-        }
-      }
     }
-  }
+  },
+  "operationId": "VirtualMachineImageTemplates_CreateOrUpdate",
+  "title": "Create an Image Template for Linux."
 }

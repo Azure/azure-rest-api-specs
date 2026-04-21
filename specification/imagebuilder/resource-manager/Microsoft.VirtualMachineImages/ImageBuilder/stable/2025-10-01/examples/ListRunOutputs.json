@@ -1,35 +1,37 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-10-01",
     "imageTemplateName": "myImageTemplate",
-    "api-version": "2025-10-01"
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs?api-version=2025-10-01&$skipToken=3",
         "value": [
           {
-            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/myManagedImageOutput",
             "name": "myManagedImageOutput",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs",
+            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/myManagedImageOutput",
             "properties": {
               "artifactId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/output_managed_image",
               "provisioningState": "Succeeded"
-            },
-            "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs"
+            }
           },
           {
-            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/mySharedImageOutput",
             "name": "mySharedImageOutput",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs",
+            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/mySharedImageOutput",
             "properties": {
               "artifactId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/galleries/Gallery1/images/SharedImageOutput/imageversions/1.2.3",
               "provisioningState": "Succeeded"
-            },
-            "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs"
+            }
           }
-        ],
-        "nextLink": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs?api-version=2025-10-01&$skipToken=3"
+        ]
       }
     }
-  }
+  },
+  "operationId": "VirtualMachineImageTemplates_ListRunOutputs",
+  "title": "Retrieve a list of all outputs created by the last run of an Image Template"
 }

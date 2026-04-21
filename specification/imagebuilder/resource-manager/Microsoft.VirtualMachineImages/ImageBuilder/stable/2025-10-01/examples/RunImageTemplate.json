@@ -1,17 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-10-01",
     "imageTemplateName": "myImageTemplate",
-    "api-version": "2025-10-01"
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
+    "200": {},
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2025-10-01"
       }
     },
-    "204": {},
-    "200": {}
-  }
+    "204": {}
+  },
+  "operationId": "VirtualMachineImageTemplates_Run",
+  "title": "Create image(s) from existing imageTemplate."
 }

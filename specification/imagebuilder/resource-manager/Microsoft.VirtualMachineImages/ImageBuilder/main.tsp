@@ -24,10 +24,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Virtual Machine Image Builder Client
+ * Virtual Machine Image Template
  */
 @armProviderNamespace
-@service(#{ title: "ImageBuilderClient" })
+@service(#{ title: "VirtualMachineImageTemplate" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.VirtualMachineImages;
@@ -42,4 +42,12 @@ enum Versions {
   v2025_10_01: "2025-10-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      Response = ArmResponse<OperationListResult>,
+      Error = ErrorResponse
+    > {}
+
+@@doc(Operations.list,
+  "Lists available operations for the Microsoft.VirtualMachineImages provider"
+);

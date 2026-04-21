@@ -1,31 +1,33 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-10-01",
     "imageTemplateName": "myImageTemplate",
-    "api-version": "2025-10-01"
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/triggers?api-version=2025-10-01&$skipToken=3",
         "value": [
           {
-            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/triggers/source",
             "name": "source",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates/triggers",
+            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/triggers/source",
             "properties": {
               "kind": "SourceImage",
+              "provisioningState": "Succeeded",
               "status": {
                 "code": "Healthy",
                 "message": "",
                 "time": "2024-10-21T17:32:28Z"
-              },
-              "provisioningState": "Succeeded"
-            },
-            "type": "Microsoft.VirtualMachineImages/imageTemplates/triggers"
+              }
+            }
           }
-        ],
-        "nextLink": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/triggers?api-version=2025-10-01&$skipToken=3"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Triggers_ListByImageTemplate",
+  "title": "List triggers by image template"
 }
