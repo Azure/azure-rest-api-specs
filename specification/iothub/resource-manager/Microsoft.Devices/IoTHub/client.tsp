@@ -14,3 +14,12 @@ using Microsoft.Devices;
   "javascript"
 );
 @@clientName(IotHubDescriptions.getValidSkus, "listValidSkus", "javascript");
+
+@@clientName(Microsoft.Devices.IotHubProperties.disableModuleSAS,
+  "disableModuleSas",
+  "java"
+);
+@@clientName(Microsoft.Devices.IotHubProperties.disableDeviceSAS,
+  "disableDeviceSas",
+  "java"
+);
