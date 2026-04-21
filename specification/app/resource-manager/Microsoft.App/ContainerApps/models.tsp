@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
@@ -16,6 +17,36 @@ namespace Microsoft.App;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Object is Record<unknown>;
+
+/**
+ * Represents an object representing files in the form of { "<filename>" : "<filecontent>"}.
+ */
+model WorkflowFiles is Object;
+
+/**
+ * Number of parallel replicas of a job that can run at a given time.
+ */
+scalar Parallelism extends int32;
+
+/**
+ * Interval to check each event source in seconds. Defaults to 30s
+ */
+scalar PollingInterval extends int32;
+
+/**
+ * Minimum number of successful replica completions before overall job completion.
+ */
+scalar ReplicaCompletionCount extends int32;
+
+/**
+ * Workload profile name for container apps to execute on.
+ */
+scalar WorkloadProfileName extends string;
+
+/**
+ * Workload profile type for container apps to execute on.
+ */
+scalar WorkloadProfileType extends string;
 
 /**
  * Custom domain verification Id of a subscription
@@ -1625,16 +1656,22 @@ model BlobStorageTokenStore {
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   managedIdentityResourceId?: string;
 }
 
@@ -2575,6 +2612,8 @@ model ManagedEnvironmentProperties {
    * Private Link Default Domain Name for the environment
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   privateLinkDefaultDomain?: string;
 
   /**
@@ -2591,11 +2630,15 @@ model ManagedEnvironmentProperties {
   /**
    * Environment level Application Insights configuration
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
@@ -2607,6 +2650,8 @@ model ManagedEnvironmentProperties {
   /**
    * The list of availability zones to use for managed environment
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   availabilityZones?: string[];
 
   /**
@@ -2671,6 +2716,8 @@ model ManagedEnvironmentProperties {
   /**
    * Disk encryption configuration for the Managed Environment.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 }
 
@@ -2744,6 +2791,8 @@ model LogAnalyticsConfiguration {
   /**
    * Boolean indicating whether to parse json string log into dynamic json columns
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   dynamicJsonColumns?: boolean;
 }
 
@@ -2908,12 +2957,14 @@ model WorkloadProfile {
   /**
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   enableFips?: boolean = false;
 
   /**
    * Workload profile type for the workloads to run on.
    */
-  workloadProfileType: string;
+  workloadProfileType: WorkloadProfileType;
 
   /**
    * The minimum capacity.
@@ -2995,7 +3046,7 @@ model IngressConfiguration {
   /**
    * Name of the workload profile used by the ingress component. Required.
    */
-  workloadProfileName?: string;
+  workloadProfileName?: WorkloadProfileName;
 
   /**
    * Time (in seconds) to allow active connections to complete on termination. Must be between 0 and 3600. Defaults to 480 seconds.
@@ -3560,6 +3611,8 @@ model HttpRouteTarget {
   /**
    * Weighted routing
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   @minValue(0)
   @maxValue(100)
   weight?: int32;
@@ -3725,6 +3778,8 @@ model JobProperties {
    * Current running state of the job
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   runningState?: JobRunningState;
 
   /**
@@ -3736,7 +3791,7 @@ model JobProperties {
   /**
    * Workload profile name to pin for container apps job execution.
    */
-  workloadProfileName?: string;
+  workloadProfileName?: WorkloadProfileName;
 
   /**
    * Container Apps Job configuration properties.
@@ -3821,12 +3876,12 @@ model JobConfigurationManualTriggerConfig {
   /**
    * Minimum number of successful replica completions before overall job completion.
    */
-  replicaCompletionCount?: int32;
+  replicaCompletionCount?: ReplicaCompletionCount;
 
   /**
    * Number of parallel replicas of a job that can run at a given time.
    */
-  parallelism?: int32;
+  parallelism?: Parallelism;
 }
 
 /**
@@ -3836,7 +3891,7 @@ model JobConfigurationScheduleTriggerConfig {
   /**
    * Minimum number of successful replica completions before overall job completion.
    */
-  replicaCompletionCount?: int32;
+  replicaCompletionCount?: ReplicaCompletionCount;
 
   /**
    * Cron formatted repeating schedule ("* * * * *") of a Cron Job.
@@ -3846,7 +3901,7 @@ model JobConfigurationScheduleTriggerConfig {
   /**
    * Number of parallel replicas of a job that can run at a given time.
    */
-  parallelism?: int32;
+  parallelism?: Parallelism;
 }
 
 /**
@@ -3856,12 +3911,12 @@ model JobConfigurationEventTriggerConfig {
   /**
    * Minimum number of successful replica completions before overall job completion.
    */
-  replicaCompletionCount?: int32;
+  replicaCompletionCount?: ReplicaCompletionCount;
 
   /**
    * Number of parallel replicas of a job that can run at a given time.
    */
-  parallelism?: int32;
+  parallelism?: Parallelism;
 
   /**
    * Scaling configurations for event driven jobs.
@@ -3876,7 +3931,7 @@ model JobScale {
   /**
    * Interval to check each event source in seconds. Defaults to 30s
    */
-  pollingInterval?: int32;
+  pollingInterval?: PollingInterval;
 
   /**
    * Minimum number of job executions that are created for a trigger, default 0
@@ -4078,6 +4133,8 @@ model JobPatchProperties {
   /**
    * The complex type of the extended location.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   extendedLocation?: ExtendedLocation;
 
   /**
@@ -4229,18 +4286,24 @@ model JobExecutionProperties {
   /**
    * Detailed status of the job execution.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   detailedStatus?: ExecutionStatus;
 
   /**
    * Reason for the current condition of job execution.
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   reason?: string;
 
   /**
    * Human readable message indicating details about the current condition of the job execution.
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   message?: string;
 }
 
@@ -5711,11 +5774,15 @@ union JavaComponentType {
   /**
    * SpringCloudGateway
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   SpringCloudGateway: "SpringCloudGateway",
 
   /**
    * Nacos
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   Nacos: "Nacos",
 }
 
@@ -5960,6 +6027,8 @@ model SessionPoolProperties {
   /**
    * The MCP (Model Context Protocol) server settings of the session pool.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   mcpServerSettings?: McpServerSettings;
 }
 
@@ -6110,6 +6179,8 @@ model SessionContainer {
    * List of probes for the container.
    */
   @identifiers(#["type"])
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   probes?: SessionProbe[];
 }
 
@@ -6749,6 +6820,8 @@ model ContainerAppProperties {
    * Any errors that occurred during deployment
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   deploymentErrors?: string;
 
   /**
@@ -6766,11 +6839,13 @@ model ContainerAppProperties {
   /**
    * Workload profile name to pin for container app execution.
    */
-  workloadProfileName?: string;
+  workloadProfileName?: WorkloadProfileName;
 
   /**
    * Container App auto patch configuration.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   patchingConfiguration?: ContainerAppPropertiesPatchingConfiguration;
 
   /**
@@ -6849,6 +6924,8 @@ model Configuration {
   /**
    * Required in labels revisions mode. Label to apply to newly created revision.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   targetLabel?: string;
 
   /**
@@ -6880,6 +6957,8 @@ model Configuration {
   /**
    * Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given. Value must be greater than 0 and less than or equal to 100.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   @maxValue(100)
   @minValue(1)
   revisionTransitionThreshold?: int32;
@@ -7000,6 +7079,8 @@ model Ingress {
   /**
    * Whether an http app listens on http or https
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   targetPortHttpScheme?: IngressTargetPortHttpScheme;
 }
 
@@ -7238,6 +7319,8 @@ model Runtime {
   /**
    * .NET app configuration
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   dotnet?: RuntimeDotnet;
 }
 
@@ -7253,6 +7336,8 @@ model RuntimeJava {
   /**
    * Diagnostic capabilities achieved by java agent
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   javaAgent?: RuntimeJavaJavaAgent;
 }
 
@@ -7512,7 +7597,7 @@ model Scale {
   /**
    * Optional. KEDA Polling Interval. Defaults to 30 seconds if not set.
    */
-  pollingInterval?: int32;
+  pollingInterval?: PollingInterval;
 
   /**
    * Scaling rules.
@@ -8716,6 +8801,8 @@ model WorkflowArtifacts {
 /**
  * Spring Cloud Gateway route definition
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 model ScgRoute {
   /**
    * Id of the route
@@ -8757,6 +8844,8 @@ model JavaComponentIngress {
 /**
  * Spring Cloud Gateway properties.
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 model SpringCloudGatewayComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.
@@ -8793,6 +8882,8 @@ model SpringBootAdminComponent extends JavaComponentProperties {
 /**
  * Nacos properties.
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 model NacosComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.

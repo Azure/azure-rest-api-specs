@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -79,6 +80,8 @@ interface ContainerAppsSessionPools {
    * Fetch the MCP server credentials of a session pool.
    */
   @summary("Fetch the MCP server credentials of a session pool.")
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   fetchMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,
@@ -89,6 +92,8 @@ interface ContainerAppsSessionPools {
    * Rotate and fetch the rotated MCP server credentials of a session pool.
    */
   @summary("Rotate and fetch the rotated MCP server credentials of a session pool.")
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   rotateMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,

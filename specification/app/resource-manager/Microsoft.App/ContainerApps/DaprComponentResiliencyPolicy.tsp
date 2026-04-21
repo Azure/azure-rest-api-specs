@@ -9,11 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Dapr Component Resiliency Policy.
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @parentResource(DaprComponent)
 model DaprComponentResiliencyPolicy
   is Azure.ResourceManager.ProxyResource<DaprComponentResiliencyPolicyProperties> {
@@ -56,6 +59,8 @@ alias DaprComponentResiliencyPolicyOps = Azure.ResourceManager.Legacy.LegacyOper
   ErrorType = DefaultErrorResponse
 >;
 
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface DaprComponentResiliencyPolicies {
   /**

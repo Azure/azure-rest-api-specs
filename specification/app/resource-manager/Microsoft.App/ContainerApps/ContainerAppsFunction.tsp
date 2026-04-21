@@ -9,11 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Container App Function.
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @parentResource(Revision)
 model ContainerAppsFunction
   is Azure.ResourceManager.ProxyResource<ContainerAppsFunctionProperties> {
@@ -82,6 +85,8 @@ alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.Lega
   ErrorType = DefaultErrorResponse
 >;
 
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 @tag("AzureFunctionsOnContainerApps")
 interface ContainerAppsFunctions {

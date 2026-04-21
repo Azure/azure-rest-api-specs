@@ -9,11 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Container App Patch
  */
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @parentResource(ContainerApp)
 model ContainerAppsPatchResource
   is Azure.ResourceManager.ProxyResource<PatchProperties> {
@@ -51,6 +54,8 @@ alias ContainerAppsPatchesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+@added(Versions.v2025_10_02_preview)
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface ContainerAppsPatches {
   /**
