@@ -13798,6 +13798,40 @@
         },
         "description": "Definition for sampling strategy."
       },
+      "AgentEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Agent"
+            ],
+            "description": "The source type, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional supplementary prompt text to augment the agent's instructions."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Agent source — references an agent to fetch instructions and metadata from."
+      },
       "AgentId": {
         "type": "object",
         "required": [
@@ -17009,6 +17043,36 @@
         },
         "description": "Base class for run data sources with discriminator support."
       },
+      "DatasetEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Dataset"
+            ],
+            "description": "The source type, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the dataset. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Dataset source — reference to a dataset."
+      },
       "DatasetReference": {
         "type": "object",
         "required": [
@@ -18626,9 +18690,9 @@
           "sources": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteGenerationSource"
+              "$ref": "#/components/schemas/EvaluationSuiteJobSource"
             },
-            "description": "Source materials for generation — agent descriptions, prompts."
+            "description": "Source materials for generation — agent context, prompts, traces, or datasets."
           },
           "model": {
             "type": "string",
@@ -18682,24 +18746,52 @@
         },
         "description": "Result produced by a successful evaluation suite generation job."
       },
-      "EvaluationSuiteGenerationSource": {
+      "EvaluationSuiteJobSource": {
         "type": "object",
         "required": [
           "type"
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteJobSourceType"
+              }
+            ],
             "description": "The type of source."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "Prompt": "#/components/schemas/PromptEvaluationSuiteGenerationSource"
+            "Prompt": "#/components/schemas/PromptEvaluationSuiteJobSource",
+            "Agent": "#/components/schemas/AgentEvaluationSuiteJobSource",
+            "Traces": "#/components/schemas/TracesEvaluationSuiteJobSource",
+            "Dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource"
           }
         },
-        "description": "Source for evaluation suite generation. Discriminated by type."
+        "description": "Base source model for evaluation suite generation jobs."
+      },
+      "EvaluationSuiteJobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Prompt",
+              "Agent",
+              "Traces",
+              "Dataset"
+            ]
+          }
+        ],
+        "description": "The supported source types for evaluation suite generation jobs."
       },
       "EvaluationSuiteRunRequest": {
         "type": "object",
@@ -41911,11 +42003,11 @@
         ],
         "description": "Prompt-based evaluator"
       },
-      "PromptEvaluationSuiteGenerationSource": {
+      "PromptEvaluationSuiteJobSource": {
         "type": "object",
         "required": [
           "type",
-          "agent_name"
+          "prompt"
         ],
         "properties": {
           "type": {
@@ -41925,25 +42017,17 @@
             ],
             "description": "The source type, which is Prompt."
           },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch agent instructions for generation."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, the latest version is used."
-          },
           "prompt": {
             "type": "string",
-            "description": "Optional prompt providing additional evaluation guidance."
+            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/EvaluationSuiteGenerationSource"
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Prompt source for evaluation suite generation."
+        "description": "Prompt source — inline text provided by the user."
       },
       "ProtocolVersionRecord": {
         "type": "object",
@@ -43524,6 +43608,58 @@
           }
         },
         "description": "A specific version of a toolbox."
+      },
+      "TracesEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Traces"
+            ],
+            "description": "The source type, which is Traces."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch traces for."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, traces for all versions are included."
+          },
+          "start_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Start of the time window (Unix timestamp in seconds)."
+          },
+          "end_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of traces to retrieve.",
+            "default": 100
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Traces source — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
