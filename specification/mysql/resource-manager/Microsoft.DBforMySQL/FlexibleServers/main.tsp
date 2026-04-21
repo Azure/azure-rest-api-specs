@@ -26,6 +26,7 @@ import "./Maintenance.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
+import "./FabricMirroringSettings.tsp"; 
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -61,6 +62,11 @@ enum Versions {
    * The 2025-06-01-preview API version.
    */
   v2025_06_01_preview: "2025-06-01-preview",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
 
 interface Operations {
