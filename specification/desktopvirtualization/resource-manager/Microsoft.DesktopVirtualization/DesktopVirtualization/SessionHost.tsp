@@ -105,6 +105,7 @@ interface SessionHosts {
 
   /**
    * create or update a sessionHost.
+   * @Introduced in 2026-01-01-preview
    */
   @added(Versions.vLatestPreview)
   create is ArmResourceCreateOrReplaceSync<SessionHost>;
@@ -118,6 +119,7 @@ interface SessionHosts {
 
   /**
    * Operation to list the scoped RegistrationTokens associated with the SessionHost.
+   * @Introduced in 2026-01-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SessionHosts_ListSingleRegistrationTokens")
