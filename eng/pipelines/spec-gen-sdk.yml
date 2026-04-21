@@ -16,7 +16,7 @@ parameters:
     displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
   - name: ApiVersion
     type: string
-    default: ''
+    default: 'none'
     displayName: 'API version'
   - name: SdkReleaseType
     type: string
@@ -24,7 +24,7 @@ parameters:
       - 'beta'
       - 'stable'
     default: 'beta'
-    displayName: 'SDK release type'
+    displayName: 'SDK release type (ignored when API version is "none")'
   - name: CreatePullRequest
     type: boolean
     default: false

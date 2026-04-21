@@ -153,6 +153,7 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "csharp"
 );
+@@alternateType(Azure.Batch.DiskCustomerManagedKey.keyUrl, url, "csharp");
 
 @@clientName(BatchClient.listJobsFromSchedule,
   "listJobsFromSchedules",
@@ -165,6 +166,96 @@ interface BatchClient {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Azure.Batch.CommonParameters.returnClientRequestId,
   true,
+  "csharp"
+);
+
+@@clientName(Azure.Batch.BatchPoolLifetimeOption.JobSchedule,
+  "jobScheduleOption",
+  "csharp"
+);
+
+// Model property overrides
+@@clientName(Azure.Batch.BatchPoolLifetimeOption.Job, "jobOption", "csharp");
+@@clientName(Azure.Batch.BatchPoolStatistics.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchJobStatistics.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchNodeFile.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchJobSchedule.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchJobScheduleConfiguration.doNotRunUntil,
+  "doNotRunBefore ",
+  "csharp"
+);
+@@clientName(Azure.Batch.SecurityProfile.encryptionAtHost,
+  "isEncryptedAtHost",
+  "csharp"
+);
+@@clientName(Azure.Batch.ContainerRegistryReference.registryServer,
+  "registryServerUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.ResourceFile.storageContainerUrl,
+  "storageContainerUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.ResourceFile.httpUrl, "httpUri", "csharp");
+@@clientName(Azure.Batch.OutputFileBlobContainerDestination.containerUrl,
+  "containerUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.VMExtension.autoUpgradeMinorVersion,
+  "shouldAutoUpgradeMinorVersion",
+  "csharp"
+);
+@@clientName(Azure.Batch.VMExtension.enableAutomaticUpgrade,
+  "isAutomaticUpgradeEnabled",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchOsDisk.writeAcceleratorEnabled,
+  "isWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(Azure.Batch.AzureFileShareConfiguration.azureFileUrl,
+  "azureFileUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.RecentBatchJob.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchJobScheduleStatistics.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchJobScheduleStatistics.wallClockTime,
+  "duration",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchJob.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchJobDisableOptions.disableTasks,
+  "jobOption",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchJobPreparationAndReleaseTaskStatus.nodeUrl,
+  "nodeUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchJobPreparationTaskExecutionInfo.taskRootDirectoryUrl,
+  "taskRootDirectoryUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchJobReleaseTaskExecutionInfo.taskRootDirectoryUrl,
+  "taskRootDirectoryUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchPool.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchTask.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchNodeInfo.nodeUrl, "nodeUri", "csharp");
+@@clientName(Azure.Batch.BatchNodeInfo.taskRootDirectoryUrl,
+  "taskRootDirectoryUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchTaskStatistics.url, "uri", "csharp");
+@@clientName(Azure.Batch.RollingUpgradePolicy.enableCrossZoneUpgrade,
+  "isCrossZoneUpgradeEnabled",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchNode.url, "uri", "csharp");
+@@clientName(Azure.Batch.BatchTaskInfo.taskUrl, "taskUri", "csharp");
+@@clientName(Azure.Batch.UploadBatchServiceLogsOptions.containerUrl,
+  "containerUri",
   "csharp"
 );
 
@@ -203,6 +294,55 @@ interface BatchClient {
   "terminateJobScheduleInternal",
   "python"
 );
+@@clientName(Azure.Batch.AutoScaleRunError.values, "error_values", "python");
+@@clientName(Azure.Batch.BatchTaskGroup.value, "task_values", "python");
+@@clientName(Azure.Batch.ResizeError.values, "error_values", "python");
+@@clientName(Azure.Batch.BatchCreateTaskCollectionResult.value,
+  "result_values",
+  "python"
+);
+@@clientName(Azure.Batch.BatchError.values, "error_values", "python");
+@@clientName(Azure.Batch.BatchJob.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchJobSchedule.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchPool.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchTask.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchTaskCreateResult.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.avgDiskGiB,
+  "avg_disk_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.avgMemoryGiB,
+  "avg_memory_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.peakMemoryGiB,
+  "peak_memory_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.peakDiskGiB,
+  "peak_disk_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskReadGiB,
+  "disk_read_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskWriteGiB,
+  "disk_write_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.networkReadGiB,
+  "network_read_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.networkWriteGiB,
+  "network_write_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+  "BatchNodeUserReplaceOptions",
+  "python"
+);
 @@access(Azure.Batch.Pools.deletePool, Access.internal, "python");
 @@clientName(BatchClient.deletePool, "deletePoolInternal", "python");
 @@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "python");
@@ -224,6 +364,38 @@ interface BatchClient {
 @@access(Azure.Batch.BatchJobDisableOptions, Access.public, "python");
 @@access(Azure.Batch.BatchNodeDeallocationOption, Access.public, "python");
 @@access(Azure.Batch.DisableBatchJobOption, Access.public, "python");
+
+/* JAVASCRIPT OVERRIDES */
+@@clientName(Azure.Batch.CommonListParameters.maxresults,
+  "maxResults",
+  "javascript"
+);
+@@clientName(Azure.Batch.CommonParameters.timeOut,
+  "timeoutInSeconds",
+  "javascript"
+);
+@@clientName(Azure.Batch.CommonParameters.ocpdate, "ocpDate", "javascript");
+@@clientName(Azure.Batch.BatchSupportedImage.batchSupportEndOfLife,
+  "supportEndDate",
+  "javascript"
+);
+@@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
+@@clientName(Azure.Batch.ListPoolUsageMetricsOptionalParameters.endtime,
+  "endTime",
+  "javascript"
+);
+@@clientName(Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
+  "nodeDeallocationOption",
+  "javascript"
+);
+@@clientName(Azure.Batch.ExitConditions.default,
+  "defaultOptions",
+  "javascript"
+);
+@@clientName(Azure.Batch.CifsMountConfiguration,
+  "BatchCifsMountConfiguration",
+  "javascript"
+);
 
 /* GO OVERRIDES */
 // don't export API for this operation because it retired before the first Go SDK release

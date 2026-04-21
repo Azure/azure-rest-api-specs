@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./CommonModels.tsp";
+import "./VmSkus.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -49,7 +50,7 @@ interface TrustedAccessRolesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Adding @armResourceOperations would inject an undesired resource-derived tag on these location-scoped operations."
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_02_02_preview)
 interface ContainerServiceOperationGroup {
   /**
    * Only returns the latest version of each node image. For example there may be an AKSUbuntu-1804gen2containerd-2024.01.26, but only AKSUbuntu-1804gen2containerd-2024.02.02 is visible in this list.
@@ -63,5 +64,32 @@ interface ContainerServiceOperationGroup {
     Response = NodeImageVersionsListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationResourceParameter
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Adding @armResourceOperations would inject an undesired resource-derived tag on these location-scoped operations."
+@added(Versions.v2026_02_02_preview)
+interface VmSkusOperationGroup {
+  /**
+   * Gets the list of VM SKUs accepted by AKS when creating node pools in a specified location. AKS will perform a best effort approach to provision the requested VM SKUs, but availability is not guaranteed.
+   */
+  @summary("Gets the list of VM SKUs accepted by AKS.")
+  @tag("Skus")
+  @autoRoute
+  @get
+  @list
+  @action("vmSkus")
+  list is ArmProviderActionSync<
+    Response = VmSkusListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      ...LocationResourceParameter;
+
+      /**
+       * To Include Extended Locations information or not in the response.
+       */
+      @query
+      includeExtendedLocations?: boolean;
+    }
   >;
 }

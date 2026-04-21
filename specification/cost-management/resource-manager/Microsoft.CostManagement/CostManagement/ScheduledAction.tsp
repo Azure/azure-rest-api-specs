@@ -55,7 +55,8 @@ interface ScheduledActionOps
         @segment("scheduledActions")
         @key
         name: string,
-      }
+      },
+      ResourceName = "TenantScheduledAction"
     > {}
 
 @armResourceOperations
@@ -151,7 +152,8 @@ interface ScheduledActionOperationGroupOps
         @segment("scheduledActions")
         @key
         name: string,
-      }
+      },
+      ResourceName = "ScheduledAction"
     > {}
 
 @armResourceOperations

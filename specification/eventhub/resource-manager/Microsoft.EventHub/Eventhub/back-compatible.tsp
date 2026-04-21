@@ -54,7 +54,8 @@ using Microsoft.EventHub;
 );
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.list,
-  "NetworkSecurityPerimeterConfiguration"
+  "NetworkSecurityPerimeterConfiguration",
+  "!java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSecurityPerimeterConfiguration.properties
@@ -158,3 +159,12 @@ using Microsoft.EventHub;
 @@clientName(TlsVersion.`1.1`, "One1", "javascript");
 @@clientName(TlsVersion.`1.2`, "One2", "javascript");
 @@clientName(TlsVersion.`1.3`, "One3", "javascript");
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "EventHubsErrorDetail",
+  "python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "EventHubsErrorAdditionalInfo",
+  "python"
+);

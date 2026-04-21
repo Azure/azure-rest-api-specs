@@ -7237,6 +7237,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7261,7 +7266,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SvmPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -9094,6 +9099,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -9118,7 +9128,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ClusterPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -12773,9 +12783,6 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_List_Custom": {
-            "$ref": "./examples/VolumeGroups_List_Custom.json"
-          },
           "VolumeGroups_List_Oracle": {
             "$ref": "./examples/VolumeGroups_List_Oracle.json"
           },
@@ -12839,12 +12846,6 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_Get_Custom": {
-            "$ref": "./examples/VolumeGroups_Get_Custom.json"
-          },
-          "VolumeGroups_Get_Custom_SMB": {
-            "$ref": "./examples/VolumeGroups_Get_Custom_SMB.json"
-          },
           "VolumeGroups_Get_Oracle": {
             "$ref": "./examples/VolumeGroups_Get_Oracle.json"
           },
@@ -12923,12 +12924,6 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_Create_Custom": {
-            "$ref": "./examples/VolumeGroups_Create_Custom.json"
-          },
-          "VolumeGroups_Create_Custom_SMB": {
-            "$ref": "./examples/VolumeGroups_Create_Custom_SMB.json"
-          },
           "VolumeGroups_Create_Oracle": {
             "$ref": "./examples/VolumeGroups_Create_Oracle.json"
           },
@@ -13132,7 +13127,7 @@
     },
     "AccountPropertiesPatch": {
       "type": "object",
-      "description": "NetApp account properties for PATCH operations",
+      "description": "NetApp account patch properties",
       "properties": {
         "activeDirectories": {
           "type": "array",
@@ -13144,10 +13139,6 @@
             "activeDirectoryId"
           ]
         },
-        "entraIdConfig": {
-          "$ref": "#/definitions/EntraIdConfigPatch",
-          "description": "Entra ID configuration for the account."
-        },
         "encryption": {
           "$ref": "#/definitions/AccountEncryption",
           "description": "Encryption settings"
@@ -13157,13 +13148,13 @@
           "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
           "x-nullable": true
         },
-        "multiAdStatus": {
-          "$ref": "#/definitions/MultiAdStatus",
-          "description": "MultiAD Status for the account"
-        },
         "ldapConfiguration": {
-          "$ref": "#/definitions/LdapConfigurationPatch",
+          "$ref": "#/definitions/LdapConfiguration",
           "description": "LDAP Configuration for the account."
+        },
+        "entraIdConfig": {
+          "$ref": "#/definitions/EntraIdConfigPatch",
+          "description": "Entra ID configuration for the account."
         }
       }
     },
@@ -13409,6 +13400,7 @@
         }
       },
       "required": [
+        "site",
         "domain",
         "secretPassword"
       ]
@@ -13580,8 +13572,7 @@
       "description": "Application Type",
       "enum": [
         "SAP-HANA",
-        "ORACLE",
-        "CUSTOM"
+        "ORACLE"
       ],
       "x-ms-enum": {
         "name": "ApplicationType",
@@ -13594,11 +13585,6 @@
           {
             "name": "ORACLE",
             "value": "ORACLE"
-          },
-          {
-            "name": "CUSTOM",
-            "value": "CUSTOM",
-            "description": "Custom application type allows min 2 and max 12 data volumes in a volume group."
           }
         ]
       }
@@ -14599,7 +14585,7 @@
       "type": "object",
       "description": "Cache resource properties",
       "properties": {
-        "filepath": {
+        "filePath": {
           "type": "string",
           "description": "The file path of the Cache.",
           "minLength": 1,
@@ -14782,7 +14768,7 @@
         }
       },
       "required": [
-        "filepath",
+        "filePath",
         "size",
         "cacheSubnetResourceId",
         "peeringSubnetResourceId",
@@ -15308,9 +15294,23 @@
       "type": "object",
       "description": "Information about cluster peering process",
       "properties": {
-        "peerAcceptCommand": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPeerCommandResponseProperties",
+          "description": "Represents the properties of the cluster peer command response."
+        }
+      }
+    },
+    "ClusterPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the cluster peer command response.",
+      "properties": {
+        "clusterPeeringCommand": {
           "type": "string",
-          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>"
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>."
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "Passphrase for use with cluster peer command"
         }
       }
     },
@@ -17598,7 +17598,7 @@
     },
     "EntraIdAkvConfigPatch": {
       "type": "object",
-      "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "description": "Entra ID Patch configuration for the account.",
       "properties": {
         "azureKeyVaultUri": {
           "type": "string",
@@ -18245,43 +18245,6 @@
         }
       }
     },
-    "LdapConfigurationPatch": {
-      "type": "object",
-      "description": "LDAP configuration for PATCH operations (no default values)",
-      "properties": {
-        "domain": {
-          "type": "string",
-          "description": "Name of the LDAP configuration domain",
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
-        },
-        "ldapServers": {
-          "type": "array",
-          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
-          }
-        },
-        "ldapOverTLS": {
-          "type": "boolean",
-          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
-        },
-        "serverCACertificate": {
-          "type": "string",
-          "format": "password",
-          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
-          "minLength": 1,
-          "maxLength": 10240,
-          "x-ms-secret": true
-        },
-        "certificateCNHost": {
-          "type": "string",
-          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
-          "maxLength": 255,
-          "x-nullable": true
-        }
-      }
-    },
     "LdapSearchScopeOpt": {
       "type": "object",
       "description": "LDAP search scope",
@@ -18703,28 +18666,13 @@
       "type": "object",
       "description": "NetApp account patch resource",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -18733,10 +18681,6 @@
           "$ref": "#/definitions/AccountPropertiesPatch",
           "description": "NetApp Account properties",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity used for the resource."
         }
       }
     },
@@ -19066,7 +19010,7 @@
       "properties": {
         "peerClusterName": {
           "type": "string",
-          "description": "ONTAP cluster name of external cluster hosting the origin volume"
+          "description": "ONTAP cluster name of external cluster hosting the origin volume. Must match the exact cluster name."
         },
         "peerAddresses": {
           "type": "array",
@@ -21020,6 +20964,16 @@
     "SvmPeerCommandResponse": {
       "type": "object",
       "description": "Information about svm peering process",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SvmPeerCommandResponseProperties",
+          "description": "Represents the properties of the SVM peer command response."
+        }
+      }
+    },
+    "SvmPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the SVM peer command response.",
       "properties": {
         "svmPeeringCommand": {
           "type": "string",

@@ -1,0 +1,38 @@
+{
+  "operationId": "Insights_Get",
+  "title": "Get Insight sample for MitigationAction category",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-01-01-preview",
+    "workloadImpactName": "impactId",
+    "insightName": "HPCUASucceeded"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Impact/workloadimpacts/impactId/insights/HPCUASucceeded",
+        "name": "HPCUASucceeded",
+        "type": "Microsoft.impact/workloadimpacts/insights",
+        "properties": {
+          "category": "MitigationAction",
+          "eventTime": "2023-06-15T04:00:00.009223Z",
+          "insightUniqueId": "00000000-0000-0000-0000-000000000000",
+          "impact": {
+            "impactId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Impact/workloadimpacts/impactId",
+            "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/virtualMachine/vm",
+            "startTime": "2018-11-08T00:00:00Z",
+            "endTime": "2018-11-08T00:00:00Z"
+          },
+          "content": {
+            "title": "Node was flagged for inspection",
+            "description": "At 2024-02-16 21:05:07 (UTC) an impact was reported on west-eur-VM indicating a potential disruption from Azure platform. <strong>Action Taken</strong> The hardware your VM was running on was flagged for inspection. We will conduct our investigation and take corrective action to prevent further impact on your workloads. We apologize for any disruption. Microsoft Azure Team"
+          },
+          "additionalDetails": {
+            "statusCode": "Succeeded",
+            "terminalState": "true"
+          }
+        }
+      }
+    }
+  }
+}

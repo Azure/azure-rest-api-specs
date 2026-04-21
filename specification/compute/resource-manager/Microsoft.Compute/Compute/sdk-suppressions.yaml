@@ -1,0 +1,136 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-compute
+      breaking-changes:
+        - Parameter id of model SecurityPostureReference is now required
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/compute/armcompute
+      breaking-changes:
+        - Type of `SecurityPostureReference.ExcludeExtensions` has been changed from `[]*VirtualMachineExtension` to `[]*string`
+        - Enum `CloudServiceSlotType` has been removed
+        - Enum `CloudServiceUpgradeMode` has been removed
+        - Function `*ClientFactory.NewCloudServiceOperatingSystemsClient` has been removed
+        - Function `*ClientFactory.NewCloudServiceRoleInstancesClient` has been removed
+        - Function `*ClientFactory.NewCloudServiceRolesClient` has been removed
+        - Function `*ClientFactory.NewCloudServicesClient` has been removed
+        - Function `*ClientFactory.NewCloudServicesUpdateDomainClient` has been removed
+        - Function `NewCloudServiceOperatingSystemsClient` has been removed
+        - Function `*CloudServiceOperatingSystemsClient.GetOSFamily` has been removed
+        - Function `*CloudServiceOperatingSystemsClient.GetOSVersion` has been removed
+        - Function `*CloudServiceOperatingSystemsClient.NewListOSFamiliesPager` has been removed
+        - Function `*CloudServiceOperatingSystemsClient.NewListOSVersionsPager` has been removed
+        - Function `NewCloudServiceRoleInstancesClient` has been removed
+        - Function `*CloudServiceRoleInstancesClient.BeginDelete` has been removed
+        - Function `*CloudServiceRoleInstancesClient.Get` has been removed
+        - Function `*CloudServiceRoleInstancesClient.GetInstanceView` has been removed
+        - Function `*CloudServiceRoleInstancesClient.GetRemoteDesktopFile` has been removed
+        - Function `*CloudServiceRoleInstancesClient.NewListPager` has been removed
+        - Function `*CloudServiceRoleInstancesClient.BeginRebuild` has been removed
+        - Function `*CloudServiceRoleInstancesClient.BeginReimage` has been removed
+        - Function `*CloudServiceRoleInstancesClient.BeginRestart` has been removed
+        - Function `NewCloudServiceRolesClient` has been removed
+        - Function `*CloudServiceRolesClient.Get` has been removed
+        - Function `*CloudServiceRolesClient.NewListPager` has been removed
+        - Function `NewCloudServicesClient` has been removed
+        - Function `*CloudServicesClient.BeginCreateOrUpdate` has been removed
+        - Function `*CloudServicesClient.BeginDelete` has been removed
+        - Function `*CloudServicesClient.BeginDeleteInstances` has been removed
+        - Function `*CloudServicesClient.Get` has been removed
+        - Function `*CloudServicesClient.GetInstanceView` has been removed
+        - Function `*CloudServicesClient.NewListAllPager` has been removed
+        - Function `*CloudServicesClient.NewListPager` has been removed
+        - Function `*CloudServicesClient.BeginPowerOff` has been removed
+        - Function `*CloudServicesClient.BeginRebuild` has been removed
+        - Function `*CloudServicesClient.BeginReimage` has been removed
+        - Function `*CloudServicesClient.BeginRestart` has been removed
+        - Function `*CloudServicesClient.BeginStart` has been removed
+        - Function `*CloudServicesClient.BeginUpdate` has been removed
+        - Function `NewCloudServicesUpdateDomainClient` has been removed
+        - Function `*CloudServicesUpdateDomainClient.GetUpdateDomain` has been removed
+        - Function `*CloudServicesUpdateDomainClient.NewListUpdateDomainsPager` has been removed
+        - Function `*CloudServicesUpdateDomainClient.BeginWalkUpdateDomain` has been removed
+        - Struct `CloudService` has been removed
+        - Struct `CloudServiceExtensionProfile` has been removed
+        - Struct `CloudServiceExtensionProperties` has been removed
+        - Struct `CloudServiceInstanceView` has been removed
+        - Struct `CloudServiceListResult` has been removed
+        - Struct `CloudServiceNetworkProfile` has been removed
+        - Struct `CloudServiceOsProfile` has been removed
+        - Struct `CloudServiceProperties` has been removed
+        - Struct `CloudServiceRole` has been removed
+        - Struct `CloudServiceRoleListResult` has been removed
+        - Struct `CloudServiceRoleProfile` has been removed
+        - Struct `CloudServiceRoleProfileProperties` has been removed
+        - Struct `CloudServiceRoleProperties` has been removed
+        - Struct `CloudServiceRoleSKU` has been removed
+        - Struct `CloudServiceUpdate` has been removed
+        - Struct `CloudServiceVaultAndSecretReference` has been removed
+        - Struct `CloudServiceVaultCertificate` has been removed
+        - Struct `CloudServiceVaultSecretGroup` has been removed
+  azure-sdk-for-js:
+    - package: "@azure/arm-compute"
+      breaking-changes:
+        - Enum `Expand` has been removed
+        - Operation `*VirtualMachineImagesClient.NewListWithPropertiesPager` does not support pagination anymore, use `*VirtualMachineImagesClient.ListWithProperties` instead.
+        - Struct `VirtualMachineImagesWithPropertiesListResult` has been removed
+        - Parameter id of interface SecurityPostureReference is now required
+        - Type of parameter excludeExtensions of interface SecurityPostureReference is changed from VirtualMachineExtension[] to string[]
+        - Type of parameter purchasePlan of interface Disk is changed from PurchasePlanAutoGenerated to DiskPurchasePlan
+        - Type of parameter purchasePlan of interface DiskRestorePoint is changed from PurchasePlanAutoGenerated to DiskPurchasePlan
+        - Type of parameter purchasePlan of interface DiskUpdate is changed from PurchasePlanAutoGenerated to DiskPurchasePlan
+        - Type of parameter purchasePlan of interface Snapshot is changed from PurchasePlanAutoGenerated to DiskPurchasePlan
+        - Removed Interface CloudService
+        - Removed Interface CloudServiceExtensionProfile
+        - Removed Interface CloudServiceExtensionProperties
+        - Removed Interface CloudServiceInstanceView
+        - Removed Interface CloudServiceNetworkProfile
+        - Removed Interface CloudServiceOperatingSystemsOperations
+        - Removed Interface CloudServiceOperatingSystemsGetOSFamilyOptionalParams
+        - Removed Interface CloudServiceOperatingSystemsGetOSVersionOptionalParams
+        - Removed Interface CloudServiceOperatingSystemsListOSFamiliesOptionalParams
+        - Removed Interface CloudServiceOperatingSystemsListOSVersionsOptionalParams
+        - Removed Interface CloudServiceOsProfile
+        - Removed Interface CloudServiceProperties
+        - Removed Interface CloudServiceRole
+        - Removed Interface CloudServiceRoleInstancesOperations
+        - Removed Interface CloudServiceRoleInstancesDeleteOptionalParams
+        - Removed Interface CloudServiceRoleInstancesGetInstanceViewOptionalParams
+        - Removed Interface CloudServiceRoleInstancesGetOptionalParams
+        - Removed Interface CloudServiceRoleInstancesGetRemoteDesktopFileOptionalParams
+        - Removed Interface CloudServiceRoleInstancesListOptionalParams
+        - Removed Interface CloudServiceRoleInstancesRebuildOptionalParams
+        - Removed Interface CloudServiceRoleInstancesReimageOptionalParams
+        - Removed Interface CloudServiceRoleInstancesRestartOptionalParams
+        - Removed Interface CloudServiceRoleProfile
+        - Removed Interface CloudServiceRoleProfileProperties
+        - Removed Interface CloudServiceRoleProperties
+        - Removed Interface CloudServiceRolesOperations
+        - Removed Interface CloudServiceRolesGetOptionalParams
+        - Removed Interface CloudServiceRoleSku
+        - Removed Interface CloudServiceRolesListOptionalParams
+        - Removed Interface CloudServicesOperations
+        - Removed Interface CloudServicesCreateOrUpdateOptionalParams
+        - Removed Interface CloudServicesDeleteInstancesOptionalParams
+        - Removed Interface CloudServicesDeleteOptionalParams
+        - Removed Interface CloudServicesGetInstanceViewOptionalParams
+        - Removed Interface CloudServicesGetOptionalParams
+        - Removed Interface CloudServicesListAllOptionalParams
+        - Removed Interface CloudServicesListOptionalParams
+        - Removed Interface CloudServicesPowerOffOptionalParams
+        - Removed Interface CloudServicesRebuildOptionalParams
+        - Removed Interface CloudServicesReimageOptionalParams
+        - Removed Interface CloudServicesRestartOptionalParams
+        - Removed Interface CloudServicesStartOptionalParams
+        - Removed Interface CloudServicesUpdateDomainOperations
+        - Removed Interface CloudServicesUpdateDomainGetUpdateDomainOptionalParams
+        - Removed Interface CloudServicesUpdateDomainListUpdateDomainsOptionalParams
+        - Removed Interface CloudServicesUpdateDomainWalkUpdateDomainOptionalParams
+        - Removed Interface CloudServicesUpdateOptionalParams
+        - Removed Interface CloudServiceUpdate
+        - Removed Interface CloudServiceVaultAndSecretReference
+        - Removed Interface CloudServiceVaultCertificate
+        - Removed Interface CloudServiceVaultSecretGroup
+        - Removed Type Alias CloudServiceSlotType
+        - Removed Type Alias CloudServiceUpgradeMode
+        - Removed Enum KnownCloudServiceSlotType
+        - Removed Enum KnownCloudServiceUpgradeMode
