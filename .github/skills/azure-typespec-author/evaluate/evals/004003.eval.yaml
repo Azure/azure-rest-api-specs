@@ -53,12 +53,14 @@ stimuli:
       dest: VpnServerConfigurationPolicyGroup.tsp
     - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnSiteLinkConnection.tsp
       dest: VpnSiteLinkConnection.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/tspconfig.yaml
+      dest: tspconfig.yaml
   graders:
   - type: tool-calls
     config:
       required:
         - edit
-        - azsdk_run_typespec_validation
+        - azure-sdk-mcp-azsdk_run_typespec_validation
   # VP1: Underscore operationIds should be removed (e.g. BgpConnection has only underscore ones)
   - type: file-not-matches
     config:

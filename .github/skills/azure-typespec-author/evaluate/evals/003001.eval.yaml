@@ -36,12 +36,14 @@ stimuli:
       dest: inma.tsp
     - src: ../fixtures/003001-dataplane-async-delete-op/package.json
       dest: package.json
+    - src: ../fixtures/003001-dataplane-async-delete-op/tspconfig.yaml
+      dest: tspconfig.yaml
   graders:
   - type: tool-calls
     config:
       required:
         - edit
-        - azsdk_run_typespec_validation
+        - azure-sdk-mcp-azsdk_run_typespec_validation
   # VP1: Async delete added to StacItems namespace
   - type: file-matches
     config:

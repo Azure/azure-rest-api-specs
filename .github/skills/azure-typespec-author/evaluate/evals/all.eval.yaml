@@ -1,0 +1,1894 @@
+name: azure-typespec-author-eval
+description: Combined evaluation suite for azure-typespec-author (all 30 cases).
+version: "1.0"
+type: capability
+
+# Root-level environment (merged into all stimuli)
+environment:
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["./start-mcp.ps1"]
+      timeout: 60000
+
+# Execution configuration
+config:
+  runs: 1
+  timeout: 1800
+  model: claude-opus-4.6-1m
+  executor: copilot-sdk
+
+# Test cases
+stimuli:
+- name: 001001-version-spread-property
+  prompt: I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in a new API version 2025-05-04-preview only.
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-05-04-preview
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: "\\.\\.\\.ManagedServiceIdentityProperty;"
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: "@@added\\(Employee\\.identity, Versions\\.(v2025_05_04_preview|`2025-05-04-preview`)\\);"
+  - type: prompt
+    config:
+      prompt: Verify changes are scoped to this task only, with no unrelated edits beyond introducing preview-only identity via versioning.
+      model: claude-opus-4.6-1m
+      scoring: scale_1_5
+      threshold: 1.0
+  constraints:
+    max_turns: 10
+    max_tokens: 50000
+  scoring:
+    weights:
+      tool-calls: 1
+      file-matches: 3
+      prompt: 1
+    threshold: 1.0
+
+- prompt: |
+    add a default value `21` for property age in model EmployeeProperties from a new api version 2025-11-01
+  name: 001002-version-default-value
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@removed\(Versions\.v2025_11_01\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@renamedFrom\(Versions\.v2025_11_01, "age"\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@added\(Versions\.v2025_11_01\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'age\?: int32 = 21;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 4
+    threshold: 1.0
+
+- prompt: |
+    change the property age of EmployeeProperties from required to optional for new api version 2025-05-04-preview
+  name: 001003-version-required-to-optional
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/001003-version-required-to-optional/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@madeOptional'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 2025-05-04-preview|v2025_05_04_preview
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 2
+    threshold: 1.0
+
+- prompt: |
+    change the visibility of property 'provisioningState' from Lifecycle.Read to Lifecycle.Read and Lifecycle.Create in version 2025-05-04-preview only
+  name: 001004-version-property-decorator
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: Lifecycle\.Read, Lifecycle\.Create
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-05-04-preview
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 2
+    threshold: 1.0
+
+- prompt: |
+    Add a new preview version `2025-05-04-preview` to my service widget resource manager. Exclude Feature: `age` property with default value 21. Carry other features.
+  name: 001005-version-add-preview-after-preview
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/001005-version-add-preview-after-preview\employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/001005-version-add-preview-after-preview\main.tsp
+      dest: main.tsp
+    - src: ../fixtures/001005-version-add-preview-after-preview\shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/001005-version-add-preview-after-preview\tspconfig.yaml
+      dest: tspconfig.yaml
+    - src: ../fixtures/001005-version-add-preview-after-preview\package.json
+      dest: package.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Operations_List_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2024-10-01-preview\Operations_List_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Operations_List_MinimumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001005-version-add-preview-after-preview\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-exists
+    config:
+      path: examples/2025-05-04-preview/Employees_Get_MaximumSet_Gen.json
+  - type: file-not-exists
+    config:
+      path: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-05-04-preview
+  - type: file-not-matches
+    config:
+      path: main.tsp
+      pattern: 2024-10-01-preview
+  - type: file-not-matches
+    config:
+      path: employee.tsp
+      pattern: oldAge
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Evaluate only the semantic interpretation of the request: the excluded feature is the default value 21 on age, while age itself should remain as optional int32 (not removed). Also check the agent clearly explains this rationale. Do not re-evaluate version renaming, old version removal, oldAge removal, or example folder/file changes, since those are already covered by file-based graders.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 1
+      file-not-matches: 2
+      file-exists: 1
+      file-not-exists: 1
+    threshold: 1.0
+
+- prompt: |
+    Add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version
+  name: 001006-version-add-preview-after-stable
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/001006-version-add-preview-after-stable\employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/001006-version-add-preview-after-stable\main.tsp
+      dest: main.tsp
+    - src: ../fixtures/001006-version-add-preview-after-stable\shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/001006-version-add-preview-after-stable\tspconfig.yaml
+      dest: tspconfig.yaml
+    - src: ../fixtures/001006-version-add-preview-after-stable\package.json
+      dest: package.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001006-version-add-preview-after-stable\examples\2024-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2024-10-01/Operations_List_MinimumSet_Gen.json
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-exists
+    config:
+      path: examples/2025-05-04-preview/Employees_Get_MaximumSet_Gen.json
+  - type: file-exists
+    config:
+      path: examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-05-04-preview
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2024-10-01
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      file-exists: 2
+      prompt: 1
+      file-matches: 2
+    threshold: 1.0
+
+- prompt: |
+    I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
+  name: 001007-version-add-stable-after-preview
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/001007-version-add-stable-after-preview\employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/001007-version-add-stable-after-preview\main.tsp
+      dest: main.tsp
+    - src: ../fixtures/001007-version-add-stable-after-preview\shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/001007-version-add-stable-after-preview\tspconfig.yaml
+      dest: tspconfig.yaml
+    - src: ../fixtures/001007-version-add-stable-after-preview\package.json
+      dest: package.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\readme.md
+      dest: readme.md
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Operations_List_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Operations_List_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Operations_List_MinimumSet_Gen.json
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-exists
+    config:
+      path: examples/2025-01-01/Employees_Get_MaximumSet_Gen.json
+  - type: file-not-exists
+    config:
+      path: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-01-01
+  - type: file-not-matches
+    config:
+      path: main.tsp
+      pattern: 2024-10-01-preview
+  - type: file-not-matches
+    config:
+      path: employee.tsp
+      pattern: 'workLocation\?: WorkLocation;'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@added\(Versions\.v2025_01_01\)'
+  - type: file-not-matches
+    config:
+      path: employee.tsp
+      pattern: v2024_10_01_preview
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Evaluate only the semantic interpretation of the request: the excluded features are workLocation property and WorkLocation model (both should not appear in the new version), while other features should be carried. Also check the agent clearly explains this semantic rationale. Do not re-evaluate version renaming (2024-10-01-preview → 2025-01-01), old version removal, new version example setup, or decorators, since those are already covered by file-based graders.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 2
+      file-not-matches: 3
+      file-exists: 1
+      file-not-exists: 1
+    threshold: 1.0
+    executor: copilot-sdk
+    runs: 1
+    model: claude-opus-4.6-1m
+    timeout: 1800
+
+- prompt: |
+    Add a new stable version `2025-01-01` to my service. Carry over changes.
+  name: 001008-version-add-stable-after-stable
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/001008-version-add-stable-after-stable\employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/001008-version-add-stable-after-stable\main.tsp
+      dest: main.tsp
+    - src: ../fixtures/001008-version-add-stable-after-stable\shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/001008-version-add-stable-after-stable\tspconfig.yaml
+      dest: tspconfig.yaml
+    - src: ../fixtures/001008-version-add-stable-after-stable\package.json
+      dest: package.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\readme.md
+      dest: readme.md
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2024-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2024-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2024-10-01/Operations_List_MinimumSet_Gen.json
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-exists
+    config:
+      path: examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+  - type: file-exists
+    config:
+      path: examples/2025-01-01/Employees_Get_MaximumSet_Gen.json
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2021-10-01
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2024-10-01
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-01-01
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      file-exists: 2
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`.
+  name: 001009-version-model-property-required
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: v2025_05_04_preview
+  - type: file-not-matches
+    config:
+      path: main.tsp
+      pattern: v2024_10_01_preview
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@madeRequired\(Versions\.v2025_05_04_preview\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'email: string;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify: (1) new version 2025-05-04-preview added, (2) old preview version 2024-10-01-preview removed from enum, (3) email property made required only in new version, (4) only scoped edits made.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, remove the `department` property from EmployeeProperties only for version `2025-05-04-preview`.
+  name: 001010-version-model-property-removed
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: v2025_05_04_preview
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@removed\(Versions\.v2025_05_04_preview\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'department\?: string;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, rename the `age` property to `employeeAge` in EmployeeProperties only for version `2025-05-04-preview`.
+  name: 001011-version-model-property-renamed
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: v2025_05_04_preview
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@renamedFrom\(Versions\.v2025_05_04_preview, "age"\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'employeeAge\?: int32;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, change the return type of the `exportData` operation from `ExportResult` to `DetailedExportResult` with additional properties `format` (string) and `exportedAt` (utcDateTime) only for version `2025-05-04-preview`.
+  name: 001012-version-operation-return-type-changed
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: v2025_05_04_preview
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'model DetailedExportResult'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'format\?: string;'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'exportedAt\?: utcDateTime;'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@returnTypeChangedFrom\(Versions\.v2025_05_04_preview, ExportResult\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'exportData is ArmResourceActionSync<Employee, void, DetailedExportResult>;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 6
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, change the type of the `statusCode` property from `string` to `int32` in EmployeeProperties only for version `2025-05-04-preview`.
+  name: 001013-version-model-property-type-changed
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: v2025_05_04_preview
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@typeChangedFrom\(Versions\.v2025_05_04_preview, string\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'statusCode\?: int32;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    change resource Employee to be an extension resource
+  name: 002001-ARM-change-resource-type
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ExtensionResource<
+  - type: file-not-matches
+    config:
+      path: '*.tsp'
+      pattern: TrackedResource<
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: Extension\.Read<|Extension\.CreateOrReplaceAsync<|Extension\.CustomPatch(Sync|Async)<|Extension\.DeleteWithoutOkAsync<|Extension\.ListByTarget<
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'The original separate list-by-resource-group and list-by-subscription operations should be consolidated into a single list operation using the extension list template. A scope-parameterized interface should be defined to allow the extension resource to be scoped to any parent resource.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-not-matches: 1
+      file-matches: 2
+    threshold: 1.0
+
+- prompt: |
+    add an extension resource named asset
+  name: 002002-ARM-define-extension-resource
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+      - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+        dest: employee.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+        dest: main.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/package.json
+        dest: package.json
+      - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+        dest: readme.md
+      - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+        dest: shared.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+        dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: model Asset is ExtensionResource<AssetProperties>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: interface Assets|interface AssetOps
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: provisioningState
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    Define a PATCH operation for Employees. It is to update properties of an employee. Ensure the definition meets TypeSpec Azure guidelines.
+  name: 002003-ARM-define-full-update-operation
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/002003-ARM-define-full-update-operation/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmCustomPatchAsync<
+  - type: file-not-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourcePatchAsync<
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-not-matches: 1
+      file-matches: 1
+    threshold: 1.0
+
+- prompt: |
+    Define a "badge assignment" extension resource. It should be an extension resource that can be attached to an employee. Ensure the definition meets TypeSpec Azure guidelines.
+  name: 002004-ARM-define-extension-resource
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/002004-ARM-define-extension-resource/badgeAssignment.tsp
+      dest: badgeAssignment.tsp
+    - src: ../fixtures/002004-ARM-define-extension-resource/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/002004-ARM-define-extension-resource/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: badgeAssignment.tsp
+      pattern: model BadgeAssignment is ExtensionResource<BadgeAssignmentProperties>
+  - type: file-matches
+    config:
+      path: badgeAssignment.tsp
+      pattern: '@visibility\(Lifecycle\.Read\)'
+  - type: file-matches
+    config:
+      path: badgeAssignment.tsp
+      pattern: Extension\.Read<|Extension\.CreateOrReplaceAsync<|Extension\.CustomPatch(Sync|Async)<|Extension\.DeleteWithoutOkAsync<
+  - type: file-matches
+    config:
+      path: badgeAssignment.tsp
+      pattern: Extension\.ListByTarget<
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 4
+    threshold: 1.0
+
+- prompt: |
+    Define a Azure resource "Employee" under the namespace "Microsoft.Widget" using TypeSpec. Properties: age (int32, optional), city (string, optional), profile (bytes, optional), provisioningState (enum, optional, read-only). Ensure the definition meets TypeSpec Azure design guidelines.
+  name: 002005-ARM-define-the-resource
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/002005-ARM-define-the-resource/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: model Employee is TrackedResource<EmployeeProperties>
+  # Point 3: EmployeeProperties has age, city, profile, and read-only provisioningState
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'age\?: int32'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: '@visibility\(Lifecycle\.Read\)'
+  # Point 4: ProvisioningState union includes standard ARM states
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: ResourceProvisioningState
+  # Point 5: CRUD + listByResourceGroup + listBySubscription
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: ArmResourceCreateOrReplaceAsync<Employee>|ArmResourceCreateOrUpdateAsync<Employee>
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: ArmResourceListByParent<Employee>
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: ArmListBySubscription<Employee>
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify all five aspects: (1) Employee resource definition is written into a TSP file; (2) Employee model uses TrackedResource<EmployeeProperties> under Microsoft.Widget namespace; (3) EmployeeProperties includes age, city, profile, and a read-only provisioningState; (4) ProvisioningState is a union type incorporating standard ARM ResourceProvisioningState; (5) Employees interface includes full CRUD operations (get, create, update, delete) plus listByResourceGroup and listBySubscription.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 7
+    threshold: 1.0
+
+- prompt: |
+    Create a new "AddressResource" child resource under the parent resource "Employee". Properties: street address, city, state, postal code, country, and a read-only provisioning state. Ensure the definition meets TypeSpec Azure design guidelines.
+  name: 002006-ARM-define-child-resource
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+      - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+        dest: employee.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+        dest: main.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/package.json
+        dest: package.json
+      - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+        dest: readme.md
+      - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+        dest: shared.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+        dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: '@parentResource\(Employee\)'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'model AddressResource is ProxyResource<AddressProperties>'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: interface Addresses|interface AddressResource
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'model AddressProperties'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'street1\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'street2\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'city\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'state\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'postalCode\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'country\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: '@visibility\(Lifecycle\.Read\)'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'provisioningState\?: ProvisioningState;'
+  # Addresses interface CRUD + list-by-parent
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceRead<AddressResource>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceCreateOrReplaceAsync<AddressResource>|ArmResourceCreateOrReplaceSync<AddressResource>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceDeleteWithoutOkAsync<AddressResource>|ArmResourceDeleteSync<AddressResource>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceListByParent<AddressResource>
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'The Addresses interface should include standard CRUD operations (get, create, update, delete) and a list-by-parent operation.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 16
+    threshold: 1.0
+
+- prompt: |
+    Add an additional POST action called "/notify" to the standard operations of Employee. Request body: message content (string) and priority (enum with values Low, Medium, High). Response body: notification identifier (string) and status (string). Ensure the definition meets TypeSpec Azure design guidelines.
+  name: 002007-ARM-define-custom-action
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+      - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+        dest: employee.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+        dest: main.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/package.json
+        dest: package.json
+      - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+        dest: readme.md
+      - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+        dest: shared.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+        dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: Extensible enum for notification priority levels (Low, Medium, High)
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: union.*Priority|enum.*Priority
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'Low|"Low"'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'Medium|"Medium"'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'High|"High"'
+  # VP2: Request model with message content (string) and priority fields
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: model.*Notify.*Request|model.*Notification.*Request
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'message.*:\s*string|content.*:\s*string'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'priority.*:\s*.*Priority'
+  # VP3: Response model with notification identifier (string) and status (string)
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: model.*Notify.*Response|model.*Notification.*Response
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'notificationId.*:\s*string|identifier.*:\s*string'
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'status.*:\s*string'
+  # VP4: Synchronous notify action on Employees interface
+  - type: file-matches
+    config:
+      path: 'employee.tsp'
+      pattern: 'notify is ArmResourceActionSync<|notify is ArmResourceActionAsync<|notify is ArmResourceAction<'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 11
+    threshold: 1.0
+
+- prompt: |
+    add top and skip query parameters to the ListBySubscription operation in interface Employees
+  name: 002008-ARM-add-parameters
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+      - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+        dest: employee.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+        dest: main.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/package.json
+        dest: package.json
+      - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+        dest: readme.md
+      - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+        dest: shared.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+        dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: TopQueryParameter
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: SkipQueryParameter
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: listBySubscription
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 3
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, add a patch operation to an existing ARM resource named 'Employee'
+  name: 002009-arm-add-patch-operation-to-resource
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/002009-arm-add-patch-operation-to-resource/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'update is ArmCustomPatchSync<Employee, Azure\.ResourceManager\.Foundations\.ResourceUpdateModel<Employee, EmployeeProperties>>;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 1
+    threshold: 1.0
+
+- prompt: |
+    In the Widget project, add a sync operation exportEmployeeData for employee resource.
+  name: 002010-arm-action-sync-operation
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/002010-arm-action-sync-operation/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/002010-arm-action-sync-operation/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/002010-arm-action-sync-operation/package.json
+      dest: package.json
+    - src: ../fixtures/002010-arm-action-sync-operation/readme.md
+      dest: readme.md
+    - src: ../fixtures/002010-arm-action-sync-operation/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/002010-arm-action-sync-operation/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'exportData is ArmResourceActionSync<Employee, void, ExportResult>;'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 1
+    threshold: 1.0
+
+- prompt: |
+    Add an async delete operation for StacItems
+  name: 003001-dataplane-async-delete-op
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/003001-dataplane-async-delete-op/inma.tsp
+      dest: inma.tsp
+    - src: ../fixtures/003001-dataplane-async-delete-op/package.json
+      dest: package.json
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: Async delete added to StacItems namespace
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: 'interface StacItems'
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: 'LongRunningResourceDelete<StacItem>'
+  # VP2: Uses StandardResourceOperations alias
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: 'alias StandardResourceOperations|StandardResourceOperations\.LongRunningResourceDelete'
+  # VP3: Linked to existing polling operation
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: '@pollingOperation\(IngestionOperations\.get\)'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 4
+    threshold: 1.0
+
+- prompt: |
+    Add a move async operation to move employee, operation's request is MoveRequest, response is MoveResponse
+  name: 003002-arm-action-lro
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: Async move action using ArmResourceActionAsync
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'move is ArmResourceActionAsync<Employee,'
+  # VP2: MoveRequest input and MoveResponse output
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'ArmResourceActionAsync<Employee,\s*MoveRequest,\s*MoveResponse'
+  # VP3: Combined LRO headers with FinalResult and RetryAfterHeader
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'LroHeaders = ArmCombinedLroHeaders'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'FinalResult\s*=\s*MoveResponse'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'RetryAfterHeader'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 5
+    threshold: 1.0
+
+- prompt: |
+    Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template.
+  name: 003003-arm-modify-response
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: ArmAsyncOperationHeader with FinalResult = Employee (alias or inline)
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'ArmAsyncOperationHeader<FinalResult\s*=\s*Employee>'
+  # VP2: createOrUpdate uses ArmResourceCreateOrReplaceAsync with custom LroHeaders
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'createOrUpdate is ArmResourceCreateOrReplaceAsync<'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'LroHeaders\s*='
+  # VP3: Other operations unchanged
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'update is ArmResourcePatchSync<Employee'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'delete is ArmResourceDeleteWithoutOkAsync<Employee>'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 5
+    threshold: 1.0
+
+- prompt: |
+    add minLength decorator to set the minLength 1 for resource name parameter of Employee resource
+  name: 004001-decorate-mgmt-resource-name-parameter
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: '@minLength\(1\)|@@minLength\(Employee\.name,\s*1\)'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'ResourceNameParameter<Employee,\s*KeyName\s*=\s*"name"\>|@key\("employeeName"\)'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 2
+    threshold: 1.0
+
+- prompt: |
+    I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array.
+  name: 004002-decorate-length-constrains-on-array-item
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: Custom scalar type with minLength/maxLength constraints
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'scalar.*extends string'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@minLength\(3\)'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@maxLength\(10\)'
+  # VP2: Assets array uses custom scalar type instead of plain string
+  - type: file-not-matches
+    config:
+      path: employee.tsp
+      pattern: 'assets:\s*string\[\]'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'assets:.*\[\]'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 5
+    threshold: 1.0
+
+- prompt: |
+    Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore those operationIds that do not contain underscores or begin with a lowercase letter.
+  name: 004003-delete-and-restore-operationId-decorator
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BastionHost.tsp
+      dest: BastionHost.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BgpConnection.tsp
+      dest: BgpConnection.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRouteGateway.tsp
+      dest: ExpressRouteGateway.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRoutePort.tsp
+      dest: ExpressRoutePort.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRouteProviderPort.tsp
+      dest: ExpressRouteProviderPort.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/NetworkInterface.tsp
+      dest: NetworkInterface.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/P2SVpnGateway.tsp
+      dest: P2SVpnGateway.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/package.json
+      dest: package.json
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/Route.tsp
+      dest: Route.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnServerConfigurationPolicyGroup.tsp
+      dest: VpnServerConfigurationPolicyGroup.tsp
+    - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnSiteLinkConnection.tsp
+      dest: VpnSiteLinkConnection.tsp
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: Underscore operationIds should be removed (e.g. BgpConnection has only underscore ones)
+  - type: file-not-matches
+    config:
+      path: BgpConnection.tsp
+      pattern: '@operationId\('
+  - type: file-not-matches
+    config:
+      path: NetworkInterface.tsp
+      pattern: '@operationId\('
+  # VP2: Non-standard PascalCase operationIds restored with @operationId
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '@operationId\("PutBastionShareableLink"\)'
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '@operationId\("GetActiveSessions"\)'
+  - type: file-matches
+    config:
+      path: ExpressRouteProviderPort.tsp
+      pattern: '@operationId\("ExpressRouteProviderPort"\)'
+  # VP3: Restored operationIds keep their #suppress comment
+  - type: file-matches
+    config:
+      path: BastionHost.tsp
+      pattern: '#suppress.*no-openapi|#suppress.*operationId'
+  # Underscore one in ExpressRouteProviderPort should be removed
+  - type: file-not-matches
+    config:
+      path: ExpressRouteProviderPort.tsp
+      pattern: '@operationId\("ExpressRouteProviderPortsLocation_List"\)'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-not-matches: 3
+      file-matches: 4
+    threshold: 1.0
+
+- prompt: |
+    Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".
+  name: 005001-warning-suppress-warning
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/005001-warning-suppress-warning/models.tsp
+      dest: models.tsp
+    - src: ../fixtures/005001-warning-suppress-warning/package.json
+      dest: package.json
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: models.tsp
+      pattern: '#suppress'
+  - type: file-matches
+    config:
+      path: models.tsp
+      pattern: 'FIXME: Update justification, follow aka\.ms/tsp/conversion-fix for details'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+  scoring:
+    weights:
+      tool-calls: 1
+      prompt: 1
+      file-matches: 2
+    threshold: 1.0
