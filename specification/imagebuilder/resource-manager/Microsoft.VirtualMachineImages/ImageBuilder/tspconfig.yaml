@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/imagebuilder"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,45 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-imagebuilder"
+    namespace: "com.azure.resourcemanager.imagebuilder"
+    service-name: "ImageBuilder"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ImageBuilder"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/imagebuilder"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-imagebuilder"
+    namespace: "azure.mgmt.imagebuilder"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/imagebuilder"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-imagebuilder"
+    flavor: azure
+    compatibility-lro: true
+    typespec-title-map:
+      ImageBuilderClient: MicrosoftImageBuilder
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-imagebuilder"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/imagebuilder"
+    emitter-output-dir: "{output-dir}/{service-dir}/armimagebuilder"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armimagebuilder"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

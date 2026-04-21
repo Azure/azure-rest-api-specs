@@ -34,24 +34,18 @@ interface ImageTemplates {
   /**
    * Get information about a virtual machine image template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_Get")
   @tag("VirtualMachineImageTemplate")
   get is ArmResourceRead<ImageTemplate>;
 
   /**
    * Create or update a virtual machine image template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_CreateOrUpdate")
   @tag("VirtualMachineImageTemplate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ImageTemplate>;
 
   /**
    * Update the tags for this Virtual Machine Image Template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_Update")
   @patch(#{ implicitOptionality: false })
   @tag("VirtualMachineImageTemplate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -65,33 +59,25 @@ interface ImageTemplates {
   /**
    * Delete a virtual machine image template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_Delete")
   @tag("VirtualMachineImageTemplate")
   delete is ArmResourceDeleteWithoutOkAsync<ImageTemplate>;
 
   /**
    * Gets information about the VM image templates associated with the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_ListByResourceGroup")
   @tag("VirtualMachineImageTemplate")
   listByResourceGroup is ArmResourceListByParent<ImageTemplate>;
 
   /**
    * Gets information about the VM image templates associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_List")
   @tag("VirtualMachineImageTemplate")
   list is ArmListBySubscription<ImageTemplate>;
 
   /**
    * Create artifacts from a existing image template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_Run")
   @tag("VirtualMachineImageTemplate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   run is ArmResourceActionAsync<
@@ -104,9 +90,7 @@ interface ImageTemplates {
   /**
    * Cancel the long running image build based on the image template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualMachineImageTemplates_Cancel")
   @tag("VirtualMachineImageTemplate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   cancel is ArmResourceActionAsync<
