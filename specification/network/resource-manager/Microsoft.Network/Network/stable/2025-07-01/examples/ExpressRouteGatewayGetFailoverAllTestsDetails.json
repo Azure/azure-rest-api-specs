@@ -9,7 +9,55 @@
   },
   "responses": {
     "200": {
-      "body": []
+      "body": [
+        {
+          "peeringLocation": "Hong Kong",
+          "circuits": [
+            {
+              "nrpResourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuit1",
+              "name": "circuit1",
+              "connectionName": "conn1"
+            }
+          ],
+          "status": "Completed",
+          "startTime": "2026-02-11T07:37:04Z",
+          "endTime": "2026-02-11T08:41:50Z",
+          "connections": [
+            {
+              "nrpResourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/ergw1/expressRouteConnections/conn1",
+              "name": "conn1",
+              "status": "Connected",
+              "lastUpdatedTime": "2026-02-11T08:41:49Z"
+            }
+          ],
+          "testGuid": "16546d1a-0548-4d6d-84ca-7149f3af4403",
+          "testType": "SingleSiteFailover",
+          "issues": []
+        },
+        {
+          "peeringLocation": "Hong Kong2",
+          "circuits": [
+            {
+              "nrpResourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuit2",
+              "name": "circuit2",
+              "connectionName": "conn2"
+            }
+          ],
+          "status": "NotStarted",
+          "startTime": "",
+          "endTime": "",
+          "connections": [
+            {
+              "nrpResourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/ergw1/expressRouteConnections/conn2",
+              "name": "conn2",
+              "status": "Connected"
+            }
+          ],
+          "testGuid": "00000000-0000-0000-0000-000000000000",
+          "testType": "SingleSiteFailover",
+          "issues": []
+        }
+      ]
     },
     "202": {
       "headers": {

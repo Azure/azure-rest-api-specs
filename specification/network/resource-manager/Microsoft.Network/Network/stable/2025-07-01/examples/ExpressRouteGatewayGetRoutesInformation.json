@@ -12,8 +12,48 @@
         "lastComputedTime": "2025-01-01T00:00:00Z",
         "nextEligibleComputeTime": "2025-01-01T01:00:00Z",
         "routeSetVersion": "1",
-        "routeSets": [],
-        "circuitsMetadataMap": {}
+        "routeSets": [
+          {
+            "name": "Set-1",
+            "locations": [
+              "Washington DC",
+              "London2"
+            ],
+            "details": {
+              "10.11.0.0/24": [
+                {
+                  "circuit": "x0",
+                  "pri": 1,
+                  "sec": 1
+                },
+                {
+                  "circuit": "x1",
+                  "pri": 2,
+                  "sec": 2
+                }
+              ],
+              "10.57.0.0/16": [
+                {
+                  "circuit": "x0",
+                  "pri": 1,
+                  "sec": 1
+                }
+              ]
+            }
+          }
+        ],
+        "circuitsMetadataMap": {
+          "x0": {
+            "name": "circuit1",
+            "link": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuit1",
+            "location": "Hong Kong"
+          },
+          "x1": {
+            "name": "circuit2",
+            "link": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuit2",
+            "location": "Hong Kong2"
+          }
+        }
       }
     },
     "202": {

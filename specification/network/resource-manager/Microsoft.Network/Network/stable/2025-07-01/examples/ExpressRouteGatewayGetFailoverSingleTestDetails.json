@@ -9,7 +9,37 @@
   },
   "responses": {
     "200": {
-      "body": []
+      "body": [
+        {
+          "peeringLocation": "Hong Kong",
+          "startTimeUtc": "2026-02-11T07:37:04Z",
+          "endTimeUtc": "2026-02-11T08:41:50Z",
+          "status": "Completed",
+          "wasSimulationSuccessful": true,
+          "redundantRoutes": [
+            {
+              "peeringLocations": [
+                "Atlanta",
+                "Silicon Valley"
+              ],
+              "routes": [
+                "10.0.0.0/24"
+              ]
+            }
+          ],
+          "nonRedundantRoutes": [
+            "10.10.0.0/16",
+            "10.11.0.0/24"
+          ],
+          "failoverConnectionDetails": [
+            {
+              "failoverConnectionName": "conn1",
+              "failoverLocation": "Hong Kong2",
+              "isVerified": true
+            }
+          ]
+        }
+      ]
     },
     "202": {
       "headers": {
