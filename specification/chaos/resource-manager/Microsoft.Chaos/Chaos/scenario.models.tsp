@@ -192,7 +192,7 @@ model ExternalResource {
   /**
    * The resource ID of the external resource.
    */
-  resourceId?: string;
+  resourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**

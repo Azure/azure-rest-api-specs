@@ -43,6 +43,7 @@ alias ParentResourceParameters = {
  * Current provisioning state for a given Azure Chaos resource.
  */
 union ProvisioningState {
+  string,
   ResourceProvisioningState, // include standard provisioning states
 
   /**

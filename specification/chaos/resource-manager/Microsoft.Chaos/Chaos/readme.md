@@ -107,6 +107,10 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations"].post
     reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: PostOperationIdContainsUrlVerb
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails"].post
+    reason: The operationId Experiments_ExecutionDetails is established in previous API versions (2024-11-01-preview, 2025-01-01). Renaming would be a breaking change for existing SDKs.
 ```
 
 ### Tag: package-2025-01
@@ -140,6 +144,10 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: openapi.json
     reason: already used in GA api version, fixing it will cause breaking change
+  - code: PostOperationIdContainsUrlVerb
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails"].post
+    reason: The operationId Experiments_ExecutionDetails is established in previous API versions. Renaming would be a breaking change for existing SDKs.
 ```
 
 ### Tag: package-preview-2024-11
@@ -173,6 +181,10 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: openapi.json
     reason: already used in GA api version, fixing it will cause breaking change
+  - code: PostOperationIdContainsUrlVerb
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails"].post
+    reason: The operationId Experiments_ExecutionDetails is established in previous API versions. Renaming would be a breaking change for existing SDKs.
 ```
 
 ### Tag: package-preview-2024-03

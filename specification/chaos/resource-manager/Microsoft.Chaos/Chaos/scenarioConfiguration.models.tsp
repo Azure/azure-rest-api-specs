@@ -110,7 +110,7 @@ model ConfigurationFilters {
    * for each subscription are included.
    *
    * At execution time, each physical zone is resolved to per-subscription
-   * logical zones via the ARM locations API. The resolved mapping is surfaced
+   * logical zones via the Azure locations API. The resolved mapping is surfaced
    * on the scenario run response (`zoneResolution`).
    *
    * Null or omitted means physical zone targeting is not used.

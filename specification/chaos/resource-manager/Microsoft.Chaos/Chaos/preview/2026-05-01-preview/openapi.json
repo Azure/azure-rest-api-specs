@@ -4556,7 +4556,7 @@
           "type": "array",
           "description": "Recommended Azure RBAC role definition GUIDs for this action.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           },
           "readOnly": true
         }
@@ -4610,11 +4610,11 @@
       "properties": {
         "targetType": {
           "type": "string",
-          "description": "The ARM resource type (e.g., \"Microsoft.Compute/virtualMachines\")."
+          "description": "The Azure resource type (e.g., \"Microsoft.Compute/virtualMachines\")."
         },
         "requiredPermissions": {
           "type": "array",
-          "description": "List of ARM permissions required for this target type.",
+          "description": "List of Azure permissions required for this target type.",
           "items": {
             "type": "string"
           }
@@ -4664,6 +4664,11 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "BranchStatus": {
       "type": "object",
@@ -5130,7 +5135,7 @@
         },
         "physicalZones": {
           "type": "array",
-          "description": "Array of physical availability zone identifiers in `{region}-az{N}` format\n(e.g., `\"westus2-az1\"`). Only resources in the corresponding logical zone\nfor each subscription are included.\n\nAt execution time, each physical zone is resolved to per-subscription\nlogical zones via the ARM locations API. The resolved mapping is surfaced\non the scenario run response (`zoneResolution`).\n\nNull or omitted means physical zone targeting is not used.\nOnly one physical zone is supported in preview.\n\nMutually exclusive with `zones` — set one or the other, not both.",
+          "description": "Array of physical availability zone identifiers in `{region}-az{N}` format\n(e.g., `\"westus2-az1\"`). Only resources in the corresponding logical zone\nfor each subscription are included.\n\nAt execution time, each physical zone is resolved to per-subscription\nlogical zones via the Azure locations API. The resolved mapping is surfaced\non the scenario run response (`zoneResolution`).\n\nNull or omitted means physical zone targeting is not used.\nOnly one physical zone is supported in preview.\n\nMutually exclusive with `zones` — set one or the other, not both.",
           "items": {
             "type": "string"
           }
@@ -5181,7 +5186,7 @@
         "storageAccountResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "ARM Resource ID of the Storage account to use for Customer Data storage.",
+          "description": "Azure Resource ID of the Storage account to use for Customer Data storage.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -5684,6 +5689,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the external resource."
         }
       }
@@ -6093,7 +6099,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM identifier for private endpoint.",
+          "description": "The Azure identifier for private endpoint.",
           "readOnly": true
         }
       }

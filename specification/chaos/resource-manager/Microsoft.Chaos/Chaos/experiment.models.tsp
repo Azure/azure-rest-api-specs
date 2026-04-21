@@ -213,7 +213,7 @@ model ChaosTargetFilter {
  */
 model CustomerDataStorageProperties {
   /**
-   * ARM Resource ID of the Storage account to use for Customer Data storage.
+   * Azure Resource ID of the Storage account to use for Customer Data storage.
    */
   storageAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {

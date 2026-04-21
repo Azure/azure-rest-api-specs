@@ -122,7 +122,7 @@ model ActionProperties {
    * Recommended Azure RBAC role definition GUIDs for this action.
    */
   @visibility(Lifecycle.Read)
-  recommendedRoles?: string[];
+  recommendedRoles?: Azure.Core.uuid[];
 }
 
 /**
@@ -132,12 +132,12 @@ model ActionProperties {
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionSupportedTargetType {
   /**
-   * The ARM resource type (e.g., "Microsoft.Compute/virtualMachines").
+   * The Azure resource type (e.g., "Microsoft.Compute/virtualMachines").
    */
   targetType?: string;
 
   /**
-   * List of ARM permissions required for this target type.
+   * List of Azure permissions required for this target type.
    */
   requiredPermissions?: string[];
 }
