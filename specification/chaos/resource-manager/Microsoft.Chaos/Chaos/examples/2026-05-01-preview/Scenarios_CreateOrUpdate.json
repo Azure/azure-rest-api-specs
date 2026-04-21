@@ -2,42 +2,85 @@
   "parameters": {
     "api-version": "2026-05-01-preview",
     "workspaceName": "exampleWorkspace",
-    "scenarioName": "myVMShutdownScenario",
+    "scenarioName": "zoneDownScenario",
     "resourceGroupName": "exampleRG",
     "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
     "resource": {
       "properties": {
-        "description": "This scenario demonstrates shutting down virtual machines to test application resilience to infrastructure failures.",
+        "description": "Induces an outage of all discovered VM and VMSS instances in the target zone with an option to invoke custom scripted actions using Automation Runbooks. Additionally, it forces failover of discovered Redis instances to simulate backend zonal outage.",
         "parameters": [
           {
             "name": "duration",
             "type": "string",
-            "default": "PT5M",
+            "default": "PT15M",
             "required": false,
-            "description": "Duration of the shutdown in ISO 8601 format"
+            "description": "The duration of the outage scenario."
           },
           {
-            "name": "targetResourceIds",
-            "type": "array",
-            "required": true,
-            "description": "Array of target virtual machine resource IDs"
+            "name": "customRunbook1ResourceId",
+            "type": "string",
+            "required": false,
+            "description": "Optional custom runbook 1 resource ID. If not provided, this action will be skipped."
+          },
+          {
+            "name": "customRunbook1ParametersJson",
+            "type": "string",
+            "required": false,
+            "default": "{}",
+            "description": "Optional custom runbook 1 parameters in JSON format."
           }
         ],
         "actions": [
           {
-            "name": "shutdownAction",
-            "actionId": "microsoft-compute-shutdown/1.0",
-            "description": "Shutdown virtual machines to test resilience",
+            "name": "vmssZoneDown",
+            "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+            "description": "Force shutdown VMSS instances in target zone",
+            "duration": "%%{parameters.duration}%%",
+            "parameters": [
+              {
+                "key": "zones",
+                "value": "%%{filters.zones}%%"
+              }
+            ]
+          },
+          {
+            "name": "vmZoneDown",
+            "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+            "description": "Force shutdown VM instances in target zone",
+            "duration": "%%{parameters.duration}%%",
+            "parameters": [
+              {
+                "key": "zones",
+                "value": "%%{filters.zones}%%"
+              }
+            ]
+          },
+          {
+            "name": "redisFailover",
+            "actionId": "urn:csci:microsoft:azureClusteredCacheForRedis:Reboot/1.0.0",
+            "description": "Force failover of Redis instances to simulate backend zonal outage",
             "duration": "PT5M",
             "parameters": [
               {
-                "name": "abruptShutdown",
-                "type": "boolean",
-                "default": "false",
-                "required": false,
-                "description": "Whether to perform an abrupt shutdown"
+                "key": "RebootType",
+                "value": "PrimaryNode"
               }
             ]
+          },
+          {
+            "name": "custom-runbook-1",
+            "actionId": "urn:csci:microsoft:Automation:StartRunbook/1.0.0",
+            "description": "Custom Runbook 1",
+            "duration": "PT30M",
+            "parameters": [
+              {
+                "key": "RunbookParameters",
+                "value": "%%{parameters.customRunbook1ParametersJson}%%"
+              }
+            ],
+            "externalResource": {
+              "resourceId": "%%{parameters.customRunbook1ResourceId}%%"
+            }
           }
         ]
       }
@@ -46,43 +89,86 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/myVMShutdownScenario",
-        "name": "myVMShutdownScenario",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/zoneDownScenario",
+        "name": "zoneDownScenario",
         "type": "Microsoft.Chaos/workspaces/scenarios",
         "properties": {
           "provisioningState": "Succeeded",
-          "version": "1.0.0",
-          "description": "This scenario demonstrates shutting down virtual machines to test application resilience to infrastructure failures.",
+          "version": "1.0",
+          "description": "Induces an outage of all discovered VM and VMSS instances in the target zone with an option to invoke custom scripted actions using Automation Runbooks. Additionally, it forces failover of discovered Redis instances to simulate backend zonal outage.",
           "parameters": [
             {
               "name": "duration",
               "type": "string",
-              "default": "PT5M",
+              "default": "PT15M",
               "required": false,
-              "description": "Duration of the shutdown in ISO 8601 format"
+              "description": "The duration of the outage scenario."
             },
             {
-              "name": "targetResourceIds",
-              "type": "array",
-              "required": true,
-              "description": "Array of target virtual machine resource IDs"
+              "name": "customRunbook1ResourceId",
+              "type": "string",
+              "required": false,
+              "description": "Optional custom runbook 1 resource ID. If not provided, this action will be skipped."
+            },
+            {
+              "name": "customRunbook1ParametersJson",
+              "type": "string",
+              "required": false,
+              "default": "{}",
+              "description": "Optional custom runbook 1 parameters in JSON format."
             }
           ],
           "actions": [
             {
-              "name": "shutdownAction",
-              "actionId": "microsoft-compute-shutdown/1.0",
-              "description": "Shutdown virtual machines to test resilience",
+              "name": "vmssZoneDown",
+              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "description": "Force shutdown VMSS instances in target zone",
+              "duration": "%%{parameters.duration}%%",
+              "parameters": [
+                {
+                  "key": "zones",
+                  "value": "%%{filters.zones}%%"
+                }
+              ]
+            },
+            {
+              "name": "vmZoneDown",
+              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "description": "Force shutdown VM instances in target zone",
+              "duration": "%%{parameters.duration}%%",
+              "parameters": [
+                {
+                  "key": "zones",
+                  "value": "%%{filters.zones}%%"
+                }
+              ]
+            },
+            {
+              "name": "redisFailover",
+              "actionId": "urn:csci:microsoft:azureClusteredCacheForRedis:Reboot/1.0.0",
+              "description": "Force failover of Redis instances to simulate backend zonal outage",
               "duration": "PT5M",
               "parameters": [
                 {
-                  "name": "abruptShutdown",
-                  "type": "boolean",
-                  "default": "false",
-                  "required": false,
-                  "description": "Whether to perform an abrupt shutdown"
+                  "key": "RebootType",
+                  "value": "PrimaryNode"
                 }
               ]
+            },
+            {
+              "name": "custom-runbook-1",
+              "actionId": "urn:csci:microsoft:Automation:StartRunbook/1.0.0",
+              "description": "Custom Runbook 1",
+              "duration": "PT30M",
+              "parameters": [
+                {
+                  "key": "RunbookParameters",
+                  "value": "%%{parameters.customRunbook1ParametersJson}%%"
+                }
+              ],
+              "externalResource": {
+                "resourceId": "%%{parameters.customRunbook1ResourceId}%%"
+              }
             }
           ]
         },
@@ -99,43 +185,86 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/myVMShutdownScenario",
-        "name": "myVMShutdownScenario",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/zoneDownScenario",
+        "name": "zoneDownScenario",
         "type": "Microsoft.Chaos/workspaces/scenarios",
         "properties": {
           "provisioningState": "Creating",
-          "version": "1.0.0",
-          "description": "This scenario demonstrates shutting down virtual machines to test application resilience to infrastructure failures.",
+          "version": "1.0",
+          "description": "Induces an outage of all discovered VM and VMSS instances in the target zone with an option to invoke custom scripted actions using Automation Runbooks. Additionally, it forces failover of discovered Redis instances to simulate backend zonal outage.",
           "parameters": [
             {
               "name": "duration",
               "type": "string",
-              "default": "PT5M",
+              "default": "PT15M",
               "required": false,
-              "description": "Duration of the shutdown in ISO 8601 format"
+              "description": "The duration of the outage scenario."
             },
             {
-              "name": "targetResourceIds",
-              "type": "array",
-              "required": true,
-              "description": "Array of target virtual machine resource IDs"
+              "name": "customRunbook1ResourceId",
+              "type": "string",
+              "required": false,
+              "description": "Optional custom runbook 1 resource ID. If not provided, this action will be skipped."
+            },
+            {
+              "name": "customRunbook1ParametersJson",
+              "type": "string",
+              "required": false,
+              "default": "{}",
+              "description": "Optional custom runbook 1 parameters in JSON format."
             }
           ],
           "actions": [
             {
-              "name": "shutdownAction",
-              "actionId": "microsoft-compute-shutdown/1.0",
-              "description": "Shutdown virtual machines to test resilience",
+              "name": "vmssZoneDown",
+              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "description": "Force shutdown VMSS instances in target zone",
+              "duration": "%%{parameters.duration}%%",
+              "parameters": [
+                {
+                  "key": "zones",
+                  "value": "%%{filters.zones}%%"
+                }
+              ]
+            },
+            {
+              "name": "vmZoneDown",
+              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "description": "Force shutdown VM instances in target zone",
+              "duration": "%%{parameters.duration}%%",
+              "parameters": [
+                {
+                  "key": "zones",
+                  "value": "%%{filters.zones}%%"
+                }
+              ]
+            },
+            {
+              "name": "redisFailover",
+              "actionId": "urn:csci:microsoft:azureClusteredCacheForRedis:Reboot/1.0.0",
+              "description": "Force failover of Redis instances to simulate backend zonal outage",
               "duration": "PT5M",
               "parameters": [
                 {
-                  "name": "abruptShutdown",
-                  "type": "boolean",
-                  "default": "false",
-                  "required": false,
-                  "description": "Whether to perform an abrupt shutdown"
+                  "key": "RebootType",
+                  "value": "PrimaryNode"
                 }
               ]
+            },
+            {
+              "name": "custom-runbook-1",
+              "actionId": "urn:csci:microsoft:Automation:StartRunbook/1.0.0",
+              "description": "Custom Runbook 1",
+              "duration": "PT30M",
+              "parameters": [
+                {
+                  "key": "RunbookParameters",
+                  "value": "%%{parameters.customRunbook1ParametersJson}%%"
+                }
+              ],
+              "externalResource": {
+                "resourceId": "%%{parameters.customRunbook1ResourceId}%%"
+              }
             }
           ]
         },
