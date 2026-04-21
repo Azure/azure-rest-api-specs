@@ -2012,6 +2012,16 @@ union IpAllocationType {
 }
 
 /**
+ * Controls verbosity of the returned load balancer resource.
+ */
+union LoadBalancerDetailLevel {
+  string,
+
+  /** When set to 'Reduced', read-only reference collections may be omitted. */
+  Reduced: "Reduced",
+}
+
+/**
  * Who created the route.
  */
 union EffectiveRouteSource {
@@ -2920,7 +2930,13 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
-   * None
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
+   * No next hop type.
    */
   None: "None",
 }
@@ -6253,6 +6269,24 @@ model ApplicationGatewaySku {
 }
 
 /**
+ * Managed HSM properties of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_07_01)
+model ApplicationGatewayManagedHsm {
+  /**
+   * Key identifier of a key stored in Managed HSM.
+   */
+  keyId?: url;
+
+  /**
+   * Base-64 encoded value of a base-64 public certificate.
+   */
+  publicCertData?: string;
+}
+
+/**
  * Application Gateway Ssl policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6660,6 +6694,12 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
    * Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
    */
   keyVaultSecretId?: string;
+
+  /**
+   * Managed HSM properties of the Application Gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  hsm?: ApplicationGatewayManagedHsm;
 
   /**
    * The provisioning state of the SSL certificate resource.
@@ -9114,6 +9154,27 @@ model AzureFirewallPropertiesFormat {
    * Properties to provide a custom autoscale configuration to this azure firewall.
    */
   autoscaleConfiguration?: AzureFirewallAutoscaleConfiguration;
+
+  /**
+   * AFC configuration for the Azure Firewall.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  afcConfiguration?: AfcConfiguration;
+}
+
+/**
+ * AFC configuration for the Azure Firewall.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "AfcConfiguration is a firewall-specific model and must be emitted to firewall.json"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
+model AfcConfiguration {
+  /**
+   * The endpoint URL of the AFC control plane associated with this Azure Firewall.
+   */
+  @visibility(Lifecycle.Read)
+  serviceEndpoint?: string;
 }
 
 /**
@@ -26040,3 +26101,5 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(DisablePeeringRoute, Versions.v2025_07_01);
+@@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
