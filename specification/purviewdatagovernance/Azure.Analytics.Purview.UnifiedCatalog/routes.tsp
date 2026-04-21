@@ -927,7 +927,7 @@ interface Policies {
   List is RpcOperation<
     {
       @doc("Optional continuation token.")
-      @query
+      @query("$skipToken")
       skipToken?: string;
     },
     CatalogResponse
