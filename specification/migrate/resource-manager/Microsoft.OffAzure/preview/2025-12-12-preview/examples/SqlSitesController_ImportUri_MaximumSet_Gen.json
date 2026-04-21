@@ -1,0 +1,30 @@
+{
+  "title": "SqlSitesController_ImportUri_MaximumSet",
+  "operationId": "SqlSitesController_ImportUri",
+  "parameters": {
+    "api-version": "2025-12-12-preview",
+    "subscriptionId": "291F8922-D548-4CAF-9C43-C65300D5AFD4",
+    "resourceGroupName": "exampleResourceGroup",
+    "siteName": "55--o3Q",
+    "sqlSiteName": "SQL-Server01",
+    "body": {
+      "jobArmId": "/subscriptions/291F8922-D548-4CAF-9C43-C65300D5AFD4/resourceGroups/exampleResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet1",
+      "uri": "https://example.blob.core.windows.net/container/file.csv?sas_token",
+      "importType": "AzureMigrateCsv"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Retry-After": "30"
+      }
+    },
+    "200": {
+      "body": {
+        "uri": "https://example.blob.core.windows.net/container/file.csv?sas_token",
+        "importType": "AzureMigrateCSV"
+      }
+    }
+  }
+}
