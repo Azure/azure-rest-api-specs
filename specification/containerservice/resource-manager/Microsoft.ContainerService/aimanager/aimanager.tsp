@@ -32,7 +32,7 @@ model AIManagerProperties {
   @doc("The status of the last operation.")
   provisioningState?: AIManagerProvisioningState;
 
-  @doc("Delete options of the AI Manager. Defaults to `Keep` if not specified.")
+  @doc("Delete options of the AI Manager. Defaults to `Delete` if not specified.")
   deletePolicy?: DeletePolicy;
 
   @visibility(Lifecycle.Read)
