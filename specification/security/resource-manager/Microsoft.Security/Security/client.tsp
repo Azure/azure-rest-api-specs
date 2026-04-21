@@ -316,3 +316,16 @@ op privateLinkResourcesGetCustomization(
   "ArmActionType",
   "python"
 );
+
+@@clientName(Common.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "java"
+);
+@@clientName(PrivateLinksAPI.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java"
+);
+@@clientName(Common.ActionType,
+  "ArmActionType",
+  "java"
+);
