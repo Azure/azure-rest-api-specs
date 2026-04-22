@@ -65,7 +65,7 @@ interface Groups {
   createOrReplace is ArmResourceCreateOrReplaceAsync<Group>;
   update is ArmResourcePatchAsync<Group, GroupProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Group>;
-  listByResourceGroup is ArmResourceListByParent<Group>;
+  listByNamespace is ArmResourceListByParent<Group>;
 
   @doc("Gets a stored sample of members that was determined during the last refresh.")
   getSampleOfMembers is ArmResourceActionSync<
