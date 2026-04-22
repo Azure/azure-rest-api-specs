@@ -698,12 +698,6 @@ model EntraIsolationKeySource extends IsolationKeySource {
 )
 model HeaderIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Header;
-
-  @doc("The user isolation key header value")
-  user_isolation_key: string;
-
-  @doc("The chat isolation key header value")
-  chat_isolation_key: string;
 }
 
 @extension(
