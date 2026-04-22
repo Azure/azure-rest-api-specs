@@ -920,7 +920,7 @@ model ResourceGroupExportResult {
   /**
    * The template export error.
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
 /**
