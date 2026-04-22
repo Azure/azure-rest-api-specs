@@ -323,7 +323,7 @@ op MetricsListAtSubscriptionScopePostCustomized(
   @query("timespan")
   timespan?: string,
 
-  ...IntervalQueryParameter;
+  ...IntervalQueryParameter,
 
   /** The names of the metrics (comma separated) to retrieve. */
   @query("metricnames")
