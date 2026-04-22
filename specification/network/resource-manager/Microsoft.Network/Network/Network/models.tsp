@@ -20519,6 +20519,12 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
   enablePrivateLinkFastPath?: boolean;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -21475,6 +21481,12 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * Certificate Authentication information for a certificate based authentication connection.
    */
   certificateAuthentication?: CertificateAuthentication;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -23935,6 +23947,12 @@ model BgpConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   connectionState?: HubBgpConnectionStatus;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
