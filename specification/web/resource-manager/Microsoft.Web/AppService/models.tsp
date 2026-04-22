@@ -1046,6 +1046,23 @@ enum RedundancyMode {
 }
 
 /**
+ * The platform release channel for the site.
+ */
+@added(Versions.v2026_03_15)
+union PlatformReleaseChannel {
+  string,
+
+  /** Latest receives updates earliest. */
+  Latest: "Latest",
+
+  /** Standard receives updates after Latest. */
+  Standard: "Standard",
+
+  /** Extended receives updates last with extended support. */
+  Extended: "Extended",
+}
+
+/**
  * Specifies the scope of uniqueness for the default hostname during resource creation
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2374,6 +2391,12 @@ model SiteProperties {
    */
   @visibility(Lifecycle.Read)
   sku?: string;
+
+  /**
+   * The platform release channel for the site. Latest receives updates earliest, followed by Standard, then Extended.
+   */
+  @added(Versions.v2026_03_15)
+  platformReleaseChannel?: PlatformReleaseChannel;
 }
 
 /**
