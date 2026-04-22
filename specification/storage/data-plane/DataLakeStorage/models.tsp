@@ -222,7 +222,7 @@ model FileSystemItem {
   lastModified?: string;
 
   /** The entity tag. */
-  eTag?: string;
+  eTag?: eTag;
 }
 
 /** A list of filesystems. */
@@ -243,7 +243,7 @@ model PathItem {
   lastModified?: string;
 
   /** The entity tag. */
-  eTag?: string;
+  eTag?: eTag;
 
   /** The content length. */
   contentLength?: int64;
@@ -415,7 +415,7 @@ model BlobPropertiesInternal {
 
   /** The entity tag. */
   @Xml.name("Etag")
-  etag: string;
+  etag: eTag;
 
   /** Size in bytes. */
   @Xml.name("Content-Length")
@@ -582,14 +582,14 @@ alias ContentLengthParameter = {
 alias IfMatchParameter = {
   /** Specify an ETag value to operate only on blobs with a matching value. */
   @header("If-Match")
-  ifMatch?: string;
+  ifMatch?: eTag;
 };
 
 /** The If-None-Match header parameter. */
 alias IfNoneMatchParameter = {
   /** Specify an ETag value to operate only on blobs without a matching value. */
   @header("If-None-Match")
-  ifNoneMatch?: string;
+  ifNoneMatch?: eTag;
 };
 
 /** The If-Modified-Since header parameter. */
@@ -614,14 +614,14 @@ alias IfUnmodifiedSinceParameter = {
 alias SourceIfMatchParameter = {
   /** Specify an ETag value to operate only on blobs with a matching value. */
   @header("x-ms-source-if-match")
-  sourceIfMatch?: string;
+  sourceIfMatch?: eTag;
 };
 
 /** The source If-None-Match header parameter. */
 alias SourceIfNoneMatchParameter = {
   /** Specify an ETag value to operate only on blobs without a matching value. */
   @header("x-ms-source-if-none-match")
-  sourceIfNoneMatch?: string;
+  sourceIfNoneMatch?: eTag;
 };
 
 /** The source If-Modified-Since header parameter. */
@@ -1009,7 +1009,7 @@ alias DateResponseHeader = {
 alias EtagResponseHeader = {
   /** An HTTP entity tag associated with the resource. */
   @header("ETag")
-  eTag: string;
+  eTag: eTag;
 };
 
 /** The Last-Modified response header. */
