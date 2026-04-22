@@ -4839,54 +4839,6 @@
         ]
       }
     },
-    "DnsNamePolicy": {
-      "type": "string",
-      "description": "DNS Name Policy for namespace. Defines the DNS naming behavior for the namespace.",
-      "enum": [
-        "StandardNonPartitionedZone",
-        "StandardPartitionedZone",
-        "SecureTenantReuse",
-        "SecureSubscriptionReuse",
-        "SecureResourceGroupReuse",
-        "SecureNoReuse"
-      ],
-      "x-ms-enum": {
-        "name": "DnsNamePolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "StandardNonPartitionedZone",
-            "value": "StandardNonPartitionedZone",
-            "description": "No DNS Name Label, Legacy DNS Zone"
-          },
-          {
-            "name": "StandardPartitionedZone",
-            "value": "StandardPartitionedZone",
-            "description": "No DNS Name Label, Partitioned DNS Zone"
-          },
-          {
-            "name": "SecureTenantReuse",
-            "value": "SecureTenantReuse",
-            "description": "DNS Name Label with secure tenant reuse policy"
-          },
-          {
-            "name": "SecureSubscriptionReuse",
-            "value": "SecureSubscriptionReuse",
-            "description": "DNS Name Label with secure subscription reuse policy"
-          },
-          {
-            "name": "SecureResourceGroupReuse",
-            "value": "SecureResourceGroupReuse",
-            "description": "DNS Name Label with secure resource group reuse policy"
-          },
-          {
-            "name": "SecureNoReuse",
-            "value": "SecureNoReuse",
-            "description": "DNS Name Label with no reuse policy"
-          }
-        ]
-      }
-    },
     "Encryption": {
       "type": "object",
       "description": "Properties to configure Encryption",
@@ -6504,11 +6456,6 @@
         "ipV6Enabled": {
           "type": "boolean",
           "description": "Value that indicates whether IPv6 is enabled for public network access."
-        },
-        "dnsNamePolicy": {
-          "$ref": "#/definitions/DnsNamePolicy",
-          "description": "DNS Name Policy for the namespace.",
-          "readOnly": true
         }
       }
     },
