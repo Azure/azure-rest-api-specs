@@ -44,13 +44,7 @@ alias AdvancedThreatProtectionSettingOps = Azure.ResourceManager.Legacy.Extensio
     providerNamespace: "Microsoft.Security";
   },
   {},
-  {
-    /** Advanced Threat Protection setting name. */
-    @path
-    @segment("advancedThreatProtectionSettings")
-    @key
-    settingName: AdvancedThreatProtectionSettingName;
-  }
+  AdvancedThreatProtectionSettingNameAlias
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -81,6 +75,14 @@ interface AdvancedThreatProtectionSettings {
     ErrorType = CloudError
   >;
 }
+
+alias AdvancedThreatProtectionSettingNameAlias = {
+  /** Advanced Threat Protection setting name. */
+  @path
+  @segment("advancedThreatProtectionSettings")
+  @key
+  settingName: AdvancedThreatProtectionSettingName;
+};
 
 @@doc(AdvancedThreatProtectionSetting.name, "");
 @@doc(AdvancedThreatProtectionSetting.properties,
