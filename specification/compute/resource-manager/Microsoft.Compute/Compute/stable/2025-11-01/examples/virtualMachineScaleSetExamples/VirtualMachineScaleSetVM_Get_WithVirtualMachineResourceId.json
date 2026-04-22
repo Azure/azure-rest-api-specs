@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-flex-name}",
+    "instanceId": "{vmss-flex-vm-name}",
+    "api-version": "2025-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-flex-vm-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-flex-name}/virtualMachines/{vmss-flex-vm-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
+        "location": "eastus2euap",
+        "instanceId": "{vmss-flex-vm-name}",
+        "etag": "\"3\"",
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vmss-flex-vm-name}"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_Get",
+  "title": "Get VM scale set Flex VM with VirtualMachineResourceId"
+}
