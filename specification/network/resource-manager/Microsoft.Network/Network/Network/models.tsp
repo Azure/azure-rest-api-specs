@@ -2679,6 +2679,34 @@ union NspLinkProvisioningState {
 }
 
 /**
+ * The readiness state of the resource type for NSP support.
+ */
+@added(Versions.v2025_07_01)
+union NspReadinessState {
+  string,
+
+  /**
+   * Resource Provider is actively being onboarded to NSP
+   */
+  Onboarding: "Onboarding",
+
+  /**
+   * Resource Provider supports NSP in Preview
+   */
+  Preview: "Preview",
+
+  /**
+   * Resource Provider is generally available for NSP Integration
+   */
+  GA: "GA",
+
+  /**
+   * NSP Onboarding is not started or not Supported
+   */
+  NotReady: "NotReady",
+}
+
+/**
  * The NSP link state.
  */
 union NspLinkStatus {
@@ -15359,6 +15387,34 @@ model PerimeterAssociableResourceProperties {
    */
   @visibility(Lifecycle.Read)
   publicDnsZones?: string[];
+
+  /**
+   * Service tags associated with the resource provider.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  serviceTags?: string[];
+
+  /**
+   * The readiness state of the resource type for NSP support.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  readinessState?: NspReadinessState;
+
+  /**
+   * Indicates whether the resource type supports outbound scenario.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  outboundSupported?: boolean;
+
+  /**
+   * Description of the PaaS resource type.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
