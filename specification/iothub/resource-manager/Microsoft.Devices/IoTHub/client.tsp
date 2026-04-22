@@ -63,7 +63,8 @@ op replaceManualFailover(
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   body: Microsoft.Devices.FailoverInput,
-): Azure.Core.Foundations.RetryAfterHeader;
+): (ArmCombinedLroHeaders &
+  Azure.Core.Foundations.RetryAfterHeader) | Microsoft.Devices.ErrorDetails | Azure.ResourceManager.ArmResponse<void>;
 
 @@override(IotHubDescriptions.manualFailover, replaceManualFailover, "go");
 
@@ -79,7 +80,7 @@ op replaceTestAllRoutes(
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   body: Microsoft.Devices.TestAllRoutesInput,
-): Azure.Core.Foundations.RetryAfterHeader;
+): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestAllRoutesResult> | Microsoft.Devices.ErrorDetails;
 
 @@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes, "go");
 
@@ -95,6 +96,6 @@ op replaceTestRoute(
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   body: Microsoft.Devices.TestRouteInput,
-): Azure.Core.Foundations.RetryAfterHeader;
+): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestRouteResult> | Microsoft.Devices.ErrorDetails;
 
 @@override(IotHubDescriptions.testRoute, replaceTestRoute, "go");
