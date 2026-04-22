@@ -325,7 +325,7 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
-  "python"
+  "python,javascript"
 );
 
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
