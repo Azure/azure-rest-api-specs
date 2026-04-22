@@ -283,7 +283,7 @@ interface TagsOperationGroup {
     tagName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagDetails> | ArmCreatedResponse<TagDetails> | CloudError;
+  ): ArmResponse<TagDetails> | ArmResourceCreatedSyncResponse<TagDetails> | CloudError;
 
   /**
    * This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.
