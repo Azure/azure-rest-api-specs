@@ -493,10 +493,13 @@ directive:
     reason: Not a mandatory check
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
-    from: sku.json
+    from: stable/2017-04-01/sku.json
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
-    from: namespaces.json
+    from: stable/2017-04-01/namespaces.json
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
+    from: stable/2014-09-01/EventHub.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
