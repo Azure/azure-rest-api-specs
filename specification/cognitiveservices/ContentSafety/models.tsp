@@ -30,6 +30,18 @@ union TextCategory {
 union ImageCategory {
   string,
 
+  @added(ContentSafety.Versions.v2026_05_15_preview)
+  @doc("The harm category for Image - ChildSexualExploitationAndAbuse. Only supports Boolean outputType.")
+  "ChildSexualExploitationAndAbuse",
+
+  @added(ContentSafety.Versions.v2026_05_15_preview)
+  @doc("The harm category for Image - NonConsensualIntimateImagery. Only supports Boolean outputType.")
+  "NonConsensualIntimateImagery",
+
+  @added(ContentSafety.Versions.v2026_05_15_preview)
+  @doc("The harm category for Image - ViolentExtremismAndTerrorism. Only supports Boolean outputType.")
+  "ViolentExtremismAndTerrorism",
+
   @doc("The harm category for Image - Hate.")
   "Hate",
 
@@ -57,6 +69,10 @@ union AnalyzeTextOutputType {
 @doc("The type of image analysis output.")
 union AnalyzeImageOutputType {
   string,
+
+  @added(ContentSafety.Versions.v2026_05_15_preview)
+  @doc("Output a boolean value indicating whether the content is harmful.")
+  Boolean: "Boolean",
 
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels: "FourSeverityLevels",
@@ -149,8 +165,11 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be 'FourSeverityLevels', and the output value can be 0, 2, 4, 6. Not applicable to ChildSexualExploitationAndAbuse,NonConsensualIntimateImagery,ViolentExtremismAndTerrorism category.")
   severity?: int32;
+
+  @doc("Whether the content is detected as harmful or not. The value of this field is determined by the output type specified in the request. The output type could be 'Boolean'. Always returned for ChildSexualExploitationAndAbuse,NonConsensualIntimateImagery,ViolentExtremismAndTerrorism category.")
+  detected?: boolean;
 }
 
 @doc("Text Blocklist.")

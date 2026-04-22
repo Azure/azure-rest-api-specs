@@ -38,4 +38,5 @@ namespace ContentSafety;
 enum Versions {
   v2023_10_01: "2023-10-01",
   v2024_09_01: "2024-09-01",
+  v2026_05_15_preview: "2026-05-15-preview",
 }

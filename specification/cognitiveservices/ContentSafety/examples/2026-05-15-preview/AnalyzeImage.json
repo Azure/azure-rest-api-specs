@@ -1,0 +1,38 @@
+{
+  "title": "Analyze Image",
+  "operationId": "ImageOperations_AnalyzeImage",
+  "parameters": {
+    "api-version": "2026-05-15-preview",
+    "body": {
+      "image": {
+        "content": "Y29udGVudDE="
+      },
+      "categories": [
+        "ChildSexualExploitationAndAbuse",
+        "NonConsensualIntimateImagery",
+        "ViolentExtremismAndTerrorism"
+      ],
+      "outputType": "Boolean"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "categoriesAnalysis": [
+          {
+            "category": "ChildSexualExploitationAndAbuse",
+            "detected": false
+          },
+          {
+            "category": "NonConsensualIntimateImagery",
+            "detected": false
+          },
+          {
+            "category": "ViolentExtremismAndTerrorism",
+            "detected": false
+          }
+        ]
+      }
+    }
+  }
+}
