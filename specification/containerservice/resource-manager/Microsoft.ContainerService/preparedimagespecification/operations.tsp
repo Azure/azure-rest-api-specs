@@ -19,6 +19,7 @@ interface PreparedImageSpecifications {
       IfNoneMatchParameters<PreparedImageSpecification>
   >;
 
+  @doc("Update a prepared image specification. A new version is created only when the resource content changes.")
   update is ArmCustomPatchSync<
     PreparedImageSpecification,
     PatchModel = PreparedImageSpecificationPatch,

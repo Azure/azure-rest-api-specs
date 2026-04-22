@@ -19,8 +19,3 @@ alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.Resource
   @doc("The request should only proceed if the targeted resource's etag does not match the value provided.")
   ifNoneMatch?: string;
 };
-
-alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
-  ...IfMatchParameters<T>;
-  ...IfNoneMatchParameters<T>;
-};

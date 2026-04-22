@@ -61,12 +61,3 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: LatestVersionOfCommonTypesMustBeUsed
-    from: nodecustomization.json
-    reason: Existing API versions continue using previously released common-types references for compatibility.
-```

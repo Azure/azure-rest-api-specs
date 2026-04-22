@@ -107,8 +107,8 @@ model PreparedImageSpecificationScript {
   @example("echo 'initializing node'")
   script?: string;
 
-  @doc("Whether the node should reboot after successful script execution.")
-  rebootAfter?: boolean;
+  @doc("The action to take after successful script execution.")
+  postScriptAction?: PostScriptAction;
 }
 
 @doc("Prepared image specification script for update operations")
@@ -129,8 +129,8 @@ model PreparedImageSpecificationScriptUpdate {
   @example("echo 'initializing node'")
   script?: string;
 
-  @doc("Whether the node should reboot after successful script execution.")
-  rebootAfter?: boolean;
+  @doc("The action to take after successful script execution.")
+  postScriptAction?: PostScriptAction;
 }
 
 @doc("The updatable properties of the Prepared Image Specification resource.")
@@ -174,6 +174,17 @@ union ScriptType {
 
   @doc("PowerShell script.")
   powerShell: "PowerShell",
+}
+
+@doc("The action to take after the script finishes successfully.")
+union PostScriptAction {
+  string,
+
+  @doc("No post-script action is taken.")
+  none: "None",
+
+  @doc("Reboot the node after the script completes.")
+  rebootAfter: "RebootAfter",
 }
 
 @Azure.Core.lroStatus

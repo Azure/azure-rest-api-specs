@@ -310,7 +310,7 @@
         "tags": [
           "PreparedImageSpecifications"
         ],
-        "description": "Update a PreparedImageSpecification",
+        "description": "Update a prepared image specification. A new version is created only when the resource content changes.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -662,6 +662,30 @@
         ]
       }
     },
+    "PostScriptAction": {
+      "type": "string",
+      "description": "The action to take after the script finishes successfully.",
+      "enum": [
+        "None",
+        "RebootAfter"
+      ],
+      "x-ms-enum": {
+        "name": "PostScriptAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "None",
+            "description": "No post-script action is taken."
+          },
+          {
+            "name": "rebootAfter",
+            "value": "RebootAfter",
+            "description": "Reboot the node after the script completes."
+          }
+        ]
+      }
+    },
     "PreparedImageSpecification": {
       "type": "object",
       "description": "The Prepared Image Specification resource.",
@@ -856,9 +880,9 @@
           "type": "string",
           "description": "The script content to be executed in plain text. Do not include secrets."
         },
-        "rebootAfter": {
-          "type": "boolean",
-          "description": "Whether the node should reboot after successful script execution."
+        "postScriptAction": {
+          "$ref": "#/definitions/PostScriptAction",
+          "description": "The action to take after successful script execution."
         }
       },
       "required": [
@@ -889,9 +913,9 @@
           "type": "string",
           "description": "The script content to be executed in plain text. Do not include secrets."
         },
-        "rebootAfter": {
-          "type": "boolean",
-          "description": "Whether the node should reboot after successful script execution."
+        "postScriptAction": {
+          "$ref": "#/definitions/PostScriptAction",
+          "description": "The action to take after successful script execution."
         }
       }
     },
