@@ -1,0 +1,385 @@
+{
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/scheduledQueryRules": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/scheduledQueryRules": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/scheduledQueryRules/{ruleName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract",
+                "__new": "#/definitions/Microsoft.Common.ErrorContract"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Identity__deleted": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "UserIdentityProperties__deleted": {
+      "type": "object",
+      "description": "User assigned identity properties.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConditionFailingPeriods__added": {
+      "type": "object",
+      "description": "The minimum number of violations required within the selected lookback time window required to raise an alert. Relevant only for rules of the kind LogAlert.",
+      "properties": {
+        "numberOfEvaluationPeriods": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points. Default value is 1",
+          "default": 1
+        },
+        "minFailingPeriodsToAlert": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods. Default value is 1",
+          "default": 1
+        }
+      }
+    },
+    "Microsoft.Common.CommonErrorResponse__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Microsoft.Common.ErrorContract__added": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.CommonErrorResponse",
+          "description": "The error object."
+        }
+      }
+    },
+    "Microsoft.Common.Identity__added": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Microsoft.Common.UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Microsoft.Common.UserIdentityProperties__added": {
+      "type": "object",
+      "description": "Properties of the user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "Actions": {
+      "properties": {
+        "customProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
+          }
+        },
+        "actionProperties": {
+          "additionalProperties": {
+            "description__deleted": "The dictionary of action properties to include with the post operation. This data customizes the actions."
+          }
+        }
+      }
+    },
+    "Condition": {
+      "properties": {
+        "criterionType": {
+          "description": {
+            "__old": "Specifies the type of threshold criteria",
+            "__new": "Specifies the type of threshold criteria. Previously undocumented values might be returned"
+          }
+        },
+        "failingPeriods": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "numberOfEvaluationPeriods": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points. Default value is 1",
+              "default": 1
+            },
+            "minFailingPeriodsToAlert": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods. Default value is 1",
+              "default": 1
+            }
+          },
+          "$ref__added": "#/definitions/ConditionFailingPeriods"
+        }
+      }
+    },
+    "ScheduledQueryRuleProperties": {
+      "properties": {
+        "severity": {
+          "format__deleted": "int64",
+          "type": {
+            "__old": "integer",
+            "__new": "number"
+          }
+        },
+        "actions": {
+          "type__deleted": "object"
+        },
+        "resolveConfiguration": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "ScheduledQueryRuleResource": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "SystemData of ScheduledQueryRule.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": {
+            "__old": "#/definitions/Identity",
+            "__new": "#/definitions/Microsoft.Common.Identity"
+          }
+        },
+        "etag": {
+          "description": {
+            "__old": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
+          }
+        },
+        "properties": {
+          "required__deleted": [
+            "enabled",
+            "criteria",
+            "scopes"
+          ]
+        }
+      }
+    },
+    "ScheduledQueryRuleResourceCollection": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ScheduledQueryRuleResourcePatch": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "#/definitions/Identity",
+            "__new": "#/definitions/Microsoft.Common.Identity"
+          }
+        }
+      }
+    }
+  }
+}

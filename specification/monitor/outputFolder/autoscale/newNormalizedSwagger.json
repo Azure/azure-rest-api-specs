@@ -1,0 +1,952 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "version": "2022-10-01",
+    "description": "Monitor Management Client"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/autoscalesettings": {
+      "get": {
+        "operationId": "AutoscaleSettings_ListBySubscription",
+        "tags": [
+          "AutoscaleSettings"
+        ],
+        "description": "Lists the autoscale settings for a subscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResourceCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List autoscale settings by subs": {
+            "$ref": "./examples/listAutoscaleSettingBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/autoscalesettings": {
+      "get": {
+        "operationId": "AutoscaleSettings_ListByResourceGroup",
+        "tags": [
+          "AutoscaleSettings"
+        ],
+        "description": "Lists the autoscale settings for a resource group",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResourceCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List autoscale settings": {
+            "$ref": "./examples/listAutoscaleSetting.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/autoscalesettings/{autoscaleSettingName}": {
+      "get": {
+        "operationId": "AutoscaleSettings_Get",
+        "tags": [
+          "AutoscaleSettings"
+        ],
+        "description": "Gets an autoscale setting",
+        "parameters": [
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an autoscale setting": {
+            "$ref": "./examples/getAutoscaleSetting.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AutoscaleSettings_CreateOrUpdate",
+        "tags": [
+          "AutoscaleSettings"
+        ],
+        "description": "Creates or updates an autoscale setting.",
+        "parameters": [
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an autoscale setting": {
+            "$ref": "./examples/createOrUpdateAutoscaleSetting.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AutoscaleSettings_Update",
+        "description": "Updates an existing AutoscaleSettingsResource. To update other fields use the CreateOrUpdate method.",
+        "parameters": [
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaleSettingResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an autoscale setting": {
+            "$ref": "./examples/patchAutoscaleSetting.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AutoscaleSettings_Delete",
+        "tags": [
+          "AutoscaleSettings"
+        ],
+        "description": "Deletes and autoscale setting",
+        "parameters": [
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an autoscale setting": {
+            "$ref": "./examples/deleteAutoscaleSetting.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/autoscalesettings/{autoscaleSettingName}/predictiveMetrics": {
+      "get": {
+        "operationId": "PredictiveMetric_Get",
+        "tags": [
+          "Metrics"
+        ],
+        "description": "get predictive autoscale metric future data",
+        "parameters": [
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timespan",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "duration"
+          },
+          {
+            "name": "metricNamespace",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metricName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aggregation",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PredictiveResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Metric for data": {
+            "$ref": "./examples/GetPredictiveMetric.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoscaleErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/AutoscaleErrorResponseError",
+          "description": "The error object."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system metadata related to the response.",
+          "readOnly": true
+        }
+      }
+    },
+    "AutoscaleErrorResponseError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "details": {
+          "type": "string",
+          "description": "A human-readable representation of the error's details."
+        }
+      }
+    },
+    "AutoscaleNotification": {
+      "type": "object",
+      "description": "Autoscale notification.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "the operation associated with the notification and its value must be \"scale\"",
+          "enum": [
+            "Scale"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": false
+          }
+        },
+        "email": {
+          "$ref": "#/definitions/EmailNotification",
+          "description": "the email notification."
+        },
+        "webhooks": {
+          "type": "array",
+          "description": "the collection of webhook notifications.",
+          "items": {
+            "$ref": "#/definitions/WebhookNotification"
+          }
+        }
+      },
+      "required": [
+        "operation"
+      ]
+    },
+    "AutoscaleProfile": {
+      "type": "object",
+      "description": "Autoscale profile.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the profile."
+        },
+        "capacity": {
+          "$ref": "#/definitions/ScaleCapacity",
+          "description": "the number of instances that can be used during this profile."
+        },
+        "rules": {
+          "type": "array",
+          "description": "the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified.",
+          "items": {
+            "$ref": "#/definitions/ScaleRule"
+          }
+        },
+        "fixedDate": {
+          "$ref": "#/definitions/TimeWindow",
+          "description": "the specific date-time for the profile. This element is not used if the Recurrence element is used."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence",
+          "description": "the repeating times at which this profile begins. This element is not used if the FixedDate element is used."
+        }
+      },
+      "required": [
+        "capacity",
+        "name",
+        "rules"
+      ]
+    },
+    "AutoscaleSetting": {
+      "type": "object",
+      "description": "A setting that contains all of the configuration for the automatic scaling of a resource.",
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "description": "the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/AutoscaleProfile"
+          }
+        },
+        "notifications": {
+          "type": "array",
+          "description": "the collection of notifications.",
+          "items": {
+            "$ref": "#/definitions/AutoscaleNotification"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'.",
+          "default": false
+        },
+        "predictiveAutoscalePolicy": {
+          "$ref": "#/definitions/PredictiveAutoscalePolicy",
+          "description": "the predictive autoscale policy mode."
+        },
+        "name": {
+          "type": "string",
+          "description": "the name of the autoscale setting."
+        },
+        "targetResourceUri": {
+          "type": "string",
+          "description": "the resource identifier of the resource that the autoscale setting should be added to."
+        },
+        "targetResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource that the autoscale setting should be added to."
+        }
+      },
+      "required": [
+        "profiles"
+      ]
+    },
+    "AutoscaleSettingResource": {
+      "type": "object",
+      "description": "The autoscale setting resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutoscaleSetting",
+          "description": "The autoscale setting of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AutoscaleSettingResourceCollection": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AutoscaleSettingResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutoscaleSettingResourcePatch": {
+      "type": "object",
+      "description": "The autoscale setting object for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AutoscaleSetting",
+          "description": "The autoscale setting properties of the update operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EmailNotification": {
+      "type": "object",
+      "description": "Email notification of an autoscale event.",
+      "properties": {
+        "sendToSubscriptionAdministrator": {
+          "type": "boolean",
+          "description": "a value indicating whether to send email to subscription administrator.",
+          "default": false
+        },
+        "sendToSubscriptionCoAdministrators": {
+          "type": "boolean",
+          "description": "a value indicating whether to send email to subscription co-administrators.",
+          "default": false
+        },
+        "customEmails": {
+          "type": "array",
+          "description": "the custom e-mails list. This value can be null or empty, in which case this attribute will be ignored.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricTrigger": {
+      "type": "object",
+      "description": "The trigger that results in a scaling action.",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "the name of the metric that defines what the rule monitors."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "the namespace of the metric that defines what the rule monitors."
+        },
+        "metricResourceUri": {
+          "type": "string",
+          "description": "the resource identifier of the resource the rule monitors."
+        },
+        "metricResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource the rule monitors."
+        },
+        "timeGrain": {
+          "type": "string",
+          "format": "duration",
+          "description": "the granularity of metrics the rule monitors. Must be one of the predefined values returned from metric definitions for the metric. Must be between 12 hours and 1 minute."
+        },
+        "statistic": {
+          "type": "string",
+          "description": "the metric statistic type. How the metrics from multiple instances are combined.",
+          "enum": [
+            "Average",
+            "Min",
+            "Max",
+            "Sum",
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "MetricStatisticType",
+            "modelAsString": false
+          }
+        },
+        "timeWindow": {
+          "type": "string",
+          "format": "duration",
+          "description": "the range of time in which instance data is collected. This value must be greater than the delay in metric collection, which can vary from resource-to-resource. Must be between 12 hours and 5 minutes."
+        },
+        "timeAggregation": {
+          "type": "string",
+          "description": "time aggregation type. How the data that is collected should be combined over time. The default value is Average.",
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Total",
+            "Count",
+            "Last"
+          ],
+          "x-ms-enum": {
+            "name": "TimeAggregationType",
+            "modelAsString": false
+          }
+        },
+        "operator": {
+          "type": "string",
+          "description": "the operator that is used to compare the metric data and the threshold.",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "LessThan",
+            "LessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "ComparisonOperationType",
+            "modelAsString": false
+          }
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "the threshold of the metric that triggers the scale action."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}].",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleMetricDimension"
+          }
+        },
+        "dividePerInstance": {
+          "type": "boolean",
+          "description": "a value indicating whether metric should divide per instance."
+        }
+      },
+      "required": [
+        "metricName",
+        "metricResourceUri",
+        "operator",
+        "statistic",
+        "threshold",
+        "timeAggregation",
+        "timeGrain",
+        "timeWindow"
+      ]
+    },
+    "PredictiveAutoscalePolicy": {
+      "type": "object",
+      "description": "The parameters for enabling predictive autoscale.",
+      "properties": {
+        "scaleMode": {
+          "type": "string",
+          "description": "the predictive autoscale mode",
+          "enum": [
+            "Disabled",
+            "ForecastOnly",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "PredictiveAutoscalePolicyScaleMode",
+            "modelAsString": false
+          }
+        },
+        "scaleLookAheadTime": {
+          "type": "string",
+          "format": "duration",
+          "description": "the amount of time to specify by which instances are launched in advance. It must be between 1 minute and 60 minutes in ISO 8601 format."
+        }
+      },
+      "required": [
+        "scaleMode"
+      ]
+    },
+    "PredictiveResponse": {
+      "type": "object",
+      "description": "The response to a metrics query.",
+      "properties": {
+        "timespan": {
+          "type": "string",
+          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The metrics being queried"
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "resource of the predictive metric."
+        },
+        "data": {
+          "type": "array",
+          "description": "the value of the collection.",
+          "items": {
+            "$ref": "#/definitions/PredictiveValue"
+          }
+        }
+      }
+    },
+    "PredictiveValue": {
+      "type": "object",
+      "description": "Represents a predictive metric value in the given bucket.",
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the timestamp for the metric value in ISO 8601 format."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Predictive value in this time bucket."
+        }
+      },
+      "required": [
+        "timeStamp",
+        "value"
+      ]
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "The repeating times at which this profile begins. This element is not used if the FixedDate element is used.",
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "description": "the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles. For example, to set a daily schedule, set **schedule** to every day of the week. The frequency property specifies that the schedule is repeated weekly.",
+          "enum": [
+            "None",
+            "Second",
+            "Minute",
+            "Hour",
+            "Day",
+            "Week",
+            "Month",
+            "Year"
+          ],
+          "x-ms-enum": {
+            "name": "RecurrenceFrequency",
+            "modelAsString": false
+          }
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrentSchedule",
+          "description": "the scheduling constraints for when the profile begins."
+        }
+      },
+      "required": [
+        "frequency",
+        "schedule"
+      ]
+    },
+    "RecurrentSchedule": {
+      "type": "object",
+      "description": "The scheduling constraints for when the profile begins.",
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "the timezone for the hours of the profile. Some examples of valid time zones are: Dateline Standard Time, UTC-11, Hawaiian Standard Time, Alaskan Standard Time, Pacific Standard Time (Mexico), Pacific Standard Time, US Mountain Standard Time, Mountain Standard Time (Mexico), Mountain Standard Time, Central America Standard Time, Central Standard Time, Central Standard Time (Mexico), Canada Central Standard Time, SA Pacific Standard Time, Eastern Standard Time, US Eastern Standard Time, Venezuela Standard Time, Paraguay Standard Time, Atlantic Standard Time, Central Brazilian Standard Time, SA Western Standard Time, Pacific SA Standard Time, Newfoundland Standard Time, E. South America Standard Time, Argentina Standard Time, SA Eastern Standard Time, Greenland Standard Time, Montevideo Standard Time, Bahia Standard Time, UTC-02, Mid-Atlantic Standard Time, Azores Standard Time, Cape Verde Standard Time, Morocco Standard Time, UTC, GMT Standard Time, Greenwich Standard Time, W. Europe Standard Time, Central Europe Standard Time, Romance Standard Time, Central European Standard Time, W. Central Africa Standard Time, Namibia Standard Time, Jordan Standard Time, GTB Standard Time, Middle East Standard Time, Egypt Standard Time, Syria Standard Time, E. Europe Standard Time, South Africa Standard Time, FLE Standard Time, Turkey Standard Time, Israel Standard Time, Kaliningrad Standard Time, Libya Standard Time, Arabic Standard Time, Arab Standard Time, Belarus Standard Time, Russian Standard Time, E. Africa Standard Time, Iran Standard Time, Arabian Standard Time, Azerbaijan Standard Time, Russia Time Zone 3, Mauritius Standard Time, Georgian Standard Time, Caucasus Standard Time, Afghanistan Standard Time, West Asia Standard Time, Ekaterinburg Standard Time, Pakistan Standard Time, India Standard Time, Sri Lanka Standard Time, Nepal Standard Time, Central Asia Standard Time, Bangladesh Standard Time, N. Central Asia Standard Time, Myanmar Standard Time, SE Asia Standard Time, North Asia Standard Time, China Standard Time, North Asia East Standard Time, Singapore Standard Time, W. Australia Standard Time, Taipei Standard Time, Ulaanbaatar Standard Time, Tokyo Standard Time, Korea Standard Time, Yakutsk Standard Time, Cen. Australia Standard Time, AUS Central Standard Time, E. Australia Standard Time, AUS Eastern Standard Time, West Pacific Standard Time, Tasmania Standard Time, Magadan Standard Time, Vladivostok Standard Time, Russia Time Zone 10, Central Pacific Standard Time, Russia Time Zone 11, New Zealand Standard Time, UTC+12, Fiji Standard Time, Kamchatka Standard Time, Tonga Standard Time, Samoa Standard Time, Line Islands Standard Time"
+        },
+        "days": {
+          "type": "array",
+          "description": "the collection of days that the profile takes effect on. Possible values are Sunday through Saturday.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hours": {
+          "type": "array",
+          "description": "A collection of hours that the profile takes effect on. Values supported are 0 to 23 on the 24-hour clock (AM/PM times are not supported).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "A collection of minutes at which the profile takes effect at.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "days",
+        "hours",
+        "minutes",
+        "timeZone"
+      ]
+    },
+    "ScaleAction": {
+      "type": "object",
+      "description": "The parameters for the scaling action.",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "the scale direction. Whether the scaling action increases or decreases the number of instances.",
+          "enum": [
+            "None",
+            "Increase",
+            "Decrease"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleDirection",
+            "modelAsString": false
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "the type of action that should occur when the scale rule fires.",
+          "enum": [
+            "ChangeCount",
+            "PercentChangeCount",
+            "ExactCount",
+            "ServiceAllowedNextValue"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleType",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "the number of instances that are involved in the scaling action. This value must be 1 or greater. The default value is 1.",
+          "default": "1"
+        },
+        "cooldown": {
+          "type": "string",
+          "format": "duration",
+          "description": "the amount of time to wait since the last scaling action before this action occurs. It must be between 1 week and 1 minute in ISO 8601 format."
+        }
+      },
+      "required": [
+        "cooldown",
+        "direction",
+        "type"
+      ]
+    },
+    "ScaleCapacity": {
+      "type": "object",
+      "description": "The number of instances that can be used during this profile.",
+      "properties": {
+        "minimum": {
+          "type": "string",
+          "description": "the minimum number of instances for the resource."
+        },
+        "maximum": {
+          "type": "string",
+          "description": "the maximum number of instances for the resource. The actual maximum number of instances is limited by the cores that are available in the subscription."
+        },
+        "default": {
+          "type": "string",
+          "description": "the number of instances that will be set if metrics are not available for evaluation. The default is only used if the current instance count is lower than the default."
+        }
+      },
+      "required": [
+        "default",
+        "maximum",
+        "minimum"
+      ]
+    },
+    "ScaleRule": {
+      "type": "object",
+      "description": "A rule that provide the triggers and parameters for the scaling action.",
+      "properties": {
+        "metricTrigger": {
+          "$ref": "#/definitions/MetricTrigger",
+          "description": "the trigger that results in a scaling action."
+        },
+        "scaleAction": {
+          "$ref": "#/definitions/ScaleAction",
+          "description": "the parameters for the scaling action."
+        }
+      },
+      "required": [
+        "metricTrigger",
+        "scaleAction"
+      ]
+    },
+    "ScaleRuleMetricDimension": {
+      "type": "object",
+      "description": "Specifies an auto scale rule metric dimension.",
+      "properties": {
+        "DimensionName": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "Operator": {
+          "type": "string",
+          "description": "the dimension operator. Only 'Equals' and 'NotEquals' are supported. 'Equals' being equal to any of the values. 'NotEquals' being not equal to all of the values",
+          "enum": [
+            "Equals",
+            "NotEquals"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleRuleMetricDimensionOperationType",
+            "modelAsString": true
+          }
+        },
+        "Values": {
+          "type": "array",
+          "description": "list of dimension values. For example: [\"App1\",\"App2\"].",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "DimensionName",
+        "Operator",
+        "Values"
+      ]
+    },
+    "TimeWindow": {
+      "type": "object",
+      "description": "A specific date-time for the profile.",
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "the timezone of the start and end times for the profile. Some examples of valid time zones are: Dateline Standard Time, UTC-11, Hawaiian Standard Time, Alaskan Standard Time, Pacific Standard Time (Mexico), Pacific Standard Time, US Mountain Standard Time, Mountain Standard Time (Mexico), Mountain Standard Time, Central America Standard Time, Central Standard Time, Central Standard Time (Mexico), Canada Central Standard Time, SA Pacific Standard Time, Eastern Standard Time, US Eastern Standard Time, Venezuela Standard Time, Paraguay Standard Time, Atlantic Standard Time, Central Brazilian Standard Time, SA Western Standard Time, Pacific SA Standard Time, Newfoundland Standard Time, E. South America Standard Time, Argentina Standard Time, SA Eastern Standard Time, Greenland Standard Time, Montevideo Standard Time, Bahia Standard Time, UTC-02, Mid-Atlantic Standard Time, Azores Standard Time, Cape Verde Standard Time, Morocco Standard Time, UTC, GMT Standard Time, Greenwich Standard Time, W. Europe Standard Time, Central Europe Standard Time, Romance Standard Time, Central European Standard Time, W. Central Africa Standard Time, Namibia Standard Time, Jordan Standard Time, GTB Standard Time, Middle East Standard Time, Egypt Standard Time, Syria Standard Time, E. Europe Standard Time, South Africa Standard Time, FLE Standard Time, Turkey Standard Time, Israel Standard Time, Kaliningrad Standard Time, Libya Standard Time, Arabic Standard Time, Arab Standard Time, Belarus Standard Time, Russian Standard Time, E. Africa Standard Time, Iran Standard Time, Arabian Standard Time, Azerbaijan Standard Time, Russia Time Zone 3, Mauritius Standard Time, Georgian Standard Time, Caucasus Standard Time, Afghanistan Standard Time, West Asia Standard Time, Ekaterinburg Standard Time, Pakistan Standard Time, India Standard Time, Sri Lanka Standard Time, Nepal Standard Time, Central Asia Standard Time, Bangladesh Standard Time, N. Central Asia Standard Time, Myanmar Standard Time, SE Asia Standard Time, North Asia Standard Time, China Standard Time, North Asia East Standard Time, Singapore Standard Time, W. Australia Standard Time, Taipei Standard Time, Ulaanbaatar Standard Time, Tokyo Standard Time, Korea Standard Time, Yakutsk Standard Time, Cen. Australia Standard Time, AUS Central Standard Time, E. Australia Standard Time, AUS Eastern Standard Time, West Pacific Standard Time, Tasmania Standard Time, Magadan Standard Time, Vladivostok Standard Time, Russia Time Zone 10, Central Pacific Standard Time, Russia Time Zone 11, New Zealand Standard Time, UTC+12, Fiji Standard Time, Kamchatka Standard Time, Tonga Standard Time, Samoa Standard Time, Line Islands Standard Time"
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the start time for the profile in ISO 8601 format."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the end time for the profile in ISO 8601 format."
+        }
+      },
+      "required": [
+        "end",
+        "start"
+      ]
+    },
+    "WebhookNotification": {
+      "type": "object",
+      "description": "Webhook notification of an autoscale event.",
+      "properties": {
+        "serviceUri": {
+          "type": "string",
+          "description": "the service address to receive the notification."
+        },
+        "properties": {
+          "type": "object",
+          "description": "a property bag of settings. This value can be empty.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

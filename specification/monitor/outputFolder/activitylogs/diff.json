@@ -1,0 +1,189 @@
+{
+  "info": {
+    "x-ms-code-generation-settings__deleted": {
+      "name": "MonitorManagementClient"
+    },
+    "description__added": "Monitor Management Client"
+  },
+  "paths": {
+    "/providers/microsoft.Insights/eventcategories": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/microsoft.Insights/eventtypes/management/values": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/EventData",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/eventtypes/management/values": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/EventData",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "LocalizableString__deleted": {
+      "type": "object",
+      "description": "The localizable string class.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Microsoft.Common.ErrorResponse__added": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.LocalizableString__added": {
+      "type": "object",
+      "description": "The localizable string class.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EventCategoryCollection": {
+      "description": {
+        "__old": "A collection of event categories. Currently possible values are: Administrative, Security, ServiceHealth, Alert, Recommendation, Policy.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "the list that includes the Azure event categories.",
+            "__new": "[Placeholder] Discription for value property"
+          },
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/LocalizableString",
+              "__new": "#/definitions/Microsoft.Common.LocalizableString"
+            }
+          }
+        }
+      }
+    },
+    "EventData": {
+      "properties": {
+        "eventName": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "category": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "resourceProviderName": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "resourceType": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "operationName": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "status": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        },
+        "subStatus": {
+          "$ref": {
+            "__old": "#/definitions/LocalizableString",
+            "__new": "#/definitions/Microsoft.Common.LocalizableString"
+          }
+        }
+      }
+    }
+  }
+}

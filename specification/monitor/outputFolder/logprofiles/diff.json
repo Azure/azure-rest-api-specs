@@ -1,0 +1,219 @@
+{
+  "info": {
+    "x-ms-code-generation-settings__deleted": {
+      "name": "MonitorManagementClient"
+    },
+    "description__added": "Monitor Management Client"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/logprofiles": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/logprofiles/{logProfileName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Resource__deleted": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "RetentionPolicy__deleted": {
+      "type": "object",
+      "description": "Specifies the retention policy for the log.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "days",
+        "enabled"
+      ]
+    },
+    "Microsoft.Common.ErrorResponse__added": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.RetentionPolicy__added": {
+      "type": "object",
+      "description": "Specifies the retention policy for the log.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "days",
+        "enabled"
+      ]
+    },
+    "LogProfileCollection": {
+      "description": {
+        "__old": "Represents a collection of log profiles.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "the values of the log profiles.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
+    "LogProfileProperties": {
+      "properties": {
+        "retentionPolicy": {
+          "$ref": {
+            "__old": "#/definitions/RetentionPolicy",
+            "__new": "#/definitions/Microsoft.Common.RetentionPolicy"
+          }
+        }
+      }
+    },
+    "LogProfileResource": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/Resource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

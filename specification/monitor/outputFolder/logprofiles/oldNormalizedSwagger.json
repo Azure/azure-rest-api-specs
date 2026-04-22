@@ -1,0 +1,346 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "version": "2016-03-01",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/logprofiles": {
+      "get": {
+        "operationId": "LogProfiles_List",
+        "tags": [
+          "LogProfiles"
+        ],
+        "description": "List the log profiles.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogProfileCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List log profiles": {
+            "$ref": "./examples/listLogProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/logprofiles/{logProfileName}": {
+      "get": {
+        "operationId": "LogProfiles_Get",
+        "tags": [
+          "LogProfiles"
+        ],
+        "description": "Gets the log profile.",
+        "parameters": [
+          {
+            "name": "logProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get log profile": {
+            "$ref": "./examples/getLogProfile.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LogProfiles_CreateOrUpdate",
+        "tags": [
+          "LogProfiles"
+        ],
+        "description": "Create or update a log profile in Azure Monitoring REST API.",
+        "parameters": [
+          {
+            "name": "logProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a log profile": {
+            "$ref": "./examples/createOrUpdateLogProfile.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "LogProfiles_Update",
+        "description": "Updates an existing LogProfilesResource. To update other fields use the CreateOrUpdate method.",
+        "parameters": [
+          {
+            "name": "logProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "logProfilesResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogProfileResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a log profile": {
+            "$ref": "./examples/patchLogProfile.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LogProfiles_Delete",
+        "tags": [
+          "LogProfiles"
+        ],
+        "description": "Deletes the log profile.",
+        "parameters": [
+          {
+            "name": "logProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          }
+        },
+        "x-ms-examples": {
+          "Delete log profile": {
+            "$ref": "./examples/deleteLogProfile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "LogProfileCollection": {
+      "type": "object",
+      "description": "Represents a collection of log profiles.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "the values of the log profiles.",
+          "items": {
+            "$ref": "#/definitions/LogProfileResource"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogProfileProperties": {
+      "type": "object",
+      "description": "The log profile properties.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "the resource id of the storage account to which you would like to send the Activity Log."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming the Activity Log. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'."
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of regions for which Activity Log events should be stored or streamed. It is a comma separated list of valid ARM locations including the 'global' location.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.'",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "the retention policy for the events in the log."
+        }
+      },
+      "required": [
+        "categories",
+        "locations",
+        "retentionPolicy"
+      ]
+    },
+    "LogProfileResource": {
+      "type": "object",
+      "description": "The log profile resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogProfileProperties",
+          "description": "The log profile properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "LogProfileResourcePatch": {
+      "type": "object",
+      "description": "The log profile resource for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/LogProfileProperties",
+          "description": "The log profile properties for an update operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "RetentionPolicy": {
+      "type": "object",
+      "description": "Specifies the retention policy for the log.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "days",
+        "enabled"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,322 @@
+{
+  "info": {
+    "x-ms-code-generation-settings__deleted": {
+      "name": "MonitorManagementClient"
+    },
+    "description__added": "Monitor Management Client"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Insights/actionGroups": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List action groups at resource group level": {
+            "$ref": {
+              "__old": "./examples/listActionGroups.json",
+              "__new": "./examples/listActionGroupsByResourceGroup.json"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups/{actionGroupName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups/{actionGroupName}/createNotifications": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string",
+                "description": "The location header that has the polling uri."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups/{actionGroupName}/subscribe": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "#/definitions/Microsoft.Common.ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureResource__deleted": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponse__added": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "ActionGroupList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ActionGroupPatchBody": {
+      "properties": {
+        "identity": {
+          "description__added": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": {
+            "__old": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "ActionGroupResource": {
+      "properties": {
+        "identity__added": {
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureResource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "AutomationRunbookReceiver": {
+      "properties": {
+        "managedIdentity": {
+          "description": {
+            "__old": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" ",
+            "__new": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\""
+          }
+        }
+      }
+    },
+    "AzureFunctionReceiver": {
+      "properties": {
+        "managedIdentity": {
+          "description": {
+            "__old": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" ",
+            "__new": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\""
+          }
+        }
+      }
+    },
+    "EventHubReceiver": {
+      "properties": {
+        "managedIdentity": {
+          "description": {
+            "__old": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" ",
+            "__new": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\""
+          }
+        }
+      }
+    },
+    "IncidentReceiver": {
+      "properties": {
+        "connection": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "LogicAppReceiver": {
+      "properties": {
+        "managedIdentity": {
+          "description": {
+            "__old": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" ",
+            "__new": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\""
+          }
+        }
+      }
+    },
+    "TestNotificationDetailsResponse": {
+      "properties": {
+        "context": {
+          "type__deleted": "object",
+          "description__added": "The context info"
+        }
+      }
+    },
+    "WebhookReceiver": {
+      "properties": {
+        "managedIdentity": {
+          "description": {
+            "__old": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\" ",
+            "__new": "The principal id of the managed identity. The value can be \"None\", \"SystemAssigned\""
+          }
+        }
+      }
+    }
+  }
+}
