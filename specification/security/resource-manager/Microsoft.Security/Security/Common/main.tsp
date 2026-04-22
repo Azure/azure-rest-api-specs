@@ -52,24 +52,6 @@ model CloudErrorBody {
 }
 
 /**
- * The resource management error additional info.
- */
-model ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The additional info.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  info?: unknown;
-}
-
-/**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
