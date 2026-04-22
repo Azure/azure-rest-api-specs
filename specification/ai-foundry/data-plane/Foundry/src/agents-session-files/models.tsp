@@ -28,8 +28,8 @@ model SessionDirectoryEntry {
   @doc("Whether this entry is a directory.")
   is_directory: boolean;
 
-  @doc("The last modification time in UTC (ISO 8601).")
-  @encode(DateTimeKnownEncoding.rfc3339)
+  /** The Unix timestamp (in seconds) when the file was last modified. */
+  @encode("unixTimestamp", int64)
   modified_time: utcDateTime;
 }
 

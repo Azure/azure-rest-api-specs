@@ -728,6 +728,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": true,
+                "description": "Session ID for this invocation. Returns the session ID associated with the invocation.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "*/*": {
                 "schema": {}
@@ -804,6 +813,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": true,
+                "description": "Session ID for this invocation. Returns the session ID associated with the invocation.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "*/*": {
                 "schema": {}
@@ -1961,6 +1979,93 @@
         "tags": [
           "Agents"
         ]
+      }
+    },
+    "/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream": {
+      "get": {
+        "operationId": "Agents_getSessionLogStream",
+        "description": "Streams console logs (stdout / stderr) for a specific hosted agent session\nas a Server-Sent Events (SSE) stream.\n\nEach SSE frame contains:\n- `event`: always `\"log\"`\n- `data`: a plain-text log line (currently JSON-formatted, but the schema\nis not contractual and may include additional keys or change format\nover time — clients should treat it as an opaque string)\n\nExample SSE frames:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting FoundryCBAgent server on port 8088\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.130Z\",\"stream\":\"stderr\",\"message\":\"INFO: Application startup complete.\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:35:52.714Z\",\"stream\":\"status\",\"message\":\"No logs since last 60 seconds\"}\n```\n\nThe stream remains open until the client disconnects or the server\nterminates the connection. Clients should handle reconnection as needed.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the hosted agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID (maps to an ADC sandbox).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionLogEvent"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions:import": {
@@ -7706,6 +7811,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -8377,6 +8491,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -8422,6 +8545,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -8464,6 +8596,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -8547,6 +8688,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -9454,13 +9604,13 @@
         }
       }
     },
-    "/skills/{skill_name}": {
+    "/skills/{name}": {
       "get": {
         "operationId": "Skills_getSkill",
         "description": "Retrieves a skill.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9527,7 +9677,7 @@
         "description": "Updates an existing skill.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9624,7 +9774,7 @@
         "description": "Deletes a skill.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9687,13 +9837,13 @@
         }
       }
     },
-    "/skills/{skill_name}:download": {
+    "/skills/{name}:download": {
       "get": {
         "operationId": "Skills_downloadSkill",
         "description": "Downloads a skill package.",
         "parameters": [
           {
-            "name": "skill_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -9957,13 +10107,13 @@
         }
       }
     },
-    "/toolboxes/{toolbox_name}": {
+    "/toolboxes/{name}": {
       "get": {
         "operationId": "getToolbox",
         "description": "Retrieve a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to retrieve.",
@@ -10030,7 +10180,7 @@
         "description": "Update a toolbox to point to a specific version.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/UpdateToolboxRequest.toolbox_name"
+            "$ref": "#/components/parameters/UpdateToolboxRequest.name"
           },
           {
             "name": "Foundry-Features",
@@ -10101,7 +10251,7 @@
         "description": "Delete a toolbox and all its versions.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to delete.",
@@ -10157,13 +10307,13 @@
         }
       }
     },
-    "/toolboxes/{toolbox_name}/versions": {
+    "/toolboxes/{name}/versions": {
       "post": {
         "operationId": "createToolboxVersion",
         "description": "Create a new version of a toolbox. If the toolbox does not exist, it will be created.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox. If the toolbox does not exist, it will be created.",
@@ -10273,7 +10423,7 @@
         "description": "List all versions of a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to list versions for.",
@@ -10404,13 +10554,13 @@
         }
       }
     },
-    "/toolboxes/{toolbox_name}/versions/{version}": {
+    "/toolboxes/{name}/versions/{version}": {
       "get": {
         "operationId": "getToolboxVersion",
         "description": "Retrieve a specific version of a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox.",
@@ -10486,7 +10636,7 @@
         "description": "Delete a specific version of a toolbox.",
         "parameters": [
           {
-            "name": "toolbox_name",
+            "name": "name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox.",
@@ -10581,8 +10731,8 @@
         },
         "explode": false
       },
-      "UpdateToolboxRequest.toolbox_name": {
-        "name": "toolbox_name",
+      "UpdateToolboxRequest.name": {
+        "name": "name",
         "in": "path",
         "required": true,
         "description": "The name of the toolbox to update.",
@@ -11575,6 +11725,14 @@
           "definition": {
             "$ref": "#/components/schemas/AgentDefinition"
           },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentVersionStatus"
+              }
+            ],
+            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness."
+          },
           "instance_identity": {
             "allOf": [
               {
@@ -11628,6 +11786,17 @@
             "readOnly": true
           }
         }
+      },
+      "AgentVersionStatus": {
+        "type": "string",
+        "enum": [
+          "creating",
+          "active",
+          "failed",
+          "deleting",
+          "deleted"
+        ],
+        "description": "The provisioning status of an agent version."
       },
       "AgenticIdentityPreviewCredentials": {
         "type": "object",
@@ -13345,6 +13514,11 @@
               "type": "string"
             },
             "description": "The entry point command and arguments for the code execution."
+          },
+          "content_hash": {
+            "type": "string",
+            "description": "The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.",
+            "readOnly": true
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
@@ -16673,6 +16847,50 @@
           ]
         }
       },
+      "HeaderTelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type",
+          "header_name",
+          "secret_id",
+          "secret_key"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "header"
+            ],
+            "description": "The authentication type, always 'header' for header-based secret authentication."
+          },
+          "header_name": {
+            "type": "string",
+            "description": "The name of the HTTP header to inject the secret value into.",
+            "example": "X-Otlp-Api-Key"
+          },
+          "secret_id": {
+            "type": "string",
+            "description": "The identifier of the secret store or connection.",
+            "example": "my-secret-store"
+          },
+          "secret_key": {
+            "type": "string",
+            "description": "The key within the secret to retrieve the authentication value.",
+            "example": "OTLP_KEY"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointAuth"
+          }
+        ],
+        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "HostedAgentDefinition": {
         "type": "object",
         "required": [
@@ -16788,6 +17006,14 @@
                 "CodeAgents=V1Preview"
               ]
             }
+          },
+          "telemetry_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryConfig"
+              }
+            ],
+            "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
           }
         },
         "allOf": [
@@ -38148,6 +38374,48 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "OtlpTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "endpoint",
+          "protocol"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ],
+            "description": "The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints."
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "The OTLP collector endpoint URL.",
+            "example": "https://my-collector.example.com/otlp"
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryTransportProtocol"
+              }
+            ],
+            "description": "The transport protocol for the OTLP endpoint.",
+            "example": "Http"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpoint"
+          }
+        ],
+        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -39373,6 +39641,54 @@
         },
         "description": "Response from uploading a file to a session sandbox."
       },
+      "SessionLogEvent": {
+        "type": "object",
+        "required": [
+          "event",
+          "data"
+        ],
+        "properties": {
+          "event": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionLogEventType"
+              }
+            ],
+            "description": "The SSE event type. Currently `log`, but additional event types may be added in the future. Clients should ignore unrecognized event types.",
+            "example": "log"
+          },
+          "data": {
+            "type": "string",
+            "description": "The event payload as plain text. Currently JSON-formatted but the schema is not contractual and may change.",
+            "example": "{\"timestamp\":\"2026-03-10T09:33:17.121467567+00:00\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}"
+          }
+        },
+        "description": "A single Server-Sent Event frame emitted by the hosted agent session log stream.\n\nEach frame contains an `event` field identifying the event type and a `data`\nfield carrying the payload as plain text. Although the current `data` payload\nis JSON-formatted, its schema is not contractual — additional keys may appear\nand the format may change over time. Clients should treat `data` as an\nopaque string and optionally attempt JSON parsing.\n\nNew event types may be added in the future. Clients should gracefully\nignore unrecognized event types.\n\nWire format:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n```",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "SessionLogEventType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "log"
+            ]
+          }
+        ],
+        "description": "Known SSE event types emitted by the hosted agent session log stream.\nAdditional event types may be introduced in future versions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "SharepointGroundingToolCall": {
         "type": "object",
         "required": [
@@ -39996,6 +40312,185 @@
           }
         },
         "description": "Taxonomy sub-category definition."
+      },
+      "TelemetryConfig": {
+        "type": "object",
+        "required": [
+          "endpoints"
+        ],
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryEndpoint"
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "Customer-supplied telemetry export endpoint configurations."
+          }
+        },
+        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryDataKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          }
+        ],
+        "description": "The type of telemetry data to export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointKind"
+              }
+            ],
+            "description": "The telemetry export endpoint kind."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryDataKind"
+            },
+            "description": "Data types to export to this endpoint. Use an empty array to export no data.",
+            "example": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuth"
+              }
+            ],
+            "description": "Optional authentication configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "OTLP": "#/components/schemas/OtlpTelemetryEndpoint"
+          }
+        },
+        "description": "A telemetry export endpoint configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuthType"
+              }
+            ],
+            "description": "The authentication type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "header": "#/components/schemas/HeaderTelemetryEndpointAuth"
+          }
+        },
+        "description": "Authentication configuration for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuthType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "header"
+            ]
+          }
+        ],
+        "description": "The type of authentication for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ]
+          }
+        ],
+        "description": "The kind of telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryTransportProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Http",
+              "Grpc"
+            ]
+          }
+        ],
+        "description": "The transport protocol for telemetry export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",

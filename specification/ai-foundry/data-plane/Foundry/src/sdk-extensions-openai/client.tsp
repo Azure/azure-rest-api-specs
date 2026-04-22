@@ -32,9 +32,9 @@ namespace Azure.AI.Projects {
   @@scope(Conversations.getConversationItem, "!csharp");
   @@scope(Conversations.deleteConversationItem, "!csharp");
 
-  @@usage(OpenAI.Conversation, Usage.output);
-  @@access(OpenAI.Conversation, Access.public);
-  @@clientName(OpenAI.Conversation, "ProjectConversation");
+  @@usage(OpenAI.ConversationResource, Usage.output);
+  @@access(OpenAI.ConversationResource, Access.public);
+  @@clientName(OpenAI.ConversationResource, "ProjectConversation");
   @@usage(OpenAI.CreateConversationBody, Usage.input);
   @@access(OpenAI.CreateConversationBody, Access.public);
   @@usage(OpenAI.UpdateConversationBody, Usage.input);
@@ -259,9 +259,9 @@ namespace Azure.AI.Projects {
     "InternalOutputItemImageGenToolCall"
   );
 
-  @@access(OpenAI.FunctionToolCallOutputResource, Access.internal);
-  @@clientName(OpenAI.FunctionToolCallOutputResource,
-    "InternalOutputItemFunctionToolCallOutputResource"
+  @@access(OpenAI.FunctionToolCallOutput, Access.internal);
+  @@clientName(OpenAI.FunctionToolCallOutput,
+    "InternalOutputItemFunctionToolCallOutput"
   );
 
   @@access(OpenAI.OutputItemFunctionToolCall, Access.internal);
@@ -274,9 +274,9 @@ namespace Azure.AI.Projects {
     "InternalOutputItemWebSearchToolCall"
   );
 
-  @@access(OpenAI.ItemResourceComputerToolCallOutputResource, Access.internal);
-  @@clientName(OpenAI.ItemResourceComputerToolCallOutputResource,
-    "InternalOutputItemComputerToolCallOutputResource"
+  @@access(OpenAI.ItemResourceComputerToolCallOutput, Access.internal);
+  @@clientName(OpenAI.ItemResourceComputerToolCallOutput,
+    "InternalOutputItemComputerToolCallOutput"
   );
 
   @@access(OpenAI.ItemCustomToolCallOutput, Access.internal);
@@ -299,9 +299,9 @@ namespace Azure.AI.Projects {
     "InternalOutputItemCompactionBody"
   );
 
-  @@access(OpenAI.OutputItemCustomToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemCustomToolCall,
-    "InternalOutputItemCustomToolCall"
+  @@access(OpenAI.OutputItemCustomToolCallResource, Access.internal);
+  @@clientName(OpenAI.OutputItemCustomToolCallResource,
+    "InternalOutputItemCustomToolCallResource"
   );
 
   @@clientName(_AgentItemType.a2a_preview_call, "A2APreviewCall ");
@@ -374,4 +374,16 @@ namespace Azure.AI.Projects {
   @@access(ApiError, Access.public);
 
   @@usage(StructuredOutputsOutputItem, Usage.input | Usage.output);
+
+  // --------------------------------------------------------------------------------
+  // Renames for tools.
+  // --------------------------------------------------------------------------------
+  @@clientName(OpenAI.ContainerMemoryLimit, "ResponsesContainerMemoryLimit");
+  @@clientName(OpenAI.FunctionCallOutputStatusEnum,
+    "ResponsesFunctionCallOutputStatusEnum"
+  );
+  @@clientName(OpenAI.FunctionCallStatus, "ResponsesFunctionCallStatus");
+  @@clientName(OpenAI.ToolSearchExecutionType,
+    "ResponsesToolSearchExecutionType"
+  );
 }

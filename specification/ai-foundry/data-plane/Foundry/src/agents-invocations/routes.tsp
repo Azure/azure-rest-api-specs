@@ -58,7 +58,7 @@ interface AgentInvocations {
       @header("x-agent-invocation-id") invocationId: string;
 
       /** Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request. */
-      @header("x-agent-session-id") sessionId: string;
+      @header("x-agent-session-id") agentSessionId: string;
 
       /** The content type of the response body. */
       @header contentType: string;
@@ -84,6 +84,9 @@ interface AgentInvocations {
       @path invocation_id: string;
     } & AgentInvocationPreviewHeader,
     {
+      /** Session ID for this invocation. Returns the session ID associated with the invocation. */
+      @header("x-agent-session-id") agentSessionId: string;
+
       /** The content type of the response body. */
       @header contentType: string;
 
@@ -114,6 +117,9 @@ interface AgentInvocations {
       @body request?: unknown;
     } & AgentInvocationPreviewHeader,
     {
+      /** Session ID for this invocation. Returns the session ID associated with the invocation. */
+      @header("x-agent-session-id") agentSessionId: string;
+
       /** The content type of the response body. */
       @header contentType: string;
 

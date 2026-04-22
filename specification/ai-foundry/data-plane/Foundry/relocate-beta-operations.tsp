@@ -89,7 +89,9 @@ interface Skills {}
 interface Agents {}
 // Move AgentSessionFiles
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
+  Agents
+);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
 // Move preview operations out of root Agent into Beta Agents
@@ -98,3 +100,4 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);

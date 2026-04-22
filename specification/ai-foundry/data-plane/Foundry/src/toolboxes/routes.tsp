@@ -18,7 +18,7 @@ interface Toolboxes {
   @doc("Create a new version of a toolbox. If the toolbox does not exist, it will be created.")
   @operationId("createToolboxVersion")
   @post
-  @route("/toolboxes/{toolbox_name}/versions")
+  @route("/toolboxes/{name}/versions")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   createToolboxVersion is FoundryDataPlaneOperation<
     CreateToolboxVersionRequest & ToolboxesPreviewHeader,
@@ -29,7 +29,7 @@ interface Toolboxes {
   @doc("Retrieve a toolbox.")
   @operationId("getToolbox")
   @get
-  @route("/toolboxes/{toolbox_name}")
+  @route("/toolboxes/{name}")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   getToolbox is FoundryDataPlaneOperation<
     GetToolboxRequest & ToolboxesPreviewHeader,
@@ -53,7 +53,7 @@ interface Toolboxes {
   @operationId("listToolboxVersions")
   @get
   @list
-  @route("/toolboxes/{toolbox_name}/versions")
+  @route("/toolboxes/{name}/versions")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   listToolboxVersions is FoundryDataPlaneOperation<
     ListToolboxVersionsRequest & ToolboxesPreviewHeader,
@@ -64,7 +64,7 @@ interface Toolboxes {
   @doc("Retrieve a specific version of a toolbox.")
   @operationId("getToolboxVersion")
   @get
-  @route("/toolboxes/{toolbox_name}/versions/{version}")
+  @route("/toolboxes/{name}/versions/{version}")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   getToolboxVersion is FoundryDataPlaneOperation<
     GetToolboxVersionRequest & ToolboxesPreviewHeader,
@@ -75,7 +75,7 @@ interface Toolboxes {
   @doc("Update a toolbox to point to a specific version.")
   @operationId("updateToolbox")
   @patch
-  @route("/toolboxes/{toolbox_name}")
+  @route("/toolboxes/{name}")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   updateToolbox is FoundryDataPlaneOperation<
     UpdateToolboxRequest & ToolboxesPreviewHeader,
@@ -86,7 +86,7 @@ interface Toolboxes {
   @doc("Delete a toolbox and all its versions.")
   @operationId("deleteToolbox")
   @delete
-  @route("/toolboxes/{toolbox_name}")
+  @route("/toolboxes/{name}")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   deleteToolbox is FoundryDataPlaneOperation<
     DeleteToolboxRequest & ToolboxesPreviewHeader,
@@ -97,7 +97,7 @@ interface Toolboxes {
   @doc("Delete a specific version of a toolbox.")
   @operationId("deleteToolboxVersion")
   @delete
-  @route("/toolboxes/{toolbox_name}/versions/{version}")
+  @route("/toolboxes/{name}/versions/{version}")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   deleteToolboxVersion is FoundryDataPlaneOperation<
     DeleteToolboxVersionRequest & ToolboxesPreviewHeader,
