@@ -101,24 +101,27 @@ interface Computes {
    * This is a long-running operation that returns 202 Accepted.
    * Only applicable when computeType is ContainerInstance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Computes")
-  start is ArmResourceActionNoResponseContentAsync<Compute, void>;
+  start is ArmResourceActionAsync<Compute, void, void>;
 
   /**
    * Stops a running ContainerInstance compute resource.
    * This is a long-running operation that returns 202 Accepted.
    * Only applicable when computeType is ContainerInstance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Computes")
-  stop is ArmResourceActionNoResponseContentAsync<Compute, void>;
+  stop is ArmResourceActionAsync<Compute, void, void>;
 
   /**
    * Restarts a running ContainerInstance compute resource.
    * This is a long-running operation that returns 202 Accepted.
    * Only applicable when computeType is ContainerInstance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Computes")
-  restart is ArmResourceActionNoResponseContentAsync<Compute, void>;
+  restart is ArmResourceActionAsync<Compute, void, void>;
 }
 
 @@maxLength(Compute.name, 63);
