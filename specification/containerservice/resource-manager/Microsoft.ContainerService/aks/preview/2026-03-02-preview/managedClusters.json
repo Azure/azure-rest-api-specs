@@ -6831,7 +6831,7 @@
         "vnetSubnetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the subnet which will be attached to the secondary network interface. Required when `type` is `Standard`; must be an empty string (`\"\"`) when `type` is `Dynamic`.",
+          "description": "The resource ID of the subnet which will be attached to the secondary network interface. Required when `type` is `Standard`; must be an empty string (`\"\"`) or omitted when `type` is `Dynamic`.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -6842,7 +6842,7 @@
         },
         "enableAcceleratedNetworking": {
           "type": "boolean",
-          "description": "Whether accelerated networking is enabled on this secondary NIC. Default: true."
+          "description": "Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration."
         }
       }
     },
@@ -6865,7 +6865,7 @@
           {
             "name": "Dynamic",
             "value": "Dynamic",
-            "description": "A secondary network interface created without IP configuration or subnet attachment. The interface is provisioned in an uninitialized state and the subnet is attached during workload creation. `vnetSubnetId` must be set to an empty string (`\"\"`)."
+            "description": "A secondary network interface created without IP configuration or subnet attachment. The interface is provisioned in an uninitialized state and the subnet is attached during workload creation. `vnetSubnetId` must be set to an empty string (`\"\"`) or omitted."
           }
         ]
       }

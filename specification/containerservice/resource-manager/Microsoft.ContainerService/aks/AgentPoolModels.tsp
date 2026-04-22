@@ -814,7 +814,7 @@ model AgentPoolNetworkInterface {
   /**
    * The resource ID of the subnet which will be attached to the secondary
    * network interface. Required when `type` is `Standard`; must be an empty
-   * string (`""`) when `type` is `Dynamic`.
+   * string (`""`) or omitted when `type` is `Dynamic`.
    */
   vnetSubnetId?: Azure.Core.armResourceIdentifier<[
     {
@@ -824,7 +824,9 @@ model AgentPoolNetworkInterface {
 
   /**
    * Whether accelerated networking is enabled on this secondary NIC.
-   * Default: true.
+   * If omitted, this defaults to true only when the agent pool VM SKU supports
+   * accelerated networking. Validation will fail if it is enabled on an
+   * unsupported SKU or NIC configuration.
    */
   enableAcceleratedNetworking?: boolean;
 }
