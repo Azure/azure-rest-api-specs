@@ -609,7 +609,9 @@ union ScalingHostPoolType {
 
   /**
    * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
+   * @Introduced in 2024-04-08-preview
    */
+  @added(Versions.vLatestPreview)
   Personal: "Personal",
 }
 
@@ -791,7 +793,7 @@ union SessionHostManagementProvisioningOperationStatus {
  * Operation status for SessionHostManagementUpdate.
  */
 @renamedFrom(
-  Versions.v2025_04_01_preview,
+  Versions.vLatestPreview,
   "SessionHostManagementUpdateOperationStatus"
 )
 union updateStatus {
@@ -1486,23 +1488,30 @@ model AppAttachPackageProperties {
 
   /**
    * Specific name of package owner, is "AppAttach" for native app attach packages
+   * @Introduced in 2024-03-06-preview
    */
+  @added(Versions.vLatestPreview)
   packageOwnerName?: string;
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
+   * @Introduced in 2024-03-06-preview
    */
+  @added(Versions.vLatestPreview)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
+   * @Introduced in 2024-03-06-preview
    */
+  @added(Versions.vLatestPreview)
   customData?: string;
 
   /**
    * DeploymentScope type for AppAttachPackage.
+   * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.vLatestPreview)
   deploymentScope?: DeploymentScope;
 }
 
@@ -1694,19 +1703,21 @@ model DiskInfoProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
    */
-  @removed(Versions.v2025_04_01_preview)
+  @removed(Versions.vLatestPreview)
   type: VirtualMachineDiskType;
 
   /**
    * The managed disk parameters.
+   * @Introduced in 2025-03-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   managedDisk?: ManagedDiskProperties;
 
   /**
    * Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.
+   * @Introduced in 2025-03-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   diffDiskSettings?: DiffDiskProperties;
 }
 
@@ -1738,7 +1749,7 @@ model DiffDiskProperties {
 /**
  * Disk information.
  */
-@removed(Versions.v2025_04_01_preview)
+@removed(Versions.vLatestPreview)
 model DiskInfoPatchProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
@@ -2032,14 +2043,18 @@ model BootDiagnosticsInfoPatchProperties {
 
 /**
  * List of ActiveSessionHostConfiguration definitions.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model ActiveSessionHostConfigurationList
   is Azure.Core.Page<ActiveSessionHostConfiguration>;
 
 /**
  * Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState
+ * @Introduced in 2023-11-01-preview
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+@added(Versions.vLatestPreview)
 model ActiveSessionHostConfigurationProperties {
   /**
    * The timestamp of the last update.
@@ -2128,7 +2143,9 @@ model ActiveSessionHostConfigurationProperties {
 
 /**
  * The configurations of a hostpool update.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model HostPoolUpdateConfigurationProperties {
   /**
    * Whether not to save original disk. False by default.
@@ -2155,7 +2172,9 @@ model HostPoolUpdateConfigurationProperties {
 
 /**
  * The configurations of a hostpool update.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model HostPoolUpdateConfigurationPatchProperties {
   /**
    * Whether not to save original disk. False by default.
@@ -2182,8 +2201,10 @@ model HostPoolUpdateConfigurationPatchProperties {
 
 /**
  * Session Host Managements of HostPool.
+ * @Introduced in 2023-11-01-preview
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
+@added(Versions.vLatestPreview)
 model SessionHostManagementProperties {
   /**
    * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
@@ -2197,20 +2218,24 @@ model SessionHostManagementProperties {
 
   /**
    * Parameters that apply when session hosts are provisioned.
+   * @Introduced in 2023-10-04-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   provisioning?: SessionHostProvisioningConfigurationProperties;
 
   /**
    * The policy that should be applied when the Session Host provisioning operation fails.
+   * @Introduced in 2025-03-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
 }
 
 /**
  * The configuration for session host provisioning operations.
+ * @Introduced in 2025-03-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostProvisioningConfigurationProperties {
   /**
    * Whether the session host should be set in drain mode following provisioning.
@@ -2231,7 +2256,9 @@ model SessionHostProvisioningConfigurationProperties {
 
 /**
  * The configuration for session host provisioning operations.
+ * @Introduced in 2025-03-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostProvisioningConfigurationPatchProperties {
   /**
    * Whether the session host should be set in drain mode following provisioning.
@@ -2252,7 +2279,9 @@ model SessionHostProvisioningConfigurationPatchProperties {
 
 /**
  * Represents a SessionHostManagementPatch definition.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostManagementPatchProperties {
   /**
    * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
@@ -2266,14 +2295,16 @@ model SessionHostManagementPatchProperties {
 
   /**
    * Parameters that apply when session hosts are provisioned.
+   * @Introduced in 2023-10-04-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   provisioning?: SessionHostProvisioningConfigurationPatchProperties;
 
   /**
    * The policy that should be applied when the Session Host provisioning operation fails.
+   * @Introduced in 2025-03-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
 }
 /**
@@ -2331,14 +2362,16 @@ model ApplicationGroupProperties {
 
   /**
    * Tenant that the resource is being requested on behalf of.
+   * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.v2025_08_01_preview)
+  @added(Versions.vLatestPreview)
   oboTenantId?: string;
 
   /**
    * DeploymentScope type for ApplicationGroup.
+   * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   deploymentScope?: DeploymentScope;
 }
@@ -2625,50 +2658,63 @@ model HostPoolProperties {
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   relayUDP?: RelayUDP;
 
   /**
    * The type of management for this hostpool, Automated or Standard. The default value is Automated.
+   * @Introduced in 2023-11-01-preview
    */
+  @added(Versions.vLatestPreview)
   managementType?: ManagementType;
 
   /**
    * DeploymentScope type for HostPool.
+   * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.v2025_08_01_preview)
+  @added(Versions.vLatestPreview)
   deploymentScope?: DeploymentScope;
 
   /**
    * Tenant that the resource is being requested on behalf of.
+   * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.v2025_08_01_preview)
+  @added(Versions.vLatestPreview)
   oboTenantId?: string;
 
   /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
@@ -2874,14 +2920,16 @@ model ScalingSchedule {
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
 
   /**
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties;
 
   /**
@@ -2975,9 +3023,10 @@ model ScalingSchedule {
 
 /**
  * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+ * @Introduced in 2024-11-01-preview
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@added(Versions.v2025_04_01_preview)
+@added(Versions.vLatestPreview)
 @OpenAPI.extension("x-nullable", true)
 model CreateDeleteProperties {
   /**
@@ -3032,8 +3081,9 @@ model Time {
 
 /**
  * Request body for listing scoped registration tokens for a session host.
+ * @Introduced in 2026-01-01-preview
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.vLatestPreview)
 model ScopedRegistrationTokenProperties {
   /**
    * Expiration time of the registration token in UTC.
@@ -3106,14 +3156,16 @@ model WorkspaceProperties {
 
   /**
    * Tenant that the resource is being requested on behalf of.
+   * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.v2025_08_01_preview)
+  @added(Versions.vLatestPreview)
   oboTenantId?: string;
 
   /**
    * DeploymentScope type for Workspace.
+   * @Introduced in 2025-11-01-preview
    */
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.vLatestPreview)
   deploymentScope?: DeploymentScope;
 }
 
@@ -3162,12 +3214,16 @@ model AppAttachPackagePatchProperties {
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
+   * @Introduced in 2024-03-06-preview
    */
+  @added(Versions.vLatestPreview)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
+   * @Introduced in 2024-03-06-preview
    */
+  @added(Versions.vLatestPreview)
   customData?: string;
 }
 
@@ -3368,12 +3424,16 @@ model ApplicationPatchProperties {
 
 /**
  * List of SessionHostManagement definitions.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostManagementList is Azure.Core.Page<SessionHostManagement>;
 
 /**
  * List of SessionHostConfiguration definitions.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostConfigurationList is Azure.Core.Page<SessionHostConfiguration>;
 
 /**
@@ -3417,8 +3477,10 @@ model DesktopProperties {
 
 /**
  * SessionHostManagement properties that can be patched.
+ * @Introduced in 2023-11-01-preview
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
+@added(Versions.vLatestPreview)
 model SessionHostManagementPatch {
   /**
    * Detailed properties for SessionHostManagement
@@ -3428,8 +3490,10 @@ model SessionHostManagementPatch {
 
 /**
  * SessionHostConfiguration properties that can be patched.
+ * @Introduced in 2023-11-01-preview
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
+@added(Versions.vLatestPreview)
 model SessionHostConfigurationPatch {
   /**
    * Detailed properties for SessionHostConfiguration
@@ -3509,7 +3573,9 @@ model StartMenuItemProperties {
 
 /**
  * Object containing the definition for properties to be used for a sessionHostUpdate operation.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model UpdateSessionHostsRequestBody {
   /**
    * The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately
@@ -3529,7 +3595,9 @@ model UpdateSessionHostsRequestBody {
 
 /**
  * Object containing control action for hostpool update.
+ * @Introduced in 2024-04-08-preview
  */
+@added(Versions.vLatestPreview)
 model HostPoolUpdateControlParameter {
   /**
    * Action types for controlling hostpool update.
@@ -3545,7 +3613,9 @@ model HostPoolUpdateControlParameter {
 
 /**
  * Object containing control action for hostpool provisioning.
+ * @Introduced in 2025-03-01-preview
  */
+@added(Versions.vLatestPreview)
 model HostPoolProvisioningControlParameter {
   /**
    * Action types for controlling hostpool update.
@@ -3559,7 +3629,7 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
-@@added(HostPoolPatch.identity, Versions.v2025_04_01_preview);
+@@added(HostPoolPatch.identity, Versions.vLatestPreview);
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
 @@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
 
@@ -3683,33 +3753,42 @@ model HostPoolPatchProperties {
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
+  @added(Versions.vLatestPreview)
   relayUDP?: RelayUDP;
 
   /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.v2025_09_01_preview)
+  @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
@@ -3986,22 +4065,25 @@ model SessionHostList is Azure.Core.Page<SessionHost>;
 model SessionHostProperties {
   /**
    * Number of active sessions on SessionHost.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   activeSessions?: int32;
 
   /**
    * Number of disconnected sessions on SessionHost.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   disconnectedSessions?: int32;
 
   /**
    * Number of pending sessions on SessionHost.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   pendingSessions?: int32;
 
@@ -4101,13 +4183,17 @@ model SessionHostProperties {
 
   /**
    * The last time update was completed.
+   * @Introduced in 2023-11-01-preview
    */
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   lastSessionHostUpdateTime?: utcDateTime;
 
   /**
    * SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z
+   * @Introduced in 2023-11-01-preview
    */
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   sessionHostConfiguration?: string;
 
@@ -4633,8 +4719,10 @@ model ScalingPlanPooledScheduleList
 model ScalingPlanPooledScheduleProperties {
   /**
    * Name of the ScalingPlanPooledSchedule
+   * @Introduced in 2024-08-08-preview
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Service already uses this property"
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -4645,14 +4733,16 @@ model ScalingPlanPooledScheduleProperties {
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
 
   /**
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties;
 
   /**
@@ -4751,7 +4841,9 @@ model ScalingPlanPooledScheduleProperties {
 model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Name of the ScalingPlanPooledSchedule
+   * @Introduced in 2024-08-08-preview
    */
+  @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -4762,14 +4854,16 @@ model ScalingPlanPooledSchedulePatchProperties {
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   scalingMethod?: ScalingMethodType;
 
   /**
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   * @Introduced in 2024-11-01-preview
    */
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties;
 
   /**
@@ -4919,7 +5013,9 @@ model WorkspacePatchProperties {
 
 /**
  * Session host configurations of HostPool.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostConfigurationProperties {
   /**
    * The timestamp of the last update.
@@ -5014,7 +5110,9 @@ model SessionHostConfigurationProperties {
 
 /**
  * Session host configurations of HostPool.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostConfigurationPatchProperties {
   /**
    * Friendly name to describe this version of the SessionHostConfiguration.
@@ -5062,7 +5160,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Disk Information
    */
-  @typeChangedFrom(Versions.v2025_04_01_preview, DiskInfoPatchProperties)
+  @typeChangedFrom(Versions.vLatestPreview, DiskInfoPatchProperties)
   diskInfo?: DiskInfoProperties;
 
   /**
@@ -5098,8 +5196,10 @@ model SessionHostConfigurationPatchProperties {
 
 /**
  * The current status of the session host update async operation.
+ * @Introduced in 2024-04-08-preview
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+@added(Versions.vLatestPreview)
 model SessionHostManagementUpdateStatusProperties {
   /**
    * The correlation Id for Log Analytics..
@@ -5124,7 +5224,9 @@ model SessionHostManagementUpdateStatusProperties {
 
 /**
  * Properties bag for sessionHostManagement Provisioning Statuses.
+ * @Introduced in 2025-03-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostManagementProvisioningStatusProperties {
   /**
    * The correlation Id for Log Analytics.
@@ -5149,7 +5251,9 @@ model SessionHostManagementProvisioningStatusProperties {
 
 /**
  * SessionHostManagement Provisioning Operation Progress information.
+ * @Introduced in 2025-03-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostManagementProvisioningOperationProgress {
   /**
    * Time that the sessionHostManagement operation was created.
@@ -5179,7 +5283,9 @@ model SessionHostManagementProvisioningOperationProgress {
 
 /**
  * SessionHostManagement Operation Progress information.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 model SessionHostManagementOperationProgress {
   /**
    * Time that the sessionHostManagement operation was created.
