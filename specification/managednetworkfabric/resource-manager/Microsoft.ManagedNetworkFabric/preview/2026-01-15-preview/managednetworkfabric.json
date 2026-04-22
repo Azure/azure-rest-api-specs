@@ -21005,6 +21005,11 @@
       "type": "object",
       "description": "Network Bootstrap Interface Patch properties.",
       "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.",
+          "minLength": 1
+        },
         "additionalDescription": {
           "type": "string",
           "description": "Additional description of the interface."
@@ -21068,6 +21073,11 @@
           "type": "string",
           "description": "IPv6Address of the interface.",
           "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.",
+          "minLength": 1
         },
         "operationalState": {
           "$ref": "#/definitions/OperationalState",

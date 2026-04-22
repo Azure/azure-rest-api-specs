@@ -48,7 +48,6 @@ model NetworkBootstrapInterfaceProperties extends AnnotationResource {
 
   @doc("Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
-  @removed(Versions.v2026_01_15_preview)
   serialNumber?: string;
 
   @doc("Operational state of networkBootstrapInterface indicating if the interface is reachable")
@@ -68,7 +67,6 @@ model NetworkBootstrapInterfacePatch {
 model NetworkBootstrapInterfacePatchProperties extends AnnotationResource {
   @doc("Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
-  @removed(Versions.v2026_01_15_preview)
   serialNumber?: string;
 
   @doc("Additional description of the interface.")

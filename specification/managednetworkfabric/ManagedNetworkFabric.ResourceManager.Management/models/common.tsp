@@ -599,7 +599,7 @@ model ValidateConfigurationResponseProperties {
   url?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response instead of spread"
 @doc("Common response for device updates.")
 model CommonPostActionResponseForDeviceUpdate extends CommonErrorResponse {
   @doc("Gets the configuration state.")
@@ -1435,7 +1435,7 @@ union GenerateBaseConfiguration {
 /**
  * The error message.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Extending Resource Manager error response"
 @Azure.ResourceManager.CommonTypes.Private.armCommonDefinition(
   "ErrorResponse",
   Azure.ResourceManager.CommonTypes.Versions.v5
