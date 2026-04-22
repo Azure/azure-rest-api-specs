@@ -2991,6 +2991,27 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-access-tier": {
+                "x-ms-client-name": "AccessTier",
+                "type": "string",
+                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive."
+              },
+              "x-ms-access-tier-inferred": {
+                "x-ms-client-name": "AccessTierInferred",
+                "type": "boolean",
+                "description": "For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value."
+              },
+              "x-ms-access-tier-change-time": {
+                "x-ms-client-name": "AccessTierChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
+              },
+              "x-ms-smart-access-tier": {
+                "x-ms-client-name": "SmartAccessTier",
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               }
             },
             "schema": {
@@ -3278,6 +3299,27 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
+              },
+              "x-ms-access-tier": {
+                "x-ms-client-name": "AccessTier",
+                "type": "string",
+                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive."
+              },
+              "x-ms-access-tier-inferred": {
+                "x-ms-client-name": "AccessTierInferred",
+                "type": "boolean",
+                "description": "For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value."
+              },
+              "x-ms-access-tier-change-time": {
+                "x-ms-client-name": "AccessTierChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
+              },
+              "x-ms-smart-access-tier": {
+                "x-ms-client-name": "SmartAccessTier",
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               }
             },
             "schema": {
