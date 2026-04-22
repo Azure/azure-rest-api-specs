@@ -415,6 +415,10 @@ model CodeConfiguration {
 
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
+
+  @visibility(Lifecycle.Read)
+  @doc("The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.")
+  content_hash?: string;
 }
 
 @doc("The hosted agent definition.")
