@@ -16137,7 +16137,7 @@
     },
     "ResiliencyPolicy": {
       "type": "object",
-      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.",
+      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy, ResilientVMDeletionPolicy and OperationRecoverySettings (version > 2025-11-01).",
       "properties": {
         "resilientVMCreationPolicy": {
           "$ref": "#/definitions/ResilientVMCreationPolicy",
@@ -17204,7 +17204,7 @@
         },
         "securityType": {
           "$ref": "#/definitions/SecurityTypes",
-          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set."
+          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. If not specified, Standard will be returned starting api version 2025-11-01."
         },
         "encryptionIdentity": {
           "$ref": "#/definitions/EncryptionIdentity",
@@ -17218,7 +17218,7 @@
     },
     "SecurityTypes": {
       "type": "string",
-      "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.",
+      "description": "Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a Standard value starting API version 2025-11-01.",
       "enum": [
         "TrustedLaunch",
         "ConfidentialVM"
