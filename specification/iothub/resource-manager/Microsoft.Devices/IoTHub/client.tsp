@@ -15,6 +15,7 @@ using Microsoft.Devices;
 );
 @@clientName(IotHubDescriptions.getValidSkus, "listValidSkus", "javascript");
 
+@@clientName(Microsoft.Devices.IotHubProperties.hostName, "hostname", "java");
 @@clientName(Microsoft.Devices.IotHubProperties.disableModuleSAS,
   "disableModuleSas",
   "java"
