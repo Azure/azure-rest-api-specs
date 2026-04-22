@@ -126,32 +126,6 @@ union PublicNetworkAccess {
 }
 
 /**
- * DNS Name Policy for namespace. Defines the DNS naming behavior for the namespace.
- */
-@added(Versions.v2026_01_01)
-union DnsNamePolicy {
-  string,
-
-  /** No DNS Name Label, Legacy DNS Zone */
-  StandardNonPartitionedZone: "StandardNonPartitionedZone",
-
-  /** No DNS Name Label, Partitioned DNS Zone */
-  StandardPartitionedZone: "StandardPartitionedZone",
-
-  /** DNS Name Label with secure tenant reuse policy */
-  SecureTenantReuse: "SecureTenantReuse",
-
-  /** DNS Name Label with secure subscription reuse policy */
-  SecureSubscriptionReuse: "SecureSubscriptionReuse",
-
-  /** DNS Name Label with secure resource group reuse policy */
-  SecureResourceGroupReuse: "SecureResourceGroupReuse",
-
-  /** DNS Name Label with no reuse policy */
-  SecureNoReuse: "SecureNoReuse",
-}
-
-/**
  * Status of the connection.
  */
 union PrivateLinkConnectionStatus {
@@ -640,6 +614,12 @@ model ClusterProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   platformCapabilities?: PlatformCapabilities;
+
+  /**
+   * A value that indicates whether the cluster is zone redundant.
+   */
+  @added(Versions.v2026_01_01)
+  zoneRedundant?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -899,13 +879,6 @@ model EHNamespaceProperties {
    */
   @added(Versions.v2026_01_01)
   ipV6Enabled?: boolean;
-
-  /**
-   * DNS Name Policy for the namespace.
-   */
-  @added(Versions.v2026_01_01)
-  @visibility(Lifecycle.Read)
-  dnsNamePolicy?: DnsNamePolicy;
 }
 
 /**
