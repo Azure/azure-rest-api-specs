@@ -253,15 +253,27 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(AfdUrlSigningAction, "FrontDoorUrlSigningAction", "csharp");
-@@clientName(CustomRuleAfd, "FrontDoorCustomRule", "csharp");
+// AfdCipherSuiteSetType: Cannot rename — used as property type on generated
+// class FrontDoorCustomDomainHttpsContent.CipherSuiteSetType, renaming causes
+// unfixable ApiCompat break (property type change on generated class).
+// AfdCustomizedCipherSuiteForTls12/13: Cannot rename — these are inline union
+// types, the generator references them by original name in serialization code
+// and FrontDoorCustomDomainHttpsCustomizedCipherSuiteSet properties.
+@@clientName(CustomRuleAfd, "CustomRuleFrontDoor", "csharp");
 @@clientName(ManagedRuleGroupOverrideAfd,
-  "FrontDoorManagedRuleGroupOverride",
+  "ManagedRuleGroupOverrideFrontDoor",
   "csharp"
 );
-@@clientName(ManagedRuleOverrideAfd, "FrontDoorManagedRuleOverride", "csharp");
-@@clientName(ManagedRuleSetAfd, "FrontDoorManagedRuleSet", "csharp");
-@@clientName(MatchConditionAfd, "FrontDoorMatchCondition", "csharp");
-@@clientName(PolicySettingsAfd, "FrontDoorPolicySettings", "csharp");
+@@clientName(ManagedRuleOverrideAfd, "ManagedRuleOverrideFrontDoor", "csharp");
+@@clientName(ManagedRuleSetAfd, "ManagedRuleSetFrontDoor", "csharp");
+@@clientName(MatchConditionAfd, "MatchConditionFrontDoor", "csharp");
+@@clientName(PolicySettingsAfd, "PolicySettingsFrontDoor", "csharp");
+@@clientName(CustomRuleListAfd, "CustomRuleListFrontDoor", "csharp");
+@@clientName(ManagedRuleSetListAfd, "ManagedRuleSetListFrontDoor", "csharp");
+@@clientName(AFDDomains, "FrontDoorCustomDomains", "csharp");
+@@clientName(AFDEndpoints, "FrontDoorEndpoints", "csharp");
+@@clientName(AFDOriginGroups, "FrontDoorOriginGroups", "csharp");
+@@clientName(AFDOrigins, "FrontDoorOrigins", "csharp");
 @@clientName(ManagedRuleSet, "WafPolicyManagedRuleSet", "csharp");
 @@clientName(UrlSigningKeyParameters, "UriSigningKeyProperties", "csharp");
 @@clientName(DeploymentStages, "CdnDeploymentStages", "csharp");
@@ -309,7 +321,7 @@ using Azure.ResourceManager;
 );
 @@clientName(MatchVariable, "DeliveryRuleMatchVariable", "csharp");
 @@clientName(OriginCapacityResourceProperties,
-  "AfdOriginCapacitySettings",
+  "FrontDoorOriginCapacitySettings",
   "csharp"
 );
 @@clientName(ProfileAgentUpdateParameters, "CdnProfileAgentPatch", "csharp");
@@ -611,6 +623,8 @@ using Azure.ResourceManager;
 @@clientName(Status, "ValidationStatus", "csharp");
 @@clientName(ValidateSecretInput, "ValidateSecretContent", "csharp");
 @@clientName(MigrationParameters, "MigrationContent", "csharp");
+// CdnMigrationToAfdParameters: Cannot rename to FrontDoor — old type implements
+// IJsonModel<CdnMigrationToAfdContent>, renaming causes unfixable ApiCompat break.
 @@clientName(CdnMigrationToAfdParameters, "CdnMigrationToAfdContent", "csharp");
 @@clientName(EndpointProperties.customDomains,
   "DeepCreatedCustomDomains",
