@@ -29,6 +29,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2025-09-01-preview")
   v2025_09_01_preview: "2025-09-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2026-09-01")
+  v2026_09_01: "2026-09-01",
 }
 
 @doc("File share resource")
@@ -39,6 +43,11 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   @path
   @segment("fileShares")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Identity is a valid envelope property"
+  @added(Versions.v2026_09_01)
+  @doc("Managed service identity for the file share.")
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @doc("Media Tier enum.")
@@ -193,6 +202,11 @@ model FileShareProperties {
   @visibility(Lifecycle.Read)
   @doc("The list of associated private endpoint connections.")
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @doc("Encryption settings for the file share.")
+  encryption?: CommonTypes.Encryption;
 }
 
 #deprecated "Deprecating 202 for PUT requests. Use 201 instead."
