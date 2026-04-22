@@ -11,6 +11,7 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
 import "./src/evaluations/routes.tsp";
 import "./src/evaluators/routes.tsp";
+import "./src/human-evaluations/routes.tsp";
 import "./src/indexes/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/managed-blueprints/routes.tsp";
