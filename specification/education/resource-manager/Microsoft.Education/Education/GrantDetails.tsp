@@ -52,7 +52,7 @@ alias BillingProfileGrantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     /** The grant name. */
     @path
     @segment("grants")
-    @key("grant")
+    @key
     grant: "default";
   }
 >;
@@ -68,7 +68,7 @@ alias EducationGrantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     /** The grant name. */
     @path
     @segment("grants")
-    @key("grant")
+    @key
     grant: "default";
   }
 >;

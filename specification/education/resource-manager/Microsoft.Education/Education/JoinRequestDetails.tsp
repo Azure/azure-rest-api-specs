@@ -57,7 +57,7 @@ alias InvoiceSectionJoinRequestOps = Azure.ResourceManager.Legacy.ExtensionOpera
     /** The lab name. */
     @path
     @segment("labs")
-    @key("lab")
+    @key
     lab: "default";
   },
   {},
@@ -65,7 +65,7 @@ alias InvoiceSectionJoinRequestOps = Azure.ResourceManager.Legacy.ExtensionOpera
     /** The ID that uniquely identifies a join request. */
     @path
     @segment("joinRequests")
-    @key("joinRequestName")
+    @key
     joinRequestName: string;
   }
 >;

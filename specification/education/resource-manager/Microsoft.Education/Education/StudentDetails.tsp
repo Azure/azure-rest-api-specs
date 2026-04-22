@@ -58,7 +58,7 @@ alias InvoiceSectionStudentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     /** The lab name. */
     @path
     @segment("labs")
-    @key("lab")
+    @key
     lab: "default";
   },
   {},
@@ -66,7 +66,7 @@ alias InvoiceSectionStudentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     /** The student alias. */
     @path
     @segment("students")
-    @key("studentAlias")
+    @key
     studentAlias: string;
   }
 >;
