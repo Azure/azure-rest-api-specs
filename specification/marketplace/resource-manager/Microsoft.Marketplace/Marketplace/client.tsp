@@ -108,9 +108,18 @@ using Microsoft.Marketplace;
 @@alternateType(QueryRequestApproval.etag, Azure.Core.eTag, "csharp");
 
 // CollectionIds types (string[] → Guid[] in C#)
-@@alternateType(PrivateStoreProperties.collectionIds, Azure.Core.uuid[], "csharp");
-@@alternateType(BulkCollectionsDetails.collectionIds, Azure.Core.uuid[], "csharp");
-@@alternateType(AdminRequestApprovalProperties.collectionIds, Azure.Core.uuid[], "csharp");
+@@alternateType(PrivateStoreProperties.collectionIds,
+  Azure.Core.uuid[],
+  "csharp"
+);
+@@alternateType(BulkCollectionsDetails.collectionIds,
+  Azure.Core.uuid[],
+  "csharp"
+);
+@@alternateType(AdminRequestApprovalProperties.collectionIds,
+  Azure.Core.uuid[],
+  "csharp"
+);
 
 // ===== Model Renames (naming convention compliance) =====
 @@clientName(SubscriptionsResponse, "SubscriptionsResult", "csharp");
@@ -120,13 +129,28 @@ using Microsoft.Marketplace;
 // which collides with the ARM collection class for PrivateStore resources.
 // Override to "PrivateStoreCollectionInfo" to match the renamed Collection model.
 @@clientLocation(Collections.get, "PrivateStoreCollectionInfo", "csharp");
-@@clientLocation(Collections.createOrUpdate, "PrivateStoreCollectionInfo", "csharp");
+@@clientLocation(Collections.createOrUpdate,
+  "PrivateStoreCollectionInfo",
+  "csharp"
+);
 @@clientLocation(Collections.delete, "PrivateStoreCollectionInfo", "csharp");
 @@clientLocation(Collections.list, "PrivateStoreCollectionInfo", "csharp");
-@@clientLocation(Collections.transferOffers, "PrivateStoreCollectionInfo", "csharp");
-@@clientLocation(Collections.approveAllItems, "PrivateStoreCollectionInfo", "csharp");
-@@clientLocation(Collections.disableApproveAllItems, "PrivateStoreCollectionInfo", "csharp");
-@@clientLocation(PrivateStoreCollectionOperationGroup.post, "PrivateStoreCollectionInfo", "csharp");
+@@clientLocation(Collections.transferOffers,
+  "PrivateStoreCollectionInfo",
+  "csharp"
+);
+@@clientLocation(Collections.approveAllItems,
+  "PrivateStoreCollectionInfo",
+  "csharp"
+);
+@@clientLocation(Collections.disableApproveAllItems,
+  "PrivateStoreCollectionInfo",
+  "csharp"
+);
+@@clientLocation(PrivateStoreCollectionOperationGroup.post,
+  "PrivateStoreCollectionInfo",
+  "csharp"
+);
 
 // ===== Operation Renames =====
 @@clientName(PrivateStoreCollectionOperationGroup.post, "Delete", "csharp");
@@ -151,3 +175,99 @@ using Microsoft.Marketplace;
   "FetchCollectionsToSubscriptionsMapping",
   "csharp"
 );
+
+// ===== Resource ID type fix =====
+// Fix string id → ResourceIdentifier in generated Data constructors (armCommonTypesVersion is v3)
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// ===== Resource path parameter type fixes (string → Guid) =====
+@@alternateType(PrivateStore.name, Azure.Core.uuid, "csharp");
+@@alternateType(Collection.name, Azure.Core.uuid, "csharp");
+
+// Route parameter UUID fixes for non-ARM operations in routes.tsp
+@@alternateType(PrivateStoreCollectionOperationGroup.post::parameters.privateStoreId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(PrivateStoreCollectionOperationGroup.post::parameters.collectionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(PrivateStoreCollectionOfferOperationGroup.post::parameters.privateStoreId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(PrivateStoreCollectionOfferOperationGroup.post::parameters.collectionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+// ===== ClientLocation fix for offer delete =====
+// Move offer delete operation to PrivateStoreOffer resource (was auto-placed on PrivateStoreCollectionInfo)
+@@clientLocation(PrivateStoreCollectionOfferOperationGroup.post,
+  "PrivateStoreOffer",
+  "csharp"
+);
+
+// ===== Pageable fixes =====
+// These list operations use ArmListSinglePageByParent which returns Response<ListModel>
+// instead of Pageable<Resource>. Mark them as pageable to generate correct Pageable<T> return types.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(AdminRequestApprovalsResources.adminRequestApprovalsList,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(RequestApprovalResources.getApprovalRequestsList,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Collections.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(PrivateStores.queryOffers,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(PrivateStores.queryUserOffers,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(PrivateStores.queryUserRules,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(PrivateStores.fetchAllSubscriptionsInTenant,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Collections.listByContexts,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Collections.queryRules,
+  "csharp"
+);
+
+// ===== Operation rename for listByContexts =====
+// The generated method name GetByContexts must match old API name GetPrivateStoreCollectionOffersByContexts
+@@clientName(Collections.listByContexts,
+  "GetPrivateStoreCollectionOffersByContexts",
+  "csharp"
+);
+
+// ===== Property renames =====
+// Rule.type → RuleType to match old API
+@@clientName(Rule.type, "RuleType", "csharp");
+
+// ===== Property flattening =====
+// QueryRequestApprovalProperties needs flattening so PlanIds/PublisherId/SubscriptionId appear directly
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QueryRequestApprovalProperties.properties,
+  "csharp"
+);
+
+// ===== Usage fix for PrivateStoreOfferResult =====
+// Make OfferProperties (C# name: PrivateStoreOfferResult) input+output so collections are writable
+@@usage(OfferProperties, Usage.input | Usage.output, "csharp");
