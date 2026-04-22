@@ -97,10 +97,16 @@ enum EncryptionAlgorithmTypeCustom {
 @@alternateType(Storage.DataLake.PathItem.lastModified, utcDateTime, "csharp");
 @@alternateType(Storage.DataLake.PathItem.contentLength, string, "csharp");
 @@alternateType(Storage.DataLake.PathItem.isDirectory, string, "csharp");
+@@alternateType(Storage.DataLake.PathItem.eTag, string, "csharp");
+@@alternateType(Storage.DataLake.BlobPropertiesInternal.etag, string, "csharp");
 @@alternateType(Storage.DataLake.EncryptionAlgorithmType,
   EncryptionAlgorithmTypeCustom,
   "csharp"
 );
+@@alternateType(Storage.DataLake.IfMatchParameter.ifMatch, string, "csharp");
+@@alternateType(Storage.DataLake.IfNoneMatchParameter.ifNoneMatch, string, "csharp");
+@@alternateType(Storage.DataLake.SourceIfMatchParameter.sourceIfMatch, string, "csharp");
+@@alternateType(Storage.DataLake.SourceIfNoneMatchParameter.sourceIfNoneMatch, string, "csharp");
 
 @@access(Storage.DataLake.PathGetPropertiesAction, Access.public, "csharp");
 @@access(Storage.DataLake.PathLeaseAction, Access.public, "csharp");
