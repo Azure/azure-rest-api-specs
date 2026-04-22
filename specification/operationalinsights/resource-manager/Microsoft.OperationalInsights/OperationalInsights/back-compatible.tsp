@@ -170,6 +170,6 @@ model AccessRulePropertiesSubscriptionsItem {
   id?: Azure.Core.armResourceIdentifier;
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
-  Microsoft.OperationalInsights.AccessRulePropertiesSubscriptionsItem,
+  Microsoft.OperationalInsights.AccessRulePropertiesSubscriptionsItem[],
   "go"
 );
