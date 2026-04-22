@@ -6,10 +6,7 @@ using Azure.ClientGenerator.Core;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API was moved to its own service."
 namespace Microsoft.Monitor;
 
-// Mark SloView preview operations and their exclusively-used models as internal.
-// Shared models (EvaluationType, BaselineProperties, Signal, etc.) remain public
-// because they are also used by the public Slis interface.
-@@access(Access.internal, SloView.sliSignalPreview);
-@@access(Access.internal, SignalPreviewSliProperties);
-@@access(Access.internal, PreviewType);
-@@access(Access.internal, KqlmQueryResult);
+// Hide sliSignalPreview from all SDK generations.
+// @@access targets operations, so we mark the single operation inside SloView
+// as internal. The Slis interface remains public.
+@@access(SloView.sliSignalPreview, Access.internal);
