@@ -378,7 +378,7 @@ union DeploymentState {
 }
 
 /**
- * The routing mode that determines how requests are distributed across models.
+ * The model-router routing mode that determines how requests are distributed across models.
  */
 union RoutingMode {
   string,
@@ -389,27 +389,27 @@ union RoutingMode {
   Cost: "cost",
 
   /**
-   * Balance cost and accuracy when routing requests across models.
+   * Balance cost and quality when routing requests across models.
    */
   Balanced: "balanced",
 
   /**
-   * Route requests to maximize accuracy regardless of cost.
+   * Route requests to maximize quality regardless of cost.
    */
-  Accuracy: "accuracy",
+  Quality: "quality",
 }
 
 /**
- * Routing configuration for the deployment. Specifies how requests are routed across multiple models.
+ * Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.
  */
 model DeploymentRouting {
   /**
-   * The routing mode that determines how requests are distributed across models.
+   * The model-router routing mode that determines how requests are distributed across models.
    */
   mode?: RoutingMode = RoutingMode.Balanced;
 
   /**
-   * Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
+   * Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
    */
   @identifiers(#["name", "version"])
   models?: DeploymentModel[];
@@ -3141,7 +3141,7 @@ model DeploymentProperties {
   deploymentState?: DeploymentState | null;
 
   /**
-   * Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset.
+   * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
 }

@@ -9620,7 +9620,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11175,7 +11175,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -12962,7 +12962,7 @@
         },
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
-          "description": "Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset."
+          "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
         }
       }
     },
@@ -13021,16 +13021,16 @@
     },
     "DeploymentRouting": {
       "type": "object",
-      "description": "Routing configuration for the deployment. Specifies how requests are routed across multiple models.",
+      "description": "Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.",
       "properties": {
         "mode": {
           "type": "string",
-          "description": "The routing mode that determines how requests are distributed across models.",
+          "description": "The model-router routing mode that determines how requests are distributed across models.",
           "default": "balanced",
           "enum": [
             "cost",
             "balanced",
-            "accuracy"
+            "quality"
           ],
           "x-ms-enum": {
             "name": "RoutingMode",
@@ -13044,19 +13044,19 @@
               {
                 "name": "Balanced",
                 "value": "balanced",
-                "description": "Balance cost and accuracy when routing requests across models."
+                "description": "Balance cost and quality when routing requests across models."
               },
               {
-                "name": "Accuracy",
-                "value": "accuracy",
-                "description": "Route requests to maximize accuracy regardless of cost."
+                "name": "Quality",
+                "value": "quality",
+                "description": "Route requests to maximize quality regardless of cost."
               }
             ]
           }
         },
         "models": {
           "type": "array",
-          "description": "Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
+          "description": "Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
           "items": {
             "$ref": "#/definitions/DeploymentModel"
           },
@@ -15022,7 +15022,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -16613,11 +16613,11 @@
     },
     "RoutingMode": {
       "type": "string",
-      "description": "The routing mode that determines how requests are distributed across models.",
+      "description": "The model-router routing mode that determines how requests are distributed across models.",
       "enum": [
         "cost",
         "balanced",
-        "accuracy"
+        "quality"
       ],
       "x-ms-enum": {
         "name": "RoutingMode",
@@ -16631,12 +16631,12 @@
           {
             "name": "Balanced",
             "value": "balanced",
-            "description": "Balance cost and accuracy when routing requests across models."
+            "description": "Balance cost and quality when routing requests across models."
           },
           {
-            "name": "Accuracy",
-            "value": "accuracy",
-            "description": "Route requests to maximize accuracy regardless of cost."
+            "name": "Quality",
+            "value": "quality",
+            "description": "Route requests to maximize quality regardless of cost."
           }
         ]
       }
