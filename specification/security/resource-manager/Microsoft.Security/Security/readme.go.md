@@ -111,7 +111,7 @@ input-file:
   - stable/2020-01-01/discoveredSecuritySolutions.json
   - stable/2020-01-01/externalSecuritySolutions.json
   - stable/2020-01-01/jitNetworkAccessPolicies.json
-  - stable/2020-01-01/securitySolutions.json
+  - stable/2020-01-01/SecuritySolutions.json
   - stable/2020-01-01/securitySolutionsReferenceData.json
   - stable/2020-01-01/serverVulnerabilityAssessments.json
   - stable/2020-01-01/topologies.json
