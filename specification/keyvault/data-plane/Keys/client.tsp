@@ -685,6 +685,7 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(KeyVault.updateKey, "UpdateKeyProperties", "rust");
 @@clientDoc(KeyVault.encrypt,
   """
+    
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
     so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::decrypt()`].
     You can pass an empty string for the version to `decrypt()` to select the latest key version
@@ -695,6 +696,7 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 );
 @@clientDoc(KeyVault.sign,
   """
+    
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
     so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::verify()`].
     You can pass an empty string for the version to `verify()` to select the latest key version
@@ -705,9 +707,10 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 );
 @@clientDoc(KeyVault.wrapKey,
   """
+    
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
-    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::unwrapKey()`].
-    You can pass an empty string for the version to `unwrapKey()` to select the latest key version
+    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::unwrap_key()`].
+    You can pass an empty string for the version to `unwrap_key()` to select the latest key version
     but if you don't record the specific version used for wrapping a key, key rotation can make the data inaccessible.
     """,
   DocumentationMode.append,
@@ -715,10 +718,25 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 );
 @@clientDoc(KeyVault.secureWrapKey,
   """
+    
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
-    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::secureUnwrapKey()`].
-    You can pass an empty string for the version to `secureUnwrapKey()` to select the latest key version
+    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::secure_unwrap_key()`].
+    You can pass an empty string for the version to `secure_unwrap_key()` to select the latest key version
     but if you don't record the specific version used for wrapping a key, key rotation can make the data inaccessible.
+    """,
+  DocumentationMode.append,
+  "rust"
+);
+
+@@clientDoc(KeyOperationResult.kid,
+  """
+    
+    You should record this when returned from [`KeyClient::encrypt()`](crate::KeyClient::encrypt), [`sign()`](crate::KeyClient::sign),
+    and [`wrap_key()`](crate::KeyClient::wrap_key) so you can later parse it with [`ResourceId`](crate::ResourceId)
+    and pass the version to [`decrypt()`](crate::KeyClient::decrypt), [`verify()`](crate::KeyClient::verify),
+    and [`unwrap_key()`](crate::KeyClient::unwrap_key).
+    You can pass an empty string for the version to those functions to select the latest key version
+    but if you don't record the specific version used encrypting, signing, or wrapping a key, key rotation can make the data inaccessible.
     """,
   DocumentationMode.append,
   "rust"
