@@ -69,6 +69,7 @@
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 2,
             "elapsedMs": 1234,
+            "warning": "6 additional documents were dropped because rerankerThreshold filtered them out during reranking. Adjust the threshold if higher recall is desired.",
             "searchIndexArguments": {
               "search": "hello world",
               "filter": "foo eq bar",
@@ -167,7 +168,15 @@
             "rerankerScore": 2.7,
             "docKey": "myDocKey2"
           }
-        ]
+        ],
+        "responseSensitivityLabelInfo": {
+          "displayName": "Confidential",
+          "sensitivityLabelId": "00000000-0000-0000-0000-000000000001",
+          "toolTip": "This content is confidential.",
+          "priority": 2,
+          "color": "#FF0000",
+          "isEncrypted": false
+        }
       }
     },
     "206": {
