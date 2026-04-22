@@ -1,12 +1,42 @@
 {
-  "title": "Get_Namespace",
-  "operationId": "Namespaces_Get",
-  "description": "Get a namespace",
+  "title": "Update_Namespace_MessagingEndpoints",
+  "operationId": "Namespaces_Update",
+  "description": "Update a namespace's messaging endpoints",
   "parameters": {
-    "api-version": "2026-11-01-preview",
+    "api-version": "2026-11-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "namespaceName": "mynamespace"
+    "namespaceName": "mynamespace",
+    "properties": {
+      "properties": {
+        "messaging": {
+          "endpoints": {
+            "myPrimaryIotHubEndpoint": {
+              "endpointType": "Microsoft.Devices/IotHubs",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub1",
+              "inboundCallerIdentity": {
+                "type": "SystemAssigned"
+              },
+              "provisioning": {
+                "availability": "Available",
+                "allocationWeight": 1
+              }
+            },
+            "mySecondaryIotHubEndpoint": {
+              "endpointType": "Microsoft.Devices/IotHubs",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub2",
+              "inboundCallerIdentity": {
+                "type": "SystemAssigned"
+              },
+              "provisioning": {
+                "availability": "Available",
+                "allocationWeight": 1
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -18,10 +48,10 @@
         "systemData": {
           "createdBy": "00003442-0000-0000-0000-494059220000",
           "createdByType": "Application",
-          "createdAt": "2024-10-01T21:39:27.7050447Z",
+          "createdAt": "2024-09-25T23:41:41.8591157Z",
           "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
           "lastModifiedByType": "Application",
-          "lastModifiedAt": "2024-10-01T21:39:27.7050447Z"
+          "lastModifiedAt": "2024-10-01T21:03:33.5993192Z"
         },
         "identity": {
           "principalId": "00000000-8c07-4d9f-822d-3348a09f72c2",
@@ -30,6 +60,7 @@
         },
         "properties": {
           "uuid": "00000000-6971-4c90-a7a9-99be82dea167",
+          "provisioningState": "Succeeded",
           "messaging": {
             "endpoints": {
               "myPrimaryIotHubEndpoint": {
@@ -50,8 +81,7 @@
                 "endpointType": "Microsoft.Devices/IotHubs",
                 "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub2",
                 "inboundCallerIdentity": {
-                  "type": "UserAssigned",
-                  "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myAdrCallerUami"
+                  "type": "SystemAssigned"
                 },
                 "linkingState": "Succeeded",
                 "address": "myIotHub2.service.azure-devices.net",
@@ -63,22 +93,13 @@
               }
             }
           },
-          "provisioning": {
-            "endpoints": {
-              "myDpsEndpoint": {
-                "endpointType": "Microsoft.Devices/provisioningServices",
-                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/provisioningServices/myDps",
-                "inboundCallerIdentity": {
-                  "type": "UserAssigned",
-                  "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myAdrCallerUami"
-                },
-                "linkingState": "Succeeded"
-              }
-            }
-          },
-          "provisioningState": "Succeeded",
           "dataEndpoint": "northeurope.api.deviceregistry.com"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
       }
     }
   }

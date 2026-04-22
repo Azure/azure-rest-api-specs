@@ -1192,11 +1192,11 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplace_Namespace_With_Endpoints": {
-            "$ref": "./examples/CreateOrReplace_Namespace_With_Endpoints.json"
-          },
           "CreateOrReplace_Namespace_With_ManagementEndpoints": {
             "$ref": "./examples/CreateOrReplace_Namespace_With_ManagementEndpoints.json"
+          },
+          "CreateOrReplace_Namespace_With_MessagingEndpoints": {
+            "$ref": "./examples/CreateOrReplace_Namespace_With_MessagingEndpoints.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1269,11 +1269,14 @@
           }
         },
         "x-ms-examples": {
-          "Update_Namespace_Endpoints": {
-            "$ref": "./examples/Update_Namespace_Endpoints.json"
-          },
           "Update_Namespace_ManagementEndpoints": {
             "$ref": "./examples/Update_Namespace_ManagementEndpoints.json"
+          },
+          "Update_Namespace_MessagingEndpoints": {
+            "$ref": "./examples/Update_Namespace_MessagingEndpoints.json"
+          },
+          "Update_Namespace_ProvisioningEndpoints": {
+            "$ref": "./examples/Update_Namespace_ProvisioningEndpoints.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7044,17 +7047,20 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/InboundCallerIdentityType",
-          "description": "The type of managed identity. SystemAssigned or UserAssigned."
+          "description": "The identity type."
         },
         "userAssignedIdentity": {
           "type": "string",
           "description": "The resource ID of the user-assigned managed identity. Required when type is UserAssigned."
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "InboundCallerIdentityType": {
       "type": "string",
-      "description": "The type of managed identity for inbound caller identity.",
+      "description": "The type of identity used for inbound calls to the ADR namespace.",
       "enum": [
         "SystemAssigned",
         "UserAssigned"
@@ -7459,7 +7465,10 @@
           "$ref": "#/definitions/MessagingEndpointProvisioning",
           "description": "The provisioning configuration for this messaging endpoint."
         }
-      }
+      },
+      "required": [
+        "inboundCallerIdentity"
+      ]
     },
     "MessagingEndpointAvailability": {
       "type": "string",
@@ -10088,7 +10097,8 @@
       },
       "required": [
         "endpointType",
-        "resourceId"
+        "resourceId",
+        "inboundCallerIdentity"
       ]
     },
     "ProvisioningState": {

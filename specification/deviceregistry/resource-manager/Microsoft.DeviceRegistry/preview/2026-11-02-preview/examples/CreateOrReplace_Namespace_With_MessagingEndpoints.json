@@ -1,0 +1,158 @@
+{
+  "title": "CreateOrReplace_Namespace_With_MessagingEndpoints",
+  "operationId": "Namespaces_CreateOrReplace",
+  "description": "Create or replace a namespace with messaging endpoints",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "mynamespace",
+    "resource": {
+      "location": "northeurope",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "messaging": {
+          "endpoints": {
+            "myPrimaryIotHubEndpoint": {
+              "endpointType": "Microsoft.Devices/IotHubs",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub1",
+              "inboundCallerIdentity": {
+                "type": "SystemAssigned"
+              }
+            },
+            "mySecondaryIotHubEndpoint": {
+              "endpointType": "Microsoft.Devices/IotHubs",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub2",
+              "inboundCallerIdentity": {
+                "type": "UserAssigned",
+                "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myAdrCallerUami"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/mynamespace",
+        "name": "mynamespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-09-25T23:41:41.8591157Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-01T21:03:33.5993192Z"
+        },
+        "identity": {
+          "principalId": "00000000-8c07-4d9f-822d-3348a09f72c2",
+          "tenantId": "00000000-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "uuid": "00000000-6971-4c90-a7a9-99be82dea167",
+          "provisioningState": "Succeeded",
+          "messaging": {
+            "endpoints": {
+              "myPrimaryIotHubEndpoint": {
+                "endpointType": "Microsoft.Devices/IotHubs",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub1",
+                "inboundCallerIdentity": {
+                  "type": "SystemAssigned"
+                },
+                "linkingState": "Succeeded",
+                "address": "myIotHub1.service.azure-devices.net",
+                "deviceAddress": "myIotHub1.device.azure-devices.net",
+                "provisioning": {
+                  "availability": "Available",
+                  "allocationWeight": 1
+                }
+              },
+              "mySecondaryIotHubEndpoint": {
+                "endpointType": "Microsoft.Devices/IotHubs",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub2",
+                "inboundCallerIdentity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myAdrCallerUami"
+                },
+                "linkingState": "Succeeded",
+                "address": "myIotHub2.service.azure-devices.net",
+                "deviceAddress": "myIotHub2.device.azure-devices.net",
+                "provisioning": {
+                  "availability": "Available",
+                  "allocationWeight": 1
+                }
+              }
+            }
+          },
+          "dataEndpoint": "northeurope.api.deviceregistry.com"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/mynamespace",
+        "name": "mynamespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-09-25T23:41:41.8591157Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-09-25T23:41:41.8591157Z"
+        },
+        "identity": {
+          "principalId": "00000000-8c07-4d9f-822d-3348a09f72c2",
+          "tenantId": "00000000-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "uuid": "00000000-6971-4c90-a7a9-99be82dea167",
+          "provisioningState": "Accepted",
+          "messaging": {
+            "endpoints": {
+              "myPrimaryIotHubEndpoint": {
+                "endpointType": "Microsoft.Devices/IotHubs",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub1",
+                "inboundCallerIdentity": {
+                  "type": "SystemAssigned"
+                },
+                "linkingState": "InProgress",
+                "address": "myIotHub1.service.azure-devices.net",
+                "deviceAddress": "myIotHub1.device.azure-devices.net",
+                "provisioning": {
+                  "availability": "Available",
+                  "allocationWeight": 1
+                }
+              },
+              "mySecondaryIotHubEndpoint": {
+                "endpointType": "Microsoft.Devices/IotHubs",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIotHub2",
+                "inboundCallerIdentity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myAdrCallerUami"
+                },
+                "linkingState": "InProgress",
+                "address": "myIotHub2.service.azure-devices.net",
+                "deviceAddress": "myIotHub2.device.azure-devices.net",
+                "provisioning": {
+                  "availability": "Available",
+                  "allocationWeight": 1
+                }
+              }
+            }
+          },
+          "dataEndpoint": "northeurope.api.deviceregistry.com"
+        }
+      }
+    }
+  }
+}

@@ -101,7 +101,7 @@ model MessagingEndpoint {
 
   @added(Versions.v2026_11_01_preview)
   @doc("The identity the linked resource uses to call the ADR namespace.")
-  inboundCallerIdentity?: InboundCallerIdentity;
+  inboundCallerIdentity: InboundCallerIdentity;
 
   @added(Versions.v2026_11_01_preview)
   @doc("The linking state of this messaging endpoint.")
@@ -169,7 +169,7 @@ model ProvisioningEndpoint {
   resourceId: string;
 
   @doc("The identity the linked resource uses to call the ADR namespace.")
-  inboundCallerIdentity?: InboundCallerIdentity;
+  inboundCallerIdentity: InboundCallerIdentity;
 
   @doc("The linking state of this provisioning endpoint.")
   @visibility(Lifecycle.Read)
@@ -194,15 +194,15 @@ union NamespaceLinkingStateValue {
 @added(Versions.v2026_11_01_preview)
 @doc("The identity a linked resource uses for inbound calls to the ADR namespace.")
 model InboundCallerIdentity {
-  @doc("The type of managed identity. SystemAssigned or UserAssigned.")
-  type?: InboundCallerIdentityType;
+  @doc("The identity type.")
+  type: InboundCallerIdentityType;
 
   @doc("The resource ID of the user-assigned managed identity. Required when type is UserAssigned.")
   userAssignedIdentity?: string;
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("The type of managed identity for inbound caller identity.")
+@doc("The type of identity used for inbound calls to the ADR namespace.")
 union InboundCallerIdentityType {
   string,
 
