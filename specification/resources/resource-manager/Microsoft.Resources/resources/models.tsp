@@ -1,0 +1,193 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.Core;
+
+namespace Microsoft.Resources {
+  // ================================
+  // RESOURCE MODELS
+  // ================================
+
+  /** Generic resource information. */
+  @doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+  model GenericResource
+    is Azure.ResourceManager.TrackedResource<GenericResourceProperties> {
+    /** The name of the resource */
+    @doc("The name of the resource")
+    @key("resourceName")
+    @segment("resources")
+    @visibility(Lifecycle.Read)
+    @path
+    @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$")
+    name: string;
+  }
+
+  /** The resource properties. */
+  @doc("The resource properties.")
+  model GenericResourceProperties {
+    /** The provisioning state. */
+    @doc("Gets or sets the provisioning state.")
+    @visibility(Lifecycle.Read)
+    provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+  }
+
+  /** Resource group information. */
+  @doc("Resource group information.")
+  model ResourceGroup
+    is Azure.ResourceManager.ExtensionResource<ResourceGroupProperties> {
+    /** The name of the resource group. */
+    @doc("The name of the resource group.")
+    @key("resourceGroupName")
+    @segment("resourceGroups")
+    @visibility(Lifecycle.Read)
+    @path
+    @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$")
+    name: string;
+  }
+
+  /** The resource group properties. */
+  @doc("The resource group properties.")
+  model ResourceGroupProperties {
+    /** The location of the resource group. */
+    @doc("Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations.")
+    location: string;
+
+    /** The tags attached to the resource group. */
+    @doc("The tags attached to the resource group.")
+    tags?: string;
+
+    /** The ID of the resource that manages this resource group. */
+    @doc("The ID of the resource that manages this resource group.")
+    managedBy?: string;
+
+    /** The provisioning state. */
+    @doc("Gets or sets the provisioning state.")
+    @visibility(Lifecycle.Read)
+    provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+  }
+
+  /** List of resource groups. */
+  @doc("List of resource groups.")
+  model ResourceGroupListResult is Azure.Core.Page<ResourceGroup>;
+
+  /** List of resources. */
+  @doc("List of resources.")
+  model ResourceListResult is Azure.Core.Page<GenericResource>;
+
+  // ================================
+  // BATCH OPERATION MODELS
+  // ================================
+
+  /** HTTP method enumeration. */
+  @doc("HTTP method enumeration.")
+  union HttpMethod {
+    /** GET method. */
+    GET: "GET",
+
+    /** PUT method. */
+    PUT: "PUT",
+
+    /** PATCH method. */
+    PATCH: "PATCH",
+
+    /** DELETE method. */
+    DELETE: "DELETE",
+
+    /** POST method. */
+    POST: "POST",
+
+    string,
+  }
+
+  /** Batch request definition. */
+  @doc("Batch request definition.")
+  model BatchRequest {
+    /** The HTTP method for the request. */
+    @doc("The HTTP method for the request.")
+    httpMethod: HttpMethod;
+
+    /** The relative URL for the request. */
+    @doc("The relative URL for the request.")
+    relativeUrl: string;
+
+    /** Optional name to identify this request within the batch. */
+    @doc("Optional name to identify this request within the batch.")
+    name?: string;
+
+    /** The request body (for PUT/PATCH/POST operations). */
+    @doc("The request body (for PUT/PATCH/POST operations).")
+    body?: string;
+
+    /** Request headers. */
+    @doc("Request headers.")
+    headers?: string;
+
+    /** List of request names that this request depends on. */
+    @doc("List of request names that this request depends on.")
+    dependsOn?: string[];
+  }
+
+  /** Collection of batch requests. */
+  @doc("Collection of batch requests.")
+  model BatchRequests {
+    /** The batch requests to execute. */
+    @doc("The batch requests to execute.")
+    requests: BatchRequest[];
+  }
+
+  /** Batch response status enumeration. */
+  @doc("Batch response status enumeration.")
+  union BatchResponseStatus {
+    /** The request succeeded. */
+    "Succeeded",
+
+    /** The request failed. */
+    "Failed",
+
+    /** The request was processed but failed validation. */
+    "ValidationFailed",
+
+    /** The request was skipped due to dependency failure. */
+    "Skipped",
+
+    string,
+  }
+
+  /** Individual response within a batch response. */
+  @doc("Individual response within a batch response.")
+  model BatchResponseItem {
+    /** The name of the request (if provided in the batch request). */
+    @doc("The name of the request (if provided in the batch request).")
+    name?: string;
+
+    /** The HTTP status code of the response. */
+    @doc("The HTTP status code of the response.")
+    statusCode: int32;
+
+    /** The status of the batch response item. */
+    @doc("The status of the batch response item.")
+    status: BatchResponseStatus;
+
+    /** The response body. */
+    @doc("The response body.")
+    body?: string;
+
+    /** Response headers. */
+    @doc("Response headers.")
+    headers?: string;
+  }
+
+  /** Batch operation response. */
+  @doc("Batch operation response.")
+  model BatchResponse {
+    /** Individual responses within the batch. */
+    @doc("Individual responses within the batch.")
+    responses: BatchResponseItem[];
+  }
+}

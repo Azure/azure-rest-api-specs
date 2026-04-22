@@ -1,0 +1,23 @@
+parameters:
+  "service-dir":
+    default: "sdk/resources"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/resources.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource"
+    namespace: "azure.mgmt.resource"
+    generate-test: true
+    generate-sample: true
