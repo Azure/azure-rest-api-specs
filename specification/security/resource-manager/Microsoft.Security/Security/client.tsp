@@ -311,6 +311,7 @@ op privateLinkResourcesGetCustomization(
   "ArmSecurityStandardProperties",
   "go"
 );
+@@usage(IoTSecurityAPI.CustomAlertRule, Usage.input | Usage.output, "go");
 
 @@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "go");
 
@@ -325,4 +326,30 @@ op privateLinkResourcesGetCustomization(
 @@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "python"
+);
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+  "ArmActionType",
+  "java"
+);
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+  "ArmActionType",
+  "java"
 );
