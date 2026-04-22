@@ -826,6 +826,10 @@ directive:
     from: cognitiveservices.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}"]
     reason: The resource accounts/commitmentPlans is not a tracked resource
+  - suppress: RPC-Patch-V1-10 
+    from: cognitiveservices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5]
+    reason: computeType (within properties) is mandatory for this PATCH operation to validate resource consistency.
 ```
 
 ---
