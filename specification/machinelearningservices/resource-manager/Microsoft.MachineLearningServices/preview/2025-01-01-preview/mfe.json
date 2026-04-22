@@ -21182,6 +21182,19 @@
           ],
           "x-nullable": true
         },
+        "secretsConfiguration": {
+          "description": "Configuration for secrets to be made available during runtime.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SecretConfiguration",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "parentJobName": {
           "description": "Parent job name.",
           "type": "string",
@@ -27832,6 +27845,31 @@
             "description": "Sunday weekday"
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "SecretConfiguration": {
+      "description": "Secret Configuration definition.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "Secret Uri.\r\nSample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "workspaceSecretName": {
+          "description": "Name of secret in workspace key vault.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
       },
       "additionalProperties": false
     }

@@ -7125,6 +7125,14 @@ model JobBaseProperties extends ResourceBase {
   notificationSetting?: NotificationSetting | null;
 
   /**
+   * Configuration for secrets to be made available during runtime.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  secretsConfiguration?: Record<SecretConfiguration | null> | null;
+
+  /**
    * Parent job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
@@ -7157,6 +7165,26 @@ model IdentityConfiguration {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identityType: IdentityConfigurationType;
+}
+
+/**
+ * Secret Configuration definition.
+ */
+model SecretConfiguration {
+  /**
+   * Secret Uri.
+   * Sample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  uri?: string | null;
+
+  /**
+   * Name of secret in workspace key vault.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  workspaceSecretName?: string | null;
 }
 
 /**

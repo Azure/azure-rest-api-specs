@@ -26363,6 +26363,19 @@
             "create"
           ]
         },
+        "secretsConfiguration": {
+          "type": "object",
+          "description": "Configuration for secrets to be made available during runtime.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/SecretConfiguration",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "services": {
           "type": "object",
           "description": "List of JobEndpoints.\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
@@ -32540,6 +32553,30 @@
             "description": "Use the custom seasonality value."
           }
         ]
+      }
+    },
+    "SecretConfiguration": {
+      "type": "object",
+      "description": "Secret Configuration definition.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Secret Uri.\nSample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workspaceSecretName": {
+          "type": "string",
+          "description": "Name of secret in workspace key vault.",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
       }
     },
     "SecretExpiry": {
