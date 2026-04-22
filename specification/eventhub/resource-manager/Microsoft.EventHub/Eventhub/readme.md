@@ -491,6 +491,12 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: AuthorizationRules.json
     reason: Not a mandatory check
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
+    from: sku.json
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
+    from: namespaces.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
