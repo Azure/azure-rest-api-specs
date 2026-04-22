@@ -1129,7 +1129,8 @@ model ClusterUpdate {
   /**
    * The identity of the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 
   /**
    * Resource tags.
@@ -1244,6 +1245,12 @@ model DatabaseProperties {
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created.
    */
   accessKeysAuthentication?: AccessKeysAuthentication;
+
+  /**
+   * Specifies which keyspace events should trigger notifications. Default is an empty string, meaning this feature is disabled. When enabled, at least 'K' (keyspace events) or 'E' (keyevent events) must be present. For example, 'AKE' enables all standard events. See https://redis.io/docs/latest/develop/use/keyspace-notifications/ for the complete list of event types.
+   */
+  @added(Versions.v2026_02_01_preview)
+  notifyKeyspaceEvents?: string;
 }
 
 /**
