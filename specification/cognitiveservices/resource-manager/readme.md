@@ -91,7 +91,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].delete
   - code: AvoidAdditionalProperties
-    reason: "metadata" is a user-defined key-value property bag where customers store arbitrary metadata about connections (e.g., API versions, deployment config). Keys are not predefined by the service. "CustomKeys.keys" holds user-provided authentication credentials with user-defined key names. Both are Dictionary<string, string> in the backend.
+    reason: Metadata is a user-defined key-value property bag where customers store arbitrary metadata about connections (e.g. API versions, deployment config). Keys are not predefined by the service. CustomKeys.keys holds user-provided authentication credentials with user-defined key names. Both are Dictionary of string in the backend.
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
@@ -102,7 +102,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
   - code: AvoidAdditionalProperties
-    reason: "endpoints" is a read-only dictionary of service endpoint names to URLs (e.g., OpenAI, Speech). Keys are dynamically determined at runtime by the account kind and region from the service API catalog. Same pattern as AccountProperties.endpoints which has shipped in stable since the original TypeSpec migration.
+    reason: Endpoints is a read-only dictionary of service endpoint names to URLs (e.g. OpenAI, Speech). Keys are dynamically determined at runtime by the account kind and region from the service API catalog. Same pattern as AccountProperties.endpoints which has shipped in stable since the original TypeSpec migration.
     where:
       - $.definitions.ProjectProperties.properties.endpoints
   - code: AvoidAdditionalProperties
