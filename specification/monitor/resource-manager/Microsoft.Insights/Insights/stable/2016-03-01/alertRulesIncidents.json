@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "version": "2016-03-01",
+    "description": "Monitor Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AlertRuleIncidents"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents": {
+      "get": {
+        "operationId": "AlertRuleIncidents_ListByAlertRule",
+        "tags": [
+          "AlertRuleIncidents"
+        ],
+        "description": "Gets a list of incidents associated to an alert rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IncidentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List alert rule incidents": {
+            "$ref": "./examples/listAlertRuleIncidents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}": {
+      "get": {
+        "operationId": "AlertRuleIncidents_Get",
+        "tags": [
+          "AlertRuleIncidents"
+        ],
+        "description": "Gets an incident associated to an alert rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single alert rule incident": {
+            "$ref": "./examples/getAlertRuleIncident.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Incident": {
+      "type": "object",
+      "description": "An alert incident indicates the activation status of an alert rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Incident name.",
+          "readOnly": true
+        },
+        "ruleName": {
+          "type": "string",
+          "description": "Rule name that is associated with the incident.",
+          "readOnly": true
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "A boolean to indicate whether the incident is active or resolved.",
+          "readOnly": true
+        },
+        "activatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the incident was activated in ISO8601 format.",
+          "readOnly": true
+        },
+        "resolvedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the incident was resolved in ISO8601 format. If null, it means the incident is still active.",
+          "readOnly": true
+        }
+      }
+    },
+    "IncidentListResult": {
+      "type": "object",
+      "description": "The List incidents operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "the incident collection.",
+          "items": {
+            "$ref": "#/definitions/Incident"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the URL to get the next set of results."
+        }
+      }
+    },
+    "Microsoft.Common.ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

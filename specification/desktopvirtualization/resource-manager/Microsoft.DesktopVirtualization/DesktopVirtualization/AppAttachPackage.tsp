@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -52,7 +54,9 @@ interface AppAttachPackages {
     Parameters = {
       /**
        * Allows force delete
+       * @Introduced in 2023-10-04-preview
        */
+      @added(Versions.vLatestPreview)
       @query("force")
       force?: boolean;
     }
