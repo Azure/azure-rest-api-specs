@@ -10052,6 +10052,10 @@
         "error": {
           "$ref": "#/definitions/KnowledgeBaseErrorDetail",
           "description": "The error detail explaining why the operation failed. This property is only included when the activity does not succeed."
+        },
+        "warning": {
+          "type": "string",
+          "description": "A warning message surfacing potential configuration issues observed during the activity, such as documents dropped due to score thresholding, token limit truncation, or timeout conditions."
         }
       },
       "discriminator": "type",

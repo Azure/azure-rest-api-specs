@@ -408,6 +408,10 @@ model KnowledgeBaseActivityRecord {
 
   /** The error detail explaining why the operation failed. This property is only included when the activity does not succeed. */
   error?: KnowledgeBaseErrorDetail;
+
+  /** A warning message surfacing potential configuration issues observed during the activity, such as documents dropped due to score thresholding, token limit truncation, or timeout conditions. */
+  @added(Versions.v2026_05_01_preview)
+  warning?: string;
 }
 
 /** Represents a retrieval activity record. */
