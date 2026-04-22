@@ -2842,6 +2842,43 @@ union DynamicsDeploymentType {
 }
 
 /**
+ * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0.
+ */
+union AmazonRedshiftSslMode {
+  string,
+
+  /**
+   * Connect only using SSL, a trusted certificate authority, and a server name that matches the certificate.
+   */
+  Verify_full: "verify-full",
+
+  /**
+   * Connect only using SSL and a trusted certificate authority.
+   */
+  Verify_ca: "verify-ca",
+
+  /**
+   * Connect only using SSL.
+   */
+  Required: "require",
+
+  /**
+   * Connect using SSL if available. Otherwise, connect without using SSL.
+   */
+  Preferred: "prefer",
+
+  /**
+   * By default, connect without using SSL. If the server requires SSL connections, then use SSL.
+   */
+  Allowed: "allow",
+
+  /**
+   * Connect without using SSL.
+   */
+  Disabled: "disable",
+}
+
+/**
  * All available dynamicsAuthenticationType values.
  */
 union DynamicsAuthenticationType {
@@ -15353,6 +15390,16 @@ model AmazonRedshiftLinkedServiceTypeProperties {
    * The TCP port number that the Amazon Redshift server uses to listen for client connections. The default value is 5439. Type: integer (or Expression with resultType integer).
    */
   port?: Dfe<int32>;
+
+  /**
+   * The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string.
+   */
+  sslMode?: Dfe<string>;
+
+  /**
+   * Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: boolean (or Expression with resultType boolean).
+   */
+  sslInsecure?: Dfe<boolean>;
 
   /**
    * The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string.
