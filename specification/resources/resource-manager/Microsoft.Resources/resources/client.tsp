@@ -27,3 +27,7 @@ using Azure.ClientGenerator.Core;
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "java"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "ErrorResponse",
+  "go"
+);
