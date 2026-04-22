@@ -15271,6 +15271,11 @@
               "type": "string"
             },
             "description": "The entry point command and arguments for the code execution."
+          },
+          "content_hash": {
+            "type": "string",
+            "description": "The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.",
+            "readOnly": true
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
