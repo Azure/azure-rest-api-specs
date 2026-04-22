@@ -5,7 +5,10 @@ using Azure.ClientGenerator.Core;
 
 namespace Customizations;
 
-@@clientNamespace(Storage.DataLake, "Azure.Storage.Files.DataLake", "!python, !csharp");
+@@clientNamespace(Storage.DataLake,
+  "Azure.Storage.Files.DataLake",
+  "javascript"
+);
 
 @@clientName(Storage.DataLake.EtagResponseHeader.eTag,
   "etag",
@@ -39,7 +42,11 @@ namespace Customizations;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.DataLake, "includeRootSlash", false, "javascript");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.DataLake, "omitSlashFromEmptyRoute", true, "csharp,python");
+@@clientOption(Storage.DataLake,
+  "omitSlashFromEmptyRoute",
+  true,
+  "csharp,python"
+);
 
 @@clientName(Storage.DataLake.PathItem, "Path", "python");
 
@@ -73,7 +80,9 @@ enum EncryptionAlgorithmTypeCustom {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@Legacy.disablePageable(Storage.DataLake.FileSystem.listPaths, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Legacy.disablePageable(Storage.DataLake.FileSystem.listBlobHierarchySegment, "csharp");
+@@Legacy.disablePageable(Storage.DataLake.FileSystem.listBlobHierarchySegment,
+  "csharp"
+);
 
 @@clientName(Storage.DataLake.Service, "ServiceRestClient", "csharp");
 @@clientName(Storage.DataLake.FileSystem, "FileSystemRestClient", "csharp");
@@ -93,7 +102,7 @@ enum EncryptionAlgorithmTypeCustom {
   "csharp"
 );
 
-@@access(Storage.DataLake.PathGetPropertiesAction, Access.`public`, "csharp");
-@@access(Storage.DataLake.PathLeaseAction, Access.`public`, "csharp");
-@@access(Storage.DataLake.PathRenameMode, Access.`public`, "csharp");
-@@access(Storage.DataLake.PathUpdateAction, Access.`public`, "csharp");
+@@access(Storage.DataLake.PathGetPropertiesAction, Access.public, "csharp");
+@@access(Storage.DataLake.PathLeaseAction, Access.public, "csharp");
+@@access(Storage.DataLake.PathRenameMode, Access.public, "csharp");
+@@access(Storage.DataLake.PathUpdateAction, Access.public, "csharp");
