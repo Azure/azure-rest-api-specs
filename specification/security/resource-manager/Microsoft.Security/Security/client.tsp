@@ -345,7 +345,7 @@ op privateLinkResourcesGetCustomization(
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
   "current",
   "python"
 );
