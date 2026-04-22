@@ -19,18 +19,18 @@ model BaseResource {
   /**
    * Gets or sets the relative ARM name to get job.
    */
-  id: string;
+  id?: string;
 
   /**
    * Gets or sets the Job ID.
    */
-  name: string;
+  name?: string;
 
   /**
    * Type name for export job.
    */
   @visibility(Lifecycle.Read)
-  type: string;
+  type?: string;
 }
 
 /**

@@ -13316,11 +13316,6 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id",
-        "name",
-        "type"
-      ],
       "x-ms-azure-resource": true
     },
     "BizTalkServer": {
@@ -18756,7 +18751,10 @@
           "description": "The SiteHealthSummary items on this page",
           "items": {
             "$ref": "#/definitions/SiteHealthSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "applianceName"
+          ]
         },
         "nextLink": {
           "type": "string",

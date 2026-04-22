@@ -623,3 +623,4 @@ using Microsoft.OffAzure;
 );
 @@visibility(WebAppRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(WebAppSite.properties, Lifecycle.Read, Lifecycle.Create);
+@@identifiers(SiteHealthSummaryCollection.value, #["applianceName"]);
