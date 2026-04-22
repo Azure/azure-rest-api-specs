@@ -490,6 +490,11 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `conversation_gen_preview`. */
   type: ItemGenerationParamsType.conversationGenPreview;
 
+  /** The source of test scenarios, supporting file_id or file_content. */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
+
   /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
   `model`: string;
 
@@ -508,11 +513,6 @@ model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
 
   /** The parameters for conversation generation. */
   item_generation_params: ConversationGenPreviewItemGenerationParams;
-
-  /** The source of test scenarios, supporting file_id or file_content. */
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
 
   /** The target agent to simulate conversations against. */
   target: AzureAIAgentTarget;
@@ -564,9 +564,9 @@ model EvalRun is OpenAI.EvalRun {
   */
   properties?: Record<string>;
 
-  /** The level at which evaluation is performed. Defaults to 'trace' if not specified. */
+  /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   @removed(Versions.v1)
-  evaluation_level?: EvaluationLevel = EvaluationLevel.trace;
+  evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
@@ -587,9 +587,9 @@ model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
   */
   properties?: Record<string>;
 
-  /** The level at which evaluation is performed. Defaults to 'trace' if not specified. */
+  /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   @removed(Versions.v1)
-  evaluation_level?: EvaluationLevel = EvaluationLevel.trace;
+  evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
 model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
