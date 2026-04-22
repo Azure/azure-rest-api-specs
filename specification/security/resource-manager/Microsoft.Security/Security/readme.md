@@ -126,46 +126,6 @@ openapi-type: arm
 tag: package-composite-v3
 ```
 
-### Tag: sdkvalidation
-
-Only for SDK validation purpose, should be removed before merge
-
-``` yaml $(tag) == 'sdkvalidation'
-input-file:
-  - stable/2017-08-01/complianceResults.json
-  - stable/2019-01-01/advancedThreatProtectionSettings.json
-  - stable/2019-08-01/security-IoTSecurity.json
-  - stable/2020-01-01/secureScore.json
-  - stable/2020-01-01/security-SecuritySolutions.json
-  - stable/2022-01-01/alerts.json
-  - stable/2022-05-01/settings.json
-  - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
-  - stable/2023-11-15/apiCollections.json
-  - stable/2024-01-01/pricings.json
-  - stable/2024-08-01/security-SecurityStandards.json
-  - stable/2025-05-04/security-Assessment.json
-  - stable/2026-01-01/privateLinks.json
-  - preview/2015-06-01-preview/locations.json
-  - preview/2015-06-01-preview/tasks.json
-  - preview/2017-08-01-preview/security-LegacySettings.json
-  - preview/2019-01-01-preview/alertsSuppressionRules.json
-  - preview/2019-01-01-preview/regulatoryCompliance.json
-  - preview/2019-01-01-preview/subAssessments.json
-  - preview/2021-08-01-preview/security-Standards.json
-  - preview/2021-10-01-preview/mdeOnboardings.json
-  - preview/2022-01-01-preview/security-Governance.json
-  - preview/2022-07-01-preview/applications.json
-  - preview/2023-01-01-preview/securityOperators.json
-  - preview/2023-02-15-preview/sensitivitySettings.json
-  - preview/2023-05-01-preview/healthReports.json
-  - preview/2023-12-01-preview/security-Automations.json
-  - preview/2024-08-01-preview/securityConnectors.json
-  - preview/2025-09-01-preview/defenderForStorageSettings.json
-  - preview/2025-10-01-preview/security-Operations.json
-  - preview/2025-11-01-preview/securityConnectorsDevOps.json
-  - preview/2026-04-01-preview/security-SqlVulnerabilityAssessments.json
-```
-
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
