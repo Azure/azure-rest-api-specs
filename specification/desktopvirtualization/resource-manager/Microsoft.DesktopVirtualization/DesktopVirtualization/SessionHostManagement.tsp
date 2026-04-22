@@ -17,7 +17,9 @@ using Versioning;
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for SessionHostManagement properties.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
 model SessionHostManagement
@@ -31,7 +33,10 @@ model SessionHostManagement
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
 }
-
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface InitiateSessionHostUpdate {
   /**
@@ -47,6 +52,10 @@ interface InitiateSessionHostUpdate {
   >;
 }
 
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ControlSessionHostUpdate {
   /**
@@ -59,7 +68,10 @@ interface ControlSessionHostUpdate {
   >;
 }
 
-@added(Versions.v2025_04_01_preview)
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 @tag("SessionHostManagement")
 interface ControlSessionHostProvisioning {
@@ -73,7 +85,11 @@ interface ControlSessionHostProvisioning {
   >;
 }
 
+/**
+ * @Introduced in 2023-11-01-preview
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface SessionHostManagements {
   /**
