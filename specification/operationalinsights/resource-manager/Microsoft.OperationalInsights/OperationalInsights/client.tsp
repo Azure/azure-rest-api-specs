@@ -8,3 +8,4 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsManagementClient",
   "javascript"
 );
+@@clientName(LogAnalyticsQueryPacks.search, "listSearch", "javascript");

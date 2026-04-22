@@ -171,5 +171,5 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   Microsoft.OperationalInsights.AccessRulePropertiesSubscriptionsItem[],
-  "go"
+  "go,javascript"
 );
