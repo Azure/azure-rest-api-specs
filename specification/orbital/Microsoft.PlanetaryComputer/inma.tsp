@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "./models.stac.spec.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
-@service(#{ title: "MPCPro Ingestion and Management API" })
+
 namespace Microsoft.PlanetaryComputer;
 
 @doc("Generic paged response model")
@@ -126,6 +128,10 @@ model IngestionDefinition {
   @doc("Source catalog URL. Required for StaticCatalog ingestion type")
   sourceCatalogUrl?: url;
 
+  @added(Versions.v2026_04_15)
+  @doc("Parquet catalog URL. Required for StacGeoparquet ingestion type")
+  stacGeoparquetUrl?: url;
+
   @doc("Skip processing existing items in the catalog")
   skipExistingItems?: boolean;
 
@@ -147,6 +153,10 @@ union IngestionType {
 
   @doc("Static STAC Catalog")
   StaticCatalog: "StaticCatalog",
+
+  @added(Versions.v2026_04_15)
+  @doc("Ingestion STAC Geoparquet catalog")
+  StacGeoparquet: "StacGeoparquet",
 }
 
 @doc("Ingestion status")
@@ -351,6 +361,27 @@ interface StacItems {
      */
     @query
     datetime?: string,
+
+    /**
+     * Whether to sign asset URLs in the response.
+     */
+    @added(Versions.v2026_04_15)
+    @query("sign")
+    sign?: StacAssetUrlSigningMode,
+
+    /**
+     * URL signature duration in minutes.
+     */
+    @added(Versions.v2026_04_15)
+    @query("duration")
+    durationInMinutes?: int32,
+
+    /**
+     * Pagination token for fetching the next set of results.
+     */
+    @added(Versions.v2026_04_15)
+    @query("token")
+    token?: string,
   ): StacItemCollection | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -365,6 +396,20 @@ interface StacItems {
     @maxLength(500)
     @pattern(".*")
     itemId: string,
+
+    /**
+     * Whether to sign asset URLs in the response.
+     */
+    @added(Versions.v2026_04_15)
+    @query("sign")
+    sign?: StacAssetUrlSigningMode,
+
+    /**
+     * URL signature duration in minutes.
+     */
+    @added(Versions.v2026_04_15)
+    @query("duration")
+    durationInMinutes?: int32,
   ): StacItem | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -411,11 +456,49 @@ interface StacItems {
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @removed(Versions.v2026_04_15)
   @doc("Create or replace a STAC item in a collection")
+  @sharedRoute
   @route("/stac/collections/{collectionId}/items/{itemId}")
   @put
   @pollingOperation(IngestionOperations.get)
   createOrReplace(
+    ...CollectionParameters,
+
+    @doc("STAC Item id")
+    @path
+    @maxLength(500)
+    @pattern(".*")
+    itemId: string,
+
+    @doc("STAC Item")
+    @body
+    body: StacItem,
+  ): {
+    @pollingLocation
+    @doc("Url used to monitor the background operation")
+    @header
+    location: url;
+
+    @doc("Url used to monitor the background operation")
+    @header("operation-location")
+    operationLocation: url;
+
+    @statusCode statusCode: 202;
+
+    @doc("Operation")
+    @body
+    _: Operation;
+  } | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @doc("Replace a STAC item in a collection")
+  @sharedRoute
+  @route("/stac/collections/{collectionId}/items/{itemId}")
+  @put
+  @pollingOperation(IngestionOperations.get)
+  replace(
     ...CollectionParameters,
 
     @doc("STAC Item id")
@@ -758,7 +841,7 @@ interface IngestionOperations {
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @doc("Cancel all running operations of a geo-catalog collection")
+  @doc("Cancel all pending and running operations across the entire GeoCatalog instance. This is a catalog-wide operation and is not scoped to a specific collection.")
   @route("/inma/operations")
   @delete
   deleteAll(...ApiVersionParameter): {
@@ -958,12 +1041,12 @@ interface StacCollections {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
-  @doc("Create or replace a collection in the GeoCatalog instance")
-  @summary("Create or update Collection")
+  @doc("Replace an existing collection in the GeoCatalog instance")
+  @summary("Replace Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/collections")
   @put
-  createOrReplace(
+  replace(
     ...CollectionParameters,
 
     @doc("Request collection body")

@@ -27,7 +27,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "TrafficManagerManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Network;
 
 /**
@@ -37,5 +36,13 @@ enum Versions {
   /**
    * The 2022-04-01 API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2022_04_01: "2022-04-01",
+
+  /**
+   * The 2024-04-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2024_04_01_preview: "2024-04-01-preview",
 }

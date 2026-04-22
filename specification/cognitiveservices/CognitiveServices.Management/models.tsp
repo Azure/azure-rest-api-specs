@@ -197,6 +197,7 @@ union QuotaUsageStatus {
  * The quota scope that determines the level at which the quota is applied.
  */
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -376,7 +377,7 @@ union DeploymentState {
 }
 
 /**
- * The routing mode that determines how requests are distributed across models.
+ * The model-router routing mode that determines how requests are distributed across models.
  */
 union RoutingMode {
   string,
@@ -387,27 +388,27 @@ union RoutingMode {
   Cost: "cost",
 
   /**
-   * Balance cost and accuracy when routing requests across models.
+   * Balance cost and quality when routing requests across models.
    */
   Balanced: "balanced",
 
   /**
-   * Route requests to maximize accuracy regardless of cost.
+   * Route requests to maximize quality regardless of cost.
    */
-  Accuracy: "accuracy",
+  Quality: "quality",
 }
 
 /**
- * Routing configuration for the deployment. Specifies how requests are routed across multiple models.
+ * Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.
  */
 model DeploymentRouting {
   /**
-   * The routing mode that determines how requests are distributed across models.
+   * The model-router routing mode that determines how requests are distributed across models.
    */
   mode?: RoutingMode = RoutingMode.Balanced;
 
   /**
-   * Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
+   * Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
    */
   @identifiers(#["name", "version"])
   models?: DeploymentModel[];
@@ -1641,6 +1642,7 @@ model AccountProperties {
    * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
    */
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1663,6 +1665,7 @@ model AccountProperties {
  * Represents the mode for foundry auto-upgrade configuration.
  */
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1682,6 +1685,7 @@ union FoundryAutoUpgradeMode {
  * Customers can opt out of auto-upgrade by setting mode to Disabled.
  */
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2312,6 +2316,7 @@ model Usage {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2319,6 +2324,7 @@ model Usage {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   scopeId?: string | null;
 }
 
@@ -2839,6 +2845,7 @@ model ModelSkuCapacityProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   scopeId?: string | null;
 
   /**
@@ -2846,6 +2853,7 @@ model ModelSkuCapacityProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   scopeType?: QuotaScopeType | null;
 }
 
@@ -3125,7 +3133,7 @@ model DeploymentProperties {
   deploymentState?: DeploymentState | null;
 
   /**
-   * Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset.
+   * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
 }
@@ -3370,6 +3378,7 @@ model RaiPolicyProperties {
   /**
    * The list of custom rai topics.
    */
+  @removed(Versions.v2025_10_01_preview)
   @identifiers(#[])
   customTopics?: CustomTopicConfig[];
 
@@ -3445,6 +3454,7 @@ model RaiBlocklistConfig {
  * Gets or sets the source to which filter applies.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CustomTopicConfig' extends 'RaiTopicConfig' using inheritance to match service-side object hierarchy"
+@removed(Versions.v2025_10_01_preview)
 model CustomTopicConfig extends RaiTopicConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3455,6 +3465,7 @@ model CustomTopicConfig extends RaiTopicConfig {
 /**
  * Azure OpenAI RAI topic config.
  */
+@removed(Versions.v2025_10_01_preview)
 model RaiTopicConfig {
   /**
    * Name of RAI topic.

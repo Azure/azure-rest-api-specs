@@ -10507,7 +10507,7 @@
     },
     "MinimumTlsVersion": {
       "type": "string",
-      "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.",
+      "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.",
       "enum": [
         "TLS1_0",
         "TLS1_1",
@@ -11712,28 +11712,6 @@
           }
         ]
       }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "ResourceAccessRule": {
       "type": "object",
@@ -13116,7 +13094,7 @@
         },
         "minimumTlsVersion": {
           "$ref": "#/definitions/MinimumTlsVersion",
-          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported."
         },
         "allowSharedKeyAccess": {
           "type": "boolean",
@@ -13261,7 +13239,7 @@
         },
         "minimumTlsVersion": {
           "$ref": "#/definitions/MinimumTlsVersion",
-          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported."
         },
         "allowSharedKeyAccess": {
           "type": "boolean",
@@ -13368,7 +13346,7 @@
         },
         "minimumTlsVersion": {
           "$ref": "#/definitions/MinimumTlsVersion",
-          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported."
         },
         "allowSharedKeyAccess": {
           "type": "boolean",
@@ -13527,12 +13505,9 @@
           "description": "Properties of the storage task assignment."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

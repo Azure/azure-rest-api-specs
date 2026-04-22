@@ -61,7 +61,8 @@ interface TriggeredWebJobOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface TriggeredWebJobs {
   /**
    * Description for Gets a triggered web job by its ID for an app, or a deployment slot.
@@ -131,7 +132,8 @@ interface TriggeredWebJobOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface TriggeredWebJobOperationGroup {
   /**
    * Description for Gets a triggered web job by its ID for an app, or a deployment slot.
