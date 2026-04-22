@@ -547,6 +547,27 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
 );
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.EvalRunPerTestingCriteriaResults,
+  {
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    Errored?: integer,
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    Skipped?: integer,
+  }
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.EvalRunResultCounts,
+  {
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    Skipped?: integer,
+  }
+);
+
 model EvalRun is OpenAI.EvalRun {
   /** Unix timestamp (in seconds) when the evaluation run was last modified. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
@@ -604,6 +625,9 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.EvalRunOutputItemResult,
   {
+    /** The evaluation status for this result item. Values: "completed", "error", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
+    status?: string,
+
     /** The name of the metric (e.g., "fluency", "f1_score"). */
     metric?: string,
 
