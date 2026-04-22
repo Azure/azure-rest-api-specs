@@ -80,16 +80,6 @@ interface ManagedTrafficConfigs {
     ManagedTrafficConfigResource,
     OverrideErrorType = DefaultErrorResponse
   >;
-
-  /**
-   * List the managed traffic configurations for a web app.
-   */
-  @summary("List the managed traffic configurations for a web app.")
-  listManagedTrafficConfigs is ManagedTrafficConfigOps.List<
-    ManagedTrafficConfigResource,
-    Response = ArmResponse<ManagedTrafficConfigCollection>,
-    OverrideErrorType = DefaultErrorResponse
-  >;
 }
 
 @@doc(ManagedTrafficConfigResource.name,

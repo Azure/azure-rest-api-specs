@@ -86,6 +86,7 @@ import "./WorkflowVersion.tsp";
 import "./ServerFarmSilo.tsp";
 import "./SiteSilo.tsp";
 import "./ManagedTrafficConfig.tsp";
+import "./LastKnownGood.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
