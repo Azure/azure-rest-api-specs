@@ -1,0 +1,41 @@
+{
+  "operationId": "Transcribe",
+  "title": "Transcribe audio file",
+  "parameters": {
+    "Endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2025-10-15",
+    "Content-Type": "multipart/form-data",
+    "definition": "{ \"locales\":  [\"en-US\"] }",
+    "audio": "{binary}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "durationMilliseconds": 2000,
+        "combinedPhrases": [
+          {
+            "text": "Weather"
+          }
+        ],
+        "phrases": [
+          {
+            "offsetMilliseconds": 40,
+            "durationMilliseconds": 320,
+            "text": "Weather",
+            "words": [
+              {
+                "text": "weather",
+                "offsetMilliseconds": 40,
+                "durationMilliseconds": 320
+              }
+            ],
+            "locale": "en-US",
+            "confidence": 0.78983736
+          }
+        ]
+      }
+    }
+  }
+}

@@ -270,6 +270,7 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+@@clientName(BatchClient.listSubTasks, "list_subtasks", "python");
 // Python LRO private methods
 @@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");
@@ -377,10 +378,6 @@ interface BatchClient {
 @@clientName(Azure.Batch.CommonParameters.ocpdate, "ocpDate", "javascript");
 @@clientName(Azure.Batch.BatchSupportedImage.batchSupportEndOfLife,
   "supportEndDate",
-  "javascript"
-);
-@@clientName(Azure.Batch.AuthenticationTokenSettings.access,
-  "scopes",
   "javascript"
 );
 @@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
