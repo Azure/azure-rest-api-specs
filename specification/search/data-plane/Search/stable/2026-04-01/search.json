@@ -7919,36 +7919,6 @@
         ]
       }
     },
-    "IndexerPermissionOption": {
-      "type": "string",
-      "description": "Options with various types of permission data to index.",
-      "enum": [
-        "userIds",
-        "groupIds",
-        "rbacScope"
-      ],
-      "x-ms-enum": {
-        "name": "IndexerPermissionOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UserIds",
-            "value": "userIds",
-            "description": "Indexer to ingest ACL userIds from data source to index."
-          },
-          {
-            "name": "GroupIds",
-            "value": "groupIds",
-            "description": "Indexer to ingest ACL groupIds from data source to index."
-          },
-          {
-            "name": "RbacScope",
-            "value": "rbacScope",
-            "description": "Indexer to ingest Azure RBAC scope from data source to index."
-          }
-        ]
-      }
-    },
     "IndexerResyncBody": {
       "type": "object",
       "description": "Request body for resync indexer operation.",
@@ -9657,14 +9627,6 @@
           "description": "Optional schedule for data ingestion.",
           "x-nullable": true
         },
-        "ingestionPermissionOptions": {
-          "type": "array",
-          "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/KnowledgeSourceIngestionPermissionOption"
-          }
-        },
         "contentExtractionMode": {
           "type": "string",
           "description": "Optional content extraction mode. Default is 'minimal'.",
@@ -9695,36 +9657,6 @@
           "description": "Optional AI Services configuration for content processing.",
           "x-nullable": true
         }
-      }
-    },
-    "KnowledgeSourceIngestionPermissionOption": {
-      "type": "string",
-      "description": "Permission types to ingest together with document content.",
-      "enum": [
-        "userIds",
-        "groupIds",
-        "rbacScope"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeSourceIngestionPermissionOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UserIds",
-            "value": "userIds",
-            "description": "Ingest explicit user identifiers alongside document content."
-          },
-          {
-            "name": "GroupIds",
-            "value": "groupIds",
-            "description": "Ingest group identifiers alongside document content."
-          },
-          {
-            "name": "RbacScope",
-            "value": "rbacScope",
-            "description": "Ingest RBAC scope information alongside document content."
-          }
-        ]
       }
     },
     "KnowledgeSourceKind": {

@@ -106,6 +106,7 @@ The following preview features were not promoted to the GA release.
 - **Index and data source configuration removed**:
   - `SearchIndex` / `SearchIndexResponse`: `permissionFilterOption`, `purviewEnabled`
   - `SearchIndexerDataSource`: `indexerPermissionOptions` (array), `subType` (read-only)
+  - `KnowledgeSourceIngestionParameters`: `ingestionPermissionOptions` (array)
   - `SearchField`: `permissionFilter`, `sensitivityLabel`
   - `SearchIndexPermissionFilterOption`, `PermissionFilter`
 

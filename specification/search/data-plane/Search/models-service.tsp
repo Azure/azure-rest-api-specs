@@ -3035,6 +3035,7 @@ union StopwordsList {
 }
 
 /** Options with various types of permission data to index. */
+@removed(Versions.v2026_04_01)
 union IndexerPermissionOption {
   string,
 
