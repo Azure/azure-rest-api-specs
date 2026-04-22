@@ -55,6 +55,11 @@ input-file:
   - stable/2025-07-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
+    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
   - code: ProvisioningStateMustBeReadOnly
     from: networkManager.json
     reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
