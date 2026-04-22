@@ -92,32 +92,6 @@ union PublicNetworkAccess {
 }
 
 /**
- * DNS Name Policy for namespace. Defines the DNS naming behavior for the namespace.
- */
-@added(Versions.v2026_01_01)
-union DnsNamePolicy {
-  string,
-
-  /** No DNS Name Label, Legacy DNS Zone */
-  StandardNonPartitionedZone: "StandardNonPartitionedZone",
-
-  /** No DNS Name Label, Partitioned DNS Zone */
-  StandardPartitionedZone: "StandardPartitionedZone",
-
-  /** DNS Name Label with secure tenant reuse policy */
-  SecureTenantReuse: "SecureTenantReuse",
-
-  /** DNS Name Label with secure subscription reuse policy */
-  SecureSubscriptionReuse: "SecureSubscriptionReuse",
-
-  /** DNS Name Label with secure resource group reuse policy */
-  SecureResourceGroupReuse: "SecureResourceGroupReuse",
-
-  /** DNS Name Label with no reuse policy */
-  SecureNoReuse: "SecureNoReuse",
-}
-
-/**
  * Setting to Enable or Disable Confidential Compute
  */
 union Mode {
@@ -542,13 +516,6 @@ model SBNamespaceProperties {
    */
   @added(Versions.v2026_01_01)
   ipV6Enabled?: boolean;
-
-  /**
-   * DNS Name Policy for the namespace.
-   */
-  @added(Versions.v2026_01_01)
-  @visibility(Lifecycle.Read)
-  dnsNamePolicy?: DnsNamePolicy;
 }
 
 /**
