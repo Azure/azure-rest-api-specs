@@ -148,8 +148,7 @@ union ConfidentialVMEncryptionType {
   NonPersistedTPM: "NonPersistedTPM",
 
   /**
-   * Confidential VM Encryption Type which should be used for encrypting the data disks with customer managed keys. This Encryption type should only be used for data disks, and should not be used for OS disk encryption. When this encryption type is used for data disk encryption.
-   * Subscriptions need to be enrolled for Confidential VM with data encryption through following AFEC - Microsoft.Compute/ConfidentialVMDataDiskEncryptionPreview
+   * Confidential VM Encryption Type which should be used for encrypting the data disks with customer managed keys. This Encryption type should only be used for data disks, and should not be used for OS disk encryption. When this encryption type is used for data disk encryption.Subscriptions need to be enrolled for Confidential VM with data encryption through following AFEC - Microsoft.Compute/ConfidentialVMDataDiskEncryptionPreview
    */
   @added(Versions.v2026_03_03)
   DataDiskEncryptedWithCmk: "DataDiskEncryptedWithCmk",
