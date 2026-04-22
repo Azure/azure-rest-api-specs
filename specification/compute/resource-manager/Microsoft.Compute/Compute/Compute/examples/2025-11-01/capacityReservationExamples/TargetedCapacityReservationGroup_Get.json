@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-11-01",
+    "capacityReservationGroupName": "targetedCapacityReservationGroup",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/targetedCapacityReservationGroup",
+        "properties": {
+          "capacityReservations": [
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/targetedCapacityReservationGroup/capacityReservations/targetedCapacityReservation1"
+            },
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/targetedCapacityReservationGroup/capacityReservations/targetedCapacityReservation2"
+            }
+          ],
+          "sharingProfile": {
+            "subscriptionIds": [
+              {
+                "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
+          "instanceView": {
+            "capacityReservations": [
+              {
+                "name": "targetedCapacityReservation1",
+                "utilizationInfo": {
+                  "currentCapacity": 5,
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                    },
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              },
+              {
+                "name": "targetedCapacityReservation2",
+                "utilizationInfo": {
+                  "currentCapacity": 5,
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                    },
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              }
+            ],
+            "sharedSubscriptionIds": [
+              {
+                "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
+          "reservationType": "Targeted"
+        },
+        "location": "westus",
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "name": "targetedCapacityReservationGroup",
+        "zones": [
+          "3",
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_Get",
+  "title": "Get a targeted capacity reservation group."
+}

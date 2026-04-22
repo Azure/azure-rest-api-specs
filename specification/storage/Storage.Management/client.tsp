@@ -1061,3 +1061,35 @@ enum ProvisioningStateEnum {
   ProvisioningStateEnum,
   "java"
 );
+
+// CSharp SDK: Preserve API compatibility — output-only models were previously round-trip
+@@usage(ImmutabilityPolicyProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(BlobRestoreStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(GeoReplicationStats, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(LegalHoldProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(TagProperty, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ProtectedAppendWritesHistory,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(Endpoints, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(StorageAccountInternetEndpoints,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(StorageAccountIpv6Endpoints,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(KeyCreationTime, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(StorageAccountMicrosoftEndpoints,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(UpdateHistoryProperty,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
