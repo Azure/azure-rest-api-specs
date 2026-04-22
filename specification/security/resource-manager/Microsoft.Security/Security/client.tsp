@@ -106,7 +106,8 @@ op privateLinksGetCustomization(
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
-  privateLinksGetCustomization
+  privateLinksGetCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -129,7 +130,8 @@ op privateLinksCreateCustomization(
   "privateLink"
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
-  privateLinksCreateCustomization
+  privateLinksCreateCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -148,7 +150,8 @@ op privateLinksUpdateCustomization(
   "privateLink"
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
-  privateLinksUpdateCustomization
+  privateLinksUpdateCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -165,7 +168,8 @@ op privateLinksDeleteCustomization(
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
-  privateLinksDeleteCustomization
+  privateLinksDeleteCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -180,7 +184,8 @@ op privateLinksHeadCustomization(
 ): OkResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
-  privateLinksHeadCustomization
+  privateLinksHeadCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -195,7 +200,8 @@ op privateEndpointConnectionsListCustomization(
 ): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
-  privateEndpointConnectionsListCustomization
+  privateEndpointConnectionsListCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -211,7 +217,8 @@ op privateEndpointConnectionsGetCustomization(
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
-  privateEndpointConnectionsGetCustomization
+  privateEndpointConnectionsGetCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -234,7 +241,8 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 > | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
-  privateEndpointConnectionsCreateOrUpdateCustomization
+  privateEndpointConnectionsCreateOrUpdateCustomization,
+  "!javascript"
 );
 @@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
@@ -256,7 +264,8 @@ op privateEndpointConnectionsDeleteCustomization(
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
-  privateEndpointConnectionsDeleteCustomization
+  privateEndpointConnectionsDeleteCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -271,7 +280,8 @@ op privateLinkResourcesListCustomization(
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
-  privateLinkResourcesListCustomization
+  privateLinkResourcesListCustomization,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -288,7 +298,8 @@ op privateLinkResourcesGetCustomization(
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
-  privateLinkResourcesGetCustomization
+  privateLinkResourcesGetCustomization,
+  "!javascript"
 );
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
