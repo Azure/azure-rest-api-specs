@@ -122,7 +122,7 @@ input-file:
   - stable/2024-01-01/pricings.json
   - stable/2024-08-01/securityStandards.json
   - stable/2024-08-01/standardAssignments.json
-  - stable/2024-08-01/customRecommendations.json
+  - stable/2024-08-01/customRecommedations.json
   - preview/2021-08-01-preview/standards.json
   - preview/2021-08-01-preview/assignments.json
   - preview/2025-09-01-preview/defenderForStorageSettings.json
