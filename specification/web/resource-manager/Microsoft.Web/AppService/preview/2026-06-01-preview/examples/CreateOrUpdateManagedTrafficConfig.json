@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "testsite",
+    "configName": "default",
+    "api-version": "2026-06-01-preview",
+    "resource": {
+      "properties": {
+        "trafficMode": "Active",
+        "endpoints": [
+          {
+            "region": "westus",
+            "priority": 1,
+            "weight": 700
+          },
+          {
+            "region": "eastus",
+            "priority": 1,
+            "weight": 300
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite/managedTrafficConfig/default",
+        "name": "default",
+        "type": "Microsoft.Web/sites/managedTrafficConfig",
+        "properties": {
+          "trafficMode": "Active",
+          "endpoints": [
+            {
+              "region": "westus",
+              "priority": 1,
+              "weight": 700
+            },
+            {
+              "region": "eastus",
+              "priority": 1,
+              "weight": 300
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedTrafficConfigs_CreateOrUpdateManagedTrafficConfig",
+  "title": "Create or update managed traffic configuration"
+}

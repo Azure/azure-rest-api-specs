@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "testsite",
+    "siloName": "eastus-silo",
+    "api-version": "2026-06-01-preview",
+    "resource": {
+      "location": "East US",
+      "properties": {
+        "siloLocation": "eastus",
+        "primarySiteName": "testsite",
+        "primaryLocation": "westus",
+        "trafficMode": "Active",
+        "endpointStatus": "Enabled",
+        "followLkg": true,
+        "appSettingsOverrides": [
+          {
+            "name": "SETTING1",
+            "value": "overrideValue1"
+          }
+        ],
+        "networkingOverride": {
+          "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite/silos/eastus-silo",
+        "name": "eastus-silo",
+        "type": "Microsoft.Web/sites/silos",
+        "location": "East US",
+        "properties": {
+          "siloLocation": "eastus",
+          "primarySiteName": "testsite",
+          "primaryLocation": "westus",
+          "trafficMode": "Active",
+          "endpointStatus": "Enabled",
+          "followLkg": true,
+          "appSettingsOverrides": [
+            {
+              "name": "SETTING1",
+              "value": "overrideValue1"
+            }
+          ],
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite/silos/eastus-silo",
+        "name": "eastus-silo",
+        "type": "Microsoft.Web/sites/silos",
+        "location": "East US",
+        "properties": {
+          "siloLocation": "eastus",
+          "primarySiteName": "testsite",
+          "primaryLocation": "westus",
+          "trafficMode": "Active",
+          "endpointStatus": "Enabled",
+          "followLkg": true,
+          "appSettingsOverrides": [
+            {
+              "name": "SETTING1",
+              "value": "overrideValue1"
+            }
+          ],
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+          },
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  },
+  "operationId": "SiteSilos_CreateOrUpdateSiteSilo",
+  "title": "Create or update site silo"
+}

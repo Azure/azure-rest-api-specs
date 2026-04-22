@@ -16241,3 +16241,21 @@ model ManagedTrafficConfigProperties {
  */
 @added(Versions.v2026_06_01_preview)
 model ManagedTrafficConfigCollection is Azure.Core.Page<ManagedTrafficConfigResource>;
+
+/**
+ * Properties of the Last Known Good revision for a site.
+ */
+@added(Versions.v2026_06_01_preview)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "LastKnownGood is a simple read-only data model, not a provisionable resource"
+model LastKnownGoodProperties {
+  /**
+   * Name of the primary site.
+   */
+  siteName?: string;
+
+  /**
+   * Time when the LKG revision was created.
+   */
+  @visibility(Lifecycle.Read)
+  createdTime?: utcDateTime;
+}
