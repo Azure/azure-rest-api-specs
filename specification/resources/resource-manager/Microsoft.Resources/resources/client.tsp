@@ -21,9 +21,3 @@ using Azure.ClientGenerator.Core;
   "ManagementError",
   "java"
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to restore GenericResource base class to TrackedResource for Java SDK backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.Resources.GenericResource,
-  Azure.ResourceManager.CommonTypes.TrackedResource,
-  "java"
-);
