@@ -327,6 +327,18 @@ op privateLinkResourcesGetCustomization(
   "ArmActionType",
   "python"
 );
+@@clientName(SecuritySolutionsAPI.AadConnectivityState,
+  "AadConnectivityStateEnum",
+  "python"
+);
+@@clientName(SecuritySolutionsAPI.ExternalSecuritySolutionKind,
+  "ExternalSecuritySolutionKindEnum",
+  "python"
+);
+@@clientName(SecuritySolutionsAPI.Protocol, "ProtocolEnum", "python");
+@@clientName(AlertsAPI.Kind, "KindEnum", "python");
+@@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "python");
+
 
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
