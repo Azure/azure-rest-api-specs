@@ -8,9 +8,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(
-  DocumentTranslation.Versions.v2025_12_01_preview
-)
+@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2026_03_01)
 namespace ClientCustomizations;
 
 @client({
@@ -211,7 +209,10 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TargetInput.category, "category_id", "python");
+@@clientName(DocumentTranslation.TargetInput.deploymentName,
+  "deployment_name",
+  "python"
+);
 
 @@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
 
