@@ -622,11 +622,5 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsCallParticipantKind, "ACSCallParticipantRoleKind", "go");
 @@clientName(recordingFormatType.Mp3, "MP3", "go");
 @@clientName(recordingFormatType.Mp4, "MP4", "go");
-@@clientName(AcsChatRetentionPolicy, "ACSChatRetentionPolicy", "go");
-@@clientName(AcsChatRetentionPolicyKind, "ACSChatRetentionPolicyKind", "go");
-@@clientName(AcsChatThreadDeletedReasonType,
-  "ACSChatThreadDeletedReasonType",
-  "go"
-);
 
 // [END] ACS renames (and acronym casing)
