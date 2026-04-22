@@ -8,3 +8,5 @@ using Microsoft.HybridCompute;
   "HybridComputeManagementClient",
   "javascript"
 );
+
+@@alternateType(ServiceExtension.serviceExtensionType, string, "go");
