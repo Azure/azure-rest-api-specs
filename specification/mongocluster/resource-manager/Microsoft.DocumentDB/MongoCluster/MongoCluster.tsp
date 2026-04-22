@@ -30,9 +30,23 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
 interface MongoClusters {
   /** Gets information about a mongo cluster. */
   get is ArmResourceRead<MongoCluster>;
+
+  // Legacy: uses azure-async-operation final-state-via for API versions before 2026-02-01-preview.
   /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @sharedRoute
+  @removed(Versions.v2026_02_01_preview)
+  @renamedFrom(Versions.v2026_02_01_preview, "createOrUpdate")
+  createOrUpdateLegacy is ArmResourceCreateOrUpdateAsync<
+    MongoCluster,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  // New: uses the default original-uri final-state-via from 2026-02-01-preview onwards.
+  /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
+  @sharedRoute
+  @added(Versions.v2026_02_01_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     MongoCluster,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader

@@ -97,6 +97,7 @@ using Microsoft.DocumentDB;
 );
 @@clientName(DataApiMode, "MongoClusterDataApiMode", "csharp");
 @@clientName(DatabaseRole, "MongoClusterDatabaseRole", "csharp");
+@@clientName(NetworkBypassMode, "MongoClusterNetworkBypassMode", "csharp");
 @@clientName(EntraIdentityProvider,
   "MongoClusterEntraIdentityProvider",
   "csharp"
