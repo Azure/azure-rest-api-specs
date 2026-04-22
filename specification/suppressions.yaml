@@ -1,6 +1,11 @@
 # Managed centrally by the Azure SDK Team
 # Remove suppressions as specs are fixed
 
+- tool: TypeSpecRequirement
+  reason: False positive in TypeSpec-Requirement path parsing for service names containing 'specification'
+  paths:
+    - containerservice/resource-manager/Microsoft.ContainerService/preparedimagespecification/preview/2026-02-02-preview/preparedimagespecification.json
+
 - tool: TypeSpecValidation
   rules: [FolderStructure]
   sub-rules: [MustUseV2]
@@ -107,9 +112,6 @@
     - migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management
     - migrate/Waves.Management
     - mission/Mission.Management
-    - monitor/Microsoft.Monitor.Management
-    - monitor/Microsoft.Monitor.Operations.Management
-    - monitor/Microsoft.Monitor.PipelineGroups.Management
     - monitor/Monitor.Ingestion
     - monitor/Monitor.Query.Logs
     - monitor/Monitor.Query.Metrics

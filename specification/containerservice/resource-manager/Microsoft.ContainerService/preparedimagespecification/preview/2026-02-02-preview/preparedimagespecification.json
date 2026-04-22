@@ -1,0 +1,1039 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServicePreparedImageSpecificationClient",
+    "version": "2026-02-02-preview",
+    "description": "Azure Kubernetes Prepared Image Specification api client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PreparedImageSpecifications"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/preparedImageSpecifications": {
+      "get": {
+        "operationId": "PreparedImageSpecifications_ListBySubscription",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "List the prepared image specifications in a subscription at the latest version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecificationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_ListBySubscription": {
+            "$ref": "./examples/PreparedImageSpecifications_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications": {
+      "get": {
+        "operationId": "PreparedImageSpecifications_ListByResourceGroup",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "List the prepared image specifications in a resource group at the latest version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecificationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_ListByResourceGroup": {
+            "$ref": "./examples/PreparedImageSpecifications_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications/{preparedImageSpecificationName}": {
+      "get": {
+        "operationId": "PreparedImageSpecifications_Get",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "Get a prepared image specification at the latest version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_Get": {
+            "$ref": "./examples/PreparedImageSpecifications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PreparedImageSpecifications_CreateOrUpdate",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "Create or update a prepared image specification resource. A new version is created only when the resource content changes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag does not match the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PreparedImageSpecification' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecification"
+            }
+          },
+          "201": {
+            "description": "Resource 'PreparedImageSpecification' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecification"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_CreateOrUpdate": {
+            "$ref": "./examples/PreparedImageSpecifications_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PreparedImageSpecifications_Update",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "Update a prepared image specification. A new version is created only when the resource content changes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecificationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_Update": {
+            "$ref": "./examples/PreparedImageSpecifications_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PreparedImageSpecifications_Delete",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "Delete a prepared image specification. This operation will be blocked if the resource is in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_Delete": {
+            "$ref": "./examples/PreparedImageSpecifications_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications/{preparedImageSpecificationName}/versions": {
+      "get": {
+        "operationId": "PreparedImageSpecifications_ListVersions",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "List all versions of a prepared image specification.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecificationVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_ListVersions": {
+            "$ref": "./examples/PreparedImageSpecifications_ListVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications/{preparedImageSpecificationName}/versions/{version}": {
+      "get": {
+        "operationId": "PreparedImageSpecifications_GetVersion",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "Get a prepared image specification at a particular version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the Prepared Image Specification.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreparedImageSpecificationVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_GetVersion": {
+            "$ref": "./examples/PreparedImageSpecifications_GetVersion.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PreparedImageSpecifications_DeleteVersion",
+        "tags": [
+          "PreparedImageSpecifications"
+        ],
+        "description": "Delete a prepared image specification version. This operation will be blocked if the prepared image specification version is in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "preparedImageSpecificationName",
+            "in": "path",
+            "description": "The name of the Prepared Image Specification resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the Prepared Image Specification.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PreparedImageSpecifications_DeleteVersion": {
+            "$ref": "./examples/PreparedImageSpecifications_DeleteVersion.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "ExecutionPoint": {
+      "type": "string",
+      "description": "The execution point for the script.",
+      "enum": [
+        "NodeImageBuildTime",
+        "NodeProvisionTime"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionPoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nodeImageBuildTime",
+            "value": "NodeImageBuildTime",
+            "description": "Execute during node image build time."
+          },
+          {
+            "name": "nodeProvisionTime",
+            "value": "NodeProvisionTime",
+            "description": "Execute during node provisioning time."
+          }
+        ]
+      }
+    },
+    "PostScriptAction": {
+      "type": "string",
+      "description": "The action to take after the script finishes successfully.",
+      "enum": [
+        "None",
+        "RebootAfter"
+      ],
+      "x-ms-enum": {
+        "name": "PostScriptAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "None",
+            "description": "No post-script action is taken."
+          },
+          {
+            "name": "rebootAfter",
+            "value": "RebootAfter",
+            "description": "Reboot the node after the script completes."
+          }
+        ]
+      }
+    },
+    "PreparedImageSpecification": {
+      "type": "object",
+      "description": "The Prepared Image Specification resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PreparedImageSpecificationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PreparedImageSpecificationListResult": {
+      "type": "object",
+      "description": "The response of a PreparedImageSpecification list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PreparedImageSpecification items on this page",
+          "items": {
+            "$ref": "#/definitions/PreparedImageSpecification"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PreparedImageSpecificationManagedIdentityProfile": {
+      "type": "object",
+      "description": "The managed identity profile used by the prepared image specification.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "objectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The object ID of the managed identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The client ID of the managed identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "PreparedImageSpecificationManagedIdentityProfileUpdate": {
+      "type": "object",
+      "description": "The managed identity profile used by the prepared image specification for update operations.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "PreparedImageSpecificationPatch": {
+      "type": "object",
+      "description": "Prepared image specification patch resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PreparedImageSpecificationPatchProperties",
+          "description": "Patchable prepared image specification properties."
+        }
+      }
+    },
+    "PreparedImageSpecificationPatchProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Prepared Image Specification resource.",
+      "properties": {
+        "containerImages": {
+          "type": "array",
+          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identityProfile": {
+          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfileUpdate",
+          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time."
+        },
+        "customizationScripts": {
+          "type": "array",
+          "description": "The scripts to customize the node before or after image capture.",
+          "items": {
+            "$ref": "#/definitions/PreparedImageSpecificationScriptUpdate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PreparedImageSpecificationProperties": {
+      "type": "object",
+      "description": "The properties of the Prepared Image Specification resource.",
+      "properties": {
+        "containerImages": {
+          "type": "array",
+          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identityProfile": {
+          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfile",
+          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
+        },
+        "version": {
+          "type": "string",
+          "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
+          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the prepared image specification.",
+          "readOnly": true
+        },
+        "customizationScripts": {
+          "type": "array",
+          "description": "The scripts to customize the node before or after image capture.",
+          "items": {
+            "$ref": "#/definitions/PreparedImageSpecificationScript"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PreparedImageSpecificationScript": {
+      "type": "object",
+      "description": "Prepared image specification script",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the customization script. \nMust be unique within the prepared image specification resource.\nCan only contain lowercase alphanumeric,'-' or '.' characters.",
+          "maxLength": 263,
+          "pattern": "^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "executionPoint": {
+          "$ref": "#/definitions/ExecutionPoint",
+          "description": "The stage at which the script is executed.\nSpecifying `NodeImageBuildTime` will ensure changes are persisted into the node image."
+        },
+        "scriptType": {
+          "$ref": "#/definitions/ScriptType",
+          "description": "The runtime environment for the script (e.g. Bash)."
+        },
+        "script": {
+          "type": "string",
+          "description": "The script content to be executed in plain text. Do not include secrets."
+        },
+        "postScriptAction": {
+          "$ref": "#/definitions/PostScriptAction",
+          "description": "The action to take after successful script execution."
+        }
+      },
+      "required": [
+        "name",
+        "executionPoint",
+        "scriptType"
+      ]
+    },
+    "PreparedImageSpecificationScriptUpdate": {
+      "type": "object",
+      "description": "Prepared image specification script for update operations",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the customization script.",
+          "maxLength": 263,
+          "pattern": "^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$"
+        },
+        "executionPoint": {
+          "$ref": "#/definitions/ExecutionPoint",
+          "description": "The stage at which the script is executed."
+        },
+        "scriptType": {
+          "$ref": "#/definitions/ScriptType",
+          "description": "The runtime environment for the script (e.g. Bash)."
+        },
+        "script": {
+          "type": "string",
+          "description": "The script content to be executed in plain text. Do not include secrets."
+        },
+        "postScriptAction": {
+          "$ref": "#/definitions/PostScriptAction",
+          "description": "The action to take after successful script execution."
+        }
+      }
+    },
+    "PreparedImageSpecificationVersion": {
+      "type": "object",
+      "description": "A version of the Prepared Image Specification resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PreparedImageSpecificationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PreparedImageSpecificationVersionListResult": {
+      "type": "object",
+      "description": "The response of a PreparedImageSpecificationVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PreparedImageSpecificationVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/PreparedImageSpecificationVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the image customization.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning the resource is in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The change request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ScriptType": {
+      "type": "string",
+      "description": "The script type.",
+      "enum": [
+        "Bash",
+        "PowerShell"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "bash",
+            "value": "Bash",
+            "description": "Bash script."
+          },
+          {
+            "name": "powerShell",
+            "value": "PowerShell",
+            "description": "PowerShell script."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
