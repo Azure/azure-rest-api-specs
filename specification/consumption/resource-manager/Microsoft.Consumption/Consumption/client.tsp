@@ -123,7 +123,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(OperatorType, "NotificationAlertTriggerType", "csharp");
 @@clientName(ThresholdType, "NotificationThresholdType", "csharp");
 @@clientName(ReservationSummaryProperties.usageDate, "UseOn", "csharp");
-// @@clientName(ChargeSummary, "ConsumptionChargeSummary", "csharp");
+@@clientName(ChargeSummary, "ConsumptionChargeSummary", "csharp");
 @@clientName(Marketplace, "ConsumptionMarketplace", "csharp");
 @@clientName(ReservationRecommendationDetailsModel,
   "ConsumptionReservationRecommendationDetails",
@@ -140,7 +140,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(TagsResult, "ConsumptionTagsResult", "csharp");
-// @@clientName(UsageDetail, "ConsumptionUsageDetail", "csharp");
+@@clientName(UsageDetail, "ConsumptionUsageDetail", "csharp");
 @@clientName(LegacyUsageDetail, "ConsumptionLegacyUsageDetail", "csharp");
 @@clientName(ModernUsageDetail, "ConsumptionModernUsageDetail", "csharp");
 @@clientName(MarketplaceProperties.usageStart, "UsageStartOn", "csharp");
@@ -281,52 +281,22 @@ using Azure.ClientGenerator.Core;
 // Rename the operation to match the contract's expected method name (GetPriceSheet)
 @@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
 
-@@alternateType(UsageDetail, ConsumptionUsageDetail, "csharp");
-@@alternateType(ChargeSummary, ConsumptionChargeSummary, "csharp");
+// Override read-only visibility on eTag so the generated property exposes a public setter (matches shipped v1.0.1 surface).
+@@visibility(EventSummary.eTag, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
+@@visibility(LotSummary.eTag, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
 
 @@usage(Tag, Usage.input, "csharp");
 @@usage(TagsResult, Usage.input, "csharp");
 
-/**
- * An usage detail resource.
- */
-@discriminator("kind")
-model ConsumptionUsageDetail {
-  ...Azure.ResourceManager.Foundations.Resource;
+// Keep LotSummary/EventSummary as input + output to preserve public parameterless ctor and settable properties (matches shipped v1.0.1 surface).
+@@usage(LotSummary, Usage.input | Usage.output, "csharp");
+@@usage(EventSummary, Usage.input | Usage.output, "csharp");
 
-  /**
-   * Specifies the kind of usage details.
-   */
-  kind: UsageDetailsKind;
-
-  /**
-   * The etag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: Azure.Core.EtagProperty.etag;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-}
-
-/**
- * A charge summary resource.
- */
-@discriminator("kind")
-model ConsumptionChargeSummary {
-  ...Azure.ResourceManager.Foundations.ProxyResource;
-
-  /**
-   * Specifies the kind of charge summary.
-   */
-  kind: ChargeSummaryKind;
-
-  /**
-   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
-   */
-  eTag?: Azure.Core.EtagProperty.etag;
-}
+// Force aggregated-cost collection properties to be read-only so the generated flattening helpers expose IReadOnlyList<T> (matches shipped v1.0.1 surface).
+@@visibility(ManagementGroupAggregatedCostProperties.children, Lifecycle.Read);
+@@visibility(ManagementGroupAggregatedCostProperties.includedSubscriptions,
+  Lifecycle.Read
+);
+@@visibility(ManagementGroupAggregatedCostProperties.excludedSubscriptions,
+  Lifecycle.Read
+);
