@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Devices;
+using Azure.ResourceManager;
 
 @@clientName(Microsoft.Devices, "IotHubClient", "javascript,java");
 @@clientName(IotHubDescriptions.getEndpointHealth,
@@ -48,3 +50,51 @@ using Microsoft.Devices;
   "go"
 );
 @@clientName(MessagingEndpointProperties.ttlAsIso8601, "TTLAsIso8601", "go");
+
+/**
+ * override for IotHubDescriptions.manualFailover
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceManualFailover(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  iotHubName: string,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  body: Microsoft.Devices.FailoverInput,
+): Azure.Core.Foundations.RetryAfterHeader;
+
+@@override(IotHubDescriptions.manualFailover, replaceManualFailover, "go");
+
+/**
+ * override for IotHubDescriptions.testAllRoutes
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceTestAllRoutes(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  iotHubName: string,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  body: Microsoft.Devices.TestAllRoutesInput,
+): Azure.Core.Foundations.RetryAfterHeader;
+
+@@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes, "go");
+
+/**
+ * override for IotHubDescriptions.testRoute
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceTestRoute(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  iotHubName: string,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  body: Microsoft.Devices.TestRouteInput,
+): Azure.Core.Foundations.RetryAfterHeader;
+
+@@override(IotHubDescriptions.testRoute, replaceTestRoute, "go");
