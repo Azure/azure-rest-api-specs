@@ -8570,6 +8570,12 @@ model FleetResourceProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: Status;
+
+  /**
+   * A test input string for the Fleet.
+   */
+  @added(Versions.v2026_03_15)
+  testInput?: string;
 }
 
 /**
