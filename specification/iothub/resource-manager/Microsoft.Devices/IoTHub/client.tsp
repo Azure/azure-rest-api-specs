@@ -28,3 +28,23 @@ using Microsoft.Devices;
   "disableDeviceSas",
   "java"
 );
+
+// Keep legacy Go struct field names with "Iso8601" casing.
+@@clientName(StorageEndpointProperties.sasTtlAsIso8601,
+  "SasTTLAsIso8601",
+  "go"
+);
+@@clientName(FeedbackProperties.lockDurationAsIso8601,
+  "LockDurationAsIso8601",
+  "go"
+);
+@@clientName(FeedbackProperties.ttlAsIso8601, "TTLAsIso8601", "go");
+@@clientName(CloudToDeviceProperties.defaultTtlAsIso8601,
+  "DefaultTTLAsIso8601",
+  "go"
+);
+@@clientName(MessagingEndpointProperties.lockDurationAsIso8601,
+  "LockDurationAsIso8601",
+  "go"
+);
+@@clientName(MessagingEndpointProperties.ttlAsIso8601, "TTLAsIso8601", "go");
