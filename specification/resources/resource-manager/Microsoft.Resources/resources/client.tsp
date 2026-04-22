@@ -10,7 +10,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
-  "python"
+  "python,go"
 );
 
 @@clientName(Microsoft.Resources.ErrorResponse,
