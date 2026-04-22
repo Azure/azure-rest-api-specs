@@ -24,7 +24,7 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the EventHub API.
 
-``` yaml
+``` yaml $(tag) == 'default'
 openapi-type: arm
 tag: package-2026-01
 ```
@@ -491,15 +491,6 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: AuthorizationRules.json
     reason: Not a mandatory check
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
-    from: stable/2017-04-01/sku.json
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
-    from: stable/2017-04-01/namespaces.json
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason:  This is an older API versions. Swagger Avocado has been failing MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.
-    from: stable/2014-09-01/EventHub.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
