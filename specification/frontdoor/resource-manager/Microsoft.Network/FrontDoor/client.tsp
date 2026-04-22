@@ -321,7 +321,7 @@ interface ProfilesOverrides {
   "csharp"
 );
 
-// FrontDoorResourceData (BasicResourceWithSettableIDName) instead of FrontDoorSubResource (SubResource).
+// FrontDoorResourceData and other models in the following section should be use BasicResourceWithSettableIDName as base class instead of FrontDoorSubResource (SubResource).
 // hierarchyBuilding cannot be used here: the validator requires the base's properties (id) to be
 // directly on the target, but our models inherit `id` from SubResource.
 // Keeps models.tsp untouched (no swagger change) — replacements are C#-only constructs.
