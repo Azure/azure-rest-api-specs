@@ -226,6 +226,11 @@ model ProvisionedClusterProperties {
   kubernetesVersion?: string;
 
   /**
+   * The Kubernetes distribution for the provisioned cluster (e.g., K8s, K3s).
+   */
+  kubernetesDistribution?: string;
+
+  /**
    * The network configuration profile for the provisioned cluster.
    */
   networkProfile?: NetworkProfile;
