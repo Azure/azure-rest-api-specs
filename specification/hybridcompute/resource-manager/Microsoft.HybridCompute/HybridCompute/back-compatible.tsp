@@ -77,7 +77,6 @@ using Microsoft.HybridCompute;
 @@clientName(Machines.upgradeExtensions::parameters.body,
   "extensionUpgradeParameters"
 );
-@@clientLocation(Machines.setupExtensions, "");
 @@clientName(Machines.setupExtensions::parameters.body, "extensions");
 @@clientLocation(Machines.networkProfileGet, "NetworkProfile");
 @@clientName(Machines.networkProfileGet, "Get");
