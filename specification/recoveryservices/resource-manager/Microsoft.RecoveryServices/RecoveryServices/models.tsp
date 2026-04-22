@@ -1300,9 +1300,7 @@ model ImmutabilitySettings {
  */
 @added(Versions.v2026_05_01)
 model ImmutabilityConfiguration {
-  /**
-   * AsPerPolicy or TimeBased.
-   */
+  /** The type of immutability configuration. Use 'AsPerPolicy' to inherit the immutability duration from the backup policy, or 'TimeBased' to specify an explicit duration via the durationInDays property. */
   type?: ImmutabilityType;
 
   /**
