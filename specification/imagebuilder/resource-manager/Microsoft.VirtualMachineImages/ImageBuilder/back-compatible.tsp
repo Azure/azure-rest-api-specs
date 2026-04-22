@@ -24,10 +24,7 @@ using Microsoft.VirtualMachineImages;
 @@Legacy.flattenProperty(RunOutput.properties);
 
 @@clientName(Triggers.createOrUpdate::parameters.resource, "parameters");
-/*
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Trigger.properties);
-*/
+
 @@doc(Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
   "The URL to query for the status of the asynchronous operation."
 );

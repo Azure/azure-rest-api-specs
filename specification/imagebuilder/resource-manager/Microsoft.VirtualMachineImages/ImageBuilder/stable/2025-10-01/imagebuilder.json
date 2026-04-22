@@ -1510,12 +1510,54 @@
       "description": "Error handling options upon a build failure",
       "properties": {
         "onCustomizerError": {
-          "$ref": "#/definitions/OnBuildError",
-          "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved."
+          "type": "string",
+          "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved.",
+          "default": "cleanup",
+          "enum": [
+            "cleanup",
+            "abort"
+          ],
+          "x-ms-enum": {
+            "name": "OnBuildError",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "cleanup",
+                "value": "cleanup",
+                "description": "cleanup"
+              },
+              {
+                "name": "abort",
+                "value": "abort",
+                "description": "abort"
+              }
+            ]
+          }
         },
         "onValidationError": {
-          "$ref": "#/definitions/OnBuildError",
-          "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved."
+          "type": "string",
+          "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved.",
+          "default": "cleanup",
+          "enum": [
+            "cleanup",
+            "abort"
+          ],
+          "x-ms-enum": {
+            "name": "OnBuildError",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "cleanup",
+                "value": "cleanup",
+                "description": "cleanup"
+              },
+              {
+                "name": "abort",
+                "value": "abort",
+                "description": "abort"
+              }
+            ]
+          }
         }
       }
     },
@@ -1868,30 +1910,6 @@
         }
       ],
       "x-ms-discriminator-value": "WindowsUpdate"
-    },
-    "OnBuildError": {
-      "type": "string",
-      "description": "Error handling behavior upon build failure",
-      "enum": [
-        "cleanup",
-        "abort"
-      ],
-      "x-ms-enum": {
-        "name": "OnBuildError",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "cleanup",
-            "value": "cleanup",
-            "description": "cleanup"
-          },
-          {
-            "name": "abort",
-            "value": "abort",
-            "description": "abort"
-          }
-        ]
-      }
     },
     "Operation": {
       "type": "object",
