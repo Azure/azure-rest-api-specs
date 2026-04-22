@@ -41,6 +41,7 @@ Each reference file covers one cross-cutting rule area with:
 | [lro-final-state-via.md](references/lro-final-state-via.md)                   | LRO polling and `final-state-via` decision table                                             | --                                                   |
 | [suppression-review-criteria.md](references/suppression-review-criteria.md)   | Suppression approval/rejection decision framework                                            | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                  |
 | [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | Linter rule ID → instruction file mapping (130+ rules)                                       | --                                                   |
+| [example-quality.md](references/example-quality.md)                           | Example file quality: orphan detection, coverage, descriptive values                         | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES        |
 | [design-decisions.md](references/design-decisions.md)                         | Grey-area design trade-off frameworks (10 decision matrices)                                 | DD-001–DD-010                                        |
 
 ## Authoritative External Sources

@@ -199,6 +199,7 @@ Flag these issues when found:
 - **Circular references** without `@visibility` to break the cycle.
 - **Hardcoded API version strings** instead of using the versioning enum.
 - **Missing examples** — every operation should have corresponding example files.
+- **Low-quality example values** — example files with filler values like `"aaaaaaa"`, `"string"`, or repeated characters are published in public Azure docs and SDK samples. See [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md) for the full `EX-DESCRIPTIVE-VALUES` rule. Auto-generated examples **SHOULD** be hand-edited to replace filler values before submitting.
 - **Manual swagger alongside TypeSpec** — once a service has transitioned to TypeSpec, new manually authored swagger files **MUST NOT** be added to the same package tag. All new API versions must use TypeSpec, with generated swagger from `tsp compile .`.
 - **`@operationId` overrides** — avoid using `@operationId` decorators in TypeSpec. Instead, restructure interfaces and operation names so the generated operationId naturally follows the ARM `{ResourceType}_{Verb}` pattern. `@operationId` overrides create tech debt that must eventually be cleaned up.
 - **URI properties** — properties that hold URLs or SAS URIs **MUST** use the TypeSpec `url` scalar type (which generates `"format": "uri"` in swagger) rather than plain `string`.
@@ -348,4 +349,4 @@ When reviewing TypeSpec files, verify:
 - ✅ No default values on properties that flow into PATCH models (RPC-Patch-V1-10)
 - ✅ No bearer/OAuth tokens passed in ARM request bodies -- use managed identity or Key Vault
 - ✅ Generated OpenAPI files match `tsp compile .` output
-- ✅ Example files present for all operations
+- ✅ Example files present for all operations, with realistic descriptive values (EX-DESCRIPTIVE-VALUES)
