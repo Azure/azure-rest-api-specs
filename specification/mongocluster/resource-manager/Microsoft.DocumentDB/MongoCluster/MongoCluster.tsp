@@ -33,7 +33,7 @@ interface MongoClusters {
 
   // Legacy: uses azure-async-operation final-state-via for API versions before 2026-02-01-preview.
   /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Legacy versions use azure-async-operation; fixed to original-uri from v2026_02_01_preview via @sharedRoute split"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @sharedRoute
   @removed(Versions.v2026_02_01_preview)
