@@ -54,7 +54,7 @@ suppressions:
     where:
       - $.definitions.ManagedNetworkSettings.properties.outboundRules
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    reason: ManagedNetwork PUT is an async operation that returns 202 Accepted for long-running network infrastructure provisioning. The backend is shared with Machine Learning Services RP and returns 202 instead of ARM-standard 200/201. Changing response codes would be a breaking change for existing clients. provisioningState is present in the resource model and returned in the final LRO result.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
@@ -91,7 +91,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].delete
   - code: AvoidAdditionalProperties
-    reason: Approved to be suppressed in AML swagger
+    reason: "metadata" is a user-defined key-value property bag where customers store arbitrary metadata about connections (e.g., API versions, deployment config). Keys are not predefined by the service. "CustomKeys.keys" holds user-provided authentication credentials with user-defined key names. Both are Dictionary<string, string> in the backend.
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
@@ -102,7 +102,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
   - code: AvoidAdditionalProperties
-    reason: Same as existing account resource, trying to have the same behavior
+    reason: "endpoints" is a read-only dictionary of service endpoint names to URLs (e.g., OpenAI, Speech). Keys are dynamically determined at runtime by the account kind and region from the service API catalog. Same pattern as AccountProperties.endpoints which has shipped in stable since the original TypeSpec migration.
     where:
       - $.definitions.ProjectProperties.properties.endpoints
   - code: AvoidAdditionalProperties
