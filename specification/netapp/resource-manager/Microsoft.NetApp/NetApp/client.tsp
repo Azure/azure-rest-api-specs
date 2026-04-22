@@ -646,6 +646,21 @@ using Microsoft.NetApp;
   "csharp"
 );
 
+// VolumePatch (renamed to NetAppVolumePatch above): restore TrackedResourceData base
+@@alternateType(Microsoft.NetApp.VolumePatch.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.NetApp.VolumePatch.location,
+  azureLocation,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(Microsoft.NetApp.VolumePatch,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for backward compat"
 @@hierarchyBuilding(Microsoft.NetApp.SubvolumeModel,
   Azure.ResourceManager.Foundations.ProxyResource,
