@@ -25711,7 +25711,6 @@ model ExpressRoutePortAuthorizationListResult
 model ExpressRoutePortsLocationListResult
   is Azure.Core.Page<ExpressRoutePortsLocation>;
 
-
 @@Azure.ClientGenerator.Core.clientName(ListVirtualHubRouteTableV2SResult,
   "ListVirtualHubRouteTableV2sResult"
 );
