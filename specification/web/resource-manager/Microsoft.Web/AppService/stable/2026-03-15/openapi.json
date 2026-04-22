@@ -49224,6 +49224,36 @@
         }
       }
     },
+    "PlatformReleaseChannel": {
+      "type": "string",
+      "description": "The platform release channel for the site.",
+      "enum": [
+        "Latest",
+        "Standard",
+        "Extended"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformReleaseChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Latest",
+            "value": "Latest",
+            "description": "Latest receives updates earliest."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard receives updates after Latest."
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "Extended receives updates last with extended support."
+          }
+        ]
+      }
+    },
     "PremierAddOn": {
       "type": "object",
       "description": "Premier add-on.",
@@ -53724,6 +53754,10 @@
           "type": "string",
           "description": "Current SKU of application based on associated App Service Plan. Some valid SKU values are Free, Shared, Basic, Dynamic, FlexConsumption, Standard, Premium, PremiumV2, PremiumV3, Isolated, IsolatedV2",
           "readOnly": true
+        },
+        "platformReleaseChannel": {
+          "$ref": "#/definitions/PlatformReleaseChannel",
+          "description": "The platform release channel for the site. Latest receives updates earliest, followed by Standard, then Extended."
         }
       }
     },
