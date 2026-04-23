@@ -5836,3 +5836,103 @@ model ManagedComputeDeploymentListResult {
   @visibility(Lifecycle.Read)
   value?: ManagedComputeDeployment[];
 }
+
+/**
+ * Deployment detail within a managed compute usage entry.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentInfo {
+  /**
+   * Full ARM resource ID of the deployment.
+   */
+  deploymentId?: string;
+
+  /**
+   * Full ARM resource ID of the account/project.
+   */
+  projectId?: string;
+
+  /**
+   * Model name (e.g., 'gpt-4o').
+   */
+  modelId?: string;
+
+  /**
+   * Number of GPUs consumed by this deployment.
+   */
+  gpuCount?: int64;
+
+  /**
+   * Number of instances for this deployment.
+   */
+  instanceCount?: int32;
+}
+
+/**
+ * Managed compute quota usage for a specific SKU.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeUsage {
+  /**
+   * Fully qualified resource ID for the managed compute usage.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: MetricName;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  unit?: UnitType;
+
+  /**
+   * Maximum value for this metric.
+   */
+  limit?: float64;
+
+  /**
+   * Current value for this metric.
+   */
+  currentValue?: float64;
+
+  /**
+   * Offer scope (e.g., 'Global', 'Datazone-US').
+   */
+  offerScope?: string;
+
+  /**
+   * Deployments consuming this managed compute quota.
+   */
+  @identifiers(#["deploymentId"])
+  deployments?: ManagedComputeDeploymentInfo[];
+}
+
+/**
+ * List of managed compute quota entries.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeUsageListResult {
+  /**
+   * The link used to get the next page of managed compute usages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Per-SKU managed compute quota usage entries.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  value?: ManagedComputeUsage[];
+}
