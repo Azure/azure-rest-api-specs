@@ -701,7 +701,10 @@ interface Blob {
     ...EncryptionKeySha256Parameter,
     ...EncryptionAlgorithmParameter,
     ...IfTagsParameter,
-    ...ConditionalRequestHeaders,
+    ...IfModifiedSinceParameter,
+    ...IfUnmodifiedSinceParameter,
+    ...IfNoneMatchParameter,
+    ...IfMatchParameter,
   ): (BodyParameter & {
     /** The media type of the body of the response. */
     @header("Content-Type")
