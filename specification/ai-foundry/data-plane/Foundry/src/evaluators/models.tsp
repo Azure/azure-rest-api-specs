@@ -140,6 +140,31 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 // ============================================================================
+// Generation artifacts (provenance for evaluators created via generation jobs)
+// ============================================================================
+
+@doc("Reference to a versioned Foundry Dataset.")
+model DatasetReference {
+  @doc("Dataset name.")
+  name: string;
+
+  @doc("Dataset version.")
+  version: string;
+}
+
+@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. All references are read-only and resolve to versioned Foundry Datasets in a service-reserved namespace.")
+model EvaluatorGenerationArtifacts {
+  @doc("Reference to the generated evaluation specification — a Markdown document describing what the evaluator measures, design decisions, and intended scope. Always present for generated evaluators.")
+  spec?: DatasetReference;
+
+  @doc("Reference to the tool schemas inferred during spec generation, when the generation pipeline produced them. JSONL of OpenAI tool-schema objects. Optional: absent when the generation pipeline did not produce or infer tools.")
+  tools?: DatasetReference;
+
+  @doc("Reference to the supplementary context materials used during generation (e.g., file uploads, trace samples). Optional: absent when generation used only inline prompt/agent inputs with no supplementary files.")
+  context?: DatasetReference;
+}
+
+// ============================================================================
 // Evaluator Generation Job (LRO — follows DataGenerationJob pattern)
 // ============================================================================
 
@@ -192,6 +217,10 @@ model EvaluatorVersion {
   @doc("Definition of the evaluator")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   definition: EvaluatorDefinition;
+
+  @doc("Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.")
+  @visibility(Lifecycle.Read)
+  generation_artifacts?: EvaluatorGenerationArtifacts;
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")
