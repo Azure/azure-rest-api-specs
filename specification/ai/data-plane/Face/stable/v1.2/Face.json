@@ -352,12 +352,12 @@
         "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.",
         "parameters": [
           {
-            "name": "body",
+            "name": "options",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "Options parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionContent"
+              "$ref": "#/definitions/CreateLivenessSessionOptions"
             }
           }
         ],
@@ -5262,7 +5262,7 @@
         "name"
       ]
     },
-    "CreateLivenessSessionContent": {
+    "CreateLivenessSessionOptions": {
       "type": "object",
       "description": "Request model for creating liveness session.",
       "properties": {
