@@ -189,6 +189,7 @@ interface ExpressRouteCircuits {
     ExpressRouteCircuit,
     void,
     {
+      /** The result of the start circuit link failover test operation. */
       @body body: stringApplicationJson;
     },
     Parameters = {
@@ -219,6 +220,7 @@ interface ExpressRouteCircuits {
     ExpressRouteCircuit,
     ExpressRouteLinkFailoverStopApiParameters,
     {
+      /** The result of the stop circuit link failover test operation. */
       @body body: stringApplicationJson;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
