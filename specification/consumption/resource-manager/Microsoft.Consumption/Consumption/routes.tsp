@@ -585,8 +585,8 @@ interface ReservationRecommendationDetailsOperationGroup {
     /**
      * Scope of the reservation.
      */
-    @query("reservationScope")
-    reservationScope: Scope,
+    @query("scope")
+    scope: Scope,
 
     /**
      * Used to select the region the recommendation should be generated for.
