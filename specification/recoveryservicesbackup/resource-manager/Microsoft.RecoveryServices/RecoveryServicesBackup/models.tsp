@@ -4600,7 +4600,7 @@ model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SQL Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4625,7 +4625,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SQL Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 @added(Versions.v2026_01_31_preview)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
@@ -5090,7 +5090,7 @@ model AzureWorkloadSAPAseRecoveryPoint extends RecoveryPoint {
 /**
  * Recovery point specific to PointInTime
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5119,7 +5119,7 @@ alias AzureWorkloadSQLRecoveryPointProperties = {
 /**
  * SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5133,7 +5133,7 @@ model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
 /**
  * Extended info class details
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRecoveryPointExtendedInfo {
   /**
    * UTC time at which data directory info was captured
@@ -5157,7 +5157,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
 /**
  * SQLDataDirectory info
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model SQLDataDirectory {
   /**
    * Type of data directory mapping
@@ -5185,7 +5185,7 @@ alias AzureWorkloadSQLPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5218,7 +5218,7 @@ alias AzureWorkloadSQLRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5232,7 +5232,7 @@ model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
 /**
  * Encapsulates information regarding data directory
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model SQLDataDirectoryMapping {
   /**
    * Type of data directory mapping
@@ -7198,7 +7198,7 @@ model AzureIaaSComputeVMProtectableItem extends WorkloadProtectableItem {
 /**
  * Container for SQL workloads under SQL Availability Group.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureSQLAGWorkloadContainerProtectionContainer
   extends ProtectionContainer {
   /**
@@ -7715,7 +7715,7 @@ model AzureVmWorkloadSAPHanaSystemWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SQL Availability Group.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7735,7 +7735,7 @@ model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
 /**
  * Azure VM workload-specific protectable item representing SQL Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7749,7 +7749,7 @@ model AzureVmWorkloadSQLDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SQL Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7762,7 +7762,7 @@ model AzureVmWorkloadSQLDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SQL Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLInstanceProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7776,7 +7776,7 @@ model AzureVmWorkloadSQLInstanceProtectableItem
 /**
  * Azure VM workload-specific workload item representing SQL Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLInstanceWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7897,7 +7897,7 @@ model AzureWorkloadAutoProtectionIntent extends ProtectionIntent {
 /**
  * Azure Workload SQL Auto Protection intent item.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLAutoProtectionIntent extends ProtectionIntent {
   /**
    * backup protectionIntent type.
@@ -8497,7 +8497,7 @@ model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
   /**
@@ -8518,7 +8518,7 @@ model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRestoreWithRehydrateRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
