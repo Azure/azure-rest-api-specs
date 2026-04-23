@@ -51,6 +51,12 @@ model EvaluationSuiteVersion {
   displayName?: string;
 
   @doc("""
+    Subtype of the evaluation suite. Follows the evaluator subtype pattern.
+    For example, "benchmark" for benchmark suites.
+    """)
+  subtype?: string;
+
+  @doc("""
     Dataset reference for evaluation.
     Optional — omit for evaluator-only suites where data comes from
     live production traces or is provided at run time.
