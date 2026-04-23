@@ -741,7 +741,7 @@ model SupportedCapabilities {
    * Virtualization capabilities supported by the disk.
    */
   @added(Versions.v2026_03_02)
-  virtualizationTypes?: string;
+  supportedVirtualizationTypes?: string;
 
   /**
    * Direct virtualization scheduler type supported by the disk.
