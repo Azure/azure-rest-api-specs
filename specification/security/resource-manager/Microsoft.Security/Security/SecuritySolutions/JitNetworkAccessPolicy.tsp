@@ -63,16 +63,18 @@ alias JitNetworkAccessPoliciesInitiateOps = Azure.ResourceManager.Legacy.RoutedO
     @key
     jitNetworkAccessPolicyName: string;
   },
-  {
-    /** Type of the action to do on the Just-in-Time access policy. */
-    @path
-    @key
-    jitNetworkAccessPolicyInitiateType: JitNetworkAccessPolicyInitiateType;
-  },
+  JitNetworkAccessPolicyInitiateTypeAlias,
   ResourceRoute = #{
     route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}",
   }
 >;
+
+alias JitNetworkAccessPolicyInitiateTypeAlias = {
+  /** Type of the action to do on the Just-in-Time access policy. */
+  @path
+  @key
+  jitNetworkAccessPolicyInitiateType: JitNetworkAccessPolicyInitiateType;
+};
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ allowStaticRoutes: true })
