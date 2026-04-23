@@ -351,3 +351,12 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
+
+// =====================================================================
+// C# naming alignment with Azure.ResourceManager.Compute SDK
+// =====================================================================
+@@clientName(AdditionalCapabilities.ultraSSDEnabled, "IsUltraSsdEnabled", "csharp");
+@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
+@@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
