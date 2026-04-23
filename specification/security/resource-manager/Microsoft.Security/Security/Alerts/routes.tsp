@@ -47,6 +47,7 @@ interface AlertsOperationGroup {
    * Simulate security alerts
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-at-original-uri" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Alerts")
   @post
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate")
