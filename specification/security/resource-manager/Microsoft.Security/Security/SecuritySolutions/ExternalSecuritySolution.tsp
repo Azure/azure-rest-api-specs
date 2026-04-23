@@ -12,7 +12,6 @@ using TypeSpec.OpenAPI;
 using Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace SecuritySolutionsAPI;
 // FIXME: ExternalSecuritySolution has no properties property
@@ -20,10 +19,10 @@ namespace SecuritySolutionsAPI;
  * Represents a security solution external to Microsoft Defender for Cloud which sends information to an OMS workspace and whose data is displayed by Microsoft Defender for Cloud.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ArmLocationResource)
 @discriminator("kind")
-model ExternalSecuritySolution is Azure.ResourceManager.ProxyResource<{}> {
+model ExternalSecuritySolution
+  is Azure.ResourceManager.ProxyResource<ExternalSecuritySolutionProperties> {
   ...ResourceNameParameter<
     Resource = ExternalSecuritySolution,
     KeyName = "externalSecuritySolutionsName",
@@ -36,12 +35,6 @@ model ExternalSecuritySolution is Azure.ResourceManager.ProxyResource<{}> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: ExternalSecuritySolutionKind;
-
-  /**
-   * The external security solution properties
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ExternalSecuritySolutionProperties;
 
   /**
    * Location where the resource is stored
