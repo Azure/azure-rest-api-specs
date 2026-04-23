@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2026-02-tsp` is specified on the c
 
 ```yaml $(tag) == 'package-2026-02-tsp'
 input-file:
-  - stable/2026-02-06/DataLakeStorage.json
+  - stable/2026-06-06/generated_datalake.json
 ```
 
 ### Suppression
@@ -55,54 +55,54 @@ directive:
 ```yaml
 suppressions:
   - code: LroExtension
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Legacy operations not defined as lro
 ```
 
 ```yaml
 directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Service uses XML, not JSON, so cannot validate.
   - suppress: ValidFormats
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Properly specifying parameter format.
   - suppress: EnumInsteadOfBoolean
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract
   - suppress: ErrorResponse
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract
   - suppress: MsPaths
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Auto-generated swagger based on typespec
   - suppress: SuccessResponseBody
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract
   - suppress: LroHeaders
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract
   - suppress: VersionPolicy
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API with api version header
   - suppress: PutInOperationName
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API with sdk usage
   - suppress: OperationId
-    from: DataLakeStorage.json
+    from: generated_datalake.json
   - suppress: GetInOperationName
-    from: DataLakeStorage.json
+    from: generated_datalake.json
   - suppress: XmsEnumValidation
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract and auto-generated enum definitions
   - suppress: SecurityDefinitionDescription
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Auto-generated swagger from typespec
   - suppress: PathParameterSchema
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract
   - suppress: PutRequestResponseScheme
-    from: DataLakeStorage.json
+    from: generated_datalake.json
     reason: Existing API contract
 ```
 
