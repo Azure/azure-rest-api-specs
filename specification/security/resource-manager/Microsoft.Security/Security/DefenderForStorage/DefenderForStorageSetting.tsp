@@ -42,16 +42,16 @@ alias DefenderForStorageSettingsOps = Azure.ResourceManager.Legacy.ExtensionOper
     @segment("providers")
     @key
     providerNamespace: "Microsoft.Security";
-
+  },
+  {},
+  {
     /** The defender for storage setting name. */
     @path
     @segment("defenderForStorageSettings")
     @key
     @pattern("^[a-z][a-z0-9]*$")
     settingName: SettingName;
-  },
-  {},
-  {}
+  }
 >;
 
 alias DefenderForStorageMalwareScansOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -110,11 +110,10 @@ interface DefenderForStorageSettings {
    * Lists the Defender for Storage settings for the specified storage account.
    */
   @tag("DefenderForStorage")
-  list is Azure.ResourceManager.Extension.ListByTarget<
-    Azure.ResourceManager.Extension.ScopeParameter,
+  list is DefenderForStorageSettingsOps.List<
     DefenderForStorageSetting,
     Response = ArmResponse<DefenderForStorageSettingList>,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**

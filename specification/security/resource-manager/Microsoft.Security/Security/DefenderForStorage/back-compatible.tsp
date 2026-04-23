@@ -23,4 +23,3 @@ using Common;
 @@clientLocation(DefenderForStorageSettings.getMalwareScan,
   "DefenderForStorage"
 );
-@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceId");
