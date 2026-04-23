@@ -71,11 +71,10 @@ export async function main() {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
     const result = await rule.execute(absolutePath);
-    if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
       console.log("Rule " + rule.name + " failed");
-      if (result.errorOutput) console.log(result.errorOutput);
+      console.log(result.reason);
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful
       // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
