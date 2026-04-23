@@ -218,7 +218,10 @@ interface ExpressRouteCircuits {
   @added(Versions.v2025_07_01)
   stopCircuitLinkFailoverTest is ArmResourceActionAsync<
     ExpressRouteCircuit,
-    ExpressRouteLinkFailoverStopApiParameters,
+    {
+      /** Parameters supplied to stop the link failover simulation on the express route circuit. */
+      @bodyRoot stopParameters: ExpressRouteLinkFailoverStopApiParameters;
+    },
     {
       /** The result of the stop circuit link failover test operation. */
       @body body: stringApplicationJson;
@@ -238,7 +241,4 @@ interface ExpressRouteCircuits {
 );
 @@doc(ExpressRouteCircuits.updateTags::parameters.properties,
   "Parameters supplied to update express route circuit tags."
-);
-@@doc(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters.body,
-  "Parameters supplied to stop the link failover simulation on the express route circuit."
 );
