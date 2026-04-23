@@ -945,8 +945,7 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
 /** An HTTP byte range, e.g. "bytes=0-1023". */
 @alternateType(
   {
-    identity: "azure_storage_blob::models::HttpRange",
-    package: "azure_storage_blob",
+    identity: "crate::models::HttpRange",
   },
   "rust"
 )
