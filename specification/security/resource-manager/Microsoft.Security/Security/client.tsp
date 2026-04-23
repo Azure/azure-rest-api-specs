@@ -388,3 +388,18 @@ op privateLinkResourcesGetCustomization(
   "javascript"
 );
 @@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript");
+
+@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
+  "DefenderCspmAwsOfferingCiemDiscovery",
+  "go"
+);
+
+@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
+  "DefenderCspmAwsOfferingCiemOidc",
+  "go"
+);
+
+@@clientName(IoTSecurityAPI.ThresholdCustomAlertRule,
+  "ThresholdCustomAlertRuleClassification",
+  "go"
+);
