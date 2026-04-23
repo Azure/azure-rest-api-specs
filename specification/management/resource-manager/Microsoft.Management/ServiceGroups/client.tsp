@@ -11,3 +11,13 @@ namespace Microsoft.Management;
   "ServiceGroupsManagementClient",
   "javascript"
 );
+
+// Rename the ServiceGroups interface to avoid C# namespace-type name conflict
+// (namespace segment "ServiceGroups" would conflict with the interface type)
+@@clientName(ServiceGroups, "ServiceGroupClient", "csharp");
+
+// Rename ServiceGroupCollectionResponse to avoid AZC0030 (model name ending with 'Response')
+@@clientName(ServiceGroupCollectionResponse,
+  "ServiceGroupCollectionResult",
+  "csharp"
+);
