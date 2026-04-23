@@ -25,8 +25,9 @@ import "./Capability.tsp";
 import "./Maintenance.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
+import "./SubscriptionUsage.tsp";
 import "./routes.tsp";
-import "./FabricMirroringSettings.tsp"; 
+import "./FabricMirroringSettings.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
