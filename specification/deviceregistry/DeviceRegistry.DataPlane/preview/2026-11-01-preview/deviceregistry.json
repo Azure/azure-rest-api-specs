@@ -924,7 +924,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProvisionDevicesRequest"
+              "$ref": "#/definitions/ProvisionDeviceRequest"
             }
           }
         ],
@@ -948,7 +948,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/ProvisionDevicesResult",
+                  "$ref": "#/definitions/ProvisionDeviceResult",
                   "description": "The result of the operation."
                 }
               },
@@ -1268,6 +1268,19 @@
           }
         ]
       }
+    },
+    "CertificateAuthorityCredentials": {
+      "type": "object",
+      "description": "Certificate authority credentials for device provisioning.",
+      "properties": {
+        "adrCertificatePolicyResourceId": {
+          "type": "string",
+          "description": "ADR certificate policy resource ID."
+        }
+      },
+      "required": [
+        "adrCertificatePolicyResourceId"
+      ]
     },
     "DataPlaneResourceBase": {
       "type": "object",
@@ -1690,23 +1703,23 @@
     },
     "DeviceProvisioningAuthentication": {
       "type": "object",
-      "description": "Authentication configuration for device provisioning.",
+      "description": "Operational authentication information for device provisioning.",
       "properties": {
         "type": {
           "$ref": "#/definitions/DeviceProvisioningAuthenticationType",
-          "description": "The operational authentication type."
+          "description": "The authentication type."
         },
         "symmetricKey": {
           "$ref": "#/definitions/SymmetricKeyCredentials",
-          "description": "Symmetric key credentials. Required when type is SymmetricKey."
+          "description": "Symmetric key details. Required when type is SymmetricKey."
         },
         "certificateAuthority": {
-          "type": "string",
-          "description": "The certificate authority identifier. Required when type is X509Certificate."
+          "$ref": "#/definitions/CertificateAuthorityCredentials",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
         },
         "selfSignedThumbprints": {
           "$ref": "#/definitions/SelfSignedThumbprints",
-          "description": "Self-signed certificate thumbprints. Required when type is SelfSignedX509Certificate."
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
         }
       },
       "required": [
@@ -1718,7 +1731,7 @@
       "description": "The authentication type for device provisioning.",
       "enum": [
         "SymmetricKey",
-        "X509Certificate",
+        "CertificateAuthority",
         "SelfSignedX509Certificate"
       ],
       "x-ms-enum": {
@@ -1731,9 +1744,9 @@
             "description": "Symmetric key authentication."
           },
           {
-            "name": "X509Certificate",
-            "value": "X509Certificate",
-            "description": "X.509 certificate authentication."
+            "name": "CertificateAuthority",
+            "value": "CertificateAuthority",
+            "description": "Certificate authority authentication."
           },
           {
             "name": "SelfSignedX509Certificate",
@@ -1908,31 +1921,16 @@
     },
     "DeviceTwin": {
       "type": "object",
-      "description": "Initial device twin configuration for provisioning.",
+      "description": "Initial device twin configuration to apply during provisioning.",
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Tags to set on the device twin.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "Device twin tags.",
+          "additionalProperties": {}
         },
         "properties": {
-          "$ref": "#/definitions/DeviceTwinDesiredProperties",
+          "$ref": "#/definitions/TwinProperties",
           "description": "The device twin properties."
-        }
-      }
-    },
-    "DeviceTwinDesiredProperties": {
-      "type": "object",
-      "description": "Desired properties for the device twin.",
-      "properties": {
-        "desired": {
-          "type": "object",
-          "description": "The desired properties to set on the device twin.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2322,73 +2320,59 @@
         "value"
       ]
     },
-    "ProvisionDevicesRequest": {
+    "ProvisionDeviceRequest": {
       "type": "object",
-      "description": "Request body for provisioning devices in a namespace.",
+      "description": "Request body for the provision device endpoint.",
       "properties": {
-        "externalDeviceId": {
+        "iotHubDeviceId": {
           "type": "string",
-          "description": "The ID to use as the IoT Hub device identity. This must be the External Device ID."
+          "description": "The device identity in IoT Hub."
         },
-        "serviceEndpoint": {
-          "type": "string",
+        "targetEndpoint": {
+          "$ref": "#/definitions/TargetEndpoint",
           "description": "The service endpoint identifier as returned by the GetNamespace API."
         },
         "authentication": {
           "$ref": "#/definitions/DeviceProvisioningAuthentication",
-          "description": "The authentication configuration for the device."
+          "description": "Operational authentication configuration."
         },
         "deviceTwin": {
           "$ref": "#/definitions/DeviceTwin",
-          "description": "Optional initial device twin properties to set during provisioning."
+          "description": "Initial device twin configuration to apply during provisioning."
         }
       },
       "required": [
-        "externalDeviceId",
-        "serviceEndpoint",
+        "iotHubDeviceId",
+        "targetEndpoint",
         "authentication"
       ]
     },
-    "ProvisionDevicesResult": {
+    "ProvisionDeviceResult": {
       "type": "object",
-      "description": "Result of a device provisioning operation.",
+      "description": "Result of a successful device provisioning operation.",
       "properties": {
-        "name": {
+        "deviceUuid": {
           "type": "string",
-          "description": "The name of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Unique device identifier assigned by the system."
         },
-        "uuid": {
+        "deviceResourceId": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
-          "readOnly": true
+          "description": "ARM resource ID of the provisioned device."
         },
-        "type": {
+        "externalDeviceId": {
           "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "External device ID (IoT Hub device ID)."
         },
-        "etag": {
+        "messagingEndpointName": {
           "type": "string",
-          "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
+          "description": "Name of the messaging endpoint the device is connected to."
         }
       },
       "required": [
-        "name",
-        "type"
+        "deviceUuid",
+        "deviceResourceId",
+        "externalDeviceId",
+        "messagingEndpointName"
       ]
     },
     "ProvisioningError": {
@@ -2411,15 +2395,15 @@
     },
     "SelfSignedThumbprints": {
       "type": "object",
-      "description": "Self-signed certificate thumbprints for device provisioning.",
+      "description": "Self-signed X.509 certificate thumbprints for device authentication.",
       "properties": {
         "primaryThumbprint": {
           "type": "string",
-          "description": "The primary self-signed certificate thumbprint."
+          "description": "Primary certificate thumbprint."
         },
         "secondaryThumbprint": {
           "type": "string",
-          "description": "The secondary self-signed certificate thumbprint."
+          "description": "Secondary certificate thumbprint."
         }
       },
       "required": [
@@ -2429,7 +2413,7 @@
     },
     "SymmetricKeyCredentials": {
       "type": "object",
-      "description": "Symmetric key credentials for device provisioning.",
+      "description": "Symmetric key authentication details.",
       "properties": {
         "primaryKey": {
           "type": "string",
@@ -2474,6 +2458,35 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
+    },
+    "TargetEndpoint": {
+      "type": "object",
+      "description": "IoT Hub endpoint target for device provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net)."
+        }
+      },
+      "required": [
+        "name",
+        "address"
+      ]
+    },
+    "TwinProperties": {
+      "type": "object",
+      "description": "Device twin desired properties.",
+      "properties": {
+        "desired": {
+          "type": "object",
+          "description": "The desired properties to set on the device twin.",
+          "additionalProperties": {}
         }
       }
     }
