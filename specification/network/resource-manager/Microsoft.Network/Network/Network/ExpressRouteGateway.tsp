@@ -314,7 +314,10 @@ interface ExpressRouteGateways {
   @added(Versions.v2025_07_01)
   stopSiteFailoverTest is ArmResourceActionAsync<
     ExpressRouteGateway,
-    ExpressRouteFailoverStopApiParameters,
+    {
+      /** Parameters supplied to stop the failover simulation on the express route gateway. */
+      @bodyRoot stopParameters: ExpressRouteFailoverStopApiParameters;
+    },
     {
       @body body: stringApplicationJson;
     },
@@ -380,7 +383,4 @@ interface ExpressRouteGateways {
 );
 @@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "Parameters required in an ExpressRouteConnection PUT operation."
-);
-@@doc(ExpressRouteGateways.stopSiteFailoverTest::parameters.body,
-  "Parameters supplied to stop the failover simulation on the ExpressRoute gateway."
 );
