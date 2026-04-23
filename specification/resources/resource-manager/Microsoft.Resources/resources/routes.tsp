@@ -263,7 +263,7 @@ interface TagsOperationGroup {
     tagValue: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagValue> | ArmCreatedResponse<TagValue> | CloudError;
+  ): ArmResponse<TagValue> | ArmResourceCreatedSyncResponse<TagValue> | CloudError;
 
   /**
    * This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.
