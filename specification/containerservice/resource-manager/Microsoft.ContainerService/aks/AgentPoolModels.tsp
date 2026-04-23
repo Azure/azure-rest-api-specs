@@ -758,52 +758,25 @@ model AgentPoolNetworkProfile {
     }
   ]>[];
 
-  /**
-   * Secondary network interface configurations for each VM in the agent pool.
-   * Each entry is a template: one physical NIC per entry is provisioned on every
-   * VM instance. These interfaces are created at agent pool creation time and
-   * are immutable.
-   * The length of the list must be less than the NIC capacity minus 1 for the
-   * VM size of the agent pool (AKS manages the primary NIC). For example, a
-   * Standard_D8a_v4 VM supports up to 4 NICs, so the maximum number of secondary
-   * interfaces allowed is 3. For mixed-SKU VM pools the effective capacity is the
-   * minimum across all SKUs: count(secondaryNetworkInterfaces) + 1 <= min(maxNICs).
-   * For more information, see https://aka.ms/aks/multi-nic
-   */
+  /** Secondary network interface configurations for each VM in the agent pool. Each entry is a template: one physical NIC per entry is provisioned on every VM instance. These interfaces are created at agent pool creation time and are immutable. The length of the list must be less than the NIC capacity minus 1 for the VM size of the agent pool (AKS manages the primary NIC). For example, a Standard_D8a_v4 VM supports up to 4 NICs, so the maximum number of secondary interfaces allowed is 3. For mixed-SKU VM pools the effective capacity is the minimum across all SKUs: count(secondaryNetworkInterfaces) + 1 <= min(maxNICs). For more information, see https://aka.ms/aks/multi-nic */
   @added(Versions.v2026_03_02_preview)
   @identifiers(#[])
   secondaryNetworkInterfaces?: AgentPoolNetworkInterface[];
 }
 
-/**
- * Type of network interface to be provisioned on each virtual machine instance.
- * For more information, see https://aka.ms/aks/multi-nic
- */
+/** Type of network interface to be provisioned on each virtual machine instance. For more information, see https://aka.ms/aks/multi-nic */
 @added(Versions.v2026_03_02_preview)
 union AgentPoolNetworkInterfaceType {
   string,
 
-  /**
-   * A standard network interface programmed with an IP from a specified VNet subnet.
-   * Must be used with `vnetSubnetId` set in the AgentPoolNetworkInterface.
-   * IP address family (IPv4/IPv6/Dual-stack) is determined by the subnet.
-   */
+  /** A standard network interface programmed with an IP from a specified VNet subnet. Must be used with `vnetSubnetId` set in the AgentPoolNetworkInterface. IP address family (IPv4/IPv6/Dual-stack) is determined by the subnet. */
   Standard: "Standard",
 
-  /**
-   * A secondary network interface created without IP configuration or subnet
-   * attachment. The interface is provisioned in an uninitialized state and the
-   * subnet is attached during workload creation. `vnetSubnetId` must be set to
-   * an empty string (`""`).
-   */
+  /** A secondary network interface created without IP configuration or subnet attachment. The interface is provisioned in an uninitialized state and the subnet is attached during workload creation. `vnetSubnetId` must be set to an empty string (`""`) or omitted. */
   Dynamic: "Dynamic",
 }
 
-/**
- * Configuration of a secondary network interface provisioned on each VM
- * instance in the agent pool.
- * For more information, see https://aka.ms/aks/multi-nic
- */
+/** Configuration of a secondary network interface provisioned on each VM instance in the agent pool. For more information, see https://aka.ms/aks/multi-nic */
 @added(Versions.v2026_03_02_preview)
 model AgentPoolNetworkInterface {
   /**
@@ -811,23 +784,14 @@ model AgentPoolNetworkInterface {
    */
   type?: AgentPoolNetworkInterfaceType;
 
-  /**
-   * The resource ID of the subnet which will be attached to the secondary
-   * network interface. Required when `type` is `Standard`; must be an empty
-   * string (`""`) or omitted when `type` is `Dynamic`.
-   */
+  /** The resource ID of the subnet which will be attached to the secondary network interface. Required when `type` is `Standard`; must be an empty string (`""`) or omitted when `type` is `Dynamic`. */
   vnetSubnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
 
-  /**
-   * Whether accelerated networking is enabled on this secondary NIC.
-   * If omitted, this defaults to true only when the agent pool VM SKU supports
-   * accelerated networking. Validation will fail if it is enabled on an
-   * unsupported SKU or NIC configuration.
-   */
+  /** Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration. */
   enableAcceleratedNetworking?: boolean;
 }
 
