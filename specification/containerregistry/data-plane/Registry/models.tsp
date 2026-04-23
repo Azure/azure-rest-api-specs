@@ -1233,3 +1233,37 @@ model PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedS
   @encodedName("application/x-www-form-urlencoded", "grant_type")
   grantType: TokenGrantType;
 }
+
+/**
+ * A descriptor for a manifest in the referrers list, following the OCI image descriptor spec.
+ */
+model ReferrerDescriptor {
+  /** The media type of the referenced manifest. */
+  mediaType?: string;
+
+  /** The digest of the referenced manifest. */
+  digest?: string;
+
+  /** The size in bytes of the referenced manifest. */
+  size?: int64;
+
+  /** The artifact type of the referenced manifest. */
+  artifactType?: string;
+
+  /** Annotations associated with the referenced manifest. */
+  annotations?: Record<string>;
+}
+
+/**
+ * The result of listing referrers for a manifest, following the OCI Index format.
+ */
+model ReferrersResult {
+  /** The schema version. Always 2 for OCI Index. */
+  schemaVersion: int32;
+
+  /** The media type of this response. */
+  mediaType?: string;
+
+  /** The list of referrer descriptors. */
+  manifests?: ReferrerDescriptor[];
+}

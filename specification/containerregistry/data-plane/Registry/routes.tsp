@@ -440,6 +440,7 @@ interface ContainerRegistry {
     },
     ArtifactManifestProperties
   >;
+
 }
 
 interface ContainerRegistryBlob {
@@ -838,6 +839,30 @@ interface ContainerRegistryBlob {
       /** Content range of the blob chunk. */
       @header("Content-Range") contentRange: string;
     }
+  >;
+
+  /**
+   * Get the list of referrers for a given manifest digest, following the OCI
+   * Distribution Referrers API specification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OCI Distribution Referrers API"
+  @route("/v2/{name}/referrers/{digest}")
+  @get
+  getReferrers is AcrOperation<
+    {
+      /**
+       * Name of the image (including the namespace)
+       */
+      @path
+      name: string;
+
+      /**
+       * Digest of the manifest to list referrers for
+       */
+      @path
+      digest: string;
+    },
+    ReferrersResult
   >;
 }
 
