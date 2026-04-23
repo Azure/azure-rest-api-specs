@@ -357,11 +357,10 @@ These settings apply only when `--tag=package-2026-03-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2026-03-03'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2025-11-01/ComputeRP.json
-  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
+  - stable/2025-11-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2026-03-03/GalleryRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - stable/2026-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2026-03-03-only
