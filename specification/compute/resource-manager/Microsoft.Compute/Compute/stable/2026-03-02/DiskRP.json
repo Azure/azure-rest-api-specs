@@ -1829,6 +1829,9 @@
           }
         },
         "x-ms-examples": {
+          "get a disk restorePoint resource with InstantAccess snapshotAccessState.": {
+            "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_Get_WithInstantAccess.json"
+          },
           "get an incremental disk restorePoint resource.": {
             "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_Get.json"
           },
@@ -3472,6 +3475,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Logical sector size in bytes for disk restore points of UltraSSD_LRS and PremiumV2_LRS disks. Supported values are 512 and 4096. 4096 is the default.",
+          "readOnly": true
+        },
+        "snapshotAccessState": {
+          "$ref": "#/definitions/Common.SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot.",
           "readOnly": true
         }
       }
