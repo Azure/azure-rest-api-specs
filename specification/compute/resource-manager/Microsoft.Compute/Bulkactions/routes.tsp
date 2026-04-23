@@ -19,14 +19,10 @@ namespace Microsoft.Compute;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 alias LocationParameter = {
-  /** Static bulkactions prefix segment for bulk VM operations. */
-  @path
-  @segment("bulkactions")
-  bulkActions: "locations";
-
   /** The location name. */
   @path
   @minLength(1)
+  @segment("locations")
   @key
   locationparameter: Azure.Core.azureLocation;
 };
@@ -34,8 +30,8 @@ alias LocationParameter = {
 alias DefaultVirtualMachines = {
   /** Static virtual machine segment for bulk VM operations. */
   @path
-  @segment("virtualMachines")
-  virtualMachines: "bulkVmOperations";
+  @segment("bulkVmOperations")
+  bulkVmOperations: "virtualMachines";
 };
 
 @@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,

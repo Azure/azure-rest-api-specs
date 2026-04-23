@@ -49,53 +49,43 @@ suppressions:
       Tags are mimicing the existing object structure from compute, bulkactions is a
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings 
+    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/cancel"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/cancel"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/create"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/create"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/deallocate"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/deallocate"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/delete"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/delete"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/getOperationsStatus"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/getOperationsStatus"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/hibernate"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/hibernate"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/reimage"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/reimage"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/start"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/start"]
   - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
+    reason: bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/vdiFlexCreate"]
-        
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/bulkVmOperations/virtualMachines/vdiFlexCreate"]
 ```
 
 ### Tag: package-2026-04-06-preview
