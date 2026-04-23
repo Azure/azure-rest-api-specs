@@ -73,11 +73,12 @@ interface ManagedTrafficConfigs {
   >;
 
   /**
-   * Create or update the managed traffic configuration for a web app.
+   * Update the managed traffic configuration for a web app.
    */
-  @summary("Create or update the managed traffic configuration for a web app.")
-  createOrUpdateManagedTrafficConfig is ManagedTrafficConfigOps.CreateOrUpdateSync<
+  @summary("Update the managed traffic configuration for a web app.")
+  updateManagedTrafficConfig is ManagedTrafficConfigOps.CreateOrUpdateSync<
     ManagedTrafficConfigResource,
+    Response = ArmResourceUpdatedResponse<ManagedTrafficConfigResource>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -88,6 +89,6 @@ interface ManagedTrafficConfigs {
 @@doc(ManagedTrafficConfigResource.properties,
   "ManagedTrafficConfig resource specific properties"
 );
-@@doc(ManagedTrafficConfigs.createOrUpdateManagedTrafficConfig::parameters.resource,
+@@doc(ManagedTrafficConfigs.updateManagedTrafficConfig::parameters.resource,
   "Traffic configuration properties."
 );
