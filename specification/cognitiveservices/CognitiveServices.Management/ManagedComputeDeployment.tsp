@@ -82,7 +82,7 @@ interface ManagedComputeDeployments {
 @@doc(ManagedComputeDeployment.name,
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
-@@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
+@@encodedName(ManagedComputeDeployment.eTag, "application/json", "etag");
 @@doc(ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."
 );
