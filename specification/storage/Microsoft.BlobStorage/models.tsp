@@ -1790,6 +1790,13 @@ alias SourceRangeParameter = {
   sourceRange?: string;
 };
 
+/** The required source range parameter. */
+alias SourceRangeParameterRequired = {
+  /** Bytes of source data in the specified range. */
+  @header("x-ms-source-range")
+  sourceRange: string;
+};
+
 /** The source URL parameter. */
 alias SourceUrlParameter = {
   /** Specify a URL to the copy source. */
@@ -2484,6 +2491,13 @@ alias RangeParameter = {
   /** Return only the bytes of the blob in the specified range. */
   @header("Range")
   range?: string;
+};
+
+/** The required range parameter. */
+alias RangeParameterRequired = {
+  /** Bytes of data in the specified range. */
+  @header("Range")
+  range: string;
 };
 
 /** The version ID parameter. */

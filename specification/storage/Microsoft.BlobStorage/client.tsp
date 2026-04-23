@@ -259,8 +259,16 @@ scalar HttpRange extends string;
   uint64,
   "rust"
 );
+// Blob.download — "Range" header → HttpRange
+@@alternateType(Blob.download::parameters.range, HttpRange, "rust");
+// PageBlob.getPageRanges + getPageRangesDiff — "Range" header → HttpRange (via spread alias)
 @@alternateType(RangeParameter.range, HttpRange, "rust");
+// PageBlob.uploadPages + uploadPagesFromUrl — required "Range" header → HttpRange
+@@alternateType(RangeParameterRequired.range, HttpRange, "rust");
+// AppendBlob.appendBlockFromUrl + BlockBlob.stageBlockFromUrl — "x-ms-source-range" header → HttpRange (via spread alias)
 @@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
+// PageBlob.uploadPagesFromUrl — required "x-ms-source-range" header → HttpRange
+@@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
