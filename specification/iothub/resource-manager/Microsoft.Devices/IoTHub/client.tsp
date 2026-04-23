@@ -7,7 +7,7 @@ using Microsoft.Devices;
 using Azure.ResourceManager;
 using Http;
 
-@@clientName(Microsoft.Devices, "IotHubClient", "javascript,java");
+@@clientName(Microsoft.Devices, "IotHubClient", "javascript,java,python");
 @@clientName(IotHubDescriptions.getEndpointHealth,
   "listEndpointHealth",
   "javascript"
