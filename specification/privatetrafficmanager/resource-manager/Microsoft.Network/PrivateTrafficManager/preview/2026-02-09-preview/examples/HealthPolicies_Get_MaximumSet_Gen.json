@@ -1,0 +1,42 @@
+{
+  "title": "HealthPolicies_Get_MaximumSet",
+  "operationId": "HealthPolicies_Get",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "privateTrafficManagerProfileName": "myProfile",
+    "healthPolicyName": "myHealthPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "name": "myHealthPolicy",
+          "kind": "Probe",
+          "probeConfig": {
+            "protocol": "HTTPS",
+            "port": 443,
+            "path": "/health",
+            "intervalInSeconds": 30,
+            "timeoutInSeconds": 10,
+            "toleratedNumberOfFailures": 3
+          },
+          "provisioningState": "Succeeded"
+        },
+        "kind": "Probe",
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/healthPolicies/myHealthPolicy",
+        "name": "myHealthPolicy",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles/healthPolicies",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-18T10:05:58.139Z"
+        }
+      }
+    }
+  }
+}
