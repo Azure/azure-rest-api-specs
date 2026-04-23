@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 
@@ -2011,7 +2012,7 @@ model MigrationProperties {
   /**
    * Identifier of the private endpoint migration instance.
    */
-  migrationInstanceResourceId?: Azure.Core.armResourceIdentifier;
+  migrationInstanceResourceId?: armResourceIdentifier;
 
   /**
    * Mode used to perform the migration: Online or Offline.
@@ -3005,7 +3006,7 @@ model ServerProperties {
    * Identifier of the server to be used as the source of the new server. Required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', 'Replica', or 'ReviveDropped'. This property is returned only when the target server is a read replica.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  sourceServerResourceId?: Azure.Core.armResourceIdentifier<[
+  sourceServerResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.DBforPostgreSQL/flexibleServers";
     }
@@ -3204,7 +3205,7 @@ model Network {
   /**
    * Resource identifier of the delegated subnet. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone.
    */
-  delegatedSubnetResourceId?: Azure.Core.armResourceIdentifier<[
+  delegatedSubnetResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
@@ -3213,7 +3214,7 @@ model Network {
   /**
    * Identifier of the private DNS zone. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone.
    */
-  privateDnsZoneArmResourceId?: Azure.Core.armResourceIdentifier<[
+  privateDnsZoneArmResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Network/privateDnsZones";
     }
@@ -4031,8 +4032,8 @@ model MaintenanceEventActionResponse {
   @doc("The maintenance event name (maintenance ID).")
   maintenanceEventId?: string;
 
-  @doc("The full ARM resource ID of the server.")
-  serverId?: string;
+  @doc("The full Azure resource ID of the server.")
+  serverId?: armResourceIdentifier;
 
   @doc("The status (e.g. 'Accepted', 'Succeeded').")
   status?: string;
