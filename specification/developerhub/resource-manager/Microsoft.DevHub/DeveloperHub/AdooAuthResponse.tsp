@@ -15,7 +15,7 @@ namespace Microsoft.DevHub;
  */
 @singleton("default")
 @subscriptionResource
-model AdooAuthResponse is Azure.ResourceManager.ProxyResource<AdooAuth> {
+model AdooAuthResponse is Azure.ResourceManager.ProxyResource<ADOOAuth> {
   ...ResourceNameParameter<
     Resource = AdooAuthResponse,
     KeyName = "adooauth",

@@ -1477,7 +1477,8 @@ model AdooAuthInfoResponse {
  * The properties of ADO OAuth.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AdooAuth {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ADOOAuth {
   /**
    * user making request
    */

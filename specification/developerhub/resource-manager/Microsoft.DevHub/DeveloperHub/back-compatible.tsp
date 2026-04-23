@@ -46,4 +46,3 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthListResponse, "ADOOAuthListResponse");
 @@clientName(AdooAuthResponse, "ADOOAuthResponse");
 @@clientName(PrLinkResponse, "prLinkResponse");
-@@clientName(AdooAuth, "ADOOAuth");
