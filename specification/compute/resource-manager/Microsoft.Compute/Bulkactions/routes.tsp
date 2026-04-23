@@ -27,11 +27,11 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
-alias DefaultVirtualMachines = {
-  /** Static virtual machine segment for bulk VM operations. */
+alias DefaultBulkVmOperations = {
+  /** Bulk VM operations and virtual machines path segments. */
   @path
   @segment("bulkVmOperations")
-  bulkVmOperations: "virtualMachines";
+  virtualMachines: "virtualMachines";
 };
 
 @@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
@@ -102,7 +102,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -118,7 +118,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -135,7 +135,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -152,7 +152,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -169,7 +169,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -186,7 +186,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -203,7 +203,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -220,7 +220,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
@@ -237,7 +237,7 @@ interface VirtualMachineBulkOperations {
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
+    ...DefaultBulkVmOperations,
 
     @doc("The request body")
     @body
