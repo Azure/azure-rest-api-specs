@@ -17086,6 +17086,11 @@
           "datasetVersion": {
             "type": "string",
             "description": "Dataset version. Omit to use the latest version."
+          },
+          "itemSchema": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Dataset column schema for constructing the eval group's data_source_config.\nDescribes the shape of each row in the dataset.\nFor generate flow, provided by the dataset generation API.\nFor manual create, provided by the user."
           }
         },
         "description": "Reference to a dataset registered in the Foundry project.\nWhen datasetVersion is omitted the latest version is used."
@@ -18892,11 +18897,6 @@
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
           },
-          "itemSchema": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Dataset column schema for constructing the eval group's data_source_config.\nDescribes the shape of each row in the dataset.\nFor generate flow, provided by the dataset generation API.\nFor manual create, provided by the user."
-          },
           "inputMessages": {
             "type": "object",
             "additionalProperties": {},
@@ -18958,11 +18958,6 @@
               }
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
-          },
-          "itemSchema": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Dataset column schema for constructing the eval group's data_source_config.\nDescribes the shape of each row in the dataset.\nFor generate flow, provided by the dataset generation API.\nFor manual create, provided by the user."
           },
           "inputMessages": {
             "type": "object",

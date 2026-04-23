@@ -23,6 +23,14 @@ model DatasetReference {
 
   @doc("Dataset version. Omit to use the latest version.")
   datasetVersion?: string;
+
+  @doc("""
+    Dataset column schema for constructing the eval group's data_source_config.
+    Describes the shape of each row in the dataset.
+    For generate flow, provided by the dataset generation API.
+    For manual create, provided by the user.
+    """)
+  itemSchema?: Record<unknown>;
 }
 
 // ---------------------------------------------------------------------------
@@ -65,14 +73,6 @@ model EvaluationSuiteVersion {
     Optional — allows suites to exist without a target.
     """)
   target?: Target;
-
-  @doc("""
-    Dataset column schema for constructing the eval group's data_source_config.
-    Describes the shape of each row in the dataset.
-    For generate flow, provided by the dataset generation API.
-    For manual create, provided by the user.
-    """)
-  itemSchema?: Record<unknown>;
 
   @doc("""
     How to send dataset rows to the target (agent or model).
