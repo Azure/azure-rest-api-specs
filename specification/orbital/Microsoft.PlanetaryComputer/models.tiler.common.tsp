@@ -1,9 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./models.common.colormaps.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -56,6 +59,56 @@ union Resampling {
   /**
    * Root mean square resampling - useful for resampling error or deviation grids
    */
+  rms: "rms",
+}
+
+/**
+ * WarpKernel resampling algorithm used when doing re-projection. Defaults to `nearest`.
+ */
+@added(Versions.v2026_04_15)
+union WarpKernelResampling {
+  string,
+
+  /** Nearest neighbor */
+  nearest: "nearest",
+
+  /** Bilinear interpolation */
+  bilinear: "bilinear",
+
+  /** Cubic interpolation */
+  cubic: "cubic",
+
+  /** Cubic spline interpolation */
+  cubic_spline: "cubic_spline",
+
+  /** Lanczos windowed sinc resampling */
+  lanczos: "lanczos",
+
+  /** Average resampling */
+  average: "average",
+
+  /** Mode resampling */
+  mode: "mode",
+
+  /** Maximum value resampling */
+  max: "max",
+
+  /** Minimum value resampling */
+  min: "min",
+
+  /** Median value resampling */
+  med: "med",
+
+  /** First quartile resampling */
+  q1: "q1",
+
+  /** Third quartile resampling */
+  q3: "q3",
+
+  /** Sum resampling */
+  sum: "sum",
+
+  /** Root mean square resampling */
   rms: "rms",
 }
 
@@ -254,6 +307,12 @@ union PixelSelection {
    * Select image with highest value in the last band
    */
   lastBandHigh: "lastbandhigh",
+
+  /**
+   * Count available pixels across sources
+   */
+  @added(Versions.v2026_04_15)
+  count: "count",
 }
 
 /**
@@ -437,6 +496,14 @@ model WmtsCapabilitiesXmlResponse {
  */
 model AssetQueryParameters {
   /**
+   * Dataset band indexes
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  bidx?: int32[];
+
+  /**
    * Asset's names.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
@@ -454,7 +521,8 @@ model AssetQueryParameters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("asset_bidx")
-  assetBandIndices?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  assetBandIndices?: string[];
 
   /**
    * Asset as Band
@@ -466,13 +534,21 @@ model AssetQueryParameters {
    * Overwrite internal Nodata value
    */
   @query("nodata")
-  noData?: float32;
+  @typeChangedFrom(Versions.v2026_04_15, float32)
+  noData?: string;
 
   /**
    * Apply internal Scale or Offset
    */
   @query("unscale")
   unscale?: boolean;
+
+  /**
+   * WarpKernel resampling algorithm (only used when doing re-projection). Defaults to `nearest`.
+   */
+  @added(Versions.v2026_04_15)
+  @query("reproject")
+  reproject?: WarpKernelResampling;
 }
 
 /**
@@ -523,6 +599,21 @@ model MiscTileQueryParameters {
 }
 
 /**
+ * Padding parameter for tile rendering endpoints only.
+ * Separated from MiscTileQueryParameters because padding applies to tiles/tilejson but not to bbox/feature/preview/WMTS.
+ */
+@added(Versions.v2026_04_15)
+model TilePaddingQueryParameters {
+  /**
+   * Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.
+   */
+  @added(Versions.v2026_04_15)
+  @query
+  @minValueExclusive(0)
+  padding?: int32;
+}
+
+/**
  * Standard tile coordinates (zoom, x, y) that identify a specific tile in a tile pyramid
  */
 model ZxyPathParameters {
@@ -565,6 +656,32 @@ model ZoomQueryParameters {
   maxZoom?: int32;
 }
 
+/**
+ * STAC Collection Identifier as a query parameter
+ */
+@added(Versions.v2026_04_15)
+model CollectionQueryParameter {
+  /**
+   * STAC Collection Identifier
+   */
+  @added(Versions.v2026_04_15)
+  @query("collection")
+  collection?: string;
+}
+
+/**
+ * Output Coordinate Reference System query parameter
+ */
+@added(Versions.v2026_04_15)
+model DstCrsQueryParameter {
+  /**
+   * Output Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("dst_crs")
+  destinationCrs?: string;
+}
+
 alias TileResponse =
   | ImagePngResponse
   | ImageJpegResponse
@@ -573,3 +690,169 @@ alias TileResponse =
   | ImageJp2Response
   | ImageTiffResponse
   | ApplicationXbinaryResponse;
+
+/**
+ * A link object used in OGC tile resources
+ */
+@added(Versions.v2026_04_15)
+model TileSetLink {
+  /**
+   * The URL target of the link
+   */
+  href: string;
+
+  /**
+   * The relationship type of the link
+   */
+  rel: string;
+
+  /**
+   * The media type of the linked resource
+   */
+  type?: string;
+
+  /**
+   * Human-readable title of the link
+   */
+  title?: string;
+}
+
+/**
+ * Bounding box for a tile set
+ */
+@added(Versions.v2026_04_15)
+model TileSetBoundingBox {
+  /**
+   * Lower-left corner coordinates [x, y]
+   */
+  lowerLeft: float64[];
+
+  /**
+   * Upper-right corner coordinates [x, y]
+   */
+  upperRight: float64[];
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+}
+
+/**
+ * Summary information about a single tileset within a list of available tilesets
+ */
+@added(Versions.v2026_04_15)
+model TileSetEntry {
+  /**
+   * Human-readable title of the tileset
+   */
+  title?: string;
+
+  /**
+   * Type of data in the tiles (e.g., 'map', 'vector')
+   */
+  dataType?: string;
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+
+  /**
+   * Links related to this tileset
+   */
+  links?: TileSetLink[];
+
+  /**
+   * Bounding box of the tileset
+   */
+  boundingBox?: TileSetBoundingBox;
+
+  /**
+   * Access constraints for the tileset
+   */
+  accessConstraints?: string;
+}
+
+/**
+ * Response containing a list of available tilesets
+ */
+@added(Versions.v2026_04_15)
+model TileSetList {
+  /**
+   * Array of available tilesets
+   */
+  tilesets: TileSetEntry[];
+}
+
+/**
+ * Limits for a specific tile matrix within a tileset, defining the valid row/column range
+ */
+@added(Versions.v2026_04_15)
+model TileMatrixSetLimitsEntry {
+  /**
+   * Identifier of the tile matrix level
+   */
+  tileMatrix: string;
+
+  /**
+   * Minimum tile row index at this zoom level
+   */
+  minTileRow: int32;
+
+  /**
+   * Maximum tile row index at this zoom level
+   */
+  maxTileRow: int32;
+
+  /**
+   * Minimum tile column index at this zoom level
+   */
+  minTileCol: int32;
+
+  /**
+   * Maximum tile column index at this zoom level
+   */
+  maxTileCol: int32;
+}
+
+/**
+ * Detailed metadata about a specific tileset, including tile matrix set limits
+ */
+@added(Versions.v2026_04_15)
+model TileSetMetadata {
+  /**
+   * Human-readable title of the tileset
+   */
+  title?: string;
+
+  /**
+   * Type of data in the tiles
+   */
+  dataType?: string;
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+
+  /**
+   * Links related to this tileset
+   */
+  links?: TileSetLink[];
+
+  /**
+   * Bounding box of the tileset
+   */
+  boundingBox?: TileSetBoundingBox;
+
+  /**
+   * Access constraints for the tileset
+   */
+  accessConstraints?: string;
+
+  /**
+   * Limits for each tile matrix level in the tileset
+   */
+  tileMatrixSetLimits?: TileMatrixSetLimitsEntry[];
+}
