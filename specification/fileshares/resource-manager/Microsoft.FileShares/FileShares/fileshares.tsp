@@ -29,6 +29,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2025-09-01-preview")
   v2025_09_01_preview: "2025-09-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2026-06-01")
+  v2026_06_01: "2026-06-01",
 }
 
 @doc("File share resource")
@@ -39,6 +43,11 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   @path
   @segment("fileShares")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Identity is a valid envelope property"
+  @added(Versions.v2026_06_01)
+  @doc("The managed service identity of the file share.")
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @doc("Media Tier enum.")
