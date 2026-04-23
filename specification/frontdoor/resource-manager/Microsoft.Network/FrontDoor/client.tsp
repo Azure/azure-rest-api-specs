@@ -222,6 +222,14 @@ interface ProfilesOverrides {
 @@clientName(Transform.UrlEncode, "UriEncode", "csharp");
 @@clientName(ResourceType, "FrontDoorResourceType", "csharp");
 @@clientName(MinimumTLSVersion, "FrontDoorRequiredMinimumTlsVersion", "csharp");
+@@clientName(ManagedRuleSetException,
+  "FrontDoorManagedRuleSetException",
+  "csharp"
+);
+@@clientName(ManagedRuleSetScope, "FrontDoorManagedRuleSetScope", "csharp");
+@@clientName(RuleGroupScope, "FrontDoorRuleGroupScope", "csharp");
+@@clientName(RuleScope, "FrontDoorRuleScope", "csharp");
+@@clientName(SensitivityType, "FrontDoorSensitivityType", "csharp");
 @@clientName(LatencyMetric.endDateTimeUTC, "EndOn", "csharp");
 @@clientName(AggregationInterval,
   "FrontDoorTimeSeriesInfoAggregationInterval",
