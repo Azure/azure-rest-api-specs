@@ -683,6 +683,7 @@ interface MosaicCollectionsWmts {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...AssetQueryParameters;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -731,6 +732,7 @@ interface MosaicCollectionsWmtsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...AssetQueryParameters;
     },
     WmtsCapabilitiesXmlResponse
   >;
