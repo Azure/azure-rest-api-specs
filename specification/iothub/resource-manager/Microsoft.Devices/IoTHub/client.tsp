@@ -66,7 +66,7 @@ op replaceManualFailover(
 ): (ArmCombinedLroHeaders &
   Azure.Core.Foundations.RetryAfterHeader) | Microsoft.Devices.ErrorDetails | Azure.ResourceManager.ArmResponse<void>;
 
-@@override(IotHubDescriptions.manualFailover, replaceManualFailover, "go");
+@@override(IotHubDescriptions.manualFailover, replaceManualFailover);
 @@clientName(replaceManualFailover::parameters.body, "failoverInput", "go");
 
 /**
@@ -83,7 +83,7 @@ op replaceTestAllRoutes(
   body: Microsoft.Devices.TestAllRoutesInput,
 ): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestAllRoutesResult> | Microsoft.Devices.ErrorDetails;
 
-@@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes, "go");
+@@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes);
 @@clientName(replaceTestAllRoutes::parameters.body, "input", "go");
 
 /**
@@ -100,5 +100,5 @@ op replaceTestRoute(
   body: Microsoft.Devices.TestRouteInput,
 ): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestRouteResult> | Microsoft.Devices.ErrorDetails;
 
-@@override(IotHubDescriptions.testRoute, replaceTestRoute, "go");
+@@override(IotHubDescriptions.testRoute, replaceTestRoute);
 @@clientName(replaceTestRoute::parameters.body, "input", "go");
