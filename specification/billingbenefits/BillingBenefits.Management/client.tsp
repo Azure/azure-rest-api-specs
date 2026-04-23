@@ -284,9 +284,5 @@ using Microsoft.BillingBenefits;
   "csharp"
 );
 
-// csharp: preserve original public property names after flatten/lift-to-nullable generator fix
+// csharp: preserve original public property name after flatten/lift-to-nullable generator fix
 @@clientName(MaccModelProperties.entityType, "BenefitEntityType", "csharp");
-@@clientName(ReservationOrderAliasResponse.location, "AliasLocation", "csharp");
-@@clientName(ReservationOrderAliasRequest.location, "AliasLocation", "csharp");
-// CreditsValidateModel.{location,type} are flattened from Credit's TrackedResource envelope and
-// cannot be referenced from the consuming model; handled via SDK-side custom code instead.
