@@ -27,7 +27,7 @@ These are the global settings for the Kubernetes Connect RP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-02-01-preview
+tag: package-2021-10-01
 ```
 ### Tag: package-2026-02-01-preview
 
