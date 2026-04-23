@@ -4137,7 +4137,11 @@
         }
       },
       "title": "OperationExtendedInfo",
-      "type": "object"
+      "discriminator": "objectType",
+      "type": "object",
+      "required": [
+        "objectType"
+      ]
     },
     "OperationJobExtendedInfo": {
       "allOf": [
