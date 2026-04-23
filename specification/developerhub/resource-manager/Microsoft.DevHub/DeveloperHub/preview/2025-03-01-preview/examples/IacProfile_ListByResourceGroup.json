@@ -1,90 +1,92 @@
 {
   "parameters": {
     "api-version": "2025-03-01-preview",
-    "subscriptionId": "a0a37f63-7183-4e86-9ac7-ce8036a3ed31",
+    "location": "location1",
     "resourceGroupName": "resourceGroup1",
-    "location": "location1"
+    "subscriptionId": "a0a37f63-7183-4e86-9ac7-ce8036a3ed31"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com:443/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles?api-version=2018-05-05-preview&timeRange=1&$skipToken=",
         "value": [
           {
-            "id": "/subscriptions/a0a37f63-7183-4e86-9ac7-ce8036a3ed31/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles/profilename",
             "name": "profilename",
             "type": "Microsoft.DevHub/iacProfiles",
+            "id": "/subscriptions/a0a37f63-7183-4e86-9ac7-ce8036a3ed31/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles/profilename",
             "location": "",
-            "tags": {},
             "properties": {
               "githubProfile": {
-                "repositoryName": "localtest",
-                "repositoryMainBranch": "main",
-                "repositoryOwner": "owner",
                 "authStatus": "Authorized",
-                "pullNumber": 8,
+                "branchName": "aks-devhub-ybvmw",
                 "prStatus": "submitted",
-                "branchName": "aks-devhub-ybvmw"
-              },
-              "terraformProfile": {
-                "storageAccountSubscription": "subscription",
-                "storageAccountResourceGroup": "hybrid-iac",
-                "storageAccountName": "hybridiac",
-                "storageContainerName": "hybridiac"
+                "pullNumber": 8,
+                "repositoryMainBranch": "main",
+                "repositoryName": "localtest",
+                "repositoryOwner": "owner"
               },
               "stages": [
                 {
-                  "stageName": "dev",
                   "dependencies": [],
-                  "gitEnvironment": "Terraform"
+                  "gitEnvironment": "Terraform",
+                  "stageName": "dev"
                 },
                 {
-                  "stageName": "qa",
                   "dependencies": [
                     "dev"
                   ],
-                  "gitEnvironment": "Terraform"
+                  "gitEnvironment": "Terraform",
+                  "stageName": "qa"
                 },
                 {
-                  "stageName": "prod",
                   "dependencies": [
                     "qa"
                   ],
-                  "gitEnvironment": "Terraform"
+                  "gitEnvironment": "Terraform",
+                  "stageName": "prod"
                 }
               ],
               "templates": [
                 {
-                  "templateName": "base",
-                  "sourceResourceId": "/subscriptions/xxxx/resourceGroups/xxxx",
-                  "instanceStage": "dev",
                   "instanceName": "contoso",
+                  "instanceStage": "dev",
+                  "sourceResourceId": "/subscriptions/xxxx/resourceGroups/xxxx",
                   "templateDetails": [
                     {
-                      "productName": "HCI",
                       "count": 1,
-                      "namingConvention": "$sitid-hci"
+                      "namingConvention": "$sitid-hci",
+                      "productName": "HCI"
                     },
                     {
-                      "productName": "AKSarc",
                       "count": 1,
-                      "namingConvention": "$sitid-aks"
+                      "namingConvention": "$sitid-aks",
+                      "productName": "AKSarc"
                     }
-                  ]
+                  ],
+                  "templateName": "base"
                 }
-              ]
+              ],
+              "terraformProfile": {
+                "storageAccountName": "hybridiac",
+                "storageAccountResourceGroup": "hybrid-iac",
+                "storageAccountSubscription": "subscription",
+                "storageContainerName": "hybridiac"
+              }
             },
             "systemData": {
+              "createdAt": "2024-01-16T09:56:23.933651400Z",
               "createdBy": "",
               "createdByType": "User",
-              "createdAt": "2024-01-16T09:56:23.933651400Z",
+              "lastModifiedAt": "2024-01-16T14:32:00.783994200Z",
               "lastModifiedBy": "aks-dev-hub-devhub",
-              "lastModifiedByType": "Application",
-              "lastModifiedAt": "2024-01-16T14:32:00.783994200Z"
-            }
+              "lastModifiedByType": "Application"
+            },
+            "tags": {}
           }
-        ],
-        "nextLink": "https://management.azure.com:443/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles?api-version=2018-05-05-preview&timeRange=1&$skipToken="
+        ]
       }
     }
-  }
+  },
+  "operationId": "IacProfiles_ListByResourceGroup",
+  "title": "List IacProfiles"
 }

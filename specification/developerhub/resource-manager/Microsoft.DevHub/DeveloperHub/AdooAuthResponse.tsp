@@ -24,26 +24,45 @@ model AdooAuthResponse is Azure.ResourceManager.ProxyResource<AdooAuth> {
   >;
 }
 
-@armResourceOperations
+alias AdooAuthResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+    ...LocationParameter;
+  },
+  {
+    /** undefined */
+    @path
+    @segment("adooauth")
+    default: "default";
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface AdooAuthResponses {
   /**
    * Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.")
+  @tag("ADOOAuth")
   @operationId("ADOOAuth_Get")
-  get is ArmResourceRead<
-    AdooAuthResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is AdooAuthResponsesOps.Read<AdooAuthResponse>;
 
   /**
    * Callback URL to hit once authenticated with ADO to have the service store the OAuth token.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Callback URL to hit once authenticated with ADO to have the service store the OAuth token.")
+  @tag("ADOOAuth")
   @operationId("ADOOAuth_List")
   list is ArmResourceListByParent<
     AdooAuthResponse,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
+      ...LocationParameter;
+    },
     Response = ArmResponse<AdooAuthListResponse>
   >;
 
@@ -51,12 +70,13 @@ interface AdooAuthResponses {
    * Gets ADOOAuth info used to authenticate users with ADO.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets ADOOAuth info used to authenticate users with ADO.")
+  @tag("ADOOAuth")
   @operationId("GetADOOAuthInfo")
-  getADOOAuthInfo is ArmResourceActionSync<
+  getADOOAuthInfo is AdooAuthResponsesOps.ActionSync<
     AdooAuthResponse,
     AdooAuthCallRequest,
-    ArmResponse<AdooAuthInfoResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResponse<AdooAuthInfoResponse>,
     OptionalRequestBody = true
   >;
 }

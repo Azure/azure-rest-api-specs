@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
 /**
  * The AKS Developer Hub Service Client
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.DevHub")
 @service(#{ title: "DeveloperHubServiceClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -46,4 +46,14 @@ enum Versions {
   v2025_03_01_preview: "2025-03-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  /**
+   * Returns list of operations.
+   */
+  @route("/providers/microsoft.DevHub/operations")
+  @summary("Gets a list of operations.")
+  @tag("Operations")
+  list(
+    ...ApiVersionParameter,
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}

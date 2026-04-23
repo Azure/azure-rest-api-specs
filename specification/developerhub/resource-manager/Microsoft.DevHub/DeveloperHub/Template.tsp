@@ -23,12 +23,14 @@ model Template is Azure.ResourceManager.ProxyResource<TemplateProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Templates {
   /**
    * Gets a list of supported templates.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of supported templates.")
+  @tag("Template")
   @operationId("Template_Get")
   get is ArmResourceRead<
     Template,
@@ -39,6 +41,8 @@ interface Templates {
    * Gets a list of supported templates.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of supported templates.")
+  @tag("Template")
   @operationId("Template_List")
   list is ArmResourceListByParent<
     Template,

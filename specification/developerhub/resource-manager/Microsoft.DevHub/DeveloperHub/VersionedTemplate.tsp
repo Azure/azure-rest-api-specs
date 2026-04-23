@@ -26,12 +26,14 @@ model VersionedTemplate
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface VersionedTemplates {
   /**
    * Gets a VersionedTemplate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a VersionedTemplate.")
+  @tag("VersionedTemplate")
   @operationId("VersionedTemplate_Get")
   get is ArmResourceRead<
     VersionedTemplate,
@@ -42,6 +44,8 @@ interface VersionedTemplates {
    * Gets a list of VersionedTemplate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of VersionedTemplate.")
+  @tag("VersionedTemplate")
   @operationId("VersionedTemplate_List")
   list is ArmResourceListByParent<
     VersionedTemplate,
@@ -52,6 +56,8 @@ interface VersionedTemplates {
    * Generates a VersionedTemplate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Generates a VersionedTemplate.")
+  @tag("VersionedTemplate")
   @operationId("VersionedTemplate_Generate")
   generate is ArmResourceActionSync<
     VersionedTemplate,

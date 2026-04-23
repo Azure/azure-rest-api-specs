@@ -25,16 +25,32 @@ model GitHubOAuthResponse
   >;
 }
 
-@armResourceOperations
+alias GitHubOAuthResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+    ...LocationParameter;
+  },
+  {
+    /** undefined */
+    @path
+    @segment("githuboauth")
+    default: "default";
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface GitHubOAuthResponses {
   /**
    * Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
+  @tag("GitHubOAuth")
   @operationId("GitHubOAuthCallback")
-  gitHubOAuthCallback is ArmResourceRead<
+  gitHubOAuthCallback is GitHubOAuthResponsesOps.Read<
     GitHubOAuthResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * The code response from authenticating the GitHub App.
@@ -54,24 +70,30 @@ interface GitHubOAuthResponses {
    * Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
+  @tag("GitHubOAuth")
   @operationId("ListGitHubOAuth")
   listGitHubOAuth is ArmResourceListByParent<
     GitHubOAuthResponse,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<GitHubOAuthListResponse>
+    Response = ArmResponse<GitHubOAuthListResponse>,
+    Parameters = {
+      ...LocationParameter;
+    }
   >;
 
   /**
    * Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.")
+  @tag("GitHubOAuth")
   @operationId("GitHubOAuth")
   @action("getGitHubOAuthInfo")
-  gitHubOAuth is ArmResourceActionSync<
+  gitHubOAuth is GitHubOAuthResponsesOps.ActionSync<
     GitHubOAuthResponse,
     GitHubOAuthCallRequest,
     ArmResponse<GitHubOAuthInfoResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     OptionalRequestBody = true
   >;
 }

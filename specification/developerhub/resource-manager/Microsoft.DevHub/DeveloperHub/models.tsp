@@ -163,6 +163,11 @@ union ManifestType {
    * Repositories using kubernetes manifests
    */
   kube: "kube",
+
+  /**
+   * Repositories using kustomize
+   */
+  kustomize: "kustomize",
 }
 
 /**
