@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
       Playwright Service API endpoint (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.
       The region corresponds to your Azure Playwright workspace location. You can find this value in your Azure Playwright workspace properties under `dataplaneUri`.
       """)
-    endpoint: string,
+    endpoint: url,
   }
 )
 @useAuth(

@@ -833,3 +833,10 @@ model BackupFindRestorableTimeRangesResponse
   "BackupFindRestorableTimeRangeResult",
   "csharp"
 );
+
+// CSharp SDK: Preserve API compatibility — output-only models were previously round-trip
+@@usage(DeletionInfo, Usage.input, "csharp");
+@@usage(ProtectionStatusDetails, Usage.input, "csharp");
+@@usage(JobExtendedInfo, Usage.input, "csharp");
+@@usage(JobSubTask, Usage.input, "csharp");
+@@usage(RestoreJobRecoveryPointDetails, Usage.input, "csharp");

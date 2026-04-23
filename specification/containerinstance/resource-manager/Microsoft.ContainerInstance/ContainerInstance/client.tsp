@@ -52,3 +52,281 @@ using Microsoft.ContainerInstance;
   "ListResultContainerGroupProperties",
   "python"
 );
+
+// C# backward-compatible type renames for Azure.ResourceManager.ContainerInstance migration
+@@clientName(Container, "ContainerInstanceContainer", "csharp");
+@@clientName(IpAddress, "ContainerGroupIPAddress", "csharp");
+@@clientName(ImageRegistryCredential,
+  "ContainerGroupImageRegistryCredential",
+  "csharp"
+);
+@@clientName(DnsConfiguration, "ContainerGroupDnsConfiguration", "csharp");
+@@clientName(EncryptionProperties,
+  "ContainerGroupEncryptionProperties",
+  "csharp"
+);
+@@clientName(LogAnalytics, "ContainerGroupLogAnalytics", "csharp");
+@@clientName(ElasticProfile, "ContainerGroupElasticProfile", "csharp");
+@@clientName(SecretReference, "ContainerGroupSecretReference", "csharp");
+@@clientName(IdentityAcls,
+  "ContainerGroupIdentityAccessControlLevels",
+  "csharp"
+);
+@@clientName(Port, "ContainerGroupPort", "csharp");
+@@clientName(AzureFileVolume, "ContainerInstanceAzureFileVolume", "csharp");
+@@clientName(GitRepoVolume, "ContainerInstanceGitRepoVolume", "csharp");
+@@clientName(EnvironmentVariable, "ContainerEnvironmentVariable", "csharp");
+@@clientName(ResourceLimits, "ContainerResourceLimits", "csharp");
+@@clientName(ResourceRequests, "ContainerResourceRequestsContent", "csharp");
+@@clientName(ResourceRequirements, "ContainerResourceRequirements", "csharp");
+@@clientName(VolumeMount, "ContainerVolumeMount", "csharp");
+@@clientName(Volume, "ContainerVolume", "csharp");
+@@clientName(Event, "ContainerEvent", "csharp");
+@@clientName(ContainerPropertiesInstanceView,
+  "ContainerInstanceView",
+  "csharp"
+);
+@@clientName(OperatingSystemTypes,
+  "ContainerInstanceOperatingSystemType",
+  "csharp"
+);
+@@clientName(Capabilities, "ContainerCapabilities", "csharp");
+@@clientName(CapabilitiesCapabilities,
+  "ContainerSupportedCapabilities",
+  "csharp"
+);
+@@clientName(Logs, "ContainerLogs", "csharp");
+@@clientName(ContainerAttachResponse, "ContainerAttachResult", "csharp");
+@@clientName(ContainerExecRequest, "ContainerExecContent", "csharp");
+@@clientName(ContainerExecResponse, "ContainerExecResult", "csharp");
+@@clientName(GpuResource, "ContainerGpuResourceInfo", "csharp");
+@@clientName(GpuSku, "ContainerGpuSku", "csharp");
+@@clientName(Scheme, "ContainerHttpGetScheme", "csharp");
+@@clientName(LogAnalyticsLogType,
+  "ContainerGroupLogAnalyticsLogType",
+  "csharp"
+);
+@@clientName(ContainerGroupIpAddressType,
+  "ContainerGroupIPAddressType",
+  "csharp"
+);
+@@clientName(ContainerGroupPropertiesPropertiesInstanceView,
+  "ContainerGroupInstanceView",
+  "csharp"
+);
+@@clientName(SecurityContextDefinition,
+  "ContainerSecurityContextDefinition",
+  "csharp"
+);
+@@clientName(NetworkProfile, "ContainerGroupNetworkProfile", "csharp");
+@@clientName(FileShare, "ContainerGroupFileShare", "csharp");
+@@clientName(UpdateProfile, "NGroupUpdateProfile", "csharp");
+@@clientName(UpdateProfileRollingUpdateProfile,
+  "NGroupRollingUpdateProfile",
+  "csharp"
+);
+@@clientName(FileShareProperties,
+  "ContainerGroupFileShareProperties",
+  "csharp"
+);
+@@clientName(IdentityAccessControl,
+  "ContainerGroupIdentityAccessControl",
+  "csharp"
+);
+@@clientName(SecurityContextCapabilitiesDefinition,
+  "ContainerSecurityContextCapabilitiesDefinition",
+  "csharp"
+);
+@@clientName(UsageName, "ContainerInstanceUsageName", "csharp");
+@@clientName(IdentityAccessLevel,
+  "ContainerGroupIdentityAccessLevel",
+  "csharp"
+);
+
+// C# rename for ARM common Resource — avoids duplicate-client-name with local Resource model
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "csharp"
+);
+
+// C# resource hierarchy: restore TrackedResourceData inheritance
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(ContainerGroup,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(ContainerGroupProfile,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(NGroup,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+// ContainerGroupPatch uses local Resource model as PatchModel — restore TrackedResourceData base
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(Resource,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+
+// C# property type overrides: restore old SDK types for backward compatibility
+@@alternateType(ContainerGroupProfile.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(NGroup.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(ContainerAttachResponse.webSocketUri, url, "csharp");
+@@alternateType(ContainerExecResponse.webSocketUri, url, "csharp");
+@@alternateType(Capabilities.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(LogAnalytics.workspaceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ContainerGroupSubnetId.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Fix missing/misnamed types in generated code
+@@clientName(HttpHeader, "ContainerHttpHeader", "csharp");
+@@clientName(InitContainerDefinition,
+  "InitContainerDefinitionContent",
+  "csharp"
+);
+@@clientName(NGroupCGPropertyVolume,
+  "NGroupContainerGroupPropertyVolume",
+  "csharp"
+);
+@@clientName(NGroupCGPropertyContainer,
+  "NGroupContainerGroupPropertyContainer",
+  "csharp"
+);
+@@access(ContainerGroupProvisioningState, Access.public, "csharp");
+
+// Fix identity types to use ARM common ManagedServiceIdentity for backward compat
+@@alternateType(ContainerGroupProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ListResultContainerGroupProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(NGroup.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(NGroupPatch.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+// Note: IpAddress.ip (IPAddress → string) handled via custom code
+
+// Category 2: Enum value renames (casing)
+@@clientName(ContainerGroupNetworkProtocol.TCP, "Tcp", "csharp");
+@@clientName(ContainerGroupNetworkProtocol.UDP, "Udp", "csharp");
+@@clientName(ContainerNetworkProtocol.TCP, "Tcp", "csharp");
+@@clientName(ContainerNetworkProtocol.UDP, "Udp", "csharp");
+@@clientName(DnsNameLabelReusePolicy.Noreuse, "NoReuse", "csharp");
+
+// Category 4: Property type changes (Uri/ResourceIdentifier → string)
+@@alternateType(EncryptionProperties.vaultBaseUrl, url, "csharp");
+@@alternateType(ImageRegistryCredential.identityUrl, url, "csharp");
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IpAddress.ip, Azure.Core.ipV4Address, "csharp");
+
+// Category 5: Property renames
+@@clientName(IpAddress.type, "AddressType", "csharp");
+@@clientName(IpAddress.ip, "IP", "csharp");
+@@clientName(ContainerProbe.initialDelaySeconds,
+  "InitialDelayInSeconds",
+  "csharp"
+);
+@@clientName(ContainerProbe.periodSeconds, "PeriodInSeconds", "csharp");
+@@clientName(ContainerProbe.timeoutSeconds, "TimeoutInSeconds", "csharp");
+@@clientName(Event.type, "EventType", "csharp");
+@@clientName(CachedImages.osType, "OSType", "csharp");
+@@clientName(Capabilities.osType, "OSType", "csharp");
+@@clientName(Capabilities.ipAddressType, "IPAddressType", "csharp");
+
+// Category 5: Data property renames (flattened from ContainerGroupPropertiesProperties)
+@@clientName(ContainerGroupPropertiesProperties.osType,
+  "ContainerGroupOSType",
+  "csharp"
+);
+@@clientName(ContainerGroupPropertiesProperties.ipAddress,
+  "IPAddress",
+  "csharp"
+);
+@@clientName(ListResultContainerGroupPropertiesProperties.osType,
+  "ContainerGroupOSType",
+  "csharp"
+);
+@@clientName(ListResultContainerGroupPropertiesProperties.ipAddress,
+  "IPAddress",
+  "csharp"
+);
+
+// Category 5: ContainerGroupProfileData property renames (from ContainerGroupProfileProperties)
+// osType and ipAddress in ContainerGroupProfileProperties model at line ~1818
+@@clientName(ContainerGroupProfileProperties.osType, "OSType", "csharp");
+@@clientName(ContainerGroupProfileProperties.ipAddress, "IPAddress", "csharp");
+
+// Category 5: Uri properties for EncryptionProperties and ImageRegistryCredential
+@@clientName(EncryptionProperties.vaultBaseUrl, "VaultBaseUri", "csharp");
+@@clientName(ImageRegistryCredential.identityUrl, "IdentityUri", "csharp");
+
+// Category 5: ContainerGroupProfileStub.resource → ResourceId
+@@clientName(ApiEntityReference.id, "ResourceId", "csharp");
+
+// Category B: Extension/Mocking method renames for backward compat
+@@clientName(LocationOperationGroup.listCachedImages,
+  "GetCachedImagesWithLocation",
+  "csharp"
+);
+@@clientName(LocationOperationGroup.listCapabilities,
+  "GetCapabilitiesWithLocation",
+  "csharp"
+);
+@@clientName(LocationOperationGroup.listUsage,
+  "GetUsagesWithLocation",
+  "csharp"
+);
+@@clientName(SubnetServiceAssociationLinkOperationGroup.delete,
+  "DeleteSubnetServiceAssociationLink",
+  "csharp"
+);
+
+// Category B: Fix location parameter type (string → AzureLocation) for backward compat
+@@alternateType(LocationOperationGroup.listCachedImages::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(LocationOperationGroup.listCapabilities::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(LocationOperationGroup.listUsage::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+// Category C: Resource method renames for backward compat
+@@clientName(ContainerGroups.attach, "AttachContainer", "csharp");
+@@clientName(ContainerGroups.executeCommand,
+  "ExecuteContainerCommand",
+  "csharp"
+);
+@@clientName(ContainerGroups.listLogs, "GetContainerLogs", "csharp");
+
+// Category D: Property renames for backward compat
+@@clientName(AzureFileVolume.readOnly, "IsReadOnly", "csharp");
+@@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
+@@clientName(SecurityContextDefinition.privileged, "IsPrivileged", "csharp");
