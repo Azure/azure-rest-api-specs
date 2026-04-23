@@ -520,38 +520,6 @@
         "organizationName"
       ]
     },
-    "LiftrBase.Data.PartnerOrganizationPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties specific to Partner's organization",
-      "properties": {
-        "organizationId": {
-          "type": "string",
-          "description": "Organization Id in partner's system"
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "Workspace Id in partner's system"
-        },
-        "organizationName": {
-          "type": "string",
-          "description": "Organization name in partner's system",
-          "minLength": 1,
-          "maxLength": 50,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
-        },
-        "workspaceName": {
-          "type": "string",
-          "description": "Workspace name in partner's system",
-          "minLength": 1,
-          "maxLength": 50,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
-        },
-        "singleSignOnProperties": {
-          "$ref": "#/definitions/LiftrBase.SingleSignOnProperties",
-          "description": "Single Sign On properties for the organization"
-        }
-      }
-    },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
       "description": "Marketplace details for an organization",
@@ -572,24 +540,6 @@
       "required": [
         "offerDetails"
       ]
-    },
-    "LiftrBase.MarketplaceDetailsUpdate": {
-      "type": "object",
-      "description": "Marketplace details for an organization",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Azure subscription id for the the marketplace offer is purchased from"
-        },
-        "subscriptionStatus": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
-          "description": "Marketplace subscription status"
-        },
-        "offerDetails": {
-          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
-          "description": "Offer details for the marketplace that is selected by the user"
-        }
-      }
     },
     "LiftrBase.MarketplaceSubscriptionStatus": {
       "type": "string",
@@ -661,36 +611,6 @@
         "offerId",
         "planId"
       ]
-    },
-    "LiftrBase.OfferDetailsUpdate": {
-      "type": "object",
-      "description": "Offer details for the marketplace that is selected by the user",
-      "properties": {
-        "publisherId": {
-          "type": "string",
-          "description": "Publisher Id for the marketplace offer"
-        },
-        "offerId": {
-          "type": "string",
-          "description": "Offer Id for the marketplace offer"
-        },
-        "planId": {
-          "type": "string",
-          "description": "Plan Id for the marketplace offer"
-        },
-        "planName": {
-          "type": "string",
-          "description": "Plan Name for the marketplace offer"
-        },
-        "termUnit": {
-          "type": "string",
-          "description": "Plan Display Name for the marketplace offer"
-        },
-        "termId": {
-          "type": "string",
-          "description": "Plan Display Name for the marketplace offer"
-        }
-      }
     },
     "LiftrBase.SingleSignOnProperties": {
       "type": "object",
@@ -787,32 +707,6 @@
         "emailAddress"
       ]
     },
-    "LiftrBase.UserDetailsUpdate": {
-      "type": "object",
-      "description": "User details for an organization",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name of the user"
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name of the user"
-        },
-        "emailAddress": {
-          "$ref": "#/definitions/LiftrBase.email",
-          "description": "Email address of the user"
-        },
-        "upn": {
-          "type": "string",
-          "description": "User's principal name"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "User's phone number"
-        }
-      }
-    },
     "LiftrBase.email": {
       "type": "string",
       "description": "Reusable representation of an email address.",
@@ -886,7 +780,7 @@
       "description": "The updatable properties of the OrganizationResource.",
       "properties": {
         "marketplace": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
@@ -895,11 +789,11 @@
           ]
         },
         "user": {
-          "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
+          "$ref": "#/definitions/LiftrBase.UserDetails",
           "description": "Details of the user."
         },
         "partnerOrganizationProperties": {
-          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationPropertiesUpdate",
+          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationProperties",
           "description": "Organization properties"
         }
       }

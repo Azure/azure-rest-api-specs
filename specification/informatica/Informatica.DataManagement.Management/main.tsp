@@ -91,7 +91,7 @@ interface Organizations
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
