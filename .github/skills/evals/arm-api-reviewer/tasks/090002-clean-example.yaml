@@ -1,0 +1,39 @@
+id: 090002-clean-example
+name: "True Negative: Clean example file produces no issues"
+description: |
+  A well-formed example file with proper resource IDs, no secrets,
+  and correct formatting should produce no findings.
+tags:
+  - true-negative
+  - examples
+  - false-positive
+inputs:
+  prompt: "{{.Vars.review_example_get}}"
+  files:
+    - path: examples/example-clean.json
+expected:
+  output_contains:
+    - "example"
+graders:
+  - type: prompt
+    name: clean_example_check
+    config:
+      prompt: |
+        Review the agent's output for a clean, well-formed example file.
+        The example (example-clean.json) has:
+        - A proper fully-qualified ARM resource ID
+        - No realistic secrets or sensitive data
+        - Correct formatting and valid values
+        - Proper provisioningState
+        - Tags included
+        - SystemData included with valid timestamps and identity
+
+        The agent MAY note minor observations or suggestions. That is acceptable.
+        The key question is: did the agent avoid flagging serious EX-* rule
+        violations that would be false positives?
+
+        If the agent found zero or only minor findings (suggestions, not
+        blocking violations), call set_waza_grade_pass.
+        If the agent flagged multiple serious EX-* violations that are
+        clearly false positives, call set_waza_grade_fail listing them.
+      continue_session: true

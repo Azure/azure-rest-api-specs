@@ -1,0 +1,29 @@
+id: 060001-example-bad-resource-id
+name: "Example: Detect invalid resource ID"
+description: |
+  An example file has an empty id field. The reviewer must flag this as
+  an invalid ARM resource ID.
+tags:
+  - examples
+  - resource-id
+inputs:
+  prompt: "{{.Vars.review_example_get}}"
+  files:
+    - path: examples/example-bad-resource-id.json
+expected:
+  output_contains:
+    - "EX-RESOURCE-ID"
+    - "id"
+graders:
+  - type: prompt
+    name: resource_id_check
+    config:
+      prompt: |
+        Review the agent's output and verify it detected the invalid resource ID.
+        The example has "id": "" (empty string) in the response body.
+        A valid ARM resource ID should be a fully qualified path like:
+        /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.CleanService/widgets/myWidget
+
+        If the agent flagged the empty resource ID, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details.
+      continue_session: true

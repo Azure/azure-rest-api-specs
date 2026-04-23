@@ -1,0 +1,48 @@
+id: 110001-report-format-structure
+name: "Format: Verify report includes required structure"
+description: |
+  Tests that the reviewer output follows the required report format with
+  exact line numbers, rule IDs, JSON paths, structured sections, and
+  no em dashes (U+2014).
+tags:
+  - report-format
+  - output-structure
+inputs:
+  prompt: |
+    Review the following ARM resource-manager OpenAPI specification file for compliance
+    with Azure REST API Guidelines and ARM RPC rules. This is a new service with no
+    previous API version. Report all findings using the standard review report format
+    with rule IDs, exact line numbers, JSON paths, and fix suggestions.
+  files:
+    - path: arm-openapi/secret-property.json
+expected:
+  output_contains:
+    - "line"
+    - "SEC-SECRET-DETECT"
+graders:
+  - type: prompt
+    name: format_check
+    config:
+      prompt: |
+        Review the agent's output format (not the content accuracy) and verify
+        it follows the required report structure:
+
+        1. EXACT LINE NUMBERS: Each finding must cite a specific line number
+           (e.g., "line 42" or "line 10-15"). Vague references like "near end"
+           or "around line" are NOT acceptable.
+
+        2. RULE IDS: Each finding must include a rule ID (e.g., SEC-SECRET-DETECT,
+           RPC-Put-V1-22).
+
+        3. FIX SUGGESTIONS: Each finding must include a concrete fix suggestion.
+
+        4. NO EM DASHES: The output must NOT contain the em dash character (U+2014).
+           Hyphens with spaces or double hyphens are acceptable.
+
+        5. STRUCTURED SECTIONS: The output should have organized sections
+           (Blocking Issues, Warnings, Summary, or similar structure).
+
+        Check all 5 criteria. If at least criteria 1, 2, and 4 are met,
+        call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail listing which criteria failed.
+      continue_session: true

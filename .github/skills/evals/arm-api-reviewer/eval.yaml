@@ -1,0 +1,77 @@
+name: arm-api-reviewer-eval
+description: Evaluation suite for the ARM API Reviewer agent.
+skill: azure-api-review
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 600
+  parallel: true
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
+# Shared prompt templates referenced by tasks as {{.Vars.<key>}}
+inputs:
+  review_arm_new_service: >-
+    Review the following ARM resource-manager OpenAPI specification file for compliance
+    with Azure REST API Guidelines and ARM RPC rules. This is a new service with no
+    previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
+  review_example_get: >-
+    Review the following example JSON file for compliance with Azure REST API
+    example file guidelines. This example is for a GET operation on an ARM
+    resource. Report all findings with rule IDs and fix suggestions.
+metrics:
+  - name: issue_detection
+    weight: 0.4
+    threshold: 0.8
+    description: Did the reviewer detect all known violations in the fixture?
+  - name: false_positive_rate
+    weight: 0.3
+    threshold: 0.85
+    description: Did the reviewer avoid flagging non-issues?
+  - name: classification_accuracy
+    weight: 0.15
+    threshold: 0.8
+    description: Were issues correctly tagged [NEW] vs [EXISTING]?
+  - name: report_format
+    weight: 0.15
+    threshold: 0.9
+    description: Does the output follow the required report structure?
+graders:
+  - type: skill_invocation
+    name: routing_check
+    config:
+      required_skills:
+        - azure-api-review
+      mode: in_order
+      allow_extra: true
+tasks:
+  # --- 01xxxx: ARM resource structure & CRUD ---
+  - "tasks/010001-missing-crud-ops.yaml"
+  - "tasks/010002-missing-provisioning-state.yaml"
+  # --- 02xxxx: Property design (secrets, mutability, naming) ---
+  - "tasks/020001-secret-property.yaml"
+  - "tasks/020002-naming-violations.yaml"
+  - "tasks/020003-missing-descriptions.yaml"
+  - "tasks/020004-enum-violations.yaml"
+  # --- 03xxxx: PATCH / DELETE / LRO operations ---
+  - "tasks/030001-patch-violations.yaml"
+  - "tasks/030002-put-response-mismatch.yaml"
+  - "tasks/030003-delete-violations.yaml"
+  - "tasks/030004-lro-violations.yaml"
+  # --- 04xxxx: Breaking changes & version comparison ---
+  - "tasks/040001-breaking-removed-property.yaml"
+  - "tasks/040002-breaking-type-change.yaml"
+  - "tasks/040003-breaking-enum-narrowing.yaml"
+  # --- 05xxxx: Suppression analysis ---
+  - "tasks/050001-suppression-no-reason.yaml"
+  - "tasks/050002-suppression-security-rule.yaml"
+  # --- 06xxxx: Example file validation ---
+  - "tasks/060001-example-bad-resource-id.yaml"
+  - "tasks/060002-example-realistic-secret.yaml"
+  # --- 09xxxx: True negatives (clean specs) ---
+  - "tasks/090001-clean-arm-spec.yaml"
+  - "tasks/090002-clean-example.yaml"
+  # --- 10xxxx: New vs. existing classification ---
+  - "tasks/100001-new-vs-existing-classification.yaml"
+  # --- 11xxxx: Report format & output structure ---
+  - "tasks/110001-report-format-structure.yaml"

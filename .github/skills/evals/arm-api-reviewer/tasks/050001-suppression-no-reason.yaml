@@ -1,0 +1,36 @@
+id: 050001-suppression-no-reason
+name: "Suppression: Detect suppressions without reason"
+description: |
+  A readme.md has suppressions without reason fields. The reviewer must
+  flag these as requiring justification.
+tags:
+  - suppression
+  - readme
+inputs:
+  prompt: |
+    Review the following readme.md suppression file for an ARM specification.
+    This is a new API version with no previous readme.md to compare against.
+    Check all suppressions for proper justification per Azure suppression guidelines.
+  files:
+    - path: readme/readme-new-suppression-no-reason.md
+expected:
+  output_contains:
+    - "reason"
+    - "suppress"
+graders:
+  - type: prompt
+    name: suppression_reason_check
+    config:
+      prompt: |
+        Review the agent's output and verify it flagged suppressions without reasons.
+        The readme.md has two suppressions:
+        1. suppress: AvoidAdditionalProperties - no reason field
+        2. suppress: PatchBodyParametersSchema - no reason field
+
+        The agent should have flagged both suppressions as lacking required
+        justification (per RPC-SUPPRESS-GA/SCOPE rules).
+
+        If the agent flagged at least one suppression as missing a reason,
+        call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details.
+      continue_session: true

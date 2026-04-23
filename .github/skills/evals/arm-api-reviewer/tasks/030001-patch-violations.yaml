@@ -1,0 +1,34 @@
+id: 030001-patch-violations
+name: "Operations: Detect PATCH body violations"
+description: |
+  A PATCH operation body has required properties, default values, and
+  create-only mutability properties - all violations of RPC-Patch-V1-10.
+tags:
+  - patch
+  - operations
+inputs:
+  prompt: "{{.Vars.review_arm_new_service}}"
+  files:
+    - path: arm-openapi/patch-violations.json
+expected:
+  output_contains:
+    - "required"
+    - "PATCH"
+graders:
+  - type: prompt
+    name: patch_check
+    config:
+      prompt: |
+        Review the agent's output and verify it detected PATCH body violations.
+        The GadgetUpdate model has these issues:
+        1. "properties" is marked as required in GadgetUpdate (PATCH body should have
+           no required properties per RPC-Patch-V1-10)
+        2. "displayName" is marked as required in GadgetUpdateProperties
+        3. "displayName" has a default value of "DefaultGadget" (no defaults in PATCH)
+        4. "category" has x-ms-mutability: ["create", "read"] (create-only mutability
+           should not appear in PATCH body)
+
+        If the agent flagged at least the required properties and the default value
+        as violations, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details.
+      continue_session: true

@@ -1,0 +1,37 @@
+id: 040003-breaking-enum-narrowing
+name: "Breaking: Detect enum value narrowing between versions"
+description: |
+  An enum that had 5 values in 2024-01-01 now has only 3 values in 2025-01-01.
+  Removing enum values is a breaking change.
+tags:
+  - breaking-change
+  - version-comparison
+  - enums
+inputs:
+  prompt: |
+    Review the following ARM resource-manager OpenAPI specification files. The new version
+    is stable/2025-01-01 and the previous version is stable/2024-01-01.
+    Compare the two versions for breaking changes and report all findings.
+  files:
+    - path: version-pairs/enum-narrowing/stable-2024-01-01.json
+    - path: version-pairs/enum-narrowing/stable-2025-01-01.json
+expected:
+  output_contains:
+    - "breaking"
+    - "enum"
+graders:
+  - type: prompt
+    name: enum_narrowing_check
+    config:
+      prompt: |
+        Review the agent's output and verify it detected the enum narrowing.
+        Between stable-2024-01-01 and stable-2025-01-01:
+        The "status" enum had 5 values (Active, Inactive, Pending, Suspended, Archived)
+        and now has only 3 values (Active, Inactive, Pending).
+        "Suspended" and "Archived" were removed.
+        Removing enum values is a breaking change.
+
+        If the agent identified the removal of enum values as a breaking change,
+        call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details.
+      continue_session: true

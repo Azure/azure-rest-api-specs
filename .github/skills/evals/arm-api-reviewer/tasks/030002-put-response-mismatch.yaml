@@ -1,0 +1,36 @@
+id: 030002-put-response-mismatch
+name: "Operations: Detect PUT 200/201 response schema mismatch"
+description: |
+  A PUT operation returns different schemas for 200 and 201 responses.
+  The 200 response uses Item but the 201 uses ItemCreateResponse which
+  has an extra createdAt property. This violates RPC-Put-V1-12/25.
+tags:
+  - put
+  - operations
+  - response-schema
+inputs:
+  prompt: "{{.Vars.review_arm_new_service}}"
+  files:
+    - path: arm-openapi/put-response-mismatch.json
+expected:
+  output_contains:
+    - "200"
+    - "201"
+graders:
+  - type: prompt
+    name: put_mismatch_check
+    config:
+      prompt: |
+        Review the agent's output and verify it detected the PUT response schema mismatch.
+        The Items_CreateOrUpdate PUT operation returns:
+        - 200: Item schema
+        - 201: ItemCreateResponse schema (different - has an extra createdAt property)
+
+        Per RPC-Put-V1-12 and RPC-Put-V1-25, PUT 200 and 201 responses MUST use
+        the same schema. The agent should also flag that the request body schema
+        (Item) differs from the 201 response schema (ItemCreateResponse) per RPC-Put-V1-29.
+
+        If the agent flagged the schema mismatch between 200 and 201 responses,
+        call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details.
+      continue_session: true

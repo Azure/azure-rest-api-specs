@@ -1,0 +1,51 @@
+id: 090001-clean-arm-spec
+name: "True Negative: Clean ARM spec produces no blocking issues"
+description: |
+  A fully compliant ARM specification should produce no blocking findings.
+  This tests the false positive rate of the reviewer.
+tags:
+  - true-negative
+  - false-positive
+inputs:
+  prompt: "{{.Vars.review_arm_new_service}}"
+  files:
+    - path: arm-openapi/clean-spec.json
+expected:
+  output_contains:
+    - "clean"
+graders:
+  - type: prompt
+    name: clean_spec_check
+    config:
+      prompt: |
+        Review the agent's output for a clean, compliant ARM specification.
+        The spec (clean-spec.json) is designed to be fully compliant:
+        - Has all CRUD operations (PUT, GET, PATCH, DELETE)
+        - Has ListByResourceGroup and ListBySubscription
+        - Has Operations API
+        - Has provisioningState with correct terminal states (Succeeded, Failed, Canceled)
+        - Has x-ms-pageable on collection operations
+        - Has x-ms-enum with modelAsString: true
+        - Has descriptions on all elements
+        - Has systemData
+        - Has proper parameter definitions
+        - Has x-ms-mutability on location (immutable)
+        - Uses correct naming conventions
+
+        The agent MAY note that the spec defines types inline instead of
+        referencing common-types. That is a process/tooling observation,
+        NOT a blocking API design violation. Treat it as acceptable.
+
+        The agent MAY note other minor suggestions or warnings. That is fine.
+
+        The key question: did the agent avoid flagging serious blocking
+        RPC rule violations, security violations, or breaking changes that
+        would be false positives for this compliant spec?
+
+        If the agent found zero blocking issues, or only minor/suggestion-level
+        findings (like common-types usage recommendations), call set_waza_grade_pass.
+
+        If the agent flagged multiple serious blocking RPC violations that are
+        clearly false positives (e.g., claiming missing operations that exist,
+        claiming missing provisioningState that exists), call set_waza_grade_fail.
+      continue_session: true

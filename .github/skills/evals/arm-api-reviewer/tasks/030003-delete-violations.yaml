@@ -1,0 +1,33 @@
+id: 030003-delete-violations
+name: "Operations: Detect DELETE response violations"
+description: |
+  A DELETE operation returns 404 (should use 204 instead) and returns
+  a response body (DELETE should have empty body).
+tags:
+  - delete
+  - operations
+inputs:
+  prompt: "{{.Vars.review_arm_new_service}}"
+  files:
+    - path: arm-openapi/delete-violations.json
+expected:
+  output_contains:
+    - "DELETE"
+    - "204"
+graders:
+  - type: prompt
+    name: delete_check
+    config:
+      prompt: |
+        Review the agent's output and verify it detected DELETE violations.
+        The Widgets_Delete operation has these issues:
+        1. Returns 404 response - DELETE should return 204 when resource doesn't exist,
+           not 404 (per RPC-Delete-V1-01)
+        2. The 200 response has a schema (returns Widget body) - sync DELETE should
+           have empty response body (per RPC-Delete-V1-04)
+        3. Missing 204 response code for "resource does not exist"
+
+        If the agent flagged the 404 response and/or the non-empty response body
+        as violations, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details.
+      continue_session: true

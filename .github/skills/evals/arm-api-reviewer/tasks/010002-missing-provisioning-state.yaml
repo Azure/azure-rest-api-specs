@@ -1,0 +1,31 @@
+id: 010002-missing-provisioning-state
+name: "ARM: Detect missing provisioningState"
+description: |
+  An ARM resource with an async PUT (x-ms-long-running-operation: true) is missing
+  a provisioningState property in its properties model. The reviewer must flag this.
+tags:
+  - arm
+  - async
+  - provisioning-state
+inputs:
+  prompt: "{{.Vars.review_arm_new_service}}"
+  files:
+    - path: arm-openapi/missing-provisioning-state.json
+expected:
+  output_contains:
+    - "provisioningState"
+    - "RPC-Async-V1-02"
+graders:
+  - type: prompt
+    name: provisioning_state_check
+    config:
+      prompt: |
+        Review the agent's output and verify it flagged the missing provisioningState property.
+        The Job resource has x-ms-long-running-operation: true on PUT but its JobProperties
+        model has no provisioningState property. The agent should have flagged this as a
+        violation of RPC-Async-V1-02 or RPC-Async-V1-03.
+
+        If the agent correctly identified the missing provisioningState and cited
+        a relevant rule ID, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with reasoning.
+      continue_session: true

@@ -1,0 +1,37 @@
+id: 010001-missing-crud-ops
+name: "ARM: Detect missing CRUD operations"
+description: |
+  A tracked ARM resource (Widget) has PUT, GET, and PATCH but is missing
+  DELETE, ListByResourceGroup, and ListBySubscription operations.
+  The reviewer must flag the missing lifecycle operations.
+tags:
+  - arm
+  - crud
+  - tracked-resource
+inputs:
+  prompt: "{{.Vars.review_arm_new_service}}"
+  files:
+    - path: arm-openapi/missing-crud-ops.json
+expected:
+  output_contains:
+    - "DELETE"
+    - "resource group"
+graders:
+  - type: prompt
+    name: crud_detection_check
+    config:
+      prompt: |
+        Review the agent's output and verify it flagged ALL of the following missing operations
+        for the tracked Widget resource:
+        1. Missing DELETE operation
+        2. Missing ListByResourceGroup (collection GET at resource group scope)
+        3. Missing ListBySubscription (collection GET at subscription scope)
+        4. Missing Operations API endpoint (/providers/Microsoft.WidgetManager/operations)
+
+        The agent should have cited rule IDs related to tracked resource lifecycle requirements
+        (e.g., RPC-Put-V1-22, RPC-Get-V1-05, or equivalent).
+
+        If the agent detected at least 3 of the 4 missing operations and cited relevant rule IDs,
+        call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with details on what was missed.
+      continue_session: true
