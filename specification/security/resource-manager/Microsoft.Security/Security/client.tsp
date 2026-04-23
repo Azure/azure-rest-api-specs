@@ -368,3 +368,15 @@ op privateLinkResourcesGetCustomization(
   "ArmActionType",
   "java"
 );
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
+  "IoTAcrauthentication",
+  "javascript"
+);
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
+  "IoTIpfilterDenyAll",
+  "javascript"
+);
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
+  "IoTIpfilterPermissiveRule",
+  "javascript"
+);
