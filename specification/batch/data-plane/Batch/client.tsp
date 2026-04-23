@@ -292,6 +292,10 @@ interface BatchClient {
   "deleteJobScheduleInternal",
   "python"
 );
+@@clientName(Azure.Batch.OutputFileUploadConfig,
+  "OutputFileUploadConfiguration",
+  "python"
+);
 @@access(Azure.Batch.JobSchedules.terminateJobSchedule,
   Access.internal,
   "python"
