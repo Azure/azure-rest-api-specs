@@ -1338,9 +1338,6 @@ model AzureResourceDetails extends ResourceDetails {
 /**
  * Details of the On Premise resource that was assessed
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("source")
 model OnPremiseResourceDetails extends ResourceDetails {
   /**
    * Azure resource Id of the workspace the machine is attached to
@@ -1361,13 +1358,37 @@ model OnPremiseResourceDetails extends ResourceDetails {
    * The name of the machine
    */
   machineName: string;
+
+  /**
+   * The platform where the assessed resource resides
+   */
+  source: "OnPremise";
 }
 
 /**
  * Details of the On Premise Sql resource that was assessed
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model OnPremiseSqlResourceDetails extends OnPremiseResourceDetails {
+model OnPremiseSqlResourceDetails extends ResourceDetails {
+  /**
+   * Azure resource Id of the workspace the machine is attached to
+   */
+  workspaceId: string;
+
+  /**
+   * The unique Id of the machine
+   */
+  vmuuid: string;
+
+  /**
+   * The oms agent Id installed on the machine
+   */
+  sourceComputerId: string;
+
+  /**
+   * The name of the machine
+   */
+  machineName: string;
+
   /**
    * The Sql server name installed on the machine
    */

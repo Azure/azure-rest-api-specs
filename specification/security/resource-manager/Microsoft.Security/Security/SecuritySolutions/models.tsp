@@ -745,11 +745,6 @@ model TopologySingleResourceChild {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CefExternalSecuritySolution extends ExternalSecuritySolution {
-  /**
-   * The external security solution properties for CEF solutions
-   */
-  properties?: CefSolutionProperties;
-
   kind: ExternalSecuritySolutionKind.CEF;
 }
 
@@ -797,11 +792,6 @@ model ConnectedWorkspace {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AtaExternalSecuritySolution extends ExternalSecuritySolution {
-  /**
-   * The external security solution properties for ATA solutions
-   */
-  properties?: AtaSolutionProperties;
-
   kind: ExternalSecuritySolutionKind.ATA;
 }
 
@@ -819,11 +809,6 @@ model AtaSolutionProperties extends ExternalSecuritySolutionProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AadExternalSecuritySolution extends ExternalSecuritySolution {
-  /**
-   * The external security solution properties for AAD solutions
-   */
-  properties?: AadSolutionProperties;
-
   kind: ExternalSecuritySolutionKind.AAD;
 }
 

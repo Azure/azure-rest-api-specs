@@ -38,6 +38,12 @@ model ExternalSecuritySolution is Azure.ResourceManager.ProxyResource<{}> {
   kind?: ExternalSecuritySolutionKind;
 
   /**
+   * The external security solution properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: ExternalSecuritySolutionProperties;
+
+  /**
    * Location where the resource is stored
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
