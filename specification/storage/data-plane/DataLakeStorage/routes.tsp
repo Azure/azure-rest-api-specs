@@ -99,7 +99,7 @@ interface Service {
   /** List filesystems and their properties in given account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @get
+  @list
   @sharedRoute
   listFileSystems is DataLakeOperationResponseBody<
     {
@@ -210,7 +210,7 @@ interface FileSystem {
   /** List FileSystem paths and their properties. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @get
+  @list
   @sharedRoute
   @route("?resource=filesystem")
   listPaths is DataLakeOperationResponseBody<
@@ -236,7 +236,7 @@ interface FileSystem {
   /** The List Blobs operation returns a list of the blobs under the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @get
+  @list
   @route("?restype=container&comp=list")
   listBlobHierarchySegment is DataLakeOperationResponseBody<
     {
@@ -334,8 +334,7 @@ interface Path {
       @minValue(1)
       maxRecords?: int32;
 
-      /** Optional. The number of paths processed with each invocation is limited. If the number of paths to be processed exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is returned in the response, it must be percent-encoded and specified in a subsequent invocation of setAccessControlRecursive operation. */
-      @query continuation?: string;
+      ...ContinuationParameter<"Optional. The number of paths processed with each invocation is limited. If the number of paths to be processed exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is returned in the response, it must be percent-encoded and specified in a subsequent invocation of setAccessControlRecursive operation.">;
 
       /** Mode for set access control recursive. */
       @query mode?: PathSetAccessControlRecursiveMode;

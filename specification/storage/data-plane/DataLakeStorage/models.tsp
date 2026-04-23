@@ -228,6 +228,7 @@ model FileSystemItem {
 /** A list of filesystems. */
 model FileSystemList {
   /** The list of filesystems. */
+  @pageItems
   filesystems?: FileSystemItem[];
 }
 
@@ -275,6 +276,7 @@ model PathItem {
 /** A list of paths. */
 model PathList {
   /** The list of paths. */
+  @pageItems
   paths?: PathItem[];
 }
 
@@ -342,6 +344,7 @@ model ListBlobsHierarchySegmentResponse {
 
   /** The next marker for pagination. */
   @Xml.name("NextMarker")
+  @continuationToken
   nextMarker?: string;
 }
 
@@ -354,6 +357,7 @@ model BlobHierarchyListSegment {
   blobPrefixes?: BlobPrefix[];
 
   /** The blob items. */
+  @pageItems
   @Xml.name("Blob")
   @Xml.unwrapped
   blobItems: BlobItemInternal[];
@@ -821,9 +825,11 @@ alias PrefixParameter = {
 };
 
 /** The continuation query parameter. */
-alias ContinuationParameter = {
-  /** Optional. When deleting a directory, the number of paths that are deleted with each invocation is limited. If the number of paths to be deleted exceeds this limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the delete operation to continue deleting the directory. */
-  @query continuation?: string;
+alias ContinuationParameter<TDoc extends valueof string = "Optional. When deleting a directory, the number of paths that are deleted with each invocation is limited. If the number of paths to be deleted exceeds this limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the delete operation to continue deleting the directory."> = {
+  @doc(TDoc)
+  @continuationToken
+  @query
+  continuation?: string;
 };
 
 /** The max results query parameter. */
@@ -973,7 +979,9 @@ alias UndeleteSourceParameter = {
 /** The marker query parameter. */
 alias MarkerParameter = {
   /** A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client. */
-  @query marker?: string;
+  @query
+  @continuationToken
+  marker?: string;
 };
 
 /** The delimiter query parameter. */
@@ -1034,6 +1042,7 @@ alias RequestIdResponseHeader = {
 alias ContinuationResponseHeader = {
   /** If the number of paths to be listed exceeds the maxResults limit, a continuation token is returned in this response header. When a continuation token is returned in the response, it must be specified in a subsequent invocation of the list operation to continue listing the paths. */
   @header("x-ms-continuation")
+  @continuationToken
   continuation?: string;
 };
 
