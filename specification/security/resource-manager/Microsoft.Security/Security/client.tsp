@@ -387,3 +387,4 @@ op privateLinkResourcesGetCustomization(
   "IoTIpfilterPermissiveRule",
   "javascript"
 );
+@@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript");
