@@ -76,12 +76,16 @@ enum EncryptionAlgorithmTypeCustom {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Legacy.disablePageable(Storage.DataLake.Service.listFileSystems, "csharp");
+@@Legacy.disablePageable(Storage.DataLake.Service.listFileSystems,
+  "python,javascript,csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Legacy.disablePageable(Storage.DataLake.FileSystem.listPaths, "csharp");
+@@Legacy.disablePageable(Storage.DataLake.FileSystem.listPaths,
+  "python,javascript,csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@Legacy.disablePageable(Storage.DataLake.FileSystem.listBlobHierarchySegment,
-  "csharp"
+  "python,javascript,csharp"
 );
 
 @@clientName(Storage.DataLake.Service, "ServiceRestClient", "csharp");
