@@ -66,10 +66,7 @@ interface SiteSilos {
    * Get a specific silo for a web app.
    */
   @summary("Get a specific silo for a web app.")
-  get is SiteSiloOps.Read<
-    SiteSilo,
-    OverrideErrorType = DefaultErrorResponse
-  >;
+  get is SiteSiloOps.Read<SiteSilo, OverrideErrorType = DefaultErrorResponse>;
 
   /**
    * Create or update a web app silo.
@@ -102,6 +99,4 @@ interface SiteSilos {
 
 @@doc(SiteSilo.name, "Name of the silo.");
 @@doc(SiteSilo.properties, "SiteSilo resource specific properties");
-@@doc(SiteSilos.createOrUpdate::parameters.resource,
-  "Details of the silo."
-);
+@@doc(SiteSilos.createOrUpdate::parameters.resource, "Details of the silo.");
