@@ -33,7 +33,10 @@ namespace Azure.AI.Projects;
 // Datasets
 @@clientName(Datasets.getVersion, "getDatasetVersion");
 @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
-@@clientName(Datasets.listLatest, "listLatestVersion");
+@@clientName(Datasets.listLatest, "listLatestDatasetVersions");
+@@clientName(Datasets.deleteVersion, "deleteDatasetVersion");
+@@clientName(Datasets.listVersions, "listDatasetVersions");
+@@clientName(Datasets.createOrUpdateVersion, "createOrUpdateDatasetVersion");
 
 // Deployments
 @@clientName(Deployments.list, "listDeployments");
@@ -53,11 +56,19 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluationTaxonomies.update, "updateEvaluationTaxonomy");
 
 // Evaluators
-// no renames
+@@clientName(Evaluators.listVersions, "listEvaluatorVersions");
+@@clientName(Evaluators.getVersion, "getEvaluatorVersion");
+@@clientName(Evaluators.createVersion, "createEvaluatorVersion");
+@@clientName(Evaluators.deleteVersion, "deleteEvaluatorVersion");
+@@clientName(Evaluators.listLatestVersions, "listLatestEvaluatorVersions");
+@@clientName(Evaluators.updateVersion, "updateEvaluatorVersion");
 
 // Indexes
-// removed because convention dictates names need to be `verbNoun`
-// @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
+@@clientName(Indexes.createOrUpdateVersion, "createOrUpdateIndexVersion");
+@@clientName(Indexes.deleteVersion, "deleteIndexVersion");
+@@clientName(Indexes.getVersion, "getIndexVersion");
+@@clientName(Indexes.listLatest, "listLatestIndexVersions");
+@@clientName(Indexes.listVersions, "listIndexVersions");
 
 // Insights
 @@clientName(Insights.list, "listInsights");
@@ -105,6 +116,8 @@ namespace Azure.AI.Projects;
 
 @@clientName(BlobReference.blobUri, "blobUrl");
 @@clientName(SasCredential.sasUri, "sasUrl");
+@@clientName(DatasetVersion.dataUri, "dataUrl");
+@@clientName(FolderDatasetVersion.dataUri, "dataUrl");
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
@@ -132,8 +145,12 @@ namespace Azure.AI.Projects;
   "java"
 );
 
+// Singularize "credentials" -> "credential" for Connection property accessor
+@@clientName(Connection.credentials, "credential", "java");
+
 // Enums variants
 @@clientName(ConnectionType.APIKey, "API_KEY", "java");
+@@clientName(ConnectionType.RemoteTool, "REMOTE_TOOL_PREVIEW", "java");
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
@@ -142,6 +159,9 @@ namespace Azure.AI.Projects;
 
 // The fix for ambiguous import of OperationState
 @@clientName(Azure.Core.Foundations.OperationState, "operationStatus", "java");
+
+// is_primary -> primary so accessors become isPrimary()/setPrimary()
+@@clientName(EvaluatorMetric.is_primary, "primary", "java");
 
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
@@ -153,6 +173,9 @@ namespace Azure.AI.Projects;
   },
   "java"
 );
+
+// SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
+@@alternateType(SasCredential.type, CredentialType, "java");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");
