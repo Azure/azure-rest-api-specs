@@ -28,7 +28,13 @@ model ManagedComputeDeployment
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
   >;
   ...ResourceSkuProperty;
-  ...EntityTagProperty;
+  
+  /**
+   * Resource Etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @added(Versions.v2026_03_15_preview)
@@ -82,7 +88,7 @@ interface ManagedComputeDeployments {
 @@doc(ManagedComputeDeployment.name,
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
-@@encodedName(ManagedComputeDeployment.eTag, "application/json", "etag");
+@@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
 @@doc(ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."
 );
