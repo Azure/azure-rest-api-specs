@@ -14,7 +14,6 @@ namespace Microsoft.Devices;
 /**
  * The private endpoint connection of an IotHub
  */
-@parentResource(IotHubDescriptionLowerCase)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<
     PrivateEndpointConnectionProperties,
@@ -28,6 +27,29 @@ model PrivateEndpointConnection
   >;
 }
 
+alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the IoT Hub */
+    @path
+    @key
+    @segment("iotHubs")
+    resourceName: string;
+  },
+  {
+    /** The name of the private endpoint connection */
+    @path
+    @key
+    @segment("privateEndpointConnections")
+    privateEndpointConnectionName: string;
+  },
+  ErrorType = ErrorDetails
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface PrivateEndpointConnections {
   /**
@@ -35,7 +57,7 @@ interface PrivateEndpointConnections {
    */
   @summary("Get private endpoint connection")
   @tag("GET")
-  get is ArmResourceRead<PrivateEndpointConnection, Error = ErrorDetails>;
+  get is PrivateEndpointConnectionOps.Read<PrivateEndpointConnection>;
 
   /**
    * Update the status of a private endpoint connection with the specified name
@@ -44,11 +66,10 @@ interface PrivateEndpointConnections {
   @summary("Update private endpoint connection")
   @tag("PUT")
   @Azure.Core.useFinalStateVia("location")
-  update is ArmResourceCreateOrReplaceAsync<
+  update is PrivateEndpointConnectionOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = ErrorDetails
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -58,14 +79,13 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete private endpoint connection")
   @tag("DELETE")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PrivateEndpointConnection;
-    }) | ArmDeletedNoContentResponse,
-    Error = ErrorDetails
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -73,10 +93,9 @@ interface PrivateEndpointConnections {
    */
   @summary("List private endpoint connections")
   @tag("GET")
-  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
+  list is PrivateEndpointConnectionOps.ListSinglePage<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection[]>,
-    Error = ErrorDetails
+    Response = ArmResponse<PrivateEndpointConnection[]>
   >;
 }
 

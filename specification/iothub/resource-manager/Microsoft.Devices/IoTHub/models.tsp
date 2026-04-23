@@ -2527,6 +2527,10 @@ model CertificateProperties {
 /**
  * The X509 Certificate.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CertificateWithNonceDescription {
   /**
    * The description of an X509 CA Certificate including the challenge nonce issued for the Proof-Of-Possession flow.

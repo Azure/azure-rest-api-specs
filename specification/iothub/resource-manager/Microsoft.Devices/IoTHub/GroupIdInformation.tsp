@@ -10,33 +10,48 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Devices;
-
-/**
- * Intermediate model for lowercase iotHubs path segment used by private link resources.
- */
-model IotHubDescriptionLowerCase
-  is Azure.ResourceManager.TrackedResource<IotHubProperties> {
-  ...ResourceNameParameter<
-    Resource = IotHubDescriptionLowerCase,
-    KeyName = "resourceName",
-    SegmentName = "iotHubs",
-    NamePattern = ""
-  >;
-}
-
 /**
  * The group information for creating a private endpoint on an IotHub
  */
-@parentResource(IotHubDescriptionLowerCase)
-model GroupIdInformation
-  is Azure.ResourceManager.ProxyResource<GroupIdInformationProperties, false> {
-  ...ResourceNameParameter<
-    Resource = GroupIdInformation,
-    KeyName = "groupId",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
+model GroupIdInformation {
+  /** The resource identifier. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** The resource name. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** The resource type. */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** The properties for a group information object */
+  properties: GroupIdInformationProperties;
 }
+
+alias GroupIdInformationOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the IoT Hub */
+    @path
+    @key
+    @segment("iotHubs")
+    resourceName: string;
+  },
+  {
+    /** The name of the private link resource */
+    @path
+    @key
+    @segment("privateLinkResources")
+    groupId: string;
+  },
+  ErrorType = ErrorDetails
+>;
 
 @armResourceOperations(#{ omitTags: true })
 interface GroupIdInformations {
@@ -45,21 +60,19 @@ interface GroupIdInformations {
    */
   @summary("Get the specified private link resource")
   @tag("GET")
-  get is ArmResourceRead<GroupIdInformation, Error = ErrorDetails>;
+  get is GroupIdInformationOps.Read<GroupIdInformation>;
 
   /**
    * List private link resources for the given IotHub
    */
   @summary("List private link resources")
   @tag("GET")
-  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
+  list is GroupIdInformationOps.ListSinglePage<
     GroupIdInformation,
-    Response = ArmResponse<PrivateLinkResources>,
-    Error = ErrorDetails
+    Response = ArmResponse<PrivateLinkResources>
   >;
 }
 
-@@doc(GroupIdInformation.name, "The name of the private link resource");
 @@doc(GroupIdInformation.properties,
   "The properties for a group information object"
 );
