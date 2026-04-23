@@ -34,6 +34,35 @@ model Workspace is Azure.ResourceManager.TrackedResource<WorkspaceProperties> {
   etag?: string;
 }
 
+alias SchemaOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * The name of the schema.
+     */
+    @path
+    @segment("schema")
+    @key("schemaName")
+    schemaName: string;
+  }
+>;
+
 alias GatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -244,12 +273,10 @@ interface Workspaces {
    * Gets the schema for a given workspace.
    */
   @tag("Workspaces")
-  @list
-  @action("schema")
-  schemaGet is ArmResourceActionSync<
+  @post
+  schemaGet is SchemaOps.ListSinglePage<
     Workspace,
-    void,
-    ArmResponse<SearchGetSchemaResponse>
+    Response = ArmResponse<SearchGetSchemaResponse>
   >;
 
   /**
