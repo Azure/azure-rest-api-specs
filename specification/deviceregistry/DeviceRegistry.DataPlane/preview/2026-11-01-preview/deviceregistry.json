@@ -421,7 +421,7 @@
         "tags": [
           "Device Capabilities"
         ],
-        "description": "Delete a device capability.",
+        "description": "Delete a device capability. This is a long-running operation that tears down any provider-side resources (e.g. IoT Hub device registration) before removing the capability document.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -449,8 +449,37 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -469,7 +498,11 @@
           "Delete a device capability": {
             "$ref": "./examples/DeviceCapabilities_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities:getCapabilityByUuid": {

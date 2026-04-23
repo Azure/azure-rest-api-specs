@@ -124,8 +124,9 @@ interface DeviceCapabilities {
   /** Update a device capability. */
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceCapability>;
 
-  /** Delete a device capability. */
-  delete is ResourceOperations.ResourceDelete<DeviceCapability>;
+  /** Delete a device capability. This is a long-running operation that tears down any provider-side resources (e.g. IoT Hub device registration) before removing the capability document. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  delete is ResourceOperations.LongRunningResourceDelete<DeviceCapability>;
 
   /** List capabilities for a device. */
   list is ResourceOperations.ResourceList<DeviceCapability>;
