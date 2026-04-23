@@ -107,9 +107,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@usage(BlobName, Usage.output, "rust");
 
-/** An HTTP byte range, e.g. "bytes=0-1023". */
-scalar HttpRange extends string;
-
 @@alternateType(BlobItem.name, string, "rust");
 @@alternateType(BlobPrefix.name, string, "rust");
 
@@ -260,15 +257,45 @@ scalar HttpRange extends string;
   "rust"
 );
 // Blob.download — "Range" header → HttpRange
-@@alternateType(Blob.download::parameters.range, HttpRange, "rust");
+@@alternateType(Blob.download::parameters.range,
+  {
+    identity: "HttpRange",
+    package: "azure_storage_blob::models",
+  },
+  "rust"
+);
 // PageBlob.getPageRanges + getPageRangesDiff — "Range" header → HttpRange (via spread alias)
-@@alternateType(RangeParameter.range, HttpRange, "rust");
+@@alternateType(RangeParameter.range,
+  {
+    identity: "HttpRange",
+    package: "azure_storage_blob::models",
+  },
+  "rust"
+);
 // PageBlob.uploadPages + uploadPagesFromUrl — required "Range" header → HttpRange
-@@alternateType(RangeParameterRequired.range, HttpRange, "rust");
+@@alternateType(RangeParameterRequired.range,
+  {
+    identity: "HttpRange",
+    package: "azure_storage_blob::models",
+  },
+  "rust"
+);
 // AppendBlob.appendBlockFromUrl + BlockBlob.stageBlockFromUrl — "x-ms-source-range" header → HttpRange (via spread alias)
-@@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
+@@alternateType(SourceRangeParameter.sourceRange,
+  {
+    identity: "HttpRange",
+    package: "azure_storage_blob::models",
+  },
+  "rust"
+);
 // PageBlob.uploadPagesFromUrl — required "x-ms-source-range" header → HttpRange
-@@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
+@@alternateType(SourceRangeParameterRequired.sourceRange,
+  {
+    identity: "HttpRange",
+    package: "azure_storage_blob::models",
+  },
+  "rust"
+);
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
