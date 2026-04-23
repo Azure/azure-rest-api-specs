@@ -202,7 +202,7 @@ These settings apply only when `--tag=package-7.0-preview` is specified on the c
 
 ``` yaml $(tag) == 'package-7.0-preview'
 input-file:
-- preview/7.0-preview/keyvault.json
+- preview/7.0/keyvault.json
 ```
 
 ### Tag: package-2016-10
@@ -533,24 +533,4 @@ directive:
     from: rbac.json
     where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
-  - suppress: MissingTypeObject
-    from: securitydomain.json
-    where: $.definitions.CertificateInfoObject
-    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
-  - suppress: MissingTypeObject
-    from: securitydomain.json
-    where: $.definitions.TransferKey
-    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
-  - suppress: MissingTypeObject
-    from: securitydomain.json
-    where: $.definitions.SecurityDomainObject
-    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
-  - suppress: MissingTypeObject
-    from: securitydomain.json
-    where: $.definitions.SecurityDomainOperationStatus
-    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
-  - suppress: MissingTypeObject
-    from: securitydomain.json
-    where: $.definitions.SecurityDomainJsonWebKey
-    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
 ```

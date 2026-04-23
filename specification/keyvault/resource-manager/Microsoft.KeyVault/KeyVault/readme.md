@@ -26,16 +26,25 @@ These are the global settings for the KeyVault API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-02-01
+tag: package-preview-2026-05-01
 ```
 
-### Tag: package-preview-2026-03
+### Tag: package-preview-2026-05
 
-These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-03'
+```yaml $(tag) == 'package-preview-2026-05'
 input-file:
-  - preview/2026-03-01-preview/openapi.json
+  - preview/2026-05-01-preview/openapi.json
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/openapi.json
 ```
 
 ### Tag: package-2026-02-01
