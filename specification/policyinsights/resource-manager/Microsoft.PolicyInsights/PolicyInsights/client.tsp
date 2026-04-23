@@ -71,6 +71,18 @@ namespace PolicyInsightsManagementClient;
 @@clientLocation(componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
 );
+@@clientLocation(componentPolicyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForResourceGroup
+);
+@@clientLocation(componentPolicyStatesListQueryResultsForSubscription::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForSubscription
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation
+);
 
 /**
  * Parameter group for OData query options.
@@ -967,11 +979,10 @@ op policyStatesListQueryResultsForPolicySetDefinition(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesSummarizeForPolicySetDefinition(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
   @path
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
+
+  ...SubscriptionIdParameter,
 
   @path
   authorizationNamespace: "Microsoft.Authorization",
@@ -979,6 +990,7 @@ op policyStatesSummarizeForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
+  ...ApiVersionParameter,
   queryOptions?: PolicyStatesSummarizeForPolicySetDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
@@ -1009,11 +1021,10 @@ op policyStatesListQueryResultsForPolicyDefinition(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesSummarizeForPolicyDefinition(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
   @path
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
+
+  ...SubscriptionIdParameter,
 
   @path
   authorizationNamespace: "Microsoft.Authorization",
@@ -1021,6 +1032,7 @@ op policyStatesSummarizeForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
+  ...ApiVersionParameter,
   queryOptions?: PolicyStatesSummarizeForPolicyDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
@@ -1051,11 +1063,10 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
   @path
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
+
+  ...SubscriptionIdParameter,
 
   @path
   authorizationNamespace: "Microsoft.Authorization",
@@ -1063,6 +1074,7 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
+  ...ApiVersionParameter,
   queryOptions?: PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
@@ -1096,14 +1108,13 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
-  ...ApiVersionParameter,
+  @path
+  policyStatesSummaryResource: PolicyStatesSummaryResourceType,
+
   ...SubscriptionIdParameter,
 
   @path
   resourceGroupName: string,
-
-  @path
-  policyStatesSummaryResource: PolicyStatesSummaryResourceType,
 
   @path
   authorizationNamespace: "Microsoft.Authorization",
@@ -1111,6 +1122,7 @@ op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
+  ...ApiVersionParameter,
   queryOptions?: PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
