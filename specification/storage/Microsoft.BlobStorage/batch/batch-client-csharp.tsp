@@ -160,7 +160,7 @@ op setTierCsharp is StorageOperationNoBody<
     @header("x-ms-access-tier")
     tier: AccessTier;
 
-    ...RehydratePriorityHeader;
+    ...RehydratePriorityParameter;
     ...LeaseIdOptionalParameter;
     ...IfTagsParameter;
 
