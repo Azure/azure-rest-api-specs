@@ -1,0 +1,45 @@
+{
+	"servers": {
+		"playwright": {
+			"command": "npx",
+			"args": [
+				"@playwright/mcp@latest"
+			],
+			"type": "stdio"
+		},
+		"ado": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@azure-devops/mcp",
+				"msazure",
+				"--authentication",
+				"azcli"
+			]
+		},
+		"icm-mcp": {
+			"url": "https://icm-mcp-prod.azure-api.net/v1/",
+			"type": "http"
+		},
+		"Ev2 MCP Server": {
+			"type": "stdio",
+			"command": "dnx",
+			"args": [
+				"Ev2.McpServer",
+				"--source",
+				"https://msazure.pkgs.visualstudio.com/_packaging/Official/nuget/v3/index.json",
+				"--interactive",
+				"--yes"
+			]
+		}
+	},
+	"inputs": [
+		{
+			"id": "ado_org",
+			"type": "promptString",
+			"description": "Azure DevOps organization name (e.g. 'contoso')",
+			"default": "msazure"
+		}
+	]
+}
