@@ -53,6 +53,9 @@ safe-outputs:
     max: 1
     footer: "if-body"
     target: "${{ github.event.pull_request.number }}"
+  add-labels:
+    max: 1
+    target: "${{ github.event.pull_request.number }}"
   messages:
     footer: "> 📖 *Suggested by [{workflow_name}]({run_url})*"
     run-started: "📖 [{workflow_name}]({run_url}) is generating hero scenarios for this PR…"

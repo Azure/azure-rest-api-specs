@@ -5959,12 +5959,14 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -6205,14 +6207,21 @@
           "description": "Specifies the priming jobs defined in the cache.",
           "items": {
             "$ref": "#/definitions/PrimingJob"
-          }
+          },
+          "x-ms-identifiers": [
+            "primingJobId"
+          ]
         },
         "spaceAllocation": {
           "type": "array",
           "description": "Specifies the space allocation percentage for each storage target in the cache.",
           "items": {
             "$ref": "#/definitions/StorageTargetSpaceAllocation"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -8070,7 +8079,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "SKU name for this resource."
+          "description": "SKU name for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },

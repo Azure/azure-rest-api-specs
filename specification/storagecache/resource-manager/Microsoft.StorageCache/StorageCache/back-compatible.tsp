@@ -140,3 +140,9 @@ using Microsoft.StorageCache;
 );
 
 @@clientName(ProvisioningStateType.Canceled, "Cancelled", "go");
+
+@@Azure.ResourceManager.identifiers(CacheProperties.spaceAllocation, #["name"]);
+
+@@Azure.ResourceManager.identifiers(CacheProperties.primingJobs,
+  #["primingJobId"]
+);
