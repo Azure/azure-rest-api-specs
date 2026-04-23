@@ -11,8 +11,8 @@ namespace Azure.AI.Projects;
 union QuestionKind {
   string,
 
-  @doc("Two-option answer (yes/no).")
-  yes_no: "yesNo",
+  @doc("Two-option answer (pass/fail).")
+  binary: "binary",
 }
 
 @doc("The source of a human evaluation template.")
@@ -20,10 +20,10 @@ union QuestionKind {
 union TemplateSource {
   string,
 
-  @doc("Built-in template from the azureml registry.")
+  @doc("Built-in template")
   builtin: "builtin",
 
-  @doc("Custom template created in the workspace.")
+  @doc("Custom template")
   custom: "custom",
 }
 
@@ -39,18 +39,18 @@ model Question {
   text: string;
 
   @doc("The evaluation dimension this question captures (for example, 'helpfulness'). Maps to gen_ai.evaluation.name in the OpenTelemetry GenAI Semantic Conventions.")
-  dimension: string;
+  evaluation_name: string;
 }
 
 @doc("A two-option (yes/no) question. The evaluator picks one of two choices; the answer is a boolean.")
 @removed(Versions.v1)
 model YesNoQuestion extends Question {
-  kind: QuestionKind.yes_no;
+  kind: QuestionKind.binary;
 }
 
 @doc("A human-evaluation template: the rubric a builder or end user applies when evaluating a trace. Identified by name + version.")
 @removed(Versions.v1)
-@resource("humanevaluations/templates")
+@resource("human_evaluation_templates")
 model HumanEvaluationTemplate {
   ...AssetBase;
 
