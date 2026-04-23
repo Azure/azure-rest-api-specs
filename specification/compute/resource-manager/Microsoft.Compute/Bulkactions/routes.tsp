@@ -38,7 +38,6 @@ alias DefaultVirtualMachines = {
   virtualMachines: "bulkVmOperations";
 };
 
-
 @@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
   "requestBody"
 );
@@ -248,15 +247,4 @@ interface VirtualMachineBulkOperations {
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
-  /** BulkVmOperations_Get: Gets the singleton bulk VM operations proxy resource status. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Singleton proxy read endpoint; not an ARM tracked resource read."
-  @get
-  @autoRoute
-  bulkVmOperations(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
-    ...LocationParameter,
-    ...DefaultVirtualMachines,
-  ): ArmResponse<BulkVmOperationsReadResponse> | ErrorResponse;
 }
