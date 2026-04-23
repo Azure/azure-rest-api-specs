@@ -369,7 +369,7 @@ These settings apply only when `--tag=package-2026-03-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2026-03-03-only'
 input-file:
-  - Microsoft.Compute/GalleryRP/stable/2026-03-03/GalleryRP.json
+  - stable/2026-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2025-11-01
