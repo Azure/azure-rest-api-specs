@@ -90,6 +90,70 @@ using Microsoft.Marketplace;
   "GetPrivateStoreCollectionOffersByContexts",
   "csharp"
 );
+@@clientName(AcknowledgeOfferNotificationProperties,
+  "AcknowledgeOfferNotificationContent",
+  "csharp"
+);
+@@clientName(AnyExistingOffersInTheCollectionsResponse,
+  "AnyExistingOffersInTheCollectionsResult",
+  "csharp"
+);
+@@clientName(BulkCollectionsPayload, "BulkCollectionsActionContent", "csharp");
+@@clientName(BulkCollectionsResponse, "BulkCollectionsActionResult", "csharp");
+@@clientName(CollectionsDetails, "PrivateStoreCollectionDetails", "csharp");
+@@clientName(CollectionsToSubscriptionsMappingPayload,
+  "CollectionsToSubscriptionsMappingContent",
+  "csharp"
+);
+@@clientName(CollectionsToSubscriptionsMappingResponse,
+  "CollectionsToSubscriptionsMappingResult",
+  "csharp"
+);
+@@clientName(MultiContextAndPlansPayload,
+  "MultiContextAndPlansContent",
+  "csharp"
+);
+@@clientName(NewNotifications, "NewPlanNotification", "csharp");
+@@clientName(NewPlansNotificationsList,
+  "NewPlanNotificationListResult",
+  "csharp"
+);
+@@clientName(OfferProperties, "PrivateStoreOfferResult", "csharp");
+@@clientName(QueryApprovedPlansPayload, "QueryApprovedPlansContent", "csharp");
+@@clientName(QueryApprovedPlansResponse, "QueryApprovedPlansResult", "csharp");
+@@clientName(QueryRequestApproval, "QueryApprovalRequestResult", "csharp");
+@@clientName(QueryRequestApprovalProperties,
+  "QueryApprovalRequestContent",
+  "csharp"
+);
+@@clientName(QueryUserOffersProperties, "QueryUserOffersContent", "csharp");
+@@clientName(QueryUserRulesProperties, "QueryUserRulesContent", "csharp");
+@@clientName(Recipient, "NotificationRecipient", "csharp");
+@@clientName(BillingAccountsResponse,
+  "PrivateStoreBillingAccountsResult",
+  "csharp"
+);
+@@clientName(SetRulesRequest, "SetRulesContent", "csharp");
+@@clientName(TransferOffersProperties, "TransferOffersContent", "csharp");
+@@clientName(TransferOffersResponse, "TransferOffersResult", "csharp");
+@@clientName(UserRequestDetails, "PlanRequesterInfo", "csharp");
+@@clientName(WithdrawProperties, "WithdrawPlanContent", "csharp");
+@@clientName(StopSellOffersPlansNotificationsListProperties,
+  "StopSellOffersPlansNotificationsResult",
+  "csharp"
+);
+@@clientName(Accessibility, "PrivateStorePlanAccessibility", "csharp");
+@@clientName(AdminAction, "MarketplaceAdminAction", "csharp");
+@@clientName(Availability, "PrivateStoreAvailability", "csharp");
+@@clientName(Operation, "PrivateStoreOperation", "csharp");
+@@clientName(Rule, "MarketplaceRule", "csharp");
+@@clientName(RuleListResponse, "MarketplaceRuleListResult", "csharp");
+@@clientName(RuleType, "MarketplaceRuleType", "csharp");
+@@clientName(Status, "PrivateStorePlanStatus", "csharp");
+@@clientName(Subscription, "MarketplaceSubscription", "csharp");
+@@clientName(SubscriptionState, "MarketplaceSubscriptionState", "csharp");
+@@clientName(PlanDetails, "PrivateStorePlanDetails", "csharp");
+@@clientName(Plan, "PrivateStorePlan", "csharp");
 // NOTE: @@clientName on Collections.createOrUpdate::parameters.resource has no effect
 // for the C# MPG generator. BodyParameterNameNormalizer forcibly renames body parameters
 // based on the body type suffix (e.g., a type ending in "Data" becomes "data"), overriding
