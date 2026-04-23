@@ -5,6 +5,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Devices;
 using Azure.ResourceManager;
+using Http;
 
 @@clientName(Microsoft.Devices, "IotHubClient", "javascript,java");
 @@clientName(IotHubDescriptions.getEndpointHealth,
@@ -62,12 +63,15 @@ op replaceManualFailover(
   iotHubName: string,
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  body: Microsoft.Devices.FailoverInput,
+  @body body: Microsoft.Devices.FailoverInput,
 ): (ArmCombinedLroHeaders &
   Azure.Core.Foundations.RetryAfterHeader) | Microsoft.Devices.ErrorDetails | Azure.ResourceManager.ArmResponse<void>;
 
 @@override(IotHubDescriptions.manualFailover, replaceManualFailover);
-@@clientName(replaceManualFailover::parameters.body, "failoverInput", "go");
+@@clientName(replaceManualFailover::parameters.body,
+  "failoverInput",
+  "go,javascript"
+);
 
 /**
  * override for IotHubDescriptions.testAllRoutes
@@ -80,11 +84,11 @@ op replaceTestAllRoutes(
   iotHubName: string,
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  body: Microsoft.Devices.TestAllRoutesInput,
+  @body body: Microsoft.Devices.TestAllRoutesInput,
 ): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestAllRoutesResult> | Microsoft.Devices.ErrorDetails;
 
 @@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes);
-@@clientName(replaceTestAllRoutes::parameters.body, "input", "go");
+@@clientName(replaceTestAllRoutes::parameters.body, "input", "go,javascript");
 
 /**
  * override for IotHubDescriptions.testRoute
@@ -97,8 +101,8 @@ op replaceTestRoute(
   iotHubName: string,
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  body: Microsoft.Devices.TestRouteInput,
+  @body body: Microsoft.Devices.TestRouteInput,
 ): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestRouteResult> | Microsoft.Devices.ErrorDetails;
 
 @@override(IotHubDescriptions.testRoute, replaceTestRoute);
-@@clientName(replaceTestRoute::parameters.body, "input", "go");
+@@clientName(replaceTestRoute::parameters.body, "input", "go,javascript");
