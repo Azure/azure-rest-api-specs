@@ -14,7 +14,8 @@ namespace Microsoft.DevHub;
 /**
  * Generate preview dockerfile and manifests.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Generate preview dockerfile and manifests.")
 @route("/subscriptions/{subscriptionId}/providers/microsoft.DevHub/locations/{location}/generatePreviewArtifacts")
 @tag("Artifacts")
@@ -22,6 +23,6 @@ op generatePreviewArtifacts(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...LocationParameter,
-  #suppress ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @body parameters: ArtifactGenerationProperties,
 ): ArmResponse<Record<string>> | ErrorResponse;

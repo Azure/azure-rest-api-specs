@@ -27,7 +27,7 @@ interface Workflows {
   /**
    * Gets a workflow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a workflow.")
   @tag("Workflow")
   @operationId("Workflow_Get")
@@ -36,7 +36,7 @@ interface Workflows {
   /**
    * Creates or updates a workflow
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates or updates a workflow")
   @tag("Workflow")
   @operationId("Workflow_CreateOrUpdate")
@@ -45,7 +45,7 @@ interface Workflows {
   /**
    * Updates tags on a workflow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates tags on a workflow.")
   @tag("Workflow")
   @operationId("Workflow_UpdateTags")
@@ -55,7 +55,7 @@ interface Workflows {
   /**
    * Deletes a workflow
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a workflow")
   @tag("Workflow")
   @operationId("Workflow_Delete")
@@ -67,7 +67,7 @@ interface Workflows {
   /**
    * Gets a list of workflows within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of workflows within a resource group.")
   @tag("Workflow")
   @operationId("Workflow_ListByResourceGroup")
@@ -85,7 +85,7 @@ interface Workflows {
   /**
    * Gets a list of workflows associated with the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of workflows associated with the specified subscription.")
   @tag("Workflow")
   @operationId("Workflow_List")

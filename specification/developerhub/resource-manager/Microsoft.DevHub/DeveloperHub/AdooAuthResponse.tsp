@@ -44,7 +44,7 @@ interface AdooAuthResponses {
   /**
    * Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.")
   @tag("ADOOAuth")
   @operationId("ADOOAuth_Get")
@@ -53,7 +53,7 @@ interface AdooAuthResponses {
   /**
    * Callback URL to hit once authenticated with ADO to have the service store the OAuth token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Callback URL to hit once authenticated with ADO to have the service store the OAuth token.")
   @tag("ADOOAuth")
   @operationId("ADOOAuth_List")
@@ -69,7 +69,8 @@ interface AdooAuthResponses {
   /**
    * Gets ADOOAuth info used to authenticate users with ADO.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets ADOOAuth info used to authenticate users with ADO.")
   @tag("ADOOAuth")
   @operationId("GetADOOAuthInfo")

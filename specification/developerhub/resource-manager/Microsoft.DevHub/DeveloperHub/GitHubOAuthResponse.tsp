@@ -15,6 +15,7 @@ namespace Microsoft.DevHub;
  */
 @singleton("default")
 @subscriptionResource
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthResponse
   is Azure.ResourceManager.ProxyResource<GitHubOAuthProperties> {
   ...ResourceNameParameter<
@@ -41,11 +42,13 @@ alias GitHubOAuthResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface GitHubOAuthResponses {
   /**
    * Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("GitHubOAuthCallback")
@@ -69,7 +72,8 @@ interface GitHubOAuthResponses {
   /**
    * Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("ListGitHubOAuth")
@@ -85,7 +89,8 @@ interface GitHubOAuthResponses {
   /**
    * Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.")
   @tag("GitHubOAuth")
   @operationId("GitHubOAuth")

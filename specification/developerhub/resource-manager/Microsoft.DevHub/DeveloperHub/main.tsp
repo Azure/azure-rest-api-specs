@@ -34,6 +34,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "DeveloperHubServiceClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.DevHub;
 
 /**
@@ -46,6 +47,7 @@ enum Versions {
   v2025_03_01_preview: "2025-03-01-preview",
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface Operations {
   /**
    * Returns list of operations.

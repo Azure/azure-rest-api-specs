@@ -576,7 +576,7 @@ union ParameterKind {
 /**
  * Properties of a IacProfile.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IacProfileProperties {
   /**
    * GitHub Profile of a IacProfile
@@ -588,9 +588,11 @@ model IacProfileProperties {
    */
   terraformProfile?: TerraformProfile;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   stages?: StageProperties[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   templates?: IacTemplateProperties[];
 }
 
@@ -671,9 +673,9 @@ model StageProperties {
    */
   stageName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dependencies?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gitEnvironment?: string;
 }
 
@@ -701,7 +703,8 @@ model IacTemplateProperties {
    */
   instanceName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   templateDetails?: IacTemplateDetails[];
 
   /**
@@ -711,7 +714,7 @@ model IacTemplateProperties {
   quickStartTemplateType?: QuickStartTemplateType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IacTemplateDetails {
   /**
    * The name of the products.
@@ -736,28 +739,28 @@ model TagsObject {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExportTemplateRequest {
   /**
    * Template Name
    */
   templateName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceGroupIds?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   siteId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceStage?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrLinkResponse {
   /**
    * The link of the pull request.
@@ -765,18 +768,19 @@ model PrLinkResponse {
   prLink?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScaleTemplateRequest {
   /**
    * Template Name
    */
   templateName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scaleRequirement?: ScaleProperty[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScaleProperty {
   /**
    * The region of the store
@@ -826,6 +830,7 @@ model OperationDisplay {
 /**
  * GitHubOAuth request object
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthCallRequest {
   /**
    * The URL the client will redirect to on successful authentication. If empty, no redirect will occur.
@@ -836,22 +841,26 @@ model GitHubOAuthCallRequest {
 /**
  * URL used to authorize the Developer Hub GitHub App
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthInfoResponse {
   /**
    * URL for authorizing the Developer Hub GitHub App
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authURL?: string;
 
   /**
    * OAuth token used to make calls to GitHub
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   token?: string;
 }
 
 /**
  * The response from List GitHubOAuth operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthProperties {
   /**
    * user making request
@@ -862,6 +871,7 @@ model GitHubOAuthProperties {
 /**
  * The response from List GitHubOAuth operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthListResponse {
   /**
    * Singleton list response containing one GitHubOAuthResponse response
@@ -873,7 +883,7 @@ model GitHubOAuthListResponse {
 /**
  * Workflow properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkflowProperties {
   /**
    * Profile of a github workflow.
@@ -954,6 +964,7 @@ model GitHubWorkflowProfile {
    * The URL to the Pull Request submitted against the users repository.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   prURL?: string;
 
   /**
@@ -968,7 +979,7 @@ model GitHubWorkflowProfile {
   @visibility(Lifecycle.Read)
   prStatus?: PullRequestStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastWorkflowRun?: WorkflowRun;
 
   /**
@@ -987,7 +998,7 @@ model Deployment {
    */
   manifestType?: ManifestType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kubeManifestLocations?: string[];
 
   /**
@@ -1003,13 +1014,14 @@ model Deployment {
   /**
    * Manifest override values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   overrides?: Record<string>;
 }
 
 /**
  * Information on the azure container registry
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ACR {
   /**
    * ACR subscription id
@@ -1047,7 +1059,7 @@ model GitHubWorkflowProfileOidcCredentials {
   azureTenantId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkflowRun {
   /**
    * Describes if the workflow run succeeded.
@@ -1059,6 +1071,7 @@ model WorkflowRun {
    * URL to the run of the workflow.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   workflowRunURL?: string;
 
   /**
@@ -1157,6 +1170,7 @@ model AzurePipelineProfile {
   /**
    * The name of the ARM Service Connection the pipeline is associated with.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   armServiceConnection?: string;
 
   /**
@@ -1197,7 +1211,7 @@ model AzurePipelineProfile {
    */
   pullRequest?: PullRequest;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastWorkflowRun?: WorkflowRun;
 
   /**
@@ -1210,6 +1224,7 @@ model AzurePipelineProfile {
 /**
  * Details of the ADO repository associated with the workflow.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ADORepository {
   /**
    * The owner of the repository the workflow is associated with.
@@ -1260,6 +1275,7 @@ model PullRequest {
    * The URL to the Pull Request submitted against the users repository.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   prURL?: string;
 
   /**
@@ -1299,7 +1315,8 @@ model TemplateWorkflowProfile {
    */
   dockerfileTemplate?: TemplateReference;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   manifestTemplates?: TemplateReference[];
 
   /**
@@ -1317,7 +1334,7 @@ model TemplateWorkflowProfile {
    */
   pullRequest?: PullRequest;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastWorkflowRun?: WorkflowRun;
 
   /**
@@ -1348,7 +1365,7 @@ model TemplateReference {
   /**
    * parameters for template creation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 }
 
@@ -1405,6 +1422,7 @@ model OidcCredentials {
 /**
  * Details of the GitHub repository associated with the workflow.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ADOProviderProfile {
   /**
    * Details of the ADO repository associated with the workflow.
@@ -1414,6 +1432,7 @@ model ADOProviderProfile {
   /**
    * The name of the ARM Service Connection the pipeline is associated with.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   armServiceConnection?: string;
 }
 
@@ -1444,18 +1463,20 @@ model AdooAuthInfoResponse {
   /**
    * URL used to authorize ADO app using Entra ID
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authURL?: string;
 
   /**
    * OAuth token used to make calls to ADO APIs
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   token?: string;
 }
 
 /**
  * The properties of ADO OAuth.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AdooAuth {
   /**
    * user making request
@@ -1471,7 +1492,7 @@ model AdooAuthListResponse is Azure.Core.Page<AdooAuthResponse>;
 /**
  * Template properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TemplateProperties {
   /**
    * The name of the template.
@@ -1503,7 +1524,7 @@ model TemplateProperties {
 /**
  * VersionedTemplate properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VersionedTemplateProperties {
   /**
    * The version of the template.
@@ -1581,6 +1602,6 @@ model GenerateVersionedTemplateResponse {
   /**
    * files returned as a map<path string,content string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   generatedFiles?: Record<string>;
 }
