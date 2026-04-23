@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "rpc",
+    "vmRestorePointName": "vmrp",
+    "diskRestorePointName": "myConfidentialDisk_c4bc27e0-ccf6-494e-a740-af34de775527",
+    "api-version": "2026-03-02"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpc/restorePoints/vmrp/diskRestorePoints/myConfidentialDisk_c4bc27e0-ccf6-494e-a740-af34de775527",
+        "name": "myConfidentialDisk_c4bc27e0-ccf6-494e-a740-af34de775527",
+        "properties": {
+          "timeCreated": "2026-03-02T04:41:35.079872+00:00",
+          "sourceResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myConfidentialDisk",
+          "osType": "Windows",
+          "hyperVGeneration": "V2",
+          "familyId": "f22e934b-c768-447f-8c44-ada4b40224ec",
+          "sourceUniqueId": "d633885d-d102-4481-901e-5b2413d1a7be",
+          "networkAccessPolicy": "AllowAll",
+          "publicNetworkAccess": "Disabled",
+          "securityProfile": {
+            "securityType": "ConfidentialVM_DiskEncryptedWithPlatformKey",
+            "confidentialVMVersion": "V2"
+          },
+          "logicalSectorSize": 4096
+        }
+      }
+    }
+  },
+  "operationId": "DiskRestorePoint_Get",
+  "title": "get a ConfidentialVM incremental disk restorePoint resource with confidentialVMVersion."
+}
