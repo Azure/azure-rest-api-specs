@@ -38,16 +38,16 @@ model ManagedTrafficConfigResource
 interface ManagedTrafficConfigOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...ApiVersionParameter;
-        ...SubscriptionIdParameter;
-        ...ResourceGroupParameter;
-        ...Azure.ResourceManager.Legacy.Provider;
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** Name of the app. */
         @path
         @segment("sites")
         @key
-        name: string;
+        name: string,
       },
       {
         /** Name of the managed traffic configuration. Must be "default". */
@@ -55,7 +55,7 @@ interface ManagedTrafficConfigOps
         @segment("managedTrafficConfig")
         @key
         @pattern("^default$")
-        configName: string;
+        configName: string,
       }
     > {}
 

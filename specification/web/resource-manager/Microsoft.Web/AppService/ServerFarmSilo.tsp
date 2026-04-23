@@ -38,16 +38,16 @@ model ServerFarmSilo
 interface ServerFarmSiloOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...ApiVersionParameter;
-        ...SubscriptionIdParameter;
-        ...ResourceGroupParameter;
-        ...Azure.ResourceManager.Legacy.Provider;
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** Name of the App Service plan. */
         @path
         @segment("serverfarms")
         @key
-        name: string;
+        name: string,
       },
       {
         /** Name of the silo. */
@@ -55,7 +55,7 @@ interface ServerFarmSiloOps
         @segment("silos")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-        siloName: string;
+        siloName: string,
       }
     > {}
 
@@ -102,9 +102,7 @@ interface ServerFarmSilos {
 }
 
 @@doc(ServerFarmSilo.name, "Name of the silo.");
-@@doc(ServerFarmSilo.properties,
-  "ServerFarmSilo resource specific properties"
-);
+@@doc(ServerFarmSilo.properties, "ServerFarmSilo resource specific properties");
 @@doc(ServerFarmSilos.createOrUpdateServerFarmSilo::parameters.resource,
   "Details of the silo."
 );

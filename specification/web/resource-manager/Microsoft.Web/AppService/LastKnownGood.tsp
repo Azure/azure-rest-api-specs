@@ -38,16 +38,16 @@ model LastKnownGoodResource
 interface LastKnownGoodOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...ApiVersionParameter;
-        ...SubscriptionIdParameter;
-        ...ResourceGroupParameter;
-        ...Azure.ResourceManager.Legacy.Provider;
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** Name of the app. */
         @path
         @segment("sites")
         @key
-        name: string;
+        name: string,
       },
       {
         /** Name of the Last Known Good resource. Must be "default". */
@@ -55,7 +55,7 @@ interface LastKnownGoodOps
         @segment("lastKnownGood")
         @key
         @pattern("^default$")
-        lkgName: string;
+        lkgName: string,
       }
     > {}
 
@@ -85,9 +85,7 @@ interface LastKnownGoods {
   >;
 }
 
-@@doc(LastKnownGoodResource.name,
-  "Name of the Last Known Good resource."
-);
+@@doc(LastKnownGoodResource.name, "Name of the Last Known Good resource.");
 @@doc(LastKnownGoodResource.properties,
   "LastKnownGood resource specific properties"
 );

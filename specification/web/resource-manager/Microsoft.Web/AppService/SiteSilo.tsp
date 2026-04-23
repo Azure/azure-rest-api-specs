@@ -19,8 +19,7 @@ namespace Microsoft.Web;
  */
 @added(Versions.v2026_06_01_preview)
 @parentResource(Site)
-model SiteSilo
-  is Azure.ResourceManager.TrackedResource<SiteSiloProperties> {
+model SiteSilo is Azure.ResourceManager.TrackedResource<SiteSiloProperties> {
   ...ResourceNameParameter<
     Resource = SiteSilo,
     KeyName = "siloName",
@@ -38,16 +37,16 @@ model SiteSilo
 interface SiteSiloOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...ApiVersionParameter;
-        ...SubscriptionIdParameter;
-        ...ResourceGroupParameter;
-        ...Azure.ResourceManager.Legacy.Provider;
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** Name of the app. */
         @path
         @segment("sites")
         @key
-        name: string;
+        name: string,
       },
       {
         /** Name of the silo. */
@@ -55,7 +54,7 @@ interface SiteSiloOps
         @segment("silos")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-        siloName: string;
+        siloName: string,
       }
     > {}
 
