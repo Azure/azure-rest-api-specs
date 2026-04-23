@@ -24379,9 +24379,9 @@ model PolicySettings {
    */
   @maxValue(1440)
   @minValue(5)
-  @removed(Versions.v2025_07_01)  
-  captchaCookieExpirationInMins?: int32;  
-  
+  @removed(Versions.v2025_07_01)
+  captchaCookieExpirationInMins?: int32;
+
   /**
    * Web Application Firewall CAPTCHA Cookie Expiration time in minutes.
    */
