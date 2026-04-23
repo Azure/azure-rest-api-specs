@@ -256,46 +256,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   uint64,
   "rust"
 );
-// Blob.download — "Range" header → HttpRange
-@@alternateType(Blob.download::parameters.range,
-  {
-    identity: "HttpRange",
-    package: "azure_storage_blob::models",
-  },
-  "rust"
-);
-// PageBlob.getPageRanges + getPageRangesDiff — "Range" header → HttpRange (via spread alias)
-@@alternateType(RangeParameter.range,
-  {
-    identity: "HttpRange",
-    package: "azure_storage_blob::models",
-  },
-  "rust"
-);
-// PageBlob.uploadPages + uploadPagesFromUrl — required "Range" header → HttpRange
-@@alternateType(RangeParameterRequired.range,
-  {
-    identity: "HttpRange",
-    package: "azure_storage_blob::models",
-  },
-  "rust"
-);
-// AppendBlob.appendBlockFromUrl + BlockBlob.stageBlockFromUrl — "x-ms-source-range" header → HttpRange (via spread alias)
-@@alternateType(SourceRangeParameter.sourceRange,
-  {
-    identity: "HttpRange",
-    package: "azure_storage_blob::models",
-  },
-  "rust"
-);
-// PageBlob.uploadPagesFromUrl — required "x-ms-source-range" header → HttpRange
-@@alternateType(SourceRangeParameterRequired.sourceRange,
-  {
-    identity: "HttpRange",
-    package: "azure_storage_blob::models",
-  },
-  "rust"
-);
+// Range/source-range string parameters → HttpRange for Rust
+@@alternateType(Blob.download::parameters.range, HttpRange, "rust");
+@@alternateType(RangeParameter.range, HttpRange, "rust");
+@@alternateType(RangeParameterRequired.range, HttpRange, "rust");
+@@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
+@@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
@@ -975,3 +941,13 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
   setAccessPolicyRequiredContainerAcl,
   "rust"
 );
+
+/** An HTTP byte range, e.g. "bytes=0-1023". */
+@alternateType(
+  {
+    identity: "HttpRange",
+    package: "azure_storage_blob::models",
+  },
+  "rust"
+)
+scalar HttpRange extends string;
