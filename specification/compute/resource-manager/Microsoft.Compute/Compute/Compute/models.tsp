@@ -367,8 +367,8 @@ union VirtualMachinePriorityTypes {
   string,
 
   @doc("""
-      Regular Priority for a standalone virtual machine or the virtual machines in the scale set.
-      This is the default priority and it will be used to deploy regular VM/VMSS.
+    Regular Priority for a standalone virtual machine or the virtual machines in the scale set.
+    This is the default priority and it will be used to deploy regular VM/VMSS.
     """)
   Regular: "Regular",
 
@@ -379,9 +379,9 @@ union VirtualMachinePriorityTypes {
   Spot: "Spot",
 
   @doc("""
-      SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.
-      This is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next
-      generation of Azure Spot VM/VMSS with more reliability and longer running time.
+    SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.
+    This is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next
+    generation of Azure Spot VM/VMSS with more reliability and longer running time.
     """)
   @added(Versions.v2026_04_01)
   SpotPlus: "SpotPlus",
