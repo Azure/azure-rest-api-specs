@@ -1,0 +1,81 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+
+namespace Microsoft.Monitor;
+
+@doc("Defines the available preview types for signal preview.")
+union PreviewType {
+  @doc("Preview for good signal.")
+  GoodSignal: "GoodSignal",
+
+  @doc("Preview for total signal.")
+  TotalSignal: "TotalSignal",
+
+  @doc("Preview for signal.")
+  Signal: "Signal",
+
+  @doc("Preview for SLO evaluation.")
+  Slo: "Slo",
+
+  string,
+}
+
+@doc("Defines the properties for signal preview SLI.")
+model SignalPreviewSliProperties {
+  @doc("The preview type for the signal preview operation.")
+  previewType: PreviewType;
+
+  @doc("Determines how the SLI is evaluated—either based on request counts or time windows.")
+  evaluationType: EvaluationType;
+
+  @doc("Defines the SLO baseline associated with the SLI.")
+  baselineProperties?: BaselineProperties;
+
+  // Window-based properties (used when evaluationType is WindowBased)
+  @doc("Defines the uptime criteria for window-based SLIs.")
+  windowUptimeCriteria?: WindowUptimeCriteria;
+
+  @doc("Signals used for window-based SLI calculations.")
+  signals?: Signal;
+
+  // Request-based properties (used when evaluationType is RequestBased)
+  @doc("Represents good signals used in request-based SLI calculations.")
+  goodSignals?: Signal;
+
+  @doc("Represents total signals used in request-based SLI calculations.")
+  totalSignals?: Signal;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+@armResourceOperations
+@doc("Defines operations for previewing signal.")
+interface SloView {
+  /**
+  POST Actions
+  */
+  @route(ServiceGroupRoute)
+  @post
+  @armResourceCollectionAction
+  @action("providers/Microsoft.Monitor/sliSignalPreview")
+  @doc("Returns preview data for the signal.")
+  sliSignalPreview(
+    ...ServiceGroupBaseParameters,
+    ...Azure.ResourceManager.ApiVersionParameter,
+
+    @body
+    @doc("The signal preview properties.")
+    body: SignalPreviewSliProperties,
+  ): {
+    @statusCode statusCode: 200;
+    @body body: KqlmQueryResult;
+  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+}

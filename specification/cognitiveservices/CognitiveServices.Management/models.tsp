@@ -378,7 +378,7 @@ union DeploymentState {
 }
 
 /**
- * The routing mode that determines how requests are distributed across models.
+ * The model-router routing mode that determines how requests are distributed across models.
  */
 union RoutingMode {
   string,
@@ -389,27 +389,27 @@ union RoutingMode {
   Cost: "cost",
 
   /**
-   * Balance cost and accuracy when routing requests across models.
+   * Balance cost and quality when routing requests across models.
    */
   Balanced: "balanced",
 
   /**
-   * Route requests to maximize accuracy regardless of cost.
+   * Route requests to maximize quality regardless of cost.
    */
-  Accuracy: "accuracy",
+  Quality: "quality",
 }
 
 /**
- * Routing configuration for the deployment. Specifies how requests are routed across multiple models.
+ * Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.
  */
 model DeploymentRouting {
   /**
-   * The routing mode that determines how requests are distributed across models.
+   * The model-router routing mode that determines how requests are distributed across models.
    */
   mode?: RoutingMode = RoutingMode.Balanced;
 
   /**
-   * Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
+   * Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
    */
   @identifiers(#["name", "version"])
   models?: DeploymentModel[];
@@ -3141,7 +3141,7 @@ model DeploymentProperties {
   deploymentState?: DeploymentState | null;
 
   /**
-   * Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset.
+   * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
 }
@@ -3244,6 +3244,17 @@ model SkuResource {
    * The capacity configuration.
    */
   capacity?: CapacityConfig;
+}
+
+/**
+ * The object being used to update sku of a resource, in general used for PATCH operations.
+ */
+@added(Versions.v2026_03_15_preview)
+model PatchResourceSku {
+  /**
+   * The resource model definition representing SKU
+   */
+  sku?: Sku;
 }
 
 /**
@@ -5706,3 +5717,222 @@ model RaiPolicyListResult {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Properties of a Cognitive Services managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentProperties {
+  /**
+   * AzureML Registry model asset URI. Required on creation; immutable after creation.
+   * Example: azureml://registries/{registry}/models/{model}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  `model`: url;
+
+  /**
+   * AzureML Registry deployment template URI. Optional on creation.
+   * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  deploymentTemplate?: url;
+
+  /**
+   * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  acceleratorType?: string;
+
+  /**
+   * Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorsPerInstance?: int32;
+
+  /**
+   * Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.
+   */
+  @visibility(Lifecycle.Read)
+  totalAccelerators?: int32;
+
+  /**
+   * Read-only. Current provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Read-only. Status message and timestamp from the last provisioning operation.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningDetails?: ManagedComputeDeploymentProvisioningDetails;
+
+  /**
+   * Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  routes?: ManagedComputeDeploymentRoutes;
+}
+
+/**
+ * Provisioning status details for a managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentProvisioningDetails {
+  /**
+   * A human-readable status message from the last provisioning operation.
+   */
+  message?: string;
+
+  /**
+   * Timestamp of the last provisioning operation.
+   */
+  lastOperationTimestamp?: utcDateTime;
+}
+
+/**
+ * Inference route paths for a managed compute deployment, relative to the account endpoint.
+ * Populated when provisioningState is Succeeded.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentRoutes {
+  /**
+   * Relative path to the chat completions scoring endpoint.
+   */
+  chatCompletionsScoringPath?: string;
+
+  /**
+   * Relative path to the Swagger/OpenAPI endpoint.
+   */
+  swagger?: string;
+
+  /**
+   * Relative path to the messages API scoring endpoint.
+   */
+  messagesApiScoringPath?: string;
+}
+
+/**
+ * The list of managed compute deployments.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentListResult {
+  /**
+   * The link used to get the next page of managed compute deployments.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of managed compute deployments and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ManagedComputeDeployment[];
+}
+
+/**
+ * Deployment detail within a managed compute usage entry.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentInfo {
+  /**
+   * Full ARM resource ID of the deployment.
+   */
+  deploymentId?: string;
+
+  /**
+   * Full ARM resource ID of the account/project.
+   */
+  projectId?: string;
+
+  /**
+   * Model name (e.g., 'gpt-4o').
+   */
+  modelId?: string;
+
+  /**
+   * Number of GPUs consumed by this deployment.
+   */
+  gpuCount?: int64;
+
+  /**
+   * Number of instances for this deployment.
+   */
+  instanceCount?: int32;
+}
+
+/**
+ * Managed compute quota usage for a specific SKU.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeUsage {
+  /**
+   * Fully qualified resource ID for the managed compute usage.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: MetricName;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  unit?: UnitType;
+
+  /**
+   * Maximum value for this metric.
+   */
+  limit?: float64;
+
+  /**
+   * Current value for this metric.
+   */
+  currentValue?: float64;
+
+  /**
+   * Offer scope (e.g., 'Global', 'Datazone-US').
+   */
+  offerScope?: string;
+
+  /**
+   * Deployments consuming this managed compute quota.
+   */
+  @identifiers(#["deploymentId"])
+  deployments?: ManagedComputeDeploymentInfo[];
+}
+
+/**
+ * List of managed compute quota entries.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeUsageListResult {
+  /**
+   * The link used to get the next page of managed compute usages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Per-SKU managed compute quota usage entries.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  value?: ManagedComputeUsage[];
+}

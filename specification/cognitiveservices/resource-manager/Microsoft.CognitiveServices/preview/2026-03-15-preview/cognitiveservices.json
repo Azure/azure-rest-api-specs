@@ -121,7 +121,13 @@
       "name": "AgentDeployment"
     },
     {
+      "name": "ManagedComputeDeployments"
+    },
+    {
       "name": "ComputeOperations"
+    },
+    {
+      "name": "ManagedComputeUsages"
     },
     {
       "name": "Skus"
@@ -516,6 +522,48 @@
           "GetComputeOperationStatus": {
             "$ref": "./examples/GetComputeOperationStatus.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/managedComputeUsages": {
+      "get": {
+        "operationId": "ManagedComputeUsagesOperationGroup_List",
+        "tags": [
+          "ManagedComputeUsages"
+        ],
+        "description": "List managed compute quota usages for a subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeUsageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Managed Compute Usages": {
+            "$ref": "./examples/ListManagedComputeUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3787,6 +3835,366 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments": {
+      "get": {
+        "operationId": "ManagedComputeDeployments_List",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Gets the managed compute deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListManagedComputeDeployments": {
+            "$ref": "./examples/ListManagedComputeDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}": {
+      "get": {
+        "operationId": "ManagedComputeDeployments_Get",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Gets the specified managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetManagedComputeDeployment": {
+            "$ref": "./examples/GetManagedComputeDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedComputeDeployments_CreateOrUpdate",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Creates or updates a managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The managed compute deployment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedComputeDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedComputeDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateManagedComputeDeployment": {
+            "$ref": "./examples/CreateOrUpdateManagedComputeDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ManagedComputeDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedComputeDeployments_Update",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Updates the specified managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The managed compute deployment patch properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchResourceSku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateManagedComputeDeployment": {
+            "$ref": "./examples/UpdateManagedComputeDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedComputeDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedComputeDeployments_Delete",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Deletes the specified managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteManagedComputeDeployment": {
+            "$ref": "./examples/DeleteManagedComputeDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks": {
       "get": {
         "operationId": "ManagedNetworkSettings_List",
@@ -4220,7 +4628,10 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OutboundRuleListResult"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules": {
@@ -9620,7 +10031,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11175,7 +11586,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -12962,7 +13373,7 @@
         },
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
-          "description": "Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset."
+          "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
         }
       }
     },
@@ -13021,16 +13432,16 @@
     },
     "DeploymentRouting": {
       "type": "object",
-      "description": "Routing configuration for the deployment. Specifies how requests are routed across multiple models.",
+      "description": "Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.",
       "properties": {
         "mode": {
           "type": "string",
-          "description": "The routing mode that determines how requests are distributed across models.",
+          "description": "The model-router routing mode that determines how requests are distributed across models.",
           "default": "balanced",
           "enum": [
             "cost",
             "balanced",
-            "accuracy"
+            "quality"
           ],
           "x-ms-enum": {
             "name": "RoutingMode",
@@ -13044,19 +13455,19 @@
               {
                 "name": "Balanced",
                 "value": "balanced",
-                "description": "Balance cost and accuracy when routing requests across models."
+                "description": "Balance cost and quality when routing requests across models."
               },
               {
-                "name": "Accuracy",
-                "value": "accuracy",
-                "description": "Route requests to maximize accuracy regardless of cost."
+                "name": "Quality",
+                "value": "quality",
+                "description": "Route requests to maximize quality regardless of cost."
               }
             ]
           }
         },
         "models": {
           "type": "array",
-          "description": "Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
+          "description": "Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
           "items": {
             "$ref": "#/definitions/DeploymentModel"
           },
@@ -13770,6 +14181,248 @@
         }
       ],
       "x-ms-discriminator-value": "Managed"
+    },
+    "ManagedComputeDeployment": {
+      "type": "object",
+      "description": "Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedComputeDeploymentProperties",
+          "description": "Properties of the Cognitive Services managed compute deployment."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedComputeDeploymentInfo": {
+      "type": "object",
+      "description": "Deployment detail within a managed compute usage entry.",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the deployment."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the account/project."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Model name (e.g., 'gpt-4o')."
+        },
+        "gpuCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of GPUs consumed by this deployment."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances for this deployment."
+        }
+      }
+    },
+    "ManagedComputeDeploymentListResult": {
+      "type": "object",
+      "description": "The list of managed compute deployments.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of managed compute deployments."
+        },
+        "value": {
+          "type": "array",
+          "description": "Gets the list of managed compute deployments and their properties.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeDeployment"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedComputeDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of a Cognitive Services managed compute deployment.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "format": "uri",
+          "description": "AzureML Registry model asset URI. Required on creation; immutable after creation.\nExample: azureml://registries/{registry}/models/{model}/versions/{version}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentTemplate": {
+          "type": "string",
+          "format": "uri",
+          "description": "AzureML Registry deployment template URI. Optional on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "acceleratorType": {
+          "type": "string",
+          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "versionUpgradeOption": {
+          "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
+          "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "acceleratorsPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.",
+          "readOnly": true
+        },
+        "totalAccelerators": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Read-only. Current provisioning state.",
+          "readOnly": true
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/ManagedComputeDeploymentProvisioningDetails",
+          "description": "Read-only. Status message and timestamp from the last provisioning operation.",
+          "readOnly": true
+        },
+        "routes": {
+          "$ref": "#/definitions/ManagedComputeDeploymentRoutes",
+          "description": "Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "model"
+      ]
+    },
+    "ManagedComputeDeploymentProvisioningDetails": {
+      "type": "object",
+      "description": "Provisioning status details for a managed compute deployment.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable status message from the last provisioning operation."
+        },
+        "lastOperationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last provisioning operation."
+        }
+      }
+    },
+    "ManagedComputeDeploymentRoutes": {
+      "type": "object",
+      "description": "Inference route paths for a managed compute deployment, relative to the account endpoint.\nPopulated when provisioningState is Succeeded.",
+      "properties": {
+        "chatCompletionsScoringPath": {
+          "type": "string",
+          "description": "Relative path to the chat completions scoring endpoint."
+        },
+        "swagger": {
+          "type": "string",
+          "description": "Relative path to the Swagger/OpenAPI endpoint."
+        },
+        "messagesApiScoringPath": {
+          "type": "string",
+          "description": "Relative path to the messages API scoring endpoint."
+        }
+      }
+    },
+    "ManagedComputeUsage": {
+      "type": "object",
+      "description": "Managed compute quota usage for a specific SKU.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the managed compute usage.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value for this metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current value for this metric."
+        },
+        "offerScope": {
+          "type": "string",
+          "description": "Offer scope (e.g., 'Global', 'Datazone-US')."
+        },
+        "deployments": {
+          "type": "array",
+          "description": "Deployments consuming this managed compute quota.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeDeploymentInfo"
+          },
+          "x-ms-identifiers": [
+            "deploymentId"
+          ]
+        }
+      }
+    },
+    "ManagedComputeUsageListResult": {
+      "type": "object",
+      "description": "List of managed compute quota entries.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of managed compute usages."
+        },
+        "value": {
+          "type": "array",
+          "description": "Per-SKU managed compute quota usage entries.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeUsage"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
     },
     "ManagedIdentityAuthTypeConnectionProperties": {
       "type": "object",
@@ -14787,6 +15440,16 @@
       ],
       "x-ms-discriminator-value": "PAT"
     },
+    "PatchResourceSku": {
+      "type": "object",
+      "description": "The object being used to update sku of a resource, in general used for PATCH operations.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        }
+      }
+    },
     "PatchResourceTags": {
       "type": "object",
       "description": "The object being used to update tags of a resource, in general used for PATCH operations.",
@@ -15022,7 +15685,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -16613,11 +17276,11 @@
     },
     "RoutingMode": {
       "type": "string",
-      "description": "The routing mode that determines how requests are distributed across models.",
+      "description": "The model-router routing mode that determines how requests are distributed across models.",
       "enum": [
         "cost",
         "balanced",
-        "accuracy"
+        "quality"
       ],
       "x-ms-enum": {
         "name": "RoutingMode",
@@ -16631,12 +17294,12 @@
           {
             "name": "Balanced",
             "value": "balanced",
-            "description": "Balance cost and accuracy when routing requests across models."
+            "description": "Balance cost and quality when routing requests across models."
           },
           {
-            "name": "Accuracy",
-            "value": "accuracy",
-            "description": "Route requests to maximize accuracy regardless of cost."
+            "name": "Quality",
+            "value": "quality",
+            "description": "Route requests to maximize quality regardless of cost."
           }
         ]
       }

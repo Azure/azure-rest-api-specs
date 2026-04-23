@@ -82,6 +82,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   @tag("ManagedNetwork")
   @action("batchOutboundRules")
+  @list
   post is ArmResourceActionAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     Request = ManagedNetworkSettingsBasicResource,

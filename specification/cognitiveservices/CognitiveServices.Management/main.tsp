@@ -37,7 +37,9 @@ import "./OutboundRuleBasicResource.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
+import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
+import "./ManagedComputeUsages.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
