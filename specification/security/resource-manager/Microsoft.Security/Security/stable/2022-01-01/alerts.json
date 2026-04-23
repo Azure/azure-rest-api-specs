@@ -426,7 +426,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       }
@@ -1247,28 +1247,13 @@
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "#/definitions/Common.ErrorAdditionalInfo"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
-    },
-    "Common.ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The additional info.",
-          "readOnly": true
-        }
-      }
     },
     "Intent": {
       "type": "string",
