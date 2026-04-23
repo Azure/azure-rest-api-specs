@@ -67,7 +67,7 @@ interface ServerFarmSilos {
    * Get a specific silo for an App Service plan.
    */
   @summary("Get a specific silo for an App Service plan.")
-  getServerFarmSilo is ServerFarmSiloOps.Read<
+  get is ServerFarmSiloOps.Read<
     ServerFarmSilo,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -76,7 +76,7 @@ interface ServerFarmSilos {
    * Create or update an App Service plan silo.
    */
   @summary("Create or update an App Service plan silo.")
-  createOrUpdateServerFarmSilo is ServerFarmSiloOps.CreateOrUpdateAsync<
+  createOrUpdate is ServerFarmSiloOps.CreateOrUpdateAsync<
     ServerFarmSilo,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -85,7 +85,7 @@ interface ServerFarmSilos {
    * Delete an App Service plan silo.
    */
   @summary("Delete an App Service plan silo.")
-  deleteServerFarmSilo is ServerFarmSiloOps.DeleteWithoutOkAsync<
+  delete is ServerFarmSiloOps.DeleteWithoutOkAsync<
     ServerFarmSilo,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -94,7 +94,7 @@ interface ServerFarmSilos {
    * Get all silos for an App Service plan.
    */
   @summary("Get all silos for an App Service plan.")
-  listServerFarmSilos is ServerFarmSiloOps.List<
+  list is ServerFarmSiloOps.List<
     ServerFarmSilo,
     Response = ArmResponse<ServerFarmSiloCollection>,
     OverrideErrorType = DefaultErrorResponse
@@ -103,6 +103,6 @@ interface ServerFarmSilos {
 
 @@doc(ServerFarmSilo.name, "Name of the silo.");
 @@doc(ServerFarmSilo.properties, "ServerFarmSilo resource specific properties");
-@@doc(ServerFarmSilos.createOrUpdateServerFarmSilo::parameters.resource,
+@@doc(ServerFarmSilos.createOrUpdate::parameters.resource,
   "Details of the silo."
 );

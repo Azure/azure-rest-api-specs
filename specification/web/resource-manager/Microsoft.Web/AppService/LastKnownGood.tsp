@@ -67,7 +67,7 @@ interface LastKnownGoods {
    * Get the current Last Known Good revision for a web app.
    */
   @summary("Get the current Last Known Good revision for a web app.")
-  getLastKnownGood is LastKnownGoodOps.Read<
+  get is LastKnownGoodOps.Read<
     LastKnownGoodResource,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -77,7 +77,7 @@ interface LastKnownGoods {
    */
   @summary("Mark the current site state as Last Known Good.")
   @action("mark")
-  markLastKnownGood is LastKnownGoodOps.ActionSync<
+  mark is LastKnownGoodOps.ActionSync<
     LastKnownGoodResource,
     void,
     ArmResponse<LastKnownGoodResource>,

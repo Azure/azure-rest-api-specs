@@ -67,7 +67,7 @@ interface ManagedTrafficConfigs {
    * Get the managed traffic configuration for a web app.
    */
   @summary("Get the managed traffic configuration for a web app.")
-  getManagedTrafficConfig is ManagedTrafficConfigOps.Read<
+  get is ManagedTrafficConfigOps.Read<
     ManagedTrafficConfigResource,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -76,7 +76,7 @@ interface ManagedTrafficConfigs {
    * Update the managed traffic configuration for a web app.
    */
   @summary("Update the managed traffic configuration for a web app.")
-  updateManagedTrafficConfig is ManagedTrafficConfigOps.CreateOrUpdateSync<
+  update is ManagedTrafficConfigOps.CreateOrUpdateSync<
     ManagedTrafficConfigResource,
     Response = ArmResourceUpdatedResponse<ManagedTrafficConfigResource>,
     OverrideErrorType = DefaultErrorResponse
@@ -89,6 +89,6 @@ interface ManagedTrafficConfigs {
 @@doc(ManagedTrafficConfigResource.properties,
   "ManagedTrafficConfig resource specific properties"
 );
-@@doc(ManagedTrafficConfigs.updateManagedTrafficConfig::parameters.resource,
+@@doc(ManagedTrafficConfigs.update::parameters.resource,
   "Traffic configuration properties."
 );

@@ -66,7 +66,7 @@ interface SiteSilos {
    * Get a specific silo for a web app.
    */
   @summary("Get a specific silo for a web app.")
-  getSiteSilo is SiteSiloOps.Read<
+  get is SiteSiloOps.Read<
     SiteSilo,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -75,7 +75,7 @@ interface SiteSilos {
    * Create or update a web app silo.
    */
   @summary("Create or update a web app silo.")
-  createOrUpdateSiteSilo is SiteSiloOps.CreateOrUpdateAsync<
+  createOrUpdate is SiteSiloOps.CreateOrUpdateAsync<
     SiteSilo,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -84,7 +84,7 @@ interface SiteSilos {
    * Delete a web app silo.
    */
   @summary("Delete a web app silo.")
-  deleteSiteSilo is SiteSiloOps.DeleteWithoutOkAsync<
+  delete is SiteSiloOps.DeleteWithoutOkAsync<
     SiteSilo,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -93,7 +93,7 @@ interface SiteSilos {
    * Get all silos for a web app.
    */
   @summary("Get all silos for a web app.")
-  listSiteSilos is SiteSiloOps.List<
+  list is SiteSiloOps.List<
     SiteSilo,
     Response = ArmResponse<SiteSiloCollection>,
     OverrideErrorType = DefaultErrorResponse
@@ -102,6 +102,6 @@ interface SiteSilos {
 
 @@doc(SiteSilo.name, "Name of the silo.");
 @@doc(SiteSilo.properties, "SiteSilo resource specific properties");
-@@doc(SiteSilos.createOrUpdateSiteSilo::parameters.resource,
+@@doc(SiteSilos.createOrUpdate::parameters.resource,
   "Details of the silo."
 );
