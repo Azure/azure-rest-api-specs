@@ -16071,7 +16071,7 @@
         "required": [
           "name",
           "sources",
-          "model"
+          "generationModel"
         ],
         "properties": {
           "name": {
@@ -16085,9 +16085,9 @@
             },
             "description": "Source materials for generation — agent context, prompts, traces, or datasets."
           },
-          "model": {
+          "generationModel": {
             "type": "string",
-            "description": "The LLM model to use for generation (e.g., 'gpt-4o')."
+            "description": "The LLM model to use for rubric and data generation (e.g., 'gpt-4o'). Distinct from deployment_name in initializationParameters which is the LLM judge model used at eval time."
           },
           "category": {
             "type": "string",
@@ -16246,45 +16246,6 @@
         },
         "description": "Response from running an evaluation suite."
       },
-      "EvaluationSuiteTestingCriteria": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "evaluatorName"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "The grader type. Always 'azure_ai_evaluator' for Foundry evaluators."
-          },
-          "name": {
-            "type": "string",
-            "description": "Display name for this testing criteria entry. Must be unique within the suite."
-          },
-          "evaluatorName": {
-            "type": "string",
-            "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. builtin.relevance, builtin.task_adherence)\nand custom evaluators registered in the catalog."
-          },
-          "evaluatorVersion": {
-            "type": "string",
-            "description": "Evaluator version. Omit to use the latest version."
-          },
-          "initializationParameters": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Initialization parameters for the evaluator.\nIncludes deployment_name (LLM judge model), threshold (pass/fail score), and\nany evaluator-specific parameters."
-          },
-          "dataMapping": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Maps dataset columns to evaluator inputs.\nFor example, {\"query\": \"{{item.query}}\", \"response\": \"{{item.response}}\"}."
-          }
-        },
-        "description": "A testing criteria entry within an evaluation suite.\nSame shape as testing criteria on eval groups (azure_ai_evaluator grader type)."
-      },
       "EvaluationSuiteVersion": {
         "type": "object",
         "required": [
@@ -16308,10 +16269,11 @@
           "testingCriteria": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteTestingCriteria"
+              "type": "object",
+              "additionalProperties": {}
             },
             "minItems": 1,
-            "description": "Testing criteria. At least one entry is required."
+            "description": "Testing criteria — pass-through to eval group testing_criteria.\nSupports any grader type: azure_ai_evaluator, string_check, label_model, \nscore_model, text_similarity, python, etc. Stored as raw JSON.\nAt least one entry is required."
           },
           "target": {
             "allOf": [
@@ -16320,6 +16282,16 @@
               }
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
+          },
+          "itemSchema": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Dataset column schema for constructing the eval group's data_source_config.\nDescribes the shape of each row in the dataset.\nFor generate flow, provided by the dataset generation API.\nFor manual create, provided by the user."
+          },
+          "inputMessages": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "How to send dataset rows to the target (agent or model).\nPass-through to eval run data_source input_messages.\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
           },
           "evaluationLevel": {
             "type": "string",
@@ -16364,10 +16336,11 @@
           "testingCriteria": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluationSuiteTestingCriteria"
+              "type": "object",
+              "additionalProperties": {}
             },
             "minItems": 1,
-            "description": "Testing criteria. At least one entry is required."
+            "description": "Testing criteria — pass-through to eval group testing_criteria.\nSupports any grader type: azure_ai_evaluator, string_check, label_model, \nscore_model, text_similarity, python, etc. Stored as raw JSON.\nAt least one entry is required."
           },
           "target": {
             "allOf": [
@@ -16376,6 +16349,16 @@
               }
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
+          },
+          "itemSchema": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Dataset column schema for constructing the eval group's data_source_config.\nDescribes the shape of each row in the dataset.\nFor generate flow, provided by the dataset generation API.\nFor manual create, provided by the user."
+          },
+          "inputMessages": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "How to send dataset rows to the target (agent or model).\nPass-through to eval run data_source input_messages.\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
           },
           "evaluationLevel": {
             "type": "string",

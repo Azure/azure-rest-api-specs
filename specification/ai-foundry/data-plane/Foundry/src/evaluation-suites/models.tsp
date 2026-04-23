@@ -25,41 +25,6 @@ model DatasetReference {
   datasetVersion?: string;
 }
 
-@doc("""
-  A testing criteria entry within an evaluation suite.
-  Same shape as testing criteria on eval groups (azure_ai_evaluator grader type).
-  """)
-model EvaluationSuiteTestingCriteria {
-  @doc("The grader type. Always 'azure_ai_evaluator' for Foundry evaluators.")
-  type: string;
-
-  @doc("Display name for this testing criteria entry. Must be unique within the suite.")
-  name: string;
-
-  @doc("""
-    Evaluator name from the project's evaluator catalog.
-    Supports both built-in evaluators (e.g. builtin.relevance, builtin.task_adherence)
-    and custom evaluators registered in the catalog.
-    """)
-  evaluatorName: string;
-
-  @doc("Evaluator version. Omit to use the latest version.")
-  evaluatorVersion?: string;
-
-  @doc("""
-    Initialization parameters for the evaluator.
-    Includes deployment_name (LLM judge model), threshold (pass/fail score), and
-    any evaluator-specific parameters.
-    """)
-  initializationParameters?: Record<unknown>;
-
-  @doc("""
-    Maps dataset columns to evaluator inputs.
-    For example, {"query": "{{item.query}}", "response": "{{item.response}}"}.
-    """)
-  dataMapping?: Record<string>;
-}
-
 // ---------------------------------------------------------------------------
 // CRUD Resource model
 // ---------------------------------------------------------------------------
@@ -85,9 +50,14 @@ model EvaluationSuiteVersion {
     """)
   dataset?: DatasetReference;
 
-  @doc("Testing criteria. At least one entry is required.")
+  @doc("""
+    Testing criteria — pass-through to eval group testing_criteria.
+    Supports any grader type: azure_ai_evaluator, string_check, label_model, 
+    score_model, text_similarity, python, etc. Stored as raw JSON.
+    At least one entry is required.
+    """)
   @minItems(1)
-  testingCriteria: EvaluationSuiteTestingCriteria[];
+  testingCriteria: Record<unknown>[];
 
   @doc("""
     Target for this evaluation suite. Uses the existing Target discriminated type
@@ -95,6 +65,22 @@ model EvaluationSuiteVersion {
     Optional — allows suites to exist without a target.
     """)
   target?: Target;
+
+  @doc("""
+    Dataset column schema for constructing the eval group's data_source_config.
+    Describes the shape of each row in the dataset.
+    For generate flow, provided by the dataset generation API.
+    For manual create, provided by the user.
+    """)
+  itemSchema?: Record<unknown>;
+
+  @doc("""
+    How to send dataset rows to the target (agent or model).
+    Pass-through to eval run data_source input_messages.
+    Supports template type (prompt with column placeholders) and
+    item_reference type (column containing pre-built messages).
+    """)
+  inputMessages?: Record<unknown>;
 
   @doc("""
     Default evaluation level for this suite. Can be overridden at run time.
@@ -247,8 +233,8 @@ model EvaluationSuiteGenerationJobInputs {
   @doc("Source materials for generation — agent context, prompts, traces, or datasets.")
   sources: EvaluationSuiteJobSource[];
 
-  @doc("The LLM model to use for generation (e.g., 'gpt-4o').")
-  `model`: string;
+  @doc("The LLM model to use for rubric and data generation (e.g., 'gpt-4o'). Distinct from deployment_name in initializationParameters which is the LLM judge model used at eval time.")
+  generationModel: string;
 
   @doc("Category: 'quality' (default) or 'safety'.")
   category?: string;
