@@ -49,57 +49,52 @@ suppressions:
       Tags are mimicing the existing object structure from compute, bulkactions is a
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: PathForNestedResource
-    reason:
-      bulkVmOperations is a singleton proxy endpoint used for service-level read status and is not a standard ARM nested tracked resource path.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations"]
+    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings 
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/cancel"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/cancel"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/create"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/create"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/deallocate"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/deallocate"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/delete"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/delete"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/getOperationsStatus"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/getOperationsStatus"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/hibernate"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/hibernate"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/reimage"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/reimage"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/start"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/start"]
   - code: PathForResourceAction
     reason:
       bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/vdiFlexCreate"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/bulkactions/locations/{locationparameter}/virtualMachines/bulkVmOperations/vdiFlexCreate"]
         
 ```
 
