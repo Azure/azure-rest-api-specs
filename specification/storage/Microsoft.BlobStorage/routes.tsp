@@ -1594,11 +1594,7 @@ interface PageBlob {
       contentLength: 0;
 
       ...TimeoutParameter;
-
-      /** Bytes of data in the specified range. */
-      @header("Range")
-      range: string;
-
+      ...RangeParameterRequired;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
