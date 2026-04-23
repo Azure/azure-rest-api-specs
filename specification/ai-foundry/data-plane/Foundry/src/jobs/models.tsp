@@ -95,9 +95,6 @@ model Input {
 
   @doc("Literal value. Required for literal type.")
   value?: string;
-
-  @doc("Description for the input.")
-  description?: string;
 }
 
 @doc("Job output definition.")
@@ -105,10 +102,6 @@ model Output {
   @doc("Specifies the type of job output.")
   @encodedName("application/json", "jobOutputType")
   type: AssetTypes;
-
-  @doc("Output Asset URI.")
-  @encodedName("application/json", "uri")
-  path?: string;
 
   @doc("Output Asset Delivery Mode.")
   mode?: InputOutputModes;
@@ -260,9 +253,11 @@ model CommandJob extends JobProperties {
   properties?: Record<string>;
 
   @doc("Code asset reference.")
+  @encodedName("application/json", "codeId")
   code?: string;
 
   @doc("Compute resource ID.")
+  @encodedName("application/json", "computeId")
   compute: string;
 
   @doc("Mapping of input data bindings used in the job.")

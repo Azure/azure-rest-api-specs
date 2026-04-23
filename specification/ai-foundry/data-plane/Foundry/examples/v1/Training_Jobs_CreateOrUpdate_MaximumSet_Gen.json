@@ -13,25 +13,22 @@
         "description": "A sample command job for training",
         "tags": { "framework": "pytorch" },
         "properties": { "experimentName": "my-experiment" },
-        "code": "azureml:my-training-code:1",
-        "compute": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+        "codeId": "azureai:my-training-code:1",
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
         "inputs": {
           "training_data": {
             "jobInputType": "uri_folder",
             "uri": "azureai://datastores/mystore/paths/data/train",
-            "mode": "ReadOnlyMount",
-            "description": "Training dataset"
+            "mode": "ReadOnlyMount"
           },
           "learning_rate": {
             "jobInputType": "literal",
-            "value": "0.001",
-            "description": "Learning rate hyperparameter"
+            "value": "0.001"
           }
         },
         "outputs": {
           "model": {
             "jobOutputType": "uri_folder",
-            "uri": "azureai://datastores/mystore/paths/outputs/model",
             "mode": "ReadWriteMount",
             "assetName": "my-trained-model",
             "description": "Trained model output"
@@ -74,25 +71,22 @@
           "description": "A sample command job for training",
           "tags": { "framework": "pytorch" },
           "properties": { "experimentName": "my-experiment" },
-          "code": "azureml:my-training-code:1",
-          "compute": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+          "codeId": "azureai:my-training-code:1",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
           "inputs": {
             "training_data": {
               "jobInputType": "uri_folder",
               "uri": "azureai://datastores/mystore/paths/data/train",
-              "mode": "ReadOnlyMount",
-              "description": "Training dataset"
+              "mode": "ReadOnlyMount"
             },
             "learning_rate": {
               "jobInputType": "literal",
-              "value": "0.001",
-              "description": "Learning rate hyperparameter"
+              "value": "0.001"
             }
           },
           "outputs": {
             "model": {
               "jobOutputType": "uri_folder",
-              "uri": "azureai://datastores/mystore/paths/outputs/model",
               "mode": "ReadWriteMount",
               "assetName": "my-trained-model",
               "description": "Trained model output"
@@ -146,25 +140,22 @@
           "description": "A sample command job for training",
           "tags": { "framework": "pytorch" },
           "properties": { "experimentName": "my-experiment" },
-          "code": "azureml:my-training-code:1",
-          "compute": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+          "codeId": "azureai:my-training-code:1",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
           "inputs": {
             "training_data": {
               "jobInputType": "uri_folder",
               "uri": "azureai://datastores/mystore/paths/data/train",
-              "mode": "ReadOnlyMount",
-              "description": "Training dataset"
+              "mode": "ReadOnlyMount"
             },
             "learning_rate": {
               "jobInputType": "literal",
-              "value": "0.001",
-              "description": "Learning rate hyperparameter"
+              "value": "0.001"
             }
           },
           "outputs": {
             "model": {
               "jobOutputType": "uri_folder",
-              "uri": "azureai://datastores/mystore/paths/outputs/model",
               "mode": "ReadWriteMount",
               "assetName": "my-trained-model",
               "description": "Trained model output"
