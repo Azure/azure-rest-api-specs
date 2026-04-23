@@ -29,7 +29,9 @@ namespace Microsoft.Monitor {
       ObservabilityAgentResource,
       Azure.ResourceManager.Foundations.ResourceUpdateModel<
         ObservabilityAgentResource,
-        { properties?: ObservabilityAgentProperties }
+        {
+          properties?: ObservabilityAgentProperties;
+        }
       >
     >;
 
