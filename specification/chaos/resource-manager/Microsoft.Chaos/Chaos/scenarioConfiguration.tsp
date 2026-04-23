@@ -83,9 +83,9 @@ interface ScenarioConfigurations {
   /**
    * Fixes resource permissions for the given scenario configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 200+202, custom template not recognized by linter"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
   @pollingOperation(ScenarioConfigurations.getLatestPermissionsFix)
-  fixResourcePermissions is ArmResourceActionAsyncWithLocation<
+  fixResourcePermissions is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     FixResourcePermissionsRequest,
     PermissionsFix
