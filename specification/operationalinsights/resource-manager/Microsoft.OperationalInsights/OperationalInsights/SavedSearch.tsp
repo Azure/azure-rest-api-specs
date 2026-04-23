@@ -56,7 +56,7 @@ interface SavedSearches {
   /**
    * Gets the saved searches for a given Log Analytics Workspace
    */
-  listByWorkspace is ArmResourceListByParent<
+  listByWorkspace is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     SavedSearch,
     Response = ArmResponse<SavedSearchesListResult>
   >;
