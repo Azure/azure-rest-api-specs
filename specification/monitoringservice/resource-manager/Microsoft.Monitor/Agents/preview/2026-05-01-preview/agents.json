@@ -73,6 +73,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -105,6 +110,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_ListBySubscription": {
+            "$ref": "./examples/ObservabilityAgents_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -142,6 +152,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_ListByResourceGroup": {
+            "$ref": "./examples/ObservabilityAgents_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -187,6 +202,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_Get": {
+            "$ref": "./examples/ObservabilityAgents_Get.json"
           }
         }
       },
@@ -297,6 +317,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_Update": {
+            "$ref": "./examples/ObservabilityAgents_Update.json"
+          }
         }
       },
       "delete": {
@@ -349,6 +374,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ObservabilityAgents_Delete": {
+            "$ref": "./examples/ObservabilityAgents_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -357,6 +387,43 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -454,33 +521,22 @@
     },
     "ObservabilityAgentResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ObservabilityAgentResource.",
+      "description": "An observability agent resource.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ObservabilityAgentProperties",
+          "description": "Resource properties"
+        },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ObservabilityAgentResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "ObservabilityAgentResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ObservabilityAgentResource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ObservabilityAgentProperties"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     }
   },
   "parameters": {}
