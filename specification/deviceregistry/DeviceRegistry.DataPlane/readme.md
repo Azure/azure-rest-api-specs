@@ -12,6 +12,10 @@ This is a TypeSpec project so we only want the readme to default the default tag
 This is used for some tools such as doc generation and swagger apiview generation it isn't used for SDK code gen as we
 use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
+```yaml
+tag: package-2026-11-01-preview
+```
+
 ### Tag: package-2026-11-01-preview
 
 These settings apply only when `--tag=package-2026-11-01-preview` is specified on the command line.

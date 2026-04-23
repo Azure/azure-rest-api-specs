@@ -12,7 +12,7 @@
     - options.@azure-tools/typespec-ts.*
   paths:
     - DeviceRegistry.Management/tspconfig.yaml
-    - data-plane/DeviceRegistry/tspconfig.yaml
+    - DeviceRegistry.DataPlane/tspconfig.yaml
 
 - tool: TypeSpecValidation
   rules: [FolderStructure]
@@ -25,5 +25,6 @@
   rules: [FolderStructure]
   reason: Shared types in specification/deviceregistry/common/ are imported by both data-plane and control-plane projects to avoid duplication
   paths:
-    - data-plane/DeviceRegistry
+    - DeviceRegistry.DataPlane
     - DeviceRegistry.Management
+

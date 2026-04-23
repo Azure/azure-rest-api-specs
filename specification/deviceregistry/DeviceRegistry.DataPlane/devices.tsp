@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "../../common/deviceTypes.tsp";
+import "../common/deviceTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -82,14 +82,14 @@ union DeviceProvisioningAuthenticationType {
   /** Symmetric key authentication. */
   SymmetricKey: "SymmetricKey",
 
-  /** X.509 certificate authentication. */
-  X509Certificate: "X509Certificate",
+  /** Certificate authority authentication. */
+  CertificateAuthority: "CertificateAuthority",
 
   /** Self-signed X.509 certificate authentication. */
   SelfSignedX509Certificate: "SelfSignedX509Certificate",
 }
 
-/** Symmetric key credentials for device provisioning. */
+/** Symmetric key authentication details. */
 model SymmetricKeyCredentials {
   /** The primary symmetric key. */
   primaryKey: string;
@@ -98,63 +98,90 @@ model SymmetricKeyCredentials {
   secondaryKey: string;
 }
 
-/** Self-signed certificate thumbprints for device provisioning. */
+/** Self-signed X.509 certificate thumbprints for device authentication. */
 model SelfSignedThumbprints {
-  /** The primary self-signed certificate thumbprint. */
+  /** Primary certificate thumbprint. */
   primaryThumbprint: string;
 
-  /** The secondary self-signed certificate thumbprint. */
+  /** Secondary certificate thumbprint. */
   secondaryThumbprint: string;
 }
 
-/** Authentication configuration for device provisioning. */
+/** Operational authentication information for device provisioning. */
 model DeviceProvisioningAuthentication {
-  /** The operational authentication type. */
+  /** The authentication type. */
   type: DeviceProvisioningAuthenticationType;
 
-  /** Symmetric key credentials. Required when type is SymmetricKey. */
+  /** Symmetric key details. Required when type is SymmetricKey. */
   symmetricKey?: SymmetricKeyCredentials;
 
-  /** The certificate authority identifier. Required when type is X509Certificate. */
-  certificateAuthority?: string;
+  /** Certificate authority credentials. Required when type is CertificateAuthority. */
+  certificateAuthority?: CertificateAuthorityCredentials;
 
-  /** Self-signed certificate thumbprints. Required when type is SelfSignedX509Certificate. */
+  /** Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate. */
   selfSignedThumbprints?: SelfSignedThumbprints;
 }
 
-/** Desired properties for the device twin. */
-model DeviceTwinDesiredProperties {
-  /** The desired properties to set on the device twin. */
-  desired?: Record<string>;
+/** Certificate authority credentials for device provisioning. */
+model CertificateAuthorityCredentials {
+  /** ADR certificate policy resource ID. */
+  adrCertificatePolicyResourceId: string;
 }
 
-/** Initial device twin configuration for provisioning. */
+/** IoT Hub endpoint target for device provisioning. */
+model TargetEndpoint {
+  /** Display name of the target endpoint. */
+  name: string;
+
+  /** IoT Hub service endpoint address (e.g. myhub.azure-devices.net). */
+  address: string;
+}
+
+/** Device twin desired properties. */
+model TwinProperties {
+  /** The desired properties to set on the device twin. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Device twin desired properties require Record<unknown> to support arbitrary value types."
+  desired?: Record<unknown>;
+}
+
+/** Initial device twin configuration to apply during provisioning. */
 model DeviceTwin {
-  /** Tags to set on the device twin. */
-  tags?: Record<string>;
+  /** Device twin tags. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Device twin tags require Record<unknown> to support arbitrary value types."
+  tags?: Record<unknown>;
 
   /** The device twin properties. */
-  properties?: DeviceTwinDesiredProperties;
+  properties?: TwinProperties;
 }
 
-/** Request body for provisioning devices in a namespace. */
-model ProvisionDevicesRequest {
-  /** The ID to use as the IoT Hub device identity. This must be the External Device ID. */
-  externalDeviceId: string;
+/** Request body for the provision device endpoint. */
+model ProvisionDeviceRequest {
+  /** The device identity in IoT Hub. */
+  iotHubDeviceId: string;
 
   /** The service endpoint identifier as returned by the GetNamespace API. */
-  serviceEndpoint: string;
+  targetEndpoint: TargetEndpoint;
 
-  /** The authentication configuration for the device. */
+  /** Operational authentication configuration. */
   authentication: DeviceProvisioningAuthentication;
 
-  /** Optional initial device twin properties to set during provisioning. */
+  /** Initial device twin configuration to apply during provisioning. */
   deviceTwin?: DeviceTwin;
 }
 
-/** Result of a device provisioning operation. */
-model ProvisionDevicesResult {
-  ...DataPlaneResourceBase;
+/** Result of a successful device provisioning operation. */
+model ProvisionDeviceResult {
+  /** Unique device identifier assigned by the system. */
+  deviceUuid: string;
+
+  /** ARM resource ID of the provisioned device. */
+  deviceResourceId: string;
+
+  /** External device ID (IoT Hub device ID). */
+  externalDeviceId: string;
+
+  /** Name of the messaging endpoint the device is connected to. */
+  messagingEndpointName: string;
 }
 
 /** Request body for executing a direct method action on a device. */
@@ -192,8 +219,8 @@ interface Devices {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
-    ProvisionDevicesRequest,
-    ProvisionDevicesResult
+    ProvisionDeviceRequest,
+    ProvisionDeviceResult
   >;
 
   /** Invoke a direct method action on a device. */

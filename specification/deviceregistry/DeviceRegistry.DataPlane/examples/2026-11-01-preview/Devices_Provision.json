@@ -6,8 +6,11 @@
     "api-version": "2026-11-01-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
     "body": {
-      "externalDeviceId": "dps-enrollment-device-abc-123",
-      "serviceEndpoint": "my-iothub",
+      "iotHubDeviceId": "dps-enrollment-device-abc-123",
+      "targetEndpoint": {
+        "name": "my-iothub",
+        "address": "my-iothub.azure-devices.net"
+      },
       "authentication": {
         "type": "SymmetricKey",
         "symmetricKey": {
