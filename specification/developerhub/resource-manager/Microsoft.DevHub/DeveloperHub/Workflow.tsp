@@ -27,38 +27,30 @@ interface Workflows {
   /**
    * Gets a workflow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a workflow.")
   @tag("Workflow")
-  @operationId("Workflow_Get")
   get is ArmResourceRead<Workflow>;
 
   /**
    * Creates or updates a workflow
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates or updates a workflow")
   @tag("Workflow")
-  @operationId("Workflow_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Workflow>;
 
   /**
    * Updates tags on a workflow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates tags on a workflow.")
   @tag("Workflow")
-  @operationId("Workflow_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<Workflow, PatchModel = TagsObject>;
 
   /**
    * Deletes a workflow
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a workflow")
   @tag("Workflow")
-  @operationId("Workflow_Delete")
   delete is ArmResourceDeleteSync<
     Workflow,
     Response = ArmResponse<DeleteWorkflowResponse> | ArmDeletedNoContentResponse
@@ -67,10 +59,8 @@ interface Workflows {
   /**
    * Gets a list of workflows within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of workflows within a resource group.")
   @tag("Workflow")
-  @operationId("Workflow_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Workflow,
     Parameters = {
@@ -85,10 +75,8 @@ interface Workflows {
   /**
    * Gets a list of workflows associated with the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of workflows associated with the specified subscription.")
   @tag("Workflow")
-  @operationId("Workflow_List")
   list is ArmListBySubscription<Workflow>;
 }
 

@@ -13,9 +13,9 @@ namespace Microsoft.DevHub;
 /**
  * Singleton response of GitHubOAuth containing
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @subscriptionResource
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GitHubOAuthResponse
   is Azure.ResourceManager.ProxyResource<GitHubOAuthProperties> {
   ...ResourceNameParameter<
@@ -41,8 +41,8 @@ alias GitHubOAuthResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations(#{ omitTags: true })
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations(#{ omitTags: true })
 interface GitHubOAuthResponses {
   /**
    * Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.

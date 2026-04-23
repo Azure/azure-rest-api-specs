@@ -44,19 +44,15 @@ interface AdooAuthResponses {
   /**
    * Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.")
   @tag("ADOOAuth")
-  @operationId("ADOOAuth_Get")
   get is AdooAuthResponsesOps.Read<AdooAuthResponse>;
 
   /**
    * Callback URL to hit once authenticated with ADO to have the service store the OAuth token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Callback URL to hit once authenticated with ADO to have the service store the OAuth token.")
   @tag("ADOOAuth")
-  @operationId("ADOOAuth_List")
   list is ArmResourceListByParent<
     AdooAuthResponse,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

@@ -30,11 +30,11 @@ using TypeSpec.Versioning;
 /**
  * The AKS Developer Hub Service Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.DevHub")
 @service(#{ title: "DeveloperHubServiceClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.DevHub;
 
 /**

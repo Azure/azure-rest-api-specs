@@ -963,8 +963,8 @@ model GitHubWorkflowProfile {
   /**
    * The URL to the Pull Request submitted against the users repository.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   prURL?: string;
 
   /**
@@ -1070,8 +1070,8 @@ model WorkflowRun {
   /**
    * URL to the run of the workflow.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   workflowRunURL?: string;
 
   /**
@@ -1274,8 +1274,8 @@ model PullRequest {
   /**
    * The URL to the Pull Request submitted against the users repository.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   prURL?: string;
 
   /**

@@ -31,10 +31,8 @@ interface VersionedTemplates {
   /**
    * Gets a VersionedTemplate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a VersionedTemplate.")
   @tag("VersionedTemplate")
-  @operationId("VersionedTemplate_Get")
   get is ArmResourceRead<
     VersionedTemplate,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -43,10 +41,8 @@ interface VersionedTemplates {
   /**
    * Gets a list of VersionedTemplate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of VersionedTemplate.")
   @tag("VersionedTemplate")
-  @operationId("VersionedTemplate_List")
   list is ArmResourceListByParent<
     VersionedTemplate,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -55,10 +51,8 @@ interface VersionedTemplates {
   /**
    * Generates a VersionedTemplate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Generates a VersionedTemplate.")
   @tag("VersionedTemplate")
-  @operationId("VersionedTemplate_Generate")
   generate is ArmResourceActionSync<
     VersionedTemplate,
     Record<string>,
