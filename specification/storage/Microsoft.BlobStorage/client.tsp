@@ -107,6 +107,9 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@usage(BlobName, Usage.output, "rust");
 
+/** An HTTP byte range, e.g. "bytes=0-1023". */
+scalar HttpRange extends string;
+
 @@alternateType(BlobItem.name, string, "rust");
 @@alternateType(BlobPrefix.name, string, "rust");
 
@@ -256,6 +259,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   uint64,
   "rust"
 );
+@@alternateType(RangeParameter.range, HttpRange, "rust");
+@@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
