@@ -18,10 +18,6 @@ interface PrivateStoreCollectionOperationGroup {
   /**
    * Delete Private store collection. This is a workaround.
    */
-  // Bind this workaround POST to the Collection resource so it is emitted as an action
-  // on PrivateStoreCollectionInfoResource itself (not on its parent PrivateStoreResource).
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Workaround POST needs explicit resource binding to match baseline API"
-  @Azure.ResourceManager.Private.legacyResourceOperation(Collection, "action")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}")
   @post
   post(
@@ -50,10 +46,6 @@ interface PrivateStoreCollectionOfferOperationGroup {
   /**
    * Delete Private store offer. This is a workaround.
    */
-  // Bind this workaround POST to the Offer resource so it is emitted as an action
-  // on PrivateStoreOfferResource itself (not on its parent PrivateStoreCollectionInfoResource).
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Workaround POST needs explicit resource binding to match baseline API"
-  @Azure.ResourceManager.Private.legacyResourceOperation(Offer, "action")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}")
   @post
   post(

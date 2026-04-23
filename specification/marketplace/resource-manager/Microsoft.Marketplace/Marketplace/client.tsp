@@ -64,9 +64,34 @@ using Microsoft.Marketplace;
   "csharp"
 );
 @@clientName(Rule.type, "RuleType", "csharp");
-@@clientName(PrivateStoreCollectionOperationGroup.post, "Delete", "csharp");
-@@clientName(PrivateStoreCollectionOfferOperationGroup.post,
-  "Delete",
+// Legacy POST workaround operations (one URL, both DELETE and POST verbs in swagger) are
+// hidden from the C# public surface. Resources expose only the standard ARM Delete(WaitUntil).
+// This avoids a duplicate Delete overload whose body is an extensible-enum (PrivateStoreOperation)
+// and eliminates the need for a SDK-side ToRequestContent customization. See CHANGELOG.
+@@access(PrivateStoreCollectionOperationGroup.post, Access.internal, "csharp");
+@@access(PrivateStoreCollectionOfferOperationGroup.post, Access.internal, "csharp");
+// Route the internal workaround POSTs into the csharp-renamed client groups to avoid a
+// name collision: without an override these land in a client named "PrivateStoreCollection",
+// which collides with the auto-generated ArmCollection class for PrivateStoreResource.
+@@clientLocation(PrivateStoreCollectionOperationGroup.post,
+  "PrivateStoreCollectionInfo",
+  "csharp"
+);
+@@clientLocation(PrivateStoreCollectionOfferOperationGroup.post,
+  "PrivateStoreCollectionOffer",
+  "csharp"
+);
+// Generator bug workaround: the body parameter is an extensible-enum struct
+// (PrivateStoreOperation) but the codegen emits T.ToRequestContent(payload) and no such
+// method exists on extensible-enum structs. Alter the C# body type to string so codegen
+// takes the RequestContent.Create primitive path, eliminating the need for a SDK-side
+// ToRequestContent partial on PrivateStoreOperation.
+@@alternateType(PrivateStoreCollectionOperationGroup.post::parameters.payload,
+  string,
+  "csharp"
+);
+@@alternateType(PrivateStoreCollectionOfferOperationGroup.post::parameters.payload,
+  string,
   "csharp"
 );
 @@clientName(PrivateStores.fetchAllSubscriptionsInTenant,
@@ -243,14 +268,7 @@ using Microsoft.Marketplace;
   "PrivateStoreCollectionInfo",
   "csharp"
 );
-@@clientLocation(PrivateStoreCollectionOperationGroup.post,
-  "PrivateStoreCollectionInfo",
-  "csharp"
-);
-@@clientLocation(PrivateStoreCollectionOfferOperationGroup.post,
-  "PrivateStoreOffer",
-  "csharp"
-);
+
 
 // ===== @@usage: Model usage overrides (C#) =====
 // Make OfferProperties (C# name: PrivateStoreOfferResult) input+output so collections are writable.
