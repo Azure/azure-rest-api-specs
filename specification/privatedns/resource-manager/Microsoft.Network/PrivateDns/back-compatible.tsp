@@ -27,3 +27,13 @@ using Microsoft.Network;
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(PrivateZones.recordSetsList, RecordSets);
 @@clientName(PrivateZones.recordSetsList, "List");
+@@visibility(PrivateZone.tags,
+  Lifecycle.Read,
+  Lifecycle.Update,
+  Lifecycle.Create
+);
+@@visibility(VirtualNetworkLink.tags,
+  Lifecycle.Read,
+  Lifecycle.Update,
+  Lifecycle.Create
+);
