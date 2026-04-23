@@ -279,7 +279,17 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates the delete operation is performed in the background."
+            "description": "Accepted. The response indicates the delete operation is performed in the background.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to query for the status of the asynchronous delete operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the result of the asynchronous delete operation when it has completed."
+              }
+            }
           },
           "204": {
             "description": "NoContent. The response indicates the customLocation resource is already deleted."
@@ -700,10 +710,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "Update Resource Sync Rule": {
             "$ref": "./examples/ResourceSyncRulesPatch.json"
@@ -832,40 +838,12 @@
         }
       }
     },
-    "Identity": {
-      "description": "Identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal ID of resource identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tenantId": {
-          "description": "The tenant ID of resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The identity type.",
-          "type": "string",
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "customLocation": {
       "description": "Custom Locations definition.",
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
           "description": "Identity for the resource."
         },
         "properties": {
@@ -1092,7 +1070,7 @@
       "x-ms-client-flatten": true,
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
           "description": "Identity for the resource."
         },
         "properties": {
