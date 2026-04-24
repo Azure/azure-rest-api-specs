@@ -7,7 +7,7 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 
 ```text
 arm-api-reviewer/
-├── .vally.yaml            # Vally project config (skill discovery, eval paths)
+├── .vally.yaml            # Vally project config (skill discovery, eval paths, shared config, suites)
 ├── evaluate/              # Evaluate (vally) eval definitions (9 files)
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
@@ -58,23 +58,25 @@ Prerequisites: Clone [microsoft/evaluate](https://github.com/microsoft/evaluate)
 then `npm install && npm run build`.
 
 The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
-auto-discovery (via `paths.skills`) and eval file location. Skills are discovered
-automatically — individual eval files do not need to declare `environment.skills`.
+auto-discovery (via `paths.skills`), eval file location, shared execution config
+(`model`, `judge_model`, `executor`, `timeout`), and a named suite for running
+the full eval suite in a single command. Skills are discovered automatically —
+individual eval files do not need to declare `environment.skills`.
 
 ```bash
-# Run a single category
 cd .github/skills/evals/arm-api-reviewer
+
+# Run the full suite (all 21 stimuli, 5 concurrent workers)
+npx --prefix /path/to/evaluate vally eval --suite all --verbose
+
+# Run a single category
 npx --prefix /path/to/evaluate vally eval -e evaluate/eval-arm-resource-structure.yaml --verbose
 
-# Run all categories
-for f in evaluate/eval-*.yaml; do
-  npx --prefix /path/to/evaluate vally eval -e "$f" --verbose
-done
+# Override the agent model for faster inner-loop iteration
+npx --prefix /path/to/evaluate vally eval --suite all --model claude-sonnet-4.6 --verbose
 
 # Save results to a directory (includes results.jsonl + eval-results.md)
-npx --prefix /path/to/evaluate vally eval \
-  -e evaluate/eval-arm-resource-structure.yaml \
-  --output-dir ./results --verbose
+npx --prefix /path/to/evaluate vally eval --suite all --output-dir ./results --verbose
 ```
 
 Replace `/path/to/evaluate` with the path to your local clone of

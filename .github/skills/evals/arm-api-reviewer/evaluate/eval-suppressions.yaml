@@ -3,27 +3,17 @@ description: |
   Suppression analysis tests (05xxxx).
   Validates detection of suppressions without justification and
   suppressions of security-related rules with vague reasons.
-environment:
-  files:
-    - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
-      dest: "specification/nosupprsvc/resource-manager/readme.md"
-    - src: "../fixtures/readme/readme-security-suppression.md"
-      dest: "specification/secsupprsvc/resource-manager/readme.md"
-
-config:
-  runs: 1
-  timeout: 600
-  executor: copilot-sdk
-  model: claude-opus-4.6-1m
-  judge_model: gpt-4o-mini
 
 scoring:
-  weights: equal
   threshold: 0.7
 
 stimuli:
   # 050001 — Suppressions without reason
   - name: detect-suppression-no-reason
+    environment:
+      files:
+        - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
+          dest: "specification/nosupprsvc/resource-manager/readme.md"
     prompt: >
       Review the following readme.md suppression file for an ARM specification.
       This is a new API version with no previous readme.md to compare against.
@@ -49,6 +39,10 @@ stimuli:
 
   # 050002 — Security rule suppressions
   - name: detect-suppression-security-rule
+    environment:
+      files:
+        - src: "../fixtures/readme/readme-security-suppression.md"
+          dest: "specification/secsupprsvc/resource-manager/readme.md"
     prompt: >
       Review the following readme.md suppression file for an ARM specification.
       This is a new API version with no previous readme.md to compare against.

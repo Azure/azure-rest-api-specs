@@ -3,27 +3,19 @@ description: |
   True negative (false-positive resistance) tests (09xxxx).
   Validates that the reviewer does NOT flag blocking violations on clean,
   fully compliant specs and examples.
-environment:
-  files:
-    - src: "../fixtures/arm-openapi/clean-spec.json"
-      dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
-    - src: "../fixtures/examples/example-clean.json"
-      dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
-
-config:
-  runs: 1
-  timeout: 600
-  executor: copilot-sdk
-  model: claude-opus-4.6-1m
-  judge_model: gpt-4o-mini
 
 scoring:
-  weights: equal
   threshold: 0.7
 
 stimuli:
   # 090001 — Clean ARM spec (no blocking issues expected)
   - name: clean-arm-spec-no-blocking-issues
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
+        - src: "../fixtures/examples/example-clean.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
       compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
@@ -44,6 +36,10 @@ stimuli:
 
   # 090002 — Clean example file (no issues expected)
   - name: clean-example-no-issues
+    environment:
+      files:
+        - src: "../fixtures/examples/example-clean.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
     prompt: >
       Review the following example JSON file for compliance with Azure REST API
       example file guidelines. This example is for a GET operation on an ARM

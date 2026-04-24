@@ -3,31 +3,17 @@ description: |
   Property design tests (02xxxx).
   Validates detection of secret properties, naming violations,
   missing descriptions, and enum issues.
-environment:
-  files:
-    - src: "../fixtures/arm-openapi/secret-property.json"
-      dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
-    - src: "../fixtures/arm-openapi/naming-violations.json"
-      dest: "specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json"
-    - src: "../fixtures/arm-openapi/missing-descriptions.json"
-      dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
-    - src: "../fixtures/arm-openapi/enum-violations.json"
-      dest: "specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json"
-
-config:
-  runs: 1
-  timeout: 600
-  executor: copilot-sdk
-  model: claude-opus-4.6-1m
-  judge_model: gpt-4o-mini
 
 scoring:
-  weights: equal
   threshold: 0.7
 
 stimuli:
   # 020001 — Secret properties
   - name: detect-secret-properties
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
       compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
@@ -59,6 +45,10 @@ stimuli:
 
   # 020002 — Naming violations
   - name: detect-naming-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/naming-violations.json"
+          dest: "specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
       compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
@@ -86,6 +76,10 @@ stimuli:
 
   # 020003 — Missing descriptions
   - name: detect-missing-descriptions
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/missing-descriptions.json"
+          dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
       compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
@@ -108,6 +102,10 @@ stimuli:
 
   # 020004 — Enum violations
   - name: detect-enum-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/enum-violations.json"
+          dest: "specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
       compliance with Azure REST API Guidelines and ARM RPC rules. This is a new

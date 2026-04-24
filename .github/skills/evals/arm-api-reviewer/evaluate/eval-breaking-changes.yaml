@@ -3,35 +3,19 @@ description: |
   Breaking change detection tests (04xxxx).
   Validates detection of removed properties, property type changes,
   and enum value narrowing between API versions.
-environment:
-  files:
-    - src: "../fixtures/version-pairs/removed-property/stable-2024-01-01.json"
-      dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json"
-    - src: "../fixtures/version-pairs/removed-property/stable-2025-01-01.json"
-      dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json"
-    - src: "../fixtures/version-pairs/type-change/stable-2024-01-01.json"
-      dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json"
-    - src: "../fixtures/version-pairs/type-change/stable-2025-01-01.json"
-      dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json"
-    - src: "../fixtures/version-pairs/enum-narrowing/stable-2024-01-01.json"
-      dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json"
-    - src: "../fixtures/version-pairs/enum-narrowing/stable-2025-01-01.json"
-      dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json"
-
-config:
-  runs: 1
-  timeout: 600
-  executor: copilot-sdk
-  model: claude-opus-4.6-1m
-  judge_model: gpt-4o-mini
 
 scoring:
-  weights: equal
   threshold: 0.7
 
 stimuli:
   # 040001 — Removed property between versions
   - name: detect-breaking-removed-property
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/removed-property/stable-2024-01-01.json"
+          dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json"
+        - src: "../fixtures/version-pairs/removed-property/stable-2025-01-01.json"
+          dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification files. The
       new version is stable/2025-01-01 and the previous version is
@@ -57,6 +41,12 @@ stimuli:
 
   # 040002 — Property type change between versions
   - name: detect-breaking-type-change
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/type-change/stable-2024-01-01.json"
+          dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json"
+        - src: "../fixtures/version-pairs/type-change/stable-2025-01-01.json"
+          dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification files. The
       new version is stable/2025-01-01 and the previous version is
@@ -81,6 +71,12 @@ stimuli:
 
   # 040003 — Enum value narrowing between versions
   - name: detect-breaking-enum-narrowing
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/enum-narrowing/stable-2024-01-01.json"
+          dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json"
+        - src: "../fixtures/version-pairs/enum-narrowing/stable-2025-01-01.json"
+          dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification files. The
       new version is stable/2025-01-01 and the previous version is

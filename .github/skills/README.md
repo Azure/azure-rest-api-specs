@@ -72,11 +72,15 @@ catalog, grader types, running instructions, and contribution guide.
 git clone https://github.com/microsoft/evaluate.git
 cd evaluate && npm install && npm run build && cd -
 
-# Run all eval categories
+# Run the full suite (all 21 stimuli, 5 concurrent workers)
 cd .github/skills/evals/arm-api-reviewer
-for f in evaluate/eval-*.yaml; do
-  npx --prefix /path/to/evaluate vally eval -e "$f" --verbose
-done
+npx --prefix /path/to/evaluate vally eval --suite all --verbose
+
+# Or run a single category
+npx --prefix /path/to/evaluate vally eval -e evaluate/eval-breaking-changes.yaml --verbose
+
+# Use a faster model for inner-loop iteration
+npx --prefix /path/to/evaluate vally eval --suite all --model claude-sonnet-4.6 --verbose
 ```
 
 ### Gating changes
