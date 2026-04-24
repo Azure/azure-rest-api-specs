@@ -26,6 +26,15 @@ model LicenseProfile
   >;
 }
 
+alias LicenseProfileNameAlias = {
+  /**
+   * The name of the license profile.
+   */
+  @path
+  @segment("licenseProfiles")
+  licenseProfileName: LicenseProfileName;
+};
+
 alias LicenseProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -41,14 +50,7 @@ alias LicenseProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("machines")
     machineName: string;
   },
-  {
-    /**
-     * The name of the license profile.
-     */
-    @path
-    @segment("licenseProfiles")
-    licenseProfileName: LicenseProfileName;
-  }
+  LicenseProfileNameAlias
 >;
 
 @armResourceOperations(#{ omitTags: true })
