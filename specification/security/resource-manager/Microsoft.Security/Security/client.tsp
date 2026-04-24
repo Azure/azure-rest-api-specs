@@ -343,7 +343,7 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
-  "java"
+  "java,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
