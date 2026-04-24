@@ -352,15 +352,15 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
   "IoTIpfilterDenyAll",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
   "IoTIpfilterPermissiveRule",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript");
 
