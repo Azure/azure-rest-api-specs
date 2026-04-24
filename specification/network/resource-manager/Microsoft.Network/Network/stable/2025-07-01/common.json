@@ -6453,6 +6453,42 @@
         ]
       }
     },
+    "NspReadinessState": {
+      "type": "string",
+      "description": "The readiness state of the resource type for NSP support.",
+      "enum": [
+        "Onboarding",
+        "Preview",
+        "GA",
+        "NotReady"
+      ],
+      "x-ms-enum": {
+        "name": "NspReadinessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Onboarding",
+            "value": "Onboarding",
+            "description": "Resource Provider is actively being onboarded to NSP"
+          },
+          {
+            "name": "Preview",
+            "value": "Preview",
+            "description": "Resource Provider supports NSP in Preview"
+          },
+          {
+            "name": "GA",
+            "value": "GA",
+            "description": "Resource Provider is generally available for NSP Integration"
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "NSP Onboarding is not started or not Supported"
+          }
+        ]
+      }
+    },
     "NvaNicType": {
       "type": "string",
       "enum": [

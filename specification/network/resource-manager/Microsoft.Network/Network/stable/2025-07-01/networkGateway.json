@@ -5033,6 +5033,10 @@
         "enablePrivateLinkFastPath": {
           "type": "boolean",
           "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
+        },
+        "routingConfiguration": {
+          "$ref": "./virtualWan.json#/definitions/RoutingConfiguration",
+          "description": "The routing configuration indicating the associated and propagated route tables for this connection."
         }
       },
       "required": [
@@ -5218,6 +5222,10 @@
         "certificateAuthentication": {
           "$ref": "#/definitions/CertificateAuthentication",
           "description": "Certificate Authentication information for a certificate based authentication connection."
+        },
+        "routingConfiguration": {
+          "$ref": "./virtualWan.json#/definitions/RoutingConfiguration",
+          "description": "The routing configuration indicating the associated and propagated route tables for this connection."
         }
       },
       "required": [
