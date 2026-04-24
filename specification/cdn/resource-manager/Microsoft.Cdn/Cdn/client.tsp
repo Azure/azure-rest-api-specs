@@ -233,6 +233,18 @@ using Azure.ResourceManager;
 @@clientName(WebAgent, "CdnWebAgent", "csharp");
 @@clientName(AgentPath, "CdnWebAgentPath", "csharp");
 @@clientName(AgentPathType, "CdnWebAgentPathType", "csharp");
+// PR review feedback: rename nested WAF policy model to add RP context and disambiguate
+// from the existing CdnWebApplicationFirewallPolicyData ARM resource.
+@@clientName(WebApplicationFirewallPolicy,
+  "FrontDoorWebApplicationFirewallPolicyProperties",
+  "csharp"
+);
+// PR review feedback: singular + RP-prefixed name for WAF log scrubbing rule (each
+// instance represents a single rule entry, not a collection).
+@@clientName(WebApplicationFirewallScrubbingRules,
+  "FrontDoorWafLogScrubbingRule",
+  "csharp"
+);
 @@clientName(AfdUrlSigningActionParameters,
   "FrontDoorUrlSigningActionContent",
   "csharp"
