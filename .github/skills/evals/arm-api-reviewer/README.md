@@ -33,17 +33,17 @@ arm-api-reviewer/
 
 ## Test Categories (21 test cases)
 
-| ID     | Category                  | Count | Description |
-| ------ | ------------------------- | ----- | ----------- |
-| 01xxxx | ARM resource structure    | 2     | Missing CRUD ops, missing provisioningState |
-| 02xxxx | Property design           | 4     | Secrets, naming, descriptions, enums |
-| 03xxxx | Operations                | 4     | PATCH, PUT, DELETE, LRO violations |
-| 04xxxx | Breaking changes          | 3     | Removed property, type change, enum narrowing |
-| 05xxxx | Suppression analysis      | 2     | Missing reason, security rule suppressions |
-| 06xxxx | Example file validation   | 2     | Bad resource ID, realistic secrets |
-| 09xxxx | True negatives            | 2     | Clean spec, clean example (false-positive resistance) |
-| 10xxxx | Classification            | 1     | NEW vs EXISTING issue tagging |
-| 11xxxx | Report format             | 1     | Line numbers, rule IDs, structured output |
+| ID     | Category                | Count | Description                                           |
+| ------ | ----------------------- | ----- | ----------------------------------------------------- |
+| 01xxxx | ARM resource structure  | 2     | Missing CRUD ops, missing provisioningState           |
+| 02xxxx | Property design         | 4     | Secrets, naming, descriptions, enums                  |
+| 03xxxx | Operations              | 4     | PATCH, PUT, DELETE, LRO violations                    |
+| 04xxxx | Breaking changes        | 3     | Removed property, type change, enum narrowing         |
+| 05xxxx | Suppression analysis    | 2     | Missing reason, security rule suppressions            |
+| 06xxxx | Example file validation | 2     | Bad resource ID, realistic secrets                    |
+| 09xxxx | True negatives          | 2     | Clean spec, clean example (false-positive resistance) |
+| 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                         |
+| 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output             |
 
 ## Fixtures (shared)
 
@@ -99,19 +99,19 @@ options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
 
 ### Waza
 
-| Grader             | Purpose |
-| ------------------ | ------- |
+| Grader             | Purpose                                                         |
+| ------------------ | --------------------------------------------------------------- |
 | `skill_invocation` | Verify the `azure-api-review` skill is invoked (in `eval.yaml`) |
-| `prompt`           | LLM-as-judge evaluation of agent output against a rubric |
+| `prompt`           | LLM-as-judge evaluation of agent output against a rubric        |
 
 ### Evaluate (vally)
 
-| Grader              | Purpose |
-| ------------------- | ------- |
-| `output-contains`   | Substring match on agent output (keywords, rule IDs) |
-| `output-matches`    | Regex match on agent output |
-| `output-not-matches` | Negative regex match (e.g., no em dashes) |
-| `prompt`            | LLM-as-judge evaluation of agent output against `rubric` criteria |
+| Grader               | Purpose                                                           |
+| -------------------- | ----------------------------------------------------------------- |
+| `output-contains`    | Substring match on agent output (keywords, rule IDs)              |
+| `output-matches`     | Regex match on agent output                                       |
+| `output-not-matches` | Negative regex match (e.g., no em dashes)                         |
+| `prompt`             | LLM-as-judge evaluation of agent output against `rubric` criteria |
 
 Vally eval files also use `constraints.expect_skills` to verify the
 `azure-api-review` skill is activated during each stimulus.
