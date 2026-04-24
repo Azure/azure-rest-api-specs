@@ -281,9 +281,36 @@ using Azure.ClientGenerator.Core;
 // Rename the operation to match the contract's expected method name (GetPriceSheet)
 @@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
 
+// Rename scope-based operations so MockableConsumptionArmClient method names match shipped v1.1.0 contract.
+@@clientName(UsageDetailsOperationGroup.list,
+  "GetConsumptionUsageDetails",
+  "csharp"
+);
+@@clientName(MarketplacesOperationGroup.list,
+  "GetConsumptionMarketPlaces",
+  "csharp"
+);
+@@clientName(TagsOperationGroup.get, "GetConsumptionTags", "csharp");
+@@clientName(ReservationsDetailsOperationGroup.list,
+  "GetConsumptionReservationsDetails",
+  "csharp"
+);
+@@clientName(ReservationRecommendationsOperationGroup.list,
+  "GetConsumptionReservationRecommendations",
+  "csharp"
+);
+
 // Override read-only visibility on eTag so the generated property exposes a public setter (matches shipped v1.0.1 surface).
-@@visibility(EventSummary.eTag, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
-@@visibility(LotSummary.eTag, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
+@@visibility(EventSummary.eTag,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
+@@visibility(LotSummary.eTag,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
 
 @@usage(Tag, Usage.input, "csharp");
 @@usage(TagsResult, Usage.input, "csharp");
@@ -299,4 +326,34 @@ using Azure.ClientGenerator.Core;
 );
 @@visibility(ManagementGroupAggregatedCostProperties.excludedSubscriptions,
   Lifecycle.Read
+);
+
+// Flatten properties-envelope models so generated discriminator subclasses expose shipped flat-property surface.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyUsageDetail.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernUsageDetail.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyChargeSummary.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernChargeSummary.properties,
+  "csharp"
+);
+
+// meterId in shipped surface is Guid? rather than string.
+@@alternateType(LegacyUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(ModernUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(LegacyReservationRecommendationProperties.meterId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(ModernReservationRecommendationProperties.meterId,
+  Azure.Core.uuid,
+  "csharp"
 );
