@@ -1,51 +1,53 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2026-01-01",
+    "jobName": "testcontainerAppsJob0",
     "resourceGroupName": "rg",
-    "jobName": "testcontainerappsjob0",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "template": {
       "containers": [
         {
-          "image": "repo/testcontainerappsjob0:v4",
-          "name": "testcontainerappsjob0",
+          "name": "testcontainerAppsJob0",
+          "image": "repo/testcontainerAppsJob0:v4",
           "resources": {
-            "cpu": 0.5,
-            "memory": "1Gi"
+            "cpu": 0.2,
+            "memory": "100Mi"
           }
         }
       ],
       "initContainers": [
         {
-          "image": "repo/testcontainerappsjob0:v4",
           "name": "testinitcontainerAppsJob0",
-          "resources": {
-            "cpu": 0.5,
-            "memory": "1Gi"
-          },
-          "command": [
-            "/bin/sh"
-          ],
           "args": [
             "-c",
             "while true; do echo hello; sleep 10;done"
-          ]
+          ],
+          "command": [
+            "/bin/sh"
+          ],
+          "image": "repo/testcontainerAppsJob0:v4",
+          "resources": {
+            "cpu": 0.2,
+            "memory": "100Mi"
+          }
         }
       ]
-    },
-    "api-version": "2026-01-01"
+    }
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "name": "testcontainerappsjob0-pjxhsye",
+        "name": "testcontainerAppsJob0-pjxhsye",
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/{containerAppsJobName}/executions/{jobExecutionName}"
-      }
+      },
+      "headers": {}
     },
     "202": {
       "headers": {
         "Location": "location"
       }
     }
-  }
+  },
+  "operationId": "Jobs_Start",
+  "title": "Run a Container Apps Job"
 }

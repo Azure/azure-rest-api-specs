@@ -13372,7 +13372,7 @@
           ]
         },
         "workloadProfileName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkloadProfileName",
           "description": "Workload profile name to pin for container app execution."
         },
         "patchingConfiguration": {
@@ -16701,7 +16701,7 @@
       "description": "Settings for the ingress component, including workload profile, scaling, and connection handling.",
       "properties": {
         "workloadProfileName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkloadProfileName",
           "description": "Name of the workload profile used by the ingress component. Required."
         },
         "terminationGracePeriodSeconds": {
@@ -17156,13 +17156,11 @@
       "description": "Trigger configuration of an event driven job.",
       "properties": {
         "replicaCompletionCount": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/ReplicaCompletionCount",
           "description": "Minimum number of successful replica completions before overall job completion."
         },
         "parallelism": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Parallelism",
           "description": "Number of parallel replicas of a job that can run at a given time."
         },
         "scale": {
@@ -17176,13 +17174,11 @@
       "description": "Manual trigger configuration for a single execution job. Properties replicaCompletionCount and parallelism would be set to 1 by default",
       "properties": {
         "replicaCompletionCount": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/ReplicaCompletionCount",
           "description": "Minimum number of successful replica completions before overall job completion."
         },
         "parallelism": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Parallelism",
           "description": "Number of parallel replicas of a job that can run at a given time."
         }
       }
@@ -17192,8 +17188,7 @@
       "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parallelism would be set to 1 by default",
       "properties": {
         "replicaCompletionCount": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/ReplicaCompletionCount",
           "description": "Minimum number of successful replica completions before overall job completion."
         },
         "cronExpression": {
@@ -17201,8 +17196,7 @@
           "description": "Cron formatted repeating schedule (\"* * * * *\") of a Cron Job."
         },
         "parallelism": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Parallelism",
           "description": "Number of parallel replicas of a job that can run at a given time."
         }
       },
@@ -17486,7 +17480,7 @@
           ]
         },
         "workloadProfileName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkloadProfileName",
           "description": "Workload profile name to pin for container apps job execution."
         },
         "configuration": {
@@ -17589,8 +17583,7 @@
       "description": "Scaling configurations for event driven jobs.",
       "properties": {
         "pollingInterval": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/PollingInterval",
           "description": "Interval to check each event source in seconds. Defaults to 30s"
         },
         "minExecutions": {
@@ -18879,6 +18872,11 @@
         }
       }
     },
+    "Parallelism": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of parallel replicas of a job that can run at a given time."
+    },
     "PatchApplyStatus": {
       "type": "string",
       "description": "The status of the patch once it has been provisioned",
@@ -19177,6 +19175,11 @@
           }
         ]
       }
+    },
+    "PollingInterval": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Interval to check each event source in seconds. Defaults to 30s"
     },
     "PoolManagementType": {
       "type": "string",
@@ -19605,6 +19608,11 @@
       "required": [
         "value"
       ]
+    },
+    "ReplicaCompletionCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Minimum number of successful replica completions before overall job completion."
     },
     "ReplicaContainer": {
       "type": "object",
@@ -20058,8 +20066,7 @@
           "description": "Optional. KEDA Cooldown Period. Defaults to 300 seconds if not set."
         },
         "pollingInterval": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/PollingInterval",
           "description": "Optional. KEDA Polling Interval. Defaults to 30 seconds if not set."
         },
         "rules": {
@@ -21929,7 +21936,7 @@
           "default": false
         },
         "workloadProfileType": {
-          "type": "string",
+          "$ref": "#/definitions/WorkloadProfileType",
           "description": "Workload profile type for the workloads to run on."
         },
         "minimumCount": {
@@ -21947,6 +21954,10 @@
         "name",
         "workloadProfileType"
       ]
+    },
+    "WorkloadProfileName": {
+      "type": "string",
+      "description": "Workload profile name for container apps to execute on."
     },
     "WorkloadProfileStatesProperties": {
       "type": "object",
@@ -21968,6 +21979,10 @@
           "description": "Current count of nodes."
         }
       }
+    },
+    "WorkloadProfileType": {
+      "type": "string",
+      "description": "Workload profile type for container apps to execute on."
     },
     "workloadProfileStates": {
       "type": "object",
