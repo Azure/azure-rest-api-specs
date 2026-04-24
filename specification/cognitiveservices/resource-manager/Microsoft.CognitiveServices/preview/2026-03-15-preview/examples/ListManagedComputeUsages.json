@@ -16,17 +16,17 @@
               "value": "ManagedCompute.Global.FoundryH100",
               "localizedValue": "Foundry H100 Managed Compute Quota"
             },
-            "type": "managed compute sku usage",
+            "type": "Microsoft.CognitiveServices/accounts/managedComputeUsages",
             "offerScope": "Global",
             "currentValue": 96,
             "limit": 300,
-            "unit": "ManagedComputeCount",
+            "unit": "AcceleratorCount",
             "deployments": [
               {
                 "deploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount/deployments/gpt4-deploy",
                 "projectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount",
-                "modelId": "gpt-4o",
-                "gpuCount": 8,
+                "modelId": "azureml://registries//models//versions/gpt-4o",
+                "acceleratorCount": 8,
                 "instanceCount": 1
               }
             ]
