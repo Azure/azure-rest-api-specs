@@ -20,7 +20,9 @@ applyTo: "specification/**/*.json"
 
 When performing a code review on OpenAPI v2 (Swagger) JSON definition files in this repository, validate the specification against the [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). This repository hosts all OpenAPI swagger definitions for Azure services. Each service team provides a swagger specification that **must** comply with the rules below.
 
-Flag every violation clearly with the file path, the JSON path or line number, the specific rule being violated, and a concrete suggestion for how to fix it. Respond in markdown format.
+Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule being violated, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
+
+**Formatting: no em dashes.** Never use the em dash character (U+2014, `\u2014`) in any output. Use a hyphen surrounded by spaces ( - ) or a double hyphen ( -- ) instead.
 
 ---
 
@@ -551,3 +553,8 @@ When reviewing, systematically check:
 - ✅ Operations API display object uses camelCase property names (`provider`, `resource`, `operation`, `description`)
 
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.
+
+### Output Formatting
+- ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
+- ✅ No em dash characters (U+2014) in output -- use ` - ` or ` -- ` instead
+- ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
