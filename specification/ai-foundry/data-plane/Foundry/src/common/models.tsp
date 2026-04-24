@@ -116,16 +116,16 @@ union JobSourceType {
   string,
 
   @doc("Prompt source — inline text provided by the user.")
-  Prompt: "Prompt",
+  prompt: "prompt",
 
   @doc("Agent source — references an agent to fetch instructions and metadata from.")
-  Agent: "Agent",
+  agent: "agent",
 
   @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
-  Traces: "Traces",
+  traces: "traces",
 
   @doc("Dataset source — reference to a dataset.")
-  Dataset: "Dataset",
+  dataset: "dataset",
 }
 
 @doc("The base source model for jobs.")
@@ -140,8 +140,8 @@ model JobSource {
 
 @doc("Prompt source — inline text provided by the user.")
 model PromptJobSource extends JobSource {
-  @doc("The source type for this source, which is Prompt.")
-  type: "Prompt";
+  @doc("The source type for this source, which is prompt.")
+  type: "prompt";
 
   @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
   prompt: string;
@@ -149,8 +149,8 @@ model PromptJobSource extends JobSource {
 
 @doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text.")
 model AgentJobSource extends JobSource {
-  @doc("The source type for this source, which is Agent.")
-  type: "Agent";
+  @doc("The source type for this source, which is agent.")
+  type: "agent";
 
   @doc("The agent name to fetch instructions from.")
   agent_name: string;
@@ -164,8 +164,8 @@ model AgentJobSource extends JobSource {
 
 @doc("Traces source — conversation traces from Application Insights.")
 model TracesJobSource extends JobSource {
-  @doc("The source type for this source, which is Traces.")
-  type: "Traces";
+  @doc("The source type for this source, which is traces.")
+  type: "traces";
 
   @doc("The agent name to fetch traces for.")
   agent_name: string;
@@ -185,8 +185,8 @@ model TracesJobSource extends JobSource {
 
 @doc("Dataset source — reference to a dataset.")
 model DatasetJobSource extends JobSource {
-  @doc("The source type for this source, which is Dataset.")
-  type: "Dataset";
+  @doc("The source type for this source, which is dataset.")
+  type: "dataset";
 
   @doc("The name of the dataset.")
   name: string;

@@ -13461,9 +13461,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "Agent"
+              "agent"
             ],
-            "description": "The source type for this source, which is Agent."
+            "description": "The source type for this source, which is agent."
           },
           "agent_name": {
             "type": "string",
@@ -16657,9 +16657,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "Dataset"
+              "dataset"
             ],
-            "description": "The source type for this source, which is Dataset."
+            "description": "The source type for this source, which is dataset."
           },
           "name": {
             "type": "string",
@@ -16676,6 +16676,24 @@
           }
         ],
         "description": "Dataset source — reference to a dataset."
+      },
+      "DatasetReference": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Dataset name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Dataset version."
+          }
+        },
+        "description": "Reference to a versioned Foundry Dataset."
       },
       "DatasetType": {
         "anyOf": [
@@ -18541,6 +18559,36 @@
         ],
         "description": "The type of evaluator definition"
       },
+      "EvaluatorGenerationArtifacts": {
+        "type": "object",
+        "properties": {
+          "spec": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetReference"
+              }
+            ],
+            "description": "Reference to the generated evaluation specification — a Markdown document describing what the evaluator measures, design decisions, and intended scope. Always present for generated evaluators."
+          },
+          "tools": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetReference"
+              }
+            ],
+            "description": "Reference to the tool schemas inferred during spec generation, when the generation pipeline produced them. JSONL of OpenAI tool-schema objects. Optional: absent when the generation pipeline did not produce or infer tools."
+          },
+          "context": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetReference"
+              }
+            ],
+            "description": "Reference to the supplementary context materials used during generation (e.g., file uploads, trace samples). Optional: absent when generation used only inline prompt/agent inputs with no supplementary files."
+          }
+        },
+        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. All references are read-only and resolve to versioned Foundry Datasets in a service-reserved namespace."
+      },
       "EvaluatorGenerationInputs": {
         "type": "object",
         "required": [
@@ -18798,6 +18846,15 @@
               }
             ],
             "description": "Definition of the evaluator"
+          },
+          "generation_artifacts": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorGenerationArtifacts"
+              }
+            ],
+            "description": "Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.",
+            "readOnly": true
           },
           "created_by": {
             "type": "string",
@@ -19959,10 +20016,10 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "Prompt": "#/components/schemas/PromptJobSource",
-            "Agent": "#/components/schemas/AgentJobSource",
-            "Traces": "#/components/schemas/TracesJobSource",
-            "Dataset": "#/components/schemas/DatasetJobSource"
+            "prompt": "#/components/schemas/PromptJobSource",
+            "agent": "#/components/schemas/AgentJobSource",
+            "traces": "#/components/schemas/TracesJobSource",
+            "dataset": "#/components/schemas/DatasetJobSource"
           }
         },
         "description": "The base source model for jobs."
@@ -19975,10 +20032,10 @@
           {
             "type": "string",
             "enum": [
-              "Prompt",
-              "Agent",
-              "Traces",
-              "Dataset"
+              "prompt",
+              "agent",
+              "traces",
+              "dataset"
             ]
           }
         ],
@@ -41353,9 +41410,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "Prompt"
+              "prompt"
             ],
-            "description": "The source type for this source, which is Prompt."
+            "description": "The source type for this source, which is prompt."
           },
           "prompt": {
             "type": "string",
@@ -43016,9 +43073,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "Traces"
+              "traces"
             ],
-            "description": "The source type for this source, which is Traces."
+            "description": "The source type for this source, which is traces."
           },
           "agent_name": {
             "type": "string",
