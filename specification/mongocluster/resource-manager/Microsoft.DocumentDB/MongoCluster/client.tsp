@@ -132,3 +132,5 @@ namespace Azure.ResourceManager.Models {
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
+
+

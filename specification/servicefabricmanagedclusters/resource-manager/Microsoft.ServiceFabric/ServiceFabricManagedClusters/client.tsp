@@ -666,3 +666,8 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(NodeTypes.update::parameters.properties, "patch", "csharp");
 @@clientName(Services.update::parameters.properties, "patch", "csharp");
+
+// Renamed to preserve C# property name after flatten lift-to-nullable change in mgmt generator.
+// Old `SkuName` (System.Nullable<ServiceFabricManagedClustersSkuName>) is restored as an
+// [Obsolete] backward-compat shim in custom code.
+@@clientName(Sku.name, "skuName", "csharp");
