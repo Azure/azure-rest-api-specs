@@ -365,12 +365,12 @@ op privateLinkResourcesGetCustomization(
 
 @@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
   "DefenderCspmAwsOfferingCiemDiscovery",
-  "go"
+  "go,javascript"
 );
 
 @@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
   "DefenderCspmAwsOfferingCiemOidc",
-  "go"
+  "go,javascript"
 );
 
 @@clientName(IoTSecurityAPI.ThresholdCustomAlertRule,
