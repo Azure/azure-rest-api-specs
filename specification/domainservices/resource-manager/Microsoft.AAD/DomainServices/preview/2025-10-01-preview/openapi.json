@@ -1,0 +1,2052 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Domain Services Resource Provider",
+    "version": "2025-10-01-preview",
+    "description": "The AAD Domain Services API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DomainServices"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OuContainer"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AAD/operations": {
+      "get": {
+        "operationId": "DomainServiceOperations_List",
+        "tags": [
+          "DomainServices",
+          "Operations"
+        ],
+        "description": "Lists all the available Domain Services operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Aad/operations": {
+      "get": {
+        "operationId": "OuContainerOperations_List",
+        "tags": [
+          "OuContainer"
+        ],
+        "description": "Lists all the available OuContainer operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/OuContainerOperations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
+      "get": {
+        "operationId": "DomainServices_List",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "List Domain Services in Subscription",
+        "description": "The List Domain Services in Subscription operation lists all the domain services available under the given subscription (and across all resource groups within that subscription).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Domain Service": {
+            "$ref": "./examples/ListDomainServicesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
+      "get": {
+        "operationId": "DomainServices_ListByResourceGroup",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "List Domain Services in Resource Group",
+        "description": "The List Domain Services in Resource Group operation lists all the domain services available under the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Domain Service": {
+            "$ref": "./examples/ListDomainServicesByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
+      "get": {
+        "operationId": "DomainServices_Get",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "Get Domain Service",
+        "description": "The Get Domain Service operation retrieves a json representation of the Domain Service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Domain Service": {
+            "$ref": "./examples/GetDomainService.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DomainServices_CreateOrUpdate",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "Create or Update Domain Service (PUT Resource)",
+        "description": "The Create Domain Service operation creates a new domain service with the specified parameters. If the specific service already exists, then any patchable properties will be updated and any immutable properties will remain unchanged.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          },
+          {
+            "name": "domainService",
+            "in": "body",
+            "description": "Properties supplied to the Create or Update a Domain Service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DomainService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "201": {
+            "description": "Resource 'DomainService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Domain Service": {
+            "$ref": "./examples/CreateDomainService.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DomainService"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DomainServices_Update",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "Update Domain Service (PATCH Resource)",
+        "description": "The Update Domain Service operation can be used to update the existing deployment. The update call only supports the properties listed in the PATCH body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          },
+          {
+            "name": "domainService",
+            "in": "body",
+            "description": "Properties supplied to the Update a Domain Service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Domain Service": {
+            "$ref": "./examples/UpdateDomainService.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DomainService"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DomainServices_Delete",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "Delete Domain Service (DELETE Resource)",
+        "description": "The Delete Domain Service operation deletes an existing Domain Service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Domain Service": {
+            "$ref": "./examples/DeleteDomainService.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/ouContainer": {
+      "get": {
+        "operationId": "OuContainer_List",
+        "tags": [
+          "OuContainer"
+        ],
+        "summary": "List of OuContainers in DomainService instance",
+        "description": "The List of OuContainers in DomainService instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OuContainerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of OuContainers": {
+            "$ref": "./examples/ListOuContainers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/ouContainer/{ouContainerName}": {
+      "get": {
+        "operationId": "OuContainer_Get",
+        "tags": [
+          "OuContainer"
+        ],
+        "summary": "Get particular OuContainer in DomainService instance",
+        "description": "Get OuContainer in DomainService instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          },
+          {
+            "name": "ouContainerName",
+            "in": "path",
+            "description": "The name of the OuContainer.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OuContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OuContainer": {
+            "$ref": "./examples/GetOuContainer.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OuContainer_Create",
+        "tags": [
+          "OuContainer"
+        ],
+        "summary": "Create OuContainer",
+        "description": "The Create OuContainer operation creates a new OuContainer under the specified Domain Service instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          },
+          {
+            "name": "ouContainerName",
+            "in": "path",
+            "description": "The name of the OuContainer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerAccount",
+            "in": "body",
+            "description": "Container Account Description.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OuContainer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OuContainer"
+            }
+          },
+          "201": {
+            "description": "Resource 'OuContainer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OuContainer"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OuContainer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create OuContainer": {
+            "$ref": "./examples/CreateOuContainer.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OuContainer"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OuContainer_Update",
+        "tags": [
+          "OuContainer"
+        ],
+        "summary": "Update OuContainer (PATCH Resource)",
+        "description": "The Update OuContainer operation can be used to update the existing OuContainers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          },
+          {
+            "name": "ouContainerName",
+            "in": "path",
+            "description": "The name of the OuContainer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerAccount",
+            "in": "body",
+            "description": "Container Account Description.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OuContainer"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OuContainer"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update OuContainer": {
+            "$ref": "./examples/UpdateOuContainer.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OuContainer"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OuContainer_Delete",
+        "tags": [
+          "OuContainer"
+        ],
+        "summary": "Delete OuContainer",
+        "description": "The Delete OuContainer operation deletes specified OuContainer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          },
+          {
+            "name": "ouContainerName",
+            "in": "path",
+            "description": "The name of the OuContainer.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete OuContainer": {
+            "$ref": "./examples/DeleteOuContainer.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend": {
+      "post": {
+        "operationId": "DomainServices_Unsuspend",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "Unsuspend Domain Service",
+        "description": "Unsuspend a suspended Domain Service resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnsuspendDomainServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsuspend Domain Service": {
+            "$ref": "./examples/UnsuspendDomainService.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the Domain Services.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the Domain Services."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the Domain Services.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
+    "ConfigDiagnostics": {
+      "type": "object",
+      "description": "Configuration Diagnostics",
+      "properties": {
+        "lastExecuted": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Last domain configuration diagnostics DateTime"
+        },
+        "validatorResults": {
+          "type": "array",
+          "description": "List of Configuration Diagnostics validator results.",
+          "items": {
+            "$ref": "#/definitions/ConfigDiagnosticsValidatorResult"
+          }
+        }
+      }
+    },
+    "ConfigDiagnosticsValidatorResult": {
+      "type": "object",
+      "description": "Config Diagnostics validator result data",
+      "properties": {
+        "validatorId": {
+          "type": "string",
+          "description": "Validator identifier"
+        },
+        "replicaSetSubnetDisplayName": {
+          "type": "string",
+          "description": "Replica set location and subnet name"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status for individual validator after running diagnostics.",
+          "default": "None",
+          "enum": [
+            "None",
+            "Running",
+            "OK",
+            "Failure",
+            "Warning",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "None"
+              },
+              {
+                "name": "Running",
+                "value": "Running",
+                "description": "Running"
+              },
+              {
+                "name": "OK",
+                "value": "OK",
+                "description": "OK"
+              },
+              {
+                "name": "Failure",
+                "value": "Failure",
+                "description": "Failure"
+              },
+              {
+                "name": "Warning",
+                "value": "Warning",
+                "description": "Warning"
+              },
+              {
+                "name": "Skipped",
+                "value": "Skipped",
+                "description": "Skipped"
+              }
+            ]
+          }
+        },
+        "issues": {
+          "type": "array",
+          "description": "List of resource config validation issues.",
+          "items": {
+            "$ref": "#/definitions/ConfigDiagnosticsValidatorResultIssue"
+          }
+        }
+      }
+    },
+    "ConfigDiagnosticsValidatorResultIssue": {
+      "type": "object",
+      "description": "Specific issue for a particular config diagnostics validator",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Validation issue identifier."
+        },
+        "descriptionParams": {
+          "type": "array",
+          "description": "List of domain resource property name or values used to compose a rich description.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContainerAccount": {
+      "type": "object",
+      "description": "Container Account Description",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The account name"
+        },
+        "spn": {
+          "type": "string",
+          "description": "The account spn"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The account password",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DomainSecuritySettings": {
+      "type": "object",
+      "description": "Domain Security Settings",
+      "properties": {
+        "ntlmV1": {
+          "type": "string",
+          "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NtlmV1",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "tlsV1": {
+          "type": "string",
+          "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TlsV1",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "syncNtlmPasswords": {
+          "type": "string",
+          "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SyncNtlmPasswords",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "syncKerberosPasswords": {
+          "type": "string",
+          "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SyncKerberosPasswords",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "syncOnPremPasswords": {
+          "type": "string",
+          "description": "A flag to determine whether or not SyncOnPremPasswords is enabled or disabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SyncOnPremPasswords",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "kerberosRc4Encryption": {
+          "type": "string",
+          "description": "A flag to determine whether or not KerberosRc4Encryption is enabled or disabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "KerberosRc4Encryption",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "kerberosArmoring": {
+          "type": "string",
+          "description": "A flag to determine whether or not KerberosArmoring is enabled or disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "KerberosArmoring",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "ldapSigning": {
+          "type": "string",
+          "description": "A flag to determine whether or not LdapSigning is enabled or disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LdapSigning",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "channelBinding": {
+          "type": "string",
+          "description": "A flag to determine whether or not ChannelBinding is enabled or disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ChannelBinding",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "syncOnPremSamAccountName": {
+          "type": "string",
+          "description": "A flag to determine whether the SyncOnPremSamAccountName feature is active. When enabled, the samAccountName attribute in Entra Domain Services is synchronized from the onPremisesSamAccountName attribute in Entra ID",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SyncOnPremSamAccountName",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DomainService": {
+      "type": "object",
+      "description": "Domain service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DomainServiceProperties",
+          "description": "Domain service properties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DomainServiceListResult": {
+      "type": "object",
+      "description": "The list of Domain Services.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Domain Services.",
+          "items": {
+            "$ref": "#/definitions/DomainService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The continuation token for the next page of results."
+        }
+      }
+    },
+    "DomainServiceProperties": {
+      "type": "object",
+      "description": "Properties of the Domain Service.",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Data Model Version",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Azure Active Directory Tenant Id",
+          "readOnly": true
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The name of the Azure domain that the user would like to deploy Domain Services to."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "Deployment Id",
+          "readOnly": true
+        },
+        "syncOwner": {
+          "type": "string",
+          "description": "SyncOwner ReplicaSet Id",
+          "readOnly": true
+        },
+        "syncApplicationId": {
+          "type": "string",
+          "description": "The unique sync application id of the Azure AD Domain Services deployment.",
+          "readOnly": true
+        },
+        "replicaSets": {
+          "type": "array",
+          "description": "List of ReplicaSets",
+          "items": {
+            "$ref": "#/definitions/ReplicaSet"
+          }
+        },
+        "ldapsSettings": {
+          "$ref": "#/definitions/LdapsSettings",
+          "description": "Secure LDAP Settings"
+        },
+        "resourceForestSettings": {
+          "$ref": "#/definitions/ResourceForestSettings",
+          "description": "Resource Forest Settings"
+        },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "domainConfigurationType": {
+          "type": "string",
+          "description": "Domain Configuration Type"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Sku Type"
+        },
+        "filteredSync": {
+          "$ref": "#/definitions/FilteredSync",
+          "description": "Enabled or Disabled flag to turn on Group-based filtered sync"
+        },
+        "syncScope": {
+          "type": "string",
+          "description": "All or CloudOnly, All users in AAD are synced to AAD DS domain or only users actively syncing in the cloud",
+          "default": "All",
+          "enum": [
+            "All",
+            "CloudOnly"
+          ],
+          "x-ms-enum": {
+            "name": "SyncScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "All",
+                "value": "All",
+                "description": "All"
+              },
+              {
+                "name": "CloudOnly",
+                "value": "CloudOnly",
+                "description": "CloudOnly"
+              }
+            ]
+          }
+        },
+        "notificationSettings": {
+          "$ref": "#/definitions/NotificationSettings",
+          "description": "Notification Settings"
+        },
+        "migrationProperties": {
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "the current deployment or provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "configDiagnostics": {
+          "$ref": "#/definitions/ConfigDiagnostics",
+          "description": "Configuration diagnostics data containing latest execution from client."
+        }
+      }
+    },
+    "FilteredSync": {
+      "type": "string",
+      "description": "Enabled or Disabled flag to turn on Group-based filtered sync",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "FilteredSync",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "ForestTrust": {
+      "type": "object",
+      "description": "Forest Trust Setting",
+      "properties": {
+        "trustedDomainFqdn": {
+          "type": "string",
+          "description": "Trusted Domain FQDN"
+        },
+        "trustDirection": {
+          "type": "string",
+          "description": "Trust Direction"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "remoteDnsIps": {
+          "type": "string",
+          "description": "Remote Dns ips"
+        },
+        "trustPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Trust Password",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "HealthAlert": {
+      "type": "object",
+      "description": "Health Alert Description",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Health Alert Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Health Alert Name",
+          "readOnly": true
+        },
+        "issue": {
+          "type": "string",
+          "description": "Health Alert Issue",
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "description": "Health Alert Severity",
+          "readOnly": true
+        },
+        "raised": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Raised DateTime",
+          "readOnly": true
+        },
+        "lastDetected": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Last Detected DateTime",
+          "readOnly": true
+        },
+        "resolutionUri": {
+          "type": "string",
+          "description": "Health Alert TSG Link",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthMonitor": {
+      "type": "object",
+      "description": "Health Monitor Description",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Health Monitor Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Health Monitor Name",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "Health Monitor Details",
+          "readOnly": true
+        }
+      }
+    },
+    "LdapsSettings": {
+      "type": "object",
+      "description": "Secure LDAP Settings",
+      "properties": {
+        "ldaps": {
+          "type": "string",
+          "description": "A flag to determine whether or not Secure LDAP is enabled or disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "Ldaps",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        },
+        "pfxCertificate": {
+          "type": "string",
+          "description": "The certificate required to configure Secure LDAP. The parameter passed here should be a base64encoded representation of the certificate pfx file."
+        },
+        "pfxCertificatePassword": {
+          "type": "string",
+          "description": "The password to decrypt the provided Secure LDAP certificate pfx file."
+        },
+        "publicCertificate": {
+          "type": "string",
+          "description": "Public certificate used to configure secure ldap.",
+          "readOnly": true
+        },
+        "certificateThumbprint": {
+          "type": "string",
+          "description": "Thumbprint of configure ldaps certificate.",
+          "readOnly": true
+        },
+        "certificateNotAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "NotAfter DateTime of configure ldaps certificate.",
+          "readOnly": true
+        },
+        "externalAccess": {
+          "type": "string",
+          "description": "A flag to determine whether or not Secure LDAP access over the internet is enabled or disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalAccess",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "MigrationProgress": {
+      "type": "object",
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
+        }
+      }
+    },
+    "MigrationProperties": {
+      "type": "object",
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "type": "string",
+          "description": "Old Subnet Id",
+          "readOnly": true
+        },
+        "oldVnetSiteId": {
+          "type": "string",
+          "description": "Old Vnet Site Id",
+          "readOnly": true
+        },
+        "migrationProgress": {
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress",
+          "readOnly": true
+        }
+      }
+    },
+    "NotificationSettings": {
+      "type": "object",
+      "description": "Settings for notification",
+      "properties": {
+        "notifyGlobalAdmins": {
+          "$ref": "#/definitions/NotifyGlobalAdmins",
+          "description": "Should global admins be notified"
+        },
+        "notifyDcAdmins": {
+          "$ref": "#/definitions/NotifyDcAdmins",
+          "description": "Should domain controller admins be notified"
+        },
+        "additionalRecipients": {
+          "type": "array",
+          "description": "The list of additional recipients",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NotifyDcAdmins": {
+      "type": "string",
+      "description": "Should domain controller admins be notified",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "NotifyDcAdmins",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "NotifyGlobalAdmins": {
+      "type": "string",
+      "description": "Should global admins be notified",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "NotifyGlobalAdmins",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "OperationDisplayInfo": {
+      "type": "object",
+      "description": "The operation supported by Domain Services.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The action that users can perform, based on their permission level."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Domain Services."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        }
+      }
+    },
+    "OperationEntity": {
+      "type": "object",
+      "description": "The operation supported by Domain Services.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Domain Services."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of the operation."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "type": "object",
+      "description": "The list of domain service operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of operations.",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The continuation token for the next page of results."
+        }
+      }
+    },
+    "OuContainer": {
+      "type": "object",
+      "description": "Resource for OuContainer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OuContainerProperties",
+          "description": "OuContainer properties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OuContainerListResult": {
+      "type": "object",
+      "description": "The list of OuContainers in DomainService instance.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of OuContainers.",
+          "items": {
+            "$ref": "#/definitions/OuContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The continuation token for the next page of results."
+        }
+      }
+    },
+    "OuContainerProperties": {
+      "type": "object",
+      "description": "Properties of the OuContainer.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Azure Active Directory tenant id",
+          "readOnly": true
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of Domain Services.",
+          "readOnly": true
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The Deployment id",
+          "readOnly": true
+        },
+        "containerId": {
+          "type": "string",
+          "description": "The OuContainer name",
+          "readOnly": true
+        },
+        "accounts": {
+          "type": "array",
+          "description": "The list of container accounts",
+          "items": {
+            "$ref": "#/definitions/ContainerAccount"
+          }
+        },
+        "serviceStatus": {
+          "type": "string",
+          "description": "Status of OuContainer instance",
+          "readOnly": true
+        },
+        "distinguishedName": {
+          "type": "string",
+          "description": "Distinguished Name of OuContainer instance",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicaSet": {
+      "type": "object",
+      "description": "Replica Set Definition",
+      "properties": {
+        "replicaSetId": {
+          "type": "string",
+          "description": "ReplicaSet Id",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Virtual network location"
+        },
+        "vnetSiteId": {
+          "type": "string",
+          "description": "Virtual network site id",
+          "readOnly": true
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The name of the virtual network that Domain Services will be deployed on. The id of the subnet that Domain Services will be deployed on. /virtualNetwork/vnetName/subnets/subnetName."
+        },
+        "domainControllerIpAddress": {
+          "type": "array",
+          "description": "List of Domain Controller IP Address",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "externalAccessIpAddress": {
+          "type": "string",
+          "description": "External access ip address.",
+          "readOnly": true
+        },
+        "serviceStatus": {
+          "type": "string",
+          "description": "Status of Domain Service instance",
+          "readOnly": true
+        },
+        "selfUnsuspendCounter": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times the customer has self-resumed the domain service. Valid values range from 0 to 5, where 5 is the maximum allowed count before further self-resume is denied and support intervention is required.",
+          "minimum": 0,
+          "maximum": 5,
+          "readOnly": true
+        },
+        "healthLastEvaluated": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "Last domain evaluation run DateTime",
+          "readOnly": true
+        },
+        "healthMonitors": {
+          "type": "array",
+          "description": "List of Domain Health Monitors",
+          "items": {
+            "$ref": "#/definitions/HealthMonitor"
+          },
+          "readOnly": true
+        },
+        "healthAlerts": {
+          "type": "array",
+          "description": "List of Domain Health Alerts",
+          "items": {
+            "$ref": "#/definitions/HealthAlert"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceForestSettings": {
+      "type": "object",
+      "description": "Settings for Resource Forest",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "description": "List of settings for Resource Forest",
+          "items": {
+            "$ref": "#/definitions/ForestTrust"
+          }
+        },
+        "resourceForest": {
+          "type": "string",
+          "description": "Resource Forest"
+        }
+      }
+    },
+    "UnsuspendDomainServiceResponse": {
+      "type": "object",
+      "description": "Response for successful unsuspend of a domain service.",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

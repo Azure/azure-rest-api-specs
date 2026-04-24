@@ -564,3 +564,13 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextJobState.tasks, "Actions", "python");
 
 @@clientName(fhirVersion.`4.0.1`, "ENUM_4_0_1", "python");
+
+@@clientName(CustomEntitiesLROTask, "CustomEntitiesOperationAction", "csharp");
+@@clientName(EntitiesLROTask, "EntitiesOperationAction", "csharp");
+@@clientName(EntityLinkingLROTask, "EntityLinkingOperationAction", "csharp");
+@@clientName(HealthcareLROTask, "HealthcareOperationAction", "csharp");
+@@clientName(KeyPhraseLROTask, "KeyPhraseOperationAction", "csharp");
+@@clientName(PiiLROTask, "PiiOperationAction", "csharp");
+@@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
+@@clientName(HealthcareLROResult, "HealthcareOperationResult", "csharp");
+@@clientName(SentimentLROResult, "SentimentOperationResult", "csharp");

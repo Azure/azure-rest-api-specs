@@ -69,6 +69,11 @@ namespace Customizations;
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(PFMetrics, "PfMetrics", "csharp,java");
 
+@@clientName(CreatedByType.GitHubWorkflows,
+  "GithubWorkflows",
+  "csharp,java,python"
+);
+
 // Suggestion to rename properties in TestRunStatistics for better explanation
 @@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
 @@clientName(TestRunStatistics.meanResTime, "meanResponseTime", "csharp,java");

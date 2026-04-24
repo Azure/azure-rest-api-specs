@@ -14,50 +14,83 @@ namespace Microsoft.ServiceFabric;
 /**
  * An application type version resource for the specified application type name resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(ApplicationTypeResource)
 model ApplicationTypeVersionResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationTypeVersionResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationTypeVersionResource,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ApplicationTypeVersionResources {
   /**
    * Get a Service Fabric application type version resource created or in the process of being created in the Service Fabric application type name resource.
    */
-  get is ArmResourceRead<ApplicationTypeVersionResource>;
+  @summary("Gets a Service Fabric application type version resource.")
+  @tag("ApplicationTypeVersion")
+  get is ArmResourceRead<ApplicationTypeVersionResource, Error = ErrorModel>;
 
   /**
    * Create or update a Service Fabric application type version resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
+  @summary("Creates or updates a Service Fabric application type version resource.")
+  @tag("ApplicationTypeVersion")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationTypeVersionResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationTypeVersionResource>> & {
       @bodyRoot
       _: ApplicationTypeVersionResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Delete a Service Fabric application type version resource with the specified name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationTypeVersionResource>;
+  @summary("Deletes a Service Fabric application type version resource.")
+  @tag("ApplicationTypeVersion")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationTypeVersionResource,
+    Error = ErrorModel
+  >;
 
   /**
    * Gets all application type version resources created or in the process of being created in the Service Fabric application type name resource.
    */
+  @summary("Gets the list of application type version resources created in the specified Service Fabric application type name resource.")
+  @tag("ApplicationTypeVersion")
   list is ArmResourceListByParent<
     ApplicationTypeVersionResource,
-    Response = ArmResponse<ApplicationTypeVersionResourceList>
+    Response = ArmResponse<ApplicationTypeVersionResourceList>,
+    Error = ErrorModel
   >;
 }
 

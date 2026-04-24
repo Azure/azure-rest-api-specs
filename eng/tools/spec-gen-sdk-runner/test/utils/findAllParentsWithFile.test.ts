@@ -66,10 +66,13 @@ describe("findAllParentsWithFile", () => {
     );
   });
 
-  test("throws error when directory does not exist", () => {
-    expect(() =>
-      findAllParentsWithFile("specification/nonexistent/path", typespecProjectRegex, repoRoot),
-    ).toThrow(/ENOENT/);
+  test("returns empty array when directory does not exist", () => {
+    const result = findAllParentsWithFile(
+      "specification/nonexistent/path",
+      typespecProjectRegex,
+      repoRoot,
+    );
+    expect(result).toHaveLength(0);
   });
 
   test("stops at specified boundary and finds files before it", () => {

@@ -1,0 +1,200 @@
+{
+  "title": "AgentSpaces_CreateOrUpdate",
+  "operationId": "AgentSpaces_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "newAgentSpace",
+    "api-version": "2026-01-01",
+    "resource": {
+      "location": "East US",
+      "tags": {
+        "environment": "production",
+        "team": "platform",
+        "project": "aiAssistant"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "description": "New production agent space for AI assistant services",
+        "maxAgentCount": 15,
+        "serviceTreeId": "abcdef12-3456-7890-abcd-ef1234567890",
+        "policies": {
+          "genevaActionsConfiguration": {
+            "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+            "clientId": "12345678-1234-1234-1234-123456789012",
+            "certificateSubjectName": "CN=AgentSpaceAuth",
+            "authenticationMode": "OAuth",
+            "extensionName": "GenevaActions",
+            "allowedActions": [
+              {
+                "actionName": "RestartService",
+                "extension": "GenevaActions",
+                "actionParameters": [
+                  {
+                    "name": "serviceName",
+                    "type": "string"
+                  }
+                ],
+                "approvalRequired": true
+              },
+              {
+                "actionName": "GetMetrics",
+                "extension": "GenevaActions",
+                "actionParameters": [
+                  {
+                    "name": "metricName",
+                    "type": "string"
+                  },
+                  {
+                    "name": "timeRange",
+                    "type": "string"
+                  }
+                ],
+                "approvalRequired": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/newAgentSpace",
+        "name": "newAgentSpace",
+        "type": "Microsoft.App/agentSpaces",
+        "location": "East US",
+        "tags": {
+          "environment": "production",
+          "team": "platform",
+          "project": "aiAssistant"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "99999999-8888-7777-6666-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "currentAgentCount": 0,
+          "maxAgentCount": 15,
+          "memberAgents": [],
+          "lastPolicyPropagation": "2025-10-28T11:00:00Z",
+          "description": "New production agent space for AI assistant services",
+          "serviceTreeId": "abcdef12-3456-7890-abcd-ef1234567890",
+          "complianceStatus": {
+            "isCompliant": true,
+            "complianceIssues": [],
+            "lastComplianceCheck": "2025-10-28T11:00:00Z"
+          },
+          "policies": {
+            "genevaActionsConfiguration": {
+              "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+              "clientId": "12345678-1234-1234-1234-123456789012",
+              "certificateSubjectName": "CN=AgentSpaceAuth",
+              "authenticationMode": "OAuth",
+              "extensionName": "GenevaActions",
+              "allowedActions": [
+                {
+                  "actionName": "RestartService",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "serviceName",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": true
+                },
+                {
+                  "actionName": "GetMetrics",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "metricName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "timeRange",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": false
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012"
+      },
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/newAgentSpace",
+        "name": "newAgentSpace",
+        "type": "Microsoft.App/agentSpaces",
+        "location": "East US",
+        "tags": {
+          "environment": "production",
+          "team": "platform",
+          "project": "aiAssistant"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "99999999-8888-7777-6666-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "currentAgentCount": 0,
+          "maxAgentCount": 15,
+          "memberAgents": [],
+          "description": "New production agent space for AI assistant services",
+          "serviceTreeId": "abcdef12-3456-7890-abcd-ef1234567890",
+          "policies": {
+            "genevaActionsConfiguration": {
+              "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+              "clientId": "12345678-1234-1234-1234-123456789012",
+              "certificateSubjectName": "CN=AgentSpaceAuth",
+              "authenticationMode": "OAuth",
+              "extensionName": "GenevaActions",
+              "allowedActions": [
+                {
+                  "actionName": "RestartService",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "serviceName",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": true
+                },
+                {
+                  "actionName": "GetMetrics",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "metricName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "timeRange",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": false
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

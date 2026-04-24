@@ -22,10 +22,14 @@ options:
     namespace: "com.azure.resourcemanager.billingbenefits"
     service-name: "BillingBenefits" # human-readable service name, whitespace allowed
     flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.BillingBenefits"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-billingbenefits"
     typespec-title-map:
       BillingBenefitsClient: BillingBenefitsRP
+    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

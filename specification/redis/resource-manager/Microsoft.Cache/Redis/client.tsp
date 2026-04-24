@@ -21,8 +21,25 @@ using Microsoft.Cache;
 @@clientName(Microsoft.Cache.TlsVersion.`1.1`, "ONE1", "python");
 @@clientName(Microsoft.Cache.TlsVersion.`1.2`, "ONE2", "python");
 
+// Service definition is wrong
+@@alternateType(Microsoft.Cache.RedisCommonPropertiesRedisConfiguration,
+  RedisCommonPropertiesRedisConfigurationRecordString,
+  "java"
+);
+/**
+ * All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta, maxmemory-policy,notify-keyspace-events, aof-backup-enabled, aof-storage-connection-string-0, aof-storage-connection-string-1 etc.
+ */
+model RedisCommonPropertiesRedisConfigurationRecordString {
+  ...Record<string>;
+  ...RedisCommonPropertiesRedisConfigurationProperties;
+}
+
 // Java SDK specific customizations to resolve breaking changes
 @@clientName(RedisCommonPropertiesRedisConfiguration,
+  "RedisConfiguration",
+  "java"
+);
+@@clientName(RedisCommonPropertiesRedisConfigurationRecordString,
   "RedisConfiguration",
   "java"
 );
@@ -48,6 +65,10 @@ using Microsoft.Cache;
 // Fix Java SDK handwritten code
 @@usage(RedisResource, Usage.input | Usage.output, "java");
 @@usage(RedisFirewallRuleCreateParameters, Usage.input, "java");
+@@alternateType(Azure.ResourceManager.CommonTypes.OperationStatusResult.percentComplete,
+  float32,
+  "java"
+);
 
 @@clientName(RedisCommonPropertiesRedisConfiguration,
   "RedisCommonConfiguration",

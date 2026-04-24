@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace Microsoft.DesktopVirtualization;
@@ -38,12 +40,7 @@ interface AppAttachPackageInfo {
   @list
   `import` is ArmResourceActionSync<
     HostPool,
-    Request = {
-      /**
-       * Information to import app attach package
-       */
-      @bodyRoot importPackageInfoRequest: ImportPackageInfoRequest;
-    },
+    Request = ImportPackageInfoRequest,
     Response = AppAttachPackageList
   >;
 }
@@ -60,12 +57,7 @@ interface MSIXImages {
   @list
   expand is ArmResourceActionSync<
     HostPool,
-    Request = {
-      /**
-       * Represents URI referring to MSIX Image
-       */
-      @bodyRoot msixImageURI: MSIXImageURI;
-    },
+    Request = MSIXImageURI,
     Response = ExpandMsixImageList
   >;
 }
@@ -150,16 +142,7 @@ interface HostPools {
    * Update a host pool.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    HostPool,
-    HostPoolPatch,
-    Request = {
-      /**
-       * The properties to be updated.
-       */
-      @bodyRoot hostPool?: HostPoolPatch;
-    }
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<HostPool, HostPoolPatch>;
 
   /**
    * Remove a host pool.
@@ -257,3 +240,5 @@ interface HostPools {
 @@doc(HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
 );
+@@clientName(HostPools.update::parameters.body, "hostPool");
+@@doc(HostPools.update::parameters.body, "The properties to be updated.");
