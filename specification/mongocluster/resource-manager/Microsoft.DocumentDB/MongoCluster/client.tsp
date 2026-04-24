@@ -105,13 +105,10 @@ using Microsoft.DocumentDB;
   "MongoClusterEntraIdentityProviderProperties",
   "csharp"
 );
-// Renamed to preserve C# property name after flatten lift-to-nullable change in mgmt generator.
-// Old `PrincipalType` is restored as an [Obsolete] backward-compat shim in custom code
-// (which delegates to the new `PrincipalKind`).
-@@clientName(EntraIdentityProviderProperties.principalType,
-  "principalKind",
-  "csharp"
-);
+// Note: the flattened `principalType` property is renamed to `PrincipalType` in csharp
+// via [CodeGenMember("PrincipalKindFlattened")] in custom code (since the flatten produces
+// a `PrincipalKind`-like name from the inner property), and an [Obsolete] non-nullable
+// `PrincipalType` shim is added to preserve the previous API surface.
 @@clientName(EntraPrincipalType, "MongoClusterEntraPrincipalType", "csharp");
 @@clientName(IdentityProvider, "MongoClusterIdentityProvider", "csharp");
 @@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentity,
