@@ -202,7 +202,7 @@ interface BatchClient {
   "csharp"
 );
 @@clientName(Azure.Batch.VMExtension.autoUpgradeMinorVersion,
-  "shouldAutoUpgradeMinorVersion",
+  "isMinorVersionAutoUpgradeEnabled",
   "csharp"
 );
 @@clientName(Azure.Batch.VMExtension.enableAutomaticUpgrade,
@@ -236,6 +236,21 @@ interface BatchClient {
   "taskRootDirectoryUri",
   "csharp"
 );
+@@clientName(Azure.Batch.BatchCreateTaskCollectionResult.value,
+  "results",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchNodeCounts.upgradingOS, "upgradingOS", "csharp");
+@@clientName(Azure.Batch.HostEndpointSettingsModeTypes,
+  "HostEndpointSettingsModeType",
+  "csharp"
+);
+@@clientName(Azure.Batch.NameValuePair, "BatchNameValuePair", "csharp");
+@@clientName(Azure.Batch.InboundEndpoint.publicFQDN, "publicFqdn", "csharp");
+@@clientName(Azure.Batch.ExitConditions.default,
+  "defaultExitOptions ",
+  "csharp"
+);
 @@clientName(Azure.Batch.BatchJobReleaseTaskExecutionInfo.taskRootDirectoryUrl,
   "taskRootDirectoryUri",
   "csharp"
@@ -252,6 +267,7 @@ interface BatchClient {
   "isCrossZoneUpgradeEnabled",
   "csharp"
 );
+@@clientName(Azure.Batch.BatchTaskGroup.value, "tasks", "csharp");
 @@clientName(Azure.Batch.BatchNode.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTaskInfo.taskUrl, "taskUri", "csharp");
 @@clientName(Azure.Batch.UploadBatchServiceLogsOptions.containerUrl,
