@@ -8,16 +8,16 @@ union DataGenerationJobType {
   string,
 
   @doc("Simple question and answers between user and agent.")
-  SimpleQnA: "SimpleQnA",
+  simple_qna: "simple_qna",
 
   @doc("Single turn query and response from agent traces.")
-  Traces: "Traces",
+  traces: "traces",
 
   @doc("Tool calling conversation between user and agent.")
-  ToolUse: "ToolUse",
+  tool_use: "tool_use",
 
   @doc("Task helps in providing a scenario description for generating multi turn conversation between user and agent.")
-  Task: "Task",
+  task: "task",
 }
 
 @doc("LLM model options for data generation jobs.")
@@ -74,7 +74,7 @@ model DataGenerationJobOutput {
 
 model FileDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Azure OpenAI file output.")
-  type: "File";
+  type: "file";
 
   @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
@@ -87,7 +87,7 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
 
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Dataset output.")
-  type: "Dataset";
+  type: "dataset";
 
   @doc("The id of the output dataset created.")
   @visibility(Lifecycle.Read)
@@ -112,10 +112,10 @@ union DataGenerationJobOutputType {
   string,
 
   @doc("The generated data is an Azure OpenAI File.")
-  File: "File",
+  file: "file",
 
   @doc("The generated data is a Dataset.")
-  Dataset: "Dataset",
+  dataset: "dataset",
 }
 
 @doc("Token usage information for a data generation job.")
@@ -138,13 +138,13 @@ union DataGenerationJobScenario {
   string,
 
   @doc("Supervised Fine-tuning scenario.")
-  SupervisedFineTuning: "SupervisedFineTuning",
+  supervised_finetuning: "supervised_finetuning",
 
   @doc("Reinforcement Fine-tuning scenario.")
-  ReinforcementFineTuning: "ReinforcementFineTuning",
+  reinforcement_finetuning: "reinforcement_finetuning",
 
   @doc("Evaluation scenario.")
-  Evaluation: "Evaluation",
+  evaluation: "evaluation",
 }
 
 @doc("Options for managing data generation jobs.")
@@ -166,7 +166,7 @@ model DataGenerationJobOptions {
 @doc("The options for a data generation job with SimpleQnA type.")
 model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "SimpleQnA";
+  type: "simple_qna";
 
   @doc("The question types to generate. Used only for fine-tuning scenarios.")
   question_types?: Array<SimpleQnAFineTuningQuestionType>;
@@ -175,20 +175,20 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 @doc("The options for a data generation job with Traces type.")
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
-  type: "Traces";
+  type: "traces";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
 model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")
-  type: "ToolUse";
+  type: "tool_use";
 }
 
 @doc("The options for a data generation job with Task type.")
 model TaskDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Task for this model.")
-  type: "Task";
+  type: "task";
 }
 
 @doc("The supported job source types for data generation.")
@@ -200,7 +200,7 @@ union DataGenerationJobSource {
 @doc("The options for a data generation job with File source, which includes the input files for data generation.")
 model FileDataGenerationJobSource {
   @doc("The source type for this job, which is File.")
-  type: "File";
+  type: "file";
 
   @doc("Input Azure Open AI file id used for data generation.")
   id: string;
@@ -211,8 +211,8 @@ union SimpleQnAFineTuningQuestionType {
   string,
 
   @doc("Short answer question type.")
-  ShortAnswer: "ShortAnswer",
+  short_answer: "short_answer",
 
   @doc("Long answer question type.")
-  LongAnswer: "LongAnswer",
+  long_answer: "long_answer",
 }
