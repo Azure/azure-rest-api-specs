@@ -270,6 +270,12 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+
+@@clientName(BatchClient.getTaskFile, "download_task_file", "python");
+
+@@clientName(BatchClient.getNodeFile, "download_node_file", "python");
+
+@@clientName(BatchClient.listSubTasks, "list_subtasks", "python");
 // Python LRO private methods
 @@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");
@@ -286,12 +292,65 @@ interface BatchClient {
   "deleteJobScheduleInternal",
   "python"
 );
+@@clientName(Azure.Batch.OutputFileUploadConfig,
+  "OutputFileUploadConfiguration",
+  "python"
+);
 @@access(Azure.Batch.JobSchedules.terminateJobSchedule,
   Access.internal,
   "python"
 );
 @@clientName(BatchClient.terminateJobSchedule,
   "terminateJobScheduleInternal",
+  "python"
+);
+@@clientName(Azure.Batch.AutoScaleRunError.values, "error_values", "python");
+@@clientName(Azure.Batch.BatchTaskGroup.value, "task_values", "python");
+@@clientName(Azure.Batch.ResizeError.values, "error_values", "python");
+@@clientName(Azure.Batch.BatchCreateTaskCollectionResult.value,
+  "result_values",
+  "python"
+);
+@@clientName(Azure.Batch.BatchError.values, "error_values", "python");
+@@clientName(Azure.Batch.BatchJob.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchJobSchedule.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchPool.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchTask.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchTaskCreateResult.eTag, "etag", "python");
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.avgDiskGiB,
+  "avg_disk_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.avgMemoryGiB,
+  "avg_memory_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.peakMemoryGiB,
+  "peak_memory_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.peakDiskGiB,
+  "peak_disk_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskReadGiB,
+  "disk_read_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskWriteGiB,
+  "disk_write_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.networkReadGiB,
+  "network_read_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.networkWriteGiB,
+  "network_write_gib ",
+  "python"
+);
+@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+  "BatchNodeUserReplaceOptions",
   "python"
 );
 @@access(Azure.Batch.Pools.deletePool, Access.internal, "python");
@@ -330,11 +389,11 @@ interface BatchClient {
   "supportEndDate",
   "javascript"
 );
-@@clientName(Azure.Batch.AuthenticationTokenSettings.access,
-  "scopes",
+@@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
+@@clientName(Azure.Batch.ListPoolUsageMetricsOptionalParameters.endtime,
+  "endTime",
   "javascript"
 );
-@@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
 @@clientName(Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
   "nodeDeallocationOption",
   "javascript"

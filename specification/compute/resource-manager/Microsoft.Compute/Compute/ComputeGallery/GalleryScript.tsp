@@ -52,7 +52,8 @@ interface GalleryScripts {
     GalleryScript,
     Response = ArmResourceUpdatedResponse<GalleryScript> | ArmResourceCreatedResponse<
       GalleryScript,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GalleryScript> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -64,7 +65,8 @@ interface GalleryScripts {
   update is ComputeCustomPatchAsync<
     GalleryScript,
     PatchModel = GalleryScriptUpdate,
-    Response = ArmResponse<GalleryScript> | ArmAcceptedLroResponse
+    Response = ArmResponse<GalleryScript> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GalleryScript> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

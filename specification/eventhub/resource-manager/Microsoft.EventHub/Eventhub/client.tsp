@@ -6,7 +6,7 @@ using Microsoft.EventHub;
 
 @@clientName(Microsoft.EventHub,
   "EventHubManagementClient",
-  "python,javascript"
+  "python,javascript,java"
 );
 
 // Fix TLS version naming changes for Go SDK backward compatibility
@@ -164,6 +164,20 @@ using Microsoft.EventHub;
 @@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "java");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "csharp");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "java");
+
+// java naming mitigations
+@@clientName(NetworkRuleIPAction, "NetworkRuleIpAction", "java");
+@@clientName(SchemaGroupProperties.eTag, "etag", "java");
+@@clientLocation(NetworkSecurityPerimeterConfigurations.list,
+  "NetworkSecurityPerimeterConfigurations",
+  "java"
+);
+
+@@alternateType(DestinationProperties.dataLakeSubscriptionId,
+  Azure.Core.uuid,
+  "java"
+);
+
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
 @@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
 @@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");

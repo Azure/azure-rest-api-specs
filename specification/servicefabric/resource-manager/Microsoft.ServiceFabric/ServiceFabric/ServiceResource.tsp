@@ -14,20 +14,37 @@ namespace Microsoft.ServiceFabric;
 /**
  * The service resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(ApplicationResource)
-model ServiceResource extends ProxyResource {
-  properties?: ServiceResourceProperties;
+model ServiceResource
+  is Azure.ResourceManager.ProxyResource<ServiceResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = ServiceResource,
+    KeyName = "serviceName",
+    SegmentName = "services",
+    NamePattern = ""
+  >;
 
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @path
-  @key("serviceName")
-  @segment("services")
-  name: string;
+  etag?: string;
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -254,7 +271,7 @@ model ServicePlacementPolicyDescription {
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ServiceResourceUpdate extends ProxyResource {
+model ServiceResourceUpdate extends PatchProxyResource {
   /**
    * The RP-specific properties for this resource.
    */
