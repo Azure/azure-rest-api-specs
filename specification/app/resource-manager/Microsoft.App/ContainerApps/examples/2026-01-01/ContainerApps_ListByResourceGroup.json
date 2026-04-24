@@ -68,22 +68,17 @@
                   "targetPort": 3000,
                   "traffic": [
                     {
-                      "revisionName": "testcontainerApp0-ab1234",
-                      "weight": 80
+                      "revisionName": "testcontainerApp0-ab1234"
                     },
                     {
                       "label": "staging",
-                      "revisionName": "testcontainerApp0-ab4321",
-                      "weight": 20
+                      "revisionName": "testcontainerApp0-ab4321"
                     }
                   ],
                   "transport": "auto"
                 },
                 "maxInactiveRevisions": 10,
                 "runtime": {
-                  "dotnet": {
-                    "autoConfigureDataProtection": true
-                  },
                   "java": {
                     "enableMetrics": true
                   }
@@ -151,7 +146,6 @@
                 },
                 "maxInactiveRevisions": 10
               },
-              "deploymentErrors": "Code: ContainerAppImagePullProvisionError, Message: Error pulling the container image. Please check the image name or any registry credentials to access if required.",
               "eventStreamEndpoint": "testEndpoint",
               "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
               "latestRevisionFqdn": "testcontainerApp1-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
