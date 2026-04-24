@@ -77,6 +77,9 @@ npx --prefix /path/to/evaluate vally eval --suite all --model claude-sonnet-4.6 
 
 # Save results to a directory (includes results.jsonl + eval-results.md)
 npx --prefix /path/to/evaluate vally eval --suite all --output-dir ./results --verbose
+
+# Override the per-stimulus timeout (in milliseconds; default 120000 = 2 min)
+npx --prefix /path/to/evaluate vally eval --suite all --timeout 600000 --verbose
 ```
 
 Replace `/path/to/evaluate` with the path to your local clone of
@@ -98,6 +101,23 @@ To avoid timeouts:
   sequentially instead of 5 at a time, eliminating session contention.
 - **Run from a dedicated VS Code window** with no other Copilot
   activity (no chat, no inline completions in progress).
+
+### Timeout configuration
+
+The per-stimulus timeout controls how long vally waits for an agent session
+to complete. There are three levels, applied in priority order:
+
+| Level     | Location                               | Unit         | Example            |
+| --------- | -------------------------------------- | ------------ | ------------------ |
+| CLI flag  | `--timeout <ms>`                       | milliseconds | `--timeout 600000` |
+| Eval file | `config.timeout` in each `eval-*.yaml` | seconds      | `timeout: 600`     |
+| Default   | hardcoded in vally                     | seconds      | `120` (2 min)      |
+
+> **Note:** The `config` block under `suites.all` in `.vally.yaml` is
+> **not propagated** to individual eval runs. Vally's `SuiteConfig` only
+> supports `description`, `filter`, and `evals` — any `config.timeout`,
+> `config.model`, or `config.runs` there is silently ignored. Always set
+> timeout in the individual eval YAML files or via the CLI flag.
 
 ## Grader Types
 
