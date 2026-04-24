@@ -42,6 +42,10 @@ These settings apply only when `--tag=package-flexibleserver-2026-04-01-preview`
 ```yaml $(tag) == 'package-flexibleserver-2026-04-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2026-04-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    reason: The API contract for Major Version Upgrade requires showing the subscription ID.
 ```
 
 ### Tag: package-flexibleserver-2026-01-01-preview

@@ -4109,7 +4109,9 @@ model PolicyDetail {
 @added(Versions.v2026_04_01)
 model MajorVersionUpgradePrecheckResourceProperties {
   #suppress "azure-core/no-guid-usage" "SubscriptionId is a GUID by design in Azure Resource Manager."
-  ...SubscriptionIdParameter;
+  @doc("The ID of the target subscription. The value must be an UUID.")
+  @minLength(1)
+  subscriptionId?: Azure.Core.uuid;
 
   @doc("The time when the precheck was created.")
   createTime?: utcDateTime;
