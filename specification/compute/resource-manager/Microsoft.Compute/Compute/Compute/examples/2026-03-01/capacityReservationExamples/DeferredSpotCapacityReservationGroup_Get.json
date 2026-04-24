@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-04-01",
+    "capacityReservationGroupName": "deferredSpotCapacityReservationGroup",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/deferredSpotCapacityReservationGroup",
+        "properties": {
+          "capacityReservations": [
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation1"
+            },
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation2"
+            }
+          ],
+          "instanceView": {
+            "capacityReservations": [
+              {
+                "name": "deferredSpotCapacityReservation1",
+                "utilizationInfo": {
+                  "currentCapacity": 5,
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                    },
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                    }
+                  ]
+                },
+                "reservationStateInfo": {
+                  "reservationState": "Confirmed",
+                  "activeFrom": "2026-04-01T05:00:00+00:00",
+                  "activeUntil": "2026-04-01T07:30:00+00:00"
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              },
+              {
+                "name": "deferredSpotCapacityReservation2",
+                "utilizationInfo": {
+                  "currentCapacity": 5,
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                    },
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              }
+            ]
+          },
+          "reservationType": "DeferredSpot"
+        },
+        "location": "westus",
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "name": "deferredSpotCapacityReservationGroup"
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_Get",
+  "title": "Get a deferred spot capacity reservation Group."
+}
