@@ -33,17 +33,17 @@ arm-api-reviewer/
 
 ## Test Categories (21 test cases)
 
-| ID     | Category                  | Stimuli | Description |
-| ------ | ------------------------- | ------- | ----------- |
-| 01xxxx | ARM resource structure    | 2       | Missing CRUD ops, missing provisioningState |
-| 02xxxx | Property design           | 4       | Secrets, naming, descriptions, enums |
-| 03xxxx | Operations                | 4       | PATCH, PUT, DELETE, LRO violations |
-| 04xxxx | Breaking changes          | 3       | Removed property, type change, enum narrowing |
-| 05xxxx | Suppression analysis      | 2       | Missing reason, security rule suppressions |
-| 06xxxx | Example file validation   | 2       | Bad resource ID, realistic secrets |
-| 09xxxx | True negatives            | 2       | Clean spec, clean example (false-positive resistance) |
-| 10xxxx | Classification            | 1       | NEW vs EXISTING issue tagging |
-| 11xxxx | Report format             | 1       | Line numbers, rule IDs, structured output |
+| ID     | Category                  | Count | Description |
+| ------ | ------------------------- | ----- | ----------- |
+| 01xxxx | ARM resource structure    | 2     | Missing CRUD ops, missing provisioningState |
+| 02xxxx | Property design           | 4     | Secrets, naming, descriptions, enums |
+| 03xxxx | Operations                | 4     | PATCH, PUT, DELETE, LRO violations |
+| 04xxxx | Breaking changes          | 3     | Removed property, type change, enum narrowing |
+| 05xxxx | Suppression analysis      | 2     | Missing reason, security rule suppressions |
+| 06xxxx | Example file validation   | 2     | Bad resource ID, realistic secrets |
+| 09xxxx | True negatives            | 2     | Clean spec, clean example (false-positive resistance) |
+| 10xxxx | Classification            | 1     | NEW vs EXISTING issue tagging |
+| 11xxxx | Report format             | 1     | Line numbers, rule IDs, structured output |
 
 ## Fixtures (shared)
 
@@ -56,28 +56,44 @@ All 24 fixture files live in `fixtures/` and are referenced by both frameworks:
 
 ## Running with Waza
 
+Prerequisites: Install [waza](https://github.com/microsoft/waza) (Go CLI or
+azd extension).
+
 ```bash
+# From the repo root
 cd .github/skills
 waza run evals/arm-api-reviewer/eval.yaml -v
 ```
 
-See the [waza documentation](https://github.com/microsoft/waza) for installation
-and additional options (`--parallel`, `--task`, `--model`, etc.).
+The `.waza.yaml` at `.github/skills/` configures skill discovery and defaults.
+See the [waza documentation](https://github.com/microsoft/waza) for additional
+options (`--parallel`, `--task`, `--model`, etc.).
 
 ## Running with Evaluate (vally)
 
-```bash
-cd .github/skills/evals/arm-api-reviewer
+Prerequisites: Clone [microsoft/evaluate](https://github.com/microsoft/evaluate),
+then `npm install && npm run build`.
 
+```bash
 # Run a single category
-npx vally run evaluate/eval-arm-resource-structure.yaml
+cd .github/skills/evals/arm-api-reviewer
+npx --prefix /path/to/evaluate vally eval -e evaluate/eval-arm-resource-structure.yaml --verbose
 
 # Run all categories
-for f in evaluate/eval-*.yaml; do npx vally run "$f" -v; done
+for f in evaluate/eval-*.yaml; do
+  npx --prefix /path/to/evaluate vally eval -e "$f" --verbose
+done
+
+# Save results to a directory (includes results.jsonl + eval-results.md)
+npx --prefix /path/to/evaluate vally eval \
+  -e evaluate/eval-arm-resource-structure.yaml \
+  --output-dir ./results --verbose
 ```
 
-See the [evaluate documentation](https://github.com/microsoft/evaluate) for
-installation and additional options.
+Replace `/path/to/evaluate` with the path to your local clone of
+`microsoft/evaluate`. See the
+[evaluate documentation](https://github.com/microsoft/evaluate) for additional
+options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
 
 ## Grader Types
 
@@ -85,23 +101,41 @@ installation and additional options.
 
 | Grader             | Purpose |
 | ------------------ | ------- |
-| `skill_invocation` | Verify the `azure-api-review` skill is invoked |
-| `prompt`           | LLM-as-judge evaluation of agent output |
+| `skill_invocation` | Verify the `azure-api-review` skill is invoked (in `eval.yaml`) |
+| `prompt`           | LLM-as-judge evaluation of agent output against a rubric |
 
 ### Evaluate (vally)
 
-| Grader             | Purpose |
-| ------------------ | ------- |
-| `skill-invocation` | Verify the `azure-api-review` skill is invoked |
-| `output-matches`   | Regex match on agent output (rule IDs, keywords) |
+| Grader              | Purpose |
+| ------------------- | ------- |
+| `output-contains`   | Substring match on agent output (keywords, rule IDs) |
+| `output-matches`    | Regex match on agent output |
+| `output-not-matches` | Negative regex match (e.g., no em dashes) |
+| `prompt`            | LLM-as-judge evaluation of agent output against `rubric` criteria |
 
-> **Note:** The evaluate framework's LLM-as-judge grader support is pending
-> confirmation. Once available, the waza `prompt` graders can be ported to
-> evaluate for deeper semantic validation.
+Vally eval files also use `constraints.expect_skills` to verify the
+`azure-api-review` skill is activated during each stimulus.
+
+## Including Test Reports in PRs
+
+When submitting a PR that modifies the ARM API Reviewer agent, its instruction
+files, or the `azure-api-review` skill, run the eval suite and include the
+results in your PR description or as a comment:
+
+1. Run the eval suite with your chosen framework (see commands above).
+2. Attach the output file to your PR:
+   - **Waza**: Attach the JSON results file produced by `waza run ... -o results.json`.
+   - **Vally**: Attach the `results.jsonl` and/or `eval-results.md` from the
+     `--output-dir` directory.
+3. Summarize pass/fail counts in the PR description so reviewers can quickly
+   assess the impact of your changes.
 
 ## Adding New Tests
 
 1. **Add a fixture** in `fixtures/` (or reuse an existing one).
-2. **Waza:** Create a task YAML in `tasks/` and reference it in `eval.yaml`.
-3. **Evaluate:** Add a `stimulus` entry in the appropriate `evaluate/eval-*.yaml`.
+2. **Waza**: Create a task YAML in `tasks/` and add it to the `tasks:` list in
+   `eval.yaml`.
+3. **Vally**: Add a `stimulus` entry in the appropriate `evaluate/eval-*.yaml`
+   file. Include `rubric` criteria for the `prompt` grader.
 4. Follow the naming convention: `{category}{sequence}-{description}`.
+5. Run both frameworks to verify the new test works before submitting.
