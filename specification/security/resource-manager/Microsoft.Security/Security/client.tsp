@@ -321,19 +321,6 @@ op privateLinkResourcesGetCustomization(
 
 @@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "go");
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "ArmErrorAdditionalInfo",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
-  "ArmPrivateEndpointConnection",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
-  "ArmActionType",
-  "java"
-);
-
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
   "javascript"
@@ -513,4 +500,21 @@ op alertsListResourceGroupLevelByRegionCustomized(
 @@override(AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
   "python"
+);
+
+@@clientName(HealthReportsAPI.resourceDetails,
+  "HealthReportResourceDetails",
+  "java"
+);
+@@clientName(SecuritySolutionsAPI.CefExternalSecuritySolution.properties,
+  "cefSolutionProperties",
+  "java"
+);
+@@clientName(SecuritySolutionsAPI.AtaExternalSecuritySolution.properties,
+  "ataSolutionProperties",
+  "java"
+);
+@@clientName(SecuritySolutionsAPI.AadExternalSecuritySolution.properties,
+  "aadSolutionProperties",
+  "java"
 );
