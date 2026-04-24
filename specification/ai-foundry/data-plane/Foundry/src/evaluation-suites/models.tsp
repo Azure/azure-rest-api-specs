@@ -90,7 +90,7 @@ model EvaluationSuiteVersion {
 
   @doc("""
     Default evaluation level for this suite. Can be overridden at run time.
-    Exact values TBD.
+    Values: "turn" or "conversation".
     """)
   evaluationLevel?: string;
 
@@ -111,7 +111,7 @@ model EvaluationSuiteRunRequest {
   @doc("Suite version to run. Default: latest.")
   suiteVersion?: string;
 
-  @doc("Overrides the suite's default evaluation level. If omitted, uses the level from the suite.")
+  @doc("Overrides the suite's default evaluation level. Values: \"turn\" or \"conversation\". If omitted, uses the level from the suite.")
   evaluationLevel?: string;
 }
 
