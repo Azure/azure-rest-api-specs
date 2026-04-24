@@ -1937,14 +1937,22 @@
         "initiatorId": {
           "type": "string",
           "description": "The initiator of the FileShareSnapshot. This is a user-defined value.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "metadata": {
           "type": "object",
           "description": "The metadata",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
