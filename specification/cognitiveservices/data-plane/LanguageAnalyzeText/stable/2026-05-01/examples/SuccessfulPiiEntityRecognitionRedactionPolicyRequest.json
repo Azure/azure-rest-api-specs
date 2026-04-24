@@ -1,6 +1,6 @@
 {
   "operationId": "AnalyzeText",
-  "title": "SuccessfulPiiEntityRecognitionRequest",
+  "title": "SuccessfulPiiEntityRecognitionRedactionPolicyRequest",
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
     "api-version": "2026-05-01",
@@ -8,7 +8,13 @@
     "body": {
       "kind": "PiiEntityRecognition",
       "parameters": {
-        "modelVersion": "latest"
+        "modelVersion": "latest",
+        "redactionPolicies": [
+          {
+            "policyKind": "characterMask",
+            "redactionCharacter": "-"
+          }
+        ]
       },
       "analysisInput": {
         "documents": [
@@ -40,7 +46,7 @@
           "documents": [
             {
               "id": "1",
-              "redactedText": "My SSN is ***********",
+              "redactedText": "My SSN is -----------",
               "entities": [
                 {
                   "category": "USSocialSecurityNumber",
@@ -65,7 +71,7 @@
             },
             {
               "id": "2",
-              "redactedText": "Your ABA number - ********* - is the first 9 digits in the lower left hand corner of your personal check.",
+              "redactedText": "Your ABA number - --------- - is the first 9 digits in the lower left hand corner of your personal check.",
               "entities": [
                 {
                   "category": "ABARoutingNumber",
@@ -90,11 +96,11 @@
             },
             {
               "id": "3",
-              "redactedText": "Is ************** your Brazilian CPF number?",
+              "redactedText": "Is -------------- your Brazilian CPF number?",
               "entities": [
                 {
                   "category": "BRCPFNumber",
-                  "type": "BRCPFNumber",
+                  "type": "",
                   "confidenceScore": 0.85,
                   "length": 14,
                   "offset": 3,
