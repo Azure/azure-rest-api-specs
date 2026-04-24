@@ -247,6 +247,57 @@ For each scenario, include:
   the API references them. For LROs, show the polling header
   in the initial response.
 
+### Spec Fidelity Rules
+
+Before writing any request or response example, check the spec
+definitions for the operations and models involved. Specifically:
+
+- **Property types must match the spec.** If a property is typed as
+  `uuid` (or `format: uuid`), every example value for that property
+  MUST be a valid UUID (e.g., `10013344-5566-7788-99aa-bbccddeeff00`).
+  Do NOT invent human-readable prefixed IDs like `cde-...`, `col-...`,
+  or `dp-...`. If a property is typed as `url` (or `format: uri`),
+  the value MUST include a scheme (e.g., `https://host.example.com`).
+- **Response shapes must match the operation's return type.** If an
+  operation returns a single object (not an array or paged list),
+  show a single object. If it returns a paged list, show the `value`
+  array wrapper. Do NOT show a batch response for an operation that
+  returns a single item — split into multiple calls instead.
+- **One API call per operation invocation.** If you need to perform the
+  same operation on multiple resources (e.g., ingest two columns, tag
+  two columns), show each call separately with its own request and
+  response. Do NOT combine them into a batch unless the API explicitly
+  supports batch semantics.
+
+### Narrative–Step Consistency
+
+Every claim in the scenario description, prerequisites, and success
+criteria MUST be backed by a corresponding API call in the steps:
+
+- If the story says "tags both CustomerEmail and AccountNumber," there
+  must be two tagging API calls — one for each column.
+- If the prerequisites mention a resource ID, that exact ID must appear
+  in a request body or URL path in the steps.
+- The success criteria must only claim outcomes that the steps actually
+  achieve. Do NOT list a success criterion for an action that was
+  described in the narrative but omitted from the steps.
+
+### Matching Existing Document Conventions
+
+When appending scenarios to an **existing** `hero-scenarios.md`, read
+the file first and adopt its conventions:
+
+- **URL path format**: If existing scenarios use short paths (e.g.,
+  `/dataAssets/query`) without an `api-version` query parameter, use
+  the same style. If they use full paths with version parameters,
+  match that instead. Do NOT mix conventions within the same document.
+- **ID format**: If existing scenarios use placeholder-style IDs
+  (e.g., `{domain-id}`), use the same pattern. If they use concrete
+  example UUIDs, generate concrete UUIDs.
+- **Section structure**: Match the heading levels, formatting, and
+  section ordering (e.g., Story → Prerequisites → Steps → Success
+  Criteria → Value Delivered) used by existing scenarios.
+
 ## Step 4 — Post the Suggestion
 
 **If no `hero-scenarios.md` exists**, use `add-comment` to post a PR comment
