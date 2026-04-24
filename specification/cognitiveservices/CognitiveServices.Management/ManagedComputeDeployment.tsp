@@ -28,18 +28,8 @@ model ManagedComputeDeployment
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
   >;
 
-  /**
-   * The resource model definition representing SKU
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'sku' on the resource envelope for backward compatibility"
-  sku?: Sku;
-
-  /**
-   * Resource Etag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
-  @visibility(Lifecycle.Read)
-  etag?: string;
+  ...ResourceSkuProperty;
+  ...EntityTagProperty;
 }
 
 @added(Versions.v2026_03_15_preview)
@@ -58,7 +48,6 @@ interface ManagedComputeDeployments {
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "PATCH for 'createOrUpdate' follows existing service implementation pattern"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedComputeDeployment,
@@ -75,12 +64,7 @@ interface ManagedComputeDeployments {
   /**
    * Deletes the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ManagedComputeDeployment can have dependent resources, deleting it will be a LRO, result code will be 202. If the dependent resource is not provisioned, the result code will be 200."
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ManagedComputeDeployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ManagedComputeDeployment>;
 
   /**
    * Gets the managed compute deployments associated with the Cognitive Services account.
@@ -94,7 +78,6 @@ interface ManagedComputeDeployments {
 @@doc(ManagedComputeDeployment.name,
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
-@@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
 @@doc(ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."
 );
