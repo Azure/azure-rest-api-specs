@@ -40,6 +40,7 @@ import "./AgentDeploymentResource.tsp";
 import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
 import "./ManagedComputeUsages.tsp";
+import "./AcceleratorCapacity.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
