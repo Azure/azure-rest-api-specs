@@ -64,34 +64,31 @@ using Microsoft.Marketplace;
   "csharp"
 );
 @@clientName(Rule.type, "RuleType", "csharp");
-// Legacy POST workaround operations (one URL, both DELETE and POST verbs in swagger) are
-// hidden from the C# public surface. Resources expose only the standard ARM Delete(WaitUntil).
-// This avoids a duplicate Delete overload whose body is an extensible-enum (PrivateStoreOperation)
-// and eliminates the need for a SDK-side ToRequestContent customization. See CHANGELOG.
-@@access(PrivateStoreCollectionOperationGroup.post, Access.internal, "csharp");
-@@access(PrivateStoreCollectionOfferOperationGroup.post, Access.internal, "csharp");
-// Route the internal workaround POSTs into the csharp-renamed client groups to avoid a
-// name collision: without an override these land in a client named "PrivateStoreCollection",
-// which collides with the auto-generated ArmCollection class for PrivateStoreResource.
+// The two POSTs in routes.tsp share their URL with the resource DELETE verbs. They are a
+// non-standard server-side workaround surfaced publicly on main as a second Delete overload
+// taking PrivateStoreOperation?. We rename the generated method to "Delete" and merge it
+// into the CRUD client so the resource exposes both Delete(WaitUntil) (from the real DELETE
+// verb) and Delete(PrivateStoreOperation?) (from this POST workaround), matching main.
+// The @Azure.ResourceManager.Private.legacyResourceOperation decorators in routes.tsp pin
+// each POST to its owning resource (Collection / Offer).
+// The MPG generator has a codegen gap for extensible-enum bodies: it emits
+// `PrivateStoreOperation.ToRequestContent(payload)` but never emits that helper on the
+// extensible-enum struct. A SDK-side partial at src/Customize/Models/PrivateStoreOperation.cs
+// supplies the missing method so the generated Delete(PrivateStoreOperation?) still compiles.
+@@clientName(PrivateStoreCollectionOperationGroup.post, "Delete", "csharp");
+@@clientName(PrivateStoreCollectionOfferOperationGroup.post,
+  "Delete",
+  "csharp"
+);
+// Merge the POSTs into the existing CRUD client groups, avoiding an orphan
+// "PrivateStoreCollection" client (which would also collide with the ArmCollection class
+// for PrivateStoreResource) and a redundant sibling client for offer.
 @@clientLocation(PrivateStoreCollectionOperationGroup.post,
   "PrivateStoreCollectionInfo",
   "csharp"
 );
 @@clientLocation(PrivateStoreCollectionOfferOperationGroup.post,
   "PrivateStoreCollectionOffer",
-  "csharp"
-);
-// Generator bug workaround: the body parameter is an extensible-enum struct
-// (PrivateStoreOperation) but the codegen emits T.ToRequestContent(payload) and no such
-// method exists on extensible-enum structs. Alter the C# body type to string so codegen
-// takes the RequestContent.Create primitive path, eliminating the need for a SDK-side
-// ToRequestContent partial on PrivateStoreOperation.
-@@alternateType(PrivateStoreCollectionOperationGroup.post::parameters.payload,
-  string,
-  "csharp"
-);
-@@alternateType(PrivateStoreCollectionOfferOperationGroup.post::parameters.payload,
-  string,
   "csharp"
 );
 @@clientName(PrivateStores.fetchAllSubscriptionsInTenant,
@@ -268,7 +265,6 @@ using Microsoft.Marketplace;
   "PrivateStoreCollectionInfo",
   "csharp"
 );
-
 
 // ===== @@usage: Model usage overrides (C#) =====
 // Make OfferProperties (C# name: PrivateStoreOfferResult) input+output so collections are writable.
