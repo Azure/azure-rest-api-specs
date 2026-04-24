@@ -331,19 +331,6 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
-  "ArmActionType",
-  "java"
-);
-
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "ArmErrorAdditionalInfo",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
-  "ArmPrivateEndpointConnection",
   "java,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ActionType,
@@ -530,4 +517,21 @@ op alertsListResourceGroupLevelByRegionCustomized(
 @@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
   "SystemAssigned",
   "go"
+);
+
+@@clientName(HealthReportsAPI.resourceDetails,
+  "HealthReportResourceDetails",
+  "java"
+);
+@@clientName(SecuritySolutionsAPI.CefExternalSecuritySolution.properties,
+  "cefSolutionProperties",
+  "java"
+);
+@@clientName(SecuritySolutionsAPI.AtaExternalSecuritySolution.properties,
+  "ataSolutionProperties",
+  "java"
+);
+@@clientName(SecuritySolutionsAPI.AadExternalSecuritySolution.properties,
+  "aadSolutionProperties",
+  "java"
 );
