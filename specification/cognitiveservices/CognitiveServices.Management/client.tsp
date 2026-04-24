@@ -706,6 +706,9 @@ op calculateModelCapacityCustom(
 @@clientName(RaiBlocklistConfig.blocking, "IsBlocking", "csharp");
 @@clientName(RaiPolicyContentFilter.blocking, "IsBlocking", "csharp");
 @@clientName(RaiPolicyContentFilter.enabled, "IsEnabled", "csharp");
+@@clientName(QuotaScopeType, "CognitiveServicesQuotaScopeType", "csharp");
+
+@@scope(ComputeOperations.get, "!csharp"); // Core lib supports query operation status, so scope out this operation for .NET.
 
 @@usage(NetworkSecurityPerimeterConfiguration,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,

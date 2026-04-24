@@ -270,6 +270,7 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+@@clientName(BatchClient.listSubTasks, "list_subtasks", "python");
 // Python LRO private methods
 @@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");

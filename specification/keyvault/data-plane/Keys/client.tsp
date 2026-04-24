@@ -98,15 +98,8 @@ op encrypt is KeyVaultOperation<
     /**
      * The version of the key.
      */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -184,15 +177,8 @@ op sign is KeyVaultOperation<
     /**
      * The version of the key.
      */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -270,15 +256,8 @@ op wrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -358,15 +337,8 @@ op secureWrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -494,15 +466,15 @@ op getKeyAttestation is KeyVaultOperation<
 
 @@override(KeyVault.updateKey, updateKey, "!rust");
 @@override(KeyVault.getKey, getKey, "!rust");
-// Rust follows the service definition for optional versions but will consistently promote the version for crypto operation.
+// Rust follows the service definition for optional versions but will consistently promote the version for decrypt, verify, and unwrapKey operations.
 // Not using (and storing) an explicit version for crypto operations is dangerous and can lock applications out of their data.
-@@override(KeyVault.encrypt, encrypt);
+@@override(KeyVault.encrypt, encrypt, "!rust");
 @@override(KeyVault.decrypt, decrypt);
-@@override(KeyVault.sign, sign);
+@@override(KeyVault.sign, sign, "!rust");
 @@override(KeyVault.verify, verify);
-@@override(KeyVault.wrapKey, wrapKey);
+@@override(KeyVault.wrapKey, wrapKey, "!rust");
 @@override(KeyVault.unwrapKey, unwrapKey);
-@@override(KeyVault.secureWrapKey, secureWrapKey);
+@@override(KeyVault.secureWrapKey, secureWrapKey, "!rust");
 @@override(KeyVault.secureUnwrapKey, secureUnwrapKey);
 @@override(KeyVault.release, release, "!rust");
 @@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
@@ -711,6 +683,64 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(getKeyVersions, "ListKeyPropertiesVersions", "rust");
 // Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
 @@clientName(KeyVault.updateKey, "UpdateKeyProperties", "rust");
+@@clientDoc(KeyVault.encrypt,
+  """
+    
+    You should record the ['KeyOperationResult::kid`] that is returned by this operation
+    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::decrypt()`].
+    You can pass an empty string for the version to `decrypt()` to select the latest key version
+    but if you don't record the specific version used for encrypting, key rotation can make the data inaccessible.
+    """,
+  DocumentationMode.append,
+  "rust"
+);
+@@clientDoc(KeyVault.sign,
+  """
+    
+    You should record the ['KeyOperationResult::kid`] that is returned by this operation
+    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::verify()`].
+    You can pass an empty string for the version to `verify()` to select the latest key version
+    but if you don't record the specific version used for signing, key rotation can make the data unverifiable.
+    """,
+  DocumentationMode.append,
+  "rust"
+);
+@@clientDoc(KeyVault.wrapKey,
+  """
+    
+    You should record the ['KeyOperationResult::kid`] that is returned by this operation
+    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::unwrap_key()`].
+    You can pass an empty string for the version to `unwrap_key()` to select the latest key version
+    but if you don't record the specific version used for wrapping a key, key rotation can make the data inaccessible.
+    """,
+  DocumentationMode.append,
+  "rust"
+);
+@@clientDoc(KeyVault.secureWrapKey,
+  """
+    
+    You should record the ['KeyOperationResult::kid`] that is returned by this operation
+    so you can later parse it with [`ResourceId`](crate::ResourceId) and pass the version to [`KeyClient::secure_unwrap_key()`].
+    You can pass an empty string for the version to `secure_unwrap_key()` to select the latest key version
+    but if you don't record the specific version used for wrapping a key, key rotation can make the data inaccessible.
+    """,
+  DocumentationMode.append,
+  "rust"
+);
+
+@@clientDoc(KeyOperationResult.kid,
+  """
+    
+    You should record this when returned from [`KeyClient::encrypt()`](crate::KeyClient::encrypt), [`sign()`](crate::KeyClient::sign),
+    and [`wrap_key()`](crate::KeyClient::wrap_key) so you can later parse it with [`ResourceId`](crate::ResourceId)
+    and pass the version to [`decrypt()`](crate::KeyClient::decrypt), [`verify()`](crate::KeyClient::verify),
+    and [`unwrap_key()`](crate::KeyClient::unwrap_key).
+    You can pass an empty string for the version to those functions to select the latest key version
+    but if you don't record the specific version used encrypting, signing, or wrapping a key, key rotation can make the data inaccessible.
+    """,
+  DocumentationMode.append,
+  "rust"
+);
 
 @@clientName(KeyReleaseParameters.enc, "algorithm", "rust");
 @@clientName(KeyOperationsParameters.aad,

@@ -6,7 +6,7 @@ using ComputeDisk;
 
 @@clientName(DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
   "ConfidentialVMVmguestStateOnlyEncryptedWithPlatformKey",
-  "go"
+  "go,javascript"
 );
 
 // Property name changes - diskIOPS properties should be lowercase "iops" for Java compatibility
