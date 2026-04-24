@@ -116,7 +116,7 @@ op privateLinksGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
   privateLinksGetCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -140,7 +140,7 @@ op privateLinksCreateCustomization(
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
   privateLinksCreateCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -160,7 +160,7 @@ op privateLinksUpdateCustomization(
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
   privateLinksUpdateCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -178,7 +178,7 @@ op privateLinksDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -194,7 +194,7 @@ op privateLinksHeadCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
   privateLinksHeadCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -210,7 +210,7 @@ op privateEndpointConnectionsListCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -227,7 +227,7 @@ op privateEndpointConnectionsGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -251,7 +251,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
-  "!javascript,!python"
+  "!python"
 );
 @@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
@@ -274,7 +274,7 @@ op privateEndpointConnectionsDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -290,7 +290,7 @@ op privateLinkResourcesListCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
   privateLinkResourcesListCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -308,7 +308,7 @@ op privateLinkResourcesGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization,
-  "!javascript,!python"
+  "!python"
 );
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
