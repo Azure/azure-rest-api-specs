@@ -180,7 +180,7 @@ model TracesJobSource extends JobSource {
   end_time?: FoundryTimestamp;
 
   @doc("Maximum number of traces to retrieve.")
-  max_traces?: int32 = 100;
+  max_traces?: int32;
 }
 
 @doc("Dataset source — reference to a dataset.")
