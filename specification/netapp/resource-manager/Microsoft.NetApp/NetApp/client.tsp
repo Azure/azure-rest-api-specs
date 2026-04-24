@@ -775,10 +775,12 @@ using Microsoft.NetApp;
 );
 
 // --- Preserve SDK-facing NetAppProvisioningState naming for backward compat ---
+// Old SDK (1.15.0) had NetAppProvisioningState as a closed System.Enum. The spec models it
+// as an extensible union; using a union here would emit a `readonly partial struct`, breaking
+// ApiCompat. Use a closed `enum` so the C# emitter generates `public enum NetAppProvisioningState`.
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compat: must be closed enum to preserve System.Enum base type from v1.15.0."
 /** Compatibility alias for NetApp provisioning state values. */
-union NetAppProvisioningStateDef {
-  string,
-
+enum NetAppProvisioningStateDef {
   /** The request has been accepted. */
   Accepted: "Accepted",
 
