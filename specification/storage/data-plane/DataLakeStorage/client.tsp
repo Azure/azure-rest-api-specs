@@ -2,8 +2,36 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Storage.DataLake;
 
 namespace Customizations;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.DataLake,
+  },
+  "go"
+)
+interface FileSystemClient extends FileSystem {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.DataLake,
+  },
+  "go"
+)
+interface PathClient extends Path {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.DataLake,
+  },
+  "go"
+)
+interface ServiceClient extends Service {}
 
 @@clientNamespace(Storage.DataLake,
   "Azure.Storage.Files.DataLake",
@@ -17,7 +45,7 @@ namespace Customizations;
 @@clientName(Storage.DataLake.FileSystemItem.eTag, "etag", "javascript,python");
 @@clientName(Storage.DataLake.PathItem.eTag, "etag", "javascript,python");
 
-@@clientName(Storage.DataLake.BlobItemInternal, "BlobItemModel", "javascript");
+//@@clientName(Storage.DataLake.BlobItemInternal, "BlobItemModel", "javascript");
 @@clientName(Storage.DataLake.BlobPropertiesInternal,
   "BlobPropertiesModel",
   "javascript"
@@ -108,9 +136,18 @@ enum EncryptionAlgorithmTypeCustom {
   "csharp"
 );
 @@alternateType(Storage.DataLake.IfMatchParameter.ifMatch, string, "csharp");
-@@alternateType(Storage.DataLake.IfNoneMatchParameter.ifNoneMatch, string, "csharp");
-@@alternateType(Storage.DataLake.SourceIfMatchParameter.sourceIfMatch, string, "csharp");
-@@alternateType(Storage.DataLake.SourceIfNoneMatchParameter.sourceIfNoneMatch, string, "csharp");
+@@alternateType(Storage.DataLake.IfNoneMatchParameter.ifNoneMatch,
+  string,
+  "csharp"
+);
+@@alternateType(Storage.DataLake.SourceIfMatchParameter.sourceIfMatch,
+  string,
+  "csharp"
+);
+@@alternateType(Storage.DataLake.SourceIfNoneMatchParameter.sourceIfNoneMatch,
+  string,
+  "csharp"
+);
 
 @@access(Storage.DataLake.PathGetPropertiesAction, Access.public, "csharp");
 @@access(Storage.DataLake.PathLeaseAction, Access.public, "csharp");
