@@ -278,7 +278,7 @@ model BlobPrefixGo {
   @Xml.name("Name") name: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Client library owners should add relevant documentation"
-  properties: BlobProperties;
+  @Xml.name("Properties") properties: BlobProperties;
 }
 /** The properties of a blob. */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Client library owners should add relevant documentation"
