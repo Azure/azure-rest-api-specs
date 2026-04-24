@@ -54,7 +54,7 @@ namespace ComputeCombine;
 @@usage(PurchasePlan, Azure.ClientGenerator.Core.Usage.input, "java");
 
 // ResourceSku.apiVersions is a list of supported API versions for a SKU, not the service API version.
-// Suppress TCGC's name-based heuristic that incorrectly treats it as the service API version parameter.
+// Suppress the name-based heuristic that incorrectly treats it as the service API version parameter.
 @@apiVersion(ResourceSku.apiVersions, false);
 
 // Property name changes: retain old Java names for ComputeGallery and ComputeSku models
