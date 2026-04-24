@@ -13,6 +13,12 @@ using Compute;
   "go, javascript"
 );
 
+// networkApiVersion refers to Microsoft.Network API version, not the compute service version.
+// Suppress TCGC's name-based heuristic that incorrectly treats it as the service API version parameter.
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(VirtualMachineScaleSetUpdateNetworkProfile.networkApiVersion, false);
+@@apiVersion(NetworkProfile.networkApiVersion, false);
+
 @@alternateType(VirtualMachineScaleSetStorageProfile.diskControllerType,
   string,
   "go"
