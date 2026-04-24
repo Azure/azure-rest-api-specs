@@ -71,7 +71,7 @@ interface Pricings {
   /**
    * Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.
    */
-  list is PricingsOps.List<
+  list is PricingsOps.ListSinglePage<
     Pricing,
     Parameters = {
       /**

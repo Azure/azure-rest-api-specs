@@ -345,6 +345,8 @@ model CustomAlertRule {
 /**
  * A custom alert rule that checks if the number of activities (depends on the custom alert type) in a time window is within the given range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ThresholdCustomAlertRule)
 model TimeWindowCustomAlertRule extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
   ruleType: "TimeWindowCustomAlertRule";

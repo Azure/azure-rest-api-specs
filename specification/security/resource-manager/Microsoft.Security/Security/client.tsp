@@ -1,4 +1,4 @@
-﻿import "./Alerts/main.tsp";
+import "./Alerts/main.tsp";
 import "./AlertsSuppressionRules/main.tsp";
 import "./ApiCollections/main.tsp";
 import "./Applications/main.tsp";
@@ -49,6 +49,7 @@ using ComplianceResultsAPI;
 using HealthReportsAPI;
 using LegacySettingsAPI;
 using SqlVulnerabilityAssessmentsAPI;
+using AlertsAPI;
 
 @client({
   name: "SecurityManagementClient",
@@ -111,12 +112,12 @@ op privateLinksGetCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
   privateLinksGetCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -127,7 +128,7 @@ op privateLinksCreateCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   resource: PrivateLinksAPI.PrivateLinkResource,
 ): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
   PrivateLinksAPI.PrivateLinkResource,
@@ -140,7 +141,7 @@ op privateLinksCreateCustomization(
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
   privateLinksCreateCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -151,7 +152,7 @@ op privateLinksUpdateCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   properties: PrivateLinksAPI.PrivateLinkUpdate,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
@@ -160,7 +161,7 @@ op privateLinksUpdateCustomization(
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
   privateLinksUpdateCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -172,13 +173,13 @@ op privateLinksDeleteCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
 ): ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -189,12 +190,12 @@ op privateLinksHeadCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
 ): OkResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
   privateLinksHeadCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -205,12 +206,12 @@ op privateEndpointConnectionsListCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -221,13 +222,13 @@ op privateEndpointConnectionsGetCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -238,7 +239,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -251,7 +252,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
-  "!python"
+  "!python,!java"
 );
 @@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
@@ -266,7 +267,7 @@ op privateEndpointConnectionsDeleteCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
 ): ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -274,7 +275,7 @@ op privateEndpointConnectionsDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -285,12 +286,12 @@ op privateLinkResourcesListCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
   privateLinkResourcesListCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -301,14 +302,14 @@ op privateLinkResourcesGetCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization,
-  "!python"
+  "!python,!java"
 );
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
@@ -349,17 +350,18 @@ op privateLinkResourcesGetCustomization(
   "ArmActionType",
   "java"
 );
+
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
   "IoTIpfilterDenyAll",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
   "IoTIpfilterPermissiveRule",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript");
 
@@ -371,11 +373,6 @@ op privateLinkResourcesGetCustomization(
 @@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
   "DefenderCspmAwsOfferingCiemOidc",
   "go,javascript"
-);
-
-@@clientName(IoTSecurityAPI.ThresholdCustomAlertRule,
-  "ThresholdCustomAlertRuleClassification",
-  "go"
 );
 
 @@clientName(Common.ResourceDetails, "CommonResourceDetails", "python");
@@ -401,10 +398,6 @@ op privateLinkResourcesGetCustomization(
 @@clientName(AlertsAPI.Kind, "KindEnum", "python");
 @@clientName(Status, "StatusEnum", "python");
 @@clientName(OperationResult, "OperationResultAutoGenerated", "python");
-@@clientName(PrivateLinksAPI.PrivateLinkResource,
-  "PrivateLinkParameters",
-  "python"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
   "current",
@@ -446,12 +439,12 @@ op sqlVulnerabilityAssessmentScansGet(
   scanId: string,
 
   @query
-  databaseName: string,
+  databaseName?: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceId: string,
-): ArmResponse<ScanV2>;
+): ArmResponse<ScanV2> | Common.CloudError;
 
 @@override(ScanV2s.get, sqlVulnerabilityAssessmentScansGet);
 
@@ -471,12 +464,12 @@ op sqlVulnerabilityAssessmentScanResultsList(
   scanId: string,
 
   @query
-  databaseName: string,
+  databaseName?: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceId: string,
-): ArmResponse<ScanResults>;
+): ArmResponse<ScanResults> | Common.CloudError;
 
 @@override(SqlVulnerabilityAssessmentScanResults.list,
   sqlVulnerabilityAssessmentScanResultsList
@@ -502,13 +495,39 @@ op sqlVulnerabilityAssessmentScanResultsGet(
   scanResultId: string,
 
   @query
-  databaseName: string,
+  databaseName?: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceId: string,
-): ArmResponse<ScanResult>;
+): ArmResponse<ScanResult> | Common.CloudError;
 
 @@override(SqlVulnerabilityAssessmentScanResults.get,
   sqlVulnerabilityAssessmentScanResultsGet
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op alertsListResourceGroupLevelByRegionCustomized(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+
+  /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
+  @path
+  @segment("locations")
+  ascLocation: string,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+): ArmResponse<AlertList> | ErrorResponse;
+
+@@override(AlertOperationGroup.listResourceGroupLevelByRegion,
+  alertsListResourceGroupLevelByRegionCustomized,
+  "python,go"
+);
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
+  "SystemAssigned",
+  "go"
 );

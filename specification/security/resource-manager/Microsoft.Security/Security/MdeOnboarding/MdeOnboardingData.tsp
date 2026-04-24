@@ -43,7 +43,7 @@ interface MdeOnboardings {
    * The configuration or data needed to onboard the machine to MDE
    */
   @tag("MdeOnboarding")
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     MdeOnboardingData,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<MdeOnboardingDataList>,
