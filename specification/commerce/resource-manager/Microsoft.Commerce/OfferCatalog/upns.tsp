@@ -33,10 +33,9 @@ model Upn is Azure.ResourceManager.ProxyResource<UpnProperties> {
 interface Upns {
   /**
    * Get a single UPN resource by its GUID identifier. Returns the identity
-   * envelope by default; use the `fragments` query parameter to opt in to
-   * additional fragment subtrees.
+   * envelope of the UPN.
    */
-  get is Extension.Read<Extension.Tenant, Upn, Parameters = FragmentsQueryParameter>;
+  get is Extension.Read<Extension.Tenant, Upn>;
 
   /**
    * List UPN resources at tenant/provider scope. Returns the identity

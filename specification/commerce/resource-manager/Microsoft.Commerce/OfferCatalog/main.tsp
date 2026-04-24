@@ -21,7 +21,7 @@ namespace Microsoft.Commerce;
 /** The available API versions for the Offer Catalog service. */
 enum Versions {
   /** The 2026-04-24-preview API version. */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @previewVersion
   v2026_04_24_preview: "2026-04-24-preview",
 }

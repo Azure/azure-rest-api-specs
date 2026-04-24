@@ -56,21 +56,26 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all operations supported by Microsoft.Commerce/OfferCatalog": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -87,7 +92,7 @@
         "description": "List UPN resources at tenant/provider scope. Returns the identity\nenvelope for each UPN by default; use the `fragments` query parameter\nto opt in to additional fragment subtrees on every listed UPN.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FragmentsQueryParameter"
@@ -103,7 +108,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -123,10 +128,10 @@
         "tags": [
           "Upns"
         ],
-        "description": "Get a single UPN resource by its GUID identifier. Returns the identity\nenvelope by default; use the `fragments` query parameter to opt in to\nadditional fragment subtrees.",
+        "description": "Get a single UPN resource by its GUID identifier. Returns the identity\nenvelope of the UPN.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "upnGuid",
@@ -135,9 +140,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          },
-          {
-            "$ref": "#/parameters/FragmentsQueryParameter"
           }
         ],
         "responses": {
@@ -150,7 +152,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -257,7 +259,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
