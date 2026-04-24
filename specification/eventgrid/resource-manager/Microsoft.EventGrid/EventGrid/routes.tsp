@@ -112,7 +112,7 @@ interface EventSubscriptionsOperationGroup {
   listRegionalBySubscription is ArmProviderActionSync<
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
@@ -139,7 +139,7 @@ interface EventSubscriptionsOperationGroup {
   listRegionalByResourceGroup is ArmProviderActionSync<
     Scope = Extension.ResourceGroup,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
@@ -167,7 +167,7 @@ interface EventSubscriptionsOperationGroup {
     Response = ArmResponse<EventSubscriptionsListResult>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Name of the topic type.
@@ -201,7 +201,7 @@ interface EventSubscriptionsOperationGroup {
     Response = ArmResponse<EventSubscriptionsListResult>,
     Scope = Extension.ResourceGroup,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Name of the topic type.

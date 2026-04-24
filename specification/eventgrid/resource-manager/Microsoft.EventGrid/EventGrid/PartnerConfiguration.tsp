@@ -16,13 +16,23 @@ namespace Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 model PartnerConfiguration
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PartnerConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<PartnerConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = PartnerConfiguration,
     KeyName = "partnerConfiguration",
     SegmentName = "partnerConfigurations",
     NamePattern = ""
   >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Resource tags. */
+  tags?: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The geo-location where the resource lives */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 }
 
 @armResourceOperations
