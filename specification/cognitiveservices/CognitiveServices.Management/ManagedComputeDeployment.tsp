@@ -27,7 +27,6 @@ model ManagedComputeDeployment
     SegmentName = "managedComputeDeployments",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
   >;
-
   ...ResourceSkuProperty;
   ...EntityTagProperty;
 }
