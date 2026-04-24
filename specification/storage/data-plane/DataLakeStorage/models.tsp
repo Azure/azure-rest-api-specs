@@ -1035,6 +1035,7 @@ alias RequestIdResponseHeader = {
   /** A server-generated UUID recorded in the analytics logs for troubleshooting and correlation. */
   @access(Access.internal)
   @visibility(Lifecycle.Read)
+  @pattern("^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$")
   @header("x-ms-request-id")
   requestId?: string;
 };
