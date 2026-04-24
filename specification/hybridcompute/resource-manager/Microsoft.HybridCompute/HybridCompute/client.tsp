@@ -58,7 +58,4 @@ union CustomPublicNetworkAccessType {
   "default"
 );
 @@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "python");
-@@clientLocation(Machines.upgradeExtensions,
-  Microsoft.HybridCompute,
-  "python"
-);
+@@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "python");
