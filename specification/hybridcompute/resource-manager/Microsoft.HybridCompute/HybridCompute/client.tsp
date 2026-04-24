@@ -6,7 +6,7 @@ using Microsoft.HybridCompute;
 
 @@clientName(Microsoft.HybridCompute,
   "HybridComputeManagementClient",
-  "javascript"
+  "javascript,python"
 );
 
 @@alternateType(ServiceExtension.serviceExtensionType, string, "go");
@@ -34,9 +34,9 @@ union CustomPublicNetworkAccessType {
 }
 @@alternateType(PublicNetworkAccessType,
   CustomPublicNetworkAccessType,
-  "javascript"
+  "javascript,python"
 );
 @@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
-  "javascript"
+  "javascript,python"
 );
