@@ -156,7 +156,7 @@ interface BatchClient {
 @@alternateType(Azure.Batch.DiskCustomerManagedKey.keyUrl, url, "csharp");
 
 @@clientName(BatchClient.listJobsFromSchedule,
-  "listJobsFromSchedules",
+  "listJobsFromSchedule",
   "csharp"
 );
 @@clientName(BatchClient.listJobPreparationAndReleaseTaskStatus,
