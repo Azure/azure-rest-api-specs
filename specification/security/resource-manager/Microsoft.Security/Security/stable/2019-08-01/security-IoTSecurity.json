@@ -2225,16 +2225,6 @@
       "type": "object",
       "description": "A custom alert rule that checks if the number of activities (depends on the custom alert type) in a time window is within the given range.",
       "properties": {
-        "minThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum threshold."
-        },
-        "maxThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum threshold."
-        },
         "timeWindowSize": {
           "type": "string",
           "format": "duration",
@@ -2242,13 +2232,11 @@
         }
       },
       "required": [
-        "minThreshold",
-        "maxThreshold",
         "timeWindowSize"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CustomAlertRule"
+          "$ref": "#/definitions/ThresholdCustomAlertRule"
         }
       ],
       "x-ms-discriminator-value": "TimeWindowCustomAlertRule"

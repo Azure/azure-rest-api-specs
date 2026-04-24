@@ -239,7 +239,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params?: `private-link-parameters`,
+  privateLinkName?: `private-link-parameters`,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -528,5 +528,5 @@ op alertsListResourceGroupLevelByRegionCustomized(
 
 @@override(AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
-  "python"
+  "python,go"
 );
