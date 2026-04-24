@@ -42,7 +42,10 @@ arm-api-reviewer/
 
 ## Fixtures
 
-All 24 fixture files live in `fixtures/`:
+All 24 fixture files live in `fixtures/`. See
+[`fixtures/README.md`](fixtures/README.md) for the complete catalog with
+descriptions, seeded violations, and guidance on reusing fixtures in other
+eval suites.
 
 - **11 ARM OpenAPI specs** in `arm-openapi/` — 1 clean + 10 with seeded violations
 - **3 example JSON files** in `examples/` — 1 clean + 2 with issues
