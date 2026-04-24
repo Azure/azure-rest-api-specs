@@ -53,7 +53,6 @@
                 }
               ],
               "targetPort": 3000,
-              "targetPortHttpScheme": "http",
               "traffic": [
                 {
                   "revisionName": "testcontainerApp0-ab1234",
@@ -68,24 +67,12 @@
               "transport": "auto"
             },
             "maxInactiveRevisions": 10,
-            "revisionTransitionThreshold": 100,
             "runtime": {
               "dotnet": {
                 "autoConfigureDataProtection": true
               },
               "java": {
-                "enableMetrics": true,
-                "javaAgent": {
-                  "enabled": true,
-                  "logging": {
-                    "loggerSettings": [
-                      {
-                        "level": "debug",
-                        "logger": "org.springframework.boot"
-                      }
-                    ]
-                  }
-                }
+                "enableMetrics": true
               }
             }
           },

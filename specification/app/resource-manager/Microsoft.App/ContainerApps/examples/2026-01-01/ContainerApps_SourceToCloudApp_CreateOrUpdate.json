@@ -88,7 +88,6 @@
             ]
           },
           "maxInactiveRevisions": 10,
-          "revisionTransitionThreshold": 100,
           "service": {
             "type": "redis"
           }
@@ -171,10 +170,6 @@
           "serviceBinds": [
             {
               "name": "redisService",
-              "clientType": "dotnet",
-              "customizedKeys": {
-                "DesiredKey": "defaultKey"
-              },
               "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/redisService"
             }
           ],
@@ -247,7 +242,6 @@
                 "affinity": "sticky"
               },
               "targetPort": 3000,
-              "targetPortHttpScheme": "http",
               "traffic": [
                 {
                   "revisionName": "testcontainerApp0-ab1234",
@@ -379,7 +373,6 @@
               "external": true,
               "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "targetPort": 3000,
-              "targetPortHttpScheme": "http",
               "traffic": [
                 {
                   "revisionName": "testcontainerApp0-ab1234",

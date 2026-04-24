@@ -10,78 +10,23 @@
       },
       "location": "East US",
       "properties": {
-        "appInsightsConfiguration": {
-          "connectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"
-        },
         "appLogsConfiguration": {
           "logAnalyticsConfiguration": {
             "customerId": "string",
-            "dynamicJsonColumns": true,
             "sharedKey": "string"
           }
         },
-        "availabilityZones": [
-          "1",
-          "2",
-          "3"
-        ],
         "customDomainConfiguration": {
           "certificatePassword": "1234",
           "certificateValue": "Y2VydA==",
           "dnsSuffix": "www.my-name.com"
         },
         "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
-        "diskEncryptionConfiguration": {
-          "keyVaultConfiguration": {
-            "auth": {
-              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity"
-            },
-            "keyUrl": "https://contoso.vault.azure.net/mykey/19ff8313ca394b89b9e824bbbdc8c521"
-          }
-        },
         "ingressConfiguration": {
           "headerCountLimit": 30,
           "requestIdleTimeout": 5,
           "terminationGracePeriodSeconds": 3600,
           "workloadProfileName": "My-CO-01"
-        },
-        "openTelemetryConfiguration": {
-          "destinationsConfiguration": {
-            "dataDogConfiguration": {
-              "key": "000000000000000000000000",
-              "site": "string"
-            },
-            "otlpConfigurations": [
-              {
-                "name": "dashboard",
-                "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
-                "headers": [
-                  {
-                    "key": "api-key",
-                    "value": "xxxxxxxxxxx"
-                  }
-                ],
-                "insecure": true
-              }
-            ]
-          },
-          "logsConfiguration": {
-            "destinations": [
-              "appInsights"
-            ]
-          },
-          "metricsConfiguration": {
-            "destinations": [
-              "dataDog"
-            ],
-            "includeKeda": true
-          },
-          "tracesConfiguration": {
-            "destinations": [
-              "appInsights"
-            ],
-            "includeDapr": true
-          }
         },
         "peerAuthentication": {
           "mtls": {
@@ -99,7 +44,6 @@
         "workloadProfiles": [
           {
             "name": "My-GP-01",
-            "enableFips": true,
             "maximumCount": 12,
             "minimumCount": 3,
             "workloadProfileType": "GeneralPurpose"
@@ -147,18 +91,11 @@
         },
         "location": "East US",
         "properties": {
-          "appInsightsConfiguration": null,
           "appLogsConfiguration": {
             "logAnalyticsConfiguration": {
-              "customerId": "string",
-              "dynamicJsonColumns": true
+              "customerId": "string"
             }
           },
-          "availabilityZones": [
-            "1",
-            "2",
-            "3"
-          ],
           "customDomainConfiguration": {
             "customDomainVerificationId": "custom domain verification id",
             "dnsSuffix": "www.my-name.com",
@@ -168,14 +105,6 @@
           },
           "defaultDomain": "testcontainerenv.k4apps.io",
           "deploymentErrors": null,
-          "diskEncryptionConfiguration": {
-            "keyVaultConfiguration": {
-              "auth": {
-                "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity"
-              },
-              "keyUrl": "https://contoso.vault.azure.net/mykey/19ff8313ca394b89b9e824bbbdc8c521"
-            }
-          },
           "eventStreamEndpoint": "testEndpoint",
           "infrastructureResourceGroup": "capp-svc-testcontainerenv-eastus",
           "ingressConfiguration": {
@@ -183,36 +112,6 @@
             "requestIdleTimeout": 5,
             "terminationGracePeriodSeconds": 3600,
             "workloadProfileName": "My-CO-01"
-          },
-          "openTelemetryConfiguration": {
-            "destinationsConfiguration": {
-              "dataDogConfiguration": {
-                "key": null,
-                "site": "datadoghq.com"
-              },
-              "otlpConfigurations": [
-                {
-                  "name": "dashboard",
-                  "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
-                  "insecure": true
-                }
-              ]
-            },
-            "logsConfiguration": {
-              "destinations": [
-                "appInsights"
-              ]
-            },
-            "metricsConfiguration": {
-              "destinations": [
-                "dataDog"
-              ]
-            },
-            "tracesConfiguration": {
-              "destinations": [
-                "appInsights"
-              ]
-            }
           },
           "peerAuthentication": {
             "mtls": {
@@ -227,7 +126,6 @@
           "workloadProfiles": [
             {
               "name": "My-GP-01",
-              "enableFips": true,
               "maximumCount": 12,
               "minimumCount": 3,
               "workloadProfileType": "GeneralPurpose"
@@ -271,17 +169,11 @@
         },
         "location": "East US",
         "properties": {
-          "appInsightsConfiguration": null,
           "appLogsConfiguration": {
             "logAnalyticsConfiguration": {
               "customerId": "string"
             }
           },
-          "availabilityZones": [
-            "1",
-            "2",
-            "3"
-          ],
           "customDomainConfiguration": {
             "customDomainVerificationId": "custom domain verification id",
             "dnsSuffix": "www.my-name.com",
@@ -291,14 +183,6 @@
           },
           "defaultDomain": "testcontainerenv.k4apps.io",
           "deploymentErrors": null,
-          "diskEncryptionConfiguration": {
-            "keyVaultConfiguration": {
-              "auth": {
-                "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity"
-              },
-              "keyUrl": "https://contoso.vault.azure.net/mykey/19ff8313ca394b89b9e824bbbdc8c521"
-            }
-          },
           "eventStreamEndpoint": "testEndpoint",
           "infrastructureResourceGroup": "capp-svc-testcontainerenv-eastus",
           "ingressConfiguration": {
@@ -306,36 +190,6 @@
             "requestIdleTimeout": 5,
             "terminationGracePeriodSeconds": 3600,
             "workloadProfileName": "My-CO-01"
-          },
-          "openTelemetryConfiguration": {
-            "destinationsConfiguration": {
-              "dataDogConfiguration": {
-                "key": null,
-                "site": "datadoghq.com"
-              },
-              "otlpConfigurations": [
-                {
-                  "name": "dashboard",
-                  "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
-                  "insecure": true
-                }
-              ]
-            },
-            "logsConfiguration": {
-              "destinations": [
-                "appInsights"
-              ]
-            },
-            "metricsConfiguration": {
-              "destinations": [
-                "dataDog"
-              ]
-            },
-            "tracesConfiguration": {
-              "destinations": [
-                "appInsights"
-              ]
-            }
           },
           "peerAuthentication": {
             "mtls": {
@@ -350,7 +204,6 @@
           "workloadProfiles": [
             {
               "name": "My-GP-01",
-              "enableFips": true,
               "maximumCount": 12,
               "minimumCount": 3,
               "workloadProfileType": "GeneralPurpose"

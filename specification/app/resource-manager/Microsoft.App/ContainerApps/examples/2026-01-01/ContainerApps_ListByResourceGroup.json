@@ -66,7 +66,6 @@
                     "affinity": "sticky"
                   },
                   "targetPort": 3000,
-                  "targetPortHttpScheme": "http",
                   "traffic": [
                     {
                       "revisionName": "testcontainerApp0-ab1234",
@@ -81,24 +80,12 @@
                   "transport": "auto"
                 },
                 "maxInactiveRevisions": 10,
-                "revisionTransitionThreshold": 100,
                 "runtime": {
                   "dotnet": {
                     "autoConfigureDataProtection": true
                   },
                   "java": {
-                    "enableMetrics": true,
-                    "javaAgent": {
-                      "enabled": true,
-                      "logging": {
-                        "loggerSettings": [
-                          {
-                            "level": "debug",
-                            "logger": "org.springframework.boot"
-                          }
-                        ]
-                      }
-                    }
+                    "enableMetrics": true
                   }
                 }
               },
@@ -160,11 +147,9 @@
                   "external": true,
                   "fqdn": "testcontainerApp1.demokube-t24clv0g.eastus.containerApps.k4apps.io",
                   "targetPort": 3000,
-                  "targetPortHttpScheme": "http",
                   "transport": "auto"
                 },
-                "maxInactiveRevisions": 10,
-                "revisionTransitionThreshold": 100
+                "maxInactiveRevisions": 10
               },
               "deploymentErrors": "Code: ContainerAppImagePullProvisionError, Message: Error pulling the container image. Please check the image name or any registry credentials to access if required.",
               "eventStreamEndpoint": "testEndpoint",
