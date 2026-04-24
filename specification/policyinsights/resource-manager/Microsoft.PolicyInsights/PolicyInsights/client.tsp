@@ -668,6 +668,11 @@ op policyEventsListQueryResultsForManagementGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyEventsListQueryResultsForSubscription(
   ...ApiVersionParameter,
+
+  @path
+  @segment("policyEvents")
+  policyEventsResource: PolicyEventsResourceType,
+
   ...SubscriptionIdParameter,
   @bodyRoot body: void,
 
@@ -677,11 +682,6 @@ op policyEventsListQueryResultsForSubscription(
   name: string,
 
   ...ProviderNamespace<SubscriptionActionScope>,
-
-  @path
-  @segment("policyEvents")
-  policyEventsResource: PolicyEventsResourceType,
-
   queryOptions?: PolicyEventsListQueryResultsForSubscriptionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscription,
