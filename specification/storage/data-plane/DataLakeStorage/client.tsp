@@ -45,7 +45,7 @@ interface ServiceClient extends Service {}
 @@clientName(Storage.DataLake.FileSystemItem.eTag, "etag", "javascript,python");
 @@clientName(Storage.DataLake.PathItem.eTag, "etag", "javascript,python");
 
-//@@clientName(Storage.DataLake.BlobItemInternal, "BlobItemModel", "javascript");
+@@clientName(Storage.DataLake.BlobItem, "BlobItemModel", "javascript");
 @@clientName(Storage.DataLake.BlobPropertiesInternal,
   "BlobPropertiesModel",
   "javascript"
