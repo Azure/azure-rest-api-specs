@@ -42,8 +42,8 @@ interface DataGenerationJobs {
       scenario?: DataGenerationJobScenario;
 
       @doc("Filter data generation jobs by their type.")
-      @query
-      type?: DataGenerationJobType;
+      @query(#{ explode: false })
+      type?: DataGenerationJobType[];
     }
   >;
 

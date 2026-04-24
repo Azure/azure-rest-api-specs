@@ -2469,7 +2469,10 @@
             "required": false,
             "description": "Filter data generation jobs by their type.",
             "schema": {
-              "$ref": "#/components/schemas/DataGenerationJobType"
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/DataGenerationJobType"
+              }
             },
             "explode": false
           },
