@@ -4561,7 +4561,7 @@ model DistributedNodesInfo {
 /**
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4574,7 +4574,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4587,7 +4587,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SAP HANA DBInstance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4971,7 +4971,7 @@ model SnapshotRestoreParameters {
 /**
  * Recovery point specific to PointInTime in SAPHana
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4992,7 +4992,7 @@ alias AzureWorkloadSAPHanaPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5006,7 +5006,7 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5019,7 +5019,7 @@ model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
 /**
  * SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5032,7 +5032,7 @@ model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
 /**
  * Recovery point specific to PointInTime in SAPAse
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5046,7 +5046,7 @@ model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
 /**
  * AzureWorkload SAP Ase-specific restore. Specifically for PointInTime/Log restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5064,7 +5064,7 @@ model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Ase-specific restore.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5077,7 +5077,7 @@ model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
 /**
  * SAPAse specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAseRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -7566,7 +7566,7 @@ model PreBackupValidation {
 /**
  * Azure VM workload-specific protectable item representing SAP ASE Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7580,7 +7580,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP ASE Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7593,7 +7593,7 @@ model AzureVmWorkloadSAPAseDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP ASE System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseSystemProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7607,7 +7607,7 @@ model AzureVmWorkloadSAPAseSystemProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP ASE System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseSystemWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7620,7 +7620,7 @@ model AzureVmWorkloadSAPAseSystemWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP HANA Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7634,7 +7634,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP HANA Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7647,7 +7647,7 @@ model AzureVmWorkloadSAPHanaDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP HANA System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaSystemProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7661,7 +7661,7 @@ model AzureVmWorkloadSAPHanaSystemProtectableItem
 /**
  * Azure VM workload-specific protectable item representing SAP HANA Dbinstance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDBInstance extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -7674,7 +7674,7 @@ model AzureVmWorkloadSAPHanaDBInstance extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific protectable item representing HANA HSR.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -7687,7 +7687,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific protectable item representing HANA scale out.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 @added(Versions.v2026_01_31_preview)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
@@ -7702,7 +7702,7 @@ model AzureVmWorkloadSAPHanaScaleoutProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP HANA System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaSystemWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -8443,7 +8443,7 @@ model OperationStatusValidateOperationExtendedInfo
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
   /**
@@ -8479,7 +8479,7 @@ model RecoveryPointRehydrationInfo {
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
