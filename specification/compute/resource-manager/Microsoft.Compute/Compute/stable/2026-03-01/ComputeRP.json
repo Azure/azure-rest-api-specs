@@ -13247,26 +13247,6 @@
         }
       }
     },
-    "CapacityReservationStateInfo": {
-      "type": "object",
-      "description": "The current state and confirmed active schedule for a capacity reservation. Applicable to reservation types that follow a schedule-based lifecycle, such as Deferred Spot capacity reservations.",
-      "properties": {
-        "reservationState": {
-          "$ref": "#/definitions/ReservationState",
-          "description": "The current state of the capacity reservation."
-        },
-        "activeFrom": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time in UTC when the capacity reservation becomes active."
-        },
-        "activeUntil": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time in UTC when the capacity reservation expires."
-        }
-      }
-    },
     "CapacityReservationInstanceViewTypes": {
       "type": "string",
       "enum": [
@@ -13381,6 +13361,26 @@
         }
       }
     },
+    "CapacityReservationStateInfo": {
+      "type": "object",
+      "description": "The current state and confirmed active schedule for a deferred spot capacity reservation.",
+      "properties": {
+        "reservationState": {
+          "$ref": "#/definitions/ReservationState",
+          "description": "The current state of the capacity reservation."
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time in UTC when the capacity reservation becomes active."
+        },
+        "activeUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time in UTC when the capacity reservation expires."
+        }
+      }
+    },
     "CapacityReservationUpdate": {
       "type": "object",
       "description": "Specifies information about the capacity reservation. sku.capacity cannot be updated for Block Capacity Reservation. Tags can be update for all Capacity Reservation Types.",
@@ -13392,7 +13392,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted, Block, or DeferredSpot) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. **Note:** The SKU name and capacity cannot be updated for Block capacity reservations."
+          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. **Note:** The SKU name and capacity cannot be updated for Block capacity reservations."
         }
       },
       "allOf": [
@@ -16801,7 +16801,7 @@
     },
     "ReservationState": {
       "type": "string",
-      "description": "The current state of a capacity reservation. This applies to reservation types that follow a schedule-based lifecycle, such as Deferred Spot capacity reservations.",
+      "description": "The current state of a deferred spot capacity reservation.",
       "enum": [
         "Pending",
         "Confirmed",
@@ -16837,7 +16837,7 @@
     },
     "ReservationType": {
       "type": "string",
-      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity, 'DeferredSpot' for deferred spot capacity reservations, and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
+      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
       "enum": [
         "Targeted",
         "Block",
@@ -17847,19 +17847,19 @@
     },
     "ScheduleProfile": {
       "type": "object",
-      "description": "Defines the schedule for Block and DeferredSpot capacity reservations. For Block reservations, specifies the schedule during which the capacity reservation is active and VM or VMSS resources can be allocated. For DeferredSpot reservations, start and end define a time window within which a confirmed active schedule of the specified duration will be set. For Block reservations, the scheduleProfile, start, and end fields are immutable after creation. For DeferredSpot reservations, the duration can be updated when the reservation state is not Confirmed, and start, end, and duration can all be updated when the reservation state is Expired or Declined, which resets the state to Pending. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.",
+      "description": "Defines the schedule for Block and DeferredSpot capacity reservations. For Block reservations, specifies the schedule during which the capacity reservation is active and VM or VMSS resources can be allocated. For DeferredSpot reservations, start and end define a time window within which a confirmed active schedule of the specified duration will be set. For Block reservations, the scheduleProfile, start, and end fields are immutable after creation. For DeferredSpot reservations, the duration can be updated when the reservation state is not Confirmed. Start, end, and duration can all be updated when the reservation state is Expired or Declined, which resets the state to Pending. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.",
       "properties": {
         "start": {
           "type": "string",
-          "description": "The start date or time for the capacity reservation schedule. For Block reservations, this is the required start date and must be today or within 56 days in the future; for same-day scheduling, requests must be submitted before 11:30 AM UTC. For DeferredSpot reservations, this is the start of the time window within which a confirmed active schedule will be set. Example: 2025-06-27."
+          "description": "The required start date or time for the capacity reservation schedule. For Block reservations, this is the start date and must be today or within 56 days in the future; for same-day scheduling, requests must be submitted before 11:30 AM UTC. For DeferredSpot reservations, this is the start of the time window within which a confirmed active schedule will be set. Example: 2025-06-27."
         },
         "end": {
           "type": "string",
-          "description": "The end date or time for the capacity reservation schedule. For Block reservations, this must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. For DeferredSpot reservations, this is the end of the time window within which a confirmed active schedule will be set. Example: 2025-06-28."
+          "description": "The required end date or time for the capacity reservation schedule. For Block reservations, this must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. For DeferredSpot reservations, this is the end of the time window within which a confirmed active schedule will be set. Example: 2025-06-28."
         },
         "duration": {
           "type": "string",
-          "description": "The desired duration for Deferred Spot capacity reservations. Minimum 2 hours, maximum 4 hours. Must be less than or equal to the total time between start and end. Must be in ISO 8601 format."
+          "description": "The desired duration for deferred spot capacity reservations. Minimum 2 hours, maximum 4 hours. Must be less than or equal to the total time between start and end. Must be in ISO 8601 format. Example: PT2H30M (2 hours 30 minutes)"
         }
       }
     },

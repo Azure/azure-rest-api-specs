@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "capacityReservationGroupName": "deferredSpotCapacityReservationGroup",
-    "api-version": "2026-03-01",
+    "api-version": "2026-04-01",
     "$expand": "virtualMachines/$ref"
   },
   "responses": {
@@ -43,7 +43,8 @@
             "sku": {
               "name": "Standard_D2s_v3",
               "capacity": 1
-            }
+            },
+            "zones": []
           },
           {
             "name": "{capacityReservationName}",
@@ -77,5 +78,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "CapacityReservations_ListByCapacityReservationGroup",
+  "title": "List deferred spot capacity reservations in reservation group."
 }

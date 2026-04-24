@@ -8566,7 +8566,7 @@ model CapacityReservationInstanceView {
   utilizationInfo?: CapacityReservationUtilization;
 
   /**
-   * The current state and active schedule for Deferred Spot capacity reservations. 
+   * The current state and active schedule for Deferred Spot capacity reservations.
    */
   @added(Versions.v2026_03_01)
   reservationStateInfo?: CapacityReservationStateInfo;
@@ -8657,6 +8657,8 @@ union ReservationType {
  */
 @added(Versions.v2026_03_01)
 union ReservationState {
+  string,
+
   /**
    * The reservation request has been created and is awaiting confirmation.
    */

@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2026-03-01",
+    "api-version": "2025-04-01",
     "$expand": "virtualMachines/$ref"
   },
   "responses": {
@@ -74,6 +74,28 @@
                 }
               ],
               "reservationType": "Block"
+            }
+          },
+          {
+            "name": "{capacityReservationGroupName}",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+            "type": "Microsoft.Compute/CapacityReservationGroups",
+            "location": "West US",
+            "properties": {
+              "capacityReservations": [
+                {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation1"
+                },
+                {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/deferredSpotCapacityReservationGroup/capacityReservations/deferredSpotCapacityReservation2"
+                }
+              ],
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                }
+              ],
+              "reservationType": "DeferredSpot"
             }
           },
           {
