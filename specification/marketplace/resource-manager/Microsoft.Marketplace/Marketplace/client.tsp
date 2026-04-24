@@ -112,6 +112,7 @@ using Microsoft.Marketplace;
   "GetPrivateStoreCollectionOffersByContexts",
   "csharp"
 );
+@@clientName(Offers.contextsView, "GetByContexts", "csharp");
 @@clientName(AcknowledgeOfferNotificationProperties,
   "AcknowledgeOfferNotificationContent",
   "csharp"
