@@ -338,8 +338,16 @@ op privateLinkResourcesGetCustomization(
   "java"
 );
 
-@@clientName(HealthReportsAPI.resourceDetails,
-  "HealthReportResourceDetails",
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java,javascript"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+  "ArmActionType",
   "java"
 );
 
