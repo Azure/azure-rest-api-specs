@@ -336,6 +336,12 @@ using Oracle.Database;
 @@clientName(RoleType, "DataGuardRoleType", "csharp");
 @@clientName(SaasSubscriptionDetails.timeCreated, "CreatedOn", "csharp");
 
+// Renamed to preserve C# property name after flatten lift-to-nullable change in mgmt generator.
+// Old `DayOfWeek` / `DayOfWeekName` are restored as [Obsolete] backward-compat shims in
+// custom code (which delegate to the new `ScheduledDay` / `ScheduledDayName`).
+@@clientName(ScheduledOperationsType.dayOfWeek, "scheduledDay", "csharp");
+@@clientName(ScheduledOperationsTypeUpdate.dayOfWeek, "scheduledDay", "csharp");
+
 @@clientName(ScheduledOperationsType.scheduledStartTime,
   "AutoStartOn",
   "csharp"
