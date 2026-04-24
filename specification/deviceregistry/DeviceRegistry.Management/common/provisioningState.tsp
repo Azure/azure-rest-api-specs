@@ -10,13 +10,13 @@ namespace Microsoft.DeviceRegistry;
 @lroStatus
 @doc("The provisioning status of the resource.")
 union ProvisioningState {
-  @doc("Resource provisioning has succeeded.")
+  @doc("Resource has been created.")
   Succeeded: "Succeeded",
 
-  @doc("Resource provisioning has failed.")
+  @doc("Resource creation failed.")
   Failed: "Failed",
 
-  @doc("Resource provisioning has been canceled.")
+  @doc("Resource creation was canceled.")
   Canceled: "Canceled",
 
   @doc("Resource has been accepted by the server.")
