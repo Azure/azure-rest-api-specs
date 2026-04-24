@@ -270,6 +270,11 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+
+@@clientName(BatchClient.getTaskFile, "download_task_file", "python");
+
+@@clientName(BatchClient.getNodeFile, "download_node_file", "python");
+
 @@clientName(BatchClient.listSubTasks, "list_subtasks", "python");
 // Python LRO private methods
 @@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
@@ -285,6 +290,10 @@ interface BatchClient {
 @@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "python");
 @@clientName(BatchClient.deleteJobSchedule,
   "deleteJobScheduleInternal",
+  "python"
+);
+@@clientName(Azure.Batch.OutputFileUploadConfig,
+  "OutputFileUploadConfiguration",
   "python"
 );
 @@access(Azure.Batch.JobSchedules.terminateJobSchedule,
