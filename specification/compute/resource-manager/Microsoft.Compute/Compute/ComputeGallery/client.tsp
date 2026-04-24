@@ -265,7 +265,6 @@ using ComputeGallery;
   url,
   "csharp"
 );
-@@alternateType(GalleryArtifactVersionSource.uri, url, "csharp");
 
 // ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
 
