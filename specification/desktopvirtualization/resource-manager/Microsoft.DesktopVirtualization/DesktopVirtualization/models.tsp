@@ -5490,7 +5490,9 @@ model ResourceProviderOperationListResult
 
 /**
  * The source of the MSIX package.
+ * @Introduced in 2026-02-01-preview
  */
+@added(Versions.vLatestPreview)
 union MsixPackageSource {
   string,
 
@@ -5517,7 +5519,9 @@ union MsixPackageSource {
 
 /**
  * The output file type for the expanded MSIX file.
+ * @Introduced in 2026-02-01-preview
  */
+@added(Versions.vLatestPreview)
 union OutputFileType {
   string,
 
@@ -5534,7 +5538,9 @@ union OutputFileType {
 
 /**
  * Properties for expanding MSIX files.
+ * @Introduced in 2026-02-01-preview
  */
+@added(Versions.vLatestPreview)
 model ExpandMsixFileRequestProperties {
   /**
    * List of URIs to MSIX files to expand.
@@ -5574,7 +5580,9 @@ model ExpandMsixFileRequestProperties {
 
 /**
  * Request body for expanding MSIX files.
+ * @Introduced in 2026-02-01-preview
  */
+@added(Versions.vLatestPreview)
 model ExpandMsixFileRequest {
   /**
    * Properties for expanding MSIX files.
@@ -5584,7 +5592,9 @@ model ExpandMsixFileRequest {
 
 /**
  * Details about a file expansion failure.
+ * @Introduced in 2026-02-01-preview
  */
+@added(Versions.vLatestPreview)
 model ExpandMsixFileFailure {
   /**
    * The name of the file that failed to expand.
@@ -5599,7 +5609,9 @@ model ExpandMsixFileFailure {
 
 /**
  * Result of expanding MSIX files.
+ * @Introduced in 2026-02-01-preview
  */
+@added(Versions.vLatestPreview)
 model ExpandMsixFileResult {
   /**
    * List of successfully expanded files.
