@@ -523,15 +523,3 @@ op alertsListResourceGroupLevelByRegionCustomized(
   "HealthReportResourceDetails",
   "java"
 );
-@@clientName(SecuritySolutionsAPI.CefExternalSecuritySolution.properties,
-  "cefSolutionProperties",
-  "java"
-);
-@@clientName(SecuritySolutionsAPI.AtaExternalSecuritySolution.properties,
-  "ataSolutionProperties",
-  "java"
-);
-@@clientName(SecuritySolutionsAPI.AadExternalSecuritySolution.properties,
-  "aadSolutionProperties",
-  "java"
-);
