@@ -14,15 +14,12 @@ namespace Azure.AI.Projects;
 // ---------------------------------------------------------------------------
 
 @doc("""
-  Reference to a dataset registered in the Foundry project.
-  When datasetVersion is omitted the latest version is used.
+  Reference to a dataset. Uses an asset ID (e.g., azureai://accounts/{account}/projects/{project}/data/{name}/versions/{version}).
+  To use the latest version, omit the version segment or use /labels/latest.
   """)
 model DatasetReference {
-  @doc("Dataset name as registered in the Foundry project.")
-  datasetName: string;
-
-  @doc("Dataset version. Omit to use the latest version.")
-  datasetVersion?: string;
+  @doc("Dataset asset ID.")
+  id: string;
 
   @doc("""
     Dataset column schema for constructing the eval group's data_source_config.
@@ -266,11 +263,8 @@ model EvaluationSuiteGenerationJobResult {
   @doc("The generated evaluator version.")
   evaluatorVersion: string;
 
-  @doc("The generated dataset name.")
-  datasetName?: string;
-
-  @doc("The generated dataset version.")
-  datasetVersion?: string;
+  @doc("The generated dataset ID.")
+  datasetId?: string;
 }
 
 @doc("Evaluation suite generation job resource.")
