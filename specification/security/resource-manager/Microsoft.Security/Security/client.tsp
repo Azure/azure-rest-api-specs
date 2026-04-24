@@ -525,3 +525,8 @@ op alertsListResourceGroupLevelByRegionCustomized(
   alertsListResourceGroupLevelByRegionCustomized,
   "python,go"
 );
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
+  "SystemAssigned",
+  "go"
+);
