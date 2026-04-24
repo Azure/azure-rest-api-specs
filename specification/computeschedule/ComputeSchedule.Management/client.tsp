@@ -389,14 +389,3 @@ model ResourcePatchRequestInput {
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
-// ARM Resource IDs -> ResourceIdentifier
-@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
-
-// String URIs -> System.Uri
-@@alternateType(VirtualHardDisk.uri, url, "csharp");
-@@alternateType(BootDiagnostics.storageUri, url, "csharp");
-@@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
-@@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
-@@alternateType(WinRMListener.certificateUrl, url, "csharp");
-@@alternateType(VaultCertificate.certificateUrl, url, "csharp");
