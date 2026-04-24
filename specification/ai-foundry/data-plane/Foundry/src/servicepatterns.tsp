@@ -292,8 +292,8 @@ union JobStatus {
   /** Job failed. */
   failed: "failed",
 
-  /** Job was canceled by the caller. */
-  canceled: "canceled",
+  /** Job was cancelled by the caller. */
+  cancelled: "cancelled",
 }
 
 /**
