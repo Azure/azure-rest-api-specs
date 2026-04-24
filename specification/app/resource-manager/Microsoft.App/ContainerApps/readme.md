@@ -88,6 +88,7 @@ input-file:
   - stable/2026-01-01/Subscriptions.json
   - stable/2026-01-01/Usages.json
   - stable/2026-01-01/LogicAppsExtension.json
+  - stable/2026-01-01/openapi.json
 ```
 
 ### Tag: package-2025-07-01
