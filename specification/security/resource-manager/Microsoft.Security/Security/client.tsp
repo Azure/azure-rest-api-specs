@@ -104,19 +104,6 @@ model `private-link-parameters` {
   privateLinkName: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model privateLinkParametersCustomization {
-  /**
-   * The name of the private link resource.
-   */
-  @path
-  @minLength(3)
-  @maxLength(63)
-  @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
-  privateLinkParameters: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinksGetCustomization(
@@ -130,10 +117,6 @@ op privateLinksGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
   privateLinksGetCustomization
-);
-@@alternateType(privateLinksGetCustomization::parameters.params,
-  "privateLinkParameters",
-  "python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
