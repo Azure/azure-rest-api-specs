@@ -128,6 +128,10 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[5].schema.type
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[5].schema.type
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: ManagedComputeUsageListResult is a usage/quota list envelope, not an ARM resource. Same pattern as existing UsageListResult. Individual ManagedComputeUsage items already include id, name, and type properties.
+    where:
+      - $.definitions.ManagedComputeUsageListResult
 ```
 
 
