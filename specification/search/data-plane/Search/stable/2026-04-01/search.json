@@ -8757,6 +8757,7 @@
         "azureBlob",
         "indexedOneLake",
         "web",
+        "modelWebSummarization",
         "agenticReasoning"
       ],
       "x-ms-enum": {
@@ -8782,6 +8783,11 @@
             "name": "web",
             "value": "web",
             "description": "Web retrieval activity."
+          },
+          {
+            "name": "modelWebSummarization",
+            "value": "modelWebSummarization",
+            "description": "LLM web summarization activity."
           },
           {
             "name": "agenticReasoning",
@@ -9112,6 +9118,28 @@
           }
         ]
       }
+    },
+    "KnowledgeBaseModelWebSummarizationActivityRecord": {
+      "type": "object",
+      "description": "Represents an LLM web summarization activity record.",
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of input tokens for the LLM web summarization activity."
+        },
+        "outputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of output tokens for the LLM web summarization activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "modelWebSummarization"
     },
     "KnowledgeBaseReference": {
       "type": "object",
