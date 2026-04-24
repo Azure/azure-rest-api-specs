@@ -365,17 +365,11 @@ union Modes {
  */
 union VirtualMachinePriorityTypes {
   string,
-
-  @doc("""
-    Regular Priority for a standalone virtual machine or the virtual machines in the scale set.
-    This is the default priority and it will be used to deploy regular VM/VMSS.
-    """)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Regular: "Regular",
-
-  @doc("Low priority for a standalone virtual machine or the virtual machines in the scale set. Will be Deprecated, use Spot instead.")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Low: "Low",
-
-  @doc("Spot priority for a standalone virtual machine or the virtual machines in the scale set.")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Spot: "Spot",
 
   @doc("""
