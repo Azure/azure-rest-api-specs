@@ -1,4 +1,4 @@
-﻿import "./Alerts/main.tsp";
+import "./Alerts/main.tsp";
 import "./AlertsSuppressionRules/main.tsp";
 import "./ApiCollections/main.tsp";
 import "./Applications/main.tsp";
@@ -49,6 +49,7 @@ using ComplianceResultsAPI;
 using HealthReportsAPI;
 using LegacySettingsAPI;
 using SqlVulnerabilityAssessmentsAPI;
+using AlertsAPI;
 
 @client({
   name: "SecurityManagementClient",
@@ -115,8 +116,7 @@ op privateLinksGetCustomization(
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
-  privateLinksGetCustomization,
-  "!javascript,!python"
+  privateLinksGetCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -139,8 +139,7 @@ op privateLinksCreateCustomization(
   "privateLink"
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
-  privateLinksCreateCustomization,
-  "!javascript,!python"
+  privateLinksCreateCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -159,8 +158,7 @@ op privateLinksUpdateCustomization(
   "privateLink"
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
-  privateLinksUpdateCustomization,
-  "!javascript,!python"
+  privateLinksUpdateCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -177,8 +175,7 @@ op privateLinksDeleteCustomization(
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
-  privateLinksDeleteCustomization,
-  "!javascript,!python"
+  privateLinksDeleteCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -193,8 +190,7 @@ op privateLinksHeadCustomization(
 ): OkResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
-  privateLinksHeadCustomization,
-  "!javascript,!python"
+  privateLinksHeadCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -209,8 +205,7 @@ op privateEndpointConnectionsListCustomization(
 ): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
-  privateEndpointConnectionsListCustomization,
-  "!javascript,!python"
+  privateEndpointConnectionsListCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -226,8 +221,7 @@ op privateEndpointConnectionsGetCustomization(
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
-  privateEndpointConnectionsGetCustomization,
-  "!javascript,!python"
+  privateEndpointConnectionsGetCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -251,7 +245,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
-  "!javascript,!python"
+  "!python"
 );
 @@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
@@ -273,8 +267,7 @@ op privateEndpointConnectionsDeleteCustomization(
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
-  privateEndpointConnectionsDeleteCustomization,
-  "!javascript,!python"
+  privateEndpointConnectionsDeleteCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -289,8 +282,7 @@ op privateLinkResourcesListCustomization(
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
-  privateLinkResourcesListCustomization,
-  "!javascript,!python"
+  privateLinkResourcesListCustomization
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -307,8 +299,7 @@ op privateLinkResourcesGetCustomization(
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
-  privateLinkResourcesGetCustomization,
-  "!javascript,!python"
+  privateLinkResourcesGetCustomization
 );
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
@@ -343,7 +334,7 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
-  "java"
+  "java,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
@@ -401,10 +392,6 @@ op privateLinkResourcesGetCustomization(
 @@clientName(AlertsAPI.Kind, "KindEnum", "python");
 @@clientName(Status, "StatusEnum", "python");
 @@clientName(OperationResult, "OperationResultAutoGenerated", "python");
-@@clientName(PrivateLinksAPI.PrivateLinkResource,
-  "PrivateLinkParameters",
-  "python"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
   "current",
@@ -511,4 +498,25 @@ op sqlVulnerabilityAssessmentScanResultsGet(
 
 @@override(SqlVulnerabilityAssessmentScanResults.get,
   sqlVulnerabilityAssessmentScanResultsGet
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op alertsListResourceGroupLevelByRegionCustomized(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+
+  /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
+  @path
+  @segment("locations")
+  ascLocation: string,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+): ArmResponse<AlertList> | ErrorResponse;
+
+@@override(AlertOperationGroup.listResourceGroupLevelByRegion,
+  alertsListResourceGroupLevelByRegionCustomized,
+  "python"
 );
