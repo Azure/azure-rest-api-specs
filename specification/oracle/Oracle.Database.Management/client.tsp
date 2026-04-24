@@ -690,7 +690,6 @@ using Oracle.Database;
   "csharp"
 );
 
-
 // Go
 @@clientName(AutonomousDatabaseBackups.listByParent,
   "listByAutonomousDatabase",
