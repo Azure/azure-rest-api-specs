@@ -58,7 +58,6 @@ interface ManagedComputeDeployments {
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "PATCH for 'createOrUpdate' follows existing service implementation pattern"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedComputeDeployment,
