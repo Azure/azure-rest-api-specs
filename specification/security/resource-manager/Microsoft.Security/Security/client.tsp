@@ -444,7 +444,7 @@ op sqlVulnerabilityAssessmentScansGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceId: string,
-): ArmResponse<ScanV2>;
+): ArmResponse<ScanV2> | Common.CloudError;
 
 @@override(ScanV2s.get, sqlVulnerabilityAssessmentScansGet);
 
@@ -469,7 +469,7 @@ op sqlVulnerabilityAssessmentScanResultsList(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceId: string,
-): ArmResponse<ScanResults>;
+): ArmResponse<ScanResults> | Common.CloudError;
 
 @@override(SqlVulnerabilityAssessmentScanResults.list,
   sqlVulnerabilityAssessmentScanResultsList
@@ -500,7 +500,7 @@ op sqlVulnerabilityAssessmentScanResultsGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceId: string,
-): ArmResponse<ScanResult>;
+): ArmResponse<ScanResult> | Common.CloudError;
 
 @@override(SqlVulnerabilityAssessmentScanResults.get,
   sqlVulnerabilityAssessmentScanResultsGet
