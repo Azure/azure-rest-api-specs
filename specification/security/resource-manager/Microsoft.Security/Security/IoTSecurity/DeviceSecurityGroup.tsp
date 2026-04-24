@@ -27,43 +27,64 @@ model DeviceSecurityGroup
   >;
 }
 
+alias DeviceSecurityGroupsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security";
+  },
+  {},
+  {
+    /** The name of the device security group. Note that the name of the device security group is case insensitive. */
+    @path
+    @segment("deviceSecurityGroups")
+    @key
+    deviceSecurityGroupName: string;
+  }
+>;
+
 @armResourceOperations
 interface DeviceSecurityGroups {
   /**
    * Use this method to get the device security group for the specified IoT Hub resource.
    */
-  get is Azure.ResourceManager.Extension.Read<
-    Azure.ResourceManager.Extension.ScopeParameter,
+  get is DeviceSecurityGroupsOps.Read<
     DeviceSecurityGroup,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
    * Use this method to creates or updates the device security group on a specified IoT Hub resource.
    */
-  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
-    Azure.ResourceManager.Extension.ScopeParameter,
+  createOrUpdate is DeviceSecurityGroupsOps.CreateOrUpdateSync<
     DeviceSecurityGroup,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
    * User this method to deletes the device security group.
    */
-  delete is Azure.ResourceManager.Extension.DeleteSync<
-    Azure.ResourceManager.Extension.ScopeParameter,
+  delete is DeviceSecurityGroupsOps.DeleteSync<
     DeviceSecurityGroup,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
    * Use this method get the list of device security groups for the specified IoT Hub resource.
    */
-  list is Azure.ResourceManager.Extension.ListByTarget<
-    Azure.ResourceManager.Extension.ScopeParameter,
+  list is DeviceSecurityGroupsOps.List<
     DeviceSecurityGroup,
     Response = ArmResponse<DeviceSecurityGroupList>,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 }
 
