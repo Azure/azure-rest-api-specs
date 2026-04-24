@@ -2,14 +2,12 @@ paths:
   skills: "../../../skills/"
   evals: evaluate/
 
-config:
-  runs: 1
-  timeout: 600
-  executor: copilot-sdk
-  model: claude-opus-4.6-1m
-  judge_model: claude-sonnet-4.6
-
 suites:
   all:
     description: "Full ARM API Reviewer eval suite (21 stimuli)"
     evals: ["evaluate/eval-*.yaml"]
+    config:
+      runs: 1
+      timeout: 600
+      model: claude-opus-4.6-1m
+      judge_model: claude-sonnet-4.6

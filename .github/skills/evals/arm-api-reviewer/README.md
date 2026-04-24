@@ -84,6 +84,21 @@ Replace `/path/to/evaluate` with the path to your local clone of
 [evaluate documentation](https://github.com/microsoft/evaluate) for additional
 options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
 
+### Avoiding session timeouts
+
+The copilot-sdk executor spawns VS Code Copilot agent sessions for each
+stimulus. These sessions can time out (`Timeout after 120000ms waiting for
+session.idle`) if they compete for resources with other active sessions.
+To avoid timeouts:
+
+- **Close all Copilot chat sessions** before running the eval suite. An
+  active chat conversation in the same VS Code window competes with the
+  executor for agent sessions.
+- **Use `--workers 1`** if timeouts persist. This runs stimuli
+  sequentially instead of 5 at a time, eliminating session contention.
+- **Run from a dedicated VS Code window** with no other Copilot
+  activity (no chat, no inline completions in progress).
+
 ## Grader Types
 
 | Grader               | Purpose                                                           |
