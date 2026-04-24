@@ -390,10 +390,6 @@ model ResourcePatchRequestInput {
   "csharp"
 );
 
-// =====================================================================
-// C# strong typing alignment with Azure.ResourceManager.Compute SDK
-// =====================================================================
-
 // ARM Resource IDs -> ResourceIdentifier
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
 
