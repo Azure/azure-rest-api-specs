@@ -5853,14 +5853,14 @@ model ManagedComputeDeploymentInfo {
   projectId?: string;
 
   /**
-   * Model name (e.g., 'azureml://registries//models//versions/gpt-4o').
+   * Model name (e.g., 'gpt-4o').
    */
   modelId?: string;
 
   /**
    * Number of GPUs consumed by this deployment.
    */
-  acceleratorCount?: int64;
+  gpuCount?: int64;
 
   /**
    * Number of instances for this deployment.
