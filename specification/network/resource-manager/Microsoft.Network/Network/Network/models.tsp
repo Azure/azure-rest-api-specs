@@ -2679,6 +2679,34 @@ union NspLinkProvisioningState {
 }
 
 /**
+ * The readiness state of the resource type for NSP support.
+ */
+@added(Versions.v2025_07_01)
+union NspReadinessState {
+  string,
+
+  /**
+   * Resource Provider is actively being onboarded to NSP
+   */
+  Onboarding: "Onboarding",
+
+  /**
+   * Resource Provider supports NSP in Preview
+   */
+  Preview: "Preview",
+
+  /**
+   * Resource Provider is generally available for NSP Integration
+   */
+  GA: "GA",
+
+  /**
+   * NSP Onboarding is not started or not Supported
+   */
+  NotReady: "NotReady",
+}
+
+/**
  * The NSP link state.
  */
 union NspLinkStatus {
@@ -15444,6 +15472,34 @@ model PerimeterAssociableResourceProperties {
    */
   @visibility(Lifecycle.Read)
   publicDnsZones?: string[];
+
+  /**
+   * Service tags associated with the resource provider.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  serviceTags?: string[];
+
+  /**
+   * The readiness state of the resource type for NSP support.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  readinessState?: NspReadinessState;
+
+  /**
+   * Indicates whether the resource type supports outbound scenario.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  outboundSupported?: boolean;
+
+  /**
+   * Description of the PaaS resource type.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
@@ -20548,6 +20604,12 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
   enablePrivateLinkFastPath?: boolean;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -21728,6 +21790,12 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * Certificate Authentication information for a certificate based authentication connection.
    */
   certificateAuthentication?: CertificateAuthentication;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -24188,6 +24256,12 @@ model BgpConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   connectionState?: HubBgpConnectionStatus;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -24688,7 +24762,16 @@ model PolicySettings {
    */
   @maxValue(1440)
   @minValue(5)
+  @removed(Versions.v2025_07_01)
   captchaCookieExpirationInMins?: int32;
+
+  /**
+   * Web Application Firewall CAPTCHA Cookie Expiration time in minutes.
+   */
+  @maxValue(1440)
+  @minValue(5)
+  @added(Versions.v2025_07_01)
+  captchaExpirationInMins?: int32;
 }
 
 /**
