@@ -12,6 +12,22 @@ using Compute;
   "csharp"
 );
 
+// SubResource.id and ApiEntityReference.id flatten to XxxId properties on parent
+// models (e.g. NetworkSecurityGroupId, SubnetId, DiskRestorePointId). Old AutoRest
+// SDK emitted these as ResourceIdentifier; preserve that contract for csharp.
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// VirtualMachineImageResource (renamed VirtualMachineImageBase in csharp) had
+// Location typed as AzureLocation in the old SDK; the spec models it as string.
+@@alternateType(VirtualMachineImageResource.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
 @@clientName(NetworkApiVersion.`2020-11-01`,
   "TwoThousandTwenty1101",
   "go, javascript"
