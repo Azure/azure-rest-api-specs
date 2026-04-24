@@ -56,41 +56,6 @@
                 "minReplicas": 1
               }
             }
-          },
-          {
-            "name": "reddog",
-            "type": "Microsoft.App/managedEnvironments/javaComponents",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/reddog",
-            "properties": {
-              "componentType": "SpringCloudGateway",
-              "configurations": [
-                {
-                  "propertyName": "spring.cloud.gateway.enabled",
-                  "value": "true"
-                }
-              ],
-              "ingress": {
-                "fqdn": "myjavacomponent.myenvironment.test.net"
-              },
-              "provisioningState": "Succeeded",
-              "scale": {
-                "maxReplicas": 1,
-                "minReplicas": 1
-              },
-              "springCloudGatewayRoutes": [
-                {
-                  "filters": [
-                    "SetPath=/{path}"
-                  ],
-                  "id": "route1",
-                  "predicates": [
-                    "Path=/v1/{path}",
-                    "After=2024-01-20T17:42:47.789-07:00[America/Denver]"
-                  ],
-                  "uri": "https://otherjavacomponent.myenvironment.test.net"
-                }
-              ]
-            }
           }
         ]
       }
