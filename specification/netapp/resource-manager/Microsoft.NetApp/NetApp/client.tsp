@@ -645,15 +645,10 @@ union NetAppRelationshipStatusDef {
   "csharp"
 );
 
-// --- @@usage: Input/Output marking for C# ---
-
-// --- Fix missing setters via @@usage (Input | Output) ---
-@@usage(RegionInfoAvailabilityZoneMappingsItem,
-  Usage.input | Usage.output,
-  "csharp"
-);
-@@usage(ReplicationObject, Usage.input | Usage.output, "csharp");
-@@usage(VolumeRevert, Usage.input | Usage.output, "csharp");
-@@usage(RansomwareReport, Usage.input | Usage.output, "csharp");
-@@usage(RegionInfoResource, Usage.input | Usage.output, "csharp");
-@@usage(Snapshot, Usage.input | Usage.output, "csharp");
+// --- @@usage: add Usage.input to make output-only models also serializable as input (decorator appends) ---
+@@usage(RegionInfoAvailabilityZoneMappingsItem, Usage.input, "csharp");
+@@usage(ReplicationObject, Usage.input, "csharp");
+@@usage(VolumeRevert, Usage.input, "csharp");
+@@usage(RansomwareReport, Usage.input, "csharp");
+@@usage(RegionInfoResource, Usage.input, "csharp");
+@@usage(Snapshot, Usage.input, "csharp");
