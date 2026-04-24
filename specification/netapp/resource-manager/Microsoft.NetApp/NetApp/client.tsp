@@ -446,7 +446,6 @@ union NetAppRelationshipStatusDef {
 
 // C# property name casing fixes
 @@clientName(AccountProperties.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
-@@clientName(AccountPropertiesPatch.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
 @@clientName(QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
 @@clientName(NetAppProvisioningStateDef, "NetAppProvisioningState", "csharp");
@@ -489,8 +488,6 @@ union NetAppRelationshipStatusDef {
 // BackupPolicyPatch: restore TrackedResourceData base
 @@alternateType(BackupPolicyPatch.id, armResourceIdentifier, "csharp");
 @@alternateType(BackupPolicyPatch.location, azureLocation, "csharp");
-@@alternateType(NetAppAccountPatch.id, armResourceIdentifier, "csharp");
-@@alternateType(NetAppAccountPatch.location, azureLocation, "csharp");
 @@alternateType(SnapshotPolicyPatch.id, armResourceIdentifier, "csharp");
 @@alternateType(SnapshotPolicyPatch.location, azureLocation, "csharp");
 
@@ -615,11 +612,6 @@ union NetAppRelationshipStatusDef {
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
 @@hierarchyBuilding(BackupPolicyPatch,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
-@@hierarchyBuilding(NetAppAccountPatch,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
