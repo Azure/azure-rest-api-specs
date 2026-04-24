@@ -12281,7 +12281,7 @@
                 "$ref": "#/components/schemas/VersionSelector"
               }
             ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent. For Hosted Agents, this only applies to new sessions. See the SessionVerionUpgradePolicy for how versioning is handled for existing sessions."
           },
           "protocols": {
             "type": "array",
@@ -12373,7 +12373,7 @@
                 "$ref": "#/components/schemas/VersionSelectorUpdate"
               }
             ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent. For Hosted Agents, this only applies to new sessions. See the SessionVerionUpgradePolicy for how versioning is handled for existing sessions."
           },
           "protocols": {
             "type": "array",
@@ -18764,6 +18764,20 @@
               }
             ],
             "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
+          },
+          "session_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionConfig"
+              }
+            ],
+            "description": "Configuration for sessions."
+          },
+          "graceful_termination_period": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Graceful termination period in seconds. This is the time between sending SIGTERM and SIGKILL to the agent process.",
+            "default": 30
           }
         },
         "allOf": [
@@ -18855,6 +18869,69 @@
           }
         ],
         "description": "Evaluation rule action for human evaluation."
+      },
+      "IdleTimeoutSessionExpirationPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "idle_timeout"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "idle_timeout"
+            ],
+            "description": "The policy type."
+          },
+          "idle_timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "How long after the last activity the session should be expired, in seconds."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionExpirationPolicy"
+          }
+        ],
+        "description": "Expire a session after it is idle for a given duration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "IdleTimeoutSessionSuspensionPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "idle_timeout"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "idle_timeout"
+            ]
+          },
+          "idle_timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Timeout in seconds. If a sandbox shows no activity for that amount of time, the session will be suspended."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionSuspensionPolicy"
+          }
+        ],
+        "description": "Suspend after sandbox after it is idle for a given duration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "Index": {
         "type": "object",
@@ -19478,6 +19555,38 @@
           }
         ],
         "description": "Managed Azure AI Search Index Definition"
+      },
+      "MaxLifetimeSessionExpirationPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "max_lifetime"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "max_lifetime"
+            ],
+            "description": "The policy type."
+          },
+          "max_lifetime": {
+            "type": "integer",
+            "format": "int32",
+            "description": "How long after creation the session should be expired, in seconds."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionExpirationPolicy"
+          }
+        ],
+        "description": "Sessions expire after a fixed lifetime.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "MemoryItem": {
         "type": "object",
@@ -41476,6 +41585,60 @@
         ],
         "description": "Type of the task."
       },
+      "SessionConfig": {
+        "type": "object",
+        "properties": {
+          "persistent_volume": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionPersistentVolumeConfig"
+              }
+            ],
+            "description": "Configuration for a per-session durable filesystem volume.",
+            "default": {
+              "enabled": true,
+              "capacity": "5Gi"
+            }
+          },
+          "version_upgrade_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionVersionUpgradePolicy"
+              }
+            ],
+            "description": "How to agent versions of sessions should change. Defaults to automatically upgrading to the version set in the agent endpoint.",
+            "default": "auto_upgrade"
+          },
+          "suspension_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionSuspensionPolicy"
+              }
+            ],
+            "description": "When to suspend a session. Default is 2 hours after last activity.",
+            "default": {
+              "type": "idle_timeout"
+            }
+          },
+          "expiration_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionExpirationPolicy"
+              }
+            ],
+            "description": "When to expire a session. Default is 30 days after last activity.",
+            "default": {
+              "type": "idle_timeout"
+            }
+          }
+        },
+        "description": "Configure the behavior and resources of a session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "SessionDirectoryEntry": {
         "type": "object",
         "required": [
@@ -41528,6 +41691,43 @@
         },
         "description": "Response from listing a directory in a session sandbox."
       },
+      "SessionExpirationPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "never",
+                  "max_lifetime",
+                  "idle_timeout"
+                ]
+              }
+            ],
+            "description": "The policy type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "max_lifetime": "#/components/schemas/MaxLifetimeSessionExpirationPolicy",
+            "idle_timeout": "#/components/schemas/IdleTimeoutSessionExpirationPolicy"
+          }
+        },
+        "description": "Expiration configuration for session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "SessionFileWriteResponse": {
         "type": "object",
         "required": [
@@ -41569,6 +41769,82 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "SessionPersistentVolumeConfig": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether to enable the persistent filesystem volume. When enabled, a unique-per-session volume will be mounted at $HOME that is preserved across the entire session's lifespan.",
+            "default": true
+          },
+          "capacity": {
+            "type": "string",
+            "description": "Capacity of the volume in bytes.",
+            "example": "2Gi",
+            "default": "5Gi"
+          }
+        },
+        "description": "Configuration for a persistent filesystem volume attached to each hosted agent session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "SessionSuspensionPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "never",
+                  "idle_timeout"
+                ]
+              }
+            ]
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "idle_timeout": "#/components/schemas/IdleTimeoutSessionSuspensionPolicy"
+          }
+        },
+        "description": "Suspension configuration for session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "SessionVersionUpgradePolicy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "auto_upgrade",
+              "pinned"
+            ]
+          }
+        ],
+        "description": "The policy for upgrading an existing session's version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
           ]
         }
       },

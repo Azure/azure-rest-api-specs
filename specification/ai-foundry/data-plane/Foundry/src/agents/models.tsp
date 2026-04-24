@@ -407,6 +407,166 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
+@doc("The policy for upgrading an existing session's version.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union SessionVersionUpgradePolicy {
+  string,
+
+  @doc("Automatically upgrade the session to the version set in the agent endpoint.")
+  auto_upgrade: "auto_upgrade",
+
+  @doc("Pin the session to its existing version and do not upgrade.")
+  pinned: "pinned",
+}
+
+@doc("Configuration for a persistent filesystem volume attached to each hosted agent session.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model SessionPersistentVolumeConfig {
+  @doc("Whether to enable the persistent filesystem volume. When enabled, a unique-per-session volume will be mounted at $HOME that is preserved across the entire session's lifespan.")
+  enabled?: boolean = true;
+
+  @doc("Capacity of the volume in bytes.")
+  @example("2Gi")
+  capacity?: string = "5Gi";
+}
+
+/*
+ * Session suspension policies define how and when a session should be suspended (i.e. temporarily
+ * stopped with compute resources deallocated from it).
+ */
+
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" """
+  Due to a bug in typechecking of const declarations (https://github.com/microsoft/typespec/issues/10320),
+  the type of the `type` field must be a string literal or alias rather than a named union type.
+  """
+alias SessionSuspensionPolicyType = string | "never" | "idle_timeout";
+
+@doc("Suspension configuration for session.")
+@discriminator("type")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+@removed(Versions.v1)
+model SessionSuspensionPolicy {
+  type: SessionSuspensionPolicyType;
+}
+
+@doc("Suspend after sandbox after it is idle for a given duration.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+@removed(Versions.v1)
+model IdleTimeoutSessionSuspensionPolicy extends SessionSuspensionPolicy {
+  type: "idle_timeout";
+
+  @doc("Timeout in seconds. If a sandbox shows no activity for that amount of time, the session will be suspended.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout: duration;
+}
+
+// We must use const declaration to ensure the object literal is interpreted as an
+// IdleTimeoutSessionSuspensionPolicy rather than the parent type.
+const DefaultSessionSuspensionPolicy: IdleTimeoutSessionSuspensionPolicy = #{
+  type: "idle_timeout",
+  idle_timeout: duration.fromISO("PT2H"),
+};
+
+/*
+ * Session expiration policies define how and when a session should be expired (i.e. no longer usable).
+ */
+
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" """
+  Due to a bug in typechecking of const declarations (https://github.com/microsoft/typespec/issues/10320),
+  the type of the `type` field must be a string literal or alias rather than a named union type.
+  """
+alias SessionExpirationPolicyType =
+  | string
+  | "never"
+  | "max_lifetime"
+  | "idle_timeout";
+
+@doc("Expiration configuration for session.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+@discriminator("type")
+model SessionExpirationPolicy {
+  @doc("The policy type.")
+  type: SessionExpirationPolicyType;
+}
+
+@doc("Sessions expire after a fixed lifetime.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model MaxLifetimeSessionExpirationPolicy extends SessionExpirationPolicy {
+  @doc("The policy type.")
+  type: "max_lifetime";
+
+  @doc("How long after creation the session should be expired, in seconds.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  max_lifetime: duration;
+}
+
+@doc("Expire a session after it is idle for a given duration.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model IdleTimeoutSessionExpirationPolicy extends SessionExpirationPolicy {
+  @doc("The policy type.")
+  type: "idle_timeout";
+
+  @doc("How long after the last activity the session should be expired, in seconds.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout: duration;
+}
+
+// We must use const declaration to ensure the object literal is interpreted as an
+// IdleTimeoutSessionExpirationPolicy rather than the parent type.
+const DefaultSessionExpirationPolicy: IdleTimeoutSessionExpirationPolicy = #{
+  type: "idle_timeout",
+  idle_timeout: duration.fromISO("PT30D"),
+};
+
+@doc("Configure the behavior and resources of a session.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model SessionConfig {
+  @doc("Configuration for a per-session durable filesystem volume.")
+  persistent_volume?: SessionPersistentVolumeConfig = #{
+    enabled: true,
+    capacity: "5Gi",
+  };
+
+  @doc("How to agent versions of sessions should change. Defaults to automatically upgrading to the version set in the agent endpoint.")
+  version_upgrade_policy?: SessionVersionUpgradePolicy = SessionVersionUpgradePolicy.auto_upgrade;
+
+  @doc("When to suspend a session. Default is 2 hours after last activity.")
+  suspension_policy?: SessionSuspensionPolicy = DefaultSessionSuspensionPolicy;
+
+  @doc("When to expire a session. Default is 30 days after last activity.")
+  expiration_policy?: SessionExpirationPolicy = DefaultSessionExpirationPolicy;
+}
+
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -429,7 +589,7 @@ model HostedAgentDefinition extends AgentDefinition {
   container_protocol_versions: ProtocolVersionRecord[];
 
   /**
-   * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
+   * When specifying the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
    * See [vCPU and memory allocation requirements](https://learn.microsoft.com/azure/container-apps/containers#allocations).
    */
   @doc("The CPU configuration for the hosted agent.")
@@ -451,6 +611,15 @@ model HostedAgentDefinition extends AgentDefinition {
   @removed(Versions.v1)
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
   telemetry_config?: TelemetryConfig;
+
+  @removed(Versions.v1)
+  @doc("Configuration for sessions.")
+  session_config?: SessionConfig;
+
+  @removed(Versions.v1)
+  @doc("Graceful termination period in seconds. This is the time between sending SIGTERM and SIGKILL to the agent process.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  graceful_termination_period?: duration = duration.fromISO("PT30S");
 }
 
 // ── Telemetry Unions ────────────────────────────────────
@@ -864,7 +1033,7 @@ union IsolationKeySourceKind {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentEndpoint {
-  @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
+  @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent. For Hosted Agents, this only applies to new sessions. See the SessionVerionUpgradePolicy for how versioning is handled for existing sessions.")
   version_selector?: VersionSelector;
 
   @doc("The protocols that the agent supports")
@@ -994,9 +1163,7 @@ model AgentCard {
 /** The status of an agent session. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 union AgentSessionStatus {
@@ -1032,9 +1199,7 @@ union AgentSessionStatus {
 /** The type of version indicator used to determine the agent version backing a session. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 union VersionIndicatorType {
@@ -1048,9 +1213,7 @@ union VersionIndicatorType {
 @doc("Version indicator determining which agent version backs the session.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 @discriminator("type")
@@ -1062,9 +1225,7 @@ model VersionIndicator {
 /** Version indicator that references a specific agent version by name. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model VersionRefIndicator extends VersionIndicator {
@@ -1081,9 +1242,7 @@ model VersionRefIndicator extends VersionIndicator {
 @doc("An agent session providing a long-lived compute sandbox for hosted agent invocations.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model AgentSessionResource {
@@ -1118,9 +1277,7 @@ model AgentSessionResource {
 @doc("Request to create a new agent session.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model CreateAgentSessionRequest {
@@ -1137,9 +1294,7 @@ model CreateAgentSessionRequest {
 @doc("Paged result for session list operations.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model SessionListResult {
