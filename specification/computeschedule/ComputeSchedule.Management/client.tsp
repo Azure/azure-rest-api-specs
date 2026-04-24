@@ -384,8 +384,3 @@ model ResourcePatchRequestInput {
   "OSImageNotificationProfile",
   "csharp"
 );
-
-@@alternateType(ApiEntityReference.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
