@@ -8,7 +8,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/examples/example-bad-resource-id.json"
       dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json"
@@ -20,6 +20,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 060001 — Invalid resource ID in example
@@ -31,15 +32,16 @@ stimuli:
 
       File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)id|resource.?id"
+      - type: prompt
+    rubric:
+      - Flagged the empty resource ID ("id" is an empty string in the response body)
+      - A valid ARM resource ID should be a fully qualified path like /subscriptions/{sub}/resourceGroups/{rg}/providers/...
 
   # 060002 — Realistic secrets in example
   - name: detect-example-realistic-secret
@@ -50,15 +52,15 @@ stimuli:
 
       File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)secret|password|credential"
-      - type: output-matches
-        config:
-          pattern: "(?i)placeholder|redact"
+      - type: prompt
+    rubric:
+      - Flagged a realistic connection string with password in connectionString
+      - Flagged a realistic password "SuperSecretP@ssw0rd123!" in adminPassword
+      - Flagged a Base64-encoded string in primaryKey that looks like a real key
+      - Recommended placeholder values instead of realistic secrets

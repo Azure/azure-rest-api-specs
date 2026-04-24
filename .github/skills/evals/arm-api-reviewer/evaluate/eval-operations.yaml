@@ -8,7 +8,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/arm-openapi/patch-violations.json"
       dest: "specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json"
@@ -24,6 +24,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 030001 — PATCH body violations
@@ -36,18 +37,20 @@ stimuli:
 
       File: specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
+          substring: "PATCH"
       - type: output-matches
         config:
           pattern: "(?i)required"
-      - type: output-matches
-        config:
-          pattern: "(?i)PATCH"
+      - type: prompt
+    rubric:
+      - Flagged properties marked as required in the PATCH body (GadgetUpdate and GadgetUpdateProperties) — PATCH should have no required properties per RPC-Patch-V1-10
+      - Flagged the default value on displayName (no defaults allowed in PATCH body)
+      - Flagged the create-only mutability (x-ms-mutability create,read) on category in the PATCH body
 
   # 030002 — PUT 200/201 response schema mismatch
   - name: detect-put-response-mismatch
@@ -59,18 +62,19 @@ stimuli:
 
       File: specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)200"
       - type: output-matches
         config:
           pattern: "(?i)201"
+      - type: prompt
+    rubric:
+      - Flagged the PUT response schema mismatch between 200 (Item) and 201 (ItemCreateResponse) per RPC-Put-V1-12 and RPC-Put-V1-25
+      - The request body schema (Item) differs from the 201 response schema (ItemCreateResponse) per RPC-Put-V1-29
 
   # 030003 — DELETE response violations
   - name: detect-delete-violations
@@ -82,18 +86,20 @@ stimuli:
 
       File: specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
+          substring: "DELETE"
+      - type: output-contains
         config:
-          pattern: "(?i)DELETE"
-      - type: output-matches
-        config:
-          pattern: "(?i)204"
+          substring: "204"
+      - type: prompt
+    rubric:
+      - Flagged the 404 response on DELETE — should return 204 when resource does not exist per RPC-Delete-V1-01
+      - Flagged the non-empty response body on the 200 DELETE response per RPC-Delete-V1-04
+      - Flagged the missing 204 response code
 
   # 030004 — LRO pattern violations
   - name: detect-lro-violations
@@ -105,15 +111,16 @@ stimuli:
 
       File: specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)202"
+          substring: "202"
       - type: output-matches
         config:
           pattern: "(?i)RPC-Async"
+      - type: prompt
+    rubric:
+      - Flagged the async PUT returning 202 instead of 200/201 with provisioningState per RPC-Async-V1-01
+      - Flagged the DELETE returning a Widget body in the 200 response per RPC-Delete-V1-04

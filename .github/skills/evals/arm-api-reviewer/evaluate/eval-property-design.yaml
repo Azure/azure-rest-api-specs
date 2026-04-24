@@ -8,7 +8,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/arm-openapi/secret-property.json"
       dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
@@ -24,6 +24,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 020001 — Secret properties
@@ -36,21 +37,26 @@ stimuli:
 
       File: specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
+          substring: "SEC-SECRET-DETECT"
+      - type: output-contains
         config:
-          pattern: "(?i)SEC-SECRET-DETECT"
-      - type: output-matches
+          substring: "connectionString"
+      - type: output-contains
         config:
-          pattern: "(?i)connectionString"
-      - type: output-matches
-        config:
-          pattern: "(?i)x-ms-secret"
+          substring: "x-ms-secret"
+      - type: prompt
+    rubric:
+      - Detected connectionString as a secret property (connection string for backend access)
+      - Detected adminPassword as a secret property (administrator password)
+      - Detected primaryKey as a secret property (primary access key)
+      - Flagged each with SEC-SECRET-DETECT or equivalent rule ID
+      - Recommended adding x-ms-secret true for each secret property
+      - Noted that secret properties should not be returned in GET responses
 
   # 020002 — Naming violations
   - name: detect-naming-violations
@@ -62,18 +68,22 @@ stimuli:
 
       File: specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
+          substring: "DisplayName"
+      - type: output-contains
         config:
-          pattern: "(?i)DisplayName"
-      - type: output-matches
-        config:
-          pattern: "(?i)camelCase"
+          substring: "camelCase"
+      - type: prompt
+    rubric:
+      - Flagged DisplayName — should be displayName (PascalCase instead of camelCase)
+      - Flagged IPAddress — should be ipAddress (uppercase acronym)
+      - Flagged HTTP_Endpoint — should be httpEndpoint (underscores not allowed)
+      - Flagged resource_group_id — should be resourceGroupId (snake_case not allowed)
+      - Recommended camelCase alternatives for each violation
 
   # 020003 — Missing descriptions
   - name: detect-missing-descriptions
@@ -85,15 +95,17 @@ stimuli:
 
       File: specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)description"
+          substring: "description"
+      - type: prompt
+    rubric:
+      - Flagged missing descriptions on the PUT and GET operations
+      - Flagged missing descriptions on the Widget and WidgetProperties models
+      - Flagged missing descriptions on properties (displayName, category, priority, etc.)
 
   # 020004 — Enum violations
   - name: detect-enum-violations
@@ -105,15 +117,18 @@ stimuli:
 
       File: specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
+          substring: "x-ms-enum"
+      - type: output-contains
         config:
-          pattern: "(?i)x-ms-enum"
-      - type: output-matches
-        config:
-          pattern: "(?i)modelAsString"
+          substring: "modelAsString"
+      - type: prompt
+    rubric:
+      - Flagged the status enum with no x-ms-enum decorator and an empty string value
+      - Flagged the tier enum with modelAsString false (should be true)
+      - Flagged the category enum with no x-ms-enum and non-PascalCase values (typeA, typeB, typeC)
+      - Recommended adding x-ms-enum with modelAsString true

@@ -8,7 +8,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
       dest: "specification/nosupprsvc/resource-manager/readme.md"
@@ -20,6 +20,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 050001 — Suppressions without reason
@@ -32,18 +33,20 @@ stimuli:
 
       File: specification/nosupprsvc/resource-manager/readme.md
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)reason|justification"
-      - type: output-matches
+      - type: output-contains
         config:
-          pattern: "(?i)suppress"
+          substring: "suppress"
+      - type: prompt
+    rubric:
+      - Flagged the AvoidAdditionalProperties suppression as missing a reason field
+      - Flagged the PatchBodyParametersSchema suppression as missing a reason field
+      - Cited suppression justification requirements (RPC-SUPPRESS-GA/SCOPE)
 
   # 050002 — Security rule suppressions
   - name: detect-suppression-security-rule
@@ -55,15 +58,14 @@ stimuli:
 
       File: specification/secsupprsvc/resource-manager/readme.md
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)security|secret"
-      - type: output-matches
-        config:
-          pattern: "(?i)vague|insufficient|blocking|problematic"
+      - type: prompt
+    rubric:
+      - Flagged the XmsSecretNotReadBack suppression with vague reason "existing pattern" — this is a security rule suppression
+      - Flagged the SecretPropertyMustBeWriteOnly suppression with vague reason "will fix later" — this is a security rule suppression
+      - Identified both as blocking because they suppress security-related rules with insufficient justification

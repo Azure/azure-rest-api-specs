@@ -7,7 +7,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/arm-openapi/missing-crud-ops.json"
       dest: "specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json"
@@ -19,6 +19,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 010001 — Missing CRUD operations
@@ -31,21 +32,25 @@ stimuli:
 
       File: specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)DELETE"
+          substring: "DELETE"
       - type: output-matches
         config:
           pattern: "(?i)resource.?group|ListByResourceGroup"
       - type: output-matches
         config:
           pattern: "(?i)subscription|ListBySubscription"
+      - type: prompt
+    rubric:
+      - Flagged the missing DELETE operation for the tracked Widget resource
+      - Flagged the missing ListByResourceGroup (collection GET at resource group scope)
+      - Flagged the missing ListBySubscription (collection GET at subscription scope)
+      - Flagged the missing Operations API endpoint (/providers/Microsoft.WidgetManager/operations)
+      - Cited rule IDs related to tracked resource lifecycle requirements (e.g., RPC-Put-V1-22, RPC-Get-V1-05)
 
   # 010002 — Missing provisioningState
   - name: detect-missing-provisioning-state
@@ -57,15 +62,16 @@ stimuli:
 
       File: specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)provisioningState"
+          substring: "provisioningState"
       - type: output-matches
         config:
           pattern: "(?i)RPC-Async-V1-0[23]"
+      - type: prompt
+    rubric:
+      - Flagged the missing provisioningState property on the Job resource that has x-ms-long-running-operation true on PUT
+      - Cited RPC-Async-V1-02 or RPC-Async-V1-03 as the violated rule

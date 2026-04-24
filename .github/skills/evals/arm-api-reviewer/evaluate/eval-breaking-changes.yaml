@@ -8,7 +8,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/version-pairs/removed-property/stable-2024-01-01.json"
       dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json"
@@ -28,6 +28,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 040001 — Removed property between versions
@@ -41,21 +42,19 @@ stimuli:
       Previous version: specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json
       New version: specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)breaking"
-      - type: output-matches
-        config:
-          pattern: "(?i)category"
+          substring: "category"
       - type: output-matches
         config:
           pattern: "(?i)removed|missing|deleted"
+      - type: prompt
+    rubric:
+      - Identified the category property as removed from WidgetProperties between versions — a breaking change per ARG003
+      - Identified the priority property as removed from WidgetProperties between versions — a breaking change per ARG003
 
   # 040002 — Property type change between versions
   - name: detect-breaking-type-change
@@ -68,21 +67,18 @@ stimuli:
       Previous version: specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json
       New version: specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
+      - type: output-contains
         config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)breaking"
-      - type: output-matches
-        config:
-          pattern: "(?i)maxRetries"
+          substring: "maxRetries"
       - type: output-matches
         config:
           pattern: "(?i)type|string|integer"
+      - type: prompt
+    rubric:
+      - Identified that maxRetries changed from type string to type integer between versions — this is a breaking change
 
   # 040003 — Enum value narrowing between versions
   - name: detect-breaking-enum-narrowing
@@ -95,15 +91,13 @@ stimuli:
       Previous version: specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json
       New version: specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
-      - type: output-matches
-        config:
-          pattern: "(?i)breaking"
       - type: output-matches
         config:
           pattern: "(?i)enum"
+      - type: prompt
+    rubric:
+      - Identified that the status enum had values removed (Suspended and Archived were dropped from 5 values to 3)
+      - Flagged the removal of enum values as a breaking change

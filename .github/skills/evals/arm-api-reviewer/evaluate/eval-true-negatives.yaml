@@ -8,7 +8,7 @@ type: capability
 
 environment:
   skills:
-    - "../../../azure-api-review"
+    - "../../../azure-api-review/SKILL.md"
   files:
     - src: "../fixtures/arm-openapi/clean-spec.json"
       dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
@@ -20,6 +20,7 @@ config:
   timeout: 600
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  judge_model: gpt-4o-mini
 
 stimuli:
   # 090001 — Clean ARM spec (no blocking issues expected)
@@ -32,12 +33,15 @@ stimuli:
 
       File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
+      - type: prompt
+    rubric:
+      - The spec is fully compliant — has all CRUD operations, ListByResourceGroup, ListBySubscription, Operations API, provisioningState with terminal states, x-ms-pageable, x-ms-enum with modelAsString, descriptions, systemData, proper parameters, x-ms-mutability on location
+      - The agent may note that the spec defines types inline instead of referencing common-types — that is a process observation, NOT a blocking violation
+      - The agent should avoid flagging serious blocking RPC rule violations, security violations, or breaking changes that would be false positives
+      - Minor suggestions or warnings are acceptable
 
   # 090002 — Clean example file (no issues expected)
   - name: clean-example-no-issues
@@ -48,9 +52,11 @@ stimuli:
 
       File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json
     constraints:
-      max_duration_ms: 600000
+      expect_skills:
+        - azure-api-review
     graders:
-      - type: skill-invocation
-        config:
-          required:
-            - azure-api-review
+      - type: prompt
+    rubric:
+      - The example is well-formed — has a proper fully-qualified ARM resource ID, no realistic secrets, correct formatting, proper provisioningState, tags, and systemData
+      - The agent should avoid flagging serious EX-* rule violations that would be false positives
+      - Minor observations or suggestions are acceptable
