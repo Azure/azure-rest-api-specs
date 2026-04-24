@@ -38,7 +38,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "EventHubManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
+// Common type version set to v3 as required by the ARM resource manager.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.EventHub;
 
