@@ -40,3 +40,25 @@ union CustomPublicNetworkAccessType {
   "PublicNetworkAccessType",
   "javascript,python"
 );
+
+@@clientName(VMGuestPatchClassification_Windows,
+  "VMGuestPatchClassificationWindows",
+  "python"
+);
+@@clientName(VMGuestPatchClassification_Linux,
+  "VMGuestPatchClassificationLinux",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(LicenseProfileNameAlias.licenseProfileName,
+  "default",
+  "python"
+);
+@@Azure.ClientGenerator.Core.alternateType(LicenseProfileNameAlias.licenseProfileName,
+  "default"
+);
+@@clientLocation(Machines.setupExtensions, "Microsoft.HybridCompute", "python");
+@@clientLocation(Machines.upgradeExtensions,
+  "Microsoft.HybridCompute",
+  "python"
+);
