@@ -145,6 +145,8 @@ op getReplace(
   "csharp"
 );
 @@clientName(ProfileStatus, "TrafficManagerProfileStatus", "csharp");
+@@clientName(Endpoints.updateV2, "update");
+@@clientName(Profiles.updateV2, "update");
 @@clientName(MonitorProtocol.HTTP, "Http", "csharp");
 @@clientName(MonitorProtocol.HTTPS, "Https", "csharp");
 @@clientName(MonitorProtocol.TCP, "Tcp", "csharp");
