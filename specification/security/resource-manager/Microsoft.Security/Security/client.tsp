@@ -518,6 +518,5 @@ op alertsListResourceGroupLevelByRegionCustomized(
 
 @@override(AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
-  "python",
-  "go"
+  "python,go"
 );
