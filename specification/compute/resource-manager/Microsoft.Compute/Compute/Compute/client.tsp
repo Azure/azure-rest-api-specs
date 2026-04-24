@@ -1017,10 +1017,6 @@ using Compute;
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetNetworkConfigurationProperties.networkSecurityGroup,
-  Azure.ResourceManager.Models.SubResource,
-  "csharp"
-);
 @@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationGatewayBackendAddressPools,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
@@ -1037,10 +1033,6 @@ using Compute;
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetUpdateNetworkConfigurationProperties.networkSecurityGroup,
-  Azure.ResourceManager.Models.SubResource,
-  "csharp"
-);
 @@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationGatewayBackendAddressPools,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
@@ -1055,10 +1047,6 @@ using Compute;
 );
 @@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerInboundNatPools,
   Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineNetworkInterfaceConfigurationProperties.networkSecurityGroup,
-  Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
 @@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationSecurityGroups,
