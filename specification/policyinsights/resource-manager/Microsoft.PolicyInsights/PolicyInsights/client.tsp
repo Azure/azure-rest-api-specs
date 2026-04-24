@@ -861,6 +861,11 @@ op policyStatesSummarizeForManagementGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesListQueryResultsForSubscription(
   ...ApiVersionParameter,
+
+  @path
+  @segment("policyStates")
+  policyStatesResource: PolicyStatesResource,
+
   ...SubscriptionIdParameter,
   @bodyRoot body: void,
 
@@ -870,11 +875,6 @@ op policyStatesListQueryResultsForSubscription(
   name: string,
 
   ...ProviderNamespace<SubscriptionActionScope>,
-
-  @path
-  @segment("policyStates")
-  policyStatesResource: PolicyStatesResource,
-
   queryOptions?: PolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscription,
@@ -885,6 +885,11 @@ op policyStatesListQueryResultsForSubscription(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesSummarizeForSubscription(
   ...ApiVersionParameter,
+
+  @path
+  @segment("policyStates")
+  policyStatesSummaryResource: PolicyStatesSummaryResourceType,
+
   ...SubscriptionIdParameter,
   @bodyRoot body: void,
 
@@ -894,11 +899,6 @@ op policyStatesSummarizeForSubscription(
   name: string,
 
   ...ProviderNamespace<SubscriptionActionScope>,
-
-  @path
-  @segment("policyStates")
-  policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-
   queryOptions?: PolicyStatesSummarizeForSubscriptionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscription,
@@ -928,15 +928,15 @@ op policyStatesListQueryResultsForResourceGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op policyStatesSummarizeForResourceGroup(
   ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  @bodyRoot body: void,
-  ...ProviderNamespace<Extension.ResourceGroup>,
 
   @path
   @segment("policyStates")
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
 
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  @bodyRoot body: void,
+  ...ProviderNamespace<Extension.ResourceGroup>,
   queryOptions?: PolicyStatesSummarizeForResourceGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroup,
