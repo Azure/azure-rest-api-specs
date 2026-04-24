@@ -36,3 +36,7 @@ union CustomPublicNetworkAccessType {
   CustomPublicNetworkAccessType,
   "javascript"
 );
+@@clientName(CustomPublicNetworkAccessType,
+  "PublicNetworkAccessType",
+  "javascript"
+);
