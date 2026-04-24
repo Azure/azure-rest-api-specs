@@ -117,7 +117,7 @@ op privateLinksGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
   privateLinksGetCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -141,7 +141,7 @@ op privateLinksCreateCustomization(
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
   privateLinksCreateCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -161,7 +161,7 @@ op privateLinksUpdateCustomization(
 );
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
   privateLinksUpdateCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -179,7 +179,7 @@ op privateLinksDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -195,7 +195,7 @@ op privateLinksHeadCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
   privateLinksHeadCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -211,7 +211,7 @@ op privateEndpointConnectionsListCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -228,7 +228,7 @@ op privateEndpointConnectionsGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -252,7 +252,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
-  "!python"
+  "!python,!java"
 );
 @@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
@@ -275,7 +275,7 @@ op privateEndpointConnectionsDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -291,7 +291,7 @@ op privateLinkResourcesListCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
   privateLinkResourcesListCustomization,
-  "!python"
+  "!python,!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -309,7 +309,7 @@ op privateLinkResourcesGetCustomization(
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization,
-  "!python"
+  "!python,!java"
 );
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
@@ -338,18 +338,11 @@ op privateLinkResourcesGetCustomization(
   "java"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "ArmErrorAdditionalInfo",
+@@clientName(HealthReportsAPI.resourceDetails,
+  "HealthReportResourceDetails",
   "java"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
-  "ArmPrivateEndpointConnection",
-  "java,javascript"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
-  "ArmActionType",
-  "java"
-);
+
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
   "javascript,go"
