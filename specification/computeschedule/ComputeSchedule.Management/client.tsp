@@ -355,8 +355,14 @@ model ResourcePatchRequestInput {
 // =====================================================================
 // C# naming alignment with Azure.ResourceManager.Compute SDK
 // =====================================================================
-@@clientName(AdditionalCapabilities.ultraSSDEnabled, "IsUltraSsdEnabled", "csharp");
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "IsUltraSsdEnabled",
+  "csharp"
+);
 @@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
-@@clientName(WindowsConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
