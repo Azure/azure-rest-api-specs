@@ -743,6 +743,7 @@ model TopologySingleResourceChild {
 /**
  * Represents a security solution which sends CEF logs to an OMS workspace
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CefExternalSecuritySolution extends ExternalSecuritySolution {
   /**
@@ -796,6 +797,7 @@ model ConnectedWorkspace {
  * Represents an ATA security solution which sends logs to an OMS workspace
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AtaExternalSecuritySolution extends ExternalSecuritySolution {
   /**
    * The external security solution properties for ATA solutions
@@ -817,6 +819,7 @@ model AtaSolutionProperties extends ExternalSecuritySolutionProperties {
 /**
  * Represents an AAD identity protection solution which sends logs to an OMS workspace.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AadExternalSecuritySolution extends ExternalSecuritySolution {
   /**
