@@ -9,6 +9,7 @@ share the same `fixtures/` directory; choose whichever fits your toolchain.
 
 ```
 arm-api-reviewer/
+├── .vally.yaml            # Vally project config (skill discovery, eval paths)
 ├── eval.yaml              # Waza eval config
 ├── tasks/                 # Waza task definitions (21 files)
 │   ├── 010001-missing-crud-ops.yaml
@@ -28,7 +29,8 @@ arm-api-reviewer/
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
 │   └── version-pairs/     # Version pairs for breaking change detection
-└── README.md              # This file
+├── README.md              # This file
+└── .vally.yaml            # Vally project config
 ```
 
 ## Test Categories (21 test cases)
@@ -73,6 +75,10 @@ options (`--parallel`, `--task`, `--model`, etc.).
 
 Prerequisites: Clone [microsoft/evaluate](https://github.com/microsoft/evaluate),
 then `npm install && npm run build`.
+
+The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
+auto-discovery (via `paths.skills`) and eval file location. Skills are discovered
+automatically -- individual eval files do not need to declare `environment.skills`.
 
 ```bash
 # Run a single category
