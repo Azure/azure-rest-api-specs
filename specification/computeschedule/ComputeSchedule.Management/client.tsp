@@ -356,7 +356,7 @@ model ResourcePatchRequestInput {
 // C# naming alignment with Azure.ResourceManager.Compute SDK
 // =====================================================================
 @@clientName(AdditionalCapabilities.ultraSSDEnabled,
-  "IsUltraSsdEnabled",
+  "UltraSsdEnabled",
   "csharp"
 );
 @@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
