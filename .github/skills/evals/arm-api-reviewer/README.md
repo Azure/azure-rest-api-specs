@@ -5,7 +5,7 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 
 ## Directory Structure
 
-```
+```text
 arm-api-reviewer/
 ├── .vally.yaml            # Vally project config (skill discovery, eval paths)
 ├── evaluate/              # Evaluate (vally) eval definitions (9 files)

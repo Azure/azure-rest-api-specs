@@ -28,6 +28,7 @@
    ```
 
 5. Push to trigger CI:
+
    ```bash
    git push
    ```
