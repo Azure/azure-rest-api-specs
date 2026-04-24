@@ -1,0 +1,64 @@
+name: arm-api-reviewer-eval-examples
+description: |
+  Example file validation tests (06xxxx).
+  Validates detection of invalid resource IDs and realistic secrets
+  in example JSON files.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/examples/example-bad-resource-id.json"
+      dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json"
+    - src: "../fixtures/examples/example-realistic-secret.json"
+      dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 060001 — Invalid resource ID in example
+  - name: detect-example-bad-resource-id
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a GET operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)id|resource.?id"
+
+  # 060002 — Realistic secrets in example
+  - name: detect-example-realistic-secret
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a PUT operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)secret|password|credential"
+      - type: output-matches
+        config:
+          pattern: "(?i)placeholder|redact"

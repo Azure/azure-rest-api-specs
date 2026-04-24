@@ -1,0 +1,56 @@
+name: arm-api-reviewer-eval-true-negatives
+description: |
+  True negative (false-positive resistance) tests (09xxxx).
+  Validates that the reviewer does NOT flag blocking violations on clean,
+  fully compliant specs and examples.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/arm-openapi/clean-spec.json"
+      dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
+    - src: "../fixtures/examples/example-clean.json"
+      dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 090001 — Clean ARM spec (no blocking issues expected)
+  - name: clean-arm-spec-no-blocking-issues
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+
+  # 090002 — Clean example file (no issues expected)
+  - name: clean-example-no-issues
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a GET operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review

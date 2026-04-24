@@ -1,0 +1,71 @@
+name: arm-api-reviewer-eval-arm-resource-structure
+description: |
+  ARM resource structure & CRUD tests (01xxxx).
+  Validates detection of missing lifecycle operations and missing provisioningState.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/arm-openapi/missing-crud-ops.json"
+      dest: "specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json"
+    - src: "../fixtures/arm-openapi/missing-provisioning-state.json"
+      dest: "specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 010001 — Missing CRUD operations
+  - name: detect-missing-crud-ops
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)DELETE"
+      - type: output-matches
+        config:
+          pattern: "(?i)resource.?group|ListByResourceGroup"
+      - type: output-matches
+        config:
+          pattern: "(?i)subscription|ListBySubscription"
+
+  # 010002 — Missing provisioningState
+  - name: detect-missing-provisioning-state
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)provisioningState"
+      - type: output-matches
+        config:
+          pattern: "(?i)RPC-Async-V1-0[23]"

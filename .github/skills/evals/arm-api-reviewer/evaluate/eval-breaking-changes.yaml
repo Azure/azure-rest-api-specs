@@ -1,0 +1,109 @@
+name: arm-api-reviewer-eval-breaking-changes
+description: |
+  Breaking change detection tests (04xxxx).
+  Validates detection of removed properties, property type changes,
+  and enum value narrowing between API versions.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/version-pairs/removed-property/stable-2024-01-01.json"
+      dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json"
+    - src: "../fixtures/version-pairs/removed-property/stable-2025-01-01.json"
+      dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json"
+    - src: "../fixtures/version-pairs/type-change/stable-2024-01-01.json"
+      dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json"
+    - src: "../fixtures/version-pairs/type-change/stable-2025-01-01.json"
+      dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json"
+    - src: "../fixtures/version-pairs/enum-narrowing/stable-2024-01-01.json"
+      dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json"
+    - src: "../fixtures/version-pairs/enum-narrowing/stable-2025-01-01.json"
+      dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 040001 — Removed property between versions
+  - name: detect-breaking-removed-property
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings with rule IDs, line numbers, and fix suggestions.
+
+      Previous version: specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json
+      New version: specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)breaking"
+      - type: output-matches
+        config:
+          pattern: "(?i)category"
+      - type: output-matches
+        config:
+          pattern: "(?i)removed|missing|deleted"
+
+  # 040002 — Property type change between versions
+  - name: detect-breaking-type-change
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings with rule IDs, line numbers, and fix suggestions.
+
+      Previous version: specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json
+      New version: specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)breaking"
+      - type: output-matches
+        config:
+          pattern: "(?i)maxRetries"
+      - type: output-matches
+        config:
+          pattern: "(?i)type|string|integer"
+
+  # 040003 — Enum value narrowing between versions
+  - name: detect-breaking-enum-narrowing
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings.
+
+      Previous version: specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json
+      New version: specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)breaking"
+      - type: output-matches
+        config:
+          pattern: "(?i)enum"

@@ -1,0 +1,119 @@
+name: arm-api-reviewer-eval-property-design
+description: |
+  Property design tests (02xxxx).
+  Validates detection of secret properties, naming violations,
+  missing descriptions, and enum issues.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/arm-openapi/secret-property.json"
+      dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
+    - src: "../fixtures/arm-openapi/naming-violations.json"
+      dest: "specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json"
+    - src: "../fixtures/arm-openapi/missing-descriptions.json"
+      dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
+    - src: "../fixtures/arm-openapi/enum-violations.json"
+      dest: "specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 020001 — Secret properties
+  - name: detect-secret-properties
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
+      attention to secret detection. This is a new service with no previous API
+      version. Report all findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)SEC-SECRET-DETECT"
+      - type: output-matches
+        config:
+          pattern: "(?i)connectionString"
+      - type: output-matches
+        config:
+          pattern: "(?i)x-ms-secret"
+
+  # 020002 — Naming violations
+  - name: detect-naming-violations
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)DisplayName"
+      - type: output-matches
+        config:
+          pattern: "(?i)camelCase"
+
+  # 020003 — Missing descriptions
+  - name: detect-missing-descriptions
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)description"
+
+  # 020004 — Enum violations
+  - name: detect-enum-violations
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)x-ms-enum"
+      - type: output-matches
+        config:
+          pattern: "(?i)modelAsString"

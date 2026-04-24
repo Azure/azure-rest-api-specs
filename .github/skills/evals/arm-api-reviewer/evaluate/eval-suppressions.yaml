@@ -1,0 +1,69 @@
+name: arm-api-reviewer-eval-suppressions
+description: |
+  Suppression analysis tests (05xxxx).
+  Validates detection of suppressions without justification and
+  suppressions of security-related rules with vague reasons.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
+      dest: "specification/nosupprsvc/resource-manager/readme.md"
+    - src: "../fixtures/readme/readme-security-suppression.md"
+      dest: "specification/secsupprsvc/resource-manager/readme.md"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 050001 — Suppressions without reason
+  - name: detect-suppression-no-reason
+    prompt: >
+      Review the following readme.md suppression file for an ARM specification.
+      This is a new API version with no previous readme.md to compare against.
+      Check all suppressions for proper justification per Azure suppression
+      guidelines.
+
+      File: specification/nosupprsvc/resource-manager/readme.md
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)reason|justification"
+      - type: output-matches
+        config:
+          pattern: "(?i)suppress"
+
+  # 050002 — Security rule suppressions
+  - name: detect-suppression-security-rule
+    prompt: >
+      Review the following readme.md suppression file for an ARM specification.
+      This is a new API version with no previous readme.md to compare against.
+      Check all suppressions for proper justification per Azure suppression
+      guidelines. Pay special attention to suppressions of security-related rules.
+
+      File: specification/secsupprsvc/resource-manager/readme.md
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)security|secret"
+      - type: output-matches
+        config:
+          pattern: "(?i)vague|insufficient|blocking|problematic"

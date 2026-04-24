@@ -1,0 +1,47 @@
+name: arm-api-reviewer-eval-report-format
+description: |
+  Report format and structure test (11xxxx).
+  Validates that the reviewer output includes exact line numbers, rule IDs,
+  fix suggestions, and structured sections.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/arm-openapi/secret-property.json"
+      dest: "specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 110001 — Report format structure
+  - name: verify-report-format-structure
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings using the standard
+      review report format with rule IDs, exact line numbers, JSON paths, and fix
+      suggestions.
+
+      File: specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      # Verify line numbers are present
+      - type: output-matches
+        config:
+          pattern: "[Ll]ine \\d+"
+      # Verify rule IDs are present
+      - type: output-matches
+        config:
+          pattern: "SEC-SECRET-DETECT|RPC-[A-Za-z]+-V\\d+-\\d+"

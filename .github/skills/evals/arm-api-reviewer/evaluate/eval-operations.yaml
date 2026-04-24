@@ -1,0 +1,119 @@
+name: arm-api-reviewer-eval-operations
+description: |
+  PATCH, DELETE, PUT, and LRO operation tests (03xxxx).
+  Validates detection of PATCH body violations, PUT response schema mismatches,
+  DELETE response issues, and LRO pattern violations.
+version: "1.0"
+type: capability
+
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../fixtures/arm-openapi/patch-violations.json"
+      dest: "specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json"
+    - src: "../fixtures/arm-openapi/put-response-mismatch.json"
+      dest: "specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json"
+    - src: "../fixtures/arm-openapi/delete-violations.json"
+      dest: "specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json"
+    - src: "../fixtures/arm-openapi/lro-violations.json"
+      dest: "specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json"
+
+config:
+  runs: 1
+  timeout: 600
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+
+stimuli:
+  # 030001 — PATCH body violations
+  - name: detect-patch-violations
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)required"
+      - type: output-matches
+        config:
+          pattern: "(?i)PATCH"
+
+  # 030002 — PUT 200/201 response schema mismatch
+  - name: detect-put-response-mismatch
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)200"
+      - type: output-matches
+        config:
+          pattern: "(?i)201"
+
+  # 030003 — DELETE response violations
+  - name: detect-delete-violations
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)DELETE"
+      - type: output-matches
+        config:
+          pattern: "(?i)204"
+
+  # 030004 — LRO pattern violations
+  - name: detect-lro-violations
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json
+    constraints:
+      max_duration_ms: 600000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
+      - type: output-matches
+        config:
+          pattern: "(?i)202"
+      - type: output-matches
+        config:
+          pattern: "(?i)RPC-Async"
