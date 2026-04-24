@@ -8836,6 +8836,48 @@
         "seccompDefault": {
           "$ref": "#/definitions/SeccompDefault",
           "description": "Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default."
+        },
+        "kubeReserved": {
+          "$ref": "#/definitions/KubeReserved",
+          "description": "Custom kube-reserved values for kubelet. When a resource is not set, the system-computed default based on VM size is used."
+        },
+        "hardEvictionThreshold": {
+          "$ref": "#/definitions/HardEvictionThreshold",
+          "description": "Custom hard eviction thresholds for kubelet. When a signal is not set, the system default is used."
+        }
+      }
+    },
+    "KubeReserved": {
+      "type": "object",
+      "description": "Custom kube-reserved values for kubelet. When a resource is not set, the system-computed default based on VM size is used.",
+      "properties": {
+        "cpuMillicores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU reservation for kubelet in millicores."
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Memory reservation for kubelet in megabytes."
+        }
+      }
+    },
+    "HardEvictionThreshold": {
+      "type": "object",
+      "description": "Custom hard eviction thresholds for kubelet. When a signal is not set, the system default is used.",
+      "properties": {
+        "memoryAvailable": {
+          "type": "string",
+          "description": "Eviction threshold for available memory, for example '500Mi'."
+        },
+        "nodeFsAvailable": {
+          "type": "string",
+          "description": "Eviction threshold for available node filesystem space, for example '10%'."
+        },
+        "nodeFsInodesFree": {
+          "type": "string",
+          "description": "Eviction threshold for free node filesystem inodes, for example '5%'."
         }
       }
     },
