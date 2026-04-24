@@ -19,10 +19,10 @@ namespace Microsoft.Network;
 /**
  * An interconnect group resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Common.Resource references internal types from the legacy Network RP base model"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Network RP uses its own legacy Common.Resource base type for all resources for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending Common.Resource via inheritance is the standard pattern for all Network RP resources"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
@@ -41,7 +41,7 @@ model InterconnectGroup extends Common.Resource {
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is a standard envelope property on Network RP resources for optimistic concurrency"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -49,10 +49,10 @@ model InterconnectGroup extends Common.Resource {
 /**
  * A subgroup in an interconnect group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Common.SubResourceModel references internal types from the legacy Network RP base model"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Network RP uses its own legacy Common.SubResourceModel base type for all child resources for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending Common.SubResourceModel via inheritance is the standard pattern for all Network RP child resources"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
@@ -71,7 +71,7 @@ model Subgroup extends Common.SubResourceModel {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @armResourceOperations
@@ -126,7 +126,7 @@ interface InterconnectGroups {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @armResourceOperations

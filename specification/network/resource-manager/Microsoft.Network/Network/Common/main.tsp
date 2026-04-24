@@ -90,7 +90,7 @@ enum Features {
   serviceGateway,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  /** Interconnect group resource type for managing interconnect groups and subgroups. */
   interconnectGroup,
 }
 
