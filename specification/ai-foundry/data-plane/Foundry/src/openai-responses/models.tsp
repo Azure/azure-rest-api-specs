@@ -362,7 +362,7 @@ namespace Azure.AI.Projects {
     license?: string;
 
     @doc("The URL associated with the license.")
-    URL?: url;
+    url?: url;
   }
 
   @doc("Result details for an individual PII subcategory.")
