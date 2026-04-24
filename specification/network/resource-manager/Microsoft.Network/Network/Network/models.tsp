@@ -26089,7 +26089,7 @@ model VirtualNetworkApplianceIpConfigurationProperties {
 /**
  * Scope of an interconnect group resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 union InterconnectGroupScope {
@@ -26105,7 +26105,7 @@ union InterconnectGroupScope {
 /**
  * Scope of the subgroup profile.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 union SubgroupProfileScope {
@@ -26121,7 +26121,7 @@ union SubgroupProfileScope {
 /**
  * Subgroup profile of the interconnect group resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model SubgroupProfile {
@@ -26139,7 +26139,7 @@ model SubgroupProfile {
 /**
  * Interconnect group properties.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model InterconnectGroupPropertiesFormat {
@@ -26165,7 +26165,7 @@ model InterconnectGroupPropertiesFormat {
 /**
  * Properties of subgroup.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model SubgroupProperties {
@@ -26189,7 +26189,7 @@ model SubgroupProperties {
 /**
  * Represents node availability information for subgroups within an interconnect group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model InterconnectGroupNodeAvailability {
@@ -26200,7 +26200,7 @@ model InterconnectGroupNodeAvailability {
 /**
  * Represents the node availability information for a single subgroup.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy types are required for backward compatibility with the existing Network RP SDK"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model SubgroupNodeAvailabilityEntry {
