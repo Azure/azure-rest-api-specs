@@ -50,6 +50,7 @@ using HealthReportsAPI;
 using LegacySettingsAPI;
 using SqlVulnerabilityAssessmentsAPI;
 using AlertsAPI;
+using ApiCollectionsAPI;
 
 @client({
   name: "SecurityManagementClient",
@@ -517,5 +518,26 @@ op alertsListResourceGroupLevelByRegionCustomized(
 
 @@clientName(HealthReportsAPI.resourceDetails,
   "HealthReportResourceDetails",
+  "java"
+);
+@@clientLocation(ApiCollections.getByAzureApiManagementService,
+  "ApiCollections",
+  "java"
+);
+@@clientLocation(ApiCollections.onboardAzureApiManagementApi,
+  "ApiCollections",
+  "java"
+);
+@@clientLocation(ApiCollections.offboardAzureApiManagementApi,
+  "ApiCollections",
+  "java"
+);
+@@clientLocation(ApiCollections.listByAzureApiManagementService,
+  "ApiCollections",
+  "java"
+);
+@@clientLocation(ApiCollections.listBySubscription, "ApiCollections", "java");
+@@clientLocation(ApiCollectionsOperationGroup.listByResourceGroup,
+  "ApiCollections",
   "java"
 );
