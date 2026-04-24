@@ -453,14 +453,14 @@ A data steward at a financial services company needs to bring a production Azure
 ### **Prerequisites**
 - Purview endpoint configured and authenticated
 - An Azure SQL table already scanned in Microsoft Purview Data Map (Data Map asset ID `87530cc2-5a0f-4f84-befb-2af6f6f60000`; column IDs `a1174096-2a8c-4f8d-9cb4-e23512d85d43` for `CustomerEmail` and `b8d2b3f5-85cc-4d20-968b-be8d957c6716` for `AccountNumber`)
-- A "Customer Email" critical data element (`cde-1001-3344-5566-7788-99aabbccddee`) and a "Payments Data Product" (`dp-9001-3344-5566-7788-99aabbccddee`) already exist in the catalog
+- A "Customer Email" critical data element (`10013344-5566-7788-99aa-bbccddeeff00`) and a "Payments Data Product" (`90013344-5566-7788-99aa-bbccddeeff00`) already exist in the catalog
 
 ### **Step-by-Step Walkthrough**
 
 #### **Step 1: Create the Data Asset, Linking It to the Scanned Data Map Table**
 
 ```http
-POST /datagovernance/catalog/dataAssets?api-version=2026-03-20-preview
+POST /dataAssets
 Content-Type: application/json
 Authorization: Bearer {token}
 
@@ -486,7 +486,7 @@ Authorization: Bearer {token}
   "name": "transactions_prod",
   "type": "AzureSqlTable",
   "typeProperties": {
-    "serverEndpoint": "paymentssql.database.windows.net",
+    "serverEndpoint": "https://payments-sql.database.windows.net",
     "databaseName": "payments",
     "schemaName": "dbo",
     "tableName": "transactions"
@@ -518,8 +518,10 @@ Authorization: Bearer {token}
 
 #### **Step 2: Ingest the Table's Columns from Data Map into the Catalog**
 
+Ingest each column individually. First, the `CustomerEmail` column:
+
 ```http
-POST /datagovernance/catalog/dataColumns/ingest?api-version=2026-03-20-preview
+POST /dataColumns/ingest
 Content-Type: application/json
 Authorization: Bearer {token}
 
@@ -528,7 +530,32 @@ Authorization: Bearer {token}
     {
       "dataMapAssetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
       "dataMapColumnId": "a1174096-2a8c-4f8d-9cb4-e23512d85d43"
-    },
+    }
+  ]
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "id": "aaaaaa11-1111-2222-3333-444455556666",
+  "source": {
+    "type": "DataMap",
+    "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+    "columnId": "a1174096-2a8c-4f8d-9cb4-e23512d85d43"
+  }
+}
+```
+
+Then, the `AccountNumber` column:
+
+```http
+POST /dataColumns/ingest
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "requests": [
     {
       "dataMapAssetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
       "dataMapColumnId": "b8d2b3f5-85cc-4d20-968b-be8d957c6716"
@@ -540,11 +567,11 @@ Authorization: Bearer {token}
 **Expected Response** (200 OK):
 ```json
 {
-  "id": "col-aaaa-1111-2222-3333-444455556666",
+  "id": "bbbbbb11-1111-2222-3333-444455556666",
   "source": {
     "type": "DataMap",
     "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
-    "columnId": "a1174096-2a8c-4f8d-9cb4-e23512d85d43"
+    "columnId": "b8d2b3f5-85cc-4d20-968b-be8d957c6716"
   }
 }
 ```
@@ -552,7 +579,7 @@ Authorization: Bearer {token}
 #### **Step 3: Query Columns to Retrieve Their Catalog IDs and Verify Ingestion**
 
 ```http
-POST /datagovernance/catalog/dataColumns/query?api-version=2026-03-20-preview
+POST /dataColumns/query
 Content-Type: application/json
 Authorization: Bearer {token}
 
@@ -574,7 +601,7 @@ Authorization: Bearer {token}
 {
   "value": [
     {
-      "id": "col-aaaa-1111-2222-3333-444455556666",
+      "id": "aaaaaa11-1111-2222-3333-444455556666",
       "source": {
         "type": "DataMap",
         "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
@@ -588,7 +615,7 @@ Authorization: Bearer {token}
       }
     },
     {
-      "id": "col-bbbb-1111-2222-3333-444455556666",
+      "id": "bbbbbb11-1111-2222-3333-444455556666",
       "source": {
         "type": "DataMap",
         "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
@@ -605,16 +632,18 @@ Authorization: Bearer {token}
 }
 ```
 
-#### **Step 4: Tag the CustomerEmail Column with the "Customer Email" Critical Data Element**
+#### **Step 4: Tag Sensitive Columns with Critical Data Elements for PCI-DSS Compliance**
+
+Tag the `CustomerEmail` column:
 
 ```http
-POST /datagovernance/catalog/dataColumns/col-aaaa-1111-2222-3333-444455556666/relationships?entityType=CRITICALDATAELEMENT&api-version=2026-03-20-preview
+POST /dataColumns/aaaaaa11-1111-2222-3333-444455556666/relationships?entityType=CRITICALDATAELEMENT
 Content-Type: application/json
 Authorization: Bearer {token}
 
 {
   "relationshipType": "Related",
-  "entityId": "cde-1001-3344-5566-7788-99aabbccddee",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
   "description": "CustomerEmail column maps to the PCI-DSS-regulated Customer Email critical data element"
 }
 ```
@@ -623,7 +652,7 @@ Authorization: Bearer {token}
 ```json
 {
   "relationshipType": "Related",
-  "entityId": "cde-1001-3344-5566-7788-99aabbccddee",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
   "description": "CustomerEmail column maps to the PCI-DSS-regulated Customer Email critical data element",
   "systemData": {
     "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
@@ -634,15 +663,44 @@ Authorization: Bearer {token}
 }
 ```
 
-#### **Step 5: Link the Data Asset to the "Payments Data Product"**
+Tag the `AccountNumber` column:
 
 ```http
-POST /datagovernance/catalog/dataAssets/da001122-3344-5566-7788-99aabbccddee/relationships?entityType=DATAPRODUCT&api-version=2026-03-20-preview
+POST /dataColumns/bbbbbb11-1111-2222-3333-444455556666/relationships?entityType=CRITICALDATAELEMENT
 Content-Type: application/json
 Authorization: Bearer {token}
 
 {
-  "entityId": "dp-9001-3344-5566-7788-99aabbccddee",
+  "relationshipType": "Related",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
+  "description": "AccountNumber column maps to the PCI-DSS-regulated Customer Email critical data element"
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "relationshipType": "Related",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
+  "description": "AccountNumber column maps to the PCI-DSS-regulated Customer Email critical data element",
+  "systemData": {
+    "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "lastModifiedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "createdAt": "2026-03-20T12:10:30.000Z",
+    "lastModifiedAt": "2026-03-20T12:10:30.000Z"
+  }
+}
+```
+
+#### **Step 5: Link the Data Asset to the "Payments Data Product"**
+
+```http
+POST /dataAssets/da001122-3344-5566-7788-99aabbccddee/relationships?entityType=DATAPRODUCT
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "entityId": "90013344-5566-7788-99aa-bbccddeeff00",
   "relationshipType": "Related",
   "description": "transactions_prod is an underlying table powering the Payments Data Product"
 }
@@ -651,7 +709,7 @@ Authorization: Bearer {token}
 **Expected Response** (200 OK):
 ```json
 {
-  "entityId": "dp-9001-3344-5566-7788-99aabbccddee",
+  "entityId": "90013344-5566-7788-99aa-bbccddeeff00",
   "relationshipType": "Related",
   "description": "transactions_prod is an underlying table powering the Payments Data Product",
   "systemData": {
