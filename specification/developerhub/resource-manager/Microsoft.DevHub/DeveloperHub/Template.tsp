@@ -13,6 +13,7 @@ namespace Microsoft.DevHub;
 /**
  * Resource representation of a Template
  */
+@summary("Template")
 @subscriptionResource
 model Template is Azure.ResourceManager.ProxyResource<TemplateProperties> {
   ...ResourceNameParameter<

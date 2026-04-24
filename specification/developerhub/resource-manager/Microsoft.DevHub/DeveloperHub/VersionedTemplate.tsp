@@ -14,6 +14,7 @@ namespace Microsoft.DevHub;
 /**
  * Resource representation of a VersionedTemplate
  */
+@summary("VersionedTemplate")
 @subscriptionResource
 @parentResource(Template)
 model VersionedTemplate

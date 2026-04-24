@@ -13,6 +13,7 @@ namespace Microsoft.DevHub;
 /**
  * Resource representation of a IacProfile.
  */
+@summary("IacProfile")
 model IacProfile
   is Azure.ResourceManager.TrackedResource<IacProfileProperties> {
   ...ResourceNameParameter<

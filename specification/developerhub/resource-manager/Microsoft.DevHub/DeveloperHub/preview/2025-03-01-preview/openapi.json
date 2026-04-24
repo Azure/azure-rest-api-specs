@@ -1607,6 +1607,7 @@
     },
     "ArtifactGenerationProperties": {
       "type": "object",
+      "title": "Artifact Generation Properties",
       "description": "Properties used for generating artifacts such as Dockerfiles and manifests.",
       "properties": {
         "generationLanguage": {
@@ -1803,6 +1804,7 @@
         },
         "overrides": {
           "type": "object",
+          "title": "Manifest override values.",
           "description": "Manifest override values.",
           "additionalProperties": {
             "type": "string"
@@ -1839,6 +1841,7 @@
       "properties": {
         "templateName": {
           "type": "string",
+          "title": "The name of the template.",
           "description": "Template Name"
         },
         "resourceGroupIds": {
@@ -2085,22 +2088,27 @@
       "properties": {
         "repositoryOwner": {
           "type": "string",
+          "title": "The owner of the repository the workflow is associated with.",
           "description": "Repository Owner"
         },
         "repositoryName": {
           "type": "string",
+          "title": "The name of the repository the workflow is associated with.",
           "description": "Repository Name"
         },
         "branchName": {
           "type": "string",
+          "title": "The name of the branch the workflow is associated with.",
           "description": "Repository Branch Name"
         },
         "dockerfile": {
           "type": "string",
+          "title": "Path to Dockerfile within the repository.",
           "description": "Path to the Dockerfile within the repository."
         },
         "dockerBuildContext": {
           "type": "string",
+          "title": "Path to Dockerfile Build Context within the repository.",
           "description": "Path to Dockerfile Build Context within the repository."
         },
         "deploymentProperties": {
@@ -2109,6 +2117,7 @@
         },
         "namespace": {
           "type": "string",
+          "title": "The Kubernetes namespace the application is deployed to",
           "description": "Kubernetes namespace the application is deployed to."
         },
         "acr": {
@@ -2121,6 +2130,7 @@
         },
         "aksResourceId": {
           "type": "string",
+          "title": "The Azure Kubernetes Managed Cluster resource.",
           "description": "The Azure Kubernetes Cluster Resource the application will be deployed to."
         },
         "prURL": {
@@ -2169,14 +2179,17 @@
       "properties": {
         "repositoryName": {
           "type": "string",
+          "title": "The name of the repository the IacProfile is associated with.",
           "description": "Repository Name"
         },
         "repositoryMainBranch": {
           "type": "string",
+          "title": "The name of the main branch of the repository the IacProfile is associated with.",
           "description": "Repository Main Branch"
         },
         "repositoryOwner": {
           "type": "string",
+          "title": "The owner of the repository the IacProfile is associated with.",
           "description": "Repository Owner"
         },
         "authStatus": {
@@ -2197,12 +2210,14 @@
         },
         "branchName": {
           "type": "string",
+          "title": "The name of the branch current operation is associated with.",
           "description": "Repository Branch Name"
         }
       }
     },
     "IacProfile": {
       "type": "object",
+      "title": "IacProfile",
       "description": "Resource representation of a IacProfile.",
       "properties": {
         "properties": {
@@ -2295,18 +2310,22 @@
       "properties": {
         "templateName": {
           "type": "string",
+          "title": "The name of the template.",
           "description": "Template Name"
         },
         "sourceResourceId": {
           "type": "string",
+          "title": "The source resource Id of the template.",
           "description": "the source store of the template"
         },
         "instanceStage": {
           "type": "string",
+          "title": "The sample instance stage of the template.",
           "description": "the source stage of the template"
         },
         "instanceName": {
           "type": "string",
+          "title": "The sample instance name of the template.",
           "description": "the sample instance name of the template"
         },
         "templateDetails": {
@@ -2396,10 +2415,12 @@
       "properties": {
         "name": {
           "type": "string",
+          "title": "Parameter name",
           "description": "The paramater name."
         },
         "description": {
           "type": "string",
+          "title": "Parameter description",
           "description": "Description of what the paramater is used for."
         },
         "parameterType": {
@@ -2414,6 +2435,7 @@
         },
         "required": {
           "type": "boolean",
+          "title": "Parameter required",
           "description": "Whether the parameter is required."
         },
         "default": {
@@ -2428,10 +2450,12 @@
       "properties": {
         "value": {
           "type": "string",
+          "title": "ParameterDefault value",
           "description": "The default value for this parameter."
         },
         "referenceParameter": {
           "type": "string",
+          "title": "ParameterDefault Reference Parameter",
           "description": "The Parameter to reference a value from."
         }
       }
@@ -2841,6 +2865,7 @@
       "properties": {
         "templateName": {
           "type": "string",
+          "title": "The name of the template.",
           "description": "Template Name"
         },
         "scaleRequirement": {
@@ -2857,6 +2882,7 @@
       "properties": {
         "stageName": {
           "type": "string",
+          "title": "The name of the stage.",
           "description": "Stage Name"
         },
         "dependencies": {
@@ -2885,6 +2911,7 @@
     },
     "Template": {
       "type": "object",
+      "title": "Template",
       "description": "Resource representation of a Template",
       "properties": {
         "properties": {
@@ -2925,14 +2952,17 @@
       "properties": {
         "templateName": {
           "type": "string",
+          "title": "Template Name",
           "description": "The name of the template."
         },
         "defaultVersion": {
           "type": "string",
+          "title": "Template Default Version",
           "description": "The default version of the template."
         },
         "versions": {
           "type": "array",
+          "title": "Template Versions",
           "description": "The valid versions of the template.",
           "items": {
             "type": "string"
@@ -2940,6 +2970,7 @@
         },
         "description": {
           "type": "string",
+          "title": "Template Description",
           "description": "Description of the template"
         },
         "templateType": {
@@ -3068,24 +3099,29 @@
       "properties": {
         "storageAccountSubscription": {
           "type": "string",
+          "title": "The subscription id of the storage account that save terraform state.",
           "description": "Terraform Storage Account Subscription"
         },
         "storageAccountResourceGroup": {
           "type": "string",
+          "title": "The resource group of the storage account that save terraform state.",
           "description": "Terraform Storage Account Resource Group"
         },
         "storageAccountName": {
           "type": "string",
+          "title": "The name of the storage account that save terraform state.",
           "description": "Terraform Storage Account Name"
         },
         "storageContainerName": {
           "type": "string",
+          "title": "The name of the container that save terraform state.",
           "description": "Terraform Container Name"
         }
       }
     },
     "VersionedTemplate": {
       "type": "object",
+      "title": "VersionedTemplate",
       "description": "Resource representation of a VersionedTemplate",
       "properties": {
         "properties": {
@@ -3126,6 +3162,7 @@
       "properties": {
         "version": {
           "type": "string",
+          "title": "Template Version",
           "description": "The version of the template."
         },
         "templateType": {
@@ -3135,6 +3172,7 @@
         },
         "parameters": {
           "type": "array",
+          "title": "Template Parameters",
           "description": "The template parameters.",
           "items": {
             "$ref": "#/definitions/Parameter"
@@ -3144,6 +3182,7 @@
     },
     "Workflow": {
       "type": "object",
+      "title": "Workflow",
       "description": "Resource representation of a workflow",
       "properties": {
         "properties": {

@@ -603,16 +603,19 @@ model IacGitHubProfile {
   /**
    * Repository Name
    */
+  @summary("The name of the repository the IacProfile is associated with.")
   repositoryName?: string;
 
   /**
    * Repository Main Branch
    */
+  @summary("The name of the main branch of the repository the IacProfile is associated with.")
   repositoryMainBranch?: string;
 
   /**
    * Repository Owner
    */
+  @summary("The owner of the repository the IacProfile is associated with.")
   repositoryOwner?: string;
 
   /**
@@ -636,6 +639,7 @@ model IacGitHubProfile {
   /**
    * Repository Branch Name
    */
+  @summary("The name of the branch current operation is associated with.")
   branchName?: string;
 }
 
@@ -646,21 +650,25 @@ model TerraformProfile {
   /**
    * Terraform Storage Account Subscription
    */
+  @summary("The subscription id of the storage account that save terraform state.")
   storageAccountSubscription?: string;
 
   /**
    * Terraform Storage Account Resource Group
    */
+  @summary("The resource group of the storage account that save terraform state.")
   storageAccountResourceGroup?: string;
 
   /**
    * Terraform Storage Account Name
    */
+  @summary("The name of the storage account that save terraform state.")
   storageAccountName?: string;
 
   /**
    * Terraform Container Name
    */
+  @summary("The name of the container that save terraform state.")
   storageContainerName?: string;
 }
 
@@ -671,6 +679,7 @@ model StageProperties {
   /**
    * Stage Name
    */
+  @summary("The name of the stage.")
   stageName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -686,21 +695,25 @@ model IacTemplateProperties {
   /**
    * Template Name
    */
+  @summary("The name of the template.")
   templateName?: string;
 
   /**
    * the source store of the template
    */
+  @summary("The source resource Id of the template.")
   sourceResourceId?: string;
 
   /**
    * the source stage of the template
    */
+  @summary("The sample instance stage of the template.")
   instanceStage?: string;
 
   /**
    * the sample instance name of the template
    */
+  @summary("The sample instance name of the template.")
   instanceName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -748,6 +761,7 @@ model ExportTemplateRequest {
   /**
    * Template Name
    */
+  @summary("The name of the template.")
   templateName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -773,6 +787,7 @@ model ScaleTemplateRequest {
   /**
    * Template Name
    */
+  @summary("The name of the template.")
   templateName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -913,26 +928,31 @@ model GitHubWorkflowProfile {
   /**
    * Repository Owner
    */
+  @summary("The owner of the repository the workflow is associated with.")
   repositoryOwner?: string;
 
   /**
    * Repository Name
    */
+  @summary("The name of the repository the workflow is associated with.")
   repositoryName?: string;
 
   /**
    * Repository Branch Name
    */
+  @summary("The name of the branch the workflow is associated with.")
   branchName?: string;
 
   /**
    * Path to the Dockerfile within the repository.
    */
+  @summary("Path to Dockerfile within the repository.")
   dockerfile?: string;
 
   /**
    * Path to Dockerfile Build Context within the repository.
    */
+  @summary("Path to Dockerfile Build Context within the repository.")
   dockerBuildContext?: string;
 
   /**
@@ -943,6 +963,7 @@ model GitHubWorkflowProfile {
   /**
    * Kubernetes namespace the application is deployed to.
    */
+  @summary("The Kubernetes namespace the application is deployed to")
   `namespace`?: string;
 
   /**
@@ -958,6 +979,7 @@ model GitHubWorkflowProfile {
   /**
    * The Azure Kubernetes Cluster Resource the application will be deployed to.
    */
+  @summary("The Azure Kubernetes Managed Cluster resource.")
   aksResourceId?: string;
 
   /**
@@ -1015,6 +1037,7 @@ model Deployment {
    * Manifest override values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Manifest override values.")
   overrides?: Record<string>;
 }
 
@@ -1091,6 +1114,7 @@ model WorkflowRun {
 /**
  * Properties used for generating artifacts such as Dockerfiles and manifests.
  */
+@summary("Artifact Generation Properties")
 model ArtifactGenerationProperties {
   /**
    * The programming language used.
@@ -1498,21 +1522,25 @@ model TemplateProperties {
   /**
    * The name of the template.
    */
+  @summary("Template Name")
   templateName?: string;
 
   /**
    * The default version of the template.
    */
+  @summary("Template Default Version")
   defaultVersion?: string;
 
   /**
    * The valid versions of the template.
    */
+  @summary("Template Versions")
   versions?: string[];
 
   /**
    * Description of the template
    */
+  @summary("Template Description")
   description?: string;
 
   /**
@@ -1530,6 +1558,7 @@ model VersionedTemplateProperties {
   /**
    * The version of the template.
    */
+  @summary("Template Version")
   version?: string;
 
   /**
@@ -1541,6 +1570,7 @@ model VersionedTemplateProperties {
   /**
    * The template parameters.
    */
+  @summary("Template Parameters")
   parameters?: Parameter[];
 }
 
@@ -1551,11 +1581,13 @@ model Parameter {
   /**
    * The paramater name.
    */
+  @summary("Parameter name")
   name?: string;
 
   /**
    * Description of what the paramater is used for.
    */
+  @summary("Parameter description")
   description?: string;
 
   /**
@@ -1573,6 +1605,7 @@ model Parameter {
   /**
    * Whether the parameter is required.
    */
+  @summary("Parameter required")
   required?: boolean;
 
   /**
@@ -1588,11 +1621,13 @@ model ParameterDefault {
   /**
    * The default value for this parameter.
    */
+  @summary("ParameterDefault value")
   value?: string;
 
   /**
    * The Parameter to reference a value from.
    */
+  @summary("ParameterDefault Reference Parameter")
   referenceParameter?: string;
 }
 

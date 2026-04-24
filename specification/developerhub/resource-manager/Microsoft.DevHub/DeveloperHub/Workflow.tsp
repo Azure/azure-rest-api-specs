@@ -13,6 +13,7 @@ namespace Microsoft.DevHub;
 /**
  * Resource representation of a workflow
  */
+@summary("Workflow")
 model Workflow is Azure.ResourceManager.TrackedResource<WorkflowProperties> {
   ...ResourceNameParameter<
     Resource = Workflow,
