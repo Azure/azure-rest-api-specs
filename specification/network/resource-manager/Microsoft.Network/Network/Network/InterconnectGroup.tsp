@@ -84,13 +84,13 @@ interface InterconnectGroups {
   /**
    * Creates or updates an interconnect group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     InterconnectGroup,
     Error = CloudError
   >;
 
   /**
-   * Updates an interconnect group tags.
+   * Updates interconnect group tags.
    */
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -132,7 +132,7 @@ interface InterconnectGroups {
 @armResourceOperations
 interface Subgroups {
   /**
-   * Gets the specified subgroup by interconnect group.
+   * Gets the specified subgroup in an interconnect group.
    */
   get is ArmResourceRead<Subgroup, Error = CloudError>;
 

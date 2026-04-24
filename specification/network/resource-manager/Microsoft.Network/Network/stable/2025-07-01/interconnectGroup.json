@@ -219,17 +219,6 @@
             "description": "Resource 'InterconnectGroup' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/InterconnectGroup"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -243,19 +232,14 @@
           "Create interconnect group": {
             "$ref": "./examples/InterconnectGroupCreate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/InterconnectGroup"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "InterconnectGroups_UpdateTags",
         "tags": [
           "InterconnectGroups"
         ],
-        "description": "Updates an interconnect group tags.",
+        "description": "Updates interconnect group tags.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -472,7 +456,7 @@
         "tags": [
           "Subgroups"
         ],
-        "description": "Gets the specified subgroup by interconnect group.",
+        "description": "Gets the specified subgroup in an interconnect group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -566,9 +550,9 @@
     },
     "InterconnectGroupNodeAvailability": {
       "type": "object",
-      "description": "Represents node availability information for all subgroups within an InterconnectGroup.",
+      "description": "Represents node availability information for subgroups within an interconnect group.",
       "properties": {
-        "subgroups": {
+        "subgroupsNodeAvailability": {
           "type": "array",
           "description": "The list of subgroup node availability entries.",
           "items": {
@@ -659,7 +643,7 @@
         },
         "internalSubgroupId": {
           "type": "string",
-          "description": "The internal subgroup identifier assigned by downstream services."
+          "description": "The unique identifier of the subgroup."
         },
         "inServiceNodeCount": {
           "type": "integer",
@@ -684,16 +668,16 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "description": "VM size of the subgroup profile of the interconnect group resource."
+          "description": "VM size of the subgroup profile."
         },
         "scope": {
           "$ref": "./common.json#/definitions/SubgroupProfileScope",
-          "description": "Scope of the subgroup profile of the interconnect group resource."
+          "description": "Scope of the subgroup profile."
         },
         "size": {
           "type": "integer",
           "format": "int32",
-          "description": "Size of the subgroup profile of the interconnect group resource.",
+          "description": "Size of the subgroup profile.",
           "minimum": 0
         }
       },
@@ -707,7 +691,7 @@
       "properties": {
         "internalSubgroupId": {
           "type": "string",
-          "description": "The unique identifier defined by downstream services.",
+          "description": "The unique identifier of the subgroup.",
           "readOnly": true
         },
         "interconnectBlock": {

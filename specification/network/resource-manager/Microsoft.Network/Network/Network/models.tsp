@@ -26114,7 +26114,7 @@ union SubgroupProfileScope {
   /** No subgroup profile scope. */
   None: "None",
 
-  /** High-bandwidth, low-latency inter-subgroup communication. */
+  /** VerticalConnect subgroup profile scope. */
   VerticalConnect: "VerticalConnect",
 }
 
@@ -26125,13 +26125,13 @@ union SubgroupProfileScope {
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model SubgroupProfile {
-  /** VM size of the subgroup profile of the interconnect group resource. */
+  /** VM size of the subgroup profile. */
   vmSize: string;
 
-  /** Scope of the subgroup profile of the interconnect group resource. */
+  /** Scope of the subgroup profile. */
   scope?: SubgroupProfileScope;
 
-  /** Size of the subgroup profile of the interconnect group resource. */
+  /** Size of the subgroup profile. */
   @minValue(0)
   size?: int32;
 }
@@ -26169,7 +26169,7 @@ model InterconnectGroupPropertiesFormat {
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model SubgroupProperties {
-  /** The unique identifier defined by downstream services. */
+  /** The unique identifier of the subgroup. */
   @visibility(Lifecycle.Read)
   internalSubgroupId?: string;
 
@@ -26187,14 +26187,14 @@ model SubgroupProperties {
 }
 
 /**
- * Represents node availability information for all subgroups within an InterconnectGroup.
+ * Represents node availability information for subgroups within an interconnect group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
 @added(Versions.v2025_07_01)
 model InterconnectGroupNodeAvailability {
   /** The list of subgroup node availability entries. */
-  subgroups?: SubgroupNodeAvailabilityEntry[];
+  subgroupsNodeAvailability?: SubgroupNodeAvailabilityEntry[];
 }
 
 /**
@@ -26207,7 +26207,7 @@ model SubgroupNodeAvailabilityEntry {
   /** The subgroup name. */
   name?: string;
 
-  /** The internal subgroup identifier assigned by downstream services. */
+  /** The unique identifier of the subgroup. */
   internalSubgroupId?: string;
 
   /** The number of nodes that are in service. */
