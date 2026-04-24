@@ -1504,7 +1504,7 @@ model AccountProperties {
   /**
    * Resource migration token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'migrationToken' is correctly marked as secret matching service-side security handling"
+  @secret
   migrationToken?: string;
 
   /**
@@ -1906,7 +1906,7 @@ model ApiProperties {
   /**
    * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'qnaAzureSearchEndpointKey' is correctly marked as secret matching service-side security handling"
+  @secret
   qnaAzureSearchEndpointKey?: string;
 
   /**
