@@ -3,31 +3,14 @@
 ## Getting Started
 
 1. Create a new skill:
-
-   ```bash
-    waza new skill my-skill
-   ```
+   - Create `skills/my-skill/SKILL.md` with your skill definition
 
 2. Edit your skill:
    - Update `skills/my-skill/SKILL.md` with your skill definition
-   - Customize eval tasks in `evals/my-skill/tasks/`
+   - Customize eval stimuli in `evals/my-skill/evaluate/`
    - Add test fixtures to `evals/my-skill/fixtures/`
 
-3. Run evaluations:
-
-   ```bash
-   waza run                    # run all evals
-   waza run my-skill           # run one skill's evals
-   ```
-
-4. Check compliance:
-
-   ```bash
-   waza check                  # check all skills
-   waza dev my-skill           # improve with real-time scoring
-   ```
-
-5. Push to trigger CI:
+3. Push to trigger CI:
 
    ```bash
    git push
@@ -53,70 +36,56 @@ instruction files:
 - [`instructions/openapi-review.instructions.md`](../instructions/openapi-review.instructions.md) -- generic OpenAPI rules
 - [`instructions/typespec-review.instructions.md`](../instructions/typespec-review.instructions.md) -- TypeSpec rules
 
-### Installing waza
+### Installing evaluate (vally)
 
-Install the [waza](https://github.com/microsoft/waza) CLI
-(requires Go 1.26+ for source builds, or download a pre-built binary):
+Clone [microsoft/evaluate](https://github.com/microsoft/evaluate), then
+install and build:
 
 ```bash
-# Binary install (Linux/macOS)
-curl -fsSL https://raw.githubusercontent.com/microsoft/waza/main/install.sh | bash
-
-# Binary install (Windows) -- download from GitHub releases
-# https://github.com/microsoft/waza/releases/latest
-
-# Verify installation
-waza --version
+git clone https://github.com/microsoft/evaluate.git
+cd evaluate
+npm install && npm run build
 ```
 
 ### Running the ARM API Reviewer evals
 
-From the `.github/skills/` directory:
+From the `.github/skills/evals/arm-api-reviewer/` directory:
 
 ```bash
-# Run all ARM API Reviewer eval tasks
-waza run evals/arm-api-reviewer/eval.yaml -v
+# Run a single eval category
+npx --prefix /path/to/evaluate vally eval -e evaluate/eval-arm-resource-structure.yaml --verbose
 
-# Run a single task by name pattern
-waza run evals/arm-api-reviewer/eval.yaml --task "020001*" -v
+# Run all eval categories
+for f in evaluate/eval-*.yaml; do
+  npx --prefix /path/to/evaluate vally eval -e "$f" --verbose
+done
 
-# Run tasks filtered by tag
-waza run evals/arm-api-reviewer/eval.yaml --tags "security" -v
-
-# Save results to a JSON file
-waza run evals/arm-api-reviewer/eval.yaml -v -o results/arm-reviewer-results.json
-
-# Check skill readiness
-waza check skills/azure-api-review
+# Save results to a directory (includes results.jsonl + eval-results.md)
+npx --prefix /path/to/evaluate vally eval \
+  -e evaluate/eval-arm-resource-structure.yaml \
+  --output-dir ./results --verbose
 ```
+
+Replace `/path/to/evaluate` with the path to your local clone of
+`microsoft/evaluate`. See the
+[evaluate documentation](https://github.com/microsoft/evaluate) for additional
+options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
 
 ### Eval suite structure
 
 ```text
 evals/arm-api-reviewer/
-  eval.yaml                          # Eval config (metrics, graders, task list)
-  tasks/
-    010001-missing-crud-ops.yaml     # ARM resource structure & CRUD
-    010002-missing-provisioning-state.yaml
-    020001-secret-property.yaml      # Property design (secrets)
-    020002-naming-violations.yaml    # Naming conventions
-    020003-missing-descriptions.yaml # Missing descriptions
-    020004-enum-violations.yaml      # Enum best practices
-    030001-patch-violations.yaml     # PATCH body violations
-    030002-put-response-mismatch.yaml# PUT 200/201 schema mismatch
-    030003-delete-violations.yaml    # DELETE response violations
-    030004-lro-violations.yaml       # LRO pattern violations
-    040001-breaking-removed-property.yaml  # Breaking changes
-    040002-breaking-type-change.yaml
-    040003-breaking-enum-narrowing.yaml
-    050001-suppression-no-reason.yaml      # Suppression analysis
-    050002-suppression-security-rule.yaml
-    060001-example-bad-resource-id.yaml    # Example file validation
-    060002-example-realistic-secret.yaml
-    090001-clean-arm-spec.yaml       # True negatives (false positive resistance)
-    090002-clean-example.yaml
-    100001-new-vs-existing-classification.yaml  # NEW vs EXISTING tagging
-    110001-report-format-structure.yaml    # Report format validation
+  .vally.yaml                        # Vally project config (skill discovery, eval paths)
+  evaluate/
+    eval-arm-resource-structure.yaml  # ARM resource structure & CRUD (01xxxx)
+    eval-property-design.yaml         # Property design (02xxxx)
+    eval-operations.yaml              # PATCH / PUT / DELETE / LRO (03xxxx)
+    eval-breaking-changes.yaml        # Breaking changes (04xxxx)
+    eval-suppressions.yaml            # Suppression analysis (05xxxx)
+    eval-examples.yaml                # Example file validation (06xxxx)
+    eval-true-negatives.yaml          # True negatives (09xxxx)
+    eval-classification.yaml          # NEW vs EXISTING tagging (10xxxx)
+    eval-report-format.yaml           # Report format validation (11xxxx)
   fixtures/
     arm-openapi/           # ARM OpenAPI JSON specs with seeded violations
     examples/              # Example JSON files (valid and invalid)
@@ -124,9 +93,9 @@ evals/arm-api-reviewer/
     version-pairs/         # Previous/current version pairs for breaking change tests
 ```
 
-### Task naming convention
+### Test category naming convention
 
-Tasks follow a `{category}{number}-{description}.yaml` pattern:
+Tests follow a `{category}{number}-{description}` pattern:
 
 | Prefix   | Category                                                  |
 | -------- | --------------------------------------------------------- |
@@ -140,38 +109,6 @@ Tasks follow a `{category}{number}-{description}.yaml` pattern:
 | `10xxxx` | New vs. existing classification                           |
 | `11xxxx` | Report format & output structure                          |
 
-### Metrics and thresholds
-
-The eval suite measures four metrics (defined in `eval.yaml`):
-
-| Metric                    | Weight | Threshold | Description                              |
-| ------------------------- | ------ | --------- | ---------------------------------------- |
-| `issue_detection`         | 0.40   | 0.80      | Detects all known violations in fixtures |
-| `false_positive_rate`     | 0.30   | 0.85      | Avoids flagging compliant specs          |
-| `classification_accuracy` | 0.15   | 0.80      | Correctly tags [NEW] vs [EXISTING]       |
-| `report_format`           | 0.15   | 0.90      | Output follows required report structure |
-
-### Shared prompt templates
-
-Common review prompts are defined once in `eval.yaml` under `inputs`
-and referenced by tasks via `{{.Vars.<key>}}`. This avoids duplicating
-the same prompt across many task files.
-
-| Variable                 | Used by                        | Prompt summary                                           |
-| ------------------------ | ------------------------------ | -------------------------------------------------------- |
-| `review_arm_new_service` | 01xxxx, 02xxxx, 03xxxx, 09xxxx | Standard ARM spec review (new service, no prior version) |
-| `review_example_get`     | 060001, 090002                 | Example file review for GET operations                   |
-
-Tasks with specialized prompts (e.g., secret focus, breaking-change
-comparison, classification) keep their prompts inline.
-
-### Judge model
-
-The LLM used for prompt-based grading is set once via
-`config.judge_model` in `eval.yaml`. Individual task graders inherit
-this setting automatically -- do **not** add `model:` to task-level
-grader configs.
-
 ### Adding a new test case
 
 1. **Create a fixture** under `fixtures/` with a seeded violation (or
@@ -180,17 +117,18 @@ grader configs.
    `example-clean.json` for example files. Each fixture should be
    self-contained (inline definitions, standard security block, and
    parameter refs at the bottom).
-2. **Create a task YAML** under `tasks/` following the naming convention. Include:
-   - `inputs.prompt` -- use a shared prompt template from `eval.yaml` `inputs`
-     when possible (e.g., `"{{.Vars.review_arm_new_service}}"`), or write a
-     custom prompt inline for specialized tasks.
-   - `inputs.files` -- paths to fixture files (relative to `fixtures/`)
-   - `expected.output_contains` -- rule IDs or keywords the agent must mention
-   - `graders` -- a `prompt`-type grader for nuanced verification. The judge
-     model is set globally via `config.judge_model` in `eval.yaml`; do **not**
-     add `model:` to individual task graders.
-3. **Add the task** to the `tasks:` list in `eval.yaml`.
-4. **Run the task**: `waza run evals/arm-api-reviewer/eval.yaml --task "your-task-id" -v`
+2. **Add the fixture to `environment.files`** in the appropriate eval
+   YAML under `evaluate/`.
+3. **Add a stimulus** to the eval YAML with:
+   - `name` -- short descriptive identifier
+   - `prompt` -- the review prompt referencing the fixture file path
+   - `constraints.expect_skills` -- `[azure-api-review]`
+   - `graders` -- `output-contains`, `output-matches`, and/or `prompt`
+   - `rubric` -- list of criteria for the prompt grader
+4. **Run the eval**:
+   ```bash
+   npx --prefix /path/to/evaluate vally eval -e evaluate/eval-<category>.yaml --verbose
+   ```
 
 ### Gating changes
 
@@ -201,9 +139,7 @@ Changes to any of these files should pass the eval suite before merging:
 - `.github/skills/azure-api-review/**`
 - `.github/skills/evals/arm-api-reviewer/**`
 
-Use `waza run evals/arm-api-reviewer/eval.yaml` locally before
-pushing. Exit code 0 means all tasks passed; exit code 1 means one or
-more tasks failed.
+Run all eval categories locally before pushing and verify no regressions.
 
 ### Submitting changes
 
@@ -211,78 +147,24 @@ When proposing changes to the agent, instruction files, or shared
 skill, include a test report so reviewers can verify quality:
 
 ```bash
-# Generate JSON results and JUnit XML report
-waza run evals/arm-api-reviewer/eval.yaml -v \
-  -o results/arm-api-reviewer-run.json \
-  --reporter junit:results/arm-api-reviewer-run.xml
+# Run all evals and save results
+for f in evaluate/eval-*.yaml; do
+  npx --prefix /path/to/evaluate vally eval -e "$f" --verbose \
+    --output-dir ./results
+done
 ```
 
 Attach the following to your PR description or as a comment:
 
-1. **Console summary** -- copy the `BENCHMARK RESULTS` block from the
-   terminal output (success rate, aggregate score, per-task breakdown).
-2. **JSON results** (`results/arm-api-reviewer-run.json`) -- upload as
-   a PR comment attachment or paste the summary section. Reviewers can
-   use `waza compare` to diff against a baseline run.
-3. **Failure details** -- for any failed tasks, include the grader
+1. **Console summary** -- copy the results summary from the terminal
+   output (success rate, per-stimulus breakdown).
+2. **Results files** (`results/`) -- upload as a PR comment attachment
+   or paste the summary section.
+3. **Failure details** -- for any failed stimuli, include the grader
    output explaining what was missed or incorrectly flagged.
 
 Reviewers should verify:
 
 - Success rate has not regressed from the previous baseline.
-- No previously passing tasks now fail (regressions).
-- New tasks (if added) pass consistently.
-- The aggregate score meets or exceeds the metric thresholds defined
-  in `eval.yaml`.
-
-<details>
-<summary>Example report (click to expand)</summary>
-
-<!-- This is a representative report from the initial eval suite run.
-     Actual numbers may vary slightly between runs due to LLM
-     non-determinism. -->
-
-```text
-===================================================
- BENCHMARK RESULTS
-===================================================
-
-Total Tests:    21
-Succeeded:      20
-Failed:         1
-Errors:         0
-Success Rate:   95.2%
-Aggregate Score: 0.95
-Duration:       22m10s
-
----------------------------------------------------
- PER-TASK BREAKDOWN
----------------------------------------------------
-  ✓ ARM: Detect missing CRUD operations          avg=1.00
-  ✓ ARM: Detect missing provisioningState         avg=1.00
-  ✓ Property: Detect secret properties            avg=1.00
-  ✓ Property: Detect naming convention violations avg=1.00
-  ✓ Property: Detect missing descriptions         avg=1.00
-  ✓ Property: Detect enum violations              avg=1.00
-  ✓ Operations: Detect PATCH body violations      avg=1.00
-  ✓ Operations: Detect PUT 200/201 mismatch       avg=1.00
-  ✓ Operations: Detect DELETE response violations avg=1.00
-  ✓ Operations: Detect LRO pattern violations     avg=1.00
-  ✓ Breaking: Detect removed property             avg=1.00
-  ✓ Breaking: Detect property type change         avg=1.00
-  ✓ Breaking: Detect enum value narrowing         avg=1.00
-  ✓ Suppression: Detect suppressions w/o reason   avg=1.00
-  ✓ Suppression: Detect security rule suppress.   avg=1.00
-  ✓ Example: Detect invalid resource ID           avg=1.00
-  ✓ Example: Detect realistic secrets             avg=1.00
-  ✓ True Negative: Clean ARM spec                 avg=1.00
-  ✓ True Negative: Clean example file             avg=1.00
-  ✓ Classification: NEW vs EXISTING               avg=1.00
-  ✗ Format: Verify report structure               avg=0.00
-
-Failed Tests:
-  - Format: Verify report structure
-    error: transient copilot-sdk execution error
-```
-
-</details>
+- No previously passing stimuli now fail (regressions).
+- New stimuli (if added) pass consistently.

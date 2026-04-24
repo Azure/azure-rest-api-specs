@@ -1,19 +1,13 @@
 # ARM API Reviewer — Evaluation Suite
 
-Evaluation tests for the **ARM API Reviewer** agent. Tests are available in two
-frameworks — [waza](https://github.com/microsoft/waza) and
-[evaluate](https://github.com/microsoft/evaluate) (vally). Both frameworks
-share the same `fixtures/` directory; choose whichever fits your toolchain.
+Evaluation tests for the **ARM API Reviewer** agent using the
+[evaluate](https://github.com/microsoft/evaluate) (vally) framework.
 
 ## Directory Structure
 
 ```
 arm-api-reviewer/
 ├── .vally.yaml            # Vally project config (skill discovery, eval paths)
-├── eval.yaml              # Waza eval config
-├── tasks/                 # Waza task definitions (21 files)
-│   ├── 010001-missing-crud-ops.yaml
-│   └── ...
 ├── evaluate/              # Evaluate (vally) eval definitions (9 files)
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
@@ -24,16 +18,15 @@ arm-api-reviewer/
 │   ├── eval-true-negatives.yaml
 │   ├── eval-classification.yaml
 │   └── eval-report-format.yaml
-├── fixtures/              # Shared test fixtures (24 files)
+├── fixtures/              # Test fixtures (24 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
 │   └── version-pairs/     # Version pairs for breaking change detection
-├── README.md              # This file
-└── .vally.yaml            # Vally project config
+└── README.md              # This file
 ```
 
-## Test Categories (21 test cases)
+## Test Categories (21 test cases across 9 eval files)
 
 | ID     | Category                | Count | Description                                           |
 | ------ | ----------------------- | ----- | ----------------------------------------------------- |
@@ -47,29 +40,14 @@ arm-api-reviewer/
 | 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                         |
 | 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output             |
 
-## Fixtures (shared)
+## Fixtures
 
-All 24 fixture files live in `fixtures/` and are referenced by both frameworks:
+All 24 fixture files live in `fixtures/`:
 
 - **11 ARM OpenAPI specs** in `arm-openapi/` — 1 clean + 10 with seeded violations
 - **3 example JSON files** in `examples/` — 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` — suppression scenarios
 - **8 version-pair files** in `version-pairs/` — 4 pairs for breaking change detection
-
-## Running with Waza
-
-Prerequisites: Install [waza](https://github.com/microsoft/waza) (Go CLI or
-azd extension).
-
-```bash
-# From the repo root
-cd .github/skills
-waza run evals/arm-api-reviewer/eval.yaml -v
-```
-
-The `.waza.yaml` at `.github/skills/` configures skill discovery and defaults.
-See the [waza documentation](https://github.com/microsoft/waza) for additional
-options (`--parallel`, `--task`, `--model`, etc.).
 
 ## Running with Evaluate (vally)
 
@@ -78,7 +56,7 @@ then `npm install && npm run build`.
 
 The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
 auto-discovery (via `paths.skills`) and eval file location. Skills are discovered
-automatically -- individual eval files do not need to declare `environment.skills`.
+automatically — individual eval files do not need to declare `environment.skills`.
 
 ```bash
 # Run a single category
@@ -103,15 +81,6 @@ options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
 
 ## Grader Types
 
-### Waza
-
-| Grader             | Purpose                                                         |
-| ------------------ | --------------------------------------------------------------- |
-| `skill_invocation` | Verify the `azure-api-review` skill is invoked (in `eval.yaml`) |
-| `prompt`           | LLM-as-judge evaluation of agent output against a rubric        |
-
-### Evaluate (vally)
-
 | Grader               | Purpose                                                           |
 | -------------------- | ----------------------------------------------------------------- |
 | `output-contains`    | Substring match on agent output (keywords, rule IDs)              |
@@ -128,20 +97,16 @@ When submitting a PR that modifies the ARM API Reviewer agent, its instruction
 files, or the `azure-api-review` skill, run the eval suite and include the
 results in your PR description or as a comment:
 
-1. Run the eval suite with your chosen framework (see commands above).
-2. Attach the output file to your PR:
-   - **Waza**: Attach the JSON results file produced by `waza run ... -o results.json`.
-   - **Vally**: Attach the `results.jsonl` and/or `eval-results.md` from the
-     `--output-dir` directory.
+1. Run the eval suite (see commands above).
+2. Attach the `results.jsonl` and/or `eval-results.md` from the
+   `--output-dir` directory to your PR.
 3. Summarize pass/fail counts in the PR description so reviewers can quickly
    assess the impact of your changes.
 
 ## Adding New Tests
 
 1. **Add a fixture** in `fixtures/` (or reuse an existing one).
-2. **Waza**: Create a task YAML in `tasks/` and add it to the `tasks:` list in
-   `eval.yaml`.
-3. **Vally**: Add a `stimulus` entry in the appropriate `evaluate/eval-*.yaml`
+2. Add a `stimulus` entry in the appropriate `evaluate/eval-*.yaml`
    file. Include `rubric` criteria for the `prompt` grader.
-4. Follow the naming convention: `{category}{sequence}-{description}`.
-5. Run both frameworks to verify the new test works before submitting.
+3. Follow the naming convention: `{category}{sequence}-{description}`.
+4. Run the eval to verify the new test works before submitting.
