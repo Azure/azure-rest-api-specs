@@ -366,3 +366,26 @@ model ResourcePatchRequestInput {
 );
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
+@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+  "IsPasswordAuthenticationDisabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+  "IsVmAgentPlatformUpdatesEnabled",
+  "csharp"
+);
+@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+  "IsAutomaticUpdatesEnabled",
+  "csharp"
+);
+@@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(OSDisk.osType, "OSType", "csharp");
+@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+  "OSImageNotificationProfile",
+  "csharp"
+);
+
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
