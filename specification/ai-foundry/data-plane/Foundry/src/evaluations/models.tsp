@@ -218,7 +218,6 @@ model AssistantMessage extends Message {
 }
 
 @doc("The level at which evaluation is performed.")
-@removed(Versions.v1)
 union EvaluationLevel {
   @doc("Evaluation is performed at the turn level.")
   turn: "turn",

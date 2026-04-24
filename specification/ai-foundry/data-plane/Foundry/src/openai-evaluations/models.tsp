@@ -201,7 +201,6 @@ union ItemGenerationParamsType {
   syntheticDataGeneration: "synthetic_data_gen_preview",
 
   /** Parameters for conversation simulation item generation. */
-  @removed(Versions.v1)
   conversationGenPreview: "conversation_gen_preview",
 }
 
@@ -352,7 +351,6 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   trace_ids?: string[];
 
   /** Collection of conversation identifiers to filter traces by conversation. */
-  @removed(Versions.v1)
   conversation_ids?: string[];
 
   /** The agent ID used to filter traces for evaluation. */
@@ -485,7 +483,6 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
 }
 
 /** Represents the parameters for conversation simulation item generation. */
-@removed(Versions.v1)
 model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `conversation_gen_preview`. */
   type: ItemGenerationParamsType.conversationGenPreview;
@@ -506,7 +503,6 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
 }
 
 /** Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent. */
-@removed(Versions.v1)
 model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_conversation_simulation_preview`. */
   type: "azure_ai_conversation_simulation_preview";
@@ -590,7 +586,6 @@ model EvalRun is OpenAI.EvalRun {
   properties?: Record<string>;
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
-  @removed(Versions.v1)
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
@@ -613,7 +608,6 @@ model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
   properties?: Record<string>;
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
-  @removed(Versions.v1)
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
