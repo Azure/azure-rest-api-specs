@@ -48,6 +48,7 @@ using SecurityStandardsAPI;
 using ComplianceResultsAPI;
 using HealthReportsAPI;
 using LegacySettingsAPI;
+using SqlVulnerabilityAssessmentsAPI;
 
 @client({
   name: "SecurityManagementClient",
@@ -427,4 +428,87 @@ op privateLinkResourcesGetCustomization(
 );
 @@Azure.ClientGenerator.Core.alternateType(ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
   "default"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlVulnerabilityAssessmentScansGet(
+  ...ApiVersionParameter,
+
+  @path
+  providerNamespace: "Microsoft.Security",
+
+  @path
+  sqlVulnerabilityAssessment: "default",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  scanId: string,
+
+  @query
+  databaseName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceId: string,
+): ArmResponse<ScanV2>;
+
+@@override(ScanV2s.get, sqlVulnerabilityAssessmentScansGet);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlVulnerabilityAssessmentScanResultsList(
+  ...ApiVersionParameter,
+
+  @path
+  providerNamespace: "Microsoft.Security",
+
+  @path
+  sqlVulnerabilityAssessment: "default",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  scanId: string,
+
+  @query
+  databaseName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceId: string,
+): ArmResponse<ScanResults>;
+
+@@override(SqlVulnerabilityAssessmentScanResults.list,
+  sqlVulnerabilityAssessmentScanResultsList
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlVulnerabilityAssessmentScanResultsGet(
+  ...ApiVersionParameter,
+
+  @path
+  providerNamespace: "Microsoft.Security",
+
+  @path
+  sqlVulnerabilityAssessment: "default",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  scanId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  scanResultId: string,
+
+  @query
+  databaseName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceId: string,
+): ArmResponse<ScanResult>;
+
+@@override(SqlVulnerabilityAssessmentScanResults.get,
+  sqlVulnerabilityAssessmentScanResultsGet
 );
