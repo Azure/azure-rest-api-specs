@@ -253,12 +253,19 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(AfdUrlSigningAction, "FrontDoorUrlSigningAction", "csharp");
-// AfdCipherSuiteSetType: Cannot rename — used as property type on generated
-// class FrontDoorCustomDomainHttpsContent.CipherSuiteSetType, renaming causes
-// unfixable ApiCompat break (property type change on generated class).
-// AfdCustomizedCipherSuiteForTls12/13: Cannot rename — these are inline union
-// types, the generator references them by original name in serialization code
-// and FrontDoorCustomDomainHttpsCustomizedCipherSuiteSet properties.
+// AfdCipherSuiteSetType / AfdCustomizedCipherSuiteForTls12 / AfdCustomizedCipherSuiteForTls13:
+// These type names cannot be renamed — they are inline union types referenced by
+// original name in generated serialization code and as property types on generated
+// classes (FrontDoorCustomDomainHttpsContent.CipherSuiteSetType,
+// FrontDoorCustomDomainHttpsCustomizedCipherSuiteSet properties). Renaming causes an
+// unfixable ApiCompat break.
+// The generator-produced member names (e.g. TLS102019, DHERSAAES128GCMSHA256,
+// TLSAES128GCMSHA256) duplicate the underscored names that shipped in v1.5.1
+// (Tls1_0_2019, Dhe_Rsa_Aes128_Gcm_Sha256, Tls_Aes_128_Gcm_Sha256). The C# name
+// sanitizer strips underscores between digits/letters, so @@clientName cannot
+// produce the underscored form. Instead, the duplicated generator-produced
+// members are suppressed via [CodeGenSuppress] in the SDK customization, and the
+// underscored members are re-introduced there to preserve the v1.5.1 API surface.
 @@clientName(CustomRuleAfd, "CustomRuleFrontDoor", "csharp");
 @@clientName(ManagedRuleGroupOverrideAfd,
   "ManagedRuleGroupOverrideFrontDoor",
@@ -311,7 +318,7 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(KnowledgeSourceProvisioningState,
-  "WebAgentKnowledgeSourceProvisioningState",
+  "CdnWebAgentKnowledgeSourceProvisioningState",
   "csharp"
 );
 @@clientName(KnowledgeSourceType, "WebAgentKnowledgeSourceType", "csharp");
