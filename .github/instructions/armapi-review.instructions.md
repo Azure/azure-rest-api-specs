@@ -69,7 +69,7 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
   /providers/Microsoft.{Namespace}/operations
   ```
 - This GET operation **MUST** return an `OperationListResult` with `x-ms-pageable` and a `nextLinkName`.
-- The operations list **MUST** use the common-types `OperationListResult` and `Operation` definitions. Do not define custom Operation types.
+- The operations list **SHOULD** use the common-types `OperationListResult` and `Operation` definitions. If defined inline, they must include the same fields as common-types (`name`, `display`, `isDataAction` for `Operation`; `value` array and `nextLink` for `OperationListResult`).
 - If the operations endpoint is missing from the spec, flag it as an ARM Error.
 - The operations API endpoint **MUST** be scoped at the tenant level only (`/providers/Microsoft.{Namespace}/operations`). Operations **MUST NOT** vary per subscription — do not define the operations API under `/subscriptions/{subscriptionId}/...` (RPC-Operations-V1-02).
   (Also enforced by: `OperationsApiTenantLevelOnly` linter rule)
@@ -172,11 +172,11 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 - Singleton and constrained-collection resource names **MUST** be represented as an **enum path parameter** with `x-ms-enum` and `modelAsString: true` -- not as a static literal in the URI path. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the correct pattern (RPC-ConstrainedCollections-V1-04).
   (Also enforced by: `ReservedResourceNamesModelAsEnum` linter rule -- warning level)
 
-### 2.8 Common Type Definitions Must Be Used
+### 2.8 Common Type Definitions Should Be Used
 
-- **Do not define custom types for `Operation`, `OperationListResult`, `ErrorResponse`, `CloudError`, or `ErrorDetail`**. These **MUST** be referenced from the ARM common types (`common-types/resource-management/vX/types.json`).
-- Private endpoint connection types (`PrivateEndpointConnection`, `PrivateLinkResource`, etc.) **MUST** also come from common types unless the service has a documented exception. If defining them locally, they must be in a dedicated file (e.g. `privateEndpointConnections.json`) and must exactly match the common-types schema.
-- Flag any custom re-definition of these types as an ARM Error.
+- Standard types (`Operation`, `OperationListResult`, `ErrorResponse`, `CloudError`, `ErrorDetail`) **SHOULD** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). If a spec defines them inline with the correct shape (all required fields, readOnly annotations, and descriptions), flag it as a **non-blocking suggestion** to use `$ref` -- not as a blocking violation.
+- Private endpoint connection types (`PrivateEndpointConnection`, `PrivateLinkResource`, etc.) **SHOULD** also come from common types unless the service has a documented exception. If defining them locally, they must be in a dedicated file (e.g. `privateEndpointConnections.json`) and must match the common-types schema.
+- Only flag as a blocking error if the inline definition is **missing required fields** or has an **incompatible shape** compared to common-types.
 
 ---
 
@@ -938,7 +938,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Proxy resources use `ProxyResource` base type (not `Resource`); proxy resources do NOT have `tags`
 - ✅ Extension resources use the correct scope pattern; extension resources are always proxy (never tracked) (RPC-Uri-V1-12)
 - ✅ No duplicate paths when using `{scope}` parameter -- no explicitly-scoped duplicates (RPC-Uri-V1-10)
-- ✅ Operations API endpoint exists using common-types `OperationListResult` and `Operation` definitions (RPC-Operations-V1)
+- ✅ Operations API endpoint exists with `OperationListResult` and `Operation` definitions (preferably from common-types; inline equivalent is acceptable) (RPC-Operations-V1)
 - ✅ Operations API is tenant-scoped only -- not per-subscription (RPC-Operations-V1-02)
 - ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
 
@@ -955,7 +955,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `zones`, `sku`, `kind`, `plan`, `identity`, `tags` are top-level properties (not inside `properties`)
 - ✅ `sku` follows standard schema (`name`, `tier`, `size`, `family`, `capacity`); internal SKU link API not in public swagger
 - ✅ Non-ARM-envelope properties are inside the `properties` bag
-- ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions
+- ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions (recommended) or correctly-shaped inline equivalents
 - ✅ Every resource type has a point GET; singleton resources named "default" using enum path parameters (RPC-ConstrainedCollections-V1-04)
 - ✅ `x-ms-azure-resource: true` only on top-level resource models, not nested models
 - ✅ PUT request and response schemas are identical; PUT response matches GET and PATCH (RPC-Put-V1-12, RPC-Put-V1-25)
