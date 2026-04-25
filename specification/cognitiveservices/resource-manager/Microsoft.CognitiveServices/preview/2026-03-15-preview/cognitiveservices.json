@@ -3786,6 +3786,64 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/evaluateDeploymentPolicies": {
+      "post": {
+        "operationId": "Accounts_EvaluateDeploymentPolicies",
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "description": "Evaluate Azure Policy compliance for a set of hypothetical deployments without creating them.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluateDeploymentPoliciesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EvaluateDeploymentPoliciesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluateDeploymentPolicies": {
+            "$ref": "./examples/EvaluateDeploymentPolicies.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/listKeys": {
       "post": {
         "operationId": "Accounts_ListKeys",
@@ -13283,6 +13341,28 @@
         ]
       }
     },
+    "DeploymentPolicyEvaluationResult": {
+      "type": "object",
+      "description": "Policy evaluation result for a single deployment.",
+      "properties": {
+        "evaluationOutcome": {
+          "$ref": "#/definitions/PolicyEvaluationOutcome",
+          "description": "The evaluation outcome."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the evaluation outcome is Error."
+        },
+        "nonCompliantAssignments": {
+          "type": "array",
+          "description": "Details of non-compliant policy assignments.",
+          "items": {
+            "$ref": "#/definitions/PolicyAssignmentEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DeploymentProperties": {
       "type": "object",
       "description": "Properties of Cognitive Services account deployment.",
@@ -13779,6 +13859,70 @@
             "value": "Enabled"
           }
         ]
+      }
+    },
+    "EvaluateDeploymentPoliciesDeployment": {
+      "type": "object",
+      "description": "A hypothetical deployment definition used for policy dry-run evaluation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the hypothetical deployment."
+        },
+        "properties": {
+          "$ref": "#/definitions/EvaluateDeploymentPoliciesDeploymentProperties",
+          "description": "Properties of the hypothetical deployment."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "EvaluateDeploymentPoliciesDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of a hypothetical deployment for policy evaluation.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/DeploymentModel",
+          "description": "The model to evaluate."
+        },
+        "raiPolicyName": {
+          "type": "string",
+          "description": "The name of the RAI policy to evaluate."
+        }
+      },
+      "required": [
+        "model"
+      ]
+    },
+    "EvaluateDeploymentPoliciesRequest": {
+      "type": "object",
+      "description": "Request body for the evaluateDeploymentPolicies action.",
+      "properties": {
+        "deployments": {
+          "type": "array",
+          "description": "The list of hypothetical deployments to evaluate against Azure Policy.",
+          "items": {
+            "$ref": "#/definitions/EvaluateDeploymentPoliciesDeployment"
+          }
+        }
+      },
+      "required": [
+        "deployments"
+      ]
+    },
+    "EvaluateDeploymentPoliciesResponse": {
+      "type": "object",
+      "description": "Response body for the evaluateDeploymentPolicies action.",
+      "properties": {
+        "results": {
+          "type": "object",
+          "description": "Per-deployment policy evaluation results, keyed by deployment name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentPolicyEvaluationResult"
+          }
+        }
       }
     },
     "FirewallSku": {
@@ -15474,6 +15618,104 @@
           "$ref": "#/definitions/PatchResourceTags"
         }
       ]
+    },
+    "PolicyAssignmentEvaluationDetails": {
+      "type": "object",
+      "description": "Details of a non-compliant policy assignment.",
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "description": "The policy assignment ID."
+        },
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition ID."
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition ID."
+        },
+        "evaluationOutcome": {
+          "$ref": "#/definitions/PolicyEvaluationOutcome",
+          "description": "The evaluation outcome for this assignment."
+        },
+        "nonComplianceReason": {
+          "type": "string",
+          "description": "The reason for non-compliance."
+        },
+        "effect": {
+          "type": "string",
+          "description": "The policy effect (e.g., Deny, Audit)."
+        },
+        "expressionEvaluations": {
+          "type": "array",
+          "description": "Expression-level evaluation details.",
+          "items": {
+            "$ref": "#/definitions/PolicyExpressionEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PolicyEvaluationOutcome": {
+      "type": "string",
+      "description": "The outcome of a policy evaluation.",
+      "enum": [
+        "Compliant",
+        "NonCompliant",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyEvaluationOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The deployment is compliant with all policies."
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The deployment violates one or more policies."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred during evaluation."
+          }
+        ]
+      }
+    },
+    "PolicyExpressionEvaluationDetails": {
+      "type": "object",
+      "description": "Details of a policy expression evaluation.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "The policy expression."
+        },
+        "expressionKind": {
+          "type": "string",
+          "description": "The kind of expression."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The operator used in evaluation."
+        },
+        "result": {
+          "type": "string",
+          "description": "The evaluation result."
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "The target value of the expression."
+        },
+        "expressionValue": {
+          "type": "string",
+          "description": "The actual value of the expression."
+        }
+      }
     },
     "PrivateEndpointConnection": {
       "type": "object",
