@@ -360,6 +360,14 @@ model ResourcePatchRequestInput {
 @@clientName(NetworkApiVersion.`2022-11-01`, "TwoThousandTwentyTwo1101", "go");
 
 // =====================================================================
+// Fix: TCGC incorrectly detects networkApiVersion as an API version
+// parameter because its name contains "apiversion". This causes
+// the Go emitter to crash with "unexpected constant client side default
+// 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
+// =====================================================================
+@@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+// =====================================================================
 // C# naming alignment with Azure.ResourceManager.Compute SDK
 // =====================================================================
 @@clientName(AdditionalCapabilities.ultraSSDEnabled,
