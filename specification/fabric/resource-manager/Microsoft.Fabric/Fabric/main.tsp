@@ -9,7 +9,7 @@ import "./back-compatible.tsp";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-/** Microsoft.Fabric Resource Provider management API. */
+/** Microsoft.Fabric Resource Provider management API. Test: TSG 8.1.3 */
 @armProviderNamespace
 @service(#{ title: "Microsoft.Fabric management service" })
 @versioned(Microsoft.Fabric.Versions)
