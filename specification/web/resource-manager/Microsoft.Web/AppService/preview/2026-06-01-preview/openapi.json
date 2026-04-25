@@ -6630,7 +6630,7 @@
           "AppServicePlans"
         ],
         "summary": "Get all silos for an App Service plan.",
-        "description": "Get all silos for an App Service plan.",
+        "description": "Returns a paginated list of all silos associated with the specified App Service plan.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6680,7 +6680,7 @@
           "AppServicePlans"
         ],
         "summary": "Get a specific silo for an App Service plan.",
-        "description": "Get a specific silo for an App Service plan.",
+        "description": "Returns the details of a specific silo associated with the specified App Service plan.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6733,7 +6733,7 @@
           "AppServicePlans"
         ],
         "summary": "Create or update an App Service plan silo.",
-        "description": "Create or update an App Service plan silo.",
+        "description": "Creates a new silo or updates an existing silo for the specified App Service plan.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6796,7 +6796,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -6811,13 +6811,75 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "ServerFarmSilos_Update",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Update an App Service plan silo.",
+        "description": "Updates the tags of an existing App Service plan silo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "Name of the silo.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Details of the silo update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerFarmSiloPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerFarmSilo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an App Service plan silo": {
+            "$ref": "./examples/ServerFarmSilos_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "ServerFarmSilos_Delete",
         "tags": [
           "AppServicePlans"
         ],
         "summary": "Delete an App Service plan silo.",
-        "description": "Delete an App Service plan silo.",
+        "description": "Deletes the specified silo from the App Service plan.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6865,7 +6927,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -16155,6 +16217,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/lastKnownGood": {
+      "get": {
+        "operationId": "LastKnownGoods_List",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List Last Known Good resources for a web app.",
+        "description": "Returns a paginated list of Last Known Good resources for the specified web app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LastKnownGoodCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Last Known Good resources for a web app": {
+            "$ref": "./examples/LastKnownGoods_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/lastKnownGood/{lkgName}": {
       "get": {
         "operationId": "LastKnownGoods_Get",
@@ -16162,7 +16274,7 @@
           "WebApps"
         ],
         "summary": "Get the current Last Known Good revision for a web app.",
-        "description": "Get the current Last Known Good revision for a web app.",
+        "description": "Returns the current Last Known Good revision status for the specified web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -16217,7 +16329,7 @@
           "WebApps"
         ],
         "summary": "Mark the current site state as Last Known Good.",
-        "description": "Mark the current site state as Last Known Good.",
+        "description": "Marks the current site revision as Last Known Good so it can be used as a rollback target.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -16404,6 +16516,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/managedTrafficConfig": {
+      "get": {
+        "operationId": "ManagedTrafficConfigs_List",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List managed traffic configurations for a web app.",
+        "description": "Returns a paginated list of managed traffic configurations for the specified web app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedTrafficConfigCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed traffic configurations for a web app": {
+            "$ref": "./examples/ManagedTrafficConfigs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/managedTrafficConfig/{configName}": {
       "get": {
         "operationId": "ManagedTrafficConfigs_Get",
@@ -16411,7 +16573,7 @@
           "WebApps"
         ],
         "summary": "Get the managed traffic configuration for a web app.",
-        "description": "Get the managed traffic configuration for a web app.",
+        "description": "Returns the managed traffic configuration for the specified web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -16459,12 +16621,12 @@
         }
       },
       "put": {
-        "operationId": "ManagedTrafficConfigs_Update",
+        "operationId": "ManagedTrafficConfigs_CreateOrUpdate",
         "tags": [
           "WebApps"
         ],
-        "summary": "Update the managed traffic configuration for a web app.",
-        "description": "Update the managed traffic configuration for a web app.",
+        "summary": "Create or update the managed traffic configuration for a web app.",
+        "description": "Creates or updates the managed traffic configuration for the specified web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -16507,6 +16669,12 @@
               "$ref": "#/definitions/ManagedTrafficConfigResource"
             }
           },
+          "201": {
+            "description": "Resource 'ManagedTrafficConfigResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedTrafficConfigResource"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -16515,8 +16683,8 @@
           }
         },
         "x-ms-examples": {
-          "Update the managed traffic configuration for a web app": {
-            "$ref": "./examples/ManagedTrafficConfigs_Update.json"
+          "Create or update the managed traffic configuration for a web app": {
+            "$ref": "./examples/ManagedTrafficConfigs_CreateOrUpdate.json"
           }
         }
       }
@@ -19233,7 +19401,7 @@
           "WebApps"
         ],
         "summary": "Get all silos for a web app.",
-        "description": "Get all silos for a web app.",
+        "description": "Returns a paginated list of all silos associated with the specified web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19283,7 +19451,7 @@
           "WebApps"
         ],
         "summary": "Get a specific silo for a web app.",
-        "description": "Get a specific silo for a web app.",
+        "description": "Returns the details of a specific silo associated with the specified web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19336,7 +19504,7 @@
           "WebApps"
         ],
         "summary": "Create or update a web app silo.",
-        "description": "Create or update a web app silo.",
+        "description": "Creates a new silo or updates an existing silo for the specified web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19399,7 +19567,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -19414,13 +19582,75 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "SiteSilos_Update",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Update a web app silo.",
+        "description": "Updates the tags of an existing web app silo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "Name of the silo.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Details of the silo update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSiloPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteSilo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a web app silo": {
+            "$ref": "./examples/SiteSilos_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "SiteSilos_Delete",
         "tags": [
           "WebApps"
         ],
         "summary": "Delete a web app silo.",
-        "description": "Delete a web app silo.",
+        "description": "Deletes the specified silo from the web app.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19468,7 +19698,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -48006,6 +48236,27 @@
         "modelAsString": false
       }
     },
+    "LastKnownGoodCollection": {
+      "type": "object",
+      "description": "Collection of Last Known Good resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LastKnownGoodResource items on this page",
+          "items": {
+            "$ref": "#/definitions/LastKnownGoodResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LastKnownGoodProperties": {
       "type": "object",
       "description": "Properties of the Last Known Good revision for a site.",
@@ -48523,6 +48774,27 @@
         "modelAsString": false
       }
     },
+    "ManagedTrafficConfigCollection": {
+      "type": "object",
+      "description": "Collection of managed traffic configuration resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedTrafficConfigResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedTrafficConfigResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ManagedTrafficConfigProperties": {
       "type": "object",
       "description": "Properties of a managed traffic configuration resource.",
@@ -48540,9 +48812,13 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/SiloProvisioningState",
           "description": "Provisioning state of the managed traffic configuration.",
-          "readOnly": true
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/SiloProvisioningState"
+            }
+          ]
         }
       }
     },
@@ -52035,6 +52311,23 @@
         "value"
       ]
     },
+    "ServerFarmSiloPatchResource": {
+      "type": "object",
+      "description": "Update model for ServerFarmSilo. Supports updating tags.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ServerFarmSiloProperties": {
       "type": "object",
       "description": "Properties of an App Service plan silo resource.",
@@ -52061,9 +52354,13 @@
           "description": "Zone redundancy override for the silo."
         },
         "provisioningState": {
-          "$ref": "#/definitions/SiloProvisioningState",
           "description": "Provisioning state of the silo.",
-          "readOnly": true
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/SiloProvisioningState"
+            }
+          ]
         },
         "createdTime": {
           "type": "string",
@@ -54086,6 +54383,23 @@
         "value"
       ]
     },
+    "SiteSiloPatchResource": {
+      "type": "object",
+      "description": "Update model for SiteSilo. Supports updating tags.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SiteSiloProperties": {
       "type": "object",
       "description": "Properties of a site silo resource.",
@@ -54122,9 +54436,13 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/SiloProvisioningState",
           "description": "Provisioning state of the silo.",
-          "readOnly": true
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/SiloProvisioningState"
+            }
+          ]
         },
         "followLkg": {
           "type": "boolean",

@@ -63,31 +63,39 @@ interface SiteSiloOps
 @armResourceOperations(#{ omitTags: true })
 interface SiteSilos {
   /**
-   * Get a specific silo for a web app.
+   * Returns the details of a specific silo associated with the specified web app.
    */
   @summary("Get a specific silo for a web app.")
   get is SiteSiloOps.Read<SiteSilo, OverrideErrorType = DefaultErrorResponse>;
 
   /**
-   * Create or update a web app silo.
+   * Creates a new silo or updates an existing silo for the specified web app.
    */
   @summary("Create or update a web app silo.")
   createOrUpdate is SiteSiloOps.CreateOrUpdateAsync<
+    SiteSilo
+  >;
+
+  /**
+   * Updates the tags of an existing web app silo.
+   */
+  @summary("Update a web app silo.")
+  update is SiteSiloOps.CustomPatchSync<
     SiteSilo,
+    PatchModel = SiteSiloPatchResource,
     OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
-   * Delete a web app silo.
+   * Deletes the specified silo from the web app.
    */
   @summary("Delete a web app silo.")
   delete is SiteSiloOps.DeleteWithoutOkAsync<
-    SiteSilo,
-    OverrideErrorType = DefaultErrorResponse
+    SiteSilo
   >;
 
   /**
-   * Get all silos for a web app.
+   * Returns a paginated list of all silos associated with the specified web app.
    */
   @summary("Get all silos for a web app.")
   list is SiteSiloOps.List<
@@ -100,3 +108,4 @@ interface SiteSilos {
 @@doc(SiteSilo.name, "Name of the silo.");
 @@doc(SiteSilo.properties, "SiteSilo resource specific properties");
 @@doc(SiteSilos.createOrUpdate::parameters.resource, "Details of the silo.");
+@@doc(SiteSilos.update::parameters.properties, "Details of the silo update.");

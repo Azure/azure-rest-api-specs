@@ -64,7 +64,7 @@ interface ManagedTrafficConfigOps
 @armResourceOperations(#{ omitTags: true })
 interface ManagedTrafficConfigs {
   /**
-   * Get the managed traffic configuration for a web app.
+   * Returns the managed traffic configuration for the specified web app.
    */
   @summary("Get the managed traffic configuration for a web app.")
   get is ManagedTrafficConfigOps.Read<
@@ -73,12 +73,21 @@ interface ManagedTrafficConfigs {
   >;
 
   /**
-   * Update the managed traffic configuration for a web app.
+   * Creates or updates the managed traffic configuration for the specified web app.
    */
-  @summary("Update the managed traffic configuration for a web app.")
-  update is ManagedTrafficConfigOps.CreateOrUpdateSync<
+  @summary("Create or update the managed traffic configuration for a web app.")
+  createOrUpdate is ManagedTrafficConfigOps.CreateOrUpdateSync<
     ManagedTrafficConfigResource,
-    Response = ArmResourceUpdatedResponse<ManagedTrafficConfigResource>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Returns a paginated list of managed traffic configurations for the specified web app.
+   */
+  @summary("List managed traffic configurations for a web app.")
+  list is ManagedTrafficConfigOps.List<
+    ManagedTrafficConfigResource,
+    Response = ArmResponse<ManagedTrafficConfigCollection>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -89,6 +98,6 @@ interface ManagedTrafficConfigs {
 @@doc(ManagedTrafficConfigResource.properties,
   "ManagedTrafficConfig resource specific properties"
 );
-@@doc(ManagedTrafficConfigs.update::parameters.resource,
+@@doc(ManagedTrafficConfigs.createOrUpdate::parameters.resource,
   "Traffic configuration properties."
 );

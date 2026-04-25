@@ -16260,3 +16260,33 @@ model LastKnownGoodProperties {
   @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
 }
+
+/**
+ * Collection of Last Known Good resources.
+ */
+@added(Versions.v2026_06_01_preview)
+model LastKnownGoodCollection is Azure.Core.Page<LastKnownGoodResource>;
+
+/**
+ * Update model for ServerFarmSilo. Supports updating tags.
+ */
+@added(Versions.v2026_06_01_preview)
+model ServerFarmSiloPatchResource {
+  /** Kind of resource. */
+  kind?: string;
+
+  /** Resource tags. */
+  tags?: Record<string>;
+}
+
+/**
+ * Update model for SiteSilo. Supports updating tags.
+ */
+@added(Versions.v2026_06_01_preview)
+model SiteSiloPatchResource {
+  /** Kind of resource. */
+  kind?: string;
+
+  /** Resource tags. */
+  tags?: Record<string>;
+}

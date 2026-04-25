@@ -64,7 +64,7 @@ interface LastKnownGoodOps
 @armResourceOperations(#{ omitTags: true })
 interface LastKnownGoods {
   /**
-   * Get the current Last Known Good revision for a web app.
+   * Returns the current Last Known Good revision status for the specified web app.
    */
   @summary("Get the current Last Known Good revision for a web app.")
   get is LastKnownGoodOps.Read<
@@ -73,7 +73,7 @@ interface LastKnownGoods {
   >;
 
   /**
-   * Mark the current site state as Last Known Good.
+   * Marks the current site revision as Last Known Good so it can be used as a rollback target.
    */
   @summary("Mark the current site state as Last Known Good.")
   @action("mark")
@@ -81,6 +81,16 @@ interface LastKnownGoods {
     LastKnownGoodResource,
     void,
     ArmResponse<LastKnownGoodResource>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Returns a paginated list of Last Known Good resources for the specified web app.
+   */
+  @summary("List Last Known Good resources for a web app.")
+  list is LastKnownGoodOps.List<
+    LastKnownGoodResource,
+    Response = ArmResponse<LastKnownGoodCollection>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
