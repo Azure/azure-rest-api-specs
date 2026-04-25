@@ -40,3 +40,15 @@ op getChatCompletions is ResourceAction<
   GetChatCompletionsBody,
   ChatCompletions
 >;
+
+@doc("""
+  Gets chat completions with extended details for the provided chat messages.
+  """)
+@added(ServiceApiVersions.v2023_05_15)
+@actionSeparator("/")
+@action("chat/completions/details")
+op getChatCompletions is ResourceAction<
+  Deployment,
+  GetChatCompletionsBody,
+  ChatCompletions
+>;
