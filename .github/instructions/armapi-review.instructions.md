@@ -27,7 +27,11 @@ This file contains **ARM control plane–specific** review rules that supplement
 
 Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule ID, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
-**False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations (e.g., using common-types `$ref` instead of equivalent inline definitions) to blocking findings. A spec that correctly defines all ARM-required shapes inline is compliant, even if using `$ref` to common-types would be preferred.
+**False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
+
+- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, SystemData, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only.
+- **`allOf` + TrackedResource base type:** A resource model that manually declares `id`, `name`, `type`, `location`, `tags`, `systemData` as top-level properties is compliant if the shapes are correct. Using `allOf` with TrackedResource is preferred but NOT required. Flag it as a **suggestion** only.
+- **Non-terminal provisioningState values:** Including only the three terminal states (`Succeeded`, `Failed`, `Canceled`) is compliant. Adding non-terminal states (`Creating`, `Updating`, `Deleting`) is recommended but NOT required for compliance. Flag it as a **suggestion** only.
 
 ---
 
@@ -595,9 +599,7 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 
 ## 10A. `readme.md` Suppression Scoping & Tag Coverage
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, including when to approve, when to push back, and when to escalate to peer review.
-
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, GA vs. preview rigor (RPC-SUPPRESS-GA), scoping rules (RPC-SUPPRESS-SCOPE), and when suppressions are never valid.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, including GA vs. preview rigor (RPC-SUPPRESS-GA), scoping rules (RPC-SUPPRESS-SCOPE), and when suppressions are never valid.
 
 Apply the decision framework from the reference file when evaluating suppressions. Key points: suppressions from preview are not automatically acceptable in GA; suppressions must have specific `from`/`where` clauses (not blanket); warnings should not be suppressed; lack of time is never valid.
 

@@ -286,13 +286,8 @@
           "description": "The display name of the widget."
         },
         "color": {
-          "type": "string",
-          "description": "The color of the widget.",
-          "enum": ["Red", "Green", "Blue"],
-          "x-ms-enum": {
-            "name": "WidgetColor",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/WidgetColor",
+          "description": "The color of the widget."
         },
         "provisioningState": {
           "type": "string",
@@ -331,14 +326,18 @@
           "description": "The display name of the widget."
         },
         "color": {
-          "type": "string",
-          "description": "The color of the widget.",
-          "enum": ["Red", "Green", "Blue"],
-          "x-ms-enum": {
-            "name": "WidgetColor",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/WidgetColor",
+          "description": "The color of the widget."
         }
+      }
+    },
+    "WidgetColor": {
+      "type": "string",
+      "description": "The color of the widget.",
+      "enum": ["Red", "Green", "Blue"],
+      "x-ms-enum": {
+        "name": "WidgetColor",
+        "modelAsString": true
       }
     },
     "WidgetListResult": {
@@ -412,6 +411,26 @@
           "type": "boolean",
           "readOnly": true,
           "description": "Whether the operation applies to data-plane."
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX.",
+          "enum": ["user", "system", "user,system"],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
+        },
+        "actionType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Enum. Indicates the action type. 'Internal' refers to actions that are for internal only APIs.",
+          "enum": ["Internal"],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -425,13 +444,8 @@
           "description": "The identity that created the resource."
         },
         "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": ["User", "Application", "ManagedIdentity", "Key"],
-          "x-ms-enum": {
-            "name": "CreatedByType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that created the resource."
         },
         "createdAt": {
           "type": "string",
@@ -443,19 +457,23 @@
           "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": ["User", "Application", "ManagedIdentity", "Key"],
-          "x-ms-enum": {
-            "name": "CreatedByType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that last modified the resource."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)."
         }
+      }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The kind of entity that created the resource.",
+      "enum": ["User", "Application", "ManagedIdentity", "Key"],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true
       }
     },
     "ErrorResponse": {
@@ -492,6 +510,28 @@
           "readOnly": true,
           "items": { "$ref": "#/definitions/ErrorDetail" },
           "description": "The error details."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "readOnly": true,
+          "items": { "$ref": "#/definitions/ErrorAdditionalInfo" },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The additional info type."
+        },
+        "info": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The additional info."
         }
       }
     }
