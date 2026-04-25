@@ -113,7 +113,7 @@ enum EncryptionAlgorithmTypeCustom {
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@Legacy.disablePageable(Storage.DataLake.FileSystem.listBlobHierarchySegment,
-  "python,javascript,csharp"
+  "python,javascript,csharp,go"
 );
 
 @@clientName(Storage.DataLake.Service, "ServiceRestClient", "csharp");
@@ -123,7 +123,7 @@ enum EncryptionAlgorithmTypeCustom {
 @@clientName(Storage.DataLake.PathItem, "Path", "csharp");
 @@clientName(EncryptionAlgorithmTypeCustom,
   "EncryptionAlgorithmType",
-  "csharp"
+  "csharp,go"
 );
 
 @@alternateType(Storage.DataLake.PathItem.lastModified, utcDateTime, "csharp");
@@ -133,7 +133,7 @@ enum EncryptionAlgorithmTypeCustom {
 @@alternateType(Storage.DataLake.BlobPropertiesInternal.etag, string, "csharp");
 @@alternateType(Storage.DataLake.EncryptionAlgorithmType,
   EncryptionAlgorithmTypeCustom,
-  "csharp"
+  "csharp,go"
 );
 @@alternateType(Storage.DataLake.IfMatchParameter.ifMatch, string, "csharp");
 @@alternateType(Storage.DataLake.IfNoneMatchParameter.ifNoneMatch,
@@ -153,3 +153,33 @@ enum EncryptionAlgorithmTypeCustom {
 @@access(Storage.DataLake.PathLeaseAction, Access.public, "csharp");
 @@access(Storage.DataLake.PathRenameMode, Access.public, "csharp");
 @@access(Storage.DataLake.PathUpdateAction, Access.public, "csharp");
+
+// Go customizations
+
+/** The show only filter for list blobs. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+@clientName("ListBlobsShowOnly", "go")
+enum ListBlobsShowOnlyGo {
+  /** Show only deleted blobs. */
+  deleted: "deleted",
+
+  directories: "directories",
+}
+@@alternateType(ListBlobsShowOnly, ListBlobsShowOnlyGo, "go");
+@@clientName(PathItem, "Path", "go");
+@@clientName(BlobItem, "PathItemInternal", "go");
+@@clientName(BlobHierarchyListSegment.blobItems, "PathItems", "go");
+@@clientName(BlobPropertiesInternal, "PathPropertiesInternal", "go");
+@@clientName(BlobPrefix, "PathPrefix", "go");
+@@clientName(BlobItem, "PathItemInternal", "go");
+@@clientName(ListBlobsHierarchySegmentResponse,
+  "ListPathsHierarchySegmentResponse",
+  "go"
+);
+@@clientName(BlobHierarchyListSegment, "PathHierarchyListSegment", "go");
+
+@@clientOption(FileSystem.listBlobHierarchySegment,
+  "responseEnvelopeName",
+  "FileSystemClientListPathHierarchySegmentResponse",
+  "go"
+);
