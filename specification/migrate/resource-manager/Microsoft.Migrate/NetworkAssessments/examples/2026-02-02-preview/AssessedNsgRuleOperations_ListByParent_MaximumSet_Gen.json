@@ -1,0 +1,202 @@
+{
+  "title": "AssessedNsgRuleOperations_ListByParent_MaximumSet",
+  "operationId": "AssessedNsgRuleOperations_ListByParent",
+  "parameters": {
+    "api-version": "2026-02-02-preview",
+    "subscriptionId": "D5F31D22-3E2E-4A10-B63F-3E0C598D11FA",
+    "resourceGroupName": "rgnetworkAssessments",
+    "projectName": "contosoProject",
+    "assessmentName": "assessmentName",
+    "assessedNetworkSecurityGroupName": "nsg1",
+    "$filter": "properties/resourceName eq 'AllowSSH'",
+    "pageSize": 10,
+    "continuationToken": "abc123",
+    "totalRecordCount": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "workloadType": "Network",
+              "linkages": [
+                {
+                  "workloadName": "contoso-nsg",
+                  "linkageType": "Parent",
+                  "kind": "Unknown",
+                  "armId": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/networkSecurityGroups/contoso-nsg"
+                }
+              ],
+              "recommendations": [
+                {
+                  "configuration": {
+                    "azureTarget": "AzureNetworkSecurityGroup",
+                    "sizingCriterion": "AsOnPremises"
+                  },
+                  "recommendedFor": {
+                    "strategies": [
+                      "PaaSPreferred"
+                    ]
+                  },
+                  "migrationPlatform": "IaaS",
+                  "confidenceScore": 4.5,
+                  "migrationSuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "securitySuitability": {
+                    "readiness": "ConditionallySuitable"
+                  },
+                  "totalCost": [
+                    {
+                      "costDetail": [
+                        {
+                          "name": "MonthlyBandwidthCost",
+                          "value": 0
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "totalSavings": [
+                    {
+                      "savingsDetail": [
+                        {
+                          "name": "MonthlyAzureHybridCostSavings",
+                          "value": 0
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "migrationIssues": [
+                    {
+                      "issueCode": "NSGRULE001",
+                      "issueCategory": "Warning",
+                      "issueDescription": "Security rule allows inbound traffic from any source on port 22",
+                      "possibleCause": "SSH access is open to the internet",
+                      "recommendedActions": [
+                        "Restrict SSH access to specific IP ranges or use Azure Bastion"
+                      ],
+                      "moreInformation": [
+                        {
+                          "title": "NSG security rules",
+                          "url": "https://learn.microsoft.com/azure/virtual-network/network-security-group-how-it-works"
+                        }
+                      ]
+                    }
+                  ],
+                  "skus": [
+                    {
+                      "kind": "Endpoint",
+                      "resourceUri": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/networkSecurityGroups/contoso-nsg",
+                      "displayName": "Network Security Group Rule",
+                      "id": "nsg-rule",
+                      "type": "NetworkSecurityGroup",
+                      "sources": [
+                        {
+                          "name": "AllowSSH",
+                          "migrationSuitability": {
+                            "readiness": "ConditionallySuitable"
+                          }
+                        }
+                      ],
+                      "details": {
+                        "skuType": "Network",
+                        "skuName": "NetworkSecurityGroup",
+                        "capabilities": [
+                          {
+                            "name": "serviceTagSupport",
+                            "value": "supported"
+                          }
+                        ],
+                        "totalCost": [
+                          {
+                            "costDetail": [
+                              {
+                                "name": "MonthlyBandwidthCost",
+                                "value": 0
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ],
+                        "totalSavings": [
+                          {
+                            "savingsDetail": [
+                              {
+                                "name": "MonthlyAzureHybridCostSavings",
+                                "value": 0
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "migrationGuidelines": [
+                    {
+                      "guidelineId": "nsgrule-guideline-001",
+                      "migrationGuidelineCategory": "Security",
+                      "migrationGuidelineContext": [
+                        {
+                          "contextKey": "securityBestPractice",
+                          "contextValue": "Use Azure Bastion for secure SSH access instead of opening port 22"
+                        }
+                      ]
+                    }
+                  ],
+                  "recommendationReasonings": [
+                    {
+                      "reasoningId": "nsgrule-reason-001",
+                      "reasoningString": "Rule is compatible with Azure NSG but security posture can be improved",
+                      "contextDetails": [
+                        "Inbound SSH rule with broad source access should be restricted"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "resourceName": "AllowSSH",
+              "extendedDetails": {
+                "description": "Allow SSH inbound traffic",
+                "protocol": "Tcp",
+                "sourcePortRanges": [
+                  "*"
+                ],
+                "destinationPortRanges": [
+                  "22"
+                ],
+                "sourceAddressPrefixes": [
+                  "*"
+                ],
+                "destinationAddressPrefixes": [
+                  "10.0.0.0/24"
+                ],
+                "action": "Allow",
+                "priority": 100,
+                "direction": "Inbound",
+                "isDefaultRule": false
+              },
+              "createdTimestamp": "2025-09-07T16:22:10.208Z",
+              "updatedTimestamp": "2025-09-07T16:22:10.208Z"
+            },
+            "id": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedNetworkSecurityGroups/nsg1/assessedNsgRules/nsgrule1",
+            "name": "nsgrule1",
+            "type": "Microsoft.Migrate/assessmentProjects/networkAssessments/assessedNetworkSecurityGroups/assessedNsgRules",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-09-07T16:22:10.208Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-07T16:22:10.208Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedNetworkSecurityGroups/nsg1/assessedNsgRules?api-version=2026-02-02-preview&continuationToken=def456"
+      }
+    }
+  }
+}

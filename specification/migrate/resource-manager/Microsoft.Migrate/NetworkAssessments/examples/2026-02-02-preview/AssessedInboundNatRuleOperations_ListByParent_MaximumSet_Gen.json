@@ -1,0 +1,196 @@
+{
+  "title": "AssessedInboundNatRuleOperations_ListByParent_MaximumSet",
+  "operationId": "AssessedInboundNatRuleOperations_ListByParent",
+  "parameters": {
+    "api-version": "2026-02-02-preview",
+    "subscriptionId": "D5F31D22-3E2E-4A10-B63F-3E0C598D11FA",
+    "resourceGroupName": "rgnetworkAssessments",
+    "projectName": "contosoProject",
+    "assessmentName": "assessmentName",
+    "assessedLoadBalancerName": "lb1",
+    "$filter": "properties/resourceName eq 'contoso-nat-rule1'",
+    "pageSize": 10,
+    "continuationToken": "abc123",
+    "totalRecordCount": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "workloadType": "Network",
+              "linkages": [
+                {
+                  "workloadName": "contoso-lb",
+                  "linkageType": "Parent",
+                  "kind": "LoadBalancer",
+                  "armId": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/loadBalancers/contoso-lb"
+                }
+              ],
+              "recommendations": [
+                {
+                  "configuration": {
+                    "azureTarget": "AzureLoadBalancer",
+                    "sizingCriterion": "AsOnPremises"
+                  },
+                  "recommendedFor": {
+                    "strategies": [
+                      "PaaSPreferred"
+                    ]
+                  },
+                  "migrationPlatform": "IaaS",
+                  "confidenceScore": 4.5,
+                  "migrationSuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "securitySuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "totalCost": [
+                    {
+                      "costDetail": [
+                        {
+                          "name": "MonthlyBandwidthCost",
+                          "value": 5
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "totalSavings": [
+                    {
+                      "savingsDetail": [
+                        {
+                          "name": "MonthlyAzureHybridCostSavings",
+                          "value": 2
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "migrationIssues": [
+                    {
+                      "issueCode": "NATRULE001",
+                      "issueCategory": "Warning",
+                      "issueDescription": "Inbound NAT rule targets a specific VM which may need reconfiguration",
+                      "possibleCause": "VM-targeted NAT rules require the target VM to exist in the target environment",
+                      "recommendedActions": [
+                        "Ensure target VM is migrated before configuring NAT rule"
+                      ],
+                      "moreInformation": [
+                        {
+                          "title": "Inbound NAT rules",
+                          "url": "https://learn.microsoft.com/azure/load-balancer/inbound-nat-rules"
+                        }
+                      ]
+                    }
+                  ],
+                  "skus": [
+                    {
+                      "kind": "Endpoint",
+                      "resourceUri": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/loadBalancers/contoso-lb",
+                      "displayName": "Standard Load Balancer NAT Rule",
+                      "id": "standard-lb-nat-rule",
+                      "type": "LoadBalancer",
+                      "sources": [
+                        {
+                          "name": "contoso-nat-rule1",
+                          "migrationSuitability": {
+                            "readiness": "Suitable"
+                          }
+                        }
+                      ],
+                      "details": {
+                        "skuType": "Network",
+                        "skuName": "Standard",
+                        "capabilities": [
+                          {
+                            "name": "natRuleSupport",
+                            "value": "supported"
+                          }
+                        ],
+                        "totalCost": [
+                          {
+                            "costDetail": [
+                              {
+                                "name": "MonthlyBandwidthCost",
+                                "value": 5
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ],
+                        "totalSavings": [
+                          {
+                            "savingsDetail": [
+                              {
+                                "name": "MonthlyAzureHybridCostSavings",
+                                "value": 2
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "migrationGuidelines": [
+                    {
+                      "guidelineId": "natrule-guideline-001",
+                      "migrationGuidelineCategory": "General",
+                      "migrationGuidelineContext": [
+                        {
+                          "contextKey": "targetType",
+                          "contextValue": "AzureVm"
+                        }
+                      ]
+                    }
+                  ],
+                  "recommendationReasonings": [
+                    {
+                      "reasoningId": "natrule-reason-001",
+                      "reasoningString": "NAT rule can be directly migrated to Azure Standard Load Balancer",
+                      "contextDetails": [
+                        "TCP NAT rule forwarding port 3389 to target VM"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "resourceName": "contoso-nat-rule1",
+              "extendedDetails": {
+                "protocol": "Tcp",
+                "targetType": "AzureVm",
+                "frontendIpConfiguration": {
+                  "name": "frontend-ip-1",
+                  "ipAddress": "10.0.0.4"
+                },
+                "frontendPort": 3389,
+                "backendPort": 3389,
+                "targetVirtualMachine": "contoso-vm1",
+                "idleTimeoutInMinutes": 4,
+                "enableFloatingIp": false,
+                "enableTcpReset": true
+              },
+              "createdTimestamp": "2025-09-07T16:22:10.208Z",
+              "updatedTimestamp": "2025-09-07T16:22:10.208Z"
+            },
+            "id": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedLoadBalancers/lb1/assessedInboundNatRules/natrule1",
+            "name": "natrule1",
+            "type": "Microsoft.Migrate/assessmentProjects/networkAssessments/assessedLoadBalancers/assessedInboundNatRules",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-09-07T16:22:10.208Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-07T16:22:10.208Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedLoadBalancers/lb1/assessedInboundNatRules?api-version=2026-02-02-preview&continuationToken=def456"
+      }
+    }
+  }
+}
