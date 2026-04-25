@@ -206,11 +206,6 @@ model ChatCompletionsOptions {
   @encodedName("application/json", "frequency_penalty")
   frequencyPenalty?: float32;
 
-  @doc("""
-    A value indicating whether chat completions should be streamed for this request.
-    """)
-  @clientName("InternalShouldStreamResponse", "csharp")
-  stream?: boolean;
 
   /**
    * Options for streaming response. Only set this when you set `stream: true`.
