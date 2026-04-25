@@ -926,6 +926,20 @@ union StorageAlignmentStatus {
 }
 
 /**
+ * Specifies the processor mode for the virtual machine. 'Deterministic' ensures predictable and consistent processor frequency at the base/nominal level. 'Opportunistic' allows higher frequency bursts when thermal and power headroom permits (current default for Intel/AMD).
+ */
+@added(Versions.v2026_03_01)
+union ProcessorMode {
+  string,
+
+  /** Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled. */
+  Deterministic: "Deterministic",
+
+  /** Allows higher frequency bursts when thermal and power headroom permits. This is the current default for Intel/AMD processors. */
+  Opportunistic: "Opportunistic",
+}
+
+/**
  * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
 union IPVersions {
@@ -5400,6 +5414,12 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine. 'Deterministic' ensures predictable and consistent processor frequency at the base/nominal level. 'Opportunistic' allows higher frequency bursts when conditions permit. If not specified, the default is determined by the platform. Minimum api-version: 2026-03-01. Only supported on VM SKUs where the 'SupportedProcessorModes' capability is set.
+   */
+  @added(Versions.v2026_03_01)
+  processorMode?: ProcessorMode;
 }
 
 /**

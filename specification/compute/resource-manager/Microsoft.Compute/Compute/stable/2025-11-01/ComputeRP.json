@@ -10084,6 +10084,12 @@
           },
           "Get a virtual machine with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizeProperties.json"
+          },
+          "Get a virtual machine with Deterministic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithDeterministicProcessorMode.json"
+          },
+          "Get a virtual machine with Opportunistic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithOpportunisticProcessorMode.json"
           }
         }
       },
@@ -10206,6 +10212,12 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
+          },
+          "Create a VM with Deterministic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDeterministicProcessorMode.json"
+          },
+          "Create a VM with Opportunistic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithOpportunisticProcessorMode.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -14575,7 +14587,35 @@
         "vmSizeProperties": {
           "$ref": "#/definitions/VMSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        },
+        "processorMode": {
+          "$ref": "#/definitions/ProcessorMode",
+          "description": "Specifies the processor mode for the virtual machine. 'Deterministic' ensures predictable and consistent processor frequency at the base/nominal level. 'Opportunistic' allows higher frequency bursts when conditions permit. If not specified, the default is determined by the platform. Minimum api-version: 2025-11-01. Only supported on VM SKUs where the 'SupportedProcessorModes' capability is set."
         }
+      }
+    },
+    "ProcessorMode": {
+      "type": "string",
+      "description": "Specifies the processor mode for the virtual machine. 'Deterministic' ensures predictable and consistent processor frequency at the base/nominal level. 'Opportunistic' allows higher frequency bursts when thermal and power headroom permits (current default for Intel/AMD).",
+      "enum": [
+        "Deterministic",
+        "Opportunistic"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessorMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deterministic",
+            "value": "Deterministic",
+            "description": "Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled."
+          },
+          {
+            "name": "Opportunistic",
+            "value": "Opportunistic",
+            "description": "Allows higher frequency bursts when thermal and power headroom permits. This is the current default for Intel/AMD processors."
+          }
+        ]
       }
     },
     "HighSpeedInterconnectPlacement": {
