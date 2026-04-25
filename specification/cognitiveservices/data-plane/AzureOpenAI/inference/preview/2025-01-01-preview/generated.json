@@ -2898,172 +2898,7 @@
         ]
       }
     },
-    "ChatCompletionStreamOptions": {
-      "type": "object",
-      "description": "Options for streaming response. Only set this when you set `stream: true`.",
-      "properties": {
-        "include_usage": {
-          "type": "boolean",
-          "description": "If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.",
-          "x-ms-client-name": "includeUsage"
-        }
-      }
-    },
-    "ChatCompletions": {
-      "type": "object",
-      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier associated with this chat completions response."
-        },
-        "created": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
-        },
-        "choices": {
-          "type": "array",
-          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-          "items": {
-            "$ref": "#/definitions/ChatChoice"
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The model name used for this completions request."
-        },
-        "prompt_filter_results": {
-          "type": "array",
-          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
-          "items": {
-            "$ref": "#/definitions/ContentFilterResultsForPrompt"
-          },
-          "x-ms-client-name": "promptFilterResults"
-        },
-        "system_fingerprint": {
-          "type": "string",
-          "description": "Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that\nmight impact determinism.",
-          "x-ms-client-name": "systemFingerprint"
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        }
-      },
-      "required": [
-        "id",
-        "created",
-        "choices"
-      ]
-    },
-    "ChatCompletionsFunctionToolCall": {
-      "type": "object",
-      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
-      "properties": {
-        "function": {
-          "$ref": "#/definitions/FunctionCall",
-          "description": "The details of the function invocation requested by the tool call."
-        }
-      },
-      "required": [
-        "function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
-    "ChatCompletionsFunctionToolDefinition": {
-      "type": "object",
-      "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
-      "properties": {
-        "function": {
-          "type": "object",
-          "description": "The function definition details for the function tool.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "A description of what the function does, used by the model to choose when and how to call the function."
-            },
-            "name": {
-              "type": "string",
-              "description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
-            },
-            "parameters": {},
-            "strict": {
-              "type": "boolean",
-              "description": "Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](docs/guides/function-calling).",
-              "default": false,
-              "x-nullable": true
-            }
-          },
-          "required": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
-    "ChatCompletionsJsonResponseFormat": {
-      "type": "object",
-      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsResponseFormat"
-        }
-      ],
-      "x-ms-discriminator-value": "json_object"
-    },
-    "ChatCompletionsJsonSchemaResponseFormat": {
-      "type": "object",
-      "description": "A response format for Chat Completions that restricts responses to emitting JSON that conforms to a provided JSON\nSchema for Structured Outputs.",
-      "properties": {
-        "json_schema": {
-          "type": "object",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "A description of what the response format is for, used by the model to determine how to respond in the format."
-            },
-            "name": {
-              "type": "string",
-              "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
-            },
-            "schema": {},
-            "strict": {
-              "type": "boolean",
-              "description": "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).",
-              "default": false,
-              "x-nullable": true
-            }
-          },
-          "required": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "json_schema"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsResponseFormat"
-        }
-      ],
-      "x-ms-discriminator-value": "json_schema"
-    },
-    "ChatCompletionsOptions": {
+    "ChatCompletionRequestOptions": {
       "type": "object",
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
@@ -3280,6 +3115,171 @@
       "required": [
         "messages"
       ]
+    },
+    "ChatCompletionStreamOptions": {
+      "type": "object",
+      "description": "Options for streaming response. Only set this when you set `stream: true`.",
+      "properties": {
+        "include_usage": {
+          "type": "boolean",
+          "description": "If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.",
+          "x-ms-client-name": "includeUsage"
+        }
+      }
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
+        "prompt_filter_results": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
+          },
+          "x-ms-client-name": "promptFilterResults"
+        },
+        "system_fingerprint": {
+          "type": "string",
+          "description": "Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that\nmight impact determinism.",
+          "x-ms-client-name": "systemFingerprint"
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices"
+      ]
+    },
+    "ChatCompletionsFunctionToolCall": {
+      "type": "object",
+      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The details of the function invocation requested by the tool call."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatCompletionsFunctionToolDefinition": {
+      "type": "object",
+      "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
+      "properties": {
+        "function": {
+          "type": "object",
+          "description": "The function definition details for the function tool.",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "A description of what the function does, used by the model to choose when and how to call the function."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+            },
+            "parameters": {},
+            "strict": {
+              "type": "boolean",
+              "description": "Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](docs/guides/function-calling).",
+              "default": false,
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatCompletionsJsonResponseFormat": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_object"
+    },
+    "ChatCompletionsJsonSchemaResponseFormat": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting JSON that conforms to a provided JSON\nSchema for Structured Outputs.",
+      "properties": {
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "A description of what the response format is for, used by the model to determine how to respond in the format."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+            },
+            "schema": {},
+            "strict": {
+              "type": "boolean",
+              "description": "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).",
+              "default": false,
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
     },
     "ChatCompletionsResponseFormat": {
       "type": "object",
@@ -6306,7 +6306,7 @@
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ChatCompletionsOptions"
+        "$ref": "#/definitions/ChatCompletionRequestOptions"
       },
       "x-ms-parameter-location": "method"
     },

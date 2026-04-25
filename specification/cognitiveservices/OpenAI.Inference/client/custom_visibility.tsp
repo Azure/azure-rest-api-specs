@@ -67,11 +67,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-@@clientName(Azure.OpenAI.ChatCompletionsOptions.logprobs,
+@@clientName(Azure.OpenAI.ChatCompletionRequestOptions.logprobs,
   "EnableLogProbabilities",
   "csharp"
 );
-@@clientName(Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
+@@clientName(Azure.OpenAI.ChatCompletionRequestOptions.top_logprobs,
   "LogProbabilitiesPerToken",
   "csharp"
 );

@@ -462,50 +462,7 @@
         "finish_reason"
       ]
     },
-    "ChatCompletions": {
-      "type": "object",
-      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier associated with this chat completions response."
-        },
-        "created": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
-        },
-        "choices": {
-          "type": "array",
-          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-          "items": {
-            "$ref": "#/definitions/ChatChoice"
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The model name used for this completions request."
-        },
-        "prompt_filter_results": {
-          "type": "array",
-          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
-          "items": {
-            "$ref": "#/definitions/ContentFilterResultsForPrompt"
-          },
-          "x-ms-client-name": "promptFilterResults"
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        }
-      },
-      "required": [
-        "id",
-        "created",
-        "choices"
-      ]
-    },
-    "ChatCompletionsOptions": {
+    "ChatCompletionRequestOptions": {
       "type": "object",
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
@@ -581,6 +538,49 @@
       },
       "required": [
         "messages"
+      ]
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
+        "prompt_filter_results": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
+          },
+          "x-ms-client-name": "promptFilterResults"
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices"
       ]
     },
     "ChatMessageContent": {
@@ -1356,7 +1356,7 @@
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ChatCompletionsOptions"
+        "$ref": "#/definitions/ChatCompletionRequestOptions"
       },
       "x-ms-parameter-location": "method"
     },

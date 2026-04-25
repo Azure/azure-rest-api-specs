@@ -2821,6 +2821,140 @@
         "refusal"
       ]
     },
+    "ChatCompletionRequestOptions": {
+      "type": "object",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "items": {
+            "$ref": "#/definitions/ChatRequestMessage"
+          }
+        },
+        "functions": {
+          "type": "array",
+          "description": "A list of functions the model may generate JSON inputs for.",
+          "items": {
+            "$ref": "#/definitions/FunctionDefinition"
+          }
+        },
+        "function_call": {
+          "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
+          "x-ms-client-name": "functionCall"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).\n\nThis value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.",
+          "x-ms-client-name": "maxTokens"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "x-ms-client-name": "topP"
+        },
+        "logit_bias": {
+          "type": "object",
+          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-ms-client-name": "logitBias"
+        },
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of chat completions choices that should be generated for a chat completions\nresponse.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+          "x-ms-client-name": "presencePenalty"
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+          "x-ms-client-name": "frequencyPenalty"
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "data_sources": {
+          "type": "array",
+          "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-client-name": "dataSources"
+        },
+        "enhancements": {
+          "$ref": "#/definitions/AzureChatEnhancementConfiguration",
+          "description": "If provided, the configuration options for available Azure OpenAI chat enhancements."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
+        },
+        "logprobs": {
+          "type": "boolean",
+          "description": "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.",
+          "default": false,
+          "x-nullable": true
+        },
+        "top_logprobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.",
+          "x-nullable": true
+        },
+        "response_format": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat",
+          "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "tools": {
+          "type": "array",
+          "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolDefinition"
+          }
+        },
+        "tool_choice": {
+          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+          "x-ms-client-name": "toolChoice"
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
     "ChatCompletions": {
       "type": "object",
       "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -2974,140 +3108,6 @@
         }
       ],
       "x-ms-discriminator-value": "json_schema"
-    },
-    "ChatCompletionsOptions": {
-      "type": "object",
-      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
-          "items": {
-            "$ref": "#/definitions/ChatRequestMessage"
-          }
-        },
-        "functions": {
-          "type": "array",
-          "description": "A list of functions the model may generate JSON inputs for.",
-          "items": {
-            "$ref": "#/definitions/FunctionDefinition"
-          }
-        },
-        "function_call": {
-          "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
-          "x-ms-client-name": "functionCall"
-        },
-        "max_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).\n\nThis value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.",
-          "x-ms-client-name": "maxTokens"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
-          "x-ms-client-name": "topP"
-        },
-        "logit_bias": {
-          "type": "object",
-          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "x-ms-client-name": "logitBias"
-        },
-        "user": {
-          "type": "string",
-          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
-        },
-        "n": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of chat completions choices that should be generated for a chat completions\nresponse.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
-        },
-        "stop": {
-          "type": "array",
-          "description": "A collection of textual sequences that will end completions generation.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "presence_penalty": {
-          "type": "number",
-          "format": "float",
-          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
-          "x-ms-client-name": "presencePenalty"
-        },
-        "frequency_penalty": {
-          "type": "number",
-          "format": "float",
-          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
-          "x-ms-client-name": "frequencyPenalty"
-        },
-        "stream": {
-          "type": "boolean",
-          "description": "A value indicating whether chat completions should be streamed for this request."
-        },
-        "model": {
-          "type": "string",
-          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
-        },
-        "data_sources": {
-          "type": "array",
-          "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
-          "items": {
-            "$ref": "#/definitions/AzureChatExtensionConfiguration"
-          },
-          "x-ms-client-name": "dataSources"
-        },
-        "enhancements": {
-          "$ref": "#/definitions/AzureChatEnhancementConfiguration",
-          "description": "If provided, the configuration options for available Azure OpenAI chat enhancements."
-        },
-        "seed": {
-          "type": "integer",
-          "format": "int64",
-          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
-        },
-        "logprobs": {
-          "type": "boolean",
-          "description": "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.",
-          "default": false,
-          "x-nullable": true
-        },
-        "top_logprobs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.",
-          "x-nullable": true
-        },
-        "response_format": {
-          "$ref": "#/definitions/ChatCompletionsResponseFormat",
-          "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
-          "x-ms-client-name": "responseFormat"
-        },
-        "tools": {
-          "type": "array",
-          "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
-          "items": {
-            "$ref": "#/definitions/ChatCompletionsToolDefinition"
-          }
-        },
-        "tool_choice": {
-          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
-          "x-ms-client-name": "toolChoice"
-        }
-      },
-      "required": [
-        "messages"
-      ]
     },
     "ChatCompletionsResponseFormat": {
       "type": "object",
@@ -5901,7 +5901,7 @@
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ChatCompletionsOptions"
+        "$ref": "#/definitions/ChatCompletionRequestOptions"
       },
       "x-ms-parameter-location": "method"
     },

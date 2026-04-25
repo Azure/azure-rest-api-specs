@@ -96,7 +96,7 @@ model ChatCompletionStreamOptions {
   provided prompt data.
   """)
 @added(ServiceApiVersions.v2023_05_15)
-model ChatCompletionsOptions {
+model ChatCompletionRequestOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
     Typical usage begins with a chat message for the System role that provides instructions for
@@ -630,5 +630,5 @@ model GetChatCompletionsBody {
    * provided prompt data.
    */
   @bodyRoot
-  body: ChatCompletionsOptions;
+  body: ChatCompletionRequestOptions;
 }
