@@ -1533,10 +1533,13 @@ enum SiteExtensionType {
  * Job status.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// According to https://github.com/Azure/azure-sdk-for-net/issues/43295, added 2 values: Aborted, Running.
 enum TriggeredWebJobStatus {
   Success,
   Failed,
   Error,
+  Aborted,
+  Running,
 }
 
 /**
