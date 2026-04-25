@@ -489,45 +489,45 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 
 > Rules PLCY004 and OAPI025 are defined in `openapi-review.instructions.md` and [`.github/skills/azure-api-review/references/policy-compatibility.md`](../skills/azure-api-review/references/policy-compatibility.md). They apply to all specs including ARM. Do not use CSV strings for collections (use JSON arrays) and do not accept mixed data types for the same property.
 
-### 8.15 Default Values Must Be Static and Declared (OAPI022, WHATIF-002)
+### 8.14 Default Values Must Be Static and Declared (OAPI022, WHATIF-002)
 
 - Properties with `default` values **MUST** use the same default value on every similar PUT request. Do not derive the default value from other properties in the resource or from external state.
 - The `default` annotation in the swagger **MUST** specify the actual default value so that clients, documentation, and policy can discover it.
 - Every **optional** property where the service applies a default value when the property is omitted from PUT **MUST** declare that default value in the swagger spec. Without the annotation, ARM Template What-If reports a false delete for the property (the template omits it, but GET returns the service-applied default).
 
-### 8.16 Service Must Preserve Array Ordering (OAPI024)
+### 8.15 Service Must Preserve Array Ordering (OAPI024)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for OAPI024, OAPI025, and OAPI026 with examples.
 
 - The order of items in array properties from a PUT or PATCH request **MUST** be preserved in responses. Reordering breaks ARM Template What-If and Change Analysis.
 
-### 8.17 Service Must Preserve Property Value Casing (OAPI026)
+### 8.16 Service Must Preserve Property Value Casing (OAPI026)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for OAPI026 with normalization examples.
 
 - String property values from PUT/PATCH requests **MUST** match in responses. Do not normalize casing, location formats, or IP address representations.
 
-### 8.18 Service Must Reject Unknown Properties (OAPI018)
+### 8.17 Service Must Reject Unknown Properties (OAPI018)
 
 > **See also:** [`.github/skills/azure-api-review/references/what-if-preflight-compliance.md`](../skills/azure-api-review/references/what-if-preflight-compliance.md) WHATIF-005 for the What-If implications of this rule.
 
 - If a PUT or PATCH payload contains properties that the RP does not recognize, the service **MUST** reject the request with `400 Bad Request` and an appropriate ARM error response body.
 - Do not silently discard unknown properties — the user must be informed that their payload is incorrect. Silent discarding causes the GET response to differ from the PUT request, leading to What-If noise and customer confusion.
 
-### 8.19 PUT/PATCH Must Tolerate Read-Only Properties (OAPI021)
+### 8.18 PUT/PATCH Must Tolerate Read-Only Properties (OAPI021)
 
 - PUT and PATCH operations **MUST NOT** fail when the request body includes read-only properties with their current values.
 - Automation tools (CLI, Terraform, Bicep) commonly GET a resource, modify a few properties, and PUT the entire payload back. If the service rejects the request because it contains read-only properties (e.g., `provisioningState`, `id`), these tools break.
 - **Fix:** Ignore read-only properties in the request body silently, or if the value differs from the current value, reject with a descriptive `400 Bad Request` error.
 
-### 8.20 Immutable Property Tolerance and Enforcement (OAPI030, OAPI031)
+### 8.19 Immutable Property Tolerance and Enforcement (OAPI030, OAPI031)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI030 and OAPI031.
 
 - If a PUT or PATCH request includes an immutable property with the **same value** it already has, the service **MUST NOT** fail the request (OAPI030). This allows tools to round-trip payloads without stripping immutable fields.
 - If a PUT or PATCH request attempts to **change** an immutable property, the service **MUST** reject with `400 Bad Request` and an error message identifying the property (OAPI031). Do not silently ignore the change.
 
-### 8.21 Fields Must Have Clear Ownership — Server or Client (OAPI034)
+### 8.20 Fields Must Have Clear Ownership — Server or Client (OAPI034)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI034. See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for value preservation rules OAPI024, OAPI025, and OAPI026.
 
