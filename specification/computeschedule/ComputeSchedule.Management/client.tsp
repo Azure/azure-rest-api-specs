@@ -353,6 +353,13 @@ model ResourcePatchRequestInput {
 @@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
 
 // =====================================================================
+// Fix: NetworkApiVersion enum members with dashes are invalid Go identifiers
+// Aligning with Azure.ResourceManager.Compute SDK naming convention
+// =====================================================================
+@@clientName(NetworkApiVersion.`2020-11-01`, "TwoThousandTwenty1101", "go");
+@@clientName(NetworkApiVersion.`2022-11-01`, "TwoThousandTwentyTwo1101", "go");
+
+// =====================================================================
 // C# naming alignment with Azure.ResourceManager.Compute SDK
 // =====================================================================
 @@clientName(AdditionalCapabilities.ultraSSDEnabled,
