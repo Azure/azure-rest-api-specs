@@ -72,6 +72,7 @@ interface DataGenerationJobs {
   /**
    * Deletes a data generation job by its ID.
    */
+  @summary("Deletes a data generation job.")
   @route("data_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;

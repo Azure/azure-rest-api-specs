@@ -50,7 +50,7 @@ model DataGenerationJobResult {
   generated_samples?: int32;
 
   @doc("The token usage information for the data generation job.")
-  token_usage?: TokenUsage;
+  token_usage?: DataGenerationTokenUsage;
 }
 
 @doc("Data Generation Job resource.")
@@ -72,6 +72,7 @@ model DataGenerationJobOutput {
   type: DataGenerationJobOutputType;
 }
 
+@doc("Azure OpenAI file output for a data generation job.")
 model FileDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Azure OpenAI file output.")
   type: "file";
@@ -85,6 +86,7 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
   filename: string;
 }
 
+@doc("Dataset output for a data generation job.")
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Dataset output.")
   type: "dataset";
@@ -119,7 +121,7 @@ union DataGenerationJobOutputType {
 }
 
 @doc("Token usage information for a data generation job.")
-model TokenUsage {
+model DataGenerationTokenUsage {
   @doc("The number of prompt tokens used.")
   @visibility(Lifecycle.Read)
   prompt_tokens?: int64;
@@ -157,6 +159,8 @@ model DataGenerationJobOptions {
   max_samples: int32;
 
   @doc("The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1.")
+  @minValue(0)
+  @maxValue(1)
   train_split?: float32;
 
   @doc("The LLM model options.")
@@ -191,14 +195,57 @@ model TaskDataGenerationJobOptions extends DataGenerationJobOptions {
   type: "task";
 }
 
-@doc("The supported job source types for data generation.")
-union DataGenerationJobSource {
-  JobSource,
-  FileDataGenerationJobSource,
+@doc("The supported source types for data generation jobs.")
+union DataGenerationJobSourceType {
+  string,
+
+  @doc("Prompt source — inline text provided by the user.")
+  prompt: "prompt",
+
+  @doc("Agent source — references an agent.")
+  agent: "agent",
+
+  @doc("Traces source — conversation traces from Application Insights.")
+  traces: "traces",
+
+  @doc("Dataset source — reference to a dataset.")
+  dataset: "dataset",
+
+  @doc("File source — Azure OpenAI file.")
+  file: "file",
 }
 
-@doc("The options for a data generation job with File source, which includes the input files for data generation.")
-model FileDataGenerationJobSource {
+@doc("The base source model for data generation jobs.")
+@discriminator("type")
+model DataGenerationJobSource {
+  @doc("The type of source.")
+  type: DataGenerationJobSourceType;
+
+  ...JobSourceDescription;
+}
+
+@doc("Prompt source for data generation jobs — inline text provided by the user.")
+model PromptDataGenerationJobSource extends DataGenerationJobSource {
+  ...PromptJobSource;
+}
+
+@doc("Agent source for data generation jobs — references an agent to fetch instructions and metadata from.")
+model AgentDataGenerationJobSource extends DataGenerationJobSource {
+  ...AgentJobSource;
+}
+
+@doc("Traces source for data generation jobs — conversation traces from Application Insights.")
+model TracesDataGenerationJobSource extends DataGenerationJobSource {
+  ...TracesJobSource;
+}
+
+@doc("Dataset source for data generation jobs — reference to a dataset.")
+model DatasetDataGenerationJobSource extends DataGenerationJobSource {
+  ...DatasetJobSource;
+}
+
+@doc("File source for data generation jobs — Azure OpenAI file input.")
+model FileDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is File.")
   type: "file";
 

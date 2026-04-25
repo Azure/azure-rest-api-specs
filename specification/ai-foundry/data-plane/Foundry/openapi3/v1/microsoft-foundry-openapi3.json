@@ -2721,6 +2721,7 @@
       },
       "delete": {
         "operationId": "DataGenerationJobs_delete",
+        "summary": "Deletes a data generation job.",
         "description": "Deletes a data generation job by its ID.",
         "parameters": [
           {
@@ -11141,6 +11142,44 @@
         ],
         "description": "Insights from the agent cluster analysis."
       },
+      "AgentDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The source type for this source, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from."
+      },
       "AgentDefinition": {
         "type": "object",
         "required": [
@@ -11331,40 +11370,6 @@
             "AgentEndpoints=V1Preview"
           ]
         }
-      },
-      "AgentJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent_name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent"
-            ],
-            "description": "The source type for this source, which is Agent."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch instructions from."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, the latest version is used."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/JobSource"
-          }
-        ],
-        "description": "Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text."
       },
       "AgentKind": {
         "anyOf": [
@@ -14351,6 +14356,8 @@
           "train_split": {
             "type": "number",
             "format": "float",
+            "minimum": 0,
+            "maximum": 1,
             "description": "The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1."
           },
           "model_options": {
@@ -14430,7 +14437,7 @@
           "token_usage": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TokenUsage"
+                "$ref": "#/components/schemas/DataGenerationTokenUsage"
               }
             ],
             "description": "The token usage information for the data generation job."
@@ -14455,15 +14462,53 @@
         "description": "The supported scenarios for a data generation job."
       },
       "DataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobSourceType"
+              }
+            ],
+            "description": "The type of source."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "prompt": "#/components/schemas/PromptDataGenerationJobSource",
+            "agent": "#/components/schemas/AgentDataGenerationJobSource",
+            "traces": "#/components/schemas/TracesDataGenerationJobSource",
+            "dataset": "#/components/schemas/DatasetDataGenerationJobSource",
+            "file": "#/components/schemas/FileDataGenerationJobSource"
+          }
+        },
+        "description": "The base source model for data generation jobs."
+      },
+      "DataGenerationJobSourceType": {
         "anyOf": [
           {
-            "$ref": "#/components/schemas/JobSource"
+            "type": "string"
           },
           {
-            "$ref": "#/components/schemas/FileDataGenerationJobSource"
+            "type": "string",
+            "enum": [
+              "prompt",
+              "agent",
+              "traces",
+              "dataset",
+              "file"
+            ]
           }
         ],
-        "description": "The supported job source types for data generation."
+        "description": "The supported source types for data generation jobs."
       },
       "DataGenerationJobType": {
         "anyOf": [
@@ -14494,6 +14539,30 @@
           }
         },
         "description": "LLM model options for data generation jobs."
+      },
+      "DataGenerationTokenUsage": {
+        "type": "object",
+        "properties": {
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of prompt tokens used.",
+            "readOnly": true
+          },
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of completion tokens generated.",
+            "readOnly": true
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of tokens used.",
+            "readOnly": true
+          }
+        },
+        "description": "Token usage information for a data generation job."
       },
       "DataSourceConfig": {
         "type": "object",
@@ -14561,15 +14630,20 @@
           {
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
-        ]
+        ],
+        "description": "Dataset output for a data generation job."
       },
-      "DatasetJobSource": {
+      "DatasetDataGenerationJobSource": {
         "type": "object",
         "required": [
           "type",
           "name"
         ],
         "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -14588,10 +14662,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/JobSource"
+            "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Dataset source — reference to a dataset."
+        "description": "Dataset source for data generation jobs — reference to a dataset."
       },
       "DatasetType": {
         "anyOf": [
@@ -16814,7 +16888,8 @@
           {
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
-        ]
+        ],
+        "description": "Azure OpenAI file output for a data generation job."
       },
       "FileDataGenerationJobSource": {
         "type": "object",
@@ -16835,7 +16910,12 @@
             "description": "Input Azure Open AI file id used for data generation."
           }
         },
-        "description": "The options for a data generation job with File source, which includes the input files for data generation."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "File source for data generation jobs — Azure OpenAI file input."
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -17724,53 +17804,6 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
-      },
-      "JobSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobSourceType"
-              }
-            ],
-            "description": "The type of source."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "prompt": "#/components/schemas/PromptJobSource",
-            "agent": "#/components/schemas/AgentJobSource",
-            "traces": "#/components/schemas/TracesJobSource",
-            "dataset": "#/components/schemas/DatasetJobSource"
-          }
-        },
-        "description": "The base source model for jobs."
-      },
-      "JobSourceType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "prompt",
-              "agent",
-              "traces",
-              "dataset"
-            ]
-          }
-        ],
-        "description": "The supported source types for jobs."
       },
       "JobStatus": {
         "anyOf": [
@@ -39024,13 +39057,17 @@
         ],
         "description": "Prompt-based evaluator"
       },
-      "PromptJobSource": {
+      "PromptDataGenerationJobSource": {
         "type": "object",
         "required": [
           "type",
           "prompt"
         ],
         "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -39045,10 +39082,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/JobSource"
+            "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Prompt source — inline text provided by the user."
+        "description": "Prompt source for data generation jobs — inline text provided by the user."
       },
       "ProtocolVersionRecord": {
         "type": "object",
@@ -40695,30 +40732,6 @@
         },
         "title": "AzureAIEvaluatorGrader"
       },
-      "TokenUsage": {
-        "type": "object",
-        "properties": {
-          "prompt_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of prompt tokens used.",
-            "readOnly": true
-          },
-          "completion_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of completion tokens generated.",
-            "readOnly": true
-          },
-          "total_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Total number of tokens used.",
-            "readOnly": true
-          }
-        },
-        "description": "Token usage information for a data generation job."
-      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -40913,13 +40926,17 @@
         ],
         "description": "The options for a data generation job with Traces type."
       },
-      "TracesJobSource": {
+      "TracesDataGenerationJobSource": {
         "type": "object",
         "required": [
           "type",
           "agent_name"
         ],
         "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -40959,10 +40976,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/JobSource"
+            "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Traces source — conversation traces from Application Insights."
+        "description": "Traces source for data generation jobs — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
