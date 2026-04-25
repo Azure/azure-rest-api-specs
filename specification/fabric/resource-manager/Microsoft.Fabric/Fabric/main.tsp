@@ -1,3 +1,4 @@
+// Test: TSG checklist 8.1.4 - verify no Java section triggers "No sdk folder found"
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -9,7 +10,7 @@ import "./back-compatible.tsp";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-/** Microsoft.Fabric Resource Provider management API. */
+/** Microsoft.Fabric Resource Provider management API. Test: TSG 8.1.4 */
 @armProviderNamespace
 @service(#{ title: "Microsoft.Fabric management service" })
 @versioned(Microsoft.Fabric.Versions)
