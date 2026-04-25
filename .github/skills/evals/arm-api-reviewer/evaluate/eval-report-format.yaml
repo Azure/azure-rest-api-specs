@@ -37,14 +37,9 @@ stimuli:
         name: "rule IDs present"
         config:
           pattern: "SEC-SECRET-DETECT|RPC-[A-Za-z]+-V\\d+-\\d+"
-      - type: output-not-matches
-        name: "no em dashes"
-        config:
-          pattern: "\u2014"
       - type: prompt
     rubric:
-      - Each finding cites a specific line number (e.g., line 42) — not vague references like "near end"
+      - Each finding cites a specific line number (e.g., line 42) -- not vague references like "near end"
       - Each finding includes a rule ID (e.g., SEC-SECRET-DETECT, RPC-Put-V1-22)
       - Each finding includes a concrete fix suggestion
-      - The output does NOT contain em dash characters (U+2014)
       - The output has organized sections (Blocking Issues, Warnings, Summary, or similar)

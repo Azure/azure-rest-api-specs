@@ -27,8 +27,6 @@ This file contains **ARM control plane–specific** review rules that supplement
 
 Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule ID, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
-**Formatting: no em dashes.** Never use the em dash character (U+2014, `\u2014`) in any output. Use a hyphen surrounded by spaces ( - ) or a double hyphen ( -- ) instead. This applies to all text you produce -- headings, finding descriptions, fix suggestions, summary tables, and prose. Do not use `—` anywhere.
-
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations (e.g., using common-types `$ref` instead of equivalent inline definitions) to blocking findings. A spec that correctly defines all ARM-required shapes inline is compliant, even if using `$ref` to common-types would be preferred.
 
 ---
@@ -947,7 +945,6 @@ When reviewing ARM resource-manager swagger files, verify:
 ### Output Formatting
 
 - ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
-- ✅ No em dash characters (U+2014, `—`) anywhere in output -- use ` - ` or ` -- ` instead. This is a hard constraint on every character you produce.
 - ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
 - ✅ Do NOT flag blocking violations for specs that define ARM-standard types inline instead of using common-types `$ref` -- that is a process recommendation (suggest it as a non-blocking improvement), not a contract violation
 - ✅ Only flag blocking (🔴) findings for actual RPC contract violations, security issues, or breaking changes -- not for stylistic preferences or process recommendations

@@ -22,8 +22,6 @@ When performing a code review on OpenAPI v2 (Swagger) JSON definition files in t
 
 Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule being violated, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
-**Formatting: no em dashes.** Never use the em dash character (U+2014, `\u2014`) in any output. Use a hyphen surrounded by spaces ( - ) or a double hyphen ( -- ) instead.
-
 ---
 
 ## 1. File & Directory Structure
@@ -556,7 +554,6 @@ Flag all violations clearly with JSON path references, the specific rule, and a 
 
 ### Output Formatting
 - ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
-- ✅ No em dash characters (U+2014, `—`) anywhere in output -- use ` - ` or ` -- ` instead. This is a hard constraint.
 - ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
 - ✅ Do NOT elevate process recommendations (e.g., "use common-types $ref") to blocking violations. A spec that defines ARM-standard shapes correctly inline is compliant.
 - ✅ Only flag blocking findings for actual RPC contract violations, security issues, or breaking changes

@@ -35,10 +35,6 @@ of file" or "around line 50" are not acceptable -- always resolve the
 actual line number by reading the file content. Respond in markdown
 format.
 
-**Formatting: no em dashes.** Never use the em dash character (U+2014,
-`\u2014`) in any output. Use a hyphen surrounded by spaces ( - ) or a
-double hyphen ( -- ) instead.
-
 ---
 
 ## 1. Project Structure & File Organization
