@@ -132,7 +132,7 @@ model JobRunResultListResponse {
 @armResourceOperations
 interface JobRuns {
   get is ArmResourceRead<JobRun>;
-  listByResourceGroup is ArmResourceListByParent<JobRun>;
+  listByJob is ArmResourceListByParent<JobRun>;
 
   @doc("Browse the results of a job run to find individual device statuses.")
   results is ArmResourceActionSync<JobRun, void, JobRunResultListResponse>;

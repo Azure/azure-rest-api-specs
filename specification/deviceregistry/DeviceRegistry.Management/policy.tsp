@@ -92,5 +92,5 @@ interface Policies {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
   update is ArmResourcePatchAsync<Policy, PolicyProperties>;
-  listByResourceGroup is ArmResourceListByParent<Policy>;
+  listByCredential is ArmResourceListByParent<Policy>;
 }
