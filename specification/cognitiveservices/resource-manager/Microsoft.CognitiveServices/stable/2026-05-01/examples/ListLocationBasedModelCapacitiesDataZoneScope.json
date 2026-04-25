@@ -1,0 +1,38 @@
+{
+  "operationId": "LocationBasedModelCapacities_List",
+  "parameters": {
+    "api-version": "2026-05-01",
+    "location": "WestUS",
+    "modelFormat": "OpenAI",
+    "modelName": "ada",
+    "modelVersion": "1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "ListLocationBasedModelCapacities DataZone Scope",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DataZoneStandard",
+            "type": "Microsoft.CognitiveServices/locations/models/skuCapacities",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/WestUS/models/OpenAI.ada.1/skuCapacities/DataZoneStandard",
+            "location": "WestUS",
+            "properties": {
+              "availableCapacity": 400,
+              "availableFinetuneCapacity": 25,
+              "model": {
+                "name": "ada",
+                "format": "OpenAI",
+                "version": "1"
+              },
+              "skuName": "DataZoneStandard",
+              "scopeId": "US",
+              "scopeType": "DataZone"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

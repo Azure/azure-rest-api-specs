@@ -18,6 +18,7 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @parentResource(Account)
 model ManagedComputeDeployment
   is Azure.ResourceManager.ProxyResource<ManagedComputeDeploymentProperties> {
@@ -32,6 +33,7 @@ model ManagedComputeDeployment
 }
 
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface ManagedComputeDeployments {
   /**
