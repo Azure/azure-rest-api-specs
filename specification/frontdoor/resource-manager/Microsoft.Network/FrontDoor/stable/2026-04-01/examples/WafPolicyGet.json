@@ -89,8 +89,8 @@
           "managedRules": {
             "managedRuleSets": [
               {
-                "ruleSetType": "DefaultRuleSet",
-                "ruleSetVersion": "1.0",
+                "ruleSetType": "Microsoft_DefaultRuleSet",
+                "ruleSetVersion": "2.2",
                 "ruleSetAction": "Block",
                 "exclusions": [
                   {
@@ -117,8 +117,48 @@
                     ]
                   }
                 ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "enabledState": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
+                      }
+                    ]
+                  }
+                ]
               }
-            ]
+            ],
+            "exceptionsList": {
+              "exceptions": [
+                {
+                  "matchVariable": "RequestHeaderNames",
+                  "selectorMatchOperator": "Equals",
+                  "selector": "User-Agent",
+                  "valueMatchOperator": "Contains",
+                  "matchValues": [
+                    "Mozilla"
+                  ],
+                  "scopes": [
+                    {
+                      "ruleSetType": "Microsoft_DefaultRuleSet",
+                      "ruleSetVersion": "2.2"
+                    },
+                    {
+                      "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                      "ruleSetVersion": "1.0"
+                    }
+                  ]
+                }
+              ]
+            }
           },
           "frontendEndpointLinks": [
             {
@@ -132,5 +172,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "Policies_Get",
+  "title": "Get Policy"
 }
