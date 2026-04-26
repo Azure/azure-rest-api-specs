@@ -583,6 +583,10 @@
           "$ref": "#/definitions/SummaryLogsProperties",
           "description": "Summary rule properties."
         },
+        "identity": {
+          "$ref": "#/definitions/SummaryLogsIdentity",
+          "description": "The managed identity of the summary logs resource. Only user-assigned identity is supported."
+        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
@@ -594,6 +598,60 @@
         }
       ],
       "description": "Workspace data summary rules definition."
+    },
+    "SummaryLogsIdentity": {
+      "type": "object",
+      "description": "Identity for the summary logs resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "SummaryLogsIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SummaryLogsUserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SummaryLogsUserIdentityProperties": {
+      "type": "object",
+      "description": "User assigned identity properties.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "readOnly": true,
+          "description": "The client id of user assigned identity.",
+          "type": "string"
+        }
+      }
     },
     "SummaryLogsListResult": {
       "type": "object",
