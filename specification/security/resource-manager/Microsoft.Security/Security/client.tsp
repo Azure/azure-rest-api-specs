@@ -508,7 +508,7 @@ op alertsListResourceGroupLevelByRegionCustomized(
 
 @@override(AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
-  "python,go"
+  "python,go,java"
 );
 
 @@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
@@ -556,3 +556,4 @@ op alertsListResourceGroupLevelByRegionCustomized(
   "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem",
   "java"
 );
+@@clientName(GovernanceAPI.OperationResultStatus, "OperationResult", "java");
