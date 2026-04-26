@@ -762,6 +762,28 @@
             ]
           }
         },
+        "protectionLevel": {
+          "type": "string",
+          "description": "The protection level of the table. Determines the default data access isolation behavior.",
+          "enum": [
+            "General",
+            "Protected"
+          ],
+          "x-ms-enum": {
+            "name": "TableProtectionLevelEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "General",
+                "description": "The default protection level. Table data is accessible through standard permissions."
+              },
+              {
+                "value": "Protected",
+                "description": "Table data is isolated by default. Accessing or exporting data requires explicit, scoped authorization."
+              }
+            ]
+          }
+        },
         "lastPlanModifiedDate": {
           "readOnly": true,
           "type": "string",
