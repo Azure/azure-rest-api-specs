@@ -6,6 +6,6 @@ using Microsoft.OperationalInsights;
 
 @@clientName(Microsoft.OperationalInsights,
   "OperationalInsightsManagementClient",
-  "javascript"
+  "javascript,java"
 );
 @@clientName(LogAnalyticsQueryPacks.search, "listSearch", "javascript");
