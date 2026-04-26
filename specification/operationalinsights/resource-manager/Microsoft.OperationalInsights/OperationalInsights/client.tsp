@@ -9,3 +9,17 @@ using Microsoft.OperationalInsights;
   "javascript,java"
 );
 @@clientName(LogAnalyticsQueryPacks.search, "listSearch", "javascript");
+
+@@clientName(NetworkSecurityPerimeterConfigurations.getNSP, "getNsp", "java");
+@@clientName(NetworkSecurityPerimeterConfigurations.listNSP, "listNsp", "java");
+@@clientName(NetworkSecurityPerimeterConfigurations.reconcileNSP,
+  "reconcileNsp",
+  "java"
+);
+
+@@clientName(DestinationMetaData, "DestinationMetadata", "java");
+
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  global.AccessRulePropertiesSubscriptionsItem[],
+  "java"
+);
