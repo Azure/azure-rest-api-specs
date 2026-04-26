@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "hub": "chat_hub",
+    "roomId": "room1",
+    "contentType": "application/merge-patch+json",
+    "resource": {
+      "title": "Updated Room Title"
+    },
+    "if-match": "etag1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "room1",
+        "title": "Updated Room Title",
+        "defaultConversation": "c.room1.abcd1234",
+        "etag": "etag2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "room1",
+        "title": "Updated Room Title",
+        "defaultConversation": "c.room1.abcd1234",
+        "etag": "etag3"
+      }
+    }
+  },
+  "operationId": "Chat_UpdateRoom",
+  "title": "Chat_UpdateRoom"
+}

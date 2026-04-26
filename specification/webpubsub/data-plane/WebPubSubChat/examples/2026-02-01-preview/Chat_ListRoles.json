@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "hub": "chat_hub",
+    "maxpagesize": 10
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "user.normal",
+            "permissions": [
+              "user.update_own_info",
+              "user.create_room",
+              "user.fetch_all_rooms",
+              "user.search"
+            ],
+            "etag": "etag1"
+          },
+          {
+            "name": "room.member",
+            "permissions": [
+              "room.leave",
+              "room.history",
+              "room.publish_message",
+              "room.publish_image",
+              "room.publish_attachment",
+              "room.publish_reactions"
+            ],
+            "etag": "etag2"
+          },
+          {
+            "name": "room.operator",
+            "permissions": [
+              "room.invite",
+              "room.leave",
+              "room.remove_user",
+              "room.delete_room",
+              "room.history",
+              "room.mute",
+              "room.freeze",
+              "room.publish_message",
+              "room.publish_image",
+              "room.publish_attachment",
+              "room.publish_reactions"
+            ],
+            "etag": "etag3"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Chat_ListRoles",
+  "title": "Chat_ListRoles"
+}

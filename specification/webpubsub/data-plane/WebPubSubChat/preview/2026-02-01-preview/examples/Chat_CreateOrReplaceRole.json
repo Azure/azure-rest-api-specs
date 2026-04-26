@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "hub": "chat_hub",
+    "roleName": "room.moderator",
+    "resource": {
+      "permissions": [
+        "room.history",
+        "room.mute",
+        "room.freeze",
+        "room.remove_user",
+        "room.publish_message"
+      ]
+    },
+    "if-match": "etag1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "room.moderator",
+        "permissions": [
+          "room.history",
+          "room.mute",
+          "room.freeze",
+          "room.remove_user",
+          "room.publish_message"
+        ],
+        "etag": "etag2"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "room.moderator",
+        "permissions": [
+          "room.history",
+          "room.mute",
+          "room.freeze",
+          "room.remove_user",
+          "room.publish_message"
+        ],
+        "etag": "etag3"
+      }
+    }
+  },
+  "operationId": "Chat_CreateOrReplaceRole",
+  "title": "Chat_CreateOrReplaceRole"
+}
