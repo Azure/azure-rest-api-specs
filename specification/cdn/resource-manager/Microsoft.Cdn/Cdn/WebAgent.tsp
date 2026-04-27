@@ -65,7 +65,8 @@ interface WebAgents {
   update is ArmCustomPatchAsync<
     WebAgent,
     PatchModel = WebAgentUpdateParameters,
-    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent> & // ← add FinalResult!
+      Azure.Core.Foundations.RetryAfterHeader> &
       WebAgentAcceptedBody)
   >;
 
