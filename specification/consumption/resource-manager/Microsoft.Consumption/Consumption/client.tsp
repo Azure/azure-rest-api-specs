@@ -158,18 +158,6 @@ using Azure.Core;
   "MarketplaceCharges",
   "csharp"
 );
-@@clientName(ReservationRecommendationCSharp,
-  "ConsumptionReservationRecommendation",
-  "csharp"
-);
-@@clientName(LegacyReservationRecommendationCSharp,
-  "ConsumptionLegacyReservationRecommendation",
-  "csharp"
-);
-@@clientName(ModernReservationRecommendationCSharp,
-  "ConsumptionModernReservationRecommendation",
-  "csharp"
-);
 @@clientName(MeterDetailsResponse, "ConsumptionMeterDetailsInfo", "csharp");
 @@clientName(Metrictype, "ConsumptionMetricType", "csharp");
 @@clientName(ModernChargeSummary, "ConsumptionModernChargeSummary", "csharp");
@@ -332,15 +320,15 @@ using Azure.Core;
 @@alternateType(BudgetProperties.timeGrain, TimeGrainType | null, "csharp");
 @@alternateType(BudgetProperties.category, CategoryType | null, "csharp");
 @@alternateType(ReservationRecommendation,
-  ReservationRecommendationCSharp,
+  ConsumptionReservationRecommendation,
   "csharp"
 );
 @@alternateType(LegacyReservationRecommendation,
-  LegacyReservationRecommendationCSharp,
+  ConsumptionLegacyReservationRecommendation,
   "csharp"
 );
 @@alternateType(ModernReservationRecommendation,
-  ModernReservationRecommendationCSharp,
+  ConsumptionModernReservationRecommendation,
   "csharp"
 );
 
@@ -356,7 +344,7 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
-model ReservationRecommendationCSharp
+model ConsumptionReservationRecommendation
   extends Azure.ResourceManager.Foundations.Resource {
   /** Resource location */
   @visibility(Lifecycle.Read)
@@ -381,16 +369,16 @@ model ReservationRecommendationCSharp
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model LegacyReservationRecommendationCSharp
-  extends ReservationRecommendationCSharp {
+model ConsumptionLegacyReservationRecommendation
+  extends ConsumptionReservationRecommendation {
   properties: LegacyReservationRecommendationProperties;
   kind: "legacy";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ModernReservationRecommendationCSharp
-  extends ReservationRecommendationCSharp {
+model ConsumptionModernReservationRecommendation
+  extends ConsumptionReservationRecommendation {
   properties: ModernReservationRecommendationProperties;
   kind: "modern";
 }
