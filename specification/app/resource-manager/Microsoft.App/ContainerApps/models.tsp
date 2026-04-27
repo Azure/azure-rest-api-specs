@@ -23,30 +23,6 @@ model Object is Record<unknown>;
  */
 model WorkflowFiles is Object;
 
-/**
- * Number of parallel replicas of a job that can run at a given time.
- */
-scalar Parallelism extends int32;
-
-/**
- * Interval to check each event source in seconds. Defaults to 30s
- */
-scalar PollingInterval extends int32;
-
-/**
- * Minimum number of successful replica completions before overall job completion.
- */
-scalar ReplicaCompletionCount extends int32;
-
-/**
- * Workload profile name for container apps to execute on.
- */
-scalar WorkloadProfileName extends string;
-
-/**
- * Workload profile type for container apps to execute on.
- */
-scalar WorkloadProfileType extends string;
 
 /**
  * Custom domain verification Id of a subscription
@@ -2964,7 +2940,7 @@ model WorkloadProfile {
   /**
    * Workload profile type for the workloads to run on.
    */
-  workloadProfileType: WorkloadProfileType;
+  workloadProfileType: string;
 
   /**
    * The minimum capacity.
@@ -3046,7 +3022,7 @@ model IngressConfiguration {
   /**
    * Name of the workload profile used by the ingress component. Required.
    */
-  workloadProfileName?: WorkloadProfileName;
+  workloadProfileName?: string;
 
   /**
    * Time (in seconds) to allow active connections to complete on termination. Must be between 0 and 3600. Defaults to 480 seconds.
@@ -3791,7 +3767,7 @@ model JobProperties {
   /**
    * Workload profile name to pin for container apps job execution.
    */
-  workloadProfileName?: WorkloadProfileName;
+  workloadProfileName?: string;
 
   /**
    * Container Apps Job configuration properties.
@@ -3876,12 +3852,12 @@ model JobConfigurationManualTriggerConfig {
   /**
    * Minimum number of successful replica completions before overall job completion.
    */
-  replicaCompletionCount?: ReplicaCompletionCount;
+  replicaCompletionCount?: int32;
 
   /**
    * Number of parallel replicas of a job that can run at a given time.
    */
-  parallelism?: Parallelism;
+  parallelism?: int32;
 }
 
 /**
@@ -3891,7 +3867,7 @@ model JobConfigurationScheduleTriggerConfig {
   /**
    * Minimum number of successful replica completions before overall job completion.
    */
-  replicaCompletionCount?: ReplicaCompletionCount;
+  replicaCompletionCount?: int32;
 
   /**
    * Cron formatted repeating schedule ("* * * * *") of a Cron Job.
@@ -3901,7 +3877,7 @@ model JobConfigurationScheduleTriggerConfig {
   /**
    * Number of parallel replicas of a job that can run at a given time.
    */
-  parallelism?: Parallelism;
+  parallelism?: int32;
 }
 
 /**
@@ -3911,12 +3887,12 @@ model JobConfigurationEventTriggerConfig {
   /**
    * Minimum number of successful replica completions before overall job completion.
    */
-  replicaCompletionCount?: ReplicaCompletionCount;
+  replicaCompletionCount?: int32;
 
   /**
    * Number of parallel replicas of a job that can run at a given time.
    */
-  parallelism?: Parallelism;
+  parallelism?: int32;
 
   /**
    * Scaling configurations for event driven jobs.
@@ -3931,7 +3907,7 @@ model JobScale {
   /**
    * Interval to check each event source in seconds. Defaults to 30s
    */
-  pollingInterval?: PollingInterval;
+  pollingInterval?: int32;
 
   /**
    * Minimum number of job executions that are created for a trigger, default 0
@@ -6839,7 +6815,7 @@ model ContainerAppProperties {
   /**
    * Workload profile name to pin for container app execution.
    */
-  workloadProfileName?: WorkloadProfileName;
+  workloadProfileName?: string;
 
   /**
    * Container App auto patch configuration.
@@ -7597,7 +7573,7 @@ model Scale {
   /**
    * Optional. KEDA Polling Interval. Defaults to 30 seconds if not set.
    */
-  pollingInterval?: PollingInterval;
+  pollingInterval?: int32;
 
   /**
    * Scaling rules.
