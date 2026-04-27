@@ -63,3 +63,4 @@ union CustomPublicNetworkAccessType {
 @@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "python");
 @@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "go");
 @@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "go");
+@@clientName(Microsoft.HybridCompute, "Management", "go");
