@@ -15957,7 +15957,9 @@
         },
         "serviceUserPassword": {
           "type": "string",
-          "description": "Password of the look up user."
+          "format": "password",
+          "description": "Password of the look up user.",
+          "x-ms-secret": true
         },
         "searchBaseDistinguishedName": {
           "type": "string",
@@ -18699,13 +18701,17 @@
       "properties": {
         "primaryMasterKey": {
           "type": "string",
+          "format": "password",
           "description": "Base 64 encoded value of the primary read-write key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryMasterKey": {
           "type": "string",
+          "format": "password",
           "description": "Base 64 encoded value of the secondary read-write key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -18720,13 +18726,17 @@
       "properties": {
         "primaryReadonlyMasterKey": {
           "type": "string",
+          "format": "password",
           "description": "Base 64 encoded value of the primary read-only key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryReadonlyMasterKey": {
           "type": "string",
+          "format": "password",
           "description": "Base 64 encoded value of the secondary read-only key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -21598,7 +21608,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password for User Definition. Response does not contain user password."
+          "format": "password",
+          "description": "The password for User Definition. Response does not contain user password.",
+          "x-ms-secret": true
         },
         "databaseName": {
           "type": "string",
@@ -21693,8 +21705,10 @@
       "properties": {
         "authToken": {
           "type": "string",
+          "format": "password",
           "description": "Specifies auth token used for connecting to Notebook server (uses token-based auth).",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "notebookServerEndpoint": {
           "type": "string",
