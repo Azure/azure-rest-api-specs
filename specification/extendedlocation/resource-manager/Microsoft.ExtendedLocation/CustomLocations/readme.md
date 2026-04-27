@@ -29,6 +29,21 @@ openapi-type: arm
 tag: package-2024-09-15-preview
 ```
 
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: customlocations.json
+    where: $.definitions.resourceSyncRuleProperties.properties.selector.properties.matchLabels
+    reason: matchLabels is a user-defined key-value map for Kubernetes label selectors, requiring additionalProperties to represent arbitrary label keys.
+  - suppress: PreviewVersionOverOneYear
+    from: customlocations.json
+    reason: Preview API version will be promoted to GA in a future release.
+  - suppress: AvoidNestedProperties
+    from: customlocations.json
+    where: $.definitions.resourceSyncRuleProperties.properties.selector
+    reason: The selector property models a Kubernetes label selector with matchLabels and matchExpressions sub-properties, which is the standard Kubernetes API pattern.
+```
+
 ### Tag: package-2024-09-15-preview
 
 These settings apply only when `--tag=package-2024-09-15-preview` is specified on the command line.
