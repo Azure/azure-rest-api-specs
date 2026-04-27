@@ -26,32 +26,36 @@ model OrganizationResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface OrganizationResourceAPIKeyOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias OrganizationAPIKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /**
-         * Organization resource name
-         */
-        @path @segment("organizations") organizationName: string,
-      },
-      {
-        /**
-         * Confluent API Key id
-         */
-        @path @segment("apiKeys") apiKeyId: string,
-      },
-      ResourceProviderDefaultErrorResponse
-    > {}
+    /**
+     * Organization resource name
+     */
+    @path
+    @segment("organizations")
+    @key
+    organizationName: string;
+  },
+  {
+    /**
+     * Confluent API Key id
+     */
+    @path
+    @segment("apiKeys")
+    apiKeyId: string;
+  },
+  ErrorType = ResourceProviderDefaultErrorResponse,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}",
+  }
+>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface OrganizationResourceAPIKeyActions {
   /**
    * Get API key details of a kafka or schema registry cluster
@@ -60,9 +64,10 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("Organization_GetClusterAPIKey")
-  getClusterAPIKey is OrganizationResourceAPIKeyOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
+  getClusterAPIKey is OrganizationAPIKeyOps.ActionSync<
     OrganizationResource,
-    {},
+    void,
     ArmResponse<APIKeyRecord>
   >;
 
@@ -73,10 +78,10 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("Organization_DeleteClusterAPIKey")
-  deleteClusterAPIKey is OrganizationResourceAPIKeyOps.DeleteSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
+  deleteClusterAPIKey is OrganizationAPIKeyOps.DeleteSync<
     OrganizationResource,
-    {},
-    OkResponse | NoContentResponse
+    Response = OkResponse | NoContentResponse
   >;
 }
 

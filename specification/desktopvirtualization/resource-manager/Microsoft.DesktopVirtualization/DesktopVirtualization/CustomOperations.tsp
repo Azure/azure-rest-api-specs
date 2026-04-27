@@ -23,7 +23,7 @@ namespace Microsoft.DesktopVirtualization;
 @autoRoute
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op ArmCustomPatchSyncWithOptionalBody<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
@@ -52,7 +52,7 @@ op ArmCustomPatchSyncWithOptionalBody<
 @autoRoute
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op ArmCustomPatchAsyncWithOptionalBody<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,

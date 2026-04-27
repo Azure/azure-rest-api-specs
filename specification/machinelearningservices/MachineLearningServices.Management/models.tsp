@@ -31,7 +31,7 @@ alias ProxyApiVersion = {
  */
 union UsageUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Usage measured by count of items"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Count: "Count",
 }
 
@@ -40,7 +40,7 @@ union UsageUnit {
  */
 union BillingCurrency {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "United States Dollar currency code"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   USD: "USD",
 }
 
@@ -49,7 +49,7 @@ union BillingCurrency {
  */
 union UnitOfMeasure {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Price measured per one hour of usage"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OneHour: "OneHour",
 }
 
@@ -58,9 +58,9 @@ union UnitOfMeasure {
  */
 union VMPriceOSType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Linux operating system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Windows operating system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Windows: "Windows",
 }
 
@@ -69,11 +69,11 @@ union VMPriceOSType {
  */
 union VMTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard VM tier with guaranteed capacity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Low priority VM tier with discounted pricing"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LowPriority: "LowPriority",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Spot VM tier with variable pricing and availability"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Spot: "Spot",
 }
 
@@ -82,7 +82,7 @@ union VMTier {
  */
 union QuotaUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Quota measured by count of resources"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Count: "Count",
 }
 
@@ -91,21 +91,21 @@ union QuotaUnit {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Status is undefined or unknown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Undefined: "Undefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Quota update completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Success: "Success",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Quota update failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failure: "Failure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Quota value is below cluster minimum requirement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InvalidQuotaBelowClusterMinimum: "InvalidQuotaBelowClusterMinimum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Quota exceeds the subscription limit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InvalidQuotaExceedsSubscriptionLimit: "InvalidQuotaExceedsSubscriptionLimit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Invalid VM family name specified"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InvalidVMFamilyName: "InvalidVMFamilyName",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation is not supported for the specified SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OperationNotSupportedForSku: "OperationNotSupportedForSku",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation is not enabled for the specified region"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OperationNotEnabledForRegion: "OperationNotEnabledForRegion",
 }
 
@@ -114,13 +114,13 @@ union Status {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by a user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by an application"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by a managed identity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created using a key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Key: "Key",
 }
 
@@ -129,25 +129,25 @@ union CreatedByType {
  */
 union ComputeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Kubernetes Service compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AKS: "AKS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Kubernetes compute cluster"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Kubernetes: "Kubernetes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Machine Learning managed compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AmlCompute: "AmlCompute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Machine Learning compute instance"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ComputeInstance: "ComputeInstance",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Factory compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DataFactory: "DataFactory",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Virtual machine compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   VirtualMachine: "VirtualMachine",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "HDInsight compute cluster"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   HDInsight: "HDInsight",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Databricks compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Databricks: "Databricks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Lake Analytics compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DataLakeAnalytics: "DataLakeAnalytics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Synapse Spark compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SynapseSpark: "SynapseSpark",
 }
 
@@ -156,28 +156,28 @@ union ComputeType {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning state is unknown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Action to perform on underlying compute resources"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union UnderlyingResourceAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Delete the underlying compute resources"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Delete: "Delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Detach without deleting the underlying resources"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Detach: "Detach",
 }
 
@@ -186,9 +186,9 @@ union UnderlyingResourceAction {
  */
 union ImageType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Docker container image"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   docker: "docker",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "AzureML environment image (custom or curated)"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   azureml: "azureml",
 }
 
@@ -197,7 +197,7 @@ union ImageType {
  */
 union EnvironmentVariableType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Local environment variable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   local: "local",
 }
 
@@ -206,11 +206,11 @@ union EnvironmentVariableType {
  */
 union Protocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "TCP protocol"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   tcp: "tcp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "UDP protocol"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   udp: "udp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "HTTP protocol"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   http: "http",
 }
 
@@ -219,13 +219,13 @@ union Protocol {
  */
 union VolumeDefinitionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bind mount from host filesystem"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   bind: "bind",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Docker managed volume"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   volume: "volume",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Temporary filesystem mount"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   tmpfs: "tmpfs",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Named pipe mount (Windows)"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   npipe: "npipe",
 }
 
@@ -234,17 +234,17 @@ union VolumeDefinitionType {
  */
 union NodeState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Node is idle and available for work"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   idle: "idle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Node is currently running a job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   running: "running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Node is preparing to run a job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   preparing: "preparing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Node is unusable and cannot accept jobs"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   unusable: "unusable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Node is leaving the cluster"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   leaving: "leaving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Node was preempted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   preempted: "preempted",
 }
 
@@ -253,11 +253,11 @@ union NodeState {
  */
 union SourceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure ML dataset as data source"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Dataset: "Dataset",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure ML datastore as data source"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Datastore: "Datastore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URI path as data source"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   URI: "URI",
 }
 
@@ -266,9 +266,9 @@ union SourceType {
  */
 union MountAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount the data source"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Mount: "Mount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Unmount the data source"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unmount: "Unmount",
 }
 
@@ -277,9 +277,9 @@ union MountAction {
  */
 union MountMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount in read-only mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadOnly: "ReadOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount in read-write mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadWrite: "ReadWrite",
 }
 
@@ -288,17 +288,17 @@ union MountMode {
  */
 union MountState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount operation has been requested"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MountRequested: "MountRequested",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data source is successfully mounted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Mounted: "Mounted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MountFailed: "MountFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Unmount operation has been requested"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UnmountRequested: "UnmountRequested",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Unmount operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UnmountFailed: "UnmountFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data source is unmounted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unmounted: "Unmounted",
 }
 
@@ -307,17 +307,17 @@ union MountState {
  */
 union AssetProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asset provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asset provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asset provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asset is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asset is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asset is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
 }
 
@@ -326,9 +326,9 @@ union AssetProvisioningState {
  */
 union PendingUploadType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No pending upload"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Temporary blob storage reference"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TemporaryBlobReference: "TemporaryBlobReference",
 }
 
@@ -337,18 +337,18 @@ union PendingUploadType {
  */
 union PendingUploadCredentialType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared Access Signature credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SAS: "SAS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Controls which items to include in list results"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ListViewType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Show only active (non-archived) items"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ActiveOnly: "ActiveOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Show only archived items"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ArchivedOnly: "ArchivedOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Show all items including archived"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   All: "All",
 }
 
@@ -357,11 +357,11 @@ union ListViewType {
  */
 union DataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URI pointing to a single file"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   uri_file: "uri_file",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URI pointing to a folder"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   uri_folder: "uri_folder",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MLTable data format"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   mltable: "mltable",
 }
 
@@ -370,13 +370,13 @@ union DataType {
  */
 union DataReferenceCredentialType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared Access Signature credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SAS: "SAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Docker registry credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DockerCredentials: "DockerCredentials",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed identity credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No credentials required"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NoCredentials: "NoCredentials",
 }
 
@@ -385,9 +385,9 @@ union DataReferenceCredentialType {
  */
 union AutoRebuildSetting {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto rebuild is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rebuild automatically when base image is updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OnBaseImageUpdate: "OnBaseImageUpdate",
 }
 
@@ -396,24 +396,24 @@ union AutoRebuildSetting {
  */
 union EnvironmentType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Environment curated and maintained by Azure ML service"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Curated: "Curated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Environment created by user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserCreated: "UserCreated",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Risk level for security vulnerabilities"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union VulnerabilityRisk {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Unknown vulnerability risk level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UNKNOWN: "UNKNOWN",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Critical vulnerability risk level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CRITICAL: "CRITICAL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "High vulnerability risk level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   HIGH: "HIGH",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Medium vulnerability risk level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MEDIUM: "MEDIUM",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Low vulnerability risk level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LOW: "LOW",
 }
 
@@ -422,9 +422,9 @@ union VulnerabilityRisk {
  */
 union OperatingSystemType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Linux operating system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Windows operating system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Windows: "Windows",
 }
 
@@ -433,17 +433,17 @@ union OperatingSystemType {
  */
 union EndpointProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint provisioning succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
 }
 
@@ -452,11 +452,11 @@ union EndpointProvisioningState {
  */
 union EndpointAuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure ML token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AMLToken: "AMLToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Key-based authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Key: "Key",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Active Directory token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AADToken: "AADToken",
 }
 
@@ -465,9 +465,9 @@ union EndpointAuthMode {
  */
 union BatchDeploymentConfigurationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model-based batch deployment"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Model: "Model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pipeline component-based batch deployment"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PipelineComponent: "PipelineComponent",
 }
 
@@ -478,11 +478,11 @@ union BatchDeploymentConfigurationType {
  */
 union BatchLoggingLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Info level logging (default)"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Info: "Info",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Warning level logging only"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Debug level logging (most verbose)"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Debug: "Debug",
 }
 
@@ -491,11 +491,11 @@ union BatchLoggingLevel {
  */
 union ReferenceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Reference by asset ID"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Id: "Id",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Reference by data path"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DataPath: "DataPath",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Reference by output path"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OutputPath: "OutputPath",
 }
 
@@ -504,9 +504,9 @@ union ReferenceType {
  */
 union BatchOutputAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output summary only without detailed results"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SummaryOnly: "SummaryOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Append each result row to output file"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AppendRow: "AppendRow",
 }
 
@@ -515,26 +515,26 @@ union BatchOutputAction {
  */
 union DeploymentProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment is scaling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Scaling: "Scaling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment provisioning succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Type of capability host"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union CapabilityHostKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "AI Agents capability host"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Agents: "Agents",
 }
 
@@ -543,17 +543,17 @@ union CapabilityHostKind {
  */
 union CapabilityHostProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
 }
 
@@ -562,15 +562,15 @@ union CapabilityHostProvisioningState {
  */
 union CredentialsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Storage account key credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Certificate-based credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Certificate: "Certificate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No credentials required"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared Access Signature credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sas: "Sas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ServicePrincipal: "ServicePrincipal",
 }
 
@@ -579,15 +579,15 @@ union CredentialsType {
  */
 union DatastoreType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Blob Storage datastore"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureBlob: "AzureBlob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Lake Storage Gen1 datastore"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureDataLakeGen1: "AzureDataLakeGen1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Lake Storage Gen2 datastore"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureDataLakeGen2: "AzureDataLakeGen2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure File Storage datastore"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureFile: "AzureFile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft OneLake datastore"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OneLake: "OneLake",
 }
 
@@ -596,34 +596,34 @@ union DatastoreType {
  */
 union SecretsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Storage account key secret"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Certificate secret"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Certificate: "Certificate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared Access Signature secret"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sas: "Sas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal secret"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ServicePrincipal: "ServicePrincipal",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Data type of a feature column"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union FeatureDataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "String data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   String: "String",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Integer data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Integer: "Integer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Long integer data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Long: "Long",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Single-precision floating point data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Float: "Float",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Double-precision floating point data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Double: "Double",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Binary data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Binary: "Binary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Datetime data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Datetime: "Datetime",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Boolean data type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Boolean: "Boolean",
 }
 
@@ -632,11 +632,11 @@ union FeatureDataType {
  */
 union EmailNotificationEnableType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Send email when job completes"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   JobCompleted: "JobCompleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Send email when job fails"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   JobFailed: "JobFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Send email when job is cancelled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   JobCancelled: "JobCancelled",
 }
 
@@ -645,7 +645,7 @@ union EmailNotificationEnableType {
  */
 union WebhookType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure DevOps webhook integration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureDevOps: "AzureDevOps",
 }
 
@@ -723,51 +723,51 @@ union WeekDay {
   Sunday: "Sunday",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Type of schedule trigger"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union TriggerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Recurrence-based trigger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Recurrence: "Recurrence",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Cron expression-based trigger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Cron: "Cron",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Type of materialization store for feature data"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MaterializationStoreType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No materialization store"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Online materialization store"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Offline materialization store"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Offline: "Offline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Both online and offline materialization stores"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OnlineAndOffline: "OnlineAndOffline",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Status of data availability for features"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union DataAvailabilityStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No data availability status"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data availability is pending"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data is incomplete"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Incomplete: "Incomplete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data is complete and available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Complete: "Complete",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Sort order for list operations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union OrderString {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Order by creation time descending"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreatedAtDesc: "CreatedAtDesc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Order by creation time ascending"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreatedAtAsc: "CreatedAtAsc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Order by update time descending"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UpdatedAtDesc: "UpdatedAtDesc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Order by update time ascending"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UpdatedAtAsc: "UpdatedAtAsc",
 }
 
@@ -776,17 +776,17 @@ union OrderString {
  */
 union PoolProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pool is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pool is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pool provisioning succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pool provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pool is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pool provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
 }
 
@@ -795,7 +795,7 @@ union PoolProvisioningState {
  */
 union AuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Active Directory authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AAD: "AAD",
 }
 
@@ -826,11 +826,11 @@ union SkuScaleType {
  */
 union IdentityConfigurationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Managed: "Managed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure ML token-based authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AMLToken: "AMLToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "User-assigned identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserIdentity: "UserIdentity",
 }
 
@@ -839,23 +839,25 @@ union IdentityConfigurationType {
  */
 union JobType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Automated machine learning job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AutoML: "AutoML",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Command execution job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Command: "Command",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Hyperparameter sweep job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sweep: "Sweep",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pipeline workflow job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Pipeline: "Pipeline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Spark job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Spark: "Spark",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model fine-tuning job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   FineTuning: "FineTuning",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model distillation job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   Distillation: "Distillation",
 }
 
@@ -864,7 +866,7 @@ union JobType {
  */
 union NodesValueType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Use all available nodes"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   All: "All",
 }
 
@@ -946,7 +948,7 @@ union JobStatus {
   Unknown: "Unknown",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketplace subscription status"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MarketplaceSubscriptionStatus {
   string,
 
@@ -970,7 +972,7 @@ union MarketplaceSubscriptionStatus {
   Unsubscribed: "Unsubscribed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning state for marketplace subscriptions"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MarketplaceSubscriptionProvisioningState {
   string,
 
@@ -999,7 +1001,7 @@ union MarketplaceSubscriptionProvisioningState {
    */
   Updating: "Updating",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
 }
 
@@ -1008,11 +1010,11 @@ union MarketplaceSubscriptionProvisioningState {
  */
 union EndpointComputeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure-managed compute infrastructure"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Managed: "Managed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Kubernetes cluster compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Kubernetes: "Kubernetes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Machine Learning compute cluster"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureMLCompute: "AzureMLCompute",
 }
 
@@ -1021,33 +1023,33 @@ union EndpointComputeType {
  */
 union PublicNetworkAccessType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public network access is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public network access is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Data collection mode configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union DataCollectionMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data collection is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Data collection is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Rolling rate time period type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union RollingRateType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Yearly rolling rate"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Year: "Year",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Monthly rolling rate"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Month: "Month",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Daily rolling rate"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Day: "Day",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Hourly rolling rate"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Hour: "Hour",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Per-minute rolling rate"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Minute: "Minute",
 }
 
@@ -1056,86 +1058,86 @@ union RollingRateType {
  */
 union EgressPublicNetworkAccessType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Egress public network access is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Egress public network access is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Scaling type configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ScaleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Default scaling behavior"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Scale based on target utilization"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TargetUtilization: "TargetUtilization",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Container type configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ContainerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Storage initializer container"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   StorageInitializer: "StorageInitializer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Inference server container"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InferenceServer: "InferenceServer",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Key type configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union KeyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Primary access key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Primary: "Primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Secondary access key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Secondary: "Secondary",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule list view filter type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ScheduleListViewType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Show only enabled schedules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   EnabledOnly: "EnabledOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Show only disabled schedules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DisabledOnly: "DisabledOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Show all schedules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   All: "All",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule action type configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ScheduleActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Create a new job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreateJob: "CreateJob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Invoke a batch endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InvokeBatchEndpoint: "InvokeBatchEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Create a monitor"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreateMonitor: "CreateMonitor",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning status"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ScheduleProvisioningStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless endpoint authentication mode"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ServerlessInferenceEndpointAuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Key: "Key",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Active Directory authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AAD: "AAD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Both API key and AAD authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   KeyAndAAD: "KeyAndAAD",
 }
 
@@ -1144,9 +1146,9 @@ union ServerlessInferenceEndpointAuthMode {
  */
 union ContentSafetyLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Block unsafe content immediately"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Blocking: "Blocking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Defer content safety evaluation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deferred: "Deferred",
 }
 
@@ -1155,9 +1157,9 @@ union ContentSafetyLevel {
  */
 union ContentSafetyStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content safety is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content safety is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
@@ -1166,23 +1168,23 @@ union ContentSafetyStatus {
  */
 union ServerlessEndpointState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint state is unknown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being suspended"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Suspending: "Suspending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is being reinstated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Reinstating: "Reinstating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is online and available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint is suspended"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Suspended: "Suspended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint creation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreationFailed: "CreationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint deletion failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DeletionFailed: "DeletionFailed",
 }
 
@@ -1191,15 +1193,15 @@ union ServerlessEndpointState {
  */
 union EndpointServiceConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection is approved"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection is pending approval"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection was rejected"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection is disconnected"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection timed out"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Timeout: "Timeout",
 }
 
@@ -1208,11 +1210,11 @@ union EndpointServiceConnectionStatus {
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation initiated by a user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation initiated by the system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation initiated by user or system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   `user,system`: "user,system",
 }
 
@@ -1221,7 +1223,7 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Action is for internal APIs only"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Internal: "Internal",
 }
 
@@ -1230,9 +1232,9 @@ union ActionType {
  */
 union EncryptionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption is enabled for the workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption is disabled for the workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
@@ -1241,11 +1243,11 @@ union EncryptionStatus {
  */
 union IsolationMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network isolation is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow internet outbound traffic"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AllowInternetOutbound: "AllowInternetOutbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow only approved outbound traffic"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AllowOnlyApprovedOutbound: "AllowOnlyApprovedOutbound",
 }
 
@@ -1254,13 +1256,13 @@ union IsolationMode {
  */
 union RuleCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is required for operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Required: "Required",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is recommended but not mandatory"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Recommended: "Recommended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is defined by the user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserDefined: "UserDefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is a dependency requirement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Dependency: "Dependency",
 }
 
@@ -1269,15 +1271,15 @@ union RuleCategory {
  */
 union RuleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is inactive"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is active and enforced"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is being provisioned"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule provisioning or update failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
 }
 
@@ -1286,11 +1288,11 @@ union RuleStatus {
  */
 union RuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Fully qualified domain name rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   FQDN: "FQDN",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint connection rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PrivateEndpoint: "PrivateEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure service tag based rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ServiceTag: "ServiceTag",
 }
 
@@ -1299,9 +1301,9 @@ union RuleType {
  */
 union ManagedNetworkStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network is inactive"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network is active"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Active: "Active",
 }
 
@@ -1310,9 +1312,9 @@ union ManagedNetworkStatus {
  */
 union FirewallSku {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard tier firewall SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic tier firewall SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Basic: "Basic",
 }
 
@@ -1321,18 +1323,18 @@ union FirewallSku {
  */
 union ManagedNetworkKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version 1 managed network"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Version 2 managed network with granular controls"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   V2: "V2",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Default action type for network rules"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union DefaultActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deny traffic by default"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deny: "Deny",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow traffic by default"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Allow: "Allow",
 }
 
@@ -1342,13 +1344,13 @@ union DefaultActionType {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 union PrivateEndpointConnectionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
 }
 
@@ -1357,11 +1359,11 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union SystemDatastoresAuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Authenticate using access key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AccessKey: "AccessKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Authenticate using managed identity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Identity: "Identity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Authenticate using user delegation SAS"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserDelegationSAS: "UserDelegationSAS",
 }
 
@@ -1370,43 +1372,43 @@ union SystemDatastoresAuthMode {
  */
 union ConnectionAuthType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal access token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PAT: "PAT",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Username and password authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UsernamePassword: "UsernamePassword",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No authentication required"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared access signature authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SAS: "SAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Storage account key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ServicePrincipal: "ServicePrincipal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Access key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AccessKey: "AccessKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ApiKey: "ApiKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom keys authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CustomKeys: "CustomKeys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OAuth 2.0 authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OAuth2: "OAuth2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Active Directory authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AAD: "AAD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Delegated SAS authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DelegatedSAS: "DelegatedSAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Project managed identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ProjectManagedIdentity: "ProjectManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Account managed identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AccountManagedIdentity: "AccountManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "User Entra token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserEntraToken: "UserEntraToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agent user impersonation authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AgentUserImpersonation: "AgentUserImpersonation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agentic identity token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AgenticIdentityToken: "AgenticIdentityToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agentic user authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AgenticUser: "AgenticUser",
 }
 
@@ -1415,245 +1417,245 @@ union ConnectionAuthType {
  */
 union ConnectionCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Python package feed connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PythonFeed: "PythonFeed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Container registry connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ContainerRegistry: "ContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Git repository connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Git: "Git",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon S3 storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   S3: "S3",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Snowflake data warehouse connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Snowflake: "Snowflake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Key Vault connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureKeyVault: "AzureKeyVault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure SQL Database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureSqlDb: "AzureSqlDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Synapse Analytics connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureSynapseAnalytics: "AzureSynapseAnalytics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure MySQL Database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureMySqlDb: "AzureMySqlDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure PostgreSQL Database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzurePostgresDb: "AzurePostgresDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Lake Storage Gen2 connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ADLSGen2: "ADLSGen2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Container Apps environment connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureContainerAppEnvironment: "AzureContainerAppEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Redis cache connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Redis: "Redis",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API key based connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ApiKey: "ApiKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OpenAI service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureOpenAI: "AzureOpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure AI Services connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AIServices: "AIServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cognitive Search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CognitiveSearch: "CognitiveSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cognitive Services connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CognitiveService: "CognitiveService",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom keys connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CustomKeys: "CustomKeys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Blob Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureBlob: "AzureBlob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Storage Account connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureStorageAccount: "AzureStorageAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OneLake connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureOneLake: "AzureOneLake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cosmos DB connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CosmosDb: "CosmosDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Cosmos DB MongoDB API connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CosmosDbMongoDbApi: "CosmosDbMongoDbApi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Explorer connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureDataExplorer: "AzureDataExplorer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure MariaDB connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureMariaDb: "AzureMariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Databricks Delta Lake connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureDatabricksDeltaLake: "AzureDatabricksDeltaLake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure SQL Managed Instance connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureSqlMi: "AzureSqlMi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Table Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureTableStorage: "AzureTableStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon RDS for Oracle connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AmazonRdsForOracle: "AmazonRdsForOracle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon RDS for SQL Server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AmazonRdsForSqlServer: "AmazonRdsForSqlServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Redshift connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AmazonRedshift: "AmazonRedshift",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IBM Db2 database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Db2: "Db2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Drill connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Drill: "Drill",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Google BigQuery connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GoogleBigQuery: "GoogleBigQuery",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Greenplum database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Greenplum: "Greenplum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache HBase connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Hbase: "Hbase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Hive connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Hive: "Hive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Impala connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Impala: "Impala",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IBM Informix connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Informix: "Informix",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MariaDB connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MariaDb: "MariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Access database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MicrosoftAccess: "MicrosoftAccess",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MySQL database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MySql: "MySql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IBM Netezza connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Netezza: "Netezza",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Oracle: "Oracle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Phoenix connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Phoenix: "Phoenix",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "PostgreSQL database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PostgreSql: "PostgreSql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Presto distributed SQL connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Presto: "Presto",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Open Hub connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SapOpenHub: "SapOpenHub",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Business Warehouse connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SapBw: "SapBw",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP HANA connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SapHana: "SapHana",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Table connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SapTable: "SapTable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Spark connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Spark: "Spark",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SQL Server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SqlServer: "SqlServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Sybase database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sybase: "Sybase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Teradata database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Teradata: "Teradata",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Vertica database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Vertica: "Vertica",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pinecone vector database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Pinecone: "Pinecone",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Databricks connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Databricks: "Databricks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Cassandra connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Cassandra: "Cassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Couchbase database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Couchbase: "Couchbase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MongoDB v2 connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MongoDbV2: "MongoDbV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MongoDB Atlas connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MongoDbAtlas: "MongoDbAtlas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon S3 compatible storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AmazonS3Compatible: "AmazonS3Compatible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "File server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   FileServer: "FileServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FTP server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   FtpServer: "FtpServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Google Cloud Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GoogleCloudStorage: "GoogleCloudStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Hadoop Distributed File System connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Hdfs: "Hdfs",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Cloud Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OracleCloudStorage: "OracleCloudStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SFTP connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sftp: "Sftp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic HTTP connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GenericHttp: "GenericHttp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OData REST connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ODataRest: "ODataRest",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ODBC connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Odbc: "Odbc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic REST API connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GenericRest: "GenericRest",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote tool connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   RemoteTool: "RemoteTool",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Marketplace Web Service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AmazonMws: "AmazonMws",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Concur connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Concur: "Concur",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Dynamics connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Dynamics: "Dynamics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Dynamics AX connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DynamicsAx: "DynamicsAx",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Dynamics CRM connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DynamicsCrm: "DynamicsCrm",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Google AdWords connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GoogleAdWords: "GoogleAdWords",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "HubSpot connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Hubspot: "Hubspot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Jira connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Jira: "Jira",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Magento connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Magento: "Magento",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketo connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Marketo: "Marketo",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Office 365 connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Office365: "Office365",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Eloqua connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Eloqua: "Eloqua",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Responsys connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Responsys: "Responsys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Service Cloud connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OracleServiceCloud: "OracleServiceCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "PayPal connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PayPal: "PayPal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "QuickBooks connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   QuickBooks: "QuickBooks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Salesforce connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Salesforce: "Salesforce",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Salesforce Service Cloud connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SalesforceServiceCloud: "SalesforceServiceCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Salesforce Marketing Cloud connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SalesforceMarketingCloud: "SalesforceMarketingCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Cloud for Customer connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SapCloudForCustomer: "SapCloudForCustomer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP ECC connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SapEcc: "SapEcc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ServiceNow connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ServiceNow: "ServiceNow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SharePoint Online List connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SharePointOnlineList: "SharePointOnlineList",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shopify connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Shopify: "Shopify",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Square connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Square: "Square",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Web table connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   WebTable: "WebTable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Xero connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Xero: "Xero",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Zoho connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Zoho: "Zoho",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic container registry connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GenericContainerRegistry: "GenericContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Elasticsearch connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Elasticsearch: "Elasticsearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Application Insights connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AppInsights: "AppInsights",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "App Configuration connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AppConfig: "AppConfig",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OpenAI connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OpenAI: "OpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Search engine results page connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Serp: "Serp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bing LLM Search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   BingLLMSearch: "BingLLMSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless endpoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Serverless: "Serverless",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed online endpoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ManagedOnlineEndpoint: "ManagedOnlineEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API Management connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ApiManagement: "ApiManagement",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model Gateway connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ModelGateway: "ModelGateway",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Grounding with Bing Search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GroundingWithBingSearch: "GroundingWithBingSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Grounding with custom search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GroundingWithCustomSearch: "GroundingWithCustomSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SharePoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sharepoint: "Sharepoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Fabric connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MicrosoftFabric: "MicrosoftFabric",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Power Platform environment connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PowerPlatformEnvironment: "PowerPlatformEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote Agent-to-Agent connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   RemoteA2A: "RemoteA2A",
 }
 
@@ -1662,66 +1664,66 @@ union ConnectionCategory {
  */
 union ConnectionGroup {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure services connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Azure: "Azure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure AI services connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   AzureAI: "AzureAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Database connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Database: "Database",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "NoSQL database connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NoSQL: "NoSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "File storage connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   File: "File",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic protocol connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GenericProtocol: "GenericProtocol",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Services and apps connection group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ServicesAndApps: "ServicesAndApps",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint requirement"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ManagedPERequirement {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint is required"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Required: "Required",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint is not required"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NotRequired: "NotRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint is not applicable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NotApplicable: "NotApplicable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint status"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ManagedPEStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint is inactive"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint is active"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint is not applicable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NotApplicable: "NotApplicable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Default resource provisioning state"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union DefaultResourceProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning has not started"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NotStarted: "NotStarted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning request accepted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is scaling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Scaling: "Scaling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
@@ -1730,9 +1732,9 @@ union DefaultResourceProvisioningState {
  */
 union ModelLifecycleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model is generally available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   GenerallyAvailable: "GenerallyAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model is in preview"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Preview: "Preview",
 }
 
@@ -1741,11 +1743,11 @@ union ModelLifecycleStatus {
  */
 union AllowedContentLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Low content filtering level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Low: "Low",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Medium content filtering level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Medium: "Medium",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "High content filtering level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   High: "High",
 }
 
@@ -1754,9 +1756,9 @@ union AllowedContentLevel {
  */
 union RaiPolicyContentSource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apply filters to prompt content"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Prompt: "Prompt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apply filters to completion content"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Completion: "Completion",
 }
 
@@ -1765,11 +1767,11 @@ union RaiPolicyContentSource {
  */
 union RaiPolicyMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Default content filtering mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deferred content filtering mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deferred: "Deferred",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Blocking content filtering mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Blocking: "Blocking",
 }
 
@@ -1778,9 +1780,9 @@ union RaiPolicyMode {
  */
 union RaiPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Policy managed by user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserManaged: "UserManaged",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Policy managed by the system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SystemManaged: "SystemManaged",
 }
 
@@ -1789,17 +1791,17 @@ union RaiPolicyType {
  */
 union EndpointType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OpenAI service endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   `Azure.OpenAI`: "Azure.OpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Speech service endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   `Azure.Speech`: "Azure.Speech",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Content Safety service endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   `Azure.ContentSafety`: "Azure.ContentSafety",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Llama model endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   `Azure.Llama`: "Azure.Llama",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed online endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedOnlineEndpoint: "managedOnlineEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   serverlessEndpoint: "serverlessEndpoint",
 }
 
@@ -1808,38 +1810,38 @@ union EndpointType {
  */
 union DiagnoseResultLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Warning level diagnostic result"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Error level diagnostic result"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Informational diagnostic result"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Information: "Information",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Service account key identifier"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ServiceAccountKeyName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Primary service account key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Key1: "Key1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Secondary service account key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Key2: "Key2",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network provisioning state"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 union ManagedNetworkProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning is deferred"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deferred: "Deferred",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network has been deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleted: "Deleted",
 }
 
@@ -1848,11 +1850,11 @@ union ManagedNetworkProvisioningState {
  */
 union ClusterPurpose {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Fast production workloads"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   FastProd: "FastProd",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Dense production workloads"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DenseProd: "DenseProd",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Development and testing workloads"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DevTest: "DevTest",
 }
 
@@ -1861,11 +1863,11 @@ union ClusterPurpose {
  */
 union SslConfigStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SSL is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SSL is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SSL configuration is automatic"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Auto: "Auto",
 }
 
@@ -1874,9 +1876,9 @@ union SslConfigStatus {
  */
 union LoadBalancerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public IP load balancer"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PublicIp: "PublicIp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Internal load balancer"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InternalLoadBalancer: "InternalLoadBalancer",
 }
 
@@ -1885,9 +1887,9 @@ union LoadBalancerType {
  */
 union OsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Linux operating system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Windows operating system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Windows: "Windows",
 }
 
@@ -1896,9 +1898,9 @@ union OsType {
  */
 union VmPriority {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Dedicated virtual machine priority"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Dedicated: "Dedicated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Low priority virtual machine"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LowPriority: "LowPriority",
 }
 
@@ -1907,11 +1909,11 @@ union VmPriority {
  */
 union RemoteLoginPortPublicAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public SSH port is open"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public SSH port is closed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SSH port access not specified"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NotSpecified: "NotSpecified",
 }
 
@@ -1920,9 +1922,9 @@ union RemoteLoginPortPublicAccess {
  */
 union AllocationState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute is not resizing"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Steady: "Steady",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute nodes are being adjusted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Resizing: "Resizing",
 }
 
@@ -1931,9 +1933,9 @@ union AllocationState {
  */
 union ApplicationSharingPolicy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Only creator can access applications"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Personal: "Personal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace users can access applications"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Shared: "Shared",
 }
 
@@ -1942,9 +1944,9 @@ union ApplicationSharingPolicy {
  */
 union MlflowAutologger {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MLflow autologger is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MLflow autologger is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
@@ -1953,9 +1955,9 @@ union MlflowAutologger {
  */
 union SshPublicAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public SSH port is open"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public SSH port is closed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
@@ -1964,15 +1966,15 @@ union SshPublicAccess {
  */
 union PatchStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patching completed with warnings"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CompletedWithWarnings: "CompletedWithWarnings",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patching failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patching is in progress"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patching completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patching status is unknown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unknown: "Unknown",
 }
 
@@ -1981,37 +1983,37 @@ union PatchStatus {
  */
 union ComputeInstanceState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance creation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreateFailed: "CreateFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is running"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is restarting"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Restarting: "Restarting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is being resized"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Resizing: "Resizing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Job is running on instance"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   JobRunning: "JobRunning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is being set up"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SettingUp: "SettingUp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance setup failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SetupFailed: "SetupFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is starting"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Starting: "Starting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is stopped"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Stopped: "Stopped",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is stopping"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Stopping: "Stopping",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "User is setting up instance"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserSettingUp: "UserSettingUp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "User setup failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   UserSetupFailed: "UserSetupFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance state is unknown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Instance is unusable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Unusable: "Unusable",
 }
 
@@ -2020,7 +2022,7 @@ union ComputeInstanceState {
  */
 union ComputeInstanceAuthorizationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal authorization type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   personal: "personal",
 }
 
@@ -2029,19 +2031,19 @@ union ComputeInstanceAuthorizationType {
  */
 union OperationName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Create operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Create: "Create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Start operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Start: "Start",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Stop operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Stop: "Stop",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Restart operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Restart: "Restart",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resize operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Resize: "Resize",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Reimage operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Reimage: "Reimage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Delete operation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Delete: "Delete",
 }
 
@@ -2050,23 +2052,23 @@ union OperationName {
  */
 union OperationStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation is in progress"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Create operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   CreateFailed: "CreateFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Start operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   StartFailed: "StartFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Stop operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   StopFailed: "StopFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Restart operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   RestartFailed: "RestartFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resize operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ResizeFailed: "ResizeFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Reimage operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReimageFailed: "ReimageFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Delete operation failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   DeleteFailed: "DeleteFailed",
 }
 
@@ -2075,11 +2077,11 @@ union OperationStatus {
  */
 union OperationTrigger {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Triggered by user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Triggered by schedule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Schedule: "Schedule",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Triggered by idle shutdown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   IdleShutdown: "IdleShutdown",
 }
 
@@ -2088,11 +2090,11 @@ union OperationTrigger {
  */
 union ProvisioningStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning in progress"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
 }
 
@@ -2101,9 +2103,9 @@ union ProvisioningStatus {
  */
 union ScheduleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Disabled: "Disabled",
 }
 
@@ -2112,18 +2114,18 @@ union ScheduleStatus {
  */
 union ComputePowerAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Start the compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Start: "Start",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Stop the compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Stop: "Stop",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Type of compute schedule trigger"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ComputeTriggerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Recurrence-based trigger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Recurrence: "Recurrence",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Cron expression-based trigger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Cron: "Cron",
 }
 
@@ -2206,11 +2208,11 @@ union ComputeWeekDay {
  */
 union ScheduleProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning completed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning in progress"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Failed: "Failed",
 }
 
@@ -2219,11 +2221,11 @@ union ScheduleProvisioningState {
  */
 union Autosave {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Autosave is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Autosave to local storage"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Local: "Local",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Autosave to remote storage"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Remote: "Remote",
 }
 
@@ -2232,9 +2234,9 @@ union Autosave {
  */
 union Network {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bridge network mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Bridge: "Bridge",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Host network mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Host: "Host",
 }
 
@@ -2243,11 +2245,11 @@ union Network {
  */
 union Caching {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Caching is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Read-only caching enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadOnly: "ReadOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Read-write caching enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadWrite: "ReadWrite",
 }
 
@@ -2256,13 +2258,13 @@ union Caching {
  */
 union StorageAccountType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard locally redundant storage"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Standard_LRS: "Standard_LRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Premium locally redundant storage"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Premium_LRS: "Premium_LRS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Type of feature filter for monitoring"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MonitoringFeatureFilterType {
   string,
 
@@ -2304,17 +2306,17 @@ union MonitorComputeIdentityType {
  */
 union InputDeliveryMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount input as read-only"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadOnlyMount: "ReadOnlyMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount input as read-write"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadWriteMount: "ReadWriteMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Download input data"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Download: "Download",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Direct access to input data"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Direct: "Direct",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount for evaluation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   EvalMount: "EvalMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Download for evaluation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   EvalDownload: "EvalDownload",
 }
 
@@ -2323,11 +2325,11 @@ union InputDeliveryMode {
  */
 union OutputDeliveryMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mount output as read-write"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ReadWriteMount: "ReadWriteMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Upload output data"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Upload: "Upload",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Direct access to output location"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Direct: "Direct",
 }
 
@@ -2353,17 +2355,17 @@ union ForecastHorizonMode {
  */
 union JobOutputType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output as a URI file reference"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   uri_file: "uri_file",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output as a URI folder reference"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   uri_folder: "uri_folder",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output as an ML table"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   mltable: "mltable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output as a custom model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   custom_model: "custom_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output as an MLflow model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   mlflow_model: "mlflow_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Output as a Triton model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   triton_model: "triton_model",
 }
 
@@ -2372,15 +2374,15 @@ union JobOutputType {
  */
 union JobTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No tier specified"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Null: "Null",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Spot tier using low-priority compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Spot: "Spot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Premium tier with priority scheduling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Premium: "Premium",
 }
 
@@ -2491,19 +2493,19 @@ union TaskType {
  */
 union JobInputType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Input as a literal value"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   literal: "literal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Input as a URI file reference"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   uri_file: "uri_file",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Input as a URI folder reference"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   uri_folder: "uri_folder",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MLTable data asset type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   mltable: "mltable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom model asset type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   custom_model: "custom_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MLflow model asset type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   mlflow_model: "mlflow_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Triton model asset type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   triton_model: "triton_model",
 }
 
@@ -2575,7 +2577,7 @@ union TargetRollingWindowSizeMode {
   Custom: "Custom",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Identity type for service data access authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union ServiceDataAccessAuthIdentity {
   string,
 
@@ -2612,56 +2614,56 @@ union ModelProvider {
   Custom: "Custom",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Fine-tuning task types for model training"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union FineTuningTaskType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Chat completion fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ChatCompletion: "ChatCompletion",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Text completion fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TextCompletion: "TextCompletion",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Text classification fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TextClassification: "TextClassification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Question answering fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   QuestionAnswering: "QuestionAnswering",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Text summarization fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TextSummarization: "TextSummarization",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Token classification fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TokenClassification: "TokenClassification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Text translation fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TextTranslation: "TextTranslation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Image classification fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ImageClassification: "ImageClassification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Image instance segmentation fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ImageInstanceSegmentation: "ImageInstanceSegmentation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Image object detection fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   ImageObjectDetection: "ImageObjectDetection",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Video multi-object tracking fine-tuning task"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   VideoMultiObjectTracking: "VideoMultiObjectTracking",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Types of early termination policies for training"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union EarlyTerminationPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bandit-based early termination policy"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Bandit: "Bandit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Median stopping early termination policy"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   MedianStopping: "MedianStopping",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Truncation selection early termination policy"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TruncationSelection: "TruncationSelection",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Hyperparameter sampling algorithm types"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union SamplingAlgorithmType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Grid search sampling algorithm"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Grid: "Grid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Random sampling algorithm"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Random: "Random",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bayesian optimization sampling algorithm"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Bayesian: "Bayesian",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metrics for measuring categorical data drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union CategoricalDataDriftMetric {
   string,
 
@@ -2681,7 +2683,7 @@ union CategoricalDataDriftMetric {
   PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Data types for monitoring features"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MonitoringFeatureDataType {
   string,
 
@@ -2696,7 +2698,7 @@ union MonitoringFeatureDataType {
   Categorical: "Categorical",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Quality metrics for categorical data"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union CategoricalDataQualityMetric {
   string,
 
@@ -2716,7 +2718,7 @@ union CategoricalDataQualityMetric {
   OutOfBoundsRate: "OutOfBoundsRate",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metrics for measuring categorical prediction drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union CategoricalPredictionDriftMetric {
   string,
 
@@ -2863,7 +2865,7 @@ union ClassificationModels {
  */
 union StackMetaLearnerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No meta-learner selected"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   None: "None",
 
   /**
@@ -2876,7 +2878,7 @@ union StackMetaLearnerType {
    */
   LogisticRegressionCV: "LogisticRegressionCV",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "LightGBM classifier as meta-learner"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LightGBMClassifier: "LightGBMClassifier",
 
   /**
@@ -2889,9 +2891,9 @@ union StackMetaLearnerType {
    */
   ElasticNetCV: "ElasticNetCV",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "LightGBM regressor as meta-learner"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LightGBMRegressor: "LightGBMRegressor",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Linear regression as meta-learner"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LinearRegression: "LinearRegression",
 }
 
@@ -2979,20 +2981,20 @@ union FeaturizationMode {
  */
 union DistributionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "PyTorch distributed training framework"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   PyTorch: "PyTorch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "TensorFlow distributed training framework"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   TensorFlow: "TensorFlow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MPI distributed training framework"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Mpi: "Mpi",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Types of job limits configurations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union JobLimitsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Command job limits type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Command: "Command",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Sweep job limits type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sweep: "Sweep",
 }
 
@@ -3013,13 +3015,13 @@ union MonitorComputeType {
  */
 union ModelTaskType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Classification model task type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Classification: "Classification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regression model task type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Regression: "Regression",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Types of monitoring notifications"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MonitoringNotificationType {
   string,
 
@@ -3029,7 +3031,7 @@ union MonitoringNotificationType {
   AmlNotification: "AmlNotification",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Types of monitoring signals for ML models"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union MonitoringSignalType {
   string,
 
@@ -3147,7 +3149,7 @@ union DataGenerationType {
   DataGeneration: "DataGeneration",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metrics for feature attribution analysis"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union FeatureAttributionMetric {
   string,
 
@@ -3212,13 +3214,13 @@ union TargetAggregationFunction {
    */
   None: "None",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Sum aggregation function"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sum: "Sum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Maximum value aggregation function"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Max: "Max",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Minimum value aggregation function"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Min: "Min",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Mean value aggregation function"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Mean: "Mean",
 }
 
@@ -3233,9 +3235,9 @@ union UseStl {
    */
   None: "None",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "STL decomposition with seasonal component"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Season: "Season",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "STL decomposition with seasonal and trend components"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SeasonTrend: "SeasonTrend",
 }
 
@@ -3557,11 +3559,11 @@ union ObjectDetectionPrimaryMetrics {
  */
 union OneLakeArtifactType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OneLake Lakehouse artifact type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   LakeHouse: "LakeHouse",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metrics for measuring numerical data drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union NumericalDataDriftMetric {
   string,
 
@@ -3586,7 +3588,7 @@ union NumericalDataDriftMetric {
   TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Quality metrics for numerical data"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union NumericalDataQualityMetric {
   string,
 
@@ -3606,7 +3608,7 @@ union NumericalDataQualityMetric {
   OutOfBoundsRate: "OutOfBoundsRate",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metrics for measuring numerical prediction drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union NumericalPredictionDriftMetric {
   string,
 
@@ -3636,9 +3638,9 @@ union NumericalPredictionDriftMetric {
  */
 union Goal {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Minimize the metric value during tuning"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Minimize: "Minimize",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Maximize the metric value during tuning"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Maximize: "Maximize",
 }
 
@@ -3647,9 +3649,9 @@ union Goal {
  */
 union RandomSamplingAlgorithmRule {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard random sampling algorithm"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Random: "Random",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Sobol quasi-random sequence sampling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Sobol: "Sobol",
 }
 
@@ -3743,12 +3745,12 @@ union RegressionModels {
   XGBoostRegressor: "XGBoostRegressor",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Entry point types for Spark jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 union SparkJobEntryType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Python script entry point for Spark job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SparkJobPythonEntry: "SparkJobPythonEntry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Scala class entry point for Spark job"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SparkJobScalaEntry: "SparkJobScalaEntry",
 }
 
@@ -3757,11 +3759,11 @@ union SparkJobEntryType {
  */
 union DeploymentModelVersionUpgradeOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Upgrade when a new default version is available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OnceNewDefaultVersionAvailable: "OnceNewDefaultVersionAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Upgrade when the current version expires"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   OnceCurrentVersionExpired: "OnceCurrentVersionExpired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Disable automatic version upgrades"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   NoAutoUpgrade: "NoAutoUpgrade",
 }
 
@@ -3770,10 +3772,21 @@ union DeploymentModelVersionUpgradeOption {
  */
 union RuleAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow network traffic matching the rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deny network traffic matching the rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Deny: "Deny",
+}
+
+/**
+ * Enum to specifies the source type for an isolation key.
+ */
+union IsolationKeySourceType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  Entra: "Entra",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  Header: "Header",
 }
 
 /**
@@ -4154,7 +4167,7 @@ model ResourceName {
  */
 model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schema for Machine Learning compute resources"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model ComputeResourceSchema {
   /**
@@ -4259,7 +4272,7 @@ model ClusterUpdateProperties {
  * Desired scale settings for the amlCompute.
  */
 model ScaleSettingsInformation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Scale settings for AML compute cluster"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @summary("Scale settings.")
   scaleSettings?: ScaleSettings;
 }
@@ -4330,7 +4343,7 @@ model CustomService {
   kernel?: JupyterKernelConfig;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Container or environment image specification"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model Image {
   ...Record<unknown>;
 
@@ -4351,7 +4364,7 @@ model Image {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Environment variable configuration for containers"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EnvironmentVariable {
   ...Record<unknown>;
 
@@ -4367,7 +4380,7 @@ model EnvironmentVariable {
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Docker container configuration settings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model Docker {
   ...Record<unknown>;
 
@@ -4378,7 +4391,7 @@ model Docker {
   privileged?: boolean | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Network endpoint configuration for containers"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model Endpoint {
   /**
    * Protocol over which communication will happen over this endpoint
@@ -4409,7 +4422,7 @@ model Endpoint {
   hostIp?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Volume mount configuration for containers"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VolumeDefinition {
   /**
    * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
@@ -4458,7 +4471,7 @@ model VolumeDefinition {
   tmpfs?: TmpfsOptions | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Bind mount options for volume definitions"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model BindOptions {
   /**
    * Type of Bind Option
@@ -4479,7 +4492,7 @@ model BindOptions {
   selinux?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Named volume options for volume definitions"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
@@ -4488,7 +4501,7 @@ model VolumeOptions {
   nocopy?: boolean | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Temporary filesystem options for volume definitions"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TmpfsOptions {
   /**
    * Mention the Tmpfs size
@@ -4679,7 +4692,7 @@ model ResizeSchema {
  */
 model AvailableQuotaArmPaginatedResult is Azure.Core.Page<AvailableQuota>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Available quota information for a resource"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AvailableQuota {
   /**
    * Available quota properties
@@ -4688,7 +4701,7 @@ model AvailableQuota {
   properties?: AvailableQuotaProperties | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties for available quota details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AvailableQuotaProperties {
   /**
    * The number of available quota
@@ -4702,7 +4715,7 @@ model AvailableQuotaProperties {
 model UsageAndQuotaDetailsArmPaginatedResult
   is Azure.Core.Page<UsageAndQuotaDetails>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Usage and quota details for deployments"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model UsageAndQuotaDetails {
   /**
    * Model collection name
@@ -4722,7 +4735,7 @@ model UsageAndQuotaDetails {
   usageDetails?: PTUDeploymentUsage[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "PTU deployment usage details per workspace"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model PTUDeploymentUsage {
   /**
@@ -4772,7 +4785,7 @@ model CodeContainerProperties extends AssetContainer {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base container for versioned ML assets"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
@@ -4795,7 +4808,7 @@ model AssetContainer extends ResourceBase {
   nextVersion?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base properties for ML resources"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ResourceBase {
   /**
    * The asset description text.
@@ -4843,7 +4856,7 @@ model CodeVersionProperties extends AssetBase {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base properties for versioned ML assets"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AssetBase extends ResourceBase {
   /**
    * If the name version are system generated (anonymous registration).
@@ -4858,7 +4871,7 @@ model AssetBase extends ResourceBase {
   isArchived?: boolean = false;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request to create a pending upload location"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PendingUploadRequestDto {
   /**
    * If PendingUploadId = null then random guid will be used.
@@ -4872,7 +4885,7 @@ model PendingUploadRequestDto {
   pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Response with pending upload location details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PendingUploadResponseDto {
   /**
    * Container level read, write, list SAS
@@ -4892,7 +4905,7 @@ model PendingUploadResponseDto {
   pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Blob storage reference with access credentials"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model BlobReferenceForConsumptionDto {
   /**
    * Blob URI path for client to upload data.
@@ -4914,7 +4927,7 @@ model BlobReferenceForConsumptionDto {
   storageAccountArmId?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential for accessing pending upload storage"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("credentialType")
 model PendingUploadCredentialDto {
   /**
@@ -5044,7 +5057,7 @@ model GetBlobReferenceSASResponseDto {
   blobReferenceForConsumption?: GetBlobReferenceForConsumptionDto | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Blob reference details for data consumption"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model GetBlobReferenceForConsumptionDto {
   /**
    * Blob uri, example: https://blob.windows.core.net/Container/Path
@@ -5142,6 +5155,7 @@ model EnvironmentVersionProperties extends AssetBase {
    * Environment image details.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   imageDetails?: ImageDetails;
 
   /**
@@ -5190,8 +5204,9 @@ model BuildContext {
   dockerfilePath?: string = "Dockerfile";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Container image details and vulnerability findings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -5211,7 +5226,7 @@ model ImageDetails {
   vulnerabilityFindings?: VulnerabilityFindings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Container image metadata including digest and tag"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ImageInfo {
   /**
    * Image digest
@@ -5238,7 +5253,7 @@ model ImageInfo {
   tag?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Security vulnerability scan results for container images"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VulnerabilityFindings {
   /**
    * AssetId (Image digest).
@@ -5296,7 +5311,7 @@ model VulnerabilityFindings {
   totalFindingsCount?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Details of an individual security vulnerability"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VulnerabilityDetails {
   /**
    * CVE id.
@@ -5378,7 +5393,7 @@ model VulnerabilityDetails {
   vendorUrl?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Package dependency information for vulnerability tracking"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PackageDetails {
   /**
    * Install path.
@@ -5405,7 +5420,7 @@ model PackageDetails {
   patchedVersion?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration for inference container routing"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model InferenceContainerProperties {
   /**
    * The route to check the liveness of the inference server container.
@@ -5429,7 +5444,7 @@ model InferenceContainerProperties {
   startupRoute?: Route | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Route configuration for container health probes"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model Route {
   /**
    * [Required] The path for the route.
@@ -5451,7 +5466,7 @@ model ModelContainerResourceArmPaginatedResult
   is Azure.Core.Page<ModelContainer>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties for ML model asset container"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ModelContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the model container.
@@ -5514,7 +5529,7 @@ model ModelVersionProperties extends AssetBase {
   datasets?: DatasetReference[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "ML model flavor-specific configuration data"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FlavorData {
   /**
    * Model flavor-specific data.
@@ -5797,11 +5812,11 @@ model AssetReferenceBase {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute resource settings for deployment"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
 model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute resource configuration for ML workloads"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ResourceConfiguration {
   /**
    * Optional number of instances or nodes used by the compute target.
@@ -5927,7 +5942,7 @@ model PartialBatchDeployment {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration for capability host connections"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CapabilityHostProperties extends ResourceBase {
   /**
    * List of Aca Environment connections.
@@ -6156,7 +6171,7 @@ model FeaturesetVersionProperties extends AssetBase {
   stage?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Feature set materialization configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MaterializationSettings {
   /**
    * Specifies the notification details
@@ -6246,7 +6261,7 @@ model MaterializationComputeResource {
   instanceType?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Trigger for recurring scheduled operations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RecurrenceTrigger extends TriggerBase {
   /**
    * [Required] The frequency to trigger schedule.
@@ -6270,7 +6285,7 @@ model RecurrenceTrigger extends TriggerBase {
   triggerType: "Recurrence";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule definition for recurring operations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RecurrenceSchedule {
   /**
    * [Required] List of hours for the schedule.
@@ -6295,7 +6310,7 @@ model RecurrenceSchedule {
   weekDays?: WeekDay[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base configuration for schedule triggers"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("triggerType")
 model TriggerBase {
   /**
@@ -6544,11 +6559,11 @@ model PropertiesBase {
   properties?: StringStringKeyValuePair[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "String key-value pair for property storage"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model StringStringKeyValuePair {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The property key identifier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   key?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The property value"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   value?: string;
 }
 
@@ -6789,7 +6804,7 @@ model PartialMinimalTrackedResourceWithSku
   sku?: PartialSku;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request to retrieve delta model deployment status"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DeltaModelStatusRequest {
   /**
    * Gets or sets collection of delta models to retrieve status for.
@@ -6861,7 +6876,7 @@ model DeltaModelCurrentState {
   status?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request to list delta models for a base model"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DeltaModelListRequest {
   /**
    * Gets or sets number of delta models to return. Default: -1, means that all will be returned.
@@ -6925,7 +6940,7 @@ model DeltaModelModifyRequest {
   targetBaseModel?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Inference group capacity and endpoint status"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model GroupStatus {
   /**
    * Gets or sets the actual capacity info for the group.
@@ -6944,7 +6959,7 @@ model GroupStatus {
   requestedCapacity?: int32 = 0;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Current capacity metrics for inference group"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ActualCapacityInfo {
   /**
    * Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.
@@ -7114,6 +7129,7 @@ model JobBaseProperties extends ResourceBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   parentJobName?: string | null;
 
   /**
@@ -7215,7 +7231,7 @@ model Nodes {
 model MarketplaceSubscriptionResourceArmPaginatedResult
   is Azure.Core.Page<MarketplaceSubscription>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketplace subscription configuration properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MarketplaceSubscriptionProperties {
   /**
    * Marketplace Plan associated with the Marketplace Subscription.
@@ -7244,7 +7260,7 @@ model MarketplaceSubscriptionProperties {
   provisioningState?: MarketplaceSubscriptionProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Marketplace plan details for subscriptions"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MarketplacePlan {
   /**
    * The identifying name of the Offer of the Marketplace Plan.
@@ -7319,7 +7335,7 @@ model OnlineDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineDeployment>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Online deployment configuration for ML endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("endpointComputeType")
 model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
@@ -7402,7 +7418,7 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   startupProbe?: ProbeSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model data collection configuration for deployments"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DataCollector {
   /**
    * [Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.
@@ -7426,7 +7442,7 @@ model DataCollector {
   rollingRate?: RollingRateType = RollingRateType.Hour;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Data collection settings for model monitoring"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model Collection {
   /**
    * The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.
@@ -7451,7 +7467,7 @@ model Collection {
   samplingRate?: float64 = 1;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request logging configuration for data collection"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RequestLogging {
   /**
    * For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.
@@ -7494,7 +7510,7 @@ model OnlineScaleSettings {
   scaleType: ScaleType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request parameters for retrieving deployment logs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DeploymentLogsRequest {
   /**
    * The type of container to retrieve logs from.
@@ -7508,7 +7524,7 @@ model DeploymentLogsRequest {
   tail?: int32 | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Container logs from an online deployment"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DeploymentLogs {
   /**
    * The retrieved online deployment logs.
@@ -7517,7 +7533,7 @@ model DeploymentLogs {
   content?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request to regenerate endpoint authentication keys"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RegenerateEndpointKeysRequest {
   /**
    * [Required] Specification for which type of key to generate. Primary or Secondary.
@@ -7601,7 +7617,7 @@ model ScheduleProperties extends ResourceBase {
   trigger: TriggerBase;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base definition for schedule-triggered actions"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("actionType")
 model ScheduleActionBase {
   /**
@@ -7617,7 +7633,7 @@ model ScheduleActionBase {
 model ServerlessEndpointTrackedResourceArmPaginatedResult
   is Azure.Core.Page<ServerlessEndpoint>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless endpoint configuration properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessEndpointProperties {
   /**
    * [Required] Specifies the authentication mode for the Serverless endpoint.
@@ -7663,12 +7679,13 @@ model ServerlessEndpointProperties {
   provisioningState?: EndpointProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Content safety settings for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ContentSafety {
   /**
    * Specifies the current safety level for content safety.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
@@ -7677,7 +7694,7 @@ model ContentSafety {
   contentSafetyStatus: ContentSafetyStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless inference endpoint URI and headers"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessInferenceEndpoint {
   /**
    * Specifies any required headers to target this serverless endpoint.
@@ -7694,7 +7711,7 @@ model ServerlessInferenceEndpoint {
   uri: url;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model configuration for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ModelSettings {
   /**
    * The unique model identifier that this ServerlessEndpoint should provision.
@@ -7928,7 +7945,7 @@ model AcrDetails {
   systemCreatedAcrAccount?: SystemCreatedAcrAccount | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "System-created Azure Container Registry account"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SystemCreatedAcrAccount {
   /**
    * Name of the ACR account
@@ -7960,7 +7977,7 @@ model StorageAccountDetails {
   systemCreatedStorageAccount?: SystemCreatedStorageAccount | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "System-created Azure Storage account configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SystemCreatedStorageAccount {
   /**
    * Public blob access allowed
@@ -8090,6 +8107,7 @@ model WorkspaceProperties {
    * The URI of agents endpoint associated with this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   agentsEndpointUri?: url;
 
@@ -8103,6 +8121,7 @@ model WorkspaceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8110,11 +8129,12 @@ model WorkspaceProperties {
    */
   applicationInsights?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of associated workspaces"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   associatedWorkspaces?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of container registries"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   containerRegistries?: string[];
 
   /**
@@ -8132,9 +8152,9 @@ model WorkspaceProperties {
    */
   discoveryUrl?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enable data isolation for the workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   enableDataIsolation?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enable service-side CMK encryption"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   enableServiceSideCMKEncryption?: boolean;
 
@@ -8142,19 +8162,22 @@ model WorkspaceProperties {
    * Flag to tell if simplified CMK should be enabled for this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   enableSimplifiedCmk?: boolean;
 
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   enableSoftwareBillOfMaterials?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Customer-managed key encryption settings"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   encryption?: EncryptionProperty;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of existing related workspaces"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   existingWorkspaces?: string[];
 
   /**
@@ -8172,7 +8195,7 @@ model WorkspaceProperties {
    */
   hbiWorkspace?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM ID of the parent hub workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   hubResourceId?: string;
 
   /**
@@ -8184,6 +8207,7 @@ model WorkspaceProperties {
    * The list of IPv4  addresses that are allowed to access the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   ipAllowlist?: string[];
 
   /**
@@ -8191,11 +8215,14 @@ model WorkspaceProperties {
    */
   keyVault?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of associated key vaults"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   keyVaults?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed virtual network configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -8208,6 +8235,7 @@ model WorkspaceProperties {
    * A set of rules governing the network accessibility of the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8276,6 +8304,7 @@ model WorkspaceProperties {
    * Retention time in days after workspace get soft deleted.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -8283,8 +8312,9 @@ model WorkspaceProperties {
    */
   storageAccount?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM IDs of associated storage accounts"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   storageAccounts?: string[];
 
   /**
@@ -8321,7 +8351,7 @@ model WorkspaceProperties {
   workspaceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Customer-managed key encryption configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EncryptionProperty {
   /**
    * The byok cosmosdb account that customer brings to store customer's data
@@ -8392,19 +8422,19 @@ model KeyVaultProperties {
   keyVaultArmId: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Feature store workspace configuration settings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FeatureStoreSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Spark compute runtime configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   computeRuntime?: ComputeRuntimeDto;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection name for offline feature store"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   offlineStoreConnectionName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection name for online feature store"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   onlineStoreConnectionName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute runtime configuration for feature store"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ComputeRuntimeDto {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Spark runtime version identifier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   sparkRuntimeVersion?: string;
 }
 
@@ -8422,7 +8452,7 @@ model ManagedNetworkSettings {
    */
   isolationMode?: IsolationMode;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Unique identifier for the managed network"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   networkId?: string;
 
@@ -8484,7 +8514,7 @@ model OutboundRule {
   @visibility(Lifecycle.Read)
   errorInformation?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Parent rule names for rule dependencies"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   parentRuleNames?: string[];
 }
@@ -8493,7 +8523,7 @@ model OutboundRule {
  * Status of the Provisioning for the managed network of a machine learning workspace.
  */
 model ManagedNetworkProvisionStatus {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Indicates if Spark is ready on managed network"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   sparkReady?: boolean;
 
   /**
@@ -8502,7 +8532,7 @@ model ManagedNetworkProvisionStatus {
   status?: ManagedNetworkStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Network access control list configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NetworkAcls {
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
@@ -8526,11 +8556,11 @@ model IPRule {
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Notebook compute resource information"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NotebookResourceInfo {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Fully qualified domain name for notebook"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   fqdn?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether private link is enabled for notebook"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   isPrivateLinkEnabled?: boolean;
 
   /**
@@ -8544,18 +8574,18 @@ model NotebookResourceInfo {
   resourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Error details when notebook preparation fails"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NotebookPreparationError {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Detailed error message for the failure"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   errorMessage?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "HTTP status code of the error response"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   statusCode?: int32;
 }
 
 /**
  * Private endpoint connection properties.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint connection configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PrivateEndpointConnectionProperties {
   privateEndpoint?: WorkspacePrivateEndpointResource;
 
@@ -8608,7 +8638,7 @@ model PrivateLinkServiceConnectionState {
   status?: EndpointServiceConnectionStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless compute configuration for workspace"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessComputeSettings {
   /**
    * The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed
@@ -8622,19 +8652,19 @@ model ServerlessComputeSettings {
   serverlessComputeNoPublicIP?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Service-managed Azure resource settings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServiceManagedResourcesSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Cosmos DB configuration for workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   cosmosDb?: CosmosDbSettings;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cosmos DB account settings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CosmosDbSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Throughput setting for Cosmos DB collections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   collectionsThroughput?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared private link resource for workspace"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SharedPrivateLinkResource {
   /**
    * Unique name of the private link
@@ -8676,16 +8706,16 @@ model SharedPrivateLinkResourceProperty {
  * WorkspaceHub's configuration object.
  */
 model WorkspaceHubConfig {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Additional storage accounts for hub workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   additionalWorkspaceStorageAccounts?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Default resource group for child workspaces"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   defaultWorkspaceResourceGroup?: string;
 }
 
 /**
  * The parameters for updating a machine learning workspace.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Parameters for updating ML workspace properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceUpdateParameters {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
@@ -8710,9 +8740,10 @@ model WorkspaceUpdateParameters {
  * The parameters for updating a machine learning workspace.
  */
 model WorkspacePropertiesUpdateParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow role assignments at resource group level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8730,16 +8761,17 @@ model WorkspacePropertiesUpdateParameters {
    */
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enable data isolation for the workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   enableDataIsolation?: boolean;
 
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   enableSoftwareBillOfMaterials?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption settings update configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   encryption?: EncryptionUpdateProperties;
 
   /**
@@ -8760,17 +8792,20 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * The list of IPv4 addresses that are allowed to access the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IPv4 addresses allowed to access workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   ipAllowlist?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed virtual network configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
    * A set of rules governing the network accessibility of the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8797,6 +8832,7 @@ model WorkspacePropertiesUpdateParameters {
    * Retention time in days after workspace get soft deleted.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -8810,26 +8846,26 @@ model WorkspacePropertiesUpdateParameters {
   v1LegacyMode?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption update configuration properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EncryptionUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Key Vault properties for encryption update"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   keyVaultProperties: EncryptionKeyVaultUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Key Vault properties for encryption updates"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EncryptionKeyVaultUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Key identifier URI from Azure Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   keyIdentifier: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated list of workspace connections"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   is Azure.Core.Page<WorkspaceConnectionPropertiesV2BasicResource>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection configuration properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
   /**
@@ -8842,15 +8878,15 @@ model WorkspaceConnectionPropertiesV2 {
    */
   category?: ConnectionCategory;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM ID of workspace that created connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   createdByWorkspaceArmId?: Azure.Core.armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Error message if connection failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   error?: string;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection credential expiration time"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   expiryTime?: utcDateTime;
 
   /**
@@ -8859,7 +8895,7 @@ model WorkspaceConnectionPropertiesV2 {
   @visibility(Lifecycle.Read)
   group?: ConnectionGroup;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether connection is shared to all users"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   isSharedToAll?: boolean;
 
   /**
@@ -8868,15 +8904,15 @@ model WorkspaceConnectionPropertiesV2 {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   metadata?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint requirement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   peRequirement?: ManagedPERequirement;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint status"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   peStatus?: ManagedPEStatus;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "List of users connection is shared with"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   sharedUserList?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Target resource URI for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   target?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Use workspace managed identity for auth"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   useWorkspaceManagedIdentity?: boolean;
 }
 
@@ -8890,11 +8926,11 @@ model WorkspaceConnectionUpdateParameter {
   properties?: WorkspaceConnectionPropertiesV2;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated list of endpoint deployments"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<EndpointDeploymentResourcePropertiesBasicResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint deployment resource configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("type")
 model EndpointDeploymentResourceProperties {
   /**
@@ -8918,7 +8954,7 @@ model EndpointDeploymentResourceProperties {
   type: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated list of endpoint model properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModels is Azure.Core.Page<EndpointModelProperties>;
 
 /**
@@ -8931,7 +8967,7 @@ model EndpointModelProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   capabilities?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model deprecation timeline and status"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   deprecation?: EndpointModelDeprecationProperties;
 
   /**
@@ -8968,10 +9004,11 @@ model EndpointModelProperties {
   /**
    * The list of Model Sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Available SKU options for this model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   skus?: EndpointModelSkuProperties[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "System metadata for the model resource"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   systemData?: SystemData;
 
   /**
@@ -8980,7 +9017,7 @@ model EndpointModelProperties {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model deprecation timeline information"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModelDeprecationProperties {
   /**
    * The datetime of deprecation of the fineTune Model.
@@ -8995,9 +9032,9 @@ model EndpointModelDeprecationProperties {
   inference?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "SKU properties for endpoint model deployment"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModelSkuProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capacity limits for this model SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   capacity?: EndpointModelSkuCapacityProperties;
 
   /**
@@ -9017,7 +9054,7 @@ model EndpointModelSkuProperties {
   name?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rate limit settings for the model SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   rateLimits?: EndpointModelSkuRateLimitProperties[];
 
   /**
@@ -9026,7 +9063,7 @@ model EndpointModelSkuProperties {
   usageName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Capacity properties for an endpoint model SKU"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModelSkuCapacityProperties {
   /**
    * The default capacity.
@@ -9039,7 +9076,7 @@ model EndpointModelSkuCapacityProperties {
   maximum?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Rate limit properties for an endpoint model SKU"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModelSkuRateLimitProperties {
   /**
    * The count value of Call Rate Limit.
@@ -9058,9 +9095,9 @@ model EndpointModelSkuRateLimitProperties {
   rules?: EndpointModelSkuRateLimitRuleProperties[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Rate limit rule properties for an endpoint model SKU"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModelSkuRateLimitRuleProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The count value for the rate limit rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   count?: float32;
 
   /**
@@ -9069,28 +9106,28 @@ model EndpointModelSkuRateLimitRuleProperties {
   dynamicThrottlingEnabled?: boolean;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The key identifier for the rate limit rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URL patterns to match for the rate limit rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   matchPatterns?: EndpointModelSkuRateLimitRulePatternProperties[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The minimum count value for the rate limit rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   minCount?: float32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The renewal period in seconds for the rate limit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   renewalPeriod?: float32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Pattern properties for rate limit rule matching"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointModelSkuRateLimitRulePatternProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The HTTP method to match"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   method?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The URL path pattern to match"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   path?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated list of RAI blocklist properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RaiBlocklistPropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<RaiBlocklistPropertiesBasicResource>;
 
@@ -9117,7 +9154,7 @@ model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
  * The Cognitive Services RaiBlocklist Item request body.
  */
 model RaiBlocklistItemBulkRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The name of the blocklist item"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   name?: string;
 
   /**
@@ -9142,7 +9179,7 @@ model RaiBlocklistItemProperties {
   pattern?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated list of RAI blocklist item properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<RaiBlocklistItemPropertiesBasicResource>;
 
@@ -9163,9 +9200,9 @@ model RaiPolicyProperties {
   basePolicyName?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Blocklists applied to completion responses"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   completionBlocklists?: RaiBlocklistConfig[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content filters for the RAI policy"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   contentFilters?: RaiPolicyContentFilter[];
 
   /**
@@ -9174,7 +9211,7 @@ model RaiPolicyProperties {
   mode?: RaiPolicyMode;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Blocklists applied to input prompts"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   promptBlocklists?: RaiBlocklistConfig[];
 
   /**
@@ -9233,11 +9270,11 @@ model RaiPolicyContentFilter {
  * Parameters to diagnose a workspace
  */
 model DiagnoseWorkspaceParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Diagnostic request properties for the workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   value?: DiagnoseRequestProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties for workspace diagnostic requests"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DiagnoseRequestProperties {
   /**
    * Setting for diagnosing dependent application insights
@@ -9300,47 +9337,47 @@ model DiagnoseRequestProperties {
   udr?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Result of a workspace diagnostic operation"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DiagnoseResponseResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The diagnostic result values"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   value?: DiagnoseResponseResultValue;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Contains detailed diagnostic results by category"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DiagnoseResponseResultValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for user-defined route diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   userDefinedRouteResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for network security rule diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for resource lock diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   resourceLockResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for DNS resolution diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   dnsResolutionResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for storage account diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   storageAccountResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for key vault diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   keyVaultResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for container registry diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   containerRegistryResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for Application Insights diagnostics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   applicationInsightsResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Results for other diagnostic categories"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["message"])
   otherResults?: DiagnoseResult[];
 }
@@ -9368,11 +9405,11 @@ model DiagnoseResult {
   message?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated list of endpoint resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointResourcePropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<EndpointResourcePropertiesBasicResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties of an endpoint resource"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("endpointType")
 model EndpointResourceProperties {
   /**
@@ -9384,6 +9421,7 @@ model EndpointResourceProperties {
    * Deployments info.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   deployments?: EndpointDeploymentResourcePropertiesBasicResource[];
 
   /**
@@ -9427,7 +9465,7 @@ model EndpointResourceProperties {
   shouldCreateAiServicesEndpoint?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "API keys for an endpoint"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointKeys {
   /**
    * Dictionary of Keys for the endpoint.
@@ -9436,24 +9474,24 @@ model EndpointKeys {
   keys?: AccountApiKeys;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "API keys for an account"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AccountApiKeys {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The primary API key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   key1?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The secondary API key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   key2?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request body for regenerating service account keys"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RegenerateServiceAccountKeyContent {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The name of the key to regenerate"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   keyName?: ServiceAccountKeyName;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Result of listing workspace keys"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ListWorkspaceKeysResult {
   /**
    * The access key of the workspace app insights
@@ -9462,9 +9500,9 @@ model ListWorkspaceKeysResult {
   @secret
   appInsightsInstrumentationKey?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Container registry credentials for the workspace"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   containerRegistryCredentials?: RegistryListCredentialsResult;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Access keys for notebook resources"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   notebookAccessKeys?: ListNotebookKeysResult;
 
   /**
@@ -9481,7 +9519,7 @@ model ListWorkspaceKeysResult {
   userStorageKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Container registry credentials result"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model RegistryListCredentialsResult {
   /**
    * The location of the workspace ACR
@@ -9489,7 +9527,7 @@ model RegistryListCredentialsResult {
   @visibility(Lifecycle.Read)
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "List of registry passwords"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["name"])
   passwords?: Password[];
 
@@ -9500,20 +9538,20 @@ model RegistryListCredentialsResult {
   username?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Password credential for registry access"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model Password {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The name of the password"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   @secret
   name?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The password value"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   @secret
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Result of listing notebook access keys"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ListNotebookKeysResult {
   /**
    * The primary access key of the Notebook
@@ -9530,44 +9568,44 @@ model ListNotebookKeysResult {
   secondaryAccessKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Result of notebook access token request"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NotebookAccessTokenResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The access token for notebook authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   @secret
   accessToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Token expiration time in seconds"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   expiresIn?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The hostname of the notebook server"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   hostName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The resource ID of the notebook"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   notebookResourceId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The public DNS name for the notebook"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   publicDns?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The refresh token for obtaining new access tokens"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   @secret
   refreshToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The scope of the access token"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   scope?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The type of the token (e.g., Bearer)"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   tokenType?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Result of listing storage account keys"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ListStorageAccountKeysResult {
   /**
    * The access key of the storage
@@ -9577,10 +9615,10 @@ model ListStorageAccountKeysResult {
   userStorageKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Response containing external FQDN endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model ExternalFQDNResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "List of FQDN endpoint property bags"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
@@ -9589,33 +9627,33 @@ model ExternalFQDNResponse {
  * Property bag for FQDN endpoints result
  */
 model FqdnEndpointsPropertyBag {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The FQDN endpoints properties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   properties?: FqdnEndpoints;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FQDN endpoints grouped by category"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FqdnEndpoints {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The category of these FQDN endpoints"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   category?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "List of FQDN endpoints in this category"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "A fully qualified domain name endpoint"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FqdnEndpoint {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The domain name of the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   domainName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection details for the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @identifiers(#["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection details for an FQDN endpoint"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FqdnEndpointDetail {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The port number for the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   port?: int32;
 }
 
@@ -9629,7 +9667,7 @@ model PrivateEndpointConnectionListResult {
   @pageItems
   value?: PrivateEndpointConnection[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URL to get the next page of results"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @nextLink
   nextLink?: string;
 }
@@ -9641,11 +9679,11 @@ model PrivateLinkResourceListResult {
   /**
    * A list of private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "List of private link resources"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @pageItems
   value?: PrivateLinkResource[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URL to get the next page of results"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @nextLink
   nextLink?: string;
 }
@@ -9653,7 +9691,7 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "A private link resource for the workspace"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
@@ -9673,7 +9711,7 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
    */
   sku?: Azure.ResourceManager.CommonTypes.Sku;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource tags"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string>;
 }
@@ -9702,12 +9740,12 @@ model PrivateLinkResourceProperties {
  * Managed Network Provisioning options for managed network of a machine learning workspace.
  */
 model ManagedNetworkProvisionOptions {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether to include Spark in provisioning"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   includeSpark?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network settings as a resource"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ManagedNetworkSettingsBasicResource
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -9733,9 +9771,9 @@ model ManagedNetworkSettingsProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Extended managed network settings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Isolation modes that can be changed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   changeableIsolationModes?: IsolationMode[];
 }
@@ -9764,7 +9802,7 @@ model AKS extends Compute {
   computeType: "AKS";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schema for AKS compute configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AKSSchema {
   /**
@@ -10283,6 +10321,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
@@ -10351,6 +10390,7 @@ model ComputeInstanceProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
@@ -10359,6 +10399,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
@@ -10375,6 +10416,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
@@ -10454,6 +10496,7 @@ model ComputeInstanceProperties {
  * Specifies settings for autologger.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model ComputeInstanceAutologgerSettings {
   /**
    * Indicates whether mlflow autologger is enabled for notebooks.
@@ -10799,7 +10842,7 @@ model Recurrence {
   schedule?: ComputeRecurrenceSchedule;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Recurrence schedule for compute operations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ComputeRecurrenceSchedule {
   /**
    * [Required] List of hours for the schedule.
@@ -10847,7 +10890,7 @@ model Cron {
   expression?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base properties for a schedule"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ScheduleBase {
   /**
    * A system assigned id for the schedule.
@@ -10990,13 +11033,13 @@ model VirtualMachine extends Compute {
   computeType: "VirtualMachine";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schema for Virtual Machine compute"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VirtualMachineSchema {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Virtual Machine compute properties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   properties?: VirtualMachineSchemaProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties of a Virtual Machine compute"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VirtualMachineSchemaProperties {
   /**
    * Virtual Machine size
@@ -11091,7 +11134,7 @@ model HDInsight extends Compute {
   computeType: "HDInsight";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "HDInsight compute configuration schema"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model HDInsightSchema {
   properties?: HDInsightProperties;
 }
@@ -11134,7 +11177,7 @@ model Databricks extends Compute {
   computeType: "Databricks";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Databricks compute configuration schema"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DatabricksSchema {
   properties?: DatabricksProperties;
 }
@@ -11151,13 +11194,13 @@ model DataLakeAnalytics extends Compute {
   computeType: "DataLakeAnalytics";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Data Lake Analytics compute schema"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DataLakeAnalyticsSchema {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration properties for Data Lake Analytics"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   properties?: DataLakeAnalyticsSchemaProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties for Data Lake Analytics compute"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DataLakeAnalyticsSchemaProperties {
   /**
    * DataLake Store Account Name
@@ -11169,7 +11212,7 @@ model DataLakeAnalyticsSchemaProperties {
  * A SynapseSpark compute.
  */
 model SynapseSpark extends Compute {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Synapse Spark pool configuration properties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   properties?: SynapseSparkProperties;
 
   /**
@@ -11178,7 +11221,7 @@ model SynapseSpark extends Compute {
   computeType: "SynapseSpark";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration properties for Synapse Spark compute"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SynapseSparkProperties {
   /**
    * Auto scale properties.
@@ -11235,11 +11278,11 @@ model SynapseSparkProperties {
  * Auto scale properties
  */
 model AutoScaleProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Minimum number of nodes for auto scaling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   minNodeCount?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether auto scaling is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   enabled?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Maximum number of nodes for auto scaling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   maxNodeCount?: int32;
 }
 
@@ -11247,9 +11290,9 @@ model AutoScaleProperties {
  * Auto pause properties
  */
 model AutoPauseProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Delay in minutes before auto pause"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   delayInMinutes?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether auto pause is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   enabled?: boolean;
 }
 
@@ -11298,7 +11341,7 @@ model VirtualMachineSecrets extends ComputeSecrets {
   computeType: "VirtualMachine";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Virtual machine secrets configuration schema"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model VirtualMachineSecretsSchema {
   /**
    * Admin credentials for virtual machine.
@@ -11362,7 +11405,7 @@ model AccountKeyDatastoreSecrets extends DatastoreSecrets {
   secretsType: "AccountKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter that includes all features for monitoring"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AllFeatures extends MonitoringFeatureFilterBase {
   /**
    * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
@@ -11370,7 +11413,7 @@ model AllFeatures extends MonitoringFeatureFilterBase {
   filterType: "AllFeatures";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for monitoring feature filters"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("filterType")
 model MonitoringFeatureFilterBase {
   /**
@@ -11569,7 +11612,7 @@ model JobOutput {
   jobOutputType: JobOutputType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Job queue configuration settings"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model QueueSettings {
   /**
    * Enum to determine the job tier.
@@ -11579,7 +11622,7 @@ model QueueSettings {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute resource configuration for jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
@@ -11634,7 +11677,7 @@ model AutoMLVertical {
   trainingData: MLTableJobInput;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MLTable data input for jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MLTableJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -11687,7 +11730,7 @@ model NCrossValidations {
   mode: NCrossValidationsMode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Automatically detected seasonality for forecasting"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AutoSeasonality extends Seasonality {
   /**
    * [Required] Seasonality mode.
@@ -11707,7 +11750,7 @@ model Seasonality {
   mode: SeasonalityMode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Automatically determined target lags for forecasting"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AutoTargetLags extends TargetLags {
   /**
    * [Required] Set target lags mode - Auto/Custom
@@ -11944,7 +11987,7 @@ model AzureFileDatastore extends DatastoreProperties {
   datastoreType: "AzureFile";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OpenAI model fine-tuning configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning Azure Open AI model.
@@ -11981,8 +12024,9 @@ model AzureOpenAiHyperParameters {
   nEpochs?: int32 | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for model fine-tuning configurations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @discriminator("modelProvider")
 model FineTuningVertical {
   /**
@@ -12131,7 +12175,7 @@ model SamplingAlgorithm {
   samplingAlgorithmType: SamplingAlgorithmType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Threshold for categorical data drift metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The categorical data drift metric to calculate.
@@ -12145,7 +12189,7 @@ model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   dataType: "Categorical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for data drift metric thresholds"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("dataType")
 model DataDriftMetricThresholdBase {
   /**
@@ -12162,7 +12206,7 @@ model DataDriftMetricThresholdBase {
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Threshold configuration for monitoring metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MonitoringThreshold {
   /**
    * The threshold value. If null, the set default is dependent on the metric type.
@@ -12172,7 +12216,7 @@ model MonitoringThreshold {
   value?: float64 | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Threshold for categorical data quality metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CategoricalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
   /**
@@ -12187,7 +12231,7 @@ model CategoricalDataQualityMetricThreshold
   dataType: "Categorical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for data quality metric thresholds"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("dataType")
 model DataQualityMetricThresholdBase {
   /**
@@ -12204,7 +12248,7 @@ model DataQualityMetricThresholdBase {
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Threshold for categorical prediction drift metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CategoricalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
   /**
@@ -12219,7 +12263,7 @@ model CategoricalPredictionDriftMetricThreshold
   dataType: "Categorical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for prediction drift metric thresholds"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("dataType")
 model PredictionDriftMetricThresholdBase {
   /**
@@ -12698,7 +12742,7 @@ model CommandJobLimits extends JobLimits {
   jobLimitsType: "Command";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for job execution limits"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("jobLimitsType")
 model JobLimits {
   /**
@@ -12730,7 +12774,7 @@ model ContainerResourceRequirements {
   containerResourceRequests?: ContainerResourceSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource limits and requests for containers"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ContainerResourceSettings {
   /**
    * Number of vCPUs request/limit for container. More info:
@@ -12754,7 +12798,7 @@ model ContainerResourceSettings {
   memory?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule action to create a monitor"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CreateMonitorAction extends ScheduleActionBase {
   /**
    * [Required] Defines the monitor.
@@ -12768,7 +12812,7 @@ model CreateMonitorAction extends ScheduleActionBase {
   actionType: "CreateMonitor";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Definition for a machine learning monitor"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MonitorDefinition {
   /**
    * The monitor's notification settings.
@@ -12798,7 +12842,7 @@ model MonitorDefinition {
   signals: Record<MonitoringSignalBase | null>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Notification settings for monitoring alerts"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MonitorNotificationSettings {
   /**
    * The AML notification email settings.
@@ -12808,7 +12852,7 @@ model MonitorNotificationSettings {
   emailNotificationSettings?: MonitorEmailNotificationSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Email notification configuration for monitors"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MonitorEmailNotificationSettings {
   /**
    * The email recipient list which has a limitation of 499 characters in total.
@@ -12857,7 +12901,7 @@ model MonitoringTarget {
   taskType: ModelTaskType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base class for monitoring signal configurations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @discriminator("signalType")
 model MonitoringSignalBase {
   /**
@@ -12883,7 +12927,7 @@ model MonitoringSignalBase {
   signalType: MonitoringSignalType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Cron expression-based schedule trigger"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CronTrigger extends TriggerBase {
   /**
    * [Required] Specifies cron expression of schedule.
@@ -12914,7 +12958,7 @@ model CustomForecastHorizon extends ForecastHorizon {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Threshold configuration for custom metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomMetricThreshold {
   /**
    * [Required] The user-defined metric to calculate.
@@ -12932,7 +12976,7 @@ model CustomMetricThreshold {
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom model fine-tuning configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
@@ -12947,7 +12991,7 @@ model CustomModelFineTuning extends FineTuningVertical {
   modelProvider: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom model input for jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -12957,7 +13001,7 @@ model CustomModelJobInput extends JobInput {
   jobInputType: "custom_model";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom model output for jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -12967,7 +13011,7 @@ model CustomModelJobOutput extends JobOutput {
   jobOutputType: "custom_model";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom monitoring signal with user-defined metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] Reference to the component asset used to calculate the custom metrics.
@@ -13063,7 +13107,7 @@ model CustomNCrossValidations extends NCrossValidations {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "User-defined seasonality settings for time series"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomSeasonality extends Seasonality {
   /**
    * [Required] Seasonality value.
@@ -13076,7 +13120,7 @@ model CustomSeasonality extends Seasonality {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "User-defined target lag values for forecasting"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomTargetLags extends TargetLags {
   /**
    * [Required] Set target lags values.
@@ -13089,7 +13133,7 @@ model CustomTargetLags extends TargetLags {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "User-defined rolling window size for forecasting"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
   /**
    * [Required] TargetRollingWindowSize value.
@@ -13102,7 +13146,7 @@ model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Signal configuration for monitoring data drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DataDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
@@ -13151,7 +13195,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
   signalType: "DataDrift";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration for computing feature importance"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FeatureImportanceSettings {
   /**
    * The mode of operation for computing feature importance.
@@ -13165,8 +13209,9 @@ model FeatureImportanceSettings {
   targetColumn?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base model for data generation task configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13194,28 +13239,28 @@ model DataGenerationVertical {
   teacherModelEndpoint: TeacherModelEndpoint;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Settings for the teacher model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   teacherModelSettings?: TeacherModelSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration for prompt generation"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PromptSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enables chain of density prompting"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   enableChainOfDensity?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enables chain of thought prompting"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   enableChainOfThought?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Maximum length for generated summary"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   maxLenSummary?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Endpoint configuration for teacher model"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
 model TeacherModelEndpoint {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Name of the teacher model endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   endpointName?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Settings for teacher model behavior"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TeacherModelSettings {
   /**
    * Teacher Model Request Settings.
@@ -13231,11 +13276,11 @@ model TeacherModelSettings {
   teacherModelInferenceParameters?: Record<string | null> | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Request settings for teacher model endpoint"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TeacherModelEndpointRequestSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Minimum success ratio for endpoint requests"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   minEndpointSuccessRatio?: float64;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Number of requests per batch"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   requestBatchSize?: int32;
 }
 
@@ -13261,7 +13306,7 @@ model DataPathAssetReference extends AssetReferenceBase {
   referenceType: "DataPath";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Signal configuration for monitoring data quality"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DataQualityMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
@@ -13310,7 +13355,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
   signalType: "DataQuality";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Default scaling settings for online deployment"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model DefaultScaleSettings extends OnlineScaleSettings {
   /**
    * [Required] Type of deployment scaling algorithm
@@ -13322,6 +13367,7 @@ model DefaultScaleSettings extends OnlineScaleSettings {
  * Distillation Job definition.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13359,8 +13405,9 @@ model DistillationJob extends JobBaseProperties {
   jobType: "Distillation";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Details for model fine-tuning configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
@@ -13375,7 +13422,7 @@ model FinetuningDetails {
   studentModel: JobInput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource configuration for job execution"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model JobResources {
   /**
    * List of instance types to choose from.
@@ -13407,7 +13454,7 @@ model DockerCredential extends DataReferenceCredential {
   credentialType: "DockerCredentials";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule action for invoking batch endpoint"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
@@ -13423,7 +13470,7 @@ model EndpointScheduleAction extends ScheduleActionBase {
   actionType: "InvokeBatchEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Signal for monitoring feature attribution drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
@@ -13464,7 +13511,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   signalType: "FeatureAttributionDrift";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Threshold for feature attribution metrics"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FeatureAttributionMetricThreshold {
   /**
    * [Required] The feature attribution metric to calculate.
@@ -13480,7 +13527,7 @@ model FeatureAttributionMetricThreshold {
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter for selecting a subset of features"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model FeatureSubset extends MonitoringFeatureFilterBase {
   /**
    * [Required] The list of features to include.
@@ -13498,6 +13545,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
  * FineTuning Job definition.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13698,7 +13746,7 @@ model ImageClassification extends AutoMLVertical {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base configuration for image classification tasks"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ImageClassificationBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -13958,7 +14006,7 @@ model ImageModelSettings {
   weightDecay?: float32 | null;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MLflow model input for job execution"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MLFlowModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -14314,7 +14362,7 @@ model ImageInstanceSegmentation extends AutoMLVertical {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base configuration for image object detection"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -14560,7 +14608,7 @@ model ImageObjectDetection extends AutoMLVertical {
   taskType: "ImageObjectDetection";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Schedule action for creating jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model JobScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
@@ -14590,7 +14638,7 @@ model KubernetesOnlineDeployment extends OnlineDeploymentProperties {
   endpointComputeType: "Kubernetes";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Data generation for label creation tasks"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model LabelGeneration extends DataGenerationVertical {
   /**
    * Training data for fine tuning.
@@ -14610,7 +14658,7 @@ model LabelGeneration extends DataGenerationVertical {
   dataGenerationType: "LabelGeneration";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "OneLake LakeHouse artifact configuration"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model LakeHouseArtifact extends OneLakeArtifact {
   /**
    * [Required] OneLake artifact type
@@ -14654,7 +14702,7 @@ model LiteralJobInput extends JobInput {
   jobInputType: "literal";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MLflow model output from job execution"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MLFlowModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -14682,7 +14730,7 @@ model MLTableData extends DataVersionBaseProperties {
   dataType: "mltable";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MLTable output from job execution"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model MLTableJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -14876,7 +14924,7 @@ model NlpVertical {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Featurization settings for NLP tasks"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NlpVerticalFeaturizationSettings extends FeaturizationSettings {}
 
 /**
@@ -14909,7 +14957,7 @@ model NoneDatastoreCredentials extends DatastoreCredentials {
   credentialsType: "None";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metric threshold for numerical data drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The numerical data drift metric to calculate.
@@ -14922,7 +14970,7 @@ model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   dataType: "Numerical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metric threshold for numerical data quality"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NumericalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
   /**
@@ -14937,7 +14985,7 @@ model NumericalDataQualityMetricThreshold
   dataType: "Numerical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Metric threshold for numerical prediction drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NumericalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
   /**
@@ -15076,7 +15124,7 @@ model PipelineJob extends JobBaseProperties {
   jobType: "Pipeline";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Signal for monitoring prediction drift"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
@@ -15235,7 +15283,7 @@ model SASCredential extends DataReferenceCredential {
   credentialType: "SAS";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "SAS credential data transfer object for pending uploads"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SASCredentialDto extends PendingUploadCredentialDto {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
@@ -15464,7 +15512,7 @@ model SparkJobEntry {
   sparkJobEntryType: SparkJobEntryType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration for Spark job compute resources"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SparkResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
@@ -15480,7 +15528,7 @@ model SparkResourceConfiguration {
   runtimeVersion?: string = "3.1";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Python file entry point for Spark jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SparkJobPythonEntry extends SparkJobEntry {
   /**
    * [Required] Relative python file path for job entry point.
@@ -15496,7 +15544,7 @@ model SparkJobPythonEntry extends SparkJobEntry {
   sparkJobEntryType: "SparkJobPythonEntry";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Scala class entry point for Spark jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SparkJobScalaEntry extends SparkJobEntry {
   /**
    * [Required] Scala class name used as entry point.
@@ -15686,7 +15734,7 @@ model TrialComponent {
   resources?: JobResourceConfiguration;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Autoscaling settings based on target CPU utilization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TargetUtilizationScaleSettings extends OnlineScaleSettings {
   /**
    * The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.
@@ -15796,7 +15844,7 @@ model TextNer extends AutoMLVertical {
   taskType: "TextNER";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Feature filter selecting top N features by attribution"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   /**
    * The number of top features to include.
@@ -15810,7 +15858,7 @@ model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   filterType: "TopNByAttribution";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Triton inference server model input for jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TritonModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -15820,7 +15868,7 @@ model TritonModelJobInput extends JobInput {
   jobInputType: "triton_model";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Triton inference server model output for jobs"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model TritonModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -15855,7 +15903,7 @@ model UriFileDataVersion extends DataVersionBaseProperties {
   dataType: "uri_file";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "URI file reference as job input"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model UriFileJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -15865,7 +15913,7 @@ model UriFileJobInput extends JobInput {
   jobInputType: "uri_file";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "URI file reference as job output"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model UriFileJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -15885,7 +15933,7 @@ model UriFolderDataVersion extends DataVersionBaseProperties {
   dataType: "uri_folder";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "URI folder reference as job input"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model UriFolderJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -15895,7 +15943,7 @@ model UriFolderJobInput extends JobInput {
   jobInputType: "uri_folder";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "URI folder reference as job output"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model UriFolderJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -15927,10 +15975,10 @@ model AADAuthTypeWorkspaceConnectionProperties
   authType: "AAD";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using access key authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model AccessKeyAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Access key credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   credentials?: WorkspaceConnectionAccessKey;
 
   /**
@@ -15939,11 +15987,11 @@ model AccessKeyAuthTypeWorkspaceConnectionProperties
   authType: "AccessKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Access key credential object for workspace connections"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionAccessKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Identifier for the access key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   accessKeyId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Secret value of the access key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   secretAccessKey?: string;
 }
@@ -15968,7 +16016,7 @@ model AccountKeyAuthTypeWorkspaceConnectionProperties
  * Account key object for workspace connection credential.
  */
 model WorkspaceConnectionAccountKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Storage account key value"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
 }
@@ -15995,7 +16043,7 @@ model WorkspaceConnectionAccountKey {
  *
  * Use Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using API key authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ApiKeyAuthWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   credentials?: WorkspaceConnectionApiKey;
@@ -16010,7 +16058,7 @@ model ApiKeyAuthWorkspaceConnectionProperties
  * Api key object for workspace connection credential.
  */
 model WorkspaceConnectionApiKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API key value for authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
 }
@@ -16045,7 +16093,7 @@ model CapacityConfig {
   allowedValues?: int32[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Cognitive Services endpoint deployment properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CognitiveServiceEndpointDeploymentResourceProperties {
   /**
    * Model used for the endpoint deployment.
@@ -16057,7 +16105,7 @@ model CognitiveServiceEndpointDeploymentResourceProperties {
    */
   raiPolicyName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SKU configuration for the Cognitive Services resource"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   sku?: CognitiveServicesSku;
 
   /**
@@ -16066,7 +16114,7 @@ model CognitiveServiceEndpointDeploymentResourceProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model configuration for endpoint deployment"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model EndpointDeploymentModel {
   /**
    * Model format
@@ -16089,21 +16137,21 @@ model EndpointDeploymentModel {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "SKU definition for Cognitive Services resources"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CognitiveServicesSku {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capacity units for the SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   capacity?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SKU family identifier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   family?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Name of the SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Size designation of the SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   size?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pricing tier of the SKU"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   tier?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Content safety configuration for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessEndpointContentSafety {
   /**
    * Specifies the status of content safety.
@@ -16111,7 +16159,7 @@ model ServerlessEndpointContentSafety {
   contentSafetyStatus: ContentSafetyStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Content Safety endpoint deployment resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ContentSafetyEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   ...CognitiveServiceEndpointDeploymentResourceProperties;
@@ -16122,7 +16170,7 @@ model ContentSafetyEndpointDeploymentResourceProperties
   type: "Azure.ContentSafety";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Content Safety endpoint resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ContentSafetyEndpointResourceProperties
   extends EndpointResourceProperties {
   /**
@@ -16134,7 +16182,7 @@ model ContentSafetyEndpointResourceProperties
 /**
  * Custom Keys credential object
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom key-value pairs for authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   keys?: Record<string>;
@@ -16164,7 +16212,7 @@ model CustomKeysWorkspaceConnectionProperties
  * FQDN Outbound Rule for the managed network of a machine learning workspace.
  */
 model FqdnOutboundRule extends OutboundRule {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Fully qualified domain name destination"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   destination?: string;
 
   /**
@@ -16173,10 +16221,10 @@ model FqdnOutboundRule extends OutboundRule {
   type: "FQDN";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using managed identity auth"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed identity credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   credentials?: WorkspaceConnectionManagedIdentity;
 
   /**
@@ -16185,15 +16233,15 @@ model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   authType: "ManagedIdentity";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed identity configuration for workspace connection"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionManagedIdentity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Client ID of the managed identity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   clientId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM resource ID of the managed identity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   resourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed online endpoint deployment resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ManagedOnlineEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   /**
@@ -16201,7 +16249,7 @@ model ManagedOnlineEndpointDeploymentResourceProperties
    */
   endpointComputeType?: EndpointComputeType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model identifier for the deployment"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   `model`?: string;
 
   /**
@@ -16210,7 +16258,7 @@ model ManagedOnlineEndpointDeploymentResourceProperties
   type: "managedOnlineEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed online endpoint resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ManagedOnlineEndpointResourceProperties
   extends EndpointResourceProperties {
   /**
@@ -16218,13 +16266,13 @@ model ManagedOnlineEndpointResourceProperties
    */
   authMode?: EndpointAuthMode;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Compute resource for the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   compute?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description of the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   description?: string;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   mirrorTraffic?: Record<int32>;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URI for scoring requests"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   scoringUri?: url;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   traffic?: Record<int32>;
@@ -16235,15 +16283,15 @@ model ManagedOnlineEndpointResourceProperties
   endpointType: "managedOnlineEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model settings for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessEndpointModelSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Identifier of the model to deploy"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   modelId: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection with no authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model NoneAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   /**
@@ -16252,7 +16300,7 @@ model NoneAuthTypeWorkspaceConnectionProperties
   authType: "None";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using OAuth2 authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model OAuth2AuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   credentials?: WorkspaceConnectionOAuth2;
@@ -16280,7 +16328,7 @@ model WorkspaceConnectionOAuth2 {
   #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   clientId?: Azure.Core.uuid;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OAuth2 client secret for authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   clientSecret?: string;
 
@@ -16290,7 +16338,7 @@ model WorkspaceConnectionOAuth2 {
   @secret
   developerToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Password for OAuth2 password grant flow"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   password?: string;
 
@@ -16313,7 +16361,7 @@ model WorkspaceConnectionOAuth2 {
   username?: string;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OpenAI endpoint deployment resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model OpenAIEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   ...CognitiveServiceEndpointDeploymentResourceProperties;
@@ -16324,7 +16372,7 @@ model OpenAIEndpointDeploymentResourceProperties
   type: "Azure.OpenAI";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OpenAI endpoint resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model OpenAIEndpointResourceProperties extends EndpointResourceProperties {
   /**
    * Type of the endpoint.
@@ -16332,10 +16380,10 @@ model OpenAIEndpointResourceProperties extends EndpointResourceProperties {
   endpointType: "Azure.OpenAI";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using personal access token auth"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PATAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal access token credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   credentials?: WorkspaceConnectionPersonalAccessToken;
 
   /**
@@ -16344,9 +16392,9 @@ model PATAuthTypeWorkspaceConnectionProperties
   authType: "PAT";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal access token credential object"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionPersonalAccessToken {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal access token value"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   pat?: string;
 }
 
@@ -16354,9 +16402,9 @@ model WorkspaceConnectionPersonalAccessToken {
  * Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.
  */
 model PrivateEndpointDestination {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ARM resource ID of the target service"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   serviceResourceId?: Azure.Core.armResourceIdentifier;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether Spark runtime connectivity is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   sparkEnabled?: boolean;
 
   /**
@@ -16364,7 +16412,7 @@ model PrivateEndpointDestination {
    */
   sparkStatus?: RuleStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Target subresource for the private endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   subresourceTarget?: string;
 }
 
@@ -16377,7 +16425,7 @@ model PrivateEndpointOutboundRule extends OutboundRule {
    */
   destination?: PrivateEndpointDestination;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Fully qualified domain names for the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   fqdns?: string[];
 
   /**
@@ -16386,10 +16434,10 @@ model PrivateEndpointOutboundRule extends OutboundRule {
   type: "PrivateEndpoint";
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using SAS token authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SASAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared access signature credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   credentials?: WorkspaceConnectionSharedAccessSignature;
 
   /**
@@ -16398,30 +16446,30 @@ model SASAuthTypeWorkspaceConnectionProperties
   authType: "SAS";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared access signature credential object"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionSharedAccessSignature {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared access signature token value"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   sas?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Capacity reservation for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessEndpointCapacityReservation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ID of the capacity reservation group"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   capacityReservationGroupId: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Reserved capacity for the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   endpointReservedCapacity?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless endpoint resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Authentication mode for the endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   authMode?: ServerlessInferenceEndpointAuthMode;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capacity reservation configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   capacityReservation?: ServerlessEndpointCapacityReservation;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content safety configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   contentSafety?: ServerlessEndpointContentSafety;
 
   /**
@@ -16429,17 +16477,17 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
    */
   endpointState?: ServerlessEndpointState;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Inference endpoint configuration"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   inferenceEndpoint?: ServerlessEndpointInferenceEndpoint;
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketplace subscription identifier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   marketplaceSubscriptionId?: string;
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   metadata?: unknown;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model configuration settings"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   modelSettings?: ServerlessEndpointModelSettings;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketplace offer information"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   offer?: ServerlessOffer;
 
   /**
@@ -16448,34 +16496,34 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
   endpointType: "serverlessEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Inference endpoint details for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessEndpointInferenceEndpoint {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read)
   headers?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URI of the inference endpoint"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @visibility(Lifecycle.Read)
   uri: url;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketplace offer details for serverless endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServerlessOffer {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Name of the marketplace offer"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   offerName: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Publisher of the marketplace offer"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   publisher: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using service principal auth"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   credentials?: WorkspaceConnectionServicePrincipal;
 
   /**
@@ -16484,16 +16532,16 @@ model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   authType: "ServicePrincipal";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal credential object"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionServicePrincipal {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Client ID of the service principal"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   clientId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Client secret of the service principal"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   clientSecret?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Tenant ID of the service principal"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   tenantId?: string;
 }
 
@@ -16511,11 +16559,11 @@ model ServiceTagDestination {
    */
   addressPrefixes?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Port ranges for the network rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   portRanges?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network protocol for the rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   protocol?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure service tag for the destination"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   serviceTag?: string;
 }
 
@@ -16534,7 +16582,7 @@ model ServiceTagOutboundRule extends OutboundRule {
   type: "ServiceTag";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Speech endpoint deployment resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SpeechEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   ...CognitiveServiceEndpointDeploymentResourceProperties;
@@ -16545,7 +16593,7 @@ model SpeechEndpointDeploymentResourceProperties
   type: "Azure.Speech";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Speech endpoint resource properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model SpeechEndpointResourceProperties extends EndpointResourceProperties {
   /**
    * Type of the endpoint.
@@ -16553,10 +16601,10 @@ model SpeechEndpointResourceProperties extends EndpointResourceProperties {
   endpointType: "Azure.Speech";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace connection using username/password auth"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Username and password credentials"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   credentials?: WorkspaceConnectionUsernamePassword;
 
   /**
@@ -16565,9 +16613,9 @@ model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   authType: "UsernamePassword";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Username/password credential object"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionUsernamePassword {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Password for authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @secret
   password?: string;
 
@@ -16577,15 +16625,15 @@ model WorkspaceConnectionUsernamePassword {
   @secret
   securityToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Username for authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   username?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties for inference update parameters"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 //Fix Me: Compile Error
 model InferenceUpdateParameterProperties {
   description?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Parameters for updating inference endpoints"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 //Fix Me: Compile Error
 model InferenceUpdateParameter {
   properties: InferenceUpdateParameterProperties;
@@ -16612,12 +16660,13 @@ alias ReferenceSASParameters = {
   /**
    * Asset id and blob uri.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Request body for getting blob reference SAS"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @body
   body: GetBlobReferenceSASRequestDto;
 };
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom location path parameter for regional operations"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomLocationParameter {
   @path
   @segment("locations")
@@ -16630,6 +16679,30 @@ model ManagedNetworkListResult
   is Azure.Core.Page<ManagedNetworkSettingsPropertiesBasicResource>;
 
 model OutboundRuleListResult is Azure.Core.Page<OutboundRuleBasicResource>;
+
+/**
+ * Isolation key source for an agentic application.
+ */
+@discriminator("type")
+model AgenticApplicationIsolationKeySource {
+  type: IsolationKeySourceType;
+}
+
+/**
+ * Isolation key source for Entra.
+ */
+model EntraIsolationKeySource extends AgenticApplicationIsolationKeySource {
+  type: "Entra";
+}
+
+/**
+ * Isolation key source for header.
+ */
+model HeaderIsolationKeySource extends AgenticApplicationIsolationKeySource {
+  type: "Header";
+  chatHeaderName?: string;
+  userHeaderName?: string;
+}
 
 @@visibility(ListAmlUserFeatureResult.value, Lifecycle.Read);
 @@visibility(ListUsagesResult.value, Lifecycle.Read);

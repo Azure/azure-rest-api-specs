@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./HostPool.tsp";
 
@@ -10,11 +11,14 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for SessionHostConfiguration properties.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
 model SessionHostConfiguration
@@ -29,7 +33,11 @@ model SessionHostConfiguration
   >;
 }
 
+/**
+ * @Introduced in 2023-11-01-preview
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface SessionHostConfigurations {
   /**

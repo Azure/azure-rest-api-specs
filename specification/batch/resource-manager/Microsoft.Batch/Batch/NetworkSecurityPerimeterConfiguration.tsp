@@ -30,7 +30,6 @@ interface NetworkSecurityPerimeterConfigurations {
   getConfiguration is NspConfigurationOperations.Read<
     ParentResource = BatchAccount,
     Resource = NetworkSecurityPerimeterConfiguration,
-    Response = CommonTypes.NetworkSecurityPerimeterConfiguration,
     Error = CloudError
   >;
 
@@ -41,7 +40,6 @@ interface NetworkSecurityPerimeterConfigurations {
   listConfigurations is NspConfigurationOperations.ListByParent<
     ParentResource = BatchAccount,
     Resource = NetworkSecurityPerimeterConfiguration,
-    Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult,
     Error = CloudError
   >;
 
@@ -59,7 +57,4 @@ interface NetworkSecurityPerimeterConfigurations {
 
 @@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
-);
-@@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
-@@nextLink(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
 );

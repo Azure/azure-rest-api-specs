@@ -1,0 +1,39 @@
+parameters:
+  "service-dir":
+    default: "sdk/resourcegraph"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resourcegraph"
+    namespace: "azure.mgmt.resourcegraph"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resourcegraph"
+    namespace: "com.azure.resourcemanager.resourcegraph"
+    service-name: "ResourceGraph"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcegraph"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcegraph"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resourcegraph"
+    emitter-output-dir: "{output-dir}/{service-dir}/armresourcegraph"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armresourcegraph"
+    fix-const-stuttering: true
+    factory-gather-all-params: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

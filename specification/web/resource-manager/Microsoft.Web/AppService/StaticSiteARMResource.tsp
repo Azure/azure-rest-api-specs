@@ -60,7 +60,8 @@ alias StaticSiteUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("StaticSites")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface StaticSiteARMResources {
   /**
    * Description for Gets the details of a static site.
@@ -183,7 +184,7 @@ interface StaticSiteARMResources {
    * Description for Updates a user entry with the listed roles
    */
   @summary("Updates a user entry with the listed roles")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   updateStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,

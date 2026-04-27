@@ -13,3 +13,8 @@ using Microsoft.ManagedIdentity;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Identity.properties,
   "java"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SystemAssignedIdentity.properties,
+  "java"
+);

@@ -26,16 +26,7 @@ These are the global settings for the extendedLocation.
 
 ```yaml
 openapi-type: arm
-tag: package-2024-09-15-preview
-```
-
-### Tag: package-2024-09-15-preview
-
-These settings apply only when `--tag=package-2024-09-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-09-15-preview'
-input-file:
-  - preview/2024-09-15-preview/customlocations.json
+tag: package-2021-08-31-preview
 ```
 
 ### Tag: package-2021-03-15-preview
