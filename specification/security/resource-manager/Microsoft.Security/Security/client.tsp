@@ -113,7 +113,7 @@ op privateLinksGetCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
@@ -207,7 +207,7 @@ op privateEndpointConnectionsListCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
@@ -223,7 +223,7 @@ op privateEndpointConnectionsGetCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
@@ -240,7 +240,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
