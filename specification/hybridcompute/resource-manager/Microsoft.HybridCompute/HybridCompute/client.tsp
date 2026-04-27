@@ -36,7 +36,7 @@ union CustomPublicNetworkAccessType {
 }
 @@alternateType(PublicNetworkAccessType,
   CustomPublicNetworkAccessType,
-  "javascript,python"
+  "javascript,python,go"
 );
 @@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
