@@ -1532,6 +1532,100 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/operations/{operationId}?_overload=getDocumentClassifierBuildOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentClassifierBuildOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentClassifierBuildOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DocumentIntelligenceErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Classifier Build": {
+            "$ref": "./examples/GetOperation_DocumentClassifierBuild.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}?_overload=getDocumentClassifierCopyToOperation": {
+      "get": {
+        "operationId": "MiscellaneousOperations_GetDocumentClassifierCopyToOperation",
+        "description": "Gets operation info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentClassifierCopyToOperationDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DocumentIntelligenceErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation - Document Classifier Copy To": {
+            "$ref": "./examples/GetOperation_DocumentClassifierCopyTo.json"
+          }
+        }
+      }
+    },
     "/operations/{operationId}?_overload=getDocumentModelComposeOperation": {
       "get": {
         "operationId": "MiscellaneousOperations_GetDocumentModelComposeOperation",
@@ -1622,100 +1716,6 @@
         "x-ms-examples": {
           "Get Operation - Document Model Copy To": {
             "$ref": "./examples/GetOperation_DocumentModelCopyTo.json"
-          }
-        }
-      }
-    },
-    "/operations/{operationId}?_overload=getDocumentClassifierCopyToOperation": {
-      "get": {
-        "operationId": "MiscellaneousOperations_GetDocumentClassifierCopyToOperation",
-        "description": "Gets operation info.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DocumentClassifierCopyToOperationDetails"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DocumentIntelligenceErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation - Document Classifier Copy To": {
-            "$ref": "./examples/GetOperation_DocumentClassifierCopyTo.json"
-          }
-        }
-      }
-    },
-    "/operations/{operationId}?_overload=getDocumentClassifierBuildOperation": {
-      "get": {
-        "operationId": "MiscellaneousOperations_GetDocumentClassifierBuildOperation",
-        "description": "Gets operation info.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DocumentClassifierBuildOperationDetails"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DocumentIntelligenceErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation - Document Classifier Build": {
-            "$ref": "./examples/GetOperation_DocumentClassifierBuild.json"
           }
         }
       }

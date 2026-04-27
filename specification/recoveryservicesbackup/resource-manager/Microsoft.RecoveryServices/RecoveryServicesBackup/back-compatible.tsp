@@ -150,7 +150,7 @@ using Microsoft.RecoveryServices;
   AzureVmWorkloadProtectedItem
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectedItem,
   AzureVmWorkloadProtectedItem
 );
@@ -270,7 +270,7 @@ using Microsoft.RecoveryServices;
   AzureVmWorkloadProtectableItem
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@hierarchyBuilding(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
   AzureVmWorkloadProtectableItem
 );

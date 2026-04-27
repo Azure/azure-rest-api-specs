@@ -499,7 +499,7 @@ union RoutingChoice {
 }
 
 /**
- * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+ * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
  */
 union MinimumTlsVersion {
   string,
@@ -2132,6 +2132,21 @@ model FileShareLimits {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   maxProvisionedBandwidthMiBPerSec?: int32;
+
+  /**
+   * The IO scalar used for guardrail calculations for a file share in the storage account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name uses IO abbreviation for Input Output"
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  guardrailIOScalar?: float64;
+
+  /**
+   * The bandwidth scalar used for guardrail calculations for a file share in the storage account.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  guardrailBandwidthScalar?: float64;
 }
 
 /**
@@ -3119,7 +3134,7 @@ model StorageAccountPropertiesCreateParameters {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -3817,7 +3832,7 @@ model StorageAccountProperties {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -4392,7 +4407,7 @@ model StorageAccountPropertiesUpdateParameters {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
