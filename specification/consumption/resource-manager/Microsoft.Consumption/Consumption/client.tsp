@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Microsoft.Consumption;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 
 @@clientName(Microsoft.Consumption,
   "ConsumptionManagementClient",
@@ -15,6 +16,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(ChargeSummary.eTag, "etag", "java");
 @@clientName(LegacyChargeSummary.eTag, "etag", "java");
 @@clientName(EventSummary.eTag, "etag", "java");
+@@clientName(EventSummary.eTag, "InternalETag", "csharp");
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
 @@clientName(CreditSummary.eTag, "etag", "java,go");
@@ -142,7 +144,9 @@ using Azure.ClientGenerator.Core;
 @@clientName(TagsResult, "ConsumptionTagsResult", "csharp");
 @@clientName(UsageDetail, "ConsumptionUsageDetail", "csharp");
 @@clientName(LegacyUsageDetail, "ConsumptionLegacyUsageDetail", "csharp");
+@@clientName(LegacyUsageDetailProperties.date, "On", "csharp");
 @@clientName(ModernUsageDetail, "ConsumptionModernUsageDetail", "csharp");
+@@clientName(ModernUsageDetailProperties.date, "On", "csharp");
 @@clientName(MarketplaceProperties.usageStart, "UsageStartOn", "csharp");
 @@clientName(MarketplaceProperties.usageEnd, "UsageEndOn", "csharp");
 @@clientName(ReservationRecommendationDetailsProperties.resource,
@@ -150,15 +154,19 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(LegacyChargeSummary, "ConsumptionLegacyChargeSummary", "csharp");
-@@clientName(ReservationRecommendation,
+@@clientName(LegacyChargeSummaryProperties.azureMarketplaceCharges,
+  "MarketplaceCharges",
+  "csharp"
+);
+@@clientName(ReservationRecommendationCSharp,
   "ConsumptionReservationRecommendation",
   "csharp"
 );
-@@clientName(LegacyReservationRecommendation,
+@@clientName(LegacyReservationRecommendationCSharp,
   "ConsumptionLegacyReservationRecommendation",
   "csharp"
 );
-@@clientName(ModernReservationRecommendation,
+@@clientName(ModernReservationRecommendationCSharp,
   "ConsumptionModernReservationRecommendation",
   "csharp"
 );
@@ -222,134 +230,193 @@ using Azure.ClientGenerator.Core;
   "GetConsumptionReservationRecommendations",
   "csharp"
 );
+// Restore the v1.x SDK signature: rename the action method to
+// "GetConsumptionReservationRecommendationDetails" and rename the colliding
+// query parameter `scope` to `recommendationScope` (the path uses `scope`
+// as the ResourceIdentifier, so the auto-generated rename to `scope0` is
+// not back-compatible).
+@@clientName(ReservationRecommendationDetailsOperationGroup.get,
+  "GetConsumptionReservationRecommendationDetails",
+  "csharp"
+);
+@@clientName(ReservationRecommendationDetailsOperationGroup.get::parameters.scope,
+  "reservationScope",
+  "csharp"
+);
+@@clientName(UsageDetailsListParameters.$skiptoken, "skipToken ", "csharp");
+@@clientName(MarketplacesListParameters.$skiptoken, "skipToken ", "csharp");
+
+@@access(ModernChargeSummary, Access.public, "csharp");
+@@access(LegacyChargeSummary, Access.public, "csharp");
 
 @@alternateType(ReservationDetailProperties.instanceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PriceSheetProperties.billingPeriodId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PriceSheetProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(PriceSheetProperties.meterId, uuid, "csharp");
 @@alternateType(EventProperties.billingProfileId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EventProperties.lotId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(EventProperties.lotId, armResourceIdentifier, "csharp");
 @@alternateType(ModernReservationTransactionProperties.billingProfileId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ModernReservationTransactionProperties.invoiceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ModernReservationTransactionProperties.invoiceSectionId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ModernReservationTransactionProperties.purchasingSubscriptionGuid,
-  Azure.Core.uuid,
+  uuid,
   "csharp"
 );
 @@alternateType(LegacyReservationTransactionProperties.purchasingSubscriptionGuid,
-  Azure.Core.uuid,
+  uuid,
   "csharp"
 );
-@@alternateType(MarketplaceProperties.meterId, Azure.Core.uuid, "csharp");
-@@alternateType(MarketplaceProperties.subscriptionGuid,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(Reseller.resellerId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(MarketplaceProperties.meterId, uuid, "csharp");
+@@alternateType(MarketplaceProperties.subscriptionGuid, uuid, "csharp");
+@@alternateType(Reseller.resellerId, armResourceIdentifier, "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ReservationRecommendationDetailsModel.location,
-  Azure.Core.azureLocation,
+  azureLocation,
   "csharp"
 );
 @@alternateType(ReservationRecommendationDetailsModel.etag,
-  Azure.Core.EtagProperty.etag,
+  EtagProperty.etag,
   "csharp"
 );
-@@alternateType(Budget.eTag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(Balance.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(Budget.eTag, EtagProperty.etag, "csharp");
+@@alternateType(Balance.etag, EtagProperty.etag, "csharp");
+@@alternateType(UsageDetail.etag, EtagProperty.etag, "csharp");
+@@alternateType(ChargeSummary.eTag, EtagProperty.etag, "csharp");
 @@alternateType(ManagementGroupAggregatedCostResult.etag,
-  Azure.Core.EtagProperty.etag,
+  EtagProperty.etag,
   "csharp"
 );
-@@alternateType(EventSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(LotSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(ReservationDetail.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(ReservationSummary.etag,
-  Azure.Core.EtagProperty.etag,
-  "csharp"
-);
-@@alternateType(Marketplace.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(CreditSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(PriceSheetResult.etag, Azure.Core.EtagProperty.etag, "csharp");
-// meterId in shipped surface is Guid? rather than string.
-@@alternateType(LegacyUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
-@@alternateType(ModernUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(EventSummary.eTag, EtagProperty.etag, "csharp");
+@@alternateType(LotSummary.eTag, EtagProperty.etag, "csharp");
+@@alternateType(ReservationDetail.etag, EtagProperty.etag, "csharp");
+@@alternateType(ReservationSummary.etag, EtagProperty.etag, "csharp");
+@@alternateType(Marketplace.etag, EtagProperty.etag, "csharp");
+@@alternateType(CreditSummary.eTag, EtagProperty.etag, "csharp");
+@@alternateType(PriceSheetResult.etag, EtagProperty.etag, "csharp");
+@@alternateType(TagsResult.eTag, EtagProperty.etag, "csharp");
+@@alternateType(LegacyUsageDetailProperties.meterId, uuid, "csharp");
+@@alternateType(ModernUsageDetailProperties.meterId, uuid, "csharp");
 @@alternateType(LegacyReservationRecommendationProperties.meterId,
-  Azure.Core.uuid,
+  uuid,
   "csharp"
 );
 @@alternateType(ModernReservationRecommendationProperties.meterId,
-  Azure.Core.uuid,
+  uuid,
   "csharp"
 );
 
-// Override read-only visibility on eTag so the generated property exposes a public setter (matches shipped v1.0.1 surface).
-@@visibility(EventSummary.eTag,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
+// Match shipped v1.x SDK surface: AutoRest emitted these required value-type/enum
+// properties as nullable on ConsumptionBudgetData. Using `| null` keeps the wire
+// contract (still required) but maps to nullable in C# for back-compat.
+@@alternateType(BudgetProperties.amount, decimal | null, "csharp");
+@@alternateType(BudgetProperties.timeGrain, TimeGrainType | null, "csharp");
+@@alternateType(BudgetProperties.category, CategoryType | null, "csharp");
+@@alternateType(ReservationRecommendation,
+  ReservationRecommendationCSharp,
+  "csharp"
 );
-@@visibility(LotSummary.eTag,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
+@@alternateType(LegacyReservationRecommendation,
+  LegacyReservationRecommendationCSharp,
+  "csharp"
 );
-// Force aggregated-cost collection properties to be read-only so the generated flattening helpers expose IReadOnlyList<T> (matches shipped v1.0.1 surface).
-@@visibility(ManagementGroupAggregatedCostProperties.children, Lifecycle.Read);
-@@visibility(ManagementGroupAggregatedCostProperties.includedSubscriptions,
-  Lifecycle.Read
+@@alternateType(ModernReservationRecommendation,
+  ModernReservationRecommendationCSharp,
+  "csharp"
 );
-@@visibility(ManagementGroupAggregatedCostProperties.excludedSubscriptions,
-  Lifecycle.Read
-);
+
+// Restore the v1.x SDK base type: ConsumptionReservationRecommendation must
+// inherit ResourceData. The spec model uses `...Foundations.Resource` (spread)
+// instead of `extends Foundations.Resource`, so the C# MPG generator emits a
+// plain class. Declare TypeSpec replacements that use `extends` (which the
+// MPG generator translates to `: ResourceData`), redeclare every non-Resource
+// property, and re-declare the Legacy / Modern discriminator subclasses
+// against the new base. Then swap them in for C# only via @@alternateType so
+// OpenAPI / other languages stay unchanged.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@discriminator("kind")
+model ReservationRecommendationCSharp
+  extends Azure.ResourceManager.Foundations.Resource {
+  /** Resource location */
+  @visibility(Lifecycle.Read)
+  location?: azureLocation;
+
+  /** Resource sku */
+  @visibility(Lifecycle.Read)
+  sku?: string;
+
+  /** The etag for the resource. */
+  @visibility(Lifecycle.Read)
+  etag?: EtagProperty.etag;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
+
+  /** Specifies the kind of reservation recommendation. */
+  kind: ReservationRecommendationKind;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model LegacyReservationRecommendationCSharp
+  extends ReservationRecommendationCSharp {
+  properties: LegacyReservationRecommendationProperties;
+  kind: "legacy";
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ModernReservationRecommendationCSharp
+  extends ReservationRecommendationCSharp {
+  properties: ModernReservationRecommendationProperties;
+  kind: "modern";
+}
 
 @@usage(Tag, Usage.input, "csharp");
 @@usage(TagsResult, Usage.input, "csharp");
+@@usage(ChargeSummary, Usage.input, "csharp");
 
 // Keep LotSummary/EventSummary as input + output to preserve public parameterless ctor and settable properties (matches shipped v1.0.1 surface).
 @@usage(LotSummary, Usage.input | Usage.output, "csharp");
 @@usage(EventSummary, Usage.input | Usage.output, "csharp");
 
 // Flatten properties-envelope models so generated discriminator subclasses expose shipped flat-property surface.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyUsageDetail.properties,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernUsageDetail.properties,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyChargeSummary.properties,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernChargeSummary.properties,
   "csharp"
 );
