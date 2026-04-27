@@ -428,10 +428,9 @@ union NetAppRelationshipStatusDef {
 );
 
 // C# ARM resource renames (restore NetApp prefix on resource types)
-// Volume is NOT renamed via @@clientName: doing so causes the generator to omit
-// child-collection accessors (GetNetAppVolumes) on parent resources like
-// CapacityPoolResource. Backward-compat NetAppVolumeResource/Data/Collection
-// are provided as deprecated stubs in src/Custom instead.
+// Volume rename triggers a generator bug — see Azure/azure-sdk-for-net#58686.
+// Pushed temporarily to give the generator team a real-world repro; revert before merging.
+@@clientName(Volume, "NetAppVolume", "csharp");
 @@clientName(Bucket, "NetAppBucket", "csharp");
 @@clientName(Cache, "NetAppCache", "csharp");
 @@clientName(ActiveDirectoryConfig, "NetAppActiveDirectoryConfig", "csharp");
