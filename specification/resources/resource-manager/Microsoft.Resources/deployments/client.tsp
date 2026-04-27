@@ -52,6 +52,7 @@ using Microsoft.Resources;
   "ArmDeploymentOperationProperties",
   "csharp"
 );
+@@alternateType(DeploymentOperationProperties.duration, duration, "csharp");
 @@clientName(ProvisioningOperation, "ProvisioningOperationKind", "csharp");
 @@clientName(DeploymentOperationsListResult,
   "ArmDeploymentOperationsListResult",
@@ -89,6 +90,7 @@ using Microsoft.Resources;
   "csharp"
 );
 @@clientName(ParametersLink, "ArmDeploymentParametersLink", "csharp");
+@@alternateType(ParametersLink.uri, url, "csharp");
 @@clientName(TemplateLink, "ArmDeploymentTemplateLink", "csharp");
 @@clientName(ChangeType, "WhatIfChangeType", "csharp");
 @@clientName(PropertyChangeType, "WhatIfPropertyChangeType", "csharp");
@@ -102,6 +104,18 @@ using Microsoft.Resources;
   "ArmDeploymentExtensionConfigItem",
   "csharp"
 );
+@@clientName(Deployments.cancelAtScope, "Cancel", "csharp");
+@@clientName(Deployments.deploymentOperationsGetAtScope,
+  "GetDeploymentOperation",
+  "csharp"
+);
+@@clientName(Deployments.deploymentOperationsListAtScope,
+  "GetDeploymentOperations",
+  "csharp"
+);
+@@clientName(Deployments.exportTemplateAtScope, "ExportTemplate", "csharp");
+@@clientName(Deployments.validateAtScope, "Validate", "csharp");
+@@clientName(Deployments.checkExistenceAtScope, "CheckExistence", "csharp");
 
 // C# SDK: Use the generic at-scope interface (DeploymentExtendeds) for all scopes.
 // Suppress per-scope @armResourceOperations interfaces from C# to eliminate duplicate
@@ -182,9 +196,6 @@ using Microsoft.Resources;
   "!csharp"
 );
 @@scope(DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope,
-  "!csharp"
-);
-@@scope(DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope,
   "!csharp"
 );
 @@scope(DeploymentExtendedSubscriptionGroup.exportTemplateAtSubscriptionScope,
