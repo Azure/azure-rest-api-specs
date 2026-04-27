@@ -364,6 +364,11 @@ union NetAppRelationshipStatusDef {
 @@clientName(ActiveDirectory.aesEncryption, "IsAesEncryptionEnabled", "csharp");
 @@clientName(ActiveDirectory.ldapSigning, "IsLdapSigningEnabled", "csharp");
 @@clientName(ActiveDirectory.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
+@@clientName(LdapConfiguration.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
+@@clientName(LdapConfigurationPatch.ldapOverTLS,
+  "IsLdapOverTlsEnabled",
+  "csharp"
+);
 @@clientName(PoolProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
 @@clientName(PoolPatchProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
 @@clientName(VolumeBackupProperties.policyEnforced,
@@ -463,6 +468,21 @@ union NetAppRelationshipStatusDef {
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
 @@clientName(NetAppProvisioningStateDef, "NetAppProvisioningState", "csharp");
 
+// C# enum-member casing fixes (formerly exposed with these spellings)
+@@clientName(ApplicationType.`SAP-HANA`, "SapHana", "csharp");
+@@clientName(ApplicationType.ORACLE, "Oracle", "csharp");
+@@clientName(EndpointType.src, "Source", "csharp");
+@@clientName(EndpointType.dst, "Destination", "csharp");
+@@clientName(ServiceLevel.StandardZRS, "StandardZrs", "csharp");
+@@clientName(ElasticProtocolType.NFSv3, "Nfsv3", "csharp");
+@@clientName(ElasticProtocolType.NFSv4, "Nfsv4", "csharp");
+
+// Body parameter rename to restore previous property name
+@@clientName(ListReplicationsRequest.exclude,
+  "ExcludeReplicationsFilter",
+  "csharp"
+);
+
 // VolumeRevert.snapshotId: armResourceIdentifier → string (old API had string)
 @@clientName(VolumeRevert.snapshotId, "SnapshotId", "csharp");
 @@clientName(NetAppRelationshipStatusDef, "NetAppRelationshipStatus", "csharp");
@@ -474,6 +494,37 @@ union NetAppRelationshipStatusDef {
 // --- @@alternateType: property type overrides for C# ---
 // BackupsMigrationRequest.backupVaultId: armResourceIdentifier → string (old API had string)
 @@alternateType(BackupsMigrationRequest.backupVaultId, string, "csharp");
+
+// Restore previous operation names that include the NetApp resource subject (csharp).
+// NOTE: We cannot also use `@@alternateType(Azure.ResourceManager.LocationParameter.location,
+// azureLocation, "csharp")` to convert the `string location` parameter to AzureLocation:
+// doing so causes the mgmt emitter to drop these subscription-scoped action operations
+// from the generated MockableNetAppSubscriptionResource entirely. The parameter therefore
+// stays `string`; AzureLocation backward-compat overloads are added in custom code.
+@@clientName(NetAppResourceOperationGroup.checkNameAvailability,
+  "CheckNetAppNameAvailability",
+  "csharp"
+);
+@@clientName(NetAppResourceOperationGroup.checkFilePathAvailability,
+  "CheckNetAppFilePathAvailability",
+  "csharp"
+);
+@@clientName(NetAppResourceOperationGroup.checkQuotaAvailability,
+  "CheckNetAppQuotaAvailability",
+  "csharp"
+);
+@@clientName(NetAppResourceOperationGroup.queryRegionInfo,
+  "QueryRegionInfoNetAppResource",
+  "csharp"
+);
+@@clientName(NetAppResourceOperationGroup.queryNetworkSiblingSet,
+  "QueryNetworkSiblingSetNetAppResource",
+  "csharp"
+);
+@@clientName(NetAppResourceOperationGroup.updateNetworkSiblingSet,
+  "UpdateNetworkSiblingSetNetAppResource",
+  "csharp"
+);
 
 // C# property type overrides for MountTargetProperties
 @@alternateType(MountTargetProperties.mountTargetId, uuid, "csharp");
