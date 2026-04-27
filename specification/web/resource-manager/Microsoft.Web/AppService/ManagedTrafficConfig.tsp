@@ -75,11 +75,9 @@ interface ManagedTrafficConfigs {
   /**
    * Creates or updates the managed traffic configuration for the specified web app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Singleton resource: only 200 is needed"
   @summary("Create or update the managed traffic configuration for a web app.")
   createOrUpdate is ManagedTrafficConfigOps.CreateOrUpdateSync<
     ManagedTrafficConfigResource,
-    Response = ArmResourceUpdatedResponse<ManagedTrafficConfigResource>,
     OverrideErrorType = DefaultErrorResponse
   >;
 

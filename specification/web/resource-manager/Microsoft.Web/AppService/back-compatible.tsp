@@ -78,6 +78,15 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ValidateRequest.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "New silo resources need flatten for ProvisioningStateMustBeReadOnly compliance"
+@@flattenProperty(ServerFarmSilo.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "New silo resources need flatten for ProvisioningStateMustBeReadOnly compliance"
+@@flattenProperty(SiteSilo.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "New silo resources need flatten for ProvisioningStateMustBeReadOnly compliance"
+@@flattenProperty(ManagedTrafficConfigResource.properties);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSitesWorkflowPreviewRequest.properties);
 
