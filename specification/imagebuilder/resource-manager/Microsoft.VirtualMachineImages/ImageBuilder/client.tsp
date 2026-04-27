@@ -9,3 +9,7 @@ using Microsoft.VirtualMachineImages;
   "ImageBuilderClient",
   "javascript"
 );
+@@clientName(Microsoft.VirtualMachineImages,
+  "ImageBuilderClient",
+  "python"
+);
