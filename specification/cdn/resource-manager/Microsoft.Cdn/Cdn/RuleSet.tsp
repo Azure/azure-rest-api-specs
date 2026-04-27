@@ -31,16 +31,16 @@ interface RuleSets {
    */
   get is ArmResourceRead<RuleSet>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new rule set within the specified profile.
    */
-  // create is ArmResourceCreateOrReplaceSync<RuleSet>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  create is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RuleSet,
-    PatchModel = void,
-    Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
+    void,
+    Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>,
+    Error = ErrorResponse
   >;
 
   /**
