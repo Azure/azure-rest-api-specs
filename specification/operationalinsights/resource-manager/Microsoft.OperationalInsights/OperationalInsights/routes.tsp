@@ -47,7 +47,7 @@ interface QueryPacksOperationGroup {
   createOrUpdateWithoutName is ArmProviderActionSync<
     Request = LogAnalyticsQueryPack,
     Scope = Extension.ResourceGroup,
-    Response = ArmCreatedResponse<LogAnalyticsQueryPack>
+    Response = ArmResourceCreatedSyncResponse<LogAnalyticsQueryPack>
   >;
 }
 
