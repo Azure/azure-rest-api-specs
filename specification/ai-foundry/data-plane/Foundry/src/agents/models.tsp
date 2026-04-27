@@ -35,6 +35,7 @@ model CreateAgentVersionRequest {
     }
   )
   @doc("The blueprint reference for the agent.")
+  @removed(Versions.v1)
   blueprint_reference?: AgentBlueprintReference;
 }
 
@@ -178,6 +179,7 @@ model AgentObject {
   )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v1)
   blueprint_reference?: AgentBlueprintReference;
 
   @extension(
@@ -249,6 +251,7 @@ model AgentVersionObject {
   )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v1)
   blueprint_reference?: AgentBlueprintReference;
 
   @extension(
