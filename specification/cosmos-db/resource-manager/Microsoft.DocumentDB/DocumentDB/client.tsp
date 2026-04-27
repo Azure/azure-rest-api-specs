@@ -670,3 +670,47 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties",
   "javascript"
 );
+
+// Disambiguate the multiple list operations on RestorableDatabaseAccountGetResults
+// (back-compatible.tsp renames them all to "List" for non-C# languages; for C# we
+// need distinct names so they don't collide as GetAll() overloads with same signature).
+@@clientName(RestorableDatabaseAccountGetResults.restorableSqlContainersList,
+  "GetRestorableSqlContainers", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
+  "GetAllRestorableSqlResourceData", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
+  "GetRestorableMongoDBDatabases", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
+  "GetRestorableMongoDBCollections", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
+  "GetAllRestorableMongoDBResourceData", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableGremlinDatabasesList,
+  "GetRestorableGremlinDatabases", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableGremlinGraphsList,
+  "GetRestorableGremlinGraphs", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
+  "GetAllRestorableGremlinResourceData", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableTablesList,
+  "GetRestorableTables", "csharp");
+@@clientName(RestorableDatabaseAccountGetResults.restorableTableResourcesList,
+  "GetAllRestorableTableResourceData", "csharp");
+
+// Disambiguate the many list metrics/usages operations on DatabaseAccountGetResults.
+// back-compatible.tsp renames them all to "ListMetrics"/"ListUsages" for non-C# languages,
+// which collapses to colliding C# overloads on DatabaseAccountGetResultsResource.
+@@clientName(DatabaseAccounts.listMetrics, "GetAccountMetrics", "csharp");
+@@clientName(DatabaseAccounts.listUsages, "GetAccountUsages", "csharp");
+@@clientName(DatabaseAccounts.databaseListMetrics, "GetDatabaseMetrics", "csharp");
+@@clientName(DatabaseAccounts.databaseListUsages, "GetDatabaseUsages", "csharp");
+@@clientName(DatabaseAccounts.collectionListMetrics, "GetCollectionMetrics", "csharp");
+@@clientName(DatabaseAccounts.collectionListUsages, "GetCollectionUsages", "csharp");
+@@clientName(DatabaseAccounts.collectionRegionListMetrics, "GetCollectionRegionMetrics", "csharp");
+@@clientName(DatabaseAccounts.databaseAccountRegionListMetrics, "GetDatabaseAccountRegionMetrics", "csharp");
+@@clientName(DatabaseAccounts.percentileSourceTargetListMetrics, "GetPercentileSourceTargetMetrics", "csharp");
+@@clientName(DatabaseAccounts.percentileTargetListMetrics, "GetPercentileTargetMetrics", "csharp");
+@@clientName(DatabaseAccounts.percentileListMetrics, "GetPercentileMetrics", "csharp");
+@@clientName(DatabaseAccounts.collectionPartitionRegionListMetrics, "GetCollectionPartitionRegionMetrics", "csharp");
+@@clientName(DatabaseAccounts.collectionPartitionListMetrics, "GetCollectionPartitionMetrics", "csharp");
+@@clientName(DatabaseAccounts.collectionPartitionListUsages, "GetCollectionPartitionUsages", "csharp");
+@@clientName(DatabaseAccounts.partitionKeyRangeIdListMetrics, "GetPartitionKeyRangeIdMetrics", "csharp");
+@@clientName(DatabaseAccounts.partitionKeyRangeIdRegionListMetrics, "GetPartitionKeyRangeIdRegionMetrics", "csharp");
