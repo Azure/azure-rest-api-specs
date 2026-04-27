@@ -130,6 +130,9 @@
       "name": "ManagedComputeUsages"
     },
     {
+      "name": "AcceleratorCapacities"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -175,6 +178,66 @@
         "x-ms-examples": {
           "Get Operations": {
             "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/acceleratorCapacities": {
+      "get": {
+        "operationId": "AcceleratorCapacities_List",
+        "tags": [
+          "AcceleratorCapacities"
+        ],
+        "description": "Gets the accelerator capacities for a subscription. Returns available capacity\nper accelerator type, including deployment size information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offer",
+            "in": "query",
+            "description": "The offer name to query capacity for (required).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "acceleratorType",
+            "in": "query",
+            "description": "Optional accelerator type filter to narrow results to a specific accelerator type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "query",
+            "description": "Optional deployment resource ID. When provided, returns capacity for the specific region\nwhere the deployment is hosted rather than the best available region.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AcceleratorCapacityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Accelerator Capacities": {
+            "$ref": "./examples/ListAcceleratorCapacities.json"
           }
         },
         "x-ms-pageable": {
@@ -10019,6 +10082,73 @@
         ]
       }
     },
+    "AcceleratorCapacity": {
+      "type": "object",
+      "description": "Accelerator capacity information for Cognitive Services managed compute deployments.\nProvides available accelerator capacity per type and region at the subscription level.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AcceleratorCapacityProperties",
+          "description": "Properties of the accelerator capacity resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AcceleratorCapacityListResult": {
+      "type": "object",
+      "description": "The list of accelerator capacities response.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of accelerator capacities."
+        },
+        "value": {
+          "type": "array",
+          "description": "Gets the list of accelerator capacities.",
+          "items": {
+            "$ref": "#/definitions/AcceleratorCapacity"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "AcceleratorCapacityProperties": {
+      "type": "object",
+      "description": "Properties of an accelerator capacity resource.",
+      "properties": {
+        "acceleratorType": {
+          "type": "string",
+          "description": "The type of accelerator (e.g., Azure.A100, Azure.H100).",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the capacity is available.",
+          "readOnly": true
+        },
+        "availableAccelerators": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of available accelerators in the region.",
+          "readOnly": true
+        },
+        "deploymentSizeCapacities": {
+          "type": "array",
+          "description": "Capacity information broken down by deployment size.",
+          "items": {
+            "$ref": "#/definitions/DeploymentSizeCapacity"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "AccessKeyAuthTypeConnectionProperties": {
       "type": "object",
       "properties": {
@@ -13591,6 +13721,30 @@
             "value": "Manual"
           }
         ]
+      }
+    },
+    "DeploymentSizeCapacity": {
+      "type": "object",
+      "description": "Capacity information for a specific deployment size.",
+      "properties": {
+        "modelInstanceAcceleratorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of accelerators required per model instance.",
+          "readOnly": true
+        },
+        "totalAvailableCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total available capacity for this deployment size.",
+          "readOnly": true
+        },
+        "largestDeploymentCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The largest contiguous deployment capacity available for this deployment size.",
+          "readOnly": true
+        }
       }
     },
     "DeploymentSkuListResult": {
