@@ -6,7 +6,7 @@ using Microsoft.HybridCompute;
 
 @@clientName(Microsoft.HybridCompute,
   "HybridComputeManagementClient",
-  "javascript,python,go"
+  "javascript,python"
 );
 
 @@alternateType(ServiceExtension.serviceExtensionType, string, "go");
@@ -36,11 +36,11 @@ union CustomPublicNetworkAccessType {
 }
 @@alternateType(PublicNetworkAccessType,
   CustomPublicNetworkAccessType,
-  "javascript,python,go"
+  "javascript,python"
 );
 @@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
-  "javascript,python,go"
+  "javascript,python"
 );
 
 @@clientName(VMGuestPatchClassification_Windows,
@@ -59,11 +59,8 @@ union CustomPublicNetworkAccessType {
 @@Azure.ClientGenerator.Core.alternateType(LicenseProfileNameAlias.licenseProfileName,
   "default"
 );
-@@clientLocation(Machines.setupExtensions,
-  Microsoft.HybridCompute,
-  "python,go"
-);
-@@clientLocation(Machines.upgradeExtensions,
-  Microsoft.HybridCompute,
-  "python,go"
-);
+@@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "python");
+@@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "python");
+
+@@clientLocation(Machines.setupExtensions, "ManagementClient", "go");
+@@clientLocation(Machines.upgradeExtensions, "ManagementClient", "go");
