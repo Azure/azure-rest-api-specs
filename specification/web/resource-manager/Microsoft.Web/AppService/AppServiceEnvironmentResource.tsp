@@ -45,7 +45,8 @@ alias DiagnosticsOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.
@@ -374,7 +375,11 @@ interface AppServiceEnvironmentResources {
     },
     Error = DefaultErrorResponse
   >;
+}
 
+@tag("Recommendations")
+@armResourceOperations(#{ omitTags: true })
+interface AppServiceEnvironmentRecommendations {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */

@@ -42,6 +42,24 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-policy-2026-01-preview
+
+These settings apply only when `--tag=package-policy-2026-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2026-01-preview'
+input-file:
+- preview/2026-01-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    reason: "policyAssignmentInstanceId is a server-generated, read-only GUID in the established service contract"
+    where: $.definitions["Azure.Core.uuid"].format
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2025-11-stable
 
 These settings apply only when `--tag=package-policy-2025-11-stable` is specified on the command line.
@@ -914,7 +932,7 @@ directive:
     reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
-    reason: "Policy assignments can have a manged identity associated with them. This requires a location."
+    reason: "Policy assignments can have a managed identity associated with them. This requires a location."
 ```
 
 ---

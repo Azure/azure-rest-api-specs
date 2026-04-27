@@ -92,7 +92,8 @@ interface RequestHistoryOps
       }
     > {}
 
-@armResourceOperations
+@tag("WorkflowRunActions")
+@armResourceOperations(#{ omitTags: true })
 interface RequestHistories {
   /**
    * Gets a workflow run repetition request history.

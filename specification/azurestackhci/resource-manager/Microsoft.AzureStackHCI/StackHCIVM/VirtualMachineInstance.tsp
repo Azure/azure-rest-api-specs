@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -85,5 +87,13 @@ interface VirtualMachineInstances {
   save is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     Request = void
+  >;
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("The operation to power off a virtual machine instance.")
+  powerOff is ArmResourceActionAsync<
+    VirtualMachineInstance,
+    PowerOffVirtualMachineOptions,
+    Foundations.OperationStatusResult
   >;
 }

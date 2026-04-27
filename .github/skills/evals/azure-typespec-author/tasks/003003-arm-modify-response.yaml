@@ -1,0 +1,18 @@
+id: 003003-arm-modify-response
+name: "LRO: Modify LRO response headers"
+description: |
+  Test modifying the LRO createOrUpdate operation to return only Azure-AsyncOperation header without Retry-After.
+  Based on benchmark case 003003-arm-modify-response.
+tags:
+  - lro
+  - operations
+inputs:
+  prompt: "Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

@@ -1,0 +1,16 @@
+emit:
+  - "@typespec/http-client-csharp"
+options:
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}"
+    package-name: Azure.AI.Agents.Contracts.V2
+    api-version: "virtual-public-preview"
+    unreferenced-types-handling: keepAll
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-azure-core/experimental"
+  - "@azure-tools/typespec-client-generator-core"
+  # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/views/client-emitters/models/evals"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/fine-tuning"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/responses"

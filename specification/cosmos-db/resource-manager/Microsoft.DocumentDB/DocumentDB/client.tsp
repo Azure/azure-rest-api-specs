@@ -665,3 +665,8 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "ErrorResponse",
   "csharp"
 );
+
+@@clientName(ManagedServiceIdentityUserAssignedIdentities,
+  "Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties",
+  "javascript"
+);
