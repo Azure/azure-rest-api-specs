@@ -6172,3 +6172,175 @@ model ManagedComputeUsageListResult {
   @identifiers(#["id"])
   value?: ManagedComputeUsage[];
 }
+
+/**
+ * Request body for the evaluateDeploymentPolicies action.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesRequest {
+  /**
+   * The list of hypothetical deployments to evaluate against Azure Policy.
+   */
+  deployments: EvaluateDeploymentPoliciesDeployment[];
+}
+
+/**
+ * A hypothetical deployment definition used for policy dry-run evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesDeployment {
+  /**
+   * The name of the hypothetical deployment.
+   */
+  name: string;
+
+  /**
+   * Properties of the hypothetical deployment.
+   */
+  properties: EvaluateDeploymentPoliciesDeploymentProperties;
+}
+
+/**
+ * Properties of a hypothetical deployment for policy evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesDeploymentProperties {
+  /**
+   * The model to evaluate.
+   */
+  `model`: DeploymentModel;
+
+  /**
+   * The name of the RAI policy to evaluate.
+   */
+  raiPolicyName?: string;
+}
+
+/**
+ * Response body for the evaluateDeploymentPolicies action.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesResponse {
+  /**
+   * Per-deployment policy evaluation results, keyed by deployment name.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record type used to represent a dictionary of deployment policy evaluation results keyed by deployment name"
+  results?: Record<DeploymentPolicyEvaluationResult>;
+}
+
+/**
+ * The outcome of a policy evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+union PolicyEvaluationOutcome {
+  string,
+
+  /** The deployment is compliant with all policies. */
+  Compliant: "Compliant",
+
+  /** The deployment violates one or more policies. */
+  NonCompliant: "NonCompliant",
+
+  /** An error occurred during evaluation. */
+  Error: "Error",
+}
+
+/**
+ * Policy evaluation result for a single deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentPolicyEvaluationResult {
+  /**
+   * The evaluation outcome.
+   */
+  evaluationOutcome?: PolicyEvaluationOutcome;
+
+  /**
+   * Error message if the evaluation outcome is Error.
+   */
+  errorMessage?: string;
+
+  /**
+   * Details of non-compliant policy assignments.
+   */
+  @identifiers(#[])
+  nonCompliantAssignments?: PolicyAssignmentEvaluationDetails[];
+}
+
+/**
+ * Details of a non-compliant policy assignment.
+ */
+@added(Versions.v2026_03_15_preview)
+model PolicyAssignmentEvaluationDetails {
+  /**
+   * The policy assignment ID.
+   */
+  assignmentId?: string;
+
+  /**
+   * The policy definition ID.
+   */
+  policyDefinitionId?: string;
+
+  /**
+   * The policy set definition ID.
+   */
+  policySetDefinitionId?: string;
+
+  /**
+   * The evaluation outcome for this assignment.
+   */
+  evaluationOutcome?: PolicyEvaluationOutcome;
+
+  /**
+   * The reason for non-compliance.
+   */
+  nonComplianceReason?: string;
+
+  /**
+   * The policy effect (e.g., Deny, Audit).
+   */
+  effect?: string;
+
+  /**
+   * Expression-level evaluation details.
+   */
+  @identifiers(#[])
+  expressionEvaluations?: PolicyExpressionEvaluationDetails[];
+}
+
+/**
+ * Details of a policy expression evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+model PolicyExpressionEvaluationDetails {
+  /**
+   * The policy expression.
+   */
+  expression?: string;
+
+  /**
+   * The kind of expression.
+   */
+  expressionKind?: string;
+
+  /**
+   * The operator used in evaluation.
+   */
+  operator?: string;
+
+  /**
+   * The evaluation result.
+   */
+  result?: string;
+
+  /**
+   * The target value of the expression.
+   */
+  targetValue?: string;
+
+  /**
+   * The actual value of the expression.
+   */
+  expressionValue?: string;
+}

@@ -135,6 +135,10 @@ suppressions:
     reason: ManagedComputeUsageListResult is a usage/quota list envelope, not an ARM resource. Same pattern as existing UsageListResult. Individual ManagedComputeUsage items already include id, name, and type properties.
     where:
       - $.definitions.ManagedComputeUsageListResult
+  - code: AvoidAdditionalProperties
+    reason: EvaluateDeploymentPoliciesResponse.results is a dictionary keyed by deployment name, mapping each hypothetical deployment to its policy evaluation result. Keys are user-provided deployment names from the request.
+    where:
+      - $.definitions.EvaluateDeploymentPoliciesResponse.properties.results
 ```
 
 

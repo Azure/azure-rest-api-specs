@@ -28,8 +28,18 @@ model ManagedComputeDeployment
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
   >;
 
-  ...ResourceSkuProperty;
-  ...EntityTagProperty;
+  /**
+   * The resource model definition representing SKU
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own Sku model — using ResourceSkuProperty causes duplicate-client-name errors in Java/Python SDK generation due to collision with ARM common-type Sku"
+  sku?: Sku;
+
+  /**
+   * Resource Etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag' which would be a breaking change"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @added(Versions.v2026_03_15_preview)
@@ -78,6 +88,7 @@ interface ManagedComputeDeployments {
 @@doc(ManagedComputeDeployment.name,
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
+@@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
 @@doc(ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."
 );
