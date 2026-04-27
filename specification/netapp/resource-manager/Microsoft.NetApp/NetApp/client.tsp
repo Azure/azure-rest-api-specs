@@ -428,8 +428,6 @@ union NetAppRelationshipStatusDef {
 );
 
 // C# ARM resource renames (restore NetApp prefix on resource types)
-// Volume rename triggers a generator bug — see Azure/azure-sdk-for-net#58686.
-// Pushed temporarily to give the generator team a real-world repro; revert before merging.
 @@clientName(Volume, "NetAppVolume", "csharp");
 @@clientName(Bucket, "NetAppBucket", "csharp");
 @@clientName(Cache, "NetAppCache", "csharp");
@@ -536,6 +534,8 @@ union NetAppRelationshipStatusDef {
 // C# property type overrides for VolumeProperties
 @@alternateType(VolumeProperties.fileSystemId, uuid, "csharp");
 @@alternateType(VolumeProperties.networkSiblingSetId, uuid, "csharp");
+// dataStoreResourceId: string[] -> ResourceIdentifier[] (old SDK exposed Azure.Core.ResourceIdentifier)
+@@alternateType(VolumeProperties.dataStoreResourceId, armResourceIdentifier[], "csharp");
 
 // C# ETag and Guid property type overrides
 @@alternateType(PoolProperties.poolId, uuid, "csharp");
