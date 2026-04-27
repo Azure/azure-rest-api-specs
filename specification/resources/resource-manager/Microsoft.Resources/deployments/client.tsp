@@ -7,16 +7,38 @@ using Microsoft.Resources;
 
 @@clientName(Microsoft.Resources, "DeploymentsMgmtClient", "python");
 
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(Deployments, "ArmDeployments", "csharp"); // Avoid "Deployments" name conflict with namespace in C#
+@@clientName(ResourceReference, "ArmResourceReference", "csharp");
 @@clientName(DeploymentExtensionDefinition,
   "ArmDeploymentExtensionDefinition",
   "csharp"
 );
 @@clientName(DeploymentParameter, "ArmDeploymentParameterValue", "csharp");
 @@clientName(Deployment, "ArmDeploymentContent", "csharp");
+@@alternateType(Deployment.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Deployment.location, azureLocation, "csharp");
 @@clientName(DeploymentExtended, "ArmDeployment", "csharp");
 @@clientName(DeploymentPropertiesExtended,
   "ArmDeploymentPropertiesExtended",
+  "csharp"
+);
+@@clientName(DeploymentPropertiesExtended.onErrorDeployment,
+  "ErrorDeployment",
+  "csharp"
+);
+@@clientName(DeploymentPropertiesExtended.outputResources,
+  "OutputResourceDetails",
+  "csharp"
+);
+@@clientName(DeploymentPropertiesExtended.validatedResources,
+  "ValidatedResourceDetails",
   "csharp"
 );
 @@alternateType(DeploymentExtended.location, azureLocation, "csharp");
@@ -43,6 +65,15 @@ using Microsoft.Resources;
   "csharp"
 );
 @@clientName(DeploymentProperties, "ArmDeploymentProperties", "csharp");
+@@clientName(DeploymentProperties.parameters, "DeploymentParameters", "csharp");
+@@clientName(DeploymentProperties.onErrorDeployment,
+  "ErrorDeployment",
+  "csharp"
+);
+@@clientName(ExpressionEvaluationOptions.scope,
+  "ExpressionEvaluationScope",
+  "csharp"
+);
 @@clientName(Dependency, "ArmDependency", "csharp");
 @@alternateType(Dependency.resourceType, armResourceType, "csharp");
 @@clientName(BasicDependency, "BasicArmDependency", "csharp");
@@ -62,6 +93,15 @@ using Microsoft.Resources;
 @@clientName(ChangeType, "WhatIfChangeType", "csharp");
 @@clientName(PropertyChangeType, "WhatIfPropertyChangeType", "csharp");
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
+@@clientName(DeploymentExternalInput, "ArmDeploymentExternalInput", "csharp");
+@@clientName(DeploymentExternalInputDefinition,
+  "ArmDeploymentExternalInputDefinition",
+  "csharp"
+);
+@@clientName(DeploymentExtensionConfigItem,
+  "ArmDeploymentExtensionConfigItem",
+  "csharp"
+);
 
 // C# SDK: Use the generic at-scope interface (DeploymentExtendeds) for all scopes.
 // Suppress per-scope @armResourceOperations interfaces from C# to eliminate duplicate
