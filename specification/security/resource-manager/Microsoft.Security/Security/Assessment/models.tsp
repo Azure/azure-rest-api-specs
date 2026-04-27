@@ -1340,8 +1340,12 @@ model AzureResourceDetails extends ResourceDetails {
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("source")
 model OnPremiseResourceDetails extends ResourceDetails {
+  ...OnPremiseResourceDetailsProperties;
+  source: "OnPremiseResourceDetails";
+}
+
+alias OnPremiseResourceDetailsProperties = {
   /**
    * Azure resource Id of the workspace the machine is attached to
    */
@@ -1361,13 +1365,17 @@ model OnPremiseResourceDetails extends ResourceDetails {
    * The name of the machine
    */
   machineName: string;
-}
+};
 
 /**
  * Details of the On Premise Sql resource that was assessed
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model OnPremiseSqlResourceDetails extends OnPremiseResourceDetails {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(OnPremiseResourceDetails)
+model OnPremiseSqlResourceDetails extends ResourceDetails {
+  ...OnPremiseResourceDetailsProperties;
+
   /**
    * The Sql server name installed on the machine
    */

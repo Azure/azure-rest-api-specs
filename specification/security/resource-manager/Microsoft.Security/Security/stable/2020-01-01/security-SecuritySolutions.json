@@ -1578,22 +1578,16 @@
       "type": "object",
       "description": "The external security solution properties for AAD solutions",
       "properties": {
-        "deviceVendor": {
-          "type": "string"
-        },
-        "deviceType": {
-          "type": "string"
-        },
-        "workspace": {
-          "$ref": "#/definitions/ConnectedWorkspace",
-          "description": "Represents an OMS workspace to which the solution is connected"
-        },
         "connectivityState": {
           "$ref": "#/definitions/AadConnectivityState",
           "description": "The connectivity state of the external AAD solution"
         }
       },
-      "additionalProperties": {}
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExternalSecuritySolutionProperties"
+        }
+      ]
     },
     "AllowedConnectionsList": {
       "type": "object",
