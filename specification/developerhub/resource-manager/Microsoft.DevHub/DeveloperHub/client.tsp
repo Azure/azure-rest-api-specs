@@ -16,3 +16,15 @@ using Microsoft.DevHub;
   "deploymentProperties",
   "java"
 );
+@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback,
+  Microsoft.DevHub,
+  "javascript"
+);
+@@clientLocation(GitHubOAuthResponses.listGitHubOAuth,
+  Microsoft.DevHub,
+  "javascript"
+);
+@@clientLocation(GitHubOAuthResponses.gitHubOAuth,
+  Microsoft.DevHub,
+  "javascript"
+);
