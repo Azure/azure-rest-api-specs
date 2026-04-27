@@ -557,3 +557,11 @@ op alertsListResourceGroupLevelByRegionCustomized(
   "java"
 );
 @@clientName(GovernanceAPI.OperationResultStatus, "OperationResult", "java");
+@@clientName(ApplicationsAPI.SecurityConnectorApplication,
+  "SecurityConnectorApplicationOperations",
+  "java"
+);
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.list,
+  "SecurityConnectorApplications",
+  "java"
+);
