@@ -188,6 +188,3 @@ using Compute;
   "publicIpAllocationMethod",
   "java"
 );
-
-// Restore the previously-emitted [JsonConverter] on KeyVaultSecretReference for backward compatibility.
-@@useSystemTextJsonConverter(KeyVaultSecretReference, "csharp");
