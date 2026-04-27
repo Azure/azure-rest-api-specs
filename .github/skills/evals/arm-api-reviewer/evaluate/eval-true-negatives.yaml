@@ -32,10 +32,9 @@ stimuli:
     graders:
       - type: prompt
     rubric:
-      - The spec is fully compliant — has all CRUD operations, ListByResourceGroup, ListBySubscription, Operations API, provisioningState with terminal states, x-ms-pageable, x-ms-enum with modelAsString, descriptions, systemData, proper parameters, x-ms-mutability on location
-      - The agent may note that the spec defines types inline instead of referencing common-types — that is a process observation, NOT a blocking violation
-      - The agent should avoid flagging serious blocking RPC rule violations, security violations, or breaking changes that would be false positives
-      - Minor suggestions or warnings are acceptable
+      - The spec is fully compliant with ARM RPC rules — uses common-types v5 $ref for TrackedResource, ErrorResponse, OperationListResult, and standard ARM parameters; has all required CRUD operations, ListByResourceGroup, ListBySubscription, Operations API, provisioningState (read-only with terminal states and modelAsString), x-ms-pageable with nextLink, correct security definitions, and proper x-ms-mutability on location via TrackedResource
+      - The agent MUST NOT report any blocking violations (Error or Required severity). There are no blocking RPC rule violations, security violations, or breaking changes in this spec. Any finding at blocking/required severity is a false positive and constitutes a test failure.
+      - Minor suggestions (e.g., adding non-terminal provisioningState values like Creating/Updating/Deleting, etag for optimistic concurrency, server-side default annotations) and informational observations are acceptable and do not affect the grade
 
   # 090002 — Clean example file (no issues expected)
   - name: clean-example-no-issues
