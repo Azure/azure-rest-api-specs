@@ -298,6 +298,11 @@ union Source {
    * Gcp
    */
   Gcp: "Gcp",
+
+  /**
+   * On premise resource details
+   */
+  OnPremiseResourceDetails: "OnPremiseResourceDetails",
 }
 
 /**
