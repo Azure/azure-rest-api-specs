@@ -25,6 +25,19 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 
 These are the global settings for the AI Search API.
 
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/search.json
+suppressions:
+  - code: LroExtension
+    from: search.json
+    reason: Legacy swagger file
+```
+
 ``` yaml
 # common
 openapi-type: data-plane

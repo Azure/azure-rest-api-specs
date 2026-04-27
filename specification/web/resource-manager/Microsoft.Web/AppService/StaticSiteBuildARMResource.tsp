@@ -33,7 +33,8 @@ model StaticSiteBuildARMResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface StaticSiteBuildARMResources {
   /**
    * Description for Gets the details of a static site build.

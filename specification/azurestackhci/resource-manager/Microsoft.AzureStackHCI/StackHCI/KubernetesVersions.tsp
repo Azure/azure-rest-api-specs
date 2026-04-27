@@ -13,7 +13,7 @@ namespace Microsoft.AzureStackHCI;
  * Represents a kubernetes version resource.
  */
 @parentResource(SubscriptionLocationResource)
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_04_01_preview)
 model KubernetesVersion
   is Azure.ResourceManager.ProxyResource<KubernetesVersionProperties> {
   ...ResourceNameParameter<
@@ -23,7 +23,7 @@ model KubernetesVersion
 }
 
 @armResourceOperations
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_04_01_preview)
 interface KubernetesVersions {
   /**
    * List all kubernetes versions.

@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "groupName": "string",
+    "poolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "None",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "environmentConfiguration": {
+            "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
+            "environmentVariables": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ],
+            "livenessProbe": {
+              "failureThreshold": 1,
+              "initialDelay": "PT5M",
+              "period": "PT5M",
+              "successThreshold": 1,
+              "timeout": "PT5M"
+            },
+            "readinessProbe": {
+              "failureThreshold": 1,
+              "initialDelay": "PT5M",
+              "period": "PT5M",
+              "successThreshold": 1,
+              "timeout": "PT5M"
+            },
+            "startupProbe": {
+              "failureThreshold": 1,
+              "initialDelay": "PT5M",
+              "period": "PT5M",
+              "successThreshold": 1,
+              "timeout": "PT5M"
+            }
+          },
+          "modelConfiguration": {
+            "modelId": "azureml://registries/test-registry/models/modelabc/versions/1"
+          },
+          "nodeSkuType": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Failed",
+          "scaleUnitSize": 1
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:17",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:17",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "InferenceGroups_Get",
+  "title": "Get Workspace Inference Group."
+}
