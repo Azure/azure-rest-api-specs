@@ -22,15 +22,15 @@ namespace Customizations;
 );
 @@alternateType(FileCreationTimeResponseHeader.fileCreationTime,
   string,
-  "python,csharp,javascript"
+  "python,csharp"
 );
 @@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime,
   string,
-  "python,csharp,javascript"
+  "python,csharp"
 );
 @@alternateType(FileChangeTimeResponseHeader.fileChangeTime,
   string,
-  "python,csharp,javascript"
+  "python,csharp"
 );
 
 @@clientNamespace(Storage.File, "Azure.Storage.Files.Shares", "javascript");
