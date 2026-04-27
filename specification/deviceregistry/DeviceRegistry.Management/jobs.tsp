@@ -143,7 +143,7 @@ interface Jobs {
   createOrReplace is ArmResourceCreateOrReplaceAsync<Job>;
   update is ArmResourcePatchAsync<Job, JobProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Job>;
-  listByResourceGroup is ArmResourceListByParent<Job>;
+  listByNamespace is ArmResourceListByParent<Job>;
 
   @doc("Schedule the job for execution.")
   schedule is ArmResourceActionNoResponseContentAsync<Job, JobScheduleRequest>;

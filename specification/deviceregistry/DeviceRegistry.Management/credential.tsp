@@ -39,6 +39,6 @@ interface Credentials {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Credential>;
   delete is ArmResourceDeleteWithoutOkAsync<Credential>;
   update is ArmResourcePatchAsync<Credential, CredentialProperties>;
-  listByResourceGroup is ArmResourceListByParent<Credential>;
+  listByNamespace is ArmResourceListByParent<Credential>;
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
 }
