@@ -567,3 +567,7 @@ op alertsListResourceGroupLevelByRegionCustomized(
 );
 @@clientName(HealthReportsAPI.status, "HealthReportStatus", "java");
 @@clientName(SecuritySolutionsAPI.Status, "Status", "java");
+@@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.privateLinkParameters,
+  "privateLinkParameters",
+  "go"
+);
