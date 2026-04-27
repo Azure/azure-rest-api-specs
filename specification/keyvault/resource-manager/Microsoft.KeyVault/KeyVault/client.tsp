@@ -383,3 +383,27 @@ enum NameAvailabilityReason {
 
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
+
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(Vault,
+  "resource-name-constraint",
+  #{
+    minLength: 3,
+    maxLength: 24,
+    pattern: "^[a-zA-Z0-9-]+$",
+  },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(Secret,
+  "resource-name-constraint",
+  #{
+    minLength: 1,
+    maxLength: 127,
+    pattern: "^[a-zA-Z0-9-]+$",
+  },
+  "csharp"
+);
