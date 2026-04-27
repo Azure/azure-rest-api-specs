@@ -10,8 +10,8 @@ using Microsoft.DevHub;
 @@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "java");
 @@clientName(PullRequest.prURL, "prUrl", "java");
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript");
-@@clientName(ACR, "Acr", "java");
-@@clientName(Deployment, "DeploymentProperties", "java");
+@@clientName(ACR, "Acr", "java,javascript");
+@@clientName(Deployment, "DeploymentProperties", "java,javascript");
 @@clientName(GitHubWorkflowProfile.deploymentProperties,
   "deploymentProperties",
   "java"
