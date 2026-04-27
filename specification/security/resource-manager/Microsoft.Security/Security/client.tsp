@@ -129,7 +129,7 @@ op privateLinksCreateCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
   resource: PrivateLinksAPI.PrivateLinkResource,
 ): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
   PrivateLinksAPI.PrivateLinkResource,
@@ -174,7 +174,7 @@ op privateLinksDeleteCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
 ): ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
@@ -191,7 +191,7 @@ op privateLinksHeadCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
 ): OkResponse | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
@@ -287,7 +287,7 @@ op privateLinkResourcesListCustomization(
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  privateLinkName: `private-link-parameters`,
+  privateLinkParameters: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
