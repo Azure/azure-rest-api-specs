@@ -2720,7 +2720,7 @@ model HostPoolProperties {
   /**
    * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
 }
 
@@ -3800,7 +3800,7 @@ model HostPoolPatchProperties {
   /**
    * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
 }
 
