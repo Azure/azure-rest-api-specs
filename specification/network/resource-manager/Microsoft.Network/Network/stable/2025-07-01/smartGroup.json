@@ -1,0 +1,545 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-07-01",
+    "description": "APIs to manage web application firewall rules.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SmartGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/smartGroups": {
+      "get": {
+        "operationId": "SmartGroups_ListAll",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Gets all the SmartGroups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SmartGroups by Subscription": {
+            "$ref": "./examples/SmartGroupListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups": {
+      "get": {
+        "operationId": "SmartGroups_List",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Gets all the SmartGroups in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SmartGroups by Resource Group": {
+            "$ref": "./examples/SmartGroupListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/smartGroups/{smartGroupName}": {
+      "get": {
+        "operationId": "SmartGroups_Get",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Gets the specified SmartGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smartGroupName",
+            "in": "path",
+            "description": "The name of the SmartGroup.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SmartGroup": {
+            "$ref": "./examples/SmartGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SmartGroups_CreateOrUpdate",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Creates or updates a SmartGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smartGroupName",
+            "in": "path",
+            "description": "The name of the SmartGroup.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update SmartGroup operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SmartGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'SmartGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update SmartGroup": {
+            "$ref": "./examples/SmartGroupPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SmartGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SmartGroups_UpdateTags",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Updates tags of a SmartGroup resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smartGroupName",
+            "in": "path",
+            "description": "The name of the SmartGroup.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to update SmartGroup tags.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmartGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SmartGroup Tags": {
+            "$ref": "./examples/SmartGroupUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SmartGroups_Delete",
+        "tags": [
+          "SmartGroups"
+        ],
+        "description": "Deletes the specified SmartGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smartGroupName",
+            "in": "path",
+            "description": "The name of the SmartGroup.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SmartGroup": {
+            "$ref": "./examples/SmartGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "KubeSelectorGroupNamespaceSelector": {
+      "type": "object",
+      "description": "Namespace selector for scoping by namespace labels.",
+      "properties": {
+        "matchLabels": {
+          "type": "object",
+          "description": "Namespace label key-value pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "Set-based namespace label selector requirements.",
+          "items": {
+            "$ref": "#/definitions/KubeSelectorMatchExpression"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "KubeSelectorGroupSelector": {
+      "type": "object",
+      "description": "Label selector for matching Kubernetes pods.",
+      "properties": {
+        "matchLabels": {
+          "type": "object",
+          "description": "Pod label key-value pairs (AND semantics).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "Set-based label selector requirements (AND semantics with matchLabels).",
+          "items": {
+            "$ref": "#/definitions/KubeSelectorMatchExpression"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "namespaceSelector": {
+          "$ref": "#/definitions/KubeSelectorGroupNamespaceSelector",
+          "description": "The namespace selector for scoping by namespace labels."
+        }
+      }
+    },
+    "KubeSelectorMatchExpression": {
+      "type": "object",
+      "description": "A set-based label selector requirement for matching Kubernetes labels.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The label key that the selector applies to."
+        },
+        "operator": {
+          "$ref": "./common.json#/definitions/KubeSelectorMatchExpressionOperator",
+          "description": "The operator representing the relationship between the label key and values. Supported values are In, NotIn, Exists, and DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "description": "The set of values. Required for In and NotIn operators, must be empty for Exists and DoesNotExist.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SmartGroup": {
+      "type": "object",
+      "description": "SmartGroup resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SmartGroupProperties",
+          "description": "Properties of the SmartGroup resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.Resource"
+        }
+      ]
+    },
+    "SmartGroupEntry": {
+      "type": "object",
+      "description": "A single entry in a SmartGroup. Each entry has a name, a discriminator type, and type-specific properties.\nCurrently supported types: KubeSelector.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this group entry."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type discriminator (e.g. \"KubeSelector\")."
+        },
+        "properties": {
+          "$ref": "#/definitions/SmartGroupEntryProperties",
+          "description": "The type-specific properties for this group entry."
+        }
+      }
+    },
+    "SmartGroupEntryProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a SmartGroupEntry. Currently only KubeSelector fields are populated.",
+      "properties": {
+        "clusterIds": {
+          "type": "array",
+          "description": "The ARM resource IDs of the managedClusters. Used when type is KubeSelector.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selector": {
+          "$ref": "#/definitions/KubeSelectorGroupSelector",
+          "description": "The label selector for matching Kubernetes pods. Used when type is KubeSelector."
+        }
+      }
+    },
+    "SmartGroupListResult": {
+      "type": "object",
+      "description": "The response of a SmartGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SmartGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/SmartGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SmartGroupProperties": {
+      "type": "object",
+      "description": "Properties of the SmartGroup resource.",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "The collection of group entries. Each entry has a name, type, and type-specific properties.",
+          "items": {
+            "$ref": "#/definitions/SmartGroupEntry"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "firewallPolicyIds": {
+          "type": "array",
+          "description": "The firewall policy IDs referencing this SmartGroup. System-managed, read-only.",
+          "items": {
+            "$ref": "./common.json#/definitions/Common.SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the SmartGroup resource.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -6072,6 +6072,42 @@
         ]
       }
     },
+    "KubeSelectorMatchExpressionOperator": {
+      "type": "string",
+      "description": "The operator for a KubeSelectorMatchExpression.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "KubeSelectorMatchExpressionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "Matches when the label value is in the specified set."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "Matches when the label value is not in the specified set."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Matches when the label key exists, regardless of value."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "Matches when the label key does not exist."
+          }
+        ]
+      }
+    },
     "ManagedRuleEnabledState": {
       "type": "string",
       "description": "The state of the managed rule. Defaults to Disabled if not specified.",
