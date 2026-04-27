@@ -11,6 +11,8 @@ using Microsoft.HybridCompute;
 
 @@alternateType(ServiceExtension.serviceExtensionType, string, "go");
 
+@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type, string, "go");
+
 /**
  * The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).
  */
@@ -34,11 +36,11 @@ union CustomPublicNetworkAccessType {
 }
 @@alternateType(PublicNetworkAccessType,
   CustomPublicNetworkAccessType,
-  "javascript,python"
+  "javascript,python,go"
 );
 @@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
-  "javascript,python"
+  "javascript,python,go"
 );
 
 @@clientName(VMGuestPatchClassification_Windows,
@@ -59,3 +61,5 @@ union CustomPublicNetworkAccessType {
 );
 @@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "python");
 @@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "python");
+@@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "go");
+@@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "go");
