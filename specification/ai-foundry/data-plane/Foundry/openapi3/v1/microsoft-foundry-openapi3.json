@@ -1078,6 +1078,370 @@
         }
       }
     },
+    "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files": {
+      "get": {
+        "operationId": "AgentSessionFiles_listSessionFiles",
+        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The directory path to list, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentSessionFiles_deleteSessionFile",
+        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file or directory path to delete, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "description": "Whether to recursively delete directory contents. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content": {
+      "put": {
+        "operationId": "AgentSessionFiles_uploadSessionFile",
+        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The destination file path within the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionFileWriteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "AgentSessionFiles_downloadSessionFile",
+        "description": "Download a file from the session sandbox as a binary stream.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path to download from the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/agents/{agent_name}/endpoint/sessions/{session_id}": {
       "get": {
         "operationId": "Agents_getSession",
@@ -1230,370 +1594,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/files": {
-      "get": {
-        "operationId": "AgentSessionFiles_listSessionFiles",
-        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The directory path to list, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "AgentSessionFiles_deleteSessionFile",
-        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The file or directory path to delete, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "recursive",
-            "in": "query",
-            "required": false,
-            "description": "Whether to recursively delete directory contents. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/files/content": {
-      "put": {
-        "operationId": "AgentSessionFiles_uploadSessionFile",
-        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The destination file path within the sandbox, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionFileWriteResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/octet-stream": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            }
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "get": {
-        "operationId": "AgentSessionFiles_downloadSessionFile",
-        "description": "Download a file from the session sandbox as a binary stream.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The file path to download from the sandbox, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
           ]
         }
       }
@@ -10307,6 +10307,14 @@
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "base_url": {
             "type": "string",
             "format": "uri",
@@ -10429,6 +10437,14 @@
           "index_name": {
             "type": "string",
             "description": "The name of an index in an IndexResource attached to this agent."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "query_type": {
             "allOf": [
@@ -11895,6 +11911,14 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -11998,6 +12022,14 @@
           "indexes"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "indexes": {
             "type": "array",
             "items": {
@@ -12284,6 +12316,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -12325,6 +12365,14 @@
               "bing_custom_search_preview"
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_custom_search_preview": {
             "allOf": [
@@ -12429,6 +12477,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -12446,6 +12502,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -12476,6 +12540,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -12500,6 +12572,14 @@
               "bing_grounding"
             ],
             "description": "The object type, which is always 'bing_grounding'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_grounding": {
             "allOf": [
@@ -12688,6 +12768,14 @@
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "browser_automation_preview": {
             "allOf": [
               {
@@ -12791,6 +12879,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the project connection to your Azure Playwright resource."
@@ -12804,6 +12900,14 @@
           "connection"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "connection": {
             "allOf": [
               {
@@ -15779,6 +15883,14 @@
       "FabricDataAgentToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -16081,9 +16193,7 @@
       "HeaderIsolationKeySource": {
         "type": "object",
         "required": [
-          "kind",
-          "user_isolation_key",
-          "chat_isolation_key"
+          "kind"
         ],
         "properties": {
           "kind": {
@@ -16091,14 +16201,6 @@
             "enum": [
               "Header"
             ]
-          },
-          "user_isolation_key": {
-            "type": "string",
-            "description": "The user isolation key header value"
-          },
-          "chat_isolation_key": {
-            "type": "string",
-            "description": "The chat isolation key header value"
           }
         },
         "allOf": [
@@ -17087,6 +17189,14 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -17622,6 +17732,14 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -38778,9 +38896,9 @@
             "description": "Whether this entry is a directory."
           },
           "modified_time": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The last modification time in UTC (ISO 8601)."
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (in seconds) when the file was last modified."
           }
         },
         "description": "A single entry in a directory listing."
@@ -38957,6 +39075,14 @@
       "SharepointGroundingToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -38981,6 +39107,14 @@
               "sharepoint_grounding_preview"
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "sharepoint_grounding_preview": {
             "allOf": [
@@ -39699,6 +39833,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "A project connection in a ToolProjectConnectionList attached to this tool."
@@ -40234,6 +40376,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing custom search"
