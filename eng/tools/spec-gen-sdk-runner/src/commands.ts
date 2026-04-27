@@ -69,6 +69,7 @@ async function runAzsdkGeneration(
 
   // Step 2: Run azsdk pkg generate
   let generateResponse: AzsdkGenerateResponse | undefined;
+  let buildResponse: AzsdkBuildResponse | undefined;
   try {
     const generateArgs = prepareAzsdkGenerateCommand(commandInput, tspConfigRelativePath);
     logMessage(`Running: azsdk ${generateArgs.join(" ")}`, LogLevel.Info);
@@ -99,7 +100,7 @@ async function runAzsdkGeneration(
           const buildArgs = prepareAzsdkBuildCommand(packagePath);
           logMessage(`Running: azsdk ${buildArgs.join(" ")}`, LogLevel.Info);
           const buildOutput = await runCommandWithOutput("azsdk", buildArgs);
-          const buildResponse = parseAzsdkResponse<AzsdkBuildResponse>(buildOutput);
+          buildResponse = parseAzsdkResponse<AzsdkBuildResponse>(buildOutput);
           logMessage(`azsdk pkg build result: ${buildResponse.result}`, LogLevel.Info);
           if (buildResponse.result !== "succeeded") {
             logMessage(`Build failed, skipping pack step`, LogLevel.Error);
@@ -130,7 +131,7 @@ async function runAzsdkGeneration(
   }
 
   // Step 5: Build ExecutionReport via adapter
-  const executionReport = buildExecutionReport(generateResponse, packResponse, emitterCheck);
+  const executionReport = buildExecutionReport(generateResponse, packResponse, emitterCheck, buildResponse);
   return { executionReport, statusCode };
 }
 

@@ -117,6 +117,7 @@ export function buildExecutionReport(
   generateResponse: AzsdkGenerateResponse | undefined,
   packResponse: AzsdkPackResponse | undefined,
   emitterCheck: EmitterCheckResult,
+  buildResponse?: AzsdkBuildResponse,
 ): ExecutionReport {
   // If emitter is not enabled, return notEnabled result
   if (!emitterCheck.enabled) {
@@ -127,12 +128,16 @@ export function buildExecutionReport(
     };
   }
 
-  // Map azsdk-cli result to ExecutionResult
+  // Map azsdk-cli result to ExecutionResult — fail if any step failed
   let executionResult: ExecutionResult;
-  if (!generateResponse) {
+  if (!generateResponse || generateResponse.result !== "succeeded") {
+    executionResult = "failed";
+  } else if (buildResponse && buildResponse.result !== "succeeded") {
+    executionResult = "failed";
+  } else if (packResponse && packResponse.result !== "succeeded") {
     executionResult = "failed";
   } else {
-    executionResult = generateResponse.result === "succeeded" ? "succeeded" : "failed";
+    executionResult = "succeeded";
   }
 
   // Build package info from typespec-metadata and pack response
