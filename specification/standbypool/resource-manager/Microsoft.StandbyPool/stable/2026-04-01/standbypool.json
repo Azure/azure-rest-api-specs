@@ -1124,10 +1124,7 @@
           "type": "boolean",
           "description": "Indicates whether dynamic sizing is enabled for the standby pool."
         }
-      },
-      "required": [
-        "enabled"
-      ]
+      }
     },
     "HealthStateCode": {
       "type": "string",
@@ -1720,10 +1717,7 @@
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of virtual machines in the pool.",
-          "x-ms-identifiers": [
-            "vmState"
-          ]
+          "description": "Specifies the desired state of virtual machines in the pool."
         },
         "vmStateDistribution": {
           "$ref": "#/definitions/VmStateDistribution",
@@ -1779,10 +1773,7 @@
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of virtual machines in the pool.",
-          "x-ms-identifiers": [
-            "vmState"
-          ]
+          "description": "Specifies the desired state of virtual machines in the pool."
         },
         "vmStateDistribution": {
           "$ref": "#/definitions/VmStateDistribution",
@@ -1952,38 +1943,6 @@
         "id"
       ]
     },
-    "VmStateDistribution": {
-      "type": "object",
-      "description": "Specifies the distribution of virtual machine states in the pool.",
-      "properties": {
-        "runningPercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the percentage of virtual machines in the Running state in the standby pool.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "deallocatedPercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the percentage of virtual machines in the Deallocated state in the standby pool.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "hibernatedPercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the percentage of virtual machines in the Hibernated state in the standby pool.",
-          "minimum": 0,
-          "maximum": 100
-        }
-      },
-      "required": [
-        "runningPercent",
-        "deallocatedPercent",
-        "hibernatedPercent"
-      ]
-    },
     "VirtualMachineInstanceCountSummary": {
       "type": "object",
       "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
@@ -2043,6 +2002,38 @@
           }
         ]
       }
+    },
+    "VmStateDistribution": {
+      "type": "object",
+      "description": "Specifies the distribution of virtual machine states in the pool.",
+      "properties": {
+        "runningPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the percentage of virtual machines in the Running state in the standby pool.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "deallocatedPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the percentage of virtual machines in the Deallocated state in the standby pool.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "hibernatedPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the percentage of virtual machines in the Hibernated state in the standby pool.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "runningPercent",
+        "deallocatedPercent",
+        "hibernatedPercent"
+      ]
     }
   },
   "parameters": {}
