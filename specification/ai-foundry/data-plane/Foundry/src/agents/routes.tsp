@@ -222,34 +222,6 @@ interface Agents {
     AgentObject
   >;
 
-  // ── Enable / Disable Operations ──────────────────────────
-
-  /**
-   * Enables the agent endpoint, allowing it to accept requests.
-   */
-  @post
-  @route("/agents/{agent_name}/enable")
-  enableAgent is FoundryDataPlaneOperation<
-    {
-      /** The name of the agent to enable. */
-      @path agent_name: string;
-    },
-    AgentObject
-  >;
-
-  /**
-   * Disables the agent endpoint, preventing it from accepting any requests.
-   */
-  @post
-  @route("/agents/{agent_name}/disable")
-  disableAgent is FoundryDataPlaneOperation<
-    {
-      /** The name of the agent to disable. */
-      @path agent_name: string;
-    },
-    AgentObject
-  >;
-
   // ── Session Lifecycle Operations ────────────────────────
 
   /**

@@ -117,6 +117,9 @@ model PatchAgentRequest {
 
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
+
+  @doc("The operational state of the agent endpoint. Set to 'enabled' or 'disabled' to control request acceptance.")
+  endpoint_state?: EndpointState;
 }
 
 union AgentObjectType {
