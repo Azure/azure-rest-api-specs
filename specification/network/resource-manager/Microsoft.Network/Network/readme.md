@@ -4620,6 +4620,8 @@ directive:
   - suppress: ParametersInPost
     from: expressRoute.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+    from: virtualWan.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - suppress: AvoidAdditionalProperties
     from: virtualNetworkGateway.json
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
@@ -4691,6 +4693,18 @@ suppressions:
   - code: ParametersInPost
     from: expressRoute.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+    from: virtualWan.json
+    reason: The resource name parameter 'expressRouteGatewayName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute gateway failover and insights APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation"]
+  - code: ParametersInPost
+    from: virtualWan.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - code: ResourceNameRestriction
     from: bastionhost.json
     reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs.

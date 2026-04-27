@@ -22790,7 +22790,6 @@ model StaticRoutesConfig {
   /**
    * Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.
    */
-  @visibility(Lifecycle.Read)
   propagateStaticRoutes?: boolean;
 
   /**
