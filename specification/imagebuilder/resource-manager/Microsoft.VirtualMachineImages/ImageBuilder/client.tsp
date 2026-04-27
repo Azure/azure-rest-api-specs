@@ -7,5 +7,5 @@ using Microsoft.VirtualMachineImages;
 @@clientName(ImageTemplateProperties.validate, "validation", "java");
 @@clientName(Microsoft.VirtualMachineImages,
   "ImageBuilderClient",
-  "javascript"
+  "javascript,python"
 );
