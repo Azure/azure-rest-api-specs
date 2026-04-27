@@ -9,7 +9,7 @@ using Microsoft.DevHub;
 @@clientName(GitHubWorkflowProfile.prURL, "prUrl", "java");
 @@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "java");
 @@clientName(PullRequest.prURL, "prUrl", "java");
-@@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript");
+@@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
 @@clientName(ACR, "Acr", "java,javascript");
 @@clientName(Deployment, "DeploymentProperties", "java,javascript");
 @@clientName(GitHubWorkflowProfile.deploymentProperties,
