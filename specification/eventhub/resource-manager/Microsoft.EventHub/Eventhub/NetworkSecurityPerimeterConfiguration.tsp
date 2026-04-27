@@ -27,12 +27,12 @@ model NetworkSecurityPerimeterConfiguration
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "This resource does not support a DELETE operation as defined in the original OpenAPI specification."
 @armResourceOperations
 interface NetworkSecurityPerimeterConfigurations {
   /**
@@ -55,7 +55,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Refreshes any information about the association.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @post
   @action("reconcile")
   createOrUpdate is Legacy.CreateOrReplaceAsync<
