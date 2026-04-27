@@ -579,7 +579,8 @@ op policyTrackedResourcesListQueryResultsForManagementGroup(
   queryOptions?: PolicyTrackedResourcesListQueryResultsForManagementGroupQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup,
-  policyTrackedResourcesListQueryResultsForManagementGroup
+  policyTrackedResourcesListQueryResultsForManagementGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -603,7 +604,8 @@ op policyTrackedResourcesListQueryResultsForSubscription(
   queryOptions?: PolicyTrackedResourcesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
-  policyTrackedResourcesListQueryResultsForSubscription
+  policyTrackedResourcesListQueryResultsForSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -622,7 +624,8 @@ op policyTrackedResourcesListQueryResultsForResourceGroup(
   queryOptions?: PolicyTrackedResourcesListQueryResultsForResourceGroupQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup,
-  policyTrackedResourcesListQueryResultsForResourceGroup
+  policyTrackedResourcesListQueryResultsForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -639,7 +642,8 @@ op policyTrackedResourcesListQueryResultsForResource(
   queryOptions?: PolicyTrackedResourcesListQueryResultsForResourceQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResource,
-  policyTrackedResourcesListQueryResultsForResource
+  policyTrackedResourcesListQueryResultsForResource,
+  "!java"
 );
 
 // PolicyEvents overrides
@@ -661,7 +665,8 @@ op policyEventsListQueryResultsForManagementGroup(
   queryOptions?: PolicyEventsListQueryResultsForManagementGroupQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
-  policyEventsListQueryResultsForManagementGroup
+  policyEventsListQueryResultsForManagementGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -685,7 +690,8 @@ op policyEventsListQueryResultsForSubscription(
   queryOptions?: PolicyEventsListQueryResultsForSubscriptionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscription,
-  policyEventsListQueryResultsForSubscription
+  policyEventsListQueryResultsForSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -704,7 +710,8 @@ op policyEventsListQueryResultsForResourceGroup(
   queryOptions?: PolicyEventsListQueryResultsForResourceGroupQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
-  policyEventsListQueryResultsForResourceGroup
+  policyEventsListQueryResultsForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -721,7 +728,8 @@ op policyEventsListQueryResultsForResource(
   queryOptions?: PolicyEventsListQueryResultsForResourceQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResource,
-  policyEventsListQueryResultsForResource
+  policyEventsListQueryResultsForResource,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -743,7 +751,8 @@ op policyEventsListQueryResultsForPolicySetDefinition(
   queryOptions?: PolicyEventsListQueryResultsForPolicySetDefinitionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
-  policyEventsListQueryResultsForPolicySetDefinition
+  policyEventsListQueryResultsForPolicySetDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -765,7 +774,8 @@ op policyEventsListQueryResultsForPolicyDefinition(
   queryOptions?: PolicyEventsListQueryResultsForPolicyDefinitionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
-  policyEventsListQueryResultsForPolicyDefinition
+  policyEventsListQueryResultsForPolicyDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -787,7 +797,8 @@ op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
   queryOptions?: PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
-  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -812,7 +823,8 @@ op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
   queryOptions?: PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
-  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment,
+  "!java"
 );
 
 // PolicyStates overrides
@@ -834,7 +846,8 @@ op policyStatesListQueryResultsForManagementGroup(
   queryOptions?: PolicyStatesListQueryResultsForManagementGroupQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
-  policyStatesListQueryResultsForManagementGroup
+  policyStatesListQueryResultsForManagementGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -854,7 +867,8 @@ op policyStatesSummarizeForManagementGroup(
   queryOptions?: PolicyStatesSummarizeForManagementGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForManagementGroup,
-  policyStatesSummarizeForManagementGroup
+  policyStatesSummarizeForManagementGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -878,7 +892,8 @@ op policyStatesListQueryResultsForSubscription(
   queryOptions?: PolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscription,
-  policyStatesListQueryResultsForSubscription
+  policyStatesListQueryResultsForSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -902,7 +917,8 @@ op policyStatesSummarizeForSubscription(
   queryOptions?: PolicyStatesSummarizeForSubscriptionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscription,
-  policyStatesSummarizeForSubscription
+  policyStatesSummarizeForSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -921,7 +937,8 @@ op policyStatesListQueryResultsForResourceGroup(
   queryOptions?: PolicyStatesListQueryResultsForResourceGroupQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
-  policyStatesListQueryResultsForResourceGroup
+  policyStatesListQueryResultsForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -940,7 +957,8 @@ op policyStatesSummarizeForResourceGroup(
   queryOptions?: PolicyStatesSummarizeForResourceGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroup,
-  policyStatesSummarizeForResourceGroup
+  policyStatesSummarizeForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -957,7 +975,8 @@ op policyStatesListQueryResultsForResource(
   queryOptions?: PolicyStatesListQueryResultsForResourceQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResource,
-  policyStatesListQueryResultsForResource
+  policyStatesListQueryResultsForResource,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -974,7 +993,8 @@ op policyStatesSummarizeForResource(
   queryOptions?: PolicyStatesSummarizeForResourceQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResource,
-  policyStatesSummarizeForResource
+  policyStatesSummarizeForResource,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -996,7 +1016,8 @@ op policyStatesListQueryResultsForPolicySetDefinition(
   queryOptions?: PolicyStatesListQueryResultsForPolicySetDefinitionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
-  policyStatesListQueryResultsForPolicySetDefinition
+  policyStatesListQueryResultsForPolicySetDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1018,7 +1039,8 @@ op policyStatesSummarizeForPolicySetDefinition(
   queryOptions?: PolicyStatesSummarizeForPolicySetDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
-  policyStatesSummarizeForPolicySetDefinition
+  policyStatesSummarizeForPolicySetDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1040,7 +1062,8 @@ op policyStatesListQueryResultsForPolicyDefinition(
   queryOptions?: PolicyStatesListQueryResultsForPolicyDefinitionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
-  policyStatesListQueryResultsForPolicyDefinition
+  policyStatesListQueryResultsForPolicyDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1062,7 +1085,8 @@ op policyStatesSummarizeForPolicyDefinition(
   queryOptions?: PolicyStatesSummarizeForPolicyDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
-  policyStatesSummarizeForPolicyDefinition
+  policyStatesSummarizeForPolicyDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1084,7 +1108,8 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   queryOptions?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
-  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1106,7 +1131,8 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
   queryOptions?: PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
-  policyStatesSummarizeForSubscriptionLevelPolicyAssignment
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1131,7 +1157,8 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   queryOptions?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
-  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1156,7 +1183,8 @@ op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
   queryOptions?: PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
-  policyStatesSummarizeForResourceGroupLevelPolicyAssignment
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment,
+  "!java"
 );
 
 // PolicyMetadata overrides
@@ -1195,7 +1223,8 @@ op componentPolicyStatesListQueryResultsForSubscription(
   queryOptions?: ComponentPolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
-  componentPolicyStatesListQueryResultsForSubscription
+  componentPolicyStatesListQueryResultsForSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1214,7 +1243,8 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
   queryOptions?: ComponentPolicyStatesListQueryResultsForResourceGroupQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
-  componentPolicyStatesListQueryResultsForResourceGroup
+  componentPolicyStatesListQueryResultsForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1231,7 +1261,8 @@ op componentPolicyStatesListQueryResultsForResource(
   queryOptions?: ComponentPolicyStatesListQueryResultsForResourceQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
-  componentPolicyStatesListQueryResultsForResource
+  componentPolicyStatesListQueryResultsForResource,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1255,7 +1286,8 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
   queryOptions?: ComponentPolicyStatesListQueryResultsForPolicyDefinitionQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
-  componentPolicyStatesListQueryResultsForPolicyDefinition
+  componentPolicyStatesListQueryResultsForPolicyDefinition,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1279,7 +1311,8 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   queryOptions?: ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
-  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1306,7 +1339,8 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   queryOptions?: ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
-  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
+  "!java"
 );
 
 // Remediations overrides
@@ -1328,7 +1362,8 @@ op remediationsListDeploymentsAtManagementGroup(
   queryOptions?: RemediationsListDeploymentsAtManagementGroupQueryOptions,
 ): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
-  remediationsListDeploymentsAtManagementGroup
+  remediationsListDeploymentsAtManagementGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1345,7 +1380,8 @@ op remediationsListForManagementGroup(
   queryOptions?: RemediationsListForManagementGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Remediations.listForManagementGroup,
-  remediationsListForManagementGroup
+  remediationsListForManagementGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1368,7 +1404,8 @@ op remediationsListDeploymentsAtSubscription(
   body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
-  remediationsListDeploymentsAtSubscription
+  remediationsListDeploymentsAtSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1385,7 +1422,8 @@ op remediationsListForSubscription(
   queryOptions?: RemediationsListForSubscriptionQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listForSubscription,
-  remediationsListForSubscription
+  remediationsListForSubscription,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1405,7 +1443,8 @@ op remediationsListDeploymentsAtResourceGroup(
   body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
-  remediationsListDeploymentsAtResourceGroup
+  remediationsListDeploymentsAtResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1418,7 +1457,8 @@ op remediationsListForResourceGroup(
   queryOptions?: RemediationsListForResourceGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listForResourceGroup,
-  remediationsListForResourceGroup
+  remediationsListForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1435,7 +1475,8 @@ op remediationsListDeploymentsAtResource(
   queryOptions?: RemediationsListDeploymentsAtResourceQueryOptions,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listDeploymentsAtResource,
-  remediationsListDeploymentsAtResource
+  remediationsListDeploymentsAtResource,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1449,7 +1490,8 @@ op remediationsListForResource(
   queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listForResource,
-  remediationsListForResource
+  remediationsListForResource,
+  "!java"
 );
 
 // Attestations overrides
@@ -1479,7 +1521,8 @@ op attestationsListForResourceGroup(
   queryOptions?: AttestationsListForResourceGroupQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationResourceGroupOperations.listForResourceGroup,
-  attestationsListForResourceGroup
+  attestationsListForResourceGroup,
+  "!java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1493,5 +1536,6 @@ op attestationsListForResource(
   queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationOperationGroup.listForResource,
-  attestationsListForResource
+  attestationsListForResource,
+  "!java"
 );
