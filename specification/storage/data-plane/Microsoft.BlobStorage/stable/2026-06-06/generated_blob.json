@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Storage Blob service",
-    "version": "2025-11-05",
+    "version": "2026-06-06",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1034,7 +1034,8 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold"
+              "Cold",
+              "Smart"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -1119,6 +1120,11 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
+                },
+                {
+                  "name": "Smart",
+                  "value": "Smart",
+                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -1565,6 +1571,24 @@
               ]
             },
             "x-ms-client-name": "blobDeleteType"
+          },
+          {
+            "name": "x-ms-access-tier-if-modified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "accessTierIfModifiedSince"
+          },
+          {
+            "name": "x-ms-access-tier-if-unmodified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "accessTierIfUnmodifiedSince"
           }
         ],
         "responses": {
@@ -1820,7 +1844,8 @@
                 "enum": [
                   "rehydrate-pending-to-hot",
                   "rehydrate-pending-to-cool",
-                  "rehydrate-pending-to-cold"
+                  "rehydrate-pending-to-cold",
+                  "rehydrate-pending-to-smart"
                 ],
                 "x-ms-enum": {
                   "name": "ArchiveStatus",
@@ -1840,6 +1865,11 @@
                       "name": "RehydratePendingToCold",
                       "value": "rehydrate-pending-to-cold",
                       "description": "The archive status is rehydrating pending to cold."
+                    },
+                    {
+                      "name": "RehydratePendingToSmart",
+                      "value": "rehydrate-pending-to-smart",
+                      "description": "The archive status is rehydrating pending to smart."
                     }
                   ]
                 }
@@ -2158,6 +2188,10 @@
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-smart-access-tier": {
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               },
               "x-ms-tag-count": {
                 "type": "integer",
@@ -2756,6 +2790,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -3514,6 +3586,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -3769,7 +3879,8 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold"
+              "Cold",
+              "Smart"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -3854,6 +3965,11 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
+                },
+                {
+                  "name": "Smart",
+                  "value": "Smart",
+                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -7736,6 +7852,44 @@
               "modelAsString": false
             },
             "x-ms-client-name": "pageWrite"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -9922,6 +10076,40 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-blob-if-modified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
+          },
+          {
+            "name": "x-ms-blob-if-unmodified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-blob-if-match",
+            "in": "header",
+            "description": "Specify an ETag value to operate only on blobs with a matching value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "x-ms-blob-if-none-match",
+            "in": "header",
+            "description": "Specify an ETag value to operate only on blobs without a matching value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           }
         ],
         "responses": {
@@ -10050,6 +10238,40 @@
             "x-ms-client-name": "leaseId"
           },
           {
+            "name": "x-ms-blob-if-modified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
+          },
+          {
+            "name": "x-ms-blob-if-unmodified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-blob-if-match",
+            "in": "header",
+            "description": "Specify an ETag value to operate only on blobs with a matching value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "x-ms-blob-if-none-match",
+            "in": "header",
+            "description": "Specify an ETag value to operate only on blobs without a matching value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "tags",
             "in": "body",
             "description": "The blob tags.",
@@ -10176,7 +10398,8 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold"
+              "Cold",
+              "Smart"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -10261,6 +10484,11 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
+                },
+                {
+                  "name": "Smart",
+                  "value": "Smart",
+                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -10570,7 +10798,10 @@
                   "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
-                  "Premium_LRS"
+                  "Premium_LRS",
+                  "Standard_GZRS",
+                  "Premium_ZRS",
+                  "Standard_RAGZRS"
                 ],
                 "x-ms-enum": {
                   "name": "SkuName",
@@ -10600,6 +10831,21 @@
                       "name": "PremiumLRS",
                       "value": "Premium_LRS",
                       "description": "The premium LRS SKU."
+                    },
+                    {
+                      "name": "StandardGZRS",
+                      "value": "Standard_GZRS",
+                      "description": "The standard GZRS SKU."
+                    },
+                    {
+                      "name": "PremiumZRS",
+                      "value": "Premium_ZRS",
+                      "description": "The premium ZRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGZRS",
+                      "value": "Standard_RAGZRS",
+                      "description": "The standard RAGZRS SKU."
                     }
                   ]
                 }
@@ -10739,7 +10985,10 @@
                   "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
-                  "Premium_LRS"
+                  "Premium_LRS",
+                  "Standard_GZRS",
+                  "Premium_ZRS",
+                  "Standard_RAGZRS"
                 ],
                 "x-ms-enum": {
                   "name": "SkuName",
@@ -10769,6 +11018,21 @@
                       "name": "PremiumLRS",
                       "value": "Premium_LRS",
                       "description": "The premium LRS SKU."
+                    },
+                    {
+                      "name": "StandardGZRS",
+                      "value": "Standard_GZRS",
+                      "description": "The standard GZRS SKU."
+                    },
+                    {
+                      "name": "PremiumZRS",
+                      "value": "Premium_ZRS",
+                      "description": "The premium ZRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGZRS",
+                      "value": "Standard_RAGZRS",
+                      "description": "The standard RAGZRS SKU."
                     }
                   ]
                 }
@@ -11933,6 +12197,13 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
+          },
+          {
+            "name": "startFrom",
+            "in": "query",
+            "description": "Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive)",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -12126,6 +12397,13 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
+          },
+          {
+            "name": "startFrom",
+            "in": "query",
+            "description": "Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive)",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -12901,7 +13179,8 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold"
+              "Cold",
+              "Smart"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -12986,6 +13265,11 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
+                },
+                {
+                  "name": "Smart",
+                  "value": "Smart",
+                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -13855,7 +14139,8 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold"
+              "Cold",
+              "Smart"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -13940,6 +14225,11 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
+                },
+                {
+                  "name": "Smart",
+                  "value": "Smart",
+                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -14358,7 +14648,8 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold"
+              "Cold",
+              "Smart"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -14443,6 +14734,11 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
+                },
+                {
+                  "name": "Smart",
+                  "value": "Smart",
+                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -14647,6 +14943,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -14772,7 +15106,8 @@
         "Cool",
         "Archive",
         "Premium",
-        "Cold"
+        "Cold",
+        "Smart"
       ],
       "x-ms-enum": {
         "name": "AccessTier",
@@ -14857,6 +15192,11 @@
             "name": "Cold",
             "value": "Cold",
             "description": "The Cold access tier."
+          },
+          {
+            "name": "Smart",
+            "value": "Smart",
+            "description": "The Smart access tier."
           }
         ]
       }
@@ -14909,7 +15249,8 @@
       "enum": [
         "rehydrate-pending-to-hot",
         "rehydrate-pending-to-cool",
-        "rehydrate-pending-to-cold"
+        "rehydrate-pending-to-cold",
+        "rehydrate-pending-to-smart"
       ],
       "x-ms-enum": {
         "name": "ArchiveStatus",
@@ -14929,6 +15270,11 @@
             "name": "RehydratePendingToCold",
             "value": "rehydrate-pending-to-cold",
             "description": "The archive status is rehydrating pending to cold."
+          },
+          {
+            "name": "RehydratePendingToSmart",
+            "value": "rehydrate-pending-to-smart",
+            "description": "The archive status is rehydrating pending to smart."
           }
         ]
       }
@@ -15404,6 +15750,11 @@
           "$ref": "#/definitions/ArchiveStatus",
           "description": "The archive status of the blob.",
           "x-ms-client-name": "archiveStatus"
+        },
+        "SmartAccessTier": {
+          "$ref": "#/definitions/AccessTier",
+          "description": "The smart access tier of the blob.",
+          "x-ms-client-name": "smartAccessTier"
         },
         "CustomerProvidedKeySha256": {
           "type": "string",
@@ -16271,6 +16622,11 @@
           "type": "string",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "expiry"
+        },
+        "DelegatedUserTid": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The delegated user tenant id in Azure AD.",
+          "x-ms-client-name": "delegatedUserTid"
         }
       },
       "required": [
@@ -17140,7 +17496,10 @@
         "Standard_GRS",
         "Standard_RAGRS",
         "Standard_ZRS",
-        "Premium_LRS"
+        "Premium_LRS",
+        "Standard_GZRS",
+        "Premium_ZRS",
+        "Standard_RAGZRS"
       ],
       "x-ms-enum": {
         "name": "SkuName",
@@ -17170,6 +17529,21 @@
             "name": "PremiumLRS",
             "value": "Premium_LRS",
             "description": "The premium LRS SKU."
+          },
+          {
+            "name": "StandardGZRS",
+            "value": "Standard_GZRS",
+            "description": "The standard GZRS SKU."
+          },
+          {
+            "name": "PremiumZRS",
+            "value": "Premium_ZRS",
+            "description": "The premium ZRS SKU."
+          },
+          {
+            "name": "StandardRAGZRS",
+            "value": "Standard_RAGZRS",
+            "description": "The standard RAGZRS SKU."
           }
         ]
       }
@@ -17215,6 +17589,7 @@
         "ConditionHeadersNotSupported",
         "ConditionNotMet",
         "EmptyMetadataKey",
+        "IncrementalCopyOfEarlierSnapshotNotAllowed",
         "InsufficientAccountPermissions",
         "InternalError",
         "InvalidAuthenticationInfo",
@@ -17366,6 +17741,11 @@
             "name": "EmptyMetadataKey",
             "value": "EmptyMetadataKey",
             "description": "Empty metadata key."
+          },
+          {
+            "name": "IncrementalCopyOfEarlierSnapshotNotAllowed",
+            "value": "IncrementalCopyOfEarlierSnapshotNotAllowed",
+            "description": "Incremental copy of an earlier snapshot is not allowed."
           },
           {
             "name": "InsufficientAccountPermissions",
@@ -17951,6 +18331,11 @@
           "type": "string",
           "description": "The service version that created the key.",
           "x-ms-client-name": "signedVersion"
+        },
+        "SignedDelegatedUserTid": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified.",
+          "x-ms-client-name": "signedDelegatedUserTid"
         },
         "Value": {
           "$ref": "#/definitions/base64Bytes",
