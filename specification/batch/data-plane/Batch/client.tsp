@@ -255,6 +255,10 @@ interface BatchClient {
   "taskRootDirectoryUri",
   "csharp"
 );
+@@clientName(Azure.Batch.CommonListParameters.maxresults,
+  "maxResults",
+  "csharp"
+);
 @@clientName(Azure.Batch.BatchPool.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTask.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchNodeInfo.nodeUrl, "nodeUri", "csharp");
