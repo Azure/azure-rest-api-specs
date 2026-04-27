@@ -9,3 +9,11 @@ using Microsoft.DevHub;
 @@clientName(GitHubWorkflowProfile.prURL, "prUrl", "java");
 @@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "java");
 @@clientName(PullRequest.prURL, "prUrl", "java");
+
+@@clientName(ACR, "Acr", "java");
+@@clientName(Deployment, "DeploymentProperties", "java");
+
+@@clientName(GitHubWorkflowProfile.deploymentProperties,
+  "deploymentProperties",
+  "java"
+);
