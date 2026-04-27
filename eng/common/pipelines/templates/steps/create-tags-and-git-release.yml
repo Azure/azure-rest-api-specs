@@ -6,6 +6,7 @@ parameters:
   RepoId: $(Build.Repository.Name)
   WorkingDirectory: ''
   ScriptDirectory: eng/common/scripts
+  AuthToken: $(GH_TOKEN)
   NpmConfigUserConfig: ''
   NpmConfigRegistry: ''
 
@@ -24,7 +25,7 @@ steps:
     pwsh: true
   timeoutInMinutes: 5
   env:
-    GH_TOKEN: $(azuresdk-github-pat)
+    GH_TOKEN: ${{ parameters.AuthToken }}
     SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     ${{ if ne(parameters.NpmConfigUserConfig, '') }}:
       NPM_CONFIG_USERCONFIG: ${{ parameters.NpmConfigUserConfig }}
