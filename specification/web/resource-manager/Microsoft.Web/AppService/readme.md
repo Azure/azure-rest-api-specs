@@ -41,6 +41,13 @@ tag: package-2025-05
 
 ```yaml
 directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/managedTrafficConfig/{configName}"]
+    reason: The provisioningState property is readOnly in the model definition (ServerFarmSiloProperties, SiteSiloProperties, ManagedTrafficConfigProperties). The rule fires at the operation response level as a false positive.
   - suppress: XmsResourceInPutResponse
     from: WebApps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}"].put
