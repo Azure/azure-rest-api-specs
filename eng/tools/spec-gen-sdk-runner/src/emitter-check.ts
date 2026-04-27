@@ -1,7 +1,7 @@
+import yaml from "js-yaml";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
-import yaml from "js-yaml";
 import { LogLevel, logMessage } from "./log.js";
 import { execAsync } from "./utils.js";
 
@@ -106,10 +106,7 @@ export async function checkEmitterEnabled(
     }
 
     if (!metadataFilePath) {
-      logMessage(
-        `typespec-metadata output not found in ${metadataOutputDir}`,
-        LogLevel.Error,
-      );
+      logMessage(`typespec-metadata output not found in ${metadataOutputDir}`, LogLevel.Error);
       return { enabled: false };
     }
 
@@ -141,10 +138,7 @@ export async function checkEmitterEnabled(
       packageName: langMetadata.packageName,
     };
   } catch (error) {
-    logMessage(
-      `Error running typespec-metadata emitter: ${inspect(error)}`,
-      LogLevel.Error,
-    );
+    logMessage(`Error running typespec-metadata emitter: ${inspect(error)}`, LogLevel.Error);
     return { enabled: false };
   } finally {
     // Clean up the metadata output directory

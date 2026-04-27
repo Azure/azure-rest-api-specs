@@ -77,7 +77,9 @@ export function parseAzsdkResponse<T>(output: string): T {
   }
 
   if (jsonStart === -1) {
-    throw new SyntaxError(`No matching opening brace found in azsdk output: ${output.slice(0, 200)}`);
+    throw new SyntaxError(
+      `No matching opening brace found in azsdk output: ${output.slice(0, 200)}`,
+    );
   }
 
   return JSON.parse(output.slice(jsonStart, jsonEnd + 1)) as T;
@@ -146,6 +148,6 @@ export function buildExecutionReport(
     packages: [pkg],
     executionResult,
     stagedArtifactsFolder: artifactPath || undefined,
-    generateFromTypeSpec: true,    
+    generateFromTypeSpec: true,
   };
 }

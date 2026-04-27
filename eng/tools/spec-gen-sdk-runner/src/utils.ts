@@ -99,10 +99,7 @@ export async function runSpecGenSdkCommand(specGenSdkCommand: string[]): Promise
  * @param args - Array of command arguments
  * @returns The captured stdout output
  */
-export async function runCommandWithOutput(
-  executable: string,
-  args: string[],
-): Promise<string> {
+export async function runCommandWithOutput(executable: string, args: string[]): Promise<string> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
     const childProcess = spawn(executable, args, {
@@ -110,7 +107,7 @@ export async function runCommandWithOutput(
       stdio: ["inherit", "pipe", "inherit"],
       env: process.env,
     });
-    childProcess.stdout!.on("data", (data: Buffer) => {
+    childProcess.stdout.on("data", (data: Buffer) => {
       chunks.push(data);
     });
     childProcess.on("error", (error) => {
@@ -121,11 +118,7 @@ export async function runCommandWithOutput(
       if (code === 0) {
         resolve(output);
       } else {
-        reject(
-          new Error(
-            `Process '${executable}' exited with code ${code}. Output: ${output}`,
-          ),
-        );
+        reject(new Error(`Process '${executable}' exited with code ${code}. Output: ${output}`));
       }
     });
   });

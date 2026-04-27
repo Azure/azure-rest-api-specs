@@ -4,9 +4,9 @@ import {
   SdkNameSchema,
   SpecGenSdkArtifactInfo,
 } from "@azure-tools/specs-shared/sdk-types";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
@@ -407,7 +407,11 @@ export type GenerationTool = "azsdk-cli" | "spec-gen-sdk" | "unsupported";
  * available. All other languages and OpenAPI specs use spec-gen-sdk.
  * Returns "unsupported" if Rust is requested but azsdk-cli is not installed.
  */
-export function selectGenerationTool(tspConfigPath?: string, _readmePath?: string, sdkLanguage?: SdkName): GenerationTool {
+export function selectGenerationTool(
+  tspConfigPath?: string,
+  _readmePath?: string,
+  sdkLanguage?: SdkName,
+): GenerationTool {
   if (tspConfigPath && sdkLanguage === "azure-sdk-for-rust") {
     return isAzsdkCliAvailable() ? "azsdk-cli" : "unsupported";
   }
@@ -426,7 +430,11 @@ function isAzsdkCliAvailable(): boolean {
       return true;
     }
     // Fall back to checking PATH
-    const result = spawnSync("azsdk", ["--version"], { shell: true, stdio: "ignore", timeout: 5000 });
+    const result = spawnSync("azsdk", ["--version"], {
+      shell: true,
+      stdio: "ignore",
+      timeout: 5000,
+    });
     return result.status === 0;
   } catch {
     return false;
@@ -474,10 +482,7 @@ export function prepareAzsdkBuildCommand(packagePath: string): string[] {
  * @param outputPath - Optional output directory for artifacts.
  * @returns Array of arguments for the azsdk pack command.
  */
-export function prepareAzsdkPackCommand(
-  packagePath: string,
-  outputPath?: string,
-): string[] {
+export function prepareAzsdkPackCommand(packagePath: string, outputPath?: string): string[] {
   const args = ["pkg", "pack", "--package-path", packagePath, "--output", "json"];
   if (outputPath) {
     args.push("--output-path", outputPath);
