@@ -1342,7 +1342,7 @@ model AzureResourceDetails extends ResourceDetails {
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OnPremiseResourceDetails extends ResourceDetails {
   ...OnPremiseResourceDetailsProperties;
-  source: "OnPremiseResourceDetails";
+  source: "OnPremise";
 }
 
 alias OnPremiseResourceDetailsProperties = {
