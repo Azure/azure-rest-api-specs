@@ -40,7 +40,7 @@ union CustomPublicNetworkAccessType {
 );
 @@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
-  "javascript,python"
+  "javascript,python,go"
 );
 
 @@clientName(VMGuestPatchClassification_Windows,
