@@ -81,17 +81,17 @@ model VmStateDistribution {
   @doc("Specifies the percentage of virtual machines in the Running state in the standby pool.")
   @minValue(0)
   @maxValue(100)
-  runningPercent: int32;
+  runningPercent?: int32;
 
   @doc("Specifies the percentage of virtual machines in the Deallocated state in the standby pool.")
   @minValue(0)
   @maxValue(100)
-  deallocatedPercent: int32;
+  deallocatedPercent?: int32;
 
   @doc("Specifies the percentage of virtual machines in the Hibernated state in the standby pool.")
   @minValue(0)
   @maxValue(100)
-  hibernatedPercent: int32;
+  hibernatedPercent?: int32;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
