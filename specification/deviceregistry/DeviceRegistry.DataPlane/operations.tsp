@@ -78,4 +78,7 @@ model Operation {
 interface Operations {
   /** Get the status of a long-running operation. */
   get is ResourceOperations.ResourceRead<Operation>;
+
+  /** List long running operations. */
+  list is ResourceOperations.ResourceList<Operation>;
 }
