@@ -571,3 +571,7 @@ using Microsoft.NetworkCloud;
 // --- java ---
 @@clientName(KeySetUser.azureUserName, "azureUsername", "java");
 @@clientName(KeySetUserStatus.azureUserName, "azureUsername", "java");
+@@clientName(VirtualMachineIPAllocationMethod,
+  "VirtualMachineIpAllocationMethod",
+  "java"
+);
