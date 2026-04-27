@@ -52,7 +52,7 @@ interface Operations {
   /**
    * Returns list of operations.
    */
-  @route("/providers/microsoft.DevHub/operations")
+  @route("/providers/Microsoft.DevHub/operations")
   @summary("Gets a list of operations.")
   @tag("Operations")
   list(
