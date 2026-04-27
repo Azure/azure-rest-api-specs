@@ -7,29 +7,29 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.AppLink"
+    namespace: "Azure.ResourceManager.AppNetwork"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-applink"
-    namespace: "azure.mgmt.applink"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appnetwork"
+    namespace: "azure.mgmt.appnetwork"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-applink"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appnetwork"
     flavor: azure
-    namespace: "com.azure.resourcemanager.applink"
-    service-name: "applink"
+    namespace: "com.azure.resourcemanager.appnetwork"
+    service-name: "appnetwork"
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-applink"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appnetwork"
     experimental-extensible-enums: true
     flavor: azure
     package-details:
-      name: "@azure/arm-applink"
+      name: "@azure/arm-appnetwork"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/applink"
-    emitter-output-dir: "{output-dir}/{service-dir}/armapplink"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armapplink"
+    service-dir: "sdk/resourcemanager/appnetwork"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappnetwork"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappnetwork"
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -40,4 +40,4 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   service-dir:
-    default: sdk/applink
+    default: sdk/appnetwork

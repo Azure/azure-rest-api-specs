@@ -6,6 +6,28 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.KeyVault;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"
+@@clientOption(Vault,
+  "resource-rbac-roles",
+  #{
+    KeyVaultAdministrator: "00482a5a-887f-4fb3-b363-3b7fe8e74483",
+    KeyVaultCertificateUser: "db79e9a7-68ee-4b58-9aeb-b90e7c24fcba",
+    KeyVaultCertificatesOfficer: "a4417e6f-fecd-4de8-b567-7b0420556985",
+    KeyVaultContributor: "f25e0fa2-a7c8-4377-a976-54943a77a395",
+    KeyVaultCryptoOfficer: "14b46e9e-c2b7-41b4-b07b-48a6ebf60603",
+    KeyVaultCryptoServiceEncryptionUser: "e147488a-f6f5-4113-8e2d-b22465e65bf6",
+    KeyVaultCryptoServiceReleaseUser: "08bbd89e-9f13-488c-ac41-acfcb10c90ab",
+    KeyVaultCryptoUser: "12338af0-0e69-4776-bea7-57ae8d297424",
+    KeyVaultDataAccessAdministrator: "8b54135c-b56d-4d72-a534-26097cfdc8d8",
+    KeyVaultReader: "21090545-7ca7-4776-b22c-e363652d74d2",
+    KeyVaultSecretsOfficer: "b86a8fe4-44ce-4948-aee5-eccb2c155cd7",
+    KeyVaultSecretsUser: "4633458b-17de-408a-b874-0445c86b69e6",
+    ManagedHsmContributor: "18500a29-7fe2-46b2-a342-b16a415e101d",
+  },
+  "csharp"
+);
+
 @@scope(Keys.get, "!csharp");
 @@scope(Keys.createIfNotExist, "!csharp");
 @@scope(Keys.list, "!csharp");

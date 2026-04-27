@@ -208,9 +208,9 @@ interface SearchServices {
 
   /**
    * Deletes a search service in the given resource group, along with its associated resources.
+   * Returns 200 (OK) on successful deletion, or 204 (No Content) if the service is not found.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
   @tag("Services")
   delete is ArmResourceDeleteSync<
@@ -229,12 +229,12 @@ interface SearchServices {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = OkResponse | NoContentResponse | NotFoundResponse,
+    Response = OkResponse | NoContentResponse,
     Error = CloudError
   >;
 
   /**
-   * Gets a list of all Search services in the given resource group.
+   * Gets a list of all search services in the given resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
@@ -260,7 +260,7 @@ interface SearchServices {
   >;
 
   /**
-   * Gets a list of all Search services in the given subscription.
+   * Gets a list of all search services in the given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
@@ -401,6 +401,8 @@ interface SearchServices {
 
   /**
    * Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.
+   * Returns 200 (OK) on successful deletion, 204 (No Content) if the service exists but the query keys not found, or 404 (Not Found) if the service is not found.
+   * NOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
@@ -475,7 +477,7 @@ interface SearchServices {
 );
 @@doc(SearchService.properties, "Properties of the search service.");
 @@doc(SearchServices.createOrUpdate::parameters.resource,
-  "The definition of the search service to create or update."
+  "The definition of the search service to create or update. Create applies to both serverless and dedicated search services; update applies only to dedicated search services."
 );
 @@doc(SearchServices.update::parameters.properties,
   "The definition of the search service to update."
