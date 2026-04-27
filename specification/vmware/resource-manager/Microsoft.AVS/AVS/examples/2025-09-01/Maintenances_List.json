@@ -31,6 +31,36 @@
               },
               "provisioningState": "Succeeded",
               "scheduledByMicrosoft": true,
+              "activities": [
+                {
+                  "kind": "Upgrade",
+                  "component": "ESXi",
+                  "version": "7.0.3.01500",
+                  "infoLink": "https://vmwarekb/arcticle",
+                  "impact": "This upgrade will update your esxi to 7.0. Control plance performance will be impacted for the duration"
+                },
+                {
+                  "kind": "CertificateRotation",
+                  "component": "vCSA",
+                  "version": "notapplicable",
+                  "infoLink": "https://vmwarekb/arcticle",
+                  "impact": "During this time, we expect no impact to Azure VMware Solution services or to the workloads"
+                }
+              ],
+              "group": {
+                "id": "SKUMigrationID",
+                "name": "SKUMigration",
+                "kind": "Consolidation"
+              },
+              "relationships": {
+                "dependencies": [
+                  "dependentMaintenanceName1",
+                  "dependentMaintenanceName2"
+                ],
+                "prerequisites": [
+                  "prerequisiteMaintenanceName1"
+                ]
+              },
               "operations": [
                 {
                   "kind": "Schedule",
@@ -74,7 +104,19 @@
                         }
                       ]
                     }
-                  ]
+                  ],
+                  "recommendation": {
+                    "maintenanceWindows": [
+                      {
+                        "startTime": "2025-12-14T16:00:00Z",
+                        "reason": "Historically preferred time"
+                      },
+                      {
+                        "startTime": "2025-12-14T16:00:00Z",
+                        "reason": "Historically preferred day"
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Reschedule",
@@ -97,7 +139,19 @@
                         }
                       ]
                     }
-                  ]
+                  ],
+                  "recommendation": {
+                    "maintenanceWindows": [
+                      {
+                        "startTime": "2025-12-14T16:00:00Z",
+                        "reason": "Historically preferred time"
+                      },
+                      {
+                        "startTime": "2025-12-14T16:00:00Z",
+                        "reason": "Historically preferred day"
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "MaintenanceReadinessRefresh",
@@ -157,6 +211,36 @@
               },
               "provisioningState": "Succeeded",
               "scheduledByMicrosoft": true,
+              "activities": [
+                {
+                  "kind": "Upgrade",
+                  "component": "ESXi",
+                  "version": "7.0.3.01500",
+                  "infoLink": "https://vmwarekb/arcticle",
+                  "impact": "This upgrade will update your esxi to 7.0. Control plance performance will be impacted for the duration"
+                },
+                {
+                  "kind": "CertificateRotation",
+                  "component": "vCSA",
+                  "version": "notapplicable",
+                  "infoLink": "https://vmwarekb/arcticle",
+                  "impact": "During this time, we expect no impact to Azure VMware Solution services or to the workloads"
+                }
+              ],
+              "group": {
+                "id": "SKUMigrationID",
+                "name": "SKUMigration",
+                "kind": "Consolidation"
+              },
+              "relationships": {
+                "dependencies": [
+                  "dependentMaintenanceName1",
+                  "dependentMaintenanceName2"
+                ],
+                "prerequisites": [
+                  "prerequisiteMaintenanceName1"
+                ]
+              },
               "operations": [
                 {
                   "kind": "Schedule",
