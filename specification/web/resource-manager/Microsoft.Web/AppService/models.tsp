@@ -16279,6 +16279,7 @@ model ServerFarmSiloPatchResource {
   kind?: string;
 
   /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags are a standard ARM envelope property represented as Record<string>"
   tags?: Record<string>;
 }
 
@@ -16291,5 +16292,6 @@ model SiteSiloPatchResource {
   kind?: string;
 
   /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags are a standard ARM envelope property represented as Record<string>"
   tags?: Record<string>;
 }
