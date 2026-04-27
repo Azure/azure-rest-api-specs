@@ -109,12 +109,6 @@ directive:
     where: $.definitions.WorkbookResource.properties.name
     from: workbooks_API.json
     reason: 'This property is already a part of our API, cannot remove it'
-  - suppress: DefaultErrorResponseSchema
-    from: myworkbooks_API.json
-    reason: 'this error format is already part of the previous api, cannot change it'
-  - suppress: DeleteOperationResponses
-    from: myworkbooks_API.json
-    reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
   - suppress: DeleteOperationResponses
     from: analyticsItems_API.json
     reason: consistent with existing delete response | owned by another team
@@ -377,7 +371,6 @@ input-file:
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2021-03-08/workbookOperations_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2023-06-01/workbooks_API.json
   - stable/2021-10-14/livetoken_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -411,7 +404,6 @@ input-file:
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2021-03-08/workbookOperations_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2022-04-01/workbooks_API.json
   - stable/2021-10-14/livetoken_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -436,7 +428,6 @@ input-file:
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2021-03-08/workbookOperations_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2022-04-01/workbooks_API.json
   - stable/2021-10-14/livetoken_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -461,7 +452,6 @@ input-file:
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2021-03-08/workbookOperations_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2022-04-01/workbooks_API.json
   - stable/2021-10-14/livetoken_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -494,7 +484,6 @@ input-file:
   - stable/2015-05-01/webTests_API.json
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2022-04-01/workbooks_API.json
   - stable/2020-02-02/components_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -528,7 +517,6 @@ input-file:
   - stable/2015-05-01/webTests_API.json
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2021-08-01/workbooks_API.json
   - stable/2020-02-02/components_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -553,7 +541,6 @@ input-file:
   - stable/2015-05-01/webTests_API.json
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2021-08-01/workbooks_API.json
   - stable/2020-02-02/components_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -578,7 +565,6 @@ input-file:
   - stable/2015-05-01/webTests_API.json
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2020-11-20/workbookTemplates_API.json
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2021-08-01/workbooks_API.json
   - preview/2018-05-01-preview/components_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
@@ -603,22 +589,12 @@ input-file:
   - stable/2021-08-01/workbooks_API.json
 ```
 
-### Tag: package-2021-03-08-only
-
-These settings apply only when `--tag=package-2021-03-08-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-03-08-only'
-input-file:
-  - stable/2021-03-08/myworkbooks_API.json
-```
-
 ### Tag: package-2021-03-only
 
 These settings apply only when `--tag=package-2021-03-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-03-only'
 input-file:
-  - stable/2021-03-08/myworkbooks_API.json
   - stable/2021-03-08/workbooks_API.json
   - stable/2021-03-08/workbookOperations_API.json
 ```
@@ -648,7 +624,6 @@ These settings apply only when `--tag=package-2020-10-only` is specified on the 
 ``` yaml $(tag) == 'package-2020-10-only'
 input-file:
   - stable/2020-10-20/workbookOperations_API.json
-  - stable/2020-10-20/myworkbooks_API.json
   - stable/2020-10-20/workbooks_API.json
 ```
 
@@ -688,7 +663,6 @@ input-file:
   - stable/2015-05-01/webTests_API.json
   - stable/2015-05-01/analyticsItems_API.json
   - stable/2015-05-01/workbooks_API.json
-  - stable/2015-05-01/myworkbooks_API.json
   - preview/2018-05-01-preview/components_API.json
   - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - preview/2020-06-02-preview/livetoken_API.json
@@ -712,7 +686,6 @@ input-file:
 - stable/2015-05-01/webTests_API.json
 - stable/2015-05-01/analyticsItems_API.json
 - stable/2015-05-01/workbooks_API.json
-- stable/2015-05-01/myworkbooks_API.json
 - preview/2018-05-01-preview/components_API.json
 - preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
@@ -762,7 +735,6 @@ input-file:
 - stable/2015-05-01/webTests_API.json
 - stable/2015-05-01/analyticsItems_API.json
 - stable/2015-05-01/workbooks_API.json
-- stable/2015-05-01/myworkbooks_API.json
 - stable/2020-02-02/components_API.json
 ```
 
@@ -834,7 +806,6 @@ input-file:
 - stable/2015-05-01/webTests_API.json
 - stable/2015-05-01/analyticsItems_API.json
 - stable/2015-05-01/workbooks_API.json
-- stable/2015-05-01/myworkbooks_API.json
 ```
 
 ---
