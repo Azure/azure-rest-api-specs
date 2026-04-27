@@ -54,6 +54,11 @@ union AssessedResourceType {
    * ServerVulnerability
    */
   ServerVulnerability: "ServerVulnerability",
+
+  /**
+   * ServerVulnerabilityAssessment
+   */
+  ServerVulnerabilityAssessment: "ServerVulnerabilityAssessment",
 }
 
 /**
@@ -356,5 +361,5 @@ model ServerVulnerabilityProperties extends AdditionalData {
   /**
    * Sub-assessment resource type
    */
-  assessedResourceType: "ServerVulnerabilityAssessment";
+  assessedResourceType: AssessedResourceType.ServerVulnerabilityAssessment;
 }
