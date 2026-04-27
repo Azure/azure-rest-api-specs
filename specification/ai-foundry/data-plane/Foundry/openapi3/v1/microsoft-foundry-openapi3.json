@@ -38990,13 +38990,14 @@
       "RubricCriterion": {
         "type": "object",
         "required": [
+          "rubric_id",
           "description",
           "weight"
         ],
         "properties": {
           "rubric_id": {
             "type": "string",
-            "description": "Short name / slug for this rubric criterion. For generated evaluators, the service assigns a default slug derived from the description. For manually created rubric evaluators, users set this directly. Users can edit this field when saving new versions."
+            "description": "Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Set directly by the model during generation and by users for manually created rubric evaluators. Editable when saving new versions."
           },
           "description": {
             "type": "string",
@@ -40177,8 +40178,7 @@
           "max_traces": {
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of traces to retrieve.",
-            "default": 100
+            "description": "Maximum number of traces to retrieve."
           }
         },
         "allOf": [
