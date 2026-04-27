@@ -4,7 +4,7 @@ import * as z from "zod";
  * Represents supported SDK language identifiers.
  *
  * @readonly
- * @enum {"azure-sdk-for-go" | "azure-sdk-for-java" | "azure-sdk-for-js" | "azure-sdk-for-net" | "azure-sdk-for-python"}
+ * @enum {"azure-sdk-for-go" | "azure-sdk-for-java" | "azure-sdk-for-js" | "azure-sdk-for-net" | "azure-sdk-for-python" | "azure-sdk-for-rust"}
  */
 export const SdkName = Object.freeze({
   Go: "azure-sdk-for-go",
@@ -12,6 +12,7 @@ export const SdkName = Object.freeze({
   Js: "azure-sdk-for-js",
   Net: "azure-sdk-for-net",
   Python: "azure-sdk-for-python",
+  Rust: "azure-sdk-for-rust",
 });
 /** @type {import("zod").ZodType<SdkName>} */
 export const SdkNameSchema = z.enum(Object.values(SdkName));
