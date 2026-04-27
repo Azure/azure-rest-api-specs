@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CodeSigningManagementClient",
-    "version": "2025-10-13",
+    "version": "2026-05-15-preview",
     "description": "Code Signing resource provider api.",
     "x-typespec-generated": [
       {
@@ -714,13 +714,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles/{profileName}/revokeCertificate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles/{profileName}/revokeCertificates": {
       "post": {
-        "operationId": "CertificateProfiles_RevokeCertificate",
+        "operationId": "CertificateProfiles_RevokeCertificates",
         "tags": [
           "CertificateProfiles"
         ],
-        "description": "Revoke a certificate under a certificate profile.",
+        "description": "Revokes certificates under a certificate profile.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -750,10 +750,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Parameters to revoke the certificate profile",
+            "description": "Parameters to revoke the certificates in the certificate profile",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RevokeCertificate"
+              "$ref": "#/definitions/RevokeCertificateList"
             }
           }
         ],
@@ -766,11 +766,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Revoke a certificate under a certificate profile.": {
-            "$ref": "./examples/CertificateProfiles_RevokeCertificate.json"
           }
         }
       }
@@ -912,6 +907,10 @@
         "identityValidationId": {
           "type": "string",
           "description": "Identity validation id used for the certificate subject name."
+        },
+        "programType": {
+          "type": "string",
+          "description": "Indicates whether the resource is intended for a specific usage scenario."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1331,6 +1330,23 @@
         "thumbprint",
         "effectiveAt",
         "reason"
+      ]
+    },
+    "RevokeCertificateList": {
+      "type": "object",
+      "description": "Defines the list of certificates for revocation in certificate profile.",
+      "properties": {
+        "revokeCertificates": {
+          "type": "array",
+          "description": "List of certificates to be revoked in a certificate profile.",
+          "items": {
+            "$ref": "#/definitions/RevokeCertificate"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "revokeCertificates"
       ]
     },
     "SkuName": {
