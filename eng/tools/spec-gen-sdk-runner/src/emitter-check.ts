@@ -45,6 +45,7 @@ const SDK_REPO_TO_LANGUAGE_KEY: Record<string, string[]> = {
   "azure-sdk-for-net": ["csharp", "http-client-csharp", "http-client-csharp-mgmt"],
   "azure-sdk-for-js": ["typescript"],
   "azure-sdk-for-go": ["go"],
+  "azure-sdk-for-rust": ["rust"],
 };
 
 /**

@@ -6,6 +6,7 @@ import {
 } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
@@ -394,20 +395,42 @@ export function getRequiredSettingValue(
 
 /**
  * Indicates which generation tool should be used for a given spec.
+ * - "azsdk-cli": Use azsdk-cli for generation (Rust TypeSpec specs)
+ * - "spec-gen-sdk": Use existing spec-gen-sdk tool
+ * - "unsupported": The required tool is not available (e.g., Rust without azsdk-cli)
  */
-export type GenerationTool = "azsdk-cli" | "spec-gen-sdk";
+export type GenerationTool = "azsdk-cli" | "spec-gen-sdk" | "unsupported";
 
 /**
- * Determines whether to use azsdk-cli based on the feature flag and spec type.
- * When USE_AZSDK_CLI=true and the spec is TypeSpec (has tspConfigPath), uses azsdk-cli.
- * OpenAPI-only specs always fall back to spec-gen-sdk.
+ * Determines whether to use azsdk-cli or spec-gen-sdk for a given spec.
+ * Currently only uses azsdk-cli for Rust TypeSpec specs when the CLI is
+ * available. All other languages and OpenAPI specs use spec-gen-sdk.
+ * Returns "unsupported" if Rust is requested but azsdk-cli is not installed.
  */
-export function selectGenerationTool(tspConfigPath?: string, _readmePath?: string): GenerationTool {
-  const useAzsdkCli = process.env.USE_AZSDK_CLI === "true";
-  if (useAzsdkCli && tspConfigPath) {
-    return "azsdk-cli";
+export function selectGenerationTool(tspConfigPath?: string, _readmePath?: string, sdkLanguage?: SdkName): GenerationTool {
+  if (tspConfigPath && sdkLanguage === "azure-sdk-for-rust") {
+    return isAzsdkCliAvailable() ? "azsdk-cli" : "unsupported";
   }
   return "spec-gen-sdk";
+}
+
+/**
+ * Checks whether the azsdk CLI tool is available on the system.
+ * Returns true if the tool can be found via the AZSDK env variable or on PATH.
+ */
+function isAzsdkCliAvailable(): boolean {
+  try {
+    // Pipeline sets AZSDK variable to the installed path
+    const azsdkPath = process.env.AZSDK;
+    if (azsdkPath && fs.existsSync(azsdkPath)) {
+      return true;
+    }
+    // Fall back to checking PATH
+    const result = spawnSync("azsdk", ["--version"], { shell: true, stdio: "ignore", timeout: 5000 });
+    return result.status === 0;
+  } catch {
+    return false;
+  }
 }
 
 /**

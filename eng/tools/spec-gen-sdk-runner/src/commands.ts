@@ -140,9 +140,17 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   const specConfigPathText = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
 
-  const tool = selectGenerationTool(commandInput.tspConfigPath, commandInput.readmePath);
+  const tool = selectGenerationTool(commandInput.tspConfigPath, commandInput.readmePath, commandInput.sdkLanguage);
   let statusCode = 0;
   let executionReport: ExecutionReport | undefined;
+
+  if (tool === "unsupported") {
+    logMessage(
+      `azsdk-cli is not available but is required for ${commandInput.sdkRepoName}. Ensure the install-azsdk-cli pipeline step succeeded.`,
+      LogLevel.Error,
+    );
+    return 1;
+  }
 
   if (tool === "azsdk-cli" && commandInput.tspConfigPath) {
     // azsdk-cli path for TypeSpec specs
@@ -240,8 +248,18 @@ export async function generateSdkForSpecPr(): Promise<number> {
       continue;
     }
 
-    const tool = selectGenerationTool(changedSpec.typespecProject, changedSpec.readmeMd);
+    const tool = selectGenerationTool(changedSpec.typespecProject, changedSpec.readmeMd, commandInput.sdkLanguage);
     changedSpecPathText = "";
+
+    if (tool === "unsupported") {
+      logMessage(
+        `azsdk-cli is not available but is required for ${commandInput.sdkRepoName}. Skipping spec.`,
+        LogLevel.Error,
+      );
+      statusCode = 1;
+      logMessage("ending group logging", LogLevel.EndGroup);
+      continue;
+    }
 
     if (changedSpec.typespecProject) {
       changedSpecPathText = changedSpec.typespecProject;
@@ -412,7 +430,17 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       logMessage(`Generating SDK from ${specConfigs.readmePath}`, LogLevel.Group);
     }
 
-    const tool = selectGenerationTool(specConfigs.tspconfigPath, specConfigs.readmePath);
+    const tool = selectGenerationTool(specConfigs.tspconfigPath, specConfigs.readmePath, commandInput.sdkLanguage);
+
+    if (tool === "unsupported") {
+      logMessage(
+        `azsdk-cli is not available but is required for ${commandInput.sdkRepoName}. Skipping spec.`,
+        LogLevel.Error,
+      );
+      statusCode = 1;
+      logMessage("ending group logging", LogLevel.EndGroup);
+      continue;
+    }
 
     if (tool === "azsdk-cli" && specConfigs.tspconfigPath) {
       // azsdk-cli path for TypeSpec specs
