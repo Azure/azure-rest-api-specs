@@ -2851,14 +2851,14 @@ model DatabaseAccountListKeysResult
   /**
    * Base 64 encoded value of the primary read-write key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Read)
   primaryMasterKey?: string;
 
   /**
    * Base 64 encoded value of the secondary read-write key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Read)
   secondaryMasterKey?: string;
 }
@@ -2870,14 +2870,14 @@ model DatabaseAccountListReadOnlyKeysResult {
   /**
    * Base 64 encoded value of the primary read-only key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Read)
   primaryReadonlyMasterKey?: string;
 
   /**
    * Base 64 encoded value of the secondary read-only key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Read)
   secondaryReadonlyMasterKey?: string;
 }
@@ -6488,7 +6488,7 @@ model AuthenticationMethodLdapProperties {
   /**
    * Password of the look up user.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   serviceUserPassword?: string;
 
   /**
@@ -6821,7 +6821,7 @@ model MongoUserDefinitionResource {
   /**
    * The password for User Definition. Response does not contain user password.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   password?: string;
 
   /**
@@ -6929,7 +6929,7 @@ model NotebookWorkspaceConnectionInfoResult {
   /**
    * Specifies auth token used for connecting to Notebook server (uses token-based auth).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @visibility(Lifecycle.Read)
   authToken?: string;
 
