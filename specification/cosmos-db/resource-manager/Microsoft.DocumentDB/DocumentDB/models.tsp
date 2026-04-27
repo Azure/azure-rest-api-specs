@@ -2851,14 +2851,14 @@ model DatabaseAccountListKeysResult
   /**
    * Base 64 encoded value of the primary read-write key.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Keys are intentionally returned in the ListKeys response."
   @visibility(Lifecycle.Read)
   primaryMasterKey?: string;
 
   /**
    * Base 64 encoded value of the secondary read-write key.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Keys are intentionally returned in the ListKeys response."
   @visibility(Lifecycle.Read)
   secondaryMasterKey?: string;
 }
@@ -2870,14 +2870,14 @@ model DatabaseAccountListReadOnlyKeysResult {
   /**
    * Base 64 encoded value of the primary read-only key.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Keys are intentionally returned in the ListReadOnlyKeys response."
   @visibility(Lifecycle.Read)
   primaryReadonlyMasterKey?: string;
 
   /**
    * Base 64 encoded value of the secondary read-only key.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Keys are intentionally returned in the ListReadOnlyKeys response."
   @visibility(Lifecycle.Read)
   secondaryReadonlyMasterKey?: string;
 }
