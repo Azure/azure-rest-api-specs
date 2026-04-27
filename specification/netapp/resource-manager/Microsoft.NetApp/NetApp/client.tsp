@@ -423,8 +423,13 @@ union NetAppRelationshipStatusDef {
 );
 
 // C# ARM resource renames (restore NetApp prefix on resource types)
-// Note: Volume is handled via [CodeGenType] in Custom code because @@clientName
-// on Volume causes generator crashes with [CodeGenSerialization] in Custom code.
+// Volume is NOT renamed via @@clientName: doing so causes the generator to omit
+// child-collection accessors (GetNetAppVolumes) on parent resources like
+// CapacityPoolResource. Backward-compat NetAppVolumeResource/Data/Collection
+// are provided as deprecated stubs in src/Custom instead.
+@@clientName(Bucket, "NetAppBucket", "csharp");
+@@clientName(Cache, "NetAppCache", "csharp");
+@@clientName(ActiveDirectoryConfig, "NetAppActiveDirectoryConfig", "csharp");
 @@clientName(BackupPolicy, "NetAppBackupPolicy", "csharp");
 @@clientName(BackupVault, "NetAppBackupVault", "csharp");
 @@clientName(Backup, "NetAppBackupVaultBackup", "csharp");
@@ -432,6 +437,14 @@ union NetAppRelationshipStatusDef {
 @@clientName(VolumeQuotaRule, "NetAppVolumeQuotaRule", "csharp");
 @@clientName(Snapshot, "NetAppVolumeSnapshot", "csharp");
 @@clientName(VolumeGroupDetails, "NetAppVolumeGroup", "csharp");
+@@clientName(ElasticAccount, "NetAppElasticAccount", "csharp");
+@@clientName(ElasticBackup, "NetAppElasticBackup", "csharp");
+@@clientName(ElasticBackupPolicy, "NetAppElasticBackupPolicy", "csharp");
+@@clientName(ElasticBackupVault, "NetAppElasticBackupVault", "csharp");
+@@clientName(ElasticCapacityPool, "NetAppElasticCapacityPool", "csharp");
+@@clientName(ElasticSnapshot, "NetAppElasticSnapshot", "csharp");
+@@clientName(ElasticSnapshotPolicy, "NetAppElasticSnapshotPolicy", "csharp");
+@@clientName(ElasticVolume, "NetAppElasticVolume", "csharp");
 @@clientName(BackupPolicyPatch, "NetAppBackupPolicyPatch", "csharp");
 @@clientName(BackupVaultPatch, "NetAppBackupVaultPatch", "csharp");
 // SubvolumePatchParams rename removed — derived from SubvolumeInfo resource rename
