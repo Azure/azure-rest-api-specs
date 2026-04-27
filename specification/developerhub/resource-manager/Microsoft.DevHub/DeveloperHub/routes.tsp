@@ -17,7 +17,7 @@ namespace Microsoft.DevHub;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Generate preview dockerfile and manifests.")
-@route("/subscriptions/{subscriptionId}/providers/microsoft.DevHub/locations/{location}/generatePreviewArtifacts")
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/generatePreviewArtifacts")
 @tag("Artifacts")
 op generatePreviewArtifacts(
   ...ApiVersionParameter,

@@ -65,7 +65,7 @@
     }
   ],
   "paths": {
-    "/providers/microsoft.DevHub/operations": {
+    "/providers/Microsoft.DevHub/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -267,6 +267,57 @@
         "x-ms-examples": {
           "ADO OAuthInfo": {
             "$ref": "./examples/ADOOAuthInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/generatePreviewArtifacts": {
+      "post": {
+        "operationId": "GeneratePreviewArtifacts",
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Generate preview dockerfile and manifests.",
+        "description": "Generate preview dockerfile and manifests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactGenerationProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifact Generation Properties": {
+            "$ref": "./examples/GeneratePreviewArtifacts.json"
           }
         }
       }
@@ -714,57 +765,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.DevHub/locations/{location}/generatePreviewArtifacts": {
-      "post": {
-        "operationId": "GeneratePreviewArtifacts",
-        "tags": [
-          "Artifacts"
-        ],
-        "summary": "Generate preview dockerfile and manifests.",
-        "description": "Generate preview dockerfile and manifests.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ArtifactGenerationProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Artifact Generation Properties": {
-            "$ref": "./examples/GeneratePreviewArtifacts.json"
-          }
         }
       }
     },
