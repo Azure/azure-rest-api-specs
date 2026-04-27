@@ -116,7 +116,7 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
-  @doc("Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Set directly by the model during generation and by users for manually created rubric evaluators. Editable when saving new versions.")
+  @doc("Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated catalog; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
   rubric_id: string;
 
   @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
