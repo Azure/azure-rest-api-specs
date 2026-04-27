@@ -66,4 +66,7 @@ interface DeviceStates {
 
   /** Update a device state. */
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceState>;
+
+  /** List device states for a device. */
+  list is ResourceOperations.ResourceList<DeviceState>;
 }

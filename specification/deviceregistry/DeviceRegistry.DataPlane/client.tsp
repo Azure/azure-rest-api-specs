@@ -11,23 +11,19 @@ using Azure.ClientGenerator.Core;
 // Internal operations — hidden from public SDK surface.
 // Remove @@access lines below to promote an operation to public.
 @@access(Microsoft.DeviceRegistry.Devices.provision, Access.internal);
-@@access(Microsoft.DeviceRegistry.Devices.getDeviceByExternalId,
-  Access.internal
-);
-@@access(Microsoft.DeviceRegistry.Groups.getGroupsForDevice, Access.internal);
+@@access(Microsoft.DeviceRegistry.Devices.getDeviceByExternalId, Access.internal);
 @@access(Microsoft.DeviceRegistry.Devices.executeAction, Access.internal);
-@@access(Microsoft.DeviceRegistry.DeviceCapabilities.createOrReplace,
-  Access.internal
-);
+
+@@access(Microsoft.DeviceRegistry.Groups.getGroupsForDevice, Access.internal);
+
+@@access(Microsoft.DeviceRegistry.DeviceCapabilities.createOrReplace, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.get, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.update, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.delete, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.list, Access.internal);
-@@access(Microsoft.DeviceRegistry.DeviceCapabilities.getCapabilityByUuid,
-  Access.internal
-);
-@@access(Microsoft.DeviceRegistry.DeviceStates.createOrReplace,
-  Access.internal
-);
+@@access(Microsoft.DeviceRegistry.DeviceCapabilities.getCapabilityByUuid, Access.internal);
+
+@@access(Microsoft.DeviceRegistry.DeviceStates.createOrReplace, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceStates.get, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceStates.update, Access.internal);
+@@access(Microsoft.DeviceRegistry.DeviceStates.list, Access.internal);

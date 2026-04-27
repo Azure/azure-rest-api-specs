@@ -17,17 +17,6 @@ union DeviceOriginType {
   IoTHub: "IoTHub",
 }
 
-/** Whether a device has been accepted for use. */
-union DeviceAcceptedStatus {
-  string,
-
-  /** The device has been accepted. */
-  Accepted: "Accepted",
-
-  /** The device has not been accepted. */
-  NotAccepted: "NotAccepted",
-}
-
 /** Whether a device is enabled or disabled. */
 union DeviceEnabledStatus {
   string,
@@ -42,7 +31,7 @@ union DeviceEnabledStatus {
 /** Contains metadata about how a device was discovered or provisioned. */
 model DeviceOrigin {
   /** The type of origin. */
-  type?: DeviceOriginType;
+  type: DeviceOriginType;
 
   /** The source identifier for the origin. */
   sourceId?: string;
@@ -57,9 +46,6 @@ model DevicePropertiesBase {
   /** Contains metadata about how this device was discovered or provisioned. */
   @visibility(Lifecycle.Read)
   origin?: DeviceOrigin;
-
-  /** Whether a discovered or created device has been accepted for use. */
-  accepted?: DeviceAcceptedStatus;
 
   /** Indicates if the device is enabled or not. */
   enabled?: DeviceEnabledStatus;
