@@ -55,7 +55,8 @@ interface ContinuousWebJobOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ContinuousWebJobs {
   /**
    * Description for Gets a continuous web job by its ID for an app, or a deployment slot.
@@ -146,7 +147,8 @@ interface ContinuousWebJobOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ContinuousWebJobOperationGroup {
   /**
    * Description for Gets a continuous web job by its ID for an app, or a deployment slot.

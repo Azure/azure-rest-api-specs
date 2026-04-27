@@ -1,0 +1,17 @@
+id: 001004-version-property-decorator
+name: "Versioning: Change property visibility in specific version"
+description: |
+  Test changing the visibility decorator on a property for a specific API version only.
+  Based on benchmark case 001004-version-property-decorator.
+tags:
+  - versioning
+inputs:
+  prompt: "change the visibility of property 'provisioningState' from Lifecycle.Read to Lifecycle.Read and Lifecycle.Create in version 2025-05-04-preview only"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"

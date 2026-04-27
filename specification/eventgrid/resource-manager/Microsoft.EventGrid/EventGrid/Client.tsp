@@ -102,3 +102,7 @@ interface Clients {
   "ArmResourceProvisioningState",
   "python"
 );
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "ArmResourceProvisioningState",
+  "java"
+);

@@ -25,3 +25,29 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-04-01/*.json
   reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - ResourceChanges
+    - ResourceGraph
+    - ResourceHistory
+    - GraphQuery
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - ResourceChanges/tspconfig.yaml
+    - ResourceGraph/tspconfig.yaml
+    - ResourceHistory/tspconfig.yaml
+    - GraphQuery/tspconfig.yaml

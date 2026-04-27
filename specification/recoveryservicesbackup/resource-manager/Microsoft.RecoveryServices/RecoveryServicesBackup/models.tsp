@@ -267,37 +267,44 @@ union SoftDeleteFeatureState {
 /**
  * Threat status of the container
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union SourceSideScanStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Source side scan is configured */
   Configured: "Configured",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Source side scan is not configured */
   NotConfigured: "NotConfigured",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Source side scan is not applicable */
   NotApplicable: "NotApplicable",
 }
 
 /**
  * Threat summary for the container
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union SourceSideScanSummary {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Scan summary is unknown */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Scan summary is not applicable */
   NotApplicable: "NotApplicable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Scan summary is suspicious */
   Suspicious: "Suspicious",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Scan summary indicates healthy state */
   Healthy: "Healthy",
 }
 
 /**
  * Source side threat information
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 model SourceSideScanInfo {
   /**
    * Threat status of the container
@@ -313,57 +320,70 @@ model SourceSideScanInfo {
 /**
  * Threat status of the recovery point
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union ThreatStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Threat status is unknown */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recovery point is healthy */
   Healthy: "Healthy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recovery point is unhealthy */
   UnHealthy: "UnHealthy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recovery point has warning-level threats */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Threat status is not available */
   NotAvailable: "NotAvailable",
 }
 
 /**
  * Threat Status Types
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union ThreatState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Threat is active */
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Threat remediation is in progress */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Threat has been ignored */
   Ignored: "Ignored",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Threat has been resolved */
   Resolved: "Resolved",
 }
 
 /**
  * Threat Severity Types
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union ThreatSeverity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Critical severity level */
   Critical: "Critical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High severity level */
   High: "High",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Warning severity level */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Informational severity level */
   Informational: "Informational",
 }
 
 /**
  * Recovery Point Threat information
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 model ThreatInfo {
   /**
    * Threat Subject
@@ -710,16 +730,20 @@ union PolicyType {
 /**
  * Type of the protection policy
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union VMWorkloadPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Invalid policy type */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Snapshot V1 policy type */
   SnapshotV1: "SnapshotV1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Snapshot V2 policy type */
   SnapshotV2: "SnapshotV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Streaming policy type */
   Streaming: "Streaming",
 }
 
@@ -815,30 +839,37 @@ union ProtectedItemState {
 /**
  * Protection type in case protected as part of a parent.
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union ProtectionLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Protected at database level */
   Database: "Database",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Database protected under an instance */
   DatabaseUnderInstance: "DatabaseUnderInstance",
 }
 
 /**
  * The state of instance protection.
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 union InstanceProtectionReadiness {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Instance protection readiness is unknown */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Instance is ready for protection */
   Ready: "Ready",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Backup schedule is disabled for this instance */
   ScheduleDisabled: "ScheduleDisabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Instance is partially protected */
   PartialProtection: "PartialProtection",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Instance protection encountered an error */
   ProtectionError: "ProtectionError",
 }
 
@@ -964,12 +995,12 @@ union RestorePointQueryType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SnapshotCopyOnlyFull: "SnapshotCopyOnlyFull",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01_preview)
+  /** Snapshot restore point type */
+  @added(Versions.v2026_01_31_preview)
   Snapshot: "Snapshot",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01_preview)
+  /** Full, differential, and snapshot restore point types */
+  @added(Versions.v2026_01_31_preview)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1254,8 +1285,8 @@ union ContainerType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HanaHSRContainer: "HanaHSRContainer",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01_preview)
+  /** HANA scale-out container type */
+  @added(Versions.v2026_01_31_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -2340,7 +2371,7 @@ model ProtectedItem {
   /**
    * Source side threat information
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
 
@@ -2371,13 +2402,13 @@ model RecoveryPoint {
   /**
    * Threat status of the recovery point
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   threatStatus?: ThreatStatus;
 
   /**
    * Recovery point threat information.
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
 }
@@ -2386,20 +2417,15 @@ alias ResourceProperties = {
   /**
    * Resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  location?: Azure.Core.azureLocation;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 };
 
@@ -3181,7 +3207,7 @@ model UnlockDeleteResponse {
 /**
  * Patch Request content to update recovery point for given RecoveryPointId
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3192,7 +3218,7 @@ model UpdateRecoveryPointRequest {
 /**
  * Recovery Point Contract for Update Recovery Point API.
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3203,7 +3229,7 @@ model PatchRecoveryPointInput {
 /**
  * Recovery Point Properties Contract for Update Recovery Point API.
  */
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3542,7 +3568,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
   /**
    * Type of the protection policy
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4535,7 +4561,7 @@ model DistributedNodesInfo {
 /**
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4548,7 +4574,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4561,7 +4587,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SAP HANA DBInstance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4574,7 +4600,7 @@ model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SQL Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4584,23 +4610,23 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   ...AzureVmWorkloadProtectedItemProperties;
 
   /**
-   * Parent Protected item in case protected as part of a parent.
+   * Name of the parent protected item (e.g., SQL Instance name) when this database is protected as part of a parent.
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   parentProtectedItem?: string;
 
   /**
    * Protection type in case protected as part of a parent.
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   protectionLevel?: ProtectionLevel;
 }
 
 /**
  * Azure VM workload-specific protected item representing SQL Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_01_01_preview)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
+@added(Versions.v2026_01_31_preview)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4945,7 +4971,7 @@ model SnapshotRestoreParameters {
 /**
  * Recovery point specific to PointInTime in SAPHana
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4966,7 +4992,7 @@ alias AzureWorkloadSAPHanaPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4980,7 +5006,7 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4993,7 +5019,7 @@ model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
 /**
  * SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5006,7 +5032,7 @@ model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
 /**
  * Recovery point specific to PointInTime in SAPAse
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5020,7 +5046,7 @@ model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
 /**
  * AzureWorkload SAP Ase-specific restore. Specifically for PointInTime/Log restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5038,7 +5064,7 @@ model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Ase-specific restore.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5051,7 +5077,7 @@ model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
 /**
  * SAPAse specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPAseRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5064,7 +5090,7 @@ model AzureWorkloadSAPAseRecoveryPoint extends RecoveryPoint {
 /**
  * Recovery point specific to PointInTime
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5093,7 +5119,7 @@ alias AzureWorkloadSQLRecoveryPointProperties = {
 /**
  * SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5107,7 +5133,7 @@ model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
 /**
  * Extended info class details
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRecoveryPointExtendedInfo {
   /**
    * UTC time at which data directory info was captured
@@ -5123,7 +5149,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   /**
    * List of databases included in recovery point.
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5131,7 +5157,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
 /**
  * SQLDataDirectory info
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model SQLDataDirectory {
   /**
    * Type of data directory mapping
@@ -5159,7 +5185,7 @@ alias AzureWorkloadSQLPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5192,7 +5218,7 @@ alias AzureWorkloadSQLRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5206,7 +5232,7 @@ model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
 /**
  * Encapsulates information regarding data directory
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model SQLDataDirectoryMapping {
   /**
    * Type of data directory mapping
@@ -5289,22 +5315,22 @@ model BmsrpQueryObject {
   /**
    * Id of the base snapshot recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01_preview)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
+  @added(Versions.v2026_01_31_preview)
   baseSnapshotRPId?: string;
 
   /**
    * Id of the datasource of the base snapshot recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01_preview)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
+  @added(Versions.v2026_01_31_preview)
   baseRPDatasourceId?: string;
 
   /**
    * Flag to indicate whether to get only the latest recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01_preview)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
+  @added(Versions.v2026_01_31_preview)
   getLatestRPOnly?: boolean;
 }
 
@@ -5720,7 +5746,7 @@ model DailySchedule {
  * Database included in RP.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original API naming convention"
-@added(Versions.v2026_01_01_preview)
+@added(Versions.v2026_01_31_preview)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -7172,7 +7198,7 @@ model AzureIaaSComputeVMProtectableItem extends WorkloadProtectableItem {
 /**
  * Container for SQL workloads under SQL Availability Group.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureSQLAGWorkloadContainerProtectionContainer
   extends ProtectionContainer {
   /**
@@ -7540,7 +7566,7 @@ model PreBackupValidation {
 /**
  * Azure VM workload-specific protectable item representing SAP ASE Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7554,7 +7580,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP ASE Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7567,7 +7593,7 @@ model AzureVmWorkloadSAPAseDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP ASE System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseSystemProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7581,7 +7607,7 @@ model AzureVmWorkloadSAPAseSystemProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP ASE System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPAseSystemWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7594,7 +7620,7 @@ model AzureVmWorkloadSAPAseSystemWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP HANA Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7608,7 +7634,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP HANA Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7621,7 +7647,7 @@ model AzureVmWorkloadSAPHanaDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP HANA System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaSystemProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7635,7 +7661,7 @@ model AzureVmWorkloadSAPHanaSystemProtectableItem
 /**
  * Azure VM workload-specific protectable item representing SAP HANA Dbinstance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaDBInstance extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -7648,7 +7674,7 @@ model AzureVmWorkloadSAPHanaDBInstance extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific protectable item representing HANA HSR.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -7661,8 +7687,8 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific protectable item representing HANA scale out.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_01_01_preview)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
+@added(Versions.v2026_01_31_preview)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7676,7 +7702,7 @@ model AzureVmWorkloadSAPHanaScaleoutProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP HANA System.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureVmWorkloadSAPHanaSystemWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7689,7 +7715,7 @@ model AzureVmWorkloadSAPHanaSystemWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SQL Availability Group.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7709,7 +7735,7 @@ model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
 /**
  * Azure VM workload-specific protectable item representing SQL Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7723,7 +7749,7 @@ model AzureVmWorkloadSQLDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SQL Database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7736,7 +7762,7 @@ model AzureVmWorkloadSQLDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SQL Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLInstanceProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7750,7 +7776,7 @@ model AzureVmWorkloadSQLInstanceProtectableItem
 /**
  * Azure VM workload-specific workload item representing SQL Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureVmWorkloadSQLInstanceWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7871,7 +7897,7 @@ model AzureWorkloadAutoProtectionIntent extends ProtectionIntent {
 /**
  * Azure Workload SQL Auto Protection intent item.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLAutoProtectionIntent extends ProtectionIntent {
   /**
    * backup protectionIntent type.
@@ -8417,7 +8443,7 @@ model OperationStatusValidateOperationExtendedInfo
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
   /**
@@ -8453,7 +8479,7 @@ model RecoveryPointRehydrationInfo {
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -8471,7 +8497,7 @@ model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
   /**
@@ -8492,7 +8518,7 @@ model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 model AzureWorkloadSQLRestoreWithRehydrateRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.

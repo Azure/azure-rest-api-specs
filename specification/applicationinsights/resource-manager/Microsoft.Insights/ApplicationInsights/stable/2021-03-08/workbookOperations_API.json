@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "WorkbookClient",
+    "version": "2021-03-08",
     "description": "Azure client for Workbook.",
-    "version": "2021-03-08"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,36 +30,41 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.Insights/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available insights REST API operations.",
-        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Insights error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -62,43 +72,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorFieldContract"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
-          "description": "The list of invalid fields send in request, in case of validation error."
-        }
-      }
-    },
     "ErrorFieldContract": {
+      "type": "object",
+      "description": "Error Field contract.",
       "properties": {
         "code": {
           "type": "string",
@@ -112,54 +93,86 @@
           "type": "string",
           "description": "Property name."
         }
-      },
-      "description": "Error Field contract."
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        },
+        "details": {
+          "type": "array",
+          "description": "The list of invalid fields send in request, in case of validation error.",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        }
+      }
     },
     "Operation": {
-      "description": "Azure Workbooks REST API operation",
       "type": "object",
+      "description": "Azure Workbooks REST API operation",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
         },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Insights",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that represents the operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft.Insights"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation type: Read, write, delete, etc."
         }
       }
     },
     "OperationListResult": {
-      "description": "Result of the request to list Azure Workbooks operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "description": "Result of the request to list Azure Workbooks operations.\nIt contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of Workbook operations supported by the Microsoft.Insights resource provider.",
           "items": {
             "$ref": "#/definitions/Operation"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "List of Workbook operations supported by the Microsoft.Insights resource provider."
+          ]
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }
-  }
+  },
+  "parameters": {}
 }

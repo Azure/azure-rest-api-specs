@@ -1,0 +1,17 @@
+id: 004003-delete-and-restore-operationId-decorator
+name: "Decorators: Delete and restore operationId decorator"
+description: |
+  Test removing @operationId decorators and their associated suppressions, then selectively restoring operationIds that do not follow standard naming.
+  Based on benchmark case 004003-delete-and-restore-operationId-decorator.
+tags:
+  - decorators
+inputs:
+  prompt: "Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore those operationIds that do not contain underscores or begin with a lowercase letter."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

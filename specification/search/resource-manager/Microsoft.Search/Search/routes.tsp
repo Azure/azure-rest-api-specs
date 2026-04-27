@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -74,7 +76,7 @@ interface UsagesOperationGroup {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
 
-      ...LocationParameter;
+      ...LocationResourceParameter;
     },
     Error = CloudError
   >;
@@ -115,3 +117,28 @@ op usageBySubscriptionSku(
   @path
   skuName: string,
 ): ArmResponse<QuotaUsageResult> | CloudError;
+
+/**
+ * Offerings API operations
+ * Released in 2025-02-01-preview and added back to TypeSpec as the migration is based on 2025-05-01 and does not include it.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01_preview)
+interface Offerings {
+  /**
+   * Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
+  @autoRoute
+  @get
+  @action("offerings")
+  @tag("Offerings")
+  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: null })
+  list is ArmProviderActionSync<
+    Request = void,
+    Response = OfferingsListResult,
+    Scope = TenantActionScope,
+    Parameters = {},
+    Error = CloudError
+  >;
+}

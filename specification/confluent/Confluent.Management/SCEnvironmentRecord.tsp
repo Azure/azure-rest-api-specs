@@ -147,46 +147,47 @@ interface SCEnvironmentRecords {
   >;
 }
 
+alias SCEnvironmentRecordClusterOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /**
+     * Organization resource name
+     */
+    @path @segment("organizations") organizationName: string;
+
+    /**
+     * Confluent environment id
+     */
+    @path @segment("environments") environmentId: string;
+  },
+  {
+    /**
+     * Confluent connector name
+     */
+    @path @segment("schemaRegistryClusters") clusterId: string;
+  },
+  ErrorType = ResourceProviderDefaultErrorResponse,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}",
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface SCEnvironmentRecordClusterOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Organization resource name
-         */
-        @path @segment("organizations") organizationName: string,
-
-        /**
-         * Confluent environment id
-         */
-        @path @segment("environments") environmentId: string,
-      },
-      {
-        /**
-         * Confluent connector name
-         */
-        @path @segment("schemaRegistryClusters") clusterId: string,
-      },
-      ResourceProviderDefaultErrorResponse
-    > {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface SCEnvironmentRecordCluster {
   /**
    * Get schema registry cluster by Id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters/{clusterId}")
+  getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.ActionSync<
     SCEnvironmentRecord,
-    {},
+    void,
     ArmResponse<SchemaRegistryClusterRecord>
   >;
 }

@@ -1,44 +1,45 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Time Zone Service",
+    "title": "Maps Timezone",
     "version": "1.0",
-    "description": "Azure Maps Time Zone REST APIs"
+    "description": "Azure Maps Time Zone REST APIs",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
-  "consumes": [],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "https://atlas.microsoft.com"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
-  "securityDefinitions": {
-    "AADToken": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
-      "scopes": {
-        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
-      }
-    },
-    "SharedKey": {
-      "type": "apiKey",
-      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
-      "name": "subscription-key",
-      "in": "query"
-    },
-    "SasToken": {
-      "type": "apiKey",
-      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
-      "name": "SAS Token",
-      "in": "header"
-    }
-  },
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "AADToken": [
+      "AadToken": [
         "https://atlas.microsoft.com/.default"
       ]
     },
@@ -49,29 +50,882 @@
       "SasToken": []
     }
   ],
-  "responses": {},
-  "parameters": {
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "1.0",
-      "x-ms-parameter-location": "client"
+  "securityDefinitions": {
+    "AadToken": {
+      "type": "oauth2",
+      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\\n\\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\\n\\n#### Notes\\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\\n* \\nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \\n* \\nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\\n* \\nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": ""
+      }
     },
-    "TimezoneAcceptLanguage": {
-      "name": "Accept-Language",
-      "in": "header",
-      "description": "Specifies the language code in which the timezone names should be returned. If no language code is provided, the response will be in \"EN\". Please refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\\n\\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\\n\\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
+      "in": "header"
+    },
+    "SharedKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\\n\\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\\n\\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
+      "name": "subscription-key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/timezone/byCoordinates/{format}": {
+      "get": {
+        "operationId": "Timezone_GetTimezoneByCoordinates",
+        "summary": "Use to get the current, historical, and future time zone information for the\nspecified latitude-longitude pair.",
+        "description": "The `Get Timezone By Coordinates` API is an HTTP `GET` request that returns\ncurrent, historical, and future time zone information for a specified\nlatitude-longitude pair. In addition, the API provides sunset and sunrise times\nfor a given location, with the exception of regions that observe solar days.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Specifies the language code in which the timezone names should be returned. If\nno language code is provided, the response will be in \"EN\". Please refer to\n[Supported\nLanguages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptLanguage"
+          },
+          {
+            "name": "options",
+            "in": "query",
+            "description": "Alternatively, use alias \"o\". Options available for types of information\nreturned in the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "zoneInfo",
+              "transitions",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "TimezoneOptions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "none",
+                  "value": "none",
+                  "description": "Do not include zoneinfo or transitions in the result."
+                },
+                {
+                  "name": "zoneInfo",
+                  "value": "zoneInfo",
+                  "description": "Include additional time zone info in the result."
+                },
+                {
+                  "name": "transitions",
+                  "value": "transitions",
+                  "description": "Include transition information in the result (The number of transitions is\ncurrently capped at 250)."
+                },
+                {
+                  "name": "all",
+                  "value": "all",
+                  "description": "Include both zoneinfo and transitions in the result."
+                }
+              ]
+            }
+          },
+          {
+            "name": "timeStamp",
+            "in": "query",
+            "description": "Alternatively, use alias \"stamp\", or \"s\". Reference time, if omitted, the API\nwill use the machine time serving the request.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "transitionsFrom",
+            "in": "query",
+            "description": "Alternatively, use alias \"tf\". The start date from which daylight savings time\n(DST) transitions are requested, only applies when \"options\" = all or \"options\"\n= transitions.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "daylightSavingsTimeFrom"
+          },
+          {
+            "name": "transitionsYears",
+            "in": "query",
+            "description": "Alternatively, use alias \"ty\". The number of years from \"transitionsFrom\" for\nwhich DST transitions are requested, only applies when \"options\" = all or\n\"options\" = transitions.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "daylightSavingsTimeLastingYears"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Coordinates of the point for which time zone information is requested. This\nparameter is a list of coordinates, containing a pair of coordinate(lat, long).\nWhen this endpoint is called directly, coordinates are passed in as a single\nstring containing coordinates, separated by commas.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "coordinates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TimezoneResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve timezone by coordinates": {
+            "$ref": "./examples/GetTimezoneByCoordinates.json"
+          }
+        }
+      }
+    },
+    "/timezone/byId/{format}": {
+      "get": {
+        "operationId": "Timezone_GetTimezoneByID",
+        "summary": "Use to get the current, historical, and future time zone information for the\nspecified IANA time zone ID.",
+        "description": "The `Get Timezone By ID` API is an HTTP `GET` request that returns current,\nhistorical, and future time zone information for the specified IANA time zone\nID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Specifies the language code in which the timezone names should be returned. If\nno language code is provided, the response will be in \"EN\". Please refer to\n[Supported\nLanguages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptLanguage"
+          },
+          {
+            "name": "options",
+            "in": "query",
+            "description": "Alternatively, use alias \"o\". Options available for types of information\nreturned in the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "zoneInfo",
+              "transitions",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "TimezoneOptions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "none",
+                  "value": "none",
+                  "description": "Do not include zoneinfo or transitions in the result."
+                },
+                {
+                  "name": "zoneInfo",
+                  "value": "zoneInfo",
+                  "description": "Include additional time zone info in the result."
+                },
+                {
+                  "name": "transitions",
+                  "value": "transitions",
+                  "description": "Include transition information in the result (The number of transitions is\ncurrently capped at 250)."
+                },
+                {
+                  "name": "all",
+                  "value": "all",
+                  "description": "Include both zoneinfo and transitions in the result."
+                }
+              ]
+            }
+          },
+          {
+            "name": "timeStamp",
+            "in": "query",
+            "description": "Alternatively, use alias \"stamp\", or \"s\". Reference time, if omitted, the API\nwill use the machine time serving the request.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "transitionsFrom",
+            "in": "query",
+            "description": "Alternatively, use alias \"tf\". The start date from which daylight savings time\n(DST) transitions are requested, only applies when \"options\" = all or \"options\"\n= transitions.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "daylightSavingsTimeFrom"
+          },
+          {
+            "name": "transitionsYears",
+            "in": "query",
+            "description": "Alternatively, use alias \"ty\". The number of years from \"transitionsFrom\" for\nwhich DST transitions are requested, only applies when \"options\" = all or\n\"options\" = transitions.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "daylightSavingsTimeLastingYears"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The IANA time zone ID.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "timezoneId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TimezoneResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve timezone by ID": {
+            "$ref": "./examples/GetTimezoneByID.json"
+          }
+        }
+      }
+    },
+    "/timezone/enumIana/{format}": {
+      "get": {
+        "operationId": "Timezone_GetTimezoneEnumIANA",
+        "summary": "Use to get the list of IANA time zone IDs.",
+        "description": "The `Get IANA Time Zones` API is an HTTP `GET` request that returns a full list\nof Internet Assigned Numbers Authority (IANA) time zone IDs. Updates to the\nIANA service are reflected in the system within one day.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IanaId"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve Iana timezone Ids": {
+            "$ref": "./examples/GetTimezoneEnumIANA.json"
+          }
+        }
+      }
+    },
+    "/timezone/enumWindows/{format}": {
+      "get": {
+        "operationId": "Timezone_GetTimezoneEnumWindows",
+        "summary": "Use to get the list of Windows Time Zone IDs.",
+        "description": "The `Get Windows Time Zones` API is an HTTP `GET` request that returns a full\nlist of Windows Time Zone IDs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TimezoneWindows"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve Windows timezone Ids": {
+            "$ref": "./examples/GetTimezoneEnumWindows.json"
+          }
+        }
+      }
+    },
+    "/timezone/ianaVersion/{format}": {
+      "get": {
+        "operationId": "Timezone_GetTimezoneIANAVersion",
+        "summary": "Use to get the current IANA version number.",
+        "description": "The `Get Time Zone IANA Version` API is an HTTP `GET` request that returns the\ncurrent Internet Assigned Numbers Authority (IANA) version number as Metadata.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TimezoneIanaVersionResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve IANA version metadata": {
+            "$ref": "./examples/GetTimezoneIANAVersion.json"
+          }
+        }
+      }
+    },
+    "/timezone/windowsToIana/{format}": {
+      "get": {
+        "operationId": "Timezone_GetTimezoneWindowsToIANA",
+        "summary": "Use to get the IANA ID.",
+        "description": "The `Get Windows to IANA Time Zone` API is an HTTP `GET` request that returns a\ncorresponding Internet Assigned Numbers Authority (IANA) ID, given a valid\nWindows Time Zone ID. Multiple IANA IDs may be returned for a single Windows\nID. It is possible to narrow these results by adding an optional territory\nparameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Only `json` format is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "name": "JsonFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The Windows time zone ID.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "windowsTimezoneId"
+          },
+          {
+            "name": "territory",
+            "in": "query",
+            "description": "Windows Time Zone territory code.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "windowsTerritoryCode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IanaId"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve corresponding timezone IANA": {
+            "$ref": "./examples/GetTimezoneWindowsToIANA.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CountryRecord": {
+      "type": "object",
+      "description": "A country/region record.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "country/region Name",
+          "readOnly": true
+        },
+        "code": {
+          "type": "string",
+          "description": "ISO-3166 2-letter country/region code for the country/region.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional info.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error\ndetails for failed operations. (This also follows the OData error response\nformat.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      }
+    },
+    "IanaId": {
+      "type": "object",
+      "description": "IANA time zone ID information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id property",
+          "readOnly": true
+        },
+        "isAlias": {
+          "type": "boolean",
+          "description": "IsAlias property",
+          "readOnly": true
+        },
+        "aliasOf": {
+          "type": "string",
+          "description": "AliasOf property",
+          "readOnly": true
+        },
+        "hasZone1970Location": {
+          "type": "boolean",
+          "description": "This attribute returns `True` if the IanaId has any country/zone associated\nwith it.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReferenceTime": {
+      "type": "object",
+      "description": "Details in effect at the local time.",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "Time zone name in effect at the reference timestamp (i.e. PST or PDT depending\nwhether Daylight Savings Time is in effect).",
+          "readOnly": true
+        },
+        "standardOffset": {
+          "type": "string",
+          "description": "UTC offset in effect at the `ReferenceUTCTimestamp`.",
+          "readOnly": true
+        },
+        "daylightSavings": {
+          "type": "string",
+          "description": "Time saving in minutes in effect at the `ReferenceUTCTimestamp`.",
+          "readOnly": true
+        },
+        "wallTime": {
+          "type": "string",
+          "description": "Current wall time at the given time zone as shown in the `Tag` property.",
+          "readOnly": true
+        },
+        "posixTzValidYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The year this POSIX string is valid for. Note: A POSIX string will only be\nvalid in the given year.",
+          "readOnly": true
+        },
+        "posixTz": {
+          "type": "string",
+          "description": "POSIX string used to set the time zone environment variable.",
+          "readOnly": true
+        },
+        "sunrise": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Sunrise at the given time zone as shown in the `Tag` property, populated only\nwhen the call is `byCoordinates`. The sunrise is described in the [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that\nthe Timezone API does not return sunrise and sunset times when solar day is\nobserved in the requested region.",
+          "readOnly": true
+        },
+        "sunset": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Sunset at the given time zone as shown in the `Tag` property, populated only\nwhen the call is `byCoordinates`. The sunset is described in the [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that\nthe Timezone API does not return sunrise and sunset times when solar day is\nobserved in the requested region.",
+          "readOnly": true
+        }
+      }
+    },
+    "RepresentativePoint": {
+      "type": "object",
+      "description": "Representative point property",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Latitude property",
+          "readOnly": true
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Longitude property",
+          "readOnly": true
+        }
+      }
+    },
+    "TimeTransition": {
+      "type": "object",
+      "description": "Represents a time zone transition.",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "Tag property",
+          "readOnly": true
+        },
+        "standardOffset": {
+          "type": "string",
+          "description": "StandardOffset property",
+          "readOnly": true
+        },
+        "daylightSavings": {
+          "type": "string",
+          "description": "DaylightSavings property",
+          "readOnly": true
+        },
+        "utcStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date, start time for this transition period",
+          "readOnly": true
+        },
+        "utcEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date, end time for this transition period",
+          "readOnly": true
+        }
+      }
+    },
+    "TimezoneIanaVersionResult": {
+      "type": "object",
+      "description": "This object is returned from a successful Timezone IANA Version call",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version property",
+          "readOnly": true
+        }
+      }
+    },
+    "TimezoneId": {
+      "type": "object",
+      "description": "Timezone ID information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id property",
+          "readOnly": true
+        },
+        "aliases": {
+          "type": "array",
+          "description": "An array of time zone ID aliases. Only returned when [options]=*zoneinfo* or\n*all*.\n\nNote: may be null.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "countries": {
+          "type": "array",
+          "description": "An array of country/region records. Only returned when [options]=*zoneinfo* or\n*all*.",
+          "items": {
+            "$ref": "#/definitions/CountryRecord"
+          },
+          "readOnly": true
+        },
+        "names": {
+          "$ref": "#/definitions/TimezoneNames",
+          "description": "Timezone names object."
+        },
+        "referenceTime": {
+          "$ref": "#/definitions/ReferenceTime",
+          "description": "Details in effect at the local time.",
+          "readOnly": true
+        },
+        "representativePoint": {
+          "$ref": "#/definitions/RepresentativePoint",
+          "description": "Representative point property",
+          "readOnly": true
+        },
+        "timeTransitions": {
+          "type": "array",
+          "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
+          "items": {
+            "$ref": "#/definitions/TimeTransition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TimezoneNames": {
+      "type": "object",
+      "description": "Timezone names object.",
+      "properties": {
+        "iso6391LanguageCode": {
+          "type": "string",
+          "description": "The ISO 639-1 language code of the Names",
+          "readOnly": true
+        },
+        "generic": {
+          "type": "string",
+          "description": "Generic Name",
+          "readOnly": true
+        },
+        "standard": {
+          "type": "string",
+          "description": "Standard Name",
+          "readOnly": true
+        },
+        "daylight": {
+          "type": "string",
+          "description": "Daylight Name",
+          "readOnly": true
+        }
+      }
     },
     "TimezoneOptions": {
-      "name": "options",
-      "in": "query",
-      "description": "Alternatively, use alias \"o\". Options available for types of information returned in the result.",
       "type": "string",
+      "description": "Options for timezone information returned in the result.",
       "enum": [
         "none",
         "zoneInfo",
@@ -83,622 +937,87 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "none",
             "value": "none",
             "description": "Do not include zoneinfo or transitions in the result."
           },
           {
+            "name": "zoneInfo",
             "value": "zoneInfo",
             "description": "Include additional time zone info in the result."
           },
           {
+            "name": "transitions",
             "value": "transitions",
-            "description": "Include transition information in the result (The number of transitions is currently capped at 250)."
+            "description": "Include transition information in the result (The number of transitions is\ncurrently capped at 250)."
           },
           {
+            "name": "all",
             "value": "all",
             "description": "Include both zoneinfo and transitions in the result."
           }
         ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "TimezoneTimeStamp": {
-      "name": "timeStamp",
-      "in": "query",
-      "description": "Alternatively, use alias \"stamp\", or \"s\". Reference time, if omitted, the API will use the machine time serving the request.",
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "format": "date-time"
-    },
-    "TimezoneTransitionsFrom": {
-      "name": "transitionsFrom",
-      "x-ms-client-name": "daylightSavingsTimeFrom",
-      "in": "query",
-      "description": "Alternatively, use alias \"tf\". The start date from which daylight savings time (DST) transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "format": "date-time"
-    },
-    "TimezoneTransitionsYears": {
-      "name": "transitionsYears",
-      "x-ms-client-name": "daylightSavingsTimeLastingYears",
-      "in": "query",
-      "description": "Alternatively, use alias \"ty\". The number of years from \"transitionsFrom\" for which DST transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
-      "type": "integer",
-      "x-ms-parameter-location": "method"
-    }
-  },
-  "paths": {
-    "/timezone/byId/{format}": {
-      "get": {
-        "summary": "Use to get the current, historical, and future time zone information for the specified IANA time zone ID.",
-        "description": "\n\nThe `Get Timezone By ID` API is an HTTP `GET` request that returns current, historical, and future time zone information for the specified IANA time zone ID.",
-        "operationId": "Timezone_GetTimezoneByID",
-        "x-ms-examples": {
-          "Successfully retrieve timezone by ID": {
-            "$ref": "./examples/GetTimezoneByID.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TimezoneAcceptLanguage"
-          },
-          {
-            "$ref": "#/parameters/TimezoneOptions"
-          },
-          {
-            "$ref": "#/parameters/TimezoneTimeStamp"
-          },
-          {
-            "$ref": "#/parameters/TimezoneTransitionsFrom"
-          },
-          {
-            "$ref": "#/parameters/TimezoneTransitionsYears"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
-          },
-          {
-            "name": "query",
-            "x-ms-client-name": "timezoneId",
-            "in": "query",
-            "description": "The IANA time zone ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TimezoneResult"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/timezone/byCoordinates/{format}": {
-      "get": {
-        "summary": "Use to get the current, historical, and future time zone information for the specified latitude-longitude pair.",
-        "description": "\n\nThe `Get Timezone By Coordinates` API is an HTTP `GET` request that returns current, historical, and future time zone information for a specified latitude-longitude pair. In addition, the API provides sunset and sunrise times for a given location, with the exception of regions that observe solar days.",
-        "operationId": "Timezone_GetTimezoneByCoordinates",
-        "x-ms-examples": {
-          "Successfully retrieve timezone by coordinates": {
-            "$ref": "./examples/GetTimezoneByCoordinates.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TimezoneAcceptLanguage"
-          },
-          {
-            "$ref": "#/parameters/TimezoneOptions"
-          },
-          {
-            "$ref": "#/parameters/TimezoneTimeStamp"
-          },
-          {
-            "$ref": "#/parameters/TimezoneTransitionsFrom"
-          },
-          {
-            "$ref": "#/parameters/TimezoneTransitionsYears"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "description": "Coordinates of the point for which time zone information is requested. This parameter is a list of coordinates, containing a pair of coordinate(lat, long). When this endpoint is called directly, coordinates are passed in as a single string containing coordinates, separated by commas.",
-            "required": true,
-            "x-ms-client-name": "coordinates",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TimezoneResult"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/timezone/enumWindows/{format}": {
-      "get": {
-        "summary": "Use to get the list of Windows Time Zone IDs.",
-        "description": "\n\nThe `Get Windows Time Zones` API is an HTTP `GET` request that returns a full list of Windows Time Zone IDs.",
-        "operationId": "Timezone_GetTimezoneEnumWindows",
-        "x-ms-client-name": "GetWindowsTimezoneIds",
-        "x-ms-examples": {
-          "Successfully retrieve Windows timezone Ids": {
-            "$ref": "./examples/GetTimezoneEnumWindows.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TimezoneEnumWindowsResult"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/timezone/enumIana/{format}": {
-      "get": {
-        "summary": "Use to get the list of IANA time zone IDs.",
-        "description": "\n\nThe `Get IANA Time Zones` API is an HTTP `GET` request that returns a full list of Internet Assigned Numbers Authority (IANA) time zone IDs. Updates to the IANA service are reflected in the system within one day.",
-        "operationId": "Timezone_GetTimezoneEnumIANA",
-        "x-ms-client-name": "GetIANATimezoneIds",
-        "x-ms-examples": {
-          "Successfully retrieve Iana timezone Ids": {
-            "$ref": "./examples/GetTimezoneEnumIANA.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TimezoneEnumIanaResult"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/timezone/ianaVersion/{format}": {
-      "get": {
-        "summary": "Use to get the current IANA version number.",
-        "description": "\n\nThe `Get Time Zone IANA Version` API is an HTTP `GET` request that returns the current Internet Assigned Numbers Authority (IANA) version number as Metadata.",
-        "operationId": "Timezone_GetTimezoneIANAVersion",
-        "x-ms-client-name": "GetIANAVersion",
-        "x-ms-examples": {
-          "Successfully retrieve Iana version metadata": {
-            "$ref": "./examples/GetTimezoneIANAVersion.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TimezoneIanaVersionResult"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/timezone/windowsToIana/{format}": {
-      "get": {
-        "summary": "Use to get the IANA ID.",
-        "description": "\n\nThe `Get Windows to IANA Time Zone` API is an HTTP `GET` request that returns a corresponding Internet Assigned Numbers Authority (IANA) ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
-        "operationId": "Timezone_GetTimezoneWindowsToIANA",
-        "x-ms-client-name": "ConvertWindowsTimezoneToIANA",
-        "x-ms-examples": {
-          "Successfully retrieve corresponding timezone Iana": {
-            "$ref": "./examples/GetTimezoneWindowsToIANA.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "x-ms-client-name": "windowsTimezoneId",
-            "description": "The Windows time zone ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "territory",
-            "in": "query",
-            "x-ms-client-name": "windowsTerritoryCode",
-            "description": "Windows Time Zone territory code.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TimezoneWindowsToIanaResult"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "CountryRecord": {
-      "type": "object",
-      "description": "A country/region record.",
-      "properties": {
-        "Name": {
-          "description": "country/region Name",
-          "type": "string",
-          "readOnly": true
-        },
-        "Code": {
-          "description": "ISO-3166 2-letter country/region code for the country/region.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TimeTransition": {
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "Tag": {
-          "description": "Tag property",
-          "type": "string",
-          "readOnly": true
-        },
-        "StandardOffset": {
-          "description": "StandardOffset property",
-          "type": "string",
-          "readOnly": true
-        },
-        "DaylightSavings": {
-          "description": "DaylightSavings property",
-          "type": "string",
-          "readOnly": true
-        },
-        "UtcStart": {
-          "description": "Start date, start time for this transition period",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "UtcEnd": {
-          "description": "End date, end time for this transition period",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        }
       }
     },
     "TimezoneResult": {
-      "description": "This object is returned from a successful Timezone By ID call or By Coordinates call",
       "type": "object",
+      "description": "This object is returned from a successful Timezone By ID call or By Coordinates\ncall",
       "properties": {
-        "Version": {
-          "description": "Version property",
+        "version": {
           "type": "string",
+          "description": "Version property",
           "readOnly": true
         },
-        "ReferenceUtcTimestamp": {
-          "description": "Reference Utc Timestamp property",
+        "referenceUtcTimestamp": {
           "type": "string",
-          "readOnly": true,
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Reference Utc Timestamp property",
+          "readOnly": true
         },
-        "TimeZones": {
-          "$ref": "#/definitions/TimezoneIds"
+        "timeZones": {
+          "type": "array",
+          "description": "TimeZoneId array",
+          "items": {
+            "$ref": "#/definitions/TimezoneId"
+          },
+          "readOnly": true
         }
-      }
-    },
-    "TimezoneEnumWindowsResult": {
-      "description": "This object is returned from a successful Timezone Enum Windows call",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/TimezoneWindows"
       }
     },
     "TimezoneWindows": {
       "type": "object",
+      "description": "Windows timezone information with IANA mappings.",
       "properties": {
-        "WindowsId": {
+        "windowsId": {
+          "type": "string",
           "description": "Windows Id property",
-          "type": "string",
           "readOnly": true
         },
-        "Territory": {
+        "territory": {
+          "type": "string",
           "description": "Territory property",
-          "type": "string",
           "readOnly": true
         },
-        "IanaIds": {
+        "ianaIds": {
+          "type": "array",
           "description": "IanaIds array",
-          "type": "array",
           "items": {
-            "type": "string",
-            "readOnly": true
+            "type": "string"
           }
         }
       }
-    },
-    "TimezoneEnumIanaResult": {
-      "description": "This object is returned from a successful Timezone Enum IANA call",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/IanaId"
-      }
-    },
-    "TimezoneIanaVersionResult": {
-      "description": "This object is returned from a successful Timezone IANA Version call",
-      "type": "object",
-      "properties": {
-        "Version": {
-          "description": "Version property",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TimezoneWindowsToIanaResult": {
-      "description": "This object is returned from a successful Timezone Windows To IANA call",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/IanaId"
-      }
-    },
-    "IanaId": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "IsAlias": {
-          "description": "IsAlias property",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "AliasOf": {
-          "description": "AliasOf property",
-          "type": "string",
-          "readOnly": true
-        },
-        "HasZone1970Location": {
-          "description": "This attribute returns `True` if the IanaId has any country/zone associated with it.",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "TimezoneIds": {
-      "description": "TimeZoneId array",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/TimezoneId"
-      }
-    },
-    "TimezoneId": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "Aliases": {
-          "description": "An array of time zone ID aliases. Only returned when [options]=*zoneinfo* or *all*.\n\nNote: may be null.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "Countries": {
-          "description": "An array of country/region records. Only returned when [options]=*zoneinfo* or *all*.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/CountryRecord"
-          }
-        },
-        "Names": {
-          "$ref": "#/definitions/TimezoneNames"
-        },
-        "ReferenceTime": {
-          "$ref": "#/definitions/ReferenceTime"
-        },
-        "RepresentativePoint": {
-          "$ref": "#/definitions/RepresentativePoint"
-        },
-        "TimeTransitions": {
-          "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/TimeTransition"
-          }
-        }
-      }
-    },
-    "TimezoneNames": {
-      "type": "object",
-      "description": "Timezone names object.",
-      "properties": {
-        "ISO6391LanguageCode": {
-          "description": "The ISO 639-1 language code of the Names",
-          "type": "string",
-          "readOnly": true
-        },
-        "Generic": {
-          "description": "Generic Name",
-          "type": "string",
-          "readOnly": true
-        },
-        "Standard": {
-          "description": "Standard Name",
-          "type": "string",
-          "readOnly": true
-        },
-        "Daylight": {
-          "description": "Daylight Name",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ReferenceTime": {
-      "description": "Details in effect at the local time.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "Tag": {
-          "description": "Time zone name in effect at the reference timestamp (i.e. PST or PDT depending whether Daylight Savings Time is in effect).",
-          "type": "string",
-          "readOnly": true
-        },
-        "StandardOffset": {
-          "description": "UTC offset in effect at the `ReferenceUTCTimestamp`.",
-          "type": "string",
-          "readOnly": true
-        },
-        "DaylightSavings": {
-          "description": "Time saving in minutes in effect at the `ReferenceUTCTimestamp`.",
-          "type": "string",
-          "readOnly": true
-        },
-        "WallTime": {
-          "description": "Current wall time at the given time zone as shown in the `Tag` property.",
-          "type": "string",
-          "readOnly": true
-        },
-        "PosixTzValidYear": {
-          "description": "The year this POSIX string is valid for. Note: A POSIX string will only be valid in the given year.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "PosixTz": {
-          "description": "POSIX string used to set the time zone environment variable.",
-          "type": "string",
-          "readOnly": true
-        },
-        "Sunrise": {
-          "description": "Sunrise at the given time zone as shown in the `Tag` property, populated only when the call is `byCoordinates`. The sunrise is described in the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that the Timezone API does not return sunrise and sunset times when solar day is observed in the requested region.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "Sunset": {
-          "description": "Sunset at the given time zone as shown in the `Tag` property, populated only when the call is `byCoordinates`. The sunset is described in the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Note that the Timezone API does not return sunrise and sunset times when solar day is observed in the requested region.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      }
-    },
-    "RepresentativePoint": {
-      "description": "Representative point property",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "Latitude": {
-          "description": "Latitude property",
-          "type": "number",
-          "readOnly": true
-        },
-        "Longitude": {
-          "description": "Longitude property",
-          "type": "number",
-          "readOnly": true
-        }
-      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
