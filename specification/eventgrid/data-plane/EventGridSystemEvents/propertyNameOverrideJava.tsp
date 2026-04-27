@@ -21,7 +21,7 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsIncomingCallEventData.onBehalfOfCallee,
-  "onBehalfOfCommunicationIdentifier",
+  "onBehalfOfCallee",
   "java"
 );
 
