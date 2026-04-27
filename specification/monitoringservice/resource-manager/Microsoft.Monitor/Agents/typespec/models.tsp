@@ -17,7 +17,7 @@ namespace Microsoft.Monitor {
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
     /** The resource ID of the Azure Monitor workspace used as the issue container. */
-    issueContainerId?: Azure.Core.armResourceIdentifier;
+    monitoringAccountId?: Azure.Core.armResourceIdentifier;
 
     /** Whether the observability agent is enabled. */
     enabled?: boolean;
