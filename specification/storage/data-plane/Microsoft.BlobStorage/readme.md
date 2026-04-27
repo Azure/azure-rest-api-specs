@@ -175,11 +175,20 @@ input-file:
   - stable/2026-04-06/generated_blob.json
 ```
 
+### Tag: package-2026-06-tsp
+
+These settings apply only when `--tag=package-2026-06-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-tsp'
+input-file:
+  - stable/2026-06-06/generated_blob.json
+```
+
 ### Tag: package-2026-06
 
 These settings apply only when `--tag=package-2026-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-06'
+```yaml $(tag) == 'package-2026-06'
 input-file:
   - stable/2026-06-06/blob.json
 ```
