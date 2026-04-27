@@ -1076,16 +1076,16 @@ model ResubscribeProperties {
 }
 
 /**
- * SaaS guid for Activate and Validate SaaS Resource
+ * SaaS resource details for Activate and Validate SaaS Resource
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
 @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
 model ActivateSaaSParameterRequest {
   /**
-   * SaaS guid of marketplace saas subscription to be activated.
+   * SaaS resource id of marketplace saas subscription to be activated.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
-  saaSGuid: string;
+  saaSResourceId: string;
 
   /**
    * User information of the person activating the SaaS resource.

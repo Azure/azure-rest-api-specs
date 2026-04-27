@@ -330,9 +330,7 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
-  - stable/2026-01-01/databricks.json
-  - stable/2026-01-01/vnetpeering.json
-  - stable/2026-01-01/accessconnector.json
+  - stable/2026-01-01/openapi.json
 ```
 
 ---

@@ -1,0 +1,17 @@
+id: 001001-version-spread-property
+name: "Versioning: Version a spread property"
+description: |
+  Test versioning a spread model property so it only appears in a specific API version.
+  Based on benchmark case 001001-version-spread-property.
+tags:
+  - versioning
+inputs:
+  prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in a new API version 2025-05-04-preview only."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"
