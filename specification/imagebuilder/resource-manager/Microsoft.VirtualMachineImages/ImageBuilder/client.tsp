@@ -5,3 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.VirtualMachineImages;
 
 @@clientName(ImageTemplateProperties.validate, "validation", "java");
+@@clientName(Microsoft.VirtualMachineImages,
+  "ImageBuilderClient",
+  "javascript"
+);
