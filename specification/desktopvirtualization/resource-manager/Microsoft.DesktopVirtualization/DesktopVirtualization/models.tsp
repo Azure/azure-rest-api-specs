@@ -2716,6 +2716,12 @@ model HostPoolProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
+
+  /**
+   * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
+   */
+  @added(Versions.v2026_03_01_preview)
+  conditionalRdpProperty?: string;
 }
 
 /**
@@ -3790,6 +3796,12 @@ model HostPoolPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
+
+  /**
+   * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
+   */
+  @added(Versions.v2026_03_01_preview)
+  conditionalRdpProperty?: string;
 }
 
 /**
