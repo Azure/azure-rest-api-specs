@@ -33,24 +33,6 @@ namespace Customizations;
   "python,csharp"
 );
 
-@@clientNamespace(Storage.File, "Azure.Storage.Files.Shares", "javascript");
-@@clientNamespace(Storage.File.Service,
-  "Azure.Storage.Files.Shares",
-  "javascript"
-);
-@@clientNamespace(Storage.File.Share,
-  "Azure.Storage.Files.Shares",
-  "javascript"
-);
-@@clientNamespace(Storage.File.Directory,
-  "Azure.Storage.Files.Shares",
-  "javascript"
-);
-@@clientNamespace(Storage.File.File,
-  "Azure.Storage.Files.Shares",
-  "javascript"
-);
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
