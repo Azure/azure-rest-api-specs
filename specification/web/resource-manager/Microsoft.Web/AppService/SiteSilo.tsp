@@ -72,9 +72,7 @@ interface SiteSilos {
    * Creates a new silo or updates an existing silo for the specified web app.
    */
   @summary("Create or update a web app silo.")
-  createOrUpdate is SiteSiloOps.CreateOrUpdateAsync<
-    SiteSilo
-  >;
+  createOrUpdate is SiteSiloOps.CreateOrUpdateAsync<SiteSilo>;
 
   /**
    * Updates the tags of an existing web app silo.
@@ -90,9 +88,7 @@ interface SiteSilos {
    * Deletes the specified silo from the web app.
    */
   @summary("Delete a web app silo.")
-  delete is SiteSiloOps.DeleteWithoutOkAsync<
-    SiteSilo
-  >;
+  delete is SiteSiloOps.DeleteWithoutOkAsync<SiteSilo>;
 
   /**
    * Returns a paginated list of all silos associated with the specified web app.

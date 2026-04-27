@@ -76,9 +76,7 @@ interface ServerFarmSilos {
    * Creates a new silo or updates an existing silo for the specified App Service plan.
    */
   @summary("Create or update an App Service plan silo.")
-  createOrUpdate is ServerFarmSiloOps.CreateOrUpdateAsync<
-    ServerFarmSilo
-  >;
+  createOrUpdate is ServerFarmSiloOps.CreateOrUpdateAsync<ServerFarmSilo>;
 
   /**
    * Updates the tags of an existing App Service plan silo.
@@ -94,9 +92,7 @@ interface ServerFarmSilos {
    * Deletes the specified silo from the App Service plan.
    */
   @summary("Delete an App Service plan silo.")
-  delete is ServerFarmSiloOps.DeleteWithoutOkAsync<
-    ServerFarmSilo
-  >;
+  delete is ServerFarmSiloOps.DeleteWithoutOkAsync<ServerFarmSilo>;
 
   /**
    * Returns a paginated list of all silos associated with the specified App Service plan.
