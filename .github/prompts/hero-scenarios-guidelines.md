@@ -247,6 +247,111 @@ For each scenario, include:
   the API references them. For LROs, show the polling header
   in the initial response.
 
+### Spec Fidelity Rules
+
+Before writing any request or response example, check the spec
+definitions for the operations and models involved. Specifically:
+
+- **Property types must match the spec.** If a property is typed as
+  `uuid` (or `format: uuid`), every example value for that property
+  MUST be a valid UUID (e.g., `10013344-5566-7788-99aa-bbccddeeff00`).
+  Do NOT invent human-readable prefixed IDs like `cde-...`, `col-...`,
+  or `dp-...`. If a property is typed as `url` (or `format: uri`),
+  the value MUST include a scheme (e.g., `https://host.example.com`).
+- **Response shapes must match the operation's return type.** If an
+  operation returns a single object (not an array or paged list),
+  show a single object. If it returns a paged list, show the `value`
+  array wrapper. Do NOT show a batch response for an operation that
+  returns a single item — split into multiple calls instead.
+- **One API call per operation invocation.** If you need to perform the
+  same operation on multiple resources (e.g., ingest two columns, tag
+  two columns), show each call separately with its own request and
+  response. Do NOT combine them into a batch unless the API explicitly
+  supports batch semantics.
+
+### Narrative–Step Consistency
+
+Every claim in the scenario description, prerequisites, and success
+criteria MUST be backed by a corresponding API call in the steps:
+
+- If the story says "tags both CustomerEmail and AccountNumber," there
+  must be two tagging API calls — one for each column.
+- If the prerequisites mention a resource ID, that exact ID must appear
+  in a request body or URL path in the steps.
+- The success criteria must only claim outcomes that the steps actually
+  achieve. Do NOT list a success criterion for an action that was
+  described in the narrative but omitted from the steps.
+
+### Matching Existing Document Conventions
+
+When appending scenarios to an **existing** `hero-scenarios.md`, read
+the file first and adopt its conventions:
+
+- **URL path format**: If existing scenarios use short paths (e.g.,
+  `/dataAssets/query`) without an `api-version` query parameter, use
+  the same style. If they use full paths with version parameters,
+  match that instead. Do NOT mix conventions within the same document.
+- **ID format**: If existing scenarios use placeholder-style IDs
+  (e.g., `{domain-id}`), use the same pattern. If they use concrete
+  example UUIDs, generate concrete UUIDs.
+- **Section structure**: Match the heading levels, formatting, and
+  section ordering (e.g., Story → Prerequisites → Steps → Success
+  Criteria → Value Delivered) used by existing scenarios.
+
+## Step 3.5 — Verify Each Scenario Against the Spec
+
+After generating scenarios and before posting, walk through every
+scenario and verify it against the actual specification files. Do NOT
+rely on memory from Step 2 — re-read the relevant spec files during
+this step. Do not proceed to Step 4 until every scenario passes.
+
+### Per-step verification
+
+For **each HTTP request/response** in the scenario:
+
+1. **Operation exists.** Search the TypeSpec or OpenAPI files for the
+   matching route (method + path pattern). If the operation does not
+   exist in the spec, remove or rewrite the step.
+2. **Request shape matches.** Every property in the example request body
+   must exist in the operation's request model as defined in the spec.
+   Remove any invented properties.
+3. **Response shape matches.** The example response must match the
+   operation's return type — single object, paged list with `value`
+   array and `nextLink`, or no body (for `202`/`204`). Do not invent
+   a response body for operations that return no content. Do not show
+   a batch/array response for an operation that returns a single item.
+4. **Example values match property types.** Re-read the model definition
+   for each property and verify:
+   - `format: uuid` → valid UUID (`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`)
+   - `format: uri` / `url` type → includes scheme (`https://...`)
+   - `format: date-time` → ISO 8601
+   - enum/union → one of the values defined in the spec
+   - integer → a number, not a string
+5. **No invented batching.** If the scenario performs the same operation
+   on multiple resources (e.g., tag two columns), verify the spec has a
+   batch endpoint. If not, split into separate calls — one per resource.
+
+### Per-scenario verification
+
+After checking every step, review the scenario as a whole:
+
+6. **Data flow continuity.** An ID or value returned in one step's
+   response and used in a later step's request must be identical in
+   both places — no typos, no mismatched UUIDs.
+7. **Narrative completeness.** Re-read the scenario description and
+   success criteria. Every action described must have a corresponding
+   API call. Every success criterion must be achievable solely through
+   the steps shown. Remove any success criteria for actions that were
+   omitted from the steps.
+8. **Existing document conventions.** If appending to an existing
+   `hero-scenarios.md`, re-read the file and confirm your scenarios
+   use the same URL path format (short vs. full with `api-version`),
+   the same ID style (placeholders vs. concrete UUIDs), and the same
+   section structure.
+
+If any check fails, fix the scenario and re-verify the fix before
+proceeding.
+
 ## Step 4 — Post the Suggestion
 
 **If no `hero-scenarios.md` exists**, use `add-comment` to post a PR comment
