@@ -21,9 +21,11 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsIncomingCallEventData.onBehalfOfCallee,
-  "onBehalfOfCallee",
+  "onBehalfOfCommunicationIdentifier",
   "java"
 );
+
+@@clientName(AcsIncomingCallEventData.onBehalfOf, "onBehalfOfCaller", "java");
 
 @@clientName(AcsMessageMediaContent.id, "mediaId", "java");
 
