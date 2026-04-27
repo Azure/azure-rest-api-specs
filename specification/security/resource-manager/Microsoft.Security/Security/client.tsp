@@ -565,3 +565,5 @@ op alertsListResourceGroupLevelByRegionCustomized(
   "SecurityConnectorApplications",
   "java"
 );
+@@clientName(HealthReportsAPI.status, "HealthReportStatus", "java");
+@@clientName(SecuritySolutionsAPI.Status, "Status", "java");
