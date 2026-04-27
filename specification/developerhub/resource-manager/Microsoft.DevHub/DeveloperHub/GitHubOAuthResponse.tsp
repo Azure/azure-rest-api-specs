@@ -77,7 +77,7 @@ interface GitHubOAuthResponses {
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("ListGitHubOAuth")
-  listGitHubOAuth is ArmResourceListByParent<
+  listGitHubOAuth is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     GitHubOAuthResponse,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<GitHubOAuthListResponse>,
