@@ -141,6 +141,292 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Sql;
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum Features {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  BackupShortTermRetentionPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  BlobAuditing,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseAdvancedThreatProtectionSettings,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseAdvisors,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseAutomaticTuning,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseColumns,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseEncryptionProtectorRevalidate,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseEncryptionProtectorRevert,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseExtensions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseRecommendedActions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Databases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSchemas,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSecurityAlertPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSqlVulnerabilityAssessmentBaselines,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSqlVulnerabilityAssessmentExecuteScan,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSqlVulnerabilityAssessmentRuleBaselines,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSqlVulnerabilityAssessmentScanResult,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSqlVulnerabilityAssessmentScans,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseSqlVulnerabilityAssessmentsSettings,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseTables,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseUsages,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseVulnerabilityAssessmentRuleBaselines,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseVulnerabilityAssessments,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DatabaseVulnerabilityAssessmentScans,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DataMaskingPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DataMaskingRules,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DataWarehouseUserActivities,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DeletedServers,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DistributedAvailabilityGroups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ElasticPoolOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ElasticPools,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  EncryptionProtectors,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  EndpointCertificates,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  FailoverGroups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  FirewallRules,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  GeoBackupPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  InstanceFailoverGroups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  InstancePoolOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  InstancePools,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  IPv6FirewallRules,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobAgents,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobCredentials,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobExecutions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobPrivateEndpoints,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Jobs,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobStepExecutions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobSteps,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobTargetExecutions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobTargetGroups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  JobVersions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  LedgerDigestUploads,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  LocationCapabilities,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  LongTermRetentionBackups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  LongTermRetentionManagedInstanceBackups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  LongTermRetentionPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  MaintenanceWindowOptions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  MaintenanceWindows,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedBackupShortTermRetentionPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseAdvancedThreatProtectionSettings,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseColumns,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseMoveOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseQueries,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseRestoreDetails,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseSchemas,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseSecurityAlertPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseSecurityEvents,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseSensitivityLabels,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseTables,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseTransparentDataEncryption,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseVulnerabilityAssessmentRuleBaselines,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseVulnerabilityAssessments,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedDatabaseVulnerabilityAssessmentScans,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceAdministrators,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceAdvancedThreatProtectionSettings,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceAzureADOnlyAuthentications,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceDtcs,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceEncryptionProtectors,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceKeys,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceLongTermRetentionPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstancePrivateEndpointConnections,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstancePrivateLinkResources,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstances,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceTdeCertificates,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedInstanceVulnerabilityAssessments,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedLedgerDigestUploads,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedServerDnsAliases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ManagedServerSecurityAlertPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  NetworkSecurityPerimeterConfigurations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Operations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  OutboundFirewallRules,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  PrivateEndpointConnections,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  PrivateLinkResources,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  RecoverableDatabases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  RecoverableManagedDatabases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ReplicationLinks,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  RestorableDroppedDatabases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  RestorableDroppedManagedDatabases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  RestorePoints,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SensitivityLabels,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerAdvancedThreatProtectionSettings,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerAdvisors,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerAutomaticTuning,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerAzureADAdministrators,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerAzureADOnlyAuthentications,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerConfigurationOptions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerConnectionPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerDevOpsAudit,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerDnsAliases,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerKeys,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Servers,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerSecurityAlertPolicies,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerTrustCertificates,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerTrustGroups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerUsages,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ServerVulnerabilityAssessments,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlAgent,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlVulnerabilityAssessmentBaseline,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlVulnerabilityAssessmentExecuteScan,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlVulnerabilityAssessmentRuleBaseline,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlVulnerabilityAssessmentScanResult,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlVulnerabilityAssessmentScans,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SqlVulnerabilityAssessmentsSettings,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  StartStopManagedInstanceSchedules,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SubscriptionUsages,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SynapseLinkWorkspaces,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SyncAgents,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SyncGroups,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  SyncMembers,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  TdeCertificates,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  TimeZones,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  TransparentDataEncryptions,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Usages,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  VirtualClusters,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  VirtualNetworkRules,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  WorkloadClassifiers,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  WorkloadGroups,
+}
+
 /**
  * The available API versions.
  */
