@@ -36,6 +36,11 @@ namespace Dynatrace.Observability;
  */
 enum Versions {
   /**
+   * The 2024-04-24-preview API version.
+   */
+  v2024_04_24_preview: "2024-04-24-preview",
+
+  /**
    * The 2024-04-24 API version.
    */
   v2024_04_24: "2024-04-24",
