@@ -256,6 +256,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   uint64,
   "rust"
 );
+// Range/source-range string parameters → HttpRange for Rust
+@@alternateType(Blob.download::parameters.range, HttpRange, "rust");
+@@alternateType(RangeParameter.range, HttpRange, "rust");
+@@alternateType(RangeParameterRequired.range, HttpRange, "rust");
+@@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
+@@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
@@ -935,3 +941,12 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
   setAccessPolicyRequiredContainerAcl,
   "rust"
 );
+
+/** An HTTP byte range, e.g. "bytes=0-1023". */
+@alternateType(
+  {
+    identity: "crate::models::HttpRange",
+  },
+  "rust"
+)
+scalar HttpRange extends string;

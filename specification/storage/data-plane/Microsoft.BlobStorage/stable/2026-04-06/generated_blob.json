@@ -189,16 +189,38 @@
             "x-ms-client-name": "ifTags"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {
@@ -7559,7 +7581,7 @@
           {
             "name": "x-ms-source-range",
             "in": "header",
-            "description": "Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header.",
+            "description": "Bytes of source data in the specified range.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "sourceRange"
@@ -7603,7 +7625,7 @@
           {
             "name": "Range",
             "in": "header",
-            "description": "Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header.",
+            "description": "Bytes of data in the specified range.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "range"
@@ -18273,44 +18295,5 @@
       "format": "byte"
     }
   },
-  "parameters": {
-    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
-      "name": "If-Match",
-      "in": "header",
-      "description": "The request should only proceed if an entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
-      "name": "If-Modified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifModifiedSince"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
-      "name": "If-None-Match",
-      "in": "header",
-      "description": "The request should only proceed if no entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifNoneMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
-      "name": "If-Unmodified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was not modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifUnmodifiedSince"
-    }
-  }
+  "parameters": {}
 }
