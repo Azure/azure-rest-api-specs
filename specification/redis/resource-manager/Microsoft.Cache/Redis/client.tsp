@@ -134,7 +134,7 @@ using Microsoft.Cache;
   "csharp"
 );
 @@alternateType(RedisCacheAccessPolicyAssignmentProperties.objectId,
-  Azure.Core.uuid,
+  Azure.Core.uuid | null,
   "csharp"
 );
 @@clientName(OperationStatus, "RedisOperationStatus", "csharp");
