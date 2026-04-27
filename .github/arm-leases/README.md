@@ -127,7 +127,10 @@ node eng/scripts/generate-lease-files.js --orgName compute --rpNamespace Microso
 **Syntax:**
 
 ```bash
-# Generate resource provider list
+# Generate resource provider list (without service groups)
+node eng/scripts/fetch-resource-providers.js --output <filename>
+
+# Generate resource provider list (with service groups)
 node eng/scripts/fetch-resource-providers.js --with-service-groups --output <filename>
 
 # Generate lease files from list
@@ -137,9 +140,11 @@ node eng/scripts/generate-lease-files.js --input <filename> --reviewer "@yourali
 **Examples:**
 
 ```bash
-# Generate resource provider list
-node eng/scripts/fetch-resource-providers.js --with-service-groups --output rps-groups.txt
+# RPs without service groups (e.g., Microsoft.Storage)
+node eng/scripts/fetch-resource-providers.js --output rps-simple.txt
+node eng/scripts/generate-lease-files.js --input rps-simple.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
 
-# Generate lease files from list
+# RPs with service groups (e.g., Microsoft.Compute with DiskRP, ComputeRP)
+node eng/scripts/fetch-resource-providers.js --with-service-groups --output rps-groups.txt
 node eng/scripts/generate-lease-files.js --input rps-groups.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
 ```
