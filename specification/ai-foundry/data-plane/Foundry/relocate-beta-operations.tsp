@@ -101,3 +101,16 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
+
+interface DataGenerationJobs {}
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, DataGenerationJobs);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, DataGenerationJobs);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.create,
+  DataGenerationJobs
+);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel,
+  DataGenerationJobs
+);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete,
+  DataGenerationJobs
+);

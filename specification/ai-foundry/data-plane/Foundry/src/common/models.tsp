@@ -128,18 +128,16 @@ union JobSourceType {
   dataset: "dataset",
 }
 
-@doc("The base source model for jobs.")
-@discriminator("type")
-model JobSource {
-  @doc("The type of source.")
-  type: JobSourceType;
-
+@doc("Common properties shared across all job source types.")
+model JobSourceDescription {
   @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
   description?: string;
 }
 
 @doc("Prompt source — inline text provided by the user.")
-model PromptJobSource extends JobSource {
+model PromptJobSource {
+  ...JobSourceDescription;
+
   @doc("The source type for this source, which is Prompt.")
   type: "prompt";
 
@@ -148,7 +146,9 @@ model PromptJobSource extends JobSource {
 }
 
 @doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text.")
-model AgentJobSource extends JobSource {
+model AgentJobSource {
+  ...JobSourceDescription;
+
   @doc("The source type for this source, which is Agent.")
   type: "agent";
 
@@ -163,7 +163,9 @@ model AgentJobSource extends JobSource {
 }
 
 @doc("Traces source — conversation traces from Application Insights.")
-model TracesJobSource extends JobSource {
+model TracesJobSource {
+  ...JobSourceDescription;
+
   @doc("The source type for this source, which is Traces.")
   type: "traces";
 
@@ -184,7 +186,9 @@ model TracesJobSource extends JobSource {
 }
 
 @doc("Dataset source — reference to a dataset.")
-model DatasetJobSource extends JobSource {
+model DatasetJobSource {
+  ...JobSourceDescription;
+
   @doc("The source type for this source, which is Dataset.")
   type: "dataset";
 

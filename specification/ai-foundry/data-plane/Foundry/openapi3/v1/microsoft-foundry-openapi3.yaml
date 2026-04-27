@@ -23,6 +23,7 @@ tags:
   - name: Schedules
   - name: Skills
   - name: Toolboxes
+  - name: DataGenerationJobs
 paths:
   /agents:
     post:
@@ -472,6 +473,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: true
+              description: Session ID for this invocation. Returns the session ID associated with the invocation.
+              schema:
+                type: string
           content:
             '*/*':
               schema: {}
@@ -523,6 +530,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: true
+              description: Session ID for this invocation. Returns the session ID associated with the invocation.
+              schema:
+                type: string
           content:
             '*/*':
               schema: {}
@@ -704,6 +717,250 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{agent_session_id}/files:
+    get:
+      operationId: AgentSessionFiles_listSessionFiles
+      description: |-
+        List files and directories at a given path in the session sandbox.
+        Returns only the immediate children of the specified directory (non-recursive).
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The directory path to list, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDirectoryListResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Files
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    delete:
+      operationId: AgentSessionFiles_deleteSessionFile
+      description: |-
+        Delete a file or directory from the session sandbox.
+        If `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The file or directory path to delete, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
+        - name: recursive
+          in: query
+          required: false
+          description: Whether to recursively delete directory contents. Defaults to false.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Files
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content:
+    put:
+      operationId: AgentSessionFiles_uploadSessionFile
+      description: |-
+        Upload a file to the session sandbox via binary stream.
+        Maximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The destination file path within the sandbox, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionFileWriteResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Files
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    get:
+      operationId: AgentSessionFiles_downloadSessionFile
+      description: Download a file from the session sandbox as a binary stream.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The file path to download from the sandbox, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Files
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
   /agents/{agent_name}/endpoint/sessions/{session_id}:
     get:
       operationId: Agents_getSession
@@ -807,250 +1064,6 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/files:
-    get:
-      operationId: AgentSessionFiles_listSessionFiles
-      description: |-
-        List files and directories at a given path in the session sandbox.
-        Returns only the immediate children of the specified directory (non-recursive).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session ID.
-          schema:
-            type: string
-        - name: path
-          in: query
-          required: true
-          description: The directory path to list, relative to the session home directory.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SessionDirectoryListResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Session Files
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
-    delete:
-      operationId: AgentSessionFiles_deleteSessionFile
-      description: |-
-        Delete a file or directory from the session sandbox.
-        If `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session ID.
-          schema:
-            type: string
-        - name: path
-          in: query
-          required: true
-          description: The file or directory path to delete, relative to the session home directory.
-          schema:
-            type: string
-          explode: false
-        - name: recursive
-          in: query
-          required: false
-          description: Whether to recursively delete directory contents. Defaults to false.
-          schema:
-            type: boolean
-            default: false
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: 'There is no content to send for this request, but the headers may be useful. '
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Session Files
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/files/content:
-    put:
-      operationId: AgentSessionFiles_uploadSessionFile
-      description: |-
-        Upload a file to the session sandbox via binary stream.
-        Maximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session ID.
-          schema:
-            type: string
-        - name: path
-          in: query
-          required: true
-          description: The destination file path within the sandbox, relative to the session home directory.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SessionFileWriteResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Session Files
-      requestBody:
-        required: true
-        content:
-          application/octet-stream:
-            schema:
-              type: string
-              format: binary
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
-    get:
-      operationId: AgentSessionFiles_downloadSessionFile
-      description: Download a file from the session sandbox as a binary stream.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session ID.
-          schema:
-            type: string
-        - name: path
-          in: query
-          required: true
-          description: The file path to download from the sandbox, relative to the session home directory.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Session Files
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
   /agents/{agent_name}/import:
     post:
       operationId: Agents_updateAgentFromManifest
@@ -1603,6 +1616,319 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Connections
+  /data_generation_jobs:
+    get:
+      operationId: DataGenerationJobs_list
+      summary: Returns a list of data generation jobs
+      description: Returns a list of data generation jobs.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DataGenerationJobs=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: scenario
+          in: query
+          required: false
+          description: Filter data generation jobs by their scenario.
+          schema:
+            $ref: '#/components/schemas/DataGenerationJobScenario'
+          explode: false
+        - name: type
+          in: query
+          required: false
+          description: Filter data generation jobs by their type.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/DataGenerationJobType'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataGenerationJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - DataGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    post:
+      operationId: DataGenerationJobs_create
+      summary: Creates a data generation job.
+      description: Creates a data generation job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DataGenerationJobs=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - DataGenerationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataGenerationJob'
+        description: The job to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+  /data_generation_jobs/{jobId}:
+    get:
+      operationId: DataGenerationJobs_get
+      summary: Get info about a data generation job.
+      description: Gets the details of a data generation job by its ID.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DataGenerationJobs=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - DataGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    delete:
+      operationId: DataGenerationJobs_delete
+      summary: Deletes a data generation job.
+      description: Deletes a data generation job by its ID.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DataGenerationJobs=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - DataGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+  /data_generation_jobs/{jobId}:cancel:
+    post:
+      operationId: DataGenerationJobs_cancel
+      summary: Cancels a data generation job.
+      description: Cancels a data generation job by its ID.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DataGenerationJobs=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - DataGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
   /datasets:
     get:
       operationId: Datasets_listLatest
@@ -4838,6 +5164,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: false
+              description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5290,6 +5622,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: false
+              description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5318,6 +5656,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: false
+              description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5344,6 +5688,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: false
+              description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -5409,6 +5759,12 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: false
+              description: Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -7038,6 +7394,32 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
+    AgentDataGenerationJobSource:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - agent
+          description: The source type for this source, which is Agent.
+        agent_name:
+          type: string
+          description: The agent name to fetch instructions from.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, the latest version is used.
+        prompt:
+          type: string
+          description: Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition).
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobSource'
+      description: Agent source for data generation jobs — references an agent to fetch instructions and metadata from.
     AgentDefinition:
       type: object
       required:
@@ -8593,6 +8975,10 @@ components:
           items:
             type: string
           description: The entry point command and arguments for the code execution.
+        content_hash:
+          type: string
+          description: The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.
+          readOnly: true
       description: Code-based deployment configuration for a hosted agent.
       x-ms-foundry-meta:
         required_previews:
@@ -9072,6 +9458,223 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Daily recurrence schedule.
+    DataGenerationJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobInputs'
+          description: Caller-supplied inputs.
+        result:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
+          readOnly: true
+        finished_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
+          readOnly: true
+      description: Data Generation Job resource.
+    DataGenerationJobInputs:
+      type: object
+      required:
+        - name
+        - sources
+        - options
+        - scenario
+      properties:
+        name:
+          type: string
+          description: The display name of the data generation job.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationJobSource'
+          description: The sources used for the data generation job.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobOptions'
+          description: The options for the data generation job.
+        scenario:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobScenario'
+          description: The scenario of the data generation job. Either for fine-tuning or evaluation.
+      description: Caller-supplied inputs for a data generation job.
+    DataGenerationJobOptions:
+      type: object
+      required:
+        - type
+        - max_samples
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobType'
+          description: The data generation job type.
+        max_samples:
+          type: integer
+          format: int32
+          description: Maximum number of samples to generate.
+        train_split:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1.
+        model_options:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationModelOptions'
+          description: The LLM model options.
+      discriminator:
+        propertyName: type
+        mapping:
+          simple_qna: '#/components/schemas/SimpleQnADataGenerationJobOptions'
+          traces: '#/components/schemas/TracesDataGenerationJobOptions'
+          tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
+          task: '#/components/schemas/TaskDataGenerationJobOptions'
+      description: Options for managing data generation jobs.
+    DataGenerationJobOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobOutputType'
+          description: The type of the output.
+      discriminator:
+        propertyName: type
+        mapping:
+          file: '#/components/schemas/FileDataGenerationJobOutput'
+          dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
+      description: Output information for a data generation job.
+    DataGenerationJobOutputType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - file
+            - dataset
+      description: The supported output file types for a data generation job.
+    DataGenerationJobResult:
+      type: object
+      properties:
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationJobOutput'
+          description: 'The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.'
+        generated_samples:
+          type: integer
+          format: int32
+          description: The number of samples actually generated.
+        token_usage:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationTokenUsage'
+          description: The token usage information for the data generation job.
+      description: Result produced by a successful data generation job.
+    DataGenerationJobScenario:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - supervised_finetuning
+            - reinforcement_finetuning
+            - evaluation
+      description: The supported scenarios for a data generation job.
+    DataGenerationJobSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobSourceType'
+          description: The type of source.
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+      discriminator:
+        propertyName: type
+        mapping:
+          prompt: '#/components/schemas/PromptDataGenerationJobSource'
+          agent: '#/components/schemas/AgentDataGenerationJobSource'
+          traces: '#/components/schemas/TracesDataGenerationJobSource'
+          dataset: '#/components/schemas/DatasetDataGenerationJobSource'
+          file: '#/components/schemas/FileDataGenerationJobSource'
+      description: The base source model for data generation jobs.
+    DataGenerationJobSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - prompt
+            - agent
+            - traces
+            - dataset
+            - file
+      description: The supported source types for data generation jobs.
+    DataGenerationJobType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - simple_qna
+            - traces
+            - tool_use
+            - task
+      description: The supported data generation job types.
+    DataGenerationModelOptions:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: Base model name used to generate data.
+      description: LLM model options for data generation jobs.
+    DataGenerationTokenUsage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+          format: int64
+          description: The number of prompt tokens used.
+          readOnly: true
+        completion_tokens:
+          type: integer
+          format: int64
+          description: The number of completion tokens generated.
+          readOnly: true
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total number of tokens used.
+          readOnly: true
+      description: Token usage information for a data generation job.
     DataSourceConfig:
       type: object
       required:
@@ -9089,6 +9692,61 @@ components:
         propertyName: type
         mapping: {}
       description: Base class for run data sources with discriminator support.
+    DatasetDataGenerationJobOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - dataset
+          description: Dataset output.
+        id:
+          type: string
+          description: The id of the output dataset created.
+          readOnly: true
+        name:
+          type: string
+          description: The name of the output dataset and can be optionally set during job creation time.
+        version:
+          type: string
+          description: The version of the output dataset.
+          readOnly: true
+        description:
+          type: string
+          description: Description of the output dataset and can be optionally set during job creation time.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary of the output dataset and can be optionally set during job creation time.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOutput'
+      description: Dataset output for a data generation job.
+    DatasetDataGenerationJobSource:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - dataset
+          description: The source type for this source, which is Dataset.
+        name:
+          type: string
+          description: The name of the dataset.
+        version:
+          type: string
+          description: The version of the dataset. If not specified, the latest version is used.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobSource'
+      description: Dataset source for data generation jobs — reference to a dataset.
     DatasetType:
       anyOf:
         - type: string
@@ -10726,6 +11384,138 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The fabric data agent tool parameters.
+    FabricIQPreviewTool:
+      type: object
+      required:
+        - type
+        - fabric_iq_preview
+      properties:
+        type:
+          type: string
+          enum:
+            - fabric_iq_preview
+          description: The object type, which is always 'fabric_iq_preview'.
+        fabric_iq_preview:
+          allOf:
+            - $ref: '#/components/schemas/FabricIQPreviewToolParameters'
+          description: The FabricIQ tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+    FabricIQPreviewToolParameters:
+      type: object
+      required:
+        - project_connection_id
+      properties:
+        project_connection_id:
+          type: string
+          description: The ID of the FabricIQ project connection.
+        server_label:
+          type: string
+          description: (Optional) The label of the FabricIQ MCP server to connect to.
+        server_url:
+          type: string
+          format: uri
+          description: (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
+        require_approval:
+          anyOf:
+            - type: object
+              allOf:
+                - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+              nullable: true
+            - type: string
+              nullable: true
+          description: (Optional) Whether the agent requires approval before executing actions. Default is always.
+          default: always
+    FabricIQToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - fabric_iq_preview_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A Fabric IQ tool call.
+    FabricIQToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - fabric_iq_preview_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the Fabric IQ tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a Fabric IQ tool call.
+    FileDataGenerationJobOutput:
+      type: object
+      required:
+        - type
+        - id
+        - filename
+      properties:
+        type:
+          type: string
+          enum:
+            - file
+          description: Azure OpenAI file output.
+        id:
+          type: string
+          description: The id of the output Azure OpenAI file.
+          readOnly: true
+        filename:
+          type: string
+          description: The filename of the output Azure OpenAI file.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOutput'
+      description: Azure OpenAI file output for a data generation job.
+    FileDataGenerationJobSource:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - file
+          description: The source type for this job, which is File.
+        id:
+          type: string
+          description: Input Azure Open AI file id used for data generation.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobSource'
+      description: File source for data generation jobs — Azure OpenAI file input.
     FileDatasetVersion:
       type: object
       required:
@@ -10819,19 +11609,11 @@ components:
       type: object
       required:
         - kind
-        - user_isolation_key
-        - chat_isolation_key
       properties:
         kind:
           type: string
           enum:
             - Header
-        user_isolation_key:
-          type: string
-          description: The user isolation key header value
-        chat_isolation_key:
-          type: string
-          description: The chat isolation key header value
       allOf:
         - $ref: '#/components/schemas/IsolationKeySource'
       x-ms-foundry-meta:
@@ -11313,6 +12095,17 @@ components:
             - red_team_taxonomy
             - synthetic_data_gen_preview
       description: The types of parameters for red team item generation.
+    JobStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - succeeded
+            - failed
+            - cancelled
+      description: Extensible status values shared by Foundry jobs.
     ManagedAgentIdentityBlueprintReference:
       type: object
       required:
@@ -21033,6 +21826,8 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
+            - fabric_iq_preview_call
+            - fabric_iq_preview_call_output
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -21123,6 +21918,8 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
+            - fabric_iq_preview_call
+            - fabric_iq_preview_call_output
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -21918,6 +22715,8 @@ components:
           browser_automation_preview_call_output: '#/components/schemas/BrowserAutomationToolCallOutput'
           fabric_dataagent_preview_call: '#/components/schemas/FabricDataAgentToolCall'
           fabric_dataagent_preview_call_output: '#/components/schemas/FabricDataAgentToolCallOutput'
+          fabric_iq_preview_call: '#/components/schemas/FabricIQToolCall'
+          fabric_iq_preview_call_output: '#/components/schemas/FabricIQToolCallOutput'
           azure_function_call: '#/components/schemas/AzureFunctionToolCall'
           azure_function_call_output: '#/components/schemas/AzureFunctionToolCallOutput'
           a2a_preview_call: '#/components/schemas/A2AToolCall'
@@ -22638,6 +23437,8 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
+            - fabric_iq_preview_call
+            - fabric_iq_preview_call_output
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -25882,6 +26683,7 @@ components:
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
+          fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
@@ -26162,6 +26964,7 @@ components:
             - sharepoint_grounding_preview
             - memory_search_preview
             - work_iq_preview
+            - fabric_iq_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -27072,6 +27875,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
+    PromptDataGenerationJobSource:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - prompt
+          description: The source type for this source, which is Prompt.
+        prompt:
+          type: string
+          description: Inline prompt text (e.g., agent description, policy text, supplementary context).
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobSource'
+      description: Prompt source for data generation jobs — inline text provided by the user.
     ProtocolVersionRecord:
       type: object
       required:
@@ -27546,9 +28369,9 @@ components:
           type: boolean
           description: Whether this entry is a directory.
         modified_time:
-          type: string
-          format: date-time
-          description: The last modification time in UTC (ISO 8601).
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) when the file was last modified.
       description: A single entry in a directory listing.
     SessionDirectoryListResponse:
       type: object
@@ -27709,6 +28532,32 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a sharepoint tool as used to configure an agent.
+    SimpleQnADataGenerationJobOptions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - simple_qna
+          description: The data generation job type, which is SimpleQnA for this model.
+        question_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleQnAFineTuningQuestionType'
+          description: The question types to generate. Used only for fine-tuning scenarios.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOptions'
+      description: The options for a data generation job with SimpleQnA type.
+    SimpleQnAFineTuningQuestionType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - short_answer
+            - long_answer
+      description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.
     SkillObject:
       type: object
       required:
@@ -27956,6 +28805,19 @@ components:
           azure_ai_model: '#/components/schemas/AzureAIModelTargetUpdate'
           azure_ai_agent: '#/components/schemas/AzureAIAgentTargetUpdate'
       description: Base class for targets with discriminator support.
+    TaskDataGenerationJobOptions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - task
+          description: The data generation job type, which is Task for this model.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOptions'
+      description: The options for a data generation job with Task type.
     TaxonomyCategory:
       type: object
       required:
@@ -28185,6 +29047,19 @@ components:
           type: string
           description: A project connection in a ToolProjectConnectionList attached to this tool.
       description: A project connection resource.
+    ToolUseFineTuningDataGenerationJobOptions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_use
+          description: The data generation job type, which is ToolUse for this model.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOptions'
+      description: The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.
     ToolboxObject:
       type: object
       required:
@@ -28262,6 +29137,54 @@ components:
             - $ref: '#/components/schemas/ToolboxPolicies'
           description: Policy configuration for the toolbox version.
       description: A specific version of a toolbox.
+    TracesDataGenerationJobOptions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - traces
+          description: The data generation job type, which is Traces for this model.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOptions'
+      description: The options for a data generation job with Traces type.
+    TracesDataGenerationJobSource:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - traces
+          description: The source type for this source, which is Traces.
+        agent_name:
+          type: string
+          description: The agent name to fetch traces for.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
+        start_time:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
+        end_time:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
+        max_traces:
+          type: integer
+          format: int32
+          description: Maximum number of traces to retrieve.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobSource'
+      description: Traces source for data generation jobs — conversation traces from Application Insights.
     TracesPreviewEvalRunDataSource:
       type: object
       required:
