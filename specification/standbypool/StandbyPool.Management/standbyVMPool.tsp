@@ -41,7 +41,7 @@ model StandbyVirtualMachinePoolResourceProperties {
 
   @added(Microsoft.StandbyPool.Versions.`2026-04-01`)
   @doc("Specifies the distribution of virtual machine states in the pool when virtualMachineState is set to Mix.")
-  vmStateDistribution?: VMStateDistribution;
+  vmStateDistribution?: VmStateDistribution;
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
@@ -77,7 +77,7 @@ union VirtualMachineState {
 
 @added(Microsoft.StandbyPool.Versions.`2026-04-01`)
 @doc("Specifies the distribution of virtual machine states in the pool.")
-model VMStateDistribution {
+model VmStateDistribution {
   @doc("Specifies the percentage of virtual machines in the Running state in the standby pool.")
   @minValue(0)
   @maxValue(100)
