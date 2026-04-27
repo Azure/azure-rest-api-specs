@@ -46,7 +46,6 @@ interface MachineRunCommands {
    * The operation to update a run command.
    */
   @patch(#{ implicitOptionality: false })
-  @tag("internal")
   update is ArmCustomPatchAsync<
     MachineRunCommand,
     PatchModel = MachineRunCommandUpdate,
