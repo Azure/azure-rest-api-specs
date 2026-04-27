@@ -202,6 +202,27 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(ReservationDetail, "ConsumptionReservationDetail", "csharp");
+
+@@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
+@@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
+@@clientName(UsageDetailsOperationGroup.list,
+  "GetConsumptionUsageDetails",
+  "csharp"
+);
+@@clientName(MarketplacesOperationGroup.list,
+  "GetConsumptionMarketPlaces",
+  "csharp"
+);
+@@clientName(TagsOperationGroup.get, "GetConsumptionTags", "csharp");
+@@clientName(ReservationsDetailsOperationGroup.list,
+  "GetConsumptionReservationsDetails",
+  "csharp"
+);
+@@clientName(ReservationRecommendationsOperationGroup.list,
+  "GetConsumptionReservationRecommendations",
+  "csharp"
+);
+
 @@alternateType(ReservationDetailProperties.instanceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -276,27 +297,15 @@ using Azure.ClientGenerator.Core;
 @@alternateType(Marketplace.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(CreditSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(PriceSheetResult.etag, Azure.Core.EtagProperty.etag, "csharp");
-
-@@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
-// Rename the operation to match the contract's expected method name (GetPriceSheet)
-@@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
-
-// Rename scope-based operations so MockableConsumptionArmClient method names match shipped v1.1.0 contract.
-@@clientName(UsageDetailsOperationGroup.list,
-  "GetConsumptionUsageDetails",
+// meterId in shipped surface is Guid? rather than string.
+@@alternateType(LegacyUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(ModernUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(LegacyReservationRecommendationProperties.meterId,
+  Azure.Core.uuid,
   "csharp"
 );
-@@clientName(MarketplacesOperationGroup.list,
-  "GetConsumptionMarketPlaces",
-  "csharp"
-);
-@@clientName(TagsOperationGroup.get, "GetConsumptionTags", "csharp");
-@@clientName(ReservationsDetailsOperationGroup.list,
-  "GetConsumptionReservationsDetails",
-  "csharp"
-);
-@@clientName(ReservationRecommendationsOperationGroup.list,
-  "GetConsumptionReservationRecommendations",
+@@alternateType(ModernReservationRecommendationProperties.meterId,
+  Azure.Core.uuid,
   "csharp"
 );
 
@@ -311,14 +320,6 @@ using Azure.ClientGenerator.Core;
   Lifecycle.Create,
   Lifecycle.Update
 );
-
-@@usage(Tag, Usage.input, "csharp");
-@@usage(TagsResult, Usage.input, "csharp");
-
-// Keep LotSummary/EventSummary as input + output to preserve public parameterless ctor and settable properties (matches shipped v1.0.1 surface).
-@@usage(LotSummary, Usage.input | Usage.output, "csharp");
-@@usage(EventSummary, Usage.input | Usage.output, "csharp");
-
 // Force aggregated-cost collection properties to be read-only so the generated flattening helpers expose IReadOnlyList<T> (matches shipped v1.0.1 surface).
 @@visibility(ManagementGroupAggregatedCostProperties.children, Lifecycle.Read);
 @@visibility(ManagementGroupAggregatedCostProperties.includedSubscriptions,
@@ -327,6 +328,13 @@ using Azure.ClientGenerator.Core;
 @@visibility(ManagementGroupAggregatedCostProperties.excludedSubscriptions,
   Lifecycle.Read
 );
+
+@@usage(Tag, Usage.input, "csharp");
+@@usage(TagsResult, Usage.input, "csharp");
+
+// Keep LotSummary/EventSummary as input + output to preserve public parameterless ctor and settable properties (matches shipped v1.0.1 surface).
+@@usage(LotSummary, Usage.input | Usage.output, "csharp");
+@@usage(EventSummary, Usage.input | Usage.output, "csharp");
 
 // Flatten properties-envelope models so generated discriminator subclasses expose shipped flat-property surface.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
@@ -343,17 +351,5 @@ using Azure.ClientGenerator.Core;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Match shipped flattened API surface."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernChargeSummary.properties,
-  "csharp"
-);
-
-// meterId in shipped surface is Guid? rather than string.
-@@alternateType(LegacyUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
-@@alternateType(ModernUsageDetailProperties.meterId, Azure.Core.uuid, "csharp");
-@@alternateType(LegacyReservationRecommendationProperties.meterId,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(ModernReservationRecommendationProperties.meterId,
-  Azure.Core.uuid,
   "csharp"
 );
