@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Commerce Offer Catalog",
+    "version": "2026-04-24-preview",
+    "description": "Microsoft.Commerce OfferCatalog Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Upns"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Commerce/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all operations supported by Microsoft.Commerce/OfferCatalog": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Commerce/upns/{upnGuid}": {
+      "get": {
+        "operationId": "Upns_Get",
+        "tags": [
+          "Upns"
+        ],
+        "description": "Get a single UPN resource by its GUID identifier. Returns the identity\nenvelope of the UPN.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "upnGuid",
+            "in": "path",
+            "description": "The GUID identifier of the UPN. Corresponds to the OCP value-exchange productCode.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Upn"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a UPN by its GUID identifier.": {
+            "$ref": "./examples/Upns_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductSummary": {
+      "type": "object",
+      "description": "Denormalized product summary embedded in a UPN. Only identifying and\ndiscovery-relevant product fields are exposed here; the full product\ndocument is not retrievable as a separate resource type.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The stable product identifier."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "The human-readable friendly name of the product."
+        },
+        "template": {
+          "type": "string",
+          "description": "The offer template identifier for this product (for example, \"offer-template/az-generic\")."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Discovery tags associated with the product.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ownership": {
+          "$ref": "#/definitions/UpnOwnership",
+          "description": "Ownership classification of the product."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SkuSummary": {
+      "type": "object",
+      "description": "Denormalized SKU summary embedded in a UPN. Only identifying and\ndiscovery-relevant SKU fields are exposed here.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The stable SKU identifier."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "The human-readable friendly name of the SKU."
+        },
+        "type": {
+          "$ref": "#/definitions/SkuType",
+          "description": "The commercial type of the SKU."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SkuType": {
+      "type": "string",
+      "description": "The commercial type of a SKU.",
+      "enum": [
+        "consumption",
+        "subscription",
+        "one_time"
+      ],
+      "x-ms-enum": {
+        "name": "SkuType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consumption",
+            "value": "consumption",
+            "description": "Consumption-based SKU (pay-as-you-go)."
+          },
+          {
+            "name": "Subscription",
+            "value": "subscription",
+            "description": "Subscription-based SKU."
+          },
+          {
+            "name": "OneTime",
+            "value": "one_time",
+            "description": "One-time purchase SKU."
+          }
+        ]
+      }
+    },
+    "Upn": {
+      "type": "object",
+      "description": "UPN (Unified Product Node) resource.\n\nA UPN is a provider-scoped, tenant-level, read-only proxy resource that\nrepresents one transactable value-exchange in the Microsoft commercial\ncatalog. It is addressed at `/providers/Microsoft.Commerce/upns/{upnGuid}`.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpnProperties",
+          "description": "The properties of the UPN resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpnOwnership": {
+      "type": "string",
+      "description": "Ownership classification of a product. Indicates whether the product is\nowned by Microsoft (first-party) or by a third-party publisher.",
+      "enum": [
+        "1PP",
+        "3PP"
+      ],
+      "x-ms-enum": {
+        "name": "UpnOwnership",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "1PP",
+            "value": "1PP",
+            "description": "First-party (Microsoft-owned) product."
+          },
+          {
+            "name": "3PP",
+            "value": "3PP",
+            "description": "Third-party (publisher-owned) product."
+          }
+        ]
+      }
+    },
+    "UpnProperties": {
+      "type": "object",
+      "description": "Properties of a UPN (Unified Product Node) resource. A UPN is the\ntransactable catalog identity and carries denormalized product and SKU\nsummaries plus the value-exchange identity.",
+      "properties": {
+        "valueExchange": {
+          "$ref": "#/definitions/ValueExchange",
+          "description": "The value-exchange identity that this UPN represents."
+        },
+        "product": {
+          "$ref": "#/definitions/ProductSummary",
+          "description": "Denormalized product summary."
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuSummary",
+          "description": "Denormalized SKU summary."
+        },
+        "template": {
+          "type": "string",
+          "description": "The offer-template identifier for this UPN (for example, \"offer-template/az-vm\")."
+        }
+      },
+      "required": [
+        "valueExchange",
+        "product",
+        "sku"
+      ]
+    },
+    "ValueExchange": {
+      "type": "object",
+      "description": "Value-exchange (UPN identity) metadata. The value exchange is the leaf of\nthe OCP Product -> SKU -> Value Exchange hierarchy and is the transactable\nidentity addressed by this resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The stable identifier of the value exchange."
+        },
+        "unit": {
+          "$ref": "#/definitions/ValueExchangeUnit",
+          "description": "Unit metadata for the value exchange."
+        },
+        "dimensions": {
+          "$ref": "#/definitions/ValueExchangeDimensions",
+          "description": "Dimension metadata for the value exchange."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ValueExchangeDimensions": {
+      "type": "object",
+      "description": "Dimension metadata associated with a value exchange.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location dimension (for example, an Azure region)."
+        },
+        "feature": {
+          "type": "string",
+          "description": "The feature dimension (for example, a product feature name)."
+        }
+      }
+    },
+    "ValueExchangeUnit": {
+      "type": "object",
+      "description": "Unit metadata associated with a value exchange.",
+      "properties": {
+        "hint": {
+          "type": "string",
+          "description": "A human-readable hint describing the unit (for example, \"vCPU Duration - 1 Hour\")."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
