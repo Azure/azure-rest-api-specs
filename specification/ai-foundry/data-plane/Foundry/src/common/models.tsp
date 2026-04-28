@@ -157,9 +157,6 @@ model AgentJobSource {
 
   @doc("The agent version. If not specified, the latest version is used.")
   agent_version?: string;
-
-  @doc("Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition).")
-  prompt?: string;
 }
 
 @doc("Traces source — conversation traces from Application Insights.")
