@@ -12,10 +12,24 @@ using Microsoft.DevHub;
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
 @@clientName(ACR, "Acr", "java,javascript");
 @@clientName(Deployment, "DeploymentProperties", "java,javascript");
-@@clientName(GitHubWorkflowProfile.deploymentProperties,
-  "deploymentProperties",
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workflow.properties,
   "java"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkflowProperties.artifactGenerationProperties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GitHubOAuthResponse.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkflowProperties.githubWorkflowProfile,
+  "java"
+);
+
 @@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback,
   Microsoft.DevHub,
   "javascript"
