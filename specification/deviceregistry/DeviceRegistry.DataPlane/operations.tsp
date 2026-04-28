@@ -31,7 +31,7 @@ union OperationKind {
   GroupBestUpdatesComplianceReport: "GenerateReport.GroupBestUpdatesCompliance",
 
   /** Report listing the installable updates for the devices within a group. */
-  GroupInstallableUpdatesReport: "GenerateReport.GroupInstallableUpdates"
+  GroupInstallableUpdatesReport: "GenerateReport.GroupInstallableUpdates",
 }
 
 /** A long-running operation status resource scoped to a namespace. */
@@ -75,7 +75,7 @@ model Operation {
 
 /** Operations on long-running operation status resources. */
 @tag("Operations")
-interface OperationStatuses {
+interface Operations {
   /** Get the status of a long-running operation. */
   get is ResourceOperations.ResourceRead<Operation>;
 
