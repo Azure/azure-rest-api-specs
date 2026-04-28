@@ -30,6 +30,11 @@ model CredentialProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  @doc("Globally unique, immutable, non-reusable identifier of the Credential resource.")
+  uuid?: string;
 }
 
 @added(Versions.v2025_08_01_preview)
