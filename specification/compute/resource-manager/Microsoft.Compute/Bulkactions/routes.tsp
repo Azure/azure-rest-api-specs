@@ -184,7 +184,7 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("virtualMachinesBulkGetOperationStatus ")
+  @action("virtualMachinesBulkGetOperationStatus")
   bulkGetOperationsStatus(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
