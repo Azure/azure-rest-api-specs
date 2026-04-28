@@ -123,23 +123,23 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
-@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "!csharp, !python, !javascript");
+@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Container,
   "Azure.Storage.Blobs",
-  "!csharp, !python, !javascript"
+  "rust,go"
 );
-@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "!csharp, !python, !javascript");
+@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.AppendBlob,
   "Azure.Storage.Blobs",
-  "!csharp, !python, !javascript"
+  "rust,go"
 );
 @@clientNamespace(Storage.Blob.BlockBlob,
   "Azure.Storage.Blobs",
-  "!csharp, !python, !javascript"
+  "rust,go"
 );
 @@clientNamespace(Storage.Blob.PageBlob,
   "Azure.Storage.Blobs",
-  "!csharp, !python, !javascript"
+  "rust,go"
 );
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
