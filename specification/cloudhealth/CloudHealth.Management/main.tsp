@@ -1317,11 +1317,13 @@ model GetDataAnnotationsRequest {
   endAt?: utcDateTime;
 
   @doc("Maximum number of annotations to return per page.")
+  @maxValue(100)
+  @minValue(1)
   top?: int32;
 
   @secret
   @doc("Continuation token from a previous response to retrieve the next page of results.")
-  continuationToken?: string;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1336,7 +1338,7 @@ model GetDataAnnotationsResponse {
 
   @secret
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
-  continuationToken?: string;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)

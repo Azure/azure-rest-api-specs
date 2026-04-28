@@ -3114,10 +3114,12 @@
         "top": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of annotations to return per page."
+          "description": "Maximum number of annotations to return per page.",
+          "minimum": 1,
+          "maximum": 100
         },
         "continuationToken": {
-          "type": "string",
+          "$ref": "#/definitions/string4096",
           "format": "password",
           "description": "Continuation token from a previous response to retrieve the next page of results.",
           "x-ms-secret": true
@@ -3143,7 +3145,7 @@
           ]
         },
         "continuationToken": {
-          "type": "string",
+          "$ref": "#/definitions/string4096",
           "format": "password",
           "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
           "x-ms-secret": true
