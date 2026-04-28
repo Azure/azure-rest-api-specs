@@ -16,7 +16,6 @@ using Azure.Core;
 @@clientName(ChargeSummary.eTag, "etag", "java");
 @@clientName(LegacyChargeSummary.eTag, "etag", "java");
 @@clientName(EventSummary.eTag, "etag", "java");
-@@clientName(EventSummary.eTag, "InternalETag", "csharp");
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
 @@clientName(CreditSummary.eTag, "etag", "java,go");
@@ -49,6 +48,7 @@ using Azure.Core;
 @@clientName(BalanceProperties.priceHidden, "IsPriceHidden", "csharp");
 @@clientName(CreditSummary, "ConsumptionCreditSummary", "csharp");
 @@clientName(EventSummary, "ConsumptionEventSummary", "csharp");
+@@clientName(EventSummary.eTag, "InternalETag", "csharp");
 @@clientName(EventProperties.transactionDate, "TransactOn", "csharp");
 @@clientName(EventType, "ConsumptionEventType", "csharp");
 @@clientName(ManagementGroupAggregatedCostResult,
