@@ -213,6 +213,7 @@ stages:
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           echo "##vso[task.prependpath]$HOME/.cargo/bin"
           npm ci --prefix "$(SdkRepoDirectory)/eng/common/tsp-client"
+          npm exec --prefix "$(SdkRepoDirectory)/eng/common/tsp-client" -- tsp-client --version
         displayName: 'Install Rust toolchain and tsp-client'
         condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
         env:
