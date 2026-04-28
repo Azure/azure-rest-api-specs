@@ -3737,6 +3737,13 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
 // Java sends the default value on `accept` header. User can override via `RequestOptions`.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
 @@clientOption(Search.acceptHeaderMinimal.accept,
