@@ -7,3 +7,9 @@ using Azure.ClientGenerator.Core;
   "EducationManagementClient",
   "python,javascript"
 );
+@@visibility(Azure.ResourceManager.CommonTypes.OperationListResult.nextLink,
+  Lifecycle.Read
+);
+@@visibility(Azure.ResourceManager.CommonTypes.OperationListResult.value,
+  Lifecycle.Read
+);
