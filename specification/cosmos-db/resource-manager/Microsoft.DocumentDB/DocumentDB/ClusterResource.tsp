@@ -143,10 +143,12 @@ interface ClusterResources {
    * Get details about a specified command that was run asynchronously.
    */
   @get
-  getCommandAsync is ArmResourceRead<
+  @action("commands")
+  getCommandAsync is ArmResourceActionSync<
     ClusterResource,
+    void,
+    ArmResponse<CommandPublicResource>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
-    Response = ArmResponse<CommandPublicResource>,
     Parameters = {
       /**
        * Managed Cassandra cluster command id.
@@ -155,7 +157,6 @@ interface ClusterResources {
       @minLength(1)
       @pattern("^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$")
       @path
-      @segment("commands")
       commandId: string;
     },
     Error = CloudError
@@ -178,10 +179,12 @@ interface ClusterResources {
    * Get the properties of an individual backup of this cluster that is available to restore.
    */
   @get
-  getBackup is ArmResourceRead<
+  @action("backups")
+  getBackup is ArmResourceActionSync<
     ClusterResource,
+    void,
+    ArmResponse<BackupResource>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
-    Response = ArmResponse<BackupResource>,
     Parameters = {
       /**
        * Id of a restorable backup of a Cassandra cluster.
@@ -190,7 +193,6 @@ interface ClusterResources {
       @minLength(1)
       @pattern("^[0-9]+$")
       @path
-      @segment("backups")
       backupId: string;
     },
     Error = CloudError

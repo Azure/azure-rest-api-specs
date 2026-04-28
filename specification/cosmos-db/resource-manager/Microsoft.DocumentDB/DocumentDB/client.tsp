@@ -1040,9 +1040,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "ExtendedCassandraTableResourceInfo",
   "csharp"
 );
-// @@clientName(CheckNameAvailabilityReason, "CosmosDBNameUnavailableReason", "csharp");
-// @@clientName(CheckNameAvailabilityRequest, "CheckCosmosDBNameAvailabilityContent", "csharp");
-// @@clientName(CheckNameAvailabilityResponse, "CheckCosmosDBNameAvailabilityResponse", "csharp");
 @@clientName(SqlContainerGetPropertiesOptions,
   "CosmosDBSqlContainerPropertiesConfig",
   "csharp"
@@ -1072,7 +1069,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(CreateUpdateOptions, "CosmosDBCreateUpdateConfig", "csharp");
-// @@clientName(DatabaseAccountOfferType, "CosmosDBAccountOfferType", "csharp");
 @@clientName(GremlinDatabaseGetPropertiesOptions,
   "GremlinDatabasePropertiesConfig",
   "csharp"
@@ -1174,8 +1170,14 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(TableGetResults, "CosmosDBTable", "csharp");
 @@clientName(TableGetProperties, "CosmosDBTableProperties", "csharp");
-@@clientName(TableGetPropertiesResource, "CosmosDBTablePropertiesResource", "csharp");
-@@clientName(TableGetPropertiesOptions, "CosmosDBTablePropertiesOptions", "csharp");
+@@clientName(TableGetPropertiesResource,
+  "CosmosDBTablePropertiesResource",
+  "csharp"
+);
+@@clientName(TableGetPropertiesOptions,
+  "CosmosDBTablePropertiesOptions",
+  "csharp"
+);
 @@clientName(CassandraKeyspaceGetResults, "CassandraKeyspace", "csharp");
 @@clientName(CassandraKeyspaceGetProperties,
   "CassandraKeyspaceProperties",
@@ -1370,8 +1372,113 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(Permission, "CosmosDBSqlRolePermission", "csharp");
 
+// Avoid collision with the auto-generated CassandraViewResource ARM resource class.
+@@clientName(CassandraViewResource, "CassandraViewResourceInfo", "csharp");
+
+// Avoid shadowing ResourceData.Id (ResourceIdentifier) when these properties are
+// flattened onto *RoleDefinitionData (causes ctor `this(client, data.Id)` to bind
+// to the shadowed string Id).
+@@clientName(CassandraRoleDefinitionResourceProperties.id,
+  "RoleDefinitionId",
+  "csharp"
+);
+@@clientName(MongoMIRoleDefinitionResourceProperties.id,
+  "RoleDefinitionId",
+  "csharp"
+);
+@@clientName(GremlinRoleDefinitionResourceProperties.id,
+  "RoleDefinitionId",
+  "csharp"
+);
+
 @@alternateType(SqlRoleAssignmentResource.roleDefinitionId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Rename the cosmos-local ManagedServiceIdentity model so it does not collide with
+// `Azure.ResourceManager.CommonTypes.ManagedServiceIdentity` once @@alternateType
+// remaps every consumer to the common type. Any leftover internal use will surface
+// as `CosmosDBManagedServiceIdentity` instead.
+@@clientName(Microsoft.DocumentDB.ManagedServiceIdentity, "CosmosDBManagedServiceIdentity", "csharp");
+
+// Use the common ARM ManagedServiceIdentity for csharp so the EditorBrowsable(Never)
+// compatibility shims (which reference `Azure.ResourceManager.Models.ManagedServiceIdentity`)
+// stay binary-compatible with the previous GA SDK.
+@@alternateType(GremlinDatabaseGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(GremlinGraphGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(GraphResourceGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(MongoDBDatabaseGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(MongoDBCollectionGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SqlDatabaseGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SqlContainerGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SqlStoredProcedureGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SqlTriggerGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SqlUserDefinedFunctionGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(CassandraKeyspaceGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(CassandraTableGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(CassandraViewGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(TableGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ThroughputSettingsGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(DatabaseAccountGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(DatabaseAccountUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ARMResourceProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ClusterResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(PrivateEndpointProperty.id,
@@ -1412,5 +1519,13 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(ThroughputPoolAccountProperties.accountLocation,
   Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(DataCenterResourceProperties.managedDiskCustomerKeyUri,
+  url,
+  "csharp"
+);
+@@alternateType(DataCenterResourceProperties.backupStorageCustomerKeyUri,
+  url,
   "csharp"
 );
