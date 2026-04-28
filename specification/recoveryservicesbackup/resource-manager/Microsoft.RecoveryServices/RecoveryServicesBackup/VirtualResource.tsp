@@ -12,7 +12,7 @@ namespace Microsoft.RecoveryServices;
  */
 @armVirtualResource
 model VaultResource {
-  ...ResourceNameParameter<VaultResource, "vaultName", "vaults", "">;
+  ...ResourceNameParameter<VaultResource, "vaultName", "vaults", ".*">;
 }
 
 /**

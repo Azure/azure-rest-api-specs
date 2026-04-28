@@ -8748,8 +8748,15 @@ model CrossTenantVaultMapping {
   /**
    * Provisioning state of the resource.
    */
+  // Anonymous inline union avoids Spectral's ProvisioningStateMustBeReadOnly false
+  // positive. A named union emits as $ref, and OpenAPI 2.0 ($ref) semantics drop
+  // the sibling `readOnly: true` after resolution. Inlining keeps `readOnly` on
+  // the property; semantic source-of-truth is `@visibility(Lifecycle.Read)`.
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline emission required to avoid Spectral $ref-sibling-drop on readOnly:true."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."
   @visibility(Lifecycle.Read)
-  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+  provisioningState?: "Succeeded" | "Failed" | "Canceled" | "Provisioning" | "Updating" | "Deleting" | "Accepted";
 }
 
 /**
@@ -8923,6 +8930,10 @@ model VaultCredentialCertificateProperties {
   /**
    * Provisioning state of the vault credential certificate.
    */
+  // See CrossTenantVaultMapping.provisioningState for rationale on inline union.
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline emission required to avoid Spectral $ref-sibling-drop on readOnly:true."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."
   @visibility(Lifecycle.Read)
-  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+  provisioningState?: "Succeeded" | "Failed" | "Canceled" | "Provisioning" | "Updating" | "Deleting" | "Accepted";
 }

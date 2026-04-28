@@ -61,12 +61,9 @@ interface CrossTenantVaultMappings {
    * This API removes the target vault properties associated with source vault ID and deletes catalog mapping.
    */
   @action("removeCrossTenantVaultMapping")
-  remove is ArmResourceActionAsync<
+  remove is ArmResourceActionNoResponseContentAsync<
     CrossTenantVaultMappingResource,
     RemoveCrossTenantVaultMappingRequest,
-    {
-      @body body: void;
-    },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader<FinalResult = void>
   >;
