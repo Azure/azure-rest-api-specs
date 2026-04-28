@@ -141,5 +141,10 @@ namespace Microsoft.Monitor {
       SegmentName = "accounts",
       NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
     >;
+    ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   }
 }
+
+@@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
+  Microsoft.Monitor.Versions.v2025_10_03_stable
+);
