@@ -157,12 +157,11 @@
       "properties": {
         "model": {
           "type": "string",
-          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'azure-speech'.",
+          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'mai-transcribe-1', 'azure-speech'.",
           "enum": [
             "whisper-1",
             "gpt-4o-transcribe",
             "gpt-4o-mini-transcribe",
-            "gpt-4o-transcribe-diarize",
             "azure-speech"
           ],
           "x-ms-enum": {
@@ -376,31 +375,39 @@
           "maximum": 1
         },
         "custom_lexicon_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
         },
         "custom_text_normalization_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
         },
         "prefer_locales": {
           "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
           "items": {
             "type": "string"
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
         },
         "pitch": {
-          "type": "string"
+          "type": "string",
+          "description": "Pitch adjustment for the voice output."
         },
         "rate": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output."
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume adjustment for the voice output."
         }
       },
       "required": [
@@ -435,31 +442,39 @@
           "description": "Underlying neural model to use for personal voice."
         },
         "custom_lexicon_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
         },
         "custom_text_normalization_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
         },
         "prefer_locales": {
           "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
           "items": {
             "type": "string"
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
         },
         "pitch": {
-          "type": "string"
+          "type": "string",
+          "description": "Pitch adjustment for the voice output."
         },
         "rate": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output."
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume adjustment for the voice output."
         }
       },
       "required": [
@@ -744,31 +759,39 @@
           "maximum": 1
         },
         "custom_lexicon_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
         },
         "custom_text_normalization_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
         },
         "prefer_locales": {
           "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
           "items": {
             "type": "string"
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
         },
         "pitch": {
-          "type": "string"
+          "type": "string",
+          "description": "Pitch adjustment for the voice output."
         },
         "rate": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output."
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume adjustment for the voice output."
         }
       },
       "required": [
@@ -2224,8 +2247,7 @@
       "enum": [
         "DragonLatestNeural",
         "PhoenixLatestNeural",
-        "PhoenixV2Neural",
-        "DragonHDOmniLatestNeural"
+        "PhoenixV2Neural"
       ],
       "x-ms-enum": {
         "name": "PersonalVoiceModels",
@@ -2245,11 +2267,6 @@
             "name": "PhoenixV2Neural",
             "value": "PhoenixV2Neural",
             "description": "Use the Phoenix V2 model."
-          },
-          {
-            "name": "DragonHDOmniLatestNeural",
-            "value": "DragonHDOmniLatestNeural",
-            "description": "Use the latest Dragon HD Omni model."
           }
         ]
       }

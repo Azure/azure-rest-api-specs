@@ -94,8 +94,11 @@ model RequestSession {
   include?: SessionIncludeOption[];
 
   /**
-   * Set of up to 16 key-value pairs that can be attached to the session.
-   * Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.
+   * Set of up to 16 key-value pairs that can be attached to the session. This is useful for
+   * storing additional information about the session in a structured format, such as tracking IDs,
+   * user context, or application-specific labels. These key-value pairs are also included in
+   * Foundry resource logs for tracing and diagnostics. Keys can be a maximum of 64 characters
+   * long and values can be a maximum of 512 characters long.
    */
   @added(Versions.v2026_04_10)
   metadata?: Record<string>;
@@ -240,13 +243,40 @@ model AzureCustomVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /** Pitch adjustment for the voice output. */
   pitch?: string;
+
+  /** Speaking rate adjustment for the voice output. */
   rate?: string;
+
+  /** Volume adjustment for the voice output. */
   volume?: string;
 }
 
@@ -265,13 +295,40 @@ model AzureStandardVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /** Pitch adjustment for the voice output. */
   pitch?: string;
+
+  /** Speaking rate adjustment for the voice output. */
   rate?: string;
+
+  /** Volume adjustment for the voice output. */
   volume?: string;
 }
 
@@ -292,13 +349,40 @@ model AzurePersonalVoice extends AzureVoice {
   /** Underlying neural model to use for personal voice. */
   `model`: PersonalVoiceModels;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /** Pitch adjustment for the voice output. */
   pitch?: string;
+
+  /** Speaking rate adjustment for the voice output. */
   rate?: string;
+
+  /** Volume adjustment for the voice output. */
   volume?: string;
 }
 
@@ -335,13 +419,40 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /** Pitch adjustment for the voice output. */
   pitch?: string;
+
+  /** Speaking rate adjustment for the voice output. */
   rate?: string;
+
+  /** Volume adjustment for the voice output. */
   volume?: string;
 }
 
@@ -408,7 +519,7 @@ model AudioInputTranscriptionOptions {
   /**
    * The transcription model to use. Supported values:
    * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
-   * 'azure-speech'.
+   * 'mai-transcribe-1', 'azure-speech'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   @typeChangedFrom(
@@ -426,6 +537,7 @@ model AudioInputTranscriptionOptions {
     | "gpt-4o-transcribe"
     | "gpt-4o-mini-transcribe"
     | "gpt-4o-transcribe-diarize"
+    | "mai-transcribe-1"
     | "azure-speech";
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */

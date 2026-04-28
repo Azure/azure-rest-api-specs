@@ -476,7 +476,7 @@ model ActionSearchSource {
   type: "url";
 
   /** The URL of the source. */
-  url: string;
+  url: url;
 }
 
 /** A web search action. */
@@ -503,7 +503,7 @@ model ActionOpenPage {
   type: "open_page";
 
   /** The URL opened by the model. */
-  url: string;
+  url: url;
 }
 
 /** A find action to search text within a page. */
@@ -518,7 +518,7 @@ model ActionFind {
   type: "find";
 
   /** The URL of the page searched for the pattern. */
-  url: string;
+  url: url;
 }
 
 /** A response item that represents a web search call. */
