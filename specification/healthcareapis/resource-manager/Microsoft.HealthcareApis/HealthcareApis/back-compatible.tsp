@@ -89,3 +89,13 @@ using Microsoft.HealthcareApis;
 @@clientLocation(FhirServiceOperationGroup.update, "FhirServices");
 @@clientLocation(IotConnectorOperationGroup.delete, "IotConnectors");
 @@clientLocation(IotConnectorOperationGroup.update, "IotConnectors");
+
+@@clientName(DicomServiceOperationGroup.update::parameters.properties,
+  "dicomservicePatchResource"
+);
+@@clientName(FhirServiceOperationGroup.update::parameters.properties,
+  "fhirservicePatchResource"
+);
+@@clientName(IotConnectorOperationGroup.update::parameters.properties,
+  "iotConnectorPatchResource"
+);

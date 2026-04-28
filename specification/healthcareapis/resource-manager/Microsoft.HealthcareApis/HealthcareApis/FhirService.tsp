@@ -76,72 +76,63 @@ interface FhirServices {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+alias FhirServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of workspace resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    @segment("workspaces")
+    workspaceName: string;
+  },
+  {
+    /** The name of FHIR Service resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    @segment("fhirservices")
+    fhirServiceName: string;
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface FhirServiceOperationGroup {
   /**
    * Patch FHIR Service details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/fhirservices/{fhirServiceName}")
   @patch(#{ implicitOptionality: false })
   @tag("FhirServices")
-  update(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** The name of FHIR Service resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    fhirServiceName: string,
-
-    /** The name of workspace resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    workspaceName: string,
-
-    /** The parameters for updating a FHIR Service. */
-    @body
-    fhirservicePatchResource: FhirServicePatchResource,
-  ): ArmResponse<FhirService> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: FhirService;
-  }) | ErrorDetails;
+  update is FhirServicesOps.CustomPatchAsync<
+    FhirService,
+    FhirServicePatchResource,
+    Response = ArmResponse<FhirService> | (ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot
+      _: FhirService;
+    }),
+    OverrideErrorType = ErrorDetails
+  >;
 
   /**
    * Deletes a FHIR Service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/fhirservices/{fhirServiceName}")
   @delete
   @tag("FhirServices")
-  delete(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** The name of FHIR Service resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    fhirServiceName: string,
-
-    /** The name of workspace resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    workspaceName: string,
-  ):
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse
-    | ArmDeletedNoContentResponse
-    | Error;
+  delete is FhirServicesOps.DeleteWithoutOkAsync<
+    FhirService,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = Error
+  >;
 }
 
 @@maxLength(FhirService.name, 24);
@@ -150,4 +141,7 @@ interface FhirServiceOperationGroup {
 @@doc(FhirService.properties, "Fhir Service configuration.");
 @@doc(FhirServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Fhir Service resource."
+);
+@@doc(FhirServiceOperationGroup.update::parameters.properties,
+  "The parameters for updating a FHIR Service."
 );
