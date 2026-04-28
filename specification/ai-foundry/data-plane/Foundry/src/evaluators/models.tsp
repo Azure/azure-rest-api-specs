@@ -127,8 +127,8 @@ model RubricCriterion {
   @maxValue(10)
   weight: int32;
 
-  @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria. Defaults to false.")
-  always_applicable?: boolean;
+  @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.")
+  always_applicable?: boolean = false;
 }
 
 @doc("Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.")
