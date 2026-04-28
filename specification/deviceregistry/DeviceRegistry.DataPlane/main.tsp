@@ -27,7 +27,7 @@ using Azure.Core.Traits;
 )
 @service(#{ title: "Azure Device Registry Service" })
 @server(
-  "{endpoint}/deviceregistry",
+  "{endpoint}",
   "Azure Device Registry data-plane APIs",
   {
     /** Supported Device Registry endpoints (protocol and hostname). */
