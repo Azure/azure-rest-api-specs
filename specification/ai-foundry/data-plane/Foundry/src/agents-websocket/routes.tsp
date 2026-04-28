@@ -43,4 +43,29 @@ interface AgentWebsocket {
       @body response: unknown;
     }
   >;
+
+  /**
+   * Establishes a WebSocket connection via the endpoint-scoped route.
+   * Resolves or creates a session, determines the agent version, then
+   * proxies the WebSocket upgrade to the agent container and relays frames bidirectionally.
+   */
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/ws")
+  @extension("x-ms-foundry-meta", AgentWebsocketRequiredPreviews)
+  connectEndpointWebsocket is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** Optional session ID to group related WebSocket connections. If not provided, a new session will be created. */
+      @query agent_session_id?: string;
+    } & AgentWebsocketPreviewHeader,
+    {
+      /** Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request. */
+      @header("x-agent-session-id") sessionId: string;
+
+      /** The response body (101 Switching Protocols). */
+      @body response: unknown;
+    }
+  >;
 }
