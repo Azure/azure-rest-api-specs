@@ -1,0 +1,57 @@
+{
+  "operationId": "Computes_Get",
+  "title": "GetContainerInstanceCompute",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "computeName": "myContainerInstance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "computeType": "ContainerInstance",
+          "targetClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCluster",
+          "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+          "idleTimeBeforeShutdown": "PT30M",
+          "sshSettings": {
+            "sshPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ...",
+            "adminEnabled": true
+          },
+          "connectivityEndpoints": {
+            "publicIpAddress": "20.42.51.100",
+            "sshPort": 50000
+          },
+          "provisioningState": "Succeeded",
+          "errors": [],
+          "creationTime": "2026-03-24T12:00:00.000Z"
+        },
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "00000000-0000-0000-0000-000000000001",
+              "clientId": "00000000-0000-0000-0000-000000000002"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myContainerInstance",
+        "name": "myContainerInstance",
+        "type": "Microsoft.CognitiveServices/accounts/computes",
+        "systemData": {
+          "createdBy": "xxx@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-24T12:00:00.000Z",
+          "lastModifiedBy": "xxx@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-24T12:00:00.000Z"
+        }
+      }
+    }
+  }
+}

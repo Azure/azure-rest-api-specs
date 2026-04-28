@@ -1,0 +1,38 @@
+{
+  "operationId": "ManagedComputeUsagesOperationGroup_List",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "location": "global",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List Managed Compute Usages",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "ManagedCompute.Global.FoundryH100",
+            "name": {
+              "value": "ManagedCompute.Global.FoundryH100",
+              "localizedValue": "Foundry H100 Managed Compute Quota"
+            },
+            "type": "Microsoft.CognitiveServices/accounts/managedComputeUsages",
+            "offerScope": "Global",
+            "currentValue": 96,
+            "limit": 300,
+            "unit": "AcceleratorCount",
+            "deployments": [
+              {
+                "deploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount/deployments/gpt4-deploy",
+                "projectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount",
+                "modelId": "azureml://registries//models//versions/gpt-4o",
+                "acceleratorCount": 8,
+                "instanceCount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
