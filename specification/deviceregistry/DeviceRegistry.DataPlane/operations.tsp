@@ -65,7 +65,7 @@ model Operation {
 
   /* The operation results when `status` is `Succeeded`. */
   @visibility(Lifecycle.Read)
-  result?: any;
+  result?: Record<unknown>;
 }
 
 // ──────────────────────────────────────────────
