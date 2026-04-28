@@ -4456,6 +4456,16 @@
         }
       ]
     },
+    "AgentPoolArtifactStreamingProfile": {
+      "type": "object",
+      "description": "Artifact streaming profile for the agent pool.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false."
+        }
+      }
+    },
     "AgentPoolAvailableVersions": {
       "type": "object",
       "description": "The list of available versions for an agent pool.",
@@ -6960,6 +6970,10 @@
         "gatewayProfile": {
           "$ref": "#/definitions/AgentPoolGatewayProfile",
           "description": "Profile specific to a managed agent pool in Gateway mode. This field cannot be set if agent pool mode is not Gateway."
+        },
+        "artifactStreamingProfile": {
+          "$ref": "#/definitions/AgentPoolArtifactStreamingProfile",
+          "description": "Configuration for using artifact streaming on AKS."
         },
         "virtualMachinesProfile": {
           "$ref": "#/definitions/VirtualMachinesProfile",
