@@ -21,6 +21,7 @@ import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolsets/routes.tsp";
+import "./src/jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -235,6 +236,21 @@ using Azure.AI.Projects;
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
+
+@@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.Jobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.Jobs.createOrUpdate,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Jobs.beginDelete,
+  "begin_delete",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Jobs.beginCancel,
+  "begin_cancel",
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
