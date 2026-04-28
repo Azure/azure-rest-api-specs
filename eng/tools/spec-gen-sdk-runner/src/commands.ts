@@ -43,6 +43,9 @@ async function runAzsdkGeneration(
   commandInput: SpecGenSdkCmdInput,
   tspConfigRelativePath: string,
 ): Promise<{ executionReport: ExecutionReport; statusCode: number }> {
+  // Resolve the azsdk executable path from the AZSDK env variable set by the
+  // install-azsdk-cli pipeline step, falling back to bare "azsdk" on PATH.
+  const azsdkExe = process.env.AZSDK || "azsdk";
   let statusCode = 0;
   const tspConfigDir = path.resolve(
     commandInput.localSpecRepoPath,
@@ -72,8 +75,8 @@ async function runAzsdkGeneration(
   let buildResponse: AzsdkBuildResponse | undefined;
   try {
     const generateArgs = prepareAzsdkGenerateCommand(commandInput, tspConfigRelativePath);
-    logMessage(`Running: azsdk ${generateArgs.join(" ")}`, LogLevel.Info);
-    const generateOutput = await runCommandWithOutput("azsdk", generateArgs);
+    logMessage(`Running: ${azsdkExe} ${generateArgs.join(" ")}`, LogLevel.Info);
+    const generateOutput = await runCommandWithOutput(azsdkExe, generateArgs);
     generateResponse = parseAzsdkResponse<AzsdkGenerateResponse>(generateOutput);
     logMessage(`azsdk pkg generate result: ${generateResponse.result}`, LogLevel.Info);
   } catch (error) {
@@ -88,7 +91,7 @@ async function runAzsdkGeneration(
     emitterCheck.metadata &&
     emitterCheck.languageKey
   ) {
-    const langMeta = emitterCheck.metadata.languages[emitterCheck.languageKey];
+    const langMeta = emitterCheck.metadata.languages[emitterCheck.languageKey]?.[0];
     if (langMeta?.outputDir) {
       const packagePath = resolvePackagePath(langMeta.outputDir, commandInput.localSdkRepoPath);
       const isPython = commandInput.sdkRepoName.replace("-pr", "") === "azure-sdk-for-python";
@@ -98,8 +101,8 @@ async function runAzsdkGeneration(
       if (!isPython) {
         try {
           const buildArgs = prepareAzsdkBuildCommand(packagePath);
-          logMessage(`Running: azsdk ${buildArgs.join(" ")}`, LogLevel.Info);
-          const buildOutput = await runCommandWithOutput("azsdk", buildArgs);
+          logMessage(`Running: ${azsdkExe} ${buildArgs.join(" ")}`, LogLevel.Info);
+          const buildOutput = await runCommandWithOutput(azsdkExe, buildArgs);
           buildResponse = parseAzsdkResponse<AzsdkBuildResponse>(buildOutput);
           logMessage(`azsdk pkg build result: ${buildResponse.result}`, LogLevel.Info);
           if (buildResponse.result !== "succeeded") {
@@ -118,8 +121,8 @@ async function runAzsdkGeneration(
       if (buildSucceeded) {
         try {
           const packArgs = prepareAzsdkPackCommand(packagePath);
-          logMessage(`Running: azsdk ${packArgs.join(" ")}`, LogLevel.Info);
-          const packOutput = await runCommandWithOutput("azsdk", packArgs);
+          logMessage(`Running: ${azsdkExe} ${packArgs.join(" ")}`, LogLevel.Info);
+          const packOutput = await runCommandWithOutput(azsdkExe, packArgs);
           packResponse = parseAzsdkResponse<AzsdkPackResponse>(packOutput);
           logMessage(`azsdk pkg pack result: ${packResponse.result}`, LogLevel.Info);
         } catch (error) {

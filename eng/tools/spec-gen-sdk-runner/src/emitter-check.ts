@@ -16,7 +16,7 @@ export interface TypeSpecMetadata {
     documentation?: string;
     type: "data" | "management";
   };
-  languages: Record<string, LanguageMetadata>;
+  languages: Record<string, LanguageMetadata[]>;
   sourceConfigPath: string;
 }
 
@@ -54,7 +54,7 @@ const SDK_REPO_TO_LANGUAGE_KEY: Record<string, string[]> = {
  */
 function resolveLanguageKey(
   sdkRepoName: string,
-  languages: Record<string, LanguageMetadata>,
+  languages: Record<string, LanguageMetadata[]>,
 ): string | undefined {
   const normalizedName = sdkRepoName.replace("-pr", "");
   const candidates = SDK_REPO_TO_LANGUAGE_KEY[normalizedName];
@@ -126,7 +126,7 @@ export async function checkEmitterEnabled(
       return { enabled: false, metadata, languageKey: undefined };
     }
 
-    const langMetadata = metadata.languages[languageKey];
+    const langMetadata = metadata.languages[languageKey][0];
     logMessage(
       `Language emitter enabled for ${sdkRepoName}: ${langMetadata.emitterName} (package: ${langMetadata.packageName})`,
       LogLevel.Info,
