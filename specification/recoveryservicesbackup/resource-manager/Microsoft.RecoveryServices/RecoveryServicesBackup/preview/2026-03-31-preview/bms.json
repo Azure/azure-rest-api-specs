@@ -145,7 +145,43 @@
       "name": "CrossTenant"
     },
     {
-      "name": "CrossTenantOperations"
+      "name": "BackupProtectedItemsFromCrossTenantVault"
+    },
+    {
+      "name": "ProtectedItemFromCrossTenantVault"
+    },
+    {
+      "name": "CrossTenantVaultRecoveryPoints"
+    },
+    {
+      "name": "CrossTenantVaultRecoveryPoint"
+    },
+    {
+      "name": "RestoresFromCrossTenantVault"
+    },
+    {
+      "name": "ProtectedItemOperationResultsFromCrossTenantVault"
+    },
+    {
+      "name": "ProtectedItemOperationStatusesFromCrossTenantVault"
+    },
+    {
+      "name": "BackupJobsFromCrossTenantVault"
+    },
+    {
+      "name": "JobDetailsFromCrossTenantVault"
+    },
+    {
+      "name": "OperationFromCrossTenantVault"
+    },
+    {
+      "name": "ValidateOperationFromCrossTenantVault"
+    },
+    {
+      "name": "ValidateOperationResultFromCrossTenantVault"
+    },
+    {
+      "name": "ValidateOperationStatusFromCrossTenantVault"
     },
     {
       "name": "CrossTenantVaultCredentialOperations"
@@ -582,7 +618,7 @@
       "get": {
         "operationId": "ProtectedItemFromCrossTenantVault_Get",
         "tags": [
-          "CrossTenantOperations",
+          "ProtectedItemFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Gets the details of a protected item from a cross-tenant vault.",
@@ -650,11 +686,6 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Protected Item From Cross-Tenant Vault": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/GetProtectedItemFromCrossTenantVault.json"
-          }
         }
       }
     },
@@ -662,7 +693,7 @@
       "get": {
         "operationId": "ProtectedItemOperationResultsFromCrossTenantVault_Get",
         "tags": [
-          "CrossTenantOperations",
+          "ProtectedItemOperationResultsFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Fetches the result of any cross-tenant operation on the backup item.",
@@ -751,11 +782,6 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Cross-Tenant Operation Result": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantOperationResult.json"
-          }
         }
       }
     },
@@ -763,7 +789,7 @@
       "get": {
         "operationId": "ProtectedItemOperationStatusesFromCrossTenantVault_Get",
         "tags": [
-          "CrossTenantOperations",
+          "ProtectedItemOperationStatusesFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Fetches the status of a cross-tenant operation such as triggering a restore.\nThe status can be in progress, completed or failed.",
@@ -838,11 +864,6 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Cross-Tenant Operation Status": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantOperationStatus.json"
-          }
         }
       }
     },
@@ -850,7 +871,7 @@
       "get": {
         "operationId": "CrossTenantVaultRecoveryPoints_List",
         "tags": [
-          "CrossTenantOperations",
+          "CrossTenantVaultRecoveryPoints",
           "CrossTenant"
         ],
         "description": "Lists recovery points from the source vault in a different tenant.",
@@ -940,7 +961,7 @@
       "get": {
         "operationId": "CrossTenantVaultRecoveryPoint_Get",
         "tags": [
-          "CrossTenantOperations",
+          "CrossTenantVaultRecoveryPoint",
           "CrossTenant"
         ],
         "description": "Provides the information of the backed up data identified using RecoveryPointID from the source\nvault in a different tenant.",
@@ -1027,7 +1048,7 @@
       "post": {
         "operationId": "RestoresFromCrossTenantVault_Trigger",
         "tags": [
-          "CrossTenantOperations",
+          "RestoresFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.\nTo know the status of this API call, use GetProtectedItemOperationResult API.",
@@ -1138,7 +1159,7 @@
       "get": {
         "operationId": "BackupJobsFromCrossTenantVault_List",
         "tags": [
-          "CrossTenantOperations",
+          "BackupJobsFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Provides a pageable list of cross-tenant backup jobs.",
@@ -1211,7 +1232,7 @@
       "get": {
         "operationId": "JobDetailsFromCrossTenantVault_Get",
         "tags": [
-          "CrossTenantOperations",
+          "JobDetailsFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Gets extended information associated with a cross-tenant backup job.",
@@ -1275,7 +1296,7 @@
       "get": {
         "operationId": "BackupProtectedItemsFromCrossTenantVault_List",
         "tags": [
-          "CrossTenantOperations",
+          "BackupProtectedItemsFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Lists the protected items from the source vault in a different tenant.",
@@ -1348,7 +1369,7 @@
       "post": {
         "operationId": "ValidateOperationFromCrossTenantVault_Trigger",
         "tags": [
-          "CrossTenantOperations",
+          "ValidateOperationFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Triggers a validate operation for cross-tenant restore scenarios.\nThis is an asynchronous operation that performs validation checks.",
@@ -1431,7 +1452,7 @@
       "post": {
         "operationId": "OperationFromCrossTenantVault_Validate",
         "tags": [
-          "CrossTenantOperations",
+          "OperationFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Validates a backup operation for cross-tenant restore scenarios.\nThis API performs validation checks before executing a backup operation.",
@@ -1496,7 +1517,7 @@
       "get": {
         "operationId": "ValidateOperationResultFromCrossTenantVault_Get",
         "tags": [
-          "CrossTenantOperations",
+          "ValidateOperationResultFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Gets the result of a specific validate operation for cross-tenant restore scenarios.",
@@ -1573,7 +1594,7 @@
       "get": {
         "operationId": "ValidateOperationStatusFromCrossTenantVault_Get",
         "tags": [
-          "CrossTenantOperations",
+          "ValidateOperationStatusFromCrossTenantVault",
           "CrossTenant"
         ],
         "description": "Gets the status of a validate operation for cross-tenant restore scenarios.",

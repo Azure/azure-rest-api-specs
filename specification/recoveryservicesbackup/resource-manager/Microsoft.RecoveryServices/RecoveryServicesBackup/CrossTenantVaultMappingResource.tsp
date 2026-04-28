@@ -97,19 +97,21 @@ interface CrossTenantVaultMappingStatus {
   >;
 }
 
+// ============================================================
+// Cross-tenant pass-through operations (split per operationId prefix)
+// ============================================================
+
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations(#{ allowStaticRoutes: true })
-interface CrossTenantOperations {
+interface BackupProtectedItemsFromCrossTenantVault {
   /**
    * Lists the protected items from the source vault in a different tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupProtectedItems")
   @get
   @list
-  @operationId("BackupProtectedItemsFromCrossTenantVault_List")
   @tag("CrossTenant")
-  listProtectedItemsFromCrossTenantVault(
+  list(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -141,25 +143,18 @@ interface CrossTenantOperations {
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<CrossTenantProtectedItemResourceList> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface ProtectedItemFromCrossTenantVault {
   /**
    * Gets the details of a protected item from a cross-tenant vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}")
   @get
-  @operationId("ProtectedItemFromCrossTenantVault_Get")
   @tag("CrossTenant")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Get Protected Item From Cross-Tenant Vault`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/GetProtectedItemFromCrossTenantVault.json",
-      },
-    }
-  )
-  getProtectedItemFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -200,17 +195,19 @@ interface CrossTenantOperations {
 
     ...ApiVersionParameter,
   ): ArmResponse<ProtectedItemResource> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface CrossTenantVaultRecoveryPoints {
   /**
    * Lists recovery points from the source vault in a different tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints")
   @get
   @list
-  @operationId("CrossTenantVaultRecoveryPoints_List")
   @tag("CrossTenant")
-  listRecoveryPointsFromCrossTenantVault(
+  list(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -257,26 +254,19 @@ interface CrossTenantOperations {
     @query("$filter")
     $filter?: string,
   ): ArmResponse<CrossTenantRecoveryPointResourceList> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface CrossTenantVaultRecoveryPoint {
   /**
    * Provides the information of the backed up data identified using RecoveryPointID from the source
    * vault in a different tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}")
   @get
-  @operationId("CrossTenantVaultRecoveryPoint_Get")
   @tag("CrossTenant")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Get Recovery Point From Cross-Tenant Vault`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/GetRecoveryPointFromCrossTenantVault.json",
-      },
-    }
-  )
-  getRecoveryPointFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -323,17 +313,19 @@ interface CrossTenantOperations {
 
     ...ApiVersionParameter,
   ): ArmResponse<RecoveryPointResource> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface RestoresFromCrossTenantVault {
   /**
    * Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.
    * To know the status of this API call, use GetProtectedItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore")
   @post
-  @operationId("RestoresFromCrossTenantVault_Trigger")
   @tag("CrossTenant")
-  triggerRestoreFromCrossTenantVault(
+  trigger(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -386,25 +378,18 @@ interface CrossTenantOperations {
     @bodyRoot
     parameters: RestoreRequestResource,
   ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface ProtectedItemOperationResultsFromCrossTenantVault {
   /**
    * Fetches the result of any cross-tenant operation on the backup item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}")
   @get
-  @operationId("ProtectedItemOperationResultsFromCrossTenantVault_Get")
   @tag("CrossTenant")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Get Cross-Tenant Operation Result`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/GetCrossTenantOperationResult.json",
-      },
-    }
-  )
-  getProtectedItemOperationResultFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -451,26 +436,19 @@ interface CrossTenantOperations {
 
     ...ApiVersionParameter,
   ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface ProtectedItemOperationStatusesFromCrossTenantVault {
   /**
    * Fetches the status of a cross-tenant operation such as triggering a restore.
    * The status can be in progress, completed or failed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}")
   @get
-  @operationId("ProtectedItemOperationStatusesFromCrossTenantVault_Get")
   @tag("CrossTenant")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Get Cross-Tenant Operation Status`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/GetCrossTenantOperationStatus.json",
-      },
-    }
-  )
-  getProtectedItemOperationStatusFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -517,17 +495,19 @@ interface CrossTenantOperations {
 
     ...ApiVersionParameter,
   ): ArmResponse<OperationStatus> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface BackupJobsFromCrossTenantVault {
   /**
    * Provides a pageable list of cross-tenant backup jobs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs")
   @get
   @list
-  @operationId("BackupJobsFromCrossTenantVault_List")
   @tag("CrossTenant")
-  listJobsFromCrossTenantVault(
+  list(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -559,17 +539,18 @@ interface CrossTenantOperations {
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<CrossTenantJobResourceList> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface JobDetailsFromCrossTenantVault {
   /**
    * Gets extended information associated with a cross-tenant backup job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs/{jobName}")
   @get
-  @operationId("JobDetailsFromCrossTenantVault_Get")
   @tag("CrossTenant")
-  getJobDetailsFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -596,18 +577,19 @@ interface CrossTenantOperations {
 
     ...ApiVersionParameter,
   ): ArmResponse<JobResource> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface OperationFromCrossTenantVault {
   /**
    * Validates a backup operation for cross-tenant restore scenarios.
    * This API performs validation checks before executing a backup operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperation")
   @post
-  @operationId("OperationFromCrossTenantVault_Validate")
   @tag("CrossTenant")
-  validateOperationFromCrossTenantVault(
+  validate(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -633,18 +615,19 @@ interface CrossTenantOperations {
     @bodyRoot
     parameters: ValidateOperationRequestResource,
   ): ArmResponse<ValidateOperationsResponse> | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface ValidateOperationFromCrossTenantVault {
   /**
    * Triggers a validate operation for cross-tenant restore scenarios.
    * This is an asynchronous operation that performs validation checks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupTriggerValidateOperation")
   @post
-  @operationId("ValidateOperationFromCrossTenantVault_Trigger")
   @tag("CrossTenant")
-  triggerValidateOperationFromCrossTenantVault(
+  trigger(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -670,18 +653,19 @@ interface CrossTenantOperations {
     @bodyRoot
     parameters: ValidateOperationRequestResource,
   ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedLroResponse | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface ValidateOperationResultFromCrossTenantVault {
   /**
    * Gets the result of a specific validate operation for cross-tenant restore scenarios.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing ValidateOperationResults pattern in routes.tsp"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperationResults/{operationId}")
   @get
-  @operationId("ValidateOperationResultFromCrossTenantVault_Get")
   @tag("CrossTenant")
-  getValidateOperationResultFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -710,17 +694,18 @@ interface CrossTenantOperations {
     "Accepted",
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface ValidateOperationStatusFromCrossTenantVault {
   /**
    * Gets the status of a validate operation for cross-tenant restore scenarios.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperationsStatuses/{operationId}")
   @get
-  @operationId("ValidateOperationStatusFromCrossTenantVault_Get")
   @tag("CrossTenant")
-  getValidateOperationStatusFromCrossTenantVault(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
