@@ -922,8 +922,8 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "IsAppMonitoringOpenTelemetryMetricsEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs.enabled,
-  "IsAppMonitoringOpenTelemetryLogsEnabled",
+@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces.enabled,
+  "IsAppMonitoringOpenTelemetryLogsAndTracesEnabled",
   "csharp"
 );
 @@clientName(ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
