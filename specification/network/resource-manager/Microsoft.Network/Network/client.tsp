@@ -1,4 +1,4 @@
-import "./Network/main.tsp";
+﻿import "./Network/main.tsp";
 import "./Vmss/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
