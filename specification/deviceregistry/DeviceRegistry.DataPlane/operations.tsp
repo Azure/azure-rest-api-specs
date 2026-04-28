@@ -21,7 +21,7 @@ namespace Microsoft.DeviceRegistry;
 union OperationKind {
   string,
 
-  /** Device provisioning status report. **/
+  /** Device provisioning status report. * */
   ProvisionDevice: "ProvisionDevice",
 
   /** Compliance report describing the updating state of devices in the namespace. */
