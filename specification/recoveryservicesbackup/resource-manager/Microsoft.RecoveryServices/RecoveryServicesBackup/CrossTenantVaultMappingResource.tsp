@@ -805,21 +805,22 @@ model CrossTenantJobResourceList {
 // Cross-tenant Vault Credential operations
 // ============================================================
 
+// ============================================================
+// Cross-tenant Vault Credential operations (split per operationId prefix)
+// ============================================================
+
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations(#{ allowStaticRoutes: true })
-interface CrossTenantVaultCredentialOperations {
+interface CrossTenantVaultCredential {
   /**
    * Generates a vault credential certificate for cross-tenant restore scenarios.
    * This is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates
    * endpoint for the source vault, generating a self-signed certificate registered with AAD.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/generate")
   @post
-  @operationId("CrossTenantVaultCredential_Generate")
   @tag("CrossTenant")
-  generateCrossTenantVaultCredential(
+  generate(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -852,20 +853,21 @@ interface CrossTenantVaultCredentialOperations {
     @bodyRoot
     parameters?: VaultCredentialCertificateRequest,
   ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface CrossTenantVaultCredentialOperationResults {
   /**
    * Gets the result of an async vault credential generation operation.
    * Returns 202 Accepted while the TEE job is still in progress.
    * Returns 200 OK with VaultCredentialCertificateResponse when the job completes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing OperationResults pattern"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationResults/{operationId}")
   @get
-  @operationId("CrossTenantVaultCredentialOperationResults_Get")
   @tag("CrossTenant")
-  getVaultCredentialOperationResult(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
@@ -901,18 +903,19 @@ interface CrossTenantVaultCredentialOperations {
     "Accepted",
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
+}
 
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface CrossTenantVaultCredentialOperationStatuses {
   /**
    * Gets the status of an async vault credential generation operation.
    * Returns the current status (InProgress, Completed, Failed) and any associated job details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for non-standard cross-tenant operation groups"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationStatus/{operationId}")
   @get
-  @operationId("CrossTenantVaultCredentialOperationStatuses_Get")
   @tag("CrossTenant")
-  getVaultCredentialOperationStatus(
+  get(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 

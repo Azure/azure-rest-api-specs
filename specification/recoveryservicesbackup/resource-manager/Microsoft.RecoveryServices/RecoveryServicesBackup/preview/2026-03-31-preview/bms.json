@@ -184,7 +184,13 @@
       "name": "ValidateOperationStatusFromCrossTenantVault"
     },
     {
-      "name": "CrossTenantVaultCredentialOperations"
+      "name": "CrossTenantVaultCredential"
+    },
+    {
+      "name": "CrossTenantVaultCredentialOperationResults"
+    },
+    {
+      "name": "CrossTenantVaultCredentialOperationStatuses"
     },
     {
       "name": "ProtectionIntent"
@@ -1750,7 +1756,7 @@
       "post": {
         "operationId": "CrossTenantVaultCredential_Generate",
         "tags": [
-          "CrossTenantVaultCredentialOperations",
+          "CrossTenantVaultCredential",
           "CrossTenant"
         ],
         "description": "Generates a vault credential certificate for cross-tenant restore scenarios.\nThis is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates\nendpoint for the source vault, generating a self-signed certificate registered with AAD.",
@@ -1838,7 +1844,7 @@
       "get": {
         "operationId": "CrossTenantVaultCredentialOperationResults_Get",
         "tags": [
-          "CrossTenantVaultCredentialOperations",
+          "CrossTenantVaultCredentialOperationResults",
           "CrossTenant"
         ],
         "description": "Gets the result of an async vault credential generation operation.\nReturns 202 Accepted while the TEE job is still in progress.\nReturns 200 OK with VaultCredentialCertificateResponse when the job completes.",
@@ -1923,7 +1929,7 @@
       "get": {
         "operationId": "CrossTenantVaultCredentialOperationStatuses_Get",
         "tags": [
-          "CrossTenantVaultCredentialOperations",
+          "CrossTenantVaultCredentialOperationStatuses",
           "CrossTenant"
         ],
         "description": "Gets the status of an async vault credential generation operation.\nReturns the current status (InProgress, Completed, Failed) and any associated job details.",
