@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "databaseName": "myDatabase",
+    "managedInstanceName": "myManagedInstanceName",
+    "resourceGroupName": "myRG",
+    "schemaName": "dbo",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tableName": "table1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "col1",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables/columns",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/myManagedInstanceName/databases/myDatabase/schemas/dbo/tables/table1/columns/col1",
+            "properties": {
+              "columnType": "nvarchar"
+            }
+          },
+          {
+            "name": "col2",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables/columns",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/myManagedInstanceName/databases/myDatabase/schemas/dbo/tables/table1/columns/col2",
+            "properties": {
+              "columnType": "bit"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseColumns_ListByTable",
+  "title": "List managed database columns"
+}

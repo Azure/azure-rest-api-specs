@@ -61,3 +61,45 @@
 - tool: TypeSpecRequirement
   path: ./stable/2023-06-01/*.json
   reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - AnalyticsItems
+    - ComponentAPIs
+    - ComponentLinkedStorageAccounts
+    - Components
+    - DeletedWorkbooks
+    - Favorites
+    - Livetoken
+    - WebTestLocation
+    - WebTests
+    - WorkbookOperations
+    - Workbooks
+    - WorkbookTemplates
+    
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - AnalyticsItems/tspconfig.yaml
+    - ComponentAPIs/tspconfig.yaml
+    - ComponentLinkedStorageAccounts/tspconfig.yaml
+    - Components/tspconfig.yaml
+    - DeletedWorkbooks/tspconfig.yaml
+    - Favorites/tspconfig.yaml
+    - Livetoken/tspconfig.yaml
+    - WebTestLocation/tspconfig.yaml
+    - WebTests/tspconfig.yaml
+    - WorkbookOperations/tspconfig.yaml
+    - Workbooks/tspconfig.yaml
+    - WorkbookTemplates/tspconfig.yaml

@@ -4,10 +4,16 @@ skill: azure-typespec-author
 version: "1.0"
 config:
   trials_per_task: 1
-  timeout_seconds: 1000
-  parallel: false
+  timeout_seconds: 1800
+  parallel: true
   executor: copilot-sdk
   model: claude-opus-4.6-1m
+  mcp_config: "./.vscode/mcp.json"
+  mcp_servers:
+    azure:
+      type: stdio
+      command: pwsh
+      args: ["./eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
 metrics:
   - name: task_completion
     weight: 1.0

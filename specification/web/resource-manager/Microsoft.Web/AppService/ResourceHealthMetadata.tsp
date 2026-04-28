@@ -56,7 +56,8 @@ interface ResourceHealthMetadataOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("ResourceHealthMetadata")
+@armResourceOperations(#{ omitTags: true })
 interface ResourceHealthMetadataOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
@@ -107,7 +108,8 @@ interface BySiteSlotOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("ResourceHealthMetadata")
+@armResourceOperations(#{ omitTags: true })
 interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
