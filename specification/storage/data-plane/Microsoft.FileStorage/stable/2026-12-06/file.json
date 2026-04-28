@@ -6971,6 +6971,18 @@
           "items": {
             "$ref": "#/definitions/FileItem"
           }
+        },
+        "SymLinkItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SymLinkItem"
+          }
+        },
+        "BlockDeviceItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockDeviceItem"
+          }
         }
       },
       "xml": {
@@ -7040,6 +7052,69 @@
         },
         "FileType": {
           "$ref": "#/definitions/FileType"
+        }
+      }
+    },
+    "SymLinkItem": {
+      "xml": {
+        "name": "SymLink"
+      },
+      "description": "A listed symbolic link item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "LinkText": {
+          "type": "string"
+        }
+      }
+    },
+    "BlockDeviceItem": {
+      "xml": {
+        "name": "BlockDevice"
+      },
+      "description": "A listed block device item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMajor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMinor": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
