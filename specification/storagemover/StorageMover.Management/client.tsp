@@ -101,6 +101,7 @@ using Azure.Core;
 @@clientName(EndpointKind, "StorageMoverEndpointKind", "csharp");
 @@clientName(TriggerType, "StorageMoverJobTriggerType", "csharp");
 @@clientName(ScheduleInfo, "StorageMoverScheduleInfo", "csharp");
+@@clientName(SchedulerTime, "StorageMoverSchedulerTime", "csharp");
 @@clientName(DataIntegrityValidation,
   "StorageMoverDataIntegrityValidation",
   "csharp"

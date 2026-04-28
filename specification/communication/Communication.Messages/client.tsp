@@ -76,3 +76,28 @@ interface ConversationThreadClient
   "mediaUrl",
   "java"
 );
+
+@@clientName(Azure.Communication.MessagesService.Versions.c2024_02_01,
+  "2024_02_01",
+  "csharp"
+);
+
+@@clientName(Azure.Communication.MessagesService.Versions.c2024_08_30,
+  "2024_08_30",
+  "csharp"
+);
+
+@@clientName(Azure.Communication.MessagesService.Versions.c2025_01_15_Preview,
+  "2025_01_15_Preview",
+  "csharp"
+);
+
+@@clientName(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview,
+  "2025_04_01_Preview",
+  "csharp"
+);
+
+@@clientName(Azure.Communication.MessagesService.Versions.c2025_09_01_Preview,
+  "2025_09_01_Preview",
+  "csharp"
+);
