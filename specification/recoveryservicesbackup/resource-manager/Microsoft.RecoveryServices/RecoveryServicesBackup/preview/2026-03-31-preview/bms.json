@@ -511,7 +511,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}": {
       "put": {
-        "operationId": "CrossTenantVaultMapping_Create",
+        "operationId": "CrossTenantVaultMappings_CreateOrUpdate",
         "tags": [
           "CrossTenantVaultMappings"
         ],
@@ -1634,7 +1634,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping": {
       "post": {
-        "operationId": "CrossTenantVaultMapping_Remove",
+        "operationId": "CrossTenantVaultMappings_Remove",
         "tags": [
           "CrossTenantVaultMappings"
         ],
@@ -1675,6 +1675,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1688,9 +1691,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",

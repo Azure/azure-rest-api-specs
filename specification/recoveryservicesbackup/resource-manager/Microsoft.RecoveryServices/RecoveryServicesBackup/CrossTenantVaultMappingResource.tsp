@@ -48,8 +48,6 @@ interface CrossTenantVaultMappings {
    * Creates or updates the cross-tenant vault mapping for cross-tenant restore operations.
    * This API updates the target vault properties with source vault ID and creates catalog mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId uses singular CrossTenantVaultMapping per controller contract"
-  @operationId("CrossTenantVaultMapping_Create")
   createOrUpdate is ArmResourceCreateOrReplaceSync<CrossTenantVaultMappingResource>;
 
   /**
@@ -62,22 +60,15 @@ interface CrossTenantVaultMappings {
    * Removes the cross-tenant vault mapping for cross-tenant restore operations.
    * This API removes the target vault properties associated with source vault ID and deletes catalog mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId and x-ms-examples required for non-standard remove action"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST requires 204 final response per OpenAPI lint-diff PostResponseCodes rule"
-  @operationId("CrossTenantVaultMapping_Remove")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Remove Cross Tenant Vault Mapping`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/RemoveCrossTenantVaultMapping.json",
-      },
-    }
-  )
-  removeCrossTenantVaultMapping is ArmResourceActionAsyncBase<
+  @action("removeCrossTenantVaultMapping")
+  remove is ArmResourceActionAsync<
     CrossTenantVaultMappingResource,
     RemoveCrossTenantVaultMappingRequest,
-    ArmAcceptedLroResponse | ArmNoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CrossTenantVaultMappingResource>
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 
@@ -821,7 +812,7 @@ model CrossTenantJobResourceList {
 @@doc(CrossTenantVaultMappings.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(CrossTenantVaultMappings.removeCrossTenantVaultMapping::parameters.body,
+@@doc(CrossTenantVaultMappings.remove::parameters.body,
   "Request body for operation"
 );
 
