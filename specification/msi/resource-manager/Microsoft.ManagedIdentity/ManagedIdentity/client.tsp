@@ -21,6 +21,7 @@ using Microsoft.ManagedIdentity;
 
 @@clientName(Identity, "UserAssignedIdentity", "csharp");
 @@clientName(FederatedIdentityCredentialProperties.issuer, "IssuerUri", "csharp");
+@@clientName(ClaimsMatchingExpression, "FederatedIdentityClaimsMatchingExpression", "csharp");
 @@alternateType(SystemAssignedIdentityProperties.tenantId, Azure.Core.uuid, "csharp");
 @@alternateType(UserAssignedIdentityProperties.tenantId, Azure.Core.uuid, "csharp");
 
