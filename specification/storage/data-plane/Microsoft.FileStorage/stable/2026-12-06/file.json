@@ -6995,6 +6995,12 @@
           "items": {
             "$ref": "#/definitions/FifoItem"
           }
+        },
+        "SocketItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SocketItem"
+          }
         }
       },
       "xml": {
@@ -7169,6 +7175,32 @@
         "name": "Fifo"
       },
       "description": "A listed FIFO item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SocketItem": {
+      "xml": {
+        "name": "Socket"
+      },
+      "description": "A listed socket item.",
       "type": "object",
       "required": [
         "Name",
