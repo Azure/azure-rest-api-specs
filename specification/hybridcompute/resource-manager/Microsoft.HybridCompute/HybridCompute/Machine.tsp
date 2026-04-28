@@ -181,7 +181,6 @@ interface Machines {
    * The operation to Upgrade Machine Extensions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("UpgradeExtensions")
   @tag("MachineExtensions Upgrade")
   upgradeExtensions is ArmResourceActionAsync<
     Machine,
