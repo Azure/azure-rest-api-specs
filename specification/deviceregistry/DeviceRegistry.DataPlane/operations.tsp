@@ -63,9 +63,9 @@ model Operation {
   @visibility(Lifecycle.Read)
   expiresAt?: utcDateTime;
 
-  /* The operation results when `status` is `Succeeded`. */
+  /** The operation results when `status` is `Succeeded`. */
   @visibility(Lifecycle.Read)
-  result?: Record<unknown>;
+  result?: Record<string>;
 }
 
 // ──────────────────────────────────────────────
