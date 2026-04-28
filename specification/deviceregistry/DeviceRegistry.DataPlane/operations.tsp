@@ -22,7 +22,7 @@ union OperationKind {
   string,
 
   /** Device provisioning status report. **/
-  ProvisionDevice: "ProvisionDevice"
+  ProvisionDevice: "ProvisionDevice",
 
   /** Compliance report describing the updating state of devices in the namespace. */
   NamespaceUpdateComplianceReport: "GenerateReport.NamespaceUpdateCompliance",
@@ -31,7 +31,7 @@ union OperationKind {
   GroupBestUpdatesComplianceReport: "GenerateReport.GroupBestUpdatesCompliance",
 
   /** Report listing the installable updates for the devices within a group. */
-  GroupInstallableUpdates: "GenerateReport.GroupInstallableUpdates",
+  GroupInstallableUpdates: "GenerateReport.GroupInstallableUpdates"
 }
 
 /** A long-running operation status resource scoped to a namespace. */
