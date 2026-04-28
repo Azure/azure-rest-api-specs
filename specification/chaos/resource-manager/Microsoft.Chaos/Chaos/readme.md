@@ -73,7 +73,7 @@ suppressions:
     reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions["Azure.Core.uuid"]
+    where: $.definitions["Azure.Core.uuid"].format
     reason: Approved by ARM API reviewer. GUID usage is required for resource identifiers in the Chaos service.
   - code: AllTrackedResourcesMustHaveDelete
     from: openapi.json
