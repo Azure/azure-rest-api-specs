@@ -373,7 +373,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Configuration for using artifact streaming on AKS.
    */
-  @added(Versions.v2026_03_02_preview)
+  @added(Versions.v2026_03_01)
   artifactStreamingProfile?: AgentPoolArtifactStreamingProfile;
 
   /**
@@ -917,7 +917,7 @@ model AgentPoolGatewayProfile {
 }
 
 /** Artifact streaming profile for the agent pool. */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_03_01)
 model AgentPoolArtifactStreamingProfile {
   /**
    * Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false.
