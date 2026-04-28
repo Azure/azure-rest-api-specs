@@ -7037,6 +7037,9 @@
         "LinkCount": {
           "type": "integer",
           "format": "int64"
+        },
+        "FileType": {
+          "$ref": "#/definitions/FileType"
         }
       }
     },
@@ -7093,6 +7096,23 @@
         "Etag": {
           "type": "string"
         }
+      }
+    },
+    "FileType": {
+      "description": "Type of the file.",
+      "type": "string",
+      "enum": [
+        "Regular",
+        "Directory",
+        "SymLink",
+        "BlockDevice",
+        "CharacterDevice",
+        "Socket",
+        "Fifo"
+      ],
+      "x-ms-enum": {
+        "name": "NfsFileType",
+        "modelAsString": true
       }
     },
     "HandleItem": {
