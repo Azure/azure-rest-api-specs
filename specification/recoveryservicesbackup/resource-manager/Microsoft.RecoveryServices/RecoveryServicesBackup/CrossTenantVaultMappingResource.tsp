@@ -280,6 +280,72 @@ interface CrossTenantOperations {
   ): ArmResponse<CrossTenantRecoveryPointResourceList> | ErrorResponse;
 
   /**
+   * Provides the information of the backed up data identified using RecoveryPointID from the source
+   * vault in a different tenant.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for non-standard cross-tenant operation groups"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}")
+  @get
+  @operationId("CrossTenantVaultRecoveryPoint_Get")
+  @tag("CrossTenant")
+  @extension(
+    "x-ms-examples",
+    #{
+      `Get Recovery Point From Cross-Tenant Vault`: #{
+        $ref: "./examples/CrossTenantVaultMappingOperations/GetRecoveryPointFromCrossTenantVault.json",
+      },
+    }
+  )
+  getRecoveryPointFromCrossTenantVault(
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @pattern(".*")
+    @path
+    vaultName: string,
+
+    /**
+     * Cross-tenant vault mapping name.
+     */
+    @pattern(".*")
+    @path
+    crossTenantVaultMappingName: string,
+
+    /**
+     * Fabric name associated with the backed up item.
+     */
+    @pattern(".*")
+    @path
+    fabricName: string,
+
+    /**
+     * Container name associated with the backed up item.
+     */
+    @pattern(".*")
+    @path
+    containerName: string,
+
+    /**
+     * Backed up item name whose recovery point details are to be fetched.
+     */
+    @pattern(".*")
+    @path
+    protectedItemName: string,
+
+    /**
+     * RecoveryPointID represents the backed up data to be fetched.
+     */
+    @path
+    recoveryPointId: string,
+
+    ...ApiVersionParameter,
+  ): ArmResponse<RecoveryPointResource> | ErrorResponse;
+
+  /**
    * Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.
    * To know the status of this API call, use GetProtectedItemOperationResult API.
    */
