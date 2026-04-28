@@ -1198,7 +1198,10 @@ op policyMetadataList(
   body: void,
   queryOptions?: PolicyMetadataListQueryOptions,
 ): PolicyMetadataCollection | PolicyInsightsApi.ErrorResponse;
-@@override(PolicyMetadataNonResourceOperationGroup.list, policyMetadataList);
+@@override(PolicyMetadataNonResourceOperationGroup.list,
+  policyMetadataList,
+  "!java"
+);
 
 // ComponentPolicyStates overrides
 
@@ -1509,7 +1512,10 @@ op attestationsListForSubscription(
 
   queryOptions?: AttestationsListForSubscriptionQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(Attestations.listForSubscription, attestationsListForSubscription);
+@@override(Attestations.listForSubscription,
+  attestationsListForSubscription,
+  "!java"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
