@@ -43,6 +43,7 @@ model GenerateReportRequest {
   reportTarget?: string;
 }
 
+/** Base report type */
 @discriminator("reportType")
 model Report {
   /** The type of report. */
