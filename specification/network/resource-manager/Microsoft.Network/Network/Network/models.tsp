@@ -2012,6 +2012,16 @@ union IpAllocationType {
 }
 
 /**
+ * Controls verbosity of the returned load balancer resource.
+ */
+union LoadBalancerDetailLevel {
+  string,
+
+  /** When set to 'Reduced', read-only reference collections may be omitted. */
+  Reduced: "Reduced",
+}
+
+/**
  * Who created the route.
  */
 union EffectiveRouteSource {
@@ -2669,6 +2679,34 @@ union NspLinkProvisioningState {
 }
 
 /**
+ * The readiness state of the resource type for NSP support.
+ */
+@added(Versions.v2025_07_01)
+union NspReadinessState {
+  string,
+
+  /**
+   * Resource Provider is actively being onboarded to NSP
+   */
+  Onboarding: "Onboarding",
+
+  /**
+   * Resource Provider supports NSP in Preview
+   */
+  Preview: "Preview",
+
+  /**
+   * Resource Provider is generally available for NSP Integration
+   */
+  GA: "GA",
+
+  /**
+   * NSP Onboarding is not started or not Supported
+   */
+  NotReady: "NotReady",
+}
+
+/**
  * The NSP link state.
  */
 union NspLinkStatus {
@@ -2920,7 +2958,13 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
-   * None
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
+   * No next hop type.
    */
   None: "None",
 }
@@ -6253,6 +6297,24 @@ model ApplicationGatewaySku {
 }
 
 /**
+ * Managed HSM properties of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_07_01)
+model ApplicationGatewayManagedHsm {
+  /**
+   * Key identifier of a key stored in Managed HSM.
+   */
+  keyId?: url;
+
+  /**
+   * Base-64 encoded value of a base-64 public certificate.
+   */
+  publicCertData?: string;
+}
+
+/**
  * Application Gateway Ssl policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6660,6 +6722,12 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
    * Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
    */
   keyVaultSecretId?: string;
+
+  /**
+   * Managed HSM properties of the Application Gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  hsm?: ApplicationGatewayManagedHsm;
 
   /**
    * The provisioning state of the SSL certificate resource.
@@ -9114,6 +9182,27 @@ model AzureFirewallPropertiesFormat {
    * Properties to provide a custom autoscale configuration to this azure firewall.
    */
   autoscaleConfiguration?: AzureFirewallAutoscaleConfiguration;
+
+  /**
+   * AFC configuration for the Azure Firewall.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  afcConfiguration?: AfcConfiguration;
+}
+
+/**
+ * AFC configuration for the Azure Firewall.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "AfcConfiguration is a firewall-specific model and must be emitted to firewall.json"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
+model AfcConfiguration {
+  /**
+   * The endpoint URL of the AFC control plane associated with this Azure Firewall.
+   */
+  @visibility(Lifecycle.Read)
+  serviceEndpoint?: string;
 }
 
 /**
@@ -15298,6 +15387,34 @@ model PerimeterAssociableResourceProperties {
    */
   @visibility(Lifecycle.Read)
   publicDnsZones?: string[];
+
+  /**
+   * Service tags associated with the resource provider.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  serviceTags?: string[];
+
+  /**
+   * The readiness state of the resource type for NSP support.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  readinessState?: NspReadinessState;
+
+  /**
+   * Indicates whether the resource type supports outbound scenario.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  outboundSupported?: boolean;
+
+  /**
+   * Description of the PaaS resource type.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
@@ -20402,6 +20519,12 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
   enablePrivateLinkFastPath?: boolean;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -21358,6 +21481,12 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * Certificate Authentication information for a certificate based authentication connection.
    */
   certificateAuthentication?: CertificateAuthentication;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -22352,7 +22481,6 @@ model StaticRoutesConfig {
   /**
    * Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.
    */
-  @visibility(Lifecycle.Read)
   propagateStaticRoutes?: boolean;
 
   /**
@@ -23818,6 +23946,12 @@ model BgpConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   connectionState?: HubBgpConnectionStatus;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -24318,7 +24452,16 @@ model PolicySettings {
    */
   @maxValue(1440)
   @minValue(5)
+  @removed(Versions.v2025_07_01)
   captchaCookieExpirationInMins?: int32;
+
+  /**
+   * Web Application Firewall CAPTCHA Cookie Expiration time in minutes.
+   */
+  @maxValue(1440)
+  @minValue(5)
+  @added(Versions.v2025_07_01)
+  captchaExpirationInMins?: int32;
 }
 
 /**
@@ -25905,13 +26048,21 @@ model VirtualNetworkAppliancePropertiesFormat {
   /**
    * Bandwidth of the VirtualNetworkAppliance resource in Gbps.
    */
-  bandwidthInGbps?: string;
+  @typeChangedFrom(Versions.v2025_07_01, string)
+  bandwidthInGbps?: float64;
 
   /**
    * A list of IPConfigurations of the virtual network appliance.
    */
   @visibility(Lifecycle.Read)
   ipConfigurations?: VirtualNetworkApplianceIpConfiguration[];
+
+  /**
+   * Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties"
+  @added(Versions.v2025_07_01)
+  privateIPAddressVersion?: VirtualNetworkApplianceIpVersionType;
 
   /**
    * The provisioning state of the virtual network appliance resource.
@@ -25929,6 +26080,20 @@ model VirtualNetworkAppliancePropertiesFormat {
    * The reference to the subnet resource.
    */
   subnet?: Subnet;
+}
+
+/**
+ * IP address version.
+ */
+@added(Versions.v2025_07_01)
+union VirtualNetworkApplianceIpVersionType {
+  string,
+
+  /** IPv4 version */
+  IPv4: "IPv4",
+
+  /** Dual Stack version */
+  DualStack: "DualStack",
 }
 
 /**
@@ -26000,3 +26165,5 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(DisablePeeringRoute, Versions.v2025_07_01);
+@@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);

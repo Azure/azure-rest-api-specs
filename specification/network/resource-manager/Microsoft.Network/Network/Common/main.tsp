@@ -55,6 +55,11 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2025-07-01 API version.
+   */
+  v2025_07_01: "2025-07-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -168,9 +173,28 @@ union RouteNextHopType {
   VirtualAppliance: "VirtualAppliance",
 
   /**
-   * None
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
+   * No next hop type.
    */
   None: "None",
+}
+
+/**
+ * Whether to disable the routes learned by peering on the route table.
+ */
+union DisablePeeringRoute {
+  string,
+
+  /** Peering routes are enabled. */
+  None: "None",
+
+  /** All peering routes are disabled. */
+  All: "All",
 }
 
 /**
@@ -395,6 +419,29 @@ union NatGatewaySkuName {
    * StandardV2
    */
   StandardV2: "StandardV2",
+}
+
+/**
+ * Whether Nat64 is enabled for the NAT gateway resource.
+ */
+@added(Versions.v2025_07_01)
+union Nat64State {
+  string,
+
+  /**
+   * Nat64 Property is not set.
+   */
+  None: "None",
+
+  /**
+   * Nat64 is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Nat64 is disabled.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -1931,6 +1978,19 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * The DDoS protection settings associated with the frontend IP configuration.
+   */
+  @added(Versions.v2025_07_01)
+  ddosSettings?: DdosFrontendIpConfigurationSettings;
+}
+
+/** DDoS protection settings for a frontend IP configuration. */
+@added(Versions.v2025_07_01)
+model DdosFrontendIpConfigurationSettings {
+  /** The reference to the DDoS Custom Policy resource. */
+  ddosCustomPolicy?: SubResource;
 }
 
 /**
@@ -3088,6 +3148,11 @@ model RouteTablePropertiesFormat {
   disableBgpRoutePropagation?: boolean;
 
   /**
+   * Whether to disable the routes learned by peering on the route table. 'None' means peering routes are enabled, 'All' means all peering routes are disabled.
+   */
+  disablePeeringRoute?: DisablePeeringRoute;
+
+  /**
    * The provisioning state of the route table resource.
    */
   @visibility(Lifecycle.Read)
@@ -3198,6 +3263,12 @@ model NatGatewayPropertiesFormat {
    * Reference to an existing service gateway.
    */
   serviceGateway?: SubResource;
+
+  /**
+   * Whether Nat64 is enabled for the NAT gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  nat64?: Nat64State;
 
   /**
    * The resource GUID property of the NAT gateway resource.
@@ -3765,6 +3836,12 @@ model RoutePropertiesFormat {
   nextHopIpAddress?: string;
 
   /**
+   * The next hop definition containing ECMP next hop IP addresses. Only allowed when nextHopType is VirtualApplianceEcmp.
+   */
+  @added(Versions.v2025_07_01)
+  nextHop?: RouteNextHopEcmp;
+
+  /**
    * The provisioning state of the route resource.
    */
   @visibility(Lifecycle.Read)
@@ -3775,6 +3852,21 @@ model RoutePropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   hasBgpOverride?: boolean;
+}
+
+/**
+ * The next hop definition for ECMP routes containing multiple next hop IP addresses.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield service: RouteNextHopEcmp uses Legacy.feature for consistency with existing Network routing models"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2025_07_01)
+model RouteNextHopEcmp {
+  /**
+   * List of next hop IP addresses for ECMP routing. Must contain between 2 and 64 IP addresses.
+   */
+  @minItems(2)
+  @maxItems(64)
+  nextHopIpAddresses: string[];
 }
 
 /**
@@ -3985,6 +4077,12 @@ model VirtualNetworkPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   defaultPublicNatGateway?: SubResource;
+
+  /**
+   * A configurable list of summarized gateway prefixes advertised for the virtual network.
+   */
+  @added(Versions.v2025_07_01)
+  summarizedGatewayPrefixes?: AddressSpace;
 }
 
 /**
