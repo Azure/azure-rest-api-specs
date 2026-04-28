@@ -21,7 +21,8 @@ using Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetUpdate.properties,
+  "!csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -169,7 +170,8 @@ using Common;
 @@clientName(VirtualMachineScaleSets.start::parameters.body, "vmInstanceIDs");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSet.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSet.properties,
+  "!csharp"
 );
 
 @@clientName(VirtualMachineScaleSetExtensions.update::parameters.properties,
@@ -196,7 +198,8 @@ using Common;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVM.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVM.properties,
+  "!csharp"
 );
 
 @@clientName(VirtualMachineExtensions.update::parameters.properties,

@@ -1,8 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./Compute/client.tsp";
 import "./ComputeDisk/client.tsp";
-import "./ComputeGallery/main.tsp";
+import "./ComputeGallery/client.tsp";
 import "./ComputeSku/main.tsp";
+import "./alternate-type-stubs.tsp";
 
 using Azure.ClientGenerator.Core;
 using Common;
@@ -62,3 +63,83 @@ namespace ComputeCombine;
   "VirtualMachineIdentityUserAssignedIdentities",
   "java"
 );
+
+// ── C# type renames for backward compatibility (migration from AutoRest) ──
+
+// Common namespace types
+// Common.SubResource has a writable id → maps to ComputeWriteableSubResourceData (matches old AutoRest).
+// Common.SubResourceReadOnly has a read-only id → maps to ComputeSubResourceData (matches old AutoRest).
+@@clientName(Common.SubResource, "ComputeWriteableSubResourceData", "csharp");
+@@clientName(Common.SubResourceReadOnly, "ComputeSubResourceData", "csharp");
+
+// Replace Compute's local ExtendedLocation / ExtendedLocationType with ARM common types
+@@alternateType(Common.ExtendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(ComputeSku.ResourceSkuLocationInfo.type,
+  Azure.ResourceManager.CommonTypes.ExtendedLocationType,
+  "csharp"
+);
+
+// ComputeSku namespace types
+@@clientName(ComputeSku.ResourceSku, "ComputeResourceSku", "csharp");
+@@clientName(ComputeSku.ResourceSkuCapabilities,
+  "ComputeResourceSkuCapabilities",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuCapacity,
+  "ComputeResourceSkuCapacity",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuCapacityScaleType,
+  "ComputeResourceSkuCapacityScaleType",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuLocationInfo,
+  "ComputeResourceSkuLocationInfo",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuRestrictionInfo,
+  "ComputeResourceSkuRestrictionInfo",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuRestrictions,
+  "ComputeResourceSkuRestrictions",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuRestrictionsReasonCode,
+  "ComputeResourceSkuRestrictionsReasonCode",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuRestrictionsType,
+  "ComputeResourceSkuRestrictionsType",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuZoneDetails,
+  "ComputeResourceSkuZoneDetails",
+  "csharp"
+);
+
+// ComputeSku property renames (C# backward compat)
+@@clientName(ComputeSku.ResourceSkuCosts.meterID, "MeterId", "csharp");
+@@clientName(ComputeSku.ResourceSkuRestrictions.type,
+  "RestrictionsType",
+  "csharp"
+);
+@@clientName(ComputeSku.ExtendedLocationType,
+  "ComputeExtendedLocationType",
+  "csharp"
+);
+@@clientName(ComputeSku.ResourceSkuLocationInfo.type,
+  "ExtendedLocationType",
+  "csharp"
+);
+
+// ── alternateType: SubResource.id → ResourceIdentifier for C# (migration from AutoRest) ──
+@@alternateType(Common.SubResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// NOTE: Common.Architecture → ArchitectureType is handled by auto-rename of Compute.ArchitectureTypes → ArchitectureType
