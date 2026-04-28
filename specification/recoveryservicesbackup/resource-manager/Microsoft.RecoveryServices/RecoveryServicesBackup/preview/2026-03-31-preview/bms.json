@@ -1479,6 +1479,9 @@
         "description": "Validates a backup operation for cross-tenant restore scenarios.\nThis API performs validation checks before executing a backup operation.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1487,10 +1490,9 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the recovery services vault.",
+            "description": "The name of the VaultResource",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
             "name": "crossTenantVaultMappingName",
@@ -1501,12 +1503,9 @@
             "pattern": ".*"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
-            "description": "Validate operation request",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ValidateOperationRequestResource"
