@@ -60,7 +60,8 @@ eval suites.
 
 ## Running with Evaluate (vally)
 
-Prerequisites: Clone [microsoft/evaluate](https://github.com/microsoft/evaluate),
+Prerequisites: [Node.js](https://nodejs.org/) >= 20 and npm >= 11.11.1.
+Clone [microsoft/evaluate](https://github.com/microsoft/evaluate),
 then `npm install && npm run build`.
 
 The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
@@ -73,26 +74,39 @@ declare `environment.skills`.
 ```bash
 cd .github/skills/evals/arm-api-reviewer
 
+# Set VALLY_CLI to the built CLI entry point in your local evaluate clone
+# (evaluate is a monorepo; the vally binary lives under packages/cli)
+export VALLY_CLI="/path/to/evaluate/packages/cli/dist/index.js"
+
 # Run the full suite (all 25 stimuli, 5 concurrent workers)
-npx --prefix /path/to/evaluate vally eval --suite all --verbose
+node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
-npx --prefix /path/to/evaluate vally eval -e evaluate/eval-arm-resource-structure.yaml --verbose
+node $VALLY_CLI eval -e evaluate/eval-arm-resource-structure.yaml --verbose
 
 # Override the agent model for faster inner-loop iteration
-npx --prefix /path/to/evaluate vally eval --suite all --model claude-sonnet-4.6 --verbose
+node $VALLY_CLI eval --suite all --model claude-sonnet-4.6 --verbose
 
 # Save results to a directory (includes results.jsonl + eval-results.md)
-npx --prefix /path/to/evaluate vally eval --suite all --output-dir ./results --verbose
+node $VALLY_CLI eval --suite all --output-dir ./results --verbose
 
 # Override the per-stimulus timeout (in milliseconds; default 120000 = 2 min)
-npx --prefix /path/to/evaluate vally eval --suite all --timeout 600000 --verbose
+node $VALLY_CLI eval --suite all --timeout 600000 --verbose
 ```
 
 Replace `/path/to/evaluate` with the path to your local clone of
-`microsoft/evaluate`. See the
+`microsoft/evaluate`. The CLI entry point is at
+`packages/cli/dist/index.js` inside the evaluate repo (run `npm run build`
+first). See the
 [evaluate documentation](https://github.com/microsoft/evaluate) for additional
 options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
+
+> **PowerShell users:** Use `$env:VALLY_CLI` instead of `$VALLY_CLI`:
+>
+> ```powershell
+> $env:VALLY_CLI = "C:\repos\evaluate\packages\cli\dist\index.js"
+> node $env:VALLY_CLI eval --suite all --verbose
+> ```
 
 ### Avoiding session timeouts
 
