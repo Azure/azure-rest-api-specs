@@ -11,7 +11,8 @@ import { CoreLogger } from "../core-logger.js";
 // Configuration
 // ============================================
 
-export const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-zA-Z0-9-]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
+export const LEASE_FILE_PATTERN =
+  /^\.github\/arm-leases\/[a-zA-Z0-9-]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
 export const LEASE_FILE_WITH_GROUP_PATTERN =
   /^\.github\/arm-leases\/[a-zA-Z0-9-]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
 
