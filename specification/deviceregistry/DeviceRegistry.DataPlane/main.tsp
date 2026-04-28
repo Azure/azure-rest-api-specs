@@ -21,7 +21,7 @@ using Azure.Core.Traits;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://deviceregistry.azure.com/.default"],
+      scopes: ["6ce3f5ab-5f16-4633-a660-21ceb8d74c01"],
     }
   ]>
 )
