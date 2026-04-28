@@ -47,7 +47,7 @@ scalar string4096 extends string;
 
 @maxLength(4096)
 @secret
-@doc("Secre string with max length validation of 4096 characters")
+@doc("Secret string with max length validation of 4096 characters")
 scalar secretString4096 extends string;
 
 @maxLength(256)
