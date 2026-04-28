@@ -1396,6 +1396,9 @@
         "description": "Triggers a validate operation for cross-tenant restore scenarios.\nThis is an asynchronous operation that performs validation checks.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1404,10 +1407,9 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the recovery services vault.",
+            "description": "The name of the VaultResource",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
             "name": "crossTenantVaultMappingName",
@@ -1418,12 +1420,9 @@
             "pattern": ".*"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
-            "description": "Trigger validate operation request",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ValidateOperationRequestResource"
@@ -1464,7 +1463,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ValidateOperationsResponse"
         },
         "x-ms-long-running-operation": true
       }

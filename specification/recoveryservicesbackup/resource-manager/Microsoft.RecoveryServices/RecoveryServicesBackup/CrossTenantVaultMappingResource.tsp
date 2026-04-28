@@ -618,41 +618,19 @@ interface OperationFromCrossTenantVault {
 }
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
 interface ValidateOperationFromCrossTenantVault {
   /**
    * Triggers a validate operation for cross-tenant restore scenarios.
    * This is an asynchronous operation that performs validation checks.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupTriggerValidateOperation")
-  @post
+  @action("backupTriggerValidateOperation")
   @tag("CrossTenant")
-  trigger(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    ...ApiVersionParameter,
-
-    /**
-     * Trigger validate operation request
-     */
-    @bodyRoot
-    parameters: ValidateOperationRequestResource,
-  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedLroResponse | ErrorResponse;
+  trigger is ArmResourceActionAsync<
+    CrossTenantVaultMappingResource,
+    ValidateOperationRequestResource,
+    ValidateOperationsResponse
+  >;
 }
 
 @added(Versions.v2026_03_31_preview)
