@@ -58,3 +58,10 @@ using LambdaTest.HyperExecute;
   "LambdaTestHyperExecuteUserDetails",
   "csharp"
 );
+
+// Renamed to preserve C# property name after flatten lift-to-nullable change in mgmt generator.
+// Old `PartnerLicensesSubscribed` (System.Nullable<int>) is restored as an [Obsolete] backward-compat shim in custom code.
+@@clientName(PartnerProperties.licensesSubscribed,
+  "subscribedLicensesCount",
+  "csharp"
+);
