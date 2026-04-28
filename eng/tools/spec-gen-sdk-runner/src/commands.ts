@@ -131,7 +131,12 @@ async function runAzsdkGeneration(
   }
 
   // Step 5: Build ExecutionReport via adapter
-  const executionReport = buildExecutionReport(generateResponse, packResponse, emitterCheck, buildResponse);
+  const executionReport = buildExecutionReport(
+    generateResponse,
+    packResponse,
+    emitterCheck,
+    buildResponse,
+  );
   return { executionReport, statusCode };
 }
 
