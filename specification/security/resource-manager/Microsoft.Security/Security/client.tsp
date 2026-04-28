@@ -279,6 +279,11 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   "privateEndpointConnection"
 );
 
+@@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.privateLinkName,
+  "privateLinkParameters",
+  "go"
+);
+
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -598,8 +603,3 @@ op alertsListResourceGroupLevelByRegionCustomized(
 );
 @@clientName(HealthReportsAPI.status, "HealthReportStatus", "java");
 @@clientName(SecuritySolutionsAPI.Status, "Status", "java");
-
-@@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.privateLinkName,
-  "privateLinkParameters",
-  "go"
-);
