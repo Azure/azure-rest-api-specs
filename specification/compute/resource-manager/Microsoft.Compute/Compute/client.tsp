@@ -143,3 +143,29 @@ namespace ComputeCombine;
 );
 
 // NOTE: Common.Architecture → ArchitectureType is handled by auto-rename of Compute.ArchitectureTypes → ArchitectureType
+
+// ── C# operation renames for backward compatibility (migration from AutoRest) ──
+// These mirror the override-operation-name entries from the deleted autorest.md.
+@@clientName(Compute.VirtualMachines.start, "PowerOn", "csharp");
+@@clientName(Compute.VirtualMachines.migrateToVMScaleSet,
+  "MigrateToVirtualMachineScaleSet",
+  "csharp"
+);
+@@clientName(Compute.VirtualMachineScaleSets.start, "PowerOn", "csharp");
+@@clientName(Compute.VirtualMachineScaleSets.cancel,
+  "CancelVirtualMachineScaleSetRollingUpgrade",
+  "csharp"
+);
+@@clientName(Compute.VirtualMachineScaleSets.startExtensionUpgrade,
+  "StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade",
+  "csharp"
+);
+@@clientName(Compute.VirtualMachineScaleSetVMS.start, "PowerOn", "csharp");
+@@clientName(ComputeGallery.Galleries.gallerySharingProfileUpdate,
+  "UpdateSharingProfile",
+  "csharp"
+);
+@@clientName(ComputeGallery.Galleries.listByArtifactName,
+  "GetSoftDeletedResourcesByArtifactName",
+  "csharp"
+);
