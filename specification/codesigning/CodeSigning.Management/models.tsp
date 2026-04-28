@@ -237,7 +237,7 @@ model CertificateProfileProperties {
   @doc("Identity validation id used for the certificate subject name.")
   @madeRequired(Versions.v2024_09_30_preview)
   identityValidationId: string;
-    
+
   @doc("Indicates whether the resource is intended for a specific usage scenario.")
   @added(Versions.v2026_05_15_preview)
   programType?: string;
