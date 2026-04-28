@@ -581,6 +581,14 @@ directive:
     from: bms.json
     where: $.definitions.ProtectedItemResource
     reason: ProtectedItemResource has DELETE on the standard path. The cross-tenant pass-through paths are read-only and intentionally do not support DELETE.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.CrossTenantVaultMappingResource
+    reason: CrossTenantVaultMappingResource has a list operation at /backupCrossTenantVaultMappings (operationId CrossTenantVaultMappings_List). The lint rule cannot match the resource to its list path due to the custom path segment name.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.VaultCredentialCertificateResponse
+    reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
 
 suppressions:
   - from: bms.json
