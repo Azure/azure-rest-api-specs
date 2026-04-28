@@ -28,3 +28,17 @@ using Microsoft.DevHub;
   Microsoft.DevHub,
   "javascript"
 );
+
+@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback,
+  "DeveloperHubServiceClient",
+  "go"
+);
+@@clientLocation(GitHubOAuthResponses.listGitHubOAuth,
+  "DeveloperHubServiceClient",
+  "go"
+);
+@@clientLocation(GitHubOAuthResponses.gitHubOAuth,
+  "DeveloperHubServiceClient",
+  "go"
+);
+@@clientLocation(generatePreviewArtifacts, "DeveloperHubServiceClient", "go");
