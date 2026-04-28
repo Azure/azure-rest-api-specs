@@ -2905,12 +2905,25 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time for the history query. Defaults to 24 hours ago if not specified."
+          "description": "Start time for the history query. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End time for the history query. Defaults to now if not specified."
+          "description": "End time for the history query. Defaults to now if not specified. Must be omitted when continuationToken is specified."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of health state transitions to return per page. Defaults to 1000.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "continuationToken": {
+          "$ref": "#/definitions/secretString4096",
+          "format": "password",
+          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.",
+          "x-ms-secret": true
         }
       }
     },
@@ -2931,6 +2944,12 @@
           "x-ms-identifiers": [
             "occurredAt"
           ]
+        },
+        "continuationToken": {
+          "$ref": "#/definitions/secretString4096",
+          "format": "password",
+          "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4225,12 +4244,25 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time for the history query. Defaults to 24 hours ago if not specified."
+          "description": "Start time for the history query. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End time for the history query. Defaults to now if not specified."
+          "description": "End time for the history query. Defaults to now if not specified. Must be omitted when continuationToken is specified."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of data points to return per page. Defaults to 1000.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "continuationToken": {
+          "$ref": "#/definitions/secretString4096",
+          "format": "password",
+          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4258,6 +4290,12 @@
           "x-ms-identifiers": [
             "occurredAt"
           ]
+        },
+        "continuationToken": {
+          "$ref": "#/definitions/secretString4096",
+          "format": "password",
+          "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
+          "x-ms-secret": true
         }
       },
       "required": [
