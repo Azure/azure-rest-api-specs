@@ -56,7 +56,7 @@ interface GetSensitivitySettingsResponses {
   /**
    * Gets a list with a single sensitivity settings resource
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     GetSensitivitySettingsResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResponse<GetSensitivitySettingsListResponse>,
