@@ -31,19 +31,19 @@ arm-api-reviewer/
 
 ## Test Categories (25 test cases across 11 eval files)
 
-| ID     | Category                 | Count | Description                                           |
-| ------ | ------------------------ | ----- | ----------------------------------------------------- |
-| 01xxxx | ARM resource structure   | 2     | Missing CRUD ops, missing provisioningState           |
-| 02xxxx | Property design          | 4     | Secrets, naming, descriptions, enums                  |
-| 03xxxx | Operations               | 4     | PATCH, PUT, DELETE, LRO violations                    |
-| 04xxxx | Breaking changes         | 3     | Removed property, type change, enum narrowing         |
-| 05xxxx | Suppression analysis     | 2     | Missing reason, security rule suppressions            |
-| 06xxxx | Example file validation  | 2     | Bad resource ID, realistic secrets                    |
-| 07xxxx | TypeSpec review          | 3     | Segment casing, secrets, anti-patterns                |
-| 08xxxx | Check Name Availability  | 1     | Custom CNA models, missing input validation           |
-| 09xxxx | True negatives           | 2     | Clean spec, clean example (false-positive resistance) |
-| 10xxxx | Classification           | 1     | NEW vs EXISTING issue tagging                         |
-| 11xxxx | Report format            | 1     | Line numbers, rule IDs, structured output             |
+| ID     | Category                | Count | Description                                           |
+| ------ | ----------------------- | ----- | ----------------------------------------------------- |
+| 01xxxx | ARM resource structure  | 2     | Missing CRUD ops, missing provisioningState           |
+| 02xxxx | Property design         | 4     | Secrets, naming, descriptions, enums                  |
+| 03xxxx | Operations              | 4     | PATCH, PUT, DELETE, LRO violations                    |
+| 04xxxx | Breaking changes        | 3     | Removed property, type change, enum narrowing         |
+| 05xxxx | Suppression analysis    | 2     | Missing reason, security rule suppressions            |
+| 06xxxx | Example file validation | 2     | Bad resource ID, realistic secrets                    |
+| 07xxxx | TypeSpec review         | 3     | Segment casing, secrets, anti-patterns                |
+| 08xxxx | Check Name Availability | 1     | Custom CNA models, missing input validation           |
+| 09xxxx | True negatives          | 2     | Clean spec, clean example (false-positive resistance) |
+| 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                         |
+| 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output             |
 
 ## Fixtures
 
