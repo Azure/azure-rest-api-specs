@@ -12,6 +12,7 @@ using Microsoft.DevHub;
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
 @@clientName(ACR, "Acr", "java,javascript");
 @@clientName(Deployment, "DeploymentProperties", "java,javascript");
+// consistency on "AdoOAuth"
 @@clientName(AdooAuthResponse, "AdoOAuthResponse", "java");
 @@clientName(AdooAuthResponses, "AdoOAuthResponses", "java");
 @@clientName(AdooAuthCallRequest, "AdoOAuthCallRequest", "java");
