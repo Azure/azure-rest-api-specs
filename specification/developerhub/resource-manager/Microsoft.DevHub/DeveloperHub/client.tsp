@@ -42,3 +42,7 @@ using Microsoft.DevHub;
   "go"
 );
 @@clientLocation(generatePreviewArtifacts, "DeveloperHubServiceClient", "go");
+@@clientLocation(AdooAuthResponses.getADOOAuthInfo,
+  "DeveloperHubServiceClient",
+  "go"
+);
