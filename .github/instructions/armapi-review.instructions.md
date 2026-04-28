@@ -820,6 +820,27 @@ When reviewing resources that support availability zones, verify: `zones` is a t
   - `message` (string) — a human-readable explanation
 - Do not use checkNameAvailability as a gate — implement retry logic in resource creation.
 
+### 21.3 Must Use Common-Types Definitions (CNA-003)
+
+- The `checkNameAvailability` request body **MUST** reference the common-types `CheckNameAvailabilityRequest` definition (`common-types/resource-management/vX/types.json#/definitions/CheckNameAvailabilityRequest`).
+- The response body **MUST** reference the common-types `CheckNameAvailabilityResponse` definition.
+- If the spec defines custom request/response models instead of using common-types, flag it and instruct the author to use the common-types `$ref`.
+- **Why:** Custom definitions may omit the `type` field or diverge from the standard contract, making the endpoint inconsistent across RPs and bypassing any future input validation added to the common-types definition.
+
+### 21.4 Name Field Input Validation (CNA-004)
+
+- The `name` property in the `checkNameAvailability` request **MUST** have `pattern` and `maxLength` constraints matching the target resource type's name validation rules.
+- At minimum, the `name` field **SHOULD** be constrained to valid ARM resource name characters (alphanumeric, hyphens, underscores, periods). Example: `"pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,259}$"`, `"maxLength": 260`.
+- If a spec defines a custom `checkNameAvailability` request model with a bare `string` `name` field (no `pattern`, no `maxLength`), flag it as a **security concern** and instruct the author to add constraints.
+- **Why:** Unconstrained string inputs to backend queries are a SQL/NoSQL injection risk. Input validation in the spec provides client-side SDK validation and signals to implementers that the field requires server-side sanitization.
+
+### 21.5 Security: Backend Query Safety (CNA-SEC-001)
+
+- **Implementation guidance for RP authors** (not directly enforceable in the spec, but critical):
+  - The `name` value from a `checkNameAvailability` request **MUST** be passed to backend data stores (Cosmos DB, SQL, etc.) using **parameterized queries** — never via string concatenation into query text.
+  - The backend query **MUST** scope results to the caller's subscription and/or tenant. A `checkNameAvailability` call in subscription A **MUST NOT** match or return results from subscription B or a different tenant.
+- **Why:** String concatenation of user-controlled input into database queries enables injection attacks (e.g., Cosmos DB SQL injection via boolean-based blind techniques). Combined with missing tenant/subscription scoping, this creates a cross-tenant data leak vulnerability. RPs using shared frameworks (e.g., Liftr) must verify the framework's implementation uses parameterized queries.
+
 ---
 
 ## 22. managedBy Property
@@ -1042,6 +1063,11 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions used only for non-CRUD operations
 - ✅ POST for data retrieval only when retrieving secrets or P99 latency > 2s; prefer OData filters on GET
 - ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (RPC-LIST-VERSIONS)
+
+### Check Name Availability
+
+- ✅ `checkNameAvailability` uses common-types `CheckNameAvailabilityRequest` / `CheckNameAvailabilityResponse` — not custom request/response models (CNA-003)
+- ✅ `name` field has `pattern` and `maxLength` constraints — not a bare unconstrained string (CNA-004)
 
 ### Tenant-Level APIs
 
