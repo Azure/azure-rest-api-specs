@@ -102,6 +102,107 @@ namespace PolicyInsightsManagementClient;
   policyStatesSummarizeForSubscription
 );
 
+@@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  policyEventsListQueryResultsForPolicySetDefinition,
+  "java"
+);
+@@clientLocation(policyEventsListQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  policyEventsListQueryResultsForPolicyDefinition,
+  "java"
+);
+@@clientLocation(policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(policyStatesListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  policyStatesListQueryResultsForPolicySetDefinition,
+  "java"
+);
+@@clientLocation(policyStatesSummarizeForPolicySetDefinition::parameters.subscriptionId,
+  policyStatesSummarizeForPolicySetDefinition,
+  "java"
+);
+@@clientLocation(policyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  policyStatesListQueryResultsForPolicyDefinition,
+  "java"
+);
+@@clientLocation(policyStatesSummarizeForPolicyDefinition::parameters.subscriptionId,
+  policyStatesSummarizeForPolicyDefinition,
+  "java"
+);
+@@clientLocation(policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForPolicyDefinition,
+  "java"
+);
+@@clientLocation(componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
+  "java"
+);
+@@clientLocation(componentPolicyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForResourceGroup,
+  "java"
+);
+@@clientLocation(componentPolicyStatesListQueryResultsForSubscription::parameters.subscriptionId,
+  componentPolicyStatesListQueryResultsForSubscription,
+  "java"
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "java"
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+  "java"
+);
+@@clientLocation(policyEventsListQueryResultsForResourceGroup::parameters.subscriptionId,
+  policyEventsListQueryResultsForResourceGroup,
+  "java"
+);
+@@clientLocation(policyEventsListQueryResultsForSubscription::parameters.subscriptionId,
+  policyEventsListQueryResultsForSubscription,
+  "java"
+);
+@@clientLocation(policyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
+  policyStatesListQueryResultsForResourceGroup,
+  "java"
+);
+@@clientLocation(policyStatesListQueryResultsForSubscription::parameters.subscriptionId,
+  policyStatesListQueryResultsForSubscription,
+  "java"
+);
+@@clientLocation(policyStatesSummarizeForResourceGroup::parameters.subscriptionId,
+  policyStatesSummarizeForResourceGroup,
+  "java"
+);
+@@clientLocation(policyStatesSummarizeForSubscription::parameters.subscriptionId,
+  policyStatesSummarizeForSubscription,
+  "java"
+);
+
 /**
  * Parameter group for OData query options.
  */
