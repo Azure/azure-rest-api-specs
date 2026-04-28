@@ -892,10 +892,9 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * A tool for enabling semantic search over the agent's toolbox.
-   * When present, tools in the toolbox are subject to the load policy configured
-   * on the toolbox version. Deferred tools are hidden from `tools/list` and only
-   * discoverable via `tool_search` queries at runtime.
+   * A tool for searching over the agent's toolbox.
+   * When present, deferred tools are hidden from `tools/list` and only
+   * discoverable via `search_tools` queries at runtime.
    */
   model ToolboxSearchPreviewTool extends OpenAI.Tool {
     /**
