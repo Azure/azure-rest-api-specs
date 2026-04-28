@@ -289,6 +289,12 @@ union OSSKU {
    * Use Ubuntu2404 as the OS for node images, however, Ubuntu 24.04 may not be supported for all nodepools. For limitations and supported kubernetes versions, see see https://aka.ms/aks/supported-ubuntu-versions
    */
   Ubuntu2404: "Ubuntu2404",
+
+  /**
+   * Use Azure Container Linux as the OS for node images. Azure Container Linux is a container-optimized, security-focused Linux OS built on Azure Linux, with an immutable filesystem. ACL is derived from the Flatcar Container Linux project, building on Flatcar's proven container-first, immutable design, while adding Azure Linux packages, servicing, and deep integration with the Azure and AKS lifecycle. For more information, see https://aka.ms/azurecontainerlinux
+   */
+  @added(Versions.v2026_03_01)
+  AzureContainerLinux: "AzureContainerLinux",
 }
 
 /**
