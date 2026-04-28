@@ -139,92 +139,53 @@ model EvaluationSuiteRunResponse {
 // Generate API (LRO) models
 // ---------------------------------------------------------------------------
 
-// TODO: Replace with shared JobSource from common/models.tsp when available.
-// These match the shared JobSource types used by evaluator_generation_jobs
-// and data_generation_jobs.
+// Source types follow the shared JobSource pattern from evaluator_generation_jobs
+// and data_generation_jobs. Per-context discriminated base with shared shape spreads.
 
 @doc("The supported source types for evaluation suite generation jobs.")
 union EvaluationSuiteJobSourceType {
   string,
 
   @doc("Prompt source — inline text provided by the user.")
-  Prompt: "Prompt",
+  prompt: "prompt",
 
   @doc("Agent source — references an agent to fetch instructions and metadata from.")
-  Agent: "Agent",
+  agent: "agent",
 
   @doc("Traces source — conversation traces from Application Insights.")
-  Traces: "Traces",
+  traces: "traces",
 
   @doc("Dataset source — reference to a dataset.")
-  Dataset: "Dataset",
+  dataset: "dataset",
 }
 
-@doc("Base source model for evaluation suite generation jobs.")
+@doc("The base source model for evaluation suite generation jobs. Polymorphic over `type`.")
 @discriminator("type")
 model EvaluationSuiteJobSource {
   @doc("The type of source.")
   type: EvaluationSuiteJobSourceType;
 
-  @doc("Optional description of what this source represents.")
-  description?: string;
+  ...JobSourceDescription;
 }
 
-@doc("Prompt source — inline text provided by the user.")
+@doc("Prompt source for evaluation suite generation jobs — inline text provided by the user.")
 model PromptEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
-  @doc("The source type, which is Prompt.")
-  type: "Prompt";
-
-  @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
-  prompt: string;
+  ...PromptJobSource;
 }
 
-@doc("Agent source — references an agent to fetch instructions and metadata from.")
+@doc("Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.")
 model AgentEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
-  @doc("The source type, which is Agent.")
-  type: "Agent";
-
-  @doc("The agent name to fetch instructions from.")
-  agent_name: string;
-
-  @doc("The agent version. If not specified, the latest version is used.")
-  agent_version?: string;
-
-  @doc("Optional supplementary prompt text to augment the agent's instructions.")
-  prompt?: string;
+  ...AgentJobSource;
 }
 
-@doc("Traces source — conversation traces from Application Insights.")
+@doc("Traces source for evaluation suite generation jobs — conversation traces from Application Insights.")
 model TracesEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
-  @doc("The source type, which is Traces.")
-  type: "Traces";
-
-  @doc("The agent name to fetch traces for.")
-  agent_name: string;
-
-  @doc("The agent version. If not specified, traces for all versions are included.")
-  agent_version?: string;
-
-  @doc("Start of the time window (Unix timestamp in seconds).")
-  start_time?: FoundryTimestamp;
-
-  @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
-  end_time?: FoundryTimestamp;
-
-  @doc("Maximum number of traces to retrieve.")
-  max_traces?: int32 = 100;
+  ...TracesJobSource;
 }
 
-@doc("Dataset source — reference to a dataset.")
+@doc("Dataset source for evaluation suite generation jobs — reference to a dataset.")
 model DatasetEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
-  @doc("The source type, which is Dataset.")
-  type: "Dataset";
-
-  @doc("The name of the dataset.")
-  name: string;
-
-  @doc("The version of the dataset. If not specified, the latest version is used.")
-  version?: string;
+  ...DatasetJobSource;
 }
 
 @doc("Caller-supplied inputs for an evaluation suite generation job.")
