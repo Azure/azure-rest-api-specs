@@ -83,45 +83,6 @@
         }
       }
     },
-    "/providers/Microsoft.Commerce/upns": {
-      "get": {
-        "operationId": "Upns_ListByTenant",
-        "tags": [
-          "Upns"
-        ],
-        "description": "List UPN resources at tenant/provider scope. Returns the identity\nenvelope for each UPN by default; use the `fragments` query parameter\nto opt in to additional fragment subtrees on every listed UPN.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FragmentsQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UpnListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List UPNs at tenant/provider scope.": {
-            "$ref": "./examples/Upns_ListByTenant.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Commerce/upns/{upnGuid}": {
       "get": {
         "operationId": "Upns_Get",
@@ -263,129 +224,6 @@
         }
       ]
     },
-    "UpnFragment": {
-      "type": "string",
-      "description": "Fragment names that can be requested via the `fragments` query parameter\non UPN read operations. Each fragment is an opt-in subtree exposed under\n`properties.{fragmentName}` in the response.",
-      "enum": [
-        "listing",
-        "pricing",
-        "purchase",
-        "lifecycle",
-        "display",
-        "tax",
-        "term",
-        "benefits",
-        "bundle",
-        "eligibility",
-        "permutations",
-        "tags",
-        "search",
-        "financial",
-        "externalIds"
-      ],
-      "x-ms-enum": {
-        "name": "UpnFragment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Listing",
-            "value": "listing",
-            "description": "Listing and catalog-presentation fragment."
-          },
-          {
-            "name": "Pricing",
-            "value": "pricing",
-            "description": "List / retail / rate-card pricing fragment (not customer-negotiated pricing)."
-          },
-          {
-            "name": "Purchase",
-            "value": "purchase",
-            "description": "Purchase flow configuration fragment."
-          },
-          {
-            "name": "Lifecycle",
-            "value": "lifecycle",
-            "description": "Lifecycle metadata fragment."
-          },
-          {
-            "name": "Display",
-            "value": "display",
-            "description": "Display metadata fragment."
-          },
-          {
-            "name": "Tax",
-            "value": "tax",
-            "description": "Tax configuration fragment."
-          },
-          {
-            "name": "Term",
-            "value": "term",
-            "description": "Term and billing-plan fragment."
-          },
-          {
-            "name": "Benefits",
-            "value": "benefits",
-            "description": "Benefits fragment."
-          },
-          {
-            "name": "Bundle",
-            "value": "bundle",
-            "description": "Bundle composition fragment."
-          },
-          {
-            "name": "Eligibility",
-            "value": "eligibility",
-            "description": "Eligibility predicates fragment."
-          },
-          {
-            "name": "Permutations",
-            "value": "permutations",
-            "description": "Compact channel/market/salesMotion permutations fragment."
-          },
-          {
-            "name": "Tags",
-            "value": "tags",
-            "description": "Catalog tags fragment."
-          },
-          {
-            "name": "Search",
-            "value": "search",
-            "description": "Search keywords fragment."
-          },
-          {
-            "name": "Financial",
-            "value": "financial",
-            "description": "Financial classification fragment."
-          },
-          {
-            "name": "ExternalIds",
-            "value": "externalIds",
-            "description": "External identifiers fragment."
-          }
-        ]
-      }
-    },
-    "UpnListResult": {
-      "type": "object",
-      "description": "The response of a Upn list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Upn items on this page",
-          "items": {
-            "$ref": "#/definitions/Upn"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "UpnOwnership": {
       "type": "string",
       "description": "Ownership classification of a product. Indicates whether the product is\nowned by Microsoft (first-party) or by a third-party publisher.",
@@ -483,14 +321,5 @@
       }
     }
   },
-  "parameters": {
-    "FragmentsQueryParameter": {
-      "name": "fragments",
-      "in": "query",
-      "description": "A comma-separated list of fragment names to include in the response,\nor `*` to include all fragments. Example: `pricing,permutations,display`.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

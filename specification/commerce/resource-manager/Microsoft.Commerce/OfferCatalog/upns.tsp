@@ -36,17 +36,6 @@ interface Upns {
    * envelope of the UPN.
    */
   get is Extension.Read<Extension.Tenant, Upn>;
-
-  /**
-   * List UPN resources at tenant/provider scope. Returns the identity
-   * envelope for each UPN by default; use the `fragments` query parameter
-   * to opt in to additional fragment subtrees on every listed UPN.
-   */
-  listByTenant is Extension.ListByTarget<
-    Extension.Tenant,
-    Upn,
-    Parameters = FragmentsQueryParameter
-  >;
 }
 
 @@doc(Upn.name,

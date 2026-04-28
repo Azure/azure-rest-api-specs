@@ -37,60 +37,6 @@ union SkuType {
   OneTime: "one_time",
 }
 
-/**
- * Fragment names that can be requested via the `fragments` query parameter
- * on UPN read operations. Each fragment is an opt-in subtree exposed under
- * `properties.{fragmentName}` in the response.
- */
-union UpnFragment {
-  string,
-
-  /** Listing and catalog-presentation fragment. */
-  Listing: "listing",
-
-  /** List / retail / rate-card pricing fragment (not customer-negotiated pricing). */
-  Pricing: "pricing",
-
-  /** Purchase flow configuration fragment. */
-  Purchase: "purchase",
-
-  /** Lifecycle metadata fragment. */
-  Lifecycle: "lifecycle",
-
-  /** Display metadata fragment. */
-  Display: "display",
-
-  /** Tax configuration fragment. */
-  Tax: "tax",
-
-  /** Term and billing-plan fragment. */
-  Term: "term",
-
-  /** Benefits fragment. */
-  Benefits: "benefits",
-
-  /** Bundle composition fragment. */
-  Bundle: "bundle",
-
-  /** Eligibility predicates fragment. */
-  Eligibility: "eligibility",
-
-  /** Compact channel/market/salesMotion permutations fragment. */
-  Permutations: "permutations",
-
-  /** Catalog tags fragment. */
-  Tags: "tags",
-
-  /** Search keywords fragment. */
-  Search: "search",
-
-  /** Financial classification fragment. */
-  Financial: "financial",
-
-  /** External identifiers fragment. */
-  ExternalIds: "externalIds",
-}
-
 /** Unit metadata associated with a value exchange. */
 model ValueExchangeUnit {
   /** A human-readable hint describing the unit (for example, "vCPU Duration - 1 Hour"). */
@@ -178,19 +124,4 @@ model UpnProperties {
 
   /** The offer-template identifier for this UPN (for example, "offer-template/az-vm"). */
   template?: string;
-}
-
-/**
- * Optional query parameter that allows callers to opt in to fragment
- * subtrees on UPN read operations. The value is a comma-separated list of
- * fragment names (see `UpnFragment`), or `*` to request all fragments.
- * Default (omitted) returns only the identity envelope.
- */
-model FragmentsQueryParameter {
-  /**
-   * A comma-separated list of fragment names to include in the response,
-   * or `*` to include all fragments. Example: `pricing,permutations,display`.
-   */
-  @query("fragments")
-  fragments?: string;
 }
