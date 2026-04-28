@@ -886,6 +886,26 @@ model CreateAgentFromCodeContent {
   ...CreateAgentVersionFromCodeContent;
 }
 
+/**
+ * Response body for downloading a hosted agent's code zip.
+ * Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
+ * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
+ * of the content-type label.
+ */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model DownloadAgentCodeResponse {
+  @doc("The media type of the returned package content.")
+  @header("Content-Type")
+  content_type: "application/zip";
+
+  @doc("The zip code package content.")
+  @body
+  body: bytes;
+}
+
 // ══════════════════════════════════════════════════════════
 // Session Lifecycle Management
 // ══════════════════════════════════════════════════════════

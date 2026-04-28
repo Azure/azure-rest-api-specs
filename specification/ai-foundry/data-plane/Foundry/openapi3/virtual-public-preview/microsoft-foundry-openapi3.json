@@ -560,7 +560,7 @@
     "/agents/{agent_name}/code/content": {
       "get": {
         "operationId": "Agents_downloadAgentCode",
-        "description": "Download the code zip for the latest version of a code-based hosted agent.\nReturns the previously-uploaded zip as a binary stream (`application/octet-stream`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.",
+        "description": "Download the code zip for the latest version of a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -596,9 +596,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Response body for downloading a hosted agent's code zip.\nBody is the raw zip bytes; `Content-Type` declares `application/zip` so clients\ncan route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless\nof the content-type label.",
             "content": {
-              "application/octet-stream": {
+              "application/zip": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -2335,7 +2335,7 @@
     "/agents/{agent_name}/versions/{agent_version}/code/content": {
       "get": {
         "operationId": "Agents_downloadAgentVersionCode",
-        "description": "Download the code zip for a specific version of a code-based hosted agent.\nReturns the previously-uploaded zip as a binary stream (`application/octet-stream`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.",
+        "description": "Download the code zip for a specific version of a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2380,9 +2380,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Response body for downloading a hosted agent's code zip.\nBody is the raw zip bytes; `Content-Type` declares `application/zip` so clients\ncan route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless\nof the content-type label.",
             "content": {
-              "application/octet-stream": {
+              "application/zip": {
                 "schema": {
                   "type": "string",
                   "format": "binary"

@@ -340,7 +340,7 @@ interface Agents {
 
   /**
    * Download the code zip for a specific version of a code-based hosted agent.
-   * Returns the previously-uploaded zip as a binary stream (`application/octet-stream`).
+   * Returns the previously-uploaded zip (`application/zip`).
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.
    */
   @get
@@ -359,12 +359,12 @@ interface Agents {
       /** The version of the agent whose code zip should be downloaded. */
       @path agent_version: string;
     },
-    bytes
+    DownloadAgentCodeResponse
   >;
 
   /**
    * Download the code zip for the latest version of a code-based hosted agent.
-   * Returns the previously-uploaded zip as a binary stream (`application/octet-stream`).
+   * Returns the previously-uploaded zip (`application/zip`).
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.
    */
   @get
@@ -380,7 +380,7 @@ interface Agents {
       /** The name of the agent whose latest-version code zip should be downloaded. */
       @path agent_name: string;
     },
-    bytes
+    DownloadAgentCodeResponse
   >;
 
   // ── Session Lifecycle Operations ────────────────────────
