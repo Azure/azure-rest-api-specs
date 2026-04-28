@@ -145,7 +145,7 @@ model PromptJobSource {
   prompt: string;
 }
 
-@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text.")
+@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate `PromptJobSource` entry to `sources[]` to provide supplementary text alongside the agent.")
 model AgentJobSource {
   ...JobSourceDescription;
 
@@ -157,9 +157,6 @@ model AgentJobSource {
 
   @doc("The agent version. If not specified, the latest version is used.")
   agent_version?: string;
-
-  @doc("Optional supplementary prompt text to augment the agent's instructions (e.g., additional context not captured in the agent definition).")
-  prompt?: string;
 }
 
 @doc("Traces source — conversation traces from Application Insights.")
