@@ -25,19 +25,18 @@ union OperationKind {
   ProvisionDevice: "ProvisionDevice",
 
   /** Compliance report describing the updating state of devices in the namespace. */
-  NamespaceUpdateComplianceReport: "GenerateReport.NamespaceUpdateCompliance",
+  NamespaceUpdateComplianceReport: "GenerateReport.NamespaceUpdateComplianceReport",
 
   /** Report describing the best available updates and update compliance for the devices within a group. */
-  GroupBestUpdatesComplianceReport: "GenerateReport.GroupBestUpdatesCompliance",
+  GroupBestUpdatesComplianceReport: "GenerateReport.GroupBestUpdatesComplianceReport",
 
   /** Report listing the installable updates for the devices within a group. */
-  GroupInstallableUpdatesReport: "GenerateReport.GroupInstallableUpdates",
+  GroupInstallableUpdatesReport: "GenerateReport.GroupInstallableUpdatesReport",
 }
 
 /** A long-running operation status resource scoped to a namespace. */
 @parentResource(Namespace)
 @resource("operations")
-@discriminator("kind")
 model Operation {
   /** The unique identifier of the operation. */
   @key("operationId")
