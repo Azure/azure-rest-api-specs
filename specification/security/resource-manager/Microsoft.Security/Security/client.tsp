@@ -552,8 +552,16 @@ op alertsListResourceGroupLevelByRegionCustomized(
   "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem",
   "java"
 );
-@@clientName(ApplicationsAPI.SecurityConnectorApplication,
-  "SecurityConnectorApplicationOperations",
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.get,
+  "SecurityConnectorApplications",
+  "java"
+);
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
+  "SecurityConnectorApplications",
+  "java"
+);
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.delete,
+  "SecurityConnectorApplications",
   "java"
 );
 @@clientLocation(ApplicationsAPI.SecurityConnectorApplication.list,
@@ -562,6 +570,7 @@ op alertsListResourceGroupLevelByRegionCustomized(
 );
 @@clientName(HealthReportsAPI.status, "HealthReportStatus", "java");
 @@clientName(SecuritySolutionsAPI.Status, "Status", "java");
+
 @@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.privateLinkParameters,
   "privateLinkParameters",
   "go"
