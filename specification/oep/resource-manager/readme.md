@@ -4,6 +4,17 @@
 
 This is the AutoRest configuration file for oep.
 
+## TypeSpec
+
+This specification is now authored in TypeSpec. The source of truth is located at:
+`specification/oep/OpenEnergyPlatform.Management/`
+
+To regenerate the OpenAPI spec from TypeSpec, run:
+```bash
+cd specification/oep/OpenEnergyPlatform.Management
+npx tsp compile .
+```
+
 ## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
@@ -45,18 +56,18 @@ These settings apply only when `--tag=package-2022-04-04-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-04-preview'
 input-file:
-  - Microsoft.OpenEnergyPlatform/preview/2022-04-04-preview/oep.json
+  - Microsoft.OpenEnergyPlatform/preview/2022-04-04-preview/openenergyplatform.json
 ```
 
 ## Suppression
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: oep.json
+    from: openenergyplatform.json
     where: $.definitions.DataPartitionsList
     reason: DataPartitionsList is a proxy resource
   - suppress: BodyTopLevelProperties
-    from: oep.json
+    from: openenergyplatform.json
     where: $.definitions.DataPartitionsList.properties
     reason: DataPartitionsList is a proxy resource
 ```    
@@ -71,28 +82,9 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
 ```
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
