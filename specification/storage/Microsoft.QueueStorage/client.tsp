@@ -39,9 +39,9 @@ interface QueueClient extends Queue {}
   "rust"
 );
 
-@@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "!python, !csharp");
-@@clientNamespace(Service, "Azure.Storage.Queues", "!python, !csharp");
-@@clientNamespace(Queue, "Azure.Storage.Queues", "!python, !csharp");
+@@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "!python, !csharp, !javascript");
+@@clientNamespace(Service, "Azure.Storage.Queues", "!python, !csharp, !javascript");
+@@clientNamespace(Queue, "Azure.Storage.Queues", "!python, !csharp, !javascript");
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(SentMessage, "SentMessageInternal", "rust");
