@@ -128,17 +128,19 @@ union JobSourceType {
   dataset: "dataset",
 }
 
-@doc("Common properties shared across all job source types.")
-model JobSourceDescription {
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Discriminator is a closed enum-backed union."
+@doc("Base type for all job source variants. Polymorphic over `type`; concrete variants extend this model.")
+@discriminator("type")
+model JobSource {
+  @doc("The source type for this source.")
+  type: JobSourceType;
+
   @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
   description?: string;
 }
 
 @doc("Prompt source — inline text provided by the user.")
-model PromptJobSource {
-  ...JobSourceDescription;
-
-  @doc("The source type for this source, which is prompt.")
+model PromptJobSource extends JobSource {
   type: JobSourceType.prompt;
 
   @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
@@ -146,10 +148,7 @@ model PromptJobSource {
 }
 
 @doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate `PromptJobSource` entry to `sources[]` to provide supplementary text alongside the agent.")
-model AgentJobSource {
-  ...JobSourceDescription;
-
-  @doc("The source type for this source, which is agent.")
+model AgentJobSource extends JobSource {
   type: JobSourceType.agent;
 
   @doc("The agent name to fetch instructions from.")
@@ -160,10 +159,7 @@ model AgentJobSource {
 }
 
 @doc("Traces source — conversation traces from Application Insights.")
-model TracesJobSource {
-  ...JobSourceDescription;
-
-  @doc("The source type for this source, which is traces.")
+model TracesJobSource extends JobSource {
   type: JobSourceType.traces;
 
   @doc("The agent name to fetch traces for.")
@@ -183,10 +179,7 @@ model TracesJobSource {
 }
 
 @doc("Dataset source — reference to a dataset.")
-model DatasetJobSource {
-  ...JobSourceDescription;
-
-  @doc("The source type for this source, which is dataset.")
+model DatasetJobSource extends JobSource {
   type: JobSourceType.dataset;
 
   @doc("The name of the dataset.")

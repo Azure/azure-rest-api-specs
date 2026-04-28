@@ -11254,16 +11254,11 @@
           "agent_name"
         ],
         "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
           "type": {
             "type": "string",
             "enum": [
               "agent"
-            ],
-            "description": "The source type for this source, which is agent."
+            ]
           },
           "agent_name": {
             "type": "string",
@@ -11274,6 +11269,11 @@
             "description": "The agent version. If not specified, the latest version is used."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobSource"
+          }
+        ],
         "description": "Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate `PromptJobSource` entry to `sources[]` to provide supplementary text alongside the agent."
       },
       "AgentKind": {
@@ -14155,16 +14155,11 @@
           "name"
         ],
         "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
           "type": {
             "type": "string",
             "enum": [
               "dataset"
-            ],
-            "description": "The source type for this source, which is dataset."
+            ]
           },
           "name": {
             "type": "string",
@@ -14175,6 +14170,11 @@
             "description": "The version of the dataset. If not specified, the latest version is used."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobSource"
+          }
+        ],
         "description": "Dataset source — reference to a dataset."
       },
       "DatasetReference": {
@@ -15930,9 +15930,9 @@
           "sources": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluatorJobSource"
+              "$ref": "#/components/schemas/JobSource"
             },
-            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets."
+            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is a `JobSource` variant discriminated by `type`."
           },
           "category": {
             "allOf": [
@@ -16036,23 +16036,6 @@
           }
         },
         "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
-      },
-      "EvaluatorJobSource": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/PromptJobSource"
-          },
-          {
-            "$ref": "#/components/schemas/AgentJobSource"
-          },
-          {
-            "$ref": "#/components/schemas/TracesJobSource"
-          },
-          {
-            "$ref": "#/components/schemas/DatasetJobSource"
-          }
-        ],
-        "description": "Source materials for an evaluator generation job — discriminated by `type` over the four shared `JobSource` variants."
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -17262,6 +17245,53 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "JobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobSourceType"
+              }
+            ],
+            "description": "The source type for this source."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "prompt": "#/components/schemas/PromptJobSource",
+            "agent": "#/components/schemas/AgentJobSource",
+            "traces": "#/components/schemas/TracesJobSource",
+            "dataset": "#/components/schemas/DatasetJobSource"
+          }
+        },
+        "description": "Base type for all job source variants. Polymorphic over `type`; concrete variants extend this model."
+      },
+      "JobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "prompt",
+              "agent",
+              "traces",
+              "dataset"
+            ]
+          }
+        ],
+        "description": "The supported source types for jobs."
       },
       "JobStatus": {
         "anyOf": [
@@ -38470,22 +38500,22 @@
           "prompt"
         ],
         "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
           "type": {
             "type": "string",
             "enum": [
               "prompt"
-            ],
-            "description": "The source type for this source, which is prompt."
+            ]
           },
           "prompt": {
             "type": "string",
             "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobSource"
+          }
+        ],
         "description": "Prompt source — inline text provided by the user."
       },
       "ProtocolVersionRecord": {
@@ -40108,16 +40138,11 @@
           "agent_name"
         ],
         "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
           "type": {
             "type": "string",
             "enum": [
               "traces"
-            ],
-            "description": "The source type for this source, which is traces."
+            ]
           },
           "agent_name": {
             "type": "string",
@@ -40149,6 +40174,11 @@
             "description": "Maximum number of traces to retrieve."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobSource"
+          }
+        ],
         "description": "Traces source — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {

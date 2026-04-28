@@ -168,21 +168,13 @@ model EvaluatorGenerationArtifacts {
 // Evaluator Generation Job (LRO — follows DataGenerationJob pattern)
 // ============================================================================
 
-@doc("Source materials for an evaluator generation job — discriminated by `type` over the four shared `JobSource` variants.")
-union EvaluatorJobSource {
-  PromptJobSource,
-  AgentJobSource,
-  TracesJobSource,
-  DatasetJobSource,
-}
-
 @doc("Caller-supplied inputs for an evaluator generation job.")
 model EvaluatorGenerationInputs {
   @doc("Display name for this generation job.")
   name: string;
 
-  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets.")
-  sources: EvaluatorJobSource[];
+  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is a `JobSource` variant discriminated by `type`.")
+  sources: JobSource[];
 
   @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality']).")
   category?: EvaluatorCategory = EvaluatorCategory.quality;
