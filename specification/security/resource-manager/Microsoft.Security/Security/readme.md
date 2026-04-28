@@ -145,6 +145,9 @@ suppressions:
   - code: PathForNestedResource
     from: sqlVulnerabilityAssessmentsScanOperations.json
     reason: The scanOperationResults nested resource path follows the existing controller route convention. Changing the path would be a breaking change.
+  - code: INVALID_FORMAT
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The scanOperationResults nested resource path follows the existing controller route convention with an unpaired "scans" segment, so the example response id cannot satisfy the standard arm-id format. See the PathForNestedResource suppression above. Changing the path would be a breaking change.
   - code: RequiredPropertiesMissingInResourceModel
     from: sqlVulnerabilityAssessmentsScanOperations.json
     where:
@@ -740,6 +743,9 @@ suppressions:
   - code: PathForNestedResource
     from: sqlVulnerabilityAssessmentsScanOperations.json
     reason: The scanOperationResults nested resource path follows the existing controller route convention. Changing the path would be a breaking change.
+  - code: INVALID_FORMAT
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The scanOperationResults nested resource path follows the existing controller route convention with an unpaired "scans" segment, so the example response id cannot satisfy the standard arm-id format. See the PathForNestedResource suppression above. Changing the path would be a breaking change.
   - code: RequiredPropertiesMissingInResourceModel
     from: sqlVulnerabilityAssessmentsScanOperations.json
     where:
@@ -827,6 +833,9 @@ suppressions:
   - code: PathForNestedResource
     from: sqlVulnerabilityAssessmentsScanOperations.json
     reason: The scanOperationResults nested resource path follows the existing controller route convention. Changing the path would be a breaking change.
+  - code: INVALID_FORMAT
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The scanOperationResults nested resource path follows the existing controller route convention with an unpaired "scans" segment, so the example response id cannot satisfy the standard arm-id format. See the PathForNestedResource suppression above. Changing the path would be a breaking change.
   - code: RequiredPropertiesMissingInResourceModel
     from: sqlVulnerabilityAssessmentsScanOperations.json
     where:
