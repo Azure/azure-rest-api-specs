@@ -109,6 +109,15 @@ model Output {
   @doc("Name of the output data asset to register.")
   assetName?: string;
 
+  @doc("Version of the output data asset to register.")
+  assetVersion?: string;
+
+  @doc("Output Asset URI.")
+  uri?: string;
+
+  @doc("Base model ID. Applies to safetensors_model outputs.")
+  baseModelId?: string;
+
   @doc("Description for the output.")
   description?: string;
 }
@@ -284,6 +293,9 @@ model CommandJob extends JobProperties {
 
   @doc("Queue settings for the job.")
   queueSettings?: QueueSettings;
+
+  @doc("user-assigned managed identity")
+  userAssignedIdentityId?: string;
 
   @doc("Is the asset archived?")
   isArchived?: boolean;
