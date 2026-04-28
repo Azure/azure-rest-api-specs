@@ -19,7 +19,7 @@ namespace Azure.AI.Projects {
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
-    tool_search_preview: "tool_search_preview",
+    toolbox_search_preview: "toolbox_search_preview",
   }
 
   // General availability tools:
@@ -897,11 +897,11 @@ namespace Azure.AI.Projects {
    * on the toolbox version. Deferred tools are hidden from `tools/list` and only
    * discoverable via `tool_search` queries at runtime.
    */
-  model ToolSearchTool extends OpenAI.Tool {
+  model ToolboxSearchPreviewTool extends OpenAI.Tool {
     /**
-     * The type of the tool. Always `tool_search_preview`.
+     * The type of the tool. Always `toolbox_search_preview`.
      */
-    type: "tool_search_preview";
+    type: "toolbox_search_preview";
 
     ...ToolNameAndDescriptionExtension;
   }
