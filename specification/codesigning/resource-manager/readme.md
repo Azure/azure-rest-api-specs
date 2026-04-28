@@ -26,7 +26,7 @@ These are the global settings for the CodeSigning API.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-05-15-preview
+tag: package-2025-10-13
 ```
 
 ### Tag: package-2026-05-15-preview
