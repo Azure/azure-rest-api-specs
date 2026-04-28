@@ -15,19 +15,18 @@ namespace Azure.AI.Projects;
 
 @doc("""
   Reference to a dataset. Uses an asset ID (e.g., azureai://accounts/{account}/projects/{project}/data/{name}/versions/{version}).
-  To use the latest version, omit the version segment or use /labels/latest.
+  To use the latest version, omit the version segment.
   """)
 model DatasetReference {
   @doc("Dataset asset ID.")
   id: string;
 
   @doc("""
-    Dataset column schema for constructing the eval group's data_source_config.
-    Describes the shape of each row in the dataset.
-    For generate flow, provided by the dataset generation API.
-    For manual create, provided by the user.
+    Name of the schema file within the dataset's blob folder (e.g., "a3f2b1c4_schema.json").
+    Optional — if not provided, schema is inferred at runtime from the data.
+    Only applicable for uri_folder datasets.
     """)
-  itemSchema?: Record<unknown>;
+  schemaFileName?: string;
 }
 
 // ---------------------------------------------------------------------------
