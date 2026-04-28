@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureFleet",
-    "version": "2025-07-01-preview",
+    "version": "2026-04-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -73,8 +73,11 @@
           }
         },
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -112,8 +115,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_ListBySubscription": {
-            "$ref": "./examples/Fleets_ListBySubscription.json"
+          "Fleets_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -154,8 +157,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_ListByResourceGroup": {
-            "$ref": "./examples/Fleets_ListByResourceGroup.json"
+          "Fleets_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -204,8 +207,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_Get": {
-            "$ref": "./examples/Fleets_Get.json"
+          "Fleets_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -271,8 +274,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_CreateOrUpdate": {
-            "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          "Fleets_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -343,8 +346,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_Update": {
-            "$ref": "./examples/Fleets_Update.json"
+          "Fleets_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_Update_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -403,67 +406,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_Delete": {
-            "$ref": "./examples/Fleets_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}/cancel": {
-      "post": {
-        "operationId": "Fleets_Cancel",
-        "tags": [
-          "Fleets"
-        ],
-        "description": "Cancels an instance Fleet creation that is in progress.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "fleetName",
-            "in": "path",
-            "description": "The name of the Compute Fleet",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Fleets_Cancel": {
-            "$ref": "./examples/Fleets_Cancel.json"
+          "Fleets_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -513,8 +457,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_ListVirtualMachineScaleSets": {
-            "$ref": "./examples/Fleets_ListVirtualMachineScaleSets.json"
+          "Fleets_ListVirtualMachineScaleSets_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_ListVirtualMachineScaleSets_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -528,7 +472,7 @@
         "tags": [
           "Fleets"
         ],
-        "description": "List VirtualMachine resources of an instance Fleet.",
+        "description": "List VirtualMachine resources of a Launch mode Fleet.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -577,8 +521,8 @@
           }
         },
         "x-ms-examples": {
-          "Fleets_ListVirtualMachines_MaximumSet": {
-            "$ref": "./examples/Fleets_ListVirtualMachines.json"
+          "Fleets_ListVirtualMachines_MaximumSet_Gen": {
+            "$ref": "./examples/Fleets_ListVirtualMachines_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1371,7 +1315,7 @@
       "description": "Modes for Compute Fleet.",
       "enum": [
         "Managed",
-        "Instance"
+        "Launch"
       ],
       "x-ms-enum": {
         "name": "FleetMode",
@@ -1380,12 +1324,12 @@
           {
             "name": "managed",
             "value": "Managed",
-            "description": "Default. Managed is the default mode for Compute Fleet where VMs are provisioned via VMSS."
+            "description": "Default. Managed is the default mode for Compute Fleet where VMs are provisioned via virtual machine scale sets."
           },
           {
-            "name": "instance",
-            "value": "Instance",
-            "description": "Instance mode for Compute Fleet will directly provision VM instances."
+            "name": "launch",
+            "value": "Launch",
+            "description": "Launch mode for Compute Fleet will directly launch VM instances to be managed by the customer."
           }
         ]
       }
@@ -1441,6 +1385,11 @@
         "mode": {
           "$ref": "#/definitions/FleetMode",
           "description": "Mode of the Fleet."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "VirtualMachine prefix to be used for the virtual machines launched by Fleet. Can be used only with Launch mode.",
+          "pattern": "^[^_\\W][\\w\\-._]{0,64}(?<![-.])$"
         },
         "capacityType": {
           "$ref": "#/definitions/CapacityType",
@@ -2849,9 +2798,8 @@
       "type": "string",
       "description": "Virtual Machine operation status values.",
       "enum": [
+        "Launching",
         "Creating",
-        "Canceled",
-        "CancelFailedStatusUnknown",
         "Failed",
         "Succeeded"
       ],
@@ -2860,19 +2808,14 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Launching",
+            "value": "Launching",
+            "description": "Indicates that the virtual machine has not been accepted by Compute yet and is still scheduled to be created."
+          },
+          {
             "name": "Creating",
             "value": "Creating",
             "description": "Indicates that the virtual machine is either in the process of being created or is scheduled to be created."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Indicates that the cancellation request was successful because the virtual machine had not been created yet."
-          },
-          {
-            "name": "CancelFailedStatusUnknown",
-            "value": "CancelFailedStatusUnknown",
-            "description": "Indicates that the cancellation request could not be applied because the virtual machine had already been created."
           },
           {
             "name": "Failed",
@@ -2952,7 +2895,7 @@
     },
     "VirtualMachine": {
       "type": "object",
-      "description": "An instant Fleet's virtual machine.",
+      "description": "A Launch mode Fleet's virtual machine.",
       "properties": {
         "name": {
           "type": "string",
