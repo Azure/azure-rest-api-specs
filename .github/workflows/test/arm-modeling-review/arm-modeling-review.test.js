@@ -17,8 +17,8 @@ vi.mock("../../src/arm-modeling-review/detect-new-resource-types.js", () => ({
 }));
 
 import * as changedFiles from "../../../shared/src/changed-files.js";
-import { checkLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
 import armModelingReview from "../../src/arm-modeling-review/arm-modeling-review.js";
+import { checkLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
 import { detectNewResourceTypes } from "../../src/arm-modeling-review/detect-new-resource-types.js";
 
 const core = createMockCore();
