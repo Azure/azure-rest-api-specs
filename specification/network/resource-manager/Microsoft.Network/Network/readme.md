@@ -4620,6 +4620,7 @@ directive:
   - suppress: ParametersInPost
     from: expressRoute.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - suppress: ParametersInPost
     from: virtualWan.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - suppress: AvoidAdditionalProperties
@@ -4693,6 +4694,7 @@ suppressions:
   - code: ParametersInPost
     from: expressRoute.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - code: ResourceNameRestriction
     from: virtualWan.json
     reason: The resource name parameter 'expressRouteGatewayName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute gateway failover and insights APIs.
     where:
