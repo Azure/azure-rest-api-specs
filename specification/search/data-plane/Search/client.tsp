@@ -381,8 +381,12 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
 @@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+<<<<<<< Updated upstream
 @@clientName(ChatCompletionSchemaProperties.strict, "IsStrict", "csharp");
 @@alternateType(ChatCompletionSkill.uri, url, "csharp");
+=======
+@@clientName(AMLVectorizer.amlParameters, "AMLParameters", "csharp");
+>>>>>>> Stashed changes
 @@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
 @@access(DataSourceCredentials, Access.internal, "csharp");
 @@alternateType(Search.DocumentExtractionSkill.dataToExtract,
