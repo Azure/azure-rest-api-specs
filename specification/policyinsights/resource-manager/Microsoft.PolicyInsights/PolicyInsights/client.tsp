@@ -701,12 +701,16 @@ op policyTrackedResourcesListQueryResultsForSubscription(
   @path
   @segment("policyTrackedResources")
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
-
-  queryOptions?: PolicyTrackedResourcesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
-@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
+model _Params {
+  queryOptions?: PolicyTrackedResourcesListQueryResultsForSubscriptionQueryOptions;
+}
+alias _final = addParameter(
   policyTrackedResourcesListQueryResultsForSubscription,
-  "!java"
+  _Params.queryOptions
+);
+@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
+  _final
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
