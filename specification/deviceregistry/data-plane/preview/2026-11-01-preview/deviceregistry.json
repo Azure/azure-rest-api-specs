@@ -2216,6 +2216,36 @@
         "type"
       ]
     },
+    "GenerateGroupBestUpdatesComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupBestUpdates compliance report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateReportRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
+    },
+    "GenerateGroupInstallableUpdatesReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupInstallableUpdates report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateReportRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
+    },
+    "GenerateNamespaceUpdateComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a NamespaceUpdateCompliance report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateReportRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
+    },
     "GenerateReportRequest": {
       "type": "object",
       "description": "Request body for generating a report.",
@@ -2329,6 +2359,26 @@
         "name",
         "type"
       ]
+    },
+    "GroupBestUpdatesComplianceReport": {
+      "type": "object",
+      "description": "Result of a GroupBestUpdates compliance report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
+    },
+    "GroupInstallableUpdatesReport": {
+      "type": "object",
+      "description": "Result of a GroupInstallableUpdates report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
     },
     "GroupMembershipState": {
       "type": "string",
