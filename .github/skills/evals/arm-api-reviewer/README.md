@@ -20,7 +20,7 @@ arm-api-reviewer/
 │   ├── eval-true-negatives.yaml
 │   ├── eval-classification.yaml
 │   └── eval-report-format.yaml
-├── fixtures/              # Test fixtures (29 files)
+├── fixtures/              # Test fixtures (28 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -47,7 +47,7 @@ arm-api-reviewer/
 
 ## Fixtures
 
-All 29 fixture files live in `fixtures/`. See
+All 28 fixture files live in `fixtures/`. See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
