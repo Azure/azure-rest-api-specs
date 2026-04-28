@@ -52,6 +52,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "Devices"
     },
     {
@@ -62,9 +65,95 @@
     },
     {
       "name": "Groups"
+    },
+    {
+      "name": "Namespaces"
     }
   ],
   "paths": {
+    "/namespaces/{namespaceUuid}:generateReport": {
+      "post": {
+        "operationId": "Namespaces_GenerateReport",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Generate a report for a namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/Report",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}:executeAction": {
       "post": {
         "operationId": "Devices_ExecuteAction",
@@ -558,6 +647,57 @@
           "Look up a capability by its UUID": {
             "$ref": "./examples/DeviceCapabilities_GetCapabilityByUuid.json"
           }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/states": {
+      "get": {
+        "operationId": "DeviceStates_List",
+        "tags": [
+          "Device States"
+        ],
+        "description": "List device states for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1119,6 +1259,98 @@
           }
         }
       }
+    },
+    "/namespaces/{namespaceUuid}/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List long running operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/operations/{operationId}": {
+      "get": {
+        "operationId": "Operations_Get",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Get the status of a long-running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique identifier of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1403,30 +1635,6 @@
         "type"
       ]
     },
-    "DeviceAcceptedStatus": {
-      "type": "string",
-      "description": "Whether a device has been accepted for use.",
-      "enum": [
-        "Accepted",
-        "NotAccepted"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceAcceptedStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The device has been accepted."
-          },
-          {
-            "name": "NotAccepted",
-            "value": "NotAccepted",
-            "description": "The device has not been accepted."
-          }
-        ]
-      }
-    },
     "DeviceCapability": {
       "type": "object",
       "description": "A device capability resource.",
@@ -1600,7 +1808,10 @@
           "type": "string",
           "description": "The source identifier for the origin."
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "DeviceOriginType": {
       "type": "string",
@@ -1646,10 +1857,6 @@
           "$ref": "#/definitions/DeviceOrigin",
           "description": "Contains metadata about how this device was discovered or provisioned.",
           "readOnly": true
-        },
-        "accepted": {
-          "$ref": "#/definitions/DeviceAcceptedStatus",
-          "description": "Whether a discovered or created device has been accepted for use."
         },
         "enabled": {
           "$ref": "#/definitions/DeviceEnabledStatus",
@@ -1699,10 +1906,6 @@
           "$ref": "#/definitions/DeviceOrigin",
           "description": "Contains metadata about how this device was discovered or provisioned.",
           "readOnly": true
-        },
-        "accepted": {
-          "$ref": "#/definitions/DeviceAcceptedStatus",
-          "description": "Whether a discovered or created device has been accepted for use."
         },
         "enabled": {
           "$ref": "#/definitions/DeviceEnabledStatus",
@@ -2011,6 +2214,24 @@
       "required": [
         "name",
         "type"
+      ]
+    },
+    "GenerateReportRequest": {
+      "type": "object",
+      "description": "Request body for generating a report.",
+      "properties": {
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of report to generate."
+        },
+        "reportTarget": {
+          "type": "string",
+          "description": "The target of this report (e.g. group resource)."
+        }
+      },
+      "discriminator": "reportType",
+      "required": [
+        "reportType"
       ]
     },
     "GetGroupsForDeviceResult": {
@@ -2332,6 +2553,137 @@
         "namespaceUuid"
       ]
     },
+    "NamespaceUpdateComplianceReport": {
+      "type": "object",
+      "description": "Result of a NamespaceUpdateCompliance report.",
+      "properties": {
+        "totalUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the namespace that are eligible for updates."
+        },
+        "onLatestUpdateDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices that are currently on the latest available update."
+        },
+        "newUpdatesAvailableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices for which a newer update is available but not yet applied."
+        },
+        "updatesInProgressDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices currently being updated to the latest available update."
+        },
+        "totalNotUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the namespace that are not eligible for updates."
+        }
+      },
+      "required": [
+        "totalUpdateableDeviceCount",
+        "onLatestUpdateDeviceCount",
+        "newUpdatesAvailableDeviceCount",
+        "updatesInProgressDeviceCount",
+        "totalNotUpdateableDeviceCount"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
+    },
+    "Operation": {
+      "type": "object",
+      "description": "A long-running operation status resource scoped to a namespace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the operation.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/OperationKind",
+          "description": "The kind of operation tracked by this status resource.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current status of the operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details when the operation failed.",
+          "readOnly": true
+        },
+        "executedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation result expires (UTC).",
+          "readOnly": true
+        },
+        "result": {
+          "type": "object",
+          "description": "The operation results when `status` is `Succeeded`.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "status"
+      ]
+    },
+    "OperationKind": {
+      "type": "string",
+      "description": "The kind of long-running operation tracked by an `Operation` resource.",
+      "enum": [
+        "ProvisionDevice",
+        "GenerateReport.NamespaceUpdateComplianceReport",
+        "GenerateReport.GroupBestUpdatesComplianceReport",
+        "GenerateReport.GroupInstallableUpdatesReport"
+      ],
+      "x-ms-enum": {
+        "name": "OperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ProvisionDevice",
+            "value": "ProvisionDevice",
+            "description": "Device provisioning status report. *"
+          },
+          {
+            "name": "NamespaceUpdateComplianceReport",
+            "value": "GenerateReport.NamespaceUpdateComplianceReport",
+            "description": "Compliance report describing the updating state of devices in the namespace."
+          },
+          {
+            "name": "GroupBestUpdatesComplianceReport",
+            "value": "GenerateReport.GroupBestUpdatesComplianceReport",
+            "description": "Report describing the best available updates and update compliance for the devices within a group."
+          },
+          {
+            "name": "GroupInstallableUpdatesReport",
+            "value": "GenerateReport.GroupInstallableUpdatesReport",
+            "description": "Report listing the installable updates for the devices within a group."
+          }
+        ]
+      }
+    },
     "PagedDeviceCapability": {
       "type": "object",
       "description": "Paged collection of DeviceCapability items",
@@ -2341,6 +2693,48 @@
           "description": "The DeviceCapability items on this page",
           "items": {
             "$ref": "#/definitions/DeviceCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceState": {
+      "type": "object",
+      "description": "Paged collection of DeviceState items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceState items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceState"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedOperation": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
@@ -2424,6 +2818,62 @@
           "type": "string",
           "description": "The error target."
         }
+      }
+    },
+    "Record<string>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "Report": {
+      "type": "object",
+      "description": "Base report type",
+      "properties": {
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of report.",
+          "readOnly": true
+        },
+        "reportTarget": {
+          "type": "string",
+          "description": "The scope the report was generated against.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "reportType",
+      "required": [
+        "reportType"
+      ]
+    },
+    "ReportType": {
+      "type": "string",
+      "description": "The type of report.",
+      "enum": [
+        "NamespaceUpdateComplianceReport",
+        "GroupBestUpdatesComplianceReport",
+        "GroupInstallableUpdatesReport"
+      ],
+      "x-ms-enum": {
+        "name": "ReportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NamespaceUpdateComplianceReport",
+            "value": "NamespaceUpdateComplianceReport",
+            "description": "Compliance report describing the updating state of devices in the namespace."
+          },
+          {
+            "name": "GroupBestUpdatesComplianceReport",
+            "value": "GroupBestUpdatesComplianceReport",
+            "description": "Report describing the best available updates and update compliance for the devices within a group."
+          },
+          {
+            "name": "GroupInstallableUpdatesReport",
+            "value": "GroupInstallableUpdatesReport",
+            "description": "Report listing the installable updates for the devices within a group."
+          }
+        ]
       }
     },
     "SelfSignedThumbprints": {
