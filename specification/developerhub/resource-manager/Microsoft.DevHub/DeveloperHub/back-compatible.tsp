@@ -29,9 +29,9 @@ using Microsoft.DevHub;
 @@clientLocation(Workflows.listByResourceGroup, "Workflow");
 @@clientLocation(Workflows.list, "Workflow");
 
-@@clientLocation(AdooAuthResponses.get, "ADOOAuth");
-@@clientLocation(AdooAuthResponses.list, "ADOOAuth");
-@@clientLocation(AdooAuthResponses.getADOOAuthInfo, "");
+@@clientLocation(AdooAuthResponses.get, "ADOOAuth", "!java");
+@@clientLocation(AdooAuthResponses.list, "ADOOAuth", "!java");
+@@clientLocation(AdooAuthResponses.getADOOAuthInfo, Microsoft.DevHub);
 @@clientName(AdooAuthResponses.getADOOAuthInfo::parameters.body, "parameters");
 
 @@clientLocation(Templates.get, "Template");

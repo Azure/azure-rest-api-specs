@@ -12,20 +12,31 @@ using Microsoft.DevHub;
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
 @@clientName(ACR, "Acr", "java,javascript");
 @@clientName(Deployment, "DeploymentProperties", "java,javascript");
+@@clientName(AdooAuthResponse, "AdoOAuthResponse", "java");
+@@clientName(AdooAuthResponses, "AdoOAuthResponses", "java");
+@@clientName(AdooAuthCallRequest, "AdoOAuthCallRequest", "java");
+@@clientName(AdooAuthInfoResponse, "AdoOAuthInfoResponse", "java");
+@@clientName(AdooAuthListResponse, "AdoOAuthListResponse", "java");
+@@clientName(ADOOAuth, "AdoOAuth", "java");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(GitHubOAuthResponses.listGitHubOAuth,
+  "java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workflow.properties,
   "java"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkflowProperties.artifactGenerationProperties,
   "java"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GitHubOAuthResponse.properties,
   "java"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkflowProperties.githubWorkflowProfile,
   "java"
 );
