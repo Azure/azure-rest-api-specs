@@ -192,6 +192,7 @@ Native Markdown file parsing for blob indexers without requiring a separate skil
 **Knowledge base activity**
 - `KnowledgeBaseActivityRecordType`: new `modelWebSummarization` enum value for LLM web summarization activities, with corresponding `KnowledgeBaseModelWebSummarizationActivityRecord` model (`inputTokens`, `outputTokens`).
 
+---
 
 ### Preview-to-GA Changes (2025-11-01-preview → 2026-04-01)
 

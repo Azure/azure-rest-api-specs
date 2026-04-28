@@ -47,7 +47,7 @@ stages:
     variables:
       - template: /eng/pipelines/templates/variables/image.yml
       - name: NodeVersion
-        value: '22.13.x'
+        value: '22.x'
       - name: PythonVersion
         value: '3.13'
       - name: PipelineArtifactsName
@@ -195,9 +195,9 @@ stages:
             TokenToUseForAuth: $(azuresdk-github-pat)
             PreserveAuthToken: true
 
-      - task: NodeTool@0
+      - task: UseNode@1
         inputs:
-          versionSpec: $(NodeVersion)
+          version: $(NodeVersion)
         displayName: 'Install Node.js'
 
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml

@@ -1,0 +1,114 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Machine.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.HybridCompute;
+/**
+ * Describes a license profile in a hybrid machine.
+ */
+@singleton("default")
+@parentResource(Machine)
+model LicenseProfile
+  is Azure.ResourceManager.TrackedResource<LicenseProfileProperties> {
+  ...ResourceNameParameter<
+    Resource = LicenseProfile,
+    KeyName = "licenseProfile",
+    SegmentName = "licenseProfiles",
+    NamePattern = ""
+  >;
+}
+
+alias LicenseProfileNameAlias = {
+  /**
+   * The name of the license profile.
+   */
+  @path
+  @segment("licenseProfiles")
+  licenseProfileName: LicenseProfileName;
+};
+
+alias LicenseProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the hybrid machine.
+     */
+    @path
+    @pattern("[a-zA-Z0-9-_\\.]+")
+    @segment("machines")
+    machineName: string;
+  },
+  LicenseProfileNameAlias
+>;
+
+@armResourceOperations(#{ omitTags: true })
+interface LicenseProfiles {
+  /**
+   * Retrieves information about the view of a license profile.
+   */
+  @tag("licenseProfiles")
+  get is LicenseProfileOps.Read<LicenseProfile>;
+
+  /**
+   * The operation to create or update a license profile.
+   */
+  @tag("licenseProfiles")
+  createOrUpdate is LicenseProfileOps.CreateOrUpdateAsync<
+    LicenseProfile,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * The operation to update a license profile.
+   */
+  @tag("licenseProfiles")
+  @patch(#{ implicitOptionality: false })
+  update is LicenseProfileOps.CustomPatchAsync<
+    LicenseProfile,
+    PatchModel = LicenseProfileUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * The operation to delete a license profile.
+   */
+  @tag("licenseProfiles")
+  delete is LicenseProfileOps.DeleteWithoutOkAsync<
+    LicenseProfile,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * The operation to get all license profiles of a non-Azure machine
+   */
+  @tag("licenseProfiles")
+  list is ArmResourceListByParent<
+    LicenseProfile,
+    Response = LicenseProfilesListResult
+  >;
+}
+
+@@doc(LicenseProfile.name, "");
+@@doc(LicenseProfile.properties,
+  "Describe the properties of a license profile."
+);
+@@doc(LicenseProfiles.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create or Update license profile operation."
+);
+@@doc(LicenseProfiles.update::parameters.properties,
+  "Parameters supplied to the Update license profile operation."
+);
