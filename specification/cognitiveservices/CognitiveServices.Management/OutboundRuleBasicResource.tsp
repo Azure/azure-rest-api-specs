@@ -34,11 +34,15 @@ interface OutboundRuleBasicResources {
   /**
    * The PUT API for creating or updating a single outbound rule of the managed network associated with the cognitive services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "PUT returns 202 Accepted instead of 201 Created to match backend LRO behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT returns 202 Accepted instead of 201 Created to match backend LRO behavior"
   @tag("ManagedNetwork")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

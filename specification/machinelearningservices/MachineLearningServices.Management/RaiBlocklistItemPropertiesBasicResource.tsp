@@ -18,6 +18,8 @@ namespace Microsoft.MachineLearningServices;
  * RaiBlocklistItemPropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @parentResource(RaiBlocklistPropertiesBasicResource)
 model RaiBlocklistItemPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistItemProperties, false> {
@@ -33,6 +35,8 @@ model RaiBlocklistItemPropertiesBasicResource
  * RaiBlocklistItemPropertiesBasicResources interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiBlocklistItemPropertiesBasicResources {
   /**
@@ -48,12 +52,7 @@ interface RaiBlocklistItemPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistItemPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -66,12 +65,7 @@ interface RaiBlocklistItemPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -82,12 +76,7 @@ interface RaiBlocklistItemPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult>
   >;

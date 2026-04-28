@@ -18,6 +18,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
     api-version: "2026-02-01"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.KeyVault"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2025-05-01"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-keyvault"
     namespace: "azure.mgmt.keyvault"
@@ -36,6 +40,7 @@ options:
     rename-model:
       TrackedResource: Resource
     client-side-validations: true
+    generate-tests: false
     api-version: "2026-02-01"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-keyvault"
@@ -55,6 +60,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-rust":
+    api-version: "2026-02-01"
     crate-name: "azure_resourcemanager_keyvault"
     crate-version: "0.1.0"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"

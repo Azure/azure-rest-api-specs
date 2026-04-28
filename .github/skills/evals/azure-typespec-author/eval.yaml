@@ -1,0 +1,57 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+skill: azure-typespec-author
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 1800
+  parallel: true
+  executor: copilot-sdk
+  model: claude-opus-4.6-1m
+  mcp_config: "./.vscode/mcp.json"
+  mcp_servers:
+    azure:
+      type: stdio
+      command: pwsh
+      args: ["./eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
+metrics:
+  - name: task_completion
+    weight: 1.0
+    threshold: 0.8
+    description: Did the skill complete the assigned task?
+graders:
+  - type: skill_invocation
+    name: routing_check
+    config:
+      required_skills:
+        - azure-typespec-author
+      mode: in_order
+      allow_extra: true
+hooks:
+  before_run:
+    - command: "npm install"
+      working_directory: "./fixtures/Microsoft.Widget/Widget"
+      error_on_fail: true
+tasks:
+  - "tasks/001001-version-spread-property.yaml"
+  - "tasks/001002-version-default-value.yaml"
+  - "tasks/001003-version-required-to-optional.yaml"
+  - "tasks/001004-version-property-decorator.yaml"
+  - "tasks/001005-version-add-preview-after-preview.yaml"
+  - "tasks/001006-version-add-preview-after-stable.yaml"
+  - "tasks/001007-version-add-stable-after-preview.yaml"
+  - "tasks/001008-version-add-stable-after-stable.yaml"
+  - "tasks/002001-ARM-change-resource-type.yaml"
+  - "tasks/002002-ARM-define-extension-resource.yaml"
+  - "tasks/002003-ARM-define-full-update-operation.yaml"
+  - "tasks/002004-ARM-define-extension-resource.yaml"
+  - "tasks/002005-ARM-define-the-resource.yaml"
+  - "tasks/002006-ARM-define-child-resource.yaml"
+  - "tasks/002007-ARM-define-custom-action.yaml"
+  - "tasks/002008-ARM-add-parameters.yaml"
+  - "tasks/003001-dataplane-async-delete-op.yaml"
+  - "tasks/003002-arm-action-lro.yaml"
+  - "tasks/003003-arm-modify-response.yaml"
+  - "tasks/004001-decorate-mgmt-resource-name-parameter.yaml"
+  - "tasks/004002-decorate-length-constrains-on-array-item.yaml"
+  - "tasks/005001-warning-suppress-warning.yaml"

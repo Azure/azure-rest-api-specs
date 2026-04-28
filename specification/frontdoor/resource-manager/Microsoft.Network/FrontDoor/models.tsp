@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 
@@ -260,6 +262,12 @@ union MatchVariable {
    * SocketAddr
    */
   SocketAddr: "SocketAddr",
+
+  /**
+   * JA4 Match Variable
+   */
+  @added(Versions.v2025_11_01)
+  JA4: "JA4",
 }
 
 /**
@@ -332,6 +340,18 @@ union Operator {
    * ServiceTagMatch
    */
   ServiceTagMatch: "ServiceTagMatch",
+
+  /**
+   * Autonomous System Number Match Operator
+   */
+  @added(Versions.v2025_11_01)
+  AsnMatch: "AsnMatch",
+
+  /**
+   * Client Finger print Operator
+   */
+  @added(Versions.v2025_11_01)
+  ClientFingerprint: "ClientFingerprint",
 }
 
 /**
@@ -1766,8 +1786,192 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Managed rule sets are identified by a composite key of ruleSetType and ruleSetVersion properties."
   managedRuleSets?: ManagedRuleSet[];
+
+  /**
+   * List of exceptions applied on the managed rule sets.
+   */
+  @added(Versions.v2025_11_01)
+  exceptionsList?: ManagedRuleSetExceptionList;
+}
+
+/**
+ * Defines the list of exceptions for the managed rule sets.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetExceptionList {
+  /**
+   * List of exceptions.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Exceptions do not have a single natural identifier; they are identified by a composite key of matchVariable, selector, valueMatchOperator, and matchValues properties."
+  exceptions?: ManagedRuleSetException[];
+}
+
+/**
+ * Excludes whole requests from managed rule evaluation according to match conditions.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetException {
+  /**
+   * The variable to be evaluated for excluding the request.
+   */
+  matchVariable: ExceptionMatchVariable;
+
+  /**
+   * Comparison operator to apply to the selector when specifying which elements
+   * in the collection this exception applies to.
+   */
+  selectorMatchOperator?: ExceptionSelectorMatchOperator;
+
+  /**
+   * When matchVariable is a collection, operator used to specify which elements
+   * in the collection this exception applies to.
+   * Currently supported only for RequestHeaderNames.
+   */
+  selector?: string;
+
+  /**
+   * Comparison operator to apply to the value to be matched.
+   */
+  valueMatchOperator: ExceptionValueMatchOperator;
+
+  /**
+   * List of values to be matched with.
+   */
+  matchValues: string[];
+
+  /**
+   * Scope(s) of the exception.
+   */
+  @identifiers(#["ruleSetType", "ruleSetVersion"])
+  scopes: ManagedRuleSetScope[];
+}
+
+/**
+ * Defines the scope of the managed rules.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetScope {
+  /**
+   * Defines the rule set type.
+   * Examples: DefaultRuleSet, Microsoft_DefaultRuleSet,
+   * Microsoft_BotManagerRuleSet, Microsoft_HTTPDDoSRuleSet, BotProtection
+   */
+  ruleSetType: string;
+
+  /**
+   * Defines the version of the rule set.
+   */
+  ruleSetVersion: string;
+
+  /**
+   * List of rule group scopes.
+   */
+  @identifiers(#["ruleGroupName"])
+  ruleGroupScopes?: RuleGroupScope[];
+}
+
+/**
+ * Defines the scope of the rule group.
+ */
+@added(Versions.v2025_11_01)
+model RuleGroupScope {
+  /**
+   * Defines the rule group name.
+   */
+  ruleGroupName: string;
+
+  /**
+   * List of rule scopes.
+   */
+  @identifiers(#["ruleId"])
+  ruleScopes?: RuleScope[];
+}
+
+/**
+ * Defines the scope of the rule.
+ */
+@added(Versions.v2025_11_01)
+model RuleScope {
+  /**
+   * Defines the rule id.
+   */
+  ruleId: string;
+}
+
+/**
+ * The variable to be evaluated for excluding the request.
+ */
+@added(Versions.v2025_11_01)
+union ExceptionMatchVariable {
+  string,
+
+  /**
+   * Request Uri Exception Match Variable
+   */
+  RequestUri: "RequestUri",
+
+  /**
+   * Socket Address Exception Match Variable
+   */
+  SocketAddr: "SocketAddr",
+
+  /**
+   * Request Header Names Exception Match Variable
+   */
+  RequestHeaderNames: "RequestHeaderNames",
+}
+
+/**
+ * Comparison operator to apply to the selector when specifying which elements in the collection this exception applies to..
+ */
+@added(Versions.v2025_11_01)
+union ExceptionSelectorMatchOperator {
+  string,
+
+  /**
+   * Equals Selector Match Operator
+   */
+  Equals: "Equals",
+}
+
+/**
+ * Comparison operator to apply to the value to be matched..
+ */
+@added(Versions.v2025_11_01)
+union ExceptionValueMatchOperator {
+  string,
+
+  /**
+   * Equals Exception Value Match Operator
+   */
+  Equals: "Equals",
+
+  /**
+   * Contains Exception Value Match Operator
+   */
+  Contains: "Contains",
+
+  /**
+   * StartsWith Exception Value Match Operator
+   */
+  StartsWith: "StartsWith",
+
+  /**
+   * EndsWith Exception Value Match Operator
+   */
+  EndsWith: "EndsWith",
+
+  /**
+   * EqualsAny Exception Value Match Operator
+   */
+  EqualsAny: "EqualsAny",
+
+  /**
+   * IPMatch Exception Value Match Operator
+   */
+  IPMatch: "IPMatch",
 }
 
 /**

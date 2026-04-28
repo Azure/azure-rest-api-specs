@@ -1,0 +1,37 @@
+parameters:
+  service-dir:
+    default: "sdk/applicationinsights"
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-applicationinsights"
+    namespace: "azure.mgmt.applicationinsights"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-applicationinsights"
+    namespace: "com.azure.resourcemanager.applicationinsights"
+    service-name: "ApplicationInsights"
+    flavor: azure
+    use-object-for-unknown: true
+    float32-as-double: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appinsights"
+    compatibility-lro: true
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-appinsights"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/applicationinsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/armapplicationinsights"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armapplicationinsights"
+    fix-const-stuttering: true
+    flavor: azure
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

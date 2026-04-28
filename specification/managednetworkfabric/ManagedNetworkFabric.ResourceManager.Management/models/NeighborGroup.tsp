@@ -1,5 +1,8 @@
 import "./common.tsp";
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -26,6 +29,15 @@ model NeighborGroupProperties {
     }
   ]>[];
 
+  @doc("Associated Network Fabric Resource IDs")
+  @added(Versions.v2025_07_15)
+  @visibility(Lifecycle.Read)
+  networkFabricIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>[];
+
   @doc("Details of the last operation performed on the resource")
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
@@ -34,6 +46,17 @@ model NeighborGroupProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2025_07_15)
+  @doc("Configuration state of the resource.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
+}
+
+@doc("Neighbor Group Patchable Properties defines the patchable properties of the resource.")
+model NeighborGroupPatchableProperties {
+  @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
+  destination?: NeighborGroupDestinationPatch;
 }
 
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
@@ -50,18 +73,25 @@ model NeighborGroupDestination {
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
 model NeighborGroupDestinationPatch is NeighborGroupDestination;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Neighbor Group Patch definition.")
-model NeighborGroupPatch {
-  ...TagsUpdate;
-
+model NeighborGroupPatch extends TagsUpdate {
   @doc("Neighbor Group Patch properties.")
   properties?: NeighborGroupPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("Neighbor Group Patch properties.")
 model NeighborGroupPatchProperties {
   ...AnnotationResource;
+  ...NeighborGroupPatchableProperties;
+}
 
-  @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
-  destination?: NeighborGroupDestinationPatch;
+@doc("Response for Neighbor Group Resync operation.")
+@added(Versions.v2025_07_15)
+model NeighborGroupResyncResponse {
+  ...OperationStatusResult;
 }

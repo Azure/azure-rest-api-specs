@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -20,7 +20,7 @@ model NetworkFabricSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The Network Fabric Sku properties */
+  @doc("The Network Fabric SKU properties.")
   properties: NetworkFabricSkuProperties;
 }
 
@@ -30,5 +30,8 @@ interface NetworkFabricSkus {
   get is ArmResourceRead<NetworkFabricSku>;
 
   @doc("Implements Network Fabric SKUs list by subscription GET method.")
-  listBySubscription is ArmResourceListByParent<NetworkFabricSku>;
+  listBySubscription is ArmResourceListByParent<
+    NetworkFabricSku,
+    Response = NetworkFabricSkusListResult
+  >;
 }
