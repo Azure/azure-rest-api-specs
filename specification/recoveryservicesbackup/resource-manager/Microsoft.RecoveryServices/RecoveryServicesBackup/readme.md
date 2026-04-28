@@ -591,16 +591,16 @@ directive:
     reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
   - suppress: ResourceNameRestriction
     from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings"]
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would be a breaking change affecting the entire specification.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus"]
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would propagate via shared TypeSpec into all stable api-versions and trip openapi-diff rule 1036 (ConstraintChanged).
   - suppress: ResourceNameRestriction
     from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}"]
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would be a breaking change affecting the entire specification.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupTriggerValidateOperation"]
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would propagate via shared TypeSpec into all stable api-versions and trip openapi-diff rule 1036 (ConstraintChanged).
   - suppress: ResourceNameRestriction
     from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping"]
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would be a breaking change affecting the entire specification.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperation"]
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would propagate via shared TypeSpec into all stable api-versions and trip openapi-diff rule 1036 (ConstraintChanged).
 
 suppressions:
   - from: bms.json
