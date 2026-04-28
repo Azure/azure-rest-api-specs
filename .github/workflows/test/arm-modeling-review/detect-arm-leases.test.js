@@ -220,6 +220,7 @@ describe("detect-arm-leases", () => {
     });
 
     it("returns false when HEAD^ fails and GITHUB_BASE_REF is not set", async () => {
+      vi.stubEnv("GITHUB_BASE_REF", ""); // Explicitly unset to avoid CI env leakage
       mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
