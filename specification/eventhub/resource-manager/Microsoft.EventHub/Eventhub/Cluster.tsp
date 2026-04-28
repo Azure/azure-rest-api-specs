@@ -13,7 +13,7 @@ namespace Microsoft.EventHub;
 /**
  * Single Event Hubs Cluster resource in List or Get operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
 model Cluster
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterProperties> {
   ...ResourceNameParameter<
@@ -26,7 +26,7 @@ model Cluster
   /**
    * Properties of the cluster SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   sku?: ClusterSku;
 }
 
@@ -40,7 +40,7 @@ interface Clusters {
   /**
    * Creates or updates an instance of an Event Hubs Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing PUT operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
     Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
@@ -63,7 +63,7 @@ interface Clusters {
   /**
    * Deletes an existing Event Hubs Cluster. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing DELETE operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -98,8 +98,8 @@ interface Clusters {
   /**
    * Replace all specified Event Hubs Cluster settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.
    */
-  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@typespec/http/patch-implicit-optional" "PATCH operation properties are explicitly defined as required/optional matching the original OpenAPI specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @patch
   @action("quotaConfiguration/default")
   patch is ArmResourceActionSync<
