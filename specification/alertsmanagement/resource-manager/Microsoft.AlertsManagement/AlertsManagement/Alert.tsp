@@ -23,6 +23,14 @@ model Alert is Azure.ResourceManager.ProxyResource<AlertProperties> {
   >;
 }
 
+alias AlertIdParameter = {
+  /** Unique ID of an alert instance. */
+  @path
+  @segment("alerts")
+  @key
+  alertId: string;
+};
+
 alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -34,13 +42,7 @@ alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  {
-    /** Unique ID of an alert instance. */
-    @path
-    @segment("alerts")
-    @key
-    alertId: string;
-  }
+  AlertIdParameter
 >;
 
 @armResourceOperations
@@ -85,6 +87,7 @@ interface Alerts {
     ErrorType = AlertsManagementErrorResponse
   >;
 }
+
 alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -102,13 +105,7 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  {
-    /** Unique ID of an alert instance. */
-    @path
-    @segment("alerts")
-    @key
-    alertId: string;
-  }
+  AlertIdParameter
 >;
 
 alias GetAllTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -122,13 +119,7 @@ alias GetAllTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  {
-    /** Unique ID of an alert instance. */
-    @path
-    @segment("alerts")
-    @key
-    alertId: string;
-  }
+  AlertIdParameter
 >;
 @armResourceOperations
 interface AlertGetAllTenantOperation {

@@ -11,11 +11,14 @@ model AlertsClientOptions {
   scope: string;
 }
 
+// Note: csharp is excluded because the C# mgmt emitter does not consume
+// client-level initialization parameters; scope is carried per-operation via
+// Azure.ResourceManager.Legacy.ExtensionOperations, and BC is handled in C# custom code.
 @@Azure.ClientGenerator.Core.clientInitialization(Microsoft.AlertsManagement,
   {
     parameters: AlertsClientOptions,
   },
-  "!(python,java,javascript)"
+  "!(python,java,javascript,csharp)"
 );
 
 @@clientName(Microsoft.AlertsManagement, "AlertsManagementClient", "python");
@@ -39,7 +42,6 @@ model AlertsClientOptions {
   "statusUrl",
   "java"
 );
-
 @@clientName(Microsoft.AlertsManagement.AlertsMetaData,
   "AlertsMetadata",
   "java"
@@ -59,3 +61,102 @@ model AlertsClientOptions {
 @@clientName(TimeRange.`1d`, "OneD", "go,javascript");
 @@clientName(TimeRange.`7d`, "SevenD", "go,javascript");
 @@clientName(TimeRange.`30d`, "ThirtyD", "go,javascript");
+
+// C# renames for migration backward compatibility
+@@clientName(Alert, "ServiceAlert", "csharp");
+@@clientName(Alerts, "ServiceAlert", "csharp");
+@@clientName(TimeRange, "TimeRangeFilter", "csharp");
+@@clientName(TimeRange.`1h`, "OneHour", "csharp");
+@@clientName(TimeRange.`1d`, "OneDay", "csharp");
+@@clientName(TimeRange.`7d`, "SevenDays", "csharp");
+@@clientName(TimeRange.`30d`, "ThirtyDays", "csharp");
+@@clientName(Severity, "ServiceAlertSeverity", "csharp");
+@@clientName(Alert, "ServiceAlert", "csharp");
+@@clientName(AlertState, "ServiceAlertState", "csharp");
+@@clientName(Essentials, "ServiceAlertEssentials", "csharp");
+@@clientName(SignalType, "ServiceAlertSignalType", "csharp");
+@@clientName(Identifier, "RetrievedInformationIdentifier", "csharp");
+@@clientName(AlertModificationEvent, "ServiceAlertModificationEvent", "csharp");
+@@clientName(NotificationResult.statusURL, "StatusUrl", "csharp");
+@@clientName(AlertModificationItem,
+  "ServiceAlertModificationItemInfo",
+  "csharp"
+);
+@@clientName(AlertModification, "ServiceAlertModification", "csharp");
+@@clientName(AlertModificationProperties,
+  "ServiceAlertModificationProperties",
+  "csharp"
+);
+@@clientName(AlertProperties, "ServiceAlertProperties", "csharp");
+@@clientName(AlertsSortByFields, "ListServiceAlertsSortByField", "csharp");
+@@clientName(AlertsSummary, "ServiceAlertSummary", "csharp");
+@@clientName(AlertsSummaryGroupByFields, "AlertsSummaryGroupByField", "csharp");
+@@clientName(AlertsSummaryGroupItem,
+  "ServiceAlertSummaryGroupItemInfo",
+  "csharp"
+);
+@@clientName(AlertsSummaryGroup, "ServiceAlertSummaryGroup", "csharp");
+@@clientName(Comments, "ServiceAlertComments", "csharp");
+@@clientName(AlertEnrichmentResponse, "AlertEnrichmentResult", "csharp");
+@@clientName(AlertsMetaData, "ServiceAlertMetadata", "csharp");
+@@clientName(AlertsMetaDataProperties,
+  "ServiceAlertMetadataProperties",
+  "csharp"
+);
+@@clientName(MetadataIdentifier, "ServiceAlertMetadataIdentifier", "csharp");
+@@clientName(MonitorService, "MonitorServiceSourceForAlert", "csharp");
+@@clientName(SortOrder, "AlertsManagementQuerySortOrder", "csharp");
+@@clientName(ActionStatus, "ServiceAlertActionStatus", "csharp");
+@@clientName(Essentials.lastModifiedUserName, "lastModifiedBy", "csharp");
+@@clientName(MonitorService.SCOM, "Scom", "csharp");
+@@clientName(MonitorService.`VM Insights`, "VmInsights", "csharp");
+@@clientName(AlertsSortByFields.lastModifiedDateTime,
+  "LastModifiedOn",
+  "csharp"
+);
+@@clientName(AlertsSortByFields.startDateTime, "StartOn", "csharp");
+@@clientName(AlertsSummaryGroup.groupedby, "GroupedBy", "csharp");
+@@clientName(AlertsSummaryGroupItem.groupedby, "GroupedBy", "csharp");
+@@clientName(TriggeredRule, "AlertsManagementTriggeredRule", "csharp");
+@@clientName(Type, "AlertsManagementType", "csharp");
+@@clientName(AlertEnrichmentItem.type, "AlertEnrichmentType", "csharp");
+@@clientName(Status, "AlertsManagementStatus", "csharp");
+@@clientName(RuleType, "AlertsManagementRuleType", "csharp");
+@@clientName(ResultStatus, "AlertsManagementResultStatus", "csharp");
+@@clientName(NotificationResult,
+  "AlertsManagementNotificationResult",
+  "csharp"
+);
+@@clientName(BaseDetails, "AlertsManagementBaseDetails", "csharp");
+@@clientName(AlertsOperationGroup.metaData,
+  "GetServiceAlertMetadata",
+  "csharp"
+);
+@@clientName(PrometheusRangeQuery.start, "StartOn", "csharp");
+@@clientName(PrometheusRangeQuery.end, "EndOn", "csharp");
+
+@@alternateType(Essentials.smartGroupId, Azure.Core.uuid, "csharp");
+@@alternateType(AlertModificationProperties.alertId, Azure.Core.uuid, "csharp");
+@@alternateType(AlertIdParameter.alertId, Azure.Core.uuid, "csharp");
+
+@@usage(Essentials, Usage.input, "csharp");
+@@usage(AlertModification, Usage.input, "csharp");
+@@usage(AlertModificationItem, Usage.input, "csharp");
+@@usage(AlertModificationProperties, Usage.input, "csharp");
+@@usage(AlertProperties, Usage.input, "csharp");
+@@usage(AlertsSummary, Usage.input, "csharp");
+@@usage(AlertsSummaryGroup, Usage.input, "csharp");
+@@usage(AlertsSummaryGroupItem, Usage.input, "csharp");
+@@usage(Alert, Usage.input, "csharp");
+
+// Map local ProxyResource-based models to ResourceData for backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertModification,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertsSummary,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
