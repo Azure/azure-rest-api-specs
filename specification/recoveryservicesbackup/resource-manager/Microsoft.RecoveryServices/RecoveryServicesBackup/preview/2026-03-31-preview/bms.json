@@ -3548,9 +3548,9 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Request body for operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateRecoveryPointRequest"
@@ -8168,6 +8168,10 @@
           "$ref": "#/definitions/WorkloadType",
           "description": "Type of workload for the backup management"
         },
+        "vmWorkloadPolicyType": {
+          "$ref": "#/definitions/VMWorkloadPolicyType",
+          "description": "Type of the protection policy"
+        },
         "settings": {
           "$ref": "#/definitions/Settings",
           "description": "Common settings for the backup management"
@@ -8302,6 +8306,16 @@
       ],
       "x-ms-discriminator-value": "HanaHSRContainer"
     },
+    "AzureVmWorkloadSAPHanaScaleoutProtectableItem": {
+      "type": "object",
+      "description": "Azure VM workload-specific protectable item representing HANA scale out.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "HanaScaleoutContainer"
+    },
     "AzureVmWorkloadSAPHanaSystemProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SAP HANA System.",
@@ -8355,6 +8369,16 @@
     "AzureVmWorkloadSQLDatabaseProtectedItem": {
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SQL Database.",
+      "properties": {
+        "parentProtectedItem": {
+          "type": "string",
+          "description": "Name of the parent protected item (e.g., SQL Instance name) when this database is protected as part of a parent."
+        },
+        "protectionLevel": {
+          "$ref": "#/definitions/ProtectionLevel",
+          "description": "Protection type in case protected as part of a parent."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
@@ -8381,6 +8405,29 @@
         }
       ],
       "x-ms-discriminator-value": "SQLInstance"
+    },
+    "AzureVmWorkloadSQLInstanceProtectedItem": {
+      "type": "object",
+      "description": "Azure VM workload-specific protected item representing SQL Instance.",
+      "properties": {
+        "childDBNames": {
+          "type": "array",
+          "description": "Name of Child Dbs protected under this parent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instanceProtectionReadiness": {
+          "$ref": "#/definitions/InstanceProtectionReadiness",
+          "description": "The state of instance protection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSQLInstance"
     },
     "AzureVmWorkloadSQLInstanceWorkloadItem": {
       "type": "object",
@@ -8968,6 +9015,14 @@
           "description": "List of data directory paths during restore operation.",
           "items": {
             "$ref": "#/definitions/SQLDataDirectory"
+          },
+          "x-ms-identifiers": []
+        },
+        "includedDatabases": {
+          "type": "array",
+          "description": "List of databases included in recovery point.",
+          "items": {
+            "$ref": "#/definitions/DatabaseInRP"
           },
           "x-ms-identifiers": []
         }
@@ -10022,6 +10077,18 @@
         "includeSoftDeletedRP": {
           "type": "boolean",
           "description": "Flag to indicate whether Soft Deleted RPs should be included/excluded from result."
+        },
+        "baseSnapshotRPId": {
+          "type": "string",
+          "description": "Id of the base snapshot recovery point."
+        },
+        "baseRPDatasourceId": {
+          "type": "string",
+          "description": "Id of the datasource of the base snapshot recovery point."
+        },
+        "getLatestRPOnly": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to get only the latest recovery point."
         }
       }
     },
@@ -10247,7 +10314,8 @@
         "SQLAGWorkLoadContainer",
         "StorageContainer",
         "GenericContainer",
-        "HanaHSRContainer"
+        "HanaHSRContainer",
+        "HanaScaleoutContainer"
       ],
       "x-ms-enum": {
         "name": "ContainerType",
@@ -10316,6 +10384,11 @@
           {
             "name": "HanaHSRContainer",
             "value": "HanaHSRContainer"
+          },
+          {
+            "name": "HanaScaleoutContainer",
+            "value": "HanaScaleoutContainer",
+            "description": "HANA scale-out container type"
           }
         ]
       }
@@ -10811,6 +10884,20 @@
             "value": "SAPHanaDBInstance"
           }
         ]
+      }
+    },
+    "DatabaseInRP": {
+      "type": "object",
+      "description": "Database included in RP.",
+      "properties": {
+        "datasourceId": {
+          "type": "string",
+          "description": "Datasource Id for the database."
+        },
+        "datasourceName": {
+          "type": "string",
+          "description": "Datasource name for the database."
+        }
       }
     },
     "Day": {
@@ -12235,6 +12322,48 @@
           "description": "Dictionary to store the count of ProtectableItems with key POType.",
           "readOnly": true
         }
+      }
+    },
+    "InstanceProtectionReadiness": {
+      "type": "string",
+      "description": "The state of instance protection.",
+      "enum": [
+        "Unknown",
+        "Ready",
+        "ScheduleDisabled",
+        "PartialProtection",
+        "ProtectionError"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceProtectionReadiness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Instance protection readiness is unknown"
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Instance is ready for protection"
+          },
+          {
+            "name": "ScheduleDisabled",
+            "value": "ScheduleDisabled",
+            "description": "Backup schedule is disabled for this instance"
+          },
+          {
+            "name": "PartialProtection",
+            "value": "PartialProtection",
+            "description": "Instance is partially protected"
+          },
+          {
+            "name": "ProtectionError",
+            "value": "ProtectionError",
+            "description": "Instance protection encountered an error"
+          }
+        ]
       }
     },
     "InstantItemRecoveryTarget": {
@@ -13768,8 +13897,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets provisioning state of the private endpoint connection",
-          "readOnly": true
+          "description": "Gets or sets provisioning state of the private endpoint connection"
         },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
@@ -14491,6 +14619,30 @@
         }
       ]
     },
+    "ProtectionLevel": {
+      "type": "string",
+      "description": "Protection type in case protected as part of a parent.",
+      "enum": [
+        "Database",
+        "DatabaseUnderInstance"
+      ],
+      "x-ms-enum": {
+        "name": "ProtectionLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Database",
+            "value": "Database",
+            "description": "Protected at database level"
+          },
+          {
+            "name": "DatabaseUnderInstance",
+            "value": "DatabaseUnderInstance",
+            "description": "Database protected under an instance"
+          }
+        ]
+      }
+    },
     "ProtectionPolicy": {
       "type": "object",
       "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
@@ -14752,6 +14904,10 @@
         "objectType": {
           "type": "string",
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types."
+        },
+        "threatStatus": {
+          "$ref": "#/definitions/ThreatStatus",
+          "description": "Threat status of the recovery point"
         },
         "threatInfo": {
           "type": "array",
@@ -15236,7 +15392,9 @@
         "All",
         "Incremental",
         "SnapshotFull",
-        "SnapshotCopyOnlyFull"
+        "SnapshotCopyOnlyFull",
+        "Snapshot",
+        "FullDifferentialAndSnapshot"
       ],
       "x-ms-enum": {
         "name": "RestorePointQueryType",
@@ -15277,6 +15435,16 @@
           {
             "name": "SnapshotCopyOnlyFull",
             "value": "SnapshotCopyOnlyFull"
+          },
+          {
+            "name": "Snapshot",
+            "value": "Snapshot",
+            "description": "Snapshot restore point type"
+          },
+          {
+            "name": "FullDifferentialAndSnapshot",
+            "value": "FullDifferentialAndSnapshot",
+            "description": "Full, differential, and snapshot restore point types"
           }
         ]
       }
@@ -15827,17 +15995,17 @@
           {
             "name": "Configured",
             "value": "Configured",
-            "description": "Configured"
+            "description": "Source side scan is configured"
           },
           {
             "name": "NotConfigured",
             "value": "NotConfigured",
-            "description": "Not configured"
+            "description": "Source side scan is not configured"
           },
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "Not applicable"
+            "description": "Source side scan is not applicable"
           }
         ]
       }
@@ -15858,22 +16026,22 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown"
+            "description": "Scan summary is unknown"
           },
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "Not applicable"
+            "description": "Scan summary is not applicable"
           },
           {
             "name": "Suspicious",
             "value": "Suspicious",
-            "description": "Suspicious"
+            "description": "Scan summary is suspicious"
           },
           {
             "name": "Healthy",
             "value": "Healthy",
-            "description": "Healthy"
+            "description": "Scan summary indicates healthy state"
           }
         ]
       }
@@ -16088,7 +16256,7 @@
         "lastUpdatedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the last (latest) threat information was sent",
+          "description": "Timestamp when the last (latest)threat information was sent",
           "readOnly": true
         },
         "threatState": {
@@ -16110,7 +16278,7 @@
         "threatURI": {
           "type": "string",
           "format": "uri",
-          "description": "Threat details link",
+          "description": "threat details link",
           "readOnly": true
         },
         "threatSeverity": {
@@ -16135,22 +16303,22 @@
           {
             "name": "Critical",
             "value": "Critical",
-            "description": "Critical"
+            "description": "Critical severity level"
           },
           {
             "name": "High",
             "value": "High",
-            "description": "High"
+            "description": "High severity level"
           },
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "Warning"
+            "description": "Warning severity level"
           },
           {
             "name": "Informational",
             "value": "Informational",
-            "description": "Informational"
+            "description": "Informational severity level"
           }
         ]
       }
@@ -16171,22 +16339,64 @@
           {
             "name": "Active",
             "value": "Active",
-            "description": "Active"
+            "description": "Threat is active"
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "In progress"
+            "description": "Threat remediation is in progress"
           },
           {
             "name": "Ignored",
             "value": "Ignored",
-            "description": "Ignored"
+            "description": "Threat has been ignored"
           },
           {
             "name": "Resolved",
             "value": "Resolved",
-            "description": "Resolved"
+            "description": "Threat has been resolved"
+          }
+        ]
+      }
+    },
+    "ThreatStatus": {
+      "type": "string",
+      "description": "Threat status of the recovery point",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "UnHealthy",
+        "Warning",
+        "NotAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "ThreatStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Threat status is unknown"
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Recovery point is healthy"
+          },
+          {
+            "name": "UnHealthy",
+            "value": "UnHealthy",
+            "description": "Recovery point is unhealthy"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Recovery point has warning-level threats"
+          },
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable",
+            "description": "Threat status is not available"
           }
         ]
       }
@@ -16512,6 +16722,42 @@
           "$ref": "#/definitions/UserAssignedIdentityProperties",
           "description": "User assigned managed identity properties"
         }
+      }
+    },
+    "VMWorkloadPolicyType": {
+      "type": "string",
+      "description": "Type of the protection policy",
+      "enum": [
+        "Invalid",
+        "SnapshotV1",
+        "SnapshotV2",
+        "Streaming"
+      ],
+      "x-ms-enum": {
+        "name": "VMWorkloadPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid policy type"
+          },
+          {
+            "name": "SnapshotV1",
+            "value": "SnapshotV1",
+            "description": "Snapshot V1 policy type"
+          },
+          {
+            "name": "SnapshotV2",
+            "value": "SnapshotV2",
+            "description": "Snapshot V2 policy type"
+          },
+          {
+            "name": "Streaming",
+            "value": "Streaming",
+            "description": "Streaming policy type"
+          }
+        ]
       }
     },
     "ValidateIaasVMRestoreOperationRequest": {

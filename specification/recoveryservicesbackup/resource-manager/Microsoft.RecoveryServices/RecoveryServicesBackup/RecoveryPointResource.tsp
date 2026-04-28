@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ProtectedItemResource.tsp";
@@ -9,7 +8,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
@@ -77,11 +75,14 @@ interface RecoveryPoints {
   /**
    * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
    */
-  @added(Versions.v2026_03_31_preview)
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId must match existing API contract"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Custom PATCH body from 2025-02-28-preview does not follow standard ARM tags pattern"
-  @operationId("RecoveryPoints_Update")
-  update is ArmCustomPatchSync<RecoveryPointResource, UpdateRecoveryPointRequest>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
+  @added(Versions.v2026_01_31_preview)
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchSync<
+    RecoveryPointResource,
+    PatchModel = UpdateRecoveryPointRequest,
+    Response = ArmResponse<RecoveryPointResource>
+  >;
 }
 
 @armResourceOperations
@@ -141,6 +142,9 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
+);
+@@doc(RecoveryPoints.update::parameters.properties,
+  "Request body for operation"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
 @@doc(ItemLevelRecoveryConnections.provision::parameters.body,
