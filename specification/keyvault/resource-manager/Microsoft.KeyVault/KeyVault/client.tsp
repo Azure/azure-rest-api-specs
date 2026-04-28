@@ -406,7 +406,18 @@ enum NameAvailabilityReason {
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
 
-
+// Resource name constraints for the Azure.Provisioning.KeyVault generator.
+//
+// The service-side name validation rules for Vault and Secret are not declared
+// on the `name` property in the spec (no @pattern / @minLength / @maxLength
+// decorators). Adding those decorators directly to the model would change the
+// generated swagger and be flagged as a breaking change by the swagger
+// breaking-change tooling.
+//
+// Instead, we surface the constraints through the C#-only `resource-name-constraint`
+// @@clientOption so that the provisioning emitter can produce a
+// `GetResourceNameRequirements()` override on each resource without affecting
+// the swagger or any other language SDK.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
 @@clientOption(Vault,
