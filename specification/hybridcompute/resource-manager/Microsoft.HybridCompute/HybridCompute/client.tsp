@@ -65,11 +65,11 @@ union CustomPublicNetworkAccessType {
 @@clientLocation(Machines.setupExtensions, "ManagementClient", "go");
 @@clientLocation(Machines.upgradeExtensions, "ManagementClient", "go");
 
-@@scope(MachineRunCommands.update, "!go");
-@@scope(Machines.listByMachines, "!go");
-@@scope(Machines.getHybridIdentityMetadata, "!go");
-@@scope(NetworkConfigurationsOperationGroup.get, "!go");
-@@scope(NetworkConfigurationsOperationGroup.createOrUpdate, "!go");
-@@scope(NetworkConfigurationsOperationGroup.update, "!go");
-@@scope(AgentVersionsOperationGroup.list, "!go");
-@@scope(AgentVersionsOperationGroup.get, "!go");
+@@scope(MachineRunCommands.update, "!go,!python");
+@@scope(Machines.listByMachines, "!go,!python");
+@@scope(Machines.getHybridIdentityMetadata, "!go,!python");
+@@scope(NetworkConfigurationsOperationGroup.get, "!go,!python");
+@@scope(NetworkConfigurationsOperationGroup.createOrUpdate, "!go,!python");
+@@scope(NetworkConfigurationsOperationGroup.update, "!go,!python");
+@@scope(AgentVersionsOperationGroup.list, "!go,!python");
+@@scope(AgentVersionsOperationGroup.get, "!go,!python");
