@@ -5,27 +5,27 @@
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "./src/agents/routes.tsp";
-import "./src/evaluation-rules/routes.tsp";
+// import "./src/evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
-import "./src/connections/routes.tsp";
-import "./src/datasets/routes.tsp";
-import "./src/deployments/routes.tsp";
-import "./src/indexes/routes.tsp";
+// import "./src/connections/routes.tsp";
+// import "./src/datasets/routes.tsp";
+// import "./src/deployments/routes.tsp";
+// import "./src/indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
-import "./src/evaluation-taxonomies/routes.tsp";
-import "./src/evaluators/routes.tsp";
-import "./src/insights/routes.tsp";
-import "./src/memory-stores/routes.tsp";
-import "./src/red-teams/routes.tsp";
-import "./src/schedules/routes.tsp";
-import "./src/toolboxes/routes.tsp";
-import "./src/skills/routes.tsp";
+// import "./src/evaluation-taxonomies/routes.tsp";
+// import "./src/evaluators/routes.tsp";
+// import "./src/insights/routes.tsp";
+// import "./src/memory-stores/routes.tsp";
+// import "./src/red-teams/routes.tsp";
+// import "./src/schedules/routes.tsp";
+// import "./src/toolboxes/routes.tsp";
+// import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
-import "./relocate-beta-operations.tsp";
+// import "./relocate-beta-operations.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
@@ -92,194 +92,194 @@ using Azure.AI.Projects;
 // Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
 @@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
 
-// --------------------------------------------------------------------------------
-// Memories sub-client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Memories sub-client
+// // --------------------------------------------------------------------------------
 
-@@clientName(MemoryStores.createMemoryStore, "create");
-@@clientName(MemoryStores.updateMemoryStore, "update");
-@@clientName(MemoryStores.getMemoryStore, "get");
-@@clientName(MemoryStores.listMemoryStores, "list");
-@@clientName(MemoryStores.deleteMemoryStore, "delete");
-@@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
-@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
-@@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
-@@clientName(MemoryStoreDeleteScopeResponse,
-  "MemoryStoreDeleteScopeResult",
-  "python"
-);
+// @@clientName(MemoryStores.createMemoryStore, "create");
+// @@clientName(MemoryStores.updateMemoryStore, "update");
+// @@clientName(MemoryStores.getMemoryStore, "get");
+// @@clientName(MemoryStores.listMemoryStores, "list");
+// @@clientName(MemoryStores.deleteMemoryStore, "delete");
+// @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
+// @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
+// @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
+// @@clientName(MemoryStoreDeleteScopeResponse,
+//   "MemoryStoreDeleteScopeResult",
+//   "python"
+// );
 
-// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
-// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
-// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
-@@alternateType(OpenAI.InputItem, Record<unknown>);
-@@clientDoc(MemoryStoreUpdateRequest.items,
-  "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
-  DocumentationMode.replace,
-  "javascript"
-);
-@@clientDoc(MemoryStoreSearchRequest.items,
-  "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
-  DocumentationMode.replace,
-  "javascript"
-);
+// // For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
+// // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+// @@alternateType(OpenAI.InputItem, Record<unknown>);
+// @@clientDoc(MemoryStoreUpdateRequest.items,
+//   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+//   DocumentationMode.replace,
+//   "javascript"
+// );
+// @@clientDoc(MemoryStoreSearchRequest.items,
+//   "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+//   DocumentationMode.replace,
+//   "javascript"
+// );
 
-// The Python SDK will have custom code to handle LRO memory updates, and
-// new input "items" specified via OpenAI classes.
-@@access(MemoryStores.updateMemories, Access.internal, "python");
-@@scope(MemoryStores.getUpdateResult, "!(python)");
-@@usage(MemoryStoreUpdateCompletedResult, Usage.output);
-@@access(MemoryStoreUpdateCompletedResult, Access.public);
-@@usage(MemoryStoreUpdateResponse, Usage.output);
-@@access(MemoryStoreUpdateResponse, Access.public);
+// // The Python SDK will have custom code to handle LRO memory updates, and
+// // new input "items" specified via OpenAI classes.
+// @@access(MemoryStores.updateMemories, Access.internal, "python");
+// @@scope(MemoryStores.getUpdateResult, "!(python)");
+// @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
+// @@access(MemoryStoreUpdateCompletedResult, Access.public);
+// @@usage(MemoryStoreUpdateResponse, Usage.output);
+// @@access(MemoryStoreUpdateResponse, Access.public);
 
-// The Python SDK will have custom code to handle memory search, with
-// new input "items" specified via OpenAI classes.
-@@access(MemoryStores.searchMemories, Access.internal, "python");
-@@access(MemoryStoreSearchResponse, Access.public, "python");
+// // The Python SDK will have custom code to handle memory search, with
+// // new input "items" specified via OpenAI classes.
+// @@access(MemoryStores.searchMemories, Access.internal, "python");
+// @@access(MemoryStoreSearchResponse, Access.public, "python");
 
-// Rename models ending with 'Object' to end with 'Details' for Python
-@@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
+// // Rename models ending with 'Object' to end with 'Details' for Python
+// @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
-// Remove 'Object' suffix for JS client
-@@clientName(MemoryStoreObject, "MemoryStore", "javascript");
+// // Remove 'Object' suffix for JS client
+// @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
-// --------------------------------------------------------------------------------
-// Responses sub‐client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Responses sub‐client
+// // --------------------------------------------------------------------------------
 
-// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
-@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+// // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
+// @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
-// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
-@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
-  "TextResponseFormatText"
-);
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
-  "TextResponseFormatJsonObject"
-);
+// // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+// @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+// @@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+//   "TextResponseFormatText"
+// );
+// @@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+//   "TextResponseFormatJsonObject"
+// );
 
-// --------------------------------------------------------------------------------
-// Evaluators sub‐client
-// --------------------------------------------------------------------------------
-@@clientName(Evaluators.listLatestVersions, "list");
+// // --------------------------------------------------------------------------------
+// // Evaluators sub‐client
+// // --------------------------------------------------------------------------------
+// @@clientName(Evaluators.listLatestVersions, "list");
 
-// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
-@@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
-@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
+// // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+// @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
+// @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
-// --------------------------------------------------------------------------------
-// Insights sub‐client
-// --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
-@@clientName(InsightsGetParams.id, "insight_id");
+// // --------------------------------------------------------------------------------
+// // Insights sub‐client
+// // --------------------------------------------------------------------------------
+// @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+// @@clientName(InsightsGetParams.id, "insight_id");
 
-// --------------------------------------------------------------------------------
-// Datasets sub‐client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Datasets sub‐client
+// // --------------------------------------------------------------------------------
 
-// Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+// // Shorter method names for SDK datasets operations
+// @@clientName(Datasets.listLatest, "list");
+// @@clientName(Datasets.getVersion, "get");
+// @@clientName(Datasets.deleteVersion, "delete");
+// @@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
+// @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
 
-// More accurate naming
-@@clientName(AssetCredentialResponse, "DatasetCredential");
-@@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
+// // More accurate naming
+// @@clientName(AssetCredentialResponse, "DatasetCredential");
+// @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
-// --------------------------------------------------------------------------------
-// Indexes sub‐client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Indexes sub‐client
+// // --------------------------------------------------------------------------------
 
-// Shorter method names for SDK Index operations
-@@clientName(Indexes.listLatest, "list");
-@@clientName(Indexes.getVersion, "get");
-@@clientName(Indexes.deleteVersion, "delete");
-@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
+// // Shorter method names for SDK Index operations
+// @@clientName(Indexes.listLatest, "list");
+// @@clientName(Indexes.getVersion, "get");
+// @@clientName(Indexes.deleteVersion, "delete");
+// @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
-// --------------------------------------------------------------------------------
-// Schedules sub‐client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Schedules sub‐client
+// // --------------------------------------------------------------------------------
 
-@@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
-@@clientName(Schedule.id, "schedule_id");
+// @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
+// @@clientName(Schedule.id, "schedule_id");
 
-// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
-@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
-@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
-@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
-@@alternateType(CronTrigger.startTime, utcDateTime, "python");
-@@alternateType(CronTrigger.endTime, utcDateTime, "python");
-@@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
+// // Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+// @@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
+// @@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
+// @@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
+// @@alternateType(CronTrigger.startTime, utcDateTime, "python");
+// @@alternateType(CronTrigger.endTime, utcDateTime, "python");
+// @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
-// --------------------------------------------------------------------------------
-// Toolboxes sub-client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Toolboxes sub-client
+// // --------------------------------------------------------------------------------
 
-@@clientName(Toolboxes.createToolboxVersion, "create_version");
-@@clientName(Toolboxes.updateToolbox, "update");
-@@clientName(Toolboxes.getToolbox, "get");
-@@clientName(Toolboxes.getToolboxVersion, "get_version");
-@@clientName(Toolboxes.listToolboxes, "list");
-@@clientName(Toolboxes.listToolboxVersions, "list_versions");
-@@clientName(Toolboxes.deleteToolbox, "delete");
-@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
+// @@clientName(Toolboxes.createToolboxVersion, "create_version");
+// @@clientName(Toolboxes.updateToolbox, "update");
+// @@clientName(Toolboxes.getToolbox, "get");
+// @@clientName(Toolboxes.getToolboxVersion, "get_version");
+// @@clientName(Toolboxes.listToolboxes, "list");
+// @@clientName(Toolboxes.listToolboxVersions, "list_versions");
+// @@clientName(Toolboxes.deleteToolbox, "delete");
+// @@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
 
-// --------------------------------------------------------------------------------
-// Skills sub-client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Skills sub-client
+// // --------------------------------------------------------------------------------
 
-@@clientName(Skills.createSkill, "create");
-@@clientName(Skills.createSkillFromPackage, "create_from_package");
-@@clientName(Skills.getSkill, "get");
-@@clientName(Skills.downloadSkill, "download");
-@@clientName(Skills.listSkills, "list");
-@@clientName(Skills.updateSkill, "update");
-@@clientName(Skills.deleteSkill, "delete");
+// @@clientName(Skills.createSkill, "create");
+// @@clientName(Skills.createSkillFromPackage, "create_from_package");
+// @@clientName(Skills.getSkill, "get");
+// @@clientName(Skills.downloadSkill, "download");
+// @@clientName(Skills.listSkills, "list");
+// @@clientName(Skills.updateSkill, "update");
+// @@clientName(Skills.deleteSkill, "delete");
 
-// --------------------------------------------------------------------------------
-// Connections sub‐client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Connections sub‐client
+// // --------------------------------------------------------------------------------
 
-// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
-// input parameter that calls either on these two.
-@@access(Connections.get, Access.internal);
-@@access(Connections.getWithCredentials, Access.internal);
+// // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
+// // input parameter that calls either on these two.
+// @@access(Connections.get, Access.internal);
+// @@access(Connections.getWithCredentials, Access.internal);
 
-// --------------------------------------------------------------------------------
-// Deployment sub‐client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Deployment sub‐client
+// // --------------------------------------------------------------------------------
 
-// Less generic names
-@@clientName(Sku, "ModelDeploymentSku");
+// // Less generic names
+// @@clientName(Sku, "ModelDeploymentSku");
 
-// --------------------------------------------------------------------------------
-// Beta Agents sub-client
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // Beta Agents sub-client
+// // --------------------------------------------------------------------------------
 
-// Make this method internal, since it's patched with a new one that supports either binary or file-path input
-@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
-@@usage(SessionFileWriteResponse, Usage.output);
-@@access(SessionFileWriteResponse, Access.public);
+// // Make this method internal, since it's patched with a new one that supports either binary or file-path input
+// @@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
+// @@usage(SessionFileWriteResponse, Usage.output);
+// @@access(SessionFileWriteResponse, Access.public);
 
-// --------------------------------------------------------------------------------
-// To support custom client-side handling of "opt-in" to preview features.
-// --------------------------------------------------------------------------------
+// // --------------------------------------------------------------------------------
+// // To support custom client-side handling of "opt-in" to preview features.
+// // --------------------------------------------------------------------------------
 
-// Remove foundry_features input arguments from public methods, as they are set internally.
-@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
-@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+// // Remove foundry_features input arguments from public methods, as they are set internally.
+// @@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+// @@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
 
-// Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
-@@usage(AgentDefinitionOptInKeys, Usage.input, "python");
-@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-@@clientName(AgentDefinitionOptInKeys, "_AgentDefinitionOptInKeys", "python");
-@@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
-@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
-@@clientName(FoundryFeaturesOptInKeys, "_FoundryFeaturesOptInKeys", "python");
+// // Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
+// @@usage(AgentDefinitionOptInKeys, Usage.input, "python");
+// @@access(AgentDefinitionOptInKeys, Access.internal, "python");
+// @@clientName(AgentDefinitionOptInKeys, "_AgentDefinitionOptInKeys", "python");
+// @@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
+// @@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+// @@clientName(FoundryFeaturesOptInKeys, "_FoundryFeaturesOptInKeys", "python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
@@ -302,4 +302,4 @@ model AIProjectClientOptions {
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
-@@clientName(OpenAI.Error, "ApiError");
+// @@clientName(OpenAI.Error, "ApiError");
