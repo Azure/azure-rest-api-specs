@@ -156,29 +156,6 @@ using Microsoft.HybridCompute;
 @@clientLocation(PrivateLinkScopesOperationGroup.getValidationDetails,
   "PrivateLinkScopes"
 );
-@@clientLocation(Machines.listByMachines, "HybridIdentityMetadata");
-@@clientLocation(Machines.getHybridIdentityMetadata, "HybridIdentityMetadata");
-@@clientName(Machines.getHybridIdentityMetadata, "Get");
 @@clientName(LicensesOperationGroup.validateLicense::parameters.body,
   "parameters"
-);
-@@clientName(NetworkConfigurationsOperationGroup.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(NetworkConfigurationsOperationGroup.update::parameters.properties,
-  "parameters"
-);
-@@clientName(MachineRunCommands.update::parameters.properties,
-  "runCommandProperties"
-);
-@@clientLocation(AgentVersionsOperationGroup.list, "AgentVersion");
-@@clientLocation(AgentVersionsOperationGroup.get, "AgentVersion");
-@@clientLocation(NetworkConfigurationsOperationGroup.get,
-  "NetworkConfigurations"
-);
-@@clientLocation(NetworkConfigurationsOperationGroup.createOrUpdate,
-  "NetworkConfigurations"
-);
-@@clientLocation(NetworkConfigurationsOperationGroup.update,
-  "NetworkConfigurations"
 );

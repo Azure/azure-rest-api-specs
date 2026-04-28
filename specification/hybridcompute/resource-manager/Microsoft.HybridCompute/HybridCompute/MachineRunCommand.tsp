@@ -43,17 +43,6 @@ interface MachineRunCommands {
   >;
 
   /**
-   * The operation to update a run command.
-   */
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    MachineRunCommand,
-    PatchModel = MachineRunCommandUpdate,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = MachineRunCommand> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
    * The operation to delete a run command.
    */
   delete is ArmResourceDeleteWithoutOkAsync<

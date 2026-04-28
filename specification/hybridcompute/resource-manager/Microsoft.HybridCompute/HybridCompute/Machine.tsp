@@ -226,30 +226,6 @@ interface Machines {
     void,
     ArmResponse<PrivateLinkScopeValidationDetails>
   >;
-
-  /**
-   * Returns the list of HybridIdentityMetadata of the given machine.
-   */
-  @summary("Implements GET HybridIdentityMetadata in a machine.")
-  @tag("HybridIdentityMetadata")
-  @action("hybridIdentityMetadata")
-  @list
-  @get
-  listByMachines is ArmResourceActionSync<
-    Machine,
-    void,
-    ArmResponse<HybridIdentityMetadataList>
-  >;
-
-  /**
-   * Implements HybridIdentityMetadata GET method.
-   */
-  @summary("Gets HybridIdentityMetadata.")
-  @tag("HybridIdentityMetadata")
-  getHybridIdentityMetadata is HybridIdentityMetadataOps.Read<
-    Machine,
-    Response = ArmResponse<HybridIdentityMetadata>
-  >;
 }
 
 @@maxLength(Machine.name, 54);
