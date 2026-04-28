@@ -429,10 +429,11 @@ model FileShareSnapshotProperties {
   // - Users in Company A might use aliases.
   // - Users in company B might use email addresses.
   // - Automated systems like MAB might use resource identifier of Azure Backup Vault.
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The initiator of the FileShareSnapshot. This is a user-defined value.")
   initiatorId?: string;
 
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The metadata")
   metadata?: Record<string>;
 }
