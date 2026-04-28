@@ -4169,68 +4169,49 @@
             "description": "MMAWorkspaceMachine"
           },
           {
-            "name": "MMAWorkspaceNetwork",
-            "value": "MMAWorkspaceNetwork",
-            "description": "MMAWorkspaceNetwork"
+            "name": "TenantReuse",
+            "value": "TenantReuse",
+            "description": "TenantReuse"
           },
           {
-            "name": "AzureArcVM",
-            "value": "AzureArcVM",
-            "description": "AzureArcVM"
+            "name": "SubscriptionReuse",
+            "value": "SubscriptionReuse",
+            "description": "SubscriptionReuse"
           },
           {
-            "name": "AzureVMSS",
-            "value": "AzureVMSS",
-            "description": "AzureVMSS"
+            "name": "ResourceGroupReuse",
+            "value": "ResourceGroupReuse",
+            "description": "ResourceGroupReuse"
           },
           {
-            "name": "AzureArcNetwork",
-            "value": "AzureArcNetwork",
-            "description": "AzureArcNetwork"
+            "name": "NoReuse",
+            "value": "NoReuse",
+            "description": "NoReuse"
           }
         ]
       }
     },
-    "Error": {
+    "Common.Resource": {
       "type": "object",
-      "description": "Common error representation.",
+      "description": "Common resource representation.",
       "properties": {
-        "code": {
+        "id": {
           "type": "string",
-          "description": "Error code."
+          "description": "Resource ID."
         },
-        "message": {
+        "name": {
           "type": "string",
-          "description": "Error message."
+          "description": "Resource name.",
+          "readOnly": true
         },
-        "target": {
+        "type": {
           "type": "string",
-          "description": "Error target."
+          "description": "Resource type.",
+          "readOnly": true
         },
-        "details": {
-          "type": "array",
-          "description": "Error details.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
-        },
-        "innerError": {
+        "location": {
           "type": "string",
-          "description": "Inner error message."
-        }
-      }
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "description": "Common error details representation.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
+          "description": "Resource location."
         },
         "message": {
           "type": "string",
