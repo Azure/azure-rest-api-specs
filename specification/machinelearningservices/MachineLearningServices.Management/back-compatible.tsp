@@ -272,10 +272,11 @@ using Microsoft.MachineLearningServices;
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
 @@clientName(Workspaces.update::parameters.properties, "body");
 @@clientLocation(Workspaces.list, "WorkspaceFeatures");
+@@clientName(Workspaces.list, "GetWorkspaceFeatures", "csharp");
 @@clientLocation(Workspaces.getAllModels, "Connection");
 @@clientLocation(Workspaces.getInWorkspace, EndpointDeployment);
 @@clientLocation(Workspaces.privateLinkResourcesList, "PrivateLinkResources");
-@@clientName(Workspaces.privateLinkResourcesList, "List");
+@@clientName(Workspaces.privateLinkResourcesList, "GetPrivateLinkResources", "csharp");
 @@clientLocation(Workspaces.provisionManagedNetwork,
   "ManagedNetworkProvisions"
 );
@@ -453,11 +454,14 @@ using Microsoft.MachineLearningServices;
 );
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
+@@clientName(UsagesOperationGroup.list, "GetMachineLearningUsages", "csharp");
 
 @@clientLocation(VirtualMachineSizesOperationGroup.list, "VirtualMachineSizes");
+@@clientName(VirtualMachineSizesOperationGroup.list, "GetMachineLearningVmSizes", "csharp");
 
 @@clientLocation(QuotasOperationGroup.update, "Quotas");
 @@clientLocation(QuotasOperationGroup.list, "Quotas");
+@@clientName(QuotasOperationGroup.list, "GetMachineLearningQuotas", "csharp");
 
 @@clientLocation(PTUQuotaOperationGroup.listAvailable, "PTUQuota");
 @@clientLocation(PTUQuotaOperationGroup.getAvailable, "PTUQuota");
@@ -468,3 +472,45 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoint, "FQDNEndpoint");
 @@clientName(FqdnEndpointDetail, "FQDNEndpointDetail");
 @@clientName(FqdnEndpoints, "FQDNEndpoints");
+
+// Fix duplicate property names in C# - property and type have same name after PascalCase
+@@clientName(ComputeInstanceProperties.setupScripts, "SetupScriptsSettings", "csharp");
+@@clientName(SystemCreatedAcrAccount.armResourceId, "ArmResourceIdentifier", "csharp");
+@@clientName(SystemCreatedStorageAccount.armResourceId, "ArmResourceIdentifier", "csharp");
+
+// C# type renames to preserve backward compatibility with shipped API surface
+@@clientName(AllocationState, "MachineLearningAllocationState", "csharp");
+@@clientName(ConnectionCategory, "MachineLearningConnectionCategory", "csharp");
+@@clientName(DatastoreCredentials, "MachineLearningDatastoreCredentials", "csharp");
+@@clientName(EndpointProvisioningState, "MachineLearningEndpointProvisioningState", "csharp");
+@@clientName(IdentityConfiguration, "MachineLearningIdentityConfiguration", "csharp");
+@@clientName(JobInput, "MachineLearningJobInput", "csharp");
+@@clientName(JobOutput, "MachineLearningJobOutput", "csharp");
+@@clientName(JobResourceConfiguration, "MachineLearningJobResourceConfiguration", "csharp");
+@@clientName(JobService, "MachineLearningJobService", "csharp");
+@@clientName(JobStatus, "MachineLearningJobStatus", "csharp");
+@@clientName(LogVerbosity, "MachineLearningLogVerbosity", "csharp");
+@@clientName(NodeState, "MachineLearningNodeState", "csharp");
+@@clientName(NodeStateCounts, "MachineLearningNodeStateCounts", "csharp");
+@@clientName(OsType, "MachineLearningOSType", "csharp");
+@@clientName(OutboundRule, "MachineLearningOutboundRule", "csharp");
+@@clientName(RemoteLoginPortPublicAccess, "MachineLearningRemoteLoginPortPublicAccess", "csharp");
+@@clientName(ServiceDataAccessAuthIdentity, "MachineLearningServiceDataAccessAuthIdentity", "csharp");
+@@clientName(MLTableJobInput, "MachineLearningTableJobInput", "csharp");
+@@clientName(UsageName, "MachineLearningUsageName", "csharp");
+@@clientName(UsageUnit, "MachineLearningUsageUnit", "csharp");
+@@clientName(UserAccountCredentials, "MachineLearningUserAccountCredentials", "csharp");
+@@clientName(VmPriority, "MachineLearningVmPriority", "csharp");
+@@clientName(ScaleSettings, "AmlComputeScaleSettings", "csharp");
+@@clientName(ClassificationMultilabelPrimaryMetrics, "ClassificationMultilabelPrimaryMetric", "csharp");
+@@clientName(ClassificationPrimaryMetrics, "ClassificationPrimaryMetric", "csharp");
+@@clientName(Endpoint, "ContainerEndpoint", "csharp");
+@@clientName(Collection, "DataCollectionConfiguration", "csharp");
+@@clientName(ConnectionGroup, "WorkspaceConnectionGroup", "csharp");
+@@clientName(RegressionModels, "AutoMLVerticalRegressionModel", "csharp");
+@@clientName(BlockedTransformers, "BlockedTransformer", "csharp");
+@@clientName(ClassificationModels, "ClassificationModel", "csharp");
+@@clientName(ForecastingModels, "ForecastingModel", "csharp");
+@@clientName(Nodes, "JobNodes", "csharp");
+@@clientName(Webhook, "MachineLearningWebhook", "csharp");
+@@clientName(AcrDetails, "RegistryAcrDetails", "csharp");
