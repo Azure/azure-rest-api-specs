@@ -50,7 +50,6 @@ model NewDeviceProperties {
 }
 
 @@added(DeviceOriginType, Versions.v2026_11_01_preview);
-@@added(DeviceAcceptedStatus, Versions.v2026_11_01_preview);
 @@added(DeviceEnabledStatus, Versions.v2026_11_01_preview);
 @@added(DeviceOrigin, Versions.v2026_11_01_preview);
 @@added(DevicePropertiesBase, Versions.v2026_11_01_preview);
