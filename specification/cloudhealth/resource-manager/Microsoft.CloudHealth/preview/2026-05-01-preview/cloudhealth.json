@@ -3119,7 +3119,7 @@
           "maximum": 100
         },
         "continuationToken": {
-          "$ref": "#/definitions/string4096",
+          "$ref": "#/definitions/secretString4096",
           "format": "password",
           "description": "Continuation token from a previous response to retrieve the next page of results.",
           "x-ms-secret": true
@@ -3145,7 +3145,7 @@
           ]
         },
         "continuationToken": {
-          "$ref": "#/definitions/string4096",
+          "$ref": "#/definitions/secretString4096",
           "format": "password",
           "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
           "x-ms-secret": true
@@ -4448,6 +4448,13 @@
       "type": "string",
       "description": "Type for entity resource name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "secretString4096": {
+      "type": "string",
+      "format": "password",
+      "description": "Secre string with max length validation of 4096 characters",
+      "maxLength": 4096,
+      "x-ms-secret": true
     },
     "signalDefinitionName": {
       "type": "string",
