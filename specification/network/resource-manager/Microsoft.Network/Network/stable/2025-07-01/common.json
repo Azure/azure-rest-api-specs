@@ -4536,6 +4536,90 @@
         ]
       }
     },
+    "ExpressRouteFailoverBgpStatusAddressFamily": {
+      "type": "string",
+      "description": "The BGP address family type",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverBgpStatusAddressFamily",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 address family."
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 address family."
+          }
+        ]
+      }
+    },
+    "ExpressRouteFailoverLinkType": {
+      "type": "string",
+      "description": "The type of link on which failover test was performed",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverLinkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "Primary link type."
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "Secondary link type."
+          }
+        ]
+      }
+    },
+    "ExpressRouteFailoverTestType": {
+      "type": "string",
+      "description": "The type of failover test",
+      "enum": [
+        "SingleSiteFailover",
+        "MultiSiteFailover",
+        "All",
+        "LinkFailover"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverTestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleSiteFailover",
+            "value": "SingleSiteFailover",
+            "description": "Single site failover test type."
+          },
+          {
+            "name": "MultiSiteFailover",
+            "value": "MultiSiteFailover",
+            "description": "Multi site failover test type."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All failover test types."
+          },
+          {
+            "name": "LinkFailover",
+            "value": "LinkFailover",
+            "description": "Link failover test type."
+          }
+        ]
+      }
+    },
     "ExpressRouteLinkAdminState": {
       "type": "string",
       "description": "Administrative state of the physical port.",
@@ -4580,6 +4664,36 @@
             "name": "SC",
             "value": "SC",
             "description": "SC"
+          }
+        ]
+      }
+    },
+    "ExpressRouteLinkFailoverBgpStatus": {
+      "type": "string",
+      "description": "The BGP status of ExpressRoute link failover",
+      "enum": [
+        "Undefined",
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteLinkFailoverBgpStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Undefined",
+            "value": "Undefined",
+            "description": "BGP status is undefined."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "BGP is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "BGP is disconnected."
           }
         ]
       }
@@ -6068,6 +6182,30 @@
             "name": "Platform",
             "value": "Platform",
             "description": "Platform"
+          }
+        ]
+      }
+    },
+    "MaintenanceTestCategory": {
+      "type": "string",
+      "description": "The type of maintenance test category",
+      "enum": [
+        "BgpDisconnect",
+        "ASPathPrepend"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceTestCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BgpDisconnect",
+            "value": "BgpDisconnect",
+            "description": "BGP disconnect maintenance test."
+          },
+          {
+            "name": "ASPathPrepend",
+            "value": "ASPathPrepend",
+            "description": "AS path prepend maintenance test."
           }
         ]
       }
