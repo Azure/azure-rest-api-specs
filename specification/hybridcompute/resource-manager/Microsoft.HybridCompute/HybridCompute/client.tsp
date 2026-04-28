@@ -59,8 +59,8 @@ union CustomPublicNetworkAccessType {
 @@Azure.ClientGenerator.Core.alternateType(LicenseProfileNameAlias.licenseProfileName,
   "default"
 );
-@@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "python");
-@@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "python");
+@@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "!go");
+@@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute, "!go");
 
 @@clientLocation(Machines.setupExtensions, "ManagementClient", "go");
 @@clientLocation(Machines.upgradeExtensions, "ManagementClient", "go");
