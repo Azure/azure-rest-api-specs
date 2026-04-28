@@ -73,8 +73,8 @@ model Operation {
 // ──────────────────────────────────────────────
 
 /** Operations on long-running operation status resources. */
-@tag("Operations")
-interface Operations {
+@tag("Status")
+interface Status {
   /** Get the status of a long-running operation. */
   get is ResourceOperations.ResourceRead<Operation>;
 
