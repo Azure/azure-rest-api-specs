@@ -209,6 +209,8 @@ stages:
           versionSpec: $(PythonVersion)
 
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+        parameters:
+          SourceRootPath: $(SpecRepoDirectory)
 
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
