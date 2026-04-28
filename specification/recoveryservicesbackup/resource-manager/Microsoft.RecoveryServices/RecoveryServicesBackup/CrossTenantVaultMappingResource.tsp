@@ -85,42 +85,30 @@ interface CrossTenantVaultMappings {
 // Cross-tenant operations (routes under crossTenantVaultMapping)
 // ============================================================
 
+// ============================================================
+// CrossTenantVaultMappingStatus — vault-level status check action
+// (Phase 4b spike: standard ARM template form per markcowl review)
+// ============================================================
+
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
-@clientName("CrossTenantVaultMappingStatus", "autorest")
-interface CrossTenantOperations {
+@armResourceOperations
+interface CrossTenantVaultMappingStatus {
   /**
    * Gets the mapping status of the vault for cross-tenant restore operations.
    * Returns the mapping status that indicates whether the vault is properly configured for cross-tenant operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples required for non-standard cross-tenant operation"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus")
-  @post
-  @clientName("Check", "autorest")
+  @action("backupCrossTenantVaultMappingStatus")
   @tag("CrossTenant")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Check Vault Mapping Status`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/CheckVaultMappingStatus.json",
-      },
-    }
-  )
-  checkVaultMappingStatus(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
+  check is ArmResourceActionSync<
+    VaultResource,
+    void,
+    CrossTenantVaultMappingStatusResponse
+  >;
+}
 
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<CrossTenantVaultMappingStatusResponse> | ErrorResponse;
-
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface CrossTenantOperations {
   /**
    * Lists the protected items from the source vault in a different tenant.
    */

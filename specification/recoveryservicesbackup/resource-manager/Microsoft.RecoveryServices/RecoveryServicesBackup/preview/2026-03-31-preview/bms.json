@@ -139,10 +139,13 @@
       "name": "CrossTenantVaultMappings"
     },
     {
-      "name": "CrossTenantOperations"
+      "name": "CrossTenantVaultMappingStatus"
     },
     {
       "name": "CrossTenant"
+    },
+    {
+      "name": "CrossTenantOperations"
     },
     {
       "name": "CrossTenantVaultCredentialOperations"
@@ -414,11 +417,14 @@
       "post": {
         "operationId": "CrossTenantVaultMappingStatus_Check",
         "tags": [
-          "CrossTenantOperations",
+          "CrossTenantVaultMappingStatus",
           "CrossTenant"
         ],
         "description": "Gets the mapping status of the vault for cross-tenant restore operations.\nReturns the mapping status that indicates whether the vault is properly configured for cross-tenant operations.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -428,13 +434,9 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the recovery services vault.",
+            "description": "The name of the VaultResource",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
