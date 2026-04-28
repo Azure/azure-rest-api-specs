@@ -97,6 +97,9 @@
       "name": "CapacityReservations"
     },
     {
+      "name": "InterconnectBlocks"
+    },
+    {
       "name": "VirtualMachineRunCommands"
     },
     {
@@ -360,6 +363,40 @@
         "x-ms-examples": {
           "List all virtual machine images in a subscription.": {
             "$ref": "./examples/imageExamples/Image_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/interconnectBlocks": {
+      "get": {
+        "operationId": "InterconnectBlocks_ListBySubscription",
+        "tags": [
+          "InterconnectBlocks"
+        ],
+        "description": "Lists all of the Interconnect Blocks in the subscription. Use the nextLink property in the response to get the next page of Interconnect Blocks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlockListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -4201,6 +4238,297 @@
           },
           "Image_Delete_MinimumSet_Gen": {
             "$ref": "./examples/imageExamples/Images_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks": {
+      "get": {
+        "operationId": "InterconnectBlocks_ListByResourceGroup",
+        "tags": [
+          "InterconnectBlocks"
+        ],
+        "description": "Lists all of the Interconnect Blocks in the specified resource group. Use the nextLink property in the response to get the next page of Interconnect Blocks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlockListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}": {
+      "get": {
+        "operationId": "InterconnectBlocks_Get",
+        "tags": [
+          "InterconnectBlocks"
+        ],
+        "description": "Retrieves information about an Interconnect Block.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectBlockName",
+            "in": "path",
+            "description": "The name of the Interconnect Block.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation. 'instanceView' retrieves a snapshot of the runtime properties of the Interconnect Block that is managed by the platform and can change outside of control plane operations.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InterconnectBlockExpandTypes",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "instanceView",
+                  "value": "instanceView",
+                  "description": "Retrieve the runtime instance view of the Interconnect Block."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlock"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "InterconnectBlocks_CreateOrUpdate",
+        "tags": [
+          "InterconnectBlocks"
+        ],
+        "description": "Creates or updates an Interconnect Block. When updating an Interconnect Block, only tags and sku.capacity may be modified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectBlockName",
+            "in": "path",
+            "description": "The name of the Interconnect Block.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the Create Interconnect Block.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlock"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InterconnectBlock' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlock"
+            }
+          },
+          "201": {
+            "description": "Resource 'InterconnectBlock' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlock"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "InterconnectBlocks_Update",
+        "tags": [
+          "InterconnectBlocks"
+        ],
+        "description": "Updates an Interconnect Block. When updating an Interconnect Block, only tags and sku.capacity may be modified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectBlockName",
+            "in": "path",
+            "description": "The name of the Interconnect Block.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to the Update Interconnect Block operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlockUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectBlock"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "InterconnectBlocks_Delete",
+        "tags": [
+          "InterconnectBlocks"
+        ],
+        "description": "Deletes an Interconnect Block. The operation is only allowed when there are no virtual machines or VMSS VM instances associated with the Interconnect Block.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectBlockName",
+            "in": "path",
+            "description": "The name of the Interconnect Block.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15009,6 +15337,169 @@
         "name": "InstanceViewTypes",
         "modelAsString": false
       }
+    },
+    "InterconnectBlock": {
+      "type": "object",
+      "description": "Specifies information about the Interconnect Block.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InterconnectBlockProperties",
+          "description": "Properties of the Interconnect Block."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the resource for which capacity needs to be pre-allocated. Both `sku.name` and `sku.capacity` are required at create. After create, only `sku.capacity` can be updated."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Placement section specifies the user-defined constraints for Interconnect Block hardware placement. This property cannot be changed once Interconnect Block is provisioned."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "InterconnectBlockExpandTypes": {
+      "type": "string",
+      "description": "The expand expression to apply on the operation for an Interconnect Block.",
+      "enum": [
+        "instanceView"
+      ],
+      "x-ms-enum": {
+        "name": "InterconnectBlockExpandTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "instanceView",
+            "value": "instanceView",
+            "description": "Retrieve the runtime instance view of the Interconnect Block."
+          }
+        ]
+      }
+    },
+    "InterconnectBlockInstanceView": {
+      "type": "object",
+      "description": "The instance view of an Interconnect Block.",
+      "properties": {
+        "currentCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current capacity allocated for this Interconnect Block.",
+          "readOnly": true
+        },
+        "statuses": {
+          "type": "array",
+          "description": "The resource status information.",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "InterconnectBlockListResult": {
+      "type": "object",
+      "description": "The list Interconnect Block operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Interconnect Blocks.",
+          "items": {
+            "$ref": "#/definitions/InterconnectBlock"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InterconnectBlockProperties": {
+      "type": "object",
+      "description": "Properties of the Interconnect Block.",
+      "properties": {
+        "virtualMachinesAssociated": {
+          "type": "array",
+          "description": "A list of all virtual machine resource ids that are associated with the Interconnect Block.",
+          "items": {
+            "$ref": "../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "interconnectGroup": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "The Microsoft.Network/interconnectGroups resource that this Interconnect Block is associated with. Required at create and immutable thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "interconnectBlockId": {
+          "type": "string",
+          "description": "A unique id (GUID) generated and assigned to the Interconnect Block by the platform which does not change throughout the lifetime of the resource.",
+          "readOnly": true
+        },
+        "provisioningTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time when the Interconnect Block was last updated.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/InterconnectBlockInstanceView",
+          "description": "The Interconnect Block instance view.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Interconnect Block resource was created.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "interconnectGroup"
+      ]
+    },
+    "InterconnectBlockUpdate": {
+      "type": "object",
+      "description": "Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ]
     },
     "IntervalInMins": {
       "type": "string",
