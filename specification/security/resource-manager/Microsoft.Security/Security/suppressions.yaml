@@ -255,4 +255,8 @@
     - Standards/tspconfig.yaml
     - SubAssessments/tspconfig.yaml
     - Tasks/tspconfig.yaml
-  
+
+# Swagger ModelValidation suppressions
+- tool: Swagger ModelValidation
+  path: ./preview/2026-04-01-preview/examples/sqlVulnerabilityAssessmentsScanOperations/*.json
+  reason: The scanOperationResults nested resource path uses an existing controller route convention with an unpaired "scans" segment (see PathForNestedResource suppression in readme.md). As a result, the resource id returned by these operations cannot satisfy the standard arm-id format. Changing the path would be a breaking change.
