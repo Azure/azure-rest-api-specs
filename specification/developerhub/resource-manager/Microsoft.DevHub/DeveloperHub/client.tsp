@@ -19,6 +19,7 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthInfoResponse, "AdoOAuthInfoResponse", "java");
 @@clientName(AdooAuthListResponse, "AdoOAuthListResponse", "java");
 @@clientName(ADOOAuth, "AdoOAuth", "java");
+@@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(GitHubOAuthResponses.listGitHubOAuth,
