@@ -2,8 +2,7 @@
 
 These settings apply only when `--java` is specified on the command line.
 
-
-``` yaml $(java)
+```yaml $(java)
 directive:
   - from: externalSecuritySolutions.json
     where: $.definitions.ExternalSecuritySolution.allOf[1]

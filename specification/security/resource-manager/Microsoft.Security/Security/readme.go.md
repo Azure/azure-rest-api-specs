@@ -9,7 +9,7 @@ go:
   clear-output-folder: true
 ```
 
-``` yaml $(go) && $(track2)
+```yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/security/armsecurity
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -18,16 +18,16 @@ azure-arm: true
 modelerfour:
   lenient-model-deduplication: true
 directive:
-- from: swagger-document
-  where: '$.paths.*[?(@.operationId.startsWith("Connectors_"))]'
-  transform: >
-    $["operationId"] = $["operationId"].replace("Connectors_", "AccountConnectors_");
-- rename-model:
-    from: SecurityOperator
-    to: OperatorResource
-- from: externalSecuritySolutions.json
-  where: $.definitions['ExternalSecuritySolutionKind']
-  transform: >
+  - from: swagger-document
+    where: '$.paths.*[?(@.operationId.startsWith("Connectors_"))]'
+    transform: >
+      $["operationId"] = $["operationId"].replace("Connectors_", "AccountConnectors_");
+  - rename-model:
+      from: SecurityOperator
+      to: OperatorResource
+  - from: externalSecuritySolutions.json
+    where: $.definitions['ExternalSecuritySolutionKind']
+    transform: >
       $ = {
         "type": "string",
         "description": "The kind of the external solution",
@@ -52,9 +52,9 @@ directive:
           ]
         }
       };
-- from: externalSecuritySolutions.json
-  where: $.definitions['ExternalSecuritySolution']
-  transform: >
+  - from: externalSecuritySolutions.json
+    where: $.definitions['ExternalSecuritySolution']
+    transform: >
       $.properties['kind'] = {
         "$ref": "#/definitions/ExternalSecuritySolutionKind"
       };
