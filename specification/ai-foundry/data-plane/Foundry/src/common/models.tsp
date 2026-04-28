@@ -128,11 +128,10 @@ union JobSourceType {
   dataset: "dataset",
 }
 
-@doc("Common properties shared across all job source types.")
-model JobSourceDescription {
+alias JobSourceDescription = {
   @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
   description?: string;
-}
+};
 
 @doc("Prompt source — inline text provided by the user.")
 model PromptJobSource {

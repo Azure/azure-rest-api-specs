@@ -32,7 +32,7 @@ model DataGenerationJobInputs {
   name: string;
 
   @doc("The sources used for the data generation job.")
-  sources: Array<DataGenerationJobSource>;
+  sources: DataGenerationJobSource[];
 
   @doc("The options for the data generation job.")
   options: DataGenerationJobOptions;
@@ -44,10 +44,10 @@ model DataGenerationJobInputs {
 @doc("Result produced by a successful data generation job.")
 model DataGenerationJobResult {
   @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
-  outputs?: Array<DataGenerationJobOutput>;
+  outputs?: DataGenerationJobOutput[];
 
   @doc("The number of samples actually generated.")
-  generated_samples?: int32;
+  generated_samples: int32;
 
   @doc("The token usage information for the data generation job.")
   token_usage?: DataGenerationTokenUsage;
@@ -173,7 +173,7 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   type: "simple_qna";
 
   @doc("The question types to generate. Used only for fine-tuning scenarios.")
-  question_types?: Array<SimpleQnAFineTuningQuestionType>;
+  question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
 @doc("The options for a data generation job with Traces type.")
