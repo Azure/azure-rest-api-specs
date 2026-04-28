@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Security")
 @service(#{ title: "Microsoft Defender for Cloud" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace OperationsAPI;
 
 /**

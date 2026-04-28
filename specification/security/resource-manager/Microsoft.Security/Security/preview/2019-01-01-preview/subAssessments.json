@@ -53,7 +53,7 @@
         "description": "Get security sub-assessments on all your scanned resources inside a scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scope",
@@ -104,7 +104,7 @@
         "description": "Get a security sub-assessment on your scanned resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scope",
@@ -159,7 +159,7 @@
         "description": "Get security sub-assessments on all your scanned resources inside a subscription scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scope",
@@ -318,7 +318,7 @@
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorAdditionalInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -384,7 +384,8 @@
         "OnPremise",
         "OnPremiseSql",
         "Aws",
-        "Gcp"
+        "Gcp",
+        "OnPremiseResourceDetails"
       ],
       "x-ms-enum": {
         "name": "Source",
@@ -414,6 +415,11 @@
             "name": "Gcp",
             "value": "Gcp",
             "description": "Gcp"
+          },
+          {
+            "name": "OnPremiseResourceDetails",
+            "value": "OnPremiseResourceDetails",
+            "description": "On premise resource details"
           }
         ]
       }
@@ -491,7 +497,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

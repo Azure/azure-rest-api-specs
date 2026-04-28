@@ -112,7 +112,9 @@ op privateLinksGetCustomization(
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 

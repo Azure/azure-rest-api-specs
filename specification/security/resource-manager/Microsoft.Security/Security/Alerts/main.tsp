@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Security Center" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace AlertsAPI;
 
 /**
