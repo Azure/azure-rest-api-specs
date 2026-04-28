@@ -14,6 +14,7 @@ import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
+import "./src/evaluation-suites/routes.tsp";
 import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
@@ -169,6 +170,18 @@ using Azure.AI.Projects;
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
+
+// --------------------------------------------------------------------------------
+// Evaluation Suites sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(EvaluationSuites.listLatest, "list");
+
+// Evaluation suite generation jobs — renamed for Python SDK discoverability
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_job", "python");
 
 // --------------------------------------------------------------------------------
 // Insights sub‐client
