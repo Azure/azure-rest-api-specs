@@ -8756,7 +8756,14 @@ model CrossTenantVaultMapping {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."
   @visibility(Lifecycle.Read)
-  provisioningState?: "Succeeded" | "Failed" | "Canceled" | "Provisioning" | "Updating" | "Deleting" | "Accepted";
+  provisioningState?:
+    | "Succeeded"
+    | "Failed"
+    | "Canceled"
+    | "Provisioning"
+    | "Updating"
+    | "Deleting"
+    | "Accepted";
 }
 
 /**
@@ -8935,5 +8942,12 @@ model VaultCredentialCertificateProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."
   @visibility(Lifecycle.Read)
-  provisioningState?: "Succeeded" | "Failed" | "Canceled" | "Provisioning" | "Updating" | "Deleting" | "Accepted";
+  provisioningState?:
+    | "Succeeded"
+    | "Failed"
+    | "Canceled"
+    | "Provisioning"
+    | "Updating"
+    | "Deleting"
+    | "Accepted";
 }
