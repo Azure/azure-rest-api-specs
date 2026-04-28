@@ -31,7 +31,7 @@ union OperationKind {
   GroupBestUpdatesComplianceReport: "GenerateReport.GroupBestUpdatesCompliance",
 
   /** Report listing the installable updates for the devices within a group. */
-  GroupInstallableUpdates: "GenerateReport.GroupInstallableUpdates"
+  GroupInstallableUpdatesReport: "GenerateReport.GroupInstallableUpdates"
 }
 
 /** A long-running operation status resource scoped to a namespace. */
