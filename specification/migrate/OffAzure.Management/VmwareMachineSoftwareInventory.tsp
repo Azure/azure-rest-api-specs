@@ -26,6 +26,36 @@ model VmwareMachineSoftwareInventory
   >;
 }
 
+alias VmwareMachineSoftwareInventoryLegacyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Site name. */
+    @path
+    @segment("vmwareSites")
+    @key
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    siteName: string;
+
+    /** Machine name. */
+    @path
+    @segment("machines")
+    @key
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    machineName: string;
+  },
+  {
+    /** Default value. */
+    @path
+    @segment("softwareinventories")
+    @key
+    default: Default;
+  }
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface VmwareMachineSoftwareInventories {
   /**
@@ -38,7 +68,7 @@ interface VmwareMachineSoftwareInventories {
    * List VmwareMachineSoftwareInventory resources by MachineResource
    */
   @tag("VmwareSoftwareInventoriesController")
-  listByMachineResource is ArmResourceListByParent<VmwareMachineSoftwareInventory>;
+  listByMachineResource is VmwareMachineSoftwareInventoryLegacyOps.List<VmwareMachineSoftwareInventory>;
 }
 
 @@doc(VmwareMachineSoftwareInventory.name, "Default value.");
