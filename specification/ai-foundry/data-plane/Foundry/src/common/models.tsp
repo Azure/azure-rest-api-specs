@@ -139,7 +139,7 @@ model PromptJobSource {
   ...JobSourceDescription;
 
   @doc("The source type for this source, which is prompt.")
-  type: "prompt";
+  type: JobSourceType.prompt;
 
   @doc("Inline prompt text (e.g., agent description, policy text, supplementary context).")
   prompt: string;
@@ -150,7 +150,7 @@ model AgentJobSource {
   ...JobSourceDescription;
 
   @doc("The source type for this source, which is agent.")
-  type: "agent";
+  type: JobSourceType.agent;
 
   @doc("The agent name to fetch instructions from.")
   agent_name: string;
@@ -167,7 +167,7 @@ model TracesJobSource {
   ...JobSourceDescription;
 
   @doc("The source type for this source, which is traces.")
-  type: "traces";
+  type: JobSourceType.traces;
 
   @doc("The agent name to fetch traces for.")
   agent_name: string;
@@ -190,7 +190,7 @@ model DatasetJobSource {
   ...JobSourceDescription;
 
   @doc("The source type for this source, which is dataset.")
-  type: "dataset";
+  type: JobSourceType.dataset;
 
   @doc("The name of the dataset.")
   name: string;
