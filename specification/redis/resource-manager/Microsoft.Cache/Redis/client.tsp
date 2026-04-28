@@ -225,7 +225,10 @@ using Microsoft.Cache;
 @@usage(RedisResource, Usage.input | Usage.output, "csharp");
 @@usage(RedisLinkedServerWithProperties, Usage.input | Usage.output, "csharp");
 @@usage(RedisLinkedServerProperties, Usage.input | Usage.output, "csharp");
-@@usage(RedisLinkedServerCreateProperties, Usage.input | Usage.output, "csharp");
+@@usage(RedisLinkedServerCreateProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
 
 @@clientName(RedisResources.listBySubscription, "getAllRedis", "csharp");
 @@clientName(RedisResources.listByRedisCache,
