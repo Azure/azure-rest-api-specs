@@ -77,6 +77,47 @@ model NamespaceUpdateComplianceReport extends Report {
 }
 
 // ──────────────────────────────────────────────
+// Concrete request stubs (one per ReportType).
+// Add report-specific input fields to the relevant subclass as the
+// product evolves; each subclass already inherits `reportTarget` and
+// pins its `reportType` discriminator.
+// ──────────────────────────────────────────────
+
+/** Request to generate a NamespaceUpdateCompliance report. */
+model GenerateNamespaceUpdateComplianceReportRequest
+  extends GenerateReportRequest {
+  reportType: ReportType.NamespaceUpdateComplianceReport;
+}
+
+/** Request to generate a GroupBestUpdates compliance report. */
+model GenerateGroupBestUpdatesComplianceReportRequest
+  extends GenerateReportRequest {
+  reportType: ReportType.GroupBestUpdatesComplianceReport;
+}
+
+/** Request to generate a GroupInstallableUpdates report. */
+model GenerateGroupInstallableUpdatesReportRequest
+  extends GenerateReportRequest {
+  reportType: ReportType.GroupInstallableUpdatesReport;
+}
+
+// ──────────────────────────────────────────────
+// Concrete response stubs for the two report types that don't yet
+// have a typed body. Mirrors the request stubs so every value of
+// ReportType is satisfiable on both sides.
+// ──────────────────────────────────────────────
+
+/** Result of a GroupBestUpdates compliance report. */
+model GroupBestUpdatesComplianceReport extends Report {
+  reportType: ReportType.GroupBestUpdatesComplianceReport;
+}
+
+/** Result of a GroupInstallableUpdates report. */
+model GroupInstallableUpdatesReport extends Report {
+  reportType: ReportType.GroupInstallableUpdatesReport;
+}
+
+// ──────────────────────────────────────────────
 // Namespaces interface
 // ──────────────────────────────────────────────
 
