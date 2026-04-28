@@ -6344,3 +6344,79 @@ model PolicyExpressionEvaluationDetails {
    */
   expressionValue?: string;
 }
+
+/**
+ * Properties of an accelerator capacity resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AcceleratorCapacity is a read-only resource that does not have a provisioning state"
+@added(Versions.v2026_03_15_preview)
+model AcceleratorCapacityProperties {
+  /**
+   * The type of accelerator (e.g., Azure.A100, Azure.H100).
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorType?: string;
+
+  /**
+   * The Azure region where the capacity is available.
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * The number of available accelerators in the region.
+   */
+  @visibility(Lifecycle.Read)
+  availableAccelerators?: int32;
+
+  /**
+   * Capacity information broken down by deployment size.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  deploymentSizeCapacities?: DeploymentSizeCapacity[];
+}
+
+/**
+ * Capacity information for a specific deployment size.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentSizeCapacity {
+  /**
+   * The number of accelerators required per model instance.
+   */
+  @visibility(Lifecycle.Read)
+  modelInstanceAcceleratorCount?: int32;
+
+  /**
+   * The total available capacity for this deployment size.
+   */
+  @visibility(Lifecycle.Read)
+  totalAvailableCapacity?: int32;
+
+  /**
+   * The largest contiguous deployment capacity available for this deployment size.
+   */
+  @visibility(Lifecycle.Read)
+  largestDeploymentCapacity?: int32;
+}
+
+/**
+ * The list of accelerator capacities response.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorCapacityListResult {
+  /**
+   * The link used to get the next page of accelerator capacities.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of accelerator capacities.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  value?: AcceleratorCapacity[];
+}

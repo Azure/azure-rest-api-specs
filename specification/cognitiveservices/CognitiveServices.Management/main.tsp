@@ -41,6 +41,7 @@ import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
 import "./ManagedComputeUsages.tsp";
 import "./Compute.tsp";
+import "./AcceleratorCapacity.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
