@@ -359,8 +359,7 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   lookback_hours?: int32 = 168;
 
   /** Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time. */
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  end_time?: utcDateTime;
+  end_time?: FoundryTimestamp;
 
   /** Sampling limit applied to traces retrieved for evaluation. */
   max_traces?: int32 = 1000;
