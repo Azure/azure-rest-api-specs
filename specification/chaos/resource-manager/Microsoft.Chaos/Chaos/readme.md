@@ -67,6 +67,14 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/workspaceOperationResults/{operationId}"]
     reason: WorkspaceOperationResults is an LRO polling endpoint (final-state-via location), not a tracked resource CRUD path. It is subscription/location-scoped by design as a shared polling endpoint for workspace async operations.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/fixResourcePermissions"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"]
+    reason: Approved by ARM API reviewer. GUID usage is required for resource identifiers in the Chaos service.
   - code: AllTrackedResourcesMustHaveDelete
     from: openapi.json
     where: $.definitions.Workspace
