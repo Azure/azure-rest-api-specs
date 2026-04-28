@@ -212,8 +212,11 @@ stages:
           set -euo pipefail
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           echo "##vso[task.prependpath]$HOME/.cargo/bin"
-        displayName: 'Install Rust toolchain'
+          npm ci --prefix "$(SdkRepoDirectory)/eng/common/tsp-client"
+        displayName: 'Install Rust toolchain and tsp-client'
         condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+        env:
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
         parameters:
@@ -274,7 +277,7 @@ stages:
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
         env:
-          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
