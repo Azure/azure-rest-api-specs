@@ -47,6 +47,7 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentVersionFromManifestRequest,
   "CreateAgentVersionFromManifestInput"
 );
+@@clientName(UpdateToolboxRequest, "UpdateToolboxInput");
 
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB");
