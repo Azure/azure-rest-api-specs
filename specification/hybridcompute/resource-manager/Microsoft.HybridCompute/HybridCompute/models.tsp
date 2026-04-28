@@ -2494,7 +2494,7 @@ model MachineInstallPatchesParameters {
   /**
    * Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)
    */
-  maximumDuration: string;
+  maximumDuration: duration;
 
   /**
    * Defines when it is acceptable to reboot a VM during a software update operation.
