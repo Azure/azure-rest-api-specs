@@ -27,104 +27,79 @@ namespace PolicyInsightsManagementClient;
 
 // Section: Explicit subscriptionId parameter
 @@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
-  policyEventsListQueryResultsForPolicySetDefinition,
-  "!java"
+  policyEventsListQueryResultsForPolicySetDefinition
 );
 @@clientLocation(policyEventsListQueryResultsForPolicyDefinition::parameters.subscriptionId,
-  policyEventsListQueryResultsForPolicyDefinition,
-  "!java"
+  policyEventsListQueryResultsForPolicyDefinition
 );
 @@clientLocation(policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java"
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment
 );
 @@clientLocation(policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java"
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment
 );
 @@clientLocation(policyStatesListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
-  policyStatesListQueryResultsForPolicySetDefinition,
-  "!java"
+  policyStatesListQueryResultsForPolicySetDefinition
 );
 @@clientLocation(policyStatesSummarizeForPolicySetDefinition::parameters.subscriptionId,
-  policyStatesSummarizeForPolicySetDefinition,
-  "!java"
+  policyStatesSummarizeForPolicySetDefinition
 );
 @@clientLocation(policyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
-  policyStatesListQueryResultsForPolicyDefinition,
-  "!java"
+  policyStatesListQueryResultsForPolicyDefinition
 );
 @@clientLocation(policyStatesSummarizeForPolicyDefinition::parameters.subscriptionId,
-  policyStatesSummarizeForPolicyDefinition,
-  "!java"
+  policyStatesSummarizeForPolicyDefinition
 );
 @@clientLocation(policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java"
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
 );
 @@clientLocation(policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  policyStatesSummarizeForSubscriptionLevelPolicyAssignment,
-  "!java"
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment
 );
 @@clientLocation(policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java"
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
 );
 @@clientLocation(policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  policyStatesSummarizeForResourceGroupLevelPolicyAssignment,
-  "!java"
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment
 );
 @@clientLocation(componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
-  componentPolicyStatesListQueryResultsForPolicyDefinition,
-  "!java"
+  componentPolicyStatesListQueryResultsForPolicyDefinition
 );
 @@clientLocation(componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java"
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
 );
 @@clientLocation(componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java"
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
 );
 @@clientLocation(componentPolicyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
-  componentPolicyStatesListQueryResultsForResourceGroup,
-  "!java"
+  componentPolicyStatesListQueryResultsForResourceGroup
 );
 @@clientLocation(componentPolicyStatesListQueryResultsForSubscription::parameters.subscriptionId,
-  componentPolicyStatesListQueryResultsForSubscription,
-  "!java"
+  componentPolicyStatesListQueryResultsForSubscription
 );
 @@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
-  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
-  "!java"
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation
 );
 @@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
-  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
-  "!java"
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation
 );
 @@clientLocation(policyEventsListQueryResultsForResourceGroup::parameters.subscriptionId,
-  policyEventsListQueryResultsForResourceGroup,
-  "!java"
+  policyEventsListQueryResultsForResourceGroup
 );
 @@clientLocation(policyEventsListQueryResultsForSubscription::parameters.subscriptionId,
-  policyEventsListQueryResultsForSubscription,
-  "!java"
+  policyEventsListQueryResultsForSubscription
 );
 @@clientLocation(policyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
-  policyStatesListQueryResultsForResourceGroup,
-  "!java"
+  policyStatesListQueryResultsForResourceGroup
 );
 @@clientLocation(policyStatesListQueryResultsForSubscription::parameters.subscriptionId,
-  policyStatesListQueryResultsForSubscription,
-  "!java"
+  policyStatesListQueryResultsForSubscription
 );
 @@clientLocation(policyStatesSummarizeForResourceGroup::parameters.subscriptionId,
-  policyStatesSummarizeForResourceGroup,
-  "!java"
+  policyStatesSummarizeForResourceGroup
 );
 @@clientLocation(policyStatesSummarizeForSubscription::parameters.subscriptionId,
-  policyStatesSummarizeForSubscription,
-  "!java"
+  policyStatesSummarizeForSubscription
 );
 
 /**
