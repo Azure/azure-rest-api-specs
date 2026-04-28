@@ -216,7 +216,7 @@ interface Devices {
   >;
 
   /** Provision devices in a namespace. */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  @pollingOperation(Operations.get)
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
     ProvisionDeviceRequest,
@@ -224,7 +224,7 @@ interface Devices {
   >;
 
   /** Invoke a direct method action on a device. */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  @pollingOperation(Operations.get)
   executeAction is ResourceOperations.LongRunningResourceAction<
     Device,
     ExecuteActionRequest,

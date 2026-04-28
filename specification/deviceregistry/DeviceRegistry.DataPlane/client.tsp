@@ -14,8 +14,11 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.DeviceRegistry.Devices.getDeviceByExternalId,
   Access.internal
 );
-@@access(Microsoft.DeviceRegistry.Groups.getGroupsForDevice, Access.internal);
+@@access(Microsoft.DeviceRegistry.Devices.getDeviceByUuid, Access.internal);
 @@access(Microsoft.DeviceRegistry.Devices.executeAction, Access.internal);
+
+@@access(Microsoft.DeviceRegistry.Groups.getGroupsForDevice, Access.internal);
+
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.createOrReplace,
   Access.internal
 );
@@ -26,8 +29,13 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.getCapabilityByUuid,
   Access.internal
 );
+
 @@access(Microsoft.DeviceRegistry.DeviceStates.createOrReplace,
   Access.internal
 );
 @@access(Microsoft.DeviceRegistry.DeviceStates.get, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceStates.update, Access.internal);
+@@access(Microsoft.DeviceRegistry.DeviceStates.list, Access.internal);
+
+@@access(Microsoft.DeviceRegistry.Operations.get, Access.internal);
+@@access(Microsoft.DeviceRegistry.Operations.list, Access.internal);

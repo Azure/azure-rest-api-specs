@@ -8,6 +8,8 @@ import "./devices.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceStates.tsp";
 import "./groups.tsp";
+import "./namespaces.tsp";
+import "./operations.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
