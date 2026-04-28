@@ -64,3 +64,12 @@ union CustomPublicNetworkAccessType {
 
 @@clientLocation(Machines.setupExtensions, "ManagementClient", "go");
 @@clientLocation(Machines.upgradeExtensions, "ManagementClient", "go");
+
+@@scope(MachineRunCommands.update, "!go");
+@@scope(Machines.listByMachines, "!go");
+@@scope(Machines.getHybridIdentityMetadata, "!go");
+@@scope(NetworkConfigurationsOperationGroup.get, "!go");
+@@scope(NetworkConfigurationsOperationGroup.createOrUpdate, "!go");
+@@scope(NetworkConfigurationsOperationGroup.update, "!go");
+@@scope(AgentVersionsOperationGroup.list, "!go");
+@@scope(AgentVersionsOperationGroup.get, "!go");
