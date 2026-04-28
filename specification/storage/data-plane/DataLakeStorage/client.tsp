@@ -33,11 +33,6 @@ interface PathClient extends Path {}
 )
 interface ServiceClient extends Service {}
 
-@@clientNamespace(Storage.DataLake,
-  "Azure.Storage.Files.DataLake",
-  "javascript"
-);
-
 @@clientName(Storage.DataLake.EtagResponseHeader.eTag,
   "etag",
   "javascript,python"
