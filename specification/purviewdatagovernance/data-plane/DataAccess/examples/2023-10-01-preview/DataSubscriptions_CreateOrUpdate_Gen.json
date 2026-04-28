@@ -1,0 +1,42 @@
+{
+  "title": "DataSubscriptions_CreateOrUpdate",
+  "operationId": "DataSubscriptions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "dataSubscriptionId": "a0a0a0a0-bbbb-cccc-dddd-e0e0e0e0e0e0",
+    "dataSubscription": {
+      "useWorkflow": true,
+      "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+      "subscriberIdentity": {
+        "identityType": "User",
+        "objectId": "11111111-2222-3333-4444-555555555555",
+        "displayName": "Test User",
+        "email": "user@contoso.com"
+      },
+      "dataProductId": "22222222-3333-4444-5555-666666666666",
+      "dataProductName": "Sales Data Product",
+      "globalComment": "Need access for analytics."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "dataSubscriptionId": "a0a0a0a0-bbbb-cccc-dddd-e0e0e0e0e0e0",
+        "subscriptionStatus": "Pending",
+        "useWorkflow": true,
+        "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+        "subscriberIdentity": {
+          "identityType": "User",
+          "objectId": "11111111-2222-3333-4444-555555555555",
+          "displayName": "Test User",
+          "email": "user@contoso.com"
+        },
+        "dataProductId": "22222222-3333-4444-5555-666666666666",
+        "dataProductName": "Sales Data Product",
+        "globalComment": "Need access for analytics.",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "createdBy": "admin@contoso.com"
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Workflows_CreateOrUpdate",
+  "operationId": "Workflows_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+    "workflow": {
+      "name": "Data Access Request Workflow",
+      "type": "DataAccessRequest",
+      "isEnabled": true,
+      "description": "Workflow for approving data access requests.",
+      "triggers": [
+        {
+          "type": "DataAccessRequestSubmitted"
+        }
+      ],
+      "actionDag": [
+        {
+          "actionId": "action-1",
+          "actionType": "Approval",
+          "parameters": {
+            "approverObjectId": "11111111-2222-3333-4444-555555555555"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+        "name": "Data Access Request Workflow",
+        "type": "DataAccessRequest",
+        "isEnabled": true,
+        "description": "Workflow for approving data access requests.",
+        "triggers": [
+          {
+            "type": "DataAccessRequestSubmitted"
+          }
+        ],
+        "actionDag": [
+          {
+            "actionId": "action-1",
+            "actionType": "Approval",
+            "parameters": {
+              "approverObjectId": "11111111-2222-3333-4444-555555555555"
+            }
+          }
+        ],
+        "createdBy": "admin@contoso.com",
+        "lastModifiedBy": "admin@contoso.com"
+      }
+    }
+  }
+}

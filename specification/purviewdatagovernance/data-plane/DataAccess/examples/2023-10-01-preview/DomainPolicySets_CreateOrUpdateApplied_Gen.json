@@ -1,0 +1,35 @@
+{
+  "title": "DomainPolicySets_CreateOrUpdateApplied",
+  "operationId": "DomainPolicySets_CreateOrUpdateApplied",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "domainId": "55555555-6666-7777-8888-999999999999",
+    "policySet": {
+      "targetResource": {
+        "resourceId": "55555555-6666-7777-8888-999999999999",
+        "resourceType": "BusinessDomain"
+      },
+      "policySetKind": "Applied",
+      "dataProductPolicies": {
+        "termsOfUseRequired": true,
+        "skipWorkflow": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "policySetId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
+        "targetResource": {
+          "resourceId": "55555555-6666-7777-8888-999999999999",
+          "resourceType": "BusinessDomain"
+        },
+        "policySetKind": "Applied",
+        "dataProductPolicies": {
+          "termsOfUseRequired": true,
+          "skipWorkflow": false
+        }
+      }
+    }
+  }
+}

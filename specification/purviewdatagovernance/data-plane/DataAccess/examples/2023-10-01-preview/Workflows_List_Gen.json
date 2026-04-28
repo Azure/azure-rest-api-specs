@@ -1,0 +1,39 @@
+{
+  "title": "Workflows_List",
+  "operationId": "Workflows_List",
+  "parameters": {
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+            "name": "Data Access Request Workflow",
+            "type": "DataAccessRequest",
+            "isEnabled": true,
+            "description": "Workflow for approving data access requests.",
+            "triggers": [
+              {
+                "type": "DataAccessRequestSubmitted"
+              }
+            ],
+            "actionDag": [
+              {
+                "actionId": "action-1",
+                "actionType": "Approval",
+                "parameters": {
+                  "approverObjectId": "11111111-2222-3333-4444-555555555555"
+                }
+              }
+            ],
+            "createdBy": "admin@contoso.com",
+            "lastModifiedBy": "admin@contoso.com"
+          }
+        ],
+        "nextLink": "https://purview.azure.com/dataaccess/workflows?api-version=2023-10-01-preview&skipToken=abc123"
+      }
+    }
+  }
+}

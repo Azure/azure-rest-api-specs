@@ -1,0 +1,45 @@
+{
+  "title": "DataProductPolicySets_CreateOrUpdateApplied",
+  "operationId": "DataProductPolicySets_CreateOrUpdateApplied",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "dataProductId": "22222222-3333-4444-5555-666666666666",
+    "policySet": {
+      "targetResource": {
+        "resourceId": "22222222-3333-4444-5555-666666666666",
+        "resourceType": "DataProduct"
+      },
+      "policySetKind": "Applied",
+      "dataProductPolicies": {
+        "approvalTimeline": "P7D",
+        "permittedUseCases": [
+          "Analytics",
+          "Reporting"
+        ],
+        "termsOfUseRequired": true,
+        "skipWorkflow": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "policySetId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
+        "targetResource": {
+          "resourceId": "22222222-3333-4444-5555-666666666666",
+          "resourceType": "DataProduct"
+        },
+        "policySetKind": "Applied",
+        "dataProductPolicies": {
+          "approvalTimeline": "P7D",
+          "permittedUseCases": [
+            "Analytics",
+            "Reporting"
+          ],
+          "termsOfUseRequired": true,
+          "skipWorkflow": false
+        }
+      }
+    }
+  }
+}
