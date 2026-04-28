@@ -6983,6 +6983,18 @@
           "items": {
             "$ref": "#/definitions/BlockDeviceItem"
           }
+        },
+        "CharDeviceItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CharDeviceItem"
+          }
+        },
+        "FifoItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FifoItem"
+          }
         }
       },
       "xml": {
@@ -7113,6 +7125,66 @@
           "format": "int64"
         },
         "DeviceMinor": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CharDeviceItem": {
+      "xml": {
+        "name": "CharDevice"
+      },
+      "description": "A listed character device item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMajor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMinor": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "FifoItem": {
+      "xml": {
+        "name": "Fifo"
+      },
+      "description": "A listed FIFO item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
           "type": "integer",
           "format": "int64"
         }
