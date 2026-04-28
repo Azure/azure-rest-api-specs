@@ -47,7 +47,7 @@ export class FolderStructureRule implements Rule {
         return {
           success: false,
           stdOutput: stdOutput,
-          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://github.com/Azure/azure-rest-api-specs/wiki/Folder-Structure \n`,
+          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
         };
       }
     }

@@ -32,57 +32,52 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   excludePiiCategories?: PiiCategoriesExclude[];
 
-  /** RedactionPolicy to be used on the input. */
-  @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v2025_11_15_preview)
-  redactionPolicy?: BaseRedactionPolicy;
-
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   valueExclusionPolicy?: ValueExclusionPolicy;
 
   /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   entitySynonyms?: EntitySynonyms[];
 
   /** List of RedactionPolicies to be used on the input. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   redactionPolicies?: BaseRedactionPolicy[];
 
   /** Confidence score threshold configuration for PII entity recognition */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   confidenceScoreThreshold?: ConfidenceScoreThreshold;
 
   /** Disable entity validation for PII entity recognition */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   disableEntityValidation?: boolean = false;
 }
 
 /** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 model EntitySynonyms {
   /** The entity name */
-  entityType: EntityCategory;
+  entityType: PiiCategoriesExclude;
 
   /** The entity synonyms */
   synonyms: EntitySynonym[];
 }
 
 /** Configuration for confidence score threshold for PII entity recognition */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model ConfidenceScoreThreshold {
   /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
-  default: float32 = 0.3;
+  default: float32;
 
   /** List of confidence score threshold overrides for specific PII categories */
   overrides?: ConfidenceScoreThresholdOverride[];
 }
 
 /** Confidence score threshold override for a specific PII category */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model ConfidenceScoreThresholdOverride {
   /** The PII category for which to override the confidence score threshold */
   entity: PiiCategoriesExclude;
@@ -95,7 +90,7 @@ model ConfidenceScoreThresholdOverride {
 }
 
 /** The entity synonyms used to enhance pii entity detection */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 model EntitySynonym {
   /** The synonym to be used for context */
   synonym: string;
@@ -105,7 +100,7 @@ model EntitySynonym {
 }
 
 /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 model ValueExclusionPolicy {
   /** Option to make the values excluded values case sensitive */
   caseSensitive: boolean = false;
@@ -115,27 +110,27 @@ model ValueExclusionPolicy {
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind = RedactionPolicyKind.characterMask;
 
   /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   entityTypes?: PiiCategoriesExclude[];
 
   /** (Optional) name of the redaction policy for identification purposes. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   policyName?: string;
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
-  @added(Versions.v2025_11_15_preview)
-  isDefaultPolicy?: boolean = false;
+  @added(Versions.v2026_05_01)
+  isDefault?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -153,7 +148,7 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of replacing detected PII with synthetic values. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2026_05_01)
 model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.syntheticReplacement;
@@ -163,21 +158,21 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2026_05_01)
 union RedactionPolicyKind {
   string,
 
@@ -191,7 +186,6 @@ union RedactionPolicyKind {
   entityMask: "entityMask",
 
   /** Replace detected entities with synthetic values. */
-  @added(Versions.v2025_11_15_preview)
   syntheticReplacement: "syntheticReplacement",
 }
 
@@ -219,7 +213,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2025_05_15_preview, PiiEntitiesDocumentResult[])
+  @typeChangedFrom(Versions.v2025_11_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 
@@ -244,15 +238,15 @@ model PiiEntityWithTags is Entity {
   tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   maskLength?: int32;
 }
 
@@ -263,7 +257,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2025_05_15_preview, Entity[])
+  @typeChangedFrom(Versions.v2026_05_01, Entity[])
   entities: PiiEntityWithTags[];
 }
 
@@ -830,7 +824,7 @@ union PiiCategoriesExclude {
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
@@ -838,84 +832,82 @@ union PiiCategoriesExclude {
   SortCode: "SortCode",
 
   /** PIN */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   PIN: "PIN",
 
   /** VIN */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   VIN: "VIN",
 
   /** VIN */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
   /** License Plate */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2026_05_01)
   LicensePlate: "LicensePlate",
 
   /** KR Passport Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   KRPassportNumber: "KRPassportNumber",
 
   /** KR Driver's License Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   KRDriversLicenseNumber: "KRDriversLicenseNumber",
 
   /** KR Social Security Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   KRSocialSecurityNumber: "KRSocialSecurityNumber",
 
   /** Government Issued ID */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   GovernmentIssuedId: "GovernmentIssuedId",
 
   /** Password */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   Password: "Password",
 
   /** National Identification */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   NationalId: "NationalId",
 
   /** Zip Code */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   ZipCode: "ZipCode",
 
   /** Card Verification Value */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   CVV: "CVV",
 
   /** Expiration Date */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   ExpirationDate: "ExpirationDate",
 
   /** CA Social Identification Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   CASocialIdentificationNumber: "CASocialIdentificationNumber",
 
   /** Medicare Beneficiary ID */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   MedicareBeneficiaryId: "USMedicareBeneficiaryId",
 
   /** Location */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   Location: "Location",
 
   /** City */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   City: "City",
 
   /** State */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   State: "State",
 
   /** Airport */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   Airport: "Airport",
 
   /** Geopolitical Entity */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2026_05_01)
   GPE: "GPE",
 }
