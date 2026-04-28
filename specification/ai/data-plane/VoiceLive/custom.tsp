@@ -316,6 +316,7 @@ union PersonalVoiceModels {
   "PhoenixV2Neural",
 
   /** Use the latest Dragon HD Omni model. */
+  @added(Versions.v2026_04_10)
   "DragonHDOmniLatestNeural",
 }
 
@@ -410,6 +411,15 @@ model AudioInputTranscriptionOptions {
    * 'azure-speech'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  @typeChangedFrom(
+    Versions.v2026_04_10,
+
+      | string
+      | "whisper-1"
+      | "gpt-4o-transcribe"
+      | "gpt-4o-mini-transcribe"
+      | "azure-speech"
+  )
   `model`:
     | string
     | "whisper-1"
