@@ -591,16 +591,7 @@ directive:
     reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
   - suppress: ResourceNameRestriction
     from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus"]
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would propagate via shared TypeSpec into all stable api-versions and trip openapi-diff rule 1036 (ConstraintChanged).
-  - suppress: ResourceNameRestriction
-    from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupTriggerValidateOperation"]
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would propagate via shared TypeSpec into all stable api-versions and trip openapi-diff rule 1036 (ConstraintChanged).
-  - suppress: ResourceNameRestriction
-    from: bms.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperation"]
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would propagate via shared TypeSpec into all stable api-versions and trip openapi-diff rule 1036 (ConstraintChanged).
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility across all CTR paths. Adding a pattern at the source would propagate via shared TypeSpec into all stable api-versions (2025-02-01, 2025-08-01, 2026-01-01) and trip openapi-diff rule 1036 (ConstraintChanged) on every vault path. The rule fires on 70+ CTR paths (any path under /vaults/{vaultName}/backupCrossTenant... or related validate/trigger paths); a single file-scoped suppression is the only practical scope.
 
 suppressions:
   - from: bms.json

@@ -60,12 +60,12 @@ interface CrossTenantVaultMappings {
    * Removes the cross-tenant vault mapping for cross-tenant restore operations.
    * This API removes the target vault properties associated with source vault ID and deletes catalog mapping.
    */
+  #suppress "deprecated" "ArmResourceActionNoContentAsync emits 202+204 which the PostResponseCodes Spectral lint rule expects. The non-deprecated alternative ArmResourceActionNoResponseContentAsync emits 202-only (modern long-running async pattern), but the lint rule lags and still requires the 202+204 shape. Using the deprecated template avoids the suppression and keeps the spec lint-clean."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "ArmResourceActionNoContentAsync intentionally emits 202+204 to satisfy the Spectral PostResponseCodes rule (which lags the modern 202-only pattern). The TypeSpec-side warning here flags the same template's response shape from the opposite direction. The emitted swagger is valid and matches the Spectral rule's expectations."
   @action("removeCrossTenantVaultMapping")
-  remove is ArmResourceActionNoResponseContentAsync<
+  remove is ArmResourceActionNoContentAsync<
     CrossTenantVaultMappingResource,
-    RemoveCrossTenantVaultMappingRequest,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    RemoveCrossTenantVaultMappingRequest
   >;
 }
 
