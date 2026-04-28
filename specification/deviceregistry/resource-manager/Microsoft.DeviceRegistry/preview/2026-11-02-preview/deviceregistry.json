@@ -7347,30 +7347,6 @@
       ],
       "x-ms-discriminator-value": "Storage"
     },
-    "DeviceAcceptedStatus": {
-      "type": "string",
-      "description": "Whether a device has been accepted for use.",
-      "enum": [
-        "Accepted",
-        "NotAccepted"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceAcceptedStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The device has been accepted."
-          },
-          {
-            "name": "NotAccepted",
-            "value": "NotAccepted",
-            "description": "The device has not been accepted."
-          }
-        ]
-      }
-    },
     "DeviceBaseProperties": {
       "type": "object",
       "description": "Defines the device properties.",
@@ -7513,7 +7489,10 @@
           "type": "string",
           "description": "The source identifier for the origin."
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "DeviceOriginType": {
       "type": "string",
@@ -7564,10 +7543,6 @@
           "$ref": "#/definitions/DeviceOrigin",
           "description": "Contains metadata about how this device was discovered or provisioned.",
           "readOnly": true
-        },
-        "accepted": {
-          "$ref": "#/definitions/DeviceAcceptedStatus",
-          "description": "Whether a discovered or created device has been accepted for use."
         },
         "enabled": {
           "$ref": "#/definitions/DeviceEnabledStatus",
@@ -11813,10 +11788,6 @@
           "description": "Contains metadata about how this device was discovered or provisioned.",
           "readOnly": true
         },
-        "accepted": {
-          "$ref": "#/definitions/DeviceAcceptedStatus",
-          "description": "Whether a discovered or created device has been accepted for use."
-        },
         "enabled": {
           "$ref": "#/definitions/DeviceEnabledStatus",
           "description": "Indicates if the device is enabled or not."
@@ -11852,12 +11823,38 @@
         }
       }
     },
+    "NewDevicePropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the new device properties.",
+      "properties": {
+        "enabled": {
+          "$ref": "#/definitions/DeviceEnabledStatus",
+          "description": "Indicates if the device is enabled or not."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer."
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model."
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        }
+      }
+    },
     "NewDeviceUpdate": {
       "type": "object",
       "description": "New device definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NewDeviceProperties",
+          "$ref": "#/definitions/NewDevicePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
