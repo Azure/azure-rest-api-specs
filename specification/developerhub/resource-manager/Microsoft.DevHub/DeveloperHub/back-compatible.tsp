@@ -15,9 +15,9 @@ using Microsoft.DevHub;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IacProfile.properties);
 
-@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback, "");
-@@clientLocation(GitHubOAuthResponses.listGitHubOAuth, "");
-@@clientLocation(GitHubOAuthResponses.gitHubOAuth, "");
+@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback, Microsoft.DevHub);
+@@clientLocation(GitHubOAuthResponses.listGitHubOAuth, Microsoft.DevHub);
+@@clientLocation(GitHubOAuthResponses.gitHubOAuth, Microsoft.DevHub);
 @@clientName(GitHubOAuthResponses.gitHubOAuth::parameters.body, "parameters");
 
 @@clientLocation(Workflows.get, "Workflow");
