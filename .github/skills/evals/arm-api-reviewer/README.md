@@ -1,4 +1,4 @@
-# ARM API Reviewer — Evaluation Suite
+# ARM API Reviewer -- Evaluation Suite
 
 Evaluation tests for the **ARM API Reviewer** agent using the
 [evaluate](https://github.com/microsoft/evaluate) (vally) framework.
@@ -8,49 +8,55 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 ```text
 arm-api-reviewer/
 ├── .vally.yaml            # Vally project config (skill discovery, eval paths, shared config, suites)
-├── evaluate/              # Evaluate (vally) eval definitions (9 files)
+├── evaluate/              # Evaluate (vally) eval definitions (11 files)
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
 │   ├── eval-operations.yaml
 │   ├── eval-breaking-changes.yaml
 │   ├── eval-suppressions.yaml
 │   ├── eval-examples.yaml
+│   ├── eval-typespec.yaml
+│   ├── eval-check-name-availability.yaml
 │   ├── eval-true-negatives.yaml
 │   ├── eval-classification.yaml
 │   └── eval-report-format.yaml
-├── fixtures/              # Test fixtures (24 files)
+├── fixtures/              # Test fixtures (29 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
+│   ├── typespec/          # TypeSpec files with seeded violations
 │   └── version-pairs/     # Version pairs for breaking change detection
 └── README.md              # This file
 ```
 
-## Test Categories (21 test cases across 9 eval files)
+## Test Categories (25 test cases across 11 eval files)
 
-| ID     | Category                | Count | Description                                           |
-| ------ | ----------------------- | ----- | ----------------------------------------------------- |
-| 01xxxx | ARM resource structure  | 2     | Missing CRUD ops, missing provisioningState           |
-| 02xxxx | Property design         | 4     | Secrets, naming, descriptions, enums                  |
-| 03xxxx | Operations              | 4     | PATCH, PUT, DELETE, LRO violations                    |
-| 04xxxx | Breaking changes        | 3     | Removed property, type change, enum narrowing         |
-| 05xxxx | Suppression analysis    | 2     | Missing reason, security rule suppressions            |
-| 06xxxx | Example file validation | 2     | Bad resource ID, realistic secrets                    |
-| 09xxxx | True negatives          | 2     | Clean spec, clean example (false-positive resistance) |
-| 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                         |
-| 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output             |
+| ID     | Category                 | Count | Description                                           |
+| ------ | ------------------------ | ----- | ----------------------------------------------------- |
+| 01xxxx | ARM resource structure   | 2     | Missing CRUD ops, missing provisioningState           |
+| 02xxxx | Property design          | 4     | Secrets, naming, descriptions, enums                  |
+| 03xxxx | Operations               | 4     | PATCH, PUT, DELETE, LRO violations                    |
+| 04xxxx | Breaking changes         | 3     | Removed property, type change, enum narrowing         |
+| 05xxxx | Suppression analysis     | 2     | Missing reason, security rule suppressions            |
+| 06xxxx | Example file validation  | 2     | Bad resource ID, realistic secrets                    |
+| 07xxxx | TypeSpec review          | 3     | Segment casing, secrets, anti-patterns                |
+| 08xxxx | Check Name Availability  | 1     | Custom CNA models, missing input validation           |
+| 09xxxx | True negatives           | 2     | Clean spec, clean example (false-positive resistance) |
+| 10xxxx | Classification           | 1     | NEW vs EXISTING issue tagging                         |
+| 11xxxx | Report format            | 1     | Line numbers, rule IDs, structured output             |
 
 ## Fixtures
 
-All 24 fixture files live in `fixtures/`. See
+All 29 fixture files live in `fixtures/`. See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **11 ARM OpenAPI specs** in `arm-openapi/` — 1 clean + 10 with seeded violations
-- **3 example JSON files** in `examples/` — 1 clean + 2 with issues
-- **2 readme.md files** in `readme/` — suppression scenarios
-- **8 version-pair files** in `version-pairs/` — 4 pairs for breaking change detection
+- **12 ARM OpenAPI specs** in `arm-openapi/` -- 1 clean + 11 with seeded violations
+- **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
+- **2 readme.md files** in `readme/` -- suppression scenarios
+- **3 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern violations
+- **8 version-pair files** in `version-pairs/` -- 4 pairs for breaking change detection
 
 ## Running with Evaluate (vally)
 
@@ -60,13 +66,13 @@ then `npm install && npm run build`.
 The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
 auto-discovery (via `paths.skills`), eval file location, shared execution config
 (`model`, `judge_model`, `executor`, `timeout`), and a named suite for running
-the full eval suite in a single command. Skills are discovered automatically —
+the full eval suite in a single command. Skills are discovered automatically --
 individual eval files do not need to declare `environment.skills`.
 
 ```bash
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (all 21 stimuli, 5 concurrent workers)
+# Run the full suite (all 25 stimuli, 5 concurrent workers)
 npx --prefix /path/to/evaluate vally eval --suite all --verbose
 
 # Run a single category
@@ -115,7 +121,7 @@ to complete. There are three levels, applied in priority order:
 
 > **Note:** The `config` block under `suites.all` in `.vally.yaml` is
 > **not propagated** to individual eval runs. Vally's `SuiteConfig` only
-> supports `description`, `filter`, and `evals` — any `config.timeout`,
+> supports `description`, `filter`, and `evals` -- any `config.timeout`,
 > `config.model`, or `config.runs` there is silently ignored. Always set
 > timeout in the individual eval YAML files or via the CLI flag.
 
@@ -142,6 +148,15 @@ results in your PR description or as a comment:
    `--output-dir` directory to your PR.
 3. Summarize pass/fail counts in the PR description so reviewers can quickly
    assess the impact of your changes.
+
+## Non-Deterministic Tests
+
+The `clean-arm-spec-no-blocking-issues` stimulus (09xxxx) is known to be
+non-deterministic. It tests false-positive resistance on a fully compliant
+spec and may intermittently fail when the agent escalates best-practice
+recommendations to ERROR severity. This is inherent LLM variability, not a
+systematic defect -- re-runs typically pass. If you see this stimulus fail
+but all other stimuli pass, it is safe to re-run the suite.
 
 ## Adding New Tests
 

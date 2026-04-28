@@ -57,9 +57,10 @@ instruction files:
 
 The ARM API Reviewer eval suite uses the
 [evaluate](https://github.com/microsoft/evaluate) (vally) framework. It
-contains **21 stimuli** across **9 eval files** covering ARM resource
+contains **25 stimuli** across **11 eval files** covering ARM resource
 structure, property design, operations, breaking changes, suppressions,
-examples, true negatives, classification, and report format.
+examples, TypeSpec review, Check Name Availability, true negatives,
+classification, and report format.
 
 See [`evals/arm-api-reviewer/README.md`](evals/arm-api-reviewer/README.md)
 for the full eval suite documentation — directory structure, fixture
@@ -72,7 +73,7 @@ catalog, grader types, running instructions, and contribution guide.
 git clone https://github.com/microsoft/evaluate.git
 cd evaluate && npm install && npm run build && cd -
 
-# Run the full suite (all 21 stimuli, 5 concurrent workers)
+# Run the full suite (all 25 stimuli, 5 concurrent workers)
 cd .github/skills/evals/arm-api-reviewer
 npx --prefix /path/to/evaluate vally eval --suite all --verbose
 

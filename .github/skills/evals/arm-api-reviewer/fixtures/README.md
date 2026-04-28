@@ -1,4 +1,4 @@
-# ARM API Reviewer — Test Fixtures
+# ARM API Reviewer -- Test Fixtures
 
 Self-contained test fixtures for evaluating ARM API review tools. Each fixture
 is a valid OpenAPI 2.0 (Swagger) spec, TypeSpec (`.tsp`) file, example JSON,
@@ -9,12 +9,12 @@ specifications.
 
 These fixtures are designed for reuse across multiple eval suites and tools:
 
-- **Other review agents** — data-plane API reviewers, TypeSpec reviewers, or
+- **Other review agents** -- data-plane API reviewers, TypeSpec reviewers, or
   custom linting agents can reference these fixtures to test shared rules
   (naming, descriptions, enums, secrets, examples).
-- **CI validation tools** — `openapi-diff`, `oav`, and custom lint rules can
+- **CI validation tools** -- `openapi-diff`, `oav`, and custom lint rules can
   use these as known-good or known-bad inputs.
-- **SDK generation testing** — `clean-spec.json` is a complete, valid ARM spec
+- **SDK generation testing** -- `clean-spec.json` is a complete, valid ARM spec
   suitable as a golden input for SDK code-gen smoke tests. Version-pair
   fixtures can test breaking-change detection tooling.
 
@@ -30,7 +30,7 @@ environment:
 
 ## Design Principles
 
-Each fixture is **self-contained** — it includes all definitions, parameters,
+Each fixture is **self-contained** -- it includes all definitions, parameters,
 security blocks, and error responses inline. This makes fixtures portable and
 avoids cross-file dependencies.
 
@@ -46,11 +46,12 @@ rule category without interference from other issues.
 
 ## Fixture Catalog
 
-### `arm-openapi/` — ARM OpenAPI Specifications (11 files)
+### `arm-openapi/` -- ARM OpenAPI Specifications (12 files)
 
 | File                              | Violations                    | Description                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clean-spec.json`                 | None (true negative)          | Fully compliant ARM spec with all CRUD operations, provisioningState, systemData, x-ms-enum, descriptions, x-ms-pageable, and x-ms-mutability. Use as a baseline for false-positive testing. |
+| `cna-violations.json`             | CNA model issues              | Custom inline CheckNameAvailabilityRequest/Response instead of common-types `$ref`; name field has no pattern or maxLength constraint.                                                       |
 | `delete-violations.json`          | DELETE response issues        | 404 on DELETE instead of 204; non-empty response body on 200 DELETE; missing 204 response code.                                                                                              |
 | `enum-violations.json`            | Enum best-practice issues     | Missing x-ms-enum decorator; modelAsString false; non-PascalCase values; empty string enum value.                                                                                            |
 | `lro-violations.json`             | Long-running operation issues | Async PUT returning 202 instead of 200/201 with provisioningState; DELETE returning resource body.                                                                                           |
@@ -62,7 +63,7 @@ rule category without interference from other issues.
 | `put-response-mismatch.json`      | PUT response mismatch         | 200 and 201 responses use different schemas; request body differs from 201 response.                                                                                                         |
 | `secret-property.json`            | Secret property issues        | connectionString, adminPassword, and primaryKey without x-ms-secret annotation.                                                                                                              |
 
-### `examples/` — Example JSON Files (3 files)
+### `examples/` -- Example JSON Files (3 files)
 
 | File                            | Violations           | Description                                                                                          |
 | ------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -70,14 +71,14 @@ rule category without interference from other issues.
 | `example-bad-resource-id.json`  | Empty resource ID    | Response body has an empty string for the `id` field.                                                |
 | `example-realistic-secret.json` | Realistic secrets    | Contains realistic connection string, password, and Base64-encoded key values.                       |
 
-### `readme/` — Suppression Configuration (2 files)
+### `readme/` -- Suppression Configuration (2 files)
 
 | File                                  | Violations                 | Description                                                                                    |
 | ------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- |
 | `readme-new-suppression-no-reason.md` | Missing justification      | Suppressions for AvoidAdditionalProperties and PatchBodyParametersSchema with no reason field. |
 | `readme-security-suppression.md`      | Vague security suppression | Suppressions for XmsSecretNotReadBack and SecretPropertyMustBeWriteOnly with vague reasons.    |
 
-### `version-pairs/` — Version Comparison Pairs (4 pairs, 8 files)
+### `version-pairs/` -- Version Comparison Pairs (4 pairs, 8 files)
 
 Each subdirectory contains a `stable-2024-01-01.json` (previous) and
 `stable-2025-01-01.json` (new) for breaking-change detection testing.
