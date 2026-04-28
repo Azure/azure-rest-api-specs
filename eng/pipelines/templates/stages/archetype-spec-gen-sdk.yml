@@ -208,6 +208,13 @@ stages:
         inputs:
           versionSpec: $(PythonVersion)
 
+      - ${{ if contains(parameters.SdkRepoUrl, 'azure-sdk-for-rust') }}:
+        - script: |
+            set -euo pipefail
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            echo "##vso[task.prependpath]$HOME/.cargo/bin"
+          displayName: 'Install Rust toolchain'
+
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
         parameters:
           SourceRootPath: $(SpecRepoDirectory)

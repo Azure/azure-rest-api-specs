@@ -82,8 +82,9 @@ export async function checkEmitterEnabled(
     // Run tsp compile with the typespec-metadata emitter using default options.
     // Override output-dir to tspConfigDir so the metadata file lands in a
     // predictable location regardless of the tspconfig.yaml output-dir setting.
+    // Use npx to resolve the locally-installed tsp binary from node_modules/.bin.
     const tspCommand = [
-      "tsp compile",
+      "npx tsp compile",
       `"${tspConfigDir}"`,
       '--emit "@azure-tools/typespec-metadata"',
       `--output-dir "${tspConfigDir}"`,
