@@ -478,3 +478,8 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   ScheduledActionStatus | null,
   "csharp"
 );
+
+// Rename flattened nullable Category/TimeGrain to BudgetCategory/BudgetTimeGrain
+// to free the original names for non-nullable [Obsolete] backward-compat shims.
+@@clientName(BudgetProperties.category, "BudgetCategory", "csharp");
+@@clientName(BudgetProperties.timeGrain, "BudgetTimeGrain", "csharp");
