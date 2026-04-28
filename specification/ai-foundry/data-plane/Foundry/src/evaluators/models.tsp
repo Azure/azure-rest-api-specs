@@ -165,6 +165,60 @@ model EvaluatorGenerationArtifacts {
 }
 
 // ============================================================================
+// Evaluator Generation Job Sources (follows DataGenerationJobSource pattern)
+// ============================================================================
+
+@doc("The supported source types for evaluator generation jobs.")
+union EvaluatorGenerationJobSourceType {
+  string,
+
+  @doc("Prompt source — inline text provided by the user.")
+  prompt: "prompt",
+
+  @doc("Agent source — references an agent to fetch instructions and metadata from.")
+  agent: "agent",
+
+  @doc("Traces source — conversation traces from Application Insights.")
+  traces: "traces",
+
+  @doc("Dataset source — reference to a dataset.")
+  dataset: "dataset",
+}
+
+@doc("The base source model for evaluator generation jobs.")
+@discriminator("type")
+model EvaluatorGenerationJobSource {
+  @doc("The type of source.")
+  type: EvaluatorGenerationJobSourceType;
+
+  ...JobSourceDescription;
+}
+
+@doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
+model PromptEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
+  ...PromptJobSource;
+}
+
+@doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
+model AgentEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
+  ...AgentJobSource;
+}
+
+@doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
+model TracesEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
+  ...TracesJobSource;
+}
+
+@doc("Dataset source for evaluator generation jobs — reference to a dataset.")
+model DatasetEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
+  ...DatasetJobSource;
+}
+
+// ============================================================================
 // Evaluator Generation Job (LRO — follows DataGenerationJob pattern)
 // ============================================================================
 
@@ -173,8 +227,8 @@ model EvaluatorGenerationInputs {
   @doc("Display name for this generation job.")
   name: string;
 
-  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is a `JobSource` variant discriminated by `type`.")
-  sources: JobSource[];
+  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
+  sources: EvaluatorGenerationJobSource[];
 
   @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality']).")
   category?: EvaluatorCategory = EvaluatorCategory.quality;
