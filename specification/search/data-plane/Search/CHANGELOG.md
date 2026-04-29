@@ -65,6 +65,9 @@ Native Markdown file parsing for blob indexers without requiring a separate skil
 - `IndexingParametersConfiguration.markdownParsingSubmode`: controls document splitting — `oneToOne` (entire file becomes one document) or `oneToMany` (split by header sections).
 - `IndexingParametersConfiguration.markdownHeaderDepth`: sets header depth for sectioning (`h1` through `h6`; default: `h6`).
 
+**Knowledge base activity**
+- `KnowledgeBaseActivityRecordType`: new `modelWebSummarization` enum value for LLM web summarization activities, with corresponding `KnowledgeBaseModelWebSummarizationActivityRecord` model (`inputTokens`, `outputTokens`).
+
 ---
 
 ### Preview-to-GA Changes (2025-11-01-preview → 2026-04-01)
@@ -106,6 +109,7 @@ The following preview features were not promoted to the GA release.
 - **Index and data source configuration removed**:
   - `SearchIndex` / `SearchIndexResponse`: `permissionFilterOption`, `purviewEnabled`
   - `SearchIndexerDataSource`: `indexerPermissionOptions` (array), `subType` (read-only)
+  - `KnowledgeSourceIngestionParameters`: `ingestionPermissionOptions` (array)
   - `SearchField`: `permissionFilter`, `sensitivityLabel`
   - `SearchIndexPermissionFilterOption`, `PermissionFilter`
 

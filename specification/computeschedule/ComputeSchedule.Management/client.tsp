@@ -351,3 +351,60 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
+
+// =====================================================================
+// Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
+// parameter because its name contains "apiversion". This causes
+// the Go emitter to crash with "unexpected constant client side default
+// 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
+// =====================================================================
+@@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+// =====================================================================
+// C# naming alignment with Azure.ResourceManager.Compute SDK
+// =====================================================================
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "UltraSsdEnabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
+@@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
+@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+  "IsPasswordAuthenticationDisabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+  "IsVmAgentPlatformUpdatesEnabled",
+  "csharp"
+);
+@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+  "IsAutomaticUpdatesEnabled",
+  "csharp"
+);
+@@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(OSDisk.osType, "OSType", "csharp");
+@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+  "OSImageNotificationProfile",
+  "csharp"
+);
+
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// ARM Resource IDs -> ResourceIdentifier
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// String URIs -> System.Uri
+@@alternateType(VirtualHardDisk.uri, url, "csharp");
+@@alternateType(BootDiagnostics.storageUri, url, "csharp");
+@@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
+@@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
+@@alternateType(WinRMListener.certificateUrl, url, "csharp");
+@@alternateType(VaultCertificate.certificateUrl, url, "csharp");
