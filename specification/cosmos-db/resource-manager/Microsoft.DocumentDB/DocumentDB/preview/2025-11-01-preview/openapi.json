@@ -1509,7 +1509,56 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/{backupId}/backups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
+      "get": {
+        "operationId": "CassandraClusters_ListBackups",
+        "description": "List the backups of this cluster that are available to restore.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Managed Cassandra cluster name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListBackups"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraBackupsList": {
+            "$ref": "./examples/CosmosDBManagedCassandraBackupsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups/{backupId}": {
       "get": {
         "operationId": "CassandraClusters_GetBackup",
         "description": "Get the properties of an individual backup of this cluster that is available to restore.",
@@ -1565,7 +1614,56 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/{commandId}/commands": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands": {
+      "get": {
+        "operationId": "CassandraClusters_ListCommand",
+        "description": "List all commands currently running on ring info",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Managed Cassandra cluster name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListCommands"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraListCommand": {
+            "$ref": "./examples/CosmosDBManagedCassandraListCommand.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
       "get": {
         "operationId": "CassandraClusters_GetCommandAsync",
         "description": "Get details about a specified command that was run asynchronously.",
@@ -1618,104 +1716,6 @@
           "CosmosDBManagedCassandraCommandResult": {
             "$ref": "./examples/CosmosDBManagedCassandraCommandResult.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
-      "get": {
-        "operationId": "CassandraClusters_ListBackups",
-        "description": "List the backups of this cluster that are available to restore.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Managed Cassandra cluster name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ListBackups"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraBackupsList": {
-            "$ref": "./examples/CosmosDBManagedCassandraBackupsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands": {
-      "get": {
-        "operationId": "CassandraClusters_ListCommand",
-        "description": "List all commands currently running on ring info",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Managed Cassandra cluster name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ListCommands"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraListCommand": {
-            "$ref": "./examples/CosmosDBManagedCassandraListCommand.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -20614,10 +20614,6 @@
         "maxThroughput"
       ]
     },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
-    },
     "AzureBlobContainer": {
       "type": "object",
       "description": "An Azure Blob container",
@@ -21329,12 +21325,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -21348,7 +21346,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -21748,12 +21746,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -21767,7 +21767,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -21908,12 +21908,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -21927,7 +21929,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -22181,12 +22183,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -22200,7 +22204,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -24338,12 +24342,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -24385,7 +24391,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -25592,12 +25598,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -25611,7 +25619,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -25725,12 +25733,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -25744,7 +25754,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -25915,12 +25925,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -25934,7 +25946,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -27182,12 +27194,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -27201,7 +27215,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -27375,12 +27389,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -27394,7 +27410,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -30577,12 +30593,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -30596,7 +30614,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -30822,12 +30840,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -30841,7 +30861,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31179,12 +31199,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -31198,7 +31220,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31318,12 +31340,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -31337,7 +31361,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31465,12 +31489,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -31484,7 +31510,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31689,12 +31715,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -31708,7 +31736,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -32134,12 +32162,14 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -32153,7 +32183,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
