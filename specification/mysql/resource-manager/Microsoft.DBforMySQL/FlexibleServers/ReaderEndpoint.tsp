@@ -56,7 +56,7 @@ interface ReaderEndpoints {
   /**
    * Gets a list of server's Reader Endpoints.
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     ReaderEndpoint,
     Response = ArmResponse<ReaderEndpointList>
   >;
