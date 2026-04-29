@@ -7167,8 +7167,8 @@
           "readOnly": true
         },
         "maintenanceType": {
-          "type": "string",
-          "description": "The maintenance type (e.g., 'Planned Maintenance').",
+          "$ref": "#/definitions/MaintenanceType",
+          "description": "The maintenance type (e.g., 'PlannedMaintenance').",
           "readOnly": true
         },
         "description": {
@@ -7261,6 +7261,24 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "The maintenance event was canceled, failed, or timed out."
+          }
+        ]
+      }
+    },
+    "MaintenanceType": {
+      "type": "string",
+      "description": "Filter for maintenance event status.",
+      "enum": [
+        "PlannedMaintenance"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PlannedMaintenance",
+            "value": "PlannedMaintenance",
+            "description": "Planned maintenance event."
           }
         ]
       }

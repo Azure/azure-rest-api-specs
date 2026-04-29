@@ -3954,9 +3954,9 @@ model MaintenanceEventResourceProperties {
   @visibility(Lifecycle.Read)
   maintenanceEventId?: string;
 
-  @doc("The maintenance type (e.g., 'Planned Maintenance').")
+  @doc("The maintenance type (e.g., 'PlannedMaintenance').")
   @visibility(Lifecycle.Read)
-  maintenanceType?: string;
+  maintenanceType?: MaintenanceType;
 
   @doc("The human-readable description of the maintenance event.")
   @visibility(Lifecycle.Read)
@@ -3993,6 +3993,15 @@ model MaintenanceEventResourceProperties {
   @doc("The time this maintenance event record was last updated (UTC).")
   @visibility(Lifecycle.Read)
   lastUpdatedTime?: utcDateTime;
+}
+
+@doc("Filter for maintenance event status.")
+@added(Versions.v2026_04_01)
+union MaintenanceType {
+  string,
+
+  @doc("Planned maintenance event.")
+  PlannedMaintenance: "PlannedMaintenance",
 }
 
 @doc("Maintenance event resource for a PostgreSQL flexible server.")
