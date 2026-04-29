@@ -20,8 +20,8 @@ using Microsoft.Network;
   "csharp"
 );
 @@clientName(InboundEndpoint, "DnsResolverInboundEndpoint", "csharp");
-@@clientName(IpConfiguration, "InboundEndpointIpConfiguration", "csharp");
-@@clientName(IpAllocationMethod, "InboundEndpointIpAllocationMethod", "csharp");
+@@clientName(IpConfiguration, "InboundEndpointIPConfiguration", "csharp");
+@@clientName(IpAllocationMethod, "InboundEndpointIPAllocationMethod", "csharp");
 @@clientName(OutboundEndpoint, "DnsResolverOutboundEndpoint", "csharp");
 @@clientName(VirtualNetworkLink,
   "DnsForwardingRulesetVirtualNetworkLink",
@@ -30,6 +30,31 @@ using Microsoft.Network;
 @@clientName(ActionType, "DnsSecurityRuleActionType", "csharp");
 @@clientName(Action, "DnsResolverDomainListBulkAction", "csharp");
 @@clientName(DnsForwardingRuleset.name, "rulesetName", "csharp");
+
+@@clientName(DnsResolversOperationGroup.listByVirtualNetwork,
+  "getDnsResolversByVirtualNetwork",
+  "csharp"
+);
+@@clientName(DnsForwardingRulesetsOperationGroup.listByVirtualNetwork,
+  "getDnsForwardingRulesetsByVirtualNetwork",
+  "csharp"
+);
+@@clientName(DnsResolverPoliciesOperationGroup.listByVirtualNetwork,
+  "getDnsResolverPoliciesByVirtualNetwork",
+  "csharp"
+);
+
+// Preserve IP casing from old AutoRest API surface
+@@clientName(IpConfiguration.privateIpAddress, "PrivateIPAddress", "csharp");
+@@clientName(IpConfiguration.privateIpAllocationMethod,
+  "PrivateIPAllocationMethod",
+  "csharp"
+);
+@@clientName(TargetDnsServer.ipAddress, "IPAddress", "csharp");
+@@clientName(InboundEndpointProperties.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
 
 @@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   Azure.Core.eTag,
@@ -63,7 +88,38 @@ using Microsoft.Network;
   "csharp"
 );
 @@alternateType(TargetDnsServer.ipAddress, Azure.Core.ipV4Address, "csharp");
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@access(SubResource, Access.internal, "csharp");
 @@alternateType(VirtualNetworkDnsForwardingRuleset.id,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Define WritableSubResource in the ARM namespace for collection compatibility.
+namespace Azure.ResourceManager.Models {
+  model WritableSubResource {
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+// Preserve WritableSubResource-based collections from the old API surface.
+@@alternateType(DnsForwardingRulesetProperties.dnsResolverOutboundEndpoints,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(DnsForwardingRulesetPatch.dnsResolverOutboundEndpoints,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(DnsSecurityRuleProperties.dnsResolverDomainLists,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(DnsSecurityRulePatchProperties.dnsResolverDomainLists,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(SubResourceListResult.value,
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
