@@ -39274,6 +39274,7 @@
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
+            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -39630,6 +39631,7 @@
               "memory_search_preview",
               "work_iq_preview",
               "fabric_iq_preview",
+              "toolbox_search_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -42660,6 +42662,35 @@
           }
         },
         "description": "Policy configuration for a toolbox, including content safety and other governance settings."
+      },
+      "ToolboxSearchPreviewTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "toolbox_search_preview"
+            ],
+            "description": "The type of the tool. Always `toolbox_search_preview`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A tool for searching over the agent's toolbox.\nWhen present, deferred tools are hidden from `tools/list` and only\ndiscoverable via `search_tools` queries at runtime."
       },
       "ToolboxVersionObject": {
         "type": "object",

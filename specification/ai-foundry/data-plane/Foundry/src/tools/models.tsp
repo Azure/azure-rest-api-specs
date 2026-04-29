@@ -19,6 +19,7 @@ namespace Azure.AI.Projects {
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
+    toolbox_search_preview: "toolbox_search_preview",
   }
 
   // General availability tools:
@@ -888,6 +889,20 @@ namespace Azure.AI.Projects {
      * Time to wait before updating memories after inactivity (seconds). Default 300.
      */
     update_delay?: int32 = 300;
+  }
+
+  /**
+   * A tool for searching over the agent's toolbox.
+   * When present, deferred tools are hidden from `tools/list` and only
+   * discoverable via `search_tools` queries at runtime.
+   */
+  model ToolboxSearchPreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `toolbox_search_preview`.
+     */
+    type: "toolbox_search_preview";
+
+    ...ToolNameAndDescriptionExtension;
   }
 
   alias MemorySearchToolCallItemBase = {
