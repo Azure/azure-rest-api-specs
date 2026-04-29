@@ -34,6 +34,7 @@ model SBQueue is Azure.ResourceManager.ProxyResource<SBQueueProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
+@tag("Queues")
 interface SBQueues {
   /**
    * Returns a description for the specified queue.
