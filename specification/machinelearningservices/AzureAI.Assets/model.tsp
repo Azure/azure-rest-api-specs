@@ -38,18 +38,6 @@ model AssetVersion {
   properties?: Record<string>;
 }
 
-@doc("Accelerator configuration for a model instance.")
-model AcceleratorMap {
-  @doc("The type of accelerator (e.g. GPU, FPGA).")
-  acceleratorType: string;
-
-  @doc("Number of accelerators allocated per model instance.")
-  numberOfAcceleratorsPerModelInstance: int32;
-
-  @doc("Whether this is the default accelerator configuration.")
-  default?: boolean = false;
-}
-
 @doc("DeploymentTemplate resource definition")
 model DeploymentTemplate is AssetVersion {
   @doc("The type of deployment template.")
@@ -77,10 +65,7 @@ model DeploymentTemplate is AssetVersion {
   readinessProbe?: ProbeSettings;
 
   @doc("List of allowed instance types for the deployment.")
-  allowedInstanceType?: string[];
-
-  @doc("Accelerator configurations for the deployment template.")
-  acceleratorMaps?: AcceleratorMap[];
+  allowedInstanceType: string[];
 
   @doc("Default instance type for the deployment.")
   defaultInstanceType: string;
@@ -89,10 +74,10 @@ model DeploymentTemplate is AssetVersion {
   instanceCount: int32;
 
   @doc("Path for scoring requests.")
-  scoringPath: string;
+  scoringPath?: string;
 
   @doc("Port for scoring requests.")
-  scoringPort: int32;
+  scoringPort?: int32;
 }
 
 @doc("Paged collection of DeploymentTemplate items.")
