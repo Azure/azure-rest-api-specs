@@ -16,14 +16,21 @@ namespace Microsoft.CognitiveServices;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Project' to maintain SDK backward compatibility"
 @parentResource(Account)
-model Project
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProjectProperties> {
+model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
   ...ResourceNameParameter<
     Resource = Project,
     KeyName = "projectName",
     SegmentName = "projects",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 
   /**
    * Resource Etag.
@@ -79,8 +86,12 @@ interface Projects {
   /**
    * Deletes a Cognitive Services project from the resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior — Projects_Delete always completes synchronously (HTTP 200)"
   @tag("CognitiveServicesProjects")
-  delete is ArmResourceDeleteWithoutOkAsync<Project>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Project,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all the projects in a Cognitive Services account.

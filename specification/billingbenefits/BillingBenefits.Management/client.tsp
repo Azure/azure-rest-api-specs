@@ -283,3 +283,6 @@ using Microsoft.BillingBenefits;
   "listConditionalCreditByScope",
   "csharp"
 );
+
+// csharp: preserve original public property name after flatten/lift-to-nullable generator fix
+@@clientName(MaccModelProperties.entityType, "MaccEntityType", "csharp");
