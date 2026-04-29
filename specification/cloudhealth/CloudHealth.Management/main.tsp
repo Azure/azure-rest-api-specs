@@ -24,6 +24,9 @@ enum Versions {
 
   @doc("2026-01-01-preview")
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("2026-05-01-preview")
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -41,6 +44,15 @@ alias proxyResourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
 @maxLength(4096)
 @doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
+
+@maxLength(4096)
+@secret
+@doc("Secret string with max length validation of 4096 characters")
+scalar secretString4096 extends string;
+
+@maxLength(256)
+@doc("String with max length validation of 256 characters")
+scalar string256 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -172,11 +184,11 @@ model EvaluationRule {
   @doc("Configure to use ML-based dynamic thresholds. When used, degradedRule and unhealthyRule must not be set.")
   dynamicDetectionRule?: DynamicDetectionRule;
 
-  @doc("Degraded rule with static threshold.")
+  @doc("Degraded threshold rule.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   degradedRule?: ThresholdRuleV2;
 
-  @doc("Unhealthy rule with static threshold.")
+  @doc("Unhealthy threshold rule.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   @madeRequired(Versions.v2026_01_01_preview)
   unhealthyRule: ThresholdRuleV2;
@@ -200,8 +212,32 @@ model ThresholdRuleV2 {
   @doc("Operator how to compare the signal value with the threshold")
   operator: SignalOperator;
 
-  @doc("Threshold value")
-  threshold: float64;
+  @madeOptional(Versions.v2026_05_01_preview)
+  @doc("Threshold value. Required for static operators. Not applicable when operator is Dynamic.")
+  threshold?: float64;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Sensitivity level for dynamic threshold detection. Only applicable when operator is Dynamic.")
+  sensitivity?: DynamicThresholdSensitivity;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("ISO 8601 duration for the historical look-back window used by dynamic threshold computation. Only applicable when operator is Dynamic.")
+  lookBackWindow?: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Sensitivity level for dynamic threshold detection")
+union DynamicThresholdSensitivity {
+  string,
+
+  @doc("Low sensitivity — fewer anomalies detected, wider threshold band")
+  Low: "Low",
+
+  @doc("Medium sensitivity — balanced detection")
+  Medium: "Medium",
+
+  @doc("High sensitivity — more anomalies detected, tighter threshold band")
+  High: "High",
 }
 
 @removed(Versions.v2026_01_01_preview)
@@ -293,12 +329,13 @@ model ResourceMetricSignalDefinitionProperties
   @doc("Type of aggregation to apply to the metric")
   aggregationType: MetricAggregationType;
 
+  @removed(Versions.v2026_05_01_preview)
   @doc("Optional: Dimension to split by")
   @minLength(1)
   @maxLength(256)
   dimension?: string;
 
-  @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
+  @doc("Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"")
   @minLength(1)
   @maxLength(256)
   dimensionFilter?: string;
@@ -385,6 +422,10 @@ union SignalOperator {
   @added(Versions.v2026_01_01_preview)
   @doc("Not equal to")
   NotEqual: "NotEqual",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Dynamic threshold — uses statistical analysis of historical signal values")
+  Dynamic: "Dynamic",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -1148,11 +1189,22 @@ model DiscoveryError {
 @added(Versions.v2026_01_01_preview)
 @doc("Request body for getting entity health history")
 model EntityHistoryRequest {
-  @doc("Start time for the history query. Defaults to 24 hours ago if not specified.")
+  @doc("Start time for the history query. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified.")
   startAt?: utcDateTime;
 
-  @doc("End time for the history query. Defaults to now if not specified.")
+  @doc("End time for the history query. Defaults to now if not specified. Must be omitted when continuationToken is specified.")
   endAt?: utcDateTime;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Maximum number of health state transitions to return per page. Defaults to 1000.")
+  @maxValue(1000)
+  @minValue(1)
+  top?: int32;
+
+  @added(Versions.v2026_05_01_preview)
+  @secret
+  @doc("Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.")
+  continuationToken?: secretString4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1164,6 +1216,11 @@ model EntityHistoryResponse {
   @doc("List of health state transitions")
   @identifiers(#["occurredAt"])
   history: HealthStateTransition[];
+
+  @added(Versions.v2026_05_01_preview)
+  @secret
+  @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
+  continuationToken?: secretString4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1188,11 +1245,22 @@ model SignalHistoryRequest {
   @doc("Name of the signal to get history for")
   signalName: signalName;
 
-  @doc("Start time for the history query. Defaults to 24 hours ago if not specified.")
+  @doc("Start time for the history query. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified.")
   startAt?: utcDateTime;
 
-  @doc("End time for the history query. Defaults to now if not specified.")
+  @doc("End time for the history query. Defaults to now if not specified. Must be omitted when continuationToken is specified.")
   endAt?: utcDateTime;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Maximum number of data points to return per page. Defaults to 1000.")
+  @maxValue(1000)
+  @minValue(1)
+  top?: int32;
+
+  @added(Versions.v2026_05_01_preview)
+  @secret
+  @doc("Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.")
+  continuationToken?: secretString4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1207,6 +1275,11 @@ model SignalHistoryResponse {
   @doc("Signal history data points")
   @identifiers(#["occurredAt"])
   history: SignalHistoryDataPoint[];
+
+  @added(Versions.v2026_05_01_preview)
+  @secret
+  @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
+  continuationToken?: secretString4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1249,10 +1322,136 @@ model HealthReportRequest {
   additionalContext?: string4096;
 }
 
+@added(Versions.v2026_05_01_preview)
+@doc("Request body for adding a data annotation to an entity")
+model DataAnnotationRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
+  @doc("Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.")
+  annotationDetails: Record<string256>;
+
+  @doc("Optional description of the annotation")
+  description?: string4096;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("A single data annotation on an entity")
+model DataAnnotation is DataAnnotationRequest {
+  @doc("Server-assigned identifier for the annotation")
+  @maxLength(36)
+  annotationId: string;
+
+  @doc("Timestamp when the annotation was created")
+  createdAt: utcDateTime;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Request body for querying data annotations")
+model GetDataAnnotationsRequest {
+  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified.")
+  startAt?: utcDateTime;
+
+  @doc("End of UTC time range. Defaults to now if not specified. Must be omitted when continuationToken is specified.")
+  endAt?: utcDateTime;
+
+  @doc("Maximum number of annotations to return per page.")
+  @maxValue(100)
+  @minValue(1)
+  top?: int32;
+
+  @secret
+  @doc("Continuation token from a previous response to retrieve the next page of results.")
+  continuationToken?: secretString4096;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Response containing data annotations for an entity")
+model GetDataAnnotationsResponse {
+  @doc("Name of the entity")
+  entityName: entityName;
+
+  @doc("List of data annotations")
+  @identifiers(#["annotationId"])
+  annotations: DataAnnotation[];
+
+  @secret
+  @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
+  continuationToken?: secretString4096;
+}
+
 @added(Versions.v2026_01_01_preview)
 @doc("Evaluation rules for the health report")
 model HealthReportEvaluationRule {
   ...EvaluationRule;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Request body for getting recommended signals for a given Azure resource type")
+model GetRecommendedSignalsRequest {
+  @doc("Azure resource type to get recommended signals for (e.g. 'microsoft.compute/virtualMachines').")
+  @minLength(1)
+  @maxLength(256)
+  resourceType: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Response containing recommended signal configurations for a given Azure resource type")
+model GetRecommendedSignalsResponse {
+  @doc("List of recommended signal configurations for the specified resource type.")
+  @identifiers(#["id"])
+  signals: RecommendedSignal[];
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Classification of a recommended signal")
+union RecommendedSignalClassification {
+  string,
+
+  @doc("Signal is broadly recommended to be enabled by default for health models monitoring this resource type.")
+  RecommendedSignal: "RecommendedSignal",
+
+  @doc("Signal is not broadly applicable, but if a user picks this metric, the provided thresholds are suggested as a starting point.")
+  SuggestedThresholds: "SuggestedThresholds",
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("A recommended signal configuration for an Azure resource type")
+model RecommendedSignal {
+  @doc("Unique identifier of the recommended signal.")
+  id: string;
+
+  @doc("Metric namespace (e.g. 'microsoft.compute/virtualmachines').")
+  @minLength(1)
+  @maxLength(256)
+  metricNamespace: string;
+
+  @doc("Name of the metric (e.g. 'Percentage CPU').")
+  @minLength(1)
+  @maxLength(256)
+  metricName: string;
+
+  @doc("Type of aggregation to apply to the metric.")
+  aggregationType: MetricAggregationType;
+
+  @doc("Unit of the metric (e.g. Percent, Bytes, Count).")
+  @minLength(1)
+  @maxLength(100)
+  unit?: string;
+
+  @doc("Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
+
+  @doc("Optional dimension filter to apply to the metric.")
+  @minLength(1)
+  @maxLength(256)
+  dimensionFilter?: string;
+
+  @doc("Evaluation rules with recommended thresholds.")
+  evaluationRules: EvaluationRule;
+
+  @doc("Classification of the signal indicating whether it is broadly recommended or provides suggested thresholds for optional metrics.")
+  classification: RecommendedSignalClassification;
 }
 
 alias TimestampQueryParam = {
@@ -1276,6 +1475,16 @@ interface HealthModels {
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Get recommended signal configurations for a given Azure resource type")
+  @post
+  @action("getRecommendedSignals")
+  getRecommendedSignals is ArmResourceActionSync<
+    HealthModel,
+    GetRecommendedSignalsRequest,
+    GetRecommendedSignalsResponse
+  >;
 }
 
 @armResourceOperations(SignalDefinition)
@@ -1387,6 +1596,26 @@ interface Entities {
   ingestHealthReport is ArmResourceActionNoContentSync<
     Entity,
     HealthReportRequest
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Add a data annotation to an entity")
+  @post
+  @action("addDataAnnotation")
+  addDataAnnotation is ArmResourceActionSync<
+    Entity,
+    DataAnnotationRequest,
+    DataAnnotation
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Retrieve data annotations for an entity")
+  @post
+  @action("getDataAnnotations")
+  getDataAnnotations is ArmResourceActionSync<
+    Entity,
+    GetDataAnnotationsRequest,
+    GetDataAnnotationsResponse
   >;
 }
 
