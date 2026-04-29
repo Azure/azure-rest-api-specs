@@ -23,13 +23,13 @@ options:
     service-name: "OffAzure" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: sdk/offazure
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-offazure"
-    is-modular-library: true
+    service-dir: sdk/migrate
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-migrationdiscovery"
+    compatibility-lro: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-offazure"
+      name: "@azure/arm-migrationdiscovery"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/offazure"
     emitter-output-dir: "{output-dir}/{service-dir}/armoffazure"
