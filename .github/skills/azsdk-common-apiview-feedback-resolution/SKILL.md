@@ -15,13 +15,13 @@ compatibility:
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azure-sdk-mcp:azsdk_apiview_get_comments` | Get APIView comments |
-| `azure-sdk-mcp:azsdk_typespec_customized_code_update` | Apply TypeSpec changes locally |
-| `azure-sdk-mcp:azsdk_typespec_delegate_apiview_feedback` | Delegate to CCA pipeline |
-| `azure-sdk-mcp:azsdk_run_typespec_validation` | Validate TypeSpec |
-| `azure-sdk-mcp:azsdk_package_generate_code` | Regenerate SDK |
+| Tool                                                     | Purpose                        |
+| -------------------------------------------------------- | ------------------------------ |
+| `azure-sdk-mcp:azsdk_apiview_get_comments`               | Get APIView comments           |
+| `azure-sdk-mcp:azsdk_typespec_customized_code_update`    | Apply TypeSpec changes locally |
+| `azure-sdk-mcp:azsdk_typespec_delegate_apiview_feedback` | Delegate to CCA pipeline       |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`            | Validate TypeSpec              |
+| `azure-sdk-mcp:azsdk_package_generate_code`              | Regenerate SDK                 |
 
 ## Steps
 
