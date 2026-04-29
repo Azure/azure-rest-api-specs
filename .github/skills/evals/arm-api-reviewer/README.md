@@ -20,7 +20,7 @@ arm-api-reviewer/
 │   ├── eval-true-negatives.yaml
 │   ├── eval-classification.yaml
 │   └── eval-report-format.yaml
-├── fixtures/              # Test fixtures (28 files)
+├── fixtures/              # Test fixtures (31 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -29,34 +29,34 @@ arm-api-reviewer/
 └── README.md              # This file
 ```
 
-## Test Categories (25 test cases across 11 eval files)
+## Test Categories (28 test cases across 11 eval files)
 
-| ID     | Category                | Count | Description                                           |
-| ------ | ----------------------- | ----- | ----------------------------------------------------- |
-| 01xxxx | ARM resource structure  | 2     | Missing CRUD ops, missing provisioningState           |
-| 02xxxx | Property design         | 4     | Secrets, naming, descriptions, enums                  |
-| 03xxxx | Operations              | 4     | PATCH, PUT, DELETE, LRO violations                    |
-| 04xxxx | Breaking changes        | 3     | Removed property, type change, enum narrowing         |
-| 05xxxx | Suppression analysis    | 2     | Missing reason, security rule suppressions            |
-| 06xxxx | Example file validation | 2     | Bad resource ID, realistic secrets                    |
-| 07xxxx | TypeSpec review         | 3     | Segment casing, secrets, anti-patterns                |
-| 08xxxx | Check Name Availability | 1     | Custom CNA models, missing input validation           |
-| 09xxxx | True negatives          | 2     | Clean spec, clean example (false-positive resistance) |
-| 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                         |
-| 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output             |
+| ID     | Category                | Count | Description                                                    |
+| ------ | ----------------------- | ----- | -------------------------------------------------------------- |
+| 01xxxx | ARM resource structure  | 3     | Missing CRUD ops, missing provisioningState, inline types      |
+| 02xxxx | Property design         | 4     | Secrets, naming, descriptions, enums                           |
+| 03xxxx | Operations              | 4     | PATCH, PUT, DELETE, LRO violations                             |
+| 04xxxx | Breaking changes        | 4     | Removed property, type change, enum narrowing, added required  |
+| 05xxxx | Suppression analysis    | 2     | Missing reason, security rule suppressions                     |
+| 06xxxx | Example file validation | 2     | Bad resource ID, realistic secrets                             |
+| 07xxxx | TypeSpec review         | 3     | Segment casing, secrets, anti-patterns                         |
+| 08xxxx | Check Name Availability | 1     | Custom CNA models, missing input validation                    |
+| 09xxxx | True negatives          | 3     | Clean spec, clean example, clean proxy resource                |
+| 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                                  |
+| 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output                      |
 
 ## Fixtures
 
-All 28 fixture files live in `fixtures/`. See
+All 32 fixture files live in `fixtures/`. See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **12 ARM OpenAPI specs** in `arm-openapi/` -- 1 clean + 11 with seeded violations
+- **14 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **3 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern violations
-- **8 version-pair files** in `version-pairs/` -- 4 pairs for breaking change detection
+- **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
 
 ## Running with Evaluate (vally)
 
@@ -78,7 +78,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (evaluate is a monorepo; the vally binary lives under packages/cli)
 export VALLY_CLI="/path/to/evaluate/packages/cli/dist/index.js"
 
-# Run the full suite (all 25 stimuli, 5 concurrent workers)
+# Run the full suite (all 28 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
@@ -166,12 +166,12 @@ results in your PR description or as a comment:
 
 ## Non-Deterministic Tests
 
-The `clean-arm-spec-no-blocking-issues` stimulus (09xxxx) is known to be
-non-deterministic. It tests false-positive resistance on a fully compliant
-spec and may intermittently fail when the agent escalates best-practice
-recommendations to ERROR severity. This is inherent LLM variability, not a
-systematic defect -- re-runs typically pass. If you see this stimulus fail
-but all other stimuli pass, it is safe to re-run the suite.
+The `clean-arm-spec-no-blocking-issues` and `clean-proxy-resource-no-blocking-issues`
+stimuli (09xxxx) are known to be non-deterministic. They test false-positive
+resistance on fully compliant specs and may intermittently fail when the agent
+escalates best-practice recommendations to ERROR severity. This is inherent LLM
+variability, not a systematic defect -- re-runs typically pass. If you see these
+stimuli fail but all other stimuli pass, it is safe to re-run the suite.
 
 ## Adding New Tests
 

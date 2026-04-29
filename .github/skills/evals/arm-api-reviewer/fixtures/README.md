@@ -46,14 +46,16 @@ rule category without interference from other issues.
 
 ## Fixture Catalog
 
-### `arm-openapi/` -- ARM OpenAPI Specifications (12 files)
+### `arm-openapi/` -- ARM OpenAPI Specifications (14 files)
 
 | File                              | Violations                    | Description                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clean-spec.json`                 | None (true negative)          | Fully compliant ARM spec with all CRUD operations, provisioningState, systemData, x-ms-enum, descriptions, x-ms-pageable, and x-ms-mutability. Use as a baseline for false-positive testing. |
+| `clean-proxy-resource.json`       | None (true negative)          | Fully compliant proxy (extension) resource spec. Uses ProxyResource from common-types — no location, tags, or resource move. Tests false-positive resistance for tracked-resource rules.     |
 | `cna-violations.json`             | CNA model issues              | Custom inline CheckNameAvailabilityRequest/Response instead of common-types `$ref`; name field has no pattern or maxLength constraint.                                                       |
 | `delete-violations.json`          | DELETE response issues        | 404 on DELETE instead of 204; non-empty response body on 200 DELETE; missing 204 response code.                                                                                              |
 | `enum-violations.json`            | Enum best-practice issues     | Missing x-ms-enum decorator; modelAsString false; non-PascalCase values; empty string enum value.                                                                                            |
+| `inline-common-types.json`        | Inline common-types           | Defines ErrorResponse, ErrorDetail, SubscriptionIdParameter, ResourceGroupNameParameter, and ApiVersionParameter inline instead of using common-types $ref.                                  |
 | `lro-violations.json`             | Long-running operation issues | Async PUT returning 202 instead of 200/201 with provisioningState; DELETE returning resource body.                                                                                           |
 | `missing-crud-ops.json`           | Missing lifecycle operations  | PUT, GET, and PATCH exist but DELETE, ListByResourceGroup, ListBySubscription, and Operations API are missing.                                                                               |
 | `missing-descriptions.json`       | Missing descriptions          | Operations, models, and properties lack description fields.                                                                                                                                  |
@@ -78,17 +80,18 @@ rule category without interference from other issues.
 | `readme-new-suppression-no-reason.md` | Missing justification      | Suppressions for AvoidAdditionalProperties and PatchBodyParametersSchema with no reason field. |
 | `readme-security-suppression.md`      | Vague security suppression | Suppressions for XmsSecretNotReadBack and SecretPropertyMustBeWriteOnly with vague reasons.    |
 
-### `version-pairs/` -- Version Comparison Pairs (4 pairs, 8 files)
+### `version-pairs/` -- Version Comparison Pairs (5 pairs, 10 files)
 
 Each subdirectory contains a `stable-2024-01-01.json` (previous) and
 `stable-2025-01-01.json` (new) for breaking-change detection testing.
 
-| Pair                | Violations           | Description                                                                                           |
-| ------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
-| `removed-property/` | Removed properties   | `category` and `priority` properties removed between versions.                                        |
-| `type-change/`      | Property type change | `maxRetries` changed from string to integer between versions.                                         |
-| `enum-narrowing/`   | Enum value removal   | `status` enum narrowed from 5 values to 3 (Suspended, Archived dropped).                              |
-| `new-vs-existing/`  | Mixed classification | `bar` has no description in both versions (EXISTING); `baz` is newly added without description (NEW). |
+| Pair                       | Violations                  | Description                                                                                           |
+| -------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `removed-property/`        | Removed properties          | `category` and `priority` properties removed between versions.                                        |
+| `type-change/`             | Property type change        | `maxRetries` changed from string to integer between versions.                                         |
+| `enum-narrowing/`          | Enum value removal          | `status` enum narrowed from 5 values to 3 (Suspended, Archived dropped).                              |
+| `new-vs-existing/`         | Mixed classification        | `bar` has no description in both versions (EXISTING); `baz` is newly added without description (NEW). |
+| `added-required-property/` | Optional becomes required   | `sku` property changes from optional to required in WidgetProperties between versions.                |
 
 ### `typespec/` -- TypeSpec Specification Files (3 files)
 

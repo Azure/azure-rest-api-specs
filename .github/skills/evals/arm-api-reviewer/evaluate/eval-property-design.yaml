@@ -6,7 +6,7 @@ description: |
 
 config:
   runs: 1
-  timeout: 600
+  timeout: 300
   model: claude-opus-4.6-1m
   judge_model: claude-sonnet-4.6
 
@@ -88,9 +88,11 @@ stimuli:
           dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
+      attention to description completeness — every operation, model, property,
+      and parameter must have a non-empty description. This is a new service
+      with no previous API version. Report all findings with rule IDs, line
+      numbers, and fix suggestions.
 
       File: specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json
     constraints:
@@ -100,6 +102,9 @@ stimuli:
       - type: output-contains
         config:
           substring: "description"
+      - type: output-contains
+        config:
+          substring: "displayName"
       - type: prompt
     rubric:
       - Flagged missing descriptions on the PUT and GET operations
