@@ -20,132 +20,89 @@ model Remediation
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+alias RemediationManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The namespace for Microsoft Management RP; only "Microsoft.Management" is allowed. */
+    @path
+    @segment("providers")
+    @key
+    managementGroupsNamespace: ManagementGroupsNamespaceType;
+
+    /** Management group ID. */
+    @path
+    @segment("managementGroups")
+    @key
+    managementGroupId: string;
+  },
+  {
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the remediation. */
+    @path
+    @segment("remediations")
+    @key
+    remediationName: string;
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface Remediations {
   /**
    * Gets an existing remediation at management group scope.
    */
-  @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
-  @get
-  getAtManagementGroup(
-    ...ApiVersionParameter,
-
-    /**
-     * The namespace for Microsoft Management RP; only "Microsoft.Management" is allowed.
-     */
-    @path
-    managementGroupsNamespace: "Microsoft.Management",
-
-    /**
-     * Management group ID.
-     */
-    @path
-    managementGroupId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-  ): ArmResponse<Remediation> | ErrorResponse;
+  getAtManagementGroup is RemediationManagementGroupOps.Read<
+    Remediation,
+    ErrorType = ErrorResponse
+  >;
 
   /**
    * Creates or updates a remediation at management group scope.
    */
-  @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
-  @put
-  createOrUpdateAtManagementGroup(
-    ...ApiVersionParameter,
-
-    /**
-     * The namespace for Microsoft Management RP; only "Microsoft.Management" is allowed.
-     */
-    @path
-    managementGroupsNamespace: "Microsoft.Management",
-
-    /**
-     * Management group ID.
-     */
-    @path
-    managementGroupId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-
-    /**
-     * The remediation parameters.
-     */
-    @bodyRoot
-    resource: Remediation,
-  ): ArmResponse<Remediation> | (CreatedResponse &
-    Body<Remediation>) | ErrorResponse;
+  createOrUpdateAtManagementGroup is RemediationManagementGroupOps.CreateOrUpdateSync<
+    Remediation,
+    Response = ArmResponse<Remediation> | (CreatedResponse &
+      Body<Remediation>),
+    ErrorType = ErrorResponse
+  >;
 
   /**
    * Deletes an existing remediation at management group scope.
    */
-  @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
-  @delete
-  deleteAtManagementGroup(
-    ...ApiVersionParameter,
-
-    /**
-     * The namespace for Microsoft Management RP; only "Microsoft.Management" is allowed.
-     */
-    @path
-    managementGroupsNamespace: "Microsoft.Management",
-
-    /**
-     * Management group ID.
-     */
-    @path
-    managementGroupId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-  ): ArmResponse<Remediation> | ArmDeletedNoContentResponse | ErrorResponse;
+  deleteAtManagementGroup is RemediationManagementGroupOps.DeleteSync<
+    Remediation,
+    Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
+    ErrorType = ErrorResponse
+  >;
 
   /**
    * Gets all remediations for the management group.
    */
-  @route("/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations")
-  @list
-  @get
-  listForManagementGroup(
-    ...ApiVersionParameter,
+  listForManagementGroup is RemediationManagementGroupOps.List<
+    Remediation,
+    Response = ArmResponse<RemediationListResult>,
+    Parameters = {
+      /**
+       * Maximum number of records to return.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$top")
+      @minValue(0)
+      Top?: int32;
 
-    /**
-     * The namespace for Microsoft Management RP; only "Microsoft.Management" is allowed.
-     */
-    @path
-    managementGroupsNamespace: "Microsoft.Management",
-
-    /**
-     * Management group ID.
-     */
-    @path
-    managementGroupId: string,
-
-    /**
-     * Maximum number of records to return.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$top")
-    @minValue(0)
-    Top?: int32,
-
-    /**
-     * OData filter expression.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$filter")
-    Filter?: string,
-  ): ArmResponse<RemediationListResult> | ErrorResponse;
+      /**
+       * OData filter expression.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$filter")
+      Filter?: string;
+    },
+    ErrorType = ErrorResponse
+  >;
 }
 alias RemediationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -353,159 +310,107 @@ interface RemediationResourceGroupOperations {
   >;
 }
 
+alias RemediationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** Resource ID. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the remediation. */
+    @path
+    @segment("remediations")
+    @key
+    remediationName: string;
+  },
+  ErrorType = ErrorResponse
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RemediationResourceOperations {
   /**
    * Gets an existing remediation at resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
-  @get
-  getAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-  ): ArmResponse<Remediation> | ErrorResponse;
+  getAtResource is RemediationAtResourceOps.Read<
+    Remediation,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates or updates a remediation at resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
-  @put
-  createOrUpdateAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-
-    /**
-     * The remediation parameters.
-     */
-    @bodyRoot
-    resource: Remediation,
-  ): ArmResponse<Remediation> | (CreatedResponse &
-    Body<Remediation>) | ErrorResponse;
+  createOrUpdateAtResource is RemediationAtResourceOps.CreateOrUpdateAsync<
+    Remediation,
+    Response = ArmResponse<Remediation> | (CreatedResponse & Body<Remediation>)
+  >;
 
   /**
    * Deletes an existing remediation at individual resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}")
-  @delete
-  deleteAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-  ): ArmResponse<Remediation> | ArmDeletedNoContentResponse | ErrorResponse;
+  deleteAtResource is RemediationAtResourceOps.DeleteSync<
+    Remediation,
+    Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets all remediations for a resource.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations")
-  @list
-  @get
-  listForResource(
-    ...ApiVersionParameter,
+  listForResource is RemediationAtResourceOps.List<
+    Remediation,
+    Response = ArmResponse<RemediationListResult>,
+    Parameters = {
+      /**
+       * Maximum number of records to return.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$top")
+      @minValue(0)
+      Top?: int32;
 
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * Maximum number of records to return.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$top")
-    @minValue(0)
-    Top?: int32,
-
-    /**
-     * OData filter expression.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$filter")
-    Filter?: string,
-  ): ArmResponse<RemediationListResult> | ErrorResponse;
+      /**
+       * OData filter expression.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$filter")
+      Filter?: string;
+    }
+  >;
 
   /**
    * Gets all deployments for a remediation at resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments")
+  @action("listDeployments")
   @list
-  @post
-  listDeploymentsAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-
-    /**
-     * Maximum number of records to return.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$top")
-    @minValue(0)
-    Top?: int32,
-  ): ArmResponse<RemediationDeploymentsListResult> | ErrorResponse;
+  listDeploymentsAtResource is RemediationAtResourceOps.ActionSync<
+    Remediation,
+    void,
+    Response = ArmResponse<RemediationDeploymentsListResult>,
+    Parameters = {
+      /**
+       * Maximum number of records to return.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$top")
+      @minValue(0)
+      Top?: int32;
+    }
+  >;
 
   /**
    * Cancel a remediation at resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel")
-  @post
-  cancelAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the remediation.
-     */
-    @path
-    remediationName: string,
-  ): ArmResponse<Remediation> | ErrorResponse;
+  @action("cancel")
+  cancelAtResource is RemediationAtResourceOps.ActionSync<
+    Remediation,
+    void,
+    Response = ArmResponse<Remediation>,
+    OverrideErrorType = ErrorResponse
+  >;
 }
 
 @@doc(Remediation.name, "The name of the remediation.");

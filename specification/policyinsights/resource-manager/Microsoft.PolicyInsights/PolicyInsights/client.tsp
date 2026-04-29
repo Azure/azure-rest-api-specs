@@ -1388,13 +1388,12 @@ op remediationsListDeploymentsAtManagementGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op remediationsListForManagementGroup(
   ...ApiVersionParameter,
-
-  @path
-  managementGroupsNamespace: "Microsoft.Management",
+  managementGroupsNamespace: ManagementGroupsNamespaceType,
 
   @path
   managementGroupId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForManagementGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Remediations.listForManagementGroup,
@@ -1487,10 +1486,13 @@ op remediationsListDeploymentsAtResource(
   @path
   resourceId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
+
   @path
   remediationName: string,
 
   queryOptions?: RemediationsListDeploymentsAtResourceQueryOptions,
+  body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
@@ -1505,6 +1507,7 @@ op remediationsListForResource(
   @path
   resourceId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listForResource,
@@ -1554,6 +1557,7 @@ op attestationsListForResource(
   @path
   resourceId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationOperationGroup.listForResource,

@@ -21,22 +21,30 @@ model PolicyMetadata
   >;
 }
 
+alias PolicyMetadataOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the policy metadata resource. */
+    @path(#{ allowReserved: true })
+    @segment("policyMetadata")
+    @key
+    resourceName: string;
+  },
+  ErrorType = ErrorResponse
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyMetadataOperationGroup {
   /**
    * Get policy metadata resource.
    */
-  @route("/providers/Microsoft.PolicyInsights/policyMetadata/{+resourceName}")
-  @get
-  getResource(
-    ...ApiVersionParameter,
-
-    /**
-     * The name of the policy metadata resource.
-     */
-    @path
-    resourceName: string,
-  ): PolicyMetadata | ErrorResponse;
+  getResource is PolicyMetadataOps.Read<
+    PolicyMetadata,
+    Response = PolicyMetadata
+  >;
 }
 
 @@doc(PolicyMetadata.name, "The name of the policy metadata resource.");
