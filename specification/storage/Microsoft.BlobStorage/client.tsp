@@ -138,6 +138,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@clientName(ListContainersSegmentResponse, "ListContainersResponse", "rust");
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
+
+// These are no-op, we need emitter support to make a pageable operation not automatically prefix list_
 // @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 // @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(FilterBlobSegment, "FilteredBlob", "rust");

@@ -484,6 +484,7 @@ model FilterBlobSegment {
   blobs: FilterBlobItem[];
 
   /** The next marker of the blobs. */
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
