@@ -306,8 +306,12 @@ namespace KnowledgeBaseRetrievalClient {
   }
 );
 
-@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens, "inputTokensCount");
-@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens, "outputTokensCount");
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
+  "inputTokensCount"
+);
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
+  "outputTokensCount"
+);
 
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
