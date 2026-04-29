@@ -39,6 +39,5 @@ stimuli:
           pattern: "(?i)CNA|common.types|CheckNameAvailabilityRequest"
       - type: prompt
     rubric:
-      - "Flagged the custom inline CheckNameAvailabilityRequest definition -- should use common-types $ref instead (CNA-003)"
-      - "Flagged the custom inline CheckNameAvailabilityResponse definition -- should use common-types $ref instead (CNA-003)"
-      - "Flagged the name field in CheckNameAvailabilityRequest as a bare string with no pattern or maxLength constraint (CNA-004)"
+      - "Flagged the custom inline CheckNameAvailabilityRequest and/or CheckNameAvailabilityResponse definitions — should use common-types $ref instead"
+      - "Identified the name field in CheckNameAvailabilityRequest as lacking input validation (no pattern or maxLength constraint), OR recommended replacing the custom model with common-types which inherently provides validation"

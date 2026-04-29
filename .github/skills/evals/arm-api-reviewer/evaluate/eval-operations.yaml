@@ -68,8 +68,8 @@ stimuli:
           pattern: "(?i)201"
       - type: prompt
     rubric:
-      - Flagged the PUT response schema mismatch between 200 (Item) and 201 (ItemCreateResponse) per RPC-Put-V1-12 and RPC-Put-V1-25
-      - The request body schema (Item) differs from the 201 response schema (ItemCreateResponse) per RPC-Put-V1-29
+      - "Flagged that the PUT 200 and 201 responses use different schemas (200 returns Item, 201 returns ItemCreateResponse) — they must be identical"
+      - "Flagged that the PUT request body and at least one response use different models (the request body uses Item but 201 returns ItemCreateResponse)"
 
   # 030003 — DELETE response violations
   - name: detect-delete-violations
