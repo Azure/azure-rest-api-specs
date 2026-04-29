@@ -123,6 +123,10 @@ using Azure.ClientGenerator.Core;
   "PostgreSqlFlexibleServerNameUnavailableReason",
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.reason,
+  CheckNameAvailabilityReason,
+  "csharp"
+);
 @@clientName(NameAvailabilityModel,
   "PostgreSqlFlexibleServerNameAvailabilityResult",
   "csharp"
@@ -155,6 +159,8 @@ using Azure.ClientGenerator.Core;
   "SupportedStorageCapabilities",
   "csharp"
 );
+@@alternateType(StorageMbCapability.supportedIops, int64, "csharp");
+@@alternateType(StorageTierCapability.iops, int64, "csharp");
 @@clientName(ServerProperties.pointInTimeUTC, "PointInTimeUtc", "csharp");
 @@clientName(MicrosoftEntraAuth,
   "PostgreSqlFlexibleServerActiveDirectoryAuthEnum",
