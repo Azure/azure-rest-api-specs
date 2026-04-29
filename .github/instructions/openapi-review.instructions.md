@@ -457,6 +457,28 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 - Example files **SHOULD** be kept to a reasonable size. Extremely large examples (>500 lines) make review difficult and add repo bloat.
 - For "maximum set" examples, include a representative subset of fields rather than thousands of lines of repetitive data.
 
+### 22.10 Orphan Detection (EX-ORPHAN)
+
+> See [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md) for the full rule.
+
+- Every example file in the PR **MUST** be referenced by exactly one `x-ms-examples` entry. Flag any orphaned example file not referenced by any operation.
+
+### 22.11 Example Coverage (EX-COVERAGE)
+
+> See [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md) for the full rule.
+
+- PUT and PATCH operations **SHOULD** have at least two examples (minimum + maximum property set).
+- Operations with polymorphic discriminators **SHOULD** have separate examples per variant.
+- LRO operations **SHOULD** show both the initial response (e.g., `202`) and the final response (e.g., `200`).
+
+### 22.12 Descriptive Example Values (EX-DESCRIPTIVE-VALUES)
+
+> See [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md) for the full rule.
+
+- Example values **MUST** be realistic and descriptive, not filler like `"aaaaaaa"` or `"string"`.
+- Resource names **MUST** use recognizable, human-readable names (e.g., `"myVmScaleSet"`).
+- Auto-generated examples **SHOULD** be hand-edited to replace filler values before merging.
+
 ---
 
 ## 23. Unused & Orphaned Definitions (SCHEMA-UNUSED-DEF)
@@ -538,7 +560,7 @@ When reviewing, systematically check:
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values (EX-*)
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-*)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
 - ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
