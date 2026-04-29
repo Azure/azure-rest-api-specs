@@ -1714,3 +1714,4 @@ op attestationsListForResource(
   "$DO_NOT_NORMALIZE$from",
   "javascript"
 );
+@@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");

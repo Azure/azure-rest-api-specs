@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -8,7 +7,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 namespace PolicyInsightsApi;
-using Azure.ClientGenerator.Core;
 
 /**
  * The remediation definition.
@@ -32,10 +30,6 @@ alias RemediationManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOper
     @path
     @segment("providers")
     @key
-    @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-      "Microsoft.Management",
-      "javascript"
-    )
     managementGroupsNamespace: ManagementGroupsNamespaceType;
 
     /** Management group ID. */
