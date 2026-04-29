@@ -118,30 +118,33 @@ interface ApplicationInsightsComponents {
   >;
 }
 
+alias ComponentPurgeStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the Application Insights component resource. */
+    @path
+    @segment("components")
+    resourceName: string;
+  },
+  {
+    /** In a purge status request, this is the Id of the operation the status of which is returned. */
+    @path
+    @segment("operations")
+    purgeId: string;
+  },
+  ErrorType = ErrorResponseComponents
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentPurgeStatusOperationGroup {
   /**
    * Get status for an ongoing purge operation.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}")
-  @get
-  getPurgeStatus(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the Application Insights component resource.
-     */
-    @path
-    resourceName: string,
-
-    /**
-     * In a purge status request, this is the Id of the operation the status of which is returned.
-     */
-    @path
-    purgeId: string,
-  ): ArmResponse<ComponentPurgeStatusResponse> | ErrorResponseComponents;
+  getPurgeStatus is ComponentPurgeStatusOps.Read<ComponentPurgeStatusResponse>;
 }
 
 @@doc(ApplicationInsightsComponent.name,
