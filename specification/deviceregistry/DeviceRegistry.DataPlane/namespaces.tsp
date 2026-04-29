@@ -63,13 +63,13 @@ model NamespaceUpdateComplianceReport extends Report {
   /** Total number of devices in the namespace that are eligible for updates. */
   totalUpdateableDeviceCount: int32;
 
-  /** Number of devices that are currently on the latest available update. */
+  /** Number of updateable devices that are currently on the latest available update. */
   onLatestUpdateDeviceCount: int32;
 
-  /** Number of devices for which a newer update is available but not yet applied. */
+  /** Number of updateable devices for which a newer update is available but not yet applied. */
   newUpdatesAvailableDeviceCount: int32;
 
-  /** Number of devices currently being updated to the latest available update. */
+  /** Number of updateable devices currently being updated to the latest available update. */
   updatesInProgressDeviceCount: int32;
 
   /** Total number of devices in the namespace that are not eligible for updates. */
@@ -145,13 +145,13 @@ model GroupUpdateCompliance {
   /** Total number of devices in the group that are eligible for updates. */
   totalUpdateableDeviceCount: int32;
 
-  /** Number of devices that are currently on the best available update. */
+  /** Number of updateable devices that are currently on the best available update. */
   onBestUpdateDeviceCount: int32;
 
-  /** Number of devices for which a better update is available but not yet applied. */
+  /** Number of updateable devices for which a better update is available but not yet applied. */
   bestUpdateAvailableDeviceCount: int32;
 
-  /** Number of devices currently being updated to the best available update. */
+  /** Number of updateable devices currently being updated to the best available update. */
   devicesInProgressOnBestUpdate: int32;
 
   /** Total number of devices in the group that are not eligible for updates. */

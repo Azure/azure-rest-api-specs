@@ -2703,26 +2703,6 @@
         ]
       }
     },
-    "IotHubDeviceCapabilityProperties": {
-      "type": "object",
-      "description": "The device capability properties for an IoTHub capability",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeviceCapabilityProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "IoTHub"
-    },
-    "IotHubDeviceCapabilityPropertiesCreateOrUpdate": {
-      "type": "object",
-      "description": "The device capability properties for an IoTHub capability",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "IoTHub"
-    },
     "GroupUpdateCompliance": {
       "type": "object",
       "description": "Group-level update compliance counters.",
@@ -2735,17 +2715,17 @@
         "onBestUpdateDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of devices that are currently on the best available update."
+          "description": "Number of updateable devices that are currently on the best available update."
         },
         "bestUpdateAvailableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of devices for which a better update is available but not yet applied."
+          "description": "Number of updateable devices for which a better update is available but not yet applied."
         },
         "devicesInProgressOnBestUpdate": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of devices currently being updated to the best available update."
+          "description": "Number of updateable devices currently being updated to the best available update."
         },
         "totalNotUpdateableDeviceCount": {
           "type": "integer",
@@ -2782,6 +2762,26 @@
         "installableUpdates"
       ]
     },
+    "IotHubDeviceCapabilityProperties": {
+      "type": "object",
+      "description": "The device capability properties for an IoTHub capability",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "IoTHub"
+    },
+    "IotHubDeviceCapabilityPropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "The device capability properties for an IoTHub capability",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "IoTHub"
+    },
     "Namespace": {
       "type": "object",
       "description": "A device registry namespace.",
@@ -2808,17 +2808,17 @@
         "onLatestUpdateDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of devices that are currently on the latest available update."
+          "description": "Number of updateable devices that are currently on the latest available update."
         },
         "newUpdatesAvailableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of devices for which a newer update is available but not yet applied."
+          "description": "Number of updateable devices for which a newer update is available but not yet applied."
         },
         "updatesInProgressDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of devices currently being updated to the latest available update."
+          "description": "Number of updateable devices currently being updated to the latest available update."
         },
         "totalNotUpdateableDeviceCount": {
           "type": "integer",
