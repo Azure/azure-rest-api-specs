@@ -35,6 +35,7 @@ model SBSubscription
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
+@tag("Subscriptions")
 interface SBSubscriptions {
   /**
    * Returns a subscription description for the specified topic.
