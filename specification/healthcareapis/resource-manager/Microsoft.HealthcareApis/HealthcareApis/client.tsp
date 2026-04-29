@@ -1,7 +1,15 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.HealthcareApis;
 
@@ -24,12 +32,197 @@ namespace Microsoft.HealthcareApis;
   "javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
-@@Legacy.flattenProperty(PrivateEndpointConnectionDescription.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionDescription.properties,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
-@@Legacy.flattenProperty(PrivateLinkResourceDescription.properties, "java");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
-@@Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceDescription.properties,
   "java"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection.properties,
+  "java"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op dicomServiceUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /** The name of DICOM Service resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  dicomServiceName: string,
+
+  /** The name of workspace resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  workspaceName: string,
+
+  /** The parameters for updating a Dicom Service. */
+  @body
+  dicomservicePatchResource: DicomServicePatchResource,
+): ArmResponse<DicomService> | (ArmAcceptedLroResponse<
+  "Resource update request accepted.",
+  LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
+    Azure.Core.Foundations.RetryAfterHeader
+> & {
+  @bodyRoot
+  _: DicomService;
+}) | ErrorDetails;
+@@override(DicomServiceOperationGroup.update, dicomServiceUpdate);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op dicomServiceDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /** The name of DICOM Service resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  dicomServiceName: string,
+
+  /** The name of workspace resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  workspaceName: string,
+):
+  | ArmDeletedResponse
+  | ArmDeleteAcceptedLroResponse
+  | ArmDeletedNoContentResponse
+  | Error;
+@@override(DicomServiceOperationGroup.delete, dicomServiceDelete);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op fhirServiceUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /** The name of FHIR Service resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  fhirServiceName: string,
+
+  /** The name of workspace resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  workspaceName: string,
+
+  /** The parameters for updating a Fhir Service. */
+  @body
+  fhirservicePatchResource: FhirServicePatchResource,
+): ArmResponse<FhirService> | (ArmAcceptedLroResponse<
+  "Resource update request accepted.",
+  LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
+    Azure.Core.Foundations.RetryAfterHeader
+> & {
+  @bodyRoot
+  _: FhirService;
+}) | ErrorDetails;
+@@override(FhirServiceOperationGroup.update, fhirServiceUpdate);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op fhirServiceDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /** The name of FHIR Service resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  fhirServiceName: string,
+
+  /** The name of workspace resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  workspaceName: string,
+):
+  | ArmDeletedResponse
+  | ArmDeleteAcceptedLroResponse
+  | ArmDeletedNoContentResponse
+  | Error;
+@@override(FhirServiceOperationGroup.delete, fhirServiceDelete);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op iotConnectorUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /** The name of IoT Connector resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  iotConnectorName: string,
+
+  /** The name of workspace resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  workspaceName: string,
+
+  /** The parameters for updating an IoT Connector. */
+  @body
+  iotConnectorPatchResource: IotConnectorPatchResource,
+): ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
+  "Resource update request accepted.",
+  LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
+    Azure.Core.Foundations.RetryAfterHeader
+> & {
+  @bodyRoot
+  _: IotConnector;
+}) | ErrorDetails;
+@@override(IotConnectorOperationGroup.update, iotConnectorUpdate);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op iotConnectorDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /** The name of IoT Connector resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  iotConnectorName: string,
+
+  /** The name of workspace resource. */
+  @path
+  @minLength(3)
+  @maxLength(24)
+  workspaceName: string,
+):
+  | ArmDeletedResponse
+  | ArmDeleteAcceptedLroResponse
+  | ArmDeletedNoContentResponse
+  | Error;
+@@override(IotConnectorOperationGroup.delete, iotConnectorDelete);
