@@ -194,7 +194,7 @@ union ErrorCategory {
   /** Transient networking or service-side condition; the agent may retry the operation. */
   RETRYABLE: "RETRYABLE",
 
-  /** The update itself is invalid or incompatible; the service must retarget or fix the update. */
+  /** The update metadata is invalid or incompatible; the service must fix the update. */
   SERVICE: "SERVICE",
 
   /** Device-local state prevents the update; may self-resolve or require operator action. */
