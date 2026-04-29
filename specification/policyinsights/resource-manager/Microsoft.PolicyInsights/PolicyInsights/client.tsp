@@ -1267,6 +1267,10 @@ op componentPolicyStatesListQueryResultsForResource(
   componentPolicyStatesListQueryResultsForResource,
   "!java,!python,!javascript"
 );
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResource::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1292,6 +1296,10 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
   componentPolicyStatesListQueryResultsForPolicyDefinition,
   "!java,!python,!javascript"
 );
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1316,6 +1324,10 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
   "!java,!python,!javascript"
+);
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1345,7 +1357,10 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
   "!java,!python,!javascript"
 );
-
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
+);
 // Remediations overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1691,3 +1706,7 @@ op attestationsListForResource(
 @@clientName(QueryOptionsG.Top, "top", "javascript");
 @@clientName(QueryOptionsH.Top, "top", "javascript");
 @@clientName(QueryOptionsH.Filter, "filter", "javascript");
+@@clientName(listQueryResultsParameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
+);
