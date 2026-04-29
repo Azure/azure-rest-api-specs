@@ -266,3 +266,19 @@ using PolicyInsightsApi;
   #["remediatedResourceId"]
 );
 @@visibility(RemediationListResult.value, Lifecycle.Read);
+
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
+);
