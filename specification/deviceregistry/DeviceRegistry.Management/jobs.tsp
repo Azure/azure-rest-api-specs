@@ -24,28 +24,32 @@ model Job is TrackedResource<JobProperties> {
   @minLength(3)
   @maxLength(64)
   name: string;
-
-  ...ManagedSystemAssignedIdentityProperty;
 }
 
+// NOTE: JobProperties is polymorphic on `jobType` so future variants
+// (Action, State) can be added in a backward-compatible way. v1 ships
+// only the `Update` variant; additional discriminator values are
+// reserved for v2 and intentionally not declared here.
+//
+// `scheduling` is intentionally NOT on the base. Each variant declares
+// its own scheduling enum inside `definition` because the set of valid
+// scheduling types is variant-specific (e.g. Update is continuous-only;
+// Action/State in v2 will allow on-demand and timed schedules).
 @added(Versions.v2026_11_02_preview)
 @doc("The job properties.")
+@discriminator("jobType")
 model JobProperties {
   @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
-  @doc("The scheduling configuration for the job.")
-  scheduling?: JobSchedule;
+  @doc("The type of the job. Set at create time; immutable thereafter.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: JobTypeEnum;
 
-  @doc("The type of the job.")
-  jobType?: JobTypeEnum;
-
-  @doc("The target of the job.")
-  target?: JobTarget;
-
-  @doc("The definition of the job.")
-  definition?: JobDefinition;
+  @doc("The target of the job. Set at create time; immutable thereafter.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  target: JobTarget;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -53,77 +57,75 @@ model JobProperties {
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("The scheduling configuration for a job.")
-model JobSchedule {
-  @doc("The type of scheduling.")
-  schedulingType?: JobSchedulingType;
+@doc("Job properties for an Update job.")
+model UpdateJobProperties extends JobProperties {
+  jobType: JobTypeEnum.Update;
+
+  @doc("The update definition for the job. Set at create time; immutable thereafter.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  definition: UpdateJobDefinition;
 }
 
-@added(Versions.v2026_11_02_preview)
-@doc("The type of job scheduling.")
-union JobSchedulingType {
-  string,
-
-  @doc("The job runs on demand.")
-  OnDemand: "ondemand",
-}
-
+// NOTE: Only `Update` is shipped in v1. `Action` and `State` are reserved
+// values in the design and will be added as additional discriminator
+// values (with corresponding subtypes) in v2.
 @added(Versions.v2026_11_02_preview)
 @doc("The type of the job.")
 union JobTypeEnum {
   string,
 
-  @doc("An action job.")
-  Action: "Action",
-
-  @doc("A state job.")
-  State: "State",
+  @doc("An update job. Targets devices for ADU deployments.")
+  Update: "Update",
 }
 
 @added(Versions.v2026_11_02_preview)
 @doc("The target of a job.")
 model JobTarget {
-  @doc("The Azure resource ID of the target resource.")
-  targetResourceId?: Azure.Core.armResourceIdentifier;
+  @doc("The Azure resource ID of the target group. Must reference a Microsoft.DeviceRegistry/namespaces/groups resource.")
+  targetResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/groups";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("The definition of a job.")
-model JobDefinition {
-  @doc("The action definition for the job. Used when jobType is Action.")
-  action?: JobActionDefinition;
+@doc("Update-job definition. Used when jobType is Update.")
+model UpdateJobDefinition {
+  @doc("The scheduling type for the Update job. Update jobs are always continuous: ADU deployments target the group until superseded, canceled, or the parent job is deleted.")
+  schedulingType: UpdateJobSchedulingType;
 
-  @doc("The state definition for the job. Used when jobType is State.")
-  state?: JobStateDefinition;
+  @doc("The update definition for the job.")
+  update: JobUpdateDefinition;
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("The action definition for a job.")
-model JobActionDefinition {
-  @doc("The name of the action to perform.")
-  actionName?: string;
+@doc("Scheduling types supported by an Update job. Only continuous is supported.")
+union UpdateJobSchedulingType {
+  string,
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("The payload for the action.")
-  payload?: Record<string>;
-
-  @doc("The response timeout for the action.")
-  responseTimeout?: string;
-
-  @doc("The connect timeout for the action.")
-  connectTimeout?: string;
+  @doc("The job runs continuously against the target group until superseded, canceled, or the parent job is deleted.")
+  Continuous: "continuous",
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("The state definition for a job.")
-model JobStateDefinition {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("The tags for the state.")
-  tags?: Record<string>;
+@doc("The update definition for a job.")
+model JobUpdateDefinition {
+  @doc("The Azure Device Update (ADU) update identity to deploy.")
+  updateId: JobUpdateId;
+}
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("The desired state.")
-  state?: Record<string>;
+@added(Versions.v2026_11_02_preview)
+@doc("Identifier of an Azure Device Update (ADU) update.")
+model JobUpdateId {
+  @doc("The provider of the update.")
+  provider: string;
+
+  @doc("The name of the update.")
+  name: string;
+
+  @doc("The version of the update.")
+  version: string;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -141,7 +143,11 @@ model JobScheduleRequest {
 interface Jobs {
   get is ArmResourceRead<Job>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<Job>;
-  update is ArmResourcePatchAsync<Job, JobProperties>;
+  // PATCH is restricted to tags-only. Job spec properties (jobType, target,
+  // definition) are immutable after create because mutating them would have
+  // unintended effects on already-scheduled runs. Tags-only PATCH satisfies
+  // the ARM tracked-resource requirement (RPC-Patch-V1-03).
+  update is ArmTagsPatchSync<Job>;
   delete is ArmResourceDeleteWithoutOkAsync<Job>;
   listByNamespace is ArmResourceListByParent<Job>;
 

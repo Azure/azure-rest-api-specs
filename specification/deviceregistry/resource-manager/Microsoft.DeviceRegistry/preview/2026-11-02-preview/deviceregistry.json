@@ -4408,8 +4408,8 @@
           }
         },
         "x-ms-examples": {
-          "Get_Job": {
-            "$ref": "./examples/Get_Job.json"
+          "Get_Job_Update": {
+            "$ref": "./examples/Get_Job_Update.json"
           }
         }
       },
@@ -4491,8 +4491,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplace_Job": {
-            "$ref": "./examples/CreateOrReplace_Job.json"
+          "CreateOrReplace_Job_Update": {
+            "$ref": "./examples/CreateOrReplace_Job_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4542,7 +4542,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobUpdate"
+              "$ref": "#/definitions/JobTagsUpdate"
             }
           }
         ],
@@ -4553,20 +4553,6 @@
               "$ref": "#/definitions/Job"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4575,14 +4561,10 @@
           }
         },
         "x-ms-examples": {
-          "Update_Job": {
-            "$ref": "./examples/Update_Job.json"
+          "Update_Job_Tags": {
+            "$ref": "./examples/Update_Job_Tags.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Jobs_Delete",
@@ -8617,10 +8599,6 @@
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -8628,45 +8606,6 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "JobActionDefinition": {
-      "type": "object",
-      "description": "The action definition for a job.",
-      "properties": {
-        "actionName": {
-          "type": "string",
-          "description": "The name of the action to perform."
-        },
-        "payload": {
-          "type": "object",
-          "description": "The payload for the action.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "responseTimeout": {
-          "type": "string",
-          "description": "The response timeout for the action."
-        },
-        "connectTimeout": {
-          "type": "string",
-          "description": "The connect timeout for the action."
-        }
-      }
-    },
-    "JobDefinition": {
-      "type": "object",
-      "description": "The definition of a job.",
-      "properties": {
-        "action": {
-          "$ref": "#/definitions/JobActionDefinition",
-          "description": "The action definition for the job. Used when jobType is Action."
-        },
-        "state": {
-          "$ref": "#/definitions/JobStateDefinition",
-          "description": "The state definition for the job. Used when jobType is State."
-        }
-      }
     },
     "JobListResult": {
       "type": "object",
@@ -8698,28 +8637,33 @@
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
-        "scheduling": {
-          "$ref": "#/definitions/JobSchedule",
-          "description": "The scheduling configuration for the job."
-        },
         "jobType": {
           "$ref": "#/definitions/JobTypeEnum",
-          "description": "The type of the job."
+          "description": "The type of the job. Set at create time; immutable thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "target": {
           "$ref": "#/definitions/JobTarget",
-          "description": "The target of the job."
-        },
-        "definition": {
-          "$ref": "#/definitions/JobDefinition",
-          "description": "The definition of the job."
+          "description": "The target of the job. Set at create time; immutable thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType",
+        "target"
+      ]
     },
     "JobRun": {
       "type": "object",
@@ -8735,6 +8679,36 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "JobRunCancellationReason": {
+      "type": "string",
+      "description": "The reason a job run was canceled. Present only when status is Canceled.",
+      "enum": [
+        "CanceledByCustomer",
+        "CanceledByAnotherJob",
+        "CanceledByGroupDelete"
+      ],
+      "x-ms-enum": {
+        "name": "JobRunCancellationReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CanceledByCustomer",
+            "value": "CanceledByCustomer",
+            "description": "The customer canceled the run via the cancel action."
+          },
+          {
+            "name": "CanceledByAnotherJob",
+            "value": "CanceledByAnotherJob",
+            "description": "The run was canceled because another Update job targeting the same group was scheduled and superseded it."
+          },
+          {
+            "name": "CanceledByGroupDelete",
+            "value": "CanceledByGroupDelete",
+            "description": "The run was canceled because the target group was deleted."
+          }
+        ]
+      }
     },
     "JobRunListResult": {
       "type": "object",
@@ -8771,6 +8745,11 @@
           "description": "The status of the job run.",
           "readOnly": true
         },
+        "cancellationReason": {
+          "$ref": "#/definitions/JobRunCancellationReason",
+          "description": "The reason the run was canceled. Present only when status is Canceled.",
+          "readOnly": true
+        },
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
@@ -8794,14 +8773,6 @@
           "description": "The results summary of the job run.",
           "readOnly": true
         },
-        "internalMetadata": {
-          "type": "object",
-          "description": "Internal metadata used to track polling and execution state.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -8813,17 +8784,17 @@
       "type": "object",
       "description": "A single device result entry from a job run.",
       "properties": {
-        "externalDeviceId": {
+        "deviceUuid": {
           "type": "string",
-          "description": "The external device identifier."
+          "description": "The device UUID. ADR returns the device's stable UUID identifier (ADU surfaces device UUIDs in its private API; ADR re-emits them under this name to align with ADR-wide identifier conventions)."
         },
         "status": {
           "type": "string",
-          "description": "The status of the device for this job run."
+          "description": "The current per-device status for this run. One of: Succeeded, Failed, InProgress, Canceled, NotApplied."
         },
         "reason": {
           "type": "string",
-          "description": "The reason for the status, typically used for failures."
+          "description": "Short, machine-readable diagnostic that pairs with status. Present only when status is Failed; an ADU-provided machine-readable code (e.g. DOWNLOAD_FAILED). Omitted for all other statuses, including Succeeded and InProgress."
         }
       }
     },
@@ -8867,15 +8838,25 @@
           "format": "int32",
           "description": "Number of targets that failed."
         },
-        "running": {
+        "inProgress": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of targets currently running."
+          "description": "Number of targets currently in progress."
         },
         "pending": {
           "type": "integer",
           "format": "int32",
           "description": "Number of targets pending execution."
+        },
+        "canceled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of targets whose execution was canceled."
+        },
+        "notApplied": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of targets the operation does not apply to. Update jobs only; computed by ADR as total - (succeeded + failed + inProgress + canceled)."
         }
       }
     },
@@ -8885,9 +8866,11 @@
       "enum": [
         "Scheduled",
         "Queued",
-        "Running",
-        "Completed",
-        "Failed"
+        "Active",
+        "Succeeded",
+        "Failed",
+        "TimedOut",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "JobRunStatus",
@@ -8901,35 +8884,36 @@
           {
             "name": "Queued",
             "value": "Queued",
-            "description": "The job run is queued."
+            "description": "The job run is queued for dispatch and is consuming concurrency quota."
           },
           {
-            "name": "Running",
-            "value": "Running",
-            "description": "The job run is running."
+            "name": "Active",
+            "value": "Active",
+            "description": "The job run is actively executing."
           },
           {
-            "name": "Completed",
-            "value": "Completed",
+            "name": "Succeeded",
+            "value": "Succeeded",
             "description": "The job run completed successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
             "description": "The job run failed."
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The job run timed out before completing. Action/State jobs only; not applicable to Update jobs."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The job run was canceled. See `cancellationReason` for the cause."
           }
         ]
-      }
-    },
-    "JobSchedule": {
-      "type": "object",
-      "description": "The scheduling configuration for a job.",
-      "properties": {
-        "schedulingType": {
-          "$ref": "#/definitions/JobSchedulingType",
-          "description": "The type of scheduling."
-        }
-      }
+      },
+      "readOnly": true
     },
     "JobScheduleRequest": {
       "type": "object",
@@ -8947,38 +8931,13 @@
         }
       }
     },
-    "JobSchedulingType": {
-      "type": "string",
-      "description": "The type of job scheduling.",
-      "enum": [
-        "ondemand"
-      ],
-      "x-ms-enum": {
-        "name": "JobSchedulingType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OnDemand",
-            "value": "ondemand",
-            "description": "The job runs on demand."
-          }
-        ]
-      }
-    },
-    "JobStateDefinition": {
+    "JobTagsUpdate": {
       "type": "object",
-      "description": "The state definition for a job.",
+      "description": "The type used for updating tags in Job resources.",
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The tags for the state.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "state": {
-          "type": "object",
-          "description": "The desired state.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -8992,51 +8951,72 @@
         "targetResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the target resource."
+          "description": "The Azure resource ID of the target group. Must reference a Microsoft.DeviceRegistry/namespaces/groups resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces/groups"
+              }
+            ]
+          }
         }
-      }
+      },
+      "required": [
+        "targetResourceId"
+      ]
     },
     "JobTypeEnum": {
       "type": "string",
       "description": "The type of the job.",
       "enum": [
-        "Action",
-        "State"
+        "Update"
       ],
       "x-ms-enum": {
         "name": "JobTypeEnum",
         "modelAsString": true,
         "values": [
           {
-            "name": "Action",
-            "value": "Action",
-            "description": "An action job."
-          },
-          {
-            "name": "State",
-            "value": "State",
-            "description": "A state job."
+            "name": "Update",
+            "value": "Update",
+            "description": "An update job. Targets devices for ADU deployments."
           }
         ]
       }
     },
-    "JobUpdate": {
+    "JobUpdateDefinition": {
       "type": "object",
-      "description": "Job definition.",
+      "description": "The update definition for a job.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
+        "updateId": {
+          "$ref": "#/definitions/JobUpdateId",
+          "description": "The Azure Device Update (ADU) update identity to deploy."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      "required": [
+        "updateId"
+      ]
+    },
+    "JobUpdateId": {
+      "type": "object",
+      "description": "Identifier of an Azure Device Update (ADU) update.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider of the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
         }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
       ]
     },
     "LeafCertificateConfiguration": {
@@ -12603,6 +12583,65 @@
           "type": "string",
           "description": "Defines a secret reference for certificates to trust."
         }
+      }
+    },
+    "UpdateJobDefinition": {
+      "type": "object",
+      "description": "Update-job definition. Used when jobType is Update.",
+      "properties": {
+        "schedulingType": {
+          "$ref": "#/definitions/UpdateJobSchedulingType",
+          "description": "The scheduling type for the Update job. Update jobs are always continuous: ADU deployments target the group until superseded, canceled, or the parent job is deleted."
+        },
+        "update": {
+          "$ref": "#/definitions/JobUpdateDefinition",
+          "description": "The update definition for the job."
+        }
+      },
+      "required": [
+        "schedulingType",
+        "update"
+      ]
+    },
+    "UpdateJobProperties": {
+      "type": "object",
+      "description": "Job properties for an Update job.",
+      "properties": {
+        "definition": {
+          "$ref": "#/definitions/UpdateJobDefinition",
+          "description": "The update definition for the job. Set at create time; immutable thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "definition"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Update"
+    },
+    "UpdateJobSchedulingType": {
+      "type": "string",
+      "description": "Scheduling types supported by an Update job. Only continuous is supported.",
+      "enum": [
+        "continuous"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateJobSchedulingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Continuous",
+            "value": "continuous",
+            "description": "The job runs continuously against the target group until superseded, canceled, or the parent job is deleted."
+          }
+        ]
       }
     },
     "UsernamePasswordCredentials": {

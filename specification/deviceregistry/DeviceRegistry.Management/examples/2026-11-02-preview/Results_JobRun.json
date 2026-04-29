@@ -1,13 +1,13 @@
 {
   "title": "JobRun Results",
   "operationId": "JobRuns_Results",
-  "description": "Browse the results of a job run to find individual device statuses.",
+  "description": "Browse the results of an Update job run to find individual device statuses.",
   "parameters": {
     "api-version": "2026-11-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "namespaceName": "namespace-1",
-    "jobName": "adr-job-01",
+    "jobName": "adr-job-update-01",
     "runName": "c560dcd9-cd8e-413b-859c-d0ebcb94236f"
   },
   "responses": {
@@ -15,19 +15,17 @@
       "body": {
         "value": [
           {
-            "externalDeviceId": "device-001",
-            "status": "Succeeded",
-            "reason": ""
+            "deviceUuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+            "status": "Succeeded"
           },
           {
-            "externalDeviceId": "device-002",
+            "deviceUuid": "a2b6c33d-8f01-4e22-b774-771b7fa46f88",
             "status": "Failed",
-            "reason": "Device unreachable: connection timed out after 3600s"
+            "reason": "DOWNLOAD_FAILED"
           },
           {
-            "externalDeviceId": "device-003",
-            "status": "Failed",
-            "reason": "Action rejected: device firmware version incompatible"
+            "deviceUuid": "f3812ab0-91dd-4c51-8a4d-2c5b6d7e8f90",
+            "status": "InProgress"
           }
         ]
       }
