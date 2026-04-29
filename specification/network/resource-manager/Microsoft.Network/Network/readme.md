@@ -4624,6 +4624,9 @@ directive:
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
   - suppress: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - suppress: ParametersInPost
     from: virtualWan.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - suppress: AvoidAdditionalProperties
@@ -4686,6 +4689,17 @@ directive:
     reason: name, id and type properties are inherited from the upper level
 
 suppressions:
+  - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: The resource name parameter 'circuitName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute circuit link failover APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/startCircuitLinkFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stopCircuitLinkFailoverTest"]
+  - code: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
   - code: ResourceNameRestriction
     from: virtualWan.json
     reason: The resource name parameter 'expressRouteGatewayName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute gateway failover and insights APIs.
