@@ -17,13 +17,23 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model GremlinDatabaseGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GremlinDatabaseGetProperties> {
+  is Azure.ResourceManager.ProxyResource<GremlinDatabaseGetProperties> {
   ...ResourceNameParameter<
     Resource = GremlinDatabaseGetResults,
     KeyName = "databaseName",
     SegmentName = "gremlinDatabases",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Identity for the resource.
@@ -73,9 +83,4 @@ interface GremlinDatabaseGetResultsOperationGroup {
 );
 @@doc(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
   "The parameters to provide for the current Gremlin database."
-);
-@@visibility(GremlinDatabaseGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );
