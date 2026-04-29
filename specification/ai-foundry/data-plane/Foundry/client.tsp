@@ -172,15 +172,6 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
 
-// Relocate evaluator generation job operations under the `evaluators` sub-client
-// for Python so callers write `project_client.evaluators.generate_job(...)`.
-// REST surface (route + tag `EvaluatorGenerationJobs`) is unchanged.
-@@clientLocation(EvaluatorGenerationJobs.create, Evaluators, "python");
-@@clientLocation(EvaluatorGenerationJobs.get, Evaluators, "python");
-@@clientLocation(EvaluatorGenerationJobs.list, Evaluators, "python");
-@@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators, "python");
-@@clientLocation(EvaluatorGenerationJobs.delete, Evaluators, "python");
-
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
