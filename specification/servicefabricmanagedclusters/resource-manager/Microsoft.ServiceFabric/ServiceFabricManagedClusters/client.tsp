@@ -666,3 +666,7 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(NodeTypes.update::parameters.properties, "patch", "csharp");
 @@clientName(Services.update::parameters.properties, "patch", "csharp");
+
+// Note: the flattened/inner `name` property is renamed in csharp via [CodeGenMember]
+// in custom code (to `ManagedClustersSkuName`), with an [Obsolete] shim preserving the
+// previous public surface.
