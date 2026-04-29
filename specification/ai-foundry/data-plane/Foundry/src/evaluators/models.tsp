@@ -243,6 +243,18 @@ model EvaluatorGenerationInputs {
   evaluator_name: string;
 }
 
+@doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
+model EvaluatorGenerationTokenUsage {
+  @doc("Number of input (prompt) tokens consumed.")
+  input_tokens: int64;
+
+  @doc("Number of output (completion) tokens generated.")
+  output_tokens: int64;
+
+  @doc("Total tokens consumed (input + output).")
+  total_tokens: int64;
+}
+
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
 model EvaluatorGenerationJob
   is JobLike<EvaluatorVersion, EvaluatorGenerationInputs> {
@@ -256,7 +268,7 @@ model EvaluatorGenerationJob
 
   @doc("Token consumption summary. Populated when the job reaches a terminal state.")
   @visibility(Lifecycle.Read)
-  usage?: TokenUsage;
+  usage?: EvaluatorGenerationTokenUsage;
 }
 
 @doc("Evaluator Definition")

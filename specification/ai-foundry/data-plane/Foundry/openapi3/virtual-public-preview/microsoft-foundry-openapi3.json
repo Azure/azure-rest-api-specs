@@ -18702,7 +18702,7 @@
           "usage": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TokenUsage"
+                "$ref": "#/components/schemas/EvaluatorGenerationTokenUsage"
               }
             ],
             "description": "Token consumption summary. Populated when the job reaches a terminal state.",
@@ -18771,6 +18771,32 @@
           }
         ],
         "description": "The supported source types for evaluator generation jobs."
+      },
+      "EvaluatorGenerationTokenUsage": {
+        "type": "object",
+        "required": [
+          "input_tokens",
+          "output_tokens",
+          "total_tokens"
+        ],
+        "properties": {
+          "input_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of input (prompt) tokens consumed."
+          },
+          "output_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of output (completion) tokens generated."
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total tokens consumed (input + output)."
+          }
+        },
+        "description": "Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state."
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -42929,32 +42955,6 @@
           }
         },
         "title": "AzureAIEvaluatorGrader"
-      },
-      "TokenUsage": {
-        "type": "object",
-        "required": [
-          "input_tokens",
-          "output_tokens",
-          "total_tokens"
-        ],
-        "properties": {
-          "input_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of input (prompt) tokens consumed."
-          },
-          "output_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of output (completion) tokens generated."
-          },
-          "total_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Total tokens consumed (input + output)."
-          }
-        },
-        "description": "Token consumption summary for a long-running job. Populated when the job reaches a terminal state. Reusable across job-producing LROs."
       },
       "ToolCallOutputContent": {
         "anyOf": [
