@@ -20,19 +20,40 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+## Suppression
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.AgentPoolProperties.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.NamedAgentPoolProfile.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.KubernetesVersionProperties.properties.patchVersions
+    reason: "patchVersions is a map of patch version info, following AKS behavior."
+```
+
 ### Basic Information
 
 These are the global settings for the hybridaks.
 
+
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-preview-2026-04
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
+### Tag: package-preview-2026-04
+
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04'
+input-file:
+  - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
 ```
 
 ### Tag: package-2024-01

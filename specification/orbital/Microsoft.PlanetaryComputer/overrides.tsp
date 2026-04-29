@@ -240,11 +240,6 @@ model GetPreviewOptions {
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
-
-  /**
-   * Subdataset parameters
-   */
-  ...SubDatasetQueryParameters;
 }
 
 /**
