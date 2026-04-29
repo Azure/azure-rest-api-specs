@@ -11,7 +11,6 @@ import {
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  readSdkOutputCheckRequired,
   setPipelineVariables,
 } from "../src/command-helpers.js";
 import * as log from "../src/log.js";
@@ -604,65 +603,6 @@ describe("commands.ts", () => {
         ),
       );
     });
-
-    test("should use sdkReportedCheckRequired for .NET SDK when provided", () => {
-      vi.spyOn(fs, "existsSync").mockReturnValue(false);
-      vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
-      vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
-        // mock implementation intentionally left blank
-      });
-      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
-        // mock implementation intentionally left blank
-      });
-
-      const mockCommandInput = {
-        workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-net" as SdkName,
-        runMode: "",
-        localSpecRepoPath: "",
-        localSdkRepoPath: "",
-        prNumber: "456",
-        sdkRepoName: "",
-        specCommitSha: "def456",
-        specRepoHttpsUrl: "",
-      };
-
-      // Even though hasManagementPlaneSpecs=true and hasTypeSpecProjects=true
-      // (which would normally make .NET required), sdkReportedCheckRequired=false overrides
-      const result = generateArtifact(
-        mockCommandInput,
-        "succeeded",
-        false,
-        true, // hasManagementPlaneSpecs
-        true, // hasTypeSpecProjects
-        "mockStagedArtifactsFolder",
-        [],
-        true, // sdkGenerationExecuted
-        false, // sdkReportedCheckRequired - SDK says not required
-      );
-
-      const breakingChangeLabelArtifactPath = path.normalize(
-        "/working/folder/out/spec-gen-sdk-artifact",
-      );
-
-      expect(result).toBe(0);
-      expect(fs.writeFileSync).toHaveBeenCalledWith(
-        path.join(breakingChangeLabelArtifactPath, "spec-gen-sdk-artifact.json"),
-        JSON.stringify(
-          {
-            language: "azure-sdk-for-net",
-            result: "succeeded",
-            headSha: "def456",
-            prNumber: "456",
-            labelAction: false,
-            isSpecGenSdkCheckRequired: false,
-            apiViewRequestData: [],
-          },
-          undefined,
-          2,
-        ),
-      );
-    });
   });
 
   describe("getRequiredSettingValue", () => {
@@ -682,12 +622,12 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      // Based on the constants in types.ts, JS SDK requires check for data plane
       expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
-      // .NET SDK set (dataplane: false)
-      expect(result3).toBe(false);
+      // .NET SDK set (dataPlane: true)
+      expect(result3).toBe(true);
     });
 
     test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
@@ -706,112 +646,6 @@ describe("commands.ts", () => {
 
       const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
       expect(result2).toBe(true);
-    });
-    test("should use sdkReportedCheckRequired for .NET when provided as true", () => {
-      // When sdkReportedCheckRequired is true, .NET should be required regardless of other flags
-      const result = getRequiredSettingValue(true, false, "azure-sdk-for-net", true);
-      expect(result).toBe(true);
-
-      const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-net", true);
-      expect(result2).toBe(true);
-
-      const result3 = getRequiredSettingValue(true, true, "azure-sdk-for-net", true);
-      expect(result3).toBe(true);
-    });
-
-    test("should use sdkReportedCheckRequired for .NET when provided as false", () => {
-      // When sdkReportedCheckRequired is false, .NET should not be required even if
-      // hasTypeSpecProjects is true and hasManagementPlaneSpecs is true
-      const result = getRequiredSettingValue(true, true, "azure-sdk-for-net", false);
-      expect(result).toBe(false);
-
-      const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-net", false);
-      expect(result2).toBe(false);
-    });
-
-    test("should ignore sdkReportedCheckRequired for non-.NET SDKs", () => {
-      // sdkReportedCheckRequired should be ignored for other SDKs
-      const result = getRequiredSettingValue(true, true, "azure-sdk-for-go", false);
-      expect(result).toBe(true);
-
-      const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-python", false);
-      expect(result2).toBe(true);
-    });
-
-    test("should fall back to existing logic for .NET when sdkReportedCheckRequired is undefined", () => {
-      // When sdkReportedCheckRequired is undefined, .NET should use existing logic
-      const result = getRequiredSettingValue(true, true, "azure-sdk-for-net", undefined);
-      expect(result).toBe(true);
-
-      const result2 = getRequiredSettingValue(true, false, "azure-sdk-for-net", undefined);
-      expect(result2).toBe(false);
-    });
-  });
-
-  describe("readSdkOutputCheckRequired", () => {
-    beforeEach(() => {
-      vi.clearAllMocks();
-    });
-
-    const mockInput = {
-      workingFolder: "/working",
-      sdkRepoName: "azure-sdk-for-net",
-      sdkLanguage: SdkName.Net,
-      runMode: "",
-      localSpecRepoPath: "",
-      localSdkRepoPath: "",
-      specCommitSha: "",
-      specRepoHttpsUrl: "",
-    };
-
-    test("should return true when generateOutput.json has isSpecGenSdkCheckRequired=true", () => {
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.spyOn(fs, "readFileSync").mockReturnValue(
-        JSON.stringify({ packages: [], isSpecGenSdkCheckRequired: true }),
-      );
-
-      const result = readSdkOutputCheckRequired(mockInput);
-      expect(result).toBe(true);
-    });
-
-    test("should return false when generateOutput.json has isSpecGenSdkCheckRequired=false", () => {
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.spyOn(fs, "readFileSync").mockReturnValue(
-        JSON.stringify({ packages: [], isSpecGenSdkCheckRequired: false }),
-      );
-
-      const result = readSdkOutputCheckRequired(mockInput);
-      expect(result).toBe(false);
-    });
-
-    test("should return undefined when generateOutput.json does not exist", () => {
-      vi.spyOn(fs, "existsSync").mockReturnValue(false);
-
-      const result = readSdkOutputCheckRequired(mockInput);
-      expect(result).toBeUndefined();
-    });
-
-    test("should return undefined and log warning when generateOutput.json is invalid JSON", () => {
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.spyOn(fs, "readFileSync").mockReturnValue("invalid json");
-      vi.spyOn(log, "logMessage").mockImplementation(() => {
-        // mock implementation intentionally left blank
-      });
-
-      const result = readSdkOutputCheckRequired(mockInput);
-      expect(result).toBeUndefined();
-      expect(log.logMessage).toHaveBeenCalledWith(
-        expect.stringContaining("failed to parse generateOutput.json"),
-        LogLevel.Warn,
-      );
-    });
-
-    test("should return undefined when generateOutput.json has no isSpecGenSdkCheckRequired field", () => {
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify({ packages: [] }));
-
-      const result = readSdkOutputCheckRequired(mockInput);
-      expect(result).toBeUndefined();
     });
   });
 });

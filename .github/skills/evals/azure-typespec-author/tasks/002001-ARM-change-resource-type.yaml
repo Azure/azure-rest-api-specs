@@ -1,0 +1,18 @@
+id: 002001-ARM-change-resource-type
+name: "ARM: Change resource to extension resource"
+description: |
+  Test changing a tracked resource to an extension resource.
+  Based on benchmark case 002001-ARM-change-resource-type.
+tags:
+  - arm
+  - resource-type
+inputs:
+  prompt: "change resource Employee to be an extension resource"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

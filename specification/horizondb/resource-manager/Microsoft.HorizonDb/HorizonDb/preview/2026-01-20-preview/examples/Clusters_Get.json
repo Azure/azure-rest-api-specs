@@ -1,0 +1,34 @@
+{
+  "operationId": "HorizonDbClusters_Get",
+  "title": "Get a HorizonDb cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
+        "name": "examplecluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "westus2",
+        "tags": {
+          "env": "dev"
+        },
+        "properties": {
+          "administratorLogin": "exampleadministratorlogin",
+          "version": "17",
+          "vCores": 4,
+          "replicaCount": 2,
+          "zonePlacementPolicy": "Strict",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "examplecluster.westus2.horizondb.azure.com",
+          "readonlyEndpoint": "examplecluster-ro.horizondb.azure.com",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

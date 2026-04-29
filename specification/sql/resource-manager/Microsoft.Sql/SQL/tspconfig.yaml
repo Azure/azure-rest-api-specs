@@ -1,0 +1,59 @@
+parameters:
+  "service-dir":
+    default: "sdk/sql"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sql"
+    namespace: "com.azure.resourcemanager.sql"
+    flavor: "azure"
+    service-name: "Sql Server"
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    uuid-as-string: false
+    float32-as-double: false
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.SQL"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/sql"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sql"
+    namespace: "azure.mgmt.sql"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/sql"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sql"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-sql"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sql"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsql"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsql"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

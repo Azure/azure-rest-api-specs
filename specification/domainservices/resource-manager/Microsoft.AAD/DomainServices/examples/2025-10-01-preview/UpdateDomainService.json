@@ -1,0 +1,184 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "domainService": {
+      "properties": {
+        "configDiagnostics": {
+          "lastExecuted": "05 May 2021 12:00:23 GMT",
+          "validatorResults": [
+            {
+              "issues": [
+                {
+                  "descriptionParams": [],
+                  "id": "AADDS-CFG-DIAG-I20"
+                }
+              ],
+              "replicaSetSubnetDisplayName": "West US/aadds-subnet",
+              "status": "Warning",
+              "validatorId": "AADDS-CFG-DIAG-V06"
+            }
+          ]
+        },
+        "domainSecuritySettings": {
+          "ntlmV1": "Enabled",
+          "syncNtlmPasswords": "Enabled",
+          "syncOnPremSamAccountName": "Disabled",
+          "tlsV1": "Disabled"
+        },
+        "filteredSync": "Enabled",
+        "ldapsSettings": {
+          "externalAccess": "Enabled",
+          "ldaps": "Enabled",
+          "pfxCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+          "pfxCertificatePassword": "<pfxCertificatePassword>"
+        },
+        "notificationSettings": {
+          "additionalRecipients": [
+            "jicha@microsoft.com",
+            "caalmont@microsoft.com"
+          ],
+          "notifyDcAdmins": "Enabled",
+          "notifyGlobalAdmins": "Enabled"
+        },
+        "replicaSets": [
+          {
+            "location": "West US",
+            "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS"
+          },
+          {
+            "location": "East US",
+            "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetEUS/subnets/TestSubnetEUS"
+          }
+        ]
+      }
+    },
+    "domainServiceName": "TestDomainService.com",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d"
+  },
+  "responses": {
+    "200": {
+      "description": "HTTP 200 (OK) if the operation was successful.",
+      "body": {
+        "name": "TestDomainService.com",
+        "type": "Microsoft.AAD/DomainServices",
+        "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+        "properties": {
+          "deploymentId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "domainName": "TestDomainService.com",
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "syncNtlmPasswords": "Enabled",
+            "syncOnPremSamAccountName": "Disabled",
+            "tlsV1": "Disabled"
+          },
+          "filteredSync": "Enabled",
+          "ldapsSettings": {
+            "certificateNotAfter": "2018-02-15T21:43:21Z",
+            "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+            "externalAccess": "Enabled",
+            "ldaps": "Enabled",
+            "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w..."
+          },
+          "notificationSettings": {
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ],
+            "notifyDcAdmins": "Enabled",
+            "notifyGlobalAdmins": "Enabled"
+          },
+          "provisioningState": "Succeeded",
+          "replicaSets": [
+            {
+              "domainControllerIpAddress": [
+                "10.0.0.1",
+                "10.0.0.2"
+              ],
+              "externalAccessIpAddress": "13.64.148.151",
+              "location": "West US",
+              "replicaSetId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+              "serviceStatus": "Running",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS",
+              "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c"
+            },
+            {
+              "domainControllerIpAddress": [
+                "10.0.0.3",
+                "10.0.0.4"
+              ],
+              "externalAccessIpAddress": "13.64.148.152",
+              "location": "East US",
+              "replicaSetId": "5057347d-cad1-4ec8-8db6-66cf7eedf4b8",
+              "serviceStatus": "Running",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetEUS/subnets/TestSubnetEUS"
+            }
+          ],
+          "syncOwner": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+          "version": 2
+        }
+      }
+    },
+    "202": {
+      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+      "body": {
+        "name": "TestDomainService.com",
+        "type": "Microsoft.AAD/DomainServices",
+        "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+        "properties": {
+          "deploymentId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "domainName": "TestDomainService.com",
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "syncNtlmPasswords": "Enabled",
+            "syncOnPremSamAccountName": "Disabled",
+            "tlsV1": "Disabled"
+          },
+          "filteredSync": "Enabled",
+          "ldapsSettings": {
+            "certificateNotAfter": "2018-02-15T21:43:21Z",
+            "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+            "externalAccess": "Enabled",
+            "ldaps": "Enabled",
+            "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w..."
+          },
+          "notificationSettings": {
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ],
+            "notifyDcAdmins": "Enabled",
+            "notifyGlobalAdmins": "Enabled"
+          },
+          "provisioningState": "Succeeded",
+          "replicaSets": [
+            {
+              "domainControllerIpAddress": [
+                "10.0.0.1",
+                "10.0.0.2"
+              ],
+              "location": "West US",
+              "replicaSetId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+              "serviceStatus": "Running",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS",
+              "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c"
+            },
+            {
+              "location": "East US",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetEUS/subnets/TestSubnetEUS"
+            }
+          ],
+          "syncOwner": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+          "version": 2
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/domainServices/TestDomainService.com?api-version=2025-10-01-preview"
+      }
+    }
+  },
+  "operationId": "DomainServices_Update",
+  "title": "Update Domain Service"
+}
