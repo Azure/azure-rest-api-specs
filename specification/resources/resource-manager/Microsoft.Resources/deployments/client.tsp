@@ -234,3 +234,6 @@ using Microsoft.Resources;
 @@scope(DeploymentOperationsOperationGroup.list, "!csharp");
 
 @@scope(Deployments.checkExistenceAtScope, "!csharp"); // Remove this setting once https://github.com/Azure/azure-sdk-for-net/issues/58746 get fixed
+
+@@apiVersion(ProviderResourceType.apiVersions, false);
+@@apiVersion(AliasPath.apiVersions, false);
