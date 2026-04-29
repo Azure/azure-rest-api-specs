@@ -1512,16 +1512,19 @@
       "properties": {
         "targetDevices": {
           "$ref": "#/definitions/TargetDevices",
-          "description": "The devices that this update targets."
+          "description": "The devices that this update targets.",
+          "readOnly": true
         },
         "updateId": {
           "$ref": "#/definitions/UpdateId",
-          "description": "The identifier of the best-available update for the targeted devices."
+          "description": "The identifier of the best-available update for the targeted devices.",
+          "readOnly": true
         },
         "devicesNotOnBestUpdateCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of devices in the group that target this update but are not yet running it."
+          "description": "The number of devices in the group that target this update but are not yet running it.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2444,14 +2447,16 @@
         },
         "updateCompliance": {
           "$ref": "#/definitions/GroupUpdateCompliance",
-          "description": "Group-level update compliance counters."
+          "description": "Group-level update compliance counters.",
+          "readOnly": true
         },
         "bestUpdates": {
           "type": "array",
           "description": "The best-available updates for devices in the group. May be empty.",
           "items": {
             "$ref": "#/definitions/BestUpdate"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -2480,7 +2485,8 @@
           "description": "Installable updates grouped by the devices they target. May be empty.",
           "items": {
             "$ref": "#/definitions/InstallableUpdatesForTargetDevices"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -2710,27 +2716,32 @@
         "totalUpdateableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of devices in the group that are eligible for updates."
+          "description": "Total number of devices in the group that are eligible for updates.",
+          "readOnly": true
         },
         "onBestUpdateDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of updateable devices that are currently on the best available update."
+          "description": "Number of updateable devices that are currently on the best available update.",
+          "readOnly": true
         },
         "bestUpdateAvailableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of updateable devices for which a better update is available but not yet applied."
+          "description": "Number of updateable devices for which a better update is available but not yet applied.",
+          "readOnly": true
         },
         "devicesInProgressOnBestUpdate": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of updateable devices currently being updated to the best available update."
+          "description": "Number of updateable devices currently being updated to the best available update.",
+          "readOnly": true
         },
         "totalNotUpdateableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of devices in the group that are not eligible for updates."
+          "description": "Total number of devices in the group that are not eligible for updates.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2747,14 +2758,16 @@
       "properties": {
         "targetDevices": {
           "$ref": "#/definitions/TargetDevices",
-          "description": "The devices that this set of updates targets."
+          "description": "The devices that this set of updates targets.",
+          "readOnly": true
         },
         "installableUpdates": {
           "type": "array",
           "description": "The updates that can be installed on the targeted devices.",
           "items": {
             "$ref": "#/definitions/UpdateId"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -2803,27 +2816,32 @@
         "totalUpdateableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of devices in the namespace that are eligible for updates."
+          "description": "Total number of devices in the namespace that are eligible for updates.",
+          "readOnly": true
         },
         "onLatestUpdateDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of updateable devices that are currently on the latest available update."
+          "description": "Number of updateable devices that are currently on the latest available update.",
+          "readOnly": true
         },
         "newUpdatesAvailableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of updateable devices for which a newer update is available but not yet applied."
+          "description": "Number of updateable devices for which a newer update is available but not yet applied.",
+          "readOnly": true
         },
         "updatesInProgressDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of updateable devices currently being updated to the latest available update."
+          "description": "Number of updateable devices currently being updated to the latest available update.",
+          "readOnly": true
         },
         "totalNotUpdateableDeviceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of devices in the namespace that are not eligible for updates."
+          "description": "Total number of devices in the namespace that are not eligible for updates.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2877,8 +2895,9 @@
           "readOnly": true
         },
         "result": {
-          "$ref": "#/definitions/Report",
-          "description": "The operation results when `status` is `Succeeded`.",
+          "type": "object",
+          "description": "The operation results when `status` is `Succeeded`. The shape of this\nobject depends on `kind`; for report kinds it conforms to the\ncorresponding `Report` subtype returned by the originating action.",
+          "additionalProperties": {},
           "readOnly": true
         }
       },
@@ -3060,6 +3079,10 @@
         }
       }
     },
+    "Record<unknown>": {
+      "type": "object",
+      "additionalProperties": {}
+    },
     "Report": {
       "type": "object",
       "description": "Base report type",
@@ -3187,12 +3210,14 @@
           "description": "Free-form compatibility properties (e.g. manufacturer, model) used to match devices.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "agentProfile": {
           "type": "integer",
           "format": "int32",
-          "description": "The agent profile that the targeted devices must implement."
+          "description": "The agent profile that the targeted devices must implement.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3235,15 +3260,18 @@
       "properties": {
         "provider": {
           "type": "string",
-          "description": "The provider that published the update."
+          "description": "The provider that published the update.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the update."
+          "description": "The name of the update.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "The version of the update."
+          "description": "The version of the update.",
+          "readOnly": true
         }
       },
       "required": [

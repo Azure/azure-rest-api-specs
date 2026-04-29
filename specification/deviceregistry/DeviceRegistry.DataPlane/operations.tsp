@@ -63,9 +63,14 @@ model Operation {
   @visibility(Lifecycle.Read)
   expiresAt?: utcDateTime;
 
-  /** The operation results when `status` is `Succeeded`. */
+  /**
+   * The operation results when `status` is `Succeeded`. The shape of this
+   * object depends on `kind`; for report kinds it conforms to the
+   * corresponding `Report` subtype returned by the originating action.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Operation results are heterogeneous across operation kinds and require arbitrary value types."
   @visibility(Lifecycle.Read)
-  result?: Report;
+  result?: Record<unknown>;
 }
 
 // ──────────────────────────────────────────────

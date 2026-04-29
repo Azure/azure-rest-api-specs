@@ -58,21 +58,27 @@ model Report {
 /** Result of a NamespaceUpdateCompliance report. */
 model NamespaceUpdateComplianceReport extends Report {
   /** Discriminator for NamespaceUpdateCompliance reports. */
+  @visibility(Lifecycle.Read)
   reportType: ReportType.NamespaceUpdateComplianceReport;
 
   /** Total number of devices in the namespace that are eligible for updates. */
+  @visibility(Lifecycle.Read)
   totalUpdateableDeviceCount: int32;
 
   /** Number of updateable devices that are currently on the latest available update. */
+  @visibility(Lifecycle.Read)
   onLatestUpdateDeviceCount: int32;
 
   /** Number of updateable devices for which a newer update is available but not yet applied. */
+  @visibility(Lifecycle.Read)
   newUpdatesAvailableDeviceCount: int32;
 
   /** Number of updateable devices currently being updated to the latest available update. */
+  @visibility(Lifecycle.Read)
   updatesInProgressDeviceCount: int32;
 
   /** Total number of devices in the namespace that are not eligible for updates. */
+  @visibility(Lifecycle.Read)
   totalNotUpdateableDeviceCount: int32;
 }
 
@@ -110,56 +116,70 @@ model GenerateGroupInstallableUpdatesReportRequest
 /** Identifies a specific update by provider, name, and version. */
 model UpdateId {
   /** The provider that published the update. */
+  @visibility(Lifecycle.Read)
   provider: string;
 
   /** The name of the update. */
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The version of the update. */
+  @visibility(Lifecycle.Read)
   version: string;
 }
 
 /** Criteria selecting which devices an update targets. */
 model TargetDevices {
   /** Free-form compatibility properties (e.g. manufacturer, model) used to match devices. */
+  @visibility(Lifecycle.Read)
   compatProperties: Record<string>;
 
   /** The agent profile that the targeted devices must implement. */
+  @visibility(Lifecycle.Read)
   agentProfile: int32;
 }
 
 /** A best-available update for a subset of devices in the group. */
 model BestUpdate {
   /** The devices that this update targets. */
+  @visibility(Lifecycle.Read)
   targetDevices: TargetDevices;
 
   /** The identifier of the best-available update for the targeted devices. */
+  @visibility(Lifecycle.Read)
   updateId: UpdateId;
 
   /** The number of devices in the group that target this update but are not yet running it. */
+  @visibility(Lifecycle.Read)
   devicesNotOnBestUpdateCount: int32;
 }
 
 /** Group-level update compliance counters. */
 model GroupUpdateCompliance {
   /** Total number of devices in the group that are eligible for updates. */
+  @visibility(Lifecycle.Read)
   totalUpdateableDeviceCount: int32;
 
   /** Number of updateable devices that are currently on the best available update. */
+  @visibility(Lifecycle.Read)
   onBestUpdateDeviceCount: int32;
 
   /** Number of updateable devices for which a better update is available but not yet applied. */
+  @visibility(Lifecycle.Read)
   bestUpdateAvailableDeviceCount: int32;
 
   /** Number of updateable devices currently being updated to the best available update. */
+  @visibility(Lifecycle.Read)
   devicesInProgressOnBestUpdate: int32;
 
   /** Total number of devices in the group that are not eligible for updates. */
+  @visibility(Lifecycle.Read)
   totalNotUpdateableDeviceCount: int32;
 }
 
 /** Result of a GroupBestUpdates compliance report. */
 model GroupBestUpdatesComplianceReport extends Report {
+  @visibility(Lifecycle.Read)
   reportType: ReportType.GroupBestUpdatesComplianceReport;
 
   /** The group that this report was generated against. */
@@ -167,23 +187,28 @@ model GroupBestUpdatesComplianceReport extends Report {
   reportTarget: string;
 
   /** Group-level update compliance counters. */
+  @visibility(Lifecycle.Read)
   updateCompliance: GroupUpdateCompliance;
 
   /** The best-available updates for devices in the group. May be empty. */
+  @visibility(Lifecycle.Read)
   bestUpdates: BestUpdate[];
 }
 
 /** The set of installable updates available for a class of target devices in the group. */
 model InstallableUpdatesForTargetDevices {
   /** The devices that this set of updates targets. */
+  @visibility(Lifecycle.Read)
   targetDevices: TargetDevices;
 
   /** The updates that can be installed on the targeted devices. */
+  @visibility(Lifecycle.Read)
   installableUpdates: UpdateId[];
 }
 
 /** Result of a GroupInstallableUpdates report. */
 model GroupInstallableUpdatesReport extends Report {
+  @visibility(Lifecycle.Read)
   reportType: ReportType.GroupInstallableUpdatesReport;
 
   /** The group that this report was generated against. */
@@ -191,6 +216,7 @@ model GroupInstallableUpdatesReport extends Report {
   reportTarget: string;
 
   /** Installable updates grouped by the devices they target. May be empty. */
+  @visibility(Lifecycle.Read)
   installableUpdatesAndTargetDevices: InstallableUpdatesForTargetDevices[];
 }
 
