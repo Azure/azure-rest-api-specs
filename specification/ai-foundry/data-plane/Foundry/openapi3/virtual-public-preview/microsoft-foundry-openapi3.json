@@ -13185,38 +13185,6 @@
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
       },
-      "AgentEndpoint": {
-        "type": "object",
-        "properties": {
-          "version_selector": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/VersionSelector"
-              }
-            ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
-          },
-          "protocols": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEndpointProtocol"
-            },
-            "description": "The protocols that the agent supports"
-          },
-          "authorization_schemes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
-            },
-            "description": "The authorization schemes supported by the agent endpoint"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "AgentEndpointAuthorizationScheme": {
         "type": "object",
         "required": [
@@ -13261,23 +13229,39 @@
           ]
         }
       },
-      "AgentEndpointProtocol": {
-        "anyOf": [
-          {
-            "type": "string"
+      "AgentEndpointConfig": {
+        "type": "object",
+        "properties": {
+          "version_selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionSelector"
+              }
+            ],
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
           },
-          {
-            "type": "string",
-            "enum": [
-              "activity",
-              "responses",
-              "a2a",
-              "invocations"
-            ]
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointProtocol"
+            },
+            "description": "The protocols that the agent supports"
+          },
+          "authorization_schemes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            },
+            "description": "The authorization schemes supported by the agent endpoint"
           }
-        ]
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
-      "AgentEndpointUpdate": {
+      "AgentEndpointConfigUpdate": {
         "type": "object",
         "properties": {
           "version_selector": {
@@ -13308,6 +13292,22 @@
             "AgentEndpoints=V1Preview"
           ]
         }
+      },
+      "AgentEndpointProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "activity",
+              "responses",
+              "a2a",
+              "invocations"
+            ]
+          }
+        ]
       },
       "AgentEvaluation": {
         "type": "object",
@@ -13613,7 +13613,7 @@
           "agent_endpoint": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentEndpoint"
+                "$ref": "#/components/schemas/AgentEndpointConfig"
               }
             ],
             "description": "The endpoint configuration for the agent",
@@ -16227,7 +16227,7 @@
           "agent_endpoint": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentEndpoint"
+                "$ref": "#/components/schemas/AgentEndpointConfig"
               }
             ],
             "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent",
@@ -41560,7 +41560,7 @@
           "agent_endpoint": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentEndpointUpdate"
+                "$ref": "#/components/schemas/AgentEndpointConfigUpdate"
               }
             ],
             "description": "The endpoint configuration for the agent"
