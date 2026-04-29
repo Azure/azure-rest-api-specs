@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Quota;
+using Http;
 
 // csharp
 @@clientName(LimitJsonObject, "QuotaLimitJsonObject", "csharp");
@@ -82,8 +83,11 @@ using Microsoft.Quota;
 op currentQuotaLimitBasesCreateOrUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resourceName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -102,8 +106,11 @@ op currentQuotaLimitBasesCreateOrUpdate(
 op currentQuotaLimitBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resourceName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -120,8 +127,11 @@ op currentQuotaLimitBasesGet(
 op currentQuotaLimitBasesUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resourceName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -140,8 +150,11 @@ op currentQuotaLimitBasesUpdate(
 op quotaRequestStatusGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   id: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -158,8 +171,11 @@ op quotaRequestStatusGet(
 op currentUsagesBasesGet(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   extensionProvider: "Microsoft.Quota",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resourceName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"

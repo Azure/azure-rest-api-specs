@@ -47,6 +47,24 @@ alias QuotaAllocationRequestStatusesOps = Azure.ResourceManager.Legacy.Extension
   },
   {
     ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+
+    /**
+     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+     */
+    @path
+    @segment("groupQuotas")
+    @minLength(3)
+    @maxLength(63)
+    @pattern("^[a-z][a-z0-9]*$")
+    groupQuotaName: string;
+
+    /**
+     * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+     */
+    @path
+    @segment("resourceProviders")
+    @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+    resourceProviderName: string;
   },
   {
     ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
@@ -70,6 +88,13 @@ alias QuotaAllocationRequestStatusesOps = Azure.ResourceManager.Legacy.Extension
     @segment("resourceProviders")
     @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
     resourceProviderName: string;
+
+    /**
+     * Request Id.
+     */
+    @path
+    @segment("quotaAllocationRequests")
+    allocationId: string;
   }
 >;
 
@@ -79,17 +104,7 @@ interface QuotaAllocationRequestStatuses {
   /**
    * Get the quota allocation request status for the subscriptionId by allocationId.
    */
-  get is QuotaAllocationRequestStatusesOps.Read<
-    QuotaAllocationRequestStatus,
-    Parameters = {
-      /**
-       * Request Id.
-       */
-      @path
-      @segment("quotaAllocationRequests")
-      allocationId: string;
-    }
-  >;
+  get is QuotaAllocationRequestStatusesOps.Read<QuotaAllocationRequestStatus>;
 
   /**
    * Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.
@@ -97,24 +112,6 @@ interface QuotaAllocationRequestStatuses {
   list is QuotaAllocationRequestStatusesOps.List<
     QuotaAllocationRequestStatus,
     Parameters = {
-      /**
-       * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
-       */
-      @path
-      @segment("groupQuotas")
-      @minLength(3)
-      @maxLength(63)
-      @pattern("^[a-z][a-z0-9]*$")
-      groupQuotaName: string;
-
-      /**
-       * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
-       */
-      @path
-      @segment("resourceProviders")
-      @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
-      resourceProviderName: string;
-
       /**
        * | Field | Supported operators
        * |---------------------|------------------------
