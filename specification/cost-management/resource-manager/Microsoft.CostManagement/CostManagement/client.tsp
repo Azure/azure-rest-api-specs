@@ -240,6 +240,12 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@clientName(Status, "ReportOperationStatus", "csharp");
 
+// Omit CostAllocationRulesOperationGroup.checkNameAvailability from the C# SDK.
+// This operation uses @armResourceCollectionAction; the C# emitter mis-attributes it to
+// CostAllocationRuleResource, producing a method whose route does not match the resource id.
+// See https://github.com/Azure/azure-sdk-for-net/issues/58821 for details.
+@@scope(CostAllocationRulesOperationGroup.checkNameAvailability, "!csharp");
+
 @@clientName(CostAllocationRuleDefinition, "CostAllocationRule", "csharp");
 @@clientName(GenerateCostDetailsReportRequestDefinition,
   "GenerateCostDetailsReportContent",
