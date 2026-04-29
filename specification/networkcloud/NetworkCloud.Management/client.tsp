@@ -567,3 +567,11 @@ using Microsoft.NetworkCloud;
   "NetworkCloudAccessBridgeSecurityRule",
   "csharp"
 );
+
+// --- java ---
+@@clientName(KeySetUser.azureUserName, "azureUsername", "java");
+@@clientName(KeySetUserStatus.azureUserName, "azureUsername", "java");
+@@clientName(VirtualMachineIPAllocationMethod,
+  "VirtualMachineIpAllocationMethod",
+  "java"
+);

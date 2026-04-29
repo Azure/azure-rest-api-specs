@@ -316,6 +316,10 @@ union KnowledgeBaseActivityRecordType {
   @removed(Versions.v2026_04_01)
   modelAnswerSynthesis: "modelAnswerSynthesis",
 
+  /** LLM web summarization activity. */
+  @added(Versions.v2026_04_01)
+  modelWebSummarization: "modelWebSummarization",
+
   /** Agentic reasoning activity. */
   agenticReasoning: "agenticReasoning",
 }
@@ -517,6 +521,21 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
   inputTokens?: int32;
 
   /** The number of output tokens for the LLM answer synthesis activity. */
+  outputTokens?: int32;
+}
+
+/** Represents an LLM web summarization activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_04_01)
+model KnowledgeBaseModelWebSummarizationActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.modelWebSummarization;
+
+  /** The number of input tokens for the LLM web summarization activity. */
+  inputTokens?: int32;
+
+  /** The number of output tokens for the LLM web summarization activity. */
   outputTokens?: int32;
 }
 
@@ -749,6 +768,7 @@ union KnowledgeSourceContentExtractionMode {
 }
 
 /** Permission types to ingest together with document content. */
+@removed(Versions.v2026_04_01)
 union KnowledgeSourceIngestionPermissionOption {
   string,
 
@@ -785,6 +805,7 @@ model KnowledgeSourceIngestionParameters {
 
   /** Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[] | null;
 
   /** Optional content extraction mode. Default is 'minimal'. */
