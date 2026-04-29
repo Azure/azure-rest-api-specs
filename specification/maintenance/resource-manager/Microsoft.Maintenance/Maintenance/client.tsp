@@ -85,14 +85,6 @@ using Microsoft.Maintenance;
 // which is the proper resource createOrUpdate. Omit them from the C# SDK.
 @@scope(ApplyUpdatesOperationGroup.createOrUpdate, "!csharp");
 @@scope(ApplyUpdatesOperationGroup.createOrUpdateParent, "!csharp");
-
-// ConfigurationAssignmentOperationGroup defines a "MaintenanceGroupConfigurationAssignment"
-// resource that is duplicated with the canonical "MaintenanceConfigurationAssignment"
-// (interface ConfigurationAssignments). Omit all of its operations from the C# SDK so we
-// don't ship a redundant MaintenanceGroupConfigurationAssignmentResource type.
-@@scope(ConfigurationAssignmentOperationGroup.get, "!csharp");
-@@scope(ConfigurationAssignmentOperationGroup.createOrUpdate, "!csharp");
-@@scope(ConfigurationAssignmentOperationGroup.delete, "!csharp");
 @@clientName(ConfigurationAssignments.createOrUpdateParent,
   "CreateOrUpdateConfigurationAssignmentByParent",
   "csharp"
