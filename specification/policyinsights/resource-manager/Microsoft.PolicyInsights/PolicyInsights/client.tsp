@@ -1227,7 +1227,7 @@ op componentPolicyStatesListQueryResultsForSubscription(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   componentPolicyStatesListQueryResultsForSubscription,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1247,7 +1247,7 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   componentPolicyStatesListQueryResultsForResourceGroup,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1265,7 +1265,7 @@ op componentPolicyStatesListQueryResultsForResource(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
   componentPolicyStatesListQueryResultsForResource,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1290,7 +1290,7 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   componentPolicyStatesListQueryResultsForPolicyDefinition,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1315,7 +1315,7 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1343,7 +1343,7 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 // Remediations overrides
