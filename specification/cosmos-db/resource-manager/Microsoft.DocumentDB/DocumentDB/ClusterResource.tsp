@@ -15,12 +15,7 @@ namespace Microsoft.DocumentDB;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterResource
-  is Azure.ResourceManager.ProxyResource<ClusterResourceProperties> {
-  tags?: Record<string>;
-
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  location?: Azure.Core.azureLocation;
-
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterResourceProperties> {
   ...ResourceNameParameter<
     Resource = ClusterResource,
     KeyName = "clusterName",
@@ -148,12 +143,10 @@ interface ClusterResources {
    * Get details about a specified command that was run asynchronously.
    */
   @get
-  @action("commands")
-  getCommandAsync is ArmResourceActionSync<
+  getCommandAsync is ArmResourceRead<
     ClusterResource,
-    void,
-    ArmResponse<CommandPublicResource>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
+    Response = ArmResponse<CommandPublicResource>,
     Parameters = {
       /**
        * Managed Cassandra cluster command id.
@@ -162,6 +155,7 @@ interface ClusterResources {
       @minLength(1)
       @pattern("^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$")
       @path
+      @segment("commands")
       commandId: string;
     },
     Error = CloudError
@@ -184,12 +178,10 @@ interface ClusterResources {
    * Get the properties of an individual backup of this cluster that is available to restore.
    */
   @get
-  @action("backups")
-  getBackup is ArmResourceActionSync<
+  getBackup is ArmResourceRead<
     ClusterResource,
-    void,
-    ArmResponse<BackupResource>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
+    Response = ArmResponse<BackupResource>,
     Parameters = {
       /**
        * Id of a restorable backup of a Cassandra cluster.
@@ -198,6 +190,7 @@ interface ClusterResources {
       @minLength(1)
       @pattern("^[0-9]+$")
       @path
+      @segment("backups")
       backupId: string;
     },
     Error = CloudError
@@ -253,4 +246,9 @@ interface ClusterResources {
 );
 @@doc(ClusterResources.invokeCommandAsync::parameters.body,
   "Specification which command to run where"
+);
+@@visibility(ClusterResource.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
 );

@@ -15,12 +15,7 @@ namespace Microsoft.DocumentDB;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseAccountGetResults
-  is Azure.ResourceManager.ProxyResource<DatabaseAccountGetProperties> {
-  tags?: Record<string>;
-
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  location?: Azure.Core.azureLocation;
-
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DatabaseAccountGetProperties> {
   ...ResourceNameParameter<
     Resource = DatabaseAccountGetResults,
     KeyName = "accountName",
@@ -761,4 +756,9 @@ interface DatabaseAccounts {
 );
 @@doc(DatabaseAccounts.regenerateKey::parameters.body,
   "The name of the key to regenerate."
+);
+@@visibility(DatabaseAccountGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
 );

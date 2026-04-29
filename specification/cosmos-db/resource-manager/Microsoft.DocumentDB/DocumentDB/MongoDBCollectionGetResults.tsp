@@ -18,12 +18,7 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(MongoDBDatabaseGetResults)
 model MongoDBCollectionGetResults
-  is Azure.ResourceManager.ProxyResource<MongoDBCollectionGetProperties> {
-  tags?: Record<string>;
-
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  location?: Azure.Core.azureLocation;
-
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MongoDBCollectionGetProperties> {
   ...ResourceNameParameter<
     Resource = MongoDBCollectionGetResults,
     KeyName = "collectionName",
@@ -112,4 +107,9 @@ interface MongoDBCollectionGetResultsOperationGroup {
 );
 @@doc(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
+);
+@@visibility(MongoDBCollectionGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
 );

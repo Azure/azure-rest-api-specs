@@ -17,12 +17,7 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(CassandraKeyspaceGetResults)
 model CassandraViewGetResults
-  is Azure.ResourceManager.ProxyResource<CassandraViewGetProperties> {
-  tags?: Record<string>;
-
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  location?: Azure.Core.azureLocation;
-
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CassandraViewGetProperties> {
   ...ResourceNameParameter<
     Resource = CassandraViewGetResults,
     KeyName = "viewName",
@@ -82,3 +77,8 @@ interface CassandraViewGetResultsOperationGroup {
   "The parameters to provide for the current Cassandra View."
 );
 
+@@visibility(CassandraViewGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
