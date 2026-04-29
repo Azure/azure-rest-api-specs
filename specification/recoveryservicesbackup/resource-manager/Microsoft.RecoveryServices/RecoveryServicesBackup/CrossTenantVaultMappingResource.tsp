@@ -510,7 +510,6 @@ interface ValidateOperationResultFromCrossTenantVault {
   /**
    * Gets the result of a specific validate operation for cross-tenant restore scenarios.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing ValidateOperationResults pattern in routes.tsp"
   @tag("CrossTenant")
   get is ValidateOperationResultFromCrossTenantVaultOps.Read<
     ValidateOperationsResponse,
@@ -701,7 +700,6 @@ interface CrossTenantVaultCredentialOperationResults {
    * Returns 202 Accepted while the TEE job is still in progress.
    * Returns 200 OK with VaultCredentialCertificateResponse when the job completes.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing OperationResults pattern"
   @tag("CrossTenant")
   get is CrossTenantVaultCredentialOperationResultsOps.Read<
     VaultCredentialCertificateResponse,
