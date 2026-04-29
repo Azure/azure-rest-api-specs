@@ -763,7 +763,7 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the device state.",
+            "description": "The kind of device state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -841,7 +841,7 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the device state.",
+            "description": "The kind of device state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -940,7 +940,7 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the device state.",
+            "description": "The kind of device state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -1530,11 +1530,6 @@
           }
         ]
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "BestUpdate": {
       "type": "object",
@@ -2205,9 +2200,9 @@
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        "name": {
+        "kind": {
           "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the device state.",
+          "description": "The kind of device state.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2225,7 +2220,7 @@
       },
       "required": [
         "type",
-        "name"
+        "kind"
       ]
     },
     "DeviceStateCreateOrUpdate": {
@@ -2240,9 +2235,9 @@
             "create"
           ]
         },
-        "name": {
+        "kind": {
           "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the device state.",
+          "description": "The kind of device state.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2285,30 +2280,30 @@
     },
     "DeviceStateProperties": {
       "type": "object",
-      "description": "Base properties of a device state resource. The concrete shape is determined by `kind`.",
+      "description": "Base properties of a device state resource. The concrete shape is determined by `propertiesType`.",
       "properties": {
-        "kind": {
+        "propertiesType": {
           "$ref": "#/definitions/DeviceStateName",
-          "description": "The kind of device state, matching the resource `name`."
+          "description": "The kind of device state properties, matching the resource `kind`."
         }
       },
-      "discriminator": "kind",
+      "discriminator": "propertiesType",
       "required": [
-        "kind"
+        "propertiesType"
       ]
     },
     "DeviceStatePropertiesCreateOrUpdate": {
       "type": "object",
-      "description": "Base properties of a device state resource. The concrete shape is determined by `kind`.",
+      "description": "Base properties of a device state resource. The concrete shape is determined by `propertiesType`.",
       "properties": {
-        "kind": {
+        "propertiesType": {
           "$ref": "#/definitions/DeviceStateName",
-          "description": "The kind of device state, matching the resource `name`."
+          "description": "The kind of device state properties, matching the resource `kind`."
         }
       },
-      "discriminator": "kind",
+      "discriminator": "propertiesType",
       "required": [
-        "kind"
+        "propertiesType"
       ]
     },
     "DeviceTwin": {
@@ -3506,14 +3501,6 @@
       "type": "object",
       "description": "Properties of the update device state, reported by the Azure Device Update agent.",
       "properties": {
-        "deviceUuid": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the device."
-        },
-        "externalDeviceId": {
-          "type": "string",
-          "description": "The external identifier of the device."
-        },
         "deviceClassId": {
           "type": "string",
           "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
@@ -3535,10 +3522,6 @@
           "description": "Information about the most recent update job targeting this device."
         }
       },
-      "required": [
-        "deviceUuid",
-        "externalDeviceId"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeviceStateProperties"
@@ -3550,14 +3533,6 @@
       "type": "object",
       "description": "Properties of the update device state, reported by the Azure Device Update agent.",
       "properties": {
-        "deviceUuid": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the device."
-        },
-        "externalDeviceId": {
-          "type": "string",
-          "description": "The external identifier of the device."
-        },
         "deviceClassId": {
           "type": "string",
           "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."

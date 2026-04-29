@@ -32,9 +32,9 @@ union DeviceStateName {
 model DeviceState {
   ...OmitProperties<DataPlaneResourceBase, "name">;
 
-  /** The name of the device state. */
+  /** The kind of device state. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  name: DeviceStateName;
+  kind: DeviceStateName;
 
   /** The owner that is permitted to write this device state (e.g. "Microsoft.DeviceUpdate"). */
   owner?: string;
@@ -43,19 +43,19 @@ model DeviceState {
   properties?: DeviceStateProperties;
 }
 
-@@key(DeviceState.name, "stateName");
+@@key(DeviceState.kind, "stateName");
 
-/** Base properties of a device state resource. The concrete shape is determined by `kind`. */
-@discriminator("kind")
+/** Base properties of a device state resource. The concrete shape is determined by `propertiesType`. */
+@discriminator("propertiesType")
 model DeviceStateProperties {
-  /** The kind of device state, matching the resource `name`. */
-  kind: DeviceStateName;
+  /** The kind of device state properties, matching the resource `kind`. */
+  propertiesType: DeviceStateName;
 }
 
 /** Properties of the default device state. */
 model DefaultDeviceStateProperties extends DeviceStateProperties {
   /** Discriminator value for the default state. */
-  kind: DeviceStateName.default;
+  propertiesType: DeviceStateName.default;
 
   /** The desired state values. */
   desired?: Record<string>;
@@ -67,13 +67,7 @@ model DefaultDeviceStateProperties extends DeviceStateProperties {
 /** Properties of the update device state, reported by the Azure Device Update agent. */
 model UpdateDeviceStateProperties extends DeviceStateProperties {
   /** Discriminator value for the update state. */
-  kind: DeviceStateName.update;
-
-  /** The unique identifier of the device. */
-  deviceUuid: uuid;
-
-  /** The external identifier of the device. */
-  externalDeviceId: string;
+  propertiesType: DeviceStateName.update;
 
   /** The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`. */
   deviceClassId?: string;
