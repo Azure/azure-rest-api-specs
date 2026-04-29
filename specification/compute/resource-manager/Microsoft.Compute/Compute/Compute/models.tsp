@@ -2230,6 +2230,12 @@ model VirtualMachineScaleSetVMProfile {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies the Interconnect Block related details of a Scale Set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
   applicationProfile?: ApplicationProfile;
@@ -5084,6 +5090,12 @@ model VirtualMachineScaleSetVMProperties {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -5174,6 +5186,13 @@ model VirtualMachineScaleSetVMInstanceView {
    * The hypervisor generation of the Virtual Machine [V1, V2]
    */
   hyperVGeneration?: HyperVGeneration;
+
+  /**
+   * The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -6457,6 +6476,12 @@ model VirtualMachineProperties {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies information about the Interconnect Block that is used to allocate the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS.
    */
   applicationProfile?: ApplicationProfile;
@@ -6568,6 +6593,13 @@ model VirtualMachineInstanceView {
    */
   @visibility(Lifecycle.Read)
   isVMInStandbyPool?: boolean;
+
+  /**
+   * The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -8009,6 +8041,29 @@ union InterconnectBlockExpandTypes {
    * Retrieve the runtime instance view of the Interconnect Block.
    */
   instanceView: "instanceView",
+}
+
+/**
+ * The parameters of an Interconnect Block Profile.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProfile {
+  /**
+   * Specifies the Interconnect Block resource ID that should be used for allocating the Virtual Machine or Scale Set VM instances provided enough capacity has been reserved.
+   */
+  interconnectBlock?: ApiEntityReference;
+}
+
+/**
+ * The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectInstanceView {
+  /**
+   * The ID (GUID) of the Interconnect subgroup in which the Virtual Machine was placed.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectSubgroupId?: string;
 }
 
 /**

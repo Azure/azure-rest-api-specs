@@ -15431,6 +15431,16 @@
         "value"
       ]
     },
+    "InterconnectBlockProfile": {
+      "type": "object",
+      "description": "The parameters of an Interconnect Block Profile.",
+      "properties": {
+        "interconnectBlock": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the Interconnect Block resource ID that should be used for allocating the Virtual Machine or Scale Set VM instances provided enough capacity has been reserved."
+        }
+      }
+    },
     "InterconnectBlockProperties": {
       "type": "object",
       "description": "Properties of the Interconnect Block.",
@@ -15500,6 +15510,17 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ]
+    },
+    "InterconnectInstanceView": {
+      "type": "object",
+      "description": "The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.",
+      "properties": {
+        "interconnectSubgroupId": {
+          "type": "string",
+          "description": "The ID (GUID) of the Interconnect subgroup in which the Virtual Machine was placed.",
+          "readOnly": true
+        }
+      }
     },
     "IntervalInMins": {
       "type": "string",
@@ -20431,6 +20452,11 @@
           "type": "boolean",
           "description": "[Preview Feature] Specifies whether the VM is currently in or out of the Standby Pool.",
           "readOnly": true
+        },
+        "interconnectInstanceView": {
+          "$ref": "#/definitions/InterconnectInstanceView",
+          "description": "The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.",
+          "readOnly": true
         }
       }
     },
@@ -20787,6 +20813,10 @@
         "capacityReservation": {
           "$ref": "#/definitions/CapacityReservationProfile",
           "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum api-version: 2021-04-01."
+        },
+        "interconnectBlockProfile": {
+          "$ref": "#/definitions/InterconnectBlockProfile",
+          "description": "Specifies information about the Interconnect Block that is used to allocate the Virtual Machine. Minimum api-version: 2026-03-01."
         },
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
@@ -22976,6 +23006,11 @@
         "hyperVGeneration": {
           "$ref": "#/definitions/Common.HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
+        },
+        "interconnectInstanceView": {
+          "$ref": "#/definitions/InterconnectInstanceView",
+          "description": "The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.",
+          "readOnly": true
         }
       }
     },
@@ -23071,6 +23106,10 @@
         "capacityReservation": {
           "$ref": "#/definitions/CapacityReservationProfile",
           "description": "Specifies the capacity reservation related details of a scale set. Minimum api-version: 2021-04-01."
+        },
+        "interconnectBlockProfile": {
+          "$ref": "#/definitions/InterconnectBlockProfile",
+          "description": "Specifies the Interconnect Block related details of a Scale Set. Minimum api-version: 2026-03-01."
         },
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
@@ -23195,6 +23234,10 @@
               }
             ]
           }
+        },
+        "interconnectBlockProfile": {
+          "$ref": "#/definitions/InterconnectBlockProfile",
+          "description": "Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01."
         }
       }
     },
