@@ -583,15 +583,18 @@ directive:
     reason: ProtectedItemResource has DELETE on the standard path. The cross-tenant pass-through paths are read-only and intentionally do not support DELETE.
   - suppress: NestedResourcesMustHaveListOperation
     from: bms.json
-    where: $.definitions.CrossTenantVaultMappingResource
-    reason: CrossTenantVaultMappingResource has a list operation at /backupCrossTenantVaultMappings (operationId CrossTenantVaultMappings_List). The lint rule cannot match the resource to its list path due to the custom path segment name.
+    where: $.definitions.CrossTenantVaultMapping
+    reason: CrossTenantVaultMapping has a list operation at /backupCrossTenantVaultMappings (operationId CrossTenantVaultMappings_List). The lint rule cannot match the resource to its list path due to the custom path segment name.
   - suppress: NestedResourcesMustHaveListOperation
     from: bms.json
     where: $.definitions.VaultCredentialCertificateResponse
     reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
   - suppress: ResourceNameRestriction
     from: bms.json
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility across all CTR paths. Adding a pattern at the source would propagate via shared TypeSpec into all stable api-versions (2025-02-01, 2025-08-01, 2026-01-01) and trip openapi-diff rule 1036 (ConstraintChanged) on every vault path. The rule fires on 70+ CTR paths (any path under /vaults/{vaultName}/backupCrossTenant... or related validate/trigger paths); a single file-scoped suppression is the only practical scope.
+    reason: |
+      crossTenantVaultMappingName on the CrossTenantVaultMapping resource model has a real pattern (^[A-Za-z][A-Za-z0-9]{1,99}$). The remaining ResourceNameRestriction surface comes from two sources that this single file-scoped suppression covers:
+      (1) vaultName, which is inherited from the parent VaultResource with NamePattern="" for backward compatibility across all stable api-versions (2025-02-01, 2025-08-01, 2026-01-01). Adding a pattern at the source would propagate via shared TypeSpec into all stable versions and trip openapi-diff rule 1036 (ConstraintChanged) on every vault path.
+      (2) inline path parameters declared on the cross-tenant pass-through routes (vaultName, crossTenantVaultMappingName, fabricName, containerName, protectedItemName, recoveryPointName, jobName, certificateName, operationId) which currently use `@pattern(".*")` because they are shared with the corresponding stable-version parameters. A planned LegacyOperations refactor (Mark's review feedback) will replace these inline declarations with template-derived parameters, after which this suppression should be re-evaluated.
 
 suppressions:
   - from: bms.json

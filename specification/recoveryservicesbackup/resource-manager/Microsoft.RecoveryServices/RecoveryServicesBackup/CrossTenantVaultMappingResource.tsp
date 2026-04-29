@@ -31,7 +31,7 @@ model CrossTenantVaultMapping
   ...ResourceNameParameter<
     Resource = CrossTenantVaultMapping,
     SegmentName = "backupCrossTenantVaultMappings",
-    NamePattern = ".*"
+    NamePattern = "^[A-Za-z][A-Za-z0-9]{1,99}$"
   >;
 }
 
