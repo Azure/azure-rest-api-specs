@@ -62,3 +62,10 @@ namespace ComputeCombine;
   "VirtualMachineIdentityUserAssignedIdentities",
   "java"
 );
+
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(VirtualMachineScaleSetUpdateNetworkProfile.networkApiVersion,
+  false
+);
+@@apiVersion(NetworkProfile.networkApiVersion, false);
+@@apiVersion(ResourceSku.apiVersions, false);

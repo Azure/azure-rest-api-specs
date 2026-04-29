@@ -3,10 +3,12 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Monitor;
 
@@ -22,7 +24,12 @@ model Sli is ProxyResource<SliResource> {
   ...ManagedServiceIdentityProperty;
 }
 
+// Renamed to SliResourceProperties in csharp to avoid naming collision with the
+// ARM resource class SliResource : ArmResource. The .NET SDK shared test
+// InheritanceCheckTests expects all classes ending in "Resource" to extend
+// ArmResource, but this model is a plain POCO.
 @doc("Defines the root level properties of an SLI resource.")
+@clientName("SliResourceProperties", "csharp")
 model SliResource {
   @visibility(Lifecycle.Read)
   @doc("Indicates the provisioning status of the last operation.")
