@@ -111,6 +111,9 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
+@@clientName(SkillObject, "SkillDetails");
+@@clientName(SkillObject.has_blob, "blob_present");
+
 @@clientName(Index, "AIProjectIndex", "java");
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
@@ -119,6 +122,7 @@ namespace Azure.AI.Projects;
 @@clientName(SasCredential.sasUri, "sasUrl");
 @@clientName(DatasetVersion.dataUri, "dataUrl");
 @@clientName(FolderDatasetVersion.dataUri, "dataUrl");
+@@clientName(CodeBasedEvaluatorDefinition.blob_uri, "blobUrl");
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
