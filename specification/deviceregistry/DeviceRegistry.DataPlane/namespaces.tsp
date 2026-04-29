@@ -93,28 +93,105 @@ model GenerateNamespaceUpdateComplianceReportRequest
 model GenerateGroupBestUpdatesComplianceReportRequest
   extends GenerateReportRequest {
   reportType: ReportType.GroupBestUpdatesComplianceReport;
+
+  /** The group that the report is generated against. */
+  reportTarget: string;
 }
 
 /** Request to generate a GroupInstallableUpdates report. */
 model GenerateGroupInstallableUpdatesReportRequest
   extends GenerateReportRequest {
   reportType: ReportType.GroupInstallableUpdatesReport;
+
+  /** The group that the report is generated against. */
+  reportTarget: string;
 }
 
-// ──────────────────────────────────────────────
-// Concrete response stubs for the two report types that don't yet
-// have a typed body. Mirrors the request stubs so every value of
-// ReportType is satisfiable on both sides.
-// ──────────────────────────────────────────────
+/** Identifies a specific update by provider, name, and version. */
+model UpdateId {
+  /** The provider that published the update. */
+  provider: string;
+
+  /** The name of the update. */
+  name: string;
+
+  /** The version of the update. */
+  version: string;
+}
+
+/** Criteria selecting which devices an update targets. */
+model TargetDevices {
+  /** Free-form compatibility properties (e.g. manufacturer, model) used to match devices. */
+  compatProperties: Record<string>;
+
+  /** The agent profile that the targeted devices must implement. */
+  agentProfile: int32;
+}
+
+/** A best-available update for a subset of devices in the group. */
+model BestUpdate {
+  /** The devices that this update targets. */
+  targetDevices: TargetDevices;
+
+  /** The identifier of the best-available update for the targeted devices. */
+  updateId: UpdateId;
+
+  /** The number of devices in the group that target this update but are not yet running it. */
+  devicesNotOnBestUpdateCount: int32;
+}
+
+/** Group-level update compliance counters. */
+model GroupUpdateCompliance {
+  /** Total number of devices in the group that are eligible for updates. */
+  totalUpdateableDeviceCount: int32;
+
+  /** Number of devices that are currently on the best available update. */
+  onBestUpdateDeviceCount: int32;
+
+  /** Number of devices for which a better update is available but not yet applied. */
+  bestUpdateAvailableDeviceCount: int32;
+
+  /** Number of devices currently being updated to the best available update. */
+  devicesInProgressOnBestUpdate: int32;
+
+  /** Total number of devices in the group that are not eligible for updates. */
+  totalNotUpdateableDeviceCount: int32;
+}
 
 /** Result of a GroupBestUpdates compliance report. */
 model GroupBestUpdatesComplianceReport extends Report {
   reportType: ReportType.GroupBestUpdatesComplianceReport;
+
+  /** The group that this report was generated against. */
+  @visibility(Lifecycle.Read)
+  reportTarget: string;
+
+  /** Group-level update compliance counters. */
+  updateCompliance: GroupUpdateCompliance;
+
+  /** The best-available updates for devices in the group. May be empty. */
+  bestUpdates: BestUpdate[];
+}
+
+/** The set of installable updates available for a class of target devices in the group. */
+model InstallableUpdatesForTargetDevices {
+  /** The devices that this set of updates targets. */
+  targetDevices: TargetDevices;
+
+  /** The updates that can be installed on the targeted devices. */
+  installableUpdates: UpdateId[];
 }
 
 /** Result of a GroupInstallableUpdates report. */
 model GroupInstallableUpdatesReport extends Report {
   reportType: ReportType.GroupInstallableUpdatesReport;
+
+  /** The group that this report was generated against. */
+  @visibility(Lifecycle.Read)
+  reportTarget: string;
+
+  /** Installable updates grouped by the devices they target. May be empty. */
+  installableUpdatesAndTargetDevices: InstallableUpdatesForTargetDevices[];
 }
 
 // ──────────────────────────────────────────────

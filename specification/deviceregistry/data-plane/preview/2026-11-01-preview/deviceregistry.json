@@ -149,6 +149,12 @@
           }
         },
         "x-ms-examples": {
+          "Generate a group best-updates compliance report": {
+            "$ref": "./examples/Namespaces_GenerateReport_GroupBestUpdates.json"
+          },
+          "Generate a group installable-updates report": {
+            "$ref": "./examples/Namespaces_GenerateReport_GroupInstallableUpdates.json"
+          },
           "Generate a namespace update compliance report": {
             "$ref": "./examples/Namespaces_GenerateReport.json"
           }
@@ -1366,6 +1372,12 @@
           }
         },
         "x-ms-examples": {
+          "Get the result of a completed group best-updates compliance report": {
+            "$ref": "./examples/Operations_Get_GroupBestUpdates.json"
+          },
+          "Get the result of a completed group installable-updates report": {
+            "$ref": "./examples/Operations_Get_GroupInstallableUpdates.json"
+          },
           "Get the status of a long-running operation": {
             "$ref": "./examples/Operations_Get.json"
           }
@@ -1475,6 +1487,30 @@
           }
         ]
       }
+    },
+    "BestUpdate": {
+      "type": "object",
+      "description": "A best-available update for a subset of devices in the group.",
+      "properties": {
+        "targetDevices": {
+          "$ref": "#/definitions/TargetDevices",
+          "description": "The devices that this update targets."
+        },
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "The identifier of the best-available update for the targeted devices."
+        },
+        "devicesNotOnBestUpdateCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices in the group that target this update but are not yet running it."
+        }
+      },
+      "required": [
+        "targetDevices",
+        "updateId",
+        "devicesNotOnBestUpdateCount"
+      ]
     },
     "CapabilityProvisioningState": {
       "type": "string",
@@ -2239,6 +2275,15 @@
     "GenerateGroupBestUpdatesComplianceReportRequest": {
       "type": "object",
       "description": "Request to generate a GroupBestUpdates compliance report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/GenerateReportRequest"
@@ -2249,6 +2294,15 @@
     "GenerateGroupInstallableUpdatesReportRequest": {
       "type": "object",
       "description": "Request to generate a GroupInstallableUpdates report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/GenerateReportRequest"
@@ -2383,6 +2437,29 @@
     "GroupBestUpdatesComplianceReport": {
       "type": "object",
       "description": "Result of a GroupBestUpdates compliance report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that this report was generated against.",
+          "readOnly": true
+        },
+        "updateCompliance": {
+          "$ref": "#/definitions/GroupUpdateCompliance",
+          "description": "Group-level update compliance counters."
+        },
+        "bestUpdates": {
+          "type": "array",
+          "description": "The best-available updates for devices in the group. May be empty.",
+          "items": {
+            "$ref": "#/definitions/BestUpdate"
+          }
+        }
+      },
+      "required": [
+        "reportTarget",
+        "updateCompliance",
+        "bestUpdates"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Report"
@@ -2393,6 +2470,24 @@
     "GroupInstallableUpdatesReport": {
       "type": "object",
       "description": "Result of a GroupInstallableUpdates report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that this report was generated against.",
+          "readOnly": true
+        },
+        "installableUpdatesAndTargetDevices": {
+          "type": "array",
+          "description": "Installable updates grouped by the devices they target. May be empty.",
+          "items": {
+            "$ref": "#/definitions/InstallableUpdatesForTargetDevices"
+          }
+        }
+      },
+      "required": [
+        "reportTarget",
+        "installableUpdatesAndTargetDevices"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Report"
@@ -2608,6 +2703,65 @@
           }
         ]
       }
+    },
+    "GroupUpdateCompliance": {
+      "type": "object",
+      "description": "Group-level update compliance counters.",
+      "properties": {
+        "totalUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the group that are eligible for updates."
+        },
+        "onBestUpdateDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices that are currently on the best available update."
+        },
+        "bestUpdateAvailableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices for which a better update is available but not yet applied."
+        },
+        "devicesInProgressOnBestUpdate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices currently being updated to the best available update."
+        },
+        "totalNotUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the group that are not eligible for updates."
+        }
+      },
+      "required": [
+        "totalUpdateableDeviceCount",
+        "onBestUpdateDeviceCount",
+        "bestUpdateAvailableDeviceCount",
+        "devicesInProgressOnBestUpdate",
+        "totalNotUpdateableDeviceCount"
+      ]
+    },
+    "InstallableUpdatesForTargetDevices": {
+      "type": "object",
+      "description": "The set of installable updates available for a class of target devices in the group.",
+      "properties": {
+        "targetDevices": {
+          "$ref": "#/definitions/TargetDevices",
+          "description": "The devices that this set of updates targets."
+        },
+        "installableUpdates": {
+          "type": "array",
+          "description": "The updates that can be installed on the targeted devices.",
+          "items": {
+            "$ref": "#/definitions/UpdateId"
+          }
+        }
+      },
+      "required": [
+        "targetDevices",
+        "installableUpdates"
+      ]
     },
     "Namespace": {
       "type": "object",
@@ -3014,6 +3168,28 @@
         }
       }
     },
+    "TargetDevices": {
+      "type": "object",
+      "description": "Criteria selecting which devices an update targets.",
+      "properties": {
+        "compatProperties": {
+          "type": "object",
+          "description": "Free-form compatibility properties (e.g. manufacturer, model) used to match devices.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "agentProfile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The agent profile that the targeted devices must implement."
+        }
+      },
+      "required": [
+        "compatProperties",
+        "agentProfile"
+      ]
+    },
     "TargetEndpoint": {
       "type": "object",
       "description": "IoT Hub endpoint target for device provisioning.",
@@ -3042,6 +3218,29 @@
           "additionalProperties": {}
         }
       }
+    },
+    "UpdateId": {
+      "type": "object",
+      "description": "Identifies a specific update by provider, name, and version.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider that published the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
     }
   },
   "parameters": {
