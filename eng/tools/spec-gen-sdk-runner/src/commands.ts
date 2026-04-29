@@ -15,15 +15,15 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
+import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
  * Generate SDK for a single spec.
  * This is for the SDK release scenario.
- * @returns the run status code.
+ * @returns the command result with status code and execution result.
  */
-export async function generateSdkForSingleSpec(): Promise<number> {
+export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   const specConfigPathText = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
@@ -81,11 +81,11 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
   }
 
-  return statusCode;
+  return { statusCode, executionResult: executionReport?.executionResult ?? "" };
 }
 
 /* Generate SDKs for spec pull request */
-export async function generateSdkForSpecPr(): Promise<number> {
+export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
@@ -159,7 +159,10 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
-      if (executionReport.generateFromTypeSpec) {
+      if (
+        executionReport.generateFromTypeSpec &&
+        executionReport.executionResult !== "notEnabled"
+      ) {
         hasTypeSpecProjects = true;
       }
 
@@ -203,13 +206,16 @@ export async function generateSdkForSpecPr(): Promise<number> {
       apiViewRequestData,
       sdkGenerationExecuted,
     ) || statusCode;
-  return statusCode;
+  return {
+    statusCode,
+    executionResult: overallExecutionResult as CommandResult["executionResult"],
+  };
 }
 
 /**
  * Generate SDKs for batch specs.
  */
-export async function generateSdkForBatchSpecs(batchType: string): Promise<number> {
+export async function generateSdkForBatchSpecs(batchType: string): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
@@ -231,13 +237,15 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let markdownContent = "\n";
   markdownContent += `## Batch Run Type\n ${batchType}\n`;
   let failedContent = `## Spec Failures in the Generation Process\n`;
-  let succeededContent = `## Successful Specs in the Generation Process\n`;
+  let warningContent = `## Specs with Warnings in the Generation Process\n`;
+  let succeededContent = `## Successful Specs in the Generation Process (including success with warnings)\n`;
   let notEnabledContent = `## Specs with SDK Not Enabled\n`;
   let duplicatedConfigContent = `## Specs with Duplicated SDK Configurations (in 'tspconfig.yaml' and 'readme.md')\n`;
   let failedCount = 0;
   let notEnabledCount = 0;
   let duplicatedConfigCount = 0;
   let succeededCount = 0;
+  let warningCount = 0;
   let executionReport;
   let specConfigPath = "";
   let stagedArtifactsFolder = "";
@@ -296,6 +304,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       if (executionResult === "succeeded" || executionResult === "warning") {
         succeededContent += `${specConfigPath},`;
         succeededCount++;
+        if (executionResult === "warning") {
+          warningCount++;
+          warningContent += `${specConfigPath},`;
+        }
       } else if (executionResult === "notEnabled") {
         notEnabledContent += `${specConfigPath},`;
         notEnabledCount++;
@@ -328,6 +340,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
   }
+  if (warningCount > 0) {
+    markdownContent += `${warningContent}\n`;
+  }
   if (notEnabledCount > 0) {
     markdownContent += `${notEnabledContent}\n`;
   }
@@ -338,6 +353,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     markdownContent += `${succeededContent}\n`;
   }
   markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
+  markdownContent += warningCount ? `## Total Specs with Warnings\n ${warningCount}\n` : "";
   markdownContent += notEnabledCount
     ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
@@ -389,5 +405,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   // Set the pipeline variables for artifacts location
   setPipelineVariables(stagedArtifactsFolder);
 
-  return statusCode;
+  const batchExecutionResult =
+    failedCount > 0 ? "failed" : warningCount > 0 ? "warning" : "succeeded";
+  return { statusCode, executionResult: batchExecutionResult };
 }

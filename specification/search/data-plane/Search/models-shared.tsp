@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Search;
 
@@ -28,7 +30,7 @@ alias preferHeader = {
 alias acceptHeaderMinimal = {
   /** The Accept header. */
   @header("Accept")
-  accept: "application/json;odata.metadata=minimal";
+  accept?: "application/json;odata.metadata=minimal";
 };
 
 alias acceptHeaderNone = {
@@ -103,12 +105,14 @@ alias knowledgeBaseNamePath = {
 
 alias querySourceAuthorizationHeader = {
   /** Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents. */
+  @removed(Versions.v2026_04_01)
   @header("x-ms-query-source-authorization")
   querySourceAuthorization?: string;
 };
 
 alias enableElevatedReadHeader = {
   /** A value that enables elevated read that bypass document level permission checks for the query operation. */
+  @removed(Versions.v2026_04_01)
   @header("x-ms-enable-elevated-read")
   enableElevatedRead?: boolean;
 };
