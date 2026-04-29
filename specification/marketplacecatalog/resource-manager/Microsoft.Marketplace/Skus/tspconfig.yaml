@@ -1,4 +1,7 @@
-﻿emit:
+﻿parameters:
+  "service-dir":
+    default: "sdk/marketplacecatalogskus"
+emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
@@ -6,6 +9,35 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/openapi.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-python":
+    namespace: "azure.mgmt.marketplacecatalogskus"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-marketplacecatalogskus"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/marketplacecatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-marketplacecatalog-skus"
+    namespace: "com.azure.resourcemanager.marketplacecatalog.skus"
+    service-name: "Marketplace Catalog Skus"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/marketplacecatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-marketplacecatalogskus"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-marketplacecatalogskus"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/marketplacecatalog"
+    emitter-output-dir: "{output-dir}/{service-dir}/armskus"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armskus"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
