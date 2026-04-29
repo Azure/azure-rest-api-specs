@@ -138,6 +138,11 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
 @@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
 
+@@clientName(ToolboxVersionObject, "ToolboxVersionDetails", "java");
+@@clientName(ToolboxObject, "ToolboxDetails", "java");
+
+@@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -204,6 +209,8 @@ using Azure.AI.Projects;
 
 //Disabled convenient API generation for getSessionLogStream to handle deserialization manually
 @@convenientAPI(Agents.getSessionLogStream, false, "java");
+
+@@access(UpdateToolboxRequest, Access.internal, "java");
 
 // --------------------------------------------------------------------------------
 // Type overrides
