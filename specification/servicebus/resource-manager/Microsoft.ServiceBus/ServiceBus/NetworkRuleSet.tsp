@@ -34,6 +34,7 @@ model NetworkRuleSet
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
+@tag("Namespaces")
 interface NetworkRuleSets {
   /**
    * Gets NetworkRuleSet for a Namespace.
