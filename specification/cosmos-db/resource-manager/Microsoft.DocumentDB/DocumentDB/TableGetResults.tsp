@@ -17,7 +17,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model TableGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<TableGetProperties> {
+  is Azure.ResourceManager.ProxyResource<TableGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = TableGetResults,
     KeyName = "tableName",
@@ -84,9 +89,4 @@ interface TableGetResultsOperationGroup {
 );
 @@doc(TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
-);
-@@visibility(TableGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

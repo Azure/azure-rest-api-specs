@@ -18,7 +18,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model MongoDBDatabaseGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MongoDBDatabaseGetProperties> {
+  is Azure.ResourceManager.ProxyResource<MongoDBDatabaseGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = MongoDBDatabaseGetResults,
     KeyName = "databaseName",
@@ -95,9 +100,4 @@ interface MongoDBDatabaseGetResultsOperationGroup {
 );
 @@doc(MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
-);
-@@visibility(MongoDBDatabaseGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

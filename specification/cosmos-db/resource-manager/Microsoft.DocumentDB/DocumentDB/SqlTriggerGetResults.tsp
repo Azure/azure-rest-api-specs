@@ -18,7 +18,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlTriggerGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlTriggerGetProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlTriggerGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = SqlTriggerGetResults,
     KeyName = "triggerName",
@@ -74,9 +79,4 @@ interface SqlTriggerGetResultsOperationGroup {
 );
 @@doc(SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
   "The parameters to provide for the current SQL trigger."
-);
-@@visibility(SqlTriggerGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

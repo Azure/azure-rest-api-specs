@@ -17,7 +17,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model GraphResourceGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphResourceGetProperties> {
+  is Azure.ResourceManager.ProxyResource<GraphResourceGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = GraphResourceGetResults,
     KeyName = "graphName",
@@ -74,9 +79,4 @@ interface GraphResources {
 );
 @@doc(GraphResources.createUpdateGraph::parameters.resource,
   "The parameters to provide for the current graph."
-);
-@@visibility(GraphResourceGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

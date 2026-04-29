@@ -18,7 +18,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlUserDefinedFunctionGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlUserDefinedFunctionGetProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlUserDefinedFunctionGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = SqlUserDefinedFunctionGetResults,
     KeyName = "userDefinedFunctionName",
@@ -76,9 +81,4 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
 );
 @@doc(SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
   "The parameters to provide for the current SQL userDefinedFunction."
-);
-@@visibility(SqlUserDefinedFunctionGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

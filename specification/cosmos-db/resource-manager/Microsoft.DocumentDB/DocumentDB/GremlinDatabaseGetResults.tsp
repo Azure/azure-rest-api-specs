@@ -17,7 +17,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model GremlinDatabaseGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GremlinDatabaseGetProperties> {
+  is Azure.ResourceManager.ProxyResource<GremlinDatabaseGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = GremlinDatabaseGetResults,
     KeyName = "databaseName",
@@ -73,9 +78,4 @@ interface GremlinDatabaseGetResultsOperationGroup {
 );
 @@doc(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
   "The parameters to provide for the current Gremlin database."
-);
-@@visibility(GremlinDatabaseGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

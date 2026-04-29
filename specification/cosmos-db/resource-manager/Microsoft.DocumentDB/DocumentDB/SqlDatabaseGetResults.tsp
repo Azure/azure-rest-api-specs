@@ -17,7 +17,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model SqlDatabaseGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlDatabaseGetProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlDatabaseGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = SqlDatabaseGetResults,
     KeyName = "databaseName",
@@ -89,9 +94,4 @@ interface SqlResources {
 );
 @@doc(SqlResources.sqlDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
-);
-@@visibility(SqlDatabaseGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

@@ -18,7 +18,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlStoredProcedureGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlStoredProcedureGetProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlStoredProcedureGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = SqlStoredProcedureGetResults,
     KeyName = "storedProcedureName",
@@ -75,9 +80,4 @@ interface SqlStoredProcedureGetResultsOperationGroup {
 );
 @@doc(SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
   "The parameters to provide for the current SQL storedProcedure."
-);
-@@visibility(SqlStoredProcedureGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

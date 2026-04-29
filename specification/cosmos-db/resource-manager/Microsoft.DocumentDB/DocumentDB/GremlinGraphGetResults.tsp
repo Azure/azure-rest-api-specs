@@ -17,7 +17,12 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(GremlinDatabaseGetResults)
 model GremlinGraphGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GremlinGraphGetProperties> {
+  is Azure.ResourceManager.ProxyResource<GremlinGraphGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = GremlinGraphGetResults,
     KeyName = "graphName",
@@ -86,9 +91,4 @@ interface GremlinGraphGetResultsOperationGroup {
 );
 @@doc(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
-);
-@@visibility(GremlinGraphGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

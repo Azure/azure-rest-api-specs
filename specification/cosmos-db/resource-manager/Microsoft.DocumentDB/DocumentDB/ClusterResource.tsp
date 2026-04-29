@@ -15,7 +15,12 @@ namespace Microsoft.DocumentDB;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ClusterResourceProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = ClusterResource,
     KeyName = "clusterName",
@@ -248,9 +253,4 @@ interface ClusterResources {
 );
 @@doc(ClusterResources.invokeCommandAsync::parameters.body,
   "Specification which command to run where"
-);
-@@visibility(ClusterResource.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

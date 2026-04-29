@@ -675,6 +675,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(AzureConnectionType, "ServiceConnectionType", "csharp");
+@@clientName(AzureConnectionType.VPN, "Vpn", "csharp");
 @@clientName(Capacity, "CosmosDBAccountCapacity", "csharp");
 @@clientName(CassandraKeyspaceResource,
   "CassandraKeyspaceResourceInfo",
@@ -930,6 +931,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "RestorableTableResourceData",
   "csharp"
 );
+@@clientName(RestorableTableResourcesGetResult.type, "ResourceType", "csharp");
 @@clientName(RestoreMode, "CosmosDBAccountRestoreMode", "csharp");
 @@clientName(RestoreParameters, "CosmosDBAccountRestoreParameters", "csharp");
 @@clientName(RestoreParametersBase.restoreWithTtlDisabled,
@@ -1400,7 +1402,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 // `Azure.ResourceManager.CommonTypes.ManagedServiceIdentity` once @@alternateType
 // remaps every consumer to the common type. Any leftover internal use will surface
 // as `CosmosDBManagedServiceIdentity` instead.
-@@clientName(Microsoft.DocumentDB.ManagedServiceIdentity, "CosmosDBManagedServiceIdentity", "csharp");
+@@clientName(Microsoft.DocumentDB.ManagedServiceIdentity,
+  "CosmosDBManagedServiceIdentity",
+  "csharp"
+);
 
 // Use the common ARM ManagedServiceIdentity for csharp so the EditorBrowsable(Never)
 // compatibility shims (which reference `Azure.ResourceManager.Models.ManagedServiceIdentity`)
@@ -1527,5 +1532,106 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(DataCenterResourceProperties.backupStorageCustomerKeyUri,
   url,
+  "csharp"
+);
+
+@@usage(SqlDedicatedGatewayServiceResourceProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+
+// hierarchyBuilding: pin TrackedResourceData base for resources that use
+// Legacy.TrackedResourceWithOptionalLocation in spec; old SDK exposed them as
+// TrackedResource.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(ClusterResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(DatabaseAccountGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(CassandraKeyspaceGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(CassandraTableGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(CassandraViewGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(GraphResourceGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(GremlinDatabaseGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(GremlinGraphGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(MongoDBCollectionGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(MongoDBDatabaseGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(SqlContainerGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(SqlDatabaseGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(SqlStoredProcedureGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(SqlTriggerGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(SqlUserDefinedFunctionGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(TableGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(ThroughputSettingsGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(RestorableTableGetResult,
+  Azure.ResourceManager.Foundations.Resource,
   "csharp"
 );

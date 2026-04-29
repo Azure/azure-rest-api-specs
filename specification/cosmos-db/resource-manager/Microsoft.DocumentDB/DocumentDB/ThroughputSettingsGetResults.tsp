@@ -18,7 +18,12 @@ namespace Microsoft.DocumentDB;
 @singleton("default")
 @parentResource(SqlDatabaseGetResults)
 model ThroughputSettingsGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ThroughputSettingsGetProperties> {
+  is Azure.ResourceManager.ProxyResource<ThroughputSettingsGetProperties> {
+  tags?: Record<string>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  location?: Azure.Core.azureLocation;
+
   ...ResourceNameParameter<
     Resource = ThroughputSettingsGetResults,
     KeyName = "throughputSetting",
@@ -1002,9 +1007,4 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
 );
 @@doc(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Gremlin graph."
-);
-@@visibility(ThroughputSettingsGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );
