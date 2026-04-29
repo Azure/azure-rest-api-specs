@@ -88,6 +88,7 @@ alias FhirServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(3)
     @maxLength(24)
     @segment("workspaces")
+    @key
     workspaceName: string;
   },
   {
@@ -96,6 +97,7 @@ alias FhirServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(3)
     @maxLength(24)
     @segment("fhirservices")
+    @key
     fhirServiceName: string;
   }
 >;

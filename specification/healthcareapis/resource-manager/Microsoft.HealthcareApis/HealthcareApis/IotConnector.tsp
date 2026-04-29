@@ -93,6 +93,7 @@ alias IotConnectorsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(3)
     @maxLength(24)
     @segment("workspaces")
+    @key
     workspaceName: string;
   },
   {
@@ -101,6 +102,7 @@ alias IotConnectorsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(3)
     @maxLength(24)
     @segment("iotconnectors")
+    @key
     iotConnectorName: string;
   }
 >;

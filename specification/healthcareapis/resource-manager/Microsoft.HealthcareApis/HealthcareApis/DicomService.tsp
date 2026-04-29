@@ -82,6 +82,7 @@ alias DicomServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(3)
     @maxLength(24)
     @segment("workspaces")
+    @key
     workspaceName: string;
   },
   {
@@ -90,6 +91,7 @@ alias DicomServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(3)
     @maxLength(24)
     @segment("dicomservices")
+    @key
     dicomServiceName: string;
   }
 >;
