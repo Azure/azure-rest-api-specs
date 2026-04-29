@@ -20,7 +20,7 @@ applyTo: "specification/**/*.json"
 
 When performing a code review on OpenAPI v2 (Swagger) JSON definition files in this repository, validate the specification against the [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). This repository hosts all OpenAPI swagger definitions for Azure services. Each service team provides a swagger specification that **must** comply with the rules below.
 
-Flag every violation clearly with the file path, the JSON path or line number, the specific rule being violated, and a concrete suggestion for how to fix it. Respond in markdown format.
+Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule being violated, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
 ---
 
@@ -265,12 +265,12 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 > **Reference:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0) -- ARM common-types are defined by the RPC contract.
 
-- ARM specs **MUST** reference the appropriate `common-types` version (v3, v4, v5, or v6) for standard definitions:
+- ARM specs **SHOULD** reference the appropriate `common-types` version (v3, v4, v5, or v6) for standard definitions:
   - Resource types: `Resource`, `TrackedResource`, `ProxyResource`, `ExtensionResource`
   - Error types: `ErrorResponse`, `ErrorDetail`
   - Standard parameters: `SubscriptionIdParameter`, `ResourceGroupNameParameter`, `ApiVersionParameter`
   - System metadata: `systemData`
-- Use `$ref` to common-types instead of redefining standard ARM structures inline.
+- Use `$ref` to common-types instead of redefining standard ARM structures inline. This is a **recommended practice**, not a blocking requirement -- a spec that correctly defines these shapes inline (with all required fields, readOnly annotations, and descriptions) is functionally compliant. Flag inline redefinition as a non-blocking suggestion, not a blocking violation.
 - Verify the `$ref` path is valid and points to the correct common-types version file.
 - Definition names **MUST** be unique across all swagger files included in the same package tag. Duplicate definitions (e.g., `ErrorResponse` defined in both `foo.json` and `bar.json`) cause SDK generation conflicts. Use `$ref` to a single shared definition or common-types instead.
 - All ARM resources **MUST** include `systemData` as a read-only property.
@@ -551,3 +551,9 @@ When reviewing, systematically check:
 - ✅ Operations API display object uses camelCase property names (`provider`, `resource`, `operation`, `description`)
 
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.
+
+### Output Formatting
+- ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
+- ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
+- ✅ Do NOT elevate process recommendations (e.g., "use common-types $ref") to blocking violations. A spec that defines ARM-standard shapes correctly inline is compliant.
+- ✅ Only flag blocking findings for actual RPC contract violations, security issues, or breaking changes
