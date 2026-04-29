@@ -7,6 +7,7 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 
 ```text
 arm-api-reviewer/
+├── run-evals.ps1          # One-click script: clone, build, run, report
 ├── .vally.yaml            # Vally project config (skill discovery, eval paths, suites)
 ├── evaluate/              # Evaluate (vally) eval definitions (11 files)
 │   ├── eval-arm-resource-structure.yaml
@@ -20,7 +21,7 @@ arm-api-reviewer/
 │   ├── eval-true-negatives.yaml
 │   ├── eval-classification.yaml
 │   └── eval-report-format.yaml
-├── fixtures/              # Test fixtures (31 files)
+├── fixtures/              # Test fixtures (32 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -58,11 +59,53 @@ eval suites.
 - **3 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern violations
 - **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
 
-## Running with Evaluate (vally)
+## Quick Start
 
-Prerequisites: [Node.js](https://nodejs.org/) >= 20 and npm >= 11.11.1.
-Clone [microsoft/evaluate](https://github.com/microsoft/evaluate),
-then `npm install && npm run build`.
+The fastest way to run the eval suite is the **`run-evals.ps1`** script.
+It handles everything: cloning the evaluate framework, installing
+dependencies, building, running all tests, and printing a summary.
+
+Prerequisites: [Node.js](https://nodejs.org/) >= 20, npm, Git, and
+VS Code with GitHub Copilot active.
+
+```powershell
+cd .github/skills/evals/arm-api-reviewer
+
+# Run the full suite (28 stimuli, sequential -- safest)
+.\run-evals.ps1
+
+# Point to an existing evaluate clone instead of re-cloning
+.\run-evals.ps1 -EvaluateRepo "C:\repos\evaluate"
+
+# Run a single category
+.\run-evals.ps1 -Suite "eval-operations"
+
+# Faster iteration: override the model, use 3 workers
+.\run-evals.ps1 -Model "claude-sonnet-4.6" -Workers 3
+
+# Skip rebuild if evaluate is already built
+.\run-evals.ps1 -SkipBuild
+```
+
+The script will:
+
+1. **Clone** [microsoft/evaluate](https://github.com/microsoft/evaluate)
+   as a sibling to your azure-rest-api-specs repo (or use `-EvaluateRepo`
+   to point to an existing clone).
+2. **Install & build** the evaluate (vally) CLI.
+3. **Run** the eval suite and stream color-coded output.
+4. **Print a summary** with pass/fail counts, failed stimulus details,
+   and per-suite breakdown.
+5. **Save results** to `results/<timestamp>/` (includes `results.jsonl`,
+   `eval-results.md`, and `eval-results.junit.xml`).
+
+Run `Get-Help .\run-evals.ps1 -Detailed` for all parameters.
+
+## Running Manually with Evaluate (vally)
+
+If you prefer to invoke vally directly (e.g., on Linux/macOS or in CI),
+clone [microsoft/evaluate](https://github.com/microsoft/evaluate) and
+run `npm install && npm run build`.
 
 The `.vally.yaml` at `.github/skills/evals/arm-api-reviewer/` configures skill
 auto-discovery (via `paths.skills`), eval file location, and a named suite for
@@ -101,13 +144,6 @@ first). See the
 [evaluate documentation](https://github.com/microsoft/evaluate) for additional
 options (`--workers`, `--runs`, `--judge-model`, `--junit`, etc.).
 
-> **PowerShell users:** Use `$env:VALLY_CLI` instead of `$VALLY_CLI`:
->
-> ```powershell
-> $env:VALLY_CLI = "C:\repos\evaluate\packages\cli\dist\index.js"
-> node $env:VALLY_CLI eval --suite all --verbose
-> ```
-
 ### Avoiding session timeouts
 
 The copilot-sdk executor spawns VS Code Copilot agent sessions for each
@@ -136,9 +172,9 @@ to complete. There are three levels, applied in priority order:
 
 > **Note:** Each eval file declares its own `config` block (`runs`,
 > `timeout`, `model`, `judge_model`). The suite definition in
-> `.vally.yaml` only specifies `description` and `evals` -- it does not
-> carry execution config. To override values, use the CLI flags or edit
-> the individual eval YAML files directly.
+> `.vally.yaml` specifies `description`, `evals`, and `executor` -- it
+> does not carry per-eval execution config. To override values, use the
+> CLI flags or edit the individual eval YAML files directly.
 
 ## Grader Types
 
@@ -158,9 +194,9 @@ When submitting a PR that modifies the ARM API Reviewer agent, its instruction
 files, or the `azure-api-review` skill, run the eval suite and include the
 results in your PR description or as a comment:
 
-1. Run the eval suite (see commands above).
+1. Run the eval suite: `.\run-evals.ps1` (or the manual commands above).
 2. Attach the `results.jsonl` and/or `eval-results.md` from the
-   `--output-dir` directory to your PR.
+   `results/<timestamp>/` directory to your PR.
 3. Summarize pass/fail counts in the PR description so reviewers can quickly
    assess the impact of your changes.
 
