@@ -4,6 +4,7 @@
 //
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
+import "./src/agents/models.tsp";
 import "./src/agents/routes.tsp";
 // import "./src/evaluation-rules/routes.tsp";
 
@@ -22,6 +23,7 @@ import "./src/agents/routes.tsp";
 // import "./src/schedules/routes.tsp";
 // import "./src/toolboxes/routes.tsp";
 // import "./src/skills/routes.tsp";
+import "./src/agents-session-files/models.tsp";
 import "./src/agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -40,7 +42,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
-@@clientNamespace(OpenAI, "azure.ai.projects", "python");
+// @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
 // --------------------------------------------------------------------------------
 // Agents sub‐client
@@ -78,16 +80,16 @@ using Azure.AI.Projects;
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
-// Python emitter creates enum A2_A_PREVIEW = "a2a_preview". Override it here to "A2A_PREVIEW".
-@@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
+// // Python emitter creates enum A2_A_PREVIEW = "a2a_preview". Override it here to "A2A_PREVIEW".
+// @@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
 
-// Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
-@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
+// // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
+// @@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB", "python");
+// @@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB", "python");
+// @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
+// @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
-@@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+// @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
 // Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
 @@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
