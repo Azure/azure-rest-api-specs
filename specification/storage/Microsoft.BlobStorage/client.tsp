@@ -138,8 +138,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@clientName(ListContainersSegmentResponse, "ListContainersResponse", "rust");
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
-@@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
-@@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
+// @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
+// @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(FilterBlobSegment, "FilteredBlob", "rust");
 @@clientName(BlobProperties.customerProvidedKeySha256,
   "encryptionKeySha256",
