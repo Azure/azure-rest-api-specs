@@ -26,18 +26,17 @@ namespace Microsoft.RecoveryServices;
  */
 @added(Versions.v2026_03_31_preview)
 @parentResource(VaultResource)
-model CrossTenantVaultMappingResource
-  is ProxyResource<CrossTenantVaultMapping> {
+model CrossTenantVaultMapping
+  is ProxyResource<CrossTenantVaultMappingProperties> {
   ...ResourceNameParameter<
-    Resource = CrossTenantVaultMappingResource,
-    KeyName = "crossTenantVaultMappingName",
+    Resource = CrossTenantVaultMapping,
     SegmentName = "backupCrossTenantVaultMappings",
     NamePattern = ".*"
   >;
 }
 
 // ============================================================
-// CRUD operations on CrossTenantVaultMappingResource
+// CRUD operations on CrossTenantVaultMapping
 // ============================================================
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "CTR resource uses remove action instead of standard DELETE"
@@ -48,13 +47,13 @@ interface CrossTenantVaultMappings {
    * Creates or updates the cross-tenant vault mapping for cross-tenant restore operations.
    * This API updates the target vault properties with source vault ID and creates catalog mapping.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<CrossTenantVaultMappingResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<CrossTenantVaultMapping>;
 
   /**
    * Lists the cross-tenant vault mapping configurations for cross-tenant restore operations.
    * Retrieves the current cross-tenant vault mapping details including source vault mappings and mapping state.
    */
-  list is ArmResourceListByParent<CrossTenantVaultMappingResource>;
+  list is ArmResourceListByParent<CrossTenantVaultMapping>;
 
   /**
    * Removes the cross-tenant vault mapping for cross-tenant restore operations.
@@ -64,7 +63,7 @@ interface CrossTenantVaultMappings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "ArmResourceActionNoContentAsync intentionally emits 202+204 to satisfy the Spectral PostResponseCodes rule (which lags the modern 202-only pattern). The TypeSpec-side warning here flags the same template's response shape from the opposite direction. The emitted swagger is valid and matches the Spectral rule's expectations."
   @action("removeCrossTenantVaultMapping")
   remove is ArmResourceActionNoContentAsync<
-    CrossTenantVaultMappingResource,
+    CrossTenantVaultMapping,
     RemoveCrossTenantVaultMappingRequest
   >;
 }
@@ -586,7 +585,7 @@ interface OperationFromCrossTenantVault {
   @action("backupValidateOperation")
   @tag("CrossTenant")
   validate is ArmResourceActionSync<
-    CrossTenantVaultMappingResource,
+    CrossTenantVaultMapping,
     ValidateOperationRequestResource,
     ValidateOperationsResponse
   >;
@@ -602,7 +601,7 @@ interface ValidateOperationFromCrossTenantVault {
   @action("backupTriggerValidateOperation")
   @tag("CrossTenant")
   trigger is ArmResourceActionAsync<
-    CrossTenantVaultMappingResource,
+    CrossTenantVaultMapping,
     ValidateOperationRequestResource,
     ValidateOperationsResponse
   >;
@@ -743,10 +742,8 @@ model CrossTenantJobResourceList {
   nextLink?: string;
 }
 
-@@doc(CrossTenantVaultMappingResource.name, "Cross-tenant vault mapping name.");
-@@doc(CrossTenantVaultMappingResource.properties,
-  "CrossTenantVaultMappingResource properties"
-);
+@@doc(CrossTenantVaultMapping.name, "Cross-tenant vault mapping name.");
+@@doc(CrossTenantVaultMapping.properties, "CrossTenantVaultMapping properties");
 @@doc(CrossTenantVaultMappings.createOrUpdate::parameters.resource,
   "Request body for operation"
 );

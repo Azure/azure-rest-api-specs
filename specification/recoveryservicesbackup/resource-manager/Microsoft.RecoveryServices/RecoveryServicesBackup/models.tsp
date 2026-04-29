@@ -8712,7 +8712,7 @@ model ClientDiscoveryResponse {
  * Represents the configuration linking a source vault to a target vault across tenants.
  */
 @added(Versions.v2026_03_31_preview)
-model CrossTenantVaultMapping {
+model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
    */
@@ -8937,7 +8937,7 @@ model VaultCredentialCertificateProperties {
   /**
    * Provisioning state of the vault credential certificate.
    */
-  // See CrossTenantVaultMapping.provisioningState for rationale on inline union.
+  // See CrossTenantVaultMappingProperties.provisioningState for rationale on inline union.
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline emission required to avoid Spectral $ref-sibling-drop on readOnly:true."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."

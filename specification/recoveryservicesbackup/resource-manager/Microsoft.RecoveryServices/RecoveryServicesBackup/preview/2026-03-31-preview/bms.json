@@ -531,7 +531,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CrossTenantVaultMappingResourceListResult"
+              "$ref": "#/definitions/CrossTenantVaultMappingListResult"
             }
           },
           "default": {
@@ -589,21 +589,21 @@
             "description": "Request body for operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+              "$ref": "#/definitions/CrossTenantVaultMapping"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CrossTenantVaultMappingResource' update operation succeeded",
+            "description": "Resource 'CrossTenantVaultMapping' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+              "$ref": "#/definitions/CrossTenantVaultMapping"
             }
           },
           "201": {
-            "description": "Resource 'CrossTenantVaultMappingResource' create operation succeeded",
+            "description": "Resource 'CrossTenantVaultMapping' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CrossTenantVaultMappingResource"
+              "$ref": "#/definitions/CrossTenantVaultMapping"
             }
           },
           "default": {
@@ -10613,6 +10613,42 @@
     },
     "CrossTenantVaultMapping": {
       "type": "object",
+      "description": "Cross-tenant vault mapping resource for cross-tenant restore.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrossTenantVaultMappingProperties",
+          "description": "CrossTenantVaultMapping properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CrossTenantVaultMappingListResult": {
+      "type": "object",
+      "description": "The response of a CrossTenantVaultMapping list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CrossTenantVaultMapping items on this page",
+          "items": {
+            "$ref": "#/definitions/CrossTenantVaultMapping"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CrossTenantVaultMappingProperties": {
+      "type": "object",
       "description": "Cross-tenant vault mapping properties for cross-tenant restore.\nRepresents the configuration linking a source vault to a target vault across tenants.",
       "properties": {
         "sourceVaultId": {
@@ -10672,42 +10708,6 @@
       },
       "required": [
         "sourceVaultId"
-      ]
-    },
-    "CrossTenantVaultMappingResource": {
-      "type": "object",
-      "description": "Cross-tenant vault mapping resource for cross-tenant restore.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CrossTenantVaultMapping",
-          "description": "CrossTenantVaultMappingResource properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "CrossTenantVaultMappingResourceListResult": {
-      "type": "object",
-      "description": "The response of a CrossTenantVaultMappingResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CrossTenantVaultMappingResource items on this page",
-          "items": {
-            "$ref": "#/definitions/CrossTenantVaultMappingResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "CrossTenantVaultMappingStatusResponse": {
