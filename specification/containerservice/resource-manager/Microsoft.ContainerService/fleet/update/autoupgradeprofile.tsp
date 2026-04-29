@@ -73,7 +73,7 @@ model AutoUpgradeProfileProperties {
       This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, "1.30".
       By default, this is empty.
       If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
-      If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
+      If upgrade channel is not TargetKubernetesVersion, this field must be empty.
     """)
   @added(Versions.v2025_04_01_preview)
   targetKubernetesVersion?: string;
@@ -112,6 +112,14 @@ union UpgradeChannel {
     """)
   @added(Versions.v2025_04_01_preview)
   TargetKubernetesVersion: "TargetKubernetesVersion",
+
+  @doc("""
+      Applies security patches to the nodes of the target clusters.
+      For information on the behavior of update run for security patch upgrade,
+      see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
+    """)
+  @added(Versions.v2026_06_01_preview)
+  SecurityPatch: "SecurityPatch",
 }
 
 @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
@@ -192,13 +200,14 @@ union AutoUpgradeLastTriggerStatus {
 @added(Versions.v2025_03_01)
 @armResourceOperations
 interface AutoUpgradeProfileOperations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "use azure-async instead"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
   @useFinalStateVia("azure-async-operation")
   @doc("Generates an update run for a given auto upgrade profile.")
   generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
     AutoUpgradeProfile,
     void,
-    GenerateResponse,
+    GenerateUpdateRunResponse,
     BaseParameters<AutoUpgradeProfile>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
       ArmLroLocationHeader<FinalResult = GenerateResponse> &
@@ -212,4 +221,13 @@ model GenerateResponse {
   @visibility(Lifecycle.Read)
   @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
   id: string;
+}
+
+@added(Versions.v2025_03_01)
+@doc("Azure operation completed successfully.")
+union GenerateUpdateRunResponse {
+  GenerateResponse,
+
+  @added(Versions.v2026_06_01_preview)
+  ArmNoContentResponse,
 }
