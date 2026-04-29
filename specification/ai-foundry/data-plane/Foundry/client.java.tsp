@@ -200,5 +200,3 @@ namespace Azure.AI.Projects;
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
-@@alternateType(CronTrigger.timeZone, TimeZoneType, "java");
-@@alternateType(OneTimeTrigger.timeZone, TimeZoneType, "java");
