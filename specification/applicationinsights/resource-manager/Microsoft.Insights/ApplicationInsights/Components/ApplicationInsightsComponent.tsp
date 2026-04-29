@@ -55,12 +55,14 @@ alias ComponentPurgeStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
     /** The name of the Application Insights component resource. */
     @path
     @segment("components")
+    @key
     resourceName: string;
   },
   {
     /** In a purge status request, this is the Id of the operation the status of which is returned. */
     @path
     @segment("operations")
+    @key
     purgeId: string;
   },
   ErrorType = ErrorResponseComponents
