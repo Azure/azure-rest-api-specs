@@ -604,6 +604,85 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 
+/** The multipart body parameter. */
+alias MultipartBodyParameterGo = {
+  /** The body of the request. */
+  @body
+  @encode("bytes")
+  body: bytes;
+};
+@@alternateType(MultipartBodyParameter.body,
+  MultipartBodyParameterGo.body,
+  "go"
+);
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+// @post
+// @route("?comp=batch")
+// op submitBatchGo(
+//   /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+//   @header("Content-Type")
+//   @alternateType(string, "javascript,csharp,go")
+//   @clientName("multipartContentType", "go")
+//   contentType: "multipart/mixed",
+
+//   ...ApiVersionHeader,
+//   ...TimeoutParameter,
+//   ...Storage.Blob.ClientRequestIdHeader,
+//   ...ContentLengthParameter,
+
+//   /** The batch request content */
+//   @encode("bytes")
+//   @body
+//   body: bytes,
+// ): (MultipartBodyParameterGo & {
+//   @statusCode statusCode: 202;
+
+//   /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
+//   #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+//   @header("Content-Type")
+//   contentType: "multipart/mixed";
+
+//   ...ApiVersionHeader;
+//   ...Storage.Blob.RequestIdResponseHeader;
+//   ...Storage.Blob.ClientRequestIdHeader;
+// }) | Error;
+
+// @@override(Service.submitBatch, submitBatchGo);
+
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+// @post
+// @route("?restype=container&comp=batch")
+// op submitBatchContainerGo(
+//   /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+//   @header("Content-Type")
+//   @alternateType(string, "javascript,go")
+//   @clientName("multipartContentType", "go")
+//   contentType: string,
+
+//   ...ApiVersionHeader,
+//   ...TimeoutParameter,
+//   ...Storage.Blob.ClientRequestIdHeader,
+//   ...ContentLengthParameter,
+
+//   /** The batch request content */
+//   @encode("bytes")
+//   @body
+//   body: bytes,
+// ): ({
+//   @statusCode statusCode: 202;
+
+//   /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+//   @header("Content-Type")
+//   contentType: string;
+
+//   ...Storage.Blob.RequestIdResponseHeader;
+//   ...ApiVersionHeader;
+// } & MultipartBodyParameterGo) | Error;
+
+// @@override(Container.submitBatch, submitBatchContainerGo);
+
 @@clientName(QueryType, "QueryFormatType", "python");
 @@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,
   "putBlobFromUrl",
