@@ -1549,7 +1549,7 @@ op attestationsListForResource(
 // PolicyEventsOperationGroup
 @@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
-  "python,java"
+  "python"
 );
 @@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
@@ -1650,4 +1650,38 @@ op attestationsListForResource(
 @@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   "python,java"
+);
+
+op policyEventsListQueryResultsForPolicySetDefinitionJava(
+  ...ApiVersionParameter,
+
+  @path
+  policyEventsResource: PolicyEventsResourceType,
+
+  ...SubscriptionIdParameter,
+
+  @path
+  authorizationNamespace: "Microsoft.Authorization",
+
+  @path
+  policySetDefinitionName: string,
+
+  /**
+   * Maximum number of records to return.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$top")
+  @minValue(0)
+  Top?: int32,
+
+  //other query parameters
+): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  policyEventsListQueryResultsForPolicySetDefinitionJava,
+  "java"
+);
+// clientLocation
+@@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  policyEventsListQueryResultsForPolicySetDefinitionJava,
+  "java"
 );
