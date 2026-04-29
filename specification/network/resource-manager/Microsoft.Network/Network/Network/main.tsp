@@ -130,6 +130,7 @@ import "./BgpConnection.tsp";
 import "./HubIpConfiguration.tsp";
 import "./HubRouteTable.tsp";
 import "./RoutingIntent.tsp";
+import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
