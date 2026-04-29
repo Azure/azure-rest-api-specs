@@ -108,6 +108,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@usage(BlobName, Usage.output, "rust");
 
 @@alternateType(BlobItem.name, string, "rust");
+@@alternateType(BlobItem.metadata, Record<string>, "rust");
 @@alternateType(BlobPrefix.name, string, "rust");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
@@ -131,9 +132,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
+@@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
+@@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
+@@clientName(ListContainersSegmentResponse, "ListContainersResponse", "rust");
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
+@@clientName(BlobProperties.customerProvidedKeySha256,
+  "encryptionKeySha256",
+  "rust"
+);
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
   "rust"
