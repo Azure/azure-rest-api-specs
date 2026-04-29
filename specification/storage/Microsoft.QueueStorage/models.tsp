@@ -624,7 +624,6 @@ alias TimeNextVisibleResponseHeaderPrivate = {
 /** The metadata headers. */
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust,go")
   @header("x-ms-meta")
   metadata?: string;
 };

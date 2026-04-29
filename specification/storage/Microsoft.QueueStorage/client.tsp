@@ -7,6 +7,8 @@ using Storage.Queues;
 
 namespace Customizations;
 
+@@alternateType(MetadataHeaders.metadata, Record<string>, "rust,go");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
