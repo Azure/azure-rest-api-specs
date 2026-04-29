@@ -627,3 +627,14 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@alternateType(MigrateNetworkStatus.subscriptionId, Azure.Core.uuid, "csharp");
+@@alternateType(ServerForPatch.sku, Sku, "csharp");
+@@alternateType(ServerPropertiesForPatch.backup, Backup, "csharp");
+@@alternateType(ServerPropertiesForPatch.highAvailability,
+  HighAvailability,
+  "csharp"
+);
+@@alternateType(ServerPropertiesForPatch.maintenanceWindow,
+  MaintenanceWindow,
+  "csharp"
+);
+@@alternateType(ServerPropertiesForPatch.authConfig, AuthConfig, "csharp");
