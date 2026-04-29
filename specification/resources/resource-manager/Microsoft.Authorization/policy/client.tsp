@@ -355,6 +355,13 @@ namespace Microsoft.Authorization {
   "!csharp"
 );
 
+// Subscription-scoped listAll variants get mis-attributed by the C# emitter to
+// PolicyDefinitionCollection / PolicySetDefinitionCollection as a bogus GetAll overload
+// because they share return models with the resource list. Omit them from the C# SDK.
+// See https://github.com/Azure/azure-sdk-for-net/issues/58821 for related emitter bugs.
+@@scope(Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAll, "!csharp");
+@@scope(Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAll, "!csharp");
+
 @@scope(Microsoft.Authorization.Variables.getAtManagementGroup, "!csharp");
 @@scope(Microsoft.Authorization.Variables.createOrUpdateAtManagementGroup,
   "!csharp"
