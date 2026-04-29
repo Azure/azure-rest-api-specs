@@ -100,7 +100,7 @@ interface KeyVaultClient {
 @@access(KeyVault.RoleAssignments.listForScope, Access.internal, "csharp");
 
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
-@@clientName(KeyVault.Setting.value, "Content", "csharp");
+@@clientName(KeyVault.Setting.value, "TestContent", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
 
 @@usage(KeyVault.RoleDefinition, Usage.input | Usage.output, "csharp");
