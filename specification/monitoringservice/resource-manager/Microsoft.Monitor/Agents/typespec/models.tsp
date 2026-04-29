@@ -22,8 +22,8 @@ namespace Microsoft.Monitor {
     /** Whether the observability agent is enabled. */
     enabled?: boolean;
 
-    /** Comma-delimited list of operations that are disabled on this observability agent. Currently supported values: IssueCreation, Investigation. Additional values may be added in the future. */
-    disabledOperations?: string;
+    /** List of operations that are disabled on this observability agent. Currently supported values: IssueCreation, Investigation. Additional values may be added in the future. */
+    disableAutonomousOperations?: string[];
   }
 
   /**
