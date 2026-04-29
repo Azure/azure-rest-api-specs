@@ -1,0 +1,551 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Agents Control Plane API",
+    "version": "2026-05-01-preview",
+    "description": "Monitor Agents Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ObservabilityAgents"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Monitor/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/observabilityAgents": {
+      "get": {
+        "operationId": "ObservabilityAgents_ListBySubscription",
+        "tags": [
+          "ObservabilityAgents"
+        ],
+        "description": "Lists observability agents in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_ListBySubscription": {
+            "$ref": "./examples/ObservabilityAgents_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/observabilityAgents": {
+      "get": {
+        "operationId": "ObservabilityAgents_ListByResourceGroup",
+        "tags": [
+          "ObservabilityAgents"
+        ],
+        "description": "Lists observability agents in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_ListByResourceGroup": {
+            "$ref": "./examples/ObservabilityAgents_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/observabilityAgents/{observabilityAgentName}": {
+      "get": {
+        "operationId": "ObservabilityAgents_Get",
+        "tags": [
+          "ObservabilityAgents"
+        ],
+        "description": "Returns the specified observability agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityAgentName",
+            "in": "path",
+            "description": "The name of the observability agent resource. The name is case insensitive",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_Get": {
+            "$ref": "./examples/ObservabilityAgents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ObservabilityAgents_CreateOrUpdate",
+        "tags": [
+          "ObservabilityAgents"
+        ],
+        "description": "Creates or updates an observability agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityAgentName",
+            "in": "path",
+            "description": "The name of the observability agent resource. The name is case insensitive",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Properties that need to be specified to create or update an observability agent",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ObservabilityAgentResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ObservabilityAgentResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_CreateOrUpdate": {
+            "$ref": "./examples/ObservabilityAgents_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ObservabilityAgents_Update",
+        "tags": [
+          "ObservabilityAgents"
+        ],
+        "description": "Updates part of an observability agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityAgentName",
+            "in": "path",
+            "description": "The name of the observability agent resource. The name is case insensitive",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityAgentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_Update": {
+            "$ref": "./examples/ObservabilityAgents_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ObservabilityAgents_Delete",
+        "tags": [
+          "ObservabilityAgents"
+        ],
+        "description": "Deletes an observability agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityAgentName",
+            "in": "path",
+            "description": "The name of the observability agent resource. The name is case insensitive",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityAgents_Delete": {
+            "$ref": "./examples/ObservabilityAgents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ObservabilityAgentProperties": {
+      "type": "object",
+      "description": "Properties for an observability agent resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state.",
+          "readOnly": true
+        },
+        "monitoringAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the Azure Monitor workspace used as the issue container."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the observability agent is enabled."
+        },
+        "disableAutonomousOperations": {
+          "type": "array",
+          "description": "List of operations that are disabled on this observability agent. Currently supported values: IssueCreation, Investigation. Additional values may be added in the future.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ObservabilityAgentResource": {
+      "type": "object",
+      "description": "An observability agent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ObservabilityAgentProperties",
+          "description": "Resource properties"
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ObservabilityAgentResourceListResult": {
+      "type": "object",
+      "description": "The response of a ObservabilityAgentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ObservabilityAgentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ObservabilityAgentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ObservabilityAgentResourceUpdate": {
+      "type": "object",
+      "description": "An observability agent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ObservabilityAgentProperties",
+          "description": "Resource properties"
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}
