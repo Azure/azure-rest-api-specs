@@ -137,6 +137,7 @@ model AnalyzeFromStreamRequestParams {
 
 interface DocumentModels {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @doc("Gets the result of document analysis.")
   @route("/documentModels/{modelId}/analyzeResults/{resultId}")
   @get
@@ -234,6 +235,7 @@ interface DocumentModels {
 
   #suppress "@azure-tools/typespec-azure-core/byos" "Support uploading input files"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "streaming operation"
   @doc("Analyzes document with document model.")
   @post
   @pollingOperation(DocumentModels.getAnalyzeResult)
@@ -427,22 +429,27 @@ interface MiscellaneousOperations {
   @doc("Lists all operations.")
   listOperations is DIResourceOperations.ResourceList<DocumentIntelligenceOperationDetails>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentModelBuildOperation is DIResourceOperations.ResourceRead<DocumentModelBuildOperationDetails>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentModelComposeOperation is DIResourceOperations.ResourceRead<DocumentModelComposeOperationDetails>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentModelCopyToOperation is DIResourceOperations.ResourceRead<DocumentModelCopyToOperationDetails>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentClassifierCopyToOperation is DIResourceOperations.ResourceRead<DocumentClassifierCopyToOperationDetails>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentClassifierBuildOperation is DIResourceOperations.ResourceRead<DocumentClassifierBuildOperationDetails>;
@@ -488,6 +495,7 @@ interface DocumentClassifiers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "Support uploading input files"
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "streaming operation"
   @doc("Classifies document with document classifier.")
   @pollingOperation(DocumentClassifiers.getClassifyResult)
   @sharedRoute
@@ -524,6 +532,7 @@ interface DocumentClassifiers {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-client-generator-core/operation-not-in-client" "polling operation"
   @doc("Gets the result of document classifier.")
   @route("/documentClassifiers/{classifierId}/analyzeResults/{resultId}")
   @get
