@@ -1,0 +1,65 @@
+name: arm-api-reviewer-eval-examples
+description: |
+  Example file validation tests (06xxxx).
+  Validates detection of invalid resource IDs and realistic secrets
+  in example JSON files.
+
+config:
+  runs: 1
+  timeout: 120
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 060001 — Invalid resource ID in example
+  - name: detect-example-bad-resource-id
+    environment:
+      files:
+        - src: "../fixtures/examples/example-bad-resource-id.json"
+          dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json"
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a GET operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)id|resource.?id"
+      - type: prompt
+    rubric:
+      - Flagged the empty resource ID ("id" is an empty string in the response body)
+      - A valid ARM resource ID should be a fully qualified path like /subscriptions/{sub}/resourceGroups/{rg}/providers/...
+
+  # 060002 — Realistic secrets in example
+  - name: detect-example-realistic-secret
+    environment:
+      files:
+        - src: "../fixtures/examples/example-realistic-secret.json"
+          dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a PUT operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)secret|password|credential"
+      - type: prompt
+    rubric:
+      - Flagged a realistic connection string with password in connectionString
+      - Flagged a realistic password "SuperSecretP@ssw0rd123!" in adminPassword
+      - Flagged a Base64-encoded string in primaryKey that looks like a real key
+      - Recommended placeholder values instead of realistic secrets

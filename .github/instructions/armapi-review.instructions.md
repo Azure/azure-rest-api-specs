@@ -25,7 +25,13 @@ This file contains **ARM control plane–specific** review rules that supplement
 - [ARM API Best Practices & Design Choices](https://eng.ms/docs/products/arm/api_contracts/guidelines/api_best_practices_and_design_choices)
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
 
-Flag every violation clearly with the file path, JSON path or line number, the specific rule ID, and a concrete suggestion for how to fix it. Respond in markdown format.
+Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule ID, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
+
+**False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
+
+- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, SystemData, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only.
+- **`allOf` + TrackedResource base type:** A resource model that manually declares `id`, `name`, `type`, `location`, `tags`, `systemData` as top-level properties is compliant if the shapes are correct. Using `allOf` with TrackedResource is preferred but NOT required. Flag it as a **suggestion** only.
+- **Non-terminal provisioningState values:** Including only the three terminal states (`Succeeded`, `Failed`, `Canceled`) is compliant. Adding non-terminal states (`Creating`, `Updating`, `Deleting`) is recommended but NOT required for compliance. Flag it as a **suggestion** only.
 
 ---
 
@@ -67,7 +73,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   /providers/Microsoft.{Namespace}/operations
   ```
 - This GET operation **MUST** return an `OperationListResult` with `x-ms-pageable` and a `nextLinkName`.
-- The operations list **MUST** use the common-types `OperationListResult` and `Operation` definitions. Do not define custom Operation types.
+- The operations list **SHOULD** use the common-types `OperationListResult` and `Operation` definitions. If defined inline, they must include the same fields as common-types (`name`, `display`, `isDataAction` for `Operation`; `value` array and `nextLink` for `OperationListResult`).
 - If the operations endpoint is missing from the spec, flag it as an ARM Error.
 - The operations API endpoint **MUST** be scoped at the tenant level only (`/providers/Microsoft.{Namespace}/operations`). Operations **MUST NOT** vary per subscription — do not define the operations API under `/subscriptions/{subscriptionId}/...` (RPC-Operations-V1-02).
   (Also enforced by: `OperationsApiTenantLevelOnly` linter rule)
@@ -170,11 +176,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Singleton and constrained-collection resource names **MUST** be represented as an **enum path parameter** with `x-ms-enum` and `modelAsString: true` -- not as a static literal in the URI path. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the correct pattern (RPC-ConstrainedCollections-V1-04).
   (Also enforced by: `ReservedResourceNamesModelAsEnum` linter rule -- warning level)
 
-### 2.8 Common Type Definitions Must Be Used
+### 2.8 Common Type Definitions Should Be Used
 
-- **Do not define custom types for `Operation`, `OperationListResult`, `ErrorResponse`, `CloudError`, or `ErrorDetail`**. These **MUST** be referenced from the ARM common types (`common-types/resource-management/vX/types.json`).
-- Private endpoint connection types (`PrivateEndpointConnection`, `PrivateLinkResource`, etc.) **MUST** also come from common types unless the service has a documented exception. If defining them locally, they must be in a dedicated file (e.g. `privateEndpointConnections.json`) and must exactly match the common-types schema.
-- Flag any custom re-definition of these types as an ARM Error.
+- Standard types (`Operation`, `OperationListResult`, `ErrorResponse`, `CloudError`, `ErrorDetail`) **SHOULD** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). If a spec defines them inline with the correct shape (all required fields, readOnly annotations, and descriptions), flag it as a **non-blocking suggestion** to use `$ref` -- not as a blocking violation.
+- Private endpoint connection types (`PrivateEndpointConnection`, `PrivateLinkResource`, etc.) **SHOULD** also come from common types unless the service has a documented exception. If defining them locally, they must be in a dedicated file (e.g. `privateEndpointConnections.json`) and must match the common-types schema.
+- Only flag as a blocking error if the inline definition is **missing required fields** or has an **incompatible shape** compared to common-types.
 
 ---
 
@@ -497,45 +503,45 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 > Rules PLCY004 and OAPI025 are defined in `openapi-review.instructions.md` and [`.github/skills/azure-api-review/references/policy-compatibility.md`](../skills/azure-api-review/references/policy-compatibility.md). They apply to all specs including ARM. Do not use CSV strings for collections (use JSON arrays) and do not accept mixed data types for the same property.
 
-### 8.15 Default Values Must Be Static and Declared (OAPI022, WHATIF-002)
+### 8.14 Default Values Must Be Static and Declared (OAPI022, WHATIF-002)
 
 - Properties with `default` values **MUST** use the same default value on every similar PUT request. Do not derive the default value from other properties in the resource or from external state.
 - The `default` annotation in the swagger **MUST** specify the actual default value so that clients, documentation, and policy can discover it.
 - Every **optional** property where the service applies a default value when the property is omitted from PUT **MUST** declare that default value in the swagger spec. Without the annotation, ARM Template What-If reports a false delete for the property (the template omits it, but GET returns the service-applied default).
 
-### 8.16 Service Must Preserve Array Ordering (OAPI024)
+### 8.15 Service Must Preserve Array Ordering (OAPI024)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for OAPI024, OAPI025, and OAPI026 with examples.
 
 - The order of items in array properties from a PUT or PATCH request **MUST** be preserved in responses. Reordering breaks ARM Template What-If and Change Analysis.
 
-### 8.17 Service Must Preserve Property Value Casing (OAPI026)
+### 8.16 Service Must Preserve Property Value Casing (OAPI026)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for OAPI026 with normalization examples.
 
 - String property values from PUT/PATCH requests **MUST** match in responses. Do not normalize casing, location formats, or IP address representations.
 
-### 8.18 Service Must Reject Unknown Properties (OAPI018)
+### 8.17 Service Must Reject Unknown Properties (OAPI018)
 
 > **See also:** [`.github/skills/azure-api-review/references/what-if-preflight-compliance.md`](../skills/azure-api-review/references/what-if-preflight-compliance.md) WHATIF-005 for the What-If implications of this rule.
 
 - If a PUT or PATCH payload contains properties that the RP does not recognize, the service **MUST** reject the request with `400 Bad Request` and an appropriate ARM error response body.
 - Do not silently discard unknown properties — the user must be informed that their payload is incorrect. Silent discarding causes the GET response to differ from the PUT request, leading to What-If noise and customer confusion.
 
-### 8.19 PUT/PATCH Must Tolerate Read-Only Properties (OAPI021)
+### 8.18 PUT/PATCH Must Tolerate Read-Only Properties (OAPI021)
 
 - PUT and PATCH operations **MUST NOT** fail when the request body includes read-only properties with their current values.
 - Automation tools (CLI, Terraform, Bicep) commonly GET a resource, modify a few properties, and PUT the entire payload back. If the service rejects the request because it contains read-only properties (e.g., `provisioningState`, `id`), these tools break.
 - **Fix:** Ignore read-only properties in the request body silently, or if the value differs from the current value, reject with a descriptive `400 Bad Request` error.
 
-### 8.20 Immutable Property Tolerance and Enforcement (OAPI030, OAPI031)
+### 8.19 Immutable Property Tolerance and Enforcement (OAPI030, OAPI031)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI030 and OAPI031.
 
 - If a PUT or PATCH request includes an immutable property with the **same value** it already has, the service **MUST NOT** fail the request (OAPI030). This allows tools to round-trip payloads without stripping immutable fields.
 - If a PUT or PATCH request attempts to **change** an immutable property, the service **MUST** reject with `400 Bad Request` and an error message identifying the property (OAPI031). Do not silently ignore the change.
 
-### 8.21 Fields Must Have Clear Ownership — Server or Client (OAPI034)
+### 8.20 Fields Must Have Clear Ownership — Server or Client (OAPI034)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI034. See [`.github/skills/azure-api-review/references/field-ownership.md`](../skills/azure-api-review/references/field-ownership.md) for value preservation rules OAPI024, OAPI025, and OAPI026.
 
@@ -607,9 +613,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 10A. `readme.md` Suppression Scoping & Tag Coverage
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, including when to approve, when to push back, and when to escalate to peer review.
-
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, GA vs. preview rigor (RPC-SUPPRESS-GA), scoping rules (RPC-SUPPRESS-SCOPE), and when suppressions are never valid.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md) for the complete suppression approval/rejection decision framework, including GA vs. preview rigor (RPC-SUPPRESS-GA), scoping rules (RPC-SUPPRESS-SCOPE), and when suppressions are never valid.
 
 Apply the decision framework from the reference file when evaluating suppressions. Key points: suppressions from preview are not automatically acceptable in GA; suppressions must have specific `from`/`where` clauses (not blanket); warnings should not be suppressed; lack of time is never valid.
 
@@ -830,6 +834,27 @@ When reviewing resources that support availability zones, verify: `zones` is a t
   - `message` (string) — a human-readable explanation
 - Do not use checkNameAvailability as a gate — implement retry logic in resource creation.
 
+### 21.3 Must Use Common-Types Definitions (CNA-003)
+
+- The `checkNameAvailability` request body **MUST** reference the common-types `CheckNameAvailabilityRequest` definition (`common-types/resource-management/vX/types.json#/definitions/CheckNameAvailabilityRequest`).
+- The response body **MUST** reference the common-types `CheckNameAvailabilityResponse` definition.
+- If the spec defines custom request/response models instead of using common-types, flag it and instruct the author to use the common-types `$ref`.
+- **Why:** Custom definitions may omit the `type` field or diverge from the standard contract, making the endpoint inconsistent across RPs and bypassing any future input validation added to the common-types definition.
+
+### 21.4 Name Field Input Validation (CNA-004)
+
+- The `name` property in the `checkNameAvailability` request **MUST** have `pattern` and `maxLength` constraints matching the target resource type's name validation rules.
+- At minimum, the `name` field **SHOULD** be constrained to valid ARM resource name characters (alphanumeric, hyphens, underscores, periods). Example: `"pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,259}$"`, `"maxLength": 260`.
+- If a spec defines a custom `checkNameAvailability` request model with a bare `string` `name` field (no `pattern`, no `maxLength`), flag it as a **security concern** and instruct the author to add constraints.
+- **Why:** Unconstrained string inputs to backend queries are a SQL/NoSQL injection risk. Input validation in the spec provides client-side SDK validation and signals to implementers that the field requires server-side sanitization.
+
+### 21.5 Security: Backend Query Safety (CNA-SEC-001)
+
+- **Implementation guidance for RP authors** (not directly enforceable in the spec, but critical):
+  - The `name` value from a `checkNameAvailability` request **MUST** be passed to backend data stores (Cosmos DB, SQL, etc.) using **parameterized queries** — never via string concatenation into query text.
+  - The backend query **MUST** scope results to the caller's subscription and/or tenant. A `checkNameAvailability` call in subscription A **MUST NOT** match or return results from subscription B or a different tenant.
+- **Why:** String concatenation of user-controlled input into database queries enables injection attacks (e.g., Cosmos DB SQL injection via boolean-based blind techniques). Combined with missing tenant/subscription scoping, this creates a cross-tenant data leak vulnerability. RPs using shared frameworks (e.g., Liftr) must verify the framework's implementation uses parameterized queries.
+
 ---
 
 ## 22. managedBy Property
@@ -949,10 +974,17 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ ARM `type/{instance}/type/{instance}` URL pattern followed
 - ✅ Proxy resources use `ProxyResource` base type (not `Resource`); proxy resources do NOT have `tags`
 - ✅ Extension resources use the correct scope pattern; extension resources are always proxy (never tracked) (RPC-Uri-V1-12)
-- ✅ No duplicate paths when using `{scope}` parameter — no explicitly-scoped duplicates (RPC-Uri-V1-10)
-- ✅ Operations API endpoint exists using common-types `OperationListResult` and `Operation` definitions (RPC-Operations-V1)
-- ✅ Operations API is tenant-scoped only — not per-subscription (RPC-Operations-V1-02)
+- ✅ No duplicate paths when using `{scope}` parameter -- no explicitly-scoped duplicates (RPC-Uri-V1-10)
+- ✅ Operations API endpoint exists with `OperationListResult` and `Operation` definitions (preferably from common-types; inline equivalent is acceptable) (RPC-Operations-V1)
+- ✅ Operations API is tenant-scoped only -- not per-subscription (RPC-Operations-V1-02)
 - ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
+
+### Output Formatting
+
+- ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
+- ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
+- ✅ Do NOT flag blocking violations for specs that define ARM-standard types inline instead of using common-types `$ref` -- that is a process recommendation (suggest it as a non-blocking improvement), not a contract violation
+- ✅ Only flag blocking (🔴) findings for actual RPC contract violations, security issues, or breaking changes -- not for stylistic preferences or process recommendations
 
 ### Resource Model
 
@@ -960,7 +992,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `zones`, `sku`, `kind`, `plan`, `identity`, `tags` are top-level properties (not inside `properties`)
 - ✅ `sku` follows standard schema (`name`, `tier`, `size`, `family`, `capacity`); internal SKU link API not in public swagger
 - ✅ Non-ARM-envelope properties are inside the `properties` bag
-- ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions
+- ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions (recommended) or correctly-shaped inline equivalents
 - ✅ Every resource type has a point GET; singleton resources named "default" using enum path parameters (RPC-ConstrainedCollections-V1-04)
 - ✅ `x-ms-azure-resource: true` only on top-level resource models, not nested models
 - ✅ PUT request and response schemas are identical; PUT response matches GET and PATCH (RPC-Put-V1-12, RPC-Put-V1-25)
@@ -1045,6 +1077,11 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions used only for non-CRUD operations
 - ✅ POST for data retrieval only when retrieving secrets or P99 latency > 2s; prefer OData filters on GET
 - ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (RPC-LIST-VERSIONS)
+
+### Check Name Availability
+
+- ✅ `checkNameAvailability` uses common-types `CheckNameAvailabilityRequest` / `CheckNameAvailabilityResponse` — not custom request/response models (CNA-003)
+- ✅ `name` field has `pattern` and `maxLength` constraints — not a bare unconstrained string (CNA-004)
 
 ### Tenant-Level APIs
 
