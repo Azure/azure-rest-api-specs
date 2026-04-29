@@ -168,6 +168,9 @@ namespace Azure.AI.Projects;
 // is_primary -> primary so accessors become isPrimary()/setPrimary()
 @@clientName(EvaluatorMetric.is_primary, "primary", "java");
 
+// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
+@@convenientAPI(Skills.deleteSkill, false, "java");
+
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
