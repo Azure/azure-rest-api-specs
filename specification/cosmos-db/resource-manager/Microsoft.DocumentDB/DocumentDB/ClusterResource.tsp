@@ -15,13 +15,23 @@ namespace Microsoft.DocumentDB;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ClusterResourceProperties> {
   ...ResourceNameParameter<
     Resource = ClusterResource,
     KeyName = "clusterName",
     SegmentName = "cassandraClusters",
     NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Identity for the resource.
@@ -246,9 +256,4 @@ interface ClusterResources {
 );
 @@doc(ClusterResources.invokeCommandAsync::parameters.body,
   "Specification which command to run where"
-);
-@@visibility(ClusterResource.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

@@ -17,13 +17,23 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(GremlinDatabaseGetResults)
 model GremlinGraphGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GremlinGraphGetProperties> {
+  is Azure.ResourceManager.ProxyResource<GremlinGraphGetProperties> {
   ...ResourceNameParameter<
     Resource = GremlinGraphGetResults,
     KeyName = "graphName",
     SegmentName = "graphs",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Identity for the resource.
@@ -86,9 +96,4 @@ interface GremlinGraphGetResultsOperationGroup {
 );
 @@doc(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
-);
-@@visibility(GremlinGraphGetResults.location,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
 );

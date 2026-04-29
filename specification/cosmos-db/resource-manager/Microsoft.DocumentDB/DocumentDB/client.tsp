@@ -104,10 +104,6 @@ model AccessRulePropertiesSubscriptionsItem {
   "go,python"
 );
 
-// =============================================================================
-// Go/Java operation override customizations
-// =============================================================================
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -462,11 +458,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "go,java"
 );
 
-// =============================================================================
 // C# client name customizations for backward compatibility.
-// All csharp-only customizations are grouped here.
-// =============================================================================
-
 @@scope(DatabaseAccounts.getReadOnlyKeys, "!csharp");
 
 @@clientName(ApiType, "CosmosDBApiType", "csharp");
@@ -824,6 +816,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(MongoDBDatabaseResource, "MongoDBDatabaseResourceInfo", "csharp");
 @@clientName(MongoDBDatabaseResource.id, "DatabaseName", "csharp");
 @@clientName(MongoIndex, "MongoDBIndex", "csharp");
+@@clientName(MongoIndex.key, "KeyKeys", "csharp");
 @@clientName(MongoIndexOptions, "MongoDBIndexConfig", "csharp");
 @@clientName(MongoIndexOptions.unique, "IsUnique", "csharp");
 @@clientName(MongoRoleDefinitionGetResults, "MongoDBRoleDefinition", "csharp");
@@ -1345,9 +1338,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(MongoMIRoleDefinitionResource, "MongoMIRoleDefinition", "csharp");
 @@clientName(GarnetClusterResource, "GarnetCluster", "csharp");
 @@clientName(FleetAnalyticsResource, "FleetAnalytics", "csharp");
-
-// Disambiguate throughput-singleton resources that otherwise collapse into a
-// single `<Api>Resource` class and produce duplicate extension methods.
 @@clientName(ThroughputSettingsGetResultsOperationGroup,
   "CosmosDBSqlDatabaseThroughputSetting",
   "csharp"
@@ -1373,13 +1363,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(Permission, "CosmosDBSqlRolePermission", "csharp");
-
-// Avoid collision with the auto-generated CassandraViewResource ARM resource class.
 @@clientName(CassandraViewResource, "CassandraViewResourceInfo", "csharp");
-
-// Avoid shadowing ResourceData.Id (ResourceIdentifier) when these properties are
-// flattened onto *RoleDefinitionData (causes ctor `this(client, data.Id)` to bind
-// to the shadowed string Id).
 @@clientName(CassandraRoleDefinitionResourceProperties.id,
   "RoleDefinitionId",
   "csharp"
@@ -1397,19 +1381,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
-// Rename the cosmos-local ManagedServiceIdentity model so it does not collide with
-// `Azure.ResourceManager.CommonTypes.ManagedServiceIdentity` once @@alternateType
-// remaps every consumer to the common type. Any leftover internal use will surface
-// as `CosmosDBManagedServiceIdentity` instead.
 @@clientName(Microsoft.DocumentDB.ManagedServiceIdentity,
   "CosmosDBManagedServiceIdentity",
   "csharp"
 );
 
-// Use the common ARM ManagedServiceIdentity for csharp so the EditorBrowsable(Never)
-// compatibility shims (which reference `Azure.ResourceManager.Models.ManagedServiceIdentity`)
-// stay binary-compatible with the previous GA SDK.
 @@alternateType(GremlinDatabaseGetResults.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
@@ -1534,6 +1510,12 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   url,
   "csharp"
 );
+@@alternateType(ExtendedResourceProperties._etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(PartitionUsage.partitionId, Azure.Core.uuid, "csharp");
+@@alternateType(PartitionMetric.partitionId, Azure.Core.uuid, "csharp");
 
 @@usage(SqlDedicatedGatewayServiceResourceProperties,
   Azure.ClientGenerator.Core.Usage.input,
@@ -1629,9 +1611,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.hierarchyBuilding(RestorableTableGetResult,
-  Azure.ResourceManager.Foundations.Resource,
-  "csharp"
-);
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// #suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// @@Legacy.hierarchyBuilding(RestorableTableGetResult,
+//   Azure.ResourceManager.Foundations.Resource,
+//   "csharp"
+// );
