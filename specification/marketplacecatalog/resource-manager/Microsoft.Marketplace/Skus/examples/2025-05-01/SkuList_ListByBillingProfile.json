@@ -1,0 +1,79 @@
+{
+  "operationId": "SkuList_ListByBillingProfile",
+  "title": "List SKUs for billing profile",
+  "parameters": {
+    "api-version": "2025-05-01",
+    "billingAccountId": "billing-account-001",
+    "billingProfileId": "billing-profile-001",
+    "serviceFamily": "Compute",
+    "service": "Virtual Machines"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "productId": "DZH318Z0BPS6",
+            "productDisplayName": "Virtual Machines D Series",
+            "productDescription": "General purpose compute optimized for enterprise workloads.",
+            "serviceFamily": "Compute",
+            "service": "Virtual Machines",
+            "publisherId": "microsoft",
+            "publisherType": "Microsoft",
+            "productType": "VirtualMachine",
+            "summary": "Balanced CPU-to-memory ratio for development and testing.",
+            "productAttributes": [
+              {
+                "key": "generation",
+                "value": "V2"
+              }
+            ],
+            "skuName": "D2s v3",
+            "skuId": "DZH318Z0BPS6/0001",
+            "skuType": "Consumption",
+            "language": "en",
+            "skuDescription": "D2s v3 - 2 vCPUs, 8 GB RAM",
+            "skuTitle": "D2s v3",
+            "lastModifiedDateTime": "2025-04-15T10:30:00Z",
+            "location": "US East",
+            "armRegionName": "eastus",
+            "cloud": "Global",
+            "locationType": "Region",
+            "region": "US East",
+            "skuGroupId": "SG-001",
+            "zone": "Zone 1",
+            "feature": "Premium Storage",
+            "serviceType": "Standard",
+            "minQuantity": 1,
+            "cspState": "OptIn",
+            "hasRI": true,
+            "skuAttributes": [
+              {
+                "key": "diskType",
+                "value": "SSD"
+              }
+            ],
+            "skuProperties": {
+              "numberOfCores": "2",
+              "ram": "8 GB",
+              "vCpu": "2",
+              "armSkuName": "Standard_D2s_v3"
+            },
+            "offeringProperties": [
+              {
+                "meterType": "1 Hour",
+                "billingMeterId": "00000000-0000-0000-0000-000000000001",
+                "offeringId": "offering-001",
+                "type": "Consumption"
+              }
+            ],
+            "categoryIds": [
+              "compute"
+            ]
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/billing-account-001/billingProfiles/billing-profile-001/providers/Microsoft.Marketplace/skus?api-version=2025-05-01&serviceFamily=Compute&service=Virtual%20Machines&$skiptoken=token123"
+      }
+    }
+  }
+}
