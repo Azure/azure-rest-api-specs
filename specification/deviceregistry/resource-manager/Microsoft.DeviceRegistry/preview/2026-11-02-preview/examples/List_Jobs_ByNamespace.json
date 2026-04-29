@@ -13,13 +13,26 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01",
-            "name": "adr-job-01",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-update-01",
+            "name": "adr-job-update-01",
             "type": "Microsoft.DeviceRegistry/namespaces/jobs",
             "location": "North Europe",
             "properties": {
               "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
-              "jobType": "Action",
+              "jobType": "Update",
+              "target": {
+                "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/groups/group-1"
+              },
+              "definition": {
+                "schedulingType": "continuous",
+                "update": {
+                  "updateId": {
+                    "provider": "contoso",
+                    "name": "toaster-firmware",
+                    "version": "2.0.0"
+                  }
+                }
+              },
               "provisioningState": "Succeeded"
             }
           }

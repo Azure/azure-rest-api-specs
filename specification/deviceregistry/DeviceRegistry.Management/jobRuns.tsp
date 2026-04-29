@@ -38,6 +38,10 @@ model JobRunProperties {
   @visibility(Lifecycle.Read)
   status?: JobRunStatus;
 
+  @doc("The reason the run was canceled. Present only when status is Canceled.")
+  @visibility(Lifecycle.Read)
+  cancellationReason?: JobRunCancellationReason;
+
   @doc("The scheduled time for the job run.")
   @visibility(Lifecycle.Read)
   scheduledTime?: utcDateTime;
@@ -54,11 +58,6 @@ model JobRunProperties {
   @visibility(Lifecycle.Read)
   results?: JobRunResults;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Internal metadata used to track polling and execution state.")
-  @visibility(Lifecycle.Read)
-  internalMetadata?: Record<string>;
-
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -72,17 +71,38 @@ union JobRunStatus {
   @doc("The job run is scheduled.")
   Scheduled: "Scheduled",
 
-  @doc("The job run is queued.")
+  @doc("The job run is queued for dispatch and is consuming concurrency quota.")
   Queued: "Queued",
 
-  @doc("The job run is running.")
-  Running: "Running",
+  @doc("The job run is actively executing.")
+  Active: "Active",
 
   @doc("The job run completed successfully.")
-  Completed: "Completed",
+  Succeeded: "Succeeded",
 
   @doc("The job run failed.")
   Failed: "Failed",
+
+  @doc("The job run timed out before completing. Action/State jobs only; not applicable to Update jobs.")
+  TimedOut: "TimedOut",
+
+  @doc("The job run was canceled. See `cancellationReason` for the cause.")
+  Canceled: "Canceled",
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The reason a job run was canceled. Present only when status is Canceled.")
+union JobRunCancellationReason {
+  string,
+
+  @doc("The customer canceled the run via the cancel action.")
+  CanceledByCustomer: "CanceledByCustomer",
+
+  @doc("The run was canceled because another Update job targeting the same group was scheduled and superseded it.")
+  CanceledByAnotherJob: "CanceledByAnotherJob",
+
+  @doc("The run was canceled because the target group was deleted.")
+  CanceledByGroupDelete: "CanceledByGroupDelete",
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -97,23 +117,29 @@ model JobRunResults {
   @doc("Number of targets that failed.")
   failed?: int32;
 
-  @doc("Number of targets currently running.")
-  running?: int32;
+  @doc("Number of targets currently in progress.")
+  inProgress?: int32;
 
   @doc("Number of targets pending execution.")
   pending?: int32;
+
+  @doc("Number of targets whose execution was canceled.")
+  canceled?: int32;
+
+  @doc("Number of targets the operation does not apply to. Update jobs only; computed by ADR as total - (succeeded + failed + inProgress + canceled).")
+  notApplied?: int32;
 }
 
 @added(Versions.v2026_11_02_preview)
 @doc("A single device result entry from a job run.")
 model JobRunResultItem {
-  @doc("The external device identifier.")
-  externalDeviceId?: string;
+  @doc("The device UUID. ADR returns the device's stable UUID identifier (ADU surfaces device UUIDs in its private API; ADR re-emits them under this name to align with ADR-wide identifier conventions).")
+  deviceUuid?: string;
 
-  @doc("The status of the device for this job run.")
+  @doc("The current per-device status for this run. One of: Succeeded, Failed, InProgress, Canceled, NotApplied.")
   status?: string;
 
-  @doc("The reason for the status, typically used for failures.")
+  @doc("Short, machine-readable diagnostic that pairs with status. Present only when status is Failed; an ADU-provided machine-readable code (e.g. DOWNLOAD_FAILED). Omitted for all other statuses, including Succeeded and InProgress.")
   reason?: string;
 }
 
