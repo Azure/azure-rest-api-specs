@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ResiliencyReview.tsp";
 
@@ -9,11 +10,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
  * Triage recommendation data structure.
  */
+@removed(Versions.v2026_03_01_preview)
 @parentResource(ResiliencyReview)
 model TriageRecommendation
   is Azure.ResourceManager.ProxyResource<TriageRecommendationProperties> {
@@ -26,6 +29,7 @@ model TriageRecommendation
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_03_01_preview)
 interface TriageRecommendationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -50,6 +54,7 @@ interface TriageRecommendationOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_03_01_preview)
 interface TriageRecommendations {
   /**
    * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
