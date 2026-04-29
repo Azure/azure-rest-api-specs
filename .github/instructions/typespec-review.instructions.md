@@ -28,9 +28,12 @@ which is the source of truth for project structure, naming, versioning,
 documentation, and ARM resource patterns. Apply **both** files when
 reviewing PRs that add or modify TypeSpec projects.
 
-Flag every violation clearly with the file path, line number or code
-reference, the specific rule, and a concrete suggestion for how to fix
-it. Respond in markdown format.
+Flag every violation clearly with the file path, **exact line number**
+(e.g., `line 42` or `line 10-15` for ranges), the specific rule, and a
+concrete suggestion for how to fix it. Vague references like "near end
+of file" or "around line 50" are not acceptable -- always resolve the
+actual line number by reading the file content. Respond in markdown
+format.
 
 ---
 
