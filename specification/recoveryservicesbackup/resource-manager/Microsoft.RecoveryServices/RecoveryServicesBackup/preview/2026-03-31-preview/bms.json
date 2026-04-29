@@ -552,6 +552,53 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}": {
+      "get": {
+        "operationId": "CrossTenantVaultMappings_Get",
+        "tags": [
+          "CrossTenantVaultMappings"
+        ],
+        "description": "Gets the cross-tenant vault mapping by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossTenantVaultMappingName",
+            "in": "path",
+            "description": "Cross-tenant vault mapping name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMapping"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "operationId": "CrossTenantVaultMappings_CreateOrUpdate",
         "tags": [

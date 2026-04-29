@@ -44,6 +44,11 @@ model CrossTenantVaultMapping
 @armResourceOperations
 interface CrossTenantVaultMappings {
   /**
+   * Gets the cross-tenant vault mapping by name.
+   */
+  get is ArmResourceRead<CrossTenantVaultMapping>;
+
+  /**
    * Creates or updates the cross-tenant vault mapping for cross-tenant restore operations.
    * This API updates the target vault properties with source vault ID and creates catalog mapping.
    */
