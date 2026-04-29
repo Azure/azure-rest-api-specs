@@ -165,6 +165,18 @@ model TracesJobSource {
   max_traces?: int32;
 }
 
+@doc("Token consumption summary for a long-running job. Populated when the job reaches a terminal state. Reusable across job-producing LROs.")
+model TokenUsage {
+  @doc("Number of input (prompt) tokens consumed.")
+  input_tokens: int64;
+
+  @doc("Number of output (completion) tokens generated.")
+  output_tokens: int64;
+
+  @doc("Total tokens consumed (input + output).")
+  total_tokens: int64;
+}
+
 @doc("Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes.")
 model DatasetJobSource {
   ...JobSourceDescription;

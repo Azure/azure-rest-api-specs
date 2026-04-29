@@ -18698,6 +18698,15 @@
             ],
             "description": "The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).",
             "readOnly": true
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenUsage"
+              }
+            ],
+            "description": "Token consumption summary. Populated when the job reaches a terminal state.",
+            "readOnly": true
           }
         },
         "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
@@ -42920,6 +42929,32 @@
           }
         },
         "title": "AzureAIEvaluatorGrader"
+      },
+      "TokenUsage": {
+        "type": "object",
+        "required": [
+          "input_tokens",
+          "output_tokens",
+          "total_tokens"
+        ],
+        "properties": {
+          "input_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of input (prompt) tokens consumed."
+          },
+          "output_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of output (completion) tokens generated."
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total tokens consumed (input + output)."
+          }
+        },
+        "description": "Token consumption summary for a long-running job. Populated when the job reaches a terminal state. Reusable across job-producing LROs."
       },
       "ToolCallOutputContent": {
         "anyOf": [

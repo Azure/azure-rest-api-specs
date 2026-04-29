@@ -253,6 +253,10 @@ model EvaluatorGenerationJob
   @doc("The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   finished_at?: FoundryTimestamp;
+
+  @doc("Token consumption summary. Populated when the job reaches a terminal state.")
+  @visibility(Lifecycle.Read)
+  usage?: TokenUsage;
 }
 
 @doc("Evaluator Definition")
