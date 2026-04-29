@@ -9,7 +9,6 @@ using TypeSpec.Versioning;
 /**
  * Monitor Agents Management Client
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API was moved to its own service."
 @armProviderNamespace("Microsoft.Monitor")
 @service(#{ title: "Azure Monitor Agents Control Plane API" })
 @versioned(Versions)

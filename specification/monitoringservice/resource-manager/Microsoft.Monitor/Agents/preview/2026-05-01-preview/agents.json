@@ -353,6 +353,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -473,9 +478,12 @@
           "type": "boolean",
           "description": "Whether the observability agent is enabled."
         },
-        "disabledOperations": {
-          "type": "string",
-          "description": "Comma-delimited list of operations that are disabled on this observability agent. Currently supported values: IssueCreation, Investigation. Additional values may be added in the future."
+        "disableAutonomousOperations": {
+          "type": "array",
+          "description": "List of operations that are disabled on this observability agent. Currently supported values: IssueCreation, Investigation. Additional values may be added in the future.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

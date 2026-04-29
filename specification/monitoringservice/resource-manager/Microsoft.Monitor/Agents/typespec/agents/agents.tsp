@@ -33,7 +33,12 @@ namespace Microsoft.Monitor {
     /**
      * Deletes an observability agent.
      */
-    delete is ArmResourceDeleteWithoutOkAsync<ObservabilityAgentResource>;
+    delete is ArmResourceDeleteWithoutOkAsync<
+      ObservabilityAgentResource,
+      Azure.ResourceManager.Foundations.BaseParameters<ObservabilityAgentResource>,
+      ArmCombinedLroHeaders<ArmOperationStatus, void> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >;
 
     /**
      * Lists observability agents in the specified resource group.
