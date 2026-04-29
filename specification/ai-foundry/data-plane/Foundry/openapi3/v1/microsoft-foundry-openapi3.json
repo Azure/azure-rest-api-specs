@@ -16089,6 +16089,21 @@
         ],
         "description": "Evaluation task for the schedule."
       },
+      "EvaluationSuiteDataGenerationOptions": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The data generation type: 'simple_qna', 'traces', 'tool_use', or 'task'."
+          },
+          "maxSamples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate."
+          }
+        },
+        "description": "Options for dataset generation within an evaluation suite generation job."
+      },
       "EvaluationSuiteGenerationJob": {
         "type": "object",
         "required": [
@@ -16189,6 +16204,14 @@
             "type": "object",
             "additionalProperties": {},
             "description": "Optional initialization parameters applied to all generated evaluators.\nFor example, deployment_name for LLM judge model, default threshold."
+          },
+          "dataGenerationOptions": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteDataGenerationOptions"
+              }
+            ],
+            "description": "Optional data generation options. Controls how the evaluation dataset is generated.\nIf omitted, the service uses sensible defaults."
           }
         },
         "description": "Caller-supplied inputs for an evaluation suite generation job."
@@ -16250,7 +16273,8 @@
             "prompt": "#/components/schemas/PromptEvaluationSuiteJobSource",
             "agent": "#/components/schemas/AgentEvaluationSuiteJobSource",
             "traces": "#/components/schemas/TracesEvaluationSuiteJobSource",
-            "dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource"
+            "dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource",
+            "file": "#/components/schemas/FileEvaluationSuiteJobSource"
           }
         },
         "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`."
@@ -16266,7 +16290,8 @@
               "prompt",
               "agent",
               "traces",
-              "dataset"
+              "dataset",
+              "file"
             ]
           }
         ],
@@ -17274,6 +17299,32 @@
           }
         ],
         "description": "FileDatasetVersion Definition"
+      },
+      "FileEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file"
+            ],
+            "description": "The source type, which is file."
+          },
+          "id": {
+            "type": "string",
+            "description": "Input Azure OpenAI file ID used for generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "File source for evaluation suite generation jobs — Azure OpenAI file input."
       },
       "FixedRatioVersionSelectionRule": {
         "type": "object",

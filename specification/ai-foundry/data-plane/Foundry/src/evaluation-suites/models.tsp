@@ -158,6 +158,9 @@ union EvaluationSuiteJobSourceType {
 
   @doc("Dataset source — reference to a dataset.")
   dataset: "dataset",
+
+  @doc("File source — Azure OpenAI file.")
+  file: "file",
 }
 
 @doc("The base source model for evaluation suite generation jobs. Polymorphic over `type`.")
@@ -224,6 +227,15 @@ model DatasetEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   version?: string;
 }
 
+@doc("File source for evaluation suite generation jobs — Azure OpenAI file input.")
+model FileEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
+  @doc("The source type, which is file.")
+  type: "file";
+
+  @doc("Input Azure OpenAI file ID used for generation.")
+  id: string;
+}
+
 @doc("Caller-supplied inputs for an evaluation suite generation job.")
 model EvaluationSuiteGenerationJobInputs {
   @doc("The suite name to create.")
@@ -243,6 +255,21 @@ model EvaluationSuiteGenerationJobInputs {
     For example, deployment_name for LLM judge model, default threshold.
     """)
   initializationParameters?: Record<unknown>;
+
+  @doc("""
+    Optional data generation options. Controls how the evaluation dataset is generated.
+    If omitted, the service uses sensible defaults.
+    """)
+  dataGenerationOptions?: EvaluationSuiteDataGenerationOptions;
+}
+
+@doc("Options for dataset generation within an evaluation suite generation job.")
+model EvaluationSuiteDataGenerationOptions {
+  @doc("The data generation type: 'simple_qna', 'traces', 'tool_use', or 'task'.")
+  type?: string;
+
+  @doc("Maximum number of samples to generate.")
+  maxSamples?: int32;
 }
 
 @doc("Result produced by a successful evaluation suite generation job.")
