@@ -133,6 +133,10 @@ using Microsoft.Resources;
   "ErrorAdditionalInfoType",
   "csharp"
 );
+@@clientName(DeploymentsOperationGroup.calculateTemplateHash,
+  "CalculateDeploymentTemplateHash",
+  "csharp"
+);
 
 // C# SDK: Use the generic at-scope interface (DeploymentExtendeds) for all scopes.
 // Suppress per-scope @armResourceOperations interfaces from C# to eliminate duplicate
@@ -224,5 +228,8 @@ using Microsoft.Resources;
 @@scope(DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
   "!csharp"
 );
+
+@@scope(DeploymentOperationsOperationGroup.get, "!csharp");
+@@scope(DeploymentOperationsOperationGroup.list, "!csharp");
 
 @@scope(Deployments.checkExistenceAtScope, "!csharp"); // Remove this setting once https://github.com/Azure/azure-sdk-for-net/issues/58746 get fixed
