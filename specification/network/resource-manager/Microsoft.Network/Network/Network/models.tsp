@@ -26100,8 +26100,6 @@ model ExpressRoutePortAuthorizationListResult
 model ExpressRoutePortsLocationListResult
   is Azure.Core.Page<ExpressRoutePortsLocation>;
 
-model BastionHostListResult is Azure.Core.Page<BastionHost>;
-
 @@Azure.ClientGenerator.Core.clientName(ListVirtualHubRouteTableV2SResult,
   "ListVirtualHubRouteTableV2sResult"
 );
