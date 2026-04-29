@@ -3441,7 +3441,7 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientName(Search.KnowledgeSourceIngestionParameters.aiServices,
-  "AIServices",
+  "aiServices",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceStatistics,
