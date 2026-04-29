@@ -42,7 +42,7 @@ model DatasetReference {
 model EvaluationSuiteVersion {
   @doc("""
     Human-readable display name.
-    Does not need to be unique. Shown in portal list views and eval reports.
+    Does not need to be unique. Shown in Foundry portal list views and eval reports.
     """)
   displayName?: string;
 
@@ -67,7 +67,7 @@ model EvaluationSuiteVersion {
     At least one entry is required.
     """)
   @minItems(1)
-  testingCriteria: Record<unknown>[];
+  testingCriteria: Record<string, unknown>[];
 
   @doc("""
     Target for this evaluation suite. Uses the existing Target discriminated type
@@ -82,7 +82,7 @@ model EvaluationSuiteVersion {
     Supports template type (prompt with column placeholders) and
     item_reference type (column containing pre-built messages).
     """)
-  inputMessages?: Record<unknown>;
+  inputMessages?: Record<string, unknown>;
 
   @doc("""
     Default evaluation level for this suite. Can be overridden at run time.
@@ -206,7 +206,7 @@ model EvaluationSuiteGenerationJobInputs {
     Optional initialization parameters applied to all generated evaluators.
     For example, deployment_name for LLM judge model, default threshold.
     """)
-  initializationParameters?: Record<unknown>;
+  initializationParameters?: Record<string, unknown>;
 }
 
 @doc("Result produced by a successful evaluation suite generation job.")

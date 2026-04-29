@@ -177,11 +177,11 @@ using Azure.AI.Projects;
 @@clientName(EvaluationSuites.listLatest, "list");
 
 // Evaluation suite generation jobs — renamed for Python SDK discoverability
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_jobs", "python");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_job");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_job");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_jobs");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_job");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_job");
 
 // --------------------------------------------------------------------------------
 // Insights sub‐client
