@@ -577,6 +577,10 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: bms.json
+    where: $.definitions.ProtectedItemResource
+    reason: ProtectedItemResource is exposed read-only on the cross-tenant pass-through paths (BackupProtectedItemsFromCrossTenantVault) where DELETE is intentionally not supported. The standard (non-cross-tenant) path retains DELETE; the lint rule cannot scope its check to exclude the read-only cross-tenant mirror.
   - suppress: NestedResourcesMustHaveListOperation
     from: bms.json
     where: $.definitions.CrossTenantVaultMapping
