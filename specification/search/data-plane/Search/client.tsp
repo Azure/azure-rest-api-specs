@@ -321,8 +321,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(AnalyzedTokenInfo, Usage.input);
 @@access(IndexerExecutionStatus, Access.public);
 @@usage(IndexerExecutionStatus, Usage.input);
-@@access(IndexerExecutionStatus, Access.public);
-@@usage(IndexerExecutionStatus, Usage.input);
 @@access(SearchIndexer, Access.public);
 @@usage(SearchIndexer, Usage.input);
 @@access(SearchIndexerSkillset, Access.public);
@@ -495,7 +493,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(WebApiVectorizerParameters.uri, url, "csharp");
 @@alternateType(VectorizableImageUrlQuery.url, url, "csharp");
 @@clientName(AutocompleteResult, "AutocompleteResults", "csharp");
-@@access(IndexAction, Access.internal, "csharp");
 @@access(IndexAction, Access.internal, "csharp");
 @@access(IndexBatch, Access.internal, "csharp");
 @@clientName(IndexBatch, "IndexBatch", "csharp");
