@@ -534,10 +534,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "GetDatabaseUsages",
   "csharp"
 );
-// @@clientName(DatabaseAccounts.getReadOnlyKeys,
-//   "GetReadOnlyKeysDeprecated",
-//   "csharp"
-// );
 @@clientName(DatabaseAccounts.listMetrics, "GetAccountMetrics", "csharp");
 @@clientName(DatabaseAccounts.listUsages, "GetAccountUsages", "csharp");
 @@clientName(DatabaseAccounts.partitionKeyRangeIdListMetrics,
@@ -627,10 +623,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(RestorableDatabaseAccountGetResults.restorableTablesList,
   "GetRestorableTables",
-  "csharp"
-);
-@@clientName(RestorableMongodbCollectionGetResult,
-  "RestorableMongoDBCollection",
   "csharp"
 );
 @@clientName(RestorableMongodbCollectionPropertiesResource,
@@ -816,7 +808,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(MongoDBDatabaseResource, "MongoDBDatabaseResourceInfo", "csharp");
 @@clientName(MongoDBDatabaseResource.id, "DatabaseName", "csharp");
 @@clientName(MongoIndex, "MongoDBIndex", "csharp");
-@@clientName(MongoIndex.key, "KeyKeys", "csharp");
 @@clientName(MongoIndexOptions, "MongoDBIndexConfig", "csharp");
 @@clientName(MongoIndexOptions.unique, "IsUnique", "csharp");
 @@clientName(MongoRoleDefinitionGetResults, "MongoDBRoleDefinition", "csharp");
@@ -1216,24 +1207,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "RestorableCosmosDBAccount",
   "csharp"
 );
-@@clientName(RestorableSqlDatabaseGetResult, "RestorableSqlDatabase", "csharp");
-@@clientName(RestorableSqlContainerGetResult,
-  "RestorableSqlContainer",
-  "csharp"
-);
-@@clientName(RestorableMongodbDatabaseGetResult,
-  "RestorableMongoDBDatabase",
-  "csharp"
-);
-@@clientName(RestorableGremlinDatabaseGetResult,
-  "RestorableGremlinDatabase",
-  "csharp"
-);
-@@clientName(RestorableGremlinGraphGetResult,
-  "RestorableGremlinGraph",
-  "csharp"
-);
-@@clientName(RestorableTableGetResult, "RestorableTable", "csharp");
+// The original @@clientName(RestorableXxxGetResult, "RestorableXxx") decorators
+// were moved onto the Extended* wrapper models defined at the bottom of this
+// file, since @@alternateType substitutes those wrappers for the C# emitter.
 @@clientName(KeyWrapMetadata, "CosmosDBKeyWrapMetadata", "csharp");
 @@clientName(Metric, "CosmosDBBaseMetric", "csharp");
 @@clientName(Location, "CosmosDBAccountLocation", "csharp");
@@ -1611,9 +1587,100 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-// #suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-// @@Legacy.hierarchyBuilding(RestorableTableGetResult,
-//   Azure.ResourceManager.Foundations.Resource,
-//   "csharp"
-// );
+// Restorable* "GetResult" models declare id/name/type inline rather than
+// extending CommonTypes.Resource, so the generator cannot infer them as ARM
+// resources and the C# classes lose their ResourceData base. Wrap each with
+// a custom model that extends CommonTypes.Resource and substitute via
+// @@alternateType so the generated class inherits ResourceData (matches
+// the previously shipped SDK surface).
+
+/**
+ * An Azure Cosmos DB SQL database event
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableSqlDatabase extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<RestorableSqlDatabaseGetResult, "id" | "name" | "type">;
+}
+@@alternateType(RestorableSqlDatabaseGetResult,
+  RestorableSqlDatabase,
+  "csharp"
+);
+
+/**
+ * An Azure Cosmos DB SQL container event
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableSqlContainer
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<RestorableSqlContainerGetResult, "id" | "name" | "type">;
+}
+@@alternateType(RestorableSqlContainerGetResult,
+  RestorableSqlContainer,
+  "csharp"
+);
+
+/**
+ * An Azure Cosmos DB MongoDB database event
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableMongoDBDatabase
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<RestorableMongodbDatabaseGetResult, "id" | "name" | "type">;
+}
+@@alternateType(RestorableMongodbDatabaseGetResult,
+  RestorableMongoDBDatabase,
+  "csharp"
+);
+
+/**
+ * An Azure Cosmos DB MongoDB collection event
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableMongoDBCollection
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<
+    RestorableMongodbCollectionGetResult,
+    "id" | "name" | "type"
+  >;
+}
+@@alternateType(RestorableMongodbCollectionGetResult,
+  RestorableMongoDBCollection,
+  "csharp"
+);
+
+/**
+ * An Azure Cosmos DB Gremlin database event
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableGremlinDatabase
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<RestorableGremlinDatabaseGetResult, "id" | "name" | "type">;
+}
+@@alternateType(RestorableGremlinDatabaseGetResult,
+  RestorableGremlinDatabase,
+  "csharp"
+);
+
+/**
+ * An Azure Cosmos DB Gremlin graph event
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableGremlinGraph
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<RestorableGremlinGraphGetResult, "id" | "name" | "type">;
+}
+@@alternateType(RestorableGremlinGraphGetResult,
+  RestorableGremlinGraph,
+  "csharp"
+);
+
+/**
+ * An Azure Cosmos DB Table event
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableTable extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<RestorableTableGetResult, "id" | "name" | "type">;
+}
+@@alternateType(RestorableTableGetResult, RestorableTable, "csharp");
