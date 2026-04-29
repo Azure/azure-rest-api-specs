@@ -5563,6 +5563,12 @@
           "Create a scale set with Service Artifact Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithServiceArtifactReference.json"
           },
+          "Create a scale set with SpotPlus priority (Flexible)": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotPlusPriorityFlex.json"
+          },
+          "Create a scale set with SpotPlus priority (Uniform)": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotPlusPriority.json"
+          },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithUefiSettings.json"
           },
@@ -6670,6 +6676,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets a list of all lifecycle hook events in a virtual machine scale set.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6719,6 +6730,11 @@
             "schema": {
               "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a virtual machine scale set lifecycle hook event.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Get.json"
           }
         }
       },
@@ -6774,6 +6790,11 @@
             "schema": {
               "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "The operation to update the virtual machine scale set lifecycle hook event.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Update.json"
           }
         }
       }
@@ -10242,6 +10263,9 @@
           },
           "Create a vm with Scheduled Events Profile": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithScheduledEventsProfile.json"
+          },
+          "Create a vm with SpotPlus priority": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSpotPlusPriority.json"
           },
           "Create a vm with a marketplace image plan.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithAMarketplaceImagePlan.json"
@@ -20119,11 +20143,12 @@
     },
     "VirtualMachinePriorityTypes": {
       "type": "string",
-      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set.\n'Low' enum will be deprecated in the future, use 'Spot' for regular Spot VM/VMSS or use 'SpotPlus' from 2026-04-01 api version\nfor the next generation Spot VM/VMSS with better reliability.",
       "enum": [
         "Regular",
         "Low",
-        "Spot"
+        "Spot",
+        "SpotPlus"
       ],
       "x-ms-enum": {
         "name": "VirtualMachinePriorityTypes",
@@ -20131,15 +20156,23 @@
         "values": [
           {
             "name": "Regular",
-            "value": "Regular"
+            "value": "Regular",
+            "description": "Regular Priority for a standalone virtual machine or the virtual machines in the scale set.\nThis is the default priority and it will be used to deploy regular VM/VMSS."
           },
           {
             "name": "Low",
-            "value": "Low"
+            "value": "Low",
+            "description": "Low priority for a standalone virtual machine or the virtual machines in the scale set. Will be Deprecated, use Spot instead."
           },
           {
             "name": "Spot",
-            "value": "Spot"
+            "value": "Spot",
+            "description": "Spot priority for a standalone virtual machine or the virtual machines in the scale set."
+          },
+          {
+            "name": "SpotPlus",
+            "value": "SpotPlus",
+            "description": "SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.\nThis is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next\ngeneration of Azure Spot VM/VMSS with more reliability and longer running time."
           }
         ]
       }
