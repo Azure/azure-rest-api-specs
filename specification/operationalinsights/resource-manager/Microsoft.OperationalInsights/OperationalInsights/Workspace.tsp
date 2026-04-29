@@ -121,12 +121,44 @@ alias PurgeOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations(#{ omitTags: true })
+alias IntelligencePackOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * The name of the intelligence pack.
+     */
+    @path
+    @segment("intelligencePacks")
+    @key("intelligencePackName")
+    intelligencePackName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface Workspaces {
   /**
    * Gets a workspace instance.
    */
   @tag("Workspaces")
+  @autoRoute
   get is ArmResourceRead<Workspace>;
 
   /**
@@ -134,6 +166,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
@@ -147,6 +180,7 @@ interface Workspaces {
    * Updates a workspace.
    */
   @tag("Workspaces")
+  @autoRoute
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Workspace, PatchModel = WorkspacePatch>;
 
@@ -155,6 +189,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
@@ -171,6 +206,7 @@ interface Workspaces {
    * Gets workspaces in a resource group.
    */
   @tag("Workspaces")
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     Response = ArmResponse<WorkspaceListResult>
@@ -180,6 +216,7 @@ interface Workspaces {
    * Gets the workspaces in a subscription.
    */
   @tag("Workspaces")
+  @autoRoute
   list is ArmListBySubscription<
     Workspace,
     Response = ArmResponse<WorkspaceListResult>
@@ -191,6 +228,7 @@ interface Workspaces {
   @tag("AvailableServiceTiers")
   @get
   @action("availableServiceTiers")
+  @autoRoute
   listByWorkspace is ArmResourceActionSync<
     Workspace,
     void,
@@ -201,6 +239,7 @@ interface Workspaces {
    * Delete a Log Analytics gateway.
    */
   @tag("Workspaces")
+  @autoRoute
   gatewaysDelete is GatewayOps.DeleteSync<Workspace, Response = OkResponse>;
 
   /**
@@ -208,19 +247,13 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @tag("IntelligencePacks")
-  @action("Disable")
-  disable is ArmResourceActionSync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Disable")
+  disable is IntelligencePackOps.ActionSync<
     Workspace,
     void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The name of the intelligence pack to be disabled.
-       */
-      @path
-      @segment("intelligencePacks")
-      intelligencePackName: string;
-    }
+    Response = OkResponse | ErrorResponse
   >;
 
   /**
@@ -228,19 +261,13 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @tag("IntelligencePacks")
-  @action("Enable")
-  enable is ArmResourceActionSync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Enable")
+  enable is IntelligencePackOps.ActionSync<
     Workspace,
     void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The name of the intelligence pack to be enabled.
-       */
-      @path
-      @segment("intelligencePacks")
-      intelligencePackName: string;
-    }
+    Response = OkResponse | ErrorResponse
   >;
 
   /**
@@ -250,6 +277,7 @@ interface Workspaces {
   @tag("IntelligencePacks")
   @get
   @action("intelligencePacks")
+  @autoRoute
   intelligencePacksList is ArmResourceActionSync<
     Workspace,
     void,
@@ -263,6 +291,7 @@ interface Workspaces {
   @list
   @get
   @action("managementGroups")
+  @autoRoute
   managementGroupsList is ArmResourceActionSync<
     Workspace,
     void,
@@ -274,6 +303,7 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @post
+  @autoRoute
   schemaGet is SchemaOps.ListSinglePage<
     Workspace,
     Response = ArmResponse<SearchGetSchemaResponse>
@@ -284,6 +314,7 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @action("sharedKeys")
+  @autoRoute
   getSharedKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -295,6 +326,7 @@ interface Workspaces {
    */
   @tag("Workspaces")
   @action("regenerateSharedKey")
+  @autoRoute
   regenerate is ArmResourceActionSync<Workspace, void, ArmResponse<SharedKeys>>;
 
   /**
@@ -304,6 +336,7 @@ interface Workspaces {
   @list
   @get
   @action("usages")
+  @autoRoute
   usagesList is ArmResourceActionSync<
     Workspace,
     void,
@@ -320,6 +353,7 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
+  @autoRoute
   purge is ArmResourceActionSync<
     Workspace,
     WorkspacePurgeBody,
@@ -337,6 +371,7 @@ interface Workspaces {
    * Gets status of an ongoing purge operation.
    */
   @tag("Workspaces")
+  @autoRoute
   getPurgeStatus is PurgeOps.Read<
     Workspace,
     Response = ArmResponse<WorkspacePurgeStatusResponse>
@@ -348,6 +383,7 @@ interface Workspaces {
    * The failback operation is asynchronous and can take up to 30 minutes to complete. The status of the operation can be checked using the operationId returned in the response.
    */
   @tag("Workspaces")
+  @autoRoute
   failback is ArmResourceActionAsyncBase<
     Workspace,
     void,
