@@ -307,8 +307,6 @@ namespace Azure.AI.Projects {
      */
     type: "openapi";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The openapi function definition.
      */
@@ -377,8 +375,6 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'browser_automation'.
      */
     type: "azure_function";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The Azure Function Tool definition.
