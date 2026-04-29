@@ -1625,4 +1625,29 @@ op attestationsListForResource(
   PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
   "python"
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscrip
+@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "python"
+);
+
+// ComponentPolicyStatesOperationGroup
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "python"
+);
