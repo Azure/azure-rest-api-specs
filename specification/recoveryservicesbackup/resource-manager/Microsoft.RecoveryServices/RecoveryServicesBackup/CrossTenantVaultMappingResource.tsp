@@ -97,6 +97,75 @@ interface CrossTenantVaultMappingStatus {
 // Cross-tenant pass-through operations (split per operationId prefix)
 // ============================================================
 
+// Shared parent-parameter models for the LegacyOperations aliases below.
+// Each model captures only the path-segment params for a common ARM URL prefix
+// in the cross-tenant vault hierarchy. Standard scope (ApiVersion/Subscription/
+// ResourceGroup) and `Azure.ResourceManager.Legacy.Provider` are spread directly
+// in each Ops alias so they emit in the correct URL order (scope → provider → segments).
+// Note: @key is intentionally omitted because TypeSpec disallows multiple @key
+// fields on a named model. URL emission only requires @path + @segment on parent params.
+
+/**
+ * Path segment parameters under /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}.
+ */
+@added(Versions.v2026_03_31_preview)
+model CrossTenantVaultMappingParentParameters {
+  @doc("The name of the recovery services vault.")
+  @path
+  @segment("vaults")
+  vaultName: string;
+
+  @doc("Cross-tenant vault mapping name.")
+  @path
+  @segment("backupCrossTenantVaultMappings")
+  @pattern("^[A-Za-z][A-Za-z0-9]{1,99}$")
+  crossTenantVaultMappingName: string;
+}
+
+/**
+ * Path segment parameters extending the mapping parent down to a backup protection container.
+ */
+@added(Versions.v2026_03_31_preview)
+model CrossTenantContainerParentParameters {
+  ...CrossTenantVaultMappingParentParameters;
+
+  @doc("Fabric name associated with the backed up items.")
+  @path
+  @segment("backupFabrics")
+  fabricName: string;
+
+  @doc("Container name associated with the backed up items.")
+  @path
+  @segment("protectionContainers")
+  containerName: string;
+}
+
+/**
+ * Path segment parameters extending the container parent down to a protected item.
+ */
+@added(Versions.v2026_03_31_preview)
+model CrossTenantProtectedItemParentParameters {
+  ...CrossTenantContainerParentParameters;
+
+  @doc("Backed up item name.")
+  @path
+  @segment("protectedItems")
+  protectedItemName: string;
+}
+
+/**
+ * Path segment parameters extending the mapping parent down to a vault credential certificate.
+ */
+@added(Versions.v2026_03_31_preview)
+model CrossTenantVaultCredentialParentParameters {
+  ...CrossTenantVaultMappingParentParameters;
+
+  @doc("Name identifier for the certificate.")
+  @path
+  @segment("vaultCredentials")
+  certificateName: string;
+}
+
 // LegacyOperations alias for routes parented at /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/<child>
 // The first model arg captures the parent path; the second declares the child segment used by @segmentOf for list URLs.
 @added(Versions.v2026_03_31_preview)
@@ -108,19 +177,7 @@ interface BackupProtectedItemsFromCrossTenantVaultOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-
-        @doc("The name of the recovery services vault.")
-        @path
-        @segment("vaults")
-        @key
-        vaultName: string,
-
-        @doc("Cross-tenant vault mapping name.")
-        @path
-        @segment("backupCrossTenantVaultMappings")
-        @key
-        @pattern("^[A-Za-z][A-Za-z0-9]{1,99}$")
-        crossTenantVaultMappingName: string,
+        ...CrossTenantVaultMappingParentParameters,
       },
       {
         @doc("Backup managed item name.")
@@ -159,59 +216,39 @@ interface BackupProtectedItemsFromCrossTenantVault {
 }
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
 interface ProtectedItemFromCrossTenantVault {
   /**
    * Gets the details of a protected item from a cross-tenant vault.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Fabric name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    fabricName: string,
-
-    /**
-     * Container name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    containerName: string,
-
-    /**
-     * Backed up item name whose details are to be fetched.
-     */
-    @pattern(".*")
-    @path
-    protectedItemName: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<ProtectedItemResource> | ErrorResponse;
+  get is ProtectedItemFromCrossTenantVaultOps.Read<ProtectedItemResource>;
 }
 
-// LegacyOperations alias for routes parented 5 levels deep:
-// /vaults/{vaultName}/backupCrossTenantVaultMappings/{...}/backupFabrics/{...}/protectionContainers/{...}/protectedItems/{...}/<child>
+// LegacyOperations alias for routes parented at the protected-item resource (5 levels deep,
+// child = protectedItems/{protectedItemName}).
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
+interface ProtectedItemFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantContainerParentParameters,
+      },
+      {
+        @doc("Backed up item name whose details are to be fetched.")
+        @path
+        @segment("protectedItems")
+        @key
+        protectedItemName: string,
+      },
+      ResourceName = "ProtectedItemFromCrossTenantVault"
+    > {}
+
+// LegacyOperations alias for routes parented at /vaults/{}/backupCrossTenantVaultMappings/{}/backupFabrics/{}/protectionContainers/{}/protectedItems/{}/<child>
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
 interface CrossTenantVaultRecoveryPointsOps
@@ -221,37 +258,7 @@ interface CrossTenantVaultRecoveryPointsOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-
-        @doc("The name of the recovery services vault.")
-        @path
-        @segment("vaults")
-        @key
-        vaultName: string,
-
-        @doc("Cross-tenant vault mapping name.")
-        @path
-        @segment("backupCrossTenantVaultMappings")
-        @key
-        @pattern("^[A-Za-z][A-Za-z0-9]{1,99}$")
-        crossTenantVaultMappingName: string,
-
-        @doc("Fabric name associated with the container.")
-        @path
-        @segment("backupFabrics")
-        @key
-        fabricName: string,
-
-        @doc("Container name associated with the backed up items.")
-        @path
-        @segment("protectionContainers")
-        @key
-        containerName: string,
-
-        @doc("Backed up item name whose recovery points are to be fetched.")
-        @path
-        @segment("protectedItems")
-        @key
-        protectedItemName: string,
+        ...CrossTenantProtectedItemParentParameters,
       },
       {
         @doc("RecoveryPointID represents the backed up data to be fetched.")
@@ -284,326 +291,162 @@ interface CrossTenantVaultRecoveryPoints {
 }
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
 interface CrossTenantVaultRecoveryPoint {
   /**
    * Provides the information of the backed up data identified using RecoveryPointID from the source
    * vault in a different tenant.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Fabric name associated with the backed up item.
-     */
-    @pattern(".*")
-    @path
-    fabricName: string,
-
-    /**
-     * Container name associated with the backed up item.
-     */
-    @pattern(".*")
-    @path
-    containerName: string,
-
-    /**
-     * Backed up item name whose recovery point details are to be fetched.
-     */
-    @pattern(".*")
-    @path
-    protectedItemName: string,
-
-    /**
-     * RecoveryPointID represents the backed up data to be fetched.
-     */
-    @path
-    recoveryPointId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<RecoveryPointResource> | ErrorResponse;
+  get is CrossTenantVaultRecoveryPointsOps.Read<RecoveryPointResource>;
 }
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
 interface RestoresFromCrossTenantVault {
   /**
    * Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.
    * To know the status of this API call, use GetProtectedItemOperationResult API.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore")
-  @post
+  @action("restore")
   @tag("CrossTenant")
-  trigger(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Fabric name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    fabricName: string,
-
-    /**
-     * Container name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    containerName: string,
-
-    /**
-     * Backed up item to be restored.
-     */
-    @pattern(".*")
-    @path
-    protectedItemName: string,
-
-    /**
-     * Recovery point ID which represents the backed up data to be restored.
-     */
-    @path
-    recoveryPointId: string,
-
-    ...ApiVersionParameter,
-
-    /**
-     * resource restore request
-     */
-    @bodyRoot
-    parameters: RestoreRequestResource,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+  trigger is CrossTenantVaultRecoveryPointsOps.ActionAsync<
+    RecoveryPointResource,
+    RestoreRequestResource,
+    void,
+    Response = ArmAcceptedLroResponse | ArmNoContentResponse
+  >;
 }
 
+// LegacyOperations alias for routes parented at the protected-item resource
+// (5 levels deep, child = operationResults/{operationId}).
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface ProtectedItemOperationResultsFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantProtectedItemParentParameters,
+      },
+      {
+        @doc("OperationID which represents the operation whose result needs to be fetched.")
+        @path
+        @segment("operationResults")
+        @key
+        operationId: string,
+      },
+      ResourceName = "ProtectedItemOperationResultsFromCrossTenantVault"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface ProtectedItemOperationResultsFromCrossTenantVault {
   /**
    * Fetches the result of any cross-tenant operation on the backup item.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Fabric name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    fabricName: string,
-
-    /**
-     * Container name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    containerName: string,
-
-    /**
-     * Backed up item name whose details are to be fetched.
-     */
-    @pattern(".*")
-    @path
-    protectedItemName: string,
-
-    /**
-     * OperationID which represents the operation whose result needs to be fetched.
-     */
-    @path
-    operationId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ErrorResponse;
+  get is ProtectedItemOperationResultsFromCrossTenantVaultOps.Read<
+    ProtectedItemResource,
+    Response = ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse
+  >;
 }
 
+// LegacyOperations alias for routes parented at the protected-item resource
+// (5 levels deep, child = operationsStatus/{operationId}).
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface ProtectedItemOperationStatusesFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantProtectedItemParentParameters,
+      },
+      {
+        @doc("OperationID represents the operation whose status needs to be fetched.")
+        @path
+        @segment("operationsStatus")
+        @key
+        operationId: string,
+      },
+      ResourceName = "ProtectedItemOperationStatusesFromCrossTenantVault"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface ProtectedItemOperationStatusesFromCrossTenantVault {
   /**
    * Fetches the status of a cross-tenant operation such as triggering a restore.
    * The status can be in progress, completed or failed.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Fabric name associated with the backing up items.
-     */
-    @pattern(".*")
-    @path
-    fabricName: string,
-
-    /**
-     * Container name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    containerName: string,
-
-    /**
-     * Backup item name whose details are to be fetched.
-     */
-    @pattern(".*")
-    @path
-    protectedItemName: string,
-
-    /**
-     * OperationID represents the operation whose status needs to be fetched.
-     */
-    @path
-    operationId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  get is ProtectedItemOperationStatusesFromCrossTenantVaultOps.Read<OperationStatus>;
 }
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+// LegacyOperations alias for routes parented at the mapping resource,
+// child = backupJobs/{jobName}. Used by both BackupJobsFromCrossTenantVault.list
+// and JobDetailsFromCrossTenantVault.get.
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
+interface BackupJobsFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantVaultMappingParentParameters,
+      },
+      {
+        @doc("Name of the job whose details are to be fetched.")
+        @path
+        @segment("backupJobs")
+        @key
+        jobName: string,
+      },
+      ResourceName = "BackupJobsFromCrossTenantVault"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface BackupJobsFromCrossTenantVault {
   /**
    * Provides a pageable list of cross-tenant backup jobs.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs")
-  @get
-  @list
   @tag("CrossTenant")
-  list(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
+  list is BackupJobsFromCrossTenantVaultOps.List<
+    JobResource,
+    Parameters = {
+      /**
+       * OData filter options.
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    ...ApiVersionParameter,
-
-    /**
-     * OData filter options.
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * skipToken Filter.
-     */
-    @query("$skipToken")
-    $skipToken?: string,
-  ): ArmResponse<CrossTenantJobResourceList> | ErrorResponse;
+      /**
+       * skipToken Filter.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Response = ArmResponse<CrossTenantJobResourceList>
+  >;
 }
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
 interface JobDetailsFromCrossTenantVault {
   /**
    * Gets extended information associated with a cross-tenant backup job.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupJobs/{jobName}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Name of the job whose details are to be fetched.
-     */
-    @pattern(".*")
-    @path
-    jobName: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<JobResource> | ErrorResponse;
+  get is BackupJobsFromCrossTenantVaultOps.Read<JobResource>;
 }
 
 @added(Versions.v2026_03_31_preview)
@@ -638,82 +481,77 @@ interface ValidateOperationFromCrossTenantVault {
   >;
 }
 
+// LegacyOperations alias for routes parented at the mapping resource,
+// child = backupValidateOperationResults/{operationId}.
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface ValidateOperationResultFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantVaultMappingParentParameters,
+      },
+      {
+        @doc("OperationID which represents the operation whose result needs to be fetched.")
+        @path
+        @segment("backupValidateOperationResults")
+        @key
+        operationId: string,
+      },
+      ResourceName = "ValidateOperationResultFromCrossTenantVault"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface ValidateOperationResultFromCrossTenantVault {
   /**
    * Gets the result of a specific validate operation for cross-tenant restore scenarios.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing ValidateOperationResults pattern in routes.tsp"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperationResults/{operationId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * OperationID which represents the operation whose result needs to be fetched.
-     */
-    @path
-    operationId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<
-    "Accepted",
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+  get is ValidateOperationResultFromCrossTenantVaultOps.Read<
+    ValidateOperationsResponse,
+    Response = ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<
+      "Accepted",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 }
 
+// LegacyOperations alias for routes parented at the mapping resource,
+// child = backupValidateOperationsStatuses/{operationId}.
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface ValidateOperationStatusFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantVaultMappingParentParameters,
+      },
+      {
+        @doc("OperationID represents the operation whose status needs to be fetched.")
+        @path
+        @segment("backupValidateOperationsStatuses")
+        @key
+        operationId: string,
+      },
+      ResourceName = "ValidateOperationStatusFromCrossTenantVault"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface ValidateOperationStatusFromCrossTenantVault {
   /**
    * Gets the status of a validate operation for cross-tenant restore scenarios.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperationsStatuses/{operationId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * OperationID represents the operation whose status needs to be fetched.
-     */
-    @path
-    operationId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  get is ValidateOperationStatusFromCrossTenantVaultOps.Read<OperationStatus>;
 }
 
 /**
@@ -790,54 +628,73 @@ model CrossTenantJobResourceList {
 // Cross-tenant Vault Credential operations (split per operationId prefix)
 // ============================================================
 
+// LegacyOperations alias for routes parented at the mapping resource,
+// child = vaultCredentials/{certificateName}.
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface CrossTenantVaultCredentialOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantVaultMappingParentParameters,
+      },
+      {
+        @doc("Name identifier for the certificate.")
+        @path
+        @segment("vaultCredentials")
+        @key
+        certificateName: string,
+      },
+      ResourceName = "CrossTenantVaultCredential"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface CrossTenantVaultCredential {
   /**
    * Generates a vault credential certificate for cross-tenant restore scenarios.
    * This is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates
    * endpoint for the source vault, generating a self-signed certificate registered with AAD.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/generate")
-  @post
+  @action("generate")
   @tag("CrossTenant")
-  generate(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Name identifier for the certificate.
-     */
-    @pattern(".*")
-    @path
-    certificateName: string,
-
-    ...ApiVersionParameter,
-
-    /**
-     * Optional certificate generation options.
-     */
-    @bodyRoot
-    parameters?: VaultCredentialCertificateRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+  generate is CrossTenantVaultCredentialOps.ActionAsync<
+    CrossTenantVaultMapping,
+    VaultCredentialCertificateRequest,
+    void,
+    Response = ArmAcceptedLroResponse | ArmNoContentResponse,
+    OptionalRequestBody = true
+  >;
 }
 
+// LegacyOperations alias for routes parented at the certificate resource,
+// child = operationResults/{operationId}.
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface CrossTenantVaultCredentialOperationResultsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantVaultCredentialParentParameters,
+      },
+      {
+        @doc("Operation ID returned in the Location header of the generate call.")
+        @path
+        @segment("operationResults")
+        @key
+        operationId: string,
+      },
+      ResourceName = "CrossTenantVaultCredentialOperationResults"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface CrossTenantVaultCredentialOperationResults {
   /**
    * Gets the result of an async vault credential generation operation.
@@ -845,88 +702,46 @@ interface CrossTenantVaultCredentialOperationResults {
    * Returns 200 OK with VaultCredentialCertificateResponse when the job completes.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Matches existing OperationResults pattern"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationResults/{operationId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Name identifier for the certificate.
-     */
-    @pattern(".*")
-    @path
-    certificateName: string,
-
-    /**
-     * Operation ID returned in the Location header of the generate call.
-     */
-    @path
-    operationId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<VaultCredentialCertificateResponse> | ArmAcceptedResponse<
-    "Accepted",
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+  get is CrossTenantVaultCredentialOperationResultsOps.Read<
+    VaultCredentialCertificateResponse,
+    Response = ArmResponse<VaultCredentialCertificateResponse> | ArmAcceptedResponse<
+      "Accepted",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 }
 
+// LegacyOperations alias for routes parented at the certificate resource,
+// child = operationStatus/{operationId} (singular, distinct from other status routes).
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface CrossTenantVaultCredentialOperationStatusesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...CrossTenantVaultCredentialParentParameters,
+      },
+      {
+        @doc("Operation ID returned in the Azure-AsyncOperation header of the generate call.")
+        @path
+        @segment("operationStatus")
+        @key
+        operationId: string,
+      },
+      ResourceName = "CrossTenantVaultCredentialOperationStatuses"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface CrossTenantVaultCredentialOperationStatuses {
   /**
    * Gets the status of an async vault credential generation operation.
    * Returns the current status (InProgress, Completed, Failed) and any associated job details.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/operationStatus/{operationId}")
-  @get
   @tag("CrossTenant")
-  get(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Name identifier for the certificate.
-     */
-    @pattern(".*")
-    @path
-    certificateName: string,
-
-    /**
-     * Operation ID returned in the Azure-AsyncOperation header of the generate call.
-     */
-    @path
-    operationId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  get is CrossTenantVaultCredentialOperationStatusesOps.Read<OperationStatus>;
 }

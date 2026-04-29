@@ -630,53 +630,32 @@
         "description": "Gets the details of a protected item from a cross-tenant vault.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.fabricName"
           },
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.containerName"
           },
           {
             "name": "protectedItemName",
             "in": "path",
             "description": "Backed up item name whose details are to be fetched.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
@@ -710,50 +689,28 @@
         "description": "Fetches the result of any cross-tenant operation on the backup item.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.fabricName"
           },
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.containerName"
           },
           {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backed up item name whose details are to be fetched.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantProtectedItemParentParameters.protectedItemName"
           },
           {
             "name": "operationId",
@@ -761,9 +718,6 @@
             "description": "OperationID which represents the operation whose result needs to be fetched.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -811,50 +765,28 @@
         "description": "Fetches the status of a cross-tenant operation such as triggering a restore.\nThe status can be in progress, completed or failed.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backing up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.fabricName"
           },
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.containerName"
           },
           {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backup item name whose details are to be fetched.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantProtectedItemParentParameters.protectedItemName"
           },
           {
             "name": "operationId",
@@ -862,9 +794,6 @@
             "description": "OperationID represents the operation whose status needs to be fetched.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -907,40 +836,19 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the container.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.fabricName"
           },
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up items.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.containerName"
           },
           {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backed up item name whose recovery points are to be fetched.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CrossTenantProtectedItemParentParameters.protectedItemName"
           },
           {
             "name": "$filter",
@@ -984,50 +892,28 @@
         "description": "Provides the information of the backed up data identified using RecoveryPointID from the source\nvault in a different tenant.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backed up item.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.fabricName"
           },
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up item.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.containerName"
           },
           {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backed up item name whose recovery point details are to be fetched.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantProtectedItemParentParameters.protectedItemName"
           },
           {
             "name": "recoveryPointId",
@@ -1035,9 +921,6 @@
             "description": "RecoveryPointID represents the backed up data to be fetched.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1071,65 +954,40 @@
         "description": "Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.\nTo know the status of this API call, use GetProtectedItemOperationResult API.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.fabricName"
           },
           {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up items.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantContainerParentParameters.containerName"
           },
           {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backed up item to be restored.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantProtectedItemParentParameters.protectedItemName"
           },
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "Recovery point ID which represents the backed up data to be restored.",
+            "description": "RecoveryPointID represents the backed up data to be fetched.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
-            "description": "resource restore request",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RestoreRequestResource"
@@ -1182,29 +1040,19 @@
         "description": "Provides a pageable list of cross-tenant backup jobs.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
             "name": "$filter",
@@ -1255,37 +1103,26 @@
         "description": "Gets extended information associated with a cross-tenant backup job.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
             "name": "jobName",
             "in": "path",
             "description": "Name of the job whose details are to be fetched.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1328,19 +1165,10 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
             "name": "$filter",
@@ -1538,26 +1366,19 @@
         "description": "Gets the result of a specific validate operation for cross-tenant restore scenarios.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
             "name": "operationId",
@@ -1565,9 +1386,6 @@
             "description": "OperationID which represents the operation whose result needs to be fetched.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1615,26 +1433,19 @@
         "description": "Gets the status of a validate operation for cross-tenant restore scenarios.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
             "name": "operationId",
@@ -1642,9 +1453,6 @@
             "description": "OperationID represents the operation whose status needs to be fetched.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1756,42 +1564,31 @@
         "description": "Generates a vault credential certificate for cross-tenant restore scenarios.\nThis is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates\nendpoint for the source vault, generating a self-signed certificate registered with AAD.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
             "name": "certificateName",
             "in": "path",
             "description": "Name identifier for the certificate.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
-            "description": "Optional certificate generation options.",
+            "description": "The content of the action request",
             "required": false,
             "schema": {
               "$ref": "#/definitions/VaultCredentialCertificateRequest"
@@ -1844,34 +1641,22 @@
         "description": "Gets the result of an async vault credential generation operation.\nReturns 202 Accepted while the TEE job is still in progress.\nReturns 200 OK with VaultCredentialCertificateResponse when the job completes.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "certificateName",
-            "in": "path",
-            "description": "Name identifier for the certificate.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultCredentialParentParameters.certificateName"
           },
           {
             "name": "operationId",
@@ -1879,9 +1664,6 @@
             "description": "Operation ID returned in the Location header of the generate call.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1929,34 +1711,22 @@
         "description": "Gets the status of an async vault credential generation operation.\nReturns the current status (InProgress, Completed, Failed) and any associated job details.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.vaultName"
           },
           {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName"
           },
           {
-            "name": "certificateName",
-            "in": "path",
-            "description": "Name identifier for the certificate.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "$ref": "#/parameters/CrossTenantVaultCredentialParentParameters.certificateName"
           },
           {
             "name": "operationId",
@@ -1964,9 +1734,6 @@
             "description": "Operation ID returned in the Azure-AsyncOperation header of the generate call.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -17736,5 +17503,55 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "CrossTenantContainerParentParameters.containerName": {
+      "name": "containerName",
+      "in": "path",
+      "description": "Container name associated with the backed up items.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CrossTenantContainerParentParameters.fabricName": {
+      "name": "fabricName",
+      "in": "path",
+      "description": "Fabric name associated with the backed up items.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CrossTenantProtectedItemParentParameters.protectedItemName": {
+      "name": "protectedItemName",
+      "in": "path",
+      "description": "Backed up item name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CrossTenantVaultCredentialParentParameters.certificateName": {
+      "name": "certificateName",
+      "in": "path",
+      "description": "Name identifier for the certificate.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CrossTenantVaultMappingParentParameters.crossTenantVaultMappingName": {
+      "name": "crossTenantVaultMappingName",
+      "in": "path",
+      "description": "Cross-tenant vault mapping name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$",
+      "x-ms-parameter-location": "method"
+    },
+    "CrossTenantVaultMappingParentParameters.vaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
