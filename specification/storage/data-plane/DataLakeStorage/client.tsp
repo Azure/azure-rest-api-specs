@@ -158,6 +158,7 @@ enum ListBlobsShowOnlyGo {
   /** Show only deleted blobs. */
   deleted: "deleted",
 
+  /** Show only directories. */
   directories: "directories",
 }
 @@alternateType(ListBlobsShowOnly, ListBlobsShowOnlyGo, "go");
@@ -172,7 +173,7 @@ enum ListBlobsShowOnlyGo {
   "go"
 );
 @@clientName(BlobHierarchyListSegment, "PathHierarchyListSegment", "go");
-
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(FileSystem.listBlobHierarchySegment,
   "responseEnvelopeName",
   "FileSystemClientListPathHierarchySegmentResponse",
