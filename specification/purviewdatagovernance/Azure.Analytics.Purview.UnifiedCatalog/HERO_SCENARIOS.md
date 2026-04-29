@@ -439,6 +439,301 @@ curl -X POST "$PURVIEW_ENDPOINT/terms" \
 
 ---
 
+## 🎯 **Hero Scenario 6: Register a Production Table as a Governed Data Asset, Import Its Column Schema, and Tag Sensitive Columns for Compliance**
+
+**Goal**: Bring a production database table under active governance by registering it as a data asset, importing its column schema from Data Map, tagging sensitive columns with critical data elements for regulatory compliance, and linking the asset to a data product for discoverability.
+
+**Difficulty**: ⭐⭐⭐⭐ (Advanced)
+**Time to Complete**: 15-20 minutes
+
+### **The Story**
+
+A data steward at a financial services company needs to bring a production Azure SQL table that holds customer transaction records under active governance. The table was already scanned by Microsoft Purview Data Map. She registers it as a data asset, imports its column schema from Data Map, tags the `CustomerEmail` and `AccountNumber` columns with pre-defined critical data elements to satisfy PCI-DSS requirements, and links the asset to the "Payments Data Product" so downstream consumers can discover it through the catalog.
+
+### **Prerequisites**
+- Purview endpoint configured and authenticated
+- An Azure SQL table already scanned in Microsoft Purview Data Map (Data Map asset ID `87530cc2-5a0f-4f84-befb-2af6f6f60000`; column IDs `a1174096-2a8c-4f8d-9cb4-e23512d85d43` for `CustomerEmail` and `b8d2b3f5-85cc-4d20-968b-be8d957c6716` for `AccountNumber`)
+- A "Customer Email" critical data element (`10013344-5566-7788-99aa-bbccddeeff00`) and a "Payments Data Product" (`90013344-5566-7788-99aa-bbccddeeff00`) already exist in the catalog
+
+### **Step-by-Step Walkthrough**
+
+#### **Step 1: Create the Data Asset, Linking It to the Scanned Data Map Table**
+
+```http
+POST /dataAssets
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "source": {
+    "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000"
+  },
+  "contacts": {
+    "owner": [
+      {
+        "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+        "description": "Jane — Data Steward"
+      }
+    ]
+  }
+}
+```
+
+**Expected Response** (201 Created):
+```json
+{
+  "id": "da001122-3344-5566-7788-99aabbccddee",
+  "name": "transactions_prod",
+  "type": "AzureSqlTable",
+  "typeProperties": {
+    "serverEndpoint": "https://payments-sql.database.windows.net",
+    "databaseName": "payments",
+    "schemaName": "dbo",
+    "tableName": "transactions"
+  },
+  "source": {
+    "type": "DataMap",
+    "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+    "assetType": "azure_sql_table",
+    "fqn": "mssql://payments-sql.database.windows.net/payments/dbo/transactions",
+    "accountName": "payments-sql",
+    "lastRefreshedAt": "2026-03-20T12:00:00.000Z",
+    "lastRefreshedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba"
+  },
+  "contacts": {
+    "owner": [
+      {
+        "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+        "description": "Jane — Data Steward"
+      }
+    ]
+  },
+  "systemData": {
+    "provisioningState": "Succeeded",
+    "createdAt": "2026-03-20T12:00:00.000Z",
+    "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba"
+  }
+}
+```
+
+#### **Step 2: Ingest the Table's Columns from Data Map into the Catalog**
+
+Ingest each column individually. First, the `CustomerEmail` column:
+
+```http
+POST /dataColumns/ingest
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "requests": [
+    {
+      "dataMapAssetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+      "dataMapColumnId": "a1174096-2a8c-4f8d-9cb4-e23512d85d43"
+    }
+  ]
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "id": "aaaaaa11-1111-2222-3333-444455556666",
+  "source": {
+    "type": "DataMap",
+    "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+    "columnId": "a1174096-2a8c-4f8d-9cb4-e23512d85d43"
+  }
+}
+```
+
+Then, the `AccountNumber` column:
+
+```http
+POST /dataColumns/ingest
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "requests": [
+    {
+      "dataMapAssetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+      "dataMapColumnId": "b8d2b3f5-85cc-4d20-968b-be8d957c6716"
+    }
+  ]
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "id": "bbbbbb11-1111-2222-3333-444455556666",
+  "source": {
+    "type": "DataMap",
+    "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+    "columnId": "b8d2b3f5-85cc-4d20-968b-be8d957c6716"
+  }
+}
+```
+
+#### **Step 3: Query Columns to Retrieve Their Catalog IDs and Verify Ingestion**
+
+```http
+POST /dataColumns/query
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "filter": {
+    "sourceAssetId": {
+      "eq": "87530cc2-5a0f-4f84-befb-2af6f6f60000"
+    }
+  },
+  "includingOrphans": false,
+  "includeColumnDetails": true,
+  "skip": 0,
+  "top": 20
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "value": [
+    {
+      "id": "aaaaaa11-1111-2222-3333-444455556666",
+      "source": {
+        "type": "DataMap",
+        "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+        "columnId": "a1174096-2a8c-4f8d-9cb4-e23512d85d43"
+      },
+      "columnDetails": {
+        "name": "CustomerEmail",
+        "description": "Primary customer email address",
+        "dataType": "nvarchar",
+        "qualifiedName": "mssql://payments-sql.database.windows.net/payments/dbo/transactions#CustomerEmail"
+      }
+    },
+    {
+      "id": "bbbbbb11-1111-2222-3333-444455556666",
+      "source": {
+        "type": "DataMap",
+        "assetId": "87530cc2-5a0f-4f84-befb-2af6f6f60000",
+        "columnId": "b8d2b3f5-85cc-4d20-968b-be8d957c6716"
+      },
+      "columnDetails": {
+        "name": "AccountNumber",
+        "description": "Customer payment account number",
+        "dataType": "nvarchar",
+        "qualifiedName": "mssql://payments-sql.database.windows.net/payments/dbo/transactions#AccountNumber"
+      }
+    }
+  ]
+}
+```
+
+#### **Step 4: Tag Sensitive Columns with Critical Data Elements for PCI-DSS Compliance**
+
+Tag the `CustomerEmail` column:
+
+```http
+POST /dataColumns/aaaaaa11-1111-2222-3333-444455556666/relationships?entityType=CRITICALDATAELEMENT
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "relationshipType": "Related",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
+  "description": "CustomerEmail column maps to the PCI-DSS-regulated Customer Email critical data element"
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "relationshipType": "Related",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
+  "description": "CustomerEmail column maps to the PCI-DSS-regulated Customer Email critical data element",
+  "systemData": {
+    "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "lastModifiedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "createdAt": "2026-03-20T12:10:00.000Z",
+    "lastModifiedAt": "2026-03-20T12:10:00.000Z"
+  }
+}
+```
+
+Tag the `AccountNumber` column:
+
+```http
+POST /dataColumns/bbbbbb11-1111-2222-3333-444455556666/relationships?entityType=CRITICALDATAELEMENT
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "relationshipType": "Related",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
+  "description": "AccountNumber column maps to the PCI-DSS-regulated Customer Email critical data element"
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "relationshipType": "Related",
+  "entityId": "10013344-5566-7788-99aa-bbccddeeff00",
+  "description": "AccountNumber column maps to the PCI-DSS-regulated Customer Email critical data element",
+  "systemData": {
+    "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "lastModifiedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "createdAt": "2026-03-20T12:10:30.000Z",
+    "lastModifiedAt": "2026-03-20T12:10:30.000Z"
+  }
+}
+```
+
+#### **Step 5: Link the Data Asset to the "Payments Data Product"**
+
+```http
+POST /dataAssets/da001122-3344-5566-7788-99aabbccddee/relationships?entityType=DATAPRODUCT
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "entityId": "90013344-5566-7788-99aa-bbccddeeff00",
+  "relationshipType": "Related",
+  "description": "transactions_prod is an underlying table powering the Payments Data Product"
+}
+```
+
+**Expected Response** (200 OK):
+```json
+{
+  "entityId": "90013344-5566-7788-99aa-bbccddeeff00",
+  "relationshipType": "Related",
+  "description": "transactions_prod is an underlying table powering the Payments Data Product",
+  "systemData": {
+    "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "lastModifiedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+    "createdAt": "2026-03-20T12:15:00.000Z",
+    "lastModifiedAt": "2026-03-20T12:15:00.000Z"
+  }
+}
+```
+
+### **Success Criteria**
+- ✅ Registered the production table as a governed data asset linked to Data Map
+- ✅ Imported column schema (CustomerEmail, AccountNumber) into the catalog
+- ✅ Tagged sensitive columns with critical data elements for PCI-DSS compliance
+- ✅ Linked the data asset to the Payments Data Product for consumer discoverability
+
+### **Value Delivered**
+- **Compliance coverage**: Physical schema columns are mapped to regulatory critical data elements, providing an audit trail for PCI-DSS/GDPR obligations
+- **Discoverability**: The data asset appears as a linked resource in the "Payments Data Product" so consumers know exactly which tables are involved
+- **Lineage traceability**: Data Map provenance is preserved in every column (`source.columnId`), so the path from raw storage to governed catalog is always traceable
+
+---
+
 ## 📋 **Scenario Priority Matrix**
 
 | Scenario | Frequency | Business Impact | Technical Complexity |
@@ -448,5 +743,6 @@ curl -X POST "$PURVIEW_ENDPOINT/terms" \
 | Data Products | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 | Critical Data Elements | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
 | Domain & OKR Management | ⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Asset Registration & Column Tagging | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 
 These hero scenarios represent the most valuable and commonly used patterns for the Purview Data Catalog API, providing clear pathways for developers to achieve meaningful business outcomes.
