@@ -580,7 +580,7 @@ op policyTrackedResourcesListQueryResultsForManagementGroup(
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup,
   policyTrackedResourcesListQueryResultsForManagementGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -605,7 +605,7 @@ op policyTrackedResourcesListQueryResultsForSubscription(
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
   policyTrackedResourcesListQueryResultsForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -625,7 +625,7 @@ op policyTrackedResourcesListQueryResultsForResourceGroup(
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup,
   policyTrackedResourcesListQueryResultsForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -643,7 +643,7 @@ op policyTrackedResourcesListQueryResultsForResource(
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
 @@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResource,
   policyTrackedResourcesListQueryResultsForResource,
-  "!java"
+  "!java,!python"
 );
 
 // PolicyEvents overrides
@@ -666,7 +666,7 @@ op policyEventsListQueryResultsForManagementGroup(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
   policyEventsListQueryResultsForManagementGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -691,7 +691,7 @@ op policyEventsListQueryResultsForSubscription(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscription,
   policyEventsListQueryResultsForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -711,7 +711,7 @@ op policyEventsListQueryResultsForResourceGroup(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
   policyEventsListQueryResultsForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -729,7 +729,7 @@ op policyEventsListQueryResultsForResource(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResource,
   policyEventsListQueryResultsForResource,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -752,7 +752,7 @@ op policyEventsListQueryResultsForPolicySetDefinition(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   policyEventsListQueryResultsForPolicySetDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -775,7 +775,7 @@ op policyEventsListQueryResultsForPolicyDefinition(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
   policyEventsListQueryResultsForPolicyDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -798,7 +798,7 @@ op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -824,7 +824,7 @@ op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 // PolicyStates overrides
@@ -847,7 +847,7 @@ op policyStatesListQueryResultsForManagementGroup(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
   policyStatesListQueryResultsForManagementGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -868,7 +868,7 @@ op policyStatesSummarizeForManagementGroup(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForManagementGroup,
   policyStatesSummarizeForManagementGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -893,7 +893,7 @@ op policyStatesListQueryResultsForSubscription(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscription,
   policyStatesListQueryResultsForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -918,7 +918,7 @@ op policyStatesSummarizeForSubscription(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscription,
   policyStatesSummarizeForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -938,7 +938,7 @@ op policyStatesListQueryResultsForResourceGroup(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   policyStatesListQueryResultsForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -958,7 +958,7 @@ op policyStatesSummarizeForResourceGroup(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroup,
   policyStatesSummarizeForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -976,7 +976,7 @@ op policyStatesListQueryResultsForResource(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResource,
   policyStatesListQueryResultsForResource,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -994,7 +994,7 @@ op policyStatesSummarizeForResource(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResource,
   policyStatesSummarizeForResource,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1017,7 +1017,7 @@ op policyStatesListQueryResultsForPolicySetDefinition(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
   policyStatesListQueryResultsForPolicySetDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1040,7 +1040,7 @@ op policyStatesSummarizeForPolicySetDefinition(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
   policyStatesSummarizeForPolicySetDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1063,7 +1063,7 @@ op policyStatesListQueryResultsForPolicyDefinition(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   policyStatesListQueryResultsForPolicyDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1086,7 +1086,7 @@ op policyStatesSummarizeForPolicyDefinition(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
   policyStatesSummarizeForPolicyDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1109,7 +1109,7 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1132,7 +1132,7 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
   policyStatesSummarizeForSubscriptionLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1158,7 +1158,7 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 ): PolicyStatesQueryResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1184,7 +1184,7 @@ op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
 ): SummarizeResults | QueryFailure;
 @@override(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
   policyStatesSummarizeForResourceGroupLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 // PolicyMetadata overrides
@@ -1200,7 +1200,7 @@ op policyMetadataList(
 ): PolicyMetadataCollection | PolicyInsightsApi.ErrorResponse;
 @@override(PolicyMetadataNonResourceOperationGroup.list,
   policyMetadataList,
-  "!java"
+  "!java,!python"
 );
 
 // ComponentPolicyStates overrides
@@ -1227,7 +1227,7 @@ op componentPolicyStatesListQueryResultsForSubscription(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   componentPolicyStatesListQueryResultsForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1247,7 +1247,7 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   componentPolicyStatesListQueryResultsForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1265,7 +1265,7 @@ op componentPolicyStatesListQueryResultsForResource(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
   componentPolicyStatesListQueryResultsForResource,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1290,7 +1290,7 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   componentPolicyStatesListQueryResultsForPolicyDefinition,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1315,7 +1315,7 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1343,7 +1343,7 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java"
+  "!java,!python"
 );
 
 // Remediations overrides
@@ -1366,7 +1366,7 @@ op remediationsListDeploymentsAtManagementGroup(
 ): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
   remediationsListDeploymentsAtManagementGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1384,7 +1384,7 @@ op remediationsListForManagementGroup(
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Remediations.listForManagementGroup,
   remediationsListForManagementGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1408,7 +1408,7 @@ op remediationsListDeploymentsAtSubscription(
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
   remediationsListDeploymentsAtSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1426,7 +1426,7 @@ op remediationsListForSubscription(
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listForSubscription,
   remediationsListForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1447,7 +1447,7 @@ op remediationsListDeploymentsAtResourceGroup(
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
   remediationsListDeploymentsAtResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1461,7 +1461,7 @@ op remediationsListForResourceGroup(
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listForResourceGroup,
   remediationsListForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1479,7 +1479,7 @@ op remediationsListDeploymentsAtResource(
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1494,7 +1494,7 @@ op remediationsListForResource(
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listForResource,
   remediationsListForResource,
-  "!java"
+  "!java,!python"
 );
 
 // Attestations overrides
@@ -1514,7 +1514,7 @@ op attestationsListForSubscription(
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Attestations.listForSubscription,
   attestationsListForSubscription,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1528,7 +1528,7 @@ op attestationsListForResourceGroup(
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationResourceGroupOperations.listForResourceGroup,
   attestationsListForResourceGroup,
-  "!java"
+  "!java,!python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1543,5 +1543,111 @@ op attestationsListForResource(
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationOperationGroup.listForResource,
   attestationsListForResource,
-  "!java"
+  "!java,!python"
+);
+
+// PolicyEventsOperationGroup
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  "python"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+  "python"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForSubscription,
+  "python"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
+  "python"
+);
+
+// PolicyStatesOperationGroup
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicySetDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicyDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscription::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForSubscription,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroup::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+  "python"
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "python"
+);
+
+// ComponentPolicyStatesOperationGroup
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "python"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "python"
 );
