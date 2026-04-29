@@ -1,0 +1,54 @@
+parameters:
+  "service-dir":
+    default: "sdk/developerhub"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/devhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devhub"
+    namespace: "com.azure.resourcemanager.devhub"
+    service-name: "DevHub"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.DeveloperHub"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/developerhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-developerhub"
+    namespace: "azure.mgmt.developerhub"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/devhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-devhub"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-devhub"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/devhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdevhub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdevhub"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
