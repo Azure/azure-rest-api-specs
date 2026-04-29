@@ -39,9 +39,18 @@ interface QueueClient extends Queue {}
   "rust"
 );
 
-@@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "!python, !csharp, !javascript");
-@@clientNamespace(Service, "Azure.Storage.Queues", "!python, !csharp, !javascript");
-@@clientNamespace(Queue, "Azure.Storage.Queues", "!python, !csharp, !javascript");
+@@clientNamespace(Storage.Queues,
+  "Azure.Storage.Queues",
+  "!python, !csharp, !javascript"
+);
+@@clientNamespace(Service,
+  "Azure.Storage.Queues",
+  "!python, !csharp, !javascript"
+);
+@@clientNamespace(Queue,
+  "Azure.Storage.Queues",
+  "!python, !csharp, !javascript"
+);
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(SentMessage, "SentMessageInternal", "rust");
@@ -66,7 +75,7 @@ model ListOfSentMessageGo is Array<SentMessage>;
 model PeekedMessagesGo is Array<PeekedMessage>;
 /**
  * List wrapper for DequeuedMessageItem array
-*/
+ */
 model ReceivedMessagesGo is Array<ReceivedMessage>;
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
@@ -95,51 +104,71 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "SignedDelegatedUserTID",
   "go"
 );
-@@clientOption(Queue.peekMessages, "monomorphicResponseFieldName", "Messages", "go");
-@@clientOption(Queue.receiveMessages, "monomorphicResponseFieldName", "Messages", "go");
-@@clientOption(Queue.sendMessage, "monomorphicResponseFieldName", "Messages", "go");
-@@clientOption(Queue.sendMessage, "responseEnvelopeName", "MessagesClientEnqueueResponse", "go");
-@@clientOption(Queue.receiveMessages, "responseEnvelopeName", "MessagesClientDequeueResponse", "go");
-@@clientOption(Queue.updateMessage, "responseEnvelopeName", "MessageIDClientUpdateResponse", "go");
-@@clientOption(Queue.deleteMessage, "responseEnvelopeName", "MessageIDClientDeleteResponse", "go");
-@@clientOption(Queue.peekMessages, "responseEnvelopeName", "MessagesClientPeekResponse", "go");
-@@clientOption(Queue.clear, "responseEnvelopeName", "MessagesClientClearResponse", "go");
-
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.peekMessages,
+  "monomorphicResponseFieldName",
+  "Messages",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.receiveMessages,
+  "monomorphicResponseFieldName",
+  "Messages",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.sendMessage,
+  "monomorphicResponseFieldName",
+  "Messages",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.sendMessage,
+  "responseEnvelopeName",
+  "MessagesClientEnqueueResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.receiveMessages,
+  "responseEnvelopeName",
+  "MessagesClientDequeueResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.updateMessage,
+  "responseEnvelopeName",
+  "MessageIDClientUpdateResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.deleteMessage,
+  "responseEnvelopeName",
+  "MessageIDClientDeleteResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.peekMessages,
+  "responseEnvelopeName",
+  "MessagesClientPeekResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.clear,
+  "responseEnvelopeName",
+  "MessagesClientClearResponse",
+  "go"
+);
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
 
-@@clientName(ReceivedMessage.insertionTime,
-  "insertedOn",
-  "javascript"
-);
-@@clientName(SentMessage.insertionTime,
-  "insertedOn",
-  "javascript"
-);
-@@clientName(PeekedMessage.insertionTime,
-  "insertedOn",
-  "javascript"
-);
-@@clientName(ReceivedMessage.expirationTime,
-  "expiresOn",
-  "javascript"
-);
-@@clientName(SentMessage.expirationTime,
-  "expiresOn",
-  "javascript"
-);
-@@clientName(PeekedMessage.expirationTime,
-  "expiresOn",
-  "javascript"
-);
-@@clientName(ReceivedMessage.timeNextVisible,
-  "nextVisibleOn",
-  "javascript"
-);
-@@clientName(SentMessage.timeNextVisible,
-  "nextVisibleOn",
-  "javascript"
-);
+@@clientName(ReceivedMessage.insertionTime, "insertedOn", "javascript");
+@@clientName(SentMessage.insertionTime, "insertedOn", "javascript");
+@@clientName(PeekedMessage.insertionTime, "insertedOn", "javascript");
+@@clientName(ReceivedMessage.expirationTime, "expiresOn", "javascript");
+@@clientName(SentMessage.expirationTime, "expiresOn", "javascript");
+@@clientName(PeekedMessage.expirationTime, "expiresOn", "javascript");
+@@clientName(ReceivedMessage.timeNextVisible, "nextVisibleOn", "javascript");
+@@clientName(SentMessage.timeNextVisible, "nextVisibleOn", "javascript");
 @@clientName(TimeNextVisibleResponseHeader.timeNextVisible,
   "nextVisibleOn",
   "javascript"
@@ -152,86 +181,48 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.expiry, string, "javascript");
 @@clientName(AccessPolicy.start, "startsOn", "javascript");
 @@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
-@@clientName(AccessPolicy.permission,
-  "permissions",
-  "javascript"
-);
-@@clientName(UserDelegationKey.signedOid,
-  "signedObjectId",
-  "javascript"
-);
-@@clientName(UserDelegationKey.signedTid,
-  "signedTenantId",
-  "javascript"
-);
-@@alternateType(UserDelegationKey.signedStart,
-  string,
-  "javascript"
-);
-@@alternateType(UserDelegationKey.signedExpiry,
-  string,
-  "javascript"
-);
-@@clientName(UserDelegationKey.signedStart,
-  "signedStartsOn",
-  "javascript"
-);
-@@clientName(UserDelegationKey.signedExpiry,
-  "signedExpiresOn",
-  "javascript"
-);
+@@clientName(AccessPolicy.permission, "permissions", "javascript");
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "javascript");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
+@@alternateType(UserDelegationKey.signedStart, string, "javascript");
+@@alternateType(UserDelegationKey.signedExpiry, string, "javascript");
+@@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
+@@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
 @@clientName(QueueServiceProperties.logging,
   "queueAnalyticsLogging",
   "javascript"
 );
 @@clientName(Logging.delete, "deleteProperty", "javascript");
-@@clientName(GeoReplication.lastSyncTime,
-  "lastSyncOn",
-  "javascript"
-);
-@@clientName(ListQueuesResponse.maxResults,
-  "maxPageSize",
-  "javascript"
-);
-@@clientName(ListQueuesResponse.nextMarker,
-  "continuationToken",
-  "javascript"
-);
-@@clientName(TimeoutParameter.timeout,
-  "timeoutInSeconds",
-  "javascript"
-);
+@@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
+@@clientName(ListQueuesResponse.maxResults, "maxPageSize", "javascript");
+@@clientName(ListQueuesResponse.nextMarker, "continuationToken", "javascript");
+@@clientName(TimeoutParameter.timeout, "timeoutInSeconds", "javascript");
 @@clientName(Metrics.includeApis, "includeAPIs", "javascript");
 @@alternateType(KeyInfo.start, string, "javascript, python");
 @@alternateType(KeyInfo.expiry, string, "javascript, python");
 @@clientName(KeyInfo.start, "startsOn", "javascript");
 @@clientName(KeyInfo.expiry, "expiresOn", "javascript");
-@@clientOption(Error,
-  "header",
-  "x-ms-error-code:errorCode",
-  "javascript"
-);
-@@clientOption(Error,
-  "restErrorCodeHeader",
-  "x-ms-error-code",
-  "javascript"
-);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Error, "header", "x-ms-error-code:errorCode", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Error, "restErrorCodeHeader", "x-ms-error-code", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(MetadataHeaders.metadata,
   "headerCollectionPrefix",
   "x-ms-meta",
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy sdks"
 @@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp");
 
-@@alternateType(UserDelegationKey.signedExpiry,
-  string,
-  "python"
-);
+@@alternateType(UserDelegationKey.signedExpiry, string, "python");
 @@alternateType(UserDelegationKey.signedStart, string, "python");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "python");
 
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the queueAcl body ----- */
@@ -324,7 +315,6 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientName(SignedIdentifier, "QueueSignedIdentifier", "csharp");
 @@clientName(SignedIdentifiers, "QueueSignedIdentifiers", "csharp");
 
-
 @@clientLocation(Queue.receiveMessages, "MessagesRestClient", "csharp");
 @@clientLocation(Queue.sendMessage, "MessagesRestClient", "csharp");
 @@clientLocation(Queue.peekMessages, "MessagesRestClient", "csharp");
@@ -332,5 +322,11 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientLocation(Queue.updateMessage, "MessageIdRestClient", "csharp");
 @@clientLocation(Queue.deleteMessage, "MessageIdRestClient", "csharp");
 
-@@clientOption(MetadataHeaders.metadata, "collectionHeaderPrefix", "x-ms-meta-", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
