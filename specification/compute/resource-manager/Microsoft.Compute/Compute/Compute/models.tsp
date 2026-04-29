@@ -368,7 +368,9 @@ union Modes {
 }
 
 /**
- * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
+ * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set.
+ * 'Low' enum will be deprecated in the future, use 'Spot' for regular Spot VM/VMSS or use 'SpotPlus' from 2026-04-01 api version
+ * for the next generation Spot VM/VMSS with better reliability.
  */
 union VirtualMachinePriorityTypes {
   string,
