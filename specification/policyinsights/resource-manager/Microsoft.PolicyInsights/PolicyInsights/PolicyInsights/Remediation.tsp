@@ -28,10 +28,14 @@ alias RemediationManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOper
     ...ApiVersionParameter;
 
     /** The namespace for Microsoft Management RP; only "Microsoft.Management" is allowed. */
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
     @path
     @segment("providers")
     @key
-    @alternateType("Microsoft.Management", "javascript")
+    @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+      "Microsoft.Management",
+      "javascript"
+    )
     managementGroupsNamespace: ManagementGroupsNamespaceType;
 
     /** Management group ID. */
