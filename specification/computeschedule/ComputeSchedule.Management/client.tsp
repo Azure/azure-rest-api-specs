@@ -408,3 +408,52 @@ model ResourcePatchRequestInput {
 @@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
 @@alternateType(WinRMListener.certificateUrl, url, "csharp");
 @@alternateType(VaultCertificate.certificateUrl, url, "csharp");
+
+// =====================================================================
+// C# type renames: Prefix core VM types with "VirtualMachine" to match
+// Azure.ResourceManager.Compute SDK naming conventions
+// =====================================================================
+@@clientName(OSDisk, "VirtualMachineOSDisk", "csharp");
+@@clientName(OSProfile, "VirtualMachineOSProfile", "csharp");
+@@clientName(DataDisk, "VirtualMachineDataDisk", "csharp");
+@@clientName(NetworkProfile, "VirtualMachineNetworkProfile", "csharp");
+@@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
+@@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
+@@clientName(VmSizeProperties, "VirtualMachineSizeProperties", "csharp");
+@@clientName(NetworkInterfaceReference,
+  "VirtualMachineNetworkInterfaceReference",
+  "csharp"
+);
+
+// =====================================================================
+// C# type renames: Match Compute SDK type names
+// =====================================================================
+@@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
+@@clientName(BulkActionVMProperties, "BulkActionVmProperties", "csharp");
+@@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
+@@clientName(Modes, "HostEndpointSettingsMode", "csharp");
+
+// =====================================================================
+// C# enum renames: Singular names to match Compute SDK conventions
+// =====================================================================
+@@clientName(CachingTypes, "CachingType", "csharp");
+@@clientName(SecurityTypes, "SecurityType", "csharp");
+@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
+@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
+@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
+@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
+@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
+@@clientName(IPVersions, "IPVersion", "csharp");
+@@clientName(ProtocolTypes, "WinRMListenerProtocolType", "csharp");
+@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
+@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
+@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
+@@clientName(SettingNames, "SettingName", "csharp");
+
+// =====================================================================
+// C# property renames: Match Compute SDK property names
+// =====================================================================
+@@clientName(ImageReference.sharedGalleryImageId,
+  "SharedGalleryImageUniqueId",
+  "csharp"
+);
