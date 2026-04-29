@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "instanceId": "98a570f2-63db-4117-91f0-366327b7b353",
+    "location": "WestUS",
+    "restorableGremlinDatabaseRid": "PD5DALigDgw=",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "79609a98-3394-41f8-911f-cfab0c075c86",
+            "type": "Microsoft.DocumentDB/locations/restorableDatabaseAccounts/restorableGraphs",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDb/locations/westus/restorableDatabaseAccounts/98a570f2-63db-4117-91f0-366327b7b353/restorableGraphs/79609a98-3394-41f8-911f-cfab0c075c86",
+            "properties": {
+              "resource": {
+                "_rid": "zAyAPQAAAA==",
+                "canUndelete": "invalid",
+                "eventTimestamp": "2020-10-13T04:56:42Z",
+                "operationType": "Create",
+                "ownerId": "Graph1",
+                "ownerResourceId": "V18LoLrv-qA="
+              }
+            }
+          },
+          {
+            "name": "79609a98-3394-41f8-911f-cfab0c075c86",
+            "type": "Microsoft.DocumentDB/locations/restorableDatabaseAccounts/restorableGraphs",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDb/locations/westus/restorableDatabaseAccounts/98a570f2-63db-4117-91f0-366327b7b353/restorableGraphs/79609a98-3394-41f8-911f-cfab0c075c86",
+            "properties": {
+              "resource": {
+                "_rid": "zAyAPQAAAA==",
+                "canUndelete": "notRestorable",
+                "canUndeleteReason": "Individual shared database collections restore is not supported. Please restore shared database to restore its collections that share the throughput.",
+                "eventTimestamp": "2020-10-13T04:56:42Z",
+                "operationType": "Delete",
+                "ownerId": "Graph1",
+                "ownerResourceId": "V18LoLrv-qA="
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RestorableGremlinGraphs_List",
+  "title": "CosmosDBRestorableGremlinGraphList"
+}
