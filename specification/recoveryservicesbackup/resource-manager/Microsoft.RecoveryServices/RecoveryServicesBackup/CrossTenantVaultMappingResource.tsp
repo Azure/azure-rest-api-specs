@@ -210,63 +210,77 @@ interface ProtectedItemFromCrossTenantVault {
   ): ArmResponse<ProtectedItemResource> | ErrorResponse;
 }
 
+// LegacyOperations alias for routes parented 5 levels deep:
+// /vaults/{vaultName}/backupCrossTenantVaultMappings/{...}/backupFabrics/{...}/protectionContainers/{...}/protectedItems/{...}/<child>
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface CrossTenantVaultRecoveryPointsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @doc("The name of the recovery services vault.")
+        @path
+        @segment("vaults")
+        @key
+        vaultName: string,
+
+        @doc("Cross-tenant vault mapping name.")
+        @path
+        @segment("backupCrossTenantVaultMappings")
+        @key
+        @pattern("^[A-Za-z][A-Za-z0-9]{1,99}$")
+        crossTenantVaultMappingName: string,
+
+        @doc("Fabric name associated with the container.")
+        @path
+        @segment("backupFabrics")
+        @key
+        fabricName: string,
+
+        @doc("Container name associated with the backed up items.")
+        @path
+        @segment("protectionContainers")
+        @key
+        containerName: string,
+
+        @doc("Backed up item name whose recovery points are to be fetched.")
+        @path
+        @segment("protectedItems")
+        @key
+        protectedItemName: string,
+      },
+      {
+        @doc("RecoveryPointID represents the backed up data to be fetched.")
+        @path
+        @segment("recoveryPoints")
+        @key
+        recoveryPointId: string,
+      },
+      ResourceName = "CrossTenantVaultRecoveryPoints"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface CrossTenantVaultRecoveryPoints {
   /**
    * Lists recovery points from the source vault in a different tenant.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints")
-  @get
-  @list
   @tag("CrossTenant")
-  list(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    /**
-     * Fabric name associated with the container.
-     */
-    @pattern(".*")
-    @path
-    fabricName: string,
-
-    /**
-     * Container name associated with the backed up items.
-     */
-    @pattern(".*")
-    @path
-    containerName: string,
-
-    /**
-     * Backed up item name whose recovery points are to be fetched.
-     */
-    @pattern(".*")
-    @path
-    protectedItemName: string,
-
-    ...ApiVersionParameter,
-
-    /**
-     * OData filter options.
-     */
-    @query("$filter")
-    $filter?: string,
-  ): ArmResponse<CrossTenantRecoveryPointResourceList> | ErrorResponse;
+  list is CrossTenantVaultRecoveryPointsOps.List<
+    RecoveryPointResource,
+    Parameters = {
+      /**
+       * OData filter options.
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Response = ArmResponse<CrossTenantRecoveryPointResourceList>
+  >;
 }
 
 @added(Versions.v2026_03_31_preview)

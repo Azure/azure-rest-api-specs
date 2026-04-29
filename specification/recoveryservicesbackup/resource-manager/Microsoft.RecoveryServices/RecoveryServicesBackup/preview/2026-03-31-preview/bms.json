@@ -898,6 +898,9 @@
         "description": "Lists recovery points from the source vault in a different tenant.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -908,8 +911,7 @@
             "in": "path",
             "description": "The name of the recovery services vault.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
             "name": "crossTenantVaultMappingName",
@@ -917,34 +919,28 @@
             "description": "Cross-tenant vault mapping name.",
             "required": true,
             "type": "string",
-            "pattern": ".*"
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
           },
           {
             "name": "fabricName",
             "in": "path",
             "description": "Fabric name associated with the container.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
             "name": "containerName",
             "in": "path",
             "description": "Container name associated with the backed up items.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
             "name": "protectedItemName",
             "in": "path",
             "description": "Backed up item name whose recovery points are to be fetched.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           },
           {
             "name": "$filter",
