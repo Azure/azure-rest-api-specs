@@ -125,32 +125,6 @@ model ArtifactProfile {
   signals?: FoundryModelArtifactProfileSignal[];
 }
 
-@doc("The operation type for a JSON Patch operation.")
-union JsonPatchOp {
-  string,
-
-  @doc("Add a value")
-  add: "add",
-
-  @doc("Remove a value")
-  remove: "remove",
-
-  @doc("Replace a value")
-  replace: "replace",
-}
-
-@doc("A JSON Patch operation (RFC 6902). Only /description and /tags paths are supported.")
-model JsonPatchOperation {
-  @doc("The operation to perform.")
-  op: JsonPatchOp;
-
-  @doc("The JSON pointer path to the target field. Only '/description' and '/tags' or '/tags/{key}' paths are supported.")
-  path: string;
-
-  @doc("The value to set. Required for 'add' and 'replace' operations.")
-  value?: unknown;
-}
-
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;

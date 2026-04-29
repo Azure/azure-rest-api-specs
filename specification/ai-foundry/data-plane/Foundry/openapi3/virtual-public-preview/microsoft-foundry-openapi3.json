@@ -7484,8 +7484,8 @@
     },
     "/models/{name}/versions/{version}/credentials": {
       "post": {
-        "operationId": "Models_fetchCredentials",
-        "description": "Fetch credentials for a model version asset.",
+        "operationId": "Models_getCredentials",
+        "description": "Get credentials for a model version asset.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -13643,6 +13643,27 @@
         ],
         "description": "API Key Credential definition"
       },
+      "ArtifactProfile": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelArtifactProfileCategory"
+              }
+            ],
+            "description": "The category of the artifact profile"
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoundryModelArtifactProfileSignal"
+            },
+            "description": "Signals detected in the model artifact"
+          }
+        },
+        "description": "Artifact profile of the model"
+      },
       "AssetCredentialRequest": {
         "type": "object",
         "required": [
@@ -16657,19 +16678,6 @@
           }
         ]
       },
-      "DerivedModelInformation": {
-        "type": "object",
-        "required": [
-          "baseModel"
-        ],
-        "properties": {
-          "baseModel": {
-            "type": "string",
-            "description": "Base model asset ID"
-          }
-        },
-        "description": "Derived model information"
-      },
       "DeveloperMessage": {
         "type": "object",
         "required": [
@@ -18712,6 +18720,71 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryModelArtifactProfileCategory": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "DataOnly",
+              "RuntimeDependent",
+              "Unknown"
+            ]
+          }
+        ],
+        "description": "The artifact profile category."
+      },
+      "FoundryModelArtifactProfileSignal": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "PickleDeserialization",
+              "CustomPythonCode",
+              "DynamicOps",
+              "NativeBinary",
+              "UnknownFormat"
+            ]
+          }
+        ],
+        "description": "Signals detected in the model artifact."
+      },
+      "FoundryModelSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "LocalUpload",
+              "TrainingJob"
+            ]
+          }
+        ],
+        "description": "The source type of the model."
+      },
+      "FoundryModelWeightType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "FullWeight",
+              "LoRA",
+              "DraftModel"
+            ]
+          }
+        ],
+        "description": "The weight type of the model."
+      },
       "FunctionToolCall": {
         "type": "object",
         "required": [
@@ -20534,6 +20607,24 @@
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
       },
+      "ModelSourceData": {
+        "type": "object",
+        "properties": {
+          "sourceType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelSourceType"
+              }
+            ],
+            "description": "The source type of the model"
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The job ID that produced this model"
+          }
+        },
+        "description": "Source information for the model"
+      },
       "ModelVersion": {
         "type": "object",
         "required": [
@@ -20554,13 +20645,34 @@
             "format": "uri",
             "description": "URI of the model artifact in blob storage"
           },
-          "derivedModelInformation": {
+          "weightType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DerivedModelInformation"
+                "$ref": "#/components/schemas/FoundryModelWeightType"
               }
             ],
-            "description": "Derived model information"
+            "description": "The weight type of the model"
+          },
+          "baseModel": {
+            "type": "string",
+            "description": "Base model asset ID"
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelSourceData"
+              }
+            ],
+            "description": "The source of the model"
+          },
+          "artifactProfile": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactProfile"
+              }
+            ],
+            "description": "The artifact profile of the model",
+            "readOnly": true
           },
           "id": {
             "type": "string",
@@ -20596,13 +20708,25 @@
             "format": "uri",
             "description": "URI of the model artifact in blob storage"
           },
-          "derivedModelInformation": {
+          "weightType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DerivedModelInformation"
+                "$ref": "#/components/schemas/FoundryModelWeightType"
               }
             ],
-            "description": "Derived model information"
+            "description": "The weight type of the model"
+          },
+          "baseModel": {
+            "type": "string",
+            "description": "Base model asset ID"
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelSourceData"
+              }
+            ],
+            "description": "The source of the model"
           },
           "description": {
             "type": "string",
@@ -20634,13 +20758,21 @@
             "format": "uri",
             "description": "URI of the model artifact in blob storage"
           },
-          "derivedModelInformation": {
+          "weightType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DerivedModelInformation"
+                "$ref": "#/components/schemas/FoundryModelWeightType"
               }
             ],
-            "description": "Derived model information"
+            "description": "The weight type of the model"
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelSourceData"
+              }
+            ],
+            "description": "The source of the model"
           },
           "description": {
             "type": "string",
