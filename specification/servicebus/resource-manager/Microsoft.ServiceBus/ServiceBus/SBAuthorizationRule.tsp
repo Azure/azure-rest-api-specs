@@ -68,6 +68,7 @@ interface SBAuthorizationRuleOps
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
+@tag("Namespaces AuthorizationRule")
 interface SBAuthorizationRules {
   /**
    * Gets an authorization rule for a namespace by rule name.
