@@ -193,9 +193,11 @@ union EvaluatorGenerationJobSourceType {
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
-
-  ...JobSourceDescription;
 }
+// Note: `JobSourceDescription` is intentionally NOT spread here. Each
+// concrete subtype already spreads its `XxxJobSource` shape from common/, and
+// each of those already spreads `JobSourceDescription`. Spreading it again on
+// the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
 model PromptEvaluatorGenerationJobSource
