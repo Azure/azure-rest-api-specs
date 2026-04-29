@@ -559,6 +559,7 @@ interface DatasetsV1 {
   >;
 
   /** Unregister a dataset by name. */
+  #suppress "@azure-tools/typespec-azure-core/no-route-parameter-name-mismatch" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}")
@@ -684,6 +685,7 @@ interface DatasetControllerV2 {
   >;
 
   /** Update a dataset (v1.2). */
+  #suppress "@azure-tools/typespec-azure-core/no-route-parameter-name-mismatch" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}")
@@ -801,6 +803,7 @@ interface DatasetControllerV2 {
   >;
 
   /** Unregister a dataset by name (v1.2). */
+  #suppress "@azure-tools/typespec-azure-core/no-route-parameter-name-mismatch" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}")
@@ -907,6 +910,7 @@ interface DatasetV2Operations {
   >;
 
   /** Update a dataset (v2). */
+  #suppress "@azure-tools/typespec-azure-core/no-route-parameter-name-mismatch" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}")
