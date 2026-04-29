@@ -12,6 +12,9 @@ on:
       - reopened
       # re-run if base branch is changed, since previous merge commit may generate incorrect diff
       - edited
+      # re-run when ARMModelingSignedOff is manually added or removed by a reviewer
+      - labeled
+      - unlabeled
     paths:
       - "specification/**/resource-manager/**"
 
@@ -21,10 +24,13 @@ permissions:
 jobs:
   arm-modeling-review:
     name: ARM Modeling Review
+    # For code-change events (opened/synchronize/reopened/edited), always run.
+    # For label events, only run when ARMModelingSignedOff is the label being added or removed,
+    # since that label represents a manual reviewer sign-off that affects this workflow's output.
+    if: |
+      (github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+      github.event.label.name == 'ARMModelingSignedOff'
     runs-on: ubuntu-slim
-    # TODO: Remove to enable new RP detection
-    if: fromJson('false')
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
