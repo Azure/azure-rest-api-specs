@@ -78,4 +78,29 @@ interface Models
     },
     AssetCredentialResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom update with JSON Patch"
+  @doc("Update a model version's description or tags using JSON Patch (RFC 6902). Returns 404 if the model version does not exist. Only '/description' and '/tags' paths are supported.")
+  @route("/models/{name}/versions/{version}")
+  @patch
+  updateVersion is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the model.")
+      @path
+      name: string;
+
+      @doc("Version of the model.")
+      @path
+      version: string;
+
+      @doc("Content type for JSON Patch")
+      @header("Content-Type")
+      contentType: "application/json-patch+json";
+
+      @doc("JSON Patch operations to apply. Only '/description' and '/tags' paths are supported.")
+      @bodyRoot
+      body: JsonPatchOperation[];
+    },
+    ModelVersion
+  >;
 }
