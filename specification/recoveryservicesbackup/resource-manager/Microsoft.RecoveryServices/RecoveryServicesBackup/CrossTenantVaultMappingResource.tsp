@@ -97,48 +97,65 @@ interface CrossTenantVaultMappingStatus {
 // Cross-tenant pass-through operations (split per operationId prefix)
 // ============================================================
 
+// LegacyOperations alias for routes parented at /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/<child>
+// The first model arg captures the parent path; the second declares the child segment used by @segmentOf for list URLs.
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations
+interface BackupProtectedItemsFromCrossTenantVaultOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @doc("The name of the recovery services vault.")
+        @path
+        @segment("vaults")
+        @key
+        vaultName: string,
+
+        @doc("Cross-tenant vault mapping name.")
+        @path
+        @segment("backupCrossTenantVaultMappings")
+        @key
+        @pattern("^[A-Za-z][A-Za-z0-9]{1,99}$")
+        crossTenantVaultMappingName: string,
+      },
+      {
+        @doc("Backup managed item name.")
+        @path
+        @segment("backupProtectedItems")
+        @key
+        protectedItemName: string,
+      },
+      ResourceName = "BackupProtectedItemsFromCrossTenantVault"
+    > {}
+
+@added(Versions.v2026_03_31_preview)
+@armResourceOperations
 interface BackupProtectedItemsFromCrossTenantVault {
   /**
    * Lists the protected items from the source vault in a different tenant.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupProtectedItems")
-  @get
-  @list
   @tag("CrossTenant")
-  list(
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
+  list is BackupProtectedItemsFromCrossTenantVaultOps.List<
+    ProtectedItemResource,
+    Parameters = {
+      /**
+       * OData filter options.
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the recovery services vault.
-     */
-    @pattern(".*")
-    @path
-    vaultName: string,
-
-    /**
-     * Cross-tenant vault mapping name.
-     */
-    @pattern(".*")
-    @path
-    crossTenantVaultMappingName: string,
-
-    ...ApiVersionParameter,
-
-    /**
-     * OData filter options.
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * skipToken Filter.
-     */
-    @query("$skipToken")
-    $skipToken?: string,
-  ): ArmResponse<CrossTenantProtectedItemResourceList> | ErrorResponse;
+      /**
+       * skipToken Filter.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Response = ArmResponse<CrossTenantProtectedItemResourceList>
+  >;
 }
 
 @added(Versions.v2026_03_31_preview)

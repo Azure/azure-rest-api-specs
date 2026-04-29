@@ -1323,6 +1323,9 @@
         "description": "Lists the protected items from the source vault in a different tenant.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1333,8 +1336,7 @@
             "in": "path",
             "description": "The name of the recovery services vault.",
             "required": true,
-            "type": "string",
-            "pattern": ".*"
+            "type": "string"
           },
           {
             "name": "crossTenantVaultMappingName",
@@ -1342,10 +1344,7 @@
             "description": "Cross-tenant vault mapping name.",
             "required": true,
             "type": "string",
-            "pattern": ".*"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
           },
           {
             "name": "$filter",
