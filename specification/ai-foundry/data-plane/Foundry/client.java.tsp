@@ -182,6 +182,13 @@ namespace Azure.AI.Projects;
   "java"
 );
 
+@@alternateType(PageOrder,
+  {
+    identity: "com.azure.ai.agents.models.PageOrder",
+  },
+  "java"
+);
+
 // SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
 @@alternateType(SasCredential.type, CredentialType, "java");
 
