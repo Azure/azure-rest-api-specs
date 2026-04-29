@@ -367,6 +367,10 @@ using Azure.ClientGenerator.Core;
 @@alternateType(DbServerMetadata.location, Azure.Core.azureLocation, "csharp");
 
 // ResourceType type mappings
+@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
 @@alternateType(MigrationNameAvailability.type,
   Azure.Core.armResourceType,
   "csharp"
@@ -518,6 +522,10 @@ using Azure.ClientGenerator.Core;
 @@clientName(FirewallRuleProperties.endIpAddress, "EndIPAddress", "csharp");
 @@clientName(Storage.type, "StorageType", "csharp");
 @@clientName(UserAssignedIdentity.type, "IdentityType", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  "ResourceType",
+  "csharp"
+);
 @@clientName(MigrationNameAvailability.type, "ResourceType", "csharp");
 @@clientName(NameAvailabilityModel.type, "ResourceType", "csharp");
 @@clientName(CapturedLogProperties.type, "LogFileType", "csharp");
