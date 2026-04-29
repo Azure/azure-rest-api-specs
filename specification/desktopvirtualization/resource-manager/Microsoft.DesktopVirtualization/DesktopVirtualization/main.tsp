@@ -33,6 +33,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.Core;
 /**
  * This Typespec represents the Desktop Virtualization API interfaces.
  */
@@ -71,32 +72,8 @@ interface Operations {
  */
 enum Versions {
   /**
-   * The 2024-08-08-preview API version.
+   * The latest public preview API version.
    */
-  v2024_08_08_preview: "2024-08-08-preview",
-
-  /**
-   * The 2025-04-01-preview API version.
-   */
-  v2025_04_01_preview: "2025-04-01-preview",
-
-  /**
-   * The 2025-08-01-preview API version.
-   */
-  v2025_08_01_preview: "2025-08-01-preview",
-
-  /**
-   * The 2025-09-01-preview API version.
-   */
-  v2025_09_01_preview: "2025-09-01-preview",
-
-  /**
-   * The 2025-11-01-preview API version.
-   */
-  v2025_11_01_preview: "2025-11-01-preview",
-
-  /**
-   * The 2026-01-01-preview API version.
-   */
-  v2026_01_01_preview: "2026-01-01-preview",
+  @previewVersion
+  vLatestPreview: "2026-01-01-preview",
 }
