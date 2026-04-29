@@ -78,8 +78,6 @@ using Components;
 );
 @@clientLocation(ApplicationInsightsComponents.list, "Components");
 @@clientLocation(ApplicationInsightsComponents.purge, "Components");
-@@clientLocation(ComponentPurgeStatusOperationGroup.getPurgeStatus,
-  "Components"
-);
+@@clientLocation(ApplicationInsightsComponents.getPurgeStatus, "Components");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationInsightsComponent.properties);

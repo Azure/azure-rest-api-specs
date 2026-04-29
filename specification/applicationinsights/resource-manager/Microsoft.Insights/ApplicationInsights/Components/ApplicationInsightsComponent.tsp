@@ -45,6 +45,27 @@ model ApplicationInsightsComponent extends ComponentsResource {
   properties?: ApplicationInsightsComponentProperties;
 }
 
+alias ComponentPurgeStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the Application Insights component resource. */
+    @path
+    @segment("components")
+    resourceName: string;
+  },
+  {
+    /** In a purge status request, this is the Id of the operation the status of which is returned. */
+    @path
+    @segment("operations")
+    purgeId: string;
+  },
+  ErrorType = ErrorResponseComponents
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface ApplicationInsightsComponents {
   /**
@@ -116,31 +137,7 @@ interface ApplicationInsightsComponents {
     },
     Error = ErrorResponseComponents
   >;
-}
 
-alias ComponentPurgeStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** The name of the Application Insights component resource. */
-    @path
-    @segment("components")
-    resourceName: string;
-  },
-  {
-    /** In a purge status request, this is the Id of the operation the status of which is returned. */
-    @path
-    @segment("operations")
-    purgeId: string;
-  },
-  ErrorType = ErrorResponseComponents
->;
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface ComponentPurgeStatusOperationGroup {
   /**
    * Get status for an ongoing purge operation.
    */
