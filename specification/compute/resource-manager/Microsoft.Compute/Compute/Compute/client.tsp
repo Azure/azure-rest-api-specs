@@ -188,3 +188,8 @@ using Compute;
   "publicIpAllocationMethod",
   "java"
 );
+
+@@clientName(VirtualMachineScaleSets.getOSUpgradeHistory,
+  "listOSUpgradeHistory",
+  "javascript"
+);
