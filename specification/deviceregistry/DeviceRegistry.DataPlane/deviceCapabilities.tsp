@@ -32,10 +32,8 @@ model DeviceCapability {
 @@key(DeviceCapability.name, "capabilityName");
 
 /** Properties of a device capability resource. */
+@discriminator("capabilityType")
 model DeviceCapabilityProperties {
-  /** The provisioning status of this capability. */
-  provisioningState?: CapabilityProvisioningState;
-
   /** The type of this device capability resource. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilityType: CapabilityType;
@@ -44,8 +42,19 @@ model DeviceCapabilityProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilityProvider: string;
 
+  /** The provisioning status of this capability. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: CapabilityProvisioningState;
+
   /** The error information for why linking failed. */
+  @visibility(Lifecycle.Read)
   provisioningError?: ProvisioningError;
+}
+
+/** The device capability properties for an IoTHub capability */
+model IotHubDeviceCapabilityProperties extends DeviceCapabilityProperties {
+  /** Discriminator for IoT Hub capability. */
+  capabilityType: CapabilityType.IoTHub;
 }
 
 /** The provisioning state of a device capability. */
@@ -72,17 +81,8 @@ union CapabilityProvisioningState {
 union CapabilityType {
   string,
 
-  /** Can be updated through ADU. */
-  Update: "Update",
-
   /** IoT Hub connection. */
-  CloudMessaging: "Cloud Messaging",
-
-  /** CMS certificate management. */
-  CertificateManagement: "Certificate Management",
-
-  /** Has inbound endpoints. */
-  Datasets: "Datasets",
+  IoTHub: "IoTHub",
 }
 
 /** Error information for provisioning failures. */
@@ -116,7 +116,8 @@ model GetCapabilityByUuidRequest {
 @tag("Device Capabilities")
 interface DeviceCapabilities {
   /** Create or replace a device capability. */
-  createOrReplace is ResourceOperations.ResourceCreateOrReplace<DeviceCapability>;
+  @pollingOperation(Operations.get)
+  createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<DeviceCapability>;
 
   /** Get a device capability. */
   get is ResourceOperations.ResourceRead<DeviceCapability>;
@@ -125,7 +126,7 @@ interface DeviceCapabilities {
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceCapability>;
 
   /** Delete a device capability. This is a long-running operation that tears down any provider-side resources (e.g. IoT Hub device registration) before removing the capability document. */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  @pollingOperation(Operations.get)
   delete is ResourceOperations.LongRunningResourceDelete<DeviceCapability>;
 
   /** List capabilities for a device. */

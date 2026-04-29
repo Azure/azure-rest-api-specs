@@ -407,12 +407,26 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceCapability"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DeviceCapability"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
@@ -432,7 +446,11 @@
           "Create or replace a device capability": {
             "$ref": "./examples/DeviceCapabilities_CreateOrReplace.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DeviceCapabilities_Update",
@@ -1522,34 +1540,16 @@
       "type": "string",
       "description": "The type of a device capability.",
       "enum": [
-        "Update",
-        "Cloud Messaging",
-        "Certificate Management",
-        "Datasets"
+        "IoTHub"
       ],
       "x-ms-enum": {
         "name": "CapabilityType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Update",
-            "value": "Update",
-            "description": "Can be updated through ADU."
-          },
-          {
-            "name": "CloudMessaging",
-            "value": "Cloud Messaging",
+            "name": "IoTHub",
+            "value": "IoTHub",
             "description": "IoT Hub connection."
-          },
-          {
-            "name": "CertificateManagement",
-            "value": "Certificate Management",
-            "description": "CMS certificate management."
-          },
-          {
-            "name": "Datasets",
-            "value": "Datasets",
-            "description": "Has inbound endpoints."
           }
         ]
       }
@@ -1732,10 +1732,6 @@
       "type": "object",
       "description": "Properties of a device capability resource.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/CapabilityProvisioningState",
-          "description": "The provisioning status of this capability."
-        },
         "capabilityType": {
           "$ref": "#/definitions/CapabilityType",
           "description": "The type of this device capability resource.",
@@ -1752,11 +1748,18 @@
             "create"
           ]
         },
+        "provisioningState": {
+          "$ref": "#/definitions/CapabilityProvisioningState",
+          "description": "The provisioning status of this capability.",
+          "readOnly": true
+        },
         "provisioningError": {
           "$ref": "#/definitions/ProvisioningError",
-          "description": "The error information for why linking failed."
+          "description": "The error information for why linking failed.",
+          "readOnly": true
         }
       },
+      "discriminator": "capabilityType",
       "required": [
         "capabilityType",
         "capabilityProvider"
@@ -1766,10 +1769,6 @@
       "type": "object",
       "description": "Properties of a device capability resource.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/CapabilityProvisioningState",
-          "description": "The provisioning status of this capability."
-        },
         "capabilityType": {
           "$ref": "#/definitions/CapabilityType",
           "description": "The type of this device capability resource.",
@@ -1785,12 +1784,12 @@
             "read",
             "create"
           ]
-        },
-        "provisioningError": {
-          "$ref": "#/definitions/ProvisioningError",
-          "description": "The error information for why linking failed."
         }
-      }
+      },
+      "discriminator": "capabilityType",
+      "required": [
+        "capabilityType"
+      ]
     },
     "DeviceEnabledStatus": {
       "type": "string",
@@ -2608,6 +2607,26 @@
           }
         ]
       }
+    },
+    "IotHubDeviceCapabilityProperties": {
+      "type": "object",
+      "description": "The device capability properties for an IoTHub capability",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "IoTHub"
+    },
+    "IotHubDeviceCapabilityPropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "The device capability properties for an IoTHub capability",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "IoTHub"
     },
     "Namespace": {
       "type": "object",
