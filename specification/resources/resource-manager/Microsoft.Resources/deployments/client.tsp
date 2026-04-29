@@ -59,6 +59,7 @@ using Microsoft.Resources;
   "csharp"
 );
 @@clientName(DeploymentValidateResult, "ArmDeploymentValidateResult", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DeploymentValidateResult,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
