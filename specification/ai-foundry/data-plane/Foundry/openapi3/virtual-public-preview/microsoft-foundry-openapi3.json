@@ -557,7 +557,7 @@
         }
       }
     },
-    "/agents/{agent_name}/code/content": {
+    "/agents/{agent_name}/code:download": {
       "get": {
         "operationId": "Agents_downloadAgentCode",
         "description": "Download the code zip for the latest version of a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.",
@@ -2332,7 +2332,7 @@
         ]
       }
     },
-    "/agents/{agent_name}/versions/{agent_version}/code/content": {
+    "/agents/{agent_name}/versions/{agent_version}/code:download": {
       "get": {
         "operationId": "Agents_downloadAgentVersionCode",
         "description": "Download the code zip for a specific version of a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.",

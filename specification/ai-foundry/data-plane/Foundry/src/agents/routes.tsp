@@ -344,7 +344,7 @@ interface Agents {
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.
    */
   @get
-  @route("/agents/{agent_name}/versions/{agent_version}/code/content")
+  @route("/agents/{agent_name}/versions/{agent_version}/code:download")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
@@ -368,7 +368,7 @@ interface Agents {
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.
    */
   @get
-  @route("/agents/{agent_name}/code/content")
+  @route("/agents/{agent_name}/code:download")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
