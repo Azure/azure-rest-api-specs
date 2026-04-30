@@ -54,6 +54,8 @@ interface DeviceUpdateOperationGroup {
   @operationId("DeviceUpdate_ImportUpdate")
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
+  @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
+  @useFinalStateVia("operation-location")
   importUpdate is ServiceOperation<
     {
       /**
@@ -125,6 +127,8 @@ interface DeviceUpdateOperationGroup {
   @operationId("DeviceUpdate_DeleteUpdate")
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
+  @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
+  @useFinalStateVia("operation-location")
   deleteUpdate is ServiceOperation<
     {
       /**
@@ -571,6 +575,8 @@ interface DeviceManagementOperationGroup {
   @operationId("DeviceManagement_ImportDevices")
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post
+  @pollingOperation(DeviceManagementOperationGroup.getOperationStatus)
+  @useFinalStateVia("operation-location")
   importDevices is ServiceOperation<
     {
       /**
@@ -896,36 +902,6 @@ interface DeviceManagementOperationGroup {
   >;
 
   /**
-   * Deletes a deployment.
-   */
-  @tag("Deployment management")
-  @operationId("DeviceManagement_DeleteDeployment")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
-  @delete
-  deleteDeployment is ServiceOperation<
-    {
-      /**
-       * The Device Update for IoT Hub account instance identifier.
-       */
-      @path
-      instanceId: string;
-
-      /**
-       * Group identifier.
-       */
-      @path
-      groupId: string;
-
-      /**
-       * Deployment identifier.
-       */
-      @path
-      deploymentId: string;
-    },
-    void
-  >;
-
-  /**
    * Gets the status of a deployment including a breakdown of how many devices in
    * the deployment are in progress, completed, or failed.
    */
@@ -1188,42 +1164,6 @@ interface DeviceManagementOperationGroup {
       deploymentId: string;
     },
     Deployment
-  >;
-
-  /**
-   * Deletes a device class subgroup deployment.
-   */
-  @tag("Deployment management")
-  @operationId("DeviceManagement_DeleteDeploymentForDeviceClassSubgroup")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
-  @delete
-  deleteDeploymentForDeviceClassSubgroup is ServiceOperation<
-    {
-      /**
-       * The Device Update for IoT Hub account instance identifier.
-       */
-      @path
-      instanceId: string;
-
-      /**
-       * Group identifier.
-       */
-      @path
-      groupId: string;
-
-      /**
-       * Device class identifier.
-       */
-      @path
-      deviceClassId: string;
-
-      /**
-       * Deployment identifier.
-       */
-      @path
-      deploymentId: string;
-    },
-    void
   >;
 
   /**
@@ -1574,6 +1514,73 @@ interface DeviceManagementOperationGroup {
       filter: string;
     },
     DeviceHealthList
+  >;
+}
+
+@tag("Deployment management")
+interface DeploymentManagementOperationGroup {
+  /**
+   * Deletes a deployment.
+   */
+  @operationId("DeviceManagement_DeleteDeployment")
+  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
+  @delete
+  deleteDeployment is ServiceOperation<
+    {
+      /**
+       * The Device Update for IoT Hub account instance identifier.
+       */
+      @path
+      instanceId: string;
+
+      /**
+       * Group identifier.
+       */
+      @path
+      groupId: string;
+
+      /**
+       * Deployment identifier.
+       */
+      @path
+      deploymentId: string;
+    },
+    void
+  >;
+
+  /**
+   * Deletes a device class subgroup deployment.
+   */
+  @operationId("DeviceManagement_DeleteDeploymentForDeviceClassSubgroup")
+  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
+  @delete
+  deleteDeploymentForDeviceClassSubgroup is ServiceOperation<
+    {
+      /**
+       * The Device Update for IoT Hub account instance identifier.
+       */
+      @path
+      instanceId: string;
+
+      /**
+       * Group identifier.
+       */
+      @path
+      groupId: string;
+
+      /**
+       * Device class identifier.
+       */
+      @path
+      deviceClassId: string;
+
+      /**
+       * Deployment identifier.
+       */
+      @path
+      deploymentId: string;
+    },
+    void
   >;
 }
 

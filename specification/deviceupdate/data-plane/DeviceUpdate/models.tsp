@@ -53,33 +53,6 @@ union OperationStatus {
 }
 
 /**
- * Operation status (without 'Undefined' option).
- */
-union OperationStatusWithoutUndefinedOption {
-  string,
-
-  /**
-   * Background operation created but not started yet.
-   */
-  NotStarted: "NotStarted",
-
-  /**
-   * Background operation is currently running.
-   */
-  Running: "Running",
-
-  /**
-   * Background operation finished with success.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Background operation finished with failure.
-   */
-  Failed: "Failed",
-}
-
-/**
  * Deployment state.
  */
 union DeviceDeploymentState {
@@ -1434,7 +1407,7 @@ model LogCollection {
    * Operation status.
    */
   @visibility(Lifecycle.Read)
-  status?: OperationStatusWithoutUndefinedOption;
+  status?: OperationStatus;
 }
 
 /**
@@ -1479,7 +1452,7 @@ model LogCollectionOperationDetailedStatus {
   /**
    * Operation status.
    */
-  status?: OperationStatusWithoutUndefinedOption;
+  status?: OperationStatus;
 
   /**
    * Status of the devices in the operation
@@ -1509,7 +1482,7 @@ model LogCollectionOperationDeviceStatus {
   /**
    * Log upload status
    */
-  status: OperationStatusWithoutUndefinedOption;
+  status: OperationStatus;
 
   /**
    * Log upload result code

@@ -9,13 +9,12 @@ linter:
   # truth: turning them on would force changes that alter the generated
   # swagger and break already-shipped SDKs.
   disable:
-    "@azure-tools/typespec-azure-core/use-standard-operations": "Existing operations don't use Azure.Core templates. Rewriting them would change the swagger and break shipped SDKs. Revisit when shipping a new (breaking) API version."
+    "@azure-tools/typespec-azure-core/use-standard-operations": "Existing operations don't use Azure.Core templates. Rewriting them would change the swagger and break shipped SDKs."
     "@azure-tools/typespec-azure-core/no-openapi": "operationId values are kept as-is from the original swagger so generated SDK method names don't change."
     "@azure-tools/typespec-azure-core/use-standard-names": "The name 'startLogCollection' comes from the original swagger. Renaming it would change the SDK method name."
     "@azure-tools/typespec-azure-core/bad-record-type": "handlerProperties is typed as Record<unknown> so the swagger emits 'additionalProperties: {}' (matching the original). Record<string> would change the schema."
     "@azure-tools/typespec-azure-core/request-body-problem": "importUpdate's body is a raw array in the original swagger. Wrapping it in an object would be a breaking change."
     "@azure-tools/typespec-client-generator-core/property-name-conflict": "Error.innerError is the property name in the original swagger. Renaming it would change the JSON payload."
-    "@azure-tools/typespec-azure-core/long-running-polling-operation-required": "Polling links omitted to keep the swagger byte-equivalent to the original. The original swagger does not declare x-ms-long-running-operation-options or final-state-via."
 
 options:
   "@azure-tools/typespec-autorest":

@@ -21,7 +21,9 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -1174,7 +1176,6 @@
       "delete": {
         "operationId": "DeviceManagement_DeleteDeployment",
         "tags": [
-          "Device and deployment management",
           "Deployment management"
         ],
         "description": "Deletes a deployment.",
@@ -1618,7 +1619,6 @@
       "delete": {
         "operationId": "DeviceManagement_DeleteDeploymentForDeviceClassSubgroup",
         "tags": [
-          "Device and deployment management",
           "Deployment management"
         ],
         "description": "Deletes a device class subgroup deployment.",
@@ -4189,7 +4189,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/OperationStatusWithoutUndefinedOption",
+          "$ref": "#/definitions/OperationStatus",
           "description": "Operation status.",
           "readOnly": true
         }
@@ -4257,7 +4257,7 @@
           "description": "A timestamp for when the current state was entered."
         },
         "status": {
-          "$ref": "#/definitions/OperationStatusWithoutUndefinedOption",
+          "$ref": "#/definitions/OperationStatus",
           "description": "Operation status."
         },
         "deviceStatus": {
@@ -4286,7 +4286,7 @@
           "description": "Module id."
         },
         "status": {
-          "$ref": "#/definitions/OperationStatusWithoutUndefinedOption",
+          "$ref": "#/definitions/OperationStatus",
           "description": "Log upload status"
         },
         "resultCode": {
@@ -4352,42 +4352,6 @@
       ],
       "x-ms-enum": {
         "name": "OperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Background operation created but not started yet."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Background operation is currently running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Background operation finished with success."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Background operation finished with failure."
-          }
-        ]
-      }
-    },
-    "OperationStatusWithoutUndefinedOption": {
-      "type": "string",
-      "description": "Operation status (without 'Undefined' option).",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusWithoutUndefinedOption",
         "modelAsString": true,
         "values": [
           {
