@@ -117,7 +117,7 @@ interface HypervSites {
     HypervSite,
     unknown,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -130,7 +130,7 @@ interface HypervSites {
     HypervSite,
     ExportMachineErrorsRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -162,7 +162,7 @@ interface HypervSites {
     HypervSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -174,7 +174,7 @@ interface HypervSites {
     HypervSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -186,7 +186,7 @@ interface HypervSites {
     HypervSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -198,7 +198,7 @@ interface HypervSites {
     HypervSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -210,7 +210,7 @@ interface HypervSites {
     HypervSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -223,7 +223,7 @@ interface HypervSites {
     HypervSite,
     UpdateMachineDepMapStatus,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -236,7 +236,7 @@ interface HypervSites {
     HypervSite,
     MachineMetadataCollection,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

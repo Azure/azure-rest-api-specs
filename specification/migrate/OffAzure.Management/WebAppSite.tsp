@@ -78,7 +78,7 @@ interface WebAppSites {
     WebAppSite,
     ExportWebAppsRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -90,7 +90,7 @@ interface WebAppSites {
     WebAppSite,
     ProxySiteRefreshBody,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -113,7 +113,7 @@ interface WebAppSites {
     WebAppSite,
     WebAppPropertiesCollection,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

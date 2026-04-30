@@ -117,7 +117,7 @@ interface SqlSites {
     SqlSite,
     unknown,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -129,7 +129,7 @@ interface SqlSites {
     SqlSite,
     ExportSqlServersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -141,7 +141,7 @@ interface SqlSites {
     SqlSite,
     SqlSiteRefreshBody,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

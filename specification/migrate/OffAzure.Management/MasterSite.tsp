@@ -112,7 +112,7 @@ interface MasterSites {
     MasterSite,
     void,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

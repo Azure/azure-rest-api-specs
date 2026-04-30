@@ -83,7 +83,7 @@ interface MachineResources {
     MachineResource,
     void,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -95,7 +95,7 @@ interface MachineResources {
     MachineResource,
     void,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }

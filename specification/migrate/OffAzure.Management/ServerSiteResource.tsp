@@ -123,7 +123,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     unknown,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -136,7 +136,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     ExportMachineErrorsRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -158,7 +158,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     void,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -181,7 +181,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     UpdateMachineDepMapStatus,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -193,7 +193,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     MachineMetadataCollection,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -205,7 +205,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -217,7 +217,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -229,7 +229,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     DependencyMapServiceMapextensionsScopeMapRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -241,7 +241,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -253,7 +253,7 @@ interface ServerSiteResources {
     ServerSiteResource,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

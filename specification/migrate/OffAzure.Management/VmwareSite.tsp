@@ -118,7 +118,7 @@ interface VmwareSites {
     VmwareSite,
     unknown,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -131,7 +131,7 @@ interface VmwareSites {
     VmwareSite,
     ExportMachineErrorsRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -144,7 +144,7 @@ interface VmwareSites {
     VmwareSite,
     ExportMachinesRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -176,7 +176,7 @@ interface VmwareSites {
     VmwareSite,
     DependencyMapServiceMapextensionsClientGroupMembersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -188,7 +188,7 @@ interface VmwareSites {
     VmwareSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -200,7 +200,7 @@ interface VmwareSites {
     VmwareSite,
     DependencyMapServiceMapextensionsScopeMapRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -212,7 +212,7 @@ interface VmwareSites {
     VmwareSite,
     DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -224,7 +224,7 @@ interface VmwareSites {
     VmwareSite,
     DependencyMapServiceMapextensionsServerGroupMembersRequest,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -247,7 +247,7 @@ interface VmwareSites {
     VmwareSite,
     UpdateMachineDepMapStatus,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -259,7 +259,7 @@ interface VmwareSites {
     VmwareSite,
     MachineMetadataCollection,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -272,7 +272,7 @@ interface VmwareSites {
     VmwareSite,
     UpdateMachineRunAsAccount,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -285,7 +285,7 @@ interface VmwareSites {
     VmwareSite,
     UpdateMachineTags,
     unknown,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
