@@ -137,6 +137,12 @@ model UpdateModelVersionRequest {
   tags?: Record<string>;
 }
 
+@doc("Request to fetch credentials for a model asset.")
+model ModelCredentialRequest {
+  @doc("Blob URI of the model asset to fetch credentials for.")
+  blobUri: url;
+}
+
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;

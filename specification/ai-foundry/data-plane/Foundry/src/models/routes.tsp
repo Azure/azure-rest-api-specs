@@ -78,7 +78,7 @@ interface Models
       version: string;
 
       @bodyRoot
-      body: AssetCredentialRequest;
+      body: ModelCredentialRequest;
     },
     AssetCredentialResponse
   >;

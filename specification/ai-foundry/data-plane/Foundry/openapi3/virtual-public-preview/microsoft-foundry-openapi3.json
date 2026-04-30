@@ -5338,7 +5338,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AssetCredentialRequest"
+                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
               }
             }
           },
@@ -7568,7 +7568,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AssetCredentialRequest"
+                "$ref": "#/components/schemas/ModelCredentialRequest"
               }
             }
           }
@@ -13684,20 +13684,6 @@
         },
         "description": "Artifact profile of the model"
       },
-      "AssetCredentialRequest": {
-        "type": "object",
-        "required": [
-          "blobUri"
-        ],
-        "properties": {
-          "blobUri": {
-            "type": "string",
-            "format": "uri",
-            "description": "Blob URI of the asset to fetch credentials for."
-          }
-        },
-        "description": "Request to fetch credentials for an asset."
-      },
       "AssetCredentialResponse": {
         "type": "object",
         "required": [
@@ -18203,6 +18189,20 @@
         },
         "description": "Evaluator Configuration"
       },
+      "EvaluatorCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
+          }
+        },
+        "description": "Request body for getting evaluator credentials"
+      },
       "EvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -20505,6 +20505,20 @@
           }
         ],
         "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent."
+      },
+      "ModelCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "Blob URI of the model asset to fetch credentials for."
+          }
+        },
+        "description": "Request to fetch credentials for a model asset."
       },
       "ModelDeployment": {
         "type": "object",
