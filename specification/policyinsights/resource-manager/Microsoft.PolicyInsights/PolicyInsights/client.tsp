@@ -1371,7 +1371,15 @@ op remediationsListDeploymentsAtManagementGroup(
   @path
   managementGroupsNamespace: "Microsoft.Management",
 
+  @path
   managementGroupId: string,
+
+  @path
+  remediationName: string,
+
+  queryOptions?: RemediationsListDeploymentsAtManagementGroupQueryOptions,
+): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
   remediationsListDeploymentsAtManagementGroup,
   "!java,!python"
 );
@@ -1560,112 +1568,6 @@ op attestationsListForResource(
 // PolicyEventsOperationGroup
 @@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
-  "python"
-);
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
-  "python,java"
-);
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForSubscription,
-  "python,java"
-);
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
-  "python,java"
-);
-
-// PolicyStatesOperationGroup
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
-  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicySetDefinition::parameters.subscriptionId,
-  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
-  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicyDefinition::parameters.subscriptionId,
-  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
-  PolicyStatesOperationGroup.listQueryResultsForSubscription,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscription::parameters.subscriptionId,
-  PolicyStatesOperationGroup.summarizeForSubscription,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
-  PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroup::parameters.subscriptionId,
-  PolicyStatesOperationGroup.summarizeForResourceGroup,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
-  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
-  "python,java"
-);
-@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
-  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
-  "python,java"
-);
-
-// ComponentPolicyStatesOperationGroup
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
-  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
-  "python,java"
-);
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
-  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
-  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
-  "python,java"
-);
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
-  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
-  "python,java"
-);
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
-  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
-  "python,java"
-);
-
-// PolicyEventsOperationGroup
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   "python,java"
 );
 @@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
@@ -1813,7 +1715,6 @@ op attestationsListForResource(
   "javascript"
 );
 @@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");
-
 
 // Java-specific override for listQueryResultsForPolicySetDefinition
 // Keeps original Swagger parameter order: policyEventsResource, subscriptionId, ...
