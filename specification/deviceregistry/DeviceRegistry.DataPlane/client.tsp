@@ -30,12 +30,18 @@ using Azure.ClientGenerator.Core;
   Access.internal
 );
 
-@@access(Microsoft.DeviceRegistry.DeviceStates.createOrReplace,
+@@access(Microsoft.DeviceRegistry.TwinDeviceStates.createOrReplace,
   Access.internal
 );
-@@access(Microsoft.DeviceRegistry.DeviceStates.get, Access.internal);
-@@access(Microsoft.DeviceRegistry.DeviceStates.update, Access.internal);
-@@access(Microsoft.DeviceRegistry.DeviceStates.list, Access.internal);
+@@access(Microsoft.DeviceRegistry.TwinDeviceStates.get, Access.internal);
+@@access(Microsoft.DeviceRegistry.TwinDeviceStates.update, Access.internal);
+@@access(Microsoft.DeviceRegistry.TwinDeviceStates.list, Access.internal);
+
+@@access(Microsoft.DeviceRegistry.CloudDeviceStates.createOrReplace,
+  Access.internal
+);
+@@access(Microsoft.DeviceRegistry.CloudDeviceStates.update, Access.internal);
+@@access(Microsoft.DeviceRegistry.CloudDeviceStates.list, Access.internal);
 
 @@access(Microsoft.DeviceRegistry.Operations.get, Access.internal);
 @@access(Microsoft.DeviceRegistry.Operations.list, Access.internal);
