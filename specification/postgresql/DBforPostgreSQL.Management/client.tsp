@@ -342,6 +342,10 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(UserAssignedIdentity.principalId, Azure.Core.uuid, "csharp");
 @@alternateType(UserAssignedIdentity.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(UserAssignedIdentity.userAssignedIdentities,
+  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  "csharp"
+);
 
 // Uri type mappings
 @@alternateType(DataEncryption.primaryKeyURI, TypeSpec.url, "csharp");
@@ -589,6 +593,10 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
 @@clientName(PostgresMajorVersion.`17`, "Seventeen", "csharp");
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 
 // Rename AdministratorMicrosoftEntraAdd to preserve backward-compatible C# name
 @@clientName(AdministratorMicrosoftEntraAdd,
