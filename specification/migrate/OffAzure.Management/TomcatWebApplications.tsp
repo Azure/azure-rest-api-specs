@@ -35,6 +35,7 @@ interface TomcatWebApplicationsController {
   /**
    * Updates the Tomcat web application tags.
    */
+  // Workaround for "Cannot pass in unknown to patch template"(https://github.com/Azure/typespec-azure/issues/4360)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
