@@ -763,7 +763,7 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The kind of device state.",
+            "description": "The name of the device state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -841,7 +841,7 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The kind of device state.",
+            "description": "The name of the device state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -940,7 +940,7 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The kind of device state.",
+            "description": "The name of the device state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -1631,6 +1631,46 @@
         "adrCertificatePolicyResourceId"
       ]
     },
+    "CloudDeviceState": {
+      "type": "object",
+      "description": "A device state resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceStateReportedBy",
+          "description": "The cloud service that reports this device state."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "reportedBy"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceState"
+        }
+      ],
+      "x-ms-discriminator-value": "Cloud"
+    },
+    "CloudDeviceStateCreateOrUpdate": {
+      "type": "object",
+      "description": "A device state resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceStateReportedBy",
+          "description": "The cloud service that reports this device state."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "reportedBy"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceStateCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Cloud"
+    },
     "DataPlaneResourceBase": {
       "type": "object",
       "description": "Resource metadata properties (etag and systemData).",
@@ -1672,58 +1712,6 @@
         "name",
         "type"
       ]
-    },
-    "DefaultDeviceStateProperties": {
-      "type": "object",
-      "description": "Properties of the default device state.",
-      "properties": {
-        "desired": {
-          "type": "object",
-          "description": "The desired state values.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "reported": {
-          "type": "object",
-          "description": "The reported state values.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeviceStateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "default"
-    },
-    "DefaultDeviceStatePropertiesCreateOrUpdate": {
-      "type": "object",
-      "description": "Properties of the default device state.",
-      "properties": {
-        "desired": {
-          "type": "object",
-          "description": "The desired state values.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "reported": {
-          "type": "object",
-          "description": "The reported state values.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeviceStatePropertiesCreateOrUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "default"
     },
     "Device": {
       "type": "object",
@@ -2200,26 +2188,27 @@
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        "kind": {
+        "name": {
           "$ref": "#/definitions/DeviceStateName",
-          "description": "The kind of device state.",
+          "description": "The name of the device state.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
-        "owner": {
-          "type": "string",
-          "description": "The owner that is permitted to write this device state (e.g. \"Microsoft.DeviceUpdate\")."
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceStateProperties",
-          "description": "The resource-specific properties for this state."
+        "kind": {
+          "$ref": "#/definitions/DeviceStateKind",
+          "description": "The kind of device state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
+      "discriminator": "kind",
       "required": [
         "type",
+        "name",
         "kind"
       ]
     },
@@ -2235,23 +2224,50 @@
             "create"
           ]
         },
-        "kind": {
+        "name": {
           "$ref": "#/definitions/DeviceStateName",
-          "description": "The kind of device state.",
+          "description": "The name of the device state.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
-        "owner": {
-          "type": "string",
-          "description": "The owner that is permitted to write this device state (e.g. \"Microsoft.DeviceUpdate\")."
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceStatePropertiesCreateOrUpdate",
-          "description": "The resource-specific properties for this state."
+        "kind": {
+          "$ref": "#/definitions/DeviceStateKind",
+          "description": "The kind of device state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "DeviceStateKind": {
+      "type": "string",
+      "description": "The kind of a device state resource.",
+      "enum": [
+        "Twin",
+        "Cloud"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceStateKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Twin",
+            "value": "Twin",
+            "description": "A device state resource that is a device twin."
+          },
+          {
+            "name": "Cloud",
+            "value": "Cloud",
+            "description": "A device state resource that holds properties managed by cloud services and not sent to the device."
+          }
+        ]
       }
     },
     "DeviceStateName": {
@@ -2278,33 +2294,23 @@
         ]
       }
     },
-    "DeviceStateProperties": {
-      "type": "object",
-      "description": "Base properties of a device state resource. The concrete shape is determined by `propertiesType`.",
-      "properties": {
-        "propertiesType": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The kind of device state properties, matching the resource `kind`."
-        }
-      },
-      "discriminator": "propertiesType",
-      "required": [
-        "propertiesType"
-      ]
-    },
-    "DeviceStatePropertiesCreateOrUpdate": {
-      "type": "object",
-      "description": "Base properties of a device state resource. The concrete shape is determined by `propertiesType`.",
-      "properties": {
-        "propertiesType": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The kind of device state properties, matching the resource `kind`."
-        }
-      },
-      "discriminator": "propertiesType",
-      "required": [
-        "propertiesType"
-      ]
+    "DeviceStateReportedBy": {
+      "type": "string",
+      "description": "The cloud service that reports a `Cloud` device state.",
+      "enum": [
+        "Microsoft.DeviceUpdate"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceStateReportedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADU",
+            "value": "Microsoft.DeviceUpdate",
+            "description": "Reported by Azure Device Update."
+          }
+        ]
+      }
     },
     "DeviceTwin": {
       "type": "object",
@@ -3550,6 +3556,61 @@
         "address"
       ]
     },
+    "TwinDeviceState": {
+      "type": "object",
+      "description": "A device state resource that is a device twin.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TwinDeviceStateProperties",
+          "description": "The device twin properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceState"
+        }
+      ],
+      "x-ms-discriminator-value": "Twin"
+    },
+    "TwinDeviceStateCreateOrUpdate": {
+      "type": "object",
+      "description": "A device state resource that is a device twin.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TwinDeviceStateProperties",
+          "description": "The device twin properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceStateCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Twin"
+    },
+    "TwinDeviceStateProperties": {
+      "type": "object",
+      "description": "Twin properties of a device state.",
+      "properties": {
+        "desired": {
+          "type": "object",
+          "description": "The desired state values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reported": {
+          "type": "object",
+          "description": "The reported state values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TwinProperties": {
       "type": "object",
       "description": "Device twin desired properties.",
@@ -3560,6 +3621,41 @@
           "additionalProperties": {}
         }
       }
+    },
+    "UpdateCloudDeviceState": {
+      "type": "object",
+      "description": "A cloud device state reported by Azure Device Update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDeviceStateProperties",
+          "description": "Properties reported by Azure Device Update."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CloudDeviceState"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
+    },
+    "UpdateCloudDeviceStateCreateOrUpdate": {
+      "type": "object",
+      "description": "A cloud device state reported by Azure Device Update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDeviceStatePropertiesCreateOrUpdate",
+          "description": "Properties reported by Azure Device Update."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CloudDeviceStateCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
     },
     "UpdateDeviceStateProperties": {
       "type": "object",
@@ -3585,13 +3681,7 @@
           "$ref": "#/definitions/UpdateJobInfo",
           "description": "Information about the most recent update job targeting this device."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeviceStateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "update"
+      }
     },
     "UpdateDeviceStatePropertiesCreateOrUpdate": {
       "type": "object",
@@ -3617,13 +3707,7 @@
           "$ref": "#/definitions/UpdateJobInfoCreateOrUpdate",
           "description": "Information about the most recent update job targeting this device."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeviceStatePropertiesCreateOrUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "update"
+      }
     },
     "UpdateId": {
       "type": "object",

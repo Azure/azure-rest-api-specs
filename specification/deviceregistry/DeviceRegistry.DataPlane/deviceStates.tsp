@@ -26,37 +26,55 @@ union DeviceStateName {
   update: "update",
 }
 
+/** The kind of a device state resource. */
+union DeviceStateKind {
+  string,
+
+  /** A device state resource that is a device twin. */
+  Twin: "Twin",
+
+  /** A device state resource that holds properties managed by cloud services and not sent to the device. */
+  Cloud: "Cloud",
+}
+
+/** The cloud service that reports a `Cloud` device state. */
+union DeviceStateReportedBy {
+  string,
+
+  /** Reported by Azure Device Update. */
+  ADU: "Microsoft.DeviceUpdate",
+}
+
 /** A device state resource. */
 @resource("states")
 @parentResource(Device)
+@discriminator("kind")
 model DeviceState {
   ...OmitProperties<DataPlaneResourceBase, "name">;
 
+  /** The name of the device state. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  name: DeviceStateName;
+
   /** The kind of device state. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  kind: DeviceStateName;
-
-  /** The owner that is permitted to write this device state (e.g. "Microsoft.DeviceUpdate"). */
-  owner?: string;
-
-  /** The resource-specific properties for this state. */
-  properties?: DeviceStateProperties;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: DeviceStateKind;
 }
 
-@@key(DeviceState.kind, "stateName");
+@@key(DeviceState.name, "stateName");
 
-/** Base properties of a device state resource. The concrete shape is determined by `propertiesType`. */
-@discriminator("propertiesType")
-model DeviceStateProperties {
-  /** The kind of device state properties, matching the resource `kind`. */
-  propertiesType: DeviceStateName;
+/** A device state resource that is a device twin. */
+model TwinDeviceState extends DeviceState {
+  /** Discriminator value for a twin device state. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: DeviceStateKind.Twin;
+
+  /** The device twin properties. */
+  properties: TwinDeviceStateProperties;
 }
 
-/** Properties of the default device state. */
-model DefaultDeviceStateProperties extends DeviceStateProperties {
-  /** Discriminator value for the default state. */
-  propertiesType: DeviceStateName.default;
-
+/** Twin properties of a device state. */
+model TwinDeviceStateProperties {
   /** The desired state values. */
   desired?: Record<string>;
 
@@ -64,11 +82,30 @@ model DefaultDeviceStateProperties extends DeviceStateProperties {
   reported?: Record<string>;
 }
 
-/** Properties of the update device state, reported by the Azure Device Update agent. */
-model UpdateDeviceStateProperties extends DeviceStateProperties {
-  /** Discriminator value for the update state. */
-  propertiesType: DeviceStateName.update;
+/** A device state resource that holds properties managed by cloud services and not sent to the device. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Cloud device states are further discriminated by `reportedBy` to model service-specific shapes."
+@discriminator("reportedBy")
+model CloudDeviceState extends DeviceState {
+  /** Discriminator value for a cloud device state. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: DeviceStateKind.Cloud;
 
+  /** The cloud service that reports this device state. */
+  reportedBy: DeviceStateReportedBy;
+}
+
+/** A cloud device state reported by Azure Device Update. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Cloud device states are further discriminated by `reportedBy`."
+model UpdateCloudDeviceState extends CloudDeviceState {
+  /** Discriminator value for an Azure Device Update reported state. */
+  reportedBy: DeviceStateReportedBy.ADU;
+
+  /** Properties reported by Azure Device Update. */
+  properties: UpdateDeviceStateProperties;
+}
+
+/** Properties of the update device state, reported by the Azure Device Update agent. */
+model UpdateDeviceStateProperties {
   /** The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`. */
   deviceClassId?: string;
 
