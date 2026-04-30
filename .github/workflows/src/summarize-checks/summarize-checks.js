@@ -363,7 +363,11 @@ export async function summarizeChecksImpl(
     );
   }
 
-  let labelContext = updateLabels(labelNames, impactAssessment);
+  let labelContext = updateLabels(
+    labelNames,
+    impactAssessment,
+    requiredCheckRuns.some((run) => checkRunIsSuccessful(run) === false),
+  );
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
@@ -524,9 +528,11 @@ function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
 /**
  * @param {string[]} existingLabels
  * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
+ * @param {boolean} [anyRequiredChecksFailing] - If true, the ARMReview label will be removed
+ *   because required checks are failing and the PR should not be in the ARM review queue.
  * @returns {import("./labelling.js").LabelContext}
  */
-export function updateLabels(existingLabels, impactAssessment) {
+export function updateLabels(existingLabels, impactAssessment, anyRequiredChecksFailing = false) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
   //  - public/rest-api-specs-scripts/src/prSummary.ts
@@ -541,7 +547,7 @@ export function updateLabels(existingLabels, impactAssessment) {
 
   if (impactAssessment) {
     // will further update the label context if necessary
-    processImpactAssessment(labelContext, impactAssessment);
+    processImpactAssessment(labelContext, impactAssessment, anyRequiredChecksFailing);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
