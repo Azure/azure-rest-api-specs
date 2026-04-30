@@ -30,6 +30,21 @@ model ToolboxObject {
   default_version: string;
 }
 
+/**
+ * The load mode for a tool when tool search is enabled.
+ * Controls how the tool appears in `tools/list` responses.
+ */
+union ToolLoadMode {
+  /** Tool appears in `tools/list` with its full schema (name, description, inputSchema). */
+  always: "always",
+
+  /** Tool appears in `tools/list` with name and description only (no inputSchema). */
+  descriptions_only: "descriptions_only",
+
+  /** Tool is hidden from `tools/list` and only discoverable via `tool_search` queries. */
+  defer: "defer",
+}
+
 @doc("A specific version of a toolbox.")
 model ToolboxVersionObject {
   ...MetadataPropertyForResponse;
@@ -55,6 +70,9 @@ model ToolboxVersionObject {
   @doc("The list of tools contained in this toolbox version.")
   tools: OpenAI.Tool[];
 
+  @doc("Tool load policy for the toolbox version. Maps tool names (or `*` as a catch-all) to a ToolLoadMode that controls how each tool appears in `tools/list` when tool search is enabled. Resolution order: exact tool name > catch-all (`*`). When omitted and a ToolboxSearchPreviewTool is present, defaults to `{\"*\": \"defer\"}`.")
+  load?: Record<ToolLoadMode>;
+
   @doc("Policy configuration for the toolbox version.")
   policies?: ToolboxPolicies;
 }
@@ -74,6 +92,9 @@ alias CreateToolboxVersionRequest = {
 
   @doc("The list of tools to include in this version.")
   tools: OpenAI.Tool[];
+
+  @doc("Tool load policy for the toolbox version. Maps tool names (or `*` as a catch-all) to a ToolLoadMode that controls how each tool appears in `tools/list` when tool search is enabled. Resolution order: exact tool name > catch-all (`*`). When omitted and a ToolboxSearchPreviewTool is present, defaults to `{\"*\": \"defer\"}`.")
+  load?: Record<ToolLoadMode>;
 
   @doc("Policy configuration for this toolbox version.")
   policies?: ToolboxPolicies;
