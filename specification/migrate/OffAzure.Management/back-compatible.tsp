@@ -4,49 +4,49 @@ using Azure.ClientGenerator.Core;
 using Microsoft.OffAzure;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervSiteUpdate.properties);
+@@Legacy.flattenProperty(HypervSiteUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervMachineUpdate.properties);
+@@Legacy.flattenProperty(HypervMachineUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ImportSiteUpdate.properties);
+@@Legacy.flattenProperty(ImportSiteUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MasterSiteUpdate.properties);
+@@Legacy.flattenProperty(MasterSiteUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlSiteUpdate.properties);
+@@Legacy.flattenProperty(SqlSiteUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlServerV2Update.properties);
+@@Legacy.flattenProperty(SqlServerV2Update.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(WebAppSiteUpdate.properties);
+@@Legacy.flattenProperty(WebAppSiteUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(IisWebApplicationsUpdate.properties);
+@@Legacy.flattenProperty(IisWebApplicationsUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(WebApplication.properties);
+@@Legacy.flattenProperty(WebApplication.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(WebServer.properties);
+@@Legacy.flattenProperty(WebServer.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServerSiteResourceUpdate.properties);
+@@Legacy.flattenProperty(ServerSiteResourceUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServerUpdate.properties);
+@@Legacy.flattenProperty(ServerUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(VmwareSiteUpdate.properties);
+@@Legacy.flattenProperty(VmwareSiteUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MachineResourceUpdate.properties);
+@@Legacy.flattenProperty(MachineResourceUpdate.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervOperationsStatusResource.properties);
+@@Legacy.flattenProperty(HypervOperationsStatusResource.properties, "!java");
 
 @@clientLocation(HypervSites.get, "HypervSitesController");
 @@clientLocation(HypervSites.create, "HypervSitesController");
@@ -92,7 +92,7 @@ using Microsoft.OffAzure;
   "HypervOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervSite.properties);
+@@Legacy.flattenProperty(HypervSite.properties, "!java");
 
 @@clientLocation(ImportSites.get, "ImportSitesController");
 @@clientLocation(ImportSites.create, "ImportSitesController");
@@ -106,7 +106,7 @@ using Microsoft.OffAzure;
 @@clientLocation(ImportSites.exportUri, "ImportSitesController");
 @@clientLocation(ImportSites.importUri, "ImportSitesController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ImportSite.properties);
+@@Legacy.flattenProperty(ImportSite.properties, "!java");
 
 @@clientLocation(MasterSites.get, "MasterSitesController");
 @@clientLocation(MasterSites.create, "MasterSitesController");
@@ -121,7 +121,7 @@ using Microsoft.OffAzure;
   "MasterSitesOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MasterSite.properties);
+@@Legacy.flattenProperty(MasterSite.properties, "!java");
 
 @@clientLocation(PrivateEndpointConnections.get,
   "PrivateEndpointConnectionController"
@@ -137,7 +137,7 @@ using Microsoft.OffAzure;
   "PrivateEndpointConnectionController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
+@@Legacy.flattenProperty(PrivateEndpointConnection.properties, "!java");
 
 @@clientLocation(ServerSiteResources.get, "ServerSitesController");
 @@clientLocation(ServerSiteResources.create, "ServerSitesController");
@@ -208,7 +208,7 @@ using Microsoft.OffAzure;
   "ServerOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServerSiteResource.properties);
+@@Legacy.flattenProperty(ServerSiteResource.properties, "!java");
 
 @@clientLocation(VmwareSites.get, "SitesController");
 @@clientLocation(VmwareSites.create, "SitesController");
@@ -253,7 +253,7 @@ using Microsoft.OffAzure;
 @@clientLocation(VmwareSites.updateTags, "VmwarePropertiesController");
 @@clientName(VmwareSites.updateTags::parameters.body, "updateMachineTags");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(VmwareSite.properties);
+@@Legacy.flattenProperty(VmwareSite.properties, "!java");
 
 @@clientLocation(HypervClusters.getCluster, "HypervClusterController");
 @@clientLocation(HypervClusters.createCluster, "HypervClusterController");
@@ -261,7 +261,7 @@ using Microsoft.OffAzure;
 @@clientLocation(HypervClusters.delete, "HypervClusterController");
 @@clientLocation(HypervClusters.listByHypervSite, "HypervClusterController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervCluster.properties);
+@@Legacy.flattenProperty(HypervCluster.properties, "!java");
 
 @@clientLocation(HypervHosts.get, "HypervHostController");
 @@clientLocation(HypervHosts.create, "HypervHostController");
@@ -269,17 +269,17 @@ using Microsoft.OffAzure;
 @@clientLocation(HypervHosts.delete, "HypervHostController");
 @@clientLocation(HypervHosts.listByHypervSite, "HypervHostController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervHost.properties);
+@@Legacy.flattenProperty(HypervHost.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervJob.properties);
+@@Legacy.flattenProperty(HypervJob.properties, "!java");
 
 @@clientLocation(HypervMachines.get, "HypervMachinesController");
 @@clientLocation(HypervMachines.update, "HypervMachinesController");
 @@clientName(HypervMachines.update::parameters.properties, "body");
 @@clientLocation(HypervMachines.listByHypervSite, "HypervMachinesController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervMachine.properties);
+@@Legacy.flattenProperty(HypervMachine.properties, "!java");
 
 @@clientLocation(HypervVmSoftwareInventories.getMachineSoftwareInventory,
   "HypervSoftwareInventoriesController"
@@ -288,7 +288,7 @@ using Microsoft.OffAzure;
   "HypervSoftwareInventoriesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervVmSoftwareInventory.properties);
+@@Legacy.flattenProperty(HypervVmSoftwareInventory.properties, "!java");
 
 @@clientLocation(HypervRunAsAccountResources.get,
   "HypervRunAsAccountsController"
@@ -297,14 +297,14 @@ using Microsoft.OffAzure;
   "HypervRunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HypervRunAsAccountResource.properties);
+@@Legacy.flattenProperty(HypervRunAsAccountResource.properties, "!java");
 
 @@clientLocation(DeleteImportMachinesJobs.getDeletejob, "ImportJobsController");
 @@clientLocation(DeleteImportMachinesJobs.listDeletejobs,
   "ImportJobsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DeleteImportMachinesJob.properties);
+@@Legacy.flattenProperty(DeleteImportMachinesJob.properties, "!java");
 
 @@clientLocation(ExportImportedMachinesJobs.getExportjob,
   "ImportJobsController"
@@ -319,20 +319,20 @@ using Microsoft.OffAzure;
 @@clientLocation(ImportJobs.get, "ImportJobsController");
 @@clientLocation(ImportJobs.listByImportSite, "ImportJobsController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ImportJob.properties);
+@@Legacy.flattenProperty(ImportJob.properties, "!java");
 
 @@clientLocation(ImportMachines.get, "ImportMachinesController");
 @@clientLocation(ImportMachines.delete, "ImportMachinesController");
 @@clientLocation(ImportMachines.listByImportSite, "ImportMachinesController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ImportMachine.properties);
+@@Legacy.flattenProperty(ImportMachine.properties, "!java");
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResourcesController");
 @@clientLocation(PrivateLinkResources.listByMasterSite,
   "PrivateLinkResourcesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(PrivateLinkResource.properties);
+@@Legacy.flattenProperty(PrivateLinkResource.properties, "!java");
 
 @@clientLocation(SqlSites.get, "SqlSitesController");
 @@clientLocation(SqlSites.create, "SqlSitesController");
@@ -352,7 +352,7 @@ using Microsoft.OffAzure;
   "SqlOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlSite.properties);
+@@Legacy.flattenProperty(SqlSite.properties, "!java");
 
 @@clientLocation(SqlDiscoverySiteDataSources.get,
   "SqlDiscoverySiteDataSourceController"
@@ -368,7 +368,7 @@ using Microsoft.OffAzure;
   "SqlDiscoverySiteDataSourceController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlDiscoverySiteDataSource.properties);
+@@Legacy.flattenProperty(SqlDiscoverySiteDataSource.properties, "!java");
 
 @@clientLocation(ImportSqlInventoryJobs.getImportjob,
   "SqlImportJobsController"
@@ -380,31 +380,31 @@ using Microsoft.OffAzure;
 @@clientLocation(SqlJobs.get, "SqlJobsController");
 @@clientLocation(SqlJobs.listBySqlSite, "SqlJobsController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlJob.properties);
+@@Legacy.flattenProperty(SqlJob.properties, "!java");
 
 @@clientLocation(SqlRunAsAccounts.get, "SqlRunAsAccountsController");
 @@clientLocation(SqlRunAsAccounts.listBySqlSite, "SqlRunAsAccountsController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlRunAsAccount.properties);
+@@Legacy.flattenProperty(SqlRunAsAccount.properties, "!java");
 
 @@clientLocation(SqlAvailabilityGroups.get, "SqlAvailabilityGroupsController");
 @@clientLocation(SqlAvailabilityGroups.listBySqlSite,
   "SqlAvailabilityGroupsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlAvailabilityGroup.properties);
+@@Legacy.flattenProperty(SqlAvailabilityGroup.properties, "!java");
 
 @@clientLocation(SqlDatabaseV2s.get, "SqlDatabasesController");
 @@clientLocation(SqlDatabaseV2s.listBySqlSite, "SqlDatabasesController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlDatabaseV2.properties);
+@@Legacy.flattenProperty(SqlDatabaseV2.properties, "!java");
 
 @@clientLocation(SqlServerV2s.get, "SqlServersController");
 @@clientLocation(SqlServerV2s.update, "SqlServersController");
 @@clientName(SqlServerV2s.update::parameters.properties, "body");
 @@clientLocation(SqlServerV2s.listBySqlSite, "SqlServersController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SqlServerV2.properties);
+@@Legacy.flattenProperty(SqlServerV2.properties, "!java");
 
 @@clientLocation(WebAppSites.get, "WebAppSitesController");
 @@clientLocation(WebAppSites.create, "WebAppSitesController");
@@ -425,7 +425,7 @@ using Microsoft.OffAzure;
   "ListByWebAppSite"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(WebAppSite.properties);
+@@Legacy.flattenProperty(WebAppSite.properties, "!java");
 
 @@clientLocation(DiscoverySiteDataSources.get,
   "WebAppDiscoverySiteDataSourcesController"
@@ -441,7 +441,7 @@ using Microsoft.OffAzure;
   "WebAppDiscoverySiteDataSourcesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DiscoverySiteDataSource.properties);
+@@Legacy.flattenProperty(DiscoverySiteDataSource.properties, "!java");
 
 @@clientLocation(WebAppExtendedMachines.get,
   "WebAppExtendedMachinesController"
@@ -450,34 +450,34 @@ using Microsoft.OffAzure;
   "WebAppExtendedMachinesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(WebAppExtendedMachine.properties);
+@@Legacy.flattenProperty(WebAppExtendedMachine.properties, "!java");
 
 @@clientName(IisWebApplicationsController.update::parameters.properties,
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(IisWebApplications.properties);
+@@Legacy.flattenProperty(IisWebApplications.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(IisWebServers.properties);
+@@Legacy.flattenProperty(IisWebServers.properties, "!java");
 
 @@clientLocation(WebAppRunAsAccounts.get, "WebAppRunAsAccountsController");
 @@clientLocation(WebAppRunAsAccounts.listByWebAppSite,
   "WebAppRunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(WebAppRunAsAccount.properties);
+@@Legacy.flattenProperty(WebAppRunAsAccount.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(TomcatWebApplications.properties);
+@@Legacy.flattenProperty(TomcatWebApplications.properties, "!java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(TomcatWebServers.properties);
+@@Legacy.flattenProperty(TomcatWebServers.properties, "!java");
 
 @@clientLocation(ServerJobs.get, "ServerJobsController");
 @@clientLocation(ServerJobs.listByServerSiteResource, "ServerJobsController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServerJob.properties);
+@@Legacy.flattenProperty(ServerJob.properties, "!java");
 
 @@clientLocation(Servers.getMachine, "ServersController");
 @@clientLocation(Servers.updateMachine, "ServersController");
@@ -485,7 +485,7 @@ using Microsoft.OffAzure;
 @@clientLocation(Servers.deleteMachine, "ServersController");
 @@clientLocation(Servers.listByServerSiteResource, "ServersController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Server.properties);
+@@Legacy.flattenProperty(Server.properties, "!java");
 
 @@clientLocation(ServerSoftwareInventories.getMachineSoftwareInventory,
   "ServerSoftwareInventoriesController"
@@ -494,24 +494,24 @@ using Microsoft.OffAzure;
   "ServerSoftwareInventoriesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServerSoftwareInventory.properties);
+@@Legacy.flattenProperty(ServerSoftwareInventory.properties, "!java");
 
 @@clientLocation(ServerRunAsAccounts.get, "ServerRunAsAccountsController");
 @@clientLocation(ServerRunAsAccounts.listByServerSiteResource,
   "ServerRunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ServerRunAsAccount.properties);
+@@Legacy.flattenProperty(ServerRunAsAccount.properties, "!java");
 
 @@clientLocation(VmwareHosts.get, "VmwareHostController");
 @@clientLocation(VmwareHosts.listByVmwareSite, "VmwareHostController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(VmwareHost.properties);
+@@Legacy.flattenProperty(VmwareHost.properties, "!java");
 
 @@clientLocation(VmwareJobs.get, "HypervJobsController");
 @@clientLocation(VmwareJobs.listByVmwareSite, "HypervJobsController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(VmwareJob.properties);
+@@Legacy.flattenProperty(VmwareJob.properties, "!java");
 
 @@clientLocation(MachineResources.get, "MachinesController");
 @@clientLocation(MachineResources.update, "MachinesController");
@@ -520,7 +520,7 @@ using Microsoft.OffAzure;
 @@clientLocation(MachineResources.start, "MachinesController");
 @@clientLocation(MachineResources.stop, "MachinesController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MachineResource.properties);
+@@Legacy.flattenProperty(MachineResource.properties, "!java");
 
 @@clientLocation(VmwareMachineSoftwareInventories.getMachineSoftwareInventory,
   "VmwareSoftwareInventoriesController"
@@ -529,14 +529,14 @@ using Microsoft.OffAzure;
   "VmwareSoftwareInventoriesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(VmwareMachineSoftwareInventory.properties);
+@@Legacy.flattenProperty(VmwareMachineSoftwareInventory.properties, "!java");
 
 @@clientLocation(VmwareRunAsAccountResources.get, "RunAsAccountsController");
 @@clientLocation(VmwareRunAsAccountResources.listByVmwareSite,
   "RunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(VmwareRunAsAccountResource.properties);
+@@Legacy.flattenProperty(VmwareRunAsAccountResource.properties, "!java");
 
 @@clientLocation(Vcenters.get, "VcenterController");
 @@clientLocation(Vcenters.create, "VcenterController");
@@ -544,7 +544,7 @@ using Microsoft.OffAzure;
 @@clientLocation(Vcenters.delete, "VcenterController");
 @@clientLocation(Vcenters.listByVmwareSite, "VcenterController");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Vcenter.properties);
+@@Legacy.flattenProperty(Vcenter.properties, "!java");
 
 @@visibility(DeleteImportMachinesJob.properties,
   Lifecycle.Read,
