@@ -1,0 +1,86 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["./start-mcp.ps1"]
+      timeout: 60000
+# Execution configuration
+config:
+  runs: 1                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+- prompt: |
+    Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template.
+  name: 003003-arm-modify-response
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+      dest: main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
+      dest: package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+      dest: readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+      dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  # VP1: ArmAsyncOperationHeader with FinalResult = Employee (alias or inline)
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'ArmAsyncOperationHeader<FinalResult\s*=\s*Employee>'
+  # VP2: createOrUpdate uses ArmResourceCreateOrReplaceAsync with custom LroHeaders
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'createOrUpdate is ArmResourceCreateOrReplaceAsync<'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'LroHeaders\s*='
+  # VP3: Other operations unchanged
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'update is ArmResourcePatchSync<Employee'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: 'delete is ArmResourceDeleteWithoutOkAsync<Employee>'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+scoring:
+  weights:
+    tool-calls: 1
+    prompt: 1
+    file-matches: 5
+  threshold: 1.0
