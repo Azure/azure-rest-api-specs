@@ -2230,6 +2230,12 @@ model VirtualMachineScaleSetVMProfile {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies the Interconnect Block related details of a Scale Set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
   applicationProfile?: ApplicationProfile;
@@ -5084,6 +5090,12 @@ model VirtualMachineScaleSetVMProperties {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -5174,6 +5186,13 @@ model VirtualMachineScaleSetVMInstanceView {
    * The hypervisor generation of the Virtual Machine [V1, V2]
    */
   hyperVGeneration?: HyperVGeneration;
+
+  /**
+   * The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -6457,6 +6476,12 @@ model VirtualMachineProperties {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies information about the Interconnect Block that is used to allocate the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS.
    */
   applicationProfile?: ApplicationProfile;
@@ -6568,6 +6593,13 @@ model VirtualMachineInstanceView {
    */
   @visibility(Lifecycle.Read)
   isVMInStandbyPool?: boolean;
+
+  /**
+   * The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -7904,6 +7936,134 @@ model SshPublicKeyResourceProperties {
    * SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
    */
   publicKey?: string;
+}
+
+/**
+ * The list Interconnect Block operation response.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
+
+@@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
+@@doc(InterconnectBlockListResult.nextLink,
+  "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
+);
+
+/**
+ * Properties of the Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProperties {
+  /**
+   * A list of all virtual machine resource ids that are associated with the Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  virtualMachinesAssociated?: SubResourceReadOnly[];
+
+  /**
+   * The Microsoft.Network/interconnectGroups resource that this Interconnect Block is associated with. Required at create and immutable thereafter.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  interconnectGroup: ApiEntityReference;
+
+  /**
+   * A unique id (GUID) generated and assigned to the Interconnect Block by the platform which does not change throughout the lifetime of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectBlockId?: string;
+
+  /**
+   * The date time when the Interconnect Block was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningTime?: utcDateTime;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The Interconnect Block instance view.
+   */
+  @visibility(Lifecycle.Read)
+  instanceView?: InterconnectBlockInstanceView;
+
+  /**
+   * Specifies the time at which the Interconnect Block resource was created.
+   */
+  @visibility(Lifecycle.Read)
+  timeCreated?: utcDateTime;
+}
+
+/**
+ * The instance view of an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockInstanceView {
+  /**
+   * The current capacity allocated for this Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  currentCapacity?: int32;
+
+  /**
+   * The resource status information.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  statuses?: InstanceViewStatus[];
+}
+
+/**
+ * Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2026_03_01)
+model InterconnectBlockUpdate extends UpdateResource {
+  /**
+   * SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable.
+   */
+  sku?: Sku;
+}
+
+/**
+ * The expand expression to apply on the operation for an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+union InterconnectBlockExpandTypes {
+  string,
+
+  /**
+   * Retrieve the runtime instance view of the Interconnect Block.
+   */
+  instanceView: "instanceView",
+}
+
+/**
+ * The parameters of an Interconnect Block Profile.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProfile {
+  /**
+   * Specifies the Interconnect Block resource ID that should be used for allocating the Virtual Machine or Scale Set VM instances provided enough capacity has been reserved.
+   */
+  interconnectBlock?: ApiEntityReference;
+}
+
+/**
+ * The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectInstanceView {
+  /**
+   * The ID (GUID) of the Interconnect subgroup in which the Virtual Machine was placed.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectSubgroupId?: string;
 }
 
 /**
