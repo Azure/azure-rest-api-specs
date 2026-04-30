@@ -72,7 +72,7 @@ using DeviceUpdateClient;
 @@clientLocation(DeviceManagementOperationGroup.createOrUpdateDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.deleteDeployment,
+@@clientLocation(DeploymentManagementOperationGroup.deleteDeployment,
   "DeviceManagement"
 );
 @@clientLocation(DeviceManagementOperationGroup.getDeploymentStatus,
@@ -99,7 +99,7 @@ using DeviceUpdateClient;
 @@clientLocation(DeviceManagementOperationGroup.getDeploymentForDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup,
+@@clientLocation(DeploymentManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup,
   "DeviceManagement"
 );
 @@clientLocation(DeviceManagementOperationGroup.stopDeployment,
