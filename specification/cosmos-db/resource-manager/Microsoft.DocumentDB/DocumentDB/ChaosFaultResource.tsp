@@ -16,9 +16,10 @@ namespace Microsoft.DocumentDB;
 /**
  * A request object to enable/disable the chaos fault
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "chaosFaultResource preserves the prior swagger-defined camelCase resource name for backward compatibility."
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "chaosFaultResource preserves the prior swagger-defined resource name for backward compatibility."
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model chaosFaultResource
   is Azure.ResourceManager.ProxyResource<chaosFaultProperties> {
   ...ResourceNameParameter<

@@ -1365,12 +1365,14 @@ enum RoleDefinitionType {
  * Chaos Fault List Response.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
 
 /**
  * A request object to enable/disable the chaos fault.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model chaosFaultProperties {
   /**
    * Indicates whether what action to take for the Chaos Fault.
