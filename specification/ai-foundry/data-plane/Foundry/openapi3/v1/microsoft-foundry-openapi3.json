@@ -57,6 +57,9 @@
       "name": "Redteams"
     },
     {
+      "name": "Routines"
+    },
+    {
       "name": "Schedules"
     },
     {
@@ -8488,6 +8491,538 @@
         }
       }
     },
+    "/routines": {
+      "get": {
+        "operationId": "Routines_list",
+        "description": "List all routines.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token from a previous list response.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedRoutine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ]
+      }
+    },
+    "/routines/{routine_name}": {
+      "put": {
+        "operationId": "Routines_createOrUpdate",
+        "description": "Create or update a routine.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "routine_name",
+            "in": "path",
+            "required": true,
+            "description": "Unique name of the routine within the workspace.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Routine"
+              }
+            }
+          },
+          "description": "The routine to create or update."
+        }
+      },
+      "get": {
+        "operationId": "Routines_get",
+        "description": "Get a routine by name.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "routine_name",
+            "in": "path",
+            "required": true,
+            "description": "Unique name of the routine within the workspace.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ]
+      },
+      "delete": {
+        "operationId": "Routines_delete",
+        "description": "Delete a routine.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "routine_name",
+            "in": "path",
+            "required": true,
+            "description": "Unique name of the routine within the workspace.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ]
+      }
+    },
+    "/routines/{routine_name}/runs": {
+      "get": {
+        "operationId": "Routines_listRuns",
+        "description": "List execution history for a routine.",
+        "parameters": [
+          {
+            "name": "routine_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the routine.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "description": "OData-style filter expression.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "description": "One or more ordering expressions.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results to return per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token from a previous list response.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutineRunsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ]
+      }
+    },
+    "/routines/{routine_name}:dispatch": {
+      "post": {
+        "operationId": "Routines_dispatch",
+        "description": "Synchronously dispatch a routine. Returns after the downstream action completes.",
+        "parameters": [
+          {
+            "name": "routine_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the routine to dispatch.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DispatchRoutineResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DispatchRoutineRequest"
+              }
+            }
+          },
+          "description": "Optional dispatch request payload."
+        }
+      }
+    },
+    "/routines/{routine_name}:dispatchAsync": {
+      "post": {
+        "operationId": "Routines_dispatchAsync",
+        "description": "Asynchronously dispatch a routine. Returns immediately after enqueueing the action.",
+        "parameters": [
+          {
+            "name": "routine_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the routine to dispatch.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DispatchRoutineResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DispatchRoutineRequest"
+              }
+            }
+          },
+          "description": "Dispatch request payload."
+        }
+      }
+    },
     "/schedules": {
       "get": {
         "operationId": "Schedules_list",
@@ -14139,6 +14674,34 @@
           }
         ]
       },
+      "DispatchRoutineRequest": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineDispatchPayload"
+              }
+            ],
+            "description": "Optional payload to override the action's default input."
+          }
+        },
+        "description": "Request body for manually dispatching a routine."
+      },
+      "DispatchRoutineResponse": {
+        "type": "object",
+        "properties": {
+          "dispatch_id": {
+            "type": "string",
+            "description": "Unique identifier for this dispatch event."
+          },
+          "action_correlation_id": {
+            "type": "string",
+            "description": "Correlation ID linking this dispatch to the resulting agent run."
+          }
+        },
+        "description": "Response returned by the dispatch and dispatchAsync operations."
+      },
       "EntraAuthorizationScheme": {
         "type": "object",
         "required": [
@@ -15735,6 +16298,45 @@
         },
         "description": "Evaluator Definition"
       },
+      "EventRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "github_issue"
+            ]
+          },
+          "connection_id": {
+            "type": "string",
+            "description": "ID of the workspace connection that owns the GitHub OAuth credentials."
+          },
+          "owner": {
+            "type": "string",
+            "description": "GitHub repository owner or organization. Example: `\"contoso\"`."
+          },
+          "repository": {
+            "type": "string",
+            "description": "GitHub repository name. Example: `\"contoso-app\"`."
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "GitHub issue actions to match. Example: `[\"opened\", \"reopened\"]`. When omitted all actions are accepted."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "GitHub issue event trigger backed by a workspace connection."
+      },
       "FabricDataAgentToolCall": {
         "type": "object",
         "required": [
@@ -16781,6 +17383,119 @@
           }
         },
         "description": "Metadata about the insights."
+      },
+      "InvokeAgentInvocationsApiDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_invocations_api"
+            ],
+            "description": "Payload type discriminator."
+          },
+          "input": {
+            "type": "string",
+            "description": "Raw input content to send to the agent endpoint."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineDispatchPayload"
+          }
+        ],
+        "description": "Manual dispatch payload for `invoke_agent_invocations_api` actions."
+      },
+      "InvokeAgentInvocationsApiRoutineAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_endpoint_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_invocations_api"
+            ],
+            "description": "Action type discriminator."
+          },
+          "agent_endpoint_id": {
+            "type": "string",
+            "description": "Agent endpoint target for the endpoint invocations route."
+          },
+          "session_id": {
+            "type": "string",
+            "description": "Optional existing hosted-agent session to continue."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineAction"
+          }
+        ],
+        "description": "Action that invokes a published agent via the endpoint invocations API."
+      },
+      "InvokeAgentResponsesApiDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api"
+            ],
+            "description": "Payload type discriminator."
+          },
+          "input": {
+            "type": "string",
+            "description": "User message content to send to the agent. Example: `\"Summarize today's build failures.\"`"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineDispatchPayload"
+          }
+        ],
+        "description": "Manual dispatch payload for `invoke_agent_responses_api` actions."
+      },
+      "InvokeAgentResponsesApiRoutineAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api"
+            ],
+            "description": "Action type discriminator."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Project-scoped agent ID used with the workspace `/openai/responses` route. Exactly one of `agent_id` or `agent_endpoint_id` must be provided."
+          },
+          "agent_endpoint_id": {
+            "type": "string",
+            "description": "Agent endpoint target for endpoint-scoped protocol routes. Exactly one of `agent_id` or `agent_endpoint_id` must be provided."
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "Optional existing conversation ID to continue across scheduled fires."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineAction"
+          }
+        ],
+        "description": "Action that invokes a published agent via the workspace responses API."
       },
       "IsolationKeySource": {
         "type": "object",
@@ -37870,6 +38585,27 @@
         },
         "description": "Paged collection of RedTeam items"
       },
+      "PagedRoutine": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Routine"
+            },
+            "description": "The Routine items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Routine items"
+      },
       "PagedSchedule": {
         "type": "object",
         "required": [
@@ -38554,6 +39290,245 @@
         ],
         "description": "Risk category for the attack objective."
       },
+      "Routine": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Unique name of the routine within the workspace.",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the routine."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the trigger schedule is active. Defaults to `true` on creation.",
+            "default": true
+          },
+          "triggers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RoutineTrigger"
+            },
+            "description": "Named trigger configurations for this routine. The key is a user-defined trigger identifier."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAction"
+              }
+            ],
+            "description": "Action to execute when a trigger fires."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp at which the routine was created.",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp at which the routine was last updated.",
+            "readOnly": true
+          }
+        },
+        "description": "A workspace-scoped resource that pairs named trigger(s) with a single action, defining when and how a Foundry agent is invoked."
+      },
+      "RoutineAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineActionType"
+              }
+            ],
+            "description": "Action type discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "invoke_agent_responses_api": "#/components/schemas/InvokeAgentResponsesApiRoutineAction",
+            "invoke_agent_invocations_api": "#/components/schemas/InvokeAgentInvocationsApiRoutineAction"
+          }
+        },
+        "description": "Base model for a Routine action. Discriminated by `type`."
+      },
+      "RoutineActionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api",
+              "invoke_agent_invocations_api"
+            ]
+          }
+        ],
+        "description": "Discriminator values for RoutineAction.type."
+      },
+      "RoutineDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineActionType"
+              }
+            ],
+            "description": "Payload type discriminator, matching the routine's action type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "invoke_agent_responses_api": "#/components/schemas/InvokeAgentResponsesApiDispatchPayload",
+            "invoke_agent_invocations_api": "#/components/schemas/InvokeAgentInvocationsApiDispatchPayload"
+          }
+        },
+        "description": "Base class for a manual dispatch payload. Discriminated by `type`."
+      },
+      "RoutineRunDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "MLflow run identifier for this attempt."
+          },
+          "status": {
+            "type": "string",
+            "description": "Underlying MLflow run status. Example values: `RUNNING`, `FINISHED`, `FAILED`."
+          },
+          "phase": {
+            "type": "string",
+            "description": "AgentExtensions lifecycle phase. Example values: `queued`, `dispatching`, `completed`, `failed`."
+          },
+          "trigger_type": {
+            "type": "string",
+            "description": "Trigger type that produced the attempt. Example values: `schedule`, `timer`, `github_issue`."
+          },
+          "attempt_source": {
+            "type": "string",
+            "description": "Source path that created the attempt. Example values: `manual_dispatch`, `queued_dispatch`, `schedule_delivery`, `timer_delivery`."
+          },
+          "action_type": {
+            "type": "string",
+            "description": "Action type dispatched for the attempt."
+          },
+          "triggered_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Logical trigger time for the attempt."
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the underlying MLflow run started."
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the underlying MLflow run reached a terminal state."
+          },
+          "dispatch_id": {
+            "type": "string",
+            "description": "Dispatch identifier for the attempt."
+          },
+          "action_correlation_id": {
+            "type": "string",
+            "description": "Downstream action correlation identifier."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "Downstream response or invocation identifier, if available."
+          },
+          "error_type": {
+            "type": "string",
+            "description": "Fully-qualified error type for a failed attempt, if available."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Truncated failure message for a failed attempt, if available."
+          }
+        },
+        "description": "Compact record of a single routine trigger attempt."
+      },
+      "RoutineRunsResponse": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoutineRunDto"
+            },
+            "description": "Current page of routine runs."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Continuation token for the next page. Omitted when there are no additional results."
+          }
+        },
+        "description": "Paged response for routine run history."
+      },
+      "RoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineTriggerType"
+              }
+            ],
+            "description": "Trigger type discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "schedule": "#/components/schemas/ScheduleRoutineTrigger",
+            "timer": "#/components/schemas/TimerRoutineTrigger",
+            "github_issue": "#/components/schemas/EventRoutineTrigger"
+          }
+        },
+        "description": "Base model for a Routine trigger. Discriminated by `type`."
+      },
+      "RoutineTriggerType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "schedule",
+              "timer",
+              "github_issue"
+            ]
+          }
+        ],
+        "description": "Discriminator values for RoutineTrigger.type."
+      },
       "SASCredentials": {
         "type": "object",
         "required": [
@@ -38712,6 +39687,35 @@
           }
         ],
         "description": "Schedule provisioning status."
+      },
+      "ScheduleRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "schedule"
+            ],
+            "description": "Trigger type discriminator."
+          },
+          "cron_expression": {
+            "type": "string",
+            "description": "Standard cron expression for the recurring schedule. Example: `\"0 8 * * *\"` for daily at 08:00."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "IANA/Windows time zone identifier. Example: `\"UTC\"` or `\"America/Los_Angeles\"`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "Cron-based recurring schedule trigger."
       },
       "ScheduleRun": {
         "type": "object",
@@ -39708,6 +40712,35 @@
           }
         },
         "title": "AzureAIEvaluatorGrader"
+      },
+      "TimerRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "timer"
+            ],
+            "description": "Trigger type discriminator."
+          },
+          "at": {
+            "type": "string",
+            "description": "One-shot fire time in ISO 8601 format. Example: `\"2030-01-02T03:04:05Z\"`."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "IANA/Windows time zone identifier. Example: `\"UTC\"` or `\"America/Los_Angeles\"`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "One-shot timer trigger. Fires once at the configured time."
       },
       "ToolCallOutputContent": {
         "anyOf": [
