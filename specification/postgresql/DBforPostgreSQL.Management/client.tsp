@@ -342,6 +342,10 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(UserAssignedIdentity.principalId, Azure.Core.uuid, "csharp");
 @@alternateType(UserAssignedIdentity.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(UserAssignedIdentity.userAssignedIdentities,
+  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  "csharp"
+);
 
 // Uri type mappings
 @@alternateType(DataEncryption.primaryKeyURI, TypeSpec.url, "csharp");
