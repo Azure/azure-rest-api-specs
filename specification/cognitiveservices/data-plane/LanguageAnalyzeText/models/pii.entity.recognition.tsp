@@ -257,7 +257,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2026_05_15_preview, Entity[])
+  @typeChangedFrom(Versions.v2026_05_01, Entity[])
   entities: PiiEntityWithTags[];
 }
 
