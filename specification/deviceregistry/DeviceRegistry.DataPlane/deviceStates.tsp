@@ -26,17 +26,6 @@ union DeviceStateName {
   update: "update",
 }
 
-/** The kind of a device state resource. */
-union DeviceStateKind {
-  string,
-
-  /** A device state resource that is a device twin. */
-  Twin: "Twin",
-
-  /** A device state resource that holds properties managed by cloud services and not sent to the device. */
-  Cloud: "Cloud",
-}
-
 /** The cloud service that reports a `Cloud` device state. */
 union DeviceStateReportedBy {
   string,
@@ -45,33 +34,21 @@ union DeviceStateReportedBy {
   ADU: "Microsoft.DeviceUpdate",
 }
 
-/** A device state resource. */
-@resource("states")
+/** A device state resource that is a device twin. */
+@resource("states/twin")
 @parentResource(Device)
-@discriminator("kind")
-model DeviceState {
+model TwinDeviceState {
   ...OmitProperties<DataPlaneResourceBase, "name">;
 
   /** The name of the device state. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   name: DeviceStateName;
 
-  /** The kind of device state. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: DeviceStateKind;
-}
-
-@@key(DeviceState.name, "stateName");
-
-/** A device state resource that is a device twin. */
-model TwinDeviceState extends DeviceState {
-  /** Discriminator value for a twin device state. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: DeviceStateKind.Twin;
-
   /** The device twin properties. */
   properties: TwinDeviceStateProperties;
 }
+
+@@key(TwinDeviceState.name, "stateName");
 
 /** Twin properties of a device state. */
 model TwinDeviceStateProperties {
@@ -83,19 +60,23 @@ model TwinDeviceStateProperties {
 }
 
 /** A device state resource that holds properties managed by cloud services and not sent to the device. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Cloud device states are further discriminated by `reportedBy` to model service-specific shapes."
+@resource("states/cloud")
+@parentResource(Device)
 @discriminator("reportedBy")
-model CloudDeviceState extends DeviceState {
-  /** Discriminator value for a cloud device state. */
+model CloudDeviceState {
+  ...OmitProperties<DataPlaneResourceBase, "name">;
+
+  /** The name of the device state. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: DeviceStateKind.Cloud;
+  name: DeviceStateName;
 
   /** The cloud service that reports this device state. */
   reportedBy: DeviceStateReportedBy;
 }
 
+@@key(CloudDeviceState.name, "stateName");
+
 /** A cloud device state reported by Azure Device Update. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Cloud device states are further discriminated by `reportedBy`."
 model UpdateCloudDeviceState extends CloudDeviceState {
   /** Discriminator value for an Azure Device Update reported state. */
   reportedBy: DeviceStateReportedBy.ADU;
@@ -245,21 +226,37 @@ union ErrorCategory {
 }
 
 // ──────────────────────────────────────────────
-// Device states interface
+// Device states interfaces
 // ──────────────────────────────────────────────
 
-/** CRUD operations on device states. */
+/** CRUD operations on twin device states. */
 @tag("Device States")
-interface DeviceStates {
-  /** Create or replace a device state. */
-  createOrReplace is ResourceOperations.ResourceCreateOrReplace<DeviceState>;
+interface TwinDeviceStates {
+  /** Create or replace a twin device state. */
+  createOrReplace is ResourceOperations.ResourceCreateOrReplace<TwinDeviceState>;
 
-  /** Get a device state. */
-  get is ResourceOperations.ResourceRead<DeviceState>;
+  /** Get a twin device state. */
+  get is ResourceOperations.ResourceRead<TwinDeviceState>;
 
-  /** Update a device state. */
-  update is ResourceOperations.ResourceCreateOrUpdate<DeviceState>;
+  /** Update a twin device state. */
+  update is ResourceOperations.ResourceCreateOrUpdate<TwinDeviceState>;
 
-  /** List device states for a device. */
-  list is ResourceOperations.ResourceList<DeviceState>;
+  /** List twin device states for a device. */
+  list is ResourceOperations.ResourceList<TwinDeviceState>;
+}
+
+/** CRUD operations on cloud device states. */
+@tag("Device States")
+interface CloudDeviceStates {
+  /** Create or replace a cloud device state. */
+  createOrReplace is ResourceOperations.ResourceCreateOrReplace<CloudDeviceState>;
+
+  /** Get a cloud device state. */
+  get is ResourceOperations.ResourceRead<CloudDeviceState>;
+
+  /** Update a cloud device state. */
+  update is ResourceOperations.ResourceCreateOrUpdate<CloudDeviceState>;
+
+  /** List cloud device states for a device. */
+  list is ResourceOperations.ResourceList<CloudDeviceState>;
 }
