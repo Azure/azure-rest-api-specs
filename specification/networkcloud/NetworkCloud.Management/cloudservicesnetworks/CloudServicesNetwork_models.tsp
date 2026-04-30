@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 
@@ -115,6 +116,24 @@ union CloudServicesNetworkStorageStatusStatus {
    * The expansion of the storage allocation has failed.
    */
   ExpansionFailed: "ExpansionFailed",
+
+  /**
+   * The storage allocation is initializing.
+   */
+  @added(Versions.v2026_05_01_preview)
+  Initializing: "Initializing",
+
+  /**
+   * The storage allocation has no status.
+   */
+  @added(Versions.v2026_05_01_preview)
+  None: "None",
+
+  /**
+   * The storage allocation is being repaired.
+   */
+  @added(Versions.v2026_05_01_preview)
+  Repairing: "Repairing",
 }
 
 /**

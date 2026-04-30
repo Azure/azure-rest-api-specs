@@ -351,3 +351,146 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
+
+// =====================================================================
+// Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
+// parameter because its name contains "apiversion". This causes
+// the Go emitter to crash with "unexpected constant client side default
+// 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
+// =====================================================================
+@@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+// =====================================================================
+// C# naming alignment with Azure.ResourceManager.Compute SDK
+// =====================================================================
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "UltraSsdEnabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
+@@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
+@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+  "IsPasswordAuthenticationDisabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+  "IsVmAgentPlatformUpdatesEnabled",
+  "csharp"
+);
+@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+  "IsAutomaticUpdatesEnabled",
+  "csharp"
+);
+@@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(OSDisk.osType, "OSType", "csharp");
+@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+  "OSImageNotificationProfile",
+  "csharp"
+);
+
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// ARM Resource IDs -> ResourceIdentifier
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// String URIs -> System.Uri
+@@alternateType(VirtualHardDisk.uri, url, "csharp");
+@@alternateType(BootDiagnostics.storageUri, url, "csharp");
+@@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
+@@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
+@@alternateType(WinRMListener.certificateUrl, url, "csharp");
+@@alternateType(VaultCertificate.certificateUrl, url, "csharp");
+
+// =====================================================================
+// C# type renames: Prefix core VM types with "VirtualMachine" to match
+// Azure.ResourceManager.Compute SDK naming conventions
+// =====================================================================
+@@clientName(OSDisk, "VirtualMachineOSDisk", "csharp");
+@@clientName(OSProfile, "VirtualMachineOSProfile", "csharp");
+@@clientName(DataDisk, "VirtualMachineDataDisk", "csharp");
+@@clientName(NetworkProfile, "VirtualMachineNetworkProfile", "csharp");
+@@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
+@@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
+@@clientName(VmSizeProperties, "VirtualMachineSizeProperties", "csharp");
+@@clientName(NetworkInterfaceReference,
+  "VirtualMachineNetworkInterfaceReference",
+  "csharp"
+);
+
+// =====================================================================
+// C# type renames: Match Compute SDK type names
+// =====================================================================
+@@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
+@@clientName(BulkActionVMProperties, "BulkActionVmProperties", "csharp");
+@@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
+@@clientName(Modes, "HostEndpointSettingsMode", "csharp");
+
+// =====================================================================
+// C# enum renames: Singular names to match Compute SDK conventions
+// =====================================================================
+@@clientName(CachingTypes, "CachingType", "csharp");
+@@clientName(SecurityTypes, "SecurityType", "csharp");
+@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
+@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
+@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
+@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
+@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
+@@clientName(IPVersions, "IPVersion", "csharp");
+@@clientName(ProtocolTypes, "WinRMListenerProtocolType", "csharp");
+@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
+@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
+@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
+@@clientName(SettingNames, "SettingName", "csharp");
+
+// =====================================================================
+// C# property renames: Match Compute SDK property names
+// =====================================================================
+@@clientName(ImageReference.sharedGalleryImageId,
+  "SharedGalleryImageUniqueId",
+  "csharp"
+);
+
+// =====================================================================
+// [ARMCOMMON001] Use framework ManagedServiceIdentity instead of local
+// VirtualMachineIdentity / UserAssignedIdentitiesValue / ResourceIdentityType
+// =====================================================================
+@@alternateType(BulkVMConfiguration.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+
+// =====================================================================
+// [ARMCOMMON001] Use framework WritableSubResource for SubResource-typed
+// properties (wire format stays { "id": "..." })
+// =====================================================================
+
+// Define the model in the Azure.ResourceManager.Models namespace so
+// @@alternateType can reference it for C# SDK generation.
+namespace Azure.ResourceManager.Models {
+  /** Represents a reference to an existing resource by its id. */
+  model WritableSubResource {
+    /** The resource id. */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+@@alternateType(KeyVaultSecretReference.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(KeyVaultKeyReference.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
