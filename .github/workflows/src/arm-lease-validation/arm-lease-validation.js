@@ -20,6 +20,7 @@ export const ALLOWED_FILE_PATTERNS = [
   LEASE_FILE_PATTERN,
   LEASE_FILE_WITH_GROUP_PATTERN,
   /^\.github\/arm-leases\/README\.md$/,
+  /^\.github\/arm-leases\/scripts\/.+$/,
 ];
 
 /**
