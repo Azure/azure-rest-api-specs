@@ -457,3 +457,40 @@ model ResourcePatchRequestInput {
   "SharedGalleryImageUniqueId",
   "csharp"
 );
+
+// =====================================================================
+// [ARMCOMMON001] Use framework ManagedServiceIdentity instead of local
+// VirtualMachineIdentity / UserAssignedIdentitiesValue / ResourceIdentityType
+// =====================================================================
+@@alternateType(BulkVMConfiguration.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+
+// =====================================================================
+// [ARMCOMMON001] Use framework WritableSubResource for SubResource-typed
+// properties (wire format stays { "id": "..." })
+// =====================================================================
+
+// Define the model in the Azure.ResourceManager.Models namespace so
+// @@alternateType can reference it for C# SDK generation.
+namespace Azure.ResourceManager.Models {
+  /** Represents a reference to an existing resource by its id. */
+  model WritableSubResource {
+    /** The resource id. */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+@@alternateType(KeyVaultSecretReference.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(KeyVaultKeyReference.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
