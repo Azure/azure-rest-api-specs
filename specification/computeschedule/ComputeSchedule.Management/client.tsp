@@ -17,6 +17,8 @@ using TypeSpec.Versioning;
 
 @@clientName(CancelOccurrenceRequest, "OccurrenceCancelContent", "csharp");
 @@clientName(DelayRequest, "OccurrenceDelayContent", "csharp");
+// [DATE001] DateTimeOffset properties should use an "On"/"At" suffix in C#.
+@@clientName(DelayRequest.delay, "DelayOn", "csharp");
 @@clientName(Language, "NotificationLanguage", "csharp");
 @@clientName(Month, "ScheduledActionsScheduleMonth", "csharp");
 @@clientName(WeekDay, "ScheduledActionsScheduleWeekDay", "csharp");
@@ -183,12 +185,19 @@ using TypeSpec.Versioning;
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(ScheduledActionResource, "ScheduledActionResourceData", "csharp");
-@@clientName(OccurrenceResource, "OccurrenceResourceData", "csharp");
-@@clientName(OccurrenceExtensionResource,
-  "OccurrenceExtensionResourceData",
+// [SUFFIX006] ScheduledActionResource is not a ResourceData-derived ARM
+// resource (it's an item embedded in attach/patch payloads), so it must not
+// carry the "Data" suffix in C#.
+@@clientName(ScheduledActionResource,
+  "ScheduledActionResourceDetails",
   "csharp"
 );
+// [SUFFIX006] OccurrenceResource has its own Id/Name/Type and does not derive
+// from ResourceData -> drop the "Data" suffix.
+@@clientName(OccurrenceResource, "OccurrenceDetails", "csharp");
+// [RESINFIX001] OccurrenceExtensionResource derives from ResourceData; keep
+// the "Data" suffix but drop the redundant "Resource" infix.
+@@clientName(OccurrenceExtensionResource, "OccurrenceExtensionData", "csharp");
 @@clientName(ResourceOperationResponse,
   "ScheduledActionResourceOperationResult",
   "csharp"
@@ -492,5 +501,37 @@ namespace Azure.ResourceManager.Models {
 );
 @@alternateType(VaultSecretGroup.sourceVault,
   Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+
+// =====================================================================
+// [ACRONYM001] C# acronym casing: "VM" should be "Vm" (PascalCase per
+// .NET Framework Design Guidelines for two-letter acronyms in compound
+// identifiers). Aligns with Azure.ResourceManager.Compute SDK naming.
+// =====================================================================
+@@clientName(BulkVMConfiguration, "BulkVmConfiguration", "csharp");
+@@clientName(VMGalleryApplication, "VmGalleryApplication", "csharp");
+@@clientName(LinuxVMGuestPatchMode, "LinuxVmGuestPatchMode", "csharp");
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings,
+  "LinuxVmGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+  "LinuxVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings,
+  "WindowsVmGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+  "WindowsVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+// VMDiskSecurityProfile -> VirtualMachineDiskSecurityProfile to match the
+// type name used by Azure.ResourceManager.Compute.
+@@clientName(VMDiskSecurityProfile,
+  "VirtualMachineDiskSecurityProfile",
   "csharp"
 );
