@@ -726,6 +726,33 @@ options:
     success: false,
     subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir succeeds with inline sdk/<service-name> path (no {service-dir} variable)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.RecoveryServicesBackup"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservicesbackup/Azure.ResourceManager.RecoveryServicesBackup"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate Go DP emitter-output-dir succeeds with multi-segment package path (e.g. azadmin/backup)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
+    service-dir: "sdk/security/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/azadmin/backup"
+`,
+    success: true,
+    subRules: [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
+  },
 ];
 
 const optionalRulesWithoutEmitterConfigTestCases: Case[] = [

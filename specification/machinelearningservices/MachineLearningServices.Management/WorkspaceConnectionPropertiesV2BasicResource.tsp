@@ -109,6 +109,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    * Test machine learning workspaces connections under the specified workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -123,6 +125,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    * Get available models under the Azure OpenAI connection.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get
@@ -132,12 +136,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
     void,
     ArmResponse<EndpointModels>,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 }

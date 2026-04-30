@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -45,16 +47,7 @@ interface ScalingPlans {
    * Update a scaling plan.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    ScalingPlan,
-    ScalingPlanPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot scalingPlan?: ScalingPlanPatch;
-    }
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<ScalingPlan, ScalingPlanPatch>;
 
   /**
    * Remove a scaling plan.
@@ -154,3 +147,4 @@ interface ScalingPlans {
 @@doc(ScalingPlans.create::parameters.resource,
   "Object containing scaling plan definitions."
 );
+@@clientName(ScalingPlans.update::parameters.body, "scalingPlan");

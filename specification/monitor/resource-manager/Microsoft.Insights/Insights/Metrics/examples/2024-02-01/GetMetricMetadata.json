@@ -1,0 +1,92 @@
+{
+  "operationId": "Metrics_List",
+  "parameters": {
+    "$filter": "Tier eq '*'",
+    "api-version": "2024-02-01",
+    "metric": "BlobCount",
+    "metricnamespace": "Microsoft.Storage/storageAccounts/blobServices",
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default",
+    "resulttype": "metadata",
+    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z"
+  },
+  "title": "Get Metric for metadata",
+  "responses": {
+    "200": {
+      "body": {
+        "interval": "PT1H",
+        "namespace": "microsoft.storage/storageaccounts/blobservices",
+        "resourceregion": "westus2",
+        "timespan": "2021-04-15T02:18:00Z/2021-04-22T02:18:00Z",
+        "value": [
+          {
+            "name": {
+              "localizedValue": "Blob Count",
+              "value": "BlobCount"
+            },
+            "type": "Microsoft.Insights/metrics",
+            "displayDescription": "The number of blob objects stored in the storage account.",
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default/providers/Microsoft.Insights/metrics/BlobCount",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "tier",
+                      "value": "tier"
+                    },
+                    "value": "Cool"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "tier",
+                      "value": "tier"
+                    },
+                    "value": "Archive"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "tier",
+                      "value": "tier"
+                    },
+                    "value": "Standard"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "tier",
+                      "value": "tier"
+                    },
+                    "value": "Untiered"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "tier",
+                      "value": "tier"
+                    },
+                    "value": "Hot"
+                  }
+                ]
+              }
+            ],
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  }
+}

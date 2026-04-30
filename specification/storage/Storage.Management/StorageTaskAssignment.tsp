@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./StorageAccount.tsp";
 
@@ -9,28 +10,20 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
  * The storage task assignment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StorageAccount)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model StorageTaskAssignment extends Resource {
+model StorageTaskAssignment is ProxyResource<StorageTaskAssignmentProperties> {
   ...ResourceNameParameter<
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",
     SegmentName = "storageTaskAssignments",
     NamePattern = "^[a-z][a-z0-9]{2,23}$"
   >;
-
-  /**
-   * Properties of the storage task assignment.
-   */
-  properties: StorageTaskAssignmentProperties;
 }
 
 @armResourceOperations
@@ -43,6 +36,7 @@ interface StorageTaskAssignments {
   /**
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns 202 for LRO PUT"
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
@@ -124,6 +118,22 @@ interface StorageTaskAssignments {
       $filter?: string;
     },
     Error = ErrorResponse
+  >;
+
+  /**
+   * Stops any active running storage action for the storage task assignment
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API uses non-standard response codes for this action"
+  @added(Versions.v2025_08_01)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @action("stopAssignment")
+  stopAssignment is ArmResourceActionAsync<
+    StorageTaskAssignment,
+    void,
+    void,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

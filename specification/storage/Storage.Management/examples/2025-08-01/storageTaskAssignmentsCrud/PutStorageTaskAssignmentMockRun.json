@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
+    "resourceGroupName": "res4228",
+    "accountName": "sto4445",
+    "storageTaskAssignmentName": "myassignment1",
+    "api-version": "2025-08-01",
+    "parameters": {
+      "properties": {
+        "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/myStorageTask",
+        "enabled": true,
+        "description": "My Storage task assignment for testing",
+        "executionContext": {
+          "trigger": {
+            "type": "MockRun",
+            "parameters": {
+              "startOn": "2023-01-01T00:00:00.1234567Z"
+            }
+          },
+          "target": {
+            "prefix": [],
+            "excludePrefix": []
+          }
+        },
+        "report": {
+          "prefix": "reports"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
+        "name": "myassignment1",
+        "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
+        "properties": {
+          "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/myStorageTask",
+          "enabled": true,
+          "description": "My Storage task assignment for testing",
+          "provisioningState": "ValidateSubscriptionQuotaBegin",
+          "executionContext": {
+            "trigger": {
+              "type": "MockRun",
+              "parameters": {
+                "startOn": "2023-01-01T00:00:00.1234567Z"
+              }
+            },
+            "target": {
+              "prefix": [],
+              "excludePrefix": []
+            }
+          },
+          "report": {
+            "prefix": "reports"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
+        "name": "myassignment1",
+        "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
+        "properties": {
+          "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/myStorageTask",
+          "enabled": true,
+          "description": "My Storage task assignment for testing",
+          "provisioningState": "ValidateSubscriptionQuotaBegin",
+          "executionContext": {
+            "trigger": {
+              "type": "MockRun",
+              "parameters": {
+                "startOn": "2023-01-01T00:00:00.1234567Z"
+              }
+            },
+            "target": {
+              "prefix": [],
+              "excludePrefix": []
+            }
+          },
+          "report": {
+            "prefix": "reports"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res4228/providers/Microsoft.Storage/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-08-01"
+      }
+    }
+  },
+  "operationId": "StorageTaskAssignments_Create",
+  "title": "PutStorageTaskAssignmentMockRun"
+}

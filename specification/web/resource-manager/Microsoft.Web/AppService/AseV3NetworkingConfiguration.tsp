@@ -33,7 +33,8 @@ model AseV3NetworkingConfiguration
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ omitTags: true })
 interface AseV3NetworkingConfigurations {
   /**
    * Description for Get networking configuration of an App Service Environment

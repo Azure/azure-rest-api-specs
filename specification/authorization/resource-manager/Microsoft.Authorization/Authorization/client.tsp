@@ -1,0 +1,71 @@
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
+import "./AccessReview/main.tsp";
+import "./AttributeNamespaces/main.tsp";
+import "./Authorization/main.tsp";
+import "./ClassicAdmin/main.tsp";
+import "./DenyAssignment/main.tsp";
+import "./ProviderOperations/main.tsp";
+import "./RoleAssignment/main.tsp";
+import "./RoleDefinitions/main.tsp";
+import "./RoleManagementAlerts/main.tsp";
+
+using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+using Microsoft.AccessReview;
+using Microsoft.AttributeNamespaces;
+using Microsoft.Authorization;
+using Microsoft.ClassicAdmin;
+using Microsoft.DenyAssignment;
+using Microsoft.ProviderOperations;
+using Microsoft.RoleAssignment;
+using Microsoft.RoleDefinitions;
+using Microsoft.RoleManagementAlerts;
+
+@client({
+  name: "CombineClient",
+  service: [
+    Microsoft.AccessReview,
+    Microsoft.AttributeNamespaces,
+    Microsoft.Authorization,
+    Microsoft.ClassicAdmin,
+    Microsoft.DenyAssignment,
+    Microsoft.ProviderOperations,
+    Microsoft.RoleAssignment,
+    Microsoft.RoleDefinitions,
+    Microsoft.RoleManagementAlerts
+  ],
+  autoMergeService: true,
+})
+namespace Microsoft.AuthorizationCombinedClient;
+
+@@clientName(Microsoft.AuthorizationCombinedClient,
+  "AuthorizationManagementClient",
+  "javascript,python"
+);
+@@alternateType(Microsoft.DenyAssignment.DenyAssignmentPrincipalType,
+  string,
+  "go,python"
+);
+@@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
+@@clientName(Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
+  "UserType",
+  "python"
+);
+@@clientName(Microsoft.Authorization.UserType, "CommonUserType", "python");
+
+@@usage(Microsoft.RoleAssignment.RoleAssignment,
+  Azure.ClientGenerator.Core.Usage.input,
+  "java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataGetParameters.$expand,
+  "resourceTypes",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataListParameters.$expand,
+  "resourceTypes",
+  "python"
+);

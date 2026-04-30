@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "distributedAvailabilityGroupName": "dag",
+    "managedInstanceName": "testcl",
+    "parameters": {
+      "properties": {
+        "databases": [
+          {
+            "databaseName": "testdb"
+          }
+        ],
+        "instanceAvailabilityGroupName": "testcl",
+        "partnerAvailabilityGroupName": "BoxLocalAg1",
+        "partnerEndpoint": "TCP://SERVER:7022"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "properties": {
+          "databases": [
+            {
+              "databaseName": "testdb"
+            }
+          ],
+          "distributedAvailabilityGroupName": "dag",
+          "failoverMode": "None",
+          "instanceAvailabilityGroupName": "testcl",
+          "instanceLinkRole": "Secondary",
+          "partnerAvailabilityGroupName": "BoxLocalAg1",
+          "partnerEndpoint": "TCP://SERVER:7022",
+          "seedingMode": "Automatic"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "properties": {
+          "databases": [
+            {
+              "databaseName": "testdb"
+            }
+          ],
+          "distributedAvailabilityGroupName": "dag",
+          "failoverMode": "None",
+          "instanceAvailabilityGroupName": "testcl",
+          "instanceLinkRole": "Secondary",
+          "partnerAvailabilityGroupName": "BoxLocalAg1",
+          "partnerEndpoint": "TCP://SERVER:7022",
+          "seedingMode": "Automatic"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "DistributedAvailabilityGroups_CreateOrUpdate",
+  "title": "Create a distributed availability group with minimal properties."
+}

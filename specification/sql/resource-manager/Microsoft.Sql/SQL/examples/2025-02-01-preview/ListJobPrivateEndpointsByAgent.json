@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "jobAgentName": "agent1",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "endpoint1",
+            "type": "Microsoft.Sql/servers/jobAgents/privateEndpoints",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/privateEndpoints/endpoint1",
+            "properties": {
+              "privateEndpointId": "EJ_47e33188-85ff-4705-8d78-444444444444_endpoint1",
+              "targetServerAzureResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/targetserver1"
+            }
+          },
+          {
+            "name": "endpoint2",
+            "type": "Microsoft.Sql/servers/jobAgents/privateEndpoints",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/privateEndpoints/endpoint2",
+            "properties": {
+              "privateEndpointId": "EJ_00000000-85ff-222-8d78-444444444444_endpoint2",
+              "targetServerAzureResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/targetserver2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "JobPrivateEndpoints_ListByAgent",
+  "title": "List private endpoints in a job agent"
+}

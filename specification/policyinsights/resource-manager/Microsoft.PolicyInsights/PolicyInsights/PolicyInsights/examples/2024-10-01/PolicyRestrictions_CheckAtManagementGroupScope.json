@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "managementGroupId": "financeMg",
+    "managementGroupsNamespace": "Microsoft.Management",
+    "parameters": {
+      "pendingFields": [
+        {
+          "field": "type"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "contentEvaluationResult": {
+          "policyEvaluations": []
+        },
+        "fieldRestrictions": [
+          {
+            "field": "type",
+            "restrictions": [
+              {
+                "policy": {
+                  "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/financeMg/providers/microsoft.authorization/policyAssignments/7EB1508A",
+                  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/financeMg/providers/microsoft.authorization/policyDefinitions/allowedTypes",
+                  "policyDefinitionReferenceId": "DefRef",
+                  "policySetDefinitionId": "/providers/Microsoft.Management/managementGroups/financeMg/providers/microsoft.authorization/policySetDefinitions/735551F1"
+                },
+                "policyEffect": "Deny",
+                "reason": "type not allowed",
+                "result": "Required",
+                "values": [
+                  "Microsoft.Compute/virtualMachines"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyRestrictions_CheckAtManagementGroupScope",
+  "title": "Check policy restrictions at management group scope"
+}

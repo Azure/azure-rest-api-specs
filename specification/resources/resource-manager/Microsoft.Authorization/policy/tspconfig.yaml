@@ -11,11 +11,8 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
     namespace: "Azure.ResourceManager.Resources.Policy"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-policy"
@@ -29,6 +26,7 @@ options:
     service-name: "Policy"
     flavor: azure
   "@azure-tools/typespec-ts":
+    compatibility-lro: true
     service-dir: "sdk/policy"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-policy"
     flavor: azure
