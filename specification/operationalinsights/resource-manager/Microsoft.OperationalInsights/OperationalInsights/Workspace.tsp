@@ -245,9 +245,9 @@ interface Workspaces {
   /**
    * Disables an intelligence pack for a given workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
   @tag("IntelligencePacks")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Disable")
   disable is IntelligencePackOps.ActionSync<
@@ -259,9 +259,9 @@ interface Workspaces {
   /**
    * Enables an intelligence pack for a given workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Workspaces")
   @tag("IntelligencePacks")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Enable")
   enable is IntelligencePackOps.ActionSync<
