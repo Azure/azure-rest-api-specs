@@ -5161,6 +5161,23 @@
         }
       }
     },
+    "AzureEntityResource": {
+      "type": "object",
+      "title": "Entity Resource",
+      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "BillingType": {
       "type": "string",
       "description": "Configures whether billing will be only on the cluster or each workspace will be billed by its proportional use. This does not change the overall billing, only how it will be distributed. Default value is 'Cluster'",
@@ -8380,7 +8397,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/AzureEntityResource"
         }
       ]
     },

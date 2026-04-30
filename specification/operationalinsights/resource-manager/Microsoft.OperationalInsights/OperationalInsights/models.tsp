@@ -2946,6 +2946,15 @@ model UserIdentityProperties {
   clientId?: string;
 }
 
+/** The resource model definition for an Azure Resource Manager resource with an etag. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("Entity Resource")
+model AzureEntityResource extends CommonTypes.Resource {
+  /** Resource Etag. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
 /**
  * The top level Workspace resource container.
  */
