@@ -61,6 +61,12 @@ model WorkspaceProperties {
   provisioningState?: ProvisioningState;
 
   /**
+   * The endpoint of the workspace used by Chaos agents to connect and communicate with the service.
+   */
+  @visibility(Lifecycle.Read)
+  endpoint?: string;
+
+  /**
    * The intended workspace-level resource scope to be used by child scenarios.
    */
   scopes: Azure.Core.armResourceIdentifier[];
