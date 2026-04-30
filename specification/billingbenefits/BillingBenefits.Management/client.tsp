@@ -6,7 +6,6 @@ using Microsoft.BillingBenefits;
 
 // go
 @@clientLocation(BenefitOperationGroup.validate, "RP", "go");
-@@clientName(Microsoft.BillingBenefits.ResourceSku, "SKU", "go");
 @@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
   "ServiceManagedIdentity",
   "go"
