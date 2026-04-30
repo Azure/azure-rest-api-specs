@@ -18,7 +18,7 @@ alias ListModelVersionsParameters = {
 interface Models
   extends VersionedOperations<
       ModelVersion,
-      InputParameters<ModelVersion>,
+      InputParameters<UpdateModelVersionRequest>,
       ListModelVersionsParameters,
       ListModelVersionsParameters
     > {

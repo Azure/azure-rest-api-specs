@@ -4691,7 +4691,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluationTaxonomyCreateOrUpdate"
+                "$ref": "#/components/schemas/EvaluationTaxonomy"
               }
             }
           },
@@ -5028,7 +5028,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluatorVersionCreate"
+                "$ref": "#/components/schemas/EvaluatorVersion"
               }
             }
           }
@@ -5722,7 +5722,7 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/IndexUpdate"
+                "$ref": "#/components/schemas/Index"
               }
             }
           },
@@ -7115,6 +7115,16 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "source.jobId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by source job ID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -7169,6 +7179,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "source.jobId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by source job ID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -7343,7 +7363,7 @@
             "name": "version",
             "in": "path",
             "required": true,
-            "description": "The specific version id of the ModelVersion to create or update.",
+            "description": "The specific version id of the UpdateModelVersionRequest to create or update.",
             "schema": {
               "type": "string"
             }
@@ -7398,11 +7418,11 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/ModelVersionUpdate"
+                "$ref": "#/components/schemas/UpdateModelVersionRequest"
               }
             }
           },
-          "description": "The ModelVersion to create or update."
+          "description": "The UpdateModelVersionRequest to create or update."
         }
       }
     },
@@ -7474,7 +7494,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ModelVersionCreate"
+                "$ref": "#/components/schemas/ModelVersion"
               }
             }
           },
@@ -14173,27 +14193,6 @@
         ],
         "description": "Azure AI Search Index Definition"
       },
-      "AzureAISearchIndexUpdate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "AzureSearch"
-            ],
-            "description": "Type of index"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IndexUpdate"
-          }
-        ],
-        "description": "Azure AI Search Index Definition"
-      },
       "AzureAISearchQueryType": {
         "anyOf": [
           {
@@ -15738,27 +15737,6 @@
         ],
         "description": "CosmosDB Vector Store Index Definition"
       },
-      "CosmosDBIndexUpdate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "CosmosDBNoSqlVectorStore"
-            ],
-            "description": "Type of index"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IndexUpdate"
-          }
-        ],
-        "description": "CosmosDB Vector Store Index Definition"
-      },
       "CreateAgentFromManifestRequest": {
         "type": "object",
         "required": [
@@ -16353,6 +16331,17 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "discriminator": {
@@ -17975,37 +17964,6 @@
             "description": "The version of the resource",
             "readOnly": true
           },
-          "taxonomyInput": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EvaluationTaxonomyInput"
-              }
-            ],
-            "description": "Input configuration for the evaluation taxonomy."
-          },
-          "taxonomyCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TaxonomyCategory"
-            },
-            "description": "List of taxonomy categories."
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Additional properties for the evaluation taxonomy."
-          }
-        },
-        "description": "Evaluation Taxonomy Definition"
-      },
-      "EvaluationTaxonomyCreateOrUpdate": {
-        "type": "object",
-        "required": [
-          "taxonomyInput"
-        ],
-        "properties": {
           "description": {
             "type": "string",
             "description": "The asset description text."
@@ -18406,51 +18364,6 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
-          }
-        },
-        "description": "Evaluator Definition"
-      },
-      "EvaluatorVersionCreate": {
-        "type": "object",
-        "required": [
-          "evaluator_type",
-          "categories",
-          "definition"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
-          },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Metadata about the evaluator"
-          },
-          "evaluator_type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EvaluatorType"
-              }
-            ],
-            "description": "The type of the evaluator"
-          },
-          "categories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluatorCategory"
-            },
-            "description": "The categories of the evaluator"
-          },
-          "definition": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EvaluatorDefinition"
-              }
-            ],
-            "description": "Definition of the evaluator"
           },
           "description": {
             "type": "string",
@@ -19075,6 +18988,17 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "discriminator": {
@@ -19101,42 +19025,6 @@
             ]
           }
         ]
-      },
-      "IndexUpdate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/IndexType"
-              }
-            ],
-            "description": "Type of index"
-          },
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "AzureSearch": "#/components/schemas/AzureAISearchIndexUpdate",
-            "ManagedAzureSearch": "#/components/schemas/ManagedAzureAISearchIndexUpdate",
-            "CosmosDBNoSqlVectorStore": "#/components/schemas/CosmosDBIndexUpdate"
-          }
-        },
-        "description": "Index resource Definition"
       },
       "InputData": {
         "type": "object",
@@ -19643,27 +19531,6 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/Index"
-          }
-        ],
-        "description": "Managed Azure AI Search Index Definition"
-      },
-      "ManagedAzureAISearchIndexUpdate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "ManagedAzureSearch"
-            ],
-            "description": "Type of index"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IndexUpdate"
           }
         ],
         "description": "Managed Azure AI Search Index Definition"
@@ -20628,6 +20495,7 @@
       "ModelVersion": {
         "type": "object",
         "required": [
+          "blobUri",
           "name",
           "version"
         ],
@@ -20688,91 +20556,6 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
-          }
-        },
-        "description": "Model Version Definition"
-      },
-      "ModelVersionCreate": {
-        "type": "object",
-        "properties": {
-          "system_data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SystemDataV3"
-              }
-            ],
-            "description": "System related metadata"
-          },
-          "blobUri": {
-            "type": "string",
-            "format": "uri",
-            "description": "URI of the model artifact in blob storage"
-          },
-          "weightType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryModelWeightType"
-              }
-            ],
-            "description": "The weight type of the model"
-          },
-          "baseModel": {
-            "type": "string",
-            "description": "Base model asset ID"
-          },
-          "source": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelSourceData"
-              }
-            ],
-            "description": "The source of the model"
-          },
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
-          }
-        },
-        "description": "Model Version Definition"
-      },
-      "ModelVersionUpdate": {
-        "type": "object",
-        "properties": {
-          "system_data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SystemDataV3"
-              }
-            ],
-            "description": "System related metadata"
-          },
-          "blobUri": {
-            "type": "string",
-            "format": "uri",
-            "description": "URI of the model artifact in blob storage"
-          },
-          "weightType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryModelWeightType"
-              }
-            ],
-            "description": "The weight type of the model"
-          },
-          "source": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelSourceData"
-              }
-            ],
-            "description": "The source of the model"
           },
           "description": {
             "type": "string",
@@ -43119,6 +42902,23 @@
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
           }
         }
+      },
+      "UpdateModelVersionRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "Request body for updating a model version. Only description and tags can be modified."
       },
       "UserMessage": {
         "type": "object",

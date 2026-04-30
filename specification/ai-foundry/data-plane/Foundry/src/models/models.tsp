@@ -125,6 +125,15 @@ model ArtifactProfile {
   signals?: FoundryModelArtifactProfileSignal[];
 }
 
+@doc("Request body for updating a model version. Only description and tags can be modified.")
+model UpdateModelVersionRequest {
+  @doc("The asset description text.")
+  description?: string;
+
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  tags?: Record<string>;
+}
+
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;
