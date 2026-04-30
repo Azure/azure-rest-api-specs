@@ -40,7 +40,6 @@ import "./AgentDeploymentResource.tsp";
 import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
 import "./ManagedComputeUsages.tsp";
-import "./Compute.tsp";
 import "./ManagedComputeCapacity.tsp";
 import "./routes.tsp";
 
