@@ -306,6 +306,13 @@ namespace KnowledgeBaseRetrievalClient {
   }
 );
 
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
+  "inputTokensCount"
+);
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
+  "outputTokensCount"
+);
+
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
@@ -3734,6 +3741,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
