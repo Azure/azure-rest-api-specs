@@ -3680,66 +3680,6 @@ model RaiExternalSafetyProviderSchemaProperties {
 }
 
 /**
- * Cognitive Services Rai External Safety provider.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'RaiExternalSafetyProvider' uses base type inheritance matching service-side object hierarchy"
-model RaiExternalSafetyProvider
-  extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Resource Etag.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'RaiExternalSafetyProvider' to support extensible key-value pairs matching service behavior"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-
-  /**
-   * Properties of Cognitive Services Rai External Safety provider.
-   */
-  properties?: RaiExternalSafetyProviderProperties;
-}
-
-/**
- * RAI External SafetyProvider properties.
- */
-model RaiExternalSafetyProviderProperties {
-  /**
-   * The unique identifier of the safety provider.
-   */
-  providerId?: string;
-
-  /**
-   * Name of the safety provider.
-   */
-  providerName?: string;
-
-  /**
-   * Safety provider mode sync/async.
-   */
-  mode?: string;
-
-  /**
-   * Webhook URL for the safety provider.
-   */
-  url?: url;
-
-  /**
-   * Creation time of the safety provider.
-   */
-  createdAt?: utcDateTime;
-
-  /**
-   * Last modified time of the safety provider.
-   */
-  lastModifiedAt?: utcDateTime;
-}
-
-/**
  * The list of cognitive services RAI Topics.
  */
 model RaiTopicResult {
