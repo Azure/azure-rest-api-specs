@@ -249,15 +249,15 @@ using TypeSpec.Versioning;
 );
 
 @@clientName(UserInitiatedRedeploy.automaticallyApprove,
-  "AutomaticallyApproveRedeploy",
+  "IsAutomaticallyApprovedForRedeploy",
   "csharp"
 );
 @@clientName(UserInitiatedReboot.automaticallyApprove,
-  "AutomaticallyApproveReboot",
+  "IsAutomaticallyApprovedForReboot",
   "csharp"
 );
 @@clientName(AllInstancesDown.automaticallyApprove,
-  "AutomaticallyApproveAllInstancesDown",
+  "IsAutomaticallyApprovedForAllInstancesDown",
   "csharp"
 );
 
