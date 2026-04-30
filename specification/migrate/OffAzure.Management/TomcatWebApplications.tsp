@@ -35,16 +35,42 @@ interface TomcatWebApplicationsController {
   /**
    * Updates the Tomcat web application tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: false })
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("TomcatWebApplicationsController")
-  update is ArmCustomPatchSync<
-    TomcatWebApplications,
-    PatchModel = {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @bodyRoot body: unknown;
-    }
-  >;
+  @patch
+  update(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /** Site name. */
+    @path
+    @segment("masterSites")
+    @key("siteName")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    siteName: string,
+
+    /** Web app site name. */
+    @path
+    @segment("webAppSites")
+    @key("webAppSiteName")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    webAppSiteName: string,
+
+    /** Web application name. */
+    @path
+    @segment("tomcatWebApplications")
+    @key("webApplicationName")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    webApplicationName: string,
+
+    /** Patch request body. */
+    @body
+    body: unknown,
+  ): TomcatWebApplications | ErrorResponse;
 
   /**
    * Method to get all Tomcat web application.

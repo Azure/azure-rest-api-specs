@@ -468,9 +468,6 @@ using Microsoft.OffAzure;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppRunAsAccount.properties);
 
-@@clientName(TomcatWebApplicationsController.update::parameters.properties,
-  "body"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TomcatWebApplications.properties);
 
