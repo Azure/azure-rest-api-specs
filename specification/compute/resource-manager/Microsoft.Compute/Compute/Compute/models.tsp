@@ -8153,6 +8153,34 @@ model RestorePointCollectionSourceProperties {
 }
 
 /**
+ * Indicating the access status of all disk restore points within a restore point.
+ */
+@added(Versions.v2025_04_01)
+union InstantAccessState {
+  string,
+
+  /**
+   * Restore points in this state cannot be used for restore, copy, or offline download. A restore point is marked as Pending if any disk restore point within it has a snapshotAccessState of pending.
+   */
+  Pending: "Pending",
+
+  /**
+   * Restore points in this state can be used for restore, copy to a different region, and offline download. A restore point becomes Available when all disk restore points within it have a snapshotAccessState of available. This typically occurs after the instantAccessDuration has expired.
+   */
+  Available: "Available",
+
+  /**
+   * Restore points in this state allow fast disk restore but cannot be copied or downloaded. A restore point is marked as InstantAccess when all disk restore points within it have a snapshotAccessState of InstantAccess.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * Restore points in this state allow fast disk restore, and they can also be copied and downloaded. A restore point is marked as AvailableWithInstantAccess when all disk restore points within it have a snapshotAccessState of AvailableWithInstantAccess. This applies when the instantAccessDuration has not yet expired.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
+}
+
+/**
  * The restore point properties.
  */
 model RestorePointProperties {
@@ -8199,6 +8227,13 @@ model RestorePointProperties {
    */
   @added(Versions.v2025_04_01)
   instantAccessDurationMinutes?: int32;
+
+  /**
+   * Indicating the access status of all disk restore points within a restore point (e.g., Pending, Available, InstantAccess, AvailableWithInstantAccess).
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  instantAccessStatus?: InstantAccessState;
 }
 
 /**
