@@ -18,6 +18,7 @@ namespace Microsoft.DocumentDB;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model GraphResourceGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphResourceGetProperties> {
   ...ResourceNameParameter<

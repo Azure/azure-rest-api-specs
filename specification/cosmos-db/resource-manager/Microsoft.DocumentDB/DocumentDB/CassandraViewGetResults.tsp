@@ -18,6 +18,7 @@ namespace Microsoft.DocumentDB;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(CassandraKeyspaceGetResults)
+@added(Versions.v2026_04_01_preview)
 model CassandraViewGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CassandraViewGetProperties> {
   ...ResourceNameParameter<

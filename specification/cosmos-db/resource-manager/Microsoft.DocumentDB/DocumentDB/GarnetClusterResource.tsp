@@ -15,6 +15,7 @@ namespace Microsoft.DocumentDB;
 /**
  * Representation of a Garnet cache cluster.
  */
+@added(Versions.v2026_04_01_preview)
 model GarnetClusterResource
   is Azure.ResourceManager.TrackedResource<GarnetClusterResourceProperties> {
   ...ResourceNameParameter<

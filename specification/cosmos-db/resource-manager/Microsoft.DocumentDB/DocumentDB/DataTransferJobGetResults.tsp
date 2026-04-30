@@ -17,6 +17,7 @@ namespace Microsoft.DocumentDB;
  * A Cosmos DB Data Transfer Job
  */
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model DataTransferJobGetResults
   is Azure.ResourceManager.ProxyResource<DataTransferJobProperties> {
   ...ResourceNameParameter<

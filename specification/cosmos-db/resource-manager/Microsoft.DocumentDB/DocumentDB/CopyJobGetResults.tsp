@@ -17,6 +17,7 @@ namespace Microsoft.DocumentDB;
  * A Cosmos DB Copy Job
  */
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model CopyJobGetResults
   is Azure.ResourceManager.ProxyResource<CopyJobProperties, false> {
   ...ResourceNameParameter<

@@ -17,6 +17,7 @@ namespace Microsoft.DocumentDB;
  * An Azure Cosmos DB Throughputpool Account
  */
 @parentResource(ThroughputPoolResource)
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolAccountResource
   is Azure.ResourceManager.ProxyResource<ThroughputPoolAccountProperties> {
   ...ResourceNameParameter<

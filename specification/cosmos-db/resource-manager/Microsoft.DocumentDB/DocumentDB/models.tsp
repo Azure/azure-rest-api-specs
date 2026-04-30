@@ -53,6 +53,7 @@ model CassandraRoleAssignmentListResult
   is ResourceListResult<CassandraRoleAssignmentResource>;
 
 /** Properties of a Garnet cache cluster. */
+@added(Versions.v2026_04_01_preview)
 model GarnetClusterResourceProperties {
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
@@ -316,16 +317,19 @@ model MaterializedViewsProperties {
 }
 
 model FleetListResult is ResourceListResult<FleetResource>;
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolsListResult is ResourceListResult<ThroughputPoolResource>;
 model TableRoleDefinitionListResult
   is ResourceListResult<TableRoleDefinitionResource>;
 
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolAccountsListResult
   is ResourceListResult<ThroughputPoolAccountResource>;
 
 model TableRoleAssignmentListResult
   is ResourceListResult<TableRoleAssignmentResource>;
 
+@added(Versions.v2026_04_01_preview)
 model FleetAnalyticsListResult is ResourceListResult<FleetAnalyticsResource>;
 /**
  * Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.
@@ -1406,6 +1410,7 @@ model chaosFaultProperties {
  * The properties of a Copy Job
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model CopyJobProperties {
   /**
    * Job Properties
@@ -1514,6 +1519,7 @@ model CloudError {
 /**
  * The List operation response, that contains the Copy Jobs and their properties.
  */
+@added(Versions.v2026_04_01_preview)
 model CopyJobFeedResults is Azure.Core.Page<CopyJobGetResults>;
 
 /**
@@ -3435,6 +3441,7 @@ model MetricAvailability {
 /**
  * The List operation response, that contains the Graph resource and their properties.
  */
+@added(Versions.v2026_04_01_preview)
 model GraphResourcesListResult {
   /**
    * List of Graph resource and their properties.
@@ -5697,6 +5704,7 @@ model LocationProperties {
 /**
  * The List operation response, that contains the Cassandra views and their properties.
  */
+@added(Versions.v2026_04_01_preview)
 model CassandraViewListResult {
   /**
    * List of Cassandra views and their properties.
@@ -5877,6 +5885,7 @@ model DataTransferDataSourceSink {
 /**
  * The List operation response, that contains the Data Transfer jobs and their properties.
  */
+@added(Versions.v2026_04_01_preview)
 model DataTransferJobFeedResults is Azure.Core.Page<DataTransferJobGetResults>;
 
 /**
@@ -5897,6 +5906,7 @@ model ListClusters {
 /**
  * List of Garnet clusters.
  */
+@added(Versions.v2026_04_01_preview)
 model ListGarnetClusters {
   /**
    * Container for the array of clusters.
@@ -8351,6 +8361,7 @@ model TableRoleAssignmentResourceProperties {
 /**
  * Properties to update Azure Cosmos DB throughput pool.
  */
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolProperties {
   /**
    * A provisioning state of the ThroughputPool.
@@ -8368,6 +8379,7 @@ model ThroughputPoolProperties {
  * Represents a throughput pool resource for updates.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolUpdate {
   /**
    * Properties of the throughput pool.
@@ -8378,6 +8390,7 @@ model ThroughputPoolUpdate {
 /**
  * An Azure Cosmos DB Global Database Account which is part of a Throughputpool.
  */
+@added(Versions.v2026_04_01_preview)
 model ThroughputPoolAccountProperties {
   /**
    * A provisioning state of the ThroughputPool Account.
@@ -8607,6 +8620,7 @@ model FleetResourceUpdate {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model FleetAnalyticsProperties {
   /**
    * A provisioning state of the FleetAnalytics.
