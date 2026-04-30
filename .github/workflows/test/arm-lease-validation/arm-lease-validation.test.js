@@ -49,10 +49,15 @@ describe("validate-arm-leases", () => {
 
       expect(
         validateFolderStructure([
-          ".github/arm-leases/TestService/Microsoft.Test/lease.yaml", // uppercase org
+          ".github/arm-leases/TestService/Microsoft.Test/lease.yaml", // uppercase org is valid
+        ]),
+      ).toHaveLength(0);
+
+      expect(
+        validateFolderStructure([
           ".github/arm-leases/compute/Microsoft.Compute/stable/lease.yaml", // stable not allowed
         ]),
-      ).toHaveLength(2);
+      ).toHaveLength(1);
     });
   });
 
