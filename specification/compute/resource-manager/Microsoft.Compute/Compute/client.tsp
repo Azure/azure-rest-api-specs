@@ -19,7 +19,7 @@ using ComputeSku;
     service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
     autoMergeService: true,
   },
-  "!python"
+  "!(javascript, python)"
 )
 @client(
   {
@@ -27,7 +27,7 @@ using ComputeSku;
     service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
     autoMergeService: true,
   },
-  "python"
+  "javascript, python"
 )
 namespace ComputeCombine;
 
@@ -62,3 +62,10 @@ namespace ComputeCombine;
   "VirtualMachineIdentityUserAssignedIdentities",
   "java"
 );
+
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(VirtualMachineScaleSetUpdateNetworkProfile.networkApiVersion,
+  false
+);
+@@apiVersion(NetworkProfile.networkApiVersion, false);
+@@apiVersion(ResourceSku.apiVersions, false);
