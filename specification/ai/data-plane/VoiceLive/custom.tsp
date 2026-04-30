@@ -451,11 +451,16 @@ union PersonalVoiceModels {
   "PhoenixLatestNeural",
 
   /** Use the Phoenix V2 model. */
+  @removed(Versions.v2026_04_10)
   "PhoenixV2Neural",
 
   /** Use the latest Dragon HD Omni model. */
   @added(Versions.v2026_04_10)
   "DragonHDOmniLatestNeural",
+
+  /** Use the MAI-Voice-1 model. */
+  @added(Versions.v2026_04_10)
+  "MAI-Voice-1",
 }
 
 /** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
