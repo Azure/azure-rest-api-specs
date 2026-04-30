@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2025-09-01
 ```
 
+### Tag: package-preview-2026-02
+
+These settings apply only when `--tag=package-preview-2026-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-02'
+input-file:
+  - ./preview/2026-02-01-preview/containerInstance.json
+```
+
 ### Tag: package-2025-09-01
 
 These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
