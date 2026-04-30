@@ -1898,6 +1898,13 @@ model ManagedClusterProperties {
   supportPlan?: KubernetesSupportPlan;
 
   /**
+   * Whether to enable FIPS mode at the cluster level. When enabled, this setting enforces FIPS compliance for all AKS-managed components, such as the node operating system, addons, and [managed containerized components](https://aka.ms/aks/components/docs). See [Enable cluster-wide FIPS](https://aka.ms/aks/fips) for more details. When this property is enabled, all node pools in the cluster must also be FIPS-enabled.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing FIPS properties in AKS."
+  @added(Versions.v2026_03_02_preview)
+  enableFIPS?: boolean;
+
+  /**
    * Enable namespace as Azure resource. The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource.
    */
   @added(Versions.v2026_03_02_preview)
