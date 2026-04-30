@@ -13,3 +13,11 @@ using Microsoft.OffAzure;
 );
 @@clientName(SQLDiscoveryScopeStatus, "SqlDiscoveryScopeStatus", "java");
 @@clientName(SQLInventoryImportBody, "SqlInventoryImportBody", "java");
+
+// Mitigate Java breaking changes: property rename hostName → hostname
+@@clientName(SqlDatabaseReplicaInfo.hostName, "hostname", "java");
+@@clientName(SqlServerProperties.hostName, "hostname", "java");
+@@clientName(SqlServerV2UpdateProperties.hostName, "hostname", "java");
+@@clientName(WebAppExtendedMachineProperties.hostName, "hostname", "java");
+@@clientName(FrontEndBinding.hostName, "hostname", "java");
+@@clientName(VmwareMachineProperties.hostName, "hostname", "java");
