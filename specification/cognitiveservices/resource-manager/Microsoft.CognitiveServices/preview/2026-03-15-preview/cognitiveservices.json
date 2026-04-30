@@ -2629,8 +2629,8 @@
           "GetCompute": {
             "$ref": "./examples/GetCompute.json"
           },
-          "GetContainerInstanceCompute": {
-            "$ref": "./examples/GetContainerInstanceCompute.json"
+          "GetWorkbenchCompute": {
+            "$ref": "./examples/GetWorkbenchCompute.json"
           }
         }
       },
@@ -2715,8 +2715,8 @@
           "PutCompute": {
             "$ref": "./examples/PutCompute.json"
           },
-          "PutContainerInstanceCompute": {
-            "$ref": "./examples/PutContainerInstanceCompute.json"
+          "PutWorkbenchCompute": {
+            "$ref": "./examples/PutWorkbenchCompute.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2889,7 +2889,7 @@
         "tags": [
           "Computes"
         ],
-        "description": "Restarts a running ContainerInstance compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is ContainerInstance.",
+        "description": "Restarts a running Workbench compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is Workbench.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2947,8 +2947,8 @@
           }
         },
         "x-ms-examples": {
-          "RestartContainerInstanceCompute": {
-            "$ref": "./examples/RestartContainerInstanceCompute.json"
+          "RestartWorkbenchCompute": {
+            "$ref": "./examples/RestartWorkbenchCompute.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2963,7 +2963,7 @@
         "tags": [
           "Computes"
         ],
-        "description": "Starts a stopped ContainerInstance compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is ContainerInstance.",
+        "description": "Starts a stopped Workbench compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is Workbench.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3021,8 +3021,8 @@
           }
         },
         "x-ms-examples": {
-          "StartContainerInstanceCompute": {
-            "$ref": "./examples/StartContainerInstanceCompute.json"
+          "StartWorkbenchCompute": {
+            "$ref": "./examples/StartWorkbenchCompute.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3037,7 +3037,7 @@
         "tags": [
           "Computes"
         ],
-        "description": "Stops a running ContainerInstance compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is ContainerInstance.",
+        "description": "Stops a running Workbench compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is Workbench.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3095,8 +3095,8 @@
           }
         },
         "x-ms-examples": {
-          "StopContainerInstanceCompute": {
-            "$ref": "./examples/StopContainerInstanceCompute.json"
+          "StopWorkbenchCompute": {
+            "$ref": "./examples/StopWorkbenchCompute.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -12659,11 +12659,11 @@
     },
     "Compute": {
       "type": "object",
-      "description": "Cognitive Services compute resource. Supports polymorphic compute types\n(Cluster, ContainerInstance) via the computeType discriminator in properties.",
+      "description": "Cognitive Services compute resource. Supports polymorphic compute types\n(Cluster, Workbench) via the computeType discriminator in properties.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ComputeProperties",
-          "description": "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
+          "description": "Polymorphic properties of the compute resource. Use computeType to select Cluster or Workbench."
         },
         "etag": {
           "type": "string",
@@ -12915,7 +12915,7 @@
       "description": "The type of compute resource.",
       "enum": [
         "Cluster",
-        "ContainerInstance"
+        "Workbench"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
@@ -12927,9 +12927,9 @@
             "description": "Cluster (AKS-backed) compute type."
           },
           {
-            "name": "ContainerInstance",
-            "value": "ContainerInstance",
-            "description": "Container Instance compute type."
+            "name": "Workbench",
+            "value": "Workbench",
+            "description": "Workbench compute type."
           }
         ]
       }
@@ -13958,7 +13958,7 @@
     },
     "ConnectivityEndpoints": {
       "type": "object",
-      "description": "Network connectivity endpoints for a Container Instance compute.",
+      "description": "Network connectivity endpoints for a Workbench compute.",
       "properties": {
         "publicIpAddress": {
           "type": "string",
@@ -13972,43 +13972,6 @@
           "readOnly": true
         }
       }
-    },
-    "ContainerInstanceComputeProperties": {
-      "type": "object",
-      "description": "Properties for a Container Instance compute resource.",
-      "properties": {
-        "targetClusterId": {
-          "type": "string",
-          "description": "ARM resource ID of the parent cluster that hosts this container instance."
-        },
-        "imageLink": {
-          "type": "string",
-          "description": "Container image URI (e.g., MCR or ACR image path) for the container instance."
-        },
-        "idleTimeBeforeShutdown": {
-          "type": "string",
-          "description": "ISO 8601 duration before the idle instance is automatically shut down (e.g., 'PT30M')."
-        },
-        "sshSettings": {
-          "$ref": "#/definitions/SshSettings",
-          "description": "SSH configuration for remote access to the container instance."
-        },
-        "connectivityEndpoints": {
-          "$ref": "#/definitions/ConnectivityEndpoints",
-          "description": "Network connectivity endpoints assigned to the container instance.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "targetClusterId",
-        "imageLink"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerInstance"
     },
     "ContentLevel": {
       "type": "string",
@@ -19003,7 +18966,7 @@
     },
     "SshSettings": {
       "type": "object",
-      "description": "SSH configuration for a Container Instance compute.",
+      "description": "SSH configuration for a Workbench compute.",
       "properties": {
         "sshPublicKey": {
           "type": "string",
@@ -19366,6 +19329,48 @@
           }
         ]
       }
+    },
+    "WorkbenchComputeProperties": {
+      "type": "object",
+      "description": "Properties for a Workbench compute resource.",
+      "properties": {
+        "targetClusterId": {
+          "type": "string",
+          "description": "ARM resource ID of the parent cluster that hosts this workbench."
+        },
+        "imageLink": {
+          "type": "string",
+          "description": "Container image URI (e.g., MCR or ACR image path) for the workbench."
+        },
+        "idleTimeBeforeShutdown": {
+          "type": "string",
+          "description": "ISO 8601 duration before the idle instance is automatically shut down (e.g., 'PT30M')."
+        },
+        "sshSettings": {
+          "$ref": "#/definitions/SshSettings",
+          "description": "SSH configuration for remote access to the workbench."
+        },
+        "connectivityEndpoints": {
+          "$ref": "#/definitions/ConnectivityEndpoints",
+          "description": "Network connectivity endpoints assigned to the workbench.",
+          "readOnly": true
+        },
+        "webEndpoint": {
+          "type": "string",
+          "description": "The web endpoint URL for accessing the workbench.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetClusterId",
+        "imageLink"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Workbench"
     }
   },
   "parameters": {}

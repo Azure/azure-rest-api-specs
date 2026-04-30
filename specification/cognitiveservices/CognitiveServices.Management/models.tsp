@@ -5868,8 +5868,8 @@ union ComputeType {
   /** Cluster (AKS-backed) compute type. */
   Cluster: "Cluster",
 
-  /** Container Instance compute type. */
-  ContainerInstance: "ContainerInstance",
+  /** Workbench compute type. */
+  Workbench: "Workbench",
 }
 
 /**
@@ -5925,22 +5925,22 @@ model ClusterComputeProperties extends ComputeProperties {
 }
 
 /**
- * Properties for a Container Instance compute resource.
+ * Properties for a Workbench compute resource.
  */
 @added(Versions.v2026_03_15_preview)
-model ContainerInstanceComputeProperties extends ComputeProperties {
+model WorkbenchComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
    */
-  computeType: "ContainerInstance";
+  computeType: "Workbench";
 
   /**
-   * ARM resource ID of the parent cluster that hosts this container instance.
+   * ARM resource ID of the parent cluster that hosts this workbench.
    */
   targetClusterId: string;
 
   /**
-   * Container image URI (e.g., MCR or ACR image path) for the container instance.
+   * Container image URI (e.g., MCR or ACR image path) for the workbench.
    */
   imageLink: string;
 
@@ -5950,19 +5950,25 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
   idleTimeBeforeShutdown?: string;
 
   /**
-   * SSH configuration for remote access to the container instance.
+   * SSH configuration for remote access to the workbench.
    */
   sshSettings?: SshSettings;
 
   /**
-   * Network connectivity endpoints assigned to the container instance.
+   * Network connectivity endpoints assigned to the workbench.
    */
   @visibility(Lifecycle.Read)
   connectivityEndpoints?: ConnectivityEndpoints;
+
+  /**
+   * The web endpoint URL for accessing the workbench.
+   */
+  @visibility(Lifecycle.Read)
+  webEndpoint?: string;
 }
 
 /**
- * SSH configuration for a Container Instance compute.
+ * SSH configuration for a Workbench compute.
  */
 @added(Versions.v2026_03_15_preview)
 model SshSettings {
@@ -5978,7 +5984,7 @@ model SshSettings {
 }
 
 /**
- * Network connectivity endpoints for a Container Instance compute.
+ * Network connectivity endpoints for a Workbench compute.
  */
 @added(Versions.v2026_03_15_preview)
 model ConnectivityEndpoints {
