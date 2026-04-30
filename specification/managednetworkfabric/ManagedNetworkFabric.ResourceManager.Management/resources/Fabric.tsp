@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending TrackedResource base type for proper ARM resource modeling"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Represents a physical network deployment hosting infrastructure network configuration.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
