@@ -32,8 +32,8 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "iotHubClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+// FIXME: Common type version not set. Set to v6.
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Devices;
 
 /**
