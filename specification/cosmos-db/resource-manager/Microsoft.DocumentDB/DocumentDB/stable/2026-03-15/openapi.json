@@ -16244,106 +16244,6 @@
         }
       }
     },
-    "CapacityMode": {
-      "type": "string",
-      "description": "Indicates the capacity mode of the account.",
-      "enum": [
-        "None",
-        "Provisioned",
-        "Serverless"
-      ],
-      "x-ms-enum": {
-        "name": "CapacityMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          },
-          {
-            "name": "Provisioned",
-            "value": "Provisioned"
-          },
-          {
-            "name": "Serverless",
-            "value": "Serverless"
-          }
-        ]
-      }
-    },
-    "CapacityModeChangeTransitionState": {
-      "type": "object",
-      "description": "The transition state information related capacity mode change with update request.",
-      "properties": {
-        "capacityModeTransitionStatus": {
-          "$ref": "#/definitions/CapacityModeTransitionStatus",
-          "description": "The transition status of capacity mode."
-        },
-        "currentCapacityMode": {
-          "$ref": "#/definitions/CapacityMode",
-          "description": "Indicates the current capacity mode of the account."
-        },
-        "previousCapacityMode": {
-          "$ref": "#/definitions/CapacityMode",
-          "description": "Indicates the previous capacity mode of the account before successful transition."
-        },
-        "capacityModeTransitionBeginTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Begin time in UTC of the capacity mode change.",
-          "readOnly": true
-        },
-        "capacityModeTransitionEndTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time in UTC of the capacity mode change.",
-          "readOnly": true
-        },
-        "capacityModeLastSuccessfulTransitionEndTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time in UTC of the last successful capacity mode change.",
-          "readOnly": true
-        }
-      }
-    },
-    "CapacityModeTransitionStatus": {
-      "type": "string",
-      "description": "The transition status of capacity mode.",
-      "enum": [
-        "Invalid",
-        "Initialized",
-        "InProgress",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "CapacityModeTransitionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid"
-          },
-          {
-            "name": "Initialized",
-            "value": "Initialized"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          }
-        ]
-      }
-    },
     "CassandraClusterPublicStatus": {
       "type": "object",
       "description": "Properties of a managed Cassandra cluster public status.",
@@ -17912,72 +17812,6 @@
         }
       }
     },
-    "DataMaskingPolicy": {
-      "type": "object",
-      "description": "Data masking policy for the container.",
-      "properties": {
-        "includedPaths": {
-          "type": "array",
-          "description": "List of JSON paths to include in the masking policy.",
-          "items": {
-            "$ref": "#/definitions/DataMaskingPolicyIncludedPathsItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "excludedPaths": {
-          "type": "array",
-          "description": "List of JSON paths to exclude from masking.",
-          "items": {
-            "$ref": "#/definitions/DataMaskingPolicyExcludedPathsItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "isPolicyEnabled": {
-          "type": "boolean",
-          "description": "Flag indicating whether the data masking policy is enabled."
-        }
-      }
-    },
-    "DataMaskingPolicyExcludedPathsItem": {
-      "type": "object",
-      "description": "JSON path to exclude from masking.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The JSON path to exclude from masking (e.g. \"/id\")."
-        }
-      },
-      "required": [
-        "path"
-      ]
-    },
-    "DataMaskingPolicyIncludedPathsItem": {
-      "type": "object",
-      "description": "JSON path to include in the masking policy.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The JSON path to apply masking (e.g. \"/contact/phones\")."
-        },
-        "strategy": {
-          "type": "string",
-          "description": "Masking strategy to apply (e.g. \"MaskSubstring\")."
-        },
-        "startPosition": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for substring masking (when applicable)."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length of substring to mask (when applicable)."
-        }
-      },
-      "required": [
-        "path"
-      ]
-    },
     "DataTransferRegionalServiceResource": {
       "type": "object",
       "description": "Resource for a regional service location.",
@@ -18238,10 +18072,6 @@
             "type": "string"
           }
         },
-        "diagnosticLogSettings": {
-          "$ref": "#/definitions/DiagnosticLogSettings",
-          "description": "The Object representing the different Diagnostic log settings for the Cosmos DB Account."
-        },
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
@@ -18253,14 +18083,6 @@
         "capacity": {
           "$ref": "#/definitions/Capacity",
           "description": "The object that represents all properties related to capacity enforcement on an account."
-        },
-        "capacityMode": {
-          "$ref": "#/definitions/CapacityMode",
-          "description": "Indicates the capacityMode of the Cosmos DB account."
-        },
-        "enableMaterializedViews": {
-          "type": "boolean",
-          "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -18294,10 +18116,6 @@
         "enablePerRegionPerPartitionAutoscale": {
           "type": "boolean",
           "description": "Flag to indicate enabling/disabling of Per-Region Per-partition autoscale Preview feature on the account"
-        },
-        "enableAllVersionsAndDeletesChangeFeed": {
-          "type": "boolean",
-          "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
         },
         "enforceHierarchicalPartitionKeyIdLastLevel": {
           "type": "boolean",
@@ -18509,10 +18327,6 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "diagnosticLogSettings": {
-          "$ref": "#/definitions/DiagnosticLogSettings",
-          "description": "The Object representing the different Diagnostic log settings for the Cosmos DB Account."
-        },
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
@@ -18520,18 +18334,6 @@
         "capacity": {
           "$ref": "#/definitions/Capacity",
           "description": "The object that represents all properties related to capacity enforcement on an account."
-        },
-        "capacityMode": {
-          "$ref": "#/definitions/CapacityMode",
-          "description": "Indicates the capacityMode of the Cosmos DB account."
-        },
-        "capacityModeChangeTransitionState": {
-          "$ref": "#/definitions/CapacityModeChangeTransitionState",
-          "description": "The object that represents the migration state for the CapacityMode of the Cosmos DB account."
-        },
-        "enableMaterializedViews": {
-          "type": "boolean",
-          "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -18570,20 +18372,6 @@
         "enablePerRegionPerPartitionAutoscale": {
           "type": "boolean",
           "description": "Flag to indicate enabling/disabling of Per-Region Per-partition autoscale Preview feature on the account"
-        },
-        "enableAllVersionsAndDeletesChangeFeed": {
-          "type": "boolean",
-          "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
-        },
-        "throughputPoolDedicatedRUs": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY."
-        },
-        "throughputPoolMaxConsumableRUs": {
-          "type": "integer",
-          "format": "int64",
-          "description": "When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY."
         },
         "enforceHierarchicalPartitionKeyIdLastLevel": {
           "type": "boolean",
@@ -18883,10 +18671,6 @@
             "type": "string"
           }
         },
-        "diagnosticLogSettings": {
-          "$ref": "#/definitions/DiagnosticLogSettings",
-          "description": "The Object representing the different Diagnostic log settings for the Cosmos DB Account."
-        },
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
@@ -18894,14 +18678,6 @@
         "capacity": {
           "$ref": "#/definitions/Capacity",
           "description": "The object that represents all properties related to capacity enforcement on an account."
-        },
-        "capacityMode": {
-          "$ref": "#/definitions/CapacityMode",
-          "description": "Indicates the capacityMode of the Cosmos DB account."
-        },
-        "enableMaterializedViews": {
-          "type": "boolean",
-          "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -18935,10 +18711,6 @@
         "enablePerRegionPerPartitionAutoscale": {
           "type": "boolean",
           "description": "Flag to indicate enabling/disabling of Per-Region Per-partition autoscale Preview feature on the account"
-        },
-        "enableAllVersionsAndDeletesChangeFeed": {
-          "type": "boolean",
-          "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
         },
         "enforceHierarchicalPartitionKeyIdLastLevel": {
           "type": "boolean",
@@ -19039,16 +18811,6 @@
         ]
       }
     },
-    "DiagnosticLogSettings": {
-      "type": "object",
-      "description": "Indicates what diagnostic log settings are to be enabled.",
-      "properties": {
-        "enableFullTextQuery": {
-          "$ref": "#/definitions/EnableFullTextQuery",
-          "description": "Describe the level of detail with which queries are to be logged."
-        }
-      }
-    },
     "DistanceFunction": {
       "type": "string",
       "description": "The distance function to use for distance calculation in between vectors.",
@@ -19074,19 +18836,6 @@
             "value": "dotproduct"
           }
         ]
-      }
-    },
-    "EnableFullTextQuery": {
-      "type": "string",
-      "description": "Describe the level of detail with which queries are to be logged.",
-      "enum": [
-        "None",
-        "True",
-        "False"
-      ],
-      "x-ms-enum": {
-        "name": "EnableFullTextQuery",
-        "modelAsString": false
       }
     },
     "ErrorResponse": {
@@ -20611,48 +20360,6 @@
         }
       }
     },
-    "MaterializedViewDefinition": {
-      "type": "object",
-      "description": "Materialized View definition for the container.",
-      "properties": {
-        "sourceCollectionRid": {
-          "type": "string",
-          "description": "An unique identifier for the source collection. This is a system generated property.",
-          "readOnly": true
-        },
-        "sourceCollectionId": {
-          "type": "string",
-          "description": "The name of the source container on which the Materialized View will be created."
-        },
-        "definition": {
-          "type": "string",
-          "description": "The definition should be an SQL query which would be used to fetch data from the source container to populate into the Materialized View container."
-        },
-        "throughputBucketForBuild": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Throughput bucket assigned for the materialized view operations on target container."
-        }
-      },
-      "required": [
-        "sourceCollectionId",
-        "definition"
-      ]
-    },
-    "MaterializedViewDetails": {
-      "type": "object",
-      "description": "MaterializedViewDetails, contains Id & _rid fields of materialized view.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id field of Materialized container."
-        },
-        "_rid": {
-          "type": "string",
-          "description": "_rid field of Materialized container."
-        }
-      }
-    },
     "MaterializedViewsBuilderRegionalServiceResource": {
       "type": "object",
       "description": "Resource for a regional service location.",
@@ -20691,17 +20398,6 @@
         }
       ],
       "x-ms-discriminator-value": "MaterializedViewsBuilder"
-    },
-    "MaterializedViewsProperties": {
-      "type": "object",
-      "description": "Materialized Views Properties for the source container.",
-      "properties": {
-        "throughputBucketForBuild": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Throughput bucket assigned for the materialized view operations on source container."
-        }
-      }
     },
     "Metric": {
       "type": "object",
@@ -24101,21 +23797,6 @@
             ]
           }
         },
-        "materializedViewDefinition": {
-          "$ref": "#/definitions/MaterializedViewDefinition",
-          "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
-        },
-        "materializedViews": {
-          "type": "array",
-          "description": "Materialized Views defined on the container.",
-          "items": {
-            "$ref": "#/definitions/MaterializedViewDetails"
-          }
-        },
-        "materializedViewsProperties": {
-          "$ref": "#/definitions/MaterializedViewsProperties",
-          "description": "Materialized Views Properties defined for source container."
-        },
         "computedProperties": {
           "type": "array",
           "description": "List of computed properties",
@@ -24130,10 +23811,6 @@
         "fullTextPolicy": {
           "$ref": "#/definitions/FullTextPolicy",
           "description": "The FullText policy for the container."
-        },
-        "dataMaskingPolicy": {
-          "$ref": "#/definitions/DataMaskingPolicy",
-          "description": "The Data Masking policy for the container."
         }
       },
       "required": [
@@ -25315,30 +24992,6 @@
         }
       }
     },
-    "ThroughputBucketResource": {
-      "type": "object",
-      "description": "Cosmos DB throughput bucket object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the throughput bucket id"
-        },
-        "maxThroughputPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents maximum percentage throughput that can be used by the bucket"
-        },
-        "isDefaultBucket": {
-          "type": "boolean",
-          "description": "Indicates whether this is the default throughput bucket"
-        }
-      },
-      "required": [
-        "id",
-        "maxThroughputPercentage"
-      ]
-    },
     "ThroughputPolicyResource": {
       "type": "object",
       "description": "Cosmos DB resource throughput policy",
@@ -25457,13 +25110,6 @@
           "type": "string",
           "description": "The maximum throughput value or the maximum maxThroughput value (for autoscale) that can be specified",
           "readOnly": true
-        },
-        "throughputBuckets": {
-          "type": "array",
-          "description": "Array of throughput bucket limits to be applied to the Cosmos DB container",
-          "items": {
-            "$ref": "#/definitions/ThroughputBucketResource"
-          }
         }
       }
     },

@@ -1693,6 +1693,7 @@ model DatabaseAccountGetProperties {
   /**
    * The Object representing the different Diagnostic log settings for the Cosmos DB Account.
    */
+  @added(Versions.v2026_04_01_preview)
   diagnosticLogSettings?: DiagnosticLogSettings;
 
   /**
@@ -1708,16 +1709,19 @@ model DatabaseAccountGetProperties {
   /**
    * Indicates the capacityMode of the Cosmos DB account.
    */
+  @added(Versions.v2026_04_01_preview)
   capacityMode?: CapacityMode;
 
   /**
    * The object that represents the migration state for the CapacityMode of the Cosmos DB account.
    */
+  @added(Versions.v2026_04_01_preview)
   capacityModeChangeTransitionState?: CapacityModeChangeTransitionState;
 
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
 
   /**
@@ -1770,6 +1774,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  @added(Versions.v2026_04_01_preview)
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
   /**
@@ -1782,12 +1787,14 @@ model DatabaseAccountGetProperties {
    * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   throughputPoolDedicatedRUs?: int64;
 
   /**
    * When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   throughputPoolMaxConsumableRUs?: int64;
 
   /**
@@ -2167,6 +2174,7 @@ model DiagnosticLogSettings {
   /**
    * Describe the level of detail with which queries are to be logged.
    */
+  @added(Versions.v2026_04_01_preview)
   enableFullTextQuery?: EnableFullTextQuery;
 }
 
@@ -2501,6 +2509,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * The Object representing the different Diagnostic log settings for the Cosmos DB Account.
    */
+  @added(Versions.v2026_04_01_preview)
   diagnosticLogSettings?: DiagnosticLogSettings;
 
   /**
@@ -2516,11 +2525,13 @@ model DatabaseAccountUpdateProperties {
   /**
    * Indicates the capacityMode of the Cosmos DB account.
    */
+  @added(Versions.v2026_04_01_preview)
   capacityMode?: CapacityMode;
 
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
 
   /**
@@ -2567,6 +2578,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  @added(Versions.v2026_04_01_preview)
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
   /**
@@ -2729,6 +2741,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * The Object representing the different Diagnostic log settings for the Cosmos DB Account.
    */
+  @added(Versions.v2026_04_01_preview)
   diagnosticLogSettings?: DiagnosticLogSettings;
 
   /**
@@ -2749,11 +2762,13 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Indicates the capacityMode of the Cosmos DB account.
    */
+  @added(Versions.v2026_04_01_preview)
   capacityMode?: CapacityMode;
 
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
 
   /**
@@ -2800,6 +2815,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  @added(Versions.v2026_04_01_preview)
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
   /**
@@ -3710,6 +3726,7 @@ model ThroughputSettingsResource {
   /**
    * Array of throughput bucket limits to be applied to the Cosmos DB container
    */
+  @added(Versions.v2026_04_01_preview)
   throughputBuckets?: ThroughputBucketResource[];
 }
 
@@ -3992,16 +4009,19 @@ model SqlContainerResource {
   /**
    * The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container.
    */
+  @added(Versions.v2026_04_01_preview)
   materializedViewDefinition?: MaterializedViewDefinition;
 
   /**
    * Materialized Views defined on the container.
    */
+  @added(Versions.v2026_04_01_preview)
   materializedViews?: MaterializedViewDetails[];
 
   /**
    * Materialized Views Properties defined for source container.
    */
+  @added(Versions.v2026_04_01_preview)
   materializedViewsProperties?: MaterializedViewsProperties;
 
   /**
@@ -4022,6 +4042,7 @@ model SqlContainerResource {
   /**
    * The Data Masking policy for the container.
    */
+  @added(Versions.v2026_04_01_preview)
   dataMaskingPolicy?: DataMaskingPolicy;
 }
 
