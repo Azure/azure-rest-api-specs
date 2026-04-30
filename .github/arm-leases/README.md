@@ -98,7 +98,7 @@ If your PR check **"ARM Lease Validation"** is failing, review the error message
 
 ## Automation Scripts
 
-Scripts are located in `eng/scripts/`. Run from the repository root.
+Scripts are located in `.github/arm-leases/scripts/`. Run from the repository root.
 
 ### Single Resource Provider
 
@@ -106,20 +106,20 @@ Scripts are located in `eng/scripts/`. Run from the repository root.
 
 ```bash
 # Without service groups
-node eng/scripts/generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
+node .github/arm-leases/scripts/generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
 
 # With service groups
-node eng/scripts/generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D> --serviceName "<serviceName1>,<serviceName2>"
+node .github/arm-leases/scripts/generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D> --serviceName "<serviceName1>,<serviceName2>"
 ```
 
 **Examples:**
 
 ```bash
 # Without service groups
-node eng/scripts/generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johndoe" --startdate 2026-05-01 --duration P90D
+node .github/arm-leases/scripts/generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johndoe" --startdate 2026-05-01 --duration P90D
 
 # With service groups
-node eng/scripts/generate-lease-files.js --orgName compute --rpNamespace Microsoft.Compute --reviewer "@janesmith" --startdate 2026-05-01 --duration P180D --serviceName "DiskRP,ComputeRP,GalleryRP"
+node .github/arm-leases/scripts/generate-lease-files.js --orgName compute --rpNamespace Microsoft.Compute --reviewer "@janesmith" --startdate 2026-05-01 --duration P180D --serviceName "DiskRP,ComputeRP,GalleryRP"
 ```
 
 ### Bulk Generation
@@ -128,23 +128,23 @@ node eng/scripts/generate-lease-files.js --orgName compute --rpNamespace Microso
 
 ```bash
 # Generate resource provider list (without service groups)
-node eng/scripts/fetch-resource-providers.js --output <filename>
+node .github/arm-leases/scripts/fetch-resource-providers.js --output <filename>
 
 # Generate resource provider list (with service groups)
-node eng/scripts/fetch-resource-providers.js --with-service-groups --output <filename>
+node .github/arm-leases/scripts/fetch-resource-providers.js --with-service-groups --output <filename>
 
 # Generate lease files from list
-node eng/scripts/generate-lease-files.js --input <filename> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
+node .github/arm-leases/scripts/generate-lease-files.js --input <filename> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
 ```
 
 **Examples:**
 
 ```bash
 # RPs without service groups (e.g., Microsoft.Storage)
-node eng/scripts/fetch-resource-providers.js --output rps-simple.txt
-node eng/scripts/generate-lease-files.js --input rps-simple.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
+node .github/arm-leases/scripts/fetch-resource-providers.js --output rps-simple.txt
+node .github/arm-leases/scripts/generate-lease-files.js --input rps-simple.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
 
 # RPs with service groups (e.g., Microsoft.Compute with DiskRP, ComputeRP)
-node eng/scripts/fetch-resource-providers.js --with-service-groups --output rps-groups.txt
-node eng/scripts/generate-lease-files.js --input rps-groups.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
+node .github/arm-leases/scripts/fetch-resource-providers.js --with-service-groups --output rps-groups.txt
+node .github/arm-leases/scripts/generate-lease-files.js --input rps-groups.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
 ```
