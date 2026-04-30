@@ -45,6 +45,7 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
+    where: $.definitions.MajorVersionUpgradePrecheckResourceProperties.properties.subscriptionId
     reason: The API contract for Major Version Upgrade requires showing the subscription ID.
 ```
 
