@@ -209,6 +209,21 @@ stages:
           versionSpec: $(PythonVersion)
 
       - script: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          echo "##vso[task.prependpath]$HOME/.cargo/bin"
+          npm ci --prefix "$(SdkRepoDirectory)/eng/common/tsp-client"
+          npm exec --prefix "$(SdkRepoDirectory)/eng/common/tsp-client" -- tsp-client --version
+        displayName: 'Install Rust toolchain and tsp-client'
+        condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+        env:
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+
+      - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+        parameters:
+          SourceRootPath: $(SpecRepoDirectory)
+
+      - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
@@ -263,7 +278,7 @@ stages:
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
         env:
-          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
