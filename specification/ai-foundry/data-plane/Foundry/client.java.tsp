@@ -12,6 +12,7 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -37,6 +38,13 @@ namespace Azure.AI.Projects;
 @@clientName(Datasets.deleteVersion, "deleteDatasetVersion");
 @@clientName(Datasets.listVersions, "listDatasetVersions");
 @@clientName(Datasets.createOrUpdateVersion, "createOrUpdateDatasetVersion");
+
+// Data generation jobs — renamed SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob", "java");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs", "java");
+@@clientName(DataGenerationJobs.create, "createGenerationJob", "java");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "java");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "java");
 
 // Deployments
 @@clientName(Deployments.list, "listDeployments");
