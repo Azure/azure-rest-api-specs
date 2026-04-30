@@ -868,6 +868,19 @@ union GeographicallyRedundantBackup {
 }
 
 /**
+ * Indicates if immutable backup is enabled or disabled for the server.
+ */
+union ImmutableBackup {
+  string,
+
+  /** Immutable backup is enabled for the server. */
+  Enabled: "Enabled",
+
+  /** Immutable backup is disabled for the server. */
+  Disabled: "Disabled",
+}
+
+/**
  * Indicates if public network access is enabled or not.
  */
 union ServerPublicNetworkAccessState {
@@ -3191,6 +3204,11 @@ model Backup {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   earliestRestoreDate?: utcDateTime;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @doc("Indicates if immutable backup is enabled or disabled for the server.")
+  @added(Versions.v2026_04_01)
+  immutableBackup?: ImmutableBackup = ImmutableBackup.Disabled;
 }
 
 /**

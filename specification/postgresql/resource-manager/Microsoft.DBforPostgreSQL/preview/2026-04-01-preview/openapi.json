@@ -5433,6 +5433,35 @@
           "format": "date-time",
           "description": "Earliest restore point time (ISO8601 format) for a server.",
           "readOnly": true
+        },
+        "immutableBackup": {
+          "type": "string",
+          "description": "Indicates if immutable backup is enabled or disabled for the server.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ImmutableBackup",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Immutable backup is enabled for the server."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Immutable backup is disabled for the server."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
