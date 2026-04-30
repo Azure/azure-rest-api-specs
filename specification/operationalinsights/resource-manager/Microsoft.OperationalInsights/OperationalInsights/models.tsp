@@ -2946,7 +2946,7 @@ model UserIdentityProperties {
   clientId?: string;
 }
 
-// Need to use CommonTypes.AzureEntityResource after AzureEntityResource emits TrackedResource in OpenAPI · Issue #4355 · Azure/typespec-azure(https://github.com/Azure/typespec-azure/issues/4355) gets fixed
+// Need to use CommonTypes.AzureEntityResource after https://github.com/Azure/typespec-azure/issues/4355 gets fixed.
 /** The resource model definition for an Azure Resource Manager resource with an etag. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Entity Resource")
