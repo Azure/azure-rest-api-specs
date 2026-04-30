@@ -384,7 +384,7 @@ For data plane (non-ARM) swagger files, additionally verify:
 - Action operations follow the `:<action>` URL suffix pattern where applicable.
 - The spec includes `"produces": ["application/json"]` and `"consumes": ["application/json"]` (or appropriate media types).
 
-## 22. Example File Validation (EX-\*)
+## 22. Example File Validation (EX-*)
 
 Example files referenced by `x-ms-examples` are a critical part of the spec — they serve as documentation, SDK test cases, and validation inputs. Validate every example file in the PR against the following rules.
 
