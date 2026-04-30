@@ -36,6 +36,9 @@
       "name": "Evaluators"
     },
     {
+      "name": "Human Evaluations"
+    },
+    {
       "name": "Indexes"
     },
     {
@@ -5594,6 +5597,63 @@
             "Evaluations=V1Preview"
           ]
         }
+      }
+    },
+    "/human_evaluation_templates": {
+      "get": {
+        "operationId": "HumanEvaluationTemplates_listLatestVersions",
+        "description": "List the latest version of each human-evaluation template available to the project.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedHumanEvaluationTemplate"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Human Evaluations"
+        ]
       }
     },
     "/indexes": {
@@ -19069,6 +19129,50 @@
           }
         ],
         "description": "Evaluation rule action for human evaluation."
+      },
+      "HumanEvaluationTemplate": {
+        "type": "object",
+        "required": [
+          "name",
+          "version",
+          "source",
+          "questions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TemplateSource"
+              }
+            ],
+            "description": "The source of the template (builtin or custom)."
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Question"
+            },
+            "minItems": 1,
+            "description": "The questions presented to the human evaluator.",
+            "readOnly": true
+          }
+        },
+        "description": "A human-evaluation template: the rubric a builder or end user applies when evaluating a trace. Identified by name + version."
       },
       "Index": {
         "type": "object",
@@ -40695,6 +40799,27 @@
         },
         "description": "Paged collection of EvaluatorVersion items"
       },
+      "PagedHumanEvaluationTemplate": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HumanEvaluationTemplate"
+            },
+            "description": "The HumanEvaluationTemplate items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of HumanEvaluationTemplate items"
+      },
       "PagedIndex": {
         "type": "object",
         "required": [
@@ -41050,6 +41175,53 @@
           }
         },
         "description": "A record mapping for a single protocol and its version."
+      },
+      "Question": {
+        "type": "object",
+        "required": [
+          "kind",
+          "text",
+          "evaluation_name"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QuestionKind"
+              }
+            ],
+            "description": "The kind of question."
+          },
+          "text": {
+            "type": "string",
+            "description": "The question text shown to the human evaluator (for example, 'Was this response helpful?')."
+          },
+          "evaluation_name": {
+            "type": "string",
+            "description": "The evaluation dimension this question captures (for example, 'helpfulness'). Maps to gen_ai.evaluation.name in the OpenTelemetry GenAI Semantic Conventions."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "binary": "#/components/schemas/YesNoQuestion"
+          }
+        },
+        "description": "A single question presented to the human evaluator. Each question captures one evaluation dimension and produces one annotation entry when submitted."
+      },
+      "QuestionKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "binary"
+            ]
+          }
+        ],
+        "description": "The kind of question presented in a human-evaluation template."
       },
       "RaiConfig": {
         "type": "object",
@@ -42603,6 +42775,21 @@
           ]
         }
       },
+      "TemplateSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom"
+            ]
+          }
+        ],
+        "description": "The source of a human evaluation template."
+      },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
         "required": [
@@ -43447,6 +43634,26 @@
             "WorkflowAgents=V1Preview"
           ]
         }
+      },
+      "YesNoQuestion": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "binary"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Question"
+          }
+        ],
+        "description": "A two-option (yes/no) question. The evaluator picks one of two choices; the answer is a boolean."
       },
       "integer": {
         "type": "integer",

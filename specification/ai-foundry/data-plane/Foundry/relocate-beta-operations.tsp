@@ -32,6 +32,14 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
 
+interface HumanEvaluationTemplates {}
+@@clientLocation(Azure.AI.Projects.HumanEvaluationTemplates.getVersion,
+  HumanEvaluationTemplates
+);
+@@clientLocation(Azure.AI.Projects.HumanEvaluationTemplates.listLatestVersions,
+  HumanEvaluationTemplates
+);
+
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
 @@clientLocation(Azure.AI.Projects.Schedules.get, Schedules);
