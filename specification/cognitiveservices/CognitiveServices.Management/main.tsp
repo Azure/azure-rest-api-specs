@@ -37,7 +37,11 @@ import "./OutboundRuleBasicResource.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
+import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
+import "./ManagedComputeUsages.tsp";
+import "./Compute.tsp";
+import "./AcceleratorCapacity.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -78,6 +82,11 @@ enum Versions {
    * The 2026-03-01 API version.
    */
   v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-03-15-preview API version.
+   */
+  v2026_03_15_preview: "2026-03-15-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
