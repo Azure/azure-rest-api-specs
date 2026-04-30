@@ -2127,6 +2127,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceOperation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before checking the operation status again."
+              }
             }
           },
           "default": {
@@ -2339,6 +2345,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UpdateOperation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before checking the operation status again."
+              }
             }
           },
           "default": {

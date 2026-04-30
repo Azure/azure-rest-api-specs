@@ -393,7 +393,15 @@ interface DeviceUpdateOperationGroup {
       @header("If-None-Match")
       ifNoneMatch?: string;
     },
-    UpdateOperation
+    {
+      /**
+       * Number of seconds to wait before checking the operation status again.
+       */
+      @header("Retry-After")
+      retryAfter?: string;
+
+      ...UpdateOperation;
+    }
   >;
 }
 
@@ -1346,7 +1354,15 @@ interface DeviceManagementOperationGroup {
       @header("If-None-Match")
       ifNoneMatch?: string;
     },
-    DeviceOperation
+    {
+      /**
+       * Number of seconds to wait before checking the operation status again.
+       */
+      @header("Retry-After")
+      retryAfter?: string;
+
+      ...DeviceOperation;
+    }
   >;
 
   /**
