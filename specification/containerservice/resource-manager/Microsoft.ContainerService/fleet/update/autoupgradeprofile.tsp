@@ -224,7 +224,7 @@ model GenerateResponse {
 }
 
 @added(Versions.v2025_03_01)
-@doc("The response of a generateUpdateRun request. Returns 200 with a body containing the generated update run reference, or 204 No Content when no update run was created.")
+@doc("Azure operation completed successfully.")
 union GenerateUpdateRunResponse {
   GenerateResponse,
 
