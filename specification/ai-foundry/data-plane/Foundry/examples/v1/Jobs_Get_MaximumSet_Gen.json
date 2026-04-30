@@ -1,0 +1,97 @@
+{
+  "title": "Jobs_Get_MaximumSet",
+  "operationId": "Jobs_Get",
+  "parameters": {
+    "api-version": "v1",
+    "name": "my_training_job_01",
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+    "Foundry-Features": "Jobs=V1Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "my_training_job_01",
+        "name": "my_training_job_01",
+        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
+          "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
+          "displayName": "My Training Job",
+          "description": "A sample command job for training",
+          "tags": {
+            "framework": "pytorch"
+          },
+          "properties": {
+            "experimentName": "my-experiment"
+          },
+          "codeId": "azureai:my-training-code:1",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+          "inputs": {
+            "training_data": {
+              "jobInputType": "uri_folder",
+              "uri": "azureai://datastores/mystore/paths/data/train",
+              "mode": "ReadOnlyMount"
+            },
+            "learning_rate": {
+              "jobInputType": "literal",
+              "value": "0.001"
+            }
+          },
+          "outputs": {
+            "model": {
+              "jobOutputType": "uri_folder",
+              "mode": "ReadWriteMount",
+              "assetName": "my-trained-model",
+              "assetVersion": "1",
+              "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
+              "baseModelId": "azureai:qwen-base-model:1",
+              "description": "Trained model output"
+            }
+          },
+          "environmentVariables": {
+            "AZUREML_DATASET_FILE": "/mnt/data/train.csv"
+          },
+          "distribution": {
+            "distributionType": "PyTorch",
+            "processCountPerInstance": 4
+          },
+          "resources": {
+            "instanceCount": 2,
+            "instanceType": "Standard_NC6s_v3",
+            "shmSize": "2g",
+            "dockerArgs": "--privileged"
+          },
+          "limits": {
+            "jobLimitsType": "Command",
+            "timeout": "PT2H30M"
+          },
+          "services": {
+            "Studio": {
+              "jobServiceType": "Studio",
+              "port": 8080,
+              "endpoint": "https://studio.example.com"
+            },
+            "Tracking": {
+              "jobServiceType": "Tracking"
+            }
+          },
+          "queueSettings": {
+            "jobTier": "Standard"
+          },
+          "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
+          "status": "Running",
+          "isArchived": false
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}
