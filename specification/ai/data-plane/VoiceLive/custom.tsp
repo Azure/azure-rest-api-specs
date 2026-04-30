@@ -270,13 +270,31 @@ model AzureCustomVoice extends AzureVoice {
   /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
 
-  /** Pitch adjustment for the voice output. */
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
 
-  /** Speaking rate adjustment for the voice output. */
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
 
-  /** Volume adjustment for the voice output. */
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
@@ -322,13 +340,31 @@ model AzureStandardVoice extends AzureVoice {
   /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
 
-  /** Pitch adjustment for the voice output. */
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
 
-  /** Speaking rate adjustment for the voice output. */
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
 
-  /** Volume adjustment for the voice output. */
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
@@ -376,13 +412,31 @@ model AzurePersonalVoice extends AzureVoice {
   /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
 
-  /** Pitch adjustment for the voice output. */
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
 
-  /** Speaking rate adjustment for the voice output. */
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
 
-  /** Volume adjustment for the voice output. */
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
@@ -446,13 +500,31 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
 
-  /** Pitch adjustment for the voice output. */
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
 
-  /** Speaking rate adjustment for the voice output. */
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
 
-  /** Volume adjustment for the voice output. */
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
