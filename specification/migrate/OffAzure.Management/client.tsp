@@ -25,3 +25,6 @@ using Microsoft.OffAzure;
 // Mitigate Java breaking changes: resource name parameter hostName → hostname
 @@clientName(HypervHost.name, "hostname", "java");
 @@clientName(VmwareHost.name, "hostname", "java");
+
+// Mitigate Java breaking changes: property rename dnsHostName → dnsHostname
+@@clientName(SqlServerApplication.dnsHostName, "dnsHostname", "java");
