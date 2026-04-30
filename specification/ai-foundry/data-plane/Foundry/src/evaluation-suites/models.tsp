@@ -272,27 +272,9 @@ model EvaluationSuiteDataGenerationOptions {
   maxSamples?: int32;
 }
 
-@doc("Result produced by a successful evaluation suite generation job.")
-model EvaluationSuiteGenerationJobResult {
-  @doc("The created suite name.")
-  suiteName: string;
-
-  @doc("The created suite version.")
-  suiteVersion: string;
-
-  @doc("The generated evaluator name.")
-  evaluatorName: string;
-
-  @doc("The generated evaluator version.")
-  evaluatorVersion: string;
-
-  @doc("The generated dataset ID.")
-  datasetId?: string;
-}
-
-@doc("Evaluation suite generation job resource.")
+@doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")
 model EvaluationSuiteGenerationJob
-  is JobLike<EvaluationSuiteGenerationJobResult, EvaluationSuiteGenerationJobInputs> {
+  is JobLike<EvaluationSuiteVersion, EvaluationSuiteGenerationJobInputs> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;

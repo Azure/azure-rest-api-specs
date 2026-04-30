@@ -3468,7 +3468,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobCreate"
               }
             }
           },
@@ -16128,7 +16128,7 @@
           "result": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobResult"
+                "$ref": "#/components/schemas/EvaluationSuiteVersion"
               }
             ],
             "description": "Result produced on success.",
@@ -16171,7 +16171,21 @@
             "readOnly": true
           }
         },
-        "description": "Evaluation suite generation job resource."
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+      },
+      "EvaluationSuiteGenerationJobCreate": {
+        "type": "object",
+        "properties": {
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          }
+        },
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
       },
       "EvaluationSuiteGenerationJobInputs": {
         "type": "object",
@@ -16215,38 +16229,6 @@
           }
         },
         "description": "Caller-supplied inputs for an evaluation suite generation job."
-      },
-      "EvaluationSuiteGenerationJobResult": {
-        "type": "object",
-        "required": [
-          "suiteName",
-          "suiteVersion",
-          "evaluatorName",
-          "evaluatorVersion"
-        ],
-        "properties": {
-          "suiteName": {
-            "type": "string",
-            "description": "The created suite name."
-          },
-          "suiteVersion": {
-            "type": "string",
-            "description": "The created suite version."
-          },
-          "evaluatorName": {
-            "type": "string",
-            "description": "The generated evaluator name."
-          },
-          "evaluatorVersion": {
-            "type": "string",
-            "description": "The generated evaluator version."
-          },
-          "datasetId": {
-            "type": "string",
-            "description": "The generated dataset ID."
-          }
-        },
-        "description": "Result produced by a successful evaluation suite generation job."
       },
       "EvaluationSuiteJobSource": {
         "type": "object",
