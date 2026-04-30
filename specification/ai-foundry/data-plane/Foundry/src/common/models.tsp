@@ -111,11 +111,15 @@ alias SseResponseOf<T> = {
 // duplication across job-specific model files.
 // ============================================================================
 
-@doc("Common properties shared across all job source types. Spread into per-context source variants alongside a context-specific discriminated base (e.g., `EvaluatorGenerationJobSource`).")
-model JobSourceDescription {
+// Common properties shared across all job source types. Spread into per-context
+// source variants alongside a context-specific discriminated base (e.g.,
+// `EvaluatorGenerationJobSource`). Modeled as an `alias` (not a `model`) since
+// it is a single-property fragment used purely for spreading — declaring a
+// named model adds no value over inlining the property.
+alias JobSourceDescription = {
   @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
   description?: string;
-}
+};
 
 @doc("Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes.")
 model PromptJobSource {
