@@ -2021,6 +2021,64 @@ model ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentB
 model ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam
   is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
+alias listQueryResultsParameters = {
+  /**
+   * The virtual resource under ComponentPolicyStates resource type. In a given time range, 'latest' represents the latest component policy state(s).
+   */
+  @path
+  @segment("componentPolicyStates")
+  componentPolicyStatesResource: ComponentPolicyStatesResource;
+
+  /**
+   * Maximum number of records to return.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+
+  /**
+   * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$orderby")
+  OrderBy?: string;
+
+  /**
+   * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$select")
+  Select?: string;
+
+  /**
+   * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$from")
+  From?: utcDateTime;
+
+  /**
+   * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$to")
+  To?: utcDateTime;
+
+  /**
+   * OData filter expression.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$filter")
+  Filter?: string;
+
+  /**
+   * OData apply expression for aggregations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("$apply")
+  Apply?: string;
+};
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentPolicyStatesOperationGroup {
   /**
@@ -2031,64 +2089,7 @@ interface ComponentPolicyStatesOperationGroup {
   listQueryResultsForSubscription is ArmProviderActionSync<
     Response = ComponentPolicyStatesQueryResults,
     Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * The virtual resource under ComponentPolicyStates resource type. In a given time range, 'latest' represents the latest component policy state(s).
-       */
-      @path
-      @segment("componentPolicyStates")
-      componentPolicyStatesResource: ComponentPolicyStatesResource;
-
-      /**
-       * Maximum number of records to return.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$top")
-      @minValue(0)
-      Top?: int32;
-
-      /**
-       * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$orderby")
-      OrderBy?: string;
-
-      /**
-       * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$select")
-      Select?: string;
-
-      /**
-       * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$from")
-      From?: utcDateTime;
-
-      /**
-       * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$to")
-      To?: utcDateTime;
-
-      /**
-       * OData filter expression.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$filter")
-      Filter?: string;
-
-      /**
-       * OData apply expression for aggregations.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$apply")
-      Apply?: string;
-    },
+    Parameters = listQueryResultsParameters,
     Error = ErrorResponse
   >;
   /**
@@ -2099,64 +2100,7 @@ interface ComponentPolicyStatesOperationGroup {
   listQueryResultsForResourceGroup is ArmProviderActionSync<
     Response = ComponentPolicyStatesQueryResults,
     Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The virtual resource under ComponentPolicyStates resource type. In a given time range, 'latest' represents the latest component policy state(s).
-       */
-      @path
-      @segment("componentPolicyStates")
-      componentPolicyStatesResource: ComponentPolicyStatesResource;
-
-      /**
-       * Maximum number of records to return.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$top")
-      @minValue(0)
-      Top?: int32;
-
-      /**
-       * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$orderby")
-      OrderBy?: string;
-
-      /**
-       * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$select")
-      Select?: string;
-
-      /**
-       * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$from")
-      From?: utcDateTime;
-
-      /**
-       * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$to")
-      To?: utcDateTime;
-
-      /**
-       * OData filter expression.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$filter")
-      Filter?: string;
-
-      /**
-       * OData apply expression for aggregations.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("$apply")
-      Apply?: string;
-    },
+    Parameters = listQueryResultsParameters,
     Error = ErrorResponse
   >;
   /**

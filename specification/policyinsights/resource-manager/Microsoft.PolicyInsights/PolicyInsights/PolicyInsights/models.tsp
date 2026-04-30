@@ -29,6 +29,11 @@ model OperationsListResults {
   value?: Operation[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ManagementGroupsNamespaceType {
+  `Microsoft.Management`,
+}
+
 /**
  * The way resources to remediate are discovered. Defaults to ExistingNonCompliant if not specified.
  */

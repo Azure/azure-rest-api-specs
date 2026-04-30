@@ -1227,7 +1227,7 @@ op componentPolicyStatesListQueryResultsForSubscription(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   componentPolicyStatesListQueryResultsForSubscription,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1247,7 +1247,7 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   componentPolicyStatesListQueryResultsForResourceGroup,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1265,7 +1265,11 @@ op componentPolicyStatesListQueryResultsForResource(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
   componentPolicyStatesListQueryResultsForResource,
-  "!java,!python"
+  "!java,!python,!javascript"
+);
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResource::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1290,7 +1294,11 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   componentPolicyStatesListQueryResultsForPolicyDefinition,
-  "!java,!python"
+  "!java,!python,!javascript"
+);
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1315,7 +1323,11 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
-  "!java,!python"
+  "!java,!python,!javascript"
+);
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1343,9 +1355,12 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
 @@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
-
+@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
+);
 // Remediations overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1356,15 +1371,7 @@ op remediationsListDeploymentsAtManagementGroup(
   @path
   managementGroupsNamespace: "Microsoft.Management",
 
-  @path
   managementGroupId: string,
-
-  @path
-  remediationName: string,
-
-  queryOptions?: RemediationsListDeploymentsAtManagementGroupQueryOptions,
-): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
   remediationsListDeploymentsAtManagementGroup,
   "!java,!python"
 );
@@ -1373,13 +1380,12 @@ op remediationsListDeploymentsAtManagementGroup(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op remediationsListForManagementGroup(
   ...ApiVersionParameter,
-
-  @path
-  managementGroupsNamespace: "Microsoft.Management",
+  managementGroupsNamespace: ManagementGroupsNamespaceType,
 
   @path
   managementGroupId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForManagementGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(Remediations.listForManagementGroup,
@@ -1472,10 +1478,13 @@ op remediationsListDeploymentsAtResource(
   @path
   resourceId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
+
   @path
   remediationName: string,
 
   queryOptions?: RemediationsListDeploymentsAtResourceQueryOptions,
+  body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
@@ -1490,6 +1499,7 @@ op remediationsListForResource(
   @path
   resourceId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listForResource,
@@ -1539,6 +1549,7 @@ op attestationsListForResource(
   @path
   resourceId: string,
 
+  ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(AttestationOperationGroup.listForResource,
@@ -1652,6 +1663,163 @@ op attestationsListForResource(
   "python,java"
 );
 
+// PolicyEventsOperationGroup
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  "python,java"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+  "python,java"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForSubscription,
+  "python,java"
+);
+@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
+  "python,java"
+);
+
+// PolicyStatesOperationGroup
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicySetDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicyDefinition::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscription::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForSubscription,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroup::parameters.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+  "python,java"
+);
+@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "python,java"
+);
+
+// ComponentPolicyStatesOperationGroup
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "python,java"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "python,java"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "python,java"
+);
+@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "python,java"
+);
+@@clientName(QueryOptions.Top, "top", "javascript");
+@@clientName(QueryOptions.SkipToken, "skipToken", "javascript");
+@@clientName(QueryOptions.Filter, "filter", "javascript");
+@@clientName(QueryOptions.From, "from", "javascript");
+@@clientName(QueryOptions.To, "to", "javascript");
+@@clientName(QueryOptions.Select, "select", "javascript");
+@@clientName(QueryOptions.OrderBy, "orderBy", "javascript");
+@@clientName(QueryOptions.Expand, "expand", "javascript");
+@@clientName(QueryOptions.Apply, "apply", "javascript");
+@@clientName(QueryOptionsB.Apply, "apply", "javascript");
+@@clientName(QueryOptionsB.Filter, "filter", "javascript");
+@@clientName(QueryOptionsB.Top, "top", "javascript");
+@@clientName(QueryOptionsB.OrderBy, "orderBy", "javascript");
+@@clientName(QueryOptionsB.Select, "select", "javascript");
+@@clientName(QueryOptionsB.From, "from", "javascript");
+@@clientName(QueryOptionsB.To, "to", "javascript");
+@@clientName(QueryOptionsB.SkipToken, "skipToken", "javascript");
+@@clientName(QueryOptionsC.Top, "top", "javascript");
+@@clientName(QueryOptionsC.From, "from", "javascript");
+@@clientName(QueryOptionsC.To, "to", "javascript");
+@@clientName(QueryOptionsC.Filter, "filter", "javascript");
+@@clientName(QueryOptionsD.Top, "top", "javascript");
+@@clientName(QueryOptionsD.OrderBy, "orderBy", "javascript");
+@@clientName(QueryOptionsD.Select, "select", "javascript");
+@@clientName(QueryOptionsD.From, "from", "javascript");
+@@clientName(QueryOptionsD.To, "to", "javascript");
+@@clientName(QueryOptionsD.Filter, "filter", "javascript");
+@@clientName(QueryOptionsD.Apply, "apply", "javascript");
+@@clientName(QueryOptionsE.Top, "top", "javascript");
+@@clientName(QueryOptionsE.OrderBy, "orderBy", "javascript");
+@@clientName(QueryOptionsE.Select, "select", "javascript");
+@@clientName(QueryOptionsE.From, "from", "javascript");
+@@clientName(QueryOptionsE.To, "to", "javascript");
+@@clientName(QueryOptionsE.Filter, "filter", "javascript");
+@@clientName(QueryOptionsE.Apply, "apply", "javascript");
+@@clientName(QueryOptionsE.Expand, "expand", "javascript");
+@@clientName(QueryOptionsF.SkipToken, "skipToken", "javascript");
+@@clientName(QueryOptionsG.Top, "top", "javascript");
+@@clientName(QueryOptionsH.Top, "top", "javascript");
+@@clientName(QueryOptionsH.Filter, "filter", "javascript");
+@@clientName(listQueryResultsParameters.From,
+  "$DO_NOT_NORMALIZE$from",
+  "javascript"
+);
+@@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");
+
+
+// Java-specific override for listQueryResultsForPolicySetDefinition
+// Keeps original Swagger parameter order: policyEventsResource, subscriptionId, ...
+// Keeps individual query params (no queryOptions grouping)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Java backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Java backward compatibility"
 op policyEventsListQueryResultsForPolicySetDefinitionJava(
   ...ApiVersionParameter,
 
@@ -1666,22 +1834,44 @@ op policyEventsListQueryResultsForPolicySetDefinitionJava(
   @path
   policySetDefinitionName: string,
 
-  /**
-   * Maximum number of records to return.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$top")
   @minValue(0)
   Top?: int32,
 
-  //other query parameters
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$orderby")
+  OrderBy?: string,
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$select")
+  Select?: string,
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$from")
+  From?: utcDateTime,
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$to")
+  To?: utcDateTime,
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$filter")
+  Filter?: string,
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$apply")
+  Apply?: string,
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  @query("$skiptoken")
+  SkipToken?: string,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   policyEventsListQueryResultsForPolicySetDefinitionJava,
   "java"
 );
-// clientLocation
-@@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(policyEventsListQueryResultsForPolicySetDefinitionJava::parameters.subscriptionId,
   policyEventsListQueryResultsForPolicySetDefinitionJava,
   "java"
 );

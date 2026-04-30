@@ -165,113 +165,82 @@ interface AttestationResourceGroupOperations {
   >;
 }
 
+alias AttestationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** Resource ID. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the attestation. */
+    @path
+    @segment("attestations")
+    @key
+    attestationName: string;
+  },
+  ErrorType = ErrorResponse
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AttestationOperationGroup {
   /**
    * Gets an existing attestation at resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}")
-  @get
-  getAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the attestation.
-     */
-    @path
-    attestationName: string,
-  ): ArmResponse<Attestation> | ErrorResponse;
+  getAtResource is AttestationAtResourceOps.Read<
+    Attestation,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Creates or updates an attestation at resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}")
-  @put
-  createOrUpdateAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the attestation.
-     */
-    @path
-    attestationName: string,
-
-    /**
-     * The attestation parameters.
-     */
-    @bodyRoot
-    resource: Attestation,
-  ): ArmResponse<Attestation> | ArmResourceCreatedResponse<
+  createOrUpdateAtResource is AttestationAtResourceOps.CreateOrUpdateAsync<
     Attestation,
-    ArmLroLocationHeader<FinalResult = Attestation> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+    Response = ArmResponse<Attestation> | ArmResourceCreatedResponse<
+      Attestation,
+      ArmLroLocationHeader<FinalResult = Attestation> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * Deletes an existing attestation at individual resource scope.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations/{attestationName}")
-  @delete
-  deleteAtResource(
-    ...ApiVersionParameter,
-
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * The name of the attestation.
-     */
-    @path
-    attestationName: string,
-  ): {
-    @statusCode statusCode: 200;
-  } | ArmDeletedNoContentResponse | ErrorResponse;
+  deleteAtResource is AttestationAtResourceOps.DeleteSync<
+    Attestation,
+    Response = {
+      @statusCode statusCode: 200;
+    } | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets all attestations for a resource.
    */
-  @route("/{+resourceId}/providers/Microsoft.PolicyInsights/attestations")
-  @list
-  @get
-  listForResource(
-    ...ApiVersionParameter,
+  listForResource is AttestationAtResourceOps.List<
+    Attestation,
+    Parameters = {
+      /**
+       * Maximum number of records to return.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$top")
+      @minValue(0)
+      Top?: int32;
 
-    /**
-     * Resource ID.
-     */
-    @path
-    resourceId: string,
-
-    /**
-     * Maximum number of records to return.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$top")
-    @minValue(0)
-    Top?: int32,
-
-    /**
-     * OData filter expression.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("$filter")
-    Filter?: string,
-  ): ArmResponse<AttestationListResult> | ErrorResponse;
+      /**
+       * OData filter expression.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("$filter")
+      Filter?: string;
+    },
+    Response = ArmResponse<AttestationListResult>
+  >;
 }
 
 @@doc(Attestation.name, "The name of the attestation.");
