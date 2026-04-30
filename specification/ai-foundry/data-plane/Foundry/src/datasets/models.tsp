@@ -114,15 +114,3 @@ model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
 }
-
-@doc("Request to fetch credentials for an asset.")
-model AssetCredentialRequest {
-  @doc("Blob URI of the asset to fetch credentials for.")
-  blobUri: url;
-}
-
-@doc("Request body for getting evaluator credentials")
-model EvaluatorCredentialRequest {
-  @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
-  blobUri: url;
-}
