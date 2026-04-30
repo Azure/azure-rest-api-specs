@@ -151,7 +151,7 @@ model InstallResult {
   succeeded?: boolean;
 
   /** Error details for the overall installation, if it did not succeed. */
-  errorDetails?: ErrorDetails;
+  errorDetails?: DeviceUpdateError;
 
   /** Per-step results for the installation. */
   stepResults?: StepResult[];
@@ -166,19 +166,22 @@ model StepResult {
   succeeded?: boolean;
 
   /** Error details for this step, if it did not succeed. */
-  errorDetails?: ErrorDetails;
+  errorDetails?: DeviceUpdateError;
 }
 
-/** Details about an error that occurred during update installation. */
-model ErrorDetails {
+/**
+ * Details about an error that occurred during update installation.
+ *
+ * Follows the standard Azure / OData error shape (`Azure.Core.Foundations.Error`):
+ * - `code` carries the error category (constrained to a known set, but extensible).
+ * - `message` is the human-readable description of the failure.
+ * - `innererror.code` carries the agent-reported numeric error code as a string.
+ */
+model DeviceUpdateError {
+  ...OmitProperties<Azure.Core.Foundations.Error, "code">;
+
   /** The category of the error, used to determine accountability and remediation. */
-  errorCategory?: ErrorCategory;
-
-  /** A numeric code identifying the specific error. */
-  errorCode?: int32;
-
-  /** A human-readable message describing the error. */
-  errorMessage?: string;
+  code: ErrorCategory;
 }
 
 /** The category of an update installation error. */

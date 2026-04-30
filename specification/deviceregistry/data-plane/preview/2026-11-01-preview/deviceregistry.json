@@ -2321,6 +2321,68 @@
         }
       }
     },
+    "DeviceUpdateError": {
+      "type": "object",
+      "description": "Details about an error that occurred during update installation.\n\nFollows the standard Azure / OData error shape (`Azure.Core.Foundations.Error`):\n- `code` carries the error category (constrained to a known set, but extensible).\n- `message` is the human-readable description of the failure.\n- `innererror.code` carries the agent-reported numeric error code as a string.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorCategory",
+          "description": "The category of the error, used to determine accountability and remediation."
+        }
+      },
+      "required": [
+        "message",
+        "code"
+      ]
+    },
+    "DeviceUpdateErrorCreateOrUpdate": {
+      "type": "object",
+      "description": "Details about an error that occurred during update installation.\n\nFollows the standard Azure / OData error shape (`Azure.Core.Foundations.Error`):\n- `code` carries the error category (constrained to a known set, but extensible).\n- `message` is the human-readable description of the failure.\n- `innererror.code` carries the agent-reported numeric error code as a string.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorCategory",
+          "description": "The category of the error, used to determine accountability and remediation."
+        }
+      }
+    },
     "DeviceUpdateId": {
       "type": "object",
       "description": "A unique identifier for an update referenced by the device update agent.",
@@ -2408,25 +2470,6 @@
             "description": "Cryptographic or integrity validation failure requiring investigation."
           }
         ]
-      }
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "description": "Details about an error that occurred during update installation.",
-      "properties": {
-        "errorCategory": {
-          "$ref": "#/definitions/ErrorCategory",
-          "description": "The category of the error, used to determine accountability and remediation."
-        },
-        "errorCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "A numeric code identifying the specific error."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "A human-readable message describing the error."
-        }
       }
     },
     "ExecuteActionRequest": {
@@ -2962,7 +3005,28 @@
           "description": "Whether the overall installation succeeded."
         },
         "errorDetails": {
-          "$ref": "#/definitions/ErrorDetails",
+          "$ref": "#/definitions/DeviceUpdateError",
+          "description": "Error details for the overall installation, if it did not succeed."
+        },
+        "stepResults": {
+          "type": "array",
+          "description": "Per-step results for the installation.",
+          "items": {
+            "$ref": "#/definitions/StepResult"
+          }
+        }
+      }
+    },
+    "InstallResultCreateOrUpdate": {
+      "type": "object",
+      "description": "The result of installing an update on a device.",
+      "properties": {
+        "succeeded": {
+          "type": "boolean",
+          "description": "Whether the overall installation succeeded."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/DeviceUpdateErrorCreateOrUpdate",
           "description": "Error details for the overall installation, if it did not succeed."
         },
         "stepResults": {
@@ -3386,7 +3450,7 @@
           "description": "Whether this step succeeded."
         },
         "errorDetails": {
-          "$ref": "#/definitions/ErrorDetails",
+          "$ref": "#/definitions/DeviceUpdateError",
           "description": "Error details for this step, if it did not succeed."
         }
       },
@@ -3631,7 +3695,7 @@
           "description": "The identifier of the update being applied by the job."
         },
         "installResult": {
-          "$ref": "#/definitions/InstallResult",
+          "$ref": "#/definitions/InstallResultCreateOrUpdate",
           "description": "The result of installing the update on the device, if available."
         }
       }
