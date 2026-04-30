@@ -1531,10 +1531,7 @@ interface DeviceManagementOperationGroup {
     },
     DeviceHealthList
   >;
-}
 
-@tag("Deployment management")
-interface DeploymentManagementOperationGroup {
   /**
    * Deletes a deployment.
    */
