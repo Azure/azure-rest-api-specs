@@ -21,3 +21,7 @@ using Microsoft.OffAzure;
 @@clientName(WebAppExtendedMachineProperties.hostName, "hostname", "java");
 @@clientName(FrontEndBinding.hostName, "hostname", "java");
 @@clientName(VmwareMachineProperties.hostName, "hostname", "java");
+
+// Mitigate Java breaking changes: resource name parameter hostName → hostname
+@@clientName(HypervHost.name, "hostname", "java");
+@@clientName(VmwareHost.name, "hostname", "java");
