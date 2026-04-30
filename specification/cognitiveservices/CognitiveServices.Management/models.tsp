@@ -5965,6 +5965,11 @@ model WorkbenchComputeProperties extends ComputeProperties {
    */
   @visibility(Lifecycle.Read)
   webEndpoint?: string;
+
+  /**
+   * The dataset ID to mount for the workbench.
+   */
+  datasetId?: string;
 }
 
 /**
