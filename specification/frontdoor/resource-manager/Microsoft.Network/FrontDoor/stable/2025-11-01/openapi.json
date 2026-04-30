@@ -4547,6 +4547,12 @@
           "type": "string",
           "description": "Describes the functionality of the managed rule.",
           "readOnly": true
+        },
+        "paranoiaLevel": {
+          "description": "Describes the paranoia level of the managed rule. Applicable only for DRS rules (values 1-4, where higher values indicate more aggressive detection). Null for Bot Manager, DDoS, and AI rules.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -4892,6 +4898,26 @@
           "type": "string",
           "description": "Version of the managed rule set type.",
           "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)')."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the lifecycle status of the managed rule set version.",
+          "enum": [
+            "Preview",
+            "GA",
+            "Deprecated",
+            "Supported"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedRuleSetStatus",
+            "modelAsString": true
+          }
         },
         "ruleGroups": {
           "type": "array",
