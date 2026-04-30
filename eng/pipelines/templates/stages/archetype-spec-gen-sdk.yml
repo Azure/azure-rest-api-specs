@@ -342,7 +342,7 @@ stages:
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-              -OpenAsDraft $${{ ne(parameters.TriggerSource, 'release-plan-app') }}
+              -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
         
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
@@ -350,7 +350,7 @@ stages:
               $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
               Write-Host "Pull request created: $prUrl"
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-              $prStatus = "${{ iif(eq(parameters.TriggerSource, 'release-plan-app'), 'ready for review', 'draft') }}"
+              $prStatus = "${{ iif(endsWith(parameters.TriggerSource, '-release'), 'ready for review', 'draft') }}"
               Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
             condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
             displayName: "Set pull request URL variable"
