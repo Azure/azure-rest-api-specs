@@ -6,6 +6,24 @@
   },
   "tags": [
     {
+      "name": "MLflow Experiments"
+    },
+    {
+      "name": "MLflow Runs"
+    },
+    {
+      "name": "MLflow Metrics"
+    },
+    {
+      "name": "MLflow Artifacts"
+    },
+    {
+      "name": "MLflow Registered Models"
+    },
+    {
+      "name": "MLflow Model Versions"
+    },
+    {
       "name": "Agents"
     },
     {
@@ -58,6 +76,9 @@
     },
     {
       "name": "Toolsets"
+    },
+    {
+      "name": "Jobs"
     }
   ],
   "paths": {
@@ -3569,6 +3590,2932 @@
         ]
       }
     },
+    "/jobs": {
+      "get": {
+        "operationId": "Jobs_list",
+        "description": "List Jobs.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobType",
+            "in": "query",
+            "required": false,
+            "description": "Filter by job type (e.g. 'Command').",
+            "schema": {
+              "$ref": "#/components/schemas/JobType"
+            },
+            "explode": false
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "description": "Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "required": false,
+            "description": "Specifies which view type to apply when listing jobs.",
+            "schema": {
+              "$ref": "#/components/schemas/ListViewType"
+            },
+            "explode": false
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated user property names and optionally values. Example: prop1,prop2=value2.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      },
+      "post": {
+        "operationId": "Jobs_createTrainingJob",
+        "description": "Create and execute a model training Job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry job creation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Job"
+              }
+            }
+          },
+          "description": "The job to create."
+        }
+      }
+    },
+    "/jobs/{jobName}/artifacts": {
+      "get": {
+        "operationId": "JobArtifacts_listJobArtifacts",
+        "description": "List artifacts for the current view of a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "pathPrefix",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path prefix to list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/artifacts/{artifactPath}:content": {
+      "get": {
+        "operationId": "JobArtifacts_downloadJobArtifact",
+        "description": "Download job artifact content.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artifactPath",
+            "in": "path",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/artifacts/{artifactPath}:contentInfo": {
+      "get": {
+        "operationId": "JobArtifacts_getJobArtifactContentInfo",
+        "description": "Get download information for a job artifact.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artifactPath",
+            "in": "path",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobArtifactContentInfo"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/artifacts/{artifactPath}:metadata": {
+      "get": {
+        "operationId": "JobArtifacts_getJobArtifactMetadata",
+        "description": "Get metadata for a job artifact.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artifactPath",
+            "in": "path",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts": {
+      "get": {
+        "operationId": "JobAttempts_listJobAttempts",
+        "description": "List execution attempts for a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobAttempt"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}": {
+      "get": {
+        "operationId": "JobAttempts_getJobAttempt",
+        "description": "Get one execution attempt for a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobAttempt"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/artifacts": {
+      "get": {
+        "operationId": "JobAttemptArtifacts_listJobAttemptArtifacts",
+        "description": "List artifacts for a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "pathPrefix",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path prefix to list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/artifacts/{artifactPath}:content": {
+      "get": {
+        "operationId": "JobAttemptArtifacts_downloadJobAttemptArtifact",
+        "description": "Download artifact content from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artifactPath",
+            "in": "path",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/artifacts/{artifactPath}:contentInfo": {
+      "get": {
+        "operationId": "JobAttemptArtifacts_getJobAttemptArtifactContentInfo",
+        "description": "Get download information for an artifact from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artifactPath",
+            "in": "path",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobArtifactContentInfo"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/artifacts/{artifactPath}:metadata": {
+      "get": {
+        "operationId": "JobAttemptArtifacts_getJobAttemptArtifactMetadata",
+        "description": "Get metadata for an artifact from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "artifactPath",
+            "in": "path",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/metrics": {
+      "get": {
+        "operationId": "JobAttemptMetrics_listJobAttemptMetrics",
+        "description": "List metrics emitted by a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetric"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}": {
+      "get": {
+        "operationId": "JobAttemptMetrics_getJobAttemptMetric",
+        "description": "Get the full history for a metric from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricPoint"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:aggregates": {
+      "get": {
+        "operationId": "JobAttemptMetrics_getJobAttemptMetricAggregates",
+        "description": "Get aggregate metric values from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricAggregate"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:sample": {
+      "get": {
+        "operationId": "JobAttemptMetrics_getJobAttemptMetricSample",
+        "description": "Get one sampled value or window from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobMetricSample"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:samples": {
+      "get": {
+        "operationId": "JobAttemptMetrics_getJobAttemptMetricSamples",
+        "description": "Get sampled metric values from a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobMetricSample"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/metrics:lastValues": {
+      "get": {
+        "operationId": "JobAttemptMetrics_getJobAttemptMetricLastValues",
+        "description": "Get latest metric values for a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricLastValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/outputs": {
+      "get": {
+        "operationId": "JobAttemptOutputs_listJobAttemptOutputs",
+        "description": "List outputs produced by a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobOutputReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/attempts/{attemptId}/outputs/{outputName}": {
+      "get": {
+        "operationId": "JobAttemptOutputs_getJobAttemptOutput",
+        "description": "Get one output produced by a specific job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outputName",
+            "in": "path",
+            "required": true,
+            "description": "The output name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobOutputReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/metrics": {
+      "get": {
+        "operationId": "JobMetrics_listJobMetrics",
+        "description": "List metrics emitted by the current view of a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetric"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/metrics/{metricName}": {
+      "get": {
+        "operationId": "JobMetrics_getJobMetric",
+        "description": "Get the full history for a job metric.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricPoint"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/metrics/{metricName}:aggregates": {
+      "get": {
+        "operationId": "JobMetrics_getJobMetricAggregates",
+        "description": "Get aggregate values for a job metric.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricAggregate"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/metrics/{metricName}:sample": {
+      "get": {
+        "operationId": "JobMetrics_getJobMetricSample",
+        "description": "Get one sampled value or window for a job metric.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobMetricSample"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/metrics/{metricName}:samples": {
+      "get": {
+        "operationId": "JobMetrics_getJobMetricSamples",
+        "description": "Get sampled values for a job metric.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobMetricSample"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/metrics:lastValues": {
+      "get": {
+        "operationId": "JobMetrics_getJobMetricLastValues",
+        "description": "Get the latest values for metrics emitted by the current view of a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricLastValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/outputs": {
+      "get": {
+        "operationId": "JobOutputs_listJobOutputs",
+        "description": "List outputs produced by a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobOutputReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{jobName}/outputs/{outputName}": {
+      "get": {
+        "operationId": "JobOutputs_getJobOutput",
+        "description": "Get one output produced by a job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outputName",
+            "in": "path",
+            "required": true,
+            "description": "The output name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobOutputReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{name}": {
+      "get": {
+        "operationId": "Jobs_get",
+        "description": "Get a Job by name.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      },
+      "delete": {
+        "operationId": "Jobs_beginDelete",
+        "description": "Delete a Job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Response returned when a job delete operation is accepted asynchronously.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for the status of the delete operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Suggested delay in seconds before polling.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
+    "/jobs/{name}:cancel": {
+      "post": {
+        "operationId": "Jobs_beginCancel",
+        "description": "Cancel a Job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Response returned when a job cancel operation is accepted asynchronously.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for the status of the cancel operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Suggested delay in seconds before polling.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ]
+      }
+    },
     "/memory_stores": {
       "post": {
         "operationId": "createMemoryStore",
@@ -4408,6 +7355,2449 @@
           "conditional_previews": [
             "MemoryStores=V1Preview"
           ]
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/artifacts/list": {
+      "get": {
+        "operationId": "Artifacts_list",
+        "description": "List MLflow artifacts.",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "query",
+            "required": false,
+            "description": "MLflow run identifier.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "run_uuid",
+            "in": "query",
+            "required": false,
+            "description": "MLflow run UUID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path to list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Artifacts"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/create": {
+      "post": {
+        "operationId": "Experiments_create",
+        "description": "Create an MLflow experiment.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/delete": {
+      "post": {
+        "operationId": "Experiments_delete",
+        "description": "Delete an MLflow experiment.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/get": {
+      "get": {
+        "operationId": "Experiments_get",
+        "description": "Get an MLflow experiment by ID.",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "query",
+            "required": false,
+            "description": "MLflow experiment identifier.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "experiment_name",
+            "in": "query",
+            "required": false,
+            "description": "MLflow experiment name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/get-by-name": {
+      "get": {
+        "operationId": "Experiments_getByName",
+        "description": "Get an MLflow experiment by name.",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "query",
+            "required": false,
+            "description": "MLflow experiment identifier.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "experiment_name",
+            "in": "query",
+            "required": false,
+            "description": "MLflow experiment name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/restore": {
+      "post": {
+        "operationId": "Experiments_restore",
+        "description": "Restore a deleted MLflow experiment.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/search": {
+      "post": {
+        "operationId": "Experiments_search",
+        "description": "Search MLflow experiments.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/set-experiment-tag": {
+      "post": {
+        "operationId": "Experiments_setTag",
+        "description": "Set an MLflow experiment tag.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/experiments/update": {
+      "post": {
+        "operationId": "Experiments_update",
+        "description": "Update MLflow experiment metadata.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Experiments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/metrics/get-history": {
+      "get": {
+        "operationId": "Metrics_getHistory",
+        "description": "Get MLflow metric history.",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "query",
+            "required": false,
+            "description": "MLflow run identifier.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "run_uuid",
+            "in": "query",
+            "required": false,
+            "description": "MLflow run UUID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "metric_key",
+            "in": "query",
+            "required": false,
+            "description": "Metric key.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "max_results",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Token used to retrieve the next page of metric points.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Metrics"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/create": {
+      "post": {
+        "operationId": "ModelVersions_create",
+        "description": "Create an MLflow model version.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/delete": {
+      "delete": {
+        "operationId": "ModelVersions_delete",
+        "description": "Delete an MLflow model version.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "description": "Model version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/delete-tag": {
+      "delete": {
+        "operationId": "ModelVersions_deleteTag",
+        "description": "Delete an MLflow model-version tag.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "description": "Model version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/get": {
+      "get": {
+        "operationId": "ModelVersions_get",
+        "description": "Get an MLflow model version.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "description": "Model version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/get-download-uri": {
+      "get": {
+        "operationId": "ModelVersions_getDownloadUri",
+        "description": "Get an MLflow model version download URI.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "description": "Model version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/get-storage-location-uri": {
+      "post": {
+        "operationId": "ModelVersions_getStorageLocationUri",
+        "description": "Get an MLflow model version storage location URI.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/search": {
+      "get": {
+        "operationId": "ModelVersions_search",
+        "description": "Search MLflow model versions.",
+        "parameters": [
+          {
+            "name": "max_results",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Token used to retrieve the next page of results.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/set-tag": {
+      "post": {
+        "operationId": "ModelVersions_setTag",
+        "description": "Set an MLflow model-version tag.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/transition-stage": {
+      "post": {
+        "operationId": "ModelVersions_transitionStage",
+        "description": "Transition an MLflow model version stage.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/model-versions/update": {
+      "patch": {
+        "operationId": "ModelVersions_update",
+        "description": "Update an MLflow model version.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Model Versions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/create": {
+      "post": {
+        "operationId": "RegisteredModels_create",
+        "description": "Create an MLflow registered model.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/delete": {
+      "delete": {
+        "operationId": "RegisteredModels_delete",
+        "description": "Delete an MLflow registered model.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/delete-tag": {
+      "delete": {
+        "operationId": "RegisteredModels_deleteTag",
+        "description": "Delete an MLflow registered-model tag.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/get": {
+      "get": {
+        "operationId": "RegisteredModels_get",
+        "description": "Get an MLflow registered model.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/get-latest-versions": {
+      "get": {
+        "operationId": "RegisteredModels_getLatestVersions",
+        "description": "Get latest versions for an MLflow registered model.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Registered model name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/list": {
+      "get": {
+        "operationId": "RegisteredModels_list",
+        "description": "List MLflow registered models.",
+        "parameters": [
+          {
+            "name": "max_results",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Token used to retrieve the next page of results.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/rename": {
+      "post": {
+        "operationId": "RegisteredModels_rename",
+        "description": "Rename an MLflow registered model.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/search": {
+      "get": {
+        "operationId": "RegisteredModels_search",
+        "description": "Search MLflow registered models.",
+        "parameters": [
+          {
+            "name": "max_results",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Token used to retrieve the next page of results.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/set-tag": {
+      "post": {
+        "operationId": "RegisteredModels_setTag",
+        "description": "Set an MLflow registered-model tag.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/registered-models/update": {
+      "patch": {
+        "operationId": "RegisteredModels_update",
+        "description": "Update an MLflow registered model.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Registered Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/create": {
+      "post": {
+        "operationId": "Runs_create",
+        "description": "Create an MLflow run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/delete": {
+      "post": {
+        "operationId": "Runs_delete",
+        "description": "Delete an MLflow run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/delete-tag": {
+      "post": {
+        "operationId": "Runs_deleteTag",
+        "description": "Delete an MLflow run tag.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/get": {
+      "get": {
+        "operationId": "Runs_get",
+        "description": "Get an MLflow run.",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "query",
+            "required": false,
+            "description": "MLflow run identifier.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "run_uuid",
+            "in": "query",
+            "required": false,
+            "description": "MLflow run UUID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ]
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/log-batch": {
+      "post": {
+        "operationId": "Runs_logBatch",
+        "description": "Log a batch of metrics, parameters, and tags to an MLflow run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/log-inputs": {
+      "post": {
+        "operationId": "Runs_logInputs",
+        "description": "Log MLflow run input relationships.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/log-metric": {
+      "post": {
+        "operationId": "Runs_logMetric",
+        "description": "Log one metric to an MLflow run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/log-model": {
+      "post": {
+        "operationId": "Runs_logModel",
+        "description": "Log MLflow model metadata.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/log-parameter": {
+      "post": {
+        "operationId": "Runs_logParameter",
+        "description": "Log one parameter to an MLflow run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/restore": {
+      "post": {
+        "operationId": "Runs_restore",
+        "description": "Restore a deleted MLflow run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/search": {
+      "post": {
+        "operationId": "Runs_search",
+        "description": "Search MLflow runs.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/set-tag": {
+      "post": {
+        "operationId": "Runs_setTag",
+        "description": "Set an MLflow run tag.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mlflow/api/2.0/mlflow/runs/update": {
+      "post": {
+        "operationId": "Runs_update",
+        "description": "Update MLflow run metadata or status.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mlflow.MlflowResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "MLflow Runs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mlflow.MlflowPayload"
+              }
+            }
+          }
         }
       }
     },
@@ -9426,6 +14816,27 @@
         ],
         "description": "Agentic identity credential definition"
       },
+      "AllNodes": {
+        "type": "object",
+        "required": [
+          "nodesValueType"
+        ],
+        "properties": {
+          "nodesValueType": {
+            "type": "string",
+            "enum": [
+              "All"
+            ],
+            "description": "Type of the Nodes value."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NodeCollection"
+          }
+        ],
+        "description": "All nodes means the service will be running on all of the nodes of the job."
+      },
       "ApiErrorResponse": {
         "type": "object",
         "required": [
@@ -9485,6 +14896,23 @@
       "AssetId": {
         "type": "string",
         "description": "Identifier of a saved asset."
+      },
+      "AssetTypes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "uri_file",
+              "uri_folder",
+              "safetensors_model",
+              "literal"
+            ]
+          }
+        ],
+        "description": "Type of job input/output asset."
       },
       "AttackStrategy": {
         "anyOf": [
@@ -11535,6 +16963,163 @@
         ],
         "description": "Code-based evaluator definition using python code"
       },
+      "CommandJob": {
+        "type": "object",
+        "required": [
+          "jobType",
+          "command",
+          "environmentImageReference",
+          "computeId"
+        ],
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "enum": [
+              "Command"
+            ],
+            "description": "Job type."
+          },
+          "command": {
+            "type": "string",
+            "description": "The command to execute on startup of the job."
+          },
+          "environmentImageReference": {
+            "type": "string",
+            "description": "ACR path of environment."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of job."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The asset property dictionary."
+          },
+          "codeId": {
+            "type": "string",
+            "description": "Code asset reference."
+          },
+          "computeId": {
+            "type": "string",
+            "description": "Compute resource ID."
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Input"
+            },
+            "description": "Mapping of input data bindings used in the job."
+          },
+          "outputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Output"
+            },
+            "description": "Mapping of output data bindings used in the job."
+          },
+          "environmentVariables": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Environment variables included in the job."
+          },
+          "resources": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobResourceConfiguration"
+              }
+            ],
+            "description": "Compute Resource configuration for the job."
+          },
+          "distribution": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DistributionConfiguration"
+              }
+            ],
+            "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
+          },
+          "limits": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommandJobLimits"
+              }
+            ],
+            "description": "Command Job limit."
+          },
+          "services": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JobService"
+            },
+            "description": "List of job services.",
+            "readOnly": true
+          },
+          "queueSettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueueSettings"
+              }
+            ],
+            "description": "Queue settings for the job."
+          },
+          "userAssignedIdentityId": {
+            "type": "string",
+            "description": "user-assigned managed identity"
+          },
+          "isArchived": {
+            "type": "boolean",
+            "description": "Is the asset archived?"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobProperties"
+          }
+        ],
+        "description": "Properties of a Command Job."
+      },
+      "CommandJobLimits": {
+        "type": "object",
+        "required": [
+          "jobLimitsType"
+        ],
+        "properties": {
+          "jobLimitsType": {
+            "type": "string",
+            "enum": [
+              "Command"
+            ],
+            "description": "JobLimit type."
+          },
+          "timeout": {
+            "type": "string",
+            "format": "duration",
+            "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds."
+          }
+        },
+        "description": "Command Job limit class."
+      },
       "CompletionMessageToolCallChunk": {
         "type": "object",
         "required": [
@@ -12556,6 +18141,27 @@
             ]
           }
         ]
+      },
+      "DistributionConfiguration": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "description": "Specifies the type of distribution framework."
+          }
+        },
+        "discriminator": {
+          "propertyName": "distributionType",
+          "mapping": {
+            "PyTorch": "#/components/schemas/PyTorchDistribution",
+            "Mpi": "#/components/schemas/MpiDistribution",
+            "TensorFlow": "#/components/schemas/TensorFlowDistribution"
+          }
+        },
+        "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
       },
       "EntraIDCredentials": {
         "type": "object",
@@ -14611,6 +20217,57 @@
         },
         "description": "Index resource Definition"
       },
+      "Input": {
+        "type": "object",
+        "required": [
+          "jobInputType"
+        ],
+        "properties": {
+          "jobInputType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssetTypes"
+              }
+            ],
+            "description": "Specifies the type of job input."
+          },
+          "uri": {
+            "type": "string",
+            "description": "Input Asset URI. Required for uri_file, uri_folder, and safetensors_model types."
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputOutputModes"
+              }
+            ],
+            "description": "Input Asset Delivery Mode. Applies to uri-based inputs."
+          },
+          "value": {
+            "type": "string",
+            "description": "Literal value. Required for literal type."
+          }
+        },
+        "description": "Job input definition."
+      },
+      "InputOutputModes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ReadOnlyMount",
+              "ReadWriteMount",
+              "Download",
+              "Direct",
+              "Upload"
+            ]
+          }
+        ],
+        "description": "Enum to determine the input/output data delivery mode."
+      },
       "Insight": {
         "type": "object",
         "required": [
@@ -14971,6 +20628,625 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "Job": {
+        "type": "object",
+        "required": [
+          "name",
+          "properties"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the Job. This is case-sensitive.",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The resource ID.",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The resource type.",
+            "readOnly": true
+          },
+          "properties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobProperties"
+              }
+            ],
+            "description": "Properties of the job."
+          },
+          "systemData": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemData"
+              }
+            ],
+            "description": "Metadata pertaining to creation and last modification of the resource.",
+            "readOnly": true
+          }
+        },
+        "description": "Job resource."
+      },
+      "JobArtifact": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Artifact path relative to the job artifact root.",
+            "readOnly": true
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobArtifactType"
+              }
+            ],
+            "description": "Artifact type.",
+            "readOnly": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Artifact size in bytes.",
+            "readOnly": true
+          },
+          "createdTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the artifact was created.",
+            "readOnly": true
+          },
+          "updatedTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the artifact was last updated.",
+            "readOnly": true
+          },
+          "origin": {
+            "type": "string",
+            "description": "Service origin of the artifact.",
+            "readOnly": true
+          },
+          "container": {
+            "type": "string",
+            "description": "Diagnostic storage container identifier resolved by the service.",
+            "readOnly": true
+          }
+        },
+        "description": "Metadata for an artifact produced by or attached to a job."
+      },
+      "JobArtifactContentInfo": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Artifact path relative to the job artifact root.",
+            "readOnly": true
+          },
+          "contentUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "Download URI for the artifact content.",
+            "readOnly": true
+          },
+          "contentType": {
+            "type": "string",
+            "description": "MIME type of the content.",
+            "readOnly": true
+          },
+          "expiresAtUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the content URI expires.",
+            "readOnly": true
+          }
+        },
+        "description": "Content access information for a job artifact."
+      },
+      "JobArtifactType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "File",
+              "Directory"
+            ]
+          }
+        ],
+        "description": "Type of a job artifact."
+      },
+      "JobAttempt": {
+        "type": "object",
+        "required": [
+          "id",
+          "jobName"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The attempt identifier.",
+            "readOnly": true
+          },
+          "jobName": {
+            "type": "string",
+            "description": "The job name this attempt belongs to.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobAttemptStatus"
+              }
+            ],
+            "description": "The attempt status.",
+            "readOnly": true
+          },
+          "statusReason": {
+            "type": "string",
+            "description": "Additional status reason.",
+            "readOnly": true
+          },
+          "startTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the attempt started.",
+            "readOnly": true
+          },
+          "endTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the attempt ended.",
+            "readOnly": true
+          },
+          "lastStartTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Most recent time the attempt started running.",
+            "readOnly": true
+          },
+          "computeDuration": {
+            "type": "string",
+            "format": "duration",
+            "description": "Total compute duration consumed by the attempt.",
+            "readOnly": true
+          },
+          "queueingInfo": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Queueing details associated with the attempt.",
+            "readOnly": true
+          },
+          "computeDetails": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Compute details associated with the attempt.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobAttemptError"
+              }
+            ],
+            "description": "Terminal error for the attempt, if any.",
+            "readOnly": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobAttemptWarning"
+            },
+            "description": "Warnings emitted for the attempt.",
+            "readOnly": true
+          },
+          "isCurrent": {
+            "type": "boolean",
+            "description": "Whether this attempt is the current attempt for the job.",
+            "readOnly": true
+          }
+        },
+        "description": "One execution attempt of a job."
+      },
+      "JobAttemptError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Additional error details."
+          }
+        },
+        "description": "Error emitted during a job attempt."
+      },
+      "JobAttemptStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Queued",
+              "Running",
+              "Completed",
+              "Failed",
+              "Canceled"
+            ]
+          }
+        ],
+        "description": "Status of a job execution attempt."
+      },
+      "JobAttemptWarning": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable warning code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable warning message."
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Additional warning details."
+          }
+        },
+        "description": "Warning emitted during a job attempt."
+      },
+      "JobMetric": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Metric name.",
+            "readOnly": true
+          },
+          "metricType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobMetricType"
+              }
+            ],
+            "description": "Metric type.",
+            "readOnly": true
+          },
+          "columns": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Column metadata for structured metric values.",
+            "readOnly": true
+          }
+        },
+        "description": "Metadata for a metric emitted by a job or attempt."
+      },
+      "JobMetricAggregate": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Metric name.",
+            "readOnly": true
+          },
+          "startUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Aggregate window start.",
+            "readOnly": true
+          },
+          "endUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Aggregate window end.",
+            "readOnly": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Aggregate values.",
+            "readOnly": true
+          }
+        },
+        "description": "Aggregated values for a metric."
+      },
+      "JobMetricLastValue": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Metric name.",
+            "readOnly": true
+          },
+          "value": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobMetricPoint"
+              }
+            ],
+            "description": "Latest metric point.",
+            "readOnly": true
+          }
+        },
+        "description": "Latest value for a metric."
+      },
+      "JobMetricPoint": {
+        "type": "object",
+        "properties": {
+          "metricId": {
+            "type": "string",
+            "description": "Metric identifier.",
+            "readOnly": true
+          },
+          "step": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Metric step.",
+            "readOnly": true
+          },
+          "createdUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the metric point was created.",
+            "readOnly": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Metric data values.",
+            "readOnly": true
+          }
+        },
+        "description": "A metric data point."
+      },
+      "JobMetricSample": {
+        "type": "object",
+        "required": [
+          "name",
+          "points"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Metric name.",
+            "readOnly": true
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobMetricPoint"
+            },
+            "description": "Sampled metric points.",
+            "readOnly": true
+          }
+        },
+        "description": "Sampled values for a metric."
+      },
+      "JobMetricType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Scalar",
+              "Table",
+              "Image"
+            ]
+          }
+        ],
+        "description": "The kind of metric emitted by a job."
+      },
+      "JobOutputReference": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Output name.",
+            "readOnly": true
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssetTypes"
+              }
+            ],
+            "description": "Output asset type.",
+            "readOnly": true
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputOutputModes"
+              }
+            ],
+            "description": "Output delivery mode.",
+            "readOnly": true
+          },
+          "uri": {
+            "type": "string",
+            "description": "Output storage URI.",
+            "readOnly": true
+          },
+          "assetName": {
+            "type": "string",
+            "description": "Registered asset name, if the output produced an asset.",
+            "readOnly": true
+          },
+          "assetVersion": {
+            "type": "string",
+            "description": "Registered asset version, if the output produced an asset.",
+            "readOnly": true
+          },
+          "baseModelId": {
+            "type": "string",
+            "description": "Base model ID for model outputs.",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Output description.",
+            "readOnly": true
+          }
+        },
+        "description": "Named output produced by a job."
+      },
+      "JobProperties": {
+        "type": "object",
+        "required": [
+          "jobType"
+        ],
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "description": "Job type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "jobType",
+          "mapping": {
+            "Command": "#/components/schemas/CommandJob"
+          }
+        },
+        "description": "Base properties of a Job."
+      },
+      "JobResourceConfiguration": {
+        "type": "object",
+        "properties": {
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Optional number of instances or nodes used by the compute target."
+          },
+          "instanceType": {
+            "type": "string",
+            "description": "Optional type of VM used as supported by the compute target."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Additional properties bag."
+          },
+          "shmSize": {
+            "type": "string",
+            "description": "Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes)."
+          },
+          "dockerArgs": {
+            "type": "string",
+            "description": "Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types."
+          }
+        },
+        "description": "Compute Resource configuration for the job."
+      },
+      "JobService": {
+        "type": "object",
+        "properties": {
+          "jobServiceType": {
+            "type": "string",
+            "description": "Endpoint type."
+          },
+          "port": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Port for endpoint."
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "Url for endpoint."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional properties to set on the endpoint."
+          },
+          "nodes": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AllNodes"
+              }
+            ],
+            "description": "Nodes that user would like to start the service on. If Nodes is not set or set to null, the service will only be started on leader node."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of endpoint.",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Any error in the service.",
+            "readOnly": true
+          }
+        },
+        "description": "Job endpoint definition."
+      },
+      "JobType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Command"
+            ]
+          }
+        ],
+        "description": "Type of a job."
+      },
+      "ListViewType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ]
+          }
+        ],
+        "description": "Specifies which jobs to include in a list result based on their lifecycle state."
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -15744,6 +22020,16 @@
         ],
         "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent."
       },
+      "Mlflow.MlflowPayload": {
+        "type": "object",
+        "additionalProperties": {},
+        "description": "Generic MLflow compatibility request payload."
+      },
+      "Mlflow.MlflowResponse": {
+        "type": "object",
+        "additionalProperties": {},
+        "description": "Generic MLflow compatibility response payload."
+      },
       "ModelDeployment": {
         "type": "object",
         "required": [
@@ -15895,6 +22181,32 @@
         ],
         "description": "Monthly recurrence schedule."
       },
+      "MpiDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "Mpi"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "processCountPerNode": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of processes per MPI node."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "MPI distribution configuration."
+      },
       "NoAuthenticationCredentials": {
         "type": "object",
         "required": [
@@ -15916,6 +22228,23 @@
           }
         ],
         "description": "Credentials that do not require authentication"
+      },
+      "NodeCollection": {
+        "type": "object",
+        "required": [
+          "nodesValueType"
+        ],
+        "properties": {
+          "nodesValueType": {
+            "type": "string",
+            "description": "Type of the Nodes value."
+          }
+        },
+        "discriminator": {
+          "propertyName": "nodesValueType",
+          "mapping": {}
+        },
+        "description": "Nodes that user would like to start the service on."
       },
       "OAuthConsentRequestOutputItem": {
         "type": "object",
@@ -35686,6 +42015,51 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "Output": {
+        "type": "object",
+        "required": [
+          "jobOutputType"
+        ],
+        "properties": {
+          "jobOutputType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssetTypes"
+              }
+            ],
+            "description": "Specifies the type of job output."
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputOutputModes"
+              }
+            ],
+            "description": "Output Asset Delivery Mode."
+          },
+          "assetName": {
+            "type": "string",
+            "description": "Name of the output data asset to register."
+          },
+          "assetVersion": {
+            "type": "string",
+            "description": "Version of the output data asset to register."
+          },
+          "uri": {
+            "type": "string",
+            "description": "Output Asset URI."
+          },
+          "baseModelId": {
+            "type": "string",
+            "description": "Base model ID. Applies to safetensors_model outputs."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the output."
+          }
+        },
+        "description": "Job output definition."
+      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -35860,6 +42234,174 @@
           }
         },
         "description": "Paged collection of Insight items"
+      },
+      "PagedJob": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            },
+            "description": "The Job items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Job items"
+      },
+      "PagedJobArtifact": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobArtifact"
+            },
+            "description": "The JobArtifact items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobArtifact items"
+      },
+      "PagedJobAttempt": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobAttempt"
+            },
+            "description": "The JobAttempt items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobAttempt items"
+      },
+      "PagedJobMetric": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobMetric"
+            },
+            "description": "The JobMetric items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobMetric items"
+      },
+      "PagedJobMetricAggregate": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobMetricAggregate"
+            },
+            "description": "The JobMetricAggregate items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobMetricAggregate items"
+      },
+      "PagedJobMetricLastValue": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobMetricLastValue"
+            },
+            "description": "The JobMetricLastValue items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobMetricLastValue items"
+      },
+      "PagedJobMetricPoint": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobMetricPoint"
+            },
+            "description": "The JobMetricPoint items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobMetricPoint items"
+      },
+      "PagedJobOutputReference": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobOutputReference"
+            },
+            "description": "The JobOutputReference items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobOutputReference items"
       },
       "PagedRedTeam": {
         "type": "object",
@@ -36127,6 +42669,42 @@
           }
         },
         "description": "A record mapping for a single protocol and its version."
+      },
+      "PyTorchDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "PyTorch"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "processCountPerInstance": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of processes per node."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "PyTorch distribution configuration."
+      },
+      "QueueSettings": {
+        "type": "object",
+        "properties": {
+          "jobTier": {
+            "type": "string",
+            "description": "Controls the compute job tier."
+          }
+        },
+        "description": "Queue settings for the job."
       },
       "RaiConfig": {
         "type": "object",
@@ -37192,6 +43770,44 @@
           }
         ]
       },
+      "SystemData": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "description": "The identity that created the resource.",
+            "readOnly": true
+          },
+          "createdByType": {
+            "type": "string",
+            "description": "The type of identity that created the resource.",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of resource creation (UTC).",
+            "readOnly": true
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "description": "The identity that last modified the resource.",
+            "readOnly": true
+          },
+          "lastModifiedByType": {
+            "type": "string",
+            "description": "The type of identity that last modified the resource.",
+            "readOnly": true
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of resource last modification (UTC).",
+            "readOnly": true
+          }
+        },
+        "description": "Metadata pertaining to creation and last modification of the resource."
+      },
       "Target": {
         "type": "object",
         "required": [
@@ -37380,6 +43996,37 @@
           }
         },
         "description": "Taxonomy sub-category definition."
+      },
+      "TensorFlowDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "TensorFlow"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "workerCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of workers. If not specified, will default to the instance count."
+          },
+          "parameterServerCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of parameter server tasks."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "TensorFlow distribution configuration."
       },
       "ToolCallOutputContent": {
         "anyOf": [

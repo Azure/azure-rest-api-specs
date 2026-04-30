@@ -75,3 +75,90 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.getToolset, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
+
+interface Jobs {}
+interface JobAttempts {}
+interface JobArtifacts {}
+interface JobAttemptArtifacts {}
+interface JobMetrics {}
+interface JobAttemptMetrics {}
+interface JobOutputs {}
+interface JobAttemptOutputs {}
+interface Models {}
+
+@@clientLocation(Azure.AI.Projects.Jobs.createTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Jobs.list, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.get, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.beginDelete, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.beginCancel, Jobs);
+
+@@clientLocation(Azure.AI.Projects.JobAttempts.listJobAttempts, JobAttempts);
+@@clientLocation(Azure.AI.Projects.JobAttempts.getJobAttempt, JobAttempts);
+
+@@clientLocation(Azure.AI.Projects.JobArtifacts.listJobArtifacts, JobArtifacts);
+@@clientLocation(Azure.AI.Projects.JobArtifacts.getJobArtifactMetadata,
+  JobArtifacts
+);
+@@clientLocation(Azure.AI.Projects.JobArtifacts.getJobArtifactContentInfo,
+  JobArtifacts
+);
+@@clientLocation(Azure.AI.Projects.JobArtifacts.downloadJobArtifact,
+  JobArtifacts
+);
+
+@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.listJobAttemptArtifacts,
+  JobAttemptArtifacts
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.getJobAttemptArtifactMetadata,
+  JobAttemptArtifacts
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.getJobAttemptArtifactContentInfo,
+  JobAttemptArtifacts
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.downloadJobAttemptArtifact,
+  JobAttemptArtifacts
+);
+
+@@clientLocation(Azure.AI.Projects.JobMetrics.listJobMetrics, JobMetrics);
+@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricLastValues,
+  JobMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetric, JobMetrics);
+@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricAggregates,
+  JobMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricSamples,
+  JobMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricSample,
+  JobMetrics
+);
+
+@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.listJobAttemptMetrics,
+  JobAttemptMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricLastValues,
+  JobAttemptMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetric,
+  JobAttemptMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricAggregates,
+  JobAttemptMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricSamples,
+  JobAttemptMetrics
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricSample,
+  JobAttemptMetrics
+);
+
+@@clientLocation(Azure.AI.Projects.JobOutputs.listJobOutputs, JobOutputs);
+@@clientLocation(Azure.AI.Projects.JobOutputs.getJobOutput, JobOutputs);
+
+@@clientLocation(Azure.AI.Projects.JobAttemptOutputs.listJobAttemptOutputs,
+  JobAttemptOutputs
+);
+@@clientLocation(Azure.AI.Projects.JobAttemptOutputs.getJobAttemptOutput,
+  JobAttemptOutputs
+);
