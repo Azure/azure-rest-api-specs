@@ -852,6 +852,9 @@
               }
             }
           },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3398,7 +3401,7 @@
         },
         "targetKubernetesVersion": {
           "type": "string",
-          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is Rapid, Stable or NodeImage, this field must be empty."
+          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is not TargetKubernetesVersion, this field must be empty."
         },
         "longTermSupport": {
           "type": "boolean",
@@ -6334,7 +6337,8 @@
         "Stable",
         "Rapid",
         "NodeImage",
-        "TargetKubernetesVersion"
+        "TargetKubernetesVersion",
+        "SecurityPatch"
       ],
       "x-ms-enum": {
         "name": "UpgradeChannel",
@@ -6359,6 +6363,11 @@
             "name": "TargetKubernetesVersion",
             "value": "TargetKubernetesVersion",
             "description": "  Upgrades the clusters Kubernetes version to the latest supported patch version of the specified target Kubernetes version.\n  For information on the behavior of update run for Kubernetes version upgrade, \n  see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal"
+          },
+          {
+            "name": "SecurityPatch",
+            "value": "SecurityPatch",
+            "description": "  Applies security patches to the nodes of the target clusters.\n  For information on the behavior of update run for security patch upgrade,\n  see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal"
           }
         ]
       }
