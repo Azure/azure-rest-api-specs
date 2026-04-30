@@ -23,7 +23,8 @@ options:
     namespace: "com.azure.resourcemanager.migrationdiscovery"
     service-name: "Migration Discovery" # human-readable service name, whitespace allowed
     flavor: azure
-    float32-as-double: false
+    rename-model:
+      "BaseResource": "ProxyResource"
   "@azure-tools/typespec-ts":
     service-dir: sdk/migrate
     emitter-output-dir: "{output-dir}/{service-dir}/arm-migrationdiscovery"
