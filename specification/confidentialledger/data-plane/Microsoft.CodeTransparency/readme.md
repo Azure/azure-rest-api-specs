@@ -18,8 +18,24 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2024-12-09-previe
 These are the global settings for Microsoft Code Transparency.
 
 ```yaml
-tag: package-2025-01-31-preview-codetransparency
+tag: package-2026-03-26-codetransparency
 openapi-type: data-plane
+```
+
+### Tag: package-2026-03-26-codetransparency
+
+These settings apply only when `--tag=package-2026-03-26-codetransparency` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-26-codetransparency'
+input-file:
+  - stable/2026-03-26/cts.json
+suppressions:
+  - code: LroExtension
+    from: cts.json
+    reason: Following RFC which does not specify this
+  - code: ErrorResponse
+    from: cts.json
+    reason: No way to express when using CBOR
 ```
 
 ### Tag: package-2024-01-11-preview-codetransparency
