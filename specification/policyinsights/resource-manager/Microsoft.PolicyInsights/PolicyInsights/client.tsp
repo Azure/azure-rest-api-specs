@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./PolicyInsights/main.tsp";
@@ -1735,38 +1735,10 @@ op policyEventsListQueryResultsForPolicySetDefinitionJava(
   @path
   policySetDefinitionName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("$top")
   @minValue(0)
   Top?: int32,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$orderby")
-  OrderBy?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$select")
-  Select?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$from")
-  From?: utcDateTime,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$to")
-  To?: utcDateTime,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$filter")
-  Filter?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$apply")
-  Apply?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
-  @query("$skiptoken")
-  SkipToken?: string,
 ): PolicyEventsQueryResults | QueryFailure;
 @@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   policyEventsListQueryResultsForPolicySetDefinitionJava,
