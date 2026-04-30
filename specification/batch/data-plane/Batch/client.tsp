@@ -154,9 +154,10 @@ interface BatchClient {
   "csharp"
 );
 @@alternateType(Azure.Batch.DiskCustomerManagedKey.keyUrl, url, "csharp");
+@@clientName(Azure.Batch.DiskCustomerManagedKey.keyUrl, "keyUri", "csharp");
 
 @@clientName(BatchClient.listJobsFromSchedule,
-  "listJobsFromSchedules",
+  "listJobsFromSchedule",
   "csharp"
 );
 @@clientName(BatchClient.listJobPreparationAndReleaseTaskStatus,
@@ -202,7 +203,7 @@ interface BatchClient {
   "csharp"
 );
 @@clientName(Azure.Batch.VMExtension.autoUpgradeMinorVersion,
-  "shouldAutoUpgradeMinorVersion",
+  "isMinorVersionAutoUpgradeEnabled",
   "csharp"
 );
 @@clientName(Azure.Batch.VMExtension.enableAutomaticUpgrade,
@@ -236,8 +237,27 @@ interface BatchClient {
   "taskRootDirectoryUri",
   "csharp"
 );
+@@clientName(Azure.Batch.BatchCreateTaskCollectionResult.value,
+  "results",
+  "csharp"
+);
+@@clientName(Azure.Batch.BatchNodeCounts.upgradingOS, "upgradingOS", "csharp");
+@@clientName(Azure.Batch.HostEndpointSettingsModeTypes,
+  "HostEndpointSettingsModeType",
+  "csharp"
+);
+@@clientName(Azure.Batch.NameValuePair, "BatchNameValuePair", "csharp");
+@@clientName(Azure.Batch.InboundEndpoint.publicFQDN, "publicFqdn", "csharp");
+@@clientName(Azure.Batch.ExitConditions.default,
+  "defaultExitOptions ",
+  "csharp"
+);
 @@clientName(Azure.Batch.BatchJobReleaseTaskExecutionInfo.taskRootDirectoryUrl,
   "taskRootDirectoryUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.CommonListParameters.maxresults,
+  "maxResults",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchPool.url, "uri", "csharp");
@@ -252,6 +272,7 @@ interface BatchClient {
   "isCrossZoneUpgradeEnabled",
   "csharp"
 );
+@@clientName(Azure.Batch.BatchTaskGroup.value, "tasks", "csharp");
 @@clientName(Azure.Batch.BatchNode.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTaskInfo.taskUrl, "taskUri", "csharp");
 @@clientName(Azure.Batch.UploadBatchServiceLogsOptions.containerUrl,
@@ -270,6 +291,12 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+
+@@clientName(BatchClient.getTaskFile, "download_task_file", "python");
+
+@@clientName(BatchClient.getNodeFile, "download_node_file", "python");
+
+@@clientName(BatchClient.listSubTasks, "list_subtasks", "python");
 // Python LRO private methods
 @@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");
@@ -284,6 +311,10 @@ interface BatchClient {
 @@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "python");
 @@clientName(BatchClient.deleteJobSchedule,
   "deleteJobScheduleInternal",
+  "python"
+);
+@@clientName(Azure.Batch.OutputFileUploadConfig,
+  "OutputFileUploadConfiguration",
   "python"
 );
 @@access(Azure.Batch.JobSchedules.terminateJobSchedule,
