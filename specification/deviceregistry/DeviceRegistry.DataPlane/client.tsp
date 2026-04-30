@@ -37,5 +37,11 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.DeviceRegistry.DeviceStates.update, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceStates.list, Access.internal);
 
+@@access(Microsoft.DeviceRegistry.DeviceAttributes.createOrReplace,
+  Access.internal
+);
+@@access(Microsoft.DeviceRegistry.DeviceAttributes.update, Access.internal);
+@@access(Microsoft.DeviceRegistry.DeviceAttributes.list, Access.internal);
+
 @@access(Microsoft.DeviceRegistry.Operations.get, Access.internal);
 @@access(Microsoft.DeviceRegistry.Operations.list, Access.internal);

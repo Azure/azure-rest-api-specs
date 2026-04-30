@@ -21,28 +21,25 @@ union DeviceStateName {
 
   /** The default state of a device. */
   default: "default",
-
-  /** The update state of a device. */
-  update: "update",
 }
 
-/** A device state resource. */
+/** A device state resource that is a device twin. */
 @resource("states")
 @parentResource(Device)
 model DeviceState {
   ...OmitProperties<DataPlaneResourceBase, "name">;
 
   /** The name of the device state. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name: DeviceStateName;
 
-  /** The resource-specific properties for this state. */
-  properties?: DeviceStateProperties;
+  /** The device twin properties. */
+  properties: DeviceStateProperties;
 }
 
 @@key(DeviceState.name, "stateName");
 
-/** Properties of a device state resource. */
+/** Twin properties of a device state. */
 model DeviceStateProperties {
   /** The desired state values. */
   desired?: Record<string>;

@@ -64,6 +64,9 @@
       "name": "Device States"
     },
     {
+      "name": "Device Attributes"
+    },
+    {
       "name": "Groups"
     },
     {
@@ -250,6 +253,313 @@
           "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
+      "get": {
+        "operationId": "DeviceAttributes_List",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "List device attributes for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cloud device states for a device": {
+            "$ref": "./examples/DeviceAttributes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes/{attributeName}": {
+      "get": {
+        "operationId": "DeviceAttributes_Get",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Get a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the update device state": {
+            "$ref": "./examples/DeviceAttributes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceAttributes_CreateOrReplace",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Create or replace a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace the update device state": {
+            "$ref": "./examples/DeviceAttributes_CreateOrReplace_Update.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceAttributes_Update",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Update a device attribute.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update fields on the update device state": {
+            "$ref": "./examples/DeviceAttributes_Update.json"
+          }
+        }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
@@ -767,8 +1077,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default",
-              "update"
+              "default"
             ],
             "x-ms-enum": {
               "name": "DeviceStateName",
@@ -778,11 +1087,6 @@
                   "name": "default",
                   "value": "default",
                   "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
                 }
               ]
             }
@@ -845,8 +1149,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default",
-              "update"
+              "default"
             ],
             "x-ms-enum": {
               "name": "DeviceStateName",
@@ -856,11 +1159,6 @@
                   "name": "default",
                   "value": "default",
                   "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
                 }
               ]
             }
@@ -941,8 +1239,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default",
-              "update"
+              "default"
             ],
             "x-ms-enum": {
               "name": "DeviceStateName",
@@ -952,11 +1249,6 @@
                   "name": "default",
                   "value": "default",
                   "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
                 }
               ]
             }
@@ -1404,6 +1696,28 @@
     }
   },
   "definitions": {
+    "AgentInfo": {
+      "type": "object",
+      "description": "Information reported by the device update agent.",
+      "properties": {
+        "compatibilityProperties": {
+          "type": "object",
+          "description": "Properties used to determine compatibility with available updates.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "agentProfile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The agent profile identifier."
+        },
+        "agentSdkVersion": {
+          "type": "string",
+          "description": "The version of the agent SDK in use on the device."
+        }
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1693,6 +2007,119 @@
         "name",
         "type"
       ]
+    },
+    "DeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceAttributeName",
+          "description": "The name of the device attribute.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceAttributeReportedBy",
+          "description": "The cloud service that reports this device attribute."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "type",
+        "name",
+        "reportedBy"
+      ]
+    },
+    "DeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceAttributeName",
+          "description": "The name of the device attribute.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceAttributeReportedBy",
+          "description": "The cloud service that reports this device attribute."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "reportedBy"
+      ]
+    },
+    "DeviceAttributeName": {
+      "type": "string",
+      "description": "Well-known device attribute names.",
+      "enum": [
+        "update"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAttributeName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "update",
+            "value": "update",
+            "description": "The update attribute of a device."
+          }
+        ]
+      }
+    },
+    "DeviceAttributeReportedBy": {
+      "type": "string",
+      "description": "The cloud service that reports a device attribute.",
+      "enum": [
+        "Microsoft.DeviceUpdate"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAttributeReportedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADU",
+            "value": "Microsoft.DeviceUpdate",
+            "description": "Reported by Azure Device Update."
+          }
+        ]
+      }
     },
     "DeviceCapability": {
       "type": "object",
@@ -2098,7 +2525,7 @@
     },
     "DeviceState": {
       "type": "object",
-      "description": "A device state resource.",
+      "description": "A device state resource that is a device twin.",
       "properties": {
         "uuid": {
           "type": "string",
@@ -2128,23 +2555,23 @@
           "description": "The name of the device state.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
         "properties": {
           "$ref": "#/definitions/DeviceStateProperties",
-          "description": "The resource-specific properties for this state."
+          "description": "The device twin properties."
         }
       },
       "required": [
         "type",
-        "name"
+        "name",
+        "properties"
       ]
     },
     "DeviceStateCreateOrUpdate": {
       "type": "object",
-      "description": "A device state resource.",
+      "description": "A device state resource that is a device twin.",
       "properties": {
         "type": {
           "type": "string",
@@ -2159,13 +2586,12 @@
           "description": "The name of the device state.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
         "properties": {
           "$ref": "#/definitions/DeviceStateProperties",
-          "description": "The resource-specific properties for this state."
+          "description": "The device twin properties."
         }
       }
     },
@@ -2173,8 +2599,7 @@
       "type": "string",
       "description": "Well-known device state names.",
       "enum": [
-        "default",
-        "update"
+        "default"
       ],
       "x-ms-enum": {
         "name": "DeviceStateName",
@@ -2184,18 +2609,13 @@
             "name": "default",
             "value": "default",
             "description": "The default state of a device."
-          },
-          {
-            "name": "update",
-            "value": "update",
-            "description": "The update state of a device."
           }
         ]
       }
     },
     "DeviceStateProperties": {
       "type": "object",
-      "description": "Properties of a device state resource.",
+      "description": "Twin properties of a device state.",
       "properties": {
         "desired": {
           "type": "object",
@@ -2226,6 +2646,157 @@
           "$ref": "#/definitions/TwinProperties",
           "description": "The device twin properties."
         }
+      }
+    },
+    "DeviceUpdateError": {
+      "type": "object",
+      "description": "Details about an error that occurred during update installation.\n\nFollows the standard Azure / OData error shape (`Azure.Core.Foundations.Error`):\n- `code` carries the error category (constrained to a known set, but extensible).\n- `message` is the human-readable description of the failure.\n- `innererror.code` carries the agent-reported numeric error code as a string.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorCategory",
+          "description": "The category of the error, used to determine accountability and remediation."
+        }
+      },
+      "required": [
+        "message",
+        "code"
+      ]
+    },
+    "DeviceUpdateErrorCreateOrUpdate": {
+      "type": "object",
+      "description": "Details about an error that occurred during update installation.\n\nFollows the standard Azure / OData error shape (`Azure.Core.Foundations.Error`):\n- `code` carries the error category (constrained to a known set, but extensible).\n- `message` is the human-readable description of the failure.\n- `innererror.code` carries the agent-reported numeric error code as a string.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorCategory",
+          "description": "The category of the error, used to determine accountability and remediation."
+        }
+      }
+    },
+    "DeviceUpdateId": {
+      "type": "object",
+      "description": "A unique identifier for an update referenced by the device update agent.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider of the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
+    },
+    "DeviceUpdateIdCreateOrUpdate": {
+      "type": "object",
+      "description": "A unique identifier for an update referenced by the device update agent.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider of the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
+        }
+      }
+    },
+    "ErrorCategory": {
+      "type": "string",
+      "description": "The category of an update installation error.",
+      "enum": [
+        "RETRYABLE",
+        "SERVICE",
+        "DEVICE_CONDITION",
+        "DEVICE_FAULT",
+        "AGENT_FAULT",
+        "SECURITY"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RETRYABLE",
+            "value": "RETRYABLE",
+            "description": "Transient networking or service-side condition; the agent may retry the operation."
+          },
+          {
+            "name": "SERVICE",
+            "value": "SERVICE",
+            "description": "The update metadata is invalid or incompatible; the service must fix the update."
+          },
+          {
+            "name": "DEVICE_CONDITION",
+            "value": "DEVICE_CONDITION",
+            "description": "Device-local state prevents the update; may self-resolve or require operator action."
+          },
+          {
+            "name": "DEVICE_FAULT",
+            "value": "DEVICE_FAULT",
+            "description": "Device resource or hardware problem requiring operator intervention."
+          },
+          {
+            "name": "AGENT_FAULT",
+            "value": "AGENT_FAULT",
+            "description": "Agent implementation error; should not occur in production."
+          },
+          {
+            "name": "SECURITY",
+            "value": "SECURITY",
+            "description": "Cryptographic or integrity validation failure requiring investigation."
+          }
+        ]
       }
     },
     "ExecuteActionRequest": {
@@ -2752,6 +3323,48 @@
         "totalNotUpdateableDeviceCount"
       ]
     },
+    "InstallResult": {
+      "type": "object",
+      "description": "The result of installing an update on a device.",
+      "properties": {
+        "succeeded": {
+          "type": "boolean",
+          "description": "Whether the overall installation succeeded."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/DeviceUpdateError",
+          "description": "Error details for the overall installation, if it did not succeed."
+        },
+        "stepResults": {
+          "type": "array",
+          "description": "Per-step results for the installation.",
+          "items": {
+            "$ref": "#/definitions/StepResult"
+          }
+        }
+      }
+    },
+    "InstallResultCreateOrUpdate": {
+      "type": "object",
+      "description": "The result of installing an update on a device.",
+      "properties": {
+        "succeeded": {
+          "type": "boolean",
+          "description": "Whether the overall installation succeeded."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/DeviceUpdateErrorCreateOrUpdate",
+          "description": "Error details for the overall installation, if it did not succeed."
+        },
+        "stepResults": {
+          "type": "array",
+          "description": "Per-step results for the installation.",
+          "items": {
+            "$ref": "#/definitions/StepResult"
+          }
+        }
+      }
+    },
     "InstallableUpdatesForTargetDevices": {
       "type": "object",
       "description": "The set of installable updates available for a class of target devices in the group.",
@@ -2942,6 +3555,27 @@
           }
         ]
       }
+    },
+    "PagedDeviceAttribute": {
+      "type": "object",
+      "description": "Paged collection of DeviceAttribute items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceAttribute items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceAttribute"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedDeviceCapability": {
       "type": "object",
@@ -3151,6 +3785,27 @@
         "secondaryThumbprint"
       ]
     },
+    "StepResult": {
+      "type": "object",
+      "description": "The result of an individual installation step.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/DeviceUpdateId",
+          "description": "The identifier of the update applied in this step."
+        },
+        "succeeded": {
+          "type": "boolean",
+          "description": "Whether this step succeeded."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/DeviceUpdateError",
+          "description": "Error details for this step, if it did not succeed."
+        }
+      },
+      "required": [
+        "updateId"
+      ]
+    },
     "SymmetricKeyCredentials": {
       "type": "object",
       "description": "Symmetric key authentication details.",
@@ -3254,6 +3909,93 @@
         }
       }
     },
+    "UpdateDeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute reported by Azure Device Update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDeviceAttributeProperties",
+          "description": "Properties reported by Azure Device Update."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttribute"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
+    },
+    "UpdateDeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute reported by Azure Device Update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDeviceAttributePropertiesCreateOrUpdate",
+          "description": "Properties reported by Azure Device Update."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
+    },
+    "UpdateDeviceAttributeProperties": {
+      "type": "object",
+      "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
+        },
+        "installedUpdateId": {
+          "$ref": "#/definitions/DeviceUpdateId",
+          "description": "The identifier of the update currently installed on the device."
+        },
+        "agentInfoEtag": {
+          "type": "string",
+          "description": "The entity tag for the reported `agentInfo`."
+        },
+        "agentInfo": {
+          "$ref": "#/definitions/AgentInfo",
+          "description": "Information reported by the device update agent."
+        },
+        "latestUpdateJobInfo": {
+          "$ref": "#/definitions/UpdateJobInfo",
+          "description": "Information about the most recent update job targeting this device."
+        }
+      }
+    },
+    "UpdateDeviceAttributePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
+        },
+        "installedUpdateId": {
+          "$ref": "#/definitions/DeviceUpdateIdCreateOrUpdate",
+          "description": "The identifier of the update currently installed on the device."
+        },
+        "agentInfoEtag": {
+          "type": "string",
+          "description": "The entity tag for the reported `agentInfo`."
+        },
+        "agentInfo": {
+          "$ref": "#/definitions/AgentInfo",
+          "description": "Information reported by the device update agent."
+        },
+        "latestUpdateJobInfo": {
+          "$ref": "#/definitions/UpdateJobInfoCreateOrUpdate",
+          "description": "Information about the most recent update job targeting this device."
+        }
+      }
+    },
     "UpdateId": {
       "type": "object",
       "description": "Identifies a specific update by provider, name, and version.",
@@ -3279,6 +4021,91 @@
         "name",
         "version"
       ]
+    },
+    "UpdateJobInfo": {
+      "type": "object",
+      "description": "Information about an update job targeting a device.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "The identifier of the update job workflow."
+        },
+        "state": {
+          "$ref": "#/definitions/UpdateJobState",
+          "description": "The current state of the update job."
+        },
+        "updateId": {
+          "$ref": "#/definitions/DeviceUpdateId",
+          "description": "The identifier of the update being applied by the job."
+        },
+        "installResult": {
+          "$ref": "#/definitions/InstallResult",
+          "description": "The result of installing the update on the device, if available."
+        }
+      },
+      "required": [
+        "workflowId",
+        "state",
+        "updateId"
+      ]
+    },
+    "UpdateJobInfoCreateOrUpdate": {
+      "type": "object",
+      "description": "Information about an update job targeting a device.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "The identifier of the update job workflow."
+        },
+        "state": {
+          "$ref": "#/definitions/UpdateJobState",
+          "description": "The current state of the update job."
+        },
+        "updateId": {
+          "$ref": "#/definitions/DeviceUpdateIdCreateOrUpdate",
+          "description": "The identifier of the update being applied by the job."
+        },
+        "installResult": {
+          "$ref": "#/definitions/InstallResultCreateOrUpdate",
+          "description": "The result of installing the update on the device, if available."
+        }
+      }
+    },
+    "UpdateJobState": {
+      "type": "string",
+      "description": "The state of an update job on a device.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "InProgress",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateJobState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The update job completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The update job failed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The update job is in progress."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The update job was canceled."
+          }
+        ]
+      }
     }
   },
   "parameters": {
