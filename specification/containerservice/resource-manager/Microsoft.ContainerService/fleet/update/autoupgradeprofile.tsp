@@ -224,7 +224,7 @@ model GenerateResponse {
 }
 
 @added(Versions.v2025_03_01)
-@doc("The response of a generateUpdateRun request. Returns 200 with a body containing the generated update run reference, or 204 No Content when no update run was created (for example, when no updates are available or all clusters are already up-to-date).")
+@doc("The response of a generateUpdateRun request. Returns 200 with a body containing the generated update run reference, or 204 No Content when no update run was created.")
 union GenerateUpdateRunResponse {
   GenerateResponse,
 
