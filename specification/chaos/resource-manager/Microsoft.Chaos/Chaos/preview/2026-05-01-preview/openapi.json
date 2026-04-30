@@ -76,9 +76,6 @@
       "name": "OperationStatuses"
     },
     {
-      "name": "WorkspaceEvaluations"
-    },
-    {
       "name": "Workspaces"
     },
     {
@@ -92,9 +89,6 @@
     },
     {
       "name": "ScenarioConfigurations"
-    },
-    {
-      "name": "WorkspaceDiscoveries"
     }
   ],
   "paths": {
@@ -641,64 +635,6 @@
         "x-ms-examples": {
           "Get a Capability Type for a virtual machine Target resource on westus2 location.": {
             "$ref": "./examples/CapabilityTypes_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/workspaceOperationResults/{operationId}": {
-      "get": {
-        "operationId": "WorkspaceOperationResults_Get",
-        "summary": "Returns the result of a workspace async operation.",
-        "description": "Returns the result of a workspace async operation.\nFor workspace create/update operations, the response body is a Workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the result of a workspace async operation.": {
-            "$ref": "./examples/WorkspaceOperationResults_Get.json"
           }
         }
       }
@@ -2854,6 +2790,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -2993,138 +2932,6 @@
         "x-ms-examples": {
           "Get a discovered resource.": {
             "$ref": "./examples/DiscoveredResources_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest": {
-      "get": {
-        "operationId": "WorkspaceDiscoveries_GetLatest",
-        "tags": [
-          "WorkspaceDiscoveries"
-        ],
-        "summary": "Get the latest discovery for the workspace.",
-        "description": "Get the latest resource discovery for the workspace, including status and any errors encountered.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "String that represents a Workspace resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceDiscovery"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceDiscovery"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the latest discovery for the workspace.": {
-            "$ref": "./examples/WorkspaceDiscoveries_GetLatest.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/latest": {
-      "get": {
-        "operationId": "WorkspaceEvaluations_GetLatest",
-        "tags": [
-          "WorkspaceEvaluations"
-        ],
-        "summary": "Get the latest evaluation for the workspace.",
-        "description": "Get the latest evaluation for the workspace, including per-scenario results and status.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "String that represents a Workspace resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceEvaluation"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceEvaluation"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the latest evaluation for the workspace.": {
-            "$ref": "./examples/WorkspaceEvaluations_GetLatest.json"
           }
         }
       }
@@ -3888,72 +3695,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/fixResourcePermissions/latest": {
-      "get": {
-        "operationId": "ScenarioConfigurations_GetLatestPermissionsFix",
-        "tags": [
-          "ScenarioConfigurations"
-        ],
-        "description": "Get the latest fix resource permissions result for the scenario configuration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "String that represents a Workspace resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "scenarioName",
-            "in": "path",
-            "description": "Name of the scenario.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "scenarioConfigurationName",
-            "in": "path",
-            "description": "Name of the scenario definition.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PermissionsFix"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the latest permission fix result for the scenario configuration.": {
-            "$ref": "./examples/ScenarioConfigurations_GetLatestPermissionsFix.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/validate": {
       "post": {
         "operationId": "ScenarioConfigurations_Validate",
@@ -4030,90 +3771,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/validations/latest": {
-      "get": {
-        "operationId": "ScenarioConfigurations_GetLatestValidation",
-        "tags": [
-          "ScenarioConfigurations"
-        ],
-        "summary": "Get the latest validation for the scenario configuration.",
-        "description": "Get the latest validation for the scenario.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "String that represents a Workspace resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "scenarioName",
-            "in": "path",
-            "description": "Name of the scenario.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "scenarioConfigurationName",
-            "in": "path",
-            "description": "Name of the scenario definition.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Validation"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/Validation"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the latest validation for the scenario configuration.": {
-            "$ref": "./examples/ScenarioConfigurations_GetLatestValidation.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/runs": {
@@ -7643,111 +7300,6 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "WorkspaceDiscovery": {
-      "type": "object",
-      "description": "Model that represents the latest workspace discovery result.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkspaceDiscoveryProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "WorkspaceDiscoveryProperties": {
-      "type": "object",
-      "description": "Model that represents the properties of the workspace discovery.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/WorkspaceDiscoveryStatus",
-          "description": "The discovery status.",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The discovery UTC start time.",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The discovery UTC end time.",
-          "readOnly": true
-        },
-        "errors": {
-          "type": "array",
-          "description": "System or infrastructure errors encountered during discovery.",
-          "items": {
-            "$ref": "#/definitions/OperationError"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "The workspace ID this discovery belongs to.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status",
-        "workspaceId"
-      ]
-    },
-    "WorkspaceDiscoveryStatus": {
-      "type": "string",
-      "description": "Enum of the workspace discovery status.",
-      "enum": [
-        "Pending",
-        "Queued",
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "WorkspaceDiscoveryStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "The discovery is pending and has not started."
-          },
-          {
-            "name": "Queued",
-            "value": "Queued",
-            "description": "The discovery has been accepted and is queued for execution."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The discovery is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The discovery completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The discovery failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The discovery was canceled."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "WorkspaceEvaluation": {
       "type": "object",

@@ -37,10 +37,10 @@ interface Workspaces {
   /**
    * Delete a Workspace resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Custom 204 description to replace incorrect 'Resource does not exist' wording"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ARM DELETE requires 200+202+204; suppressing rule that conflicts with including 200 for terminal delete semantics"
   delete is ArmResourceDeleteAsyncBase<
     Workspace,
-    ArmDeleteAcceptedLroResponse | WorkspaceDeleteNoContentResponse
+    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | WorkspaceDeleteNoContentResponse
   >;
 
   /**
@@ -77,7 +77,6 @@ interface Workspaces {
    * Refreshes recommendation status for all scenarios in a given workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
-  @pollingOperation(WorkspaceEvaluations.getLatest)
   refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,

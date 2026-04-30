@@ -19,13 +19,10 @@ import "./target.tsp";
 import "./targetType.tsp";
 import "./operationStatus.tsp";
 import "./workspace.tsp";
-import "./workspaceOperationResults.tsp";
 import "./discoveredResource.tsp";
 import "./scenario.tsp";
 import "./scenarioConfiguration.tsp";
 import "./scenarioRun.tsp";
-import "./workspaceEvaluation.tsp";
-import "./workspaceDiscovery.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
 

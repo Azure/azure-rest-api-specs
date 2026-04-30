@@ -73,7 +73,6 @@ interface ScenarioConfigurations {
    * Validate the given scenario configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
-  @pollingOperation(ScenarioConfigurations.getLatestValidation)
   validate is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     void,
@@ -84,42 +83,11 @@ interface ScenarioConfigurations {
    * Fixes resource permissions for the given scenario configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
-  @pollingOperation(ScenarioConfigurations.getLatestPermissionsFix)
   fixResourcePermissions is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     FixResourcePermissionsRequest,
     PermissionsFix
   >;
-
-  /**
-   * Get the latest validation for the scenario.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LRO polling endpoint that returns body in both 200 and 202"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO polling endpoint returns body in 202 to reflect current status"
-  #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "LRO uses final-state-via:location pattern, not status monitor"
-  @summary("Get the latest validation for the scenario configuration.")
-  @autoRoute
-  @armResourceRead(Validation)
-  @get
-  getLatestValidation(
-    ...ResourceInstanceParameters<Validation>,
-  ): ArmResponse<Validation> | (AcceptedResponse & {
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    @header("Location")
-    location: string;
-
-    @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.")
-    @header("Retry-After")
-    retryAfter?: int32;
-
-    @bodyRoot body: Validation;
-  }) | ErrorResponse;
-
-  /**
-   * Get the latest fix resource permissions result for the scenario configuration.
-   */
-  #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "LRO uses final-state-via:location pattern, not status monitor"
-  getLatestPermissionsFix is ArmResourceRead<PermissionsFix>;
 }
 
 @@minLength(ScenarioConfiguration.name, 1);

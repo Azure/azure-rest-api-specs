@@ -41,10 +41,6 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(Microsoft.Chaos.Workspaces.listAll, "getWorkspaces", "csharp");
-@@clientName(Microsoft.Chaos.WorkspaceOperationResults.get,
-  "getWorkspaceOperationResult",
-  "csharp"
-);
 @@clientName(FixResourcePermissionsRequest,
   "ChaosFixResourcePermissionsRequestContent",
   "csharp"
