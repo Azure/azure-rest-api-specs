@@ -16,7 +16,7 @@ namespace Microsoft.CognitiveServices;
 
 /**
  * Cognitive Services compute resource. Supports polymorphic compute types
- * (Cluster, ContainerInstance) via the computeType discriminator in properties.
+ * (Cluster, Workbench) via the computeType discriminator in properties.
  */
 @added(Versions.v2026_03_15_preview)
 @parentResource(Account)
@@ -97,27 +97,27 @@ interface Computes {
   list is ArmResourceListByParent<Compute, Response = ComputeListResult>;
 
   /**
-   * Starts a stopped ContainerInstance compute resource.
+   * Starts a stopped Workbench compute resource.
    * This is a long-running operation that returns 202 Accepted.
-   * Only applicable when computeType is ContainerInstance.
+   * Only applicable when computeType is Workbench.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Computes")
   start is ArmResourceActionAsync<Compute, void, void>;
 
   /**
-   * Stops a running ContainerInstance compute resource.
+   * Stops a running Workbench compute resource.
    * This is a long-running operation that returns 202 Accepted.
-   * Only applicable when computeType is ContainerInstance.
+   * Only applicable when computeType is Workbench.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Computes")
   stop is ArmResourceActionAsync<Compute, void, void>;
 
   /**
-   * Restarts a running ContainerInstance compute resource.
+   * Restarts a running Workbench compute resource.
    * This is a long-running operation that returns 202 Accepted.
-   * Only applicable when computeType is ContainerInstance.
+   * Only applicable when computeType is Workbench.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Computes")
@@ -130,7 +130,7 @@ interface Computes {
   "The name of the compute associated with the Cognitive Services Account."
 );
 @@doc(Compute.properties,
-  "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
+  "Polymorphic properties of the compute resource. Use computeType to select Cluster or Workbench."
 );
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
 @@doc(Computes.update::parameters.properties,
