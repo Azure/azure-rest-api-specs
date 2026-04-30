@@ -224,10 +224,7 @@ using TypeSpec.Versioning;
   "ScheduledActionResourceDetachContent",
   "csharp"
 );
-@@clientName(ResourcePatchRequest,
-  "ScheduledActionResourcePatch",
-  "csharp"
-);
+@@clientName(ResourcePatchRequest, "ScheduledActionResourcePatch", "csharp");
 @@clientName(ResourceStatus, "ScheduledActionResourceStatus", "csharp");
 @@clientName(ResourceOperationStatus,
   "ScheduledActionResourceOperationStatus",
@@ -438,11 +435,23 @@ model ResourcePatchRequestInput {
 // C# type renames: Match Compute SDK type names
 // =====================================================================
 @@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
-@@clientName(BulkActionVMProperties, "BulkActionVirtualMachineProperties", "csharp");
+@@clientName(BulkActionVMProperties,
+  "BulkActionVirtualMachineProperties",
+  "csharp"
+);
 @@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
-@@clientName(BulkActionVmExtensionProperties, "BulkActionVirtualMachineExtensionProperties", "csharp");
-@@clientName(NetworkInterfaceReferenceProperties, "VirtualMachineNetworkInterfaceReferenceProperties", "csharp");
-@@clientName(OccurrenceExtensionProperties, "ScheduledActionOccurrenceExtensionProperties", "csharp");
+@@clientName(BulkActionVmExtensionProperties,
+  "BulkActionVirtualMachineExtensionProperties",
+  "csharp"
+);
+@@clientName(NetworkInterfaceReferenceProperties,
+  "VirtualMachineNetworkInterfaceReferenceProperties",
+  "csharp"
+);
+@@clientName(OccurrenceExtensionProperties,
+  "ScheduledActionOccurrenceExtensionProperties",
+  "csharp"
+);
 @@clientName(FallbackOperationInfo, "ScheduledActionFallbackInfo", "csharp");
 @@clientName(Modes, "HostEndpointSettingsMode", "csharp");
 
