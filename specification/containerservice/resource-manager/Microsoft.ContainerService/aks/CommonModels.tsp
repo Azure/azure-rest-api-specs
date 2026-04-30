@@ -3433,12 +3433,6 @@ model ManagedClusterStorageProfileDiskCSIDriver {
    * Whether to enable AzureDisk CSI Driver. The default value is true.
    */
   enabled?: boolean;
-
-  /**
-   * The version of AzureDisk CSI Driver. The default value is v1.
-   */
-  @added(Versions.v2026_03_02_preview)
-  version?: string;
 }
 
 /**
