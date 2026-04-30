@@ -55,6 +55,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2026-03-31-preview
+
+These settings apply only when `--tag=package-preview-2026-03-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-31-preview'
+input-file:
+  - preview/2026-03-31-preview/bms.json
+```
+
 ### Tag: package-preview-2026-01-31-preview
 
 These settings apply only when `--tag=package-preview-2026-01-31-preview` is specified on the command line.
@@ -568,6 +577,22 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: bms.json
+    where: $.definitions.ProtectedItemResource
+    reason: ProtectedItemResource is exposed read-only on the cross-tenant pass-through paths (BackupProtectedItemsFromCrossTenantVault) where DELETE is intentionally not supported. The standard (non-cross-tenant) path retains DELETE; the lint rule cannot scope its check to exclude the read-only cross-tenant mirror.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.CrossTenantVaultMapping
+    reason: CrossTenantVaultMapping has a list operation at /backupCrossTenantVaultMappings (operationId CrossTenantVaultMappings_List). The lint rule cannot match the resource to its list path due to the custom path segment name.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.VaultCredentialCertificateResponse
+    reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    reason: |
+      crossTenantVaultMappingName on the CrossTenantVaultMapping resource model has a real pattern (^[A-Za-z][A-Za-z0-9]{1,99}$). The remaining ResourceNameRestriction surface comes from vaultName, which is inherited from the parent VaultResource with NamePattern="" for backward compatibility across all stable api-versions (2025-02-01, 2025-08-01, 2026-01-01). Adding a pattern at the source would propagate via shared TypeSpec into all stable versions and trip openapi-diff rule 1036 (ConstraintChanged) on every vault path.
 
 suppressions:
   - from: bms.json
