@@ -170,11 +170,11 @@ alias AssetBase = {
   version: string;
 
   @doc("The asset description text.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   description?: string;
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 };
 

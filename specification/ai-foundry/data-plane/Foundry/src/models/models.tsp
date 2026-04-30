@@ -92,6 +92,9 @@ model ModelVersion {
   ...AssetBase;
 }
 
+@@visibility(ModelVersion.description, Lifecycle.Create, Lifecycle.Update, Lifecycle.Read);
+@@visibility(ModelVersion.tags, Lifecycle.Create, Lifecycle.Update, Lifecycle.Read);
+
 @doc("System metadata for a resource")
 model SystemDataV3 {
   @doc("Timestamp of resource creation")

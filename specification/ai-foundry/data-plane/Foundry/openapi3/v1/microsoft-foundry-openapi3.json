@@ -2271,7 +2271,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluationTaxonomy"
+                "$ref": "#/components/schemas/EvaluationTaxonomyCreateOrUpdate"
               }
             }
           },
@@ -2608,7 +2608,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluatorVersion"
+                "$ref": "#/components/schemas/EvaluatorVersionCreate"
               }
             }
           }
@@ -3302,7 +3302,7 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/Index"
+                "$ref": "#/components/schemas/IndexUpdate"
               }
             }
           },
@@ -10512,6 +10512,27 @@
         ],
         "description": "Azure AI Search Index Definition"
       },
+      "AzureAISearchIndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AzureSearch"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IndexUpdate"
+          }
+        ],
+        "description": "Azure AI Search Index Definition"
+      },
       "AzureAISearchQueryType": {
         "anyOf": [
           {
@@ -11867,6 +11888,27 @@
         ],
         "description": "CosmosDB Vector Store Index Definition"
       },
+      "CosmosDBIndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CosmosDBNoSqlVectorStore"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IndexUpdate"
+          }
+        ],
+        "description": "CosmosDB Vector Store Index Definition"
+      },
       "CreateAgentFromManifestRequest": {
         "type": "object",
         "required": [
@@ -12348,17 +12390,6 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "discriminator": {
@@ -13798,6 +13829,37 @@
             "description": "The version of the resource",
             "readOnly": true
           },
+          "taxonomyInput": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationTaxonomyInput"
+              }
+            ],
+            "description": "Input configuration for the evaluation taxonomy."
+          },
+          "taxonomyCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxonomyCategory"
+            },
+            "description": "List of taxonomy categories."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional properties for the evaluation taxonomy."
+          }
+        },
+        "description": "Evaluation Taxonomy Definition"
+      },
+      "EvaluationTaxonomyCreateOrUpdate": {
+        "type": "object",
+        "required": [
+          "taxonomyInput"
+        ],
+        "properties": {
           "description": {
             "type": "string",
             "description": "The asset description text."
@@ -14173,6 +14235,51 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
+          }
+        },
+        "description": "Evaluator Definition"
+      },
+      "EvaluatorVersionCreate": {
+        "type": "object",
+        "required": [
+          "evaluator_type",
+          "categories",
+          "definition"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Metadata about the evaluator"
+          },
+          "evaluator_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorType"
+              }
+            ],
+            "description": "The type of the evaluator"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "description": "The categories of the evaluator"
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorDefinition"
+              }
+            ],
+            "description": "Definition of the evaluator"
           },
           "description": {
             "type": "string",
@@ -14650,17 +14757,6 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "discriminator": {
@@ -14687,6 +14783,42 @@
             ]
           }
         ]
+      },
+      "IndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndexType"
+              }
+            ],
+            "description": "Type of index"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "AzureSearch": "#/components/schemas/AzureAISearchIndexUpdate",
+            "ManagedAzureSearch": "#/components/schemas/ManagedAzureAISearchIndexUpdate",
+            "CosmosDBNoSqlVectorStore": "#/components/schemas/CosmosDBIndexUpdate"
+          }
+        },
+        "description": "Index resource Definition"
       },
       "Insight": {
         "type": "object",
@@ -15066,6 +15198,27 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/Index"
+          }
+        ],
+        "description": "Managed Azure AI Search Index Definition"
+      },
+      "ManagedAzureAISearchIndexUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ManagedAzureSearch"
+            ],
+            "description": "Type of index"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IndexUpdate"
           }
         ],
         "description": "Managed Azure AI Search Index Definition"
