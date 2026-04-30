@@ -54,4 +54,32 @@ suppressions:
     from: openapi.json
     where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus/{skuId}"]
     reason: Sku is a proxy resource
+  - code: ParametersInPointGet
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus/{skuId}"].get.parameters
+    reason: Required query parameters for proxy
+  - code: ParametersInPointGet
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skus/{skuId}"].get.parameters
+    reason: Required query parameters for proxy
+  - code: GetCollectionResponseSchema
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus"]
+    reason: List returns SkuSummary (lightweight) while individual GET returns SkuDetails (with availabilities). The richer individual response cannot be aggregated in the listing API.
+  - code: GetCollectionResponseSchema
+    from: openapi.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skus"]
+    reason: List returns SkuSummary (lightweight) while individual GET returns SkuDetails (with availabilities). The richer individual response cannot be aggregated in the listing API.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Availability
+    reason: Using records that generate this automatically
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.SkuDetails
+    reason: SkuDetails is a read-only catalog data model representing marketplace SKU metadata, not a tracked ARM resource. It does not need id, name, or type properties.
+  - code: BodyTopLevelProperties
+    from: openapi.json
+    where: $.definitions.SkuDetails
+    reason: Existing fields in current APIs
 ```
