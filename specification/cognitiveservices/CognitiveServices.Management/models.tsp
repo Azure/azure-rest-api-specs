@@ -6346,11 +6346,11 @@ model PolicyExpressionEvaluationDetails {
 }
 
 /**
- * Properties of an accelerator capacity resource.
+ * Properties of a managed compute capacity resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AcceleratorCapacity is a read-only resource that does not have a provisioning state"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ManagedComputeCapacity is a read-only resource that does not have a provisioning state"
 @added(Versions.v2026_03_15_preview)
-model AcceleratorCapacityProperties {
+model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
    */
@@ -6402,21 +6402,21 @@ model DeploymentSizeCapacity {
 }
 
 /**
- * The list of accelerator capacities response.
+ * The list of managed compute capacities response.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorCapacityListResult {
+model ManagedComputeCapacityListResult {
   /**
-   * The link used to get the next page of accelerator capacities.
+   * The link used to get the next page of managed compute capacities.
    */
   @nextLink
   nextLink?: string;
 
   /**
-   * Gets the list of accelerator capacities.
+   * Gets the list of managed compute capacities.
    */
   @pageItems
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
-  value?: AcceleratorCapacity[];
+  value?: ManagedComputeCapacity[];
 }

@@ -14,32 +14,32 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * Accelerator capacity information for Cognitive Services managed compute deployments.
+ * Managed compute capacity information for Cognitive Services managed compute deployments.
  * Provides available accelerator capacity per type and region at the subscription level.
  */
 @added(Versions.v2026_03_15_preview)
 @subscriptionResource
-model AcceleratorCapacity
-  is Azure.ResourceManager.ProxyResource<AcceleratorCapacityProperties> {
+model ManagedComputeCapacity
+  is Azure.ResourceManager.ProxyResource<ManagedComputeCapacityProperties> {
   ...ResourceNameParameter<
-    Resource = AcceleratorCapacity,
-    KeyName = "acceleratorCapacityName",
-    SegmentName = "acceleratorCapacities",
+    Resource = ManagedComputeCapacity,
+    KeyName = "managedComputeCapacityName",
+    SegmentName = "managedComputeCapacities",
     NamePattern = ""
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'AcceleratorCapacities' is a read-only resource type that does not support delete operations"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedComputeCapacities' is a read-only resource type that does not support delete operations"
 @added(Versions.v2026_03_15_preview)
 @armResourceOperations(#{ omitTags: true })
-interface AcceleratorCapacities {
+interface ManagedComputeCapacities {
   /**
-   * Gets the accelerator capacities for a subscription. Returns available capacity
+   * Gets the managed compute capacities for a subscription. Returns available capacity
    * per accelerator type, including deployment size information.
    */
-  @tag("AcceleratorCapacities")
+  @tag("ManagedComputeCapacities")
   list is ArmResourceListByParent<
-    AcceleratorCapacity,
+    ManagedComputeCapacity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
@@ -61,13 +61,13 @@ interface AcceleratorCapacities {
       @query("deploymentId")
       deploymentId?: string;
     },
-    Response = AcceleratorCapacityListResult
+    Response = ManagedComputeCapacityListResult
   >;
 }
 
-@@doc(AcceleratorCapacity.name,
-  "The name of the accelerator capacity resource."
+@@doc(ManagedComputeCapacity.name,
+  "The name of the managed compute capacity resource."
 );
-@@doc(AcceleratorCapacity.properties,
-  "Properties of the accelerator capacity resource."
+@@doc(ManagedComputeCapacity.properties,
+  "Properties of the managed compute capacity resource."
 );
