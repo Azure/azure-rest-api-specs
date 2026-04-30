@@ -125,23 +125,6 @@ model ArtifactProfile {
   signals?: FoundryModelArtifactProfileSignal[];
 }
 
-@doc("The pending upload type for model artifacts.")
-union ModelPendingUploadType {
-  string,
-
-  @doc("Temporary blob reference for upload via SAS URI")
-  TemporaryBlobReference: "TemporaryBlobReference",
-}
-
-@doc("Request to start a pending upload for a model version.")
-model PendingUploadRequest {
-  @doc("If not provided, a random GUID will be used.")
-  pendingUploadId?: string;
-
-  @doc("Must be TemporaryBlobReference.")
-  pendingUploadType: ModelPendingUploadType.TemporaryBlobReference;
-}
-
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;

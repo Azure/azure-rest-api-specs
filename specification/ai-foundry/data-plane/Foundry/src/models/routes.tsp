@@ -7,7 +7,11 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ListModelVersionsParameters = {};
+alias ListModelVersionsParameters = {
+  @doc("Filter by source job ID.")
+  @query("source.jobId")
+  sourceJobId?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Models")
