@@ -9,6 +9,10 @@ using Microsoft.DomainRegistration;
   "DomainRegistrationManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.DomainRegistration,
+  "DomainRegistrationMgmtClient",
+  "python"
+);
 
 @@clientName(Domain, "AppServiceDomain", "csharp");
 @@clientName(DomainProperties.autoRenew, "IsAutoRenew", "csharp");

@@ -450,3 +450,6 @@ model ComputeFleetVmss extends Azure.ResourceManager.CommonTypes.Resource {
   @visibility(Lifecycle.Read)
   error?: ApiError;
 }
+
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(ComputeProfile.computeApiVersion, false);

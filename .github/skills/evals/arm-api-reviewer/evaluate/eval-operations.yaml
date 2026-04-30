@@ -1,0 +1,129 @@
+name: arm-api-reviewer-eval-operations
+description: |
+  PATCH, DELETE, PUT, and LRO operation tests (03xxxx).
+  Validates detection of PATCH body violations, PUT response schema mismatches,
+  DELETE response issues, and LRO pattern violations.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 030001 — PATCH body violations
+  - name: detect-patch-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/patch-violations.json"
+          dest: "specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "PATCH"
+      - type: output-matches
+        config:
+          pattern: "(?i)required"
+      - type: prompt
+    rubric:
+      - Flagged properties marked as required in the PATCH body (GadgetUpdate and GadgetUpdateProperties) — PATCH should have no required properties per RPC-Patch-V1-10
+      - Flagged the default value on displayName (no defaults allowed in PATCH body)
+      - Flagged the create-only mutability (x-ms-mutability create,read) on category in the PATCH body
+
+  # 030002 — PUT 200/201 response schema mismatch
+  - name: detect-put-response-mismatch
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/put-response-mismatch.json"
+          dest: "specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)200"
+      - type: output-matches
+        config:
+          pattern: "(?i)201"
+      - type: prompt
+    rubric:
+      - "Flagged that the PUT 200 and 201 responses use different schemas (200 returns Item, 201 returns ItemCreateResponse) — they must be identical"
+      - "Flagged that the PUT request body and at least one response use different models (the request body uses Item but 201 returns ItemCreateResponse)"
+
+  # 030003 — DELETE response violations
+  - name: detect-delete-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/delete-violations.json"
+          dest: "specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "DELETE"
+      - type: output-contains
+        config:
+          substring: "204"
+      - type: prompt
+    rubric:
+      - Flagged the 404 response on DELETE — should return 204 when resource does not exist per RPC-Delete-V1-01
+      - Flagged the non-empty response body on the 200 DELETE response per RPC-Delete-V1-04
+      - Flagged the missing 204 response code
+
+  # 030004 — LRO pattern violations
+  - name: detect-lro-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/lro-violations.json"
+          dest: "specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "202"
+      - type: output-matches
+        config:
+          pattern: "(?i)RPC-Async"
+      - type: prompt
+    rubric:
+      - Flagged the async PUT returning 202 instead of 200/201 with provisioningState per RPC-Async-V1-01
+      - Flagged the DELETE returning a Widget body in the 200 response per RPC-Delete-V1-04

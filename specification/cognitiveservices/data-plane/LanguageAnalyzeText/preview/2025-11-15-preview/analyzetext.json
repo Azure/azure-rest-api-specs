@@ -1434,7 +1434,7 @@
           "type": "string",
           "description": "(Optional) name of the redaction policy for identification purposes."
         },
-        "isDefaultPolicy": {
+        "isDefault": {
           "type": "boolean",
           "description": "(Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default.",
           "default": false
@@ -1693,8 +1693,7 @@
         "default": {
           "type": "number",
           "format": "float",
-          "description": "Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0",
-          "default": 0.3
+          "description": "Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0"
         },
         "overrides": {
           "type": "array",
@@ -3104,7 +3103,7 @@
       "description": "Object that allows the user to provide synonyms for context words that to enhance pii entity detection.",
       "properties": {
         "entityType": {
-          "$ref": "#/definitions/EntityCategory",
+          "$ref": "#/definitions/PiiCategoriesExclude",
           "description": "The entity name"
         },
         "synonyms": {
