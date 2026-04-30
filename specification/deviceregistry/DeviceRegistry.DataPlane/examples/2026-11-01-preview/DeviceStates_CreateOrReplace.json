@@ -1,6 +1,6 @@
 {
-  "operationId": "TwinDeviceStates_Update",
-  "title": "Update a device state",
+  "operationId": "DeviceStates_CreateOrReplace",
+  "title": "Create or replace a device state",
   "parameters": {
     "endpoint": "https://westus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-01-preview",
@@ -8,11 +8,13 @@
     "deviceName": "my-device-01",
     "stateName": "default",
     "resource": {
+      "type": "Microsoft.DeviceRegistry/namespaces/devices/states",
       "properties": {
         "desired": {
           "firmware": "2.0.1"
         }
-      }
+      },
+      "name": "default"
     }
   },
   "responses": {

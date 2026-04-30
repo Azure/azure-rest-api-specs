@@ -64,6 +64,9 @@
       "name": "Device States"
     },
     {
+      "name": "Device Attributes"
+    },
+    {
       "name": "Groups"
     },
     {
@@ -250,6 +253,313 @@
           "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
+      "get": {
+        "operationId": "DeviceAttributes_List",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "List device attributes for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cloud device states for a device": {
+            "$ref": "./examples/DeviceAttributes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes/{attributeName}": {
+      "get": {
+        "operationId": "DeviceAttributes_Get",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Get a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the update device state": {
+            "$ref": "./examples/DeviceAttributes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceAttributes_CreateOrReplace",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Create or replace a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace the update device state": {
+            "$ref": "./examples/DeviceAttributes_CreateOrReplace_Update.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceAttributes_Update",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Update a device attribute.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update fields on the update device state": {
+            "$ref": "./examples/DeviceAttributes_Update.json"
+          }
+        }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
@@ -679,13 +989,13 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/states/cloud": {
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/states": {
       "get": {
-        "operationId": "CloudDeviceStates_List",
+        "operationId": "DeviceStates_List",
         "tags": [
           "Device States"
         ],
-        "description": "List cloud device states for a device.",
+        "description": "List device states for a device.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -709,332 +1019,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedCloudDeviceState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List cloud device states for a device": {
-            "$ref": "./examples/CloudDeviceStates_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/states/cloud/{stateName}": {
-      "get": {
-        "operationId": "CloudDeviceStates_Get",
-        "tags": [
-          "Device States"
-        ],
-        "description": "Get a cloud device state.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stateName",
-            "in": "path",
-            "description": "The name of the device state.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default",
-              "update"
-            ],
-            "x-ms-enum": {
-              "name": "DeviceStateName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
-                }
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the update device state": {
-            "$ref": "./examples/CloudDeviceStates_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "CloudDeviceStates_CreateOrReplace",
-        "tags": [
-          "Device States"
-        ],
-        "description": "Create or replace a cloud device state.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stateName",
-            "in": "path",
-            "description": "The name of the device state.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default",
-              "update"
-            ],
-            "x-ms-enum": {
-              "name": "DeviceStateName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
-                }
-              ]
-            }
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceState"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceState"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or replace the update device state": {
-            "$ref": "./examples/CloudDeviceStates_CreateOrReplace_Update.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "CloudDeviceStates_Update",
-        "tags": [
-          "Device States"
-        ],
-        "description": "Update a cloud device state.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stateName",
-            "in": "path",
-            "description": "The name of the device state.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default",
-              "update"
-            ],
-            "x-ms-enum": {
-              "name": "DeviceStateName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
-                }
-              ]
-            }
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceStateCreateOrUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceState"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/CloudDeviceState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update fields on the update device state": {
-            "$ref": "./examples/CloudDeviceStates_Update.json"
-          }
-        }
-      }
-    },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/states/twin": {
-      "get": {
-        "operationId": "TwinDeviceStates_List",
-        "tags": [
-          "Device States"
-        ],
-        "description": "List twin device states for a device.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTwinDeviceState"
+              "$ref": "#/definitions/PagedDeviceState"
             }
           },
           "default": {
@@ -1052,7 +1037,7 @@
         },
         "x-ms-examples": {
           "List states for a device": {
-            "$ref": "./examples/TwinDeviceStates_List.json"
+            "$ref": "./examples/DeviceStates_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1060,13 +1045,13 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/states/twin/{stateName}": {
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/states/{stateName}": {
       "get": {
-        "operationId": "TwinDeviceStates_Get",
+        "operationId": "DeviceStates_Get",
         "tags": [
           "Device States"
         ],
-        "description": "Get a twin device state.",
+        "description": "Get a device state.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1092,8 +1077,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default",
-              "update"
+              "default"
             ],
             "x-ms-enum": {
               "name": "DeviceStateName",
@@ -1103,11 +1087,6 @@
                   "name": "default",
                   "value": "default",
                   "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
                 }
               ]
             }
@@ -1117,7 +1096,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TwinDeviceState"
+              "$ref": "#/definitions/DeviceState"
             }
           },
           "default": {
@@ -1135,16 +1114,16 @@
         },
         "x-ms-examples": {
           "Get a device state": {
-            "$ref": "./examples/TwinDeviceStates_Get.json"
+            "$ref": "./examples/DeviceStates_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "TwinDeviceStates_CreateOrReplace",
+        "operationId": "DeviceStates_CreateOrReplace",
         "tags": [
           "Device States"
         ],
-        "description": "Create or replace a twin device state.",
+        "description": "Create or replace a device state.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1170,8 +1149,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default",
-              "update"
+              "default"
             ],
             "x-ms-enum": {
               "name": "DeviceStateName",
@@ -1181,11 +1159,6 @@
                   "name": "default",
                   "value": "default",
                   "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
                 }
               ]
             }
@@ -1196,7 +1169,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TwinDeviceState"
+              "$ref": "#/definitions/DeviceState"
             }
           }
         ],
@@ -1204,13 +1177,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TwinDeviceState"
+              "$ref": "#/definitions/DeviceState"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TwinDeviceState"
+              "$ref": "#/definitions/DeviceState"
             }
           },
           "default": {
@@ -1228,16 +1201,16 @@
         },
         "x-ms-examples": {
           "Create or replace a device state": {
-            "$ref": "./examples/TwinDeviceStates_CreateOrReplace.json"
+            "$ref": "./examples/DeviceStates_CreateOrReplace.json"
           }
         }
       },
       "patch": {
-        "operationId": "TwinDeviceStates_Update",
+        "operationId": "DeviceStates_Update",
         "tags": [
           "Device States"
         ],
-        "description": "Update a twin device state.",
+        "description": "Update a device state.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1266,8 +1239,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default",
-              "update"
+              "default"
             ],
             "x-ms-enum": {
               "name": "DeviceStateName",
@@ -1277,11 +1249,6 @@
                   "name": "default",
                   "value": "default",
                   "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
                 }
               ]
             }
@@ -1292,7 +1259,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TwinDeviceStateCreateOrUpdate"
+              "$ref": "#/definitions/DeviceStateCreateOrUpdate"
             }
           }
         ],
@@ -1300,13 +1267,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TwinDeviceState"
+              "$ref": "#/definitions/DeviceState"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TwinDeviceState"
+              "$ref": "#/definitions/DeviceState"
             }
           },
           "default": {
@@ -1324,7 +1291,7 @@
         },
         "x-ms-examples": {
           "Update a device state": {
-            "$ref": "./examples/TwinDeviceStates_Update.json"
+            "$ref": "./examples/DeviceStates_Update.json"
           }
         }
       }
@@ -1953,83 +1920,6 @@
         "adrCertificatePolicyResourceId"
       ]
     },
-    "CloudDeviceState": {
-      "type": "object",
-      "description": "A device state resource that holds properties managed by cloud services and not sent to the device.",
-      "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "name": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the device state.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "reportedBy": {
-          "$ref": "#/definitions/DeviceStateReportedBy",
-          "description": "The cloud service that reports this device state."
-        }
-      },
-      "discriminator": "reportedBy",
-      "required": [
-        "type",
-        "name",
-        "reportedBy"
-      ]
-    },
-    "CloudDeviceStateCreateOrUpdate": {
-      "type": "object",
-      "description": "A device state resource that holds properties managed by cloud services and not sent to the device.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "name": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the device state.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "reportedBy": {
-          "$ref": "#/definitions/DeviceStateReportedBy",
-          "description": "The cloud service that reports this device state."
-        }
-      },
-      "discriminator": "reportedBy",
-      "required": [
-        "reportedBy"
-      ]
-    },
     "DataPlaneResourceBase": {
       "type": "object",
       "description": "Resource metadata properties (etag and systemData).",
@@ -2117,6 +2007,119 @@
         "name",
         "type"
       ]
+    },
+    "DeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceAttributeName",
+          "description": "The name of the device attribute.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceAttributeReportedBy",
+          "description": "The cloud service that reports this device attribute."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "type",
+        "name",
+        "reportedBy"
+      ]
+    },
+    "DeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceAttributeName",
+          "description": "The name of the device attribute.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceAttributeReportedBy",
+          "description": "The cloud service that reports this device attribute."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "reportedBy"
+      ]
+    },
+    "DeviceAttributeName": {
+      "type": "string",
+      "description": "Well-known device attribute names.",
+      "enum": [
+        "update"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAttributeName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "update",
+            "value": "update",
+            "description": "The update attribute of a device."
+          }
+        ]
+      }
+    },
+    "DeviceAttributeReportedBy": {
+      "type": "string",
+      "description": "The cloud service that reports a device attribute.",
+      "enum": [
+        "Microsoft.DeviceUpdate"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAttributeReportedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADU",
+            "value": "Microsoft.DeviceUpdate",
+            "description": "Reported by Azure Device Update."
+          }
+        ]
+      }
     },
     "DeviceCapability": {
       "type": "object",
@@ -2520,12 +2523,83 @@
         "type"
       ]
     },
+    "DeviceState": {
+      "type": "object",
+      "description": "A device state resource that is a device twin.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceStateName",
+          "description": "The name of the device state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceStateProperties",
+          "description": "The device twin properties."
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "properties"
+      ]
+    },
+    "DeviceStateCreateOrUpdate": {
+      "type": "object",
+      "description": "A device state resource that is a device twin.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceStateName",
+          "description": "The name of the device state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceStateProperties",
+          "description": "The device twin properties."
+        }
+      }
+    },
     "DeviceStateName": {
       "type": "string",
       "description": "Well-known device state names.",
       "enum": [
-        "default",
-        "update"
+        "default"
       ],
       "x-ms-enum": {
         "name": "DeviceStateName",
@@ -2535,31 +2609,28 @@
             "name": "default",
             "value": "default",
             "description": "The default state of a device."
-          },
-          {
-            "name": "update",
-            "value": "update",
-            "description": "The update state of a device."
           }
         ]
       }
     },
-    "DeviceStateReportedBy": {
-      "type": "string",
-      "description": "The cloud service that reports a `Cloud` device state.",
-      "enum": [
-        "Microsoft.DeviceUpdate"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceStateReportedBy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ADU",
-            "value": "Microsoft.DeviceUpdate",
-            "description": "Reported by Azure Device Update."
+    "DeviceStateProperties": {
+      "type": "object",
+      "description": "Twin properties of a device state.",
+      "properties": {
+        "desired": {
+          "type": "object",
+          "description": "The desired state values.",
+          "additionalProperties": {
+            "type": "string"
           }
-        ]
+        },
+        "reported": {
+          "type": "object",
+          "description": "The reported state values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
       }
     },
     "DeviceTwin": {
@@ -3485,15 +3556,15 @@
         ]
       }
     },
-    "PagedCloudDeviceState": {
+    "PagedDeviceAttribute": {
       "type": "object",
-      "description": "Paged collection of CloudDeviceState items",
+      "description": "Paged collection of DeviceAttribute items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CloudDeviceState items on this page",
+          "description": "The DeviceAttribute items on this page",
           "items": {
-            "$ref": "#/definitions/CloudDeviceState"
+            "$ref": "#/definitions/DeviceAttribute"
           }
         },
         "nextLink": {
@@ -3527,15 +3598,15 @@
         "value"
       ]
     },
-    "PagedOperation": {
+    "PagedDeviceState": {
       "type": "object",
-      "description": "Paged collection of Operation items",
+      "description": "Paged collection of DeviceState items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Operation items on this page",
+          "description": "The DeviceState items on this page",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/DeviceState"
           }
         },
         "nextLink": {
@@ -3548,15 +3619,15 @@
         "value"
       ]
     },
-    "PagedTwinDeviceState": {
+    "PagedOperation": {
       "type": "object",
-      "description": "Paged collection of TwinDeviceState items",
+      "description": "Paged collection of Operation items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TwinDeviceState items on this page",
+          "description": "The Operation items on this page",
           "items": {
-            "$ref": "#/definitions/TwinDeviceState"
+            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
@@ -3827,98 +3898,6 @@
         "address"
       ]
     },
-    "TwinDeviceState": {
-      "type": "object",
-      "description": "A device state resource that is a device twin.",
-      "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "name": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the device state.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/TwinDeviceStateProperties",
-          "description": "The device twin properties."
-        }
-      },
-      "required": [
-        "type",
-        "name",
-        "properties"
-      ]
-    },
-    "TwinDeviceStateCreateOrUpdate": {
-      "type": "object",
-      "description": "A device state resource that is a device twin.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "name": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the device state.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/TwinDeviceStateProperties",
-          "description": "The device twin properties."
-        }
-      }
-    },
-    "TwinDeviceStateProperties": {
-      "type": "object",
-      "description": "Twin properties of a device state.",
-      "properties": {
-        "desired": {
-          "type": "object",
-          "description": "The desired state values.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "reported": {
-          "type": "object",
-          "description": "The reported state values.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "TwinProperties": {
       "type": "object",
       "description": "Device twin desired properties.",
@@ -3930,12 +3909,12 @@
         }
       }
     },
-    "UpdateCloudDeviceState": {
+    "UpdateDeviceAttribute": {
       "type": "object",
-      "description": "A cloud device state reported by Azure Device Update.",
+      "description": "A device attribute reported by Azure Device Update.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateDeviceStateProperties",
+          "$ref": "#/definitions/UpdateDeviceAttributeProperties",
           "description": "Properties reported by Azure Device Update."
         }
       },
@@ -3944,30 +3923,30 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CloudDeviceState"
+          "$ref": "#/definitions/DeviceAttribute"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
     },
-    "UpdateCloudDeviceStateCreateOrUpdate": {
+    "UpdateDeviceAttributeCreateOrUpdate": {
       "type": "object",
-      "description": "A cloud device state reported by Azure Device Update.",
+      "description": "A device attribute reported by Azure Device Update.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateDeviceStatePropertiesCreateOrUpdate",
+          "$ref": "#/definitions/UpdateDeviceAttributePropertiesCreateOrUpdate",
           "description": "Properties reported by Azure Device Update."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CloudDeviceStateCreateOrUpdate"
+          "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
     },
-    "UpdateDeviceStateProperties": {
+    "UpdateDeviceAttributeProperties": {
       "type": "object",
-      "description": "Properties of the update device state, reported by the Azure Device Update agent.",
+      "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
       "properties": {
         "deviceClassId": {
           "type": "string",
@@ -3991,9 +3970,9 @@
         }
       }
     },
-    "UpdateDeviceStatePropertiesCreateOrUpdate": {
+    "UpdateDeviceAttributePropertiesCreateOrUpdate": {
       "type": "object",
-      "description": "Properties of the update device state, reported by the Azure Device Update agent.",
+      "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
       "properties": {
         "deviceClassId": {
           "type": "string",
