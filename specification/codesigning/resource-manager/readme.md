@@ -29,6 +29,15 @@ openapi-subtype: rpaas
 tag: package-2025-10-13
 ```
 
+### Tag: package-2026-05-15-preview
+
+These settings apply only when `--tag=package-2026-05-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-15-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2026-05-15-preview/codeSigningAccount.json
+```
+
 ### Tag: package-2025-10-13
 
 These settings apply only when `--tag=package-2025-10-13` is specified on the command line.
@@ -91,5 +100,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 See configuration in [readme.java.md](./readme.java.md)
 
 ## 
-
 

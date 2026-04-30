@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2026-05-15-preview",
+    "properties": {
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyAccount",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "Basic"
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CodeSigning/locations/westus/operationStatuses/11111111-2222-3333-4444-555555555555?api-version=2026-05-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CodeSigning/locations/westus/operationStatuses/11111111-2222-3333-4444-555555555555?api-version=2026-05-15-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "CodeSigningAccounts_Update",
+  "title": "Update an artifact signing account."
+}
