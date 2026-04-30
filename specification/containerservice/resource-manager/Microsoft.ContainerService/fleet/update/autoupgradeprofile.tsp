@@ -200,8 +200,8 @@ union AutoUpgradeLastTriggerStatus {
 @added(Versions.v2025_03_01)
 @armResourceOperations
 interface AutoUpgradeProfileOperations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "use azure-async instead"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "This POST action is an intentional ARM long-running operation that polls via azure-async-operation instead of the default POST response-code pattern; the service can complete successfully with either a generated resource reference body or 204 No Content in newer API versions."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This long-running operation intentionally uses azure-async-operation as the polling mechanism; the service does not require Location-based polling for this API, and successful completion may return 204 No Content for some cases in newer API versions."
   @useFinalStateVia("azure-async-operation")
   @doc("Generates an update run for a given auto upgrade profile.")
   generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
@@ -224,7 +224,7 @@ model GenerateResponse {
 }
 
 @added(Versions.v2025_03_01)
-@doc("Azure operation completed successfully.")
+@doc("The response of a generateUpdateRun request. Returns 200 with a body containing the generated update run reference, or 204 No Content when no update run was created (for example, when no updates are available or all clusters are already up-to-date).")
 union GenerateUpdateRunResponse {
   GenerateResponse,
 
