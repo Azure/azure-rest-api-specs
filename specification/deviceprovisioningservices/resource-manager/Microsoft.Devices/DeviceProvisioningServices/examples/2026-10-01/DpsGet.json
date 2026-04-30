@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "provisioningServiceName": "myProvisioningService",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/provisioningServices/myProvisioningService",
+        "name": "myProvisioningService",
+        "type": "Microsoft.Devices/provisioningServices",
+        "location": "East US",
+        "tags": {
+          "key1": "value1"
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1
+        },
+        "properties": {
+          "state": "Active",
+          "publicNetworkAccess": "Enabled",
+          "provisioningState": "Succeeded",
+          "serviceOperationsHostName": "myProvisioningService.azure-devices-provisioning.net",
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
+          "idScope": "0ne00000001",
+          "allocationPolicy": "Hashed",
+          "disableLocalAuth": true
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 
@@ -394,6 +396,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC
+   */
+  @added(Versions.v2026_10_01)
+  disableLocalAuth?: boolean;
 }
 
 /**
