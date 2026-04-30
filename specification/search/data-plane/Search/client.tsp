@@ -306,6 +306,13 @@ namespace KnowledgeBaseRetrievalClient {
   }
 );
 
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
+  "inputTokensCount"
+);
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
+  "outputTokensCount"
+);
+
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
@@ -381,6 +388,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
 @@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@clientName(AMLVectorizer.amlParameters, "AMLParameters", "csharp");
 @@clientName(ChatCompletionSchemaProperties.strict, "IsStrict", "csharp");
 @@alternateType(ChatCompletionSkill.uri, url, "csharp");
 @@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
@@ -3733,6 +3741,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
