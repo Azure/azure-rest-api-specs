@@ -37,11 +37,7 @@ interface Workspaces {
   /**
    * Delete a Workspace resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ARM DELETE requires 200+202+204; suppressing rule that conflicts with including 200 for terminal delete semantics"
-  delete is ArmResourceDeleteAsyncBase<
-    Workspace,
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | WorkspaceDeleteNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
 
   /**
    * Get a list of Workspace resources in a resource group.
