@@ -102,15 +102,11 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
 
-interface DataGenerationJobs {}
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, DataGenerationJobs);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, DataGenerationJobs);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.create,
-  DataGenerationJobs
-);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel,
-  DataGenerationJobs
-);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete,
-  DataGenerationJobs
-);
+interface Datasets {}
+
+// Data generation jobs → nested under datasets sub-client
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
