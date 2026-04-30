@@ -1,0 +1,102 @@
+name: arm-api-reviewer-eval-arm-resource-structure
+description: |
+  ARM resource structure & CRUD tests (01xxxx).
+  Validates detection of missing lifecycle operations and missing provisioningState.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 010001 — Missing CRUD operations
+  - name: detect-missing-crud-ops
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/missing-crud-ops.json"
+          dest: "specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "DELETE"
+      - type: output-matches
+        config:
+          pattern: "(?i)resource.?group|ListByResourceGroup"
+      - type: output-matches
+        config:
+          pattern: "(?i)subscription|ListBySubscription"
+      - type: prompt
+    rubric:
+      - Flagged the missing DELETE operation for the tracked Widget resource
+      - Flagged the missing ListByResourceGroup (collection GET at resource group scope)
+      - Flagged the missing ListBySubscription (collection GET at subscription scope)
+      - Flagged the missing Operations API endpoint (/providers/Microsoft.WidgetManager/operations)
+      - Cited rule IDs related to tracked resource lifecycle requirements (e.g., RPC-Put-V1-22, RPC-Get-V1-05)
+
+  # 010002 — Missing provisioningState
+  - name: detect-missing-provisioning-state
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/missing-provisioning-state.json"
+          dest: "specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "provisioningState"
+      - type: output-matches
+        config:
+          pattern: "(?i)RPC-Async-V1-0[23]"
+      - type: prompt
+    rubric:
+      - Flagged the missing provisioningState property on the Job resource that has x-ms-long-running-operation true on PUT
+      - Cited RPC-Async-V1-02 or RPC-Async-V1-03 as the violated rule
+
+  # 010003 — Inline common-types instead of $ref
+  - name: detect-inline-common-types
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/inline-common-types.json"
+          dest: "specification/inlinesvc/resource-manager/Microsoft.InlineTypes/stable/2025-01-01/inlinesvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/inlinesvc/resource-manager/Microsoft.InlineTypes/stable/2025-01-01/inlinesvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)common.types|TrackedResource|inline"
+      - type: prompt
+    rubric:
+      - Flagged the inline Widget definition (id, name, type, location, tags) — should use allOf with common-types TrackedResource $ref instead of redefining envelope properties
+      - Flagged the custom ErrorResponse/ErrorDetail — should reference common-types ErrorResponse
+      - Flagged the inline SubscriptionIdParameter, ResourceGroupNameParameter, and ApiVersionParameter — should reference common-types parameters
