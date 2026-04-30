@@ -56,7 +56,7 @@ interface DeploymentExtendedScopeOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
-interface DeploymentExtendeds {
+interface Deployments {
   /**
    * Gets a deployment.
    */
@@ -233,7 +233,7 @@ interface DeploymentExtendedTenantOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
-interface Deployments {
+interface DeploymentsExtendedTenant {
   /**
    * Gets a deployment.
    */
@@ -926,19 +926,17 @@ interface DeploymentExtendedOperationGroup {
 @@minLength(DeploymentExtended.name, 1);
 @@doc(DeploymentExtended.name, "The name of the deployment.");
 @@doc(DeploymentExtended.properties, "Deployment properties.");
-@@doc(DeploymentExtendeds.createOrUpdateAtScope::parameters.resource,
+@@doc(Deployments.createOrUpdateAtScope::parameters.resource,
   "Additional parameters supplied to the operation."
 );
-@@doc(DeploymentExtendeds.validateAtScope::parameters.body,
-  "Parameters to validate."
-);
-@@doc(Deployments.createOrUpdateAtTenantScope::parameters.resource,
+@@doc(Deployments.validateAtScope::parameters.body, "Parameters to validate.");
+@@doc(DeploymentsExtendedTenant.createOrUpdateAtTenantScope::parameters.resource,
   "Additional parameters supplied to the operation."
 );
-@@doc(Deployments.validateAtTenantScope::parameters.body,
+@@doc(DeploymentsExtendedTenant.validateAtTenantScope::parameters.body,
   "Parameters to validate."
 );
-@@doc(Deployments.whatIfAtTenantScope::parameters.body,
+@@doc(DeploymentsExtendedTenant.whatIfAtTenantScope::parameters.body,
   "Parameters to validate."
 );
 @@doc(DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope::parameters.resource,
