@@ -121,12 +121,12 @@ interface KeyVaultClient {
 @@access(KeyVault.RoleAssignments.get, Access.internal, "csharp");
 @@access(KeyVault.RoleAssignments.listForScope, Access.internal, "csharp");
 
- @@access(KeyVault.getEkmConnection, Access.internal, "csharp");
- @@access(KeyVault.getEkmCertificate, Access.internal, "csharp");
- @@access(KeyVault.checkEkmConnection, Access.internal, "csharp");
- @@access(KeyVault.createEkmConnection, Access.internal, "csharp");
- @@access(KeyVault.updateEkmConnection, Access.internal, "csharp");
- @@access(KeyVault.deleteEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.getEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.getEkmCertificate, Access.internal, "csharp");
+@@access(KeyVault.checkEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.createEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.updateEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.deleteEkmConnection, Access.internal, "csharp");
 
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
