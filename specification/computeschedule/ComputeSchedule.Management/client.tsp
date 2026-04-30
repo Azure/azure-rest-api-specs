@@ -77,7 +77,7 @@ using TypeSpec.Versioning;
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
 @@clientName(CreateFlexResourceOperationResponse,
-  "CreateFlexResourceOperationResult",
+  "ScheduledActionCreateFlexResult",
   "csharp"
 );
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
@@ -225,7 +225,7 @@ using TypeSpec.Versioning;
   "csharp"
 );
 @@clientName(ResourcePatchRequest,
-  "ScheduledActionResourcePatchContent",
+  "ScheduledActionResourcePatch",
   "csharp"
 );
 @@clientName(ResourceStatus, "ScheduledActionResourceStatus", "csharp");
@@ -438,8 +438,12 @@ model ResourcePatchRequestInput {
 // C# type renames: Match Compute SDK type names
 // =====================================================================
 @@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
-@@clientName(BulkActionVMProperties, "BulkActionVmProperties", "csharp");
+@@clientName(BulkActionVMProperties, "BulkActionVirtualMachineProperties", "csharp");
 @@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
+@@clientName(BulkActionVmExtensionProperties, "BulkActionVirtualMachineExtensionProperties", "csharp");
+@@clientName(NetworkInterfaceReferenceProperties, "VirtualMachineNetworkInterfaceReferenceProperties", "csharp");
+@@clientName(OccurrenceExtensionProperties, "ScheduledActionOccurrenceExtensionProperties", "csharp");
+@@clientName(FallbackOperationInfo, "ScheduledActionFallbackInfo", "csharp");
 @@clientName(Modes, "HostEndpointSettingsMode", "csharp");
 
 // =====================================================================
