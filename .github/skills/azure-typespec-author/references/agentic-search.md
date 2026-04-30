@@ -1,15 +1,14 @@
 # Agentic Search
 
-Procedure for fetching external documentation and extracting actionable guidance.
-
 ## Input
 
-A set of document URLs to fetch (provided by the caller).
+- **Step 1 result** — project analysis output from [analyze-project.md](analyze-project.md): service type, existing API versions, latest version, intent, target resource/interface, and constraints.
+- **User request** — the user's stated goal for this session.
 
 ## Procedure
 
-1. **Fetch documents** — use `web_fetch` to download each URL. Extract the page content as markdown.
-2. **Search content** — read the downloaded content and identify instructions, code examples, and patterns relevant to the current task.
-3. **Build authoring plan** — synthesize the extracted content into a concrete authoring plan grounded in the fetched material.
-
-> Do not proceed without an authoring plan grounded in the fetched reference material.
+1. **Select URLs** — read [reference-document-links.md](reference-document-links.md). Select only the URLs relevant to the user's request and Step 1 result. If unsure, select all.
+2. **Fetch** — `web_fetch` each selected URL. Extract content as markdown.
+3. **Search** — find content matching a query derived from the user's request and Step 1 result. Choose the most effective local search tool available.
+4. **Iterate** — if initial results are insufficient, refine the query or fetch additional pages/URLs until the information satisfies the query.
+5. **Return** — provide the extracted guidance to the caller.
