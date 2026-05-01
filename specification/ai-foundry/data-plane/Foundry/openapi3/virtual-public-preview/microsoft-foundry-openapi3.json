@@ -1131,6 +1131,370 @@
         }
       }
     },
+    "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files": {
+      "get": {
+        "operationId": "AgentSessionFiles_listSessionFiles",
+        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The directory path to list, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentSessionFiles_deleteSessionFile",
+        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file or directory path to delete, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "description": "Whether to recursively delete directory contents. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content": {
+      "put": {
+        "operationId": "AgentSessionFiles_uploadSessionFile",
+        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The destination file path within the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionFileWriteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "AgentSessionFiles_downloadSessionFile",
+        "description": "Download a file from the session sandbox as a binary stream.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path to download from the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/agents/{agent_name}/endpoint/sessions/{session_id}": {
       "get": {
         "operationId": "Agents_getSession",
@@ -1283,370 +1647,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/files": {
-      "get": {
-        "operationId": "AgentSessionFiles_listSessionFiles",
-        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The directory path to list, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "AgentSessionFiles_deleteSessionFile",
-        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The file or directory path to delete, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "recursive",
-            "in": "query",
-            "required": false,
-            "description": "Whether to recursively delete directory contents. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/files/content": {
-      "put": {
-        "operationId": "AgentSessionFiles_uploadSessionFile",
-        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The destination file path within the sandbox, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionFileWriteResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/octet-stream": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            }
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "get": {
-        "operationId": "AgentSessionFiles_downloadSessionFile",
-        "description": "Download a file from the session sandbox as a binary stream.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The file path to download from the sandbox, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
           ]
         }
       }
@@ -13029,6 +13029,51 @@
         },
         "description": "Definition for sampling strategy."
       },
+      "AgentFilterTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_reference"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_filter"
+            ],
+            "description": "The type of trace source, always `agent_filter`."
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReference"
+              }
+            ],
+            "description": "The agent reference to filter traces by."
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "end_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of traces to sample. Must be greater than 0."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "A trace source that selects traces by agent reference with time-based filtering."
+      },
       "AgentId": {
         "type": "object",
         "required": [
@@ -13319,6 +13364,55 @@
             "AgentEndpoints=V1Preview"
           ]
         }
+      },
+      "AgentSmartFilterTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_reference"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_smart_filter"
+            ],
+            "description": "The type of trace source, always `agent_smart_filter`."
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReference"
+              }
+            ],
+            "description": "The agent reference to filter traces by."
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "end_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of traces to sample. Must be greater than 0."
+          },
+          "model": {
+            "type": "string",
+            "description": "If you provide the model, it will be used for filtering."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "An extended agent filter trace source that also includes model information."
       },
       "AgentTaxonomyInput": {
         "type": "object",
@@ -14247,6 +14341,35 @@
           }
         },
         "description": "A set of index resources used by the `azure_ai_search` tool."
+      },
+      "AzureAITraceDataSourcePreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_trace_data_source_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_trace_data_source_preview`."
+          },
+          "trace_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TraceSource"
+              }
+            ],
+            "description": "The trace source that defines how traces are selected for evaluation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation."
       },
       "AzureFunctionBinding": {
         "type": "object",
@@ -15587,6 +15710,7 @@
         "type": "object",
         "required": [
           "type",
+          "source",
           "model"
         ],
         "properties": {
@@ -15597,6 +15721,17 @@
             ],
             "description": "The type of item generation parameters, always `conversation_gen_preview`."
           },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+              }
+            ],
+            "description": "The source of test scenarios, supporting file_id or file_content."
+          },
           "model": {
             "type": "string",
             "description": "The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'."
@@ -15604,12 +15739,29 @@
           "max_turns": {
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of turns per simulated conversation."
+            "description": "Maximum number of turns per simulated conversation. Defaults to 20.",
+            "default": 20
           },
           "num_conversations": {
             "type": "integer",
             "format": "int32",
-            "description": "Number of simulated conversations to generate per test scenario."
+            "description": "Number of simulated conversations to generate per test scenario. Defaults to 5.",
+            "default": 5
+          },
+          "data_mapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Mapping from source fields to response_id field, which is required for retrieving chat history."
+          },
+          "sampling_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelSamplingParams"
+              }
+            ],
+            "description": "Sampling parameters for the conversation generation."
           }
         },
         "allOf": [
@@ -15619,12 +15771,40 @@
         ],
         "description": "Represents the parameters for conversation simulation item generation."
       },
+      "ConversationIdTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "conversation_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation_id_source"
+            ],
+            "description": "The type of trace source, always `conversation_id_source`."
+          },
+          "conversation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of conversation identifiers to filter traces by."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "A trace source that selects traces by conversation IDs."
+      },
       "ConversationSimulationPreviewEvalRunDataSource": {
         "type": "object",
         "required": [
           "type",
           "item_generation_params",
-          "source",
           "target"
         ],
         "properties": {
@@ -15642,17 +15822,6 @@
               }
             ],
             "description": "The parameters for conversation generation."
-          },
-          "source": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
-              }
-            ],
-            "description": "The source of test scenarios, supporting file_id or file_content."
           },
           "target": {
             "allOf": [
@@ -16158,8 +16327,8 @@
                 "$ref": "#/components/schemas/EvaluationLevel"
               }
             ],
-            "description": "The level at which evaluation is performed. Defaults to 'trace' if not specified.",
-            "default": "trace"
+            "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
+            "default": "turn"
           }
         },
         "title": "CreateEvalRunRequest"
@@ -16901,6 +17070,71 @@
           "example": "{\n  \"object\": \"eval\",\n  \"id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"data_source_config\": {\n    \"type\": \"custom\",\n    \"item_schema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\"type\": \"string\"},\n      },\n      \"required\": [\"label\"]\n    },\n    \"include_sample_schema\": true\n  },\n  \"testing_criteria\": [\n    {\n      \"name\": \"My string check grader\",\n      \"type\": \"string_check\",\n      \"input\": \"{{sample.output_text}}\",\n      \"reference\": \"{{item.label}}\",\n      \"operation\": \"eq\",\n    }\n  ],\n  \"name\": \"External Data Eval\",\n  \"created_at\": 1739314509,\n  \"metadata\": {\n    \"test\": \"synthetics\",\n  }\n}\n"
         }
       },
+      "EvalAgentIdReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_id"
+            ],
+            "description": "The type of agent reference, always `agent_id`."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique identifier of the agent."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalAgentReference"
+          }
+        ],
+        "description": "Identifies a 3P (Assistants) agent by its opaque agent ID."
+      },
+      "EvalAgentReference": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReferenceType"
+              }
+            ],
+            "description": "The discriminator that identifies which kind of agent reference this is."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agent_id": "#/components/schemas/EvalAgentIdReference",
+            "agent_reference": "#/components/schemas/EvalFoundryAgentReference"
+          }
+        },
+        "description": "Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered."
+      },
+      "EvalAgentReferenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agent_id",
+              "agent_reference"
+            ]
+          }
+        ],
+        "description": "Specifies the type of agent reference used for filtering traces."
+      },
       "EvalCsvFileIdSource": {
         "type": "object",
         "required": [
@@ -16951,6 +17185,36 @@
           }
         ],
         "description": "Represents a CSV data source for evaluation runs."
+      },
+      "EvalFoundryAgentReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_reference"
+            ],
+            "description": "The type of agent reference, always `agent_reference`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the agent."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version identifier of the agent. If not specified, will look for any version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalAgentReference"
+          }
+        ],
+        "description": "Identifies a Foundry agent by its name and optional version."
       },
       "EvalResult": {
         "type": "object",
@@ -17115,8 +17379,8 @@
                 "$ref": "#/components/schemas/EvaluationLevel"
               }
             ],
-            "description": "The level at which evaluation is performed. Defaults to 'trace' if not specified.",
-            "default": "trace"
+            "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
+            "default": "turn"
           }
         },
         "description": "A schema representing an evaluation run.",
@@ -17148,6 +17412,7 @@
             "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
             "azure_ai_conversation_simulation_preview": "#/components/schemas/ConversationSimulationPreviewEvalRunDataSource",
+            "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource"
           }
         },
@@ -17269,6 +17534,14 @@
             "nullable": true,
             "description": "Optional sample or intermediate data produced by the grader."
           },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalRunOutputItemResultStatus"
+              }
+            ],
+            "description": "The evaluation status for this result item. Values: \"completed\", \"errored\", \"skipped\". Null if not provided by evaluator. When status is skipped, passed/score can be ignored."
+          },
           "metric": {
             "type": "string",
             "description": "The name of the metric (e.g., \"fluency\", \"f1_score\")."
@@ -17297,6 +17570,15 @@
         "additionalProperties": {},
         "description": "A single grader result for an evaluation run output item.",
         "title": "EvalRunOutputItemResult"
+      },
+      "EvalRunOutputItemResultStatus": {
+        "type": "string",
+        "enum": [
+          "completed",
+          "errored",
+          "skipped"
+        ],
+        "description": "The evaluation status for an evaluation run output item result."
       },
       "EvalRunOutputItemSampleInput": {
         "type": "object",
@@ -17485,8 +17767,8 @@
                 "$ref": "#/components/schemas/EvaluationLevel"
               }
             ],
-            "description": "The level at which evaluation is performed. Defaults to 'trace' if not specified.",
-            "default": "trace"
+            "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
+            "default": "turn"
           },
           "displayName": {
             "type": "string",
@@ -17611,9 +17893,8 @@
           {
             "type": "string",
             "enum": [
-              "trace",
-              "conversation",
-              "levels"
+              "turn",
+              "conversation"
             ]
           },
           {
@@ -25446,6 +25727,22 @@
           },
           "failed": {
             "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "errored": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/integer"
+              }
+            ],
+            "description": "Number of tests that errored for this criteria."
+          },
+          "skipped": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/integer"
+              }
+            ],
+            "description": "Number of tests that were skipped for this criteria."
           }
         }
       },
@@ -25469,6 +25766,14 @@
           },
           "passed": {
             "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "skipped": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/integer"
+              }
+            ],
+            "description": "Number of output items that were skipped during the evaluation."
           }
         }
       },
@@ -41647,9 +41952,9 @@
             "description": "Whether this entry is a directory."
           },
           "modified_time": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The last modification time in UTC (ISO 8601)."
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (in seconds) when the file was last modified."
           }
         },
         "description": "A single entry in a directory listing."
@@ -42699,6 +43004,78 @@
           }
         },
         "description": "A specific version of a toolbox."
+      },
+      "TraceIdTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "trace_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "trace_id_source"
+            ],
+            "description": "The type of trace source, always `trace_id_source`."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of trace identifiers to evaluate."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "A trace source that selects traces by explicit trace IDs."
+      },
+      "TraceSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TraceSourceType"
+              }
+            ],
+            "description": "The discriminator that identifies which kind of trace source this is."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "trace_id_source": "#/components/schemas/TraceIdTraceSource",
+            "conversation_id_source": "#/components/schemas/ConversationIdTraceSource",
+            "agent_filter": "#/components/schemas/AgentFilterTraceSource",
+            "agent_smart_filter": "#/components/schemas/AgentSmartFilterTraceSource"
+          }
+        },
+        "description": "Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource."
+      },
+      "TraceSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "trace_id_source",
+              "conversation_id_source",
+              "agent_filter",
+              "agent_smart_filter"
+            ]
+          }
+        ],
+        "description": "Specifies the type of trace source used to select traces for evaluation."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",

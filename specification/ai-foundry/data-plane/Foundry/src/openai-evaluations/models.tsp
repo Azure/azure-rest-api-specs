@@ -495,11 +495,17 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
   `model`: string;
 
-  /** Maximum number of turns per simulated conversation. */
-  max_turns?: int32;
+  /** Maximum number of turns per simulated conversation. Defaults to 20. */
+  max_turns?: int32 = 20;
 
-  /** Number of simulated conversations to generate per test scenario. */
-  num_conversations?: int32;
+  /** Number of simulated conversations to generate per test scenario. Defaults to 5. */
+  num_conversations?: int32 = 5;
+
+  /** Mapping from source fields to response_id field, which is required for retrieving chat history. */
+  data_mapping?: Record<string>;
+
+  /** Sampling parameters for the conversation generation. */
+  sampling_params?: ModelSamplingParams;
 }
 
 /** Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent. */
@@ -512,6 +518,141 @@ model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
 
   /** The target agent to simulate conversations against. */
   target: AzureAIAgentTarget;
+}
+
+// ── Agent Reference types (for trace source filtering) ────────────────────────
+
+/** Specifies the type of agent reference used for filtering traces. */
+union EvalAgentReferenceType {
+  string,
+
+  /** Reference by agent ID (for 3P / Assistants agents). */
+  agentId: "agent_id",
+
+  /** Reference by agent name and version (for Foundry agents). */
+  agentReference: "agent_reference",
+}
+
+/** Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered. */
+@discriminator("type")
+model EvalAgentReference {
+  /** The discriminator that identifies which kind of agent reference this is. */
+  type: EvalAgentReferenceType;
+}
+
+/** Identifies a 3P (Assistants) agent by its opaque agent ID. */
+model EvalAgentIdReference extends EvalAgentReference {
+  /** The type of agent reference, always `agent_id`. */
+  type: EvalAgentReferenceType.agentId;
+
+  /** The unique identifier of the agent. */
+  agent_id: string;
+}
+
+/** Identifies a Foundry agent by its name and optional version. */
+model EvalFoundryAgentReference extends EvalAgentReference {
+  /** The type of agent reference, always `agent_reference`. */
+  type: EvalAgentReferenceType.agentReference;
+
+  /** The name of the agent. */
+  name: string;
+
+  /** The version identifier of the agent. If not specified, will look for any version. */
+  version?: string;
+}
+
+// ── Trace Source types ────────────────────────────────────────────────────────
+
+/** Specifies the type of trace source used to select traces for evaluation. */
+union TraceSourceType {
+  string,
+
+  /** Selects traces by explicit trace IDs. */
+  traceIdSource: "trace_id_source",
+
+  /** Selects traces by conversation IDs. */
+  conversationIdSource: "conversation_id_source",
+
+  /** Selects traces by agent reference with time-based filtering. */
+  agentFilter: "agent_filter",
+
+  /** An extended agent filter that also includes model information. */
+  agentSmartFilter: "agent_smart_filter",
+}
+
+/** Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource. */
+@discriminator("type")
+model TraceSource {
+  /** The discriminator that identifies which kind of trace source this is. */
+  type: TraceSourceType;
+}
+
+/** A trace source that selects traces by explicit trace IDs. */
+model TraceIdTraceSource extends TraceSource {
+  /** The type of trace source, always `trace_id_source`. */
+  type: TraceSourceType.traceIdSource;
+
+  /** Collection of trace identifiers to evaluate. */
+  trace_ids: string[];
+}
+
+/** A trace source that selects traces by conversation IDs. */
+model ConversationIdTraceSource extends TraceSource {
+  /** The type of trace source, always `conversation_id_source`. */
+  type: TraceSourceType.conversationIdSource;
+
+  /** Collection of conversation identifiers to filter traces by. */
+  conversation_ids: string[];
+}
+
+/** A trace source that selects traces by agent reference with time-based filtering. */
+model AgentFilterTraceSource extends TraceSource {
+  /** The type of trace source, always `agent_filter`. */
+  type: TraceSourceType.agentFilter;
+
+  /** The agent reference to filter traces by. */
+  agent_reference: EvalAgentReference;
+
+  /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
+  start_time?: int64;
+
+  /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
+  end_time?: int64;
+
+  /** Maximum number of traces to sample. Must be greater than 0. */
+  max_traces?: int32;
+}
+
+/** An extended agent filter trace source that also includes model information. */
+model AgentSmartFilterTraceSource extends TraceSource {
+  /** The type of trace source, always `agent_smart_filter`. */
+  type: TraceSourceType.agentSmartFilter;
+
+  /** The agent reference to filter traces by. */
+  agent_reference: EvalAgentReference;
+
+  /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
+  start_time?: int64;
+
+  /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
+  end_time?: int64;
+
+  /** Maximum number of traces to sample. Must be greater than 0. */
+  max_traces?: int32;
+
+  /** If you provide the model, it will be used for filtering. */
+  `model`?: string;
+}
+
+// ── Trace Data Source ─────────────────────────────────────────────────────────
+
+/** A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation. */
+model AzureAITraceDataSourcePreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_trace_data_source_preview`. */
+  type: "azure_ai_trace_data_source_preview";
+
+  /** The trace source that defines how traces are selected for evaluation. */
+  trace_source?: TraceSource;
 }
 
 /** Represents a data source for benchmark evaluation runs. */
@@ -540,7 +681,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | ConversationSimulationPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -597,7 +738,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | ConversationSimulationPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
@@ -619,12 +760,24 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
   properties?: Record<string>;
 }
 
+/** The evaluation status for an evaluation run output item result. */
+union EvalRunOutputItemResultStatus {
+  /** The evaluator completed successfully for this result item. */
+  completed: "completed",
+
+  /** The evaluator encountered an error for this result item. */
+  errored: "errored",
+
+  /** The evaluator skipped this result item. */
+  skipped: "skipped",
+}
+
 /** Represents the result of an evaluation run output item. */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.EvalRunOutputItemResult,
   {
-    /** The evaluation status for this result item. Values: "completed", "error", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
-    status?: string,
+    /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
+    status?: EvalRunOutputItemResultStatus,
 
     /** The name of the metric (e.g., "fluency", "f1_score"). */
     metric?: string,
