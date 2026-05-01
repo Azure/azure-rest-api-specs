@@ -105,6 +105,12 @@ model MemoryStoreDefaultOptions {
 
   @doc("Whether to enable chat summary extraction and storage. Default is true.")
   chat_summary_enabled: boolean = true;
+
+  @doc("Whether to enable procedural memory extraction and storage. Default is true.")
+  procedural_memory_enabled: boolean = true;
+
+  @doc("The time-to-live for chat summary memories in days.")
+  chat_summary_ttl_days?: int32;
 }
 
 @doc("Usage statistics of a memory store operation.")
