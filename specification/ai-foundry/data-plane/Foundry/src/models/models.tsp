@@ -66,6 +66,26 @@ union FoundryModelArtifactProfileSignal {
   UnknownFormat: "UnknownFormat",
 }
 
+@doc("Warning code for model artifacts.")
+union FoundryModelWarningCode {
+  string,
+
+  @doc("Runtime dependent artifact warning")
+  RuntimeDependentArtifact: "RuntimeDependentArtifact",
+
+  @doc("Unclassified artifact warning")
+  UnclassifiedArtifact: "UnclassifiedArtifact",
+}
+
+@doc("A warning associated with a model.")
+model FoundryModelWarning {
+  @doc("The warning code.")
+  code?: FoundryModelWarningCode;
+
+  @doc("The warning message.")
+  message?: string;
+}
+
 @doc("Model Version Definition")
 @Rest.resource("models")
 model ModelVersion {
@@ -88,6 +108,10 @@ model ModelVersion {
   @doc("The artifact profile of the model")
   @visibility(Lifecycle.Read)
   artifactProfile?: ArtifactProfile;
+
+  @doc("Service-computed advisory warnings derived from the artifact profile.")
+  @visibility(Lifecycle.Read)
+  warnings?: FoundryModelWarning[];
 
   ...AssetBase;
 }

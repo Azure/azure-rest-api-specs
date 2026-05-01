@@ -14566,6 +14566,39 @@
         ],
         "description": "The source type of the model."
       },
+      "FoundryModelWarning": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelWarningCode"
+              }
+            ],
+            "description": "The warning code."
+          },
+          "message": {
+            "type": "string",
+            "description": "The warning message."
+          }
+        },
+        "description": "A warning associated with a model."
+      },
+      "FoundryModelWarningCode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "RuntimeDependentArtifact",
+              "UnclassifiedArtifact"
+            ]
+          }
+        ],
+        "description": "Warning code for model artifacts."
+      },
       "FoundryModelWeightType": {
         "anyOf": [
           {
@@ -16154,6 +16187,14 @@
               }
             ],
             "description": "The artifact profile of the model",
+            "readOnly": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoundryModelWarning"
+            },
+            "description": "Service-computed advisory warnings derived from the artifact profile.",
             "readOnly": true
           },
           "id": {
