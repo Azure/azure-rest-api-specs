@@ -344,9 +344,9 @@ union ScenarioRunState {
   Starting: "Starting",
 
   /**
-   * The scenario run is in the process of being setup.
+   * The scenario run is in the process of being prepared.
    */
-  SettingUp: "SettingUp",
+  Preparing: "Preparing",
 
   /**
    * The scenario run is in the process of running.
