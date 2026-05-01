@@ -27,15 +27,34 @@ export function hasVersionDirectories(rpPath) {
 }
 
 /**
- * Find the repository root by looking for the specification directory
+ * Check if a directory looks like the repository root
+ * @param {string} dir - Directory to check
+ * @returns {boolean} True if it looks like repo root
+ */
+function looksLikeRepoRoot(dir) {
+  return (
+    existsSync(join(dir, ".git")) ||
+    existsSync(join(dir, "specification")) ||
+    existsSync(join(dir, ".github"))
+  );
+}
+
+/**
+ * Find the repository root by looking for repo markers (.git, specification, .github)
+ * Supports sparse checkouts in CI by checking GITHUB_WORKSPACE first
  * @param {string} [startPath] - Starting path to search from
  * @returns {string} The repository root path
  * @throws {Error} If repository root cannot be found
  */
 export function findRepoRoot(startPath = process.cwd()) {
+  const workspace = process.env.GITHUB_WORKSPACE;
+  if (workspace && looksLikeRepoRoot(workspace)) {
+    return workspace;
+  }
+
   let current = resolve(startPath);
   for (let i = 0; i < 20; i++) {
-    if (existsSync(join(current, "specification"))) return current;
+    if (looksLikeRepoRoot(current)) return current;
     const parent = dirname(current);
     if (parent === current) break;
     current = parent;
