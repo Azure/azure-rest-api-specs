@@ -119,6 +119,11 @@ model SandboxGroup
  */
 model SandboxGroupTagsUpdate {
   /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+
+  /**
    * The managed service identities assigned to this resource.
    */
   identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
