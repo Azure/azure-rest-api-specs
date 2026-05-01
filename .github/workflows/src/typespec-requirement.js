@@ -14,7 +14,7 @@ export default async function typespecRequirement({ core }) {
 
   const changedFiles = await getChangedFiles(options);
 
-  core.info(`Changed files:\n${changedFiles.join("\n")}`);
+  core.info(`changed files count: ${changedFiles.length}`);
 
   return true;
 }
