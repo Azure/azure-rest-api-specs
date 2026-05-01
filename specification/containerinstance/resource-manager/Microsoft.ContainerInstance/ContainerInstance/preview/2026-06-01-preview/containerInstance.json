@@ -75,6 +75,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
         }
       }
     },
@@ -107,6 +112,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesList": {
+            "$ref": "./examples/ContainerGroupProfilesList.json"
+          }
         }
       }
     },
@@ -139,6 +149,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerGroupsList": {
+            "$ref": "./examples/ContainerGroupsList.json"
+          }
         }
       }
     },
@@ -174,6 +189,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CachedImages": {
+            "$ref": "./examples/CachedImagesList.json"
+          }
         }
       }
     },
@@ -209,6 +229,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetCapabilities": {
+            "$ref": "./examples/CapabilitiesList.json"
+          }
         }
       }
     },
@@ -243,6 +268,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerUsage": {
+            "$ref": "./examples/ContainerGroupUsage.json"
+          }
         }
       }
     },
@@ -350,6 +380,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesListByResourceGroup": {
+            "$ref": "./examples/ContainerGroupProfilesListByResourceGroup.json"
+          }
         }
       }
     },
@@ -391,6 +426,14 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesGetWithPriority": {
+            "$ref": "./examples/ContainerGroupProfilesGetPriority.json"
+          },
+          "ContainerGroupProfilesGet_Succeeded": {
+            "$ref": "./examples/ContainerGroupProfilesGet.json"
           }
         }
       },
@@ -457,6 +500,20 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ConfidentialContainerGroupProfile": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_CreateConfidential.json"
+          },
+          "ContainerGroupProfileCreateWithExtensions": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_Extensions.json"
+          },
+          "ContainerGroupProfileWithEncryptionProperties": {
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_EncryptionProperties.json"
+          },
+          "ContainerGroupProfilesCreateOrUpdate": {
+            "$ref": "./examples/ContainerGroupProfilesCreateOrUpdate.json"
+          }
         }
       },
       "patch": {
@@ -511,6 +568,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesPatch": {
+            "$ref": "./examples/ContainerGroupProfilesPatch.json"
+          }
         }
       },
       "delete": {
@@ -550,6 +612,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfilesDelete": {
+            "$ref": "./examples/ContainerGroupProfilesDelete.json"
           }
         }
       }
@@ -596,6 +663,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfileListAllRevisions": {
+            "$ref": "./examples/ContainerGroupProfileListAllRevisions.json"
+          }
         }
       }
     },
@@ -645,6 +717,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "ContainerGroupProfileGetByRevisionNumber": {
+            "$ref": "./examples/ContainerGroupProfileGetByRevisionNumber.json"
+          }
         }
       }
     },
@@ -680,6 +757,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContainerGroupsListByResourceGroup": {
+            "$ref": "./examples/ContainerGroupsListByResourceGroup.json"
+          }
         }
       }
     },
@@ -718,6 +800,17 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupsGetWithPriority": {
+            "$ref": "./examples/ContainerGroupsGetPriority.json"
+          },
+          "ContainerGroupsGet_Failed": {
+            "$ref": "./examples/ContainerGroupsGet_Failed.json"
+          },
+          "ContainerGroupsGet_Succeeded": {
+            "$ref": "./examples/ContainerGroupsGet_Succeeded.json"
           }
         }
       },
@@ -787,7 +880,30 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ContainerGroup"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ConfidentialContainerGroup": {
+            "$ref": "./examples/ContainerGroupCreateConfidential.json"
+          },
+          "ContainerGroupCreateOrUpdateWithStandbyPool": {
+            "$ref": "./examples/ContainerGroupCreateOrUpdateStandbyPool.json"
+          },
+          "ContainerGroupCreateWithExtensions": {
+            "$ref": "./examples/ContainerGroupExtensions.json"
+          },
+          "ContainerGroupWithEncryptionProperties": {
+            "$ref": "./examples/ContainerGroupEncryptionProperties.json"
+          },
+          "ContainerGroupsCreateOrUpdate": {
+            "$ref": "./examples/ContainerGroupsCreateOrUpdate.json"
+          },
+          "ContainerGroupsCreateOrUpdateSecretReference": {
+            "$ref": "./examples/ContainerGroupsCreateOrUpdateSecretReference.json"
+          },
+          "ContainerGroupsCreateWithPriority": {
+            "$ref": "./examples/ContainerGroupsCreatePriority.json"
+          }
+        }
       },
       "patch": {
         "operationId": "ContainerGroups_Update",
@@ -832,6 +948,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerGroupsUpdate": {
+            "$ref": "./examples/ContainerGroupsUpdate.json"
           }
         }
       },
@@ -892,7 +1013,12 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ContainerGroup"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerGroupsDelete": {
+            "$ref": "./examples/ContainerGroupsDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/attach": {
@@ -937,6 +1063,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerAttach": {
+            "$ref": "./examples/ContainerAttach.json"
           }
         }
       }
@@ -992,6 +1123,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerExec": {
+            "$ref": "./examples/ContainerExec.json"
           }
         }
       }
@@ -1053,6 +1189,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerListLogs": {
+            "$ref": "./examples/ContainerListLogs.json"
           }
         }
       }
@@ -1144,7 +1285,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerRestart": {
+            "$ref": "./examples/ContainerGroupsRestart.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start": {
@@ -1198,7 +1344,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ContainerStart": {
+            "$ref": "./examples/ContainerGroupsStart.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop": {
@@ -1233,6 +1384,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ContainerStop": {
+            "$ref": "./examples/ContainerGroupsStop.json"
           }
         }
       }
@@ -2099,7 +2255,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SubnetServiceAssociationLinkDelete": {
+            "$ref": "./examples/SubnetServiceAssociationLinkDelete.json"
+          }
+        }
       }
     }
   },
