@@ -359,10 +359,6 @@ interface Agents {
       /** The name of the agent to create a session for. */
       @path agent_name: string;
 
-      /** Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations. */
-      @header("x-session-isolation-key")
-      isolation_key: string;
-
       ...CreateAgentSessionRequest;
     },
     ResourceCreatedResponse<AgentSessionResource>
@@ -411,10 +407,6 @@ interface Agents {
 
       /** The session identifier. */
       @path session_id: string;
-
-      /** Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations. */
-      @header("x-session-isolation-key")
-      isolation_key: string;
     },
     NoContentResponse
   >;
