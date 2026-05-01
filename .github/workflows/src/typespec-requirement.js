@@ -1,4 +1,4 @@
-import { getChangedFiles } from "../../shared/src/changed-files.js";
+import { getChangedFiles, swagger } from "../../shared/src/changed-files.js";
 import { CoreLogger } from "./core-logger.js";
 
 /**
@@ -13,8 +13,10 @@ export default async function typespecRequirement({ core }) {
   };
 
   const changedFiles = await getChangedFiles(options);
+  const changedSwaggers = changedFiles.filter(swagger);
 
   core.info(`changed files count: ${changedFiles.length}`);
+  core.info(`changed swaggers count: ${changedSwaggers.length}`);
 
   return true;
 }
