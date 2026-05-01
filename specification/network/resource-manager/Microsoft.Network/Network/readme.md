@@ -4376,6 +4376,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: ResourceNameRestriction
+    from: virtualWan.json
+    reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: virtualWan.json
+    reason: The Common.ProvisioningState type is marked readOnly in TypeSpec via @visibility(Lifecycle.Read), but the autorest emitter places readOnly as a sibling of $ref rather than in the type definition itself. The linter does not follow $ref siblings per OpenAPI 2.0 spec. Known issue https://github.com/Azure/azure-openapi-validator/issues/637
   - suppress: PutRequestResponseSchemeArm
     from: virtualNetworkAppliance.json
     reason: Known issue. Github link https://github.com/Azure/azure-openapi-validator/issues/752
@@ -4642,6 +4648,9 @@ directive:
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
   - suppress: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - suppress: ParametersInPost
     from: virtualWan.json
     reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - suppress: AvoidAdditionalProperties
@@ -4704,6 +4713,17 @@ directive:
     reason: name, id and type properties are inherited from the upper level
 
 suppressions:
+  - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: The resource name parameter 'circuitName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute circuit link failover APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/startCircuitLinkFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stopCircuitLinkFailoverTest"]
+  - code: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
   - code: ResourceNameRestriction
     from: virtualWan.json
     reason: The resource name parameter 'expressRouteGatewayName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute gateway failover and insights APIs.
