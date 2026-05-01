@@ -19,12 +19,6 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: Azure.Widget
-    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "widget-rest"
     package-details:
@@ -43,3 +37,7 @@ options:
     inject-spans: true
     single-client: true
     slice-elements-byval: true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Widget
+    model-namespace: false

@@ -22,10 +22,9 @@ options:
     package-details:
       name: "@azure-rest/ai-resources-autogen"
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    namespace: "azure.ai.resources.autogen"
-    flavor: azure
-    clear-output-folder": true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: azure.ai.resources.autogen
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

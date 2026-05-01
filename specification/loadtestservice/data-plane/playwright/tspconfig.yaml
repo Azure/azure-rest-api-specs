@@ -34,12 +34,6 @@ options:
       description: "This package contains Microsoft Playwright Service client library."
       version: 1.0.0
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.Developer.Playwright"
-    flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwright"
     namespace: com.azure.developer.playwright
@@ -47,3 +41,7 @@ options:
     generate-tests: false
     service-name: Microsoft Playwright Service
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Developer.Playwright
+    model-namespace: false

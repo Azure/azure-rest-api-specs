@@ -22,13 +22,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects
     api-version: "v1"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
-    package-name: Azure.AI.Agents.Contracts.V2
-    namespace: Azure.AI.Agents.Contracts.V2
-    api-version: "virtual-public-preview"
-    flavor: azure
-    clear-output-folder: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/ai-projects"
     api-version: "v1"
@@ -59,6 +52,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
     file-type: json
     bundleId: azure-ai-agents-v2.json
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    namespace: Azure.AI.Agents.Contracts.V2
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

@@ -17,12 +17,6 @@ options:
     service-name: "ImageBuilder"
     flavor: azure
     use-object-for-unknown: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.ImageBuilder"
   "@azure-tools/typespec-python":
     service-dir: "sdk/imagebuilder"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-imagebuilder"
@@ -48,6 +42,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.ResourceManager.ImageBuilder
+    model-namespace: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

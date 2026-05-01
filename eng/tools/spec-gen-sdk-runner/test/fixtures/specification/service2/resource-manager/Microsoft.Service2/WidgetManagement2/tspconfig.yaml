@@ -9,12 +9,6 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/widgetmanagement.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.Widget"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-widget"
     namespace: "azure.mgmt.widget"
@@ -42,6 +36,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.ResourceManager.Widget
+    model-namespace: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
