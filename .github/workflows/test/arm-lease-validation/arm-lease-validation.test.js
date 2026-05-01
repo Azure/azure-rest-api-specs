@@ -31,6 +31,13 @@ describe("validate-arm-leases", () => {
       expect(isFileAllowed(".github/arm-leases/README.md")).toBe(true);
     });
 
+    it("allows script files under scripts folder", () => {
+      expect(isFileAllowed(".github/arm-leases/scripts/fetch-resource-providers.js")).toBe(true);
+      expect(isFileAllowed(".github/arm-leases/scripts/generate-lease-files.js")).toBe(true);
+      expect(isFileAllowed(".github/arm-leases/scripts/tests/fetch-resource-providers.test.js")).toBe(true);
+      expect(isFileAllowed(".github/arm-leases/scripts/tests/generate-lease-files.test.js")).toBe(true);
+    });
+
     it("rejects invalid files", () => {
       expect(isFileAllowed(".github/arm-leases/anything/here")).toBe(false);
       expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml")).toBe(false);
