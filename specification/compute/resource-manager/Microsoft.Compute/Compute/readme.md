@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2026-04-01
+tag: package-2026-04-01-only
 
 directive:
   - where:
@@ -334,12 +334,21 @@ suppressions:
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: ComputeRP.json
   - code: PatchBodyParametersSchema
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
   - code: LroPatch202
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: LroPatch202
+    from: ComputeRP.json
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+  - code: DeleteResponseCodes
+    from: ComputeRP.json
+    reason: Behavior is align with other existing API for this RP
   - code: AvoidAdditionalProperties
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: GalleryRP.json
@@ -852,6 +861,14 @@ suppressions:
     reason: Existing property name maintained for backward compatibility.
     from: ComputeRP.json
     where: $.definitions.DedicatedHostGroupPropertiesAdditionalCapabilities.properties.ultraSSDEnabled
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET
 ```
 
 ### Tag: package-2026-04-01

@@ -8911,6 +8911,20 @@ model VirtualMachineRunCommandsListResult
 );
 
 /**
+ * The List diagnostic run command operation response
+ */
+@added(Versions.v2026_04_01)
+model VirtualMachineDiagnosticRunCommandsListResult
+  is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
+
+@@doc(VirtualMachineDiagnosticRunCommandsListResult.value,
+  "The list of diagnostic run commands."
+);
+@@doc(VirtualMachineDiagnosticRunCommandsListResult.nextLink,
+  "The uri to fetch the next page of diagnostic run commands."
+);
+
+/**
  * Describes the properties of a Virtual Machine run command.
  */
 model VirtualMachineRunCommandProperties {
@@ -8944,7 +8958,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Specifies the user account password on the VM when executing the run command.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   runAsPassword?: string;
 
   /**
