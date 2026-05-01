@@ -5,6 +5,10 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using AzureAppConfiguration;
 
+@client({
+  name: "AzureAppConfigurationClient",
+  service: AzureAppConfiguration,
+})
 namespace SdkCustomizations;
 
 // Java specific customizations
@@ -17,7 +21,10 @@ namespace SdkCustomizations;
 @@access(updateSnapshot, Access.internal, "python");
 @@access(SnapshotUpdateParameters, Access.public, "python");
 
+//
 // .NET specific customizations
+
+// Method renames
 @@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
 @@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
 @@clientName(putKeyValue, "SetConfigurationSettingInternal", "csharp");
@@ -27,6 +34,7 @@ namespace SdkCustomizations;
 @@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
 @@clientName(Error, "AppConfigurationError", "csharp");
 
+// Access changes key values
 @@access(putKeyValue, Access.internal, "csharp");
 @@access(putLock, Access.internal, "csharp");
 @@access(createSnapshot, Access.internal, "csharp");
@@ -36,6 +44,19 @@ namespace SdkCustomizations;
 @@access(getSnapshot, Access.internal, "csharp");
 @@access(updateSnapshot, Access.internal, "csharp");
 
+// Access changes feature flags
+@@access(getFeatureFlag, Access.internal, "csharp");
+@@access(checkFeatureFlag, Access.internal, "csharp");
+@@access(getFeatureFlags, Access.internal, "csharp");
+@@access(checkFeatureFlags, Access.internal, "csharp");
+@@access(putFeatureFlag, Access.internal, "csharp");
+@@access(deleteFeatureFlag, Access.internal, "csharp");
+@@access(getFeatureFlagRevisions, Access.internal, "csharp");
+@@access(checkFeatureFlagRevisions, Access.internal, "csharp");
+
+// Alternate types for select parameters
+@@alternateType(FeatureFlagRevisionsRequestParams.select, string[], "csharp");
+@@alternateType(FeatureFlagsRequestParams.select, string[], "csharp");
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
 

@@ -3,7 +3,6 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -35,4 +34,7 @@ enum Versions {
 
   @doc("The 2024-09-01 API version")
   v2024_09_01: "2024-09-01",
+
+  @doc("The 2026-05-01-preview API version")
+  v2026_05_01_preview: "2026-05-01-preview",
 }
