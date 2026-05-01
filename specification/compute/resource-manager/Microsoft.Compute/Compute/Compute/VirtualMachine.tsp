@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
@@ -9,6 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
+using TypeSpec.Versioning;
 
 namespace Compute;
 /**
@@ -250,6 +252,13 @@ interface VirtualMachines {
        */
       @query("hibernate")
       hibernate?: boolean;
+
+      /**
+       * Optional parameter to force deallocate a virtual machine. Default is false.
+       */
+      @added(Versions.v2025_11_01)
+      @query("forceDeallocate")
+      forceDeallocate?: boolean;
     },
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
