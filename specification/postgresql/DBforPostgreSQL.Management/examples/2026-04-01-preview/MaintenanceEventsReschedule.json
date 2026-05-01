@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "maintenanceEventId": "mmmmmmmm-mmmm-mmmm",
+    "api-version": "2026-04-01-preview",
+    "body": {
+      "postponeToDateTime": "2026-04-10T10:00:00+00:00"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "maintenanceEventId": "mmmmmmmm-mmmm-mmmm",
+        "serverId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "status": "Accepted",
+        "plannedStartTime": "2026-04-10T10:00:00Z",
+        "plannedEndTime": "2026-04-10T10:05:00Z",
+        "appliedNow": false,
+        "lastUpdatedTime": "2026-04-07T12:00:00Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus2/operationResults/58913858-bc24-4649-998f-661e01251622?api-version=2026-04-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus2/azureAsyncOperation/58913858-bc24-4649-998f-661e01251622?api-version=2026-04-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "MaintenanceEvents_Reschedule",
+  "title": "Reschedule a maintenance event to a new date and time."
+}

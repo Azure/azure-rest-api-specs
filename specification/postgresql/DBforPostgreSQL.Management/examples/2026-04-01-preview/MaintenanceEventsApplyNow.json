@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "maintenanceEventId": "mmmmmmmm-mmmm-mmmm",
+    "api-version": "2026-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "maintenanceEventId": "mmmmmmmm-mmmm-mmmm",
+        "serverId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "status": "Succeeded",
+        "plannedStartTime": "2026-04-15T10:00:00Z",
+        "plannedEndTime": "2026-04-15T10:05:00Z",
+        "appliedNow": true,
+        "lastUpdatedTime": "2026-04-15T10:05:00Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus2/operationResults/1d3fb8f8-c018-4809-b875-299e9e99892a?api-version=2026-04-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus2/azureAsyncOperation/1d3fb8f8-c018-4809-b875-299e9e99892a?api-version=2026-04-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "MaintenanceEvents_ApplyNow",
+  "title": "Apply maintenance immediately for a server."
+}
