@@ -121,7 +121,7 @@ model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
    */
-  tags?: Record<string>;
+  tags?: {[key: string]: string};
 
   /**
    * The managed service identities assigned to this resource.
