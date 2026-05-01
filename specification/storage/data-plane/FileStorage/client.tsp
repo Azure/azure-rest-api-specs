@@ -356,6 +356,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "python,javascript,csharp,go"
 );
 
+@@alternateType(Storage.File.FileProperty.creationTime, string, "python");
+@@alternateType(Storage.File.FileProperty.lastWriteTime, string, "python");
+@@alternateType(Storage.File.FileProperty.changeTime, string, "python");
+@@alternateType(Storage.File.FileProperty.lastAccessTime, string, "python");
+
 // csharp customizations
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
 model ShareClientParameters {
