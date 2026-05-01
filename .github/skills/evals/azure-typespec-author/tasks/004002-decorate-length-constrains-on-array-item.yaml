@@ -1,0 +1,17 @@
+id: 004002-decorate-length-constrains-on-array-item
+name: "Decorators: Add length constraints on array items"
+description: |
+  Test adding minLength and maxLength constraints to individual items in a string array property.
+  Based on benchmark case 004002-decorate-length-constrains-on-array-item.
+tags:
+  - decorators
+inputs:
+  prompt: "I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "activityLogAlertName": "SampleActivityLogAlertSHRuleOnTenantLevel",
+    "activityLogAlertRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Description of sample Activity Log Alert service health rule on tenant level events.",
+        "actions": {
+          "actionGroups": [
+            {
+              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+              "actionProperties": {
+                "Email.Title": "my email title"
+              },
+              "webhookProperties": {
+                "sampleWebhookProperty": "SamplePropertyValue"
+              }
+            }
+          ]
+        },
+        "condition": {
+          "allOf": [
+            {
+              "equals": "ServiceHealth",
+              "field": "category"
+            }
+          ]
+        },
+        "enabled": true,
+        "tenantScope": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      },
+      "tags": {}
+    },
+    "api-version": "2023-01-01-preview",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleActivityLogAlertSHRuleOnTenantLevel",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertSHRuleOnTenantLevel",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert service health rule on tenant level events.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionProperties": {
+                  "Email.Title": "my email title"
+                },
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              }
+            ]
+          },
+          "enabled": true,
+          "tenantScope": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "SampleActivityLogAlertSHRuleOnTenantLevel",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertSHRuleOnTenantLevel",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert service health rule on tenant level events.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionProperties": {
+                  "Email.Title": "my email title"
+                },
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              }
+            ]
+          },
+          "enabled": true,
+          "tenantScope": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ActivityLogAlerts_CreateOrUpdate",
+  "title": "Create or update an Activity Log Alert rule for tenant level events"
+}

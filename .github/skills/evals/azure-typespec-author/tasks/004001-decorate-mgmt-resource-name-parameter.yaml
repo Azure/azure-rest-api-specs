@@ -1,0 +1,17 @@
+id: 004001-decorate-mgmt-resource-name-parameter
+name: "Decorators: Add minLength to resource name parameter"
+description: |
+  Test adding a minLength decorator to an ARM resource name parameter.
+  Based on benchmark case 004001-decorate-mgmt-resource-name-parameter.
+tags:
+  - decorators
+inputs:
+  prompt: "add minLength decorator to set the minLength 1 for resource name parameter of Employee resource"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

@@ -1,0 +1,18 @@
+id: 005001-warning-suppress-warning
+name: "Warning: Suppress compilation warnings"
+description: |
+  Test adding suppressions for warnings produced by tsp compile.
+  Based on benchmark case 005001-warning-suppress-warning.
+tags:
+  - warnings
+  - suppressions
+inputs:
+  prompt: 'Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"
