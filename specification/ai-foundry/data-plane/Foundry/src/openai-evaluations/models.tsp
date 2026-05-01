@@ -6,6 +6,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+/** The object type for evaluation deletion responses. */
 union EvalObjectType {
   evalDeleted: "eval.deleted",
 }
@@ -55,6 +56,7 @@ model GraderAzureAIEvaluator {
   data_mapping?: Record<string>;
 }
 
+/** An Azure AI Evaluator grader used as testing criterion in evaluations. */
 @summary("AzureAIEvaluatorGrader")
 model TestingCriterionAzureAIEvaluator {
   ...GraderAzureAIEvaluator;
@@ -70,6 +72,7 @@ model DataSourceConfig {
   schema: Record<unknown>;
 }
 
+/** Base data source configuration for Azure AI evaluation scenarios. */
 @discriminator("scenario")
 model AzureAIDataSourceConfig extends DataSourceConfig {
   /** The object type, which is always `azure_ai_source`. */
@@ -219,6 +222,7 @@ model ItemGenerationParams {
   type: ItemGenerationParamsType;
 }
 
+/** Represents the parameters for red team item generation. */
 model RedTeamItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters. */
   type: ItemGenerationParamsType.redTeam;
@@ -322,17 +326,17 @@ model ToolDescription {
 
 /** Represents a set of parameters used to control the sampling behavior of a language model during text generation. */
 model ModelSamplingParams {
-  /** The temperature parameter for sampling. */
-  temperature: float32;
+  /** The temperature parameter for sampling. Defaults to 1.0. */
+  temperature?: float32 = 1.0;
 
-  /** The top-p parameter for nucleus sampling. */
-  top_p: float32;
+  /** The top-p parameter for nucleus sampling. Defaults to 1.0. */
+  top_p?: float32 = 1.0;
 
-  /** The random seed for reproducibility. */
-  seed: int32;
+  /** The random seed for reproducibility. Defaults to 42. */
+  seed?: int32 = 42;
 
   /** The maximum number of tokens allowed in the completion. */
-  max_completion_tokens: int32;
+  max_completion_tokens?: int32;
 }
 
 /** Base class for run data sources with discriminator support. */
@@ -394,6 +398,7 @@ model SyntheticDataGenerationPreviewEvalRunDataSource
   input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate;
 }
 
+/** Represents the parameters for synthetic data generation item generation. */
 model SyntheticDataGenerationPreviewItemGenerationParams
   extends ItemGenerationParams {
   /** The type of item generation parameters. */
@@ -471,6 +476,7 @@ model EvalCsvRunDataSource extends EvalRunDataSource {
   source: EvalCsvFileIdSource;
 }
 
+/** Represents a data source for red team evaluation runs. */
 model RedTeamEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source. Always `azure_ai_red_team`. */
   type: "azure_ai_red_team";

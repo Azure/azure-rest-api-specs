@@ -14048,7 +14048,8 @@
           {
             "$ref": "#/components/schemas/DataSourceConfig"
           }
-        ]
+        ],
+        "description": "Base data source configuration for Azure AI evaluation scenarios."
       },
       "AzureAIModelTarget": {
         "type": "object",
@@ -14100,7 +14101,7 @@
           "sampling_params": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ModelSamplingParamsUpdate"
+                "$ref": "#/components/schemas/ModelSamplingParams"
               }
             ],
             "description": "The parameters used to control the sampling behavior of the model during text generation."
@@ -20797,53 +20798,24 @@
       },
       "ModelSamplingParams": {
         "type": "object",
-        "required": [
-          "temperature",
-          "top_p",
-          "seed",
-          "max_completion_tokens"
-        ],
         "properties": {
           "temperature": {
             "type": "number",
             "format": "float",
-            "description": "The temperature parameter for sampling."
+            "description": "The temperature parameter for sampling. Defaults to 1.0.",
+            "default": 1
           },
           "top_p": {
             "type": "number",
             "format": "float",
-            "description": "The top-p parameter for nucleus sampling."
+            "description": "The top-p parameter for nucleus sampling. Defaults to 1.0.",
+            "default": 1
           },
           "seed": {
             "type": "integer",
             "format": "int32",
-            "description": "The random seed for reproducibility."
-          },
-          "max_completion_tokens": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum number of tokens allowed in the completion."
-          }
-        },
-        "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
-      },
-      "ModelSamplingParamsUpdate": {
-        "type": "object",
-        "properties": {
-          "temperature": {
-            "type": "number",
-            "format": "float",
-            "description": "The temperature parameter for sampling."
-          },
-          "top_p": {
-            "type": "number",
-            "format": "float",
-            "description": "The top-p parameter for nucleus sampling."
-          },
-          "seed": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The random seed for reproducibility."
+            "description": "The random seed for reproducibility. Defaults to 42.",
+            "default": 42
           },
           "max_completion_tokens": {
             "type": "integer",
@@ -41483,7 +41455,8 @@
           {
             "$ref": "#/components/schemas/EvalRunDataSource"
           }
-        ]
+        ],
+        "description": "Represents a data source for red team evaluation runs."
       },
       "RedTeamItemGenerationParams": {
         "type": "object",
@@ -41518,7 +41491,8 @@
           {
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
-        ]
+        ],
+        "description": "Represents the parameters for red team item generation."
       },
       "RedTeamSeedPromptsItemGenerationParams": {
         "type": "object",
@@ -42416,7 +42390,8 @@
           {
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
-        ]
+        ],
+        "description": "Represents the parameters for synthetic data generation item generation."
       },
       "SystemMessage": {
         "type": "object",
@@ -42851,6 +42826,7 @@
             "description": "The model to use for the evaluation. Must support structured outputs."
           }
         },
+        "description": "An Azure AI Evaluator grader used as testing criterion in evaluations.",
         "title": "AzureAIEvaluatorGrader"
       },
       "ToolCallOutputContent": {
