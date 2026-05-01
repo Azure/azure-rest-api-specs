@@ -55,7 +55,7 @@ interface Issue {
   >;
 
   @doc("Update an issue")
-  update is ArmResourcePatchSync<IssueResource, IssueProperties>;
+  update is ArmCustomPatchSync<IssueResource, IssueResourceUpdate>;
 
   @doc("Get issue properties")
   get is ArmResourceRead<IssueResource>;
