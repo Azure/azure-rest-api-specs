@@ -808,6 +808,18 @@ model IotHubProperties {
   hostName?: string;
 
   /**
+   * The name of the device host. Supports secure connections over TLS 1.3.
+   */
+  @visibility(Lifecycle.Read)
+  deviceHostName?: string;
+
+  /**
+   * The name of the service host. Supports secure connections over TLS 1.3.
+   */
+  @visibility(Lifecycle.Read)
+  serviceHostName?: string;
+
+  /**
    * The Event Hub-compatible endpoint properties. The only possible keys to this dictionary is events. This key has to be present in the dictionary while making create or update calls for the IoT hub.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -886,6 +898,35 @@ model IotHubProperties {
    * Represents properties related to the Azure Device Registry (ADR).
    */
   deviceRegistry?: DeviceRegistry;
+
+  /**
+   * Set of additional read-only properties for the IoT hub.
+   */
+  @visibility(Lifecycle.Read)
+  iotHubDetails?: IotHubDetails;
+}
+
+/**
+ * Set of additional read-only properties for the IoT hub.
+ */
+model IotHubDetails {
+  /**
+   * The IoT hub Gateway version.
+   */
+  gatewayVersion?: GatewayVersion;
+}
+
+/**
+ * The IoT hub Gateway version.
+ */
+union GatewayVersion {
+  string,
+
+  /** V1 */
+  V1: "V1",
+
+  /** V2 */
+  V2: "V2",
 }
 
 /**
