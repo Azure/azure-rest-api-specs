@@ -13,6 +13,6 @@ export function isTypeSpecPath(path) {
  */
 export default async function typespecRequirement({ github, context, core }) {
   await Promise.resolve();
-  core.info(inspect(github));
-  core.info(inspect(context));
+  core.info(inspect(github).length.toString());
+  core.info(inspect(context).length.toString());
 }
