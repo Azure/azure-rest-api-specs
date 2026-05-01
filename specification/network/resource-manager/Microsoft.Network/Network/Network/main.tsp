@@ -66,6 +66,7 @@ import "./NetworkManagerRoutingConfiguration.tsp";
 import "./RoutingRuleCollection.tsp";
 import "./RoutingRule.tsp";
 import "./ScopeConnection.tsp";
+import "./Commit.tsp";
 import "./SecurityAdminConfiguration.tsp";
 import "./AdminRuleCollection.tsp";
 import "./BaseAdminRule.tsp";
@@ -129,6 +130,7 @@ import "./BgpConnection.tsp";
 import "./HubIpConfiguration.tsp";
 import "./HubRouteTable.tsp";
 import "./RoutingIntent.tsp";
+import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
@@ -161,6 +163,12 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_05_01)
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2025-07-01 API version.
+   */
+  @useDependency(Common.Versions.v2025_07_01)
+  v2025_07_01: "2025-07-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

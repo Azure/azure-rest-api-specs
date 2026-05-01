@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -2010,6 +2012,16 @@ union IpAllocationType {
 }
 
 /**
+ * Controls verbosity of the returned load balancer resource.
+ */
+union LoadBalancerDetailLevel {
+  string,
+
+  /** When set to 'Reduced', read-only reference collections may be omitted. */
+  Reduced: "Reduced",
+}
+
+/**
  * Who created the route.
  */
 union EffectiveRouteSource {
@@ -2667,6 +2679,34 @@ union NspLinkProvisioningState {
 }
 
 /**
+ * The readiness state of the resource type for NSP support.
+ */
+@added(Versions.v2025_07_01)
+union NspReadinessState {
+  string,
+
+  /**
+   * Resource Provider is actively being onboarded to NSP
+   */
+  Onboarding: "Onboarding",
+
+  /**
+   * Resource Provider supports NSP in Preview
+   */
+  Preview: "Preview",
+
+  /**
+   * Resource Provider is generally available for NSP Integration
+   */
+  GA: "GA",
+
+  /**
+   * NSP Onboarding is not started or not Supported
+   */
+  NotReady: "NotReady",
+}
+
+/**
  * The NSP link state.
  */
 union NspLinkStatus {
@@ -2918,7 +2958,13 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
-   * None
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
+   * No next hop type.
    */
   None: "None",
 }
@@ -4602,6 +4648,91 @@ union FailoverTestStatusForSingleTest {
 }
 
 /**
+ * The link on which the failover test is being performed.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union ExpressRouteFailoverLinkType {
+  string,
+
+  /**
+   * Primary link.
+   */
+  Primary: "Primary",
+
+  /**
+   * Secondary link.
+   */
+  Secondary: "Secondary",
+}
+
+/**
+ * The type of maintenance that can occur during an ExpressRoute failover test.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union MaintenanceTestCategory {
+  string,
+
+  /**
+   * BGP disconnect test category.
+   */
+  BgpDisconnect: "BgpDisconnect",
+
+  /**
+   * AS path prepend test category.
+   */
+  ASPathPrepend: "ASPathPrepend",
+}
+
+/**
+ * The address family type for BGP status.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union ExpressRouteFailoverBgpStatusAddressFamily {
+  string,
+
+  /**
+   * IPv4 address family.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * IPv6 address family.
+   */
+  IPv6: "IPv6",
+}
+
+/**
+ * The BGP status of an ExpressRoute link failover.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+union ExpressRouteLinkFailoverBgpStatus {
+  string,
+
+  /**
+   * Undefined status.
+   */
+  Undefined: "Undefined",
+
+  /**
+   * Connected status.
+   */
+  Connected: "Connected",
+
+  /**
+   * Disconnected status.
+   */
+  Disconnected: "Disconnected",
+}
+
+/**
  * Gateway connection authentication type.
  */
 union ConnectionAuthenticationType {
@@ -6251,6 +6382,24 @@ model ApplicationGatewaySku {
 }
 
 /**
+ * Managed HSM properties of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_07_01)
+model ApplicationGatewayManagedHsm {
+  /**
+   * Key identifier of a key stored in Managed HSM.
+   */
+  keyId?: url;
+
+  /**
+   * Base-64 encoded value of a base-64 public certificate.
+   */
+  publicCertData?: string;
+}
+
+/**
  * Application Gateway Ssl policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6658,6 +6807,12 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
    * Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
    */
   keyVaultSecretId?: string;
+
+  /**
+   * Managed HSM properties of the Application Gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  hsm?: ApplicationGatewayManagedHsm;
 
   /**
    * The provisioning state of the SSL certificate resource.
@@ -9112,6 +9267,27 @@ model AzureFirewallPropertiesFormat {
    * Properties to provide a custom autoscale configuration to this azure firewall.
    */
   autoscaleConfiguration?: AzureFirewallAutoscaleConfiguration;
+
+  /**
+   * AFC configuration for the Azure Firewall.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  afcConfiguration?: AfcConfiguration;
+}
+
+/**
+ * AFC configuration for the Azure Firewall.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "AfcConfiguration is a firewall-specific model and must be emitted to firewall.json"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
+model AfcConfiguration {
+  /**
+   * The endpoint URL of the AFC control plane associated with this Azure Firewall.
+   */
+  @visibility(Lifecycle.Read)
+  serviceEndpoint?: string;
 }
 
 /**
@@ -10339,7 +10515,16 @@ model DdosCustomPolicyPropertiesFormat {
   /**
    * The list of frontend IP configurations associated with the custom policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontEndIpConfiguration?: SubResource[];
+
+  /**
+   * The list of public IP addresses associated with the custom policy. This list is read-only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  publicIPAddresses?: SubResource[];
 }
 
 /**
@@ -15287,6 +15472,34 @@ model PerimeterAssociableResourceProperties {
    */
   @visibility(Lifecycle.Read)
   publicDnsZones?: string[];
+
+  /**
+   * Service tags associated with the resource provider.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  serviceTags?: string[];
+
+  /**
+   * The readiness state of the resource type for NSP support.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  readinessState?: NspReadinessState;
+
+  /**
+   * Indicates whether the resource type supports outbound scenario.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  outboundSupported?: boolean;
+
+  /**
+   * Description of the PaaS resource type.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
@@ -20391,6 +20604,12 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
   enablePrivateLinkFastPath?: boolean;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -21180,6 +21399,230 @@ model ExpressRouteFailoverStopApiParameters {
 }
 
 /**
+ * Represents a failover route for an ExpressRoute link.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverRoute {
+  /**
+   * The route.
+   */
+  route?: string;
+
+  /**
+   * The next hop.
+   */
+  nextHop?: string;
+
+  /**
+   * The AS path for primary link.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name must match C# model ExpressRouteLinkFailoverRoute.PrimaryASPath"
+  primaryASPath?: string;
+
+  /**
+   * The AS path for secondary link.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name must match C# model ExpressRouteLinkFailoverRoute.SecondaryASPath"
+  secondaryASPath?: string;
+}
+
+/**
+ * Represents a list of failover routes for an ExpressRoute link.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverRouteList {
+  /**
+   * The routes before the simulation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  beforeSimulation?: ExpressRouteLinkFailoverRoute[];
+
+  /**
+   * The routes during the simulation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  duringSimulation?: ExpressRouteLinkFailoverRoute[];
+}
+
+/**
+ * Represents the BGP status of an ExpressRoute link failover test.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverTestBgpStatus {
+  /**
+   * The address family type.
+   */
+  type?: ExpressRouteFailoverBgpStatusAddressFamily;
+
+  /**
+   * The link type.
+   */
+  link?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The BGP status.
+   */
+  status?: ExpressRouteLinkFailoverBgpStatus;
+
+  /**
+   * The check time in UTC.
+   */
+  checkTimeUtc?: string;
+}
+
+/**
+ * ExpressRoute circuit link failover test details for all tests.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverAllTestsDetails {
+  /**
+   * The current status of the test.
+   */
+  status?: FailoverTestStatus;
+
+  /**
+   * Time when the test was started.
+   */
+  startTime?: string;
+
+  /**
+   * Time when the test was completed.
+   */
+  endTime?: string;
+
+  /**
+   * The unique GUID associated with the test.
+   */
+  testGuid?: string;
+
+  /**
+   * The type of failover test.
+   */
+  testType?: FailoverTestType;
+
+  /**
+   * A list of all issues with the test.
+   */
+  issues?: string[];
+
+  /**
+   * Whether the failover simulation was successful or not.
+   */
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * The maintenance test category.
+   */
+  circuitTestCategory?: MaintenanceTestCategory;
+
+  /**
+   * The link type.
+   */
+  linkType?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The BGP status details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  bgpStatus?: ExpressRouteLinkFailoverTestBgpStatus[];
+}
+
+/**
+ * ExpressRoute circuit link failover single test details.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverSingleTestDetails {
+  /**
+   * Time when the test was started in UTC.
+   */
+  startTimeUtc?: string;
+
+  /**
+   * Time when the test was completed in UTC.
+   */
+  endTimeUtc?: string;
+
+  /**
+   * The current status of the test.
+   */
+  status?: FailoverTestStatus;
+
+  /**
+   * Whether the failover simulation was successful or not.
+   */
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * The link type.
+   */
+  linkType?: ExpressRouteFailoverLinkType;
+
+  /**
+   * The circuit test category.
+   */
+  circuitTestCategory?: MaintenanceTestCategory;
+
+  /**
+   * Whether the simulation was verified.
+   */
+  isSimulationVerified?: boolean;
+
+  /**
+   * The redundant routes for link failover tests.
+   */
+  redundantRoutes?: ExpressRouteLinkFailoverRouteList;
+
+  /**
+   * The non-redundant routes for link failover tests.
+   */
+  nonRedundantRoutes?: ExpressRouteLinkFailoverRouteList;
+
+  /**
+   * The BGP status details.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  bgpStatus?: ExpressRouteLinkFailoverTestBgpStatus[];
+}
+
+/**
+ * Parameters for stopping an ExpressRoute circuit link failover test.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2025_07_01)
+model ExpressRouteLinkFailoverStopApiParameters {
+  /**
+   * The category of the circuit test.
+   */
+  circuitTestCategory?: string;
+
+  /**
+   * The type of the link.
+   */
+  linkType?: string;
+
+  /**
+   * Whether the simulation was successful.
+   */
+  wasSimulationSuccessful?: boolean;
+
+  /**
+   * Whether the link is verified.
+   */
+  isVerified?: boolean;
+}
+
+/**
  * VirtualNetworkGatewayConnection properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -21347,6 +21790,12 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * Certificate Authentication information for a certificate based authentication connection.
    */
   certificateAuthentication?: CertificateAuthentication;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -22341,7 +22790,6 @@ model StaticRoutesConfig {
   /**
    * Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.
    */
-  @visibility(Lifecycle.Read)
   propagateStaticRoutes?: boolean;
 
   /**
@@ -22901,6 +23349,12 @@ model HubVirtualNetworkConnectionProperties {
    * Deprecated: Allow RemoteVnet to use Virtual Hub's gateways.
    */
   allowRemoteVnetToUseHubVnetGateways?: boolean;
+
+  /**
+   * The resource id of the ConnectionPolicy associated with this HubVirtualNetworkConnection.
+   */
+  @added(Versions.v2025_07_01)
+  connectionPolicy?: SubResource;
 
   /**
    * Enable internet security.
@@ -23807,6 +24261,12 @@ model BgpConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   connectionState?: HubBgpConnectionStatus;
+
+  /**
+   * The routing configuration indicating the associated and propagated route tables for this connection.
+   */
+  @added(Versions.v2025_07_01)
+  routingConfiguration?: RoutingConfiguration;
 }
 
 /**
@@ -24170,6 +24630,44 @@ model RoutingPolicy {
 model ListRoutingIntentResult is Azure.Core.Page<RoutingIntent>;
 
 /**
+ * Properties of the ConnectionPolicy resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN model definitions"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+model ConnectionPolicyProperties {
+  /**
+   * Enable internet security.
+   */
+  enableInternetSecurity?: boolean;
+
+  /**
+   * The Routing Configuration indicating the associated and propagated route tables on this connection.
+   */
+  routingConfiguration?: RoutingConfiguration;
+
+  /**
+   * The provisioning state of the ConnectionPolicy resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * List of connection names (e.g. VpnConnection, HubVirtualNetworkConnection) associated with this ConnectionPolicy. These are resource names, not Azure resource IDs, consistent with the established VirtualWAN pattern used by HubRouteTable.associatedConnections.
+   */
+  @visibility(Lifecycle.Read)
+  associatedConnections?: string[];
+}
+
+/**
+ * List of ConnectionPolicies and a URL nextLink to get the next set of results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN list result model definitions"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
+
+/**
  * Defines web application firewall policy properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -24307,7 +24805,16 @@ model PolicySettings {
    */
   @maxValue(1440)
   @minValue(5)
+  @removed(Versions.v2025_07_01)
   captchaCookieExpirationInMins?: int32;
+
+  /**
+   * Web Application Firewall CAPTCHA Cookie Expiration time in minutes.
+   */
+  @maxValue(1440)
+  @minValue(5)
+  @added(Versions.v2025_07_01)
+  captchaExpirationInMins?: int32;
 }
 
 /**
@@ -25486,6 +25993,16 @@ alias ExpressRouteFailoverAllTestDetails = ExpressRouteFailoverTestDetails[];
  */
 alias ExpressRouteFailoverSingleTestDetailsObject = ExpressRouteFailoverSingleTestDetails[];
 
+/**
+ * Circuit Link Failover All Test Details
+ */
+alias ExpressRouteLinkFailoverAllTestsDetailsList = ExpressRouteLinkFailoverAllTestsDetails[];
+
+/**
+ * Circuit Link Failover Single Test Details
+ */
+alias ExpressRouteLinkFailoverSingleTestDetailsList = ExpressRouteLinkFailoverSingleTestDetails[];
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model PerimeterAssociableResourcesListResult
@@ -25894,13 +26411,21 @@ model VirtualNetworkAppliancePropertiesFormat {
   /**
    * Bandwidth of the VirtualNetworkAppliance resource in Gbps.
    */
-  bandwidthInGbps?: string;
+  @typeChangedFrom(Versions.v2025_07_01, string)
+  bandwidthInGbps?: float64;
 
   /**
    * A list of IPConfigurations of the virtual network appliance.
    */
   @visibility(Lifecycle.Read)
   ipConfigurations?: VirtualNetworkApplianceIpConfiguration[];
+
+  /**
+   * Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties"
+  @added(Versions.v2025_07_01)
+  privateIPAddressVersion?: VirtualNetworkApplianceIpVersionType;
 
   /**
    * The provisioning state of the virtual network appliance resource.
@@ -25918,6 +26443,20 @@ model VirtualNetworkAppliancePropertiesFormat {
    * The reference to the subnet resource.
    */
   subnet?: Subnet;
+}
+
+/**
+ * IP address version.
+ */
+@added(Versions.v2025_07_01)
+union VirtualNetworkApplianceIpVersionType {
+  string,
+
+  /** IPv4 version */
+  IPv4: "IPv4",
+
+  /** Dual Stack version */
+  DualStack: "DualStack",
 }
 
 /**
@@ -25989,3 +26528,5 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(DisablePeeringRoute, Versions.v2025_07_01);
+@@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);

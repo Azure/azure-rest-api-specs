@@ -65,7 +65,10 @@ namespace CombineClient;
 @@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
 @@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
 // Mitigate ProvisioningState split: create unified union with all values
-@@clientName(Common.ProvisioningState, "CommonProvisioningState", "java");
+@@clientName(Common.ProvisioningState,
+  "CommonProvisioningState",
+  "java,javascript"
+);
 
 // Fix definition error on required property. Only "matchVariable" property is required.
 @@alternateType(ApplicationGatewayFirewallExclusion,
