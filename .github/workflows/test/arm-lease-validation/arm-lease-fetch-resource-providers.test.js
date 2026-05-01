@@ -31,7 +31,7 @@ describe("fetch-resource-providers", () => {
       // In sparse checkouts, .github exists but specification may not
       expect(
         fs.existsSync(path.join(repoRoot, "specification")) ||
-        fs.existsSync(path.join(repoRoot, ".github"))
+          fs.existsSync(path.join(repoRoot, ".github")),
       ).toBe(true);
     });
   });

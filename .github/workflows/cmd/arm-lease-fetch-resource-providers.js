@@ -145,14 +145,17 @@ export function formatOutput(rps, fmt, withSN) {
           (r) =>
             `${r.orgName.padEnd(maxOrg)}  ${r.rpNamespace.padEnd(maxRp)}  ${/** @type {string[]} */ (r.serviceNames).join(", ")}`,
         )
-      : rps.map(
-          (r) => `${r.orgName.padEnd(maxOrg)}  ${r.rpNamespace.padEnd(maxRp)}  ${r.path}`,
-        );
+      : rps.map((r) => `${r.orgName.padEnd(maxOrg)}  ${r.rpNamespace.padEnd(maxRp)}  ${r.path}`);
     return [header, sep, ...rows].join("\n");
   }
 
   return withSN
-    ? rps.map((r) => `${r.orgName}, ${r.rpNamespace}, [${/** @type {string[]} */ (r.serviceNames).join(", ")}]`).join("\n")
+    ? rps
+        .map(
+          (r) =>
+            `${r.orgName}, ${r.rpNamespace}, [${/** @type {string[]} */ (r.serviceNames).join(", ")}]`,
+        )
+        .join("\n")
     : rps.map((r) => `${r.orgName}, ${r.rpNamespace}`).join("\n");
 }
 
@@ -214,14 +217,20 @@ if (process.argv[1] === __filename) {
   }
 
   try {
-    const repoRoot = repoRootArg ? resolve(repoRootArg) : findRepoRoot(resolve(__dirname, "../../../"));
+    const repoRoot = repoRootArg
+      ? resolve(repoRootArg)
+      : findRepoRoot(resolve(__dirname, "../../../"));
     const rps = findResourceProviders(repoRoot, withServiceGroups);
 
     let outputText;
     if (count) {
       outputText = String(rps.length);
     } else {
-      outputText = formatOutput(rps, /** @type {"list"|"json"|"table"} */ (format), withServiceGroups);
+      outputText = formatOutput(
+        rps,
+        /** @type {"list"|"json"|"table"} */ (format),
+        withServiceGroups,
+      );
       if (format !== "json") {
         outputText += `\n\nTotal: ${rps.length} resource provider(s) ${withServiceGroups ? "with" : "without"} serviceNames`;
       }

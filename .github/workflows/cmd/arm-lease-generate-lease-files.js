@@ -1,6 +1,6 @@
-import { createInterface } from "readline";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { dirname, join, resolve } from "path";
+import { createInterface } from "readline";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { findRepoRoot } from "./arm-lease-fetch-resource-providers.js";
@@ -94,7 +94,9 @@ export function validateReviewer(reviewer) {
   }
   const trimmed = reviewer.trim();
   if (!trimmed.startsWith("@") || trimmed.length <= 1) {
-    throw new Error(`Reviewer must be a GitHub alias starting with @ (e.g., @githubUser). Got: ${reviewer}`);
+    throw new Error(
+      `Reviewer must be a GitHub alias starting with @ (e.g., @githubUser). Got: ${reviewer}`,
+    );
   }
   return trimmed;
 }
@@ -118,7 +120,10 @@ export function parseInputLine(line) {
   const rpNamespace = match[2].trim();
   const serviceNamesStr = match[3];
   const serviceNames = serviceNamesStr
-    ? serviceNamesStr.split(",").map((s) => s.trim()).filter(Boolean)
+    ? serviceNamesStr
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
     : [];
 
   return { orgName, rpNamespace, serviceNames };
@@ -202,11 +207,17 @@ function processEntry(entry, options, repoRoot) {
       createLeaseFile(getLeasePath(repoRoot, orgName, rpNamespace), content, isDryRun);
     } else {
       for (const serviceName of serviceNames) {
-        createLeaseFile(getLeasePath(repoRoot, orgName, rpNamespace, serviceName), content, isDryRun);
+        createLeaseFile(
+          getLeasePath(repoRoot, orgName, rpNamespace, serviceName),
+          content,
+          isDryRun,
+        );
       }
     }
   } catch (error) {
-    console.error(`Error processing ${orgName}/${rpNamespace}: ${/** @type {Error} */ (error).message}`);
+    console.error(
+      `Error processing ${orgName}/${rpNamespace}: ${/** @type {Error} */ (error).message}`,
+    );
   }
 }
 
@@ -217,7 +228,8 @@ function processEntry(entry, options, repoRoot) {
 async function promptInteractive() {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   /** @param {string} prompt */
-  const question = (prompt) => /** @type {Promise<string>} */ (new Promise((resolve) => rl.question(prompt, resolve)));
+  const question = (prompt) =>
+    /** @type {Promise<string>} */ (new Promise((resolve) => rl.question(prompt, resolve)));
 
   console.log("\nInteractive Lease File Generator");
   console.log("=================================\n");
@@ -229,7 +241,9 @@ async function promptInteractive() {
     process.exit(1);
   }
 
-  const startdateInput = await question(`Enter start date [YYYY-MM-DD] (default: ${getTodayDate()}): `);
+  const startdateInput = await question(
+    `Enter start date [YYYY-MM-DD] (default: ${getTodayDate()}): `,
+  );
   const startdate = startdateInput.trim() || getTodayDate();
 
   const durationInput = await question(`Enter duration [P#D] (default: ${DEFAULT_DURATION}): `);
@@ -334,7 +348,9 @@ if (process.argv[1] === __filename) {
 
   async function main() {
     try {
-      const repoRoot = repoRootArg ? resolve(repoRootArg) : findRepoRoot(resolve(__dirname, "../../../"));
+      const repoRoot = repoRootArg
+        ? resolve(repoRootArg)
+        : findRepoRoot(resolve(__dirname, "../../../"));
       /** @type {Array<{orgName: string, rpNamespace: string, serviceNames: string[]}>} */
       let entries = [];
       let reviewer = reviewerArg;
@@ -383,10 +399,17 @@ if (process.argv[1] === __filename) {
         entries.push({
           orgName: orgNameArg,
           rpNamespace: rpNamespaceArg,
-          serviceNames: serviceNameArg ? serviceNameArg.split(",").map((s) => s.trim()).filter(Boolean) : [],
+          serviceNames: serviceNameArg
+            ? serviceNameArg
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean)
+            : [],
         });
       } else {
-        console.error("Error: Either --input, --interactive, or both --orgName and --rpNamespace are required");
+        console.error(
+          "Error: Either --input, --interactive, or both --orgName and --rpNamespace are required",
+        );
         usage();
         process.exit(1);
       }

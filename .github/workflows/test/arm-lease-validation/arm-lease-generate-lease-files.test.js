@@ -2,15 +2,15 @@ import path from "path";
 import { describe, expect, it } from "vitest";
 
 import {
-  parseInputLine,
   generateLeaseYaml,
   getLeasePath,
-  validateStartDate,
+  getTodayDate,
+  parseInputLine,
   validateDuration,
-  validateRpNamespace,
   validateOrgName,
   validateReviewer,
-  getTodayDate,
+  validateRpNamespace,
+  validateStartDate,
 } from "../../cmd/arm-lease-generate-lease-files.js";
 
 describe("generate-lease-files", () => {
