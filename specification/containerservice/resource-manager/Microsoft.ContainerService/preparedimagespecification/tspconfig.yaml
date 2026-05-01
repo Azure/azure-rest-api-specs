@@ -13,11 +13,6 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     use-read-only-status-schema: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.ContainerServicePreparedImageSpecification"
   "@azure-tools/typespec-java":
     namespace: "com.azure.resourcemanager.containerservice.preparedimgspec"
     package-dir: "azure-resourcemanager-containerservice-preparedimgspec"
@@ -50,6 +45,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicepreparedimagespecification"
     package-details:
       name: "@azure/arm-containerservicepreparedimagespecification"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.ResourceManager.ContainerServicePreparedImageSpecification
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
