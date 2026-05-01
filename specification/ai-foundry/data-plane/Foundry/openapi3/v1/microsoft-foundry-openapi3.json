@@ -36,6 +36,9 @@
       "name": "Memory Stores"
     },
     {
+      "name": "Models"
+    },
+    {
       "name": "Conversations"
     },
     {
@@ -4408,6 +4411,546 @@
           "conditional_previews": [
             "MemoryStores=V1Preview"
           ]
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "operationId": "Models_listLatest",
+        "description": "List the latest version of each ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "source.jobId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by source job ID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      }
+    },
+    "/models/{name}/versions": {
+      "get": {
+        "operationId": "Models_listVersions",
+        "description": "List all versions of the given ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "source.jobId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by source job ID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      }
+    },
+    "/models/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Models_getVersion",
+        "description": "Get the specific version of the ModelVersion. The service returns 404 Not Found error if the ModelVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the ModelVersion to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      },
+      "delete": {
+        "operationId": "Models_deleteVersion",
+        "description": "Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the ModelVersion to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      },
+      "patch": {
+        "operationId": "Models_createOrUpdateVersion",
+        "description": "Create a new or update an existing ModelVersion with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the UpdateModelVersionRequest to create or update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelVersion"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateModelVersionRequest"
+              }
+            }
+          },
+          "description": "The UpdateModelVersionRequest to create or update."
+        }
+      }
+    },
+    "/models/{name}/versions/{version}/createAsync": {
+      "post": {
+        "operationId": "Models_createAsync",
+        "description": "Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the model.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Version of the model.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted response for asynchronous model version creation, with polling location.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for operation status.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelVersion"
+              }
+            }
+          },
+          "description": "Model version to create."
+        }
+      }
+    },
+    "/models/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Models_getCredentials",
+        "description": "Get credentials for a model version asset.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the model.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Version of the model.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetCredentialResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCredentialRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/{name}/versions/{version}/startPendingUpload": {
+      "post": {
+        "operationId": "Models_startPendingUpload",
+        "description": "Start or retrieve a pending upload for a model version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the model.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Version of the model.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PendingUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PendingUploadRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -9465,6 +10008,27 @@
         ],
         "description": "API Key Credential definition"
       },
+      "ArtifactProfile": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelArtifactProfileCategory"
+              }
+            ],
+            "description": "The category of the artifact profile"
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoundryModelArtifactProfileSignal"
+            },
+            "description": "Signals detected in the model artifact"
+          }
+        },
+        "description": "Artifact profile of the model"
+      },
       "AssetCredentialResponse": {
         "type": "object",
         "required": [
@@ -14373,6 +14937,104 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryModelArtifactProfileCategory": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "DataOnly",
+              "RuntimeDependent",
+              "Unknown"
+            ]
+          }
+        ],
+        "description": "The artifact profile category."
+      },
+      "FoundryModelArtifactProfileSignal": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "PickleDeserialization",
+              "CustomPythonCode",
+              "DynamicOps",
+              "NativeBinary",
+              "UnknownFormat"
+            ]
+          }
+        ],
+        "description": "Signals detected in the model artifact."
+      },
+      "FoundryModelSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "LocalUpload",
+              "TrainingJob"
+            ]
+          }
+        ],
+        "description": "The source type of the model."
+      },
+      "FoundryModelWarning": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelWarningCode"
+              }
+            ],
+            "description": "The warning code."
+          },
+          "message": {
+            "type": "string",
+            "description": "The warning message."
+          }
+        },
+        "description": "A warning associated with a model."
+      },
+      "FoundryModelWarningCode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "RuntimeDependentArtifact",
+              "UnclassifiedArtifact"
+            ]
+          }
+        ],
+        "description": "Warning code for model artifacts."
+      },
+      "FoundryModelWeightType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "FullWeight",
+              "LoRA",
+              "DraftModel"
+            ]
+          }
+        ],
+        "description": "The weight type of the model."
+      },
       "FunctionToolCall": {
         "type": "object",
         "required": [
@@ -15744,6 +16406,20 @@
         ],
         "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent."
       },
+      "ModelCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "Blob URI of the model asset to fetch credentials for."
+          }
+        },
+        "description": "Request to fetch credentials for a model asset."
+      },
       "ModelDeployment": {
         "type": "object",
         "required": [
@@ -15864,6 +16540,111 @@
           }
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
+      },
+      "ModelSourceData": {
+        "type": "object",
+        "properties": {
+          "sourceType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelSourceType"
+              }
+            ],
+            "description": "The source type of the model"
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The job ID that produced this model"
+          }
+        },
+        "description": "Source information for the model"
+      },
+      "ModelVersion": {
+        "type": "object",
+        "required": [
+          "blobUri",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "system_data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemDataV3"
+              }
+            ],
+            "description": "System related metadata"
+          },
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "URI of the model artifact in blob storage"
+          },
+          "weightType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryModelWeightType"
+              }
+            ],
+            "description": "The weight type of the model"
+          },
+          "baseModel": {
+            "type": "string",
+            "description": "Base model asset ID"
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelSourceData"
+              }
+            ],
+            "description": "The source of the model"
+          },
+          "artifactProfile": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactProfile"
+              }
+            ],
+            "description": "The artifact profile of the model",
+            "readOnly": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoundryModelWarning"
+            },
+            "description": "Service-computed advisory warnings derived from the artifact profile.",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "Model Version Definition"
       },
       "MonthlyRecurrenceSchedule": {
         "type": "object",
@@ -35861,6 +36642,27 @@
         },
         "description": "Paged collection of Insight items"
       },
+      "PagedModelVersion": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelVersion"
+            },
+            "description": "The ModelVersion items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of ModelVersion items"
+      },
       "PagedRedTeam": {
         "type": "object",
         "required": [
@@ -35941,9 +36743,9 @@
           "pendingUploadType": {
             "type": "string",
             "enum": [
-              "BlobReference"
+              "TemporaryBlobReference"
             ],
-            "description": "BlobReference is the only supported type."
+            "description": "TemporaryBlobReference is the only supported type."
           }
         },
         "description": "Represents a request for a pending upload."
@@ -35975,9 +36777,9 @@
           "pendingUploadType": {
             "type": "string",
             "enum": [
-              "BlobReference"
+              "TemporaryBlobReference"
             ],
-            "description": "BlobReference is the only supported type"
+            "description": "TemporaryBlobReference is the only supported type"
           }
         },
         "description": "Represents the response for a pending upload request"
@@ -37192,6 +37994,30 @@
           }
         ]
       },
+      "SystemDataV3": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of resource creation"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Identity that created the resource"
+          },
+          "createdByType": {
+            "type": "string",
+            "description": "Type of identity that created the resource"
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of last resource modification"
+          }
+        },
+        "description": "System metadata for a resource"
+      },
       "Target": {
         "type": "object",
         "required": [
@@ -37709,6 +38535,23 @@
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
           }
         }
+      },
+      "UpdateModelVersionRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "Request body for updating a model version. Only description and tags can be modified."
       },
       "UserProfileMemoryItem": {
         "type": "object",
