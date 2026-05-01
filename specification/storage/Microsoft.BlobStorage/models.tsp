@@ -469,7 +469,7 @@ model SignedIdentifier {
 
 /** The result of a Filter Blobs API call */
 @Xml.name("EnumerationResults")
-model FilterBlobSegment {
+model FilteredBlobResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -479,9 +479,12 @@ model FilterBlobSegment {
   @Xml.name("Where") where: string;
 
   /** The blob segment. */
-  @Xml.name("Blobs") blobs: FilterBlobItem[];
+  @pageItems
+  @Xml.name("Blobs")
+  blobItems: FilterBlobItem[];
 
   /** The next marker of the blobs. */
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -578,9 +581,9 @@ enum SkuName {
   StandardRAGZRS: "Standard_RAGZRS",
 }
 
-/** The list container segment response */
+/** The list containers response. */
 @Xml.name("EnumerationResults")
-model ListContainersSegmentResponse {
+model ListContainersResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -1312,23 +1315,15 @@ model ListBlobsResponse {
   /** The max results of the blobs. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /** The blob segment. */
+  /** The blob items. */
+  @pageItems
   @Xml.name("Blobs")
-  segment: BlobFlatListSegment;
+  blobItems: BlobItem[];
 
   /** The next marker of the blobs. */
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
-}
-
-/** The blob flat list segment. */
-model BlobFlatListSegment {
-  /** The blob items. */
-  @pageItems
-  @Xml.name("Blob")
-  @Xml.unwrapped
-  blobItems: BlobItem[];
 }
 
 /** Represents a page list. */
@@ -2763,6 +2758,7 @@ alias StructuredBodyTypeResponseHeader = {
 
 alias StructuredContentLengthParameter = {
   /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
+  @access(Access.internal)
   @header("x-ms-structured-content-length")
   structuredContentLength?: int64;
 };
