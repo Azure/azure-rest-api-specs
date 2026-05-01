@@ -1,11 +1,13 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -1533,10 +1535,13 @@ enum SiteExtensionType {
  * Job status.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// According to https://github.com/Azure/azure-sdk-for-net/issues/43295, added 2 values: Aborted, Running.
 enum TriggeredWebJobStatus {
   Success,
   Failed,
   Error,
+  Aborted,
+  Running,
 }
 
 /**
@@ -8460,7 +8465,9 @@ model StaticSite {
   /**
    * A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
+  @extension("x-ms-secret", true)
   repositoryToken?: string;
 
   /**
@@ -16244,4 +16251,63 @@ model StorageMount {
    * KV reference to the credentials to connect to the share.
    */
   credentialsKeyVaultReference?: KeyVaultReferenceWithStatus;
+}
+
+/**
+ * Properties of a static sites asynchronous operation status.
+ */
+model StaticSitesOperationStatusProperties {
+  /**
+   * The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The start time of the asynchronous operation.
+   */
+  startTime?: string;
+
+  /**
+   * The end time of the asynchronous operation.
+   */
+  endTime?: string;
+
+  /**
+   * The generic properties of a staticSite.
+   */
+  staticSiteProperties?: StaticSite;
+
+  /**
+   * Error details for the asynchronous operation, if any.
+   */
+  error?: ErrorResponse;
+}
+
+/**
+ * Status object for a static sites asynchronous operation.
+ */
+model StaticSitesOperationStatus {
+  /**
+   * The fully qualified ID for the staticSitesOperationStatus.  For example, /subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSitesOperationStatuses/{operationId}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the resource.  For example, Microsoft.Web/staticSitesOperationStatuses
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the staticSitesOperationStatus. For example, a1f6e015-a5de-468f-ad54-9c75638d7134
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Properties of the async operation status.
+   */
+  properties?: StaticSitesOperationStatusProperties;
 }

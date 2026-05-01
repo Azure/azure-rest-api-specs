@@ -55,7 +55,8 @@ interface SiteExtensionInfoOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteExtensionInfos {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
@@ -137,7 +138,8 @@ interface SiteExtensionInfoOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.

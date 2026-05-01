@@ -67,7 +67,8 @@ interface ProcessModuleInfoOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessModuleInfos {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -119,7 +120,8 @@ interface ProcessModuleInfoOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessModuleInfoOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -183,7 +185,8 @@ interface InstanceProcessModuleSlotOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface InstanceProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -242,7 +245,8 @@ interface ProcessModuleSlotOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.

@@ -56,7 +56,8 @@ interface SwiftVirtualNetworkOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SwiftVirtualNetworks {
   /**
    * Description for Gets a Swift Virtual Network connection.
@@ -132,7 +133,8 @@ interface SwiftVirtualNetworkOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SwiftVirtualNetworkOperationGroup {
   /**
    * Description for Gets a Swift Virtual Network connection.

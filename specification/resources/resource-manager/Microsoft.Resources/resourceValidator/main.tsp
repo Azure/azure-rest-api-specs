@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Resource Validator" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-namespace ResourceValidationClient;
+namespace ResourceValidator;
 
 enum Versions {
   v2022_06_01: "2022-06-01",
