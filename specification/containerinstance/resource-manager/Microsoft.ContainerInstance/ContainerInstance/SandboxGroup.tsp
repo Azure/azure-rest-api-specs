@@ -115,19 +115,14 @@ model SandboxGroup
 }
 
 /**
- * Tags for a resource. Additional properties are allowed.
- */
-@additionalProperties(true)
-model Tags {}
-
-/**
  * The type used for updating a SandboxGroup resource.
  */
 model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
    */
-  tags?: Tags;
+  @Azure.ResourceManager.Tags
+  tags?: Record<string>;
 
   /**
    * The managed service identities assigned to this resource.
