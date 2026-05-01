@@ -114,7 +114,6 @@ model SandboxGroup is Azure.ResourceManager.TrackedResource<SandboxGroupProperti
 /**
  * The type used for updating tags in SandboxGroup resources.
  */
-@Azure.ResourceManager.PatchResource
 model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
@@ -131,7 +130,7 @@ model SandboxGroupTagsUpdate {
  * Resource tags for SandboxGroup.
  */
 model SandboxGroupTags {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   properties?: TagProperty[];
 }
 
