@@ -1,6 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import typespecRequirementSrc from "../src/typespec-requirement.js";
 import { createMockCore } from "./mocks.js";
+
+vi.mock("simple-git", () => ({
+  simpleGit: () => ({
+    diff: vi.fn().mockResolvedValue(""),
+  }),
+}));
 
 /**
  * @param {unknown} asyncFunctionArgs
