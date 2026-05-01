@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
@@ -117,6 +119,7 @@ interface ClusterResources {
   /**
    * Invoke a command like nodetool for cassandra maintenance asynchronously
    */
+  @added(Versions.v2026_04_01_preview)
   invokeCommandAsync is ArmResourceActionAsyncBase<
     ClusterResource,
     CommandAsyncPostBody,
@@ -129,6 +132,7 @@ interface ClusterResources {
   /**
    * List all commands currently running on ring info
    */
+  @added(Versions.v2026_04_01_preview)
   @list
   @get
   @action("commands")
@@ -142,6 +146,7 @@ interface ClusterResources {
   /**
    * Get details about a specified command that was run asynchronously.
    */
+  @added(Versions.v2026_04_01_preview)
   @get
   getCommandAsync is ArmResourceRead<
     ClusterResource,
@@ -164,6 +169,7 @@ interface ClusterResources {
   /**
    * List the backups of this cluster that are available to restore.
    */
+  @added(Versions.v2026_04_01_preview)
   @list
   @get
   @action("backups")
@@ -177,6 +183,7 @@ interface ClusterResources {
   /**
    * Get the properties of an individual backup of this cluster that is available to restore.
    */
+  @added(Versions.v2026_04_01_preview)
   @get
   getBackup is ArmResourceRead<
     ClusterResource,

@@ -27,14 +27,30 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-preview-2025-11-01-preview
+tag: package-preview-2026-04-01-preview
 ```
+### Tag: package-preview-2026-04-01-preview
+These settings apply only when `--tag=package-preview-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04-01-preview'
+input-file:
+  - preview/2026-04-01-preview/openapi.json
+```
+
 ### Tag: package-preview-2025-11-01-preview
 These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2025-11-01-preview'
 input-file:
   - preview/2025-11-01-preview/openapi.json
+```
+
+### Tag: package-2026-03-15
+These settings apply only when `--tag=package-2026-03-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-15'
+input-file:
+  - stable/2026-03-15/openapi.json
 ```
 
 ### Tag: package-2025-10-15
@@ -1106,6 +1122,14 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MaterializedViewDetails.properties._rid
+    reason: _rid is a backend property
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: openapi.json
+    where: $.definitions.SoftDeletedSqlDatabaseResource.properties._rid
+    reason: _rid is a backend property
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: openapi.json
+    where: $.definitions.SoftDeletedSqlContainerResource.properties._rid
     reason: _rid is a backend property
 ```
 

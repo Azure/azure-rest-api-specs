@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./DatabaseAccountGetResults.tsp";
 
@@ -9,12 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * A Cosmos DB Data Transfer Job
  */
 @parentResource(DatabaseAccountGetResults)
+@added(Versions.v2026_04_01_preview)
 model DataTransferJobGetResults
   is Azure.ResourceManager.ProxyResource<DataTransferJobProperties> {
   ...ResourceNameParameter<
@@ -26,6 +29,7 @@ model DataTransferJobGetResults
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface DataTransferJobs {
   /**
