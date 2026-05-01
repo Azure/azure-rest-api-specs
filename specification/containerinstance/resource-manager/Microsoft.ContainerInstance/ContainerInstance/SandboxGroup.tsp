@@ -115,13 +115,18 @@ model SandboxGroup
 }
 
 /**
+ * Tags for a resource.
+ */
+model Tags is Record<string>;
+
+/**
  * The type used for updating tags in SandboxGroup resources.
  */
 model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
    */
-  tags?: {[key: string]: string};
+  tags?: Tags;
 
   /**
    * The managed service identities assigned to this resource.
