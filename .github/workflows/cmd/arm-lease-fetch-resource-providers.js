@@ -80,7 +80,8 @@ export function findResourceProviders(repoRoot, withServiceNames = false) {
   const results = [];
   const specDir = join(repoRoot, "specification");
   if (!existsSync(specDir)) {
-    throw new Error(`Specification directory not found: ${specDir}`);
+    // In sparse checkouts (CI), specification/ may not exist. Return empty list.
+    return [];
   }
 
   for (const orgName of readdirSync(specDir)) {

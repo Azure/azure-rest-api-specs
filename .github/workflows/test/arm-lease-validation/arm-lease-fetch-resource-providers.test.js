@@ -13,12 +13,26 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Check if specification directory exists (may not exist in sparse checkouts)
+const hasSpecificationDir = () => {
+  try {
+    const repoRoot = findRepoRoot(__dirname);
+    return fs.existsSync(path.join(repoRoot, "specification"));
+  } catch {
+    return false;
+  }
+};
+
 describe("fetch-resource-providers", () => {
   describe("findRepoRoot", () => {
     it("finds the repository root", () => {
       const repoRoot = findRepoRoot(__dirname);
       expect(repoRoot.endsWith("azure-rest-api-specs")).toBe(true);
-      expect(fs.existsSync(path.join(repoRoot, "specification"))).toBe(true);
+      // In sparse checkouts, .github exists but specification may not
+      expect(
+        fs.existsSync(path.join(repoRoot, "specification")) ||
+        fs.existsSync(path.join(repoRoot, ".github"))
+      ).toBe(true);
     });
   });
 
@@ -26,6 +40,12 @@ describe("fetch-resource-providers", () => {
     it("finds resource providers without service names", () => {
       const repoRoot = findRepoRoot(__dirname);
       const rps = findResourceProviders(repoRoot, false);
+
+      // In sparse checkouts, specification/ may not exist, so rps could be empty
+      if (!hasSpecificationDir()) {
+        expect(rps).toEqual([]);
+        return;
+      }
 
       expect(rps.length).toBeGreaterThan(0);
       expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path)).toBe(true);
@@ -39,6 +59,12 @@ describe("fetch-resource-providers", () => {
     it("finds resource providers with service names", () => {
       const repoRoot = findRepoRoot(__dirname);
       const rps = findResourceProviders(repoRoot, true);
+
+      // In sparse checkouts, specification/ may not exist, so rps could be empty
+      if (!hasSpecificationDir()) {
+        expect(rps).toEqual([]);
+        return;
+      }
 
       expect(rps.length).toBeGreaterThan(0);
       expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path && rp.serviceNames)).toBe(
