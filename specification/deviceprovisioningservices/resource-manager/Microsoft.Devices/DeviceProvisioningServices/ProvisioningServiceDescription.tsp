@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 /**
@@ -207,6 +209,60 @@ interface ProvisioningServiceDescriptions {
       keyName: string;
     },
     Error = ErrorDetails
+  >;
+
+  /**
+   * Preflight check for ADR linking. Returns linking state and service details.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
+  @extension("x-ms-internal", true)
+  @added(Versions.v2026_06_01_preview)
+  @action("preflightLink")
+  preflightLink is ArmResourceActionSync<
+    ProvisioningServiceDescription,
+    void,
+    ArmResponse<LinkPreflightResponse>
+  >;
+
+  /**
+   * Initiate ADR linking for the provisioning service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
+  @extension("x-ms-internal", true)
+  @added(Versions.v2026_06_01_preview)
+  @action("initiateLink")
+  initiateLink is ArmResourceActionAsync<
+    ProvisioningServiceDescription,
+    LinkInitiateRequest,
+    ArmResponse<LinkStateResponse>,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Notify the provisioning service of ADR linking status changes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
+  @extension("x-ms-internal", true)
+  @added(Versions.v2026_06_01_preview)
+  @action("notifyLink")
+  notifyLink is ArmResourceActionAsync<
+    ProvisioningServiceDescription,
+    LinkNotifyRequest,
+    ArmResponse<LinkStateResponse>,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Update the ADR link configuration for the provisioning service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
+  @extension("x-ms-internal", true)
+  @added(Versions.v2026_06_01_preview)
+  @action("updateLink")
+  updateLink is ArmResourceActionSync<
+    ProvisioningServiceDescription,
+    LinkUpdateRequest,
+    ArmResponse<LinkUpdateResponse>
   >;
 }
 

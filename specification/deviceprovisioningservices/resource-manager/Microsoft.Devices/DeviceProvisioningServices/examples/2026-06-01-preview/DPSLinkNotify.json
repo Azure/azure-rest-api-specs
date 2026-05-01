@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "provisioningServiceName": "myFirstProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "body": {
+      "action": "commit"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "adrLinkState": "Linked"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/operationresults/MTY4MjI5MD?api-version=2026-06-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "ProvisioningServiceDescriptions_NotifyLink",
+  "title": "DPSLinkNotify"
+}

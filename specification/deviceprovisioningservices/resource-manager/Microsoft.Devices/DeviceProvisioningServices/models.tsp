@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 
@@ -354,6 +356,20 @@ model IotDpsPropertiesDescription {
    * The Device Registry namespace that is linked to the provisioning service.
    */
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
+
+  /**
+   * The Device Registry namespaces linked to the provisioning service.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array uses resourceId as identifier"
+  @added(Versions.v2026_06_01_preview)
+  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
+
+  /**
+   * The ADR linking state of the provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  adrLinkState?: AdrLinkingState;
 
   /**
    * Allocation policy to be used by this provisioning service.
@@ -891,4 +907,144 @@ model CertificateBodyDescription {
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
   isVerified?: boolean;
+}
+
+/**
+ * The state of ADR linking for a provisioning service.
+ */
+@added(Versions.v2026_06_01_preview)
+union AdrLinkingState {
+  string,
+
+  /**
+   * The linking process is in progress.
+   */
+  Linking: "Linking",
+
+  /**
+   * The provisioning service is linked to a Device Registry namespace.
+   */
+  Linked: "Linked",
+
+  /**
+   * The linking process has failed.
+   */
+  LinkingFailed: "LinkingFailed",
+
+  /**
+   * The linked Device Registry namespace has been deleted.
+   */
+  NamespaceDeleted: "NamespaceDeleted",
+}
+
+/**
+ * Request body for the initiateLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkInitiateRequest {
+  /**
+   * The ARM resource ID of the Device Registry namespace to link.
+   */
+  namespaceResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces";
+    }
+  ]>;
+
+  /**
+   * The unique identifier of the Device Registry namespace.
+   */
+  namespaceUuid: string;
+
+  /**
+   * The data address for the link.
+   */
+  dataAddress: string;
+}
+
+/**
+ * Request body for the notifyLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkNotifyRequest {
+  /**
+   * The action to perform: commit, fail, or namespaceDeleted.
+   */
+  action: string;
+
+  /**
+   * The error code if the action is fail.
+   */
+  errorCode?: string;
+
+  /**
+   * The reason for the action.
+   */
+  reason?: string;
+}
+
+/**
+ * Request body for the updateLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkUpdateRequest {
+  /**
+   * The list of Device Registry namespace references.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array uses resourceId as identifier"
+  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
+}
+
+/**
+ * Response body for the preflightLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkPreflightResponse {
+  /**
+   * The ARM resource ID of the provisioning service.
+   */
+  resourceId: string;
+
+  /**
+   * The current ADR linking state.
+   */
+  adrLinkState?: AdrLinkingState;
+
+  /**
+   * Service endpoint for provisioning service.
+   */
+  serviceOperationsHostName?: string;
+
+  /**
+   * Unique identifier of this provisioning service.
+   */
+  idScope?: string;
+}
+
+/**
+ * Response body for the initiateLink and notifyLink actions.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkStateResponse {
+  /**
+   * The current ADR linking state.
+   */
+  adrLinkState: AdrLinkingState;
+}
+
+/**
+ * Response body for the updateLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkUpdateResponse {
+  /**
+   * The current ADR linking state.
+   */
+  adrLinkState: AdrLinkingState;
+
+  /**
+   * The list of Device Registry namespace references.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array uses resourceId as identifier"
+  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 }
