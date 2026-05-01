@@ -278,7 +278,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/sandboxGroups/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/sandboxGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/sandboxGroups": {
       "get": {
         "operationId": "SandboxGroups_ListBySubscription",
         "tags": [
@@ -1677,6 +1677,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups": {
+      "get": {
+        "operationId": "SandboxGroups_ListByResourceGroup",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "summary": "List SandboxGroup resources by resource group",
+        "description": "List SandboxGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SandboxGroups by resource group": {
+            "$ref": "./examples/SandboxGroupsListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}": {
       "get": {
         "operationId": "SandboxGroups_Get",
@@ -1803,13 +1846,7 @@
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SandboxGroup"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-suppressions": [
-          {
-            "code": "RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE",
-            "reason": "200 response is only returned for idempotent PUT when resource already exists; 201 is the normal creation response."
-          }
-        ]
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "SandboxGroups_Update",
@@ -1885,13 +1922,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SandboxGroup"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-suppressions": [
-          {
-            "code": "RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE",
-            "reason": "200 response is included in spec but example only demonstrates the 202 async polling pattern."
-          }
-        ]
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SandboxGroups_Delete",
@@ -1954,16 +1985,10 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-suppressions": [
-          {
-            "code": "RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE",
-            "reason": "204 response is included for edge case when resource doesn't exist; example demonstrates the normal 202 async deletion pattern."
-          }
-        ]
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect": {
       "post": {
         "operationId": "SandboxGroups_Connect",
         "tags": [
@@ -2010,49 +2035,6 @@
           "Connect to a SandboxGroup": {
             "$ref": "./examples/SandboxGroupsConnect.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups": {
-      "get": {
-        "operationId": "SandboxGroups_ListByResourceGroup",
-        "tags": [
-          "SandboxGroups"
-        ],
-        "summary": "List SandboxGroup resources by resource group",
-        "description": "List SandboxGroup resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SandboxGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List SandboxGroups by resource group": {
-            "$ref": "./examples/SandboxGroupsListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
