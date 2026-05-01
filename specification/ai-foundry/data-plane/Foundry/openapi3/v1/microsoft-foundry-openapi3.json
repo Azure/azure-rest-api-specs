@@ -17069,6 +17069,21 @@
         },
         "description": "Options for dataset generation within an evaluation suite generation job."
       },
+      "EvaluationSuiteEvaluationLevel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "turn",
+              "conversation"
+            ]
+          }
+        ],
+        "description": "The evaluation level for an evaluation suite."
+      },
       "EvaluationSuiteGenerationJob": {
         "type": "object",
         "required": [
@@ -17247,17 +17262,21 @@
       "EvaluationSuiteRunRequest": {
         "type": "object",
         "properties": {
-          "groupName": {
+          "evaluationName": {
             "type": "string",
-            "description": "Name for the eval group. Default: '{suiteName}-runs'."
+            "description": "Name for the evaluation. Default: '{suiteName}-runs'."
           },
           "suiteVersion": {
             "type": "string",
             "description": "Suite version to run. Default: latest."
           },
           "evaluationLevel": {
-            "type": "string",
-            "description": "Overrides the suite's default evaluation level. Values: \"turn\" or \"conversation\". If omitted, uses the level from the suite."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteEvaluationLevel"
+              }
+            ],
+            "description": "Overrides the suite's default evaluation level. If omitted, uses the level from the suite."
           }
         },
         "description": "Request body for running an evaluation from a suite."
@@ -17265,26 +17284,26 @@
       "EvaluationSuiteRunResponse": {
         "type": "object",
         "required": [
-          "evaluationId",
+          "evalId",
           "runId",
-          "groupName",
+          "evaluationName",
           "suiteName",
           "suiteVersion",
           "status",
           "createdAt"
         ],
         "properties": {
-          "evaluationId": {
+          "evalId": {
             "type": "string",
-            "description": "The evaluation (group) ID created."
+            "description": "The evaluation ID created."
           },
           "runId": {
             "type": "string",
             "description": "The eval run ID created."
           },
-          "groupName": {
+          "evaluationName": {
             "type": "string",
-            "description": "The eval group name."
+            "description": "The evaluation name."
           },
           "suiteName": {
             "type": "string",
@@ -17306,6 +17325,20 @@
         },
         "description": "Response from running an evaluation suite."
       },
+      "EvaluationSuiteSubtype": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "benchmarkspec"
+            ]
+          }
+        ],
+        "description": "The subtype of an evaluation suite."
+      },
       "EvaluationSuiteVersion": {
         "type": "object",
         "required": [
@@ -17319,8 +17352,12 @@
             "description": "Human-readable display name.\nDoes not need to be unique. Shown in Foundry portal list views and eval reports."
           },
           "subtype": {
-            "type": "string",
-            "description": "Subtype of the evaluation suite. Follows the evaluator subtype pattern.\nFor example, \"benchmark\" for benchmark suites."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteSubtype"
+              }
+            ],
+            "description": "Subtype of the evaluation suite."
           },
           "dataset": {
             "allOf": [
@@ -17333,11 +17370,29 @@
           "testingCriteria": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": {}
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderLabelModel"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderStringCheck"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderTextSimilarity"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderPython"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
+                },
+                {
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
+                }
+              ]
             },
             "minItems": 1,
-            "description": "Testing criteria — pass-through to eval group testing_criteria.\nSupports any grader type: azure_ai_evaluator, string_check, label_model, \nscore_model, text_similarity, python, etc. Stored as raw JSON.\nAt least one entry is required."
+            "description": "Testing criteria — the evaluator configurations for this suite.\nSupports all grader types: azure_ai_evaluator, string_check, label_model,\nscore_model, text_similarity, python, etc.\nAt least one entry is required."
           },
           "target": {
             "allOf": [
@@ -17353,8 +17408,12 @@
             "description": "How to send dataset rows to the target (agent or model).\nPass-through to eval run data_source input_messages.\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
           },
           "evaluationLevel": {
-            "type": "string",
-            "description": "Default evaluation level for this suite. Can be overridden at run time.\nValues: \"turn\" or \"conversation\"."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteEvaluationLevel"
+              }
+            ],
+            "description": "Default evaluation level for this suite. Can be overridden at run time."
           },
           "id": {
             "type": "string",
@@ -17385,8 +17444,12 @@
             "description": "Human-readable display name.\nDoes not need to be unique. Shown in Foundry portal list views and eval reports."
           },
           "subtype": {
-            "type": "string",
-            "description": "Subtype of the evaluation suite. Follows the evaluator subtype pattern.\nFor example, \"benchmark\" for benchmark suites."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteSubtype"
+              }
+            ],
+            "description": "Subtype of the evaluation suite."
           },
           "dataset": {
             "allOf": [
@@ -17399,11 +17462,29 @@
           "testingCriteria": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": {}
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderLabelModel"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderStringCheck"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderTextSimilarity"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderPython"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
+                },
+                {
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
+                }
+              ]
             },
             "minItems": 1,
-            "description": "Testing criteria — pass-through to eval group testing_criteria.\nSupports any grader type: azure_ai_evaluator, string_check, label_model, \nscore_model, text_similarity, python, etc. Stored as raw JSON.\nAt least one entry is required."
+            "description": "Testing criteria — the evaluator configurations for this suite.\nSupports all grader types: azure_ai_evaluator, string_check, label_model,\nscore_model, text_similarity, python, etc.\nAt least one entry is required."
           },
           "target": {
             "allOf": [
@@ -17419,8 +17500,12 @@
             "description": "How to send dataset rows to the target (agent or model).\nPass-through to eval run data_source input_messages.\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
           },
           "evaluationLevel": {
-            "type": "string",
-            "description": "Default evaluation level for this suite. Can be overridden at run time.\nValues: \"turn\" or \"conversation\"."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteEvaluationLevel"
+              }
+            ],
+            "description": "Default evaluation level for this suite. Can be overridden at run time."
           },
           "description": {
             "type": "string",

@@ -10,6 +10,29 @@ using OpenAPI;
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+@doc("The evaluation level for an evaluation suite.")
+union EvaluationSuiteEvaluationLevel {
+  string,
+
+  @doc("Turn-level evaluation.")
+  turn: "turn",
+
+  @doc("Conversation-level evaluation.")
+  conversation: "conversation",
+}
+
+@doc("The subtype of an evaluation suite.")
+union EvaluationSuiteSubtype {
+  string,
+
+  @doc("Benchmark spec suite.")
+  benchmarkspec: "benchmarkspec",
+}
+
+// ---------------------------------------------------------------------------
 // Child models
 // ---------------------------------------------------------------------------
 
@@ -47,10 +70,9 @@ model EvaluationSuiteVersion {
   displayName?: string;
 
   @doc("""
-    Subtype of the evaluation suite. Follows the evaluator subtype pattern.
-    For example, "benchmark" for benchmark suites.
+    Subtype of the evaluation suite.
     """)
-  subtype?: string;
+  subtype?: EvaluationSuiteSubtype;
 
   @doc("""
     Dataset reference for evaluation.
@@ -61,13 +83,21 @@ model EvaluationSuiteVersion {
   dataset?: DatasetReference;
 
   @doc("""
-    Testing criteria — pass-through to eval group testing_criteria.
-    Supports any grader type: azure_ai_evaluator, string_check, label_model, 
-    score_model, text_similarity, python, etc. Stored as raw JSON.
+    Testing criteria — the evaluator configurations for this suite.
+    Supports all grader types: azure_ai_evaluator, string_check, label_model,
+    score_model, text_similarity, python, etc.
     At least one entry is required.
     """)
   @minItems(1)
-  testingCriteria: Record<unknown>[];
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching eval group testing_criteria pattern"
+  testingCriteria: (
+    | OpenAI.EvalGraderLabelModel
+    | OpenAI.EvalGraderStringCheck
+    | OpenAI.EvalGraderTextSimilarity
+    | OpenAI.EvalGraderPython
+    | OpenAI.EvalGraderScoreModel
+    | TestingCriterionAzureAIEvaluator
+  )[];
 
   @doc("""
     Target for this evaluation suite. Uses the existing Target discriminated type
@@ -86,9 +116,8 @@ model EvaluationSuiteVersion {
 
   @doc("""
     Default evaluation level for this suite. Can be overridden at run time.
-    Values: "turn" or "conversation".
     """)
-  evaluationLevel?: string;
+  evaluationLevel?: EvaluationSuiteEvaluationLevel;
 
   // AssetBase provides: name (string, @key), version (string, read-only),
   // id (string, read-only), description (string, optional), tags (Record<string>, optional)
@@ -101,26 +130,26 @@ model EvaluationSuiteVersion {
 
 @doc("Request body for running an evaluation from a suite.")
 model EvaluationSuiteRunRequest {
-  @doc("Name for the eval group. Default: '{suiteName}-runs'.")
-  groupName?: string;
+  @doc("Name for the evaluation. Default: '{suiteName}-runs'.")
+  evaluationName?: string;
 
   @doc("Suite version to run. Default: latest.")
   suiteVersion?: string;
 
-  @doc("Overrides the suite's default evaluation level. Values: \"turn\" or \"conversation\". If omitted, uses the level from the suite.")
-  evaluationLevel?: string;
+  @doc("Overrides the suite's default evaluation level. If omitted, uses the level from the suite.")
+  evaluationLevel?: EvaluationSuiteEvaluationLevel;
 }
 
 @doc("Response from running an evaluation suite.")
 model EvaluationSuiteRunResponse {
-  @doc("The evaluation (group) ID created.")
-  evaluationId: string;
+  @doc("The evaluation ID created.")
+  evalId: string;
 
   @doc("The eval run ID created.")
   runId: string;
 
-  @doc("The eval group name.")
-  groupName: string;
+  @doc("The evaluation name.")
+  evaluationName: string;
 
   @doc("The suite name used.")
   suiteName: string;
