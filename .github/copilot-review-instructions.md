@@ -176,14 +176,15 @@ PUT operation is missing `201` response for resource creation. ARM PUT must retu
 Every comment **MUST** end with a hidden HTML telemetry marker as the very last line. The format is:
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
+<!-- posted-by: arm-api-reviewer-agent | source: code-review | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
 ```
 
+- **`source`**: Always `code-review` for automated Copilot Code Review comments. The interactive agent uses `agent` instead.
 - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-11`, `OAPI027`). Use `summary` for summary comments.
 - **`severity`**: One of `blocking`, `warning`, or `suggestion`.
 - **`classification`**: One of `new` or `existing`.
 
-Example: `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
+Example: `<!-- posted-by: arm-api-reviewer-agent | source: code-review | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
 
 To detect agent-posted comments during reconciliation, check for the substring `posted-by: arm-api-reviewer-agent` (matches both old and new marker formats).
 
@@ -265,9 +266,16 @@ comment. Reply to the thread noting the line shift.
 Do not post new comments. Note that existing threads cover all issues.
 
 **Scenario E -- Violation has been fixed:**
-If an existing unresolved comment flags a violation that no longer exists, reply
-to the thread noting the fix: "_The violation flagged here appears to have been
-addressed in the latest changes._"
+If an existing unresolved comment flags a violation that no longer exists in
+the latest code:
+
+- If the comment body contains the substring `posted-by: arm-api-reviewer-agent`
+  (agent-posted): reply noting the fix and resolve the comment: "_This issue
+  has been addressed in the latest changes. Resolving._"
+- If the comment was from a human reviewer (no agent marker): do NOT resolve
+  it. Instead, reply noting the fix: "_The violation flagged in this comment
+  appears to have been addressed in the latest code changes. The original
+  reviewer may want to verify and resolve._"
 
 ---
 
