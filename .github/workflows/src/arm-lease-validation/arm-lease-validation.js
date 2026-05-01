@@ -20,7 +20,6 @@ export const ALLOWED_FILE_PATTERNS = [
   LEASE_FILE_PATTERN,
   LEASE_FILE_WITH_GROUP_PATTERN,
   /^\.github\/arm-leases\/README\.md$/,
-  /^\.github\/arm-leases\/scripts\/.+$/,
 ];
 
 /**
@@ -262,10 +261,7 @@ export default async function validateArmLeases(core) {
   // Check for non-lease.yaml and non-README files
   core.startGroup("Checking for non-lease files");
   const nonLeaseFiles = allChangedFiles.filter(
-    (file) =>
-      !file.endsWith("/lease.yaml") &&
-      !file.endsWith("/README.md") &&
-      !file.startsWith(".github/arm-leases/scripts/"),
+    (file) => !file.endsWith("/lease.yaml") && !file.endsWith("/README.md"),
   );
 
   if (nonLeaseFiles.length > 0) {
@@ -282,10 +278,7 @@ export default async function validateArmLeases(core) {
 
   // Get ARM lease files (only lease.yaml files)
   const armLeaseFiles = allChangedFiles.filter(
-    (file) =>
-      file.startsWith(".github/arm-leases/") &&
-      !file.endsWith(".md") &&
-      !file.startsWith(".github/arm-leases/scripts/"),
+    (file) => file.startsWith(".github/arm-leases/") && !file.endsWith(".md"),
   );
 
   if (armLeaseFiles.length === 0) {

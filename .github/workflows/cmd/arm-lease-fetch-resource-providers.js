@@ -1,11 +1,11 @@
-#!/usr/bin/env node
 // Fetch Azure resource providers with or without service names (service groups)
-// Usage: node fetch-resource-providers.js [--with-service-groups] [--format list|json|table] [--count] [--output FILE]
+// Usage: node arm-lease-fetch-resource-providers.js [--with-service-groups] [--format list|json|table] [--count] [--output FILE]
 
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-function isServiceNameDirectory(dirPath) {
+export function isServiceNameDirectory(dirPath) {
   const excludeNames = new Set([
     "stable",
     "preview",
@@ -22,16 +22,16 @@ function isServiceNameDirectory(dirPath) {
   }
 }
 
-function hasVersionDirectories(rpPath) {
+export function hasVersionDirectories(rpPath) {
   return (
     fs.existsSync(path.join(rpPath, "stable")) ||
     fs.existsSync(path.join(rpPath, "preview"))
   );
 }
 
-function findRepoRoot(startPath = process.cwd()) {
+export function findRepoRoot(startPath = process.cwd()) {
   let current = path.resolve(startPath);
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 10; i++) {
     if (fs.existsSync(path.join(current, "specification"))) return current;
     const parent = path.dirname(current);
     if (parent === current) break;
@@ -42,7 +42,7 @@ function findRepoRoot(startPath = process.cwd()) {
   );
 }
 
-function findResourceProviders(repoRoot, withServiceNames = false) {
+export function findResourceProviders(repoRoot, withServiceNames = false) {
   const results = [];
   const specDir = path.join(repoRoot, "specification");
   if (!fs.existsSync(specDir))
@@ -91,7 +91,7 @@ function findResourceProviders(repoRoot, withServiceNames = false) {
   return results.sort((a, b) => a.rpNamespace.localeCompare(b.rpNamespace));
 }
 
-function formatOutput(rps, format, withSN) {
+export function formatOutput(rps, format, withSN) {
   if (format === "json") return JSON.stringify(rps, null, 2);
   if (rps.length === 0)
     return `No resource providers ${withSN ? "with" : "without"} serviceNames found.`;
@@ -130,7 +130,7 @@ function printHelp() {
 Fetch Azure resource providers with or without service names (service groups)
 
 Usage:
-  node fetch-resource-providers.js [options]
+  node arm-lease-fetch-resource-providers.js [options]
 
 Options:
   --with-service-groups      Include only RPs with serviceNames (service groups)
@@ -142,16 +142,16 @@ Options:
 
 Examples:
   # RPs without service names
-  node fetch-resource-providers.js
+  node arm-lease-fetch-resource-providers.js
 
   # RPs with service names
-  node fetch-resource-providers.js --with-service-groups
+  node arm-lease-fetch-resource-providers.js --with-service-groups
 
   # Output to file
-  node fetch-resource-providers.js --output rps.txt
+  node arm-lease-fetch-resource-providers.js --output rps.txt
 
   # JSON format
-  node fetch-resource-providers.js --format json
+  node arm-lease-fetch-resource-providers.js --format json
 `);
 }
 
@@ -207,14 +207,8 @@ function main() {
   }
 }
 
-if (require.main === module) {
+// Check if this module is being run directly
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
   process.exit(main());
 }
-
-module.exports = {
-  findRepoRoot,
-  findResourceProviders,
-  formatOutput,
-  isServiceNameDirectory,
-  hasVersionDirectories,
-};

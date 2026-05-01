@@ -1,9 +1,9 @@
-#!/usr/bin/env node
 // Generate lease.yaml files from resource provider data
 
-const fs = require("fs");
-const path = require("path");
-const readline = require("readline");
+import fs from "fs";
+import path from "path";
+import readline from "readline";
+import { fileURLToPath } from "url";
 
 const DEFAULT_DURATION = "P180D";
 const LEASE_BASE_PATH = ".github/arm-leases";
@@ -83,13 +83,13 @@ Generate lease.yaml files for Azure Resource Providers
 
 Usage:
   Single RP:
-    node generate-lease-files.js --orgName <name> --rpNamespace <name> --reviewer <name> [options]
+    node arm-lease-generate-lease-files.js --orgName <name> --rpNamespace <name> --reviewer <name> [options]
 
   From input file:
-    node generate-lease-files.js --input <file> --reviewer <name> [options]
+    node arm-lease-generate-lease-files.js --input <file> --reviewer <name> [options]
 
   Interactive mode:
-    node generate-lease-files.js --interactive
+    node arm-lease-generate-lease-files.js --interactive
 
 Options:
   --orgName <name>                Organization/service name (lowercase alphanumeric)
@@ -114,25 +114,25 @@ Input File Format:
 
 Examples:
   # Single RP without service groups
-  node generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johnDoe"
+  node arm-lease-generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johnDoe"
 
   # Single RP with service groups
-  node generate-lease-files.js --orgName compute --rpNamespace Microsoft.Compute \\
+  node arm-lease-generate-lease-files.js --orgName compute --rpNamespace Microsoft.Compute \\
     --serviceName "ComputeRP,DiskRP" --reviewer "@janeSmith"
 
-  # From fetch-resource-providers.js output
-  node fetch-resource-providers.js > rps.txt
-  node generate-lease-files.js --input rps.txt --reviewer "@johnDoe"
+  # From arm-lease-fetch-resource-providers.js output
+  node arm-lease-fetch-resource-providers.js > rps.txt
+  node arm-lease-generate-lease-files.js --input rps.txt --reviewer "@johnDoe"
 
-  # From fetch-resource-providers.js with service groups
-  node fetch-resource-providers.js --with-service-groups > rps-with-groups.txt
-  node generate-lease-files.js --input rps-with-groups.txt --reviewer "@janeSmith"
+  # From arm-lease-fetch-resource-providers.js with service groups
+  node arm-lease-fetch-resource-providers.js --with-service-groups > rps-with-groups.txt
+  node arm-lease-generate-lease-files.js --input rps-with-groups.txt --reviewer "@janeSmith"
 
   # Interactive mode
-  node generate-lease-files.js --interactive
+  node arm-lease-generate-lease-files.js --interactive
 
   # Dry run to preview
-  node generate-lease-files.js --input rps.txt --reviewer "@testUser" --dry-run
+  node arm-lease-generate-lease-files.js --input rps.txt --reviewer "@testUser" --dry-run
 
 Output:
   Creates lease.yaml files at:
@@ -149,7 +149,7 @@ Output:
 
 function findRepoRoot(startPath = process.cwd()) {
   let current = path.resolve(startPath);
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 10; i++) {
     if (fs.existsSync(path.join(current, "specification"))) {
       return current;
     }
@@ -162,7 +162,7 @@ function findRepoRoot(startPath = process.cwd()) {
   );
 }
 
-function validateStartDate(date) {
+export function validateStartDate(date) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     throw new Error(`Invalid date format: ${date}. Expected YYYY-MM-DD`);
   }
@@ -183,7 +183,7 @@ function validateStartDate(date) {
   return date;
 }
 
-function validateDuration(duration) {
+export function validateDuration(duration) {
   const match = duration.match(/^P(\d+)D$/i);
   if (!match) {
     throw new Error(
@@ -199,7 +199,7 @@ function validateDuration(duration) {
   return duration.toUpperCase();
 }
 
-function validateRpNamespace(rpNamespace) {
+export function validateRpNamespace(rpNamespace) {
   const parts = rpNamespace.split(".");
   for (const part of parts) {
     if (!/^[A-Z]/.test(part)) {
@@ -211,14 +211,14 @@ function validateRpNamespace(rpNamespace) {
   return rpNamespace;
 }
 
-function validateOrgName(orgName) {
+export function validateOrgName(orgName) {
   if (!/^[a-z0-9]+$/.test(orgName)) {
     throw new Error(`orgName must be lowercase alphanumeric: ${orgName}`);
   }
   return orgName;
 }
 
-function validateReviewer(reviewer) {
+export function validateReviewer(reviewer) {
   if (!reviewer || reviewer.trim().length === 0) {
     throw new Error("Reviewer is required and cannot be empty");
   }
@@ -231,7 +231,7 @@ function validateReviewer(reviewer) {
   return trimmed;
 }
 
-function parseInputLine(line) {
+export function parseInputLine(line) {
   line = line.trim();
   if (!line || line.startsWith("#")) {
     return null;
@@ -256,7 +256,7 @@ function parseInputLine(line) {
   return { orgName, rpNamespace, serviceNames };
 }
 
-function generateLeaseYaml(rpNamespace, startdate, duration, reviewer) {
+export function generateLeaseYaml(rpNamespace, startdate, duration, reviewer) {
   return `lease:
   resource-provider: ${rpNamespace}
   startdate: "${startdate}"
@@ -266,7 +266,7 @@ function generateLeaseYaml(rpNamespace, startdate, duration, reviewer) {
 `;
 }
 
-function getLeasePath(repoRoot, orgName, rpNamespace, serviceName = null) {
+export function getLeasePath(repoRoot, orgName, rpNamespace, serviceName = null) {
   const basePath = path.join(repoRoot, LEASE_BASE_PATH, orgName, rpNamespace);
   if (serviceName) {
     return path.join(basePath, serviceName, "lease.yaml");
@@ -394,7 +394,7 @@ async function promptInteractive() {
   };
 }
 
-function getTodayDate() {
+export function getTodayDate() {
   const today = new Date();
   return today.toISOString().split("T")[0];
 }
@@ -513,18 +513,8 @@ async function main() {
   }
 }
 
-if (require.main === module) {
+// Check if this module is being run directly
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
   main().then((code) => process.exit(code));
 }
-
-module.exports = {
-  parseInputLine,
-  generateLeaseYaml,
-  getLeasePath,
-  validateStartDate,
-  validateDuration,
-  validateRpNamespace,
-  validateOrgName,
-  validateReviewer,
-  getTodayDate,
-};

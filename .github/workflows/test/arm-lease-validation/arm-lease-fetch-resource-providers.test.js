@@ -1,13 +1,13 @@
-import { createRequire } from "module";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 
-const require = createRequire(import.meta.url);
-const { findRepoRoot, findResourceProviders, formatOutput } = require(
-  "../../../arm-leases/scripts/fetch-resource-providers.cjs",
-);
+import {
+  findRepoRoot,
+  findResourceProviders,
+  formatOutput,
+} from "../../cmd/arm-lease-fetch-resource-providers.js";
 
 // Get the directory of the current test file to find repo root reliably
 const __filename = fileURLToPath(import.meta.url);

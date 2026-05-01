@@ -1,9 +1,7 @@
-import { createRequire } from "module";
 import path from "path";
 import { describe, expect, it } from "vitest";
 
-const require = createRequire(import.meta.url);
-const {
+import {
   parseInputLine,
   generateLeaseYaml,
   getLeasePath,
@@ -13,7 +11,7 @@ const {
   validateOrgName,
   validateReviewer,
   getTodayDate,
-} = require("../../../arm-leases/scripts/generate-lease-files.cjs");
+} from "../../cmd/arm-lease-generate-lease-files.js";
 
 describe("generate-lease-files", () => {
   describe("parseInputLine", () => {
