@@ -156,3 +156,10 @@ namespace Microsoft.Resources.DeploymentStacks {
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
+
+// CSharp SDK: Preserve API compatibility — output-only model was previously round-trip
+@@usage(DeploymentExtension, Usage.input, "csharp");
+@@usage(Azure.ResourceManager.Foundations.ErrorAdditionalInfo,
+  Usage.input,
+  "csharp"
+);
