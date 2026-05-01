@@ -108,7 +108,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@usage(BlobName, Usage.output, "rust");
 
 @@alternateType(BlobItem.name, string, "rust");
-@@alternateType(BlobItem.metadata, Record<string>, "rust");
 @@alternateType(BlobPrefix.name, string, "rust");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
@@ -136,12 +135,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
-@@clientName(MetadataHeaders.metadata, "metadata", "rust");
-
 // These are no-op, we need emitter support to make a pageable operation not automatically prefix list_
 // @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 // @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 
+@@clientName(BlobProperties.customerProvidedKeySha256,
+  "encryptionKeySha256",
+  "rust"
+);
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
   "rust"
@@ -389,7 +390,7 @@ model BlobPropertiesGo {
   smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
-  @Xml.name("CustomerProvidedKeySha256") encryptionKeySha256?: string;
+  @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
 
   /** The encryption scope of the blob. */
   @Xml.name("EncryptionScope") encryptionScope?: string;

@@ -1069,7 +1069,7 @@ model BlobProperties {
   smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
-  @Xml.name("CustomerProvidedKeySha256") encryptionKeySha256?: string;
+  @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
 
   /** The encryption scope of the blob. */
   @Xml.name("EncryptionScope") encryptionScope?: string;
