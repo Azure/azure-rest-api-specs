@@ -173,14 +173,12 @@ interface SandboxGroups {
    * List SandboxGroup resources by subscription ID
    */
   @summary("List SandboxGroup resources by subscription ID")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/sandboxGroups")
   listBySubscription is ArmListBySubscription<SandboxGroup, Error = CloudError>;
 
   /**
    * List SandboxGroup resources by resource group
    */
   @summary("List SandboxGroup resources by resource group")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups")
   listByResourceGroup is ArmResourceListByParent<
     SandboxGroup,
     Error = CloudError
@@ -224,7 +222,6 @@ interface SandboxGroups {
    * Get an access token and endpoint for connecting to the SandboxGroup.
    */
   @summary("Get an access token and endpoint for connecting to the SandboxGroup.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect")
   @post
   connect is ArmResourceActionSync<
     SandboxGroup,
