@@ -367,6 +367,35 @@ model RelatedResources {
   value: RelatedResource[];
 }
 
+@doc("The issue properties for update")
+model IssuePropertiesUpdate {
+  @doc("The issue title")
+  title?: string;
+
+  @doc("The issue status")
+  status?: Status;
+
+  @doc("The issue severity")
+  severity?: string;
+
+  @doc("The issue impact time (in UTC)")
+  impactTime?: utcDateTime;
+
+  @added(Versions.v2025_10_03)
+  @doc("The issue background information")
+  background?: Background;
+
+  @added(Versions.v2025_10_03_stable)
+  @doc("The issue notification settings")
+  notifications?: Notifications;
+}
+
+@doc("The Issue resource update")
+model IssueResourceUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: IssuePropertiesUpdate;
+}
+
 @@clientName(ListParameter, "ListParameterContent", "csharp");
 @doc("Parameters for listing related entities")
 model ListParameter {
