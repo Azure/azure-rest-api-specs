@@ -469,7 +469,7 @@ model SignedIdentifier {
 
 /** The result of a Filter Blobs API call */
 @Xml.name("EnumerationResults")
-model FilterBlobSegment {
+model FilteredBlob {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -581,9 +581,9 @@ enum SkuName {
   StandardRAGZRS: "Standard_RAGZRS",
 }
 
-/** The list container segment response */
+/** The list containers response. */
 @Xml.name("EnumerationResults")
-model ListContainersSegmentResponse {
+model ListContainersResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -1069,7 +1069,7 @@ model BlobProperties {
   smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
-  @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
+  @Xml.name("CustomerProvidedKeySha256") encryptionKeySha256?: string;
 
   /** The encryption scope of the blob. */
   @Xml.name("EncryptionScope") encryptionScope?: string;

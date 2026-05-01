@@ -136,17 +136,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
-@@clientName(ListContainersSegmentResponse, "ListContainersResponse", "rust");
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 
 // These are no-op, we need emitter support to make a pageable operation not automatically prefix list_
 // @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 // @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
-@@clientName(FilterBlobSegment, "FilteredBlob", "rust");
-@@clientName(BlobProperties.customerProvidedKeySha256,
-  "encryptionKeySha256",
-  "rust"
-);
+
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
   "rust"
@@ -197,16 +192,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
 @@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
-@@clientName(FilterBlobSegment.nextMarker, "continuationToken", "javascript");
-@@clientName(ListContainersSegmentResponse.NextMarker,
+@@clientName(FilteredBlob.nextMarker, "continuationToken", "javascript");
+@@clientName(ListContainersResponse.NextMarker,
   "continuationToken",
   "javascript"
 );
 @@clientName(MaxResultsParameter.maxresults, "maxPageSize", "javascript");
-@@clientName(ListContainersSegmentResponse.maxResults,
-  "maxPageSize",
-  "javascript"
-);
+@@clientName(ListContainersResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(ListBlobsResponse.nextMarker, "continuationToken", "javascript");
 @@clientName(ListBlobsResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(PageList.nextMarker, "continuationToken", "javascript");
@@ -397,7 +389,7 @@ model BlobPropertiesGo {
   smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
-  @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
+  @Xml.name("CustomerProvidedKeySha256") encryptionKeySha256?: string;
 
   /** The encryption scope of the blob. */
   @Xml.name("EncryptionScope") encryptionScope?: string;

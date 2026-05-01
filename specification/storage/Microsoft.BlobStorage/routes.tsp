@@ -154,7 +154,7 @@ interface Service {
       /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
       @query include?: Array<ListContainersIncludeType>;
     },
-    ListContainersSegmentResponse
+    ListContainersResponse
   >;
 
   /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
@@ -242,7 +242,7 @@ interface Service {
     {
       /** The filter blobs enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilteredBlob;
     }
   >;
 }
@@ -486,7 +486,7 @@ interface Container {
     {
       /** The container filter blob enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilteredBlob;
     }
   >;
 
