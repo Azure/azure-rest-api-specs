@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace ConfidentialLedger;
 
@@ -241,6 +242,24 @@ model PagedCollections {
    */
   @pageItems
   collections: Collection[];
+
+  /**
+   * Path from which to retrieve the next page of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Paginated tags returned in response to a query.
+ */
+@added(Versions.v2026_02_23)
+model PagedTags {
+  /**
+   * Array of tags.
+   */
+  @pageItems
+  tags: string[];
 
   /**
    * Path from which to retrieve the next page of results.
@@ -583,7 +602,7 @@ model ReceiptLeafComponents {
   commitEvidence?: string;
 
   /**
-   * TWrite set digest
+   * Write set digest
    */
   writeSetDigest?: string;
 }

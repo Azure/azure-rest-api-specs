@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Confidential Ledger",
-    "version": "2024-12-09-preview",
+    "version": "2026-02-23",
     "description": "Write and retrieve ledger entries against the Confidential Ledger service.",
     "x-typespec-generated": [
       {
@@ -68,6 +68,48 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "collections"
+        }
+      }
+    },
+    "/app/collections/tags": {
+      "get": {
+        "operationId": "ListTags",
+        "summary": "Gets a list of tags for a collection.",
+        "description": "Retrieves the tags associated with a collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "query",
+            "description": "The collection id.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTags"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Tags": {
+            "$ref": "./examples/ListTags.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "tags"
         }
       }
     },
@@ -379,7 +421,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedRoles"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -398,6 +443,9 @@
         "operationId": "UpdateUserDefinedRole",
         "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove\nan existing action, the role must be deleted and recreated.",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -414,7 +462,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedRoles"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -446,8 +497,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -882,6 +933,9 @@
         "operationId": "UpdateRuntimeOptions",
         "summary": "Runtime options for user defined endpoints.",
         "description": "Updates the runtime options.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2025,6 +2079,26 @@
           "description": "Path from which to retrieve the next page of results."
         }
       }
+    },
+    "PagedTags": {
+      "type": "object",
+      "description": "Paginated tags returned in response to a query.",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "description": "Array of tags.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path from which to retrieve the next page of results."
+        }
+      },
+      "required": [
+        "tags"
+      ]
     },
     "PagedUserDefinedFunctions": {
       "type": "object",
