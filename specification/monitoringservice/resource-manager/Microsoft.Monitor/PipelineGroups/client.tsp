@@ -80,10 +80,3 @@ using Microsoft.Monitor;
   "DataCollectionRuleId",
   "csharp"
 );
-
-// ── Property type changes ──
-// dataCollectionEndpointUrl should be typed as System.Uri
-@@alternateType(AzureMonitorWorkspaceLogsApiConfig.dataCollectionEndpointUrl,
-  url,
-  "csharp"
-);
