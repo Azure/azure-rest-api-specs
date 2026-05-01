@@ -14,8 +14,17 @@
           "cpuCfsQuotaPeriod": "200ms",
           "cpuManagerPolicy": "static",
           "failSwapOn": false,
+          "hardEvictionThreshold": {
+            "memoryAvailable": "500Mi",
+            "nodeFsAvailable": "15%",
+            "nodeFsInodesFree": "10%"
+          },
           "imageGcHighThreshold": 90,
           "imageGcLowThreshold": 70,
+          "kubeReserved": {
+            "cpuMillicores": 200,
+            "memoryMB": 1024
+          },
           "topologyManagerPolicy": "best-effort"
         },
         "linuxOSConfig": {
@@ -56,8 +65,17 @@
             "cpuCfsQuotaPeriod": "200ms",
             "cpuManagerPolicy": "static",
             "failSwapOn": false,
+            "hardEvictionThreshold": {
+              "memoryAvailable": "500Mi",
+              "nodeFsAvailable": "15%",
+              "nodeFsInodesFree": "10%"
+            },
             "imageGcHighThreshold": 90,
             "imageGcLowThreshold": 70,
+            "kubeReserved": {
+              "cpuMillicores": 200,
+              "memoryMB": 1024
+            },
             "seccompDefault": "Unconfined",
             "topologyManagerPolicy": "best-effort"
           },
@@ -97,8 +115,17 @@
             "cpuCfsQuotaPeriod": "200ms",
             "cpuManagerPolicy": "static",
             "failSwapOn": false,
+            "hardEvictionThreshold": {
+              "memoryAvailable": "500Mi",
+              "nodeFsAvailable": "15%",
+              "nodeFsInodesFree": "10%"
+            },
             "imageGcHighThreshold": 90,
             "imageGcLowThreshold": 70,
+            "kubeReserved": {
+              "cpuMillicores": 200,
+              "memoryMB": 1024
+            },
             "podMaxPids": 100,
             "topologyManagerPolicy": "best-effort"
           },

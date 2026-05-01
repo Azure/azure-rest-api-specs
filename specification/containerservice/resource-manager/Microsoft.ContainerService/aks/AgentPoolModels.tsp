@@ -543,6 +543,56 @@ model KubeletConfig {
    */
   @added(Versions.v2026_03_02_preview)
   seccompDefault?: SeccompDefault;
+
+  /**
+   * Kube-reserved values for kubelet. When a value is not set, the system-computed default based on VM size is used. See [AKS node resource reservations](https://aka.ms/aks/nodereservations) for details on computed defaults. Only applicable for Linux nodepools.
+   */
+  @added(Versions.v2026_03_02_preview)
+  kubeReserved?: KubeReserved;
+
+  /**
+   * Hard eviction thresholds for kubelet. When a threshold is not set, the system default is used. See [AKS node resource reservations](https://aka.ms/aks/nodereservations) for details on computed defaults. Only applicable for Linux nodepools.
+   */
+  @added(Versions.v2026_03_02_preview)
+  hardEvictionThreshold?: HardEvictionThreshold;
+}
+
+/**
+ * Kube-reserved values for kubelet. When a value is not set, the system-computed default based on VM size is used. See [AKS node resource reservations](https://aka.ms/aks/nodereservations) for details on computed defaults. Only applicable for Linux nodepools.
+ */
+@added(Versions.v2026_03_02_preview)
+model KubeReserved {
+  /**
+   * The amount of CPU reserved for Kubernetes system daemons, in millicores. Must be greater than or equal to 140. For example, a value of 200 means 200m (0.2 CPU cores).
+   */
+  cpuMillicores?: int32;
+
+  /**
+   * The amount of memory reserved for Kubernetes system daemons, in MiB. Must be greater than or equal to 750.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API shape"
+  memoryMB?: int32;
+}
+
+/**
+ * Hard eviction thresholds for kubelet. These thresholds trigger pod eviction when node resources drop below the specified values. Values must be greater than or equal to the documented minimums for each signal. Supported formats are Ki, Mi, Gi, or percentages using %.
+ */
+@added(Versions.v2026_03_02_preview)
+model HardEvictionThreshold {
+  /**
+   * The threshold for available memory below which pod eviction is triggered. Accepts absolute values (e.g. '500Mi') or percentage values (e.g. '5%'). Absolute values must be greater than or equal to 100Mi. Percentage values must be greater than or equal to 2%.
+   */
+  memoryAvailable?: string;
+
+  /**
+   * The threshold for available node filesystem space below which pod eviction is triggered. Accepts absolute values (e.g. '1Gi') or percentage values (e.g. '10%'). Must be greater than or equal to the system default of 10%.
+   */
+  nodeFsAvailable?: string;
+
+  /**
+   * The threshold for available inodes on the node filesystem below which pod eviction is triggered. Accepts absolute inode counts (e.g. '100000') or percentage values (e.g. '5%'). Percentage values must be greater than or equal to the system default of 5%.
+   */
+  nodeFsInodesFree?: string;
 }
 
 /**
