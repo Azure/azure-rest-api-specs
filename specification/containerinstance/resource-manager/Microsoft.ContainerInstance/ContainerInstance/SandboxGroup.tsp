@@ -55,7 +55,6 @@ model SubnetReference {
   /**
    * The ARM resource ID of the subnet. The caller must have `Microsoft.Network/virtualNetworks/subnets/join/action` permission on this subnet (enforced via a linked access check at create/update time).
    */
-  @format("arm-id")
   id: string;
 }
 
@@ -88,8 +87,12 @@ model SandboxGroupProperties {
    * The ARM resource ID of the management resource group associated with this SandboxGroup.
    */
   @visibility(Lifecycle.Read)
-  @format("arm-id")
   managementResourceGroupId?: string;
+
+  /**
+   * The managed service identities assigned to this resource.
+   */
+  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**
@@ -106,6 +109,17 @@ model SandboxGroup is Azure.ResourceManager.TrackedResource<SandboxGroupProperti
   @segment("sandboxGroupName")
   @path
   name: string;
+}
+
+/**
+ * The type used for updating tags in SandboxGroup resources.
+ */
+@Azure.ResourceManager.PatchResource
+model SandboxGroupTagsUpdate {
+  /**
+   * Resource tags.
+   */
+  tags?: SandboxGroupTags;
 
   /**
    * The managed service identities assigned to this resource.
@@ -114,13 +128,16 @@ model SandboxGroup is Azure.ResourceManager.TrackedResource<SandboxGroupProperti
 }
 
 /**
- * The type used for updating tags in SandboxGroup resources.
+ * Resource tags for SandboxGroup.
  */
-model SandboxGroupTagsUpdate {
-  /**
-   * Resource tags.
-   */
-  tags?: Record<string>;
+model SandboxGroupTags {
+  @OpenAPI.extension("x-ms-identifiers", [])
+  properties?: TagProperty[];
+}
+
+model TagProperty {
+  name: string;
+  value: string;
 }
 
 /**
@@ -130,13 +147,11 @@ model SandboxGroupAccessToken {
   /**
    * The endpoint URL to use with the access token.
    */
-  @format("uri")
   endpoint: string;
 
   /**
    * The access token used to authenticate against the endpoint.
    */
-  @format("password")
   @secret
   accessToken: string;
 
@@ -158,7 +173,6 @@ model SandboxGroupListResult {
   /**
    * The link to the next page of items
    */
-  @format("uri")
   nextLink?: string;
 }
 
@@ -167,7 +181,6 @@ interface SandboxGroups {
   /**
    * List SandboxGroup resources by subscription ID
    */
-  @operationId("SandboxGroups_ListBySubscription")
   @summary("List SandboxGroup resources by subscription ID")
   @get
   listBySubscription is ArmListBySubscription<SandboxGroup, Error = CloudError>;
@@ -175,7 +188,6 @@ interface SandboxGroups {
   /**
    * List SandboxGroup resources by resource group
    */
-  @operationId("SandboxGroups_ListByResourceGroup")
   @summary("List SandboxGroup resources by resource group")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups")
   listByResourceGroup is ArmResourceListByParent<
@@ -186,14 +198,12 @@ interface SandboxGroups {
   /**
    * Get a SandboxGroup
    */
-  @operationId("SandboxGroups_Get")
   @summary("Get a SandboxGroup")
   get is ArmResourceRead<SandboxGroup, Error = CloudError>;
 
   /**
    * Create a SandboxGroup
    */
-  @operationId("SandboxGroups_CreateOrUpdate")
   @summary("Create a SandboxGroup")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SandboxGroup,
@@ -205,7 +215,6 @@ interface SandboxGroups {
   /**
    * Update a SandboxGroup
    */
-  @operationId("SandboxGroups_Update")
   @summary("Update a SandboxGroup")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -217,19 +226,12 @@ interface SandboxGroups {
   /**
    * Delete a SandboxGroup
    */
-  @operationId("SandboxGroups_Delete")
   @summary("Delete a SandboxGroup")
-  delete is ArmResourceDeleteAsyncBase<
-    SandboxGroup,
-    ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SandboxGroup, Error = CloudError>;
 
   /**
    * Get an access token and endpoint for connecting to the SandboxGroup.
    */
-  @operationId("SandboxGroups_Connect")
   @summary("Get an access token and endpoint for connecting to the SandboxGroup.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect")
   @post
