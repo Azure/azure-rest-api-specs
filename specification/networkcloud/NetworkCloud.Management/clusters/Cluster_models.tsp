@@ -122,6 +122,42 @@ union ClusterType {
 }
 
 /**
+ * ClusterContinueUpdateVersionSafeguardMode represents the mode of the cluster continue update safeguards.
+ */
+@added(Versions.v2026_05_01_preview)
+union ClusterContinueUpdateVersionSafeguardMode {
+  string,
+
+  /**
+   * Run all pre‑operation validation checks before continuing the version update. If any check fails, the request is rejected and no changes are made.
+   */
+  All: "All",
+
+  /**
+   * Skip all safeguards and continue the version update without running pre‑operation validation checks.
+   */
+  None: "None",
+}
+
+/**
+ * ClusterUpdateVersionSafeguardMode represents the mode of the cluster update safeguards.
+ */
+@added(Versions.v2026_05_01_preview)
+union ClusterUpdateVersionSafeguardMode {
+  string,
+
+  /**
+   * Run all pre‑operation validation checks before performing the version update. If any check fails, the request is rejected and no changes are made.
+   */
+  All: "All",
+
+  /**
+   * Skip all safeguards and perform the version update without running pre‑operation validation checks.
+   */
+  None: "None",
+}
+
+/**
  * The type of command output for the override.
  */
 union CommandOutputType {
@@ -141,6 +177,12 @@ union CommandOutputType {
    * BareMetalMachineRunReadCommands output type
    */
   BareMetalMachineRunReadCommands: "BareMetalMachineRunReadCommands",
+
+  /**
+   * ClusterSupportAdministrativeActions output type supporting administrative actions that can be run on a cluster for support purposes.
+   */
+  @added(Versions.v2026_05_01_preview)
+  ClusterSupportAdministrativeActions: "ClusterSupportAdministrativeActions",
 
   /**
    * StorageRunReadCommands output type
@@ -555,6 +597,20 @@ model ClusterStatus {
    */
   @visibility(Lifecycle.Read)
   hybridAksExtendedLocation?: Foundations.ExtendedLocation;
+
+  /**
+   * The date and time of the end of the last successful version update for the cluster.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  lastSuccessfulVersionUpdateTime?: utcDateTime;
+
+  /**
+   * The list of credentials that are managed for the cluster and can be rotated on-demand.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  managedCredentials?: string[];
 
   /**
    * The count of Manual Action Taken (MAT) events that have not been validated.
@@ -1124,6 +1180,12 @@ model ClusterContinueUpdateVersionParameters {
    * The mode by which the cluster will target the next grouping of servers to continue the update.
    */
   machineGroupTargetingMode?: ClusterContinueUpdateVersionMachineGroupTargetingMode = ClusterContinueUpdateVersionMachineGroupTargetingMode.AlphaByRack;
+
+  /**
+   * Specifies how safeguards are applied during the continue update version operation. Use All to run all pre‑operation validation checks. Use None to bypass safeguards. If not specified, the default is All.
+   */
+  @added(Versions.v2026_05_01_preview)
+  safeguardMode?: ClusterContinueUpdateVersionSafeguardMode;
 }
 
 /**
@@ -1169,6 +1231,17 @@ model FilterDevices {
 }
 
 /**
+ * ClusterRotateCredentialParameters represents the body of the request to rotate cluster credentials.
+ */
+@added(Versions.v2026_05_01_preview)
+model ClusterRotateCredentialParameters {
+  /**
+   * The list of credential names for the credentials to rotate.
+   */
+  credentials: string[];
+}
+
+/**
  * ClusterScanRuntimeParameters defines the parameters for the cluster scan runtime operation.
  */
 model ClusterScanRuntimeParameters {
@@ -1182,6 +1255,12 @@ model ClusterScanRuntimeParameters {
  * ClusterUpdateVersionParameters represents the body of the request to update cluster version.
  */
 model ClusterUpdateVersionParameters {
+  /**
+   * Specifies how safeguards are applied during the update version operation. Use All to run all pre‑operation validation checks. Use None to bypass safeguards. If not specified, the default is All.
+   */
+  @added(Versions.v2026_05_01_preview)
+  safeguardMode?: ClusterUpdateVersionSafeguardMode;
+
   /**
    * The version to be applied to the cluster during update.
    */
