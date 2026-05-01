@@ -159,7 +159,7 @@ For each file type, read the corresponding instruction file(s) listed in "Author
 - For TypeSpec: Check the `Versions` enum for prior versions and review uses of `@added`, `@removed`, `@typeChangedFrom`.
 - Flag: removed properties, removed operations, type changes, narrowed enums, optional-to-required transitions, renamed paths.
 - If no previous version exists (new service), note this and skip the comparison.
-- **Record the previous version path** - it will be needed in Step 5 to classify issues as new vs. existing.
+- **Record the previous version path** - it will be needed in Step 4a to classify issues as new vs. existing.
 
 **How to fetch previous versions:** Use GitHub MCP `get_file_contents` with `ref: "main"` (or the PR's base branch) to fetch files from the previous API version folder. To discover which prior version folders exist, use `get_file_contents` to list the directory (e.g., `specification/<service>/resource-manager/<ResourceProviderNamespace>/stable/`) on the base branch.
 
@@ -198,7 +198,7 @@ When a PR adds or modifies a `readme.md` file that contains `directive` / `suppr
 
 Apply the full "TypeSpec Review Checklist Summary" from `typespec-review.instructions.md`. Key areas include project structure, decorators, versioning, ARM resource patterns, secret detection, suppressions, and anti-patterns.
 
-### Step 5: New vs. Existing Issue Classification
+### Step 4a: New vs. Existing Issue Classification
 
 After completing the systematic review of the new version, classify every identified issue as **New** or **Existing** by checking whether the same violation is present in the previous API version:
 
@@ -217,7 +217,7 @@ After completing the systematic review of the new version, classify every identi
 
 4. **Verification:** Do not guess - always load and read the previous version's spec file to confirm whether an issue is pre-existing. A wrong classification wastes reviewer time.
 
-### Step 6: Cross-File Consistency
+### Step 5: Cross-File Consistency
 
 When a PR modifies multiple files or versions:
 
@@ -228,29 +228,11 @@ When a PR modifies multiple files or versions:
 - Verify `readme.md` suppressions are consistent across versions - run the suppression continuity analysis described in Step 4 ("For `readme.md` suppression files").
 - For TypeSpec projects: verify generated OpenAPI under `stable/` or `preview/` is consistent with the `.tsp` source. If both are modified, confirm the JSON was regenerated (not hand-edited).
 
-### Step 6a: Check CI Results Before Posting
-
-Before reporting a finding, check whether the same violation is already flagged by a CI check. If a CI check already reports it, **do not post a duplicate comment**. Instead, add depth that the CI check cannot: explain _why_ it matters and _how_ to fix it.
-
-Key CI checks to cross-reference:
-
-| CI Check Name                   | What It Catches                                           | How to Avoid Duplicates                                         |
-| ------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------- |
-| `Swagger LintDiff`              | Linter rule violations (130+ rules)                       | Rules annotated `(Also enforced by: <ID>)` in instruction files |
-| `Swagger BreakingChange`        | Breaking changes vs. previous stable version              | Skip if the agent's Step 3 finds the same break                 |
-| `BreakingChange(Cross-Version)` | Breaking changes across all versions                      | Same as above                                                   |
-| `Swagger ModelValidation`       | Example files don't match operation schemas               | Skip if agent flags the same example mismatch                   |
-| `Swagger SemanticValidation`    | Structural OpenAPI errors (missing refs, invalid schemas) | Skip structural errors already reported                         |
-| `TypeSpec Validation`           | TypeSpec compilation errors                               | Skip if already failing in CI                                   |
-| `Swagger Avocado`               | readme.md input-file references don't match actual files  | Flag if agent finds missing files in tag configs                |
-
-When the agent finds an issue also caught by CI, the comment should reference the CI check: "_This is also flagged by the `Swagger LintDiff` CI check. See [aka.ms/ci-fix](https://aka.ms/ci-fix) for guidance on resolving CI failures._"
-
-### Step 7: Report Findings
+### Step 6: Report Findings
 
 **Line number requirement:** Before writing any finding, you MUST resolve the exact line number of the violation. Read the file content, count or search for the specific line, and cite it as `line <N>` (e.g., `line 42`). For multi-line issues, cite the range `line <start>-<end>` (e.g., `line 10-15`). Vague references like "near end of file", "around line N", or "in the middle of the file" are **forbidden** - every finding must have a verifiable line number. For OpenAPI JSON, also include the JSON path (e.g., `$.paths['/foo'].put.responses.200`).
 
-Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[EXISTING]` based on the classification from Step 5:
+Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[EXISTING]` based on the classification from Step 4a:
 
 ```markdown
 ## API Review: `<service-name>/<api-version>`
@@ -312,45 +294,7 @@ These issues also exist in the previous version (`<previous-version>`) and were 
 
 Use the rule IDs from the instruction files (e.g., `RPC-Put-V1-01`, `RPC-Patch-V1-10`, `ARG001`, `TSP-2.1`). For generic rules without an explicit ID, cite the section name (e.g., "Section 6.1 - Naming", "Section 9 - Collections & Pagination").
 
-### Severity Calibration
-
-#### 🔴 Blocking (must fix before merge)
-
-Use only when the rule says **MUST** and the violation is unambiguous:
-
-- Security: secrets in GET/PUT/PATCH responses, missing `x-ms-secret`
-- Breaking changes: removed properties, changed types, new required fields
-- Missing CRUD operations on tracked resources
-- Incorrect response codes (PUT returning 202, DELETE returning 404)
-- Missing `provisioningState` on async resources
-- Missing security definitions
-
-#### 🟡 Warning (should fix)
-
-Use when the rule says **SHOULD** or the violation has clear impact:
-
-- Missing descriptions on models/properties
-- `additionalProperties` on service-owned models
-- Boolean properties that should be enums
-- Suppressions without strong justification
-- Missing `x-ms-pageable` on collection operations
-
-#### 💡 Suggestion (optional improvement)
-
-Use for design trade-offs and best-practice recommendations:
-
-- Grey-area decisions (see `.github/skills/azure-api-review/references/design-decisions.md` DD-001 through DD-010)
-- Property naming improvements
-- Enum value ordering
-- Documentation quality improvements
-
-#### Skip (do not post)
-
-- Violations already flagged by CI linter checks (see Step 6a)
-- Style nits that don't affect SDK generation or customer experience
-- Issues in unchanged files not modified by the PR
-
-### Step 8: Post Review Comments on PR
+### Step 7: Post Review Comments on PR
 
 After presenting the review findings to the human reviewer for approval:
 
@@ -384,15 +328,14 @@ After presenting the review findings to the human reviewer for approval:
 8. Every posted comment **MUST** end with a hidden HTML telemetry marker as the very last line of the comment body. The marker format is:
 
    ```html
-   <!-- posted-by: arm-api-reviewer-agent | source: agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
+   <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
    ```
 
-   - **`source`**: Always `agent` for comments posted via this interactive agent. Automated Copilot Code Review uses `code-review` instead, enabling telemetry to distinguish the two posting mechanisms.
    - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`). Use `summary` for summary comments that don't flag a single rule.
    - **`severity`**: One of `blocking`, `warning`, or `suggestion`.
    - **`classification`**: One of `new` (introduced in this PR) or `existing` (pre-existing technical debt).
 
-   Example: `<!-- posted-by: arm-api-reviewer-agent | source: agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
+   Example: `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
 
    This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API, computing telemetry (comments per day, top rule violations, new-vs-existing ratio), and distinguishing agent comments from human comments during reconciliation. Do not omit this marker. All fields after `posted-by` are required.
 
@@ -408,28 +351,17 @@ After presenting the review findings to the human reviewer for approval:
     - Wait for the reviewer to approve the plan before executing.
 11. Do NOT post comments without the human reviewer's approval.
 
-#### Comment Volume Control
-
-Do not flood a PR with comments. Prioritize and cap:
-
-1. **Security issues** -- always post (no cap)
-2. **Breaking changes** -- always post (no cap)
-3. **ARM contract violations** -- post up to 15
-4. **Property design / naming** -- post up to 5
-5. **Documentation gaps** -- post up to 3
-
-If more findings exist beyond the cap, summarize them in a single comment: "_N additional warnings/suggestions were identified but not posted individually. Key themes: [list]. The author should review the full checklist in `armapi-review.instructions.md`._"
-
-### Step 9: Update PR Labels
+### Step 8: Update PR Labels
 
 After successfully posting review comments to the PR:
 
-1. **Propose label changes** to the human reviewer based on findings:
-   - **If any `🔴 Blocking` findings were posted:** **Add** `ARMChangesRequested` and **remove** `WaitForARMFeedback` (if present).
-   - **If no blocking findings were posted:** **Remove** `WaitForARMFeedback` (if present) to indicate ARM feedback has been provided. Do **not** add `ARMChangesRequested` -- there are no blocking changes to request.
+1. **Propose label changes** to the human reviewer:
+   - **Add** the `ARMChangesRequested` label to signal that the PR author needs to address review feedback.
+   - **Remove** the `WaitForARMFeedback` label (if present) since ARM feedback has now been provided.
 2. **Wait for explicit confirmation** from the human reviewer before adding or removing any labels. Do NOT modify labels without approval.
 3. Once approved, apply the label changes using the GitHub tools.
-4. Report to the human reviewer which labels were added and removed.
+4. If the PR does not have the `WaitForARMFeedback` label, skip the removal step and only propose adding `ARMChangesRequested`.
+5. Report to the human reviewer which labels were added and removed.
 
 ## Constraints
 
