@@ -1,0 +1,3309 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DeveloperHubServiceClient",
+    "version": "2025-03-01-preview",
+    "description": "The AKS Developer Hub Service Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Artifacts"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "IacProfile"
+    },
+    {
+      "name": "GitHubOAuth"
+    },
+    {
+      "name": "Workflow"
+    },
+    {
+      "name": "ADOOAuth"
+    },
+    {
+      "name": "Template"
+    },
+    {
+      "name": "VersionedTemplate"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DevHub/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Gets a list of operations.",
+        "description": "Returns list of operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available operations for the container service resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/iacProfiles": {
+      "get": {
+        "operationId": "IacProfiles_List",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Gets a list of IacProfiles associated with the specified subscription.",
+        "description": "Gets a list of IacProfiles associated with the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IacProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List IacProfiles": {
+            "$ref": "./examples/IacProfile_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth": {
+      "get": {
+        "operationId": "ADOOAuth_List",
+        "tags": [
+          "ADOOAuth"
+        ],
+        "summary": "Callback URL to hit once authenticated with ADO to have the service store the OAuth token.",
+        "description": "Callback URL to hit once authenticated with ADO to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ADO OAuth": {
+            "$ref": "./examples/ADOOAuthList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default": {
+      "get": {
+        "operationId": "ADOOAuth_Get",
+        "tags": [
+          "ADOOAuth"
+        ],
+        "summary": "Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.",
+        "description": "Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ADO OAuth Callback": {
+            "$ref": "./examples/ADOOAuthDefault.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default/getADOOAuthInfo": {
+      "post": {
+        "operationId": "GetADOOAuthInfo",
+        "tags": [
+          "ADOOAuth"
+        ],
+        "summary": "Gets ADOOAuth info used to authenticate users with ADO.",
+        "description": "Gets ADOOAuth info used to authenticate users with ADO.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The fields required in ADO OAuth call request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ADO OAuthInfo": {
+            "$ref": "./examples/ADOOAuthInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/generatePreviewArtifacts": {
+      "post": {
+        "operationId": "GeneratePreviewArtifacts",
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Generate preview dockerfile and manifests.",
+        "description": "Generate preview dockerfile and manifests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactGenerationProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifact Generation Properties": {
+            "$ref": "./examples/GeneratePreviewArtifacts.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth": {
+      "get": {
+        "operationId": "ListGitHubOAuth",
+        "tags": [
+          "GitHubOAuth"
+        ],
+        "summary": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
+        "description": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List GitHub OAuth": {
+            "$ref": "./examples/GitHubOAuth_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth/default": {
+      "get": {
+        "operationId": "GitHubOAuthCallback",
+        "tags": [
+          "GitHubOAuth"
+        ],
+        "summary": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
+        "description": "Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The code response from authenticating the GitHub App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "The state response from authenticating the GitHub App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GitHub OAuth Callback": {
+            "$ref": "./examples/GitHubOAuthCallback.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/githuboauth/default/getGitHubOAuthInfo": {
+      "post": {
+        "operationId": "GitHubOAuth",
+        "tags": [
+          "GitHubOAuth"
+        ],
+        "summary": "Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.",
+        "description": "Gets GitHubOAuth info used to authenticate users with the Developer Hub GitHub App.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GitHubOAuthInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GitHub OAuth": {
+            "$ref": "./examples/GitHubOAuth.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates": {
+      "get": {
+        "operationId": "Template_List",
+        "tags": [
+          "Template"
+        ],
+        "summary": "Gets a list of supported templates.",
+        "description": "Gets a list of supported templates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Templates": {
+            "$ref": "./examples/Template_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}": {
+      "get": {
+        "operationId": "Template_Get",
+        "tags": [
+          "Template"
+        ],
+        "summary": "Gets a list of supported templates.",
+        "description": "Gets a list of supported templates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The name of the Template.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Templates": {
+            "$ref": "./examples/Template_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions": {
+      "get": {
+        "operationId": "VersionedTemplate_List",
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "summary": "Gets a list of VersionedTemplate.",
+        "description": "Gets a list of VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The name of the Template.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VersionedTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions/{templateVersion}": {
+      "get": {
+        "operationId": "VersionedTemplate_Get",
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "summary": "Gets a VersionedTemplate.",
+        "description": "Gets a VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The name of the Template.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "templateVersion",
+            "in": "path",
+            "description": "The template version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VersionedTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions/{templateVersion}/generate": {
+      "post": {
+        "operationId": "VersionedTemplate_Generate",
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "summary": "Generates a VersionedTemplate.",
+        "description": "Generates a VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The name of the Template.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "templateVersion",
+            "in": "path",
+            "description": "The template version.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateVersionedTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_Generate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/workflows": {
+      "get": {
+        "operationId": "Workflow_List",
+        "tags": [
+          "Workflow"
+        ],
+        "summary": "Gets a list of workflows associated with the specified subscription.",
+        "description": "Gets a list of workflows associated with the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workflows": {
+            "$ref": "./examples/Workflow_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles": {
+      "get": {
+        "operationId": "IacProfiles_ListByResourceGroup",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Gets a list of iacProfiles within a resource group.",
+        "description": "Gets a list of iacProfiles within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IacProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List IacProfiles": {
+            "$ref": "./examples/IacProfile_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}": {
+      "get": {
+        "operationId": "IacProfiles_Get",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Gets a IacProfile.",
+        "description": "Gets a IacProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get IacProfile": {
+            "$ref": "./examples/IacProfile_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IacProfiles_CreateOrUpdate",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Creates or updates a IacProfile",
+        "description": "Creates or updates a IacProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IacProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'IacProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "IacProfiles_UpdateTags",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Updates tags on a IacProfile.",
+        "description": "Updates tags on a IacProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Update TagsObject Tags operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update IacProfile Tags": {
+            "$ref": "./examples/IacProfile_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "IacProfiles_Delete",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Deletes a IacProfile",
+        "description": "Deletes a IacProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete IacProfile": {
+            "$ref": "./examples/IacProfile_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/export": {
+      "post": {
+        "operationId": "IacProfiles_Export",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Export a template",
+        "description": "Export a template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/prLinkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_ExportTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/scale": {
+      "post": {
+        "operationId": "IacProfiles_Scale",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Scale by template",
+        "description": "Scale by template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScaleTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/prLinkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_ScaleTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/sync": {
+      "post": {
+        "operationId": "IacProfiles_Sync",
+        "tags": [
+          "IacProfile"
+        ],
+        "summary": "Sync template",
+        "description": "Sync template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "iacProfileName",
+            "in": "path",
+            "description": "The name of the IacProfile.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_SyncTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/workflows": {
+      "get": {
+        "operationId": "Workflow_ListByResourceGroup",
+        "tags": [
+          "Workflow"
+        ],
+        "summary": "Gets a list of workflows within a resource group.",
+        "description": "Gets a list of workflows within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedClusterResource",
+            "in": "query",
+            "description": "The ManagedCluster resource associated with the workflows.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workflows": {
+            "$ref": "./examples/Workflow_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/workflows/{workflowName}": {
+      "get": {
+        "operationId": "Workflow_Get",
+        "tags": [
+          "Workflow"
+        ],
+        "summary": "Gets a workflow.",
+        "description": "Gets a workflow.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "The name of the workflow resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workflow": {
+            "$ref": "./examples/Workflow_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workflow_CreateOrUpdate",
+        "tags": [
+          "Workflow"
+        ],
+        "summary": "Creates or updates a workflow",
+        "description": "Creates or updates a workflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "The name of the workflow resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Workflow' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workflow' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Template Workflow": {
+            "$ref": "./examples/Workflow_CreateOrUpdate_WithTemplateWorkflow.json"
+          },
+          "Create Workflow": {
+            "$ref": "./examples/Workflow_CreateOrUpdate.json"
+          },
+          "Create Workflow With Artifact Generation": {
+            "$ref": "./examples/Workflow_CreateOrUpdate_WithArtifactGen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Workflow_UpdateTags",
+        "tags": [
+          "Workflow"
+        ],
+        "summary": "Updates tags on a workflow.",
+        "description": "Updates tags on a workflow.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "The name of the workflow resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Update Workflow Tags operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Managed Cluster Tags": {
+            "$ref": "./examples/Workflow_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Workflow_Delete",
+        "tags": [
+          "Workflow"
+        ],
+        "summary": "Deletes a workflow",
+        "description": "Deletes a workflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "The name of the workflow resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteWorkflowResponse"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workflow": {
+            "$ref": "./examples/Workflow_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ACR": {
+      "type": "object",
+      "description": "Information on the azure container registry",
+      "properties": {
+        "acrSubscriptionId": {
+          "type": "string",
+          "description": "ACR subscription id"
+        },
+        "acrResourceGroup": {
+          "type": "string",
+          "description": "ACR resource group"
+        },
+        "acrRegistryName": {
+          "type": "string",
+          "description": "ACR registry"
+        },
+        "acrRepositoryName": {
+          "type": "string",
+          "description": "ACR repository"
+        }
+      }
+    },
+    "ADOOAuth": {
+      "type": "object",
+      "description": "The properties of ADO OAuth.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "user making request"
+        }
+      }
+    },
+    "ADOOAuthCallRequest": {
+      "type": "object",
+      "description": "ADOOAuth request object",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "The URL the client will redirect to on successful authentication. If empty, no redirect will occur."
+        }
+      }
+    },
+    "ADOOAuthInfoResponse": {
+      "type": "object",
+      "description": "Response containing ADO OAuth information",
+      "properties": {
+        "authURL": {
+          "type": "string",
+          "description": "URL used to authorize ADO app using Entra ID"
+        },
+        "token": {
+          "type": "string",
+          "description": "OAuth token used to make calls to ADO APIs"
+        }
+      }
+    },
+    "ADOOAuthListResponse": {
+      "type": "object",
+      "description": "The response from List ADOOAuth operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AdooAuthResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/ADOOAuthResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ADOOAuthResponse": {
+      "type": "object",
+      "description": "Singleton response of ADO OAuth.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADOOAuth",
+          "description": "Details of ADO OAuth."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ADOProviderProfile": {
+      "type": "object",
+      "description": "Details of the GitHub repository associated with the workflow.",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/ADORepository",
+          "description": "Details of the ADO repository associated with the workflow."
+        },
+        "armServiceConnection": {
+          "type": "string",
+          "description": "The name of the ARM Service Connection the pipeline is associated with."
+        }
+      }
+    },
+    "ADORepository": {
+      "type": "object",
+      "description": "Details of the ADO repository associated with the workflow.",
+      "properties": {
+        "repositoryOwner": {
+          "type": "string",
+          "description": "The owner of the repository the workflow is associated with."
+        },
+        "repositoryName": {
+          "type": "string",
+          "description": "The name of the repository the workflow is associated with."
+        },
+        "branchName": {
+          "type": "string",
+          "description": "The name of the branch the workflow is associated with."
+        },
+        "adoOrganization": {
+          "type": "string",
+          "description": "The name of the Azure DevOps organization the pipeline is associated with."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The name of the project the pipeline is associated with."
+        }
+      }
+    },
+    "ArtifactGenerationProperties": {
+      "type": "object",
+      "title": "Artifact Generation Properties",
+      "description": "Properties used for generating artifacts such as Dockerfiles and manifests.",
+      "properties": {
+        "generationLanguage": {
+          "$ref": "#/definitions/GenerationLanguage",
+          "description": "The programming language used."
+        },
+        "languageVersion": {
+          "type": "string",
+          "description": "The version of the language image used for execution in the generated dockerfile."
+        },
+        "builderVersion": {
+          "type": "string",
+          "description": "The version of the language image used for building the code in the generated dockerfile."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port the application is exposed on."
+        },
+        "appName": {
+          "type": "string",
+          "description": "The name of the app."
+        },
+        "dockerfileOutputDirectory": {
+          "type": "string",
+          "description": "The directory to output the generated Dockerfile to."
+        },
+        "manifestOutputDirectory": {
+          "type": "string",
+          "description": "The directory to output the generated manifests to."
+        },
+        "dockerfileGenerationMode": {
+          "$ref": "#/definitions/DockerfileGenerationMode",
+          "description": "The mode of generation to be used for generating Dockerfiles."
+        },
+        "manifestGenerationMode": {
+          "$ref": "#/definitions/ManifestGenerationMode",
+          "description": "The mode of generation to be used for generating Manifest."
+        },
+        "manifestType": {
+          "$ref": "#/definitions/GenerationManifestType",
+          "description": "Determines the type of manifests to be generated."
+        },
+        "imageName": {
+          "type": "string",
+          "description": "The name of the image to be generated."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace to deploy the application to."
+        },
+        "imageTag": {
+          "type": "string",
+          "description": "The tag to apply to the generated image."
+        }
+      }
+    },
+    "AuthorizationStatus": {
+      "type": "string",
+      "description": "Determines the authorization status of requests.",
+      "enum": [
+        "Authorized",
+        "NotFound",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorizationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Authorized",
+            "value": "Authorized",
+            "description": "Requests authorized successfully"
+          },
+          {
+            "name": "NotFound",
+            "value": "NotFound",
+            "description": "Requests returned NotFound response"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Requests returned other error response"
+          }
+        ]
+      }
+    },
+    "AzurePipelineProfile": {
+      "type": "object",
+      "description": "Azure Pipeline Profile",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/ADORepository",
+          "description": "Details of the ADO repository associated with the workflow."
+        },
+        "armServiceConnection": {
+          "type": "string",
+          "description": "The name of the ARM Service Connection the pipeline is associated with."
+        },
+        "build": {
+          "$ref": "#/definitions/Build",
+          "description": "Build details of the repository associated with the workflow."
+        },
+        "deployment": {
+          "$ref": "#/definitions/Deployment",
+          "description": "Deployment details of the repository associated with the workflow."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace the application is deployed to."
+        },
+        "acr": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource identifier for azure container registry repository associated with the workflow.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          }
+        },
+        "clusterId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Kubernetes Cluster Resource the application will be deployed to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/managedClusters"
+              }
+            ]
+          }
+        },
+        "pullRequest": {
+          "$ref": "#/definitions/PullRequest",
+          "description": "Details of the pull request containing the workflow."
+        },
+        "lastWorkflowRun": {
+          "$ref": "#/definitions/WorkflowRun"
+        },
+        "authStatus": {
+          "$ref": "#/definitions/AuthorizationStatus",
+          "description": "Determines the authorization status of requests.",
+          "readOnly": true
+        }
+      }
+    },
+    "Build": {
+      "type": "object",
+      "description": "Build details of the repository associated with the workflow.",
+      "properties": {
+        "dockerfile": {
+          "type": "string",
+          "description": "Path to the Dockerfile within the repository."
+        },
+        "dockerBuildContext": {
+          "type": "string",
+          "description": "Path to Dockerfile Build Context within the repository."
+        }
+      }
+    },
+    "DeleteWorkflowResponse": {
+      "type": "object",
+      "description": "delete response if content must be provided on delete operation",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "delete status message"
+        }
+      }
+    },
+    "Deployment": {
+      "type": "object",
+      "description": "Deployment details of the repository associated with the workflow.",
+      "properties": {
+        "manifestType": {
+          "$ref": "#/definitions/ManifestType",
+          "description": "Determines the type of manifests within the repository."
+        },
+        "kubeManifestLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "helmChartPath": {
+          "type": "string",
+          "description": "Helm chart directory path in repository."
+        },
+        "helmValues": {
+          "type": "string",
+          "description": "Helm Values.yaml file location in repository."
+        },
+        "overrides": {
+          "type": "object",
+          "title": "Manifest override values.",
+          "description": "Manifest override values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DockerfileGenerationMode": {
+      "type": "string",
+      "description": "The mode of generation to be used for generating Dockerfiles.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DockerfileGenerationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "enabled",
+            "value": "enabled",
+            "description": "Dockerfiles will be generated"
+          },
+          {
+            "name": "disabled",
+            "value": "disabled",
+            "description": "Dockerfiles will not be generated"
+          }
+        ]
+      }
+    },
+    "ExportTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "resourceGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "instanceName": {
+          "type": "string"
+        },
+        "instanceStage": {
+          "type": "string"
+        }
+      }
+    },
+    "GenerateVersionedTemplateResponse": {
+      "type": "object",
+      "description": "Generated template files returned as a map<path string,content string>",
+      "properties": {
+        "generatedFiles": {
+          "type": "object",
+          "description": "files returned as a map<path string,content string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GenerationLanguage": {
+      "type": "string",
+      "description": "The programming language used.",
+      "enum": [
+        "clojure",
+        "csharp",
+        "erlang",
+        "go",
+        "gomodule",
+        "gradle",
+        "java",
+        "javascript",
+        "php",
+        "python",
+        "ruby",
+        "rust",
+        "swift"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "clojure",
+            "value": "clojure",
+            "description": "clojure language"
+          },
+          {
+            "name": "csharp",
+            "value": "csharp",
+            "description": "csharp language"
+          },
+          {
+            "name": "erlang",
+            "value": "erlang",
+            "description": "erlang language"
+          },
+          {
+            "name": "go",
+            "value": "go",
+            "description": "go language"
+          },
+          {
+            "name": "gomodule",
+            "value": "gomodule",
+            "description": "gomodule language"
+          },
+          {
+            "name": "gradle",
+            "value": "gradle",
+            "description": "gradle language"
+          },
+          {
+            "name": "java",
+            "value": "java",
+            "description": "java language"
+          },
+          {
+            "name": "javascript",
+            "value": "javascript",
+            "description": "javascript language"
+          },
+          {
+            "name": "php",
+            "value": "php",
+            "description": "php language"
+          },
+          {
+            "name": "python",
+            "value": "python",
+            "description": "python language"
+          },
+          {
+            "name": "ruby",
+            "value": "ruby",
+            "description": "ruby language"
+          },
+          {
+            "name": "rust",
+            "value": "rust",
+            "description": "rust language"
+          },
+          {
+            "name": "swift",
+            "value": "swift",
+            "description": "swift language"
+          }
+        ]
+      }
+    },
+    "GenerationManifestType": {
+      "type": "string",
+      "description": "Determines the type of manifests to be generated.",
+      "enum": [
+        "helm",
+        "kube"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationManifestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "helm",
+            "value": "helm",
+            "description": "Helm manifests"
+          },
+          {
+            "name": "kube",
+            "value": "kube",
+            "description": "Kubernetes manifests"
+          }
+        ]
+      }
+    },
+    "GitHubOAuthCallRequest": {
+      "type": "object",
+      "description": "GitHubOAuth request object",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "The URL the client will redirect to on successful authentication. If empty, no redirect will occur."
+        }
+      }
+    },
+    "GitHubOAuthInfoResponse": {
+      "type": "object",
+      "description": "URL used to authorize the Developer Hub GitHub App",
+      "properties": {
+        "authURL": {
+          "type": "string",
+          "description": "URL for authorizing the Developer Hub GitHub App"
+        },
+        "token": {
+          "type": "string",
+          "description": "OAuth token used to make calls to GitHub"
+        }
+      }
+    },
+    "GitHubOAuthListResponse": {
+      "type": "object",
+      "description": "The response from List GitHubOAuth operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Singleton list response containing one GitHubOAuthResponse response",
+          "items": {
+            "$ref": "#/definitions/GitHubOAuthResponse"
+          }
+        }
+      }
+    },
+    "GitHubOAuthProperties": {
+      "type": "object",
+      "description": "The response from List GitHubOAuth operation.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "user making request"
+        }
+      }
+    },
+    "GitHubOAuthResponse": {
+      "type": "object",
+      "description": "Singleton response of GitHubOAuth containing",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GitHubOAuthProperties",
+          "description": "Properties of a workflow."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GitHubProviderProfile": {
+      "type": "object",
+      "description": "Details of the GitHub repository and credentials associated with the workflow.",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/GitHubRepository",
+          "description": "Details of the GitHub repository associated with the workflow."
+        },
+        "oidcCredentials": {
+          "$ref": "#/definitions/OidcCredentials",
+          "description": "The fields needed for OIDC with GitHub."
+        }
+      }
+    },
+    "GitHubRepository": {
+      "type": "object",
+      "description": "Details of the GitHub repository associated with the workflow.",
+      "properties": {
+        "repositoryOwner": {
+          "type": "string",
+          "description": "The owner of the repository the workflow is associated with."
+        },
+        "repositoryName": {
+          "type": "string",
+          "description": "The name of the repository the workflow is associated with."
+        },
+        "branchName": {
+          "type": "string",
+          "description": "The name of the branch the workflow is associated with."
+        }
+      }
+    },
+    "GitHubWorkflowProfile": {
+      "type": "object",
+      "description": "GitHub Workflow Profile",
+      "properties": {
+        "repositoryOwner": {
+          "type": "string",
+          "title": "The owner of the repository the workflow is associated with.",
+          "description": "Repository Owner"
+        },
+        "repositoryName": {
+          "type": "string",
+          "title": "The name of the repository the workflow is associated with.",
+          "description": "Repository Name"
+        },
+        "branchName": {
+          "type": "string",
+          "title": "The name of the branch the workflow is associated with.",
+          "description": "Repository Branch Name"
+        },
+        "dockerfile": {
+          "type": "string",
+          "title": "Path to Dockerfile within the repository.",
+          "description": "Path to the Dockerfile within the repository."
+        },
+        "dockerBuildContext": {
+          "type": "string",
+          "title": "Path to Dockerfile Build Context within the repository.",
+          "description": "Path to Dockerfile Build Context within the repository."
+        },
+        "deploymentProperties": {
+          "$ref": "#/definitions/Deployment",
+          "description": "Deployment details of the repository associated with the workflow."
+        },
+        "namespace": {
+          "type": "string",
+          "title": "The Kubernetes namespace the application is deployed to",
+          "description": "Kubernetes namespace the application is deployed to."
+        },
+        "acr": {
+          "$ref": "#/definitions/ACR",
+          "description": "Information on the azure container registry"
+        },
+        "oidcCredentials": {
+          "$ref": "#/definitions/GitHubWorkflowProfileOidcCredentials",
+          "description": "The fields needed for OIDC with GitHub."
+        },
+        "aksResourceId": {
+          "type": "string",
+          "title": "The Azure Kubernetes Managed Cluster resource.",
+          "description": "The Azure Kubernetes Cluster Resource the application will be deployed to."
+        },
+        "prURL": {
+          "type": "string",
+          "description": "The URL to the Pull Request submitted against the users repository.",
+          "readOnly": true
+        },
+        "pullNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number associated with the submitted pull request.",
+          "readOnly": true
+        },
+        "prStatus": {
+          "$ref": "#/definitions/PullRequestStatus",
+          "description": "The status of the Pull Request submitted against the users repository.",
+          "readOnly": true
+        },
+        "lastWorkflowRun": {
+          "$ref": "#/definitions/WorkflowRun"
+        },
+        "authStatus": {
+          "$ref": "#/definitions/AuthorizationStatus",
+          "description": "Determines the authorization status of requests.",
+          "readOnly": true
+        }
+      }
+    },
+    "GitHubWorkflowProfileOidcCredentials": {
+      "type": "object",
+      "description": "The fields needed for OIDC with GitHub.",
+      "properties": {
+        "azureClientId": {
+          "type": "string",
+          "description": "Azure Application Client ID"
+        },
+        "azureTenantId": {
+          "type": "string",
+          "description": "Azure Directory (tenant) ID"
+        }
+      }
+    },
+    "IacGitHubProfile": {
+      "type": "object",
+      "description": "GitHub Profile of a IacProfile.",
+      "properties": {
+        "repositoryName": {
+          "type": "string",
+          "title": "The name of the repository the IacProfile is associated with.",
+          "description": "Repository Name"
+        },
+        "repositoryMainBranch": {
+          "type": "string",
+          "title": "The name of the main branch of the repository the IacProfile is associated with.",
+          "description": "Repository Main Branch"
+        },
+        "repositoryOwner": {
+          "type": "string",
+          "title": "The owner of the repository the IacProfile is associated with.",
+          "description": "Repository Owner"
+        },
+        "authStatus": {
+          "$ref": "#/definitions/AuthorizationStatus",
+          "description": "Determines the authorization status of requests.",
+          "readOnly": true
+        },
+        "pullNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number associated with the submitted pull request.",
+          "readOnly": true
+        },
+        "prStatus": {
+          "$ref": "#/definitions/PullRequestStatus",
+          "description": "The status of the Pull Request submitted against the users repository.",
+          "readOnly": true
+        },
+        "branchName": {
+          "type": "string",
+          "title": "The name of the branch current operation is associated with.",
+          "description": "Repository Branch Name"
+        }
+      }
+    },
+    "IacProfile": {
+      "type": "object",
+      "title": "IacProfile",
+      "description": "Resource representation of a IacProfile.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IacProfileProperties",
+          "description": "Properties of a IacProfile.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "IacProfileListResult": {
+      "type": "object",
+      "description": "The response of a IacProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IacProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/IacProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IacProfileProperties": {
+      "type": "object",
+      "description": "Properties of a IacProfile.",
+      "properties": {
+        "githubProfile": {
+          "$ref": "#/definitions/IacGitHubProfile",
+          "description": "GitHub Profile of a IacProfile",
+          "x-ms-client-flatten": true
+        },
+        "terraformProfile": {
+          "$ref": "#/definitions/TerraformProfile",
+          "description": "Terraform Profile of a IacProfile",
+          "x-ms-client-flatten": true
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StageProperties"
+          }
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IacTemplateProperties"
+          }
+        }
+      }
+    },
+    "IacTemplateDetails": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "string",
+          "description": "The name of the products."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of the product"
+        },
+        "namingConvention": {
+          "type": "string",
+          "description": "Naming convention of this product"
+        }
+      }
+    },
+    "IacTemplateProperties": {
+      "type": "object",
+      "description": "Properties of a IacTemplate.",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "title": "The source resource Id of the template.",
+          "description": "the source store of the template"
+        },
+        "instanceStage": {
+          "type": "string",
+          "title": "The sample instance stage of the template.",
+          "description": "the source stage of the template"
+        },
+        "instanceName": {
+          "type": "string",
+          "title": "The sample instance name of the template.",
+          "description": "the sample instance name of the template"
+        },
+        "templateDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IacTemplateDetails"
+          }
+        },
+        "quickStartTemplateType": {
+          "$ref": "#/definitions/QuickStartTemplateType",
+          "description": "Determines the authorization status of requests.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManifestGenerationMode": {
+      "type": "string",
+      "description": "The mode of generation to be used for generating Manifest.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ManifestGenerationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "enabled",
+            "value": "enabled",
+            "description": "Manifests will be generated"
+          },
+          {
+            "name": "disabled",
+            "value": "disabled",
+            "description": "Manifests will not be generated"
+          }
+        ]
+      }
+    },
+    "ManifestType": {
+      "type": "string",
+      "description": "Determines the type of manifests within the repository.",
+      "enum": [
+        "helm",
+        "kube",
+        "kustomize"
+      ],
+      "x-ms-enum": {
+        "name": "ManifestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "helm",
+            "value": "helm",
+            "description": "Repositories using helm"
+          },
+          {
+            "name": "kube",
+            "value": "kube",
+            "description": "Repositories using kubernetes manifests"
+          },
+          {
+            "name": "kustomize",
+            "value": "kustomize",
+            "description": "Repositories using kustomize"
+          }
+        ]
+      }
+    },
+    "OidcCredentials": {
+      "type": "object",
+      "description": "The fields needed for OIDC with GitHub.",
+      "properties": {
+        "azureClientId": {
+          "type": "string",
+          "description": "Azure Application Client ID"
+        },
+        "azureTenantId": {
+          "type": "string",
+          "description": "Azure Directory (tenant) ID"
+        }
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "description": "Parameter for the template.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Parameter name",
+          "description": "The paramater name."
+        },
+        "description": {
+          "type": "string",
+          "title": "Parameter description",
+          "description": "Description of what the paramater is used for."
+        },
+        "parameterType": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "The type of the template parameter.",
+          "readOnly": true
+        },
+        "parameterKind": {
+          "$ref": "#/definitions/ParameterKind",
+          "description": "The type of the template parameter.",
+          "readOnly": true
+        },
+        "required": {
+          "type": "boolean",
+          "title": "Parameter required",
+          "description": "Whether the parameter is required."
+        },
+        "default": {
+          "$ref": "#/definitions/ParameterDefault",
+          "description": "A reference to a default parameter value or a reference parameter to take the value from."
+        }
+      }
+    },
+    "ParameterDefault": {
+      "type": "object",
+      "description": "A reference to a default parameter value or a reference parameter to take the value from.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "title": "ParameterDefault value",
+          "description": "The default value for this parameter."
+        },
+        "referenceParameter": {
+          "type": "string",
+          "title": "ParameterDefault Reference Parameter",
+          "description": "The Parameter to reference a value from."
+        }
+      }
+    },
+    "ParameterKind": {
+      "type": "string",
+      "description": "The type of the template parameter.",
+      "enum": [
+        "azureContainerRegistry",
+        "azureKeyvaultUri",
+        "azureManagedCluster",
+        "azureResourceGroup",
+        "azureServiceConnection",
+        "containerImageName",
+        "containerImageVersion",
+        "clusterResourceType",
+        "dirPath",
+        "dockerFileName",
+        "envVarMap",
+        "filePath",
+        "flag",
+        "helmChartOverrides",
+        "imagePullPolicy",
+        "ingressHostName",
+        "kubernetesNamespace",
+        "kubernetesProbeHttpPath",
+        "kubernetesProbePeriod",
+        "kubernetesProbeTimeout",
+        "kubernetesProbeThreshold",
+        "kubernetesProbeType",
+        "kubernetesProbeDelay",
+        "kubernetesResourceLimit",
+        "kubernetesResourceName",
+        "kubernetesResourceRequest",
+        "label",
+        "port",
+        "repositoryBranch",
+        "workflowName",
+        "replicaCount",
+        "scalingResourceType",
+        "scalingResourceUtilization",
+        "resourceLimit",
+        "workflowAuthType"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azureContainerRegistry",
+            "value": "azureContainerRegistry",
+            "description": "azure container registry name"
+          },
+          {
+            "name": "azureKeyvaultUri",
+            "value": "azureKeyvaultUri",
+            "description": "azure keyvault uri"
+          },
+          {
+            "name": "azureManagedCluster",
+            "value": "azureManagedCluster",
+            "description": "azure managed cluster name"
+          },
+          {
+            "name": "azureResourceGroup",
+            "value": "azureResourceGroup",
+            "description": "azure resource group"
+          },
+          {
+            "name": "azureServiceConnection",
+            "value": "azureServiceConnection",
+            "description": "azure service connection"
+          },
+          {
+            "name": "containerImageName",
+            "value": "containerImageName",
+            "description": "container image name"
+          },
+          {
+            "name": "containerImageVersion",
+            "value": "containerImageVersion",
+            "description": "container image version"
+          },
+          {
+            "name": "clusterResourceType",
+            "value": "clusterResourceType",
+            "description": "cluster resource type"
+          },
+          {
+            "name": "dirPath",
+            "value": "dirPath",
+            "description": "directory path"
+          },
+          {
+            "name": "dockerFileName",
+            "value": "dockerFileName",
+            "description": "dockerfile name"
+          },
+          {
+            "name": "envVarMap",
+            "value": "envVarMap",
+            "description": "environment variables in the form of a json object"
+          },
+          {
+            "name": "filePath",
+            "value": "filePath",
+            "description": "file path"
+          },
+          {
+            "name": "flag",
+            "value": "flag",
+            "description": "boolean flag"
+          },
+          {
+            "name": "helmChartOverrides",
+            "value": "helmChartOverrides",
+            "description": "helm overrides in the form of a string key1=value1,key2=value2"
+          },
+          {
+            "name": "imagePullPolicy",
+            "value": "imagePullPolicy",
+            "description": "kubernetes deployment image pull policy"
+          },
+          {
+            "name": "ingressHostName",
+            "value": "ingressHostName",
+            "description": "kubernetes ingress host name"
+          },
+          {
+            "name": "kubernetesNamespace",
+            "value": "kubernetesNamespace",
+            "description": "kubernetes namespace"
+          },
+          {
+            "name": "kubernetesProbeHttpPath",
+            "value": "kubernetesProbeHttpPath",
+            "description": "kubernetes probe http path"
+          },
+          {
+            "name": "kubernetesProbePeriod",
+            "value": "kubernetesProbePeriod",
+            "description": "kubernetes probe period"
+          },
+          {
+            "name": "kubernetesProbeTimeout",
+            "value": "kubernetesProbeTimeout",
+            "description": "kubernetes probe timeout"
+          },
+          {
+            "name": "kubernetesProbeThreshold",
+            "value": "kubernetesProbeThreshold",
+            "description": "kubernetes probe threshold"
+          },
+          {
+            "name": "kubernetesProbeType",
+            "value": "kubernetesProbeType",
+            "description": "kubernetes probe type"
+          },
+          {
+            "name": "kubernetesProbeDelay",
+            "value": "kubernetesProbeDelay",
+            "description": "kubernetes probe delay"
+          },
+          {
+            "name": "kubernetesResourceLimit",
+            "value": "kubernetesResourceLimit",
+            "description": "kubernetes resource limit"
+          },
+          {
+            "name": "kubernetesResourceName",
+            "value": "kubernetesResourceName",
+            "description": "kubernetes resource name"
+          },
+          {
+            "name": "kubernetesResourceRequest",
+            "value": "kubernetesResourceRequest",
+            "description": "kubernetes resource request"
+          },
+          {
+            "name": "label",
+            "value": "label",
+            "description": "kubernetes label value"
+          },
+          {
+            "name": "port",
+            "value": "port",
+            "description": "service port"
+          },
+          {
+            "name": "repositoryBranch",
+            "value": "repositoryBranch",
+            "description": "repository branch name"
+          },
+          {
+            "name": "workflowName",
+            "value": "workflowName",
+            "description": "workflow name"
+          },
+          {
+            "name": "replicaCount",
+            "value": "replicaCount",
+            "description": "kubernetes replica count"
+          },
+          {
+            "name": "scalingResourceType",
+            "value": "scalingResourceType",
+            "description": "kubernetes scaling resource type"
+          },
+          {
+            "name": "scalingResourceUtilization",
+            "value": "scalingResourceUtilization",
+            "description": "kubernetes resource utilization type"
+          },
+          {
+            "name": "resourceLimit",
+            "value": "resourceLimit",
+            "description": "kubernetes resource limit"
+          },
+          {
+            "name": "workflowAuthType",
+            "value": "workflowAuthType",
+            "description": "workflow authentication type"
+          }
+        ]
+      }
+    },
+    "ParameterType": {
+      "type": "string",
+      "description": "The type of the template parameter.",
+      "enum": [
+        "string",
+        "bool",
+        "int",
+        "float",
+        "object"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "string",
+            "value": "string",
+            "description": "string parameter type."
+          },
+          {
+            "name": "bool",
+            "value": "bool",
+            "description": "boolean parameter type."
+          },
+          {
+            "name": "int",
+            "value": "int",
+            "description": "int parameter type."
+          },
+          {
+            "name": "float",
+            "value": "float",
+            "description": "float parameter type."
+          },
+          {
+            "name": "object",
+            "value": "object",
+            "description": "object parameter type."
+          }
+        ]
+      }
+    },
+    "PullRequest": {
+      "type": "object",
+      "description": "Details of the pull request containing the workflow.",
+      "properties": {
+        "prURL": {
+          "type": "string",
+          "description": "The URL to the Pull Request submitted against the users repository.",
+          "readOnly": true
+        },
+        "pullNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number associated with the submitted pull request.",
+          "readOnly": true
+        },
+        "prStatus": {
+          "$ref": "#/definitions/PullRequestStatus",
+          "description": "The status of the Pull Request submitted against the users repository.",
+          "readOnly": true
+        }
+      }
+    },
+    "PullRequestStatus": {
+      "type": "string",
+      "description": "The status of the Pull Request submitted against the users repository.",
+      "enum": [
+        "unknown",
+        "submitted",
+        "merged",
+        "removed"
+      ],
+      "x-ms-enum": {
+        "name": "PullRequestStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Pull Request state unknown."
+          },
+          {
+            "name": "submitted",
+            "value": "submitted",
+            "description": "Pull Request submitted to repository."
+          },
+          {
+            "name": "merged",
+            "value": "merged",
+            "description": "Pull Request merged into repository."
+          },
+          {
+            "name": "removed",
+            "value": "removed",
+            "description": "Workflow no longer found within repository."
+          }
+        ]
+      }
+    },
+    "QuickStartTemplateType": {
+      "type": "string",
+      "description": "Determines the authorization status of requests.",
+      "enum": [
+        "None",
+        "HCI",
+        "HCIAKS",
+        "HCIARCVM"
+      ],
+      "x-ms-enum": {
+        "name": "QuickStartTemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The template has not use quick start template"
+          },
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "The template use quick start template of HCI"
+          },
+          {
+            "name": "HCIAKS",
+            "value": "HCIAKS",
+            "description": "The template use quick start template of HCI and AKS"
+          },
+          {
+            "name": "HCIARCVM",
+            "value": "HCIARCVM",
+            "description": "The template use quick start template of HCI and ArcVM"
+          }
+        ]
+      }
+    },
+    "RepositoryProviderType": {
+      "type": "string",
+      "description": "The status of the Pull Request submitted against the users repository.",
+      "enum": [
+        "github",
+        "ado"
+      ],
+      "x-ms-enum": {
+        "name": "RepositoryProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "github",
+            "value": "github",
+            "description": "GitHub repository provider type."
+          },
+          {
+            "name": "ado",
+            "value": "ado",
+            "description": "ADO repository provider type."
+          }
+        ]
+      }
+    },
+    "ScaleProperty": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "The region of the store"
+        },
+        "stage": {
+          "type": "string",
+          "description": "The stage of the store"
+        },
+        "numberOfStore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of the store"
+        }
+      }
+    },
+    "ScaleTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "scaleRequirement": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleProperty"
+          }
+        }
+      }
+    },
+    "StageProperties": {
+      "type": "object",
+      "description": "Properties of a Stage.",
+      "properties": {
+        "stageName": {
+          "type": "string",
+          "title": "The name of the stage.",
+          "description": "Stage Name"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gitEnvironment": {
+          "type": "string"
+        }
+      }
+    },
+    "TagsObject": {
+      "type": "object",
+      "description": "Resource tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Template": {
+      "type": "object",
+      "title": "Template",
+      "description": "Resource representation of a Template",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TemplateProperties",
+          "description": "Properties of a Template."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TemplateListResult": {
+      "type": "object",
+      "description": "The response of a Template list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Template items on this page",
+          "items": {
+            "$ref": "#/definitions/Template"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TemplateProperties": {
+      "type": "object",
+      "description": "Template properties",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "Template Name",
+          "description": "The name of the template."
+        },
+        "defaultVersion": {
+          "type": "string",
+          "title": "Template Default Version",
+          "description": "The default version of the template."
+        },
+        "versions": {
+          "type": "array",
+          "title": "Template Versions",
+          "description": "The valid versions of the template.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "title": "Template Description",
+          "description": "Description of the template"
+        },
+        "templateType": {
+          "$ref": "#/definitions/TemplateType",
+          "description": "The type of the template.",
+          "readOnly": true
+        }
+      }
+    },
+    "TemplateReference": {
+      "type": "object",
+      "description": "The properties of ADO OAuth.",
+      "properties": {
+        "templateId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The versioned template arm resource id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DevHub/templates/versions"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "type": "string",
+          "description": "destination for template creation"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "parameters for template creation",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TemplateType": {
+      "type": "string",
+      "description": "The type of the template.",
+      "enum": [
+        "deployment",
+        "manifest",
+        "workflow",
+        "dockerfile"
+      ],
+      "x-ms-enum": {
+        "name": "TemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "deployment",
+            "value": "deployment",
+            "description": "Deployment template type."
+          },
+          {
+            "name": "manifest",
+            "value": "manifest",
+            "description": "Manifest template type."
+          },
+          {
+            "name": "workflow",
+            "value": "workflow",
+            "description": "Workflow template type."
+          },
+          {
+            "name": "dockerfile",
+            "value": "dockerfile",
+            "description": "Dockerfile template type."
+          }
+        ]
+      }
+    },
+    "TemplateWorkflowProfile": {
+      "type": "object",
+      "description": "Template Workflow Profile",
+      "properties": {
+        "repositoryProvider": {
+          "$ref": "#/definitions/RepositoryProviderType",
+          "description": "The status of the Pull Request submitted against the users repository."
+        },
+        "workflowTemplate": {
+          "$ref": "#/definitions/TemplateReference",
+          "description": "The properties of ADO OAuth."
+        },
+        "deploymentTemplate": {
+          "$ref": "#/definitions/TemplateReference",
+          "description": "The properties of ADO OAuth."
+        },
+        "dockerfileTemplate": {
+          "$ref": "#/definitions/TemplateReference",
+          "description": "The properties of ADO OAuth."
+        },
+        "manifestTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateReference"
+          }
+        },
+        "gitHubProviderProfile": {
+          "$ref": "#/definitions/GitHubProviderProfile",
+          "description": "Details of the GitHub repository and credentials associated with the workflow."
+        },
+        "adoProviderProfile": {
+          "$ref": "#/definitions/ADOProviderProfile",
+          "description": "Details of the GitHub repository associated with the workflow."
+        },
+        "pullRequest": {
+          "$ref": "#/definitions/PullRequest",
+          "description": "Details of the pull request containing the workflow."
+        },
+        "lastWorkflowRun": {
+          "$ref": "#/definitions/WorkflowRun"
+        },
+        "authStatus": {
+          "$ref": "#/definitions/AuthorizationStatus",
+          "description": "Determines the authorization status of requests.",
+          "readOnly": true
+        }
+      }
+    },
+    "TerraformProfile": {
+      "type": "object",
+      "description": "Terraform backend profile.",
+      "properties": {
+        "storageAccountSubscription": {
+          "type": "string",
+          "title": "The subscription id of the storage account that save terraform state.",
+          "description": "Terraform Storage Account Subscription"
+        },
+        "storageAccountResourceGroup": {
+          "type": "string",
+          "title": "The resource group of the storage account that save terraform state.",
+          "description": "Terraform Storage Account Resource Group"
+        },
+        "storageAccountName": {
+          "type": "string",
+          "title": "The name of the storage account that save terraform state.",
+          "description": "Terraform Storage Account Name"
+        },
+        "storageContainerName": {
+          "type": "string",
+          "title": "The name of the container that save terraform state.",
+          "description": "Terraform Container Name"
+        }
+      }
+    },
+    "VersionedTemplate": {
+      "type": "object",
+      "title": "VersionedTemplate",
+      "description": "Resource representation of a VersionedTemplate",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VersionedTemplateProperties",
+          "description": "Properties of a VersionedTemplate."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VersionedTemplateListResult": {
+      "type": "object",
+      "description": "The response of a VersionedTemplate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VersionedTemplate items on this page",
+          "items": {
+            "$ref": "#/definitions/VersionedTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VersionedTemplateProperties": {
+      "type": "object",
+      "description": "VersionedTemplate properties",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Template Version",
+          "description": "The version of the template."
+        },
+        "templateType": {
+          "$ref": "#/definitions/TemplateType",
+          "description": "The type of the template.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "title": "Template Parameters",
+          "description": "The template parameters.",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        }
+      }
+    },
+    "Workflow": {
+      "type": "object",
+      "title": "Workflow",
+      "description": "Resource representation of a workflow",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkflowProperties",
+          "description": "Properties of a workflow."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkflowListResult": {
+      "type": "object",
+      "description": "The response of a Workflow list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Workflow items on this page",
+          "items": {
+            "$ref": "#/definitions/Workflow"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkflowProperties": {
+      "type": "object",
+      "description": "Workflow properties",
+      "properties": {
+        "githubWorkflowProfile": {
+          "$ref": "#/definitions/GitHubWorkflowProfile",
+          "description": "Profile of a github workflow."
+        },
+        "artifactGenerationProperties": {
+          "$ref": "#/definitions/ArtifactGenerationProperties",
+          "description": "Properties for generating artifacts like dockerfile and manifests."
+        },
+        "azurePipelineProfile": {
+          "$ref": "#/definitions/AzurePipelineProfile",
+          "description": "Profile of an azure pipeline."
+        },
+        "templateWorkflowProfile": {
+          "$ref": "#/definitions/TemplateWorkflowProfile",
+          "description": "Profile of an template workflow."
+        }
+      }
+    },
+    "WorkflowRun": {
+      "type": "object",
+      "properties": {
+        "succeeded": {
+          "type": "boolean",
+          "description": "Describes if the workflow run succeeded.",
+          "readOnly": true
+        },
+        "workflowRunURL": {
+          "type": "string",
+          "description": "URL to the run of the workflow.",
+          "readOnly": true
+        },
+        "lastRunAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last workflow run.",
+          "readOnly": true
+        },
+        "workflowRunStatus": {
+          "$ref": "#/definitions/WorkflowRunStatus",
+          "description": "Describes the status of the workflow run",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkflowRunStatus": {
+      "type": "string",
+      "description": "Describes the status of the workflow run",
+      "enum": [
+        "queued",
+        "inprogress",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queued",
+            "value": "queued",
+            "description": "Workflow run is queued"
+          },
+          {
+            "name": "inprogress",
+            "value": "inprogress",
+            "description": "Workflow run is inprogress"
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "Workflow run is completed"
+          }
+        ]
+      }
+    },
+    "prLinkResponse": {
+      "type": "object",
+      "properties": {
+        "prLink": {
+          "type": "string",
+          "description": "The link of the pull request."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
