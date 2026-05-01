@@ -116,6 +116,7 @@ enum EncryptionAlgorithmTypeCustom {
 @@clientName(Storage.DataLake.Path, "PathRestClient", "csharp");
 @@clientName(Storage.DataLake.LeaseAction, "DataLakeLeaseAction", "csharp");
 @@clientName(Storage.DataLake.PathItem, "Path", "csharp");
+@@clientName(Storage.DataLake.BlobItem, "BlobItemInternal", "csharp");
 @@clientName(EncryptionAlgorithmTypeCustom,
   "EncryptionAlgorithmType",
   "csharp,go"
