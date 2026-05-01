@@ -143,7 +143,7 @@ export function formatOutput(rps, fmt, withSN) {
     const rows = withSN
       ? rps.map(
           (r) =>
-            `${r.orgName.padEnd(maxOrg)}  ${r.rpNamespace.padEnd(maxRp)}  ${r.serviceNames.join(", ")}`,
+            `${r.orgName.padEnd(maxOrg)}  ${r.rpNamespace.padEnd(maxRp)}  ${/** @type {string[]} */ (r.serviceNames).join(", ")}`,
         )
       : rps.map(
           (r) => `${r.orgName.padEnd(maxOrg)}  ${r.rpNamespace.padEnd(maxRp)}  ${r.path}`,
@@ -152,7 +152,7 @@ export function formatOutput(rps, fmt, withSN) {
   }
 
   return withSN
-    ? rps.map((r) => `${r.orgName}, ${r.rpNamespace}, [${r.serviceNames.join(", ")}]`).join("\n")
+    ? rps.map((r) => `${r.orgName}, ${r.rpNamespace}, [${/** @type {string[]} */ (r.serviceNames).join(", ")}]`).join("\n")
     : rps.map((r) => `${r.orgName}, ${r.rpNamespace}`).join("\n");
 }
 
@@ -221,7 +221,7 @@ if (process.argv[1] === __filename) {
     if (count) {
       outputText = String(rps.length);
     } else {
-      outputText = formatOutput(rps, format, withServiceGroups);
+      outputText = formatOutput(rps, /** @type {"list"|"json"|"table"} */ (format), withServiceGroups);
       if (format !== "json") {
         outputText += `\n\nTotal: ${rps.length} resource provider(s) ${withServiceGroups ? "with" : "without"} serviceNames`;
       }
@@ -234,7 +234,7 @@ if (process.argv[1] === __filename) {
       console.log(outputText);
     }
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error(`Error: ${/** @type {Error} */ (error).message}`);
     process.exit(1);
   }
 }

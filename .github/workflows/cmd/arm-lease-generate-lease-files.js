@@ -108,7 +108,7 @@ export function parseInputLine(line) {
   line = line.trim();
   if (!line || line.startsWith("#")) return null;
 
-  const match = line.match(/^([^,]+),\s*([^,\[]+)(?:,\s*\[([^\]]+)\])?$/);
+  const match = line.match(/^([^,]+),\s*([^,[]+)(?:,\s*\[([^\]]+)\])?$/);
   if (!match) {
     console.warn(`Skipping invalid line: ${line}`);
     return null;
@@ -138,7 +138,6 @@ export function generateLeaseYaml(rpNamespace, startdate, duration, reviewer) {
   startdate: "${startdate}"
   duration: ${duration}
   reviewer: "${reviewer}"
-
 `;
 }
 
@@ -207,17 +206,18 @@ function processEntry(entry, options, repoRoot) {
       }
     }
   } catch (error) {
-    console.error(`Error processing ${orgName}/${rpNamespace}: ${error.message}`);
+    console.error(`Error processing ${orgName}/${rpNamespace}: ${/** @type {Error} */ (error).message}`);
   }
 }
 
 /**
  * Run interactive mode
- * @returns {Promise<{reviewer: string, startdate: string, duration: string, entries: Array}>}
+ * @returns {Promise<{reviewer: string, startdate: string, duration: string, entries: Array<{orgName: string, rpNamespace: string, serviceNames: string[]}>, dryRun: boolean}>}
  */
 async function promptInteractive() {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
-  const question = (prompt) => new Promise((resolve) => rl.question(prompt, resolve));
+  /** @param {string} prompt */
+  const question = (prompt) => /** @type {Promise<string>} */ (new Promise((resolve) => rl.question(prompt, resolve)));
 
   console.log("\nInteractive Lease File Generator");
   console.log("=================================\n");
@@ -240,6 +240,7 @@ async function promptInteractive() {
   console.log("Example: storage, Microsoft.Storage");
   console.log("Example: compute, Microsoft.Compute, [ComputeRP, DiskRP]\n");
 
+  /** @type {Array<{orgName: string, rpNamespace: string, serviceNames: string[]}>} */
   const entries = [];
   while (true) {
     const line = await question("> ");
@@ -334,6 +335,7 @@ if (process.argv[1] === __filename) {
   async function main() {
     try {
       const repoRoot = repoRootArg ? resolve(repoRootArg) : findRepoRoot(resolve(__dirname, "../../../"));
+      /** @type {Array<{orgName: string, rpNamespace: string, serviceNames: string[]}>} */
       let entries = [];
       let reviewer = reviewerArg;
       let startdate = startdateArg || getTodayDate();
@@ -405,10 +407,10 @@ if (process.argv[1] === __filename) {
 
       console.log(`\nProcessed ${entries.length} entries`);
     } catch (error) {
-      console.error(`Error: ${error.message}`);
+      console.error(`Error: ${/** @type {Error} */ (error).message}`);
       process.exit(1);
     }
   }
 
-  main();
+  void main();
 }

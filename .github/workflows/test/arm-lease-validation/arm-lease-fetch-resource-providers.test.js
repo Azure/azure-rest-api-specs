@@ -74,8 +74,8 @@ describe("fetch-resource-providers", () => {
 
       const compute = rps.find((rp) => rp.rpNamespace === "Microsoft.Compute");
       expect(compute).toBeDefined();
-      expect(compute.orgName).toBe("compute");
-      expect(compute.serviceNames.includes("Compute")).toBe(true);
+      expect(compute?.orgName).toBe("compute");
+      expect(compute?.serviceNames?.includes("Compute")).toBe(true);
       expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(false);
     });
   });
@@ -103,9 +103,11 @@ describe("fetch-resource-providers", () => {
 
     it("formats JSON output", () => {
       const output = formatOutput(rpsWithout, "json", false);
+      /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
       const parsed = JSON.parse(output);
       expect(Array.isArray(parsed)).toBe(true);
       expect(parsed[0].rpNamespace).toBe("Microsoft.Test");
+      /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
     });
 
     it("formats table output", () => {

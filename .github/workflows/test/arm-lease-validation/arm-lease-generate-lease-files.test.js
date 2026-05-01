@@ -17,18 +17,18 @@ describe("generate-lease-files", () => {
   describe("parseInputLine", () => {
     it("parses line without service names", () => {
       const result = parseInputLine("storage, Microsoft.Storage");
-      expect(result.orgName).toBe("storage");
-      expect(result.rpNamespace).toBe("Microsoft.Storage");
-      expect(result.serviceNames).toHaveLength(0);
+      expect(result?.orgName).toBe("storage");
+      expect(result?.rpNamespace).toBe("Microsoft.Storage");
+      expect(result?.serviceNames).toHaveLength(0);
     });
 
     it("parses line with service names", () => {
       const result = parseInputLine("compute, Microsoft.Compute, [ComputeRP, DiskRP]");
-      expect(result.orgName).toBe("compute");
-      expect(result.rpNamespace).toBe("Microsoft.Compute");
-      expect(result.serviceNames).toHaveLength(2);
-      expect(result.serviceNames[0]).toBe("ComputeRP");
-      expect(result.serviceNames[1]).toBe("DiskRP");
+      expect(result?.orgName).toBe("compute");
+      expect(result?.rpNamespace).toBe("Microsoft.Compute");
+      expect(result?.serviceNames).toHaveLength(2);
+      expect(result?.serviceNames[0]).toBe("ComputeRP");
+      expect(result?.serviceNames[1]).toBe("DiskRP");
     });
 
     it("returns null for empty line", () => {
@@ -48,7 +48,7 @@ describe("generate-lease-files", () => {
       expect(yaml).toContain('startdate: "2026-06-01"');
       expect(yaml).toContain("duration: P180D");
       expect(yaml).toContain('reviewer: "@johnDoe"');
-      expect(yaml.endsWith("\n\n")).toBe(true);
+      expect(yaml.endsWith("\n")).toBe(true);
     });
 
     it("does not use duration-days field", () => {
