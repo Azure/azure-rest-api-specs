@@ -3013,7 +3013,7 @@ paths:
       description: List the latest version of each EvaluationSuiteVersion
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: agentName
+        - name: agent_name
           in: query
           required: false
           description: Filter by associated Foundry agent name (from target).
@@ -9369,26 +9369,6 @@ components:
         - AgentEndpoints=V1Preview
         - CodeAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
-    AgentEndpoint:
-      type: object
-      properties:
-        version_selector:
-          allOf:
-            - $ref: '#/components/schemas/VersionSelector'
-          description: The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.
-        protocols:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentEndpointProtocol'
-          description: The protocols that the agent supports
-        authorization_schemes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
-          description: The authorization schemes supported by the agent endpoint
-      x-ms-foundry-meta:
-        required_previews:
-          - AgentEndpoints=V1Preview
     AgentEndpointAuthorizationScheme:
       type: object
       required:
@@ -9416,16 +9396,27 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-    AgentEndpointProtocol:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - activity
-            - responses
-            - a2a
-            - invocations
-    AgentEndpointUpdate:
+    AgentEndpointConfig:
+      type: object
+      properties:
+        version_selector:
+          allOf:
+            - $ref: '#/components/schemas/VersionSelector'
+          description: The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.
+        protocols:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointProtocol'
+          description: The protocols that the agent supports
+        authorization_schemes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+          description: The authorization schemes supported by the agent endpoint
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentEndpointConfigUpdate:
       type: object
       properties:
         version_selector:
@@ -9445,6 +9436,15 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+    AgentEndpointProtocol:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - activity
+            - responses
+            - a2a
+            - invocations
     AgentEvaluation:
       type: object
       required:
@@ -9660,7 +9660,7 @@ components:
           description: The latest version of the agent.
         agent_endpoint:
           allOf:
-            - $ref: '#/components/schemas/AgentEndpoint'
+            - $ref: '#/components/schemas/AgentEndpointConfig'
           description: The endpoint configuration for the agent
           x-ms-foundry-meta:
             required_previews:
@@ -11445,7 +11445,7 @@ components:
               - AgentEndpoints=V1Preview
         agent_endpoint:
           allOf:
-            - $ref: '#/components/schemas/AgentEndpoint'
+            - $ref: '#/components/schemas/AgentEndpointConfig'
           description: An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent
           x-ms-foundry-meta:
             required_previews:
@@ -12091,7 +12091,7 @@ components:
         id:
           type: string
           description: Dataset asset ID.
-        schemaFileName:
+        schema_file_name:
           type: string
           description: |-
             Name of the schema file within the dataset's blob folder (e.g., "a3f2b1c4_schema.json").
@@ -13400,7 +13400,7 @@ components:
         type:
           type: string
           description: "The data generation type: 'simple_qna', 'traces', 'tool_use', or 'task'."
-        maxSamples:
+        max_samples:
           type: integer
           format: int32
           description: Maximum number of samples to generate.
@@ -13467,7 +13467,7 @@ components:
       required:
         - name
         - sources
-        - generationModel
+        - generation_model
       properties:
         name:
           type: string
@@ -13477,19 +13477,19 @@ components:
           items:
             $ref: '#/components/schemas/EvaluationSuiteJobSource'
           description: Source materials for generation — agent context, prompts, traces, or datasets.
-        generationModel:
+        generation_model:
           type: string
           description: The LLM model to use for rubric and data generation (e.g., 'gpt-4o'). Distinct from deployment_name in initializationParameters which is the LLM judge model used at eval time.
         category:
           type: string
           description: "Category: 'quality' (default) or 'safety'."
-        initializationParameters:
+        initialization_parameters:
           type: object
           additionalProperties: {}
           description: |-
             Optional initialization parameters applied to all generated evaluators.
             For example, deployment_name for LLM judge model, default threshold.
-        dataGenerationOptions:
+        data_generation_options:
           allOf:
             - $ref: '#/components/schemas/EvaluationSuiteDataGenerationOptions'
           description: |-
@@ -13531,13 +13531,13 @@ components:
     EvaluationSuiteRunRequest:
       type: object
       properties:
-        evaluationName:
+        evaluation_name:
           type: string
           description: "Name for the evaluation. Default: '{suiteName}-runs'."
-        suiteVersion:
+        suite_version:
           type: string
           description: 'Suite version to run. Default: latest.'
-        evaluationLevel:
+        evaluation_level:
           allOf:
             - $ref: '#/components/schemas/EvaluationSuiteEvaluationLevel'
           description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
@@ -13545,33 +13545,33 @@ components:
     EvaluationSuiteRunResponse:
       type: object
       required:
-        - evalId
-        - runId
-        - evaluationName
-        - suiteName
-        - suiteVersion
+        - eval_id
+        - run_id
+        - evaluation_name
+        - suite_name
+        - suite_version
         - status
-        - createdAt
+        - created_at
       properties:
-        evalId:
+        eval_id:
           type: string
           description: The evaluation ID created.
-        runId:
+        run_id:
           type: string
           description: The eval run ID created.
-        evaluationName:
+        evaluation_name:
           type: string
           description: The evaluation name.
-        suiteName:
+        suite_name:
           type: string
           description: The suite name used.
-        suiteVersion:
+        suite_version:
           type: string
           description: The suite version resolved.
         status:
           type: string
           description: Status of the run.
-        createdAt:
+        created_at:
           type: integer
           format: int64
           description: Unix timestamp when the run was created.
@@ -13586,11 +13586,11 @@ components:
     EvaluationSuiteVersion:
       type: object
       required:
-        - testingCriteria
+        - testing_criteria
         - name
         - version
       properties:
-        displayName:
+        display_name:
           type: string
           description: |-
             Human-readable display name.
@@ -13607,7 +13607,7 @@ components:
             Optional — omit for evaluator-only suites where data comes from
             live production traces or is provided at run time.
             The referenced dataset must exist in the project's dataset registry.
-        testingCriteria:
+        testing_criteria:
           type: array
           items:
             anyOf:
@@ -13630,7 +13630,7 @@ components:
             Target for this evaluation suite. Uses the existing Target discriminated type
             from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
             Optional — allows suites to exist without a target.
-        inputMessages:
+        input_messages:
           type: object
           additionalProperties: {}
           description: |-
@@ -13638,7 +13638,7 @@ components:
             Pass-through to eval run data_source input_messages.
             Supports template type (prompt with column placeholders) and
             item_reference type (column containing pre-built messages).
-        evaluationLevel:
+        evaluation_level:
           allOf:
             - $ref: '#/components/schemas/EvaluationSuiteEvaluationLevel'
           description: Default evaluation level for this suite. Can be overridden at run time.
@@ -13661,9 +13661,9 @@ components:
     EvaluationSuiteVersionUpdate:
       type: object
       required:
-        - testingCriteria
+        - testing_criteria
       properties:
-        displayName:
+        display_name:
           type: string
           description: |-
             Human-readable display name.
@@ -13680,7 +13680,7 @@ components:
             Optional — omit for evaluator-only suites where data comes from
             live production traces or is provided at run time.
             The referenced dataset must exist in the project's dataset registry.
-        testingCriteria:
+        testing_criteria:
           type: array
           items:
             anyOf:
@@ -13703,7 +13703,7 @@ components:
             Target for this evaluation suite. Uses the existing Target discriminated type
             from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
             Optional — allows suites to exist without a target.
-        inputMessages:
+        input_messages:
           type: object
           additionalProperties: {}
           description: |-
@@ -13711,7 +13711,7 @@ components:
             Pass-through to eval run data_source input_messages.
             Supports template type (prompt with column placeholders) and
             item_reference type (column containing pre-built messages).
-        evaluationLevel:
+        evaluation_level:
           allOf:
             - $ref: '#/components/schemas/EvaluationSuiteEvaluationLevel'
           description: Default evaluation level for this suite. Can be overridden at run time.
@@ -30746,7 +30746,7 @@ components:
       properties:
         agent_endpoint:
           allOf:
-            - $ref: '#/components/schemas/AgentEndpointUpdate'
+            - $ref: '#/components/schemas/AgentEndpointConfigUpdate'
           description: The endpoint configuration for the agent
         agent_card:
           allOf:

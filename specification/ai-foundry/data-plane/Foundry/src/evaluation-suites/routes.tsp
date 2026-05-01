@@ -11,9 +11,9 @@ using TypeSpec.Versioning;
 alias ListEvaluationSuiteVersionsParameters = {};
 
 alias EvaluationSuiteFilterQueryParams = {
-  @query("agentName")
+  @query("agent_name")
   @doc("Filter by associated Foundry agent name (from target).")
-  agentName?: string;
+  agent_name?: string;
 };
 
 // ---------------------------------------------------------------------------

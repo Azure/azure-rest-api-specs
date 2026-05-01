@@ -49,7 +49,7 @@ model DatasetReference {
     Optional — if not provided, schema is inferred at runtime from the data.
     Only applicable for uri_folder datasets.
     """)
-  schemaFileName?: string;
+  schema_file_name?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -67,7 +67,7 @@ model EvaluationSuiteVersion {
     Human-readable display name.
     Does not need to be unique. Shown in Foundry portal list views and eval reports.
     """)
-  displayName?: string;
+  display_name?: string;
 
   @doc("""
     Subtype of the evaluation suite.
@@ -90,7 +90,7 @@ model EvaluationSuiteVersion {
     """)
   @minItems(1)
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching eval group testing_criteria pattern"
-  testingCriteria: (
+  testing_criteria: (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
     | OpenAI.EvalGraderTextSimilarity
@@ -112,12 +112,12 @@ model EvaluationSuiteVersion {
     Supports template type (prompt with column placeholders) and
     item_reference type (column containing pre-built messages).
     """)
-  inputMessages?: Record<unknown>;
+  input_messages?: Record<unknown>;
 
   @doc("""
     Default evaluation level for this suite. Can be overridden at run time.
     """)
-  evaluationLevel?: EvaluationSuiteEvaluationLevel;
+  evaluation_level?: EvaluationSuiteEvaluationLevel;
 
   // AssetBase provides: name (string, @key), version (string, read-only),
   // id (string, read-only), description (string, optional), tags (Record<string>, optional)
@@ -131,37 +131,37 @@ model EvaluationSuiteVersion {
 @doc("Request body for running an evaluation from a suite.")
 model EvaluationSuiteRunRequest {
   @doc("Name for the evaluation. Default: '{suiteName}-runs'.")
-  evaluationName?: string;
+  evaluation_name?: string;
 
   @doc("Suite version to run. Default: latest.")
-  suiteVersion?: string;
+  suite_version?: string;
 
   @doc("Overrides the suite's default evaluation level. If omitted, uses the level from the suite.")
-  evaluationLevel?: EvaluationSuiteEvaluationLevel;
+  evaluation_level?: EvaluationSuiteEvaluationLevel;
 }
 
 @doc("Response from running an evaluation suite.")
 model EvaluationSuiteRunResponse {
   @doc("The evaluation ID created.")
-  evalId: string;
+  eval_id: string;
 
   @doc("The eval run ID created.")
-  runId: string;
+  run_id: string;
 
   @doc("The evaluation name.")
-  evaluationName: string;
+  evaluation_name: string;
 
   @doc("The suite name used.")
-  suiteName: string;
+  suite_name: string;
 
   @doc("The suite version resolved.")
-  suiteVersion: string;
+  suite_version: string;
 
   @doc("Status of the run.")
   status: string;
 
   @doc("Unix timestamp when the run was created.")
-  createdAt: int64;
+  created_at: int64;
 }
 
 // ---------------------------------------------------------------------------
@@ -239,7 +239,7 @@ model EvaluationSuiteGenerationJobInputs {
   sources: EvaluationSuiteJobSource[];
 
   @doc("The LLM model to use for rubric and data generation (e.g., 'gpt-4o'). Distinct from deployment_name in initializationParameters which is the LLM judge model used at eval time.")
-  generationModel: string;
+  generation_model: string;
 
   @doc("Category: 'quality' (default) or 'safety'.")
   category?: string;
@@ -248,13 +248,13 @@ model EvaluationSuiteGenerationJobInputs {
     Optional initialization parameters applied to all generated evaluators.
     For example, deployment_name for LLM judge model, default threshold.
     """)
-  initializationParameters?: Record<unknown>;
+  initialization_parameters?: Record<unknown>;
 
   @doc("""
     Optional data generation options. Controls how the evaluation dataset is generated.
     If omitted, the service uses sensible defaults.
     """)
-  dataGenerationOptions?: EvaluationSuiteDataGenerationOptions;
+  data_generation_options?: EvaluationSuiteDataGenerationOptions;
 }
 
 @doc("Options for dataset generation within an evaluation suite generation job.")
@@ -263,7 +263,7 @@ model EvaluationSuiteDataGenerationOptions {
   type?: string;
 
   @doc("Maximum number of samples to generate.")
-  maxSamples?: int32;
+  max_samples?: int32;
 }
 
 @doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")

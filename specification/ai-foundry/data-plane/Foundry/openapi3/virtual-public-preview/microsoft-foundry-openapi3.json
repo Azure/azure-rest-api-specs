@@ -4455,7 +4455,7 @@
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "agentName",
+            "name": "agent_name",
             "in": "query",
             "required": false,
             "description": "Filter by associated Foundry agent name (from target).",
@@ -18119,7 +18119,7 @@
             "type": "string",
             "description": "Dataset asset ID."
           },
-          "schemaFileName": {
+          "schema_file_name": {
             "type": "string",
             "description": "Name of the schema file within the dataset's blob folder (e.g., \"a3f2b1c4_schema.json\").\nOptional — if not provided, schema is inferred at runtime from the data.\nOnly applicable for uri_folder datasets."
           }
@@ -19649,7 +19649,7 @@
             "type": "string",
             "description": "The data generation type: 'simple_qna', 'traces', 'tool_use', or 'task'."
           },
-          "maxSamples": {
+          "max_samples": {
             "type": "integer",
             "format": "int32",
             "description": "Maximum number of samples to generate."
@@ -19760,7 +19760,7 @@
         "required": [
           "name",
           "sources",
-          "generationModel"
+          "generation_model"
         ],
         "properties": {
           "name": {
@@ -19774,7 +19774,7 @@
             },
             "description": "Source materials for generation — agent context, prompts, traces, or datasets."
           },
-          "generationModel": {
+          "generation_model": {
             "type": "string",
             "description": "The LLM model to use for rubric and data generation (e.g., 'gpt-4o'). Distinct from deployment_name in initializationParameters which is the LLM judge model used at eval time."
           },
@@ -19782,12 +19782,12 @@
             "type": "string",
             "description": "Category: 'quality' (default) or 'safety'."
           },
-          "initializationParameters": {
+          "initialization_parameters": {
             "type": "object",
             "additionalProperties": {},
             "description": "Optional initialization parameters applied to all generated evaluators.\nFor example, deployment_name for LLM judge model, default threshold."
           },
-          "dataGenerationOptions": {
+          "data_generation_options": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/EvaluationSuiteDataGenerationOptions"
@@ -19850,15 +19850,15 @@
       "EvaluationSuiteRunRequest": {
         "type": "object",
         "properties": {
-          "evaluationName": {
+          "evaluation_name": {
             "type": "string",
             "description": "Name for the evaluation. Default: '{suiteName}-runs'."
           },
-          "suiteVersion": {
+          "suite_version": {
             "type": "string",
             "description": "Suite version to run. Default: latest."
           },
-          "evaluationLevel": {
+          "evaluation_level": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/EvaluationSuiteEvaluationLevel"
@@ -19872,32 +19872,32 @@
       "EvaluationSuiteRunResponse": {
         "type": "object",
         "required": [
-          "evalId",
-          "runId",
-          "evaluationName",
-          "suiteName",
-          "suiteVersion",
+          "eval_id",
+          "run_id",
+          "evaluation_name",
+          "suite_name",
+          "suite_version",
           "status",
-          "createdAt"
+          "created_at"
         ],
         "properties": {
-          "evalId": {
+          "eval_id": {
             "type": "string",
             "description": "The evaluation ID created."
           },
-          "runId": {
+          "run_id": {
             "type": "string",
             "description": "The eval run ID created."
           },
-          "evaluationName": {
+          "evaluation_name": {
             "type": "string",
             "description": "The evaluation name."
           },
-          "suiteName": {
+          "suite_name": {
             "type": "string",
             "description": "The suite name used."
           },
-          "suiteVersion": {
+          "suite_version": {
             "type": "string",
             "description": "The suite version resolved."
           },
@@ -19905,7 +19905,7 @@
             "type": "string",
             "description": "Status of the run."
           },
-          "createdAt": {
+          "created_at": {
             "type": "integer",
             "format": "int64",
             "description": "Unix timestamp when the run was created."
@@ -19930,12 +19930,12 @@
       "EvaluationSuiteVersion": {
         "type": "object",
         "required": [
-          "testingCriteria",
+          "testing_criteria",
           "name",
           "version"
         ],
         "properties": {
-          "displayName": {
+          "display_name": {
             "type": "string",
             "description": "Human-readable display name.\nDoes not need to be unique. Shown in Foundry portal list views and eval reports."
           },
@@ -19955,7 +19955,7 @@
             ],
             "description": "Dataset reference for evaluation.\nOptional — omit for evaluator-only suites where data comes from\nlive production traces or is provided at run time.\nThe referenced dataset must exist in the project's dataset registry."
           },
-          "testingCriteria": {
+          "testing_criteria": {
             "type": "array",
             "items": {
               "anyOf": [
@@ -19990,12 +19990,12 @@
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
           },
-          "inputMessages": {
+          "input_messages": {
             "type": "object",
             "additionalProperties": {},
             "description": "How to send dataset rows to the target (agent or model).\nPass-through to eval run data_source input_messages.\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
           },
-          "evaluationLevel": {
+          "evaluation_level": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/EvaluationSuiteEvaluationLevel"
@@ -20024,10 +20024,10 @@
       "EvaluationSuiteVersionUpdate": {
         "type": "object",
         "required": [
-          "testingCriteria"
+          "testing_criteria"
         ],
         "properties": {
-          "displayName": {
+          "display_name": {
             "type": "string",
             "description": "Human-readable display name.\nDoes not need to be unique. Shown in Foundry portal list views and eval reports."
           },
@@ -20047,7 +20047,7 @@
             ],
             "description": "Dataset reference for evaluation.\nOptional — omit for evaluator-only suites where data comes from\nlive production traces or is provided at run time.\nThe referenced dataset must exist in the project's dataset registry."
           },
-          "testingCriteria": {
+          "testing_criteria": {
             "type": "array",
             "items": {
               "anyOf": [
@@ -20082,12 +20082,12 @@
             ],
             "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
           },
-          "inputMessages": {
+          "input_messages": {
             "type": "object",
             "additionalProperties": {},
             "description": "How to send dataset rows to the target (agent or model).\nPass-through to eval run data_source input_messages.\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
           },
-          "evaluationLevel": {
+          "evaluation_level": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/EvaluationSuiteEvaluationLevel"
