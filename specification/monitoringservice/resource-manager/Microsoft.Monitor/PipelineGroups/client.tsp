@@ -18,7 +18,10 @@ using Microsoft.Monitor;
 @@clientName(BatchProcessor, "PipelineGroupBatchProcessor", "csharp");
 @@clientName(SyslogReceiver, "PipelineGroupSyslogReceiver", "csharp");
 @@clientName(OtlpReceiver, "PipelineGroupOtlpReceiver", "csharp");
-@@clientName(TransformLanguageProcessor, "PipelineGroupTransformLanguageProcessor", "csharp");
+@@clientName(TransformLanguageProcessor,
+  "PipelineGroupTransformLanguageProcessor",
+  "csharp"
+);
 @@clientName(TlsConfiguration, "PipelineGroupTlsConfiguration", "csharp");
 @@clientName(CertificateWithKey, "PipelineGroupCertificateWithKey", "csharp");
 @@clientName(CertificateSource, "PipelineGroupCertificateSource", "csharp");
@@ -29,18 +32,30 @@ using Microsoft.Monitor;
 @@clientName(RecordMap, "PipelineGroupRecordMap", "csharp");
 @@clientName(ResourceMap, "PipelineGroupResourceMap", "csharp");
 @@clientName(ScopeMap, "PipelineGroupScopeMap", "csharp");
-@@clientName(ExporterPersistenceConfiguration, "PipelineGroupExporterPersistenceConfiguration", "csharp");
+@@clientName(ExporterPersistenceConfiguration,
+  "PipelineGroupExporterPersistenceConfiguration",
+  "csharp"
+);
 
 // ── Contextual naming: prefix enums/unions with PipelineGroup ──
-@@clientName(ProvisioningState, "MonitorPipelineGroupProvisioningState", "csharp");
+@@clientName(ProvisioningState,
+  "MonitorPipelineGroupProvisioningState",
+  "csharp"
+);
 @@clientName(AllowedFormats, "PipelineGroupAllowedFormat", "csharp");
 @@clientName(ReceiverType, "PipelineGroupReceiverType", "csharp");
 @@clientName(ProcessorType, "PipelineGroupProcessorType", "csharp");
 @@clientName(ExporterType, "PipelineGroupExporterType", "csharp");
 @@clientName(PipelineType, "PipelineGroupPipelineType", "csharp");
 @@clientName(CapabilityOperator, "PipelineGroupCapabilityOperator", "csharp");
-@@clientName(CertificateSourceType, "PipelineGroupCertificateSourceType", "csharp");
-@@clientName(PrivateKeySourceType, "PipelineGroupPrivateKeySourceType", "csharp");
+@@clientName(CertificateSourceType,
+  "PipelineGroupCertificateSourceType",
+  "csharp"
+);
+@@clientName(PrivateKeySourceType,
+  "PipelineGroupPrivateKeySourceType",
+  "csharp"
+);
 @@clientName(TlsMode, "PipelineGroupTlsMode", "csharp");
 @@clientName(TransportProtocol, "PipelineGroupTransportProtocol", "csharp");
 
@@ -52,11 +67,23 @@ using Microsoft.Monitor;
 @@clientName(Receiver.tlsConfiguration, "TlsConfigurationName", "csharp");
 // Integer properties must include units in the name
 @@clientName(BatchProcessor.timeout, "TimeoutInMilliseconds", "csharp");
-@@clientName(ExporterPersistenceConfiguration.maxStorageUsage, "MaxStorageUsageInGigabytes", "csharp");
-@@clientName(ExporterPersistenceConfiguration.retentionPeriod, "RetentionPeriodInMinutes", "csharp");
+@@clientName(ExporterPersistenceConfiguration.maxStorageUsage,
+  "MaxStorageUsageInGigabytes",
+  "csharp"
+);
+@@clientName(ExporterPersistenceConfiguration.retentionPeriod,
+  "RetentionPeriodInMinutes",
+  "csharp"
+);
 // Rename dataCollectionRule to DataCollectionRuleId for clarity
-@@clientName(AzureMonitorWorkspaceLogsApiConfig.dataCollectionRule, "DataCollectionRuleId", "csharp");
+@@clientName(AzureMonitorWorkspaceLogsApiConfig.dataCollectionRule,
+  "DataCollectionRuleId",
+  "csharp"
+);
 
 // ── Property type changes ──
 // dataCollectionEndpointUrl should be typed as System.Uri
-@@alternateType(AzureMonitorWorkspaceLogsApiConfig.dataCollectionEndpointUrl, url, "csharp");
+@@alternateType(AzureMonitorWorkspaceLogsApiConfig.dataCollectionEndpointUrl,
+  url,
+  "csharp"
+);
