@@ -121,37 +121,12 @@ model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
    */
-  tags?: SandboxGroupTags;
+  tags?: Record<string>;
 
   /**
    * The managed service identities assigned to this resource.
    */
   identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
-}
-
-/**
- * Resource tags for SandboxGroup.
- */
-model SandboxGroupTags {
-  /**
-   * The tag properties.
-   */
-  properties?: TagProperty[];
-}
-
-/**
- * A tag property for SandboxGroup resources.
- */
-model TagProperty {
-  /**
-   * The tag name.
-   */
-  name: string;
-
-  /**
-   * The tag value.
-   */
-  value: string;
 }
 
 /**
