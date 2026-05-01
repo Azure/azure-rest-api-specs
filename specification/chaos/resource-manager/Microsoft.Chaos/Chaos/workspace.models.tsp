@@ -56,10 +56,10 @@ model WorkspaceProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The endpoint of the workspace used by Chaos agents to connect and communicate with the service.
+   * The communication endpoint used to connect and communicate with the workspace for fault-injection orchestration.
    */
   @visibility(Lifecycle.Read)
-  endpoint?: string;
+  communicationEndpoint?: string;
 
   /**
    * The intended workspace-level resource scope to be used by child scenarios.
