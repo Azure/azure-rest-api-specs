@@ -41,6 +41,13 @@ tag: package-2025-05
 
 ```yaml
 directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/managedTrafficConfig/{configName}"]
+    reason: The provisioningState property is readOnly in the model definition (ServerFarmSiloProperties, SiteSiloProperties, ManagedTrafficConfigProperties). The rule fires at the operation response level as a false positive.
   - suppress: XmsResourceInPutResponse
     from: WebApps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}"].put
@@ -100,6 +107,15 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+```
+
+### Tag: package-2026-06-01-preview
+
+These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01-preview'
+input-file:
+    - preview/2026-06-01-preview/openapi.json
 ```
 
 ### Tag: package-2026-03-01-preview
