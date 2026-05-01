@@ -118,7 +118,8 @@ interface DevBoxDefinitionOperationGroupOps
         @minLength(3)
         @maxLength(63)
         devBoxDefinitionName: string,
-      }
+      },
+      ResourceName = "ProjectDevBoxDefinition"
     > {}
 
 @armResourceOperations

@@ -53,12 +53,11 @@ interface RaiExternalSafetyProviderSchemas {
   /**
    * Create the rai safety provider associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Response schema for 'get' matches existing service wire format"
   @tag("RaiExternalSafetyProvider")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProvider>
+    Response = ArmResourceUpdatedResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>
   >;
 
   /**

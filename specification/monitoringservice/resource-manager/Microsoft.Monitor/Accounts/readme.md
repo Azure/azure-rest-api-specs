@@ -32,7 +32,16 @@ title: AzureMonitorAccountsClient
 description: Azure Monitor Accounts Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-03-preview
+tag: package-2025-10-03
+```
+
+### Tag: package-2025-10-03
+
+These settings apply only when `--tag=package-2025-10-03` is specified on the command line
+
+``` yaml $(tag) == 'package-2025-10-03'
+input-file:
+- stable/2025-10-03/azuremonitorworkspace.json
 ```
 
 ### Tag: package-2025-10-03-preview
@@ -53,6 +62,34 @@ input-file:
 - preview/2025-05-03-preview/azuremonitorworkspace.json
 ```
 
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview is specified on the command line
+
+``` yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+- preview/2023-10-01-preview/azuremonitorworkspace.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+- stable/2023-04-03/monitoringAccounts_API.json
+- stable/2023-04-03/operations_API.json
+```
+
+### Tag: package-2021-06-03-preview-only
+
+These settings apply only when `--tag=package-2021-06-03-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-03-preview-only'
+input-file:
+- preview/2021-06-03-preview/monitoringAccounts_API.json
+- preview/2021-06-03-preview/operations_API.json
+```
 ---
 
 # Code Generation

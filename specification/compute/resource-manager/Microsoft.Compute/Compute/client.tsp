@@ -13,11 +13,22 @@ using ComputeSku;
 /**
  * Compute Client
  */
-@client({
-  name: "ComputeClient",
-  service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
-  autoMergeService: true,
-})
+@client(
+  {
+    name: "ComputeClient",
+    service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
+    autoMergeService: true,
+  },
+  "!(javascript, python)"
+)
+@client(
+  {
+    name: "ComputeManagementClient",
+    service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
+    autoMergeService: true,
+  },
+  "javascript, python"
+)
 namespace ComputeCombine;
 
 // VirtualMachineInstanceView needs input usage for premium layer constructor and setters
@@ -51,3 +62,10 @@ namespace ComputeCombine;
   "VirtualMachineIdentityUserAssignedIdentities",
   "java"
 );
+
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(VirtualMachineScaleSetUpdateNetworkProfile.networkApiVersion,
+  false
+);
+@@apiVersion(NetworkProfile.networkApiVersion, false);
+@@apiVersion(ResourceSku.apiVersions, false);

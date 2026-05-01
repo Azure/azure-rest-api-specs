@@ -52,6 +52,9 @@
       "name": "VirtualMachineScaleSetExtensions"
     },
     {
+      "name": "VirtualMachineScaleSetLifeCycleHookEvents"
+    },
+    {
       "name": "VirtualMachineScaleSetVMS"
     },
     {
@@ -6634,6 +6637,153 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_List",
+        "tags": [
+          "VirtualMachineScaleSetLifeCycleHookEvents"
+        ],
+        "description": "Gets a list of virtual machine scale set lifecycle hook events created for a virtual machine scale set resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEventListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEventName}": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Get",
+        "tags": [
+          "VirtualMachineScaleSetLifeCycleHookEvents"
+        ],
+        "description": "Gets a virtual machine scale set lifecycle hook event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lifecycleHookEventName",
+            "in": "path",
+            "description": "The name of the VMScaleSetLifecycleHookEvent",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Update",
+        "tags": [
+          "VirtualMachineScaleSetLifeCycleHookEvents"
+        ],
+        "description": "The operation to update a virtual machine scale set lifecycle hook event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lifecycleHookEventName",
+            "in": "path",
+            "description": "The name of the VMScaleSetLifecycleHookEvent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to the Update virtual machine scale set lifecycle hook event operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEventUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade": {
       "post": {
         "operationId": "VirtualMachineScaleSets_UpdateInstances",
@@ -10990,6 +11140,13 @@
             "description": "Optional parameter to hibernate a virtual machine.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "forceDeallocate",
+            "in": "query",
+            "description": "Optional parameter to force deallocate a virtual machine. Default is false.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -14117,6 +14274,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
+        "storageFaultDomainAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "managedDisk": {
           "$ref": "#/definitions/ManagedDiskParameters",
           "description": "The managed disk parameters."
@@ -14663,6 +14824,10 @@
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
           "description": "Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk,** **NvmeDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** or **NvmeDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Minimum api-version for NvmeDisk: 2024-03-01."
+        },
+        "enableFullCaching": {
+          "type": "boolean",
+          "description": "Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages"
         }
       }
     },
@@ -14826,6 +14991,10 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "x-ms-identifiers": []
+        },
+        "storageAlignmentStatus": {
+          "$ref": "#/definitions/StorageAlignmentStatus",
+          "description": "Specifies the storage alignment status for the disk."
         }
       }
     },
@@ -15051,6 +15220,26 @@
             "value": "instanceView"
           }
         ]
+      }
+    },
+    "ExternalHealthPolicy": {
+      "type": "object",
+      "description": "Specifies the external health policy for the virtual machine scale set.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false."
+        },
+        "expiryDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as \"unknown\". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H)."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
+        }
       }
     },
     "HardwareProfile": {
@@ -15614,6 +15803,95 @@
           "$ref": "../../common-types/v1/common.json#/definitions/ApiError",
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them.",
           "readOnly": true
+        }
+      }
+    },
+    "LifecycleHook": {
+      "type": "object",
+      "description": "Describes a lifecycle hook.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventType",
+          "description": "Specifies the type of the lifecycle hook."
+        },
+        "waitDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Specifies the time duration a virtual machine scale set lifecycle hook event sent to the customer waits for a response from the customer. It should be in ISO 8601 format."
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/LifecycleHookAction",
+          "description": "Specifies the action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil."
+        }
+      }
+    },
+    "LifecycleHookAction": {
+      "type": "string",
+      "description": "The action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.",
+      "enum": [
+        "Approve",
+        "Reject"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleHookAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approve",
+            "value": "Approve",
+            "description": "The lifecycle hook of a target resource in a lifecycle hook event will be approved."
+          },
+          {
+            "name": "Reject",
+            "value": "Reject",
+            "description": "The lifecycle hook of a target resource in a lifecycle hook event will be rejected."
+          }
+        ]
+      }
+    },
+    "LifecycleHookActionState": {
+      "type": "string",
+      "description": "Approval status of a target resource in a virtual machine scale set lifecycle hook event.",
+      "enum": [
+        "Waiting",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleHookActionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The lifecycle hook for the target resource is waiting for approval."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The lifecycle hook for the target resource is approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The lifecycle hook for the target resource is rejected."
+          }
+        ]
+      }
+    },
+    "LifecycleHooksProfile": {
+      "type": "object",
+      "description": "Specifies the lifecycle hooks profile for the virtual machine scale set.",
+      "properties": {
+        "lifecycleHooks": {
+          "type": "array",
+          "description": "Specifies the lifecycle hooks configured for the virtual machine scale set.",
+          "items": {
+            "$ref": "#/definitions/LifecycleHook"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     },
@@ -16231,6 +16509,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
+        "storageFaultDomainAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "managedDisk": {
           "$ref": "#/definitions/ManagedDiskParameters",
           "description": "The managed disk parameters."
@@ -16356,6 +16638,24 @@
             "value": "Linux"
           }
         ]
+      }
+    },
+    "OperationRecoverySettings": {
+      "type": "object",
+      "description": "The configuration parameters used for operation recovery settings on a virtual machine scale set.",
+      "properties": {
+        "restartRecoveryPolicy": {
+          "$ref": "#/definitions/RestartRecoveryPolicy",
+          "description": "The configuration parameters used for restart recovery policy."
+        },
+        "startRecoveryPolicy": {
+          "$ref": "#/definitions/StartRecoveryPolicy",
+          "description": "The configuration parameters used for start recovery policy."
+        },
+        "reimageRecoveryPolicy": {
+          "$ref": "#/definitions/ReimageRecoveryPolicy",
+          "description": "The configuration parameters used for reimage recovery policy."
+        }
       }
     },
     "OrchestrationMode": {
@@ -17083,6 +17383,16 @@
         }
       }
     },
+    "ReimageRecoveryPolicy": {
+      "type": "object",
+      "description": "The configuration parameters used while performing reimage recovery.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether reimage recovery should be enabled. The default value is false."
+        }
+      }
+    },
     "RepairAction": {
       "type": "string",
       "description": "Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.",
@@ -17154,7 +17464,7 @@
     },
     "ResiliencyPolicy": {
       "type": "object",
-      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.",
+      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy, ResilientVMDeletionPolicy and OperationRecoverySettings (version > 2025-11-01).",
       "properties": {
         "resilientVMCreationPolicy": {
           "$ref": "#/definitions/ResilientVMCreationPolicy",
@@ -17171,6 +17481,20 @@
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
           "description": "The configuration parameters used while performing zone allocation."
+        },
+        "operationRecoverySettings": {
+          "$ref": "#/definitions/OperationRecoverySettings",
+          "description": "The configuration parameters used for operation recovery settings."
+        }
+      }
+    },
+    "ResiliencyProfile": {
+      "type": "object",
+      "description": "Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.",
+      "properties": {
+        "zoneMovement": {
+          "$ref": "#/definitions/ZoneMovement",
+          "description": "Zone movement configuration."
         }
       }
     },
@@ -17261,6 +17585,16 @@
           "items": {
             "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
           }
+        }
+      }
+    },
+    "RestartRecoveryPolicy": {
+      "type": "object",
+      "description": "The configuration parameters used while performing restart recovery.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether restart recovery should be enabled. The default value is false."
         }
       }
     },
@@ -18276,7 +18610,7 @@
         },
         "securityType": {
           "$ref": "#/definitions/SecurityTypes",
-          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set."
+          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. If not specified, Standard will be returned starting api version 2025-11-01."
         },
         "encryptionIdentity": {
           "$ref": "#/definitions/EncryptionIdentity",
@@ -18290,8 +18624,9 @@
     },
     "SecurityTypes": {
       "type": "string",
-      "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.",
+      "description": "Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a Standard value starting API version 2025-11-01.",
       "enum": [
+        "Standard",
         "TrustedLaunch",
         "ConfidentialVM"
       ],
@@ -18299,6 +18634,11 @@
         "name": "SecurityTypes",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Indicates a VM without UEFI features such as SecureBoot or vTPM; returned as the default value when securityType is not specified."
+          },
           {
             "name": "TrustedLaunch",
             "value": "TrustedLaunch"
@@ -18548,6 +18888,16 @@
         "value"
       ]
     },
+    "StartRecoveryPolicy": {
+      "type": "object",
+      "description": "The configuration parameters used while performing start recovery.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether start recovery should be enabled. The default value is false."
+        }
+      }
+    },
     "StatusLevelTypes": {
       "type": "string",
       "description": "The level code.",
@@ -18604,6 +18954,54 @@
           {
             "name": "PremiumV2_LRS",
             "value": "PremiumV2_LRS"
+          }
+        ]
+      }
+    },
+    "StorageAlignmentStatus": {
+      "type": "string",
+      "description": "Specifies the storage alignment status for the disk.",
+      "enum": [
+        "Unaligned",
+        "Aligned"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAlignmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unaligned",
+            "value": "Unaligned",
+            "description": "Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile."
+          },
+          {
+            "name": "Aligned",
+            "value": "Aligned",
+            "description": "Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain."
+          }
+        ]
+      }
+    },
+    "StorageFaultDomainAlignmentType": {
+      "type": "string",
+      "description": "Specifies the storage fault domain alignment type for the disk.",
+      "enum": [
+        "Aligned",
+        "BestEffortAligned"
+      ],
+      "x-ms-enum": {
+        "name": "StorageFaultDomainAlignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Aligned",
+            "value": "Aligned",
+            "description": "Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains."
+          },
+          {
+            "name": "BestEffortAligned",
+            "value": "BestEffortAligned",
+            "description": "Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains."
           }
         ]
       }
@@ -19143,6 +19541,177 @@
         "activePlacementGroupId": {
           "type": "string",
           "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEvent": {
+      "type": "object",
+      "description": "Defines a virtual machine scale set lifecycle hook event.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventProperties",
+          "description": "Defines the virtual machine scale set lifecycle hook event properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VMScaleSetLifecycleHookEventAdditionalContext": {
+      "type": "object",
+      "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.\nThe keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.\nFor example, for a lifecycle hook event with UpgradeAutoOSScheduling type,\nthe additional context can contain the key \"priority\" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.",
+      "properties": {
+        "priority": {
+          "type": "string",
+          "description": "Can only be present for a lifecycle hook event of type \"UpgradeAutoOSScheduling\".\nDenotes the priority of the virtual machine scale set lifecycle hook event for the Auto OS Upgrade scheduled on the virtual machine scale set."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventListResult": {
+      "type": "object",
+      "description": "The List virtual machine scale set lifecycle hook events operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of virtual machine scale set lifecycle hook events created for a virtual machine scale set resource.",
+          "items": {
+            "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The uri to fetch the next page of virtual machine scale set lifecycle hook events. Call ListNext() with this to fetch the next page of virtual machine scale set lifecycle hook events."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VMScaleSetLifecycleHookEventProperties": {
+      "type": "object",
+      "description": "Defines the virtual machine scale set lifecycle hook event properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventType",
+          "description": "Defines the type or scenario for sending a virtual machine scale set lifecycle hook event to the customer."
+        },
+        "waitUntil": {
+          "type": "string",
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event."
+        },
+        "maxWaitUntil": {
+          "type": "string",
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity.",
+          "readOnly": true
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/LifecycleHookAction",
+          "description": "Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.",
+          "readOnly": true
+        },
+        "targetResources": {
+          "type": "array",
+          "description": "List of target resources which are getting processed in the virtual machine scale set lifecycle hook event.",
+          "items": {
+            "$ref": "#/definitions/VMScaleSetLifecycleHookEventTargetResource"
+          },
+          "x-ms-identifiers": [
+            "resource"
+          ]
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventAdditionalContext",
+          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.\nThe keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.\nFor example, for a lifecycle hook event with UpgradeAutoOSScheduling type,\nthe additional context can contain the key \"priority\" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set."
+        },
+        "state": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
+          "description": "Specifies the state of the virtual machine scale set lifecycle hook event.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventState": {
+      "type": "string",
+      "description": "The states that a virtual machine scale set lifecycle hook event can be in. This is not settable by the customer. It is set only by the platform.",
+      "enum": [
+        "Active",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "VMScaleSetLifecycleHookEventState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The lifecycle hook event is active. E.g., waiting on a response from the customer."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state."
+          }
+        ]
+      }
+    },
+    "VMScaleSetLifecycleHookEventTargetResource": {
+      "type": "object",
+      "description": "Define a single target ARM resource in a virtual machine scale set lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the target ARM resource. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet."
+        },
+        "actionState": {
+          "$ref": "#/definitions/LifecycleHookActionState",
+          "description": "State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventType": {
+      "type": "string",
+      "description": "Specifies the scenario for which the customer is interested in receiving virtual machine scale set lifecycle hook events.",
+      "enum": [
+        "UpgradeAutoOSScheduling",
+        "UpgradeAutoOSRollingBatchStarting"
+      ],
+      "x-ms-enum": {
+        "name": "VMScaleSetLifecycleHookEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpgradeAutoOSScheduling",
+            "value": "UpgradeAutoOSScheduling",
+            "description": "Lifecycle hook event sent to the customer before an Auto OS Upgrade operation starts on the virtual machine scale set."
+          },
+          {
+            "name": "UpgradeAutoOSRollingBatchStarting",
+            "value": "UpgradeAutoOSRollingBatchStarting",
+            "description": "Lifecycle hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation."
+          }
+        ]
+      }
+    },
+    "VMScaleSetLifecycleHookEventUpdate": {
+      "type": "object",
+      "description": "Specifies information about the virtual machine scale set lifecycle hook event.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventProperties",
+          "description": "virtual machine scale set lifecycle hook event properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20451,6 +21020,10 @@
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.",
           "readOnly": true
+        },
+        "resiliencyProfile": {
+          "$ref": "#/definitions/ResiliencyProfile",
+          "description": "Resiliency profile for the virtual machine."
         }
       }
     },
@@ -20801,7 +21374,7 @@
         },
         "placement": {
           "$ref": "#/definitions/Placement",
-          "description": "Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01."
+          "description": "Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. Minimum api-version: 2025-04-01."
         }
       },
       "allOf": [
@@ -20839,6 +21412,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
+        },
+        "storageFaultDomainAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
         },
         "managedDisk": {
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters",
@@ -21466,6 +22043,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
+        "storageFaultDomainAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "osType": {
           "$ref": "#/definitions/Common.OperatingSystemTypes",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**"
@@ -21648,6 +22229,14 @@
         "highSpeedInterconnectPlacement": {
           "$ref": "#/definitions/HighSpeedInterconnectPlacement",
           "description": "Specifies the high speed interconnect placement for the virtual machine scale set."
+        },
+        "lifecycleHooksProfile": {
+          "$ref": "#/definitions/LifecycleHooksProfile",
+          "description": "Specifies the lifecycle hooks profile for the virtual machine scale set."
+        },
+        "externalHealthPolicy": {
+          "$ref": "#/definitions/ExternalHealthPolicy",
+          "description": "Specifies the external health policy for the virtual machine scale set."
         }
       }
     },
@@ -21894,6 +22483,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "User-defined constraints for virtual machine scale set hardware placement."
         }
       },
       "allOf": [
@@ -22090,6 +22683,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
         },
+        "storageFaultDomainAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
           "description": "The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
@@ -22198,6 +22795,10 @@
         "skuProfile": {
           "$ref": "#/definitions/SkuProfile",
           "description": "Specifies the sku profile for the virtual machine scale set."
+        },
+        "lifecycleHooksProfile": {
+          "$ref": "#/definitions/LifecycleHooksProfile",
+          "description": "Specifies the lifecycle hooks profile for the virtual machine scale set."
         }
       }
     },
@@ -22804,6 +23405,19 @@
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.",
           "readOnly": true
+        },
+        "virtualMachineResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the ARM resource ID of the standalone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              }
+            ]
+          }
         }
       }
     },
@@ -24098,7 +24712,8 @@
       "description": "Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count.",
       "enum": [
         "Aligned",
-        "Unaligned"
+        "Unaligned",
+        "BestEffortAligned"
       ],
       "x-ms-enum": {
         "name": "ZonalPlatformFaultDomainAlignMode",
@@ -24111,6 +24726,11 @@
           {
             "name": "Unaligned",
             "value": "Unaligned"
+          },
+          {
+            "name": "BestEffortAligned",
+            "value": "BestEffortAligned",
+            "description": "Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned."
           }
         ]
       }
@@ -24127,6 +24747,16 @@
         "maxInstancePercentPerZonePolicy": {
           "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
           "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
+    "ZoneMovement": {
+      "type": "object",
+      "description": "Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another."
         }
       }
     },
