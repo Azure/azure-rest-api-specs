@@ -282,7 +282,10 @@ export default async function validateArmLeases(core) {
 
   // Get ARM lease files (only lease.yaml files)
   const armLeaseFiles = allChangedFiles.filter(
-    (file) => file.startsWith(".github/arm-leases/") && !file.endsWith(".md"),
+    (file) =>
+      file.startsWith(".github/arm-leases/") &&
+      !file.endsWith(".md") &&
+      !file.startsWith(".github/arm-leases/scripts/"),
   );
 
   if (armLeaseFiles.length === 0) {
