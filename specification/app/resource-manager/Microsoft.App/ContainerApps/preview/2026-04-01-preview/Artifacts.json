@@ -1,0 +1,436 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2026-04-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "ArtifactNameParameter": {
+      "name": "artifactName",
+      "in": "path",
+      "description": "Name of the Artifact.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Get the Artifacts in a given subscription.",
+        "operationId": "Artifacts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArtifactCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Artifacts by subscription": {
+            "$ref": "./examples/Artifacts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Get the Artifacts in a given resource group.",
+        "operationId": "Artifacts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArtifactCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Artifacts by resource group": {
+            "$ref": "./examples/Artifacts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/artifacts/{artifactName}": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Get the properties of an Artifact.",
+        "operationId": "Artifacts_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Artifact": {
+            "$ref": "./examples/Artifacts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Create or update an Artifact.",
+        "description": "Create or update an Artifact with the given properties.",
+        "operationId": "Artifacts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          },
+          {
+            "name": "artifactEnvelope",
+            "in": "body",
+            "description": "Properties used to create an Artifact.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "201": {
+            "description": "Artifact creation has started.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Artifact": {
+            "$ref": "./examples/Artifacts_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Update properties of an Artifact.",
+        "description": "Patches an Artifact using JSON merge patch.",
+        "operationId": "Artifacts_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          },
+          {
+            "name": "artifactEnvelope",
+            "in": "body",
+            "description": "Properties of an Artifact that need to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "202": {
+            "description": "Artifact update has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update Artifact": {
+            "$ref": "./examples/Artifacts_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "Delete an Artifact.",
+        "description": "Delete the Artifact with the given name.",
+        "operationId": "Artifacts_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Artifact delete has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Artifact does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Artifact": {
+            "$ref": "./examples/Artifacts_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artifact": {
+      "description": "An Artifact resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Artifact resource specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/ArtifactProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArtifactUpdate": {
+      "description": "An Artifact resource update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "description": "Artifact resource specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/ArtifactProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArtifactProperties": {
+      "description": "Artifact resource specific properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Artifact.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ArtifactProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Description of the Artifact.",
+          "type": "string"
+        },
+        "artifactType": {
+          "description": "Type of the Artifact.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the Artifact.",
+          "type": "string"
+        }
+      }
+    },
+    "ArtifactCollection": {
+      "description": "Artifact collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
