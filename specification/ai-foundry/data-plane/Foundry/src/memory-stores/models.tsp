@@ -14,6 +14,7 @@ union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
   memoryStoreScopeDeleted: "memory_store.scope.deleted",
+  memoryItemDeleted: "memory_item.deleted",
 }
 
 @doc("A memory store that can store and retrieve user memories.")
@@ -281,6 +282,22 @@ model MemoryStoreDeleteScopeResponse {
   deleted: boolean;
 }
 
+@doc("Response for deleting a memory item from a memory store.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+model DeleteMemoryItemResponse {
+  @doc("The object type. Always 'memory_item.deleted'.")
+  object: MemoryStoreObjectType.memoryItemDeleted;
+
+  @doc("The name of the memory store.")
+  name: string;
+
+  @doc("The unique ID of the deleted memory item.")
+  memory_id: string;
+
+  @doc("Whether the memory item was successfully deleted.")
+  deleted: boolean;
+}
+
 alias CreateMemoryStoreRequest = {
   @doc("The name of the memory store.")
   @maxLength(256)
@@ -385,4 +402,60 @@ alias MemoryStoreDeleteScopeRequest = {
 
   @doc("The namespace that logically groups and isolates memories to delete, such as a user ID.")
   scope: string;
+};
+
+alias CreateMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The namespace that logically groups and isolates memories, such as a user ID.")
+  scope: string;
+
+  @doc("The content of the memory.")
+  content: string;
+
+  @doc("The kind of the memory item.")
+  kind: MemoryItemKind;
+};
+
+alias UpdateMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item to update.")
+  @path
+  memory_id: string;
+
+  @doc("The updated content of the memory.")
+  content: string;
+};
+
+alias GetMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item to retrieve.")
+  @path
+  memory_id: string;
+};
+
+alias ListMemoryItemsRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  ...CommonPageQueryParameters;
+};
+
+alias DeleteMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item to delete.")
+  @path
+  memory_id: string;
 };

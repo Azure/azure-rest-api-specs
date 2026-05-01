@@ -114,4 +114,60 @@ interface MemoryStores {
     MemoryStoreDeleteScopeRequest & MemoryStorePreviewHeader,
     MemoryStoreDeleteScopeResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Create a memory item in a memory store.")
+  @operationId("createMemoryItem")
+  @post
+  @route("/memory_stores/{name}/memories")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  createMemoryItem is FoundryDataPlaneOperation<
+    CreateMemoryItemRequest & MemoryStorePreviewHeader,
+    MemoryItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Update a memory item in a memory store.")
+  @operationId("updateMemoryItem")
+  @post
+  @route("/memory_stores/{name}/memories/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  updateMemoryItem is FoundryDataPlaneOperation<
+    UpdateMemoryItemRequest & MemoryStorePreviewHeader,
+    MemoryItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Retrieve a memory item from a memory store.")
+  @operationId("getMemoryItem")
+  @get
+  @route("/memory_stores/{name}/memories/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  getMemoryItem is FoundryDataPlaneOperation<
+    GetMemoryItemRequest & MemoryStorePreviewHeader,
+    MemoryItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("List all memory items in a memory store.")
+  @operationId("listMemoryItems")
+  @get
+  @list
+  @route("/memory_stores/{name}/memories")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  listMemoryItems is FoundryDataPlaneOperation<
+    ListMemoryItemsRequest & MemoryStorePreviewHeader,
+    AgentsPagedResult<MemoryItem>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Delete a memory item from a memory store.")
+  @operationId("deleteMemoryItem")
+  @delete
+  @route("/memory_stores/{name}/memories/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  deleteMemoryItem is FoundryDataPlaneOperation<
+    DeleteMemoryItemRequest & MemoryStorePreviewHeader,
+    DeleteMemoryItemResponse
+  >;
 }

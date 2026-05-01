@@ -59,6 +59,11 @@ in order to successfully complete operations using these routes.
 | Memory Stores | Delete Scope Memories | POST | `/memory_stores/{name}:delete_scope` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Search Memories | POST | `/memory_stores/{name}:search_memories` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Update Memories | POST | `/memory_stores/{name}:update_memories` | Required: `MemoryStores=V1Preview` |
+| Memory Stores | Create Memory Item | POST | `/memory_stores/{name}/memories` | Required: `MemoryStores=V1Preview` |
+| Memory Stores | List Memory Items | GET | `/memory_stores/{name}/memories` | Required: `MemoryStores=V1Preview` |
+| Memory Stores | Update Memory Item | POST | `/memory_stores/{name}/memories/{memory_id}` | Required: `MemoryStores=V1Preview` |
+| Memory Stores | Get Memory Item | GET | `/memory_stores/{name}/memories/{memory_id}` | Required: `MemoryStores=V1Preview` |
+| Memory Stores | Delete Memory Item | DELETE | `/memory_stores/{name}/memories/{memory_id}` | Required: `MemoryStores=V1Preview` |
 | Agents | Patch Agent | PATCH | `/agents/{agent_name}` | Required: `AgentEndpoints=V1Preview` |
 | Agent Sessions | Create Session | POST | `/agents/{agent_name}/endpoint/sessions` | Required: `AgentEndpoints=V1Preview` |
 | Agent Sessions | Get Session | GET | `/agents/{agent_name}/endpoint/sessions/{session_id}` | Required: `AgentEndpoints=V1Preview` |
