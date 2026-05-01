@@ -79,26 +79,26 @@ interface KeyVaultClient {
 }
 
 @client(
-   {
-     name: "KeyVaultEkmRestClient",
-     service: KeyVault,
-   },
-   "csharp"
- )
- interface KeyVaultEkmRestClient {
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-   getEkmConnection is KeyVault.getEkmConnection;
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-   getEkmCertificate is KeyVault.getEkmCertificate;
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-   checkEkmConnection is KeyVault.checkEkmConnection;
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-   createEkmConnection is KeyVault.createEkmConnection;
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-   updateEkmConnection is KeyVault.updateEkmConnection;
-   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-   deleteEkmConnection is KeyVault.deleteEkmConnection;
- }
+  {
+    name: "KeyVaultEkmRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
+interface KeyVaultEkmRestClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getEkmConnection is KeyVault.getEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getEkmCertificate is KeyVault.getEkmCertificate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  checkEkmConnection is KeyVault.checkEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  createEkmConnection is KeyVault.createEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  updateEkmConnection is KeyVault.updateEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteEkmConnection is KeyVault.deleteEkmConnection;
+}
 
 @@access(KeyVault.fullBackup, Access.internal, "csharp");
 @@access(KeyVault.fullRestoreOperation, Access.internal, "csharp");
