@@ -100,7 +100,8 @@ model SandboxGroupProperties {
 /**
  * A SandboxGroup tracked resource.
  */
-model SandboxGroup is Azure.ResourceManager.TrackedResource<SandboxGroupProperties> {
+model SandboxGroup
+  is Azure.ResourceManager.TrackedResource<SandboxGroupProperties> {
   /**
    * The name of the SandboxGroup.
    */
