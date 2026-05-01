@@ -1341,3 +1341,5 @@ enum ResourceIdentityType {
   },
   "csharp"
 );
+
+@@apiVersion(ResourceSku.apiVersions, false);
