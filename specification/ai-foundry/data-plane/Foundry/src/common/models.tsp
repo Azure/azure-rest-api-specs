@@ -153,6 +153,9 @@ model TracesJobSource {
   @doc("The source type for this source, which is Traces.")
   type: "traces";
 
+  @doc("The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).")
+  agent_id?: string;
+
   @doc("The agent name to fetch traces for.")
   agent_name: string;
 
