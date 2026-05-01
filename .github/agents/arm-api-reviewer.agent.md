@@ -340,6 +340,7 @@ After presenting the review findings to the human reviewer for approval:
    This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API, computing telemetry (comments per day, top rule violations, new-vs-existing ratio), and distinguishing agent comments from human comments during reconciliation. Do not omit this marker. All fields after `posted-by` are required.
 
    **Backward compatibility:** To detect whether an existing comment was posted by this agent (e.g., during reconciliation in Scenarios B and C), check if the comment body contains the substring `posted-by: arm-api-reviewer-agent`. This matches both the old simple marker and the new extended marker.
+
 9. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
 10. **Report a reconciliation summary** to the human reviewer before posting:
     - Findings to **post as new comments** (with line numbers)
