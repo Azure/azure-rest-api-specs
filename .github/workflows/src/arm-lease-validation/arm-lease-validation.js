@@ -262,7 +262,10 @@ export default async function validateArmLeases(core) {
   // Check for non-lease.yaml and non-README files
   core.startGroup("Checking for non-lease files");
   const nonLeaseFiles = allChangedFiles.filter(
-    (file) => !file.endsWith("/lease.yaml") && !file.endsWith("/README.md"),
+    (file) =>
+      !file.endsWith("/lease.yaml") &&
+      !file.endsWith("/README.md") &&
+      !file.startsWith(".github/arm-leases/scripts/"),
   );
 
   if (nonLeaseFiles.length > 0) {
