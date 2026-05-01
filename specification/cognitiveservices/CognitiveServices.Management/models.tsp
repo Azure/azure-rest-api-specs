@@ -377,7 +377,7 @@ union DeploymentState {
 }
 
 /**
- * The routing mode that determines how requests are distributed across models.
+ * The model-router routing mode that determines how requests are distributed across models.
  */
 union RoutingMode {
   string,
@@ -388,27 +388,27 @@ union RoutingMode {
   Cost: "cost",
 
   /**
-   * Balance cost and accuracy when routing requests across models.
+   * Balance cost and quality when routing requests across models.
    */
   Balanced: "balanced",
 
   /**
-   * Route requests to maximize accuracy regardless of cost.
+   * Route requests to maximize quality regardless of cost.
    */
-  Accuracy: "accuracy",
+  Quality: "quality",
 }
 
 /**
- * Routing configuration for the deployment. Specifies how requests are routed across multiple models.
+ * Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.
  */
 model DeploymentRouting {
   /**
-   * The routing mode that determines how requests are distributed across models.
+   * The model-router routing mode that determines how requests are distributed across models.
    */
   mode?: RoutingMode = RoutingMode.Balanced;
 
   /**
-   * Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
+   * Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
    */
   @identifiers(#["name", "version"])
   models?: DeploymentModel[];
@@ -3133,7 +3133,7 @@ model DeploymentProperties {
   deploymentState?: DeploymentState | null;
 
   /**
-   * Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset.
+   * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
 }
@@ -3676,66 +3676,6 @@ model RaiExternalSafetyProviderSchemaProperties {
    * Last modified time of the safety provider.
    */
   @visibility(Lifecycle.Read)
-  lastModifiedAt?: utcDateTime;
-}
-
-/**
- * Cognitive Services Rai External Safety provider.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'RaiExternalSafetyProvider' uses base type inheritance matching service-side object hierarchy"
-model RaiExternalSafetyProvider
-  extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Resource Etag.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'RaiExternalSafetyProvider' to support extensible key-value pairs matching service behavior"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-
-  /**
-   * Properties of Cognitive Services Rai External Safety provider.
-   */
-  properties?: RaiExternalSafetyProviderProperties;
-}
-
-/**
- * RAI External SafetyProvider properties.
- */
-model RaiExternalSafetyProviderProperties {
-  /**
-   * The unique identifier of the safety provider.
-   */
-  providerId?: string;
-
-  /**
-   * Name of the safety provider.
-   */
-  providerName?: string;
-
-  /**
-   * Safety provider mode sync/async.
-   */
-  mode?: string;
-
-  /**
-   * Webhook URL for the safety provider.
-   */
-  url?: url;
-
-  /**
-   * Creation time of the safety provider.
-   */
-  createdAt?: utcDateTime;
-
-  /**
-   * Last modified time of the safety provider.
-   */
   lastModifiedAt?: utcDateTime;
 }
 

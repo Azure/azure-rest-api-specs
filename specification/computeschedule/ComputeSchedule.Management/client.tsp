@@ -17,6 +17,8 @@ using TypeSpec.Versioning;
 
 @@clientName(CancelOccurrenceRequest, "OccurrenceCancelContent", "csharp");
 @@clientName(DelayRequest, "OccurrenceDelayContent", "csharp");
+// [DATE001] DateTimeOffset properties should use an "On"/"At" suffix in C#.
+@@clientName(DelayRequest.delay, "DelayOn", "csharp");
 @@clientName(Language, "NotificationLanguage", "csharp");
 @@clientName(Month, "ScheduledActionsScheduleMonth", "csharp");
 @@clientName(WeekDay, "ScheduledActionsScheduleWeekDay", "csharp");
@@ -75,7 +77,7 @@ using TypeSpec.Versioning;
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
 @@clientName(CreateFlexResourceOperationResponse,
-  "CreateFlexResourceOperationResult",
+  "ScheduledActionCreateFlexResult",
   "csharp"
 );
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
@@ -183,12 +185,19 @@ using TypeSpec.Versioning;
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(ScheduledActionResource, "ScheduledActionResourceData", "csharp");
-@@clientName(OccurrenceResource, "OccurrenceResourceData", "csharp");
-@@clientName(OccurrenceExtensionResource,
-  "OccurrenceExtensionResourceData",
+// [SUFFIX006] ScheduledActionResource is not a ResourceData-derived ARM
+// resource (it's an item embedded in attach/patch payloads), so it must not
+// carry the "Data" suffix in C#.
+@@clientName(ScheduledActionResource,
+  "ScheduledActionResourceDetails",
   "csharp"
 );
+// [SUFFIX006] OccurrenceResource has its own Id/Name/Type and does not derive
+// from ResourceData -> drop the "Data" suffix.
+@@clientName(OccurrenceResource, "OccurrenceDetails", "csharp");
+// [RESINFIX001] OccurrenceExtensionResource derives from ResourceData; keep
+// the "Data" suffix but drop the redundant "Resource" infix.
+@@clientName(OccurrenceExtensionResource, "OccurrenceExtensionData", "csharp");
 @@clientName(ResourceOperationResponse,
   "ScheduledActionResourceOperationResult",
   "csharp"
@@ -215,10 +224,7 @@ using TypeSpec.Versioning;
   "ScheduledActionResourceDetachContent",
   "csharp"
 );
-@@clientName(ResourcePatchRequest,
-  "ScheduledActionResourcePatchContent",
-  "csharp"
-);
+@@clientName(ResourcePatchRequest, "ScheduledActionResourcePatch", "csharp");
 @@clientName(ResourceStatus, "ScheduledActionResourceStatus", "csharp");
 @@clientName(ResourceOperationStatus,
   "ScheduledActionResourceOperationStatus",
@@ -243,15 +249,15 @@ using TypeSpec.Versioning;
 );
 
 @@clientName(UserInitiatedRedeploy.automaticallyApprove,
-  "AutomaticallyApproveRedeploy",
+  "IsAutomaticallyApprovedForRedeploy",
   "csharp"
 );
 @@clientName(UserInitiatedReboot.automaticallyApprove,
-  "AutomaticallyApproveReboot",
+  "IsAutomaticallyApprovedForReboot",
   "csharp"
 );
 @@clientName(AllInstancesDown.automaticallyApprove,
-  "AutomaticallyApproveAllInstancesDown",
+  "IsAutomaticallyApprovedForAllInstancesDown",
   "csharp"
 );
 
@@ -351,3 +357,194 @@ model ResourcePatchRequestInput {
 // =====================================================================
 @@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
+
+// =====================================================================
+// Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
+// parameter because its name contains "apiversion". This causes
+// the Go emitter to crash with "unexpected constant client side default
+// 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
+// =====================================================================
+@@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+// =====================================================================
+// C# naming alignment with Azure.ResourceManager.Compute SDK
+// =====================================================================
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+  "UltraSsdEnabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
+@@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
+@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+  "IsPasswordAuthenticationDisabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+  "IsVmAgentPlatformUpdatesEnabled",
+  "csharp"
+);
+@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+  "IsAutomaticUpdatesEnabled",
+  "csharp"
+);
+@@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(OSDisk.osType, "OSType", "csharp");
+@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+  "OSImageNotificationProfile",
+  "csharp"
+);
+
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// ARM Resource IDs -> ResourceIdentifier
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// String URIs -> System.Uri
+@@alternateType(VirtualHardDisk.uri, url, "csharp");
+@@alternateType(BootDiagnostics.storageUri, url, "csharp");
+@@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
+@@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
+@@alternateType(WinRMListener.certificateUrl, url, "csharp");
+@@alternateType(VaultCertificate.certificateUrl, url, "csharp");
+
+// =====================================================================
+// C# type renames: Prefix core VM types with "VirtualMachine" to match
+// Azure.ResourceManager.Compute SDK naming conventions
+// =====================================================================
+@@clientName(OSDisk, "VirtualMachineOSDisk", "csharp");
+@@clientName(OSProfile, "VirtualMachineOSProfile", "csharp");
+@@clientName(DataDisk, "VirtualMachineDataDisk", "csharp");
+@@clientName(NetworkProfile, "VirtualMachineNetworkProfile", "csharp");
+@@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
+@@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
+@@clientName(VmSizeProperties, "VirtualMachineSizeProperties", "csharp");
+@@clientName(NetworkInterfaceReference,
+  "VirtualMachineNetworkInterfaceReference",
+  "csharp"
+);
+
+// =====================================================================
+// C# type renames: Match Compute SDK type names
+// =====================================================================
+@@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
+@@clientName(BulkActionVMProperties,
+  "BulkActionVirtualMachineProperties",
+  "csharp"
+);
+@@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
+@@clientName(BulkActionVmExtensionProperties,
+  "BulkActionVirtualMachineExtensionProperties",
+  "csharp"
+);
+@@clientName(NetworkInterfaceReferenceProperties,
+  "VirtualMachineNetworkInterfaceReferenceProperties",
+  "csharp"
+);
+@@clientName(OccurrenceExtensionProperties,
+  "ScheduledActionOccurrenceExtensionProperties",
+  "csharp"
+);
+@@clientName(FallbackOperationInfo, "ScheduledActionFallbackInfo", "csharp");
+@@clientName(Modes, "HostEndpointSettingsMode", "csharp");
+
+// =====================================================================
+// C# enum renames: Singular names to match Compute SDK conventions
+// =====================================================================
+@@clientName(CachingTypes, "CachingType", "csharp");
+@@clientName(SecurityTypes, "SecurityType", "csharp");
+@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
+@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
+@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
+@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
+@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
+@@clientName(IPVersions, "IPVersion", "csharp");
+@@clientName(ProtocolTypes, "WinRMListenerProtocolType", "csharp");
+@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
+@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
+@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
+@@clientName(SettingNames, "SettingName", "csharp");
+
+// =====================================================================
+// C# property renames: Match Compute SDK property names
+// =====================================================================
+@@clientName(ImageReference.sharedGalleryImageId,
+  "SharedGalleryImageUniqueId",
+  "csharp"
+);
+
+// =====================================================================
+// [ARMCOMMON001] Use framework ManagedServiceIdentity instead of local
+// VirtualMachineIdentity / UserAssignedIdentitiesValue / ResourceIdentityType
+// =====================================================================
+@@alternateType(BulkVMConfiguration.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+
+// =====================================================================
+// [ARMCOMMON001] Use framework WritableSubResource for SubResource-typed
+// properties (wire format stays { "id": "..." })
+// =====================================================================
+
+// Define the model in the Azure.ResourceManager.Models namespace so
+// @@alternateType can reference it for C# SDK generation.
+namespace Azure.ResourceManager.Models {
+  /** Represents a reference to an existing resource by its id. */
+  model WritableSubResource {
+    /** The resource id. */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+@@alternateType(KeyVaultSecretReference.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(KeyVaultKeyReference.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+@@alternateType(VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+
+// =====================================================================
+// [ACRONYM001] C# acronym casing: "VM" should be "Vm" (PascalCase per
+// .NET Framework Design Guidelines for two-letter acronyms in compound
+// identifiers). Aligns with Azure.ResourceManager.Compute SDK naming.
+// =====================================================================
+@@clientName(BulkVMConfiguration, "BulkVmConfiguration", "csharp");
+@@clientName(VMGalleryApplication, "VmGalleryApplication", "csharp");
+@@clientName(LinuxVMGuestPatchMode, "LinuxVmGuestPatchMode", "csharp");
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings,
+  "LinuxVmGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+  "LinuxVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings,
+  "WindowsVmGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+  "WindowsVmGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+// VMDiskSecurityProfile -> VirtualMachineDiskSecurityProfile to match the
+// type name used by Azure.ResourceManager.Compute.
+@@clientName(VMDiskSecurityProfile,
+  "VirtualMachineDiskSecurityProfile",
+  "csharp"
+);

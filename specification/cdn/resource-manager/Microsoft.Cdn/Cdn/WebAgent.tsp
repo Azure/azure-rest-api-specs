@@ -16,6 +16,7 @@ namespace Microsoft.Cdn;
  * Defines a web agent resource for Azure CDN.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 model WebAgent is Azure.ResourceManager.TrackedResource<WebAgentProperties> {
   ...ResourceNameParameter<
     Resource = WebAgent,
@@ -29,16 +30,19 @@ model WebAgent is Azure.ResourceManager.TrackedResource<WebAgentProperties> {
  * Defines a WebAgent response body for long-running operations.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 model WebAgentAcceptedBody {
   /**
    * Defines a WebAgent response body
    */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   _: WebAgent;
 }
 
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface WebAgents {
   /**
@@ -65,7 +69,8 @@ interface WebAgents {
   update is ArmCustomPatchAsync<
     WebAgent,
     PatchModel = WebAgentUpdateParameters,
-    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent> & // ← add FinalResult!
+      Azure.Core.Foundations.RetryAfterHeader> &
       WebAgentAcceptedBody)
   >;
 
