@@ -554,6 +554,10 @@ namespace Language.AnalyzeTextClientCustomizations;
   "PiiEntityRecognitionOperationResults",
   "csharp"
 );
+@@clientName(AnalyzeDocumentsLROResult,
+  "AnalyzeDocumentsOperationResult",
+  "csharp"
+);
 
 @@clientName(PiiEntityRecognitionLROResult,
   "PiiEntityRecognitionOperationResult",
