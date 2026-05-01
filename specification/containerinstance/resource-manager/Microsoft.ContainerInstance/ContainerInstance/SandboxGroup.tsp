@@ -196,7 +196,7 @@ interface SandboxGroups {
    * List SandboxGroup resources by subscription ID
    */
   @summary("List SandboxGroup resources by subscription ID")
-  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/sandboxGroups")
   listBySubscription is ArmListBySubscription<SandboxGroup, Error = CloudError>;
 
   /**
