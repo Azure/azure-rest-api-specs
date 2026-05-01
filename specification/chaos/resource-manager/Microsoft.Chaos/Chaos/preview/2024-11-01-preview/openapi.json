@@ -2740,7 +2740,7 @@
         "storageAccountResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "ARM Resource ID of the Storage account to use for Customer Data storage.",
+          "description": "Azure Resource ID of the Storage account to use for Customer Data storage.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -2946,7 +2946,8 @@
         "properties": {
           "$ref": "#/definitions/ExperimentExecutionDetailsProperties",
           "description": "The properties of the experiment execution details.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -3154,7 +3155,7 @@
     },
     "KeyValuePair": {
       "type": "object",
-      "description": "A map to describe the settings of an action.",
+      "description": "A map used to describe parameters for actions or configurations.",
       "properties": {
         "key": {
           "type": "string",
@@ -3254,7 +3255,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM identifier for private endpoint.",
+          "description": "The Azure identifier for private endpoint.",
           "readOnly": true
         }
       }
@@ -3586,7 +3587,11 @@
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Azure resource location."
+          "description": "Azure resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [

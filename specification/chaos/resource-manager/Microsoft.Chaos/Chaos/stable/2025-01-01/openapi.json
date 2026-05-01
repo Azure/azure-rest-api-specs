@@ -2332,7 +2332,8 @@
         "properties": {
           "$ref": "#/definitions/ExperimentExecutionDetailsProperties",
           "description": "The properties of the experiment execution details.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2526,7 +2527,7 @@
     },
     "KeyValuePair": {
       "type": "object",
-      "description": "A map to describe the settings of an action.",
+      "description": "A map used to describe parameters for actions or configurations.",
       "properties": {
         "key": {
           "type": "string",
@@ -2661,7 +2662,11 @@
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Azure resource location."
+          "description": "Azure resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [

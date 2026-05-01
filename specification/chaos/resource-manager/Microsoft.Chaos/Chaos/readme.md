@@ -31,6 +31,96 @@ openapi-type: arm
 tag: package-2025-01
 ```
 
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/openapi.json
+suppressions:
+  - code: XMSSecretInResponse
+    from: openapi.json
+    where: $.definitions.PrivateAccessProperties.properties.publicNetworkAccess
+    reason: False positive - publicNetworkAccess is not a secret. It is a simple Enabled/Disabled configuration setting for public network access control. The property name contains 'access' which may trigger the rule, but the values are not sensitive.
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/workspaceOperationResults/{operationId}"]
+    reason: WorkspaceOperationResults is an LRO polling endpoint (final-state-via location), not a tracked resource CRUD path. It is subscription/location-scoped by design as a shared polling endpoint for workspace async operations.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/fixResourcePermissions"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: Approved by ARM API reviewer. GUID usage is required for resource identifiers in the Chaos service.
+  - code: AllTrackedResourcesMustHaveDelete
+    from: openapi.json
+    where: $.definitions.Workspace
+    reason: False positive - Workspace has a DELETE operation (Workspaces_Delete) at /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}. The linter fails to correlate the definition with its delete operation.
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Workspace
+    reason: False positive - Workspace has a PATCH operation (Workspaces_Update) at the same resource path with tags support via WorkspaceUpdate model. The linter fails to correlate the definition with its patch operation.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/execute"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/validate"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/runs/{runId}/cancel"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    where: $.definitions.WorkspaceEvaluation
+    reason: WorkspaceEvaluation is a singleton resource (evaluations/latest). Singletons do not have list operations.
+  - code: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    where: $.definitions.WorkspaceDiscovery
+    reason: WorkspaceDiscovery is a singleton resource (discoveries/latest). Singletons do not have list operations.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/latest"]
+    reason: WorkspaceEvaluation is a singleton resource using @singleton("latest"). The hardcoded /latest segment is by design — there is no collection, only the single latest evaluation.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest"]
+    reason: WorkspaceDiscovery is a singleton resource using @singleton("latest"). The hardcoded /latest segment is by design — there is no collection, only the single latest discovery.
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations"].post
+    reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
+  - code: PostOperationIdContainsUrlVerb
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails"].post
+    reason: The operationId Experiments_ExecutionDetails is established in previous API versions (2024-11-01-preview, 2025-01-01). Renaming would be a breaking change for existing SDKs.
+```
+
 ### Tag: package-2025-01
 
 These settings apply only when `--tag=package-2025-01` is specified on the command line.
@@ -62,6 +152,10 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: openapi.json
     reason: already used in GA api version, fixing it will cause breaking change
+  - code: PostOperationIdContainsUrlVerb
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails"].post
+    reason: The operationId Experiments_ExecutionDetails is established in previous API versions. Renaming would be a breaking change for existing SDKs.
 ```
 
 ### Tag: package-preview-2024-11
@@ -95,6 +189,10 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: openapi.json
     reason: already used in GA api version, fixing it will cause breaking change
+  - code: PostOperationIdContainsUrlVerb
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails"].post
+    reason: The operationId Experiments_ExecutionDetails is established in previous API versions. Renaming would be a breaking change for existing SDKs.
 ```
 
 ### Tag: package-preview-2024-03
