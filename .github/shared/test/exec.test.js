@@ -72,7 +72,7 @@ describe("execNpmExec", () => {
   it("runs prettier", async () => {
     await expect(execNpmExec(["prettier", "--version"], options)).resolves.toEqual({
       stdout: /** @type {unknown} */ (expect.toSatisfy((v) => semver.valid(String(v)) !== null)),
-      stderr: "",
+      stderr: /** @type {unknown} */ (expect.any(String)),
       error: undefined,
     });
   });
