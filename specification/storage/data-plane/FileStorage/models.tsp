@@ -2401,7 +2401,7 @@ alias FileCreationTimeParameter<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
-  @encode("rfc3999-fixed-width")
+  @encode("rfc3339-fixed-width")
   @header("x-ms-file-creation-time")
   fileCreationTime?: utcDateTime;
 };
@@ -2411,7 +2411,7 @@ alias FileCreationTimeResponseHeader<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
-  @encode("rfc3999-fixed-width")
+  @encode("rfc3339-fixed-width")
   @header("x-ms-file-creation-time")
   fileCreationTime?: utcDateTime;
 };
@@ -2421,7 +2421,7 @@ alias FileLastWriteTimeParameter<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
-  @encode("rfc3999-fixed-width")
+  @encode("rfc3339-fixed-width")
   @header("x-ms-file-last-write-time")
   fileLastWriteTime?: utcDateTime;
 };
@@ -2431,7 +2431,7 @@ alias FileLastWriteTimeResponseHeader<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
-  @encode("rfc3999-fixed-width")
+  @encode("rfc3339-fixed-width")
   @header("x-ms-file-last-write-time")
   fileLastWriteTime?: utcDateTime;
 };
@@ -2441,7 +2441,7 @@ alias FileChangeTimeParameter<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
-  @encode("rfc3999-fixed-width")
+  @encode("rfc3339-fixed-width")
   @header("x-ms-file-change-time")
   fileChangeTime?: utcDateTime;
 };
@@ -2451,7 +2451,7 @@ alias FileChangeTimeResponseHeader<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
-  @encode("rfc3999-fixed-width")
+  @encode("rfc3339-fixed-width")
   @header("x-ms-file-change-time")
   fileChangeTime?: utcDateTime;
 };
