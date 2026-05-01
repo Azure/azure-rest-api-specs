@@ -152,16 +152,13 @@ model DatasetReference {
   version: string;
 }
 
-@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. All references are read-only and resolve to versioned Foundry Datasets in a service-reserved namespace.")
+@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
 model EvaluatorGenerationArtifacts {
-  @doc("Reference to the generated evaluation specification — a Markdown document describing what the evaluator measures, design decisions, and intended scope. Always present for generated evaluators.")
-  spec?: DatasetReference;
+  @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
+  dataset: DatasetReference;
 
-  @doc("Reference to the tool schemas inferred during spec generation, when the generation pipeline produced them. JSONL of OpenAI tool-schema objects. Optional: absent when the generation pipeline did not produce or infer tools.")
-  tools?: DatasetReference;
-
-  @doc("Reference to the supplementary context materials used during generation (e.g., file uploads, trace samples). Optional: absent when generation used only inline prompt/agent inputs with no supplementary files.")
-  context?: DatasetReference;
+  @doc("The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation).")
+  kinds: string[];
 }
 
 // ============================================================================

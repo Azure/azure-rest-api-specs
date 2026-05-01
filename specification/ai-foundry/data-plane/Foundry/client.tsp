@@ -167,7 +167,7 @@ using Azure.AI.Projects;
 @@clientName(Evaluators.listLatestVersions, "list");
 
 // Evaluator generation jobs — renamed for Python SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "generate_job", "python");
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
