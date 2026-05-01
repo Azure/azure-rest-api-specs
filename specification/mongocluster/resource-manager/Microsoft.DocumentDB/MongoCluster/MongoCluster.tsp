@@ -30,9 +30,23 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
 interface MongoClusters {
   /** Gets information about a mongo cluster. */
   get is ArmResourceRead<MongoCluster>;
+
+  // Legacy: uses azure-async-operation final-state-via for API versions before 2026-02-01-preview.
   /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Legacy versions use azure-async-operation; fixed to original-uri from v2026_02_01_preview via @sharedRoute split"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @sharedRoute
+  @removed(Versions.v2026_02_01_preview)
+  @renamedFrom(Versions.v2026_02_01_preview, "createOrUpdate")
+  createOrUpdateLegacy is ArmResourceCreateOrUpdateAsync<
+    MongoCluster,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  // New: uses the default original-uri final-state-via from 2026-02-01-preview onwards.
+  /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
+  @sharedRoute
+  @added(Versions.v2026_02_01_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     MongoCluster,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
@@ -213,6 +227,10 @@ model MongoClusterProperties {
   /** The encryption configuration for the cluster. Depends on identity being configured. */
   @added(Versions.v2025_08_01_preview)
   encryption?: EncryptionProperties;
+
+  /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows Azure Cosmos DB service to bypass network restrictions. */
+  @added(Versions.v2026_02_01_preview)
+  networkBypassMode?: NetworkBypassMode;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -609,4 +627,16 @@ model KeyEncryptionKeyIdentity {
   /** The user assigned identity resource id. */
   @madeOptional(Versions.v2025_08_01_preview)
   userAssignedIdentityResourceId?: string;
+}
+
+/** The network bypass mode for the Mongo cluster. */
+@added(Versions.v2026_02_01_preview)
+union NetworkBypassMode {
+  string,
+
+  /** No network bypass is enabled. */
+  "None",
+
+  /** Allows Azure Cosmos DB service to bypass network restrictions. */
+  "AzureCosmosDB",
 }
