@@ -469,7 +469,7 @@ model SignedIdentifier {
 
 /** The result of a Filter Blobs API call */
 @Xml.name("EnumerationResults")
-model FilteredBlob {
+model FilteredBlobResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -481,7 +481,7 @@ model FilteredBlob {
   /** The blob segment. */
   @pageItems
   @Xml.name("Blobs")
-  blobs: FilterBlobItem[];
+  blobItems: FilterBlobItem[];
 
   /** The next marker of the blobs. */
   @continuationToken
