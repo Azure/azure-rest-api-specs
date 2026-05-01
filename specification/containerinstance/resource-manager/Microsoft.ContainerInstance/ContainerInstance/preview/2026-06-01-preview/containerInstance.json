@@ -1803,7 +1803,13 @@
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SandboxGroup"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-suppressions": [
+          {
+            "code": "RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE",
+            "reason": "200 response is only returned for idempotent PUT when resource already exists; 201 is the normal creation response."
+          }
+        ]
       },
       "patch": {
         "operationId": "SandboxGroups_Update",
@@ -1879,7 +1885,13 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SandboxGroup"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-suppressions": [
+          {
+            "code": "RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE",
+            "reason": "200 response is included in spec but example only demonstrates the 202 async polling pattern."
+          }
+        ]
       },
       "delete": {
         "operationId": "SandboxGroups_Delete",
@@ -1942,7 +1954,13 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-suppressions": [
+          {
+            "code": "RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE",
+            "reason": "204 response is included for edge case when resource doesn't exist; example demonstrates the normal 202 async deletion pattern."
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/sandboxGroups/{sandboxGroupName}/connect": {
