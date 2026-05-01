@@ -1,6 +1,7 @@
 import { createRequire } from "module";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 
 const require = createRequire(import.meta.url);
@@ -8,10 +9,14 @@ const { findRepoRoot, findResourceProviders, formatOutput } = require(
   "../../../arm-leases/scripts/fetch-resource-providers.cjs",
 );
 
+// Get the directory of the current test file to find repo root reliably
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 describe("fetch-resource-providers", () => {
   describe("findRepoRoot", () => {
     it("finds the repository root", () => {
-      const repoRoot = findRepoRoot();
+      const repoRoot = findRepoRoot(__dirname);
       expect(repoRoot.endsWith("azure-rest-api-specs")).toBe(true);
       expect(fs.existsSync(path.join(repoRoot, "specification"))).toBe(true);
     });
@@ -19,7 +24,7 @@ describe("fetch-resource-providers", () => {
 
   describe("findResourceProviders (without service names)", () => {
     it("finds resource providers without service names", () => {
-      const repoRoot = findRepoRoot();
+      const repoRoot = findRepoRoot(__dirname);
       const rps = findResourceProviders(repoRoot, false);
 
       expect(rps.length).toBeGreaterThan(0);
@@ -32,7 +37,7 @@ describe("fetch-resource-providers", () => {
 
   describe("findResourceProviders (with service names)", () => {
     it("finds resource providers with service names", () => {
-      const repoRoot = findRepoRoot();
+      const repoRoot = findRepoRoot(__dirname);
       const rps = findResourceProviders(repoRoot, true);
 
       expect(rps.length).toBeGreaterThan(0);
