@@ -34,6 +34,16 @@ model UpdateStage {
   @doc("Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.")
   groups?: UpdateGroup[];
 
+  @doc("""
+    Select the members of the stage.
+      * If specified without UpdateGroup, one implicit group containing the selected members will be created.
+      * If specified with UpdateGroup, members will be pre-filtered before group-level selection logic is applied.
+      * If not specified, group-level selection logic will be used.
+    """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_05_01_preview)
+  memberSelector?: MemberSelector;
+
   @doc("The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified.")
   afterStageWaitInSeconds?: int32;
 
@@ -66,11 +76,30 @@ model UpdateStage {
   afterGates?: GateConfiguration[];
 }
 
+@doc("Configuration for ScheduledStart gate")
+@added(Versions.v2026_05_01_preview)
+model ScheduledStartConfiguration {
+  @doc("The day of the week when the scheduled start occurs.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  startDay: DayOfWeek;
+
+  @doc("The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^([01][0-9]|2[0-3]):[0-5][0-9]$")
+  startTime: string;
+
+  @doc("The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$")
+  utcOffset: string;
+}
+
 @doc("A group to be updated.")
 model UpdateGroup {
   @doc("""
     Name of the group.
-    It must match a group name of an existing fleet member. 
+    It serves as an identifier and must match a group name of an existing fleet member unless
+    MemberSelector is specified. When MemberSelector is set, Name is only used as an identifier.
     """)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -96,6 +125,15 @@ model UpdateGroup {
   @added(Versions.v2026_02_01_preview)
   maxConcurrency?: string;
 
+  @doc("""
+    Select the members of the group.
+      * If specified, label-based selection will override group name based selection.
+      * If not specified, group name based selection will be used.
+    """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_05_01_preview)
+  memberSelector?: MemberSelector;
+
   @doc("A list of Gates that will be created before this Group is executed.")
   @added(Versions.v2025_04_01_preview)
   @identifiers(#[])
@@ -117,4 +155,8 @@ model GateConfiguration {
 
   @doc("The type of the Gate determines how it is completed.")
   type: GateType;
+
+  @doc("Scheduled start configuration for gates of type ScheduledStart.")
+  @added(Versions.v2026_05_01_preview)
+  scheduledStartConfiguration?: ScheduledStartConfiguration;
 }
