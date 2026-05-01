@@ -5144,25 +5144,12 @@
         }
       }
     },
-    "SandboxGroupTags": {
-      "type": "object",
-      "description": "Resource tags for SandboxGroup.",
-      "properties": {
-        "properties": {
-          "type": "array",
-          "description": "The tag properties.",
-          "items": {
-            "$ref": "#/definitions/TagProperty"
-          }
-        }
-      }
-    },
     "SandboxGroupTagsUpdate": {
       "type": "object",
       "description": "The type used for updating tags in SandboxGroup resources.",
       "properties": {
         "tags": {
-          "$ref": "#/definitions/SandboxGroupTags",
+          "$ref": "#/definitions/Tags",
           "description": "Resource tags."
         },
         "identity": {
@@ -5315,23 +5302,12 @@
         "id"
       ]
     },
-    "TagProperty": {
+    "Tags": {
       "type": "object",
-      "description": "A tag property for SandboxGroup resources.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The tag name."
-        },
-        "value": {
-          "type": "string",
-          "description": "The tag value."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
+      "description": "Tags for a resource.",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "UpdateProfile": {
       "type": "object",
