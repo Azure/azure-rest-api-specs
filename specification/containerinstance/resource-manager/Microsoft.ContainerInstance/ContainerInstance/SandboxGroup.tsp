@@ -130,12 +130,24 @@ model SandboxGroupTagsUpdate {
  * Resource tags for SandboxGroup.
  */
 model SandboxGroupTags {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  /**
+   * The tag properties.
+   */
   properties?: TagProperty[];
 }
 
+/**
+ * A tag property for SandboxGroup resources.
+ */
 model TagProperty {
+  /**
+   * The tag name.
+   */
   name: string;
+
+  /**
+   * The tag value.
+   */
   value: string;
 }
 
