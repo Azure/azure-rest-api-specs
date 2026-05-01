@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerInstance;
 
@@ -106,7 +108,7 @@ model SandboxGroup is Azure.ResourceManager.TrackedResource<SandboxGroupProperti
   @minLength(1)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @key("sandboxGroupName")
-  @segment("sandboxGroupName")
+  @segment("sandboxGroups")
   @path
   name: string;
 }
@@ -188,6 +190,7 @@ model SandboxGroupListResult {
 }
 
 @armResourceOperations
+@added(Versions.v2026_06_01_preview)
 interface SandboxGroups {
   /**
    * List SandboxGroup resources by subscription ID
