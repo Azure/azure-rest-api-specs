@@ -80,6 +80,11 @@ using Microsoft.Maintenance;
   "CreateOrUpdateApplyUpdateByParent",
   "csharp"
 );
+
+// These two operations are redundant with ApplyUpdateOperationGroup.createOrUpdateOrCancel,
+// which is the proper resource createOrUpdate. Omit them from the C# SDK.
+@@scope(ApplyUpdatesOperationGroup.createOrUpdate, "!csharp");
+@@scope(ApplyUpdatesOperationGroup.createOrUpdateParent, "!csharp");
 @@clientName(ConfigurationAssignments.createOrUpdateParent,
   "CreateOrUpdateConfigurationAssignmentByParent",
   "csharp"
