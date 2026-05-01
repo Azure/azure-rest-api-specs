@@ -1,18 +1,20 @@
-import { inspect } from "util";
-
-/**
- * @param {string} path
- * @returns {boolean}
- */
-export function isTypeSpecPath(path) {
-  return path.endsWith(".tsp") || path.endsWith("tspconfig.yaml");
-}
+import { getChangedFiles } from "../../shared/src/changed-files.js";
+import { CoreLogger } from "./core-logger.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @returns {Promise<boolean>}
  */
-export default async function typespecRequirement({ github, context, core }) {
-  await Promise.resolve();
-  core.info(inspect(github).length.toString());
-  core.info(inspect(context).length.toString());
+export default async function typespecRequirement({ core }) {
+  const options = {
+    cwd: process.env.GITHUB_WORKSPACE,
+    paths: ["specification"],
+    logger: new CoreLogger(core),
+  };
+
+  const changedFiles = await getChangedFiles(options);
+
+  core.info(`Changed files:\n${changedFiles.join("\n")}`);
+
+  return true;
 }
