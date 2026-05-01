@@ -121,7 +121,7 @@ model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
    */
-  @Azure.ResourceManager.Tags
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use of Record for PATCH update envelopes."
   tags?: Record<string>;
 
   /**

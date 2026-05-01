@@ -5146,11 +5146,14 @@
     },
     "SandboxGroupTagsUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in SandboxGroup resources.",
+      "description": "The type used for updating a SandboxGroup resource.",
       "properties": {
         "tags": {
-          "$ref": "#/definitions/Tags",
-          "description": "Resource tags."
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
@@ -5301,13 +5304,6 @@
       "required": [
         "id"
       ]
-    },
-    "Tags": {
-      "type": "object",
-      "description": "Tags for a resource.",
-      "additionalProperties": {
-        "type": "string"
-      }
     },
     "UpdateProfile": {
       "type": "object",
