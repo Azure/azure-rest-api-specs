@@ -21,6 +21,7 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "AgentDetails");
 @@clientName(AgentVersionObject, "AgentVersionDetails");
+@@clientName(Agents.patchAgentObject, "updateAgentDetails");
 
 @@clientName(MemoryStoreObject, "MemoryStoreDetails");
 
