@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -14,6 +14,7 @@ namespace Search;
 /** The input contract for the retrieval request. */
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   messages?: KnowledgeBaseMessage[];
 
@@ -24,14 +25,20 @@ model KnowledgeBaseRetrievalRequest {
   maxRuntimeInSeconds?: int32;
 
   /** Limits the maximum size of the content in the output. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   maxOutputSize?: int32;
+
+  /** Limits the maximum number of documents in the output. */
+  @added(Versions.v2026_05_01_preview)
+  maxOutputDocuments?: int32;
 
   /** Limits the maximum size of the content in the output. */
   @added(Versions.v2026_04_01)
   maxOutputSizeInTokens?: int32;
 
   /** The retrieval reasoning effort configuration. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
@@ -39,6 +46,7 @@ model KnowledgeBaseRetrievalRequest {
   includeActivity?: boolean;
 
   /** The output configuration for this retrieval. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   outputMode?: KnowledgeRetrievalOutputMode;
 
@@ -56,6 +64,10 @@ model KnowledgeBaseRetrievalResponse {
 
   /** The references for the retrieval data used in the response. */
   references?: KnowledgeBaseReference[];
+
+  /** The sensitivity label information for the overall response. */
+  @added(Versions.v2026_05_01_preview)
+  responseSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Base type for reasoning effort. */
@@ -73,6 +85,7 @@ model KnowledgeRetrievalMinimalReasoningEffort
 }
 
 /** Run knowledge retrieval with low reasoning effort. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeRetrievalLowReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
@@ -81,6 +94,7 @@ model KnowledgeRetrievalLowReasoningEffort
 }
 
 /** Run knowledge retrieval with medium reasoning effort. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeRetrievalMediumReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
@@ -96,15 +110,18 @@ union KnowledgeRetrievalReasoningEffortKind {
   minimal: "minimal",
 
   /** Use low reasoning during retrieval. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   low: "low",
 
   /** Use a moderate amount of reasoning during retrieval. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   medium: "medium",
 }
 
 /** The output configuration for this retrieval. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union KnowledgeRetrievalOutputMode {
   string,
@@ -129,14 +146,27 @@ model KnowledgeSourceParams {
   includeReferenceSourceData?: boolean;
 
   /** Indicates that this knowledge source should bypass source selection and always be queried at retrieval time. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
+
+  /** Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false. */
+  @added(Versions.v2026_05_01_preview)
+  failOnError?: boolean;
 
   /** The reranker threshold all retrieved documents must meet to be included in the response. */
   rerankerThreshold?: float32;
 
+  /** Limits the maximum number of documents returned from this knowledge source. */
+  @added(Versions.v2026_05_01_preview)
+  maxOutputDocuments?: int32;
+
   /** The type of the knowledge source. */
   kind: KnowledgeSourceKind;
+
+  /** Indicates whether image serving should be enabled for this knowledge source at retrieval time. When true, images extracted during ingestion are delivered to downstream models. */
+  @added(Versions.v2026_05_01_preview)
+  enableImageServing?: boolean;
 }
 
 /** Specifies runtime parameters for a search index knowledge source */
@@ -169,6 +199,7 @@ union IndexedSharePointContainerName {
 }
 
 /** Specifies runtime parameters for a indexed SharePoint knowledge source */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
@@ -200,6 +231,7 @@ model WebKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for a remote SharePoint knowledge source */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
@@ -207,6 +239,28 @@ model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
 
   /** A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition. */
   filterExpressionAddOn?: string;
+}
+
+/** Specifies runtime parameters for a WorkIQ knowledge source */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.WorkIQ;
+}
+
+/** Specifies runtime parameters for a Fabric Data Agent knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FabricDataAgentKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricDataAgent;
+}
+
+/** Specifies runtime parameters for a Fabric Ontology knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FabricOntologyKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricOntology;
 }
 
 /** An intended query to execute without model query planning. */
@@ -295,6 +349,7 @@ union KnowledgeBaseActivityRecordType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
@@ -305,14 +360,29 @@ union KnowledgeBaseActivityRecordType {
   web: "web",
 
   /** Remote SharePoint retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 
+  /** WorkIQ retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  workIQ: "workIQ",
+
+  /** Fabric Data Agent retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  fabricDataAgent: "fabricDataAgent",
+
+  /** Fabric Ontology retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  fabricOntology: "fabricOntology",
+
   /** LLM query planning activity. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   modelQueryPlanning: "modelQueryPlanning",
 
   /** LLM answer synthesis activity. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   modelAnswerSynthesis: "modelAnswerSynthesis",
 
@@ -338,6 +408,10 @@ model KnowledgeBaseActivityRecord {
 
   /** The error detail explaining why the operation failed. This property is only included when the activity does not succeed. */
   error?: KnowledgeBaseErrorDetail;
+
+  /** A warning message surfacing potential configuration issues observed during the activity, such as documents dropped due to score thresholding, token limit truncation, or timeout conditions. */
+  @added(Versions.v2026_05_01_preview)
+  warning?: string;
 }
 
 /** Represents a retrieval activity record. */
@@ -353,6 +427,10 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 
   /** The count of documents retrieved that were sufficiently relevant to pass the reranker threshold. */
   count?: int32;
+
+  /** Statistics about image serving for this retrieval activity */
+  @added(Versions.v2026_05_01_preview)
+  imageServing?: ImageServingStatistics;
 }
 
 /** Represents a search index retrieval activity record. */
@@ -406,6 +484,7 @@ model KnowledgeBaseAzureBlobActivityArguments {
 /** Represents a indexed SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -417,6 +496,7 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityArguments {
   /** The search string used to query indexed SharePoint contents. */
@@ -474,6 +554,7 @@ model KnowledgeBaseWebActivityArguments {
 /** Represents a remote SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -485,6 +566,7 @@ model KnowledgeBaseRemoteSharePointActivityRecord
 }
 
 /** Represents the arguments the remote SharePoint retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityArguments {
   /** The search string used to query the remote SharePoint knowledge source. */
@@ -494,8 +576,72 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
   filterExpressionAddOn?: string;
 }
 
+/** Represents a WorkIQ retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.workIQ;
+
+  /** The WorkIQ arguments for the retrieval activity. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  workIQArguments?: KnowledgeBaseWorkIQActivityArguments;
+}
+
+/** Represents the arguments the WorkIQ retrieval activity was run with. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQActivityArguments {
+  /** The search string used to query the WorkIQ knowledge source. */
+  search?: string;
+}
+
+/** Represents a Fabric Data Agent retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricDataAgent;
+
+  /** The Fabric Data Agent arguments for the retrieval activity. */
+  fabricDataAgentArguments?: KnowledgeBaseFabricDataAgentActivityArguments;
+}
+
+/** Represents the arguments the Fabric Data Agent retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentActivityArguments {
+  /** The search string used to query the Fabric Data Agent knowledge source. */
+  search?: string;
+}
+
+/** Represents a Fabric Ontology retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricOntology;
+
+  /** The Fabric Ontology arguments for the retrieval activity. */
+  fabricOntologyArguments?: KnowledgeBaseFabricOntologyActivityArguments;
+}
+
+/** Represents the arguments the Fabric Ontology retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyActivityArguments {
+  /** The search string used to query the Fabric Ontology knowledge source. */
+  search?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
@@ -507,10 +653,15 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 
   /** The number of output tokens for the LLM query planning activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM query planning activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
 }
 
 /** Represents an LLM answer synthesis activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
@@ -522,6 +673,10 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
 
   /** The number of output tokens for the LLM answer synthesis activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM answer synthesis activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
 }
 
 /** Represents an LLM web summarization activity record. */
@@ -537,6 +692,10 @@ model KnowledgeBaseModelWebSummarizationActivityRecord
 
   /** The number of output tokens for the LLM web summarization activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM web summarization activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
 }
 
 /** Represents an agentic reasoning activity record. */
@@ -564,6 +723,7 @@ union KnowledgeBaseReferenceType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint document reference. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
@@ -574,8 +734,21 @@ union KnowledgeBaseReferenceType {
   web: "web",
 
   /** Remote SharePoint document reference. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
+
+  /** Work IQ document reference. */
+  @added(Versions.v2026_05_01_preview)
+  workIQ: "workIQ",
+
+  /** Fabric Data Agent document reference. */
+  @added(Versions.v2026_05_01_preview)
+  fabricDataAgent: "fabricDataAgent",
+
+  /** Fabric Ontology document reference. */
+  @added(Versions.v2026_05_01_preview)
+  fabricOntology: "fabricOntology",
 }
 
 /** Base type for references. */
@@ -606,6 +779,10 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
 
   /** The document key for the reference. */
   docKey?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents an Azure Blob Storage document reference. */
@@ -616,10 +793,15 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 
   /** The blob URL for the reference. */
   blobUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents an indexed SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
@@ -627,6 +809,10 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
 
   /** The document URL for the reference. */
   docUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents an indexed OneLake document reference. */
@@ -637,6 +823,10 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
 
   /** The document URL for the reference. */
   docUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents a web document reference. */
@@ -654,6 +844,7 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 
 /** Represents a remote SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
@@ -663,7 +854,62 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
-  searchSensitivityLabelInfo?: SharePointSensitivityLabelInfo;
+  @renamedFrom(Versions.v2026_04_01, "searchSensitivityLabelInfo")
+  @removed(Versions.v2026_04_01)
+  searchSensitivityLabelInfoRemoved?: SharePointSensitivityLabelInfo;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+}
+
+/** Represents a WorkIQ document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.workIQ;
+
+  /** The attributions for the reference. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  attributions?: WorkIQAttribution[];
+}
+
+/** Attribution information for a WorkIQ reference. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQAttribution {
+  /** The URL for the attribution. */
+  seeMoreWebUrl?: url;
+}
+
+/** Represents a Fabric Data Agent document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricDataAgent;
+
+  /** The Fabric workspace ID. */
+  workspaceId?: string;
+
+  /** The Fabric Data Agent ID. */
+  dataAgentId?: string;
+}
+
+/** Represents a Fabric Ontology document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricOntology;
+
+  /** The Fabric workspace ID. */
+  workspaceId?: string;
+
+  /** The ontology ID within the workspace. */
+  ontologyId?: string;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
@@ -686,6 +932,44 @@ model SharePointSensitivityLabelInfo {
 
   /** Indicates whether the sensitivity label enforces encryption. */
   isEncrypted?: boolean;
+}
+
+/** Information about the sensitivity label applied to a document */
+@added(Versions.v2026_05_01_preview)
+model PurviewSensitivityLabelInfo {
+  /** The display name for the sensitivity label. */
+  displayName?: string;
+
+  /** The ID of the sensitivity label. */
+  sensitivityLabelId?: string;
+
+  /** The tooltip that should be displayed for the label in a UI. */
+  toolTip?: string;
+
+  /** The priority in which the sensitivity label is applied. */
+  priority?: int32;
+
+  /** The color that the UI should display for the label, if configured. */
+  color?: string;
+
+  /** Indicates whether the sensitivity label enforces encryption. */
+  isEncrypted?: boolean;
+}
+
+/** Statistics about image serving during a retrieval activity. */
+@added(Versions.v2026_05_01_preview)
+model ImageServingStatistics {
+  /** The number of images retrieved from the asset store. */
+  imagesRetrieved?: int32;
+
+  /** The number of images sent to the downstream model. */
+  imagesSentToModel?: int32;
+
+  /** The total size in bytes of images sent to the model. */
+  totalImageSizeBytes?: int64;
+
+  /** Indicates whether image verbalization was used instead of direct image serving. */
+  verbalizationUsed?: boolean;
 }
 
 /** The error details. */
@@ -756,6 +1040,23 @@ model AIServices {
   apiKey?: string;
 }
 
+/** Configuration for an asset store used to store extracted assets such as images. */
+@added(Versions.v2026_05_01_preview)
+model AssetStore {
+  /** The connection string for the asset store. */
+  connectionString: string;
+
+  /** The name of the blob container within the asset store where extracted assets (for example, images) are stored. */
+  containerName: string;
+}
+
+/** Configuration for freshness-aware retrieval. When set, newer documents receive a ranking boost during retrieval. */
+@added(Versions.v2026_05_01_preview)
+model FreshnessPolicy {
+  /** ISO 8601 duration for the freshness boosting window (e.g. 'P90D' for 90 days). Documents newer than this duration receive a ranking boost during retrieval. */
+  boostingDuration?: string;
+}
+
 /** Optional content extraction mode. Default is 'minimal'. */
 union KnowledgeSourceContentExtractionMode {
   string,
@@ -768,6 +1069,7 @@ union KnowledgeSourceContentExtractionMode {
 }
 
 /** Permission types to ingest together with document content. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union KnowledgeSourceIngestionPermissionOption {
   string,
@@ -780,6 +1082,10 @@ union KnowledgeSourceIngestionPermissionOption {
 
   /** Ingest RBAC scope information alongside document content. */
   RbacScope: "rbacScope",
+
+  /** Ingest Microsoft Purview sensitivity labels alongside document content. */
+  @added(Versions.v2026_05_01_preview)
+  SensitivityLabels: "sensitivityLabels",
 }
 
 /** Consolidates all general ingestion settings for knowledge sources. */
@@ -805,6 +1111,7 @@ model KnowledgeSourceIngestionParameters {
 
   /** Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[] | null;
 
@@ -815,6 +1122,14 @@ model KnowledgeSourceIngestionParameters {
   /** Optional AI Services configuration for content processing. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   aiServices?: AIServices | null;
+
+  /** Optional asset store configuration for storing extracted assets such as images. */
+  @added(Versions.v2026_05_01_preview)
+  assetStore?: AssetStore;
+
+  /** Optional freshness policy for biasing retrieval toward newer documents. */
+  @added(Versions.v2026_05_01_preview)
+  freshnessPolicy?: FreshnessPolicy;
 }
 
 /** Specifies the vectorization method to be used for knowledge source embedding model. */
