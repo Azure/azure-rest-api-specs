@@ -166,6 +166,13 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
 
+// Evaluator generation jobs — renamed for Python SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
