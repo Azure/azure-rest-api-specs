@@ -10,6 +10,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -37,6 +38,13 @@ namespace Azure.AI.Projects;
 @@clientName(Datasets.deleteVersion, "delete");
 @@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
 @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+
+// Data generation jobs — renamed SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob", "csharp");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs", "csharp");
+@@clientName(DataGenerationJobs.create, "createGenerationJob", "csharp");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "csharp");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "csharp");
 
 // Shorter method names for SDK Index operations
 @@clientName(Indexes.listLatest, "list");
@@ -122,13 +130,54 @@ namespace Azure.AI.Projects;
   "csharp"
 );
 
+@@access(OpenAI.DetailEnum, Access.internal);
+@@clientName(OpenAI.DetailEnum, "InternalImageDetailLevel");
+@@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
+@@clientName(OpenAI.InputImageContentParamAutoParam,
+  "InternalInputImageContentParamAutoParam"
+);
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
 
+// Hide classes not currently used
+@@clientName(Target, "EvaluationTarget", "csharp");
+
+@@clientName(EvalResult.passed, "IsPassed", "csharp");
+@@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
+@@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
+
+@@alternateType(EvaluationScheduleTask.evalRun, unknown, "csharp");
+
+@@clientName(InsightSummary.method, "MethodName", "csharp");
+
+@@clientName(RedTeam.numTurns, "TurnCount", "csharp");
+@@clientName(RedTeam.simulationOnly, "IsSimulationOnly", "csharp");
+
+@@clientName(TaxonomySubCategory.enabled, "IsEnabled", "csharp");
+
+@@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
+
+@@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
+  "IsChatSummaryEnabled",
+  "csharp"
+);
+@@clientName(MemoryStoreDefaultOptions.user_profile_enabled,
+  "IsUserProfileEnabled",
+  "csharp"
+);
+
+@@clientName(MemoryStoreDeleteScopeResponse.deleted, "IsDeleted", "csharp");
 // --------------------------------------------------------------------------------
 // Schedules sub‐client
 // --------------------------------------------------------------------------------
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
+
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "csharp");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "csharp");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "csharp");
+@@alternateType(CronTrigger.startTime, utcDateTime, "csharp");
+@@alternateType(CronTrigger.endTime, utcDateTime, "csharp");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "csharp");

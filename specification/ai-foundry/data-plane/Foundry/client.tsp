@@ -20,6 +20,10 @@ import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/toolboxes/routes.tsp";
+import "./src/skills/routes.tsp";
+import "./src/agents-session-files/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -60,15 +64,17 @@ using Azure.AI.Projects;
 @@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
 @@clientName(Agents.listAgentVersions, "listVersions", "javascript");
 
-// Suppress these operations from Python and JavaScript SDK public surface.
-@@access(Agents.createAgent, Access.internal);
-@@access(Agents.updateAgent, Access.internal);
-@@access(Agents.createAgentFromManifest, Access.internal);
-@@access(Agents.updateAgentFromManifest, Access.internal);
+// Exclude these operations entirely from the Python SDK.
+// Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
+@@scope(Agents.createAgent, "!(python)");
+@@scope(Agents.updateAgent, "!(python)");
+@@scope(Agents.createAgentFromManifest, "!(python)");
+@@scope(Agents.updateAgentFromManifest, "!(python)");
 
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
+@@clientName(Agents.patchAgentObject, "patchAgentDetails", "python");
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
@@ -83,6 +89,9 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+
+// Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
+@@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
 
 // --------------------------------------------------------------------------------
 // Memories sub-client
@@ -157,6 +166,13 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
 
+// Evaluator generation jobs — renamed for Python SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
@@ -165,6 +181,7 @@ using Azure.AI.Projects;
 // Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -176,6 +193,20 @@ using Azure.AI.Projects;
 @@clientName(Datasets.deleteVersion, "delete");
 @@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
 @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+
+// Data generation jobs — renamed for Python SDK discoverability
+@@clientName(DataGenerationJobs.get, "get_generation_job", "python");
+@@clientName(DataGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(DataGenerationJobs.create, "create_generation_job", "python");
+@@clientName(DataGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(DataGenerationJobs.delete, "delete_generation_job", "python");
+
+// Data generation jobs — renamed for JavaScript SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob", "javascript");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs", "javascript");
+@@clientName(DataGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "javascript");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "javascript");
 
 // More accurate naming
 @@clientName(AssetCredentialResponse, "DatasetCredential");
@@ -207,6 +238,31 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
+// Toolboxes sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Toolboxes.createToolboxVersion, "create_version");
+@@clientName(Toolboxes.updateToolbox, "update");
+@@clientName(Toolboxes.getToolbox, "get");
+@@clientName(Toolboxes.getToolboxVersion, "get_version");
+@@clientName(Toolboxes.listToolboxes, "list");
+@@clientName(Toolboxes.listToolboxVersions, "list_versions");
+@@clientName(Toolboxes.deleteToolbox, "delete");
+@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
+
+// --------------------------------------------------------------------------------
+// Skills sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Skills.createSkill, "create");
+@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.getSkill, "get");
+@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.listSkills, "list");
+@@clientName(Skills.updateSkill, "update");
+@@clientName(Skills.deleteSkill, "delete");
+
+// --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
 
@@ -223,20 +279,29 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
+// Beta Agents sub-client
+// --------------------------------------------------------------------------------
+
+// Make this method internal, since it's patched with a new one that supports either binary or file-path input
+@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
+@@usage(SessionFileWriteResponse, Usage.output);
+@@access(SessionFileWriteResponse, Access.public);
+
+// --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
-// Remove preview opt-in union types from the public PythonSDK surface.
-//
-// TODO: These do not work. Follow up with the Python emitter team.
-// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
-// proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
-// in alias WithConditionalFoundryPreviewHeader.
-//
-//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
-//@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
-//@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+// Remove foundry_features input arguments from public methods, as they are set internally.
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+
+// Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
+@@usage(AgentDefinitionOptInKeys, Usage.input, "python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@clientName(AgentDefinitionOptInKeys, "_AgentDefinitionOptInKeys", "python");
+@@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@clientName(FoundryFeaturesOptInKeys, "_FoundryFeaturesOptInKeys", "python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters

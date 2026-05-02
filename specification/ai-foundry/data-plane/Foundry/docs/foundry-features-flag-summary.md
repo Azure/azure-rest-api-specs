@@ -15,9 +15,9 @@ in order to enable preview features on these GA routes.
 
 | Operation Group | Operation | Method | Path | Foundry-Features Header Value |
 |-----------------|-----------|--------|------|-------------------------------|
-| Agents | Create | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Create | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `CodeAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `CodeAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `CodeAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
 
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
@@ -59,3 +59,31 @@ in order to successfully complete operations using these routes.
 | Memory Stores | Delete Scope Memories | POST | `/memory_stores/{name}:delete_scope` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Search Memories | POST | `/memory_stores/{name}:search_memories` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Update Memories | POST | `/memory_stores/{name}:update_memories` | Required: `MemoryStores=V1Preview` |
+| Agents | Patch Agent | PATCH | `/agents/{agent_name}` | Required: `AgentEndpoints=V1Preview` |
+| Agent Sessions | Create Session | POST | `/agents/{agent_name}/endpoint/sessions` | Required: `AgentEndpoints=V1Preview` |
+| Agent Sessions | Get Session | GET | `/agents/{agent_name}/endpoint/sessions/{session_id}` | Required: `AgentEndpoints=V1Preview` |
+| Agent Sessions | Delete Session | DELETE | `/agents/{agent_name}/endpoint/sessions/{session_id}` | Required: `AgentEndpoints=V1Preview` |
+| Agent Sessions | List Sessions | GET | `/agents/{agent_name}/endpoint/sessions` | Required: `AgentEndpoints=V1Preview` |
+| Agent Invocations | Get OpenAPI Spec | GET | `/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json` | Required: `HostedAgents=V1Preview` |
+| Agent Invocations | Create | POST | `/agents/{agent_name}/endpoint/protocols/invocations` | Required: `HostedAgents=V1Preview` |
+| Agent Invocations | Get | GET | `/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}` | Required: `HostedAgents=V1Preview` |
+| Agent Invocations | Cancel | POST | `/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel` | Required: `HostedAgents=V1Preview` |
+| Agent Session Files | Upload | PUT | `/agents/{agent_name}/endpoint/sessions/{session_id}/files/content` | Required: `HostedAgents=V1Preview` |
+| Agent Session Files | Download | GET | `/agents/{agent_name}/endpoint/sessions/{session_id}/files/content` | Required: `HostedAgents=V1Preview` |
+| Agent Session Files | List | GET | `/agents/{agent_name}/endpoint/sessions/{session_id}/files` | Required: `HostedAgents=V1Preview` |
+| Agent Session Files | Delete | DELETE | `/agents/{agent_name}/endpoint/sessions/{session_id}/files` | Required: `HostedAgents=V1Preview` |
+| Skills | Create | POST | `/skills` | Required: `Skills=V1Preview` |
+| Skills | Create From Package | POST | `/skills:import` | Required: `Skills=V1Preview` |
+| Skills | Get | GET | `/skills/{name}` | Required: `Skills=V1Preview` |
+| Skills | Download | GET | `/skills/{name}:download` | Required: `Skills=V1Preview` |
+| Skills | List | GET | `/skills` | Required: `Skills=V1Preview` |
+| Skills | Update | POST | `/skills/{name}` | Required: `Skills=V1Preview` |
+| Skills | Delete | DELETE | `/skills/{name}` | Required: `Skills=V1Preview` |
+| Toolboxes | Create Version | POST | `/toolboxes/{name}/versions` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | Get | GET | `/toolboxes/{name}` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | List | GET | `/toolboxes` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | List Versions | GET | `/toolboxes/{name}/versions` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | Get Version | GET | `/toolboxes/{name}/versions/{version}` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | Update | PATCH | `/toolboxes/{name}` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | Delete | DELETE | `/toolboxes/{name}` | Required: `Toolboxes=V1Preview` |
+| Toolboxes | Delete Version | DELETE | `/toolboxes/{name}/versions/{version}` | Required: `Toolboxes=V1Preview` |
