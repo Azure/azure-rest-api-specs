@@ -21,25 +21,42 @@ function typespecRequirement(asyncFunctionArgs) {
 }
 
 describe("typespecRequirement", () => {
-  it("allows typespec-generated swaggers", async () => {
+  /**
+   * @param {{ diff: string, existingApiVersion?: boolean, typespecGenerated?: boolean }} options
+   */
+  async function runTest(options) {
     const core = createMockCore();
     vi.mocked(simpleGit).mockReturnValue(
       /** @type {any} */ ({
         catFile: vi.fn().mockImplementation(async () => {
           await Promise.resolve();
+          if (options.existingApiVersion === false) {
+            throw new Error();
+          }
           return "";
         }),
-        diff: vi.fn().mockResolvedValue("A\tspecification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json"),
+        diff: vi.fn().mockResolvedValue(options.diff),
         show: vi.fn().mockImplementation(async () => {
           await Promise.resolve();
-          return JSON.stringify({ info: { "x-typespec-generated": [{}] } });
+          return options.typespecGenerated
+            ? JSON.stringify({ info: { "x-typespec-generated": [{}] } })
+            : "{}";
         }),
       }),
     );
 
     await expect(typespecRequirement({ core })).resolves.toBe(true);
 
-    expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
+    return core.debug.mock.calls.map((c) => String(c[0])).join("\n");
+  }
+
+  it("allows typespec-generated swaggers", async () => {
+    const actual = await runTest({
+      diff: "A\tspecification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json",
+      typespecGenerated: true,
+    });
+
+    expect(actual).toMatchInlineSnapshot(`
       "changed files count: 1
       changed swaggers:
         specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
@@ -50,21 +67,11 @@ describe("typespecRequirement", () => {
   });
 
   it("allows swaggers in existing api versions", async () => {
-    const core = createMockCore();
-    vi.mocked(simpleGit).mockReturnValue(
-      /** @type {any} */ ({
-        catFile: vi.fn().mockImplementation(async () => {
-          await Promise.resolve();
-          return "";
-        }),
-        diff: vi.fn().mockResolvedValue("A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json"),
-        show: vi.fn().mockResolvedValue("{}"),
-      }),
-    );
+    const actual = await runTest({
+      diff: "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json",
+    });
 
-    await expect(typespecRequirement({ core })).resolves.toBe(true);
-
-    expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
+    expect(actual).toMatchInlineSnapshot(`
       "changed files count: 1
       changed swaggers:
         specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
@@ -76,21 +83,12 @@ describe("typespecRequirement", () => {
   });
 
   it("blocks swaggers in new api versions", async () => {
-    const core = createMockCore();
-    vi.mocked(simpleGit).mockReturnValue(
-      /** @type {any} */ ({
-        catFile: vi.fn().mockImplementation(async () => {
-          await Promise.resolve();
-          throw new Error();
-        }),
-        diff: vi.fn().mockResolvedValue("M\tspecification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"),
-        show: vi.fn().mockResolvedValue("{}"),
-      }),
-    );
+    const actual = await runTest({
+      existingApiVersion: false,
+      diff: "M\tspecification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json",
+    });
 
-    await expect(typespecRequirement({ core })).resolves.toBe(true);
-
-    expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
+    expect(actual).toMatchInlineSnapshot(`
       "changed files count: 1
       changed swaggers:
         specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
@@ -103,24 +101,15 @@ describe("typespecRequirement", () => {
   });
 
   it("ignores examples", async () => {
-    const core = createMockCore();
-    vi.mocked(simpleGit).mockReturnValue(
-      /** @type {any} */ ({
-        diff: vi
-          .fn()
-          .mockResolvedValue(
-            [
-              "R100",
-              "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
-              "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
-            ].join("\t"),
-          ),
-      }),
-    );
+    const actual = await runTest({
+      diff: [
+        "R100",
+        "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
+        "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
+      ].join("\t"),
+    });
 
-    await expect(typespecRequirement({ core })).resolves.toBe(true);
-
-    expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
+    expect(actual).toMatchInlineSnapshot(`
       "changed files count: 1
       changed swaggers:
         "
@@ -128,16 +117,11 @@ describe("typespecRequirement", () => {
   });
 
   it("ignores non-swagger files", async () => {
-    const core = createMockCore();
-    vi.mocked(simpleGit).mockReturnValue(
-      /** @type {any} */ ({
-        diff: vi.fn().mockResolvedValue("A\tspecification/baz/main.tsp"),
-      }),
-    );
+    const actual = await runTest({
+      diff: "A\tspecification/baz/main.tsp",
+    });
 
-    await expect(typespecRequirement({ core })).resolves.toBe(true);
-
-    expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
+    expect(actual).toMatchInlineSnapshot(`
       "changed files count: 1
       changed swaggers:
         "
