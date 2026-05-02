@@ -37,14 +37,10 @@ options:
   #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file"
   #   namespace: com.azure.storage.file
   #   flavor: azure
-  # "@azure-tools/typespec-rust":
-  #   package-dir: "azure_storage_file"
-  #   crate-name: "azure_storage_file"
-  #   crate-version: "0.1.0"
-  #   flavor: azure
-  #   temp-omit-doc-links: true
-  # TODO: Replace this with client.tsp solution once it lands (issue: https://github.com/Azure/typespec-rust/issues/806)
-  #   omit-constructors: true
+  "@azure-tools/typespec-rust":
+    crate-name: "azure_storage_file"
+    crate-version: "0.1.0"
+    emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
   "@azure-tools/typespec-go":
     containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azfile"
     service-dir: "sdk/storage"
