@@ -89,7 +89,9 @@ interface Skills {}
 interface Agents {}
 // Move AgentSessionFiles
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
+  Agents
+);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
 // Move preview operations out of root Agent into Beta Agents
@@ -99,3 +101,12 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
+
+interface Datasets {}
+
+// Data generation jobs → nested under datasets sub-client
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
+@@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);

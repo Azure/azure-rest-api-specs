@@ -89,7 +89,7 @@ model CreateAgentRequest {
     }
   )
   @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @extension(
     "x-ms-foundry-meta",
@@ -111,7 +111,7 @@ model UpdateAgentRequest {
 )
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
@@ -148,7 +148,7 @@ model AgentObject {
     }
   )
   @doc("The endpoint configuration for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @extension(
     "x-ms-foundry-meta",
@@ -415,6 +415,10 @@ model CodeConfiguration {
 
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
+
+  @visibility(Lifecycle.Read)
+  @doc("The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.")
+  content_hash?: string;
 }
 
 @doc("The hosted agent definition.")
@@ -698,12 +702,6 @@ model EntraIsolationKeySource extends IsolationKeySource {
 )
 model HeaderIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Header;
-
-  @doc("The user isolation key header value")
-  user_isolation_key: string;
-
-  @doc("The chat isolation key header value")
-  chat_isolation_key: string;
 }
 
 @extension(
@@ -731,7 +729,7 @@ union IsolationKeySourceKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-model AgentEndpoint {
+model AgentEndpointConfig {
   @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
   version_selector?: VersionSelector;
 
