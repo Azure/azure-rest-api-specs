@@ -66,6 +66,15 @@ export async function getChangedFiles(options = {}) {
 }
 
 /**
+ * @typedef {Object} ChangedFilesStatuses
+ * @property {string[]} additions
+ * @property {string[]} modifications
+ * @property {string[]} deletions
+ * @property {{from: string, to: string}[]} renames
+ * @property {number} total
+ */
+
+/**
  * Get a list of changed files in a git repository with statuses for additions,
  * modifications, deletions, and renames. Warning: rename behavior can vary
  * based on the git client's configuration of diff.renames.
@@ -77,7 +86,7 @@ export async function getChangedFiles(options = {}) {
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
- * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
+ * @returns {Promise<ChangedFilesStatuses>}
  */
 export async function getChangedFilesStatuses(options = {}) {
   const {

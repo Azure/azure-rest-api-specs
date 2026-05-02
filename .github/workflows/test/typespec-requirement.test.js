@@ -1,12 +1,20 @@
 import { simpleGit } from "simple-git";
 import { describe, expect, it, vi } from "vitest";
+import { getChangedFilesStatuses } from "../../shared/src/changed-files.js";
 import typespecRequirementSrc from "../src/typespec-requirement.js";
 import { createMockCore } from "./mocks.js";
+
+vi.mock("../../shared/src/changed-files.js", async (importOriginal) => {
+  const mod = await importOriginal();
+  return {
+    .../** @type {typeof import("../../shared/src/changed-files.js")} */ (mod),
+    getChangedFilesStatuses: vi.fn(),
+  };
+});
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
     catFile: vi.fn().mockResolvedValue(""),
-    diff: vi.fn().mockResolvedValue(""),
     show: vi.fn().mockResolvedValue(""),
   }),
 }));
@@ -22,10 +30,22 @@ function typespecRequirement(asyncFunctionArgs) {
 
 describe("typespecRequirement", () => {
   /**
-   * @param {{ diff: string, existingApiVersion?: boolean, typespecGenerated?: boolean }} options
+   * @param {{ changedFiles?: Partial<import("../../shared/src/changed-files.js").ChangedFilesStatuses>, existingApiVersion?: boolean, typespecGenerated?: boolean }} options
    */
   async function runTest(options) {
     const core = createMockCore();
+
+    vi.mocked(getChangedFilesStatuses).mockResolvedValue(
+      /** @type {import("../../shared/src/changed-files.js").ChangedFilesStatuses} */ ({
+        additions: [],
+        modifications: [],
+        deletions: [],
+        renames: [],
+        total: 1,
+        ...options.changedFiles,
+      }),
+    );
+
     vi.mocked(simpleGit).mockReturnValue(
       /** @type {any} */ ({
         catFile: vi.fn().mockImplementation(async () => {
@@ -35,7 +55,6 @@ describe("typespecRequirement", () => {
           }
           return "";
         }),
-        diff: vi.fn().mockResolvedValue(options.diff),
         show: vi.fn().mockImplementation(async () => {
           await Promise.resolve();
           return options.typespecGenerated
@@ -52,7 +71,9 @@ describe("typespecRequirement", () => {
 
   it("allows typespec-generated swaggers", async () => {
     const actual = await runTest({
-      diff: "A\tspecification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json",
+      changedFiles: {
+        additions: ["specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json"],
+      },
       typespecGenerated: true,
     });
 
@@ -68,7 +89,9 @@ describe("typespecRequirement", () => {
 
   it("allows swaggers in existing api versions", async () => {
     const actual = await runTest({
-      diff: "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json",
+      changedFiles: {
+        additions: ["specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json"],
+      },
     });
 
     expect(actual).toMatchInlineSnapshot(`
@@ -85,7 +108,9 @@ describe("typespecRequirement", () => {
   it("blocks swaggers in new api versions", async () => {
     const actual = await runTest({
       existingApiVersion: false,
-      diff: "M\tspecification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json",
+      changedFiles: {
+        modifications: ["specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"],
+      },
     });
 
     expect(actual).toMatchInlineSnapshot(`
@@ -102,11 +127,14 @@ describe("typespecRequirement", () => {
 
   it("ignores examples", async () => {
     const actual = await runTest({
-      diff: [
-        "R100",
-        "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
-        "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
-      ].join("\t"),
+      changedFiles: {
+        renames: [
+          {
+            from: "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
+            to: "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
+          },
+        ],
+      },
     });
 
     expect(actual).toMatchInlineSnapshot(`
@@ -118,7 +146,7 @@ describe("typespecRequirement", () => {
 
   it("ignores non-swagger files", async () => {
     const actual = await runTest({
-      diff: "A\tspecification/baz/main.tsp",
+      changedFiles: { additions: ["specification/baz/main.tsp"] },
     });
 
     expect(actual).toMatchInlineSnapshot(`
