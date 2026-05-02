@@ -1122,12 +1122,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LinkStateResponse"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1141,6 +1135,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1298,12 +1295,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LinkStateResponse"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1317,6 +1308,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1880,11 +1874,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LinkUpdateResponse"
-            }
+          "204": {
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2247,6 +2238,55 @@
         }
       }
     },
+    "InboundCallerIdentity": {
+      "type": "object",
+      "description": "The managed identity configuration for ADR communication.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InboundCallerIdentityType",
+          "description": "The type of managed identity: SystemAssigned or UserAssigned."
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the user-assigned identity. Required when type is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "InboundCallerIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for inbound caller identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "InboundCallerIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "IotDpsPropertiesDescription": {
       "type": "object",
       "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
@@ -2289,11 +2329,12 @@
           "description": "The Device Registry namespace that is linked to the provisioning service."
         },
         "deviceRegistryNamespaces": {
-          "type": "array",
-          "description": "The Device Registry namespaces linked to the provisioning service.",
-          "items": {
+          "type": "object",
+          "description": "The Device Registry namespaces linked to the provisioning service, keyed by namespace resource ID.",
+          "additionalProperties": {
             "$ref": "#/definitions/DeviceRegistryNamespaceDescription"
-          }
+          },
+          "readOnly": true
         },
         "adrLinkState": {
           "$ref": "#/definitions/AdrLinkingState",
@@ -2511,12 +2552,17 @@
         "dataAddress": {
           "type": "string",
           "description": "The data address for the link."
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "The managed identity the resource should use for ADR communication."
         }
       },
       "required": [
         "namespaceResourceId",
         "namespaceUuid",
-        "dataAddress"
+        "dataAddress",
+        "inboundCallerIdentity"
       ]
     },
     "LinkNotifyRequest": {
@@ -2544,72 +2590,21 @@
       "type": "object",
       "description": "Response body for the preflightLink action.",
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ARM resource ID of the provisioning service."
-        },
-        "adrLinkState": {
-          "$ref": "#/definitions/AdrLinkingState",
-          "description": "The current ADR linking state."
-        },
-        "serviceOperationsHostName": {
-          "type": "string",
-          "description": "Service endpoint for provisioning service."
-        },
-        "idScope": {
-          "type": "string",
-          "description": "Unique identifier of this provisioning service."
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
-    "LinkStateResponse": {
-      "type": "object",
-      "description": "Response body for the initiateLink and notifyLink actions.",
-      "properties": {
         "adrLinkState": {
           "$ref": "#/definitions/AdrLinkingState",
           "description": "The current ADR linking state."
         }
-      },
-      "required": [
-        "adrLinkState"
-      ]
+      }
     },
     "LinkUpdateRequest": {
       "type": "object",
       "description": "Request body for the updateLink action.",
       "properties": {
-        "deviceRegistryNamespaces": {
-          "type": "array",
-          "description": "The list of Device Registry namespace references.",
-          "items": {
-            "$ref": "#/definitions/DeviceRegistryNamespaceDescription"
-          }
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "The managed identity the resource should use for ADR communication."
         }
       }
-    },
-    "LinkUpdateResponse": {
-      "type": "object",
-      "description": "Response body for the updateLink action.",
-      "properties": {
-        "adrLinkState": {
-          "$ref": "#/definitions/AdrLinkingState",
-          "description": "The current ADR linking state."
-        },
-        "deviceRegistryNamespaces": {
-          "type": "array",
-          "description": "The list of Device Registry namespace references.",
-          "items": {
-            "$ref": "#/definitions/DeviceRegistryNamespaceDescription"
-          }
-        }
-      },
-      "required": [
-        "adrLinkState"
-      ]
     },
     "NameAvailabilityInfo": {
       "type": "object",

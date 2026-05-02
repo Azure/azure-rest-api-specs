@@ -234,7 +234,7 @@ interface ProvisioningServiceDescriptions {
   initiateLink is ArmResourceActionAsync<
     ProvisioningServiceDescription,
     LinkInitiateRequest,
-    ArmResponse<LinkStateResponse>,
+    void,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -248,7 +248,7 @@ interface ProvisioningServiceDescriptions {
   notifyLink is ArmResourceActionAsync<
     ProvisioningServiceDescription,
     LinkNotifyRequest,
-    ArmResponse<LinkStateResponse>,
+    void,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -262,7 +262,7 @@ interface ProvisioningServiceDescriptions {
   updateLink is ArmResourceActionSync<
     ProvisioningServiceDescription,
     LinkUpdateRequest,
-    ArmResponse<LinkUpdateResponse>
+    void
   >;
 }
 

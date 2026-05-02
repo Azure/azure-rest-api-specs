@@ -358,11 +358,12 @@ model IotDpsPropertiesDescription {
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
-   * The Device Registry namespaces linked to the provisioning service.
+   * The Device Registry namespaces linked to the provisioning service, keyed by namespace resource ID.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array uses resourceId as identifier"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary of namespace entries keyed by resource ID"
+  @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
-  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
+  deviceRegistryNamespaces?: Record<DeviceRegistryNamespaceDescription>;
 
   /**
    * The ADR linking state of the provisioning service.
@@ -938,6 +939,40 @@ union AdrLinkingState {
 }
 
 /**
+ * The managed identity configuration for ADR communication.
+ */
+@added(Versions.v2026_06_01_preview)
+model InboundCallerIdentity {
+  /**
+   * The type of managed identity: SystemAssigned or UserAssigned.
+   */
+  type: InboundCallerIdentityType;
+
+  /**
+   * The ARM resource ID of the user-assigned identity. Required when type is UserAssigned.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * The type of managed identity for inbound caller identity.
+ */
+@added(Versions.v2026_06_01_preview)
+union InboundCallerIdentityType {
+  string,
+
+  /** System-assigned managed identity. */
+  SystemAssigned: "SystemAssigned",
+
+  /** User-assigned managed identity. */
+  UserAssigned: "UserAssigned",
+}
+
+/**
  * Request body for the initiateLink action.
  */
 @added(Versions.v2026_06_01_preview)
@@ -960,6 +995,11 @@ model LinkInitiateRequest {
    * The data address for the link.
    */
   dataAddress: string;
+
+  /**
+   * The managed identity the resource should use for ADR communication.
+   */
+  inboundCallerIdentity: InboundCallerIdentity;
 }
 
 /**
@@ -989,10 +1029,9 @@ model LinkNotifyRequest {
 @added(Versions.v2026_06_01_preview)
 model LinkUpdateRequest {
   /**
-   * The list of Device Registry namespace references.
+   * The managed identity the resource should use for ADR communication.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array uses resourceId as identifier"
-  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
+  inboundCallerIdentity?: InboundCallerIdentity;
 }
 
 /**
@@ -1001,50 +1040,7 @@ model LinkUpdateRequest {
 @added(Versions.v2026_06_01_preview)
 model LinkPreflightResponse {
   /**
-   * The ARM resource ID of the provisioning service.
-   */
-  resourceId: string;
-
-  /**
    * The current ADR linking state.
    */
   adrLinkState?: AdrLinkingState;
-
-  /**
-   * Service endpoint for provisioning service.
-   */
-  serviceOperationsHostName?: string;
-
-  /**
-   * Unique identifier of this provisioning service.
-   */
-  idScope?: string;
-}
-
-/**
- * Response body for the initiateLink and notifyLink actions.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkStateResponse {
-  /**
-   * The current ADR linking state.
-   */
-  adrLinkState: AdrLinkingState;
-}
-
-/**
- * Response body for the updateLink action.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkUpdateResponse {
-  /**
-   * The current ADR linking state.
-   */
-  adrLinkState: AdrLinkingState;
-
-  /**
-   * The list of Device Registry namespace references.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array uses resourceId as identifier"
-  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 }

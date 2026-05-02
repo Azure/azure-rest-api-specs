@@ -5,28 +5,14 @@
     "resourceGroupName": "myResourceGroup",
     "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
     "body": {
-      "deviceRegistryNamespaces": [
-        {
-          "resourceId": "/subscriptions/8c64812d-6e59-4e65-96b3-14a7cdb1a4e4/resourceGroups/myRg/providers/Microsoft.DeviceRegistry/namespaces/myNamespace",
-          "authenticationType": "UserAssigned",
-          "selectedUserAssignedIdentityResourceId": "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1"
-        }
-      ]
+      "inboundCallerIdentity": {
+        "type": "UserAssigned",
+        "userAssignedIdentity": "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1"
+      }
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "adrLinkState": "Linked",
-        "deviceRegistryNamespaces": [
-          {
-            "resourceId": "/subscriptions/8c64812d-6e59-4e65-96b3-14a7cdb1a4e4/resourceGroups/myRg/providers/Microsoft.DeviceRegistry/namespaces/myNamespace",
-            "authenticationType": "UserAssigned",
-            "selectedUserAssignedIdentityResourceId": "/subscriptions/abcf2d55-764f-419f-974d-f77a55c2ce55/resourcegroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-mi-1"
-          }
-        ]
-      }
-    }
+    "204": {}
   },
   "operationId": "ProvisioningServiceDescriptions_UpdateLink",
   "title": "DPSLinkUpdate"
