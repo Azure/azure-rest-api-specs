@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 
@@ -354,6 +356,21 @@ model IotDpsPropertiesDescription {
    * The Device Registry namespace that is linked to the provisioning service.
    */
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
+
+  /**
+   * The Device Registry namespaces linked to the provisioning service, keyed by namespace resource ID.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary of namespace entries keyed by resource ID"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  deviceRegistryNamespaces?: Record<DeviceRegistryNamespaceDescription>;
+
+  /**
+   * The ADR linking state of the provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  adrLinkState?: AdrLinkingState;
 
   /**
    * Allocation policy to be used by this provisioning service.
@@ -891,4 +908,139 @@ model CertificateBodyDescription {
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
   isVerified?: boolean;
+}
+
+/**
+ * The state of ADR linking for a provisioning service.
+ */
+@added(Versions.v2026_06_01_preview)
+union AdrLinkingState {
+  string,
+
+  /**
+   * The linking process is in progress.
+   */
+  Linking: "Linking",
+
+  /**
+   * The provisioning service is linked to a Device Registry namespace.
+   */
+  Linked: "Linked",
+
+  /**
+   * The linking process has failed.
+   */
+  LinkingFailed: "LinkingFailed",
+
+  /**
+   * The linked Device Registry namespace has been deleted.
+   */
+  NamespaceDeleted: "NamespaceDeleted",
+}
+
+/**
+ * The managed identity configuration for ADR communication.
+ */
+@added(Versions.v2026_06_01_preview)
+model InboundCallerIdentity {
+  /**
+   * The type of managed identity: SystemAssigned or UserAssigned.
+   */
+  type: InboundCallerIdentityType;
+
+  /**
+   * The ARM resource ID of the user-assigned identity. Required when type is UserAssigned.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * The type of managed identity for inbound caller identity.
+ */
+@added(Versions.v2026_06_01_preview)
+union InboundCallerIdentityType {
+  string,
+
+  /** System-assigned managed identity. */
+  SystemAssigned: "SystemAssigned",
+
+  /** User-assigned managed identity. */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * Request body for the initiateLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkInitiateRequest {
+  /**
+   * The ARM resource ID of the Device Registry namespace to link.
+   */
+  namespaceResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces";
+    }
+  ]>;
+
+  /**
+   * The unique identifier of the Device Registry namespace.
+   */
+  namespaceUuid: string;
+
+  /**
+   * The data address for the link.
+   */
+  dataAddress: string;
+
+  /**
+   * The managed identity the resource should use for ADR communication.
+   */
+  inboundCallerIdentity: InboundCallerIdentity;
+}
+
+/**
+ * Request body for the notifyLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkNotifyRequest {
+  /**
+   * The action to perform: commit, fail, or namespaceDeleted.
+   */
+  action: string;
+
+  /**
+   * The error code if the action is fail.
+   */
+  errorCode?: string;
+
+  /**
+   * The reason for the action.
+   */
+  reason?: string;
+}
+
+/**
+ * Request body for the updateLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkUpdateRequest {
+  /**
+   * The managed identity the resource should use for ADR communication.
+   */
+  inboundCallerIdentity?: InboundCallerIdentity;
+}
+
+/**
+ * Response body for the preflightLink action.
+ */
+@added(Versions.v2026_06_01_preview)
+model LinkPreflightResponse {
+  /**
+   * The current ADR linking state.
+   */
+  adrLinkState?: AdrLinkingState;
 }

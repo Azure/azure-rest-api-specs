@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "provisioningServiceName": "myFirstProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "body": {
+      "namespaceResourceId": "/subscriptions/8c64812d-6e59-4e65-96b3-14a7cdb1a4e4/resourceGroups/myRg/providers/Microsoft.DeviceRegistry/namespaces/myNamespace",
+      "namespaceUuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "dataAddress": "myNamespace.servicebus.windows.net",
+      "inboundCallerIdentity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/operationresults/MTY4MjI5MD?api-version=2026-06-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "ProvisioningServiceDescriptions_InitiateLink",
+  "title": "DPSLinkInitiate"
+}
