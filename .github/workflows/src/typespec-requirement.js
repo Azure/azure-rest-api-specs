@@ -33,6 +33,8 @@ export default async function typespecRequirement({ core }) {
 
   const git = simpleGit(options.cwd);
 
+  let result = true;
+
   for (const swaggerPath of changedSwaggers) {
     core.debug(swaggerPath);
 
@@ -59,7 +61,9 @@ export default async function typespecRequirement({ core }) {
     }
 
     core.debug(`  NEW API VERSION MUST USE TYPESPEC`);
+
+    result = false;
   }
 
-  return true;
+  return result;
 }

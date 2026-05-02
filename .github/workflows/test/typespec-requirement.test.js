@@ -64,9 +64,7 @@ describe("typespecRequirement", () => {
       }),
     );
 
-    await expect(typespecRequirement({ core })).resolves.toBe(true);
-
-    return core.debug.mock.calls.map((c) => String(c[0])).join("\n");
+    return await typespecRequirement({ core });
   }
 
   it.each([
@@ -80,12 +78,7 @@ describe("typespecRequirement", () => {
         },
         typespecGenerated: true,
       },
-      expected: `changed files count: 1
-changed swaggers:
-  specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
-specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
-  swaggerText length: 38
-  typespecGenerated: true`,
+      expected: true,
     },
     {
       name: "allows swaggers in existing api versions",
@@ -96,13 +89,7 @@ specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
           ],
         },
       },
-      expected: `changed files count: 1
-changed swaggers:
-  specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
-specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
-  swaggerText length: 2
-  typespecGenerated: false
-  existingApiVersion: true`,
+      expected: true,
     },
     {
       name: "blocks swaggers in new api versions",
@@ -112,14 +99,7 @@ specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
           modifications: ["specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"],
         },
       },
-      expected: `changed files count: 1
-changed swaggers:
-  specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
-specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
-  swaggerText length: 2
-  typespecGenerated: false
-  existingApiVersion: false
-  NEW API VERSION MUST USE TYPESPEC`,
+      expected: false,
     },
     {
       name: "ignores examples",
@@ -133,21 +113,17 @@ specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
           ],
         },
       },
-      expected: `changed files count: 1
-changed swaggers:
-  `,
+      expected: true,
     },
     {
       name: "ignores non-swagger files",
       options: {
         changedFiles: { additions: ["specification/baz/main.tsp"] },
       },
-      expected: `changed files count: 1
-changed swaggers:
-  `,
+      expected: true,
     },
   ])("$name", async ({ options, expected }) => {
     const actual = await runTest(options);
-    expect(actual).toEqual(expected);
+    expect(actual).toBe(expected);
   });
 });
