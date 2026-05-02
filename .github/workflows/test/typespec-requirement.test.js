@@ -6,6 +6,7 @@ import { createMockCore } from "./mocks.js";
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
     diff: vi.fn().mockResolvedValue(""),
+    show: vi.fn().mockResolvedValue(""),
   }),
 }));
 
@@ -33,6 +34,7 @@ describe("typespecRequirement", () => {
               "A\tspecification/baz/main.tsp",
             ].join("\n"),
           ),
+        show: vi.fn().mockResolvedValue("{}"),
       }),
     );
 
@@ -42,7 +44,9 @@ describe("typespecRequirement", () => {
       "changed files count: 4
       changed swaggers:
         specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
-        specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"
+        specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
+      swagger length: 2
+      swagger length: 2"
     `);
   });
 });

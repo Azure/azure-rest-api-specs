@@ -1,5 +1,10 @@
+import debug from "debug";
+import { simpleGit } from "simple-git";
 import { getChangedFilesStatuses, swagger } from "../../shared/src/changed-files.js";
 import { CoreLogger } from "./core-logger.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -23,9 +28,12 @@ export default async function typespecRequirement({ core }) {
   core.debug(`changed files count: ${changedFiles.total}`);
   core.debug(`changed swaggers:\n  ${changedSwaggers.join("\n  ")}`);
 
-  // for (const swagger of changedSwaggers) {
-  //   const swaggerText = await git.show([`HEAD:${file}`]);
-  // }
+  const git = simpleGit(options.cwd);
+
+  for (const swagger of changedSwaggers) {
+    const swaggerText = await git.show([`HEAD:${swagger}`]);
+    core.debug(`swagger length: ${swaggerText.length}`);
+  }
 
   return true;
 }
