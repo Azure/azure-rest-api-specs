@@ -66,6 +66,11 @@ model NetworkDeviceProperties {
   @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 
+  @doc("Operational state of networkDevice indicating if the device is reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
   @doc("Secret rotation status for the device's secrets.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_15)

@@ -333,6 +333,10 @@ union DeviceRole {
   @doc("Device Role Management Switch")
   ManagementSwitch: "ManagementSwitch",
 
+  @doc("Device Role Terminal Server (NetworkBootstrapDevice)")
+  @added(Versions.v2026_01_15_preview)
+  TerminalServer: "TerminalServer",
+
   string,
 }
 
