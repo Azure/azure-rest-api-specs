@@ -89,7 +89,7 @@ model CreateAgentRequest {
     }
   )
   @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @extension(
     "x-ms-foundry-meta",
@@ -111,7 +111,7 @@ model UpdateAgentRequest {
 )
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
@@ -148,7 +148,7 @@ model AgentObject {
     }
   )
   @doc("The endpoint configuration for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @extension(
     "x-ms-foundry-meta",
@@ -729,7 +729,7 @@ union IsolationKeySourceKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-model AgentEndpoint {
+model AgentEndpointConfig {
   @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
   version_selector?: VersionSelector;
 
