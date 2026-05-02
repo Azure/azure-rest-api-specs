@@ -85,6 +85,19 @@ interface FrontDoors {
   >;
 
   /**
+   * Updates tags of an existing Front Door with the specified Front Door name under the specified subscription and resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing service uses Azure-AsyncOperation header only"
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    FrontDoor,
+    PatchModel = TagsObject,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = FrontDoor> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponse
+  >;
+
+  /**
    * Validates the custom domain mapping to ensure it maps to the correct Front Door endpoint in DNS.
    */
   validateCustomDomain is ArmResourceActionSync<
@@ -121,4 +134,7 @@ interface FrontDoors {
 );
 @@doc(FrontDoors.purgeContent::parameters.body,
   "The path to the content to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory."
+);
+@@doc(FrontDoors.update::parameters.properties,
+  "Front Door tags to be updated."
 );
