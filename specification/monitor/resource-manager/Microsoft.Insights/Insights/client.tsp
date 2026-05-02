@@ -29,6 +29,7 @@ using Microsoft.PrivateLinkScopes;
 using Microsoft.Metrics;
 using Microsoft.ServiceDiagnosticsSettings;
 
+#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [
