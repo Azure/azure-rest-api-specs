@@ -427,6 +427,11 @@ model OrganizationResourceProperties {
    * Link an existing Confluent organization
    */
   linkOrganization?: LinkOrganization;
+
+  /**
+   * The Marketplace SaaS Resource Id linked to the organization
+   */
+  saasResourceId?: string;
 }
 
 /**
@@ -449,7 +454,7 @@ model OfferDetail {
    * Offer Plan Id
    */
   @maxLength(200)
-  planId: string;
+  planId?: string;
 
   /**
    * Offer Plan Name
