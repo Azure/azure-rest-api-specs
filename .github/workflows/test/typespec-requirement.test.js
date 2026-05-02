@@ -69,90 +69,85 @@ describe("typespecRequirement", () => {
     return core.debug.mock.calls.map((c) => String(c[0])).join("\n");
   }
 
-  it("allows typespec-generated swaggers", async () => {
-    const actual = await runTest({
-      changedFiles: {
-        additions: ["specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json"],
+  it.each([
+    {
+      name: "allows typespec-generated swaggers",
+      options: {
+        changedFiles: {
+          additions: [
+            "specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json",
+          ],
+        },
+        typespecGenerated: true,
       },
-      typespecGenerated: true,
-    });
-
-    expect(actual).toMatchInlineSnapshot(`
-      "changed files count: 1
-      changed swaggers:
-        specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
-      specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
-        swaggerText length: 38
-        typespecGenerated: true"
-    `);
-  });
-
-  it("allows swaggers in existing api versions", async () => {
-    const actual = await runTest({
-      changedFiles: {
-        additions: ["specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json"],
+      expected: `changed files count: 1
+changed swaggers:
+  specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
+specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
+  swaggerText length: 38
+  typespecGenerated: true`,
+    },
+    {
+      name: "allows swaggers in existing api versions",
+      options: {
+        changedFiles: {
+          additions: [
+            "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json",
+          ],
+        },
       },
-    });
-
-    expect(actual).toMatchInlineSnapshot(`
-      "changed files count: 1
-      changed swaggers:
-        specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
-      specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
-        swaggerText length: 2
-        typespecGenerated: false
-        existingApiVersion: true"
-    `);
-  });
-
-  it("blocks swaggers in new api versions", async () => {
-    const actual = await runTest({
-      existingApiVersion: false,
-      changedFiles: {
-        modifications: ["specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"],
+      expected: `changed files count: 1
+changed swaggers:
+  specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
+specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
+  swaggerText length: 2
+  typespecGenerated: false
+  existingApiVersion: true`,
+    },
+    {
+      name: "blocks swaggers in new api versions",
+      options: {
+        existingApiVersion: false,
+        changedFiles: {
+          modifications: ["specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"],
+        },
       },
-    });
-
-    expect(actual).toMatchInlineSnapshot(`
-      "changed files count: 1
-      changed swaggers:
-        specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
-      specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
-        swaggerText length: 2
-        typespecGenerated: false
-        existingApiVersion: false
-        NEW API VERSION MUST USE TYPESPEC"
-    `);
-  });
-
-  it("ignores examples", async () => {
-    const actual = await runTest({
-      changedFiles: {
-        renames: [
-          {
-            from: "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
-            to: "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
-          },
-        ],
+      expected: `changed files count: 1
+changed swaggers:
+  specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
+specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
+  swaggerText length: 2
+  typespecGenerated: false
+  existingApiVersion: false
+  NEW API VERSION MUST USE TYPESPEC`,
+    },
+    {
+      name: "ignores examples",
+      options: {
+        changedFiles: {
+          renames: [
+            {
+              from: "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
+              to: "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
+            },
+          ],
+        },
       },
-    });
-
-    expect(actual).toMatchInlineSnapshot(`
-      "changed files count: 1
-      changed swaggers:
-        "
-    `);
-  });
-
-  it("ignores non-swagger files", async () => {
-    const actual = await runTest({
-      changedFiles: { additions: ["specification/baz/main.tsp"] },
-    });
-
-    expect(actual).toMatchInlineSnapshot(`
-      "changed files count: 1
-      changed swaggers:
-        "
-    `);
+      expected: `changed files count: 1
+changed swaggers:
+  `,
+    },
+    {
+      name: "ignores non-swagger files",
+      options: {
+        changedFiles: { additions: ["specification/baz/main.tsp"] },
+      },
+      expected: `changed files count: 1
+changed swaggers:
+  `,
+    },
+  ])("$name", async ({ options, expected }) => {
+    const actual = await runTest(options);
+    expect(actual).toEqual(expected);
   });
 });
