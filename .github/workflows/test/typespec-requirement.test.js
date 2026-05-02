@@ -27,10 +27,10 @@ describe("typespecRequirement", () => {
           .fn()
           .mockResolvedValue(
             [
-              "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json",
-              "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
-              "specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json",
-              "specification/baz/main.tsp",
+              "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json",
+              "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
+              "M\tspecification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json",
+              "A\tspecification/baz/main.tsp",
             ].join("\n"),
           ),
       }),
@@ -38,7 +38,11 @@ describe("typespecRequirement", () => {
 
     await expect(typespecRequirement({ core })).resolves.toBe(true);
 
-    expect(core.info).toHaveBeenCalledWith("changed files count: 4");
-    expect(core.info).toHaveBeenCalledWith("changed swaggers count: 2");
+    expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
+      "changed files count: 4
+      changed swaggers:
+        specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
+        specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json"
+    `);
   });
 });

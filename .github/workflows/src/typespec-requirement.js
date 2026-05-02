@@ -1,4 +1,4 @@
-import { getChangedFiles, swagger } from "../../shared/src/changed-files.js";
+import { getChangedFilesStatuses, swagger } from "../../shared/src/changed-files.js";
 import { CoreLogger } from "./core-logger.js";
 
 /**
@@ -12,11 +12,20 @@ export default async function typespecRequirement({ core }) {
     logger: new CoreLogger(core),
   };
 
-  const changedFiles = await getChangedFiles(options);
-  const changedSwaggers = changedFiles.filter(swagger);
+  const changedFiles = await getChangedFilesStatuses(options);
 
-  core.info(`changed files count: ${changedFiles.length}`);
-  core.info(`changed swaggers count: ${changedSwaggers.length}`);
+  const changedSwaggers = [
+    ...changedFiles.additions,
+    ...changedFiles.modifications,
+    ...changedFiles.renames.map((r) => r.to),
+  ].filter(swagger);
+
+  core.debug(`changed files count: ${changedFiles.total}`);
+  core.debug(`changed swaggers:\n  ${changedSwaggers.join("\n  ")}`);
+
+  // for (const swagger of changedSwaggers) {
+  //   const swaggerText = await git.show([`HEAD:${file}`]);
+  // }
 
   return true;
 }
