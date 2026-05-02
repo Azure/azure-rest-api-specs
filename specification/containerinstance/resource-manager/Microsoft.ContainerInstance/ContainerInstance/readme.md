@@ -38,6 +38,15 @@ input-file:
   - ./stable/2025-09-01/containerInstance.json
 ```
 
+### Tag: package-preview-2026-06-01
+
+These settings apply only when `--tag=package-preview-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06-01'
+input-file:
+  - ./preview/2026-06-01-preview/containerInstance.json
+```
+
 ### Tag: package-preview-2024-11
 
 These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
@@ -257,12 +266,20 @@ suppressions:
     where:
       - $.definitions.SecretReferenceVolume
   - code: GetCollectionResponseSchema
-    reason: We do not return the instanceView property in our List operation, we just return this 
+    reason: We do not return the instanceView property in our List operation, we just return this
             property for our Get operations. This change has been part of our stable api versions for a couple of years
     from:
       - containerInstance.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups"]
+  - code: XMS_EXAMPLE_NOTFOUND_ERROR
+    reason: Legacy brownfield operations from stable versions are included in preview but only SandboxGroup has examples for 2026-06-01-preview
+    from:
+      - preview/2026-06-01-preview/containerInstance.json
+  - code: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    reason: 200/204 response codes are valid per ARM spec but examples demonstrate only the primary response paths (201/202)
+    from:
+      - preview/2026-06-01-preview/containerInstance.json
 ```
 
 ---
