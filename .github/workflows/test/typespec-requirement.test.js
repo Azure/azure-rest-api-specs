@@ -38,7 +38,11 @@ describe("typespecRequirement", () => {
             [
               "A\tspecification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json",
               "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json",
-              "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
+              [
+                "R100",
+                "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/old_foo.json",
+                "specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
+              ].join("\t"),
               "M\tspecification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json",
               "A\tspecification/baz/main.tsp",
             ].join("\n"),
