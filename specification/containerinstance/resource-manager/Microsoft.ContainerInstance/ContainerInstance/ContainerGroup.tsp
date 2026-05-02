@@ -70,7 +70,7 @@ interface ContainerGroups {
   @summary("Update container groups.")
   update is ArmCustomPatchSync<
     ContainerGroup,
-    PatchModel = Resource,
+    PatchModel = ContainerGroupResource,
     Error = CloudError
   >;
 
