@@ -14,30 +14,37 @@ permissions:
   contents: read
 
 jobs:
-  TypeSpec-Requirement:
+  typespec-requirement:
     name: TypeSpec Requirement
 
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v6
         with:
-          # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
+          # We compare HEAD (PR merge commit) against HEAD^ (base) via git diff,
+          # so we only need enough history to include the merge commit and its parent.
           fetch-depth: 2
+          # Check only needs to view contents of changed files as a string, so can use
+          # "git show" on specific files instead of cloning whole repo
+          sparse-checkout: |
+            .github
 
-      - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
 
-      - run: |
-          eng/scripts/TypeSpec-Requirement.ps1 `
-            -BaseCommitish HEAD^ `
-            -HeadCommitish HEAD `
-        id: tsr-ps1
-        shell: pwsh
-
-      # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
-      - uses: ./.github/actions/add-label-artifact
-        name: Upload artifact with results
+      - id: typespec-requirement
+        name: TypeSpec Requirement
+        uses: actions/github-script@v8
         with:
-          name: "brownfield"
-          value: "${{ steps.tsr-ps1.outputs.brownfield == 'true' }}"
+          script: |
+            const { default: typespecRequirement } =
+              await import('${{ github.workspace }}/.github/workflows/src/typespec-requirement.js');
+            return await typespecRequirement({ github, context, core });
+
+      # # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
+      # - uses: ./.github/actions/add-label-artifact
+      #   name: Upload artifact with results
+      #   with:
+      #     name: "brownfield"
+      #     value: "${{ steps.tsr-ps1.outputs.brownfield == 'true' }}"
