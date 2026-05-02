@@ -125,6 +125,7 @@ interface OutboundRuleBasicResourceOperationGroupOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface OutboundRuleBasicResourceOperationGroup {
   /**
