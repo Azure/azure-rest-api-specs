@@ -40,22 +40,34 @@ describe("typespecRequirement", () => {
               "A\tspecification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/examples/foo.json",
               "M\tspecification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json",
               "A\tspecification/baz/main.tsp",
+              "A\tspecification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json",
             ].join("\n"),
           ),
-        show: vi.fn().mockResolvedValue("{}"),
+        show: vi.fn().mockImplementation(async (/** @type {string[]} */ args) => {
+          if (args[0].includes("qux.json")) {
+            return JSON.stringify({ info: { "x-typespec-generated": [{}] } });
+          }
+          return "{}";
+        }),
       }),
     );
 
     await expect(typespecRequirement({ core })).resolves.toBe(true);
 
     expect(core.debug.mock.calls.map((c) => String(c[0])).join("\n")).toMatchInlineSnapshot(`
-      "changed files count: 4
+      "changed files count: 5
       changed swaggers:
         specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
+        specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
         specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
       specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
         swaggerText length: 2
         typespecGenerated: false
+        isNewApiVersion: false
+        allowed: true
+      specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
+        swaggerText length: 38
+        typespecGenerated: true
         isNewApiVersion: false
         allowed: true
       specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
