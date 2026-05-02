@@ -39,22 +39,26 @@ export default async function typespecRequirement({ core }) {
     const swaggerText = await git.show([`HEAD:${swaggerPath}`]);
     core.debug(`  swaggerText length: ${swaggerText.length}`);
 
-    // TODO: exit fast once we know a file is safe, to avoid redundant checks
-
     const swagger = new Swagger(swaggerPath, { content: swaggerText });
     const typespecGenerated = await swagger.getTypeSpecGenerated();
     core.debug(`  typespecGenerated: ${inspect(typespecGenerated)}`);
 
-    // TODO: extract method, consider caching
-    const isNewApiVersion = await git
+    if (typespecGenerated) {
+      continue;
+    }
+
+    const existingApiVersion = await git
       .catFile(["-e", `HEAD^:${dirname(swaggerPath)}`])
-      .then(() => false)
-      .catch(() => true);
+      .then(() => true)
+      .catch(() => false);
 
-    core.debug(`  isNewApiVersion: ${isNewApiVersion}`);
+    core.debug(`  existingApiVersion: ${existingApiVersion}`);
 
-    const allowed = typespecGenerated || !isNewApiVersion;
-    core.debug(`  allowed: ${allowed}`);
+    if (existingApiVersion) {
+      continue;
+    }
+
+    core.debug(`  NEW API VERSION MUST USE TYPESPEC`);
   }
 
   return true;

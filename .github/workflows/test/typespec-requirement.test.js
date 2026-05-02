@@ -44,6 +44,7 @@ describe("typespecRequirement", () => {
             ].join("\n"),
           ),
         show: vi.fn().mockImplementation(async (/** @type {string[]} */ args) => {
+          await Promise.resolve();
           if (args[0].includes("qux.json")) {
             return JSON.stringify({ info: { "x-typespec-generated": [{}] } });
           }
@@ -63,18 +64,15 @@ describe("typespecRequirement", () => {
       specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
         swaggerText length: 2
         typespecGenerated: false
-        isNewApiVersion: false
-        allowed: true
+        existingApiVersion: true
       specification/qux/resource-manager/Microsoft.Qux/stable/2024-01-01/qux.json
         swaggerText length: 38
         typespecGenerated: true
-        isNewApiVersion: false
-        allowed: true
       specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
         swaggerText length: 2
         typespecGenerated: false
-        isNewApiVersion: true
-        allowed: false"
+        existingApiVersion: false
+        NEW API VERSION MUST USE TYPESPEC"
     `);
   });
 });
