@@ -1,0 +1,32 @@
+{
+  "operationId": "FoundryJobs_List",
+  "parameters": {
+    "accountName": "myAccount",
+    "api-version": "2026-01-15-preview",
+    "projectName": "myProject",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "List Foundry Jobs",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myJob",
+            "type": "Microsoft.CognitiveServices/accounts/projects/jobs",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/jobs/myJob",
+            "properties": {
+              "jobType": "Command",
+              "command": "python train.py",
+              "environmentImageRef": "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04:latest",
+              "status": "Completed",
+              "displayName": "My Training Job",
+              "isArchived": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}
