@@ -13532,6 +13532,51 @@
         },
         "description": "Definition for sampling strategy."
       },
+      "AgentFilterTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_reference"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_filter"
+            ],
+            "description": "The type of trace source, always `agent_filter`."
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReference"
+              }
+            ],
+            "description": "The agent reference to filter traces by."
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "end_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of traces to sample. Must be greater than 0."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "A trace source that selects traces by agent reference with time-based filtering."
+      },
       "AgentId": {
         "type": "object",
         "required": [
@@ -13822,6 +13867,55 @@
             "AgentEndpoints=V1Preview"
           ]
         }
+      },
+      "AgentSmartFilterTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_reference"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_smart_filter"
+            ],
+            "description": "The type of trace source, always `agent_smart_filter`."
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReference"
+              }
+            ],
+            "description": "The agent reference to filter traces by."
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "end_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of traces to sample. Must be greater than 0."
+          },
+          "model": {
+            "type": "string",
+            "description": "If you provide the model, it will be used for filtering."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "An extended agent filter trace source that also includes model information."
       },
       "AgentTaxonomyInput": {
         "type": "object",
@@ -14457,7 +14551,8 @@
           {
             "$ref": "#/components/schemas/DataSourceConfig"
           }
-        ]
+        ],
+        "description": "Base data source configuration for Azure AI evaluation scenarios."
       },
       "AzureAIModelTarget": {
         "type": "object",
@@ -14509,7 +14604,7 @@
           "sampling_params": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ModelSamplingParamsUpdate"
+                "$ref": "#/components/schemas/ModelSamplingParams"
               }
             ],
             "description": "The parameters used to control the sampling behavior of the model during text generation."
@@ -14758,6 +14853,35 @@
           }
         },
         "description": "A set of index resources used by the `azure_ai_search` tool."
+      },
+      "AzureAITraceDataSourcePreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_trace_data_source_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_trace_data_source_preview`."
+          },
+          "trace_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TraceSource"
+              }
+            ],
+            "description": "The trace source that defines how traces are selected for evaluation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation."
       },
       "AzureFunctionBinding": {
         "type": "object",
@@ -16123,6 +16247,139 @@
         ],
         "description": "Evaluation rule action for continuous evaluation."
       },
+      "ConversationGenPreviewItemGenerationParams": {
+        "type": "object",
+        "required": [
+          "type",
+          "source",
+          "model"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation_gen_preview"
+            ],
+            "description": "The type of item generation parameters, always `conversation_gen_preview`."
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+              }
+            ],
+            "description": "The source of test scenarios, supporting file_id or file_content."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'."
+          },
+          "max_turns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of turns per simulated conversation. Defaults to 20.",
+            "default": 20
+          },
+          "num_conversations": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of simulated conversations to generate per test scenario. Defaults to 5.",
+            "default": 5
+          },
+          "data_mapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Mapping from source fields to response_id field, which is required for retrieving chat history."
+          },
+          "sampling_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelSamplingParams"
+              }
+            ],
+            "description": "Sampling parameters for the conversation generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemGenerationParams"
+          }
+        ],
+        "description": "Represents the parameters for conversation simulation item generation."
+      },
+      "ConversationIdTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "conversation_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversation_id_source"
+            ],
+            "description": "The type of trace source, always `conversation_id_source`."
+          },
+          "conversation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of conversation identifiers to filter traces by."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "A trace source that selects traces by conversation IDs."
+      },
+      "ConversationSimulationPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_generation_params",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_conversation_simulation_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_conversation_simulation_preview`."
+          },
+          "item_generation_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
+              }
+            ],
+            "description": "The parameters for conversation generation."
+          },
+          "target": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureAIAgentTarget"
+              }
+            ],
+            "description": "The target agent to simulate conversations against."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent."
+      },
       "CosmosDBIndex": {
         "type": "object",
         "required": [
@@ -16604,6 +16861,15 @@
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
+          },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
+            "default": "turn"
           }
         },
         "title": "CreateEvalRunRequest"
@@ -17767,6 +18033,71 @@
           "example": "{\n  \"object\": \"eval\",\n  \"id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"data_source_config\": {\n    \"type\": \"custom\",\n    \"item_schema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\"type\": \"string\"},\n      },\n      \"required\": [\"label\"]\n    },\n    \"include_sample_schema\": true\n  },\n  \"testing_criteria\": [\n    {\n      \"name\": \"My string check grader\",\n      \"type\": \"string_check\",\n      \"input\": \"{{sample.output_text}}\",\n      \"reference\": \"{{item.label}}\",\n      \"operation\": \"eq\",\n    }\n  ],\n  \"name\": \"External Data Eval\",\n  \"created_at\": 1739314509,\n  \"metadata\": {\n    \"test\": \"synthetics\",\n  }\n}\n"
         }
       },
+      "EvalAgentIdReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_id"
+            ],
+            "description": "The type of agent reference, always `agent_id`."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique identifier of the agent."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalAgentReference"
+          }
+        ],
+        "description": "Identifies a 3P (Assistants) agent by its opaque agent ID."
+      },
+      "EvalAgentReference": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReferenceType"
+              }
+            ],
+            "description": "The discriminator that identifies which kind of agent reference this is."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agent_id": "#/components/schemas/EvalAgentIdReference",
+            "agent_reference": "#/components/schemas/EvalFoundryAgentReference"
+          }
+        },
+        "description": "Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered."
+      },
+      "EvalAgentReferenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agent_id",
+              "agent_reference"
+            ]
+          }
+        ],
+        "description": "Specifies the type of agent reference used for filtering traces."
+      },
       "EvalCsvFileIdSource": {
         "type": "object",
         "required": [
@@ -17817,6 +18148,36 @@
           }
         ],
         "description": "Represents a CSV data source for evaluation runs."
+      },
+      "EvalFoundryAgentReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_reference"
+            ],
+            "description": "The type of agent reference, always `agent_reference`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the agent."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version identifier of the agent. If not specified, will look for any version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalAgentReference"
+          }
+        ],
+        "description": "Identifies a Foundry agent by its name and optional version."
       },
       "EvalResult": {
         "type": "object",
@@ -17974,6 +18335,15 @@
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
+          },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
+            "default": "turn"
           }
         },
         "description": "A schema representing an evaluation run.",
@@ -18004,6 +18374,8 @@
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
+            "azure_ai_conversation_simulation_preview": "#/components/schemas/ConversationSimulationPreviewEvalRunDataSource",
+            "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource"
           }
         },
@@ -18125,6 +18497,14 @@
             "nullable": true,
             "description": "Optional sample or intermediate data produced by the grader."
           },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalRunOutputItemResultStatus"
+              }
+            ],
+            "description": "The evaluation status for this result item. Values: \"completed\", \"errored\", \"skipped\". Null if not provided by evaluator. When status is skipped, passed/score can be ignored."
+          },
           "metric": {
             "type": "string",
             "description": "The name of the metric (e.g., \"fluency\", \"f1_score\")."
@@ -18153,6 +18533,15 @@
         "additionalProperties": {},
         "description": "A single grader result for an evaluation run output item.",
         "title": "EvalRunOutputItemResult"
+      },
+      "EvalRunOutputItemResultStatus": {
+        "type": "string",
+        "enum": [
+          "completed",
+          "errored",
+          "skipped"
+        ],
+        "description": "The evaluation status for an evaluation run output item result."
       },
       "EvalRunOutputItemSampleInput": {
         "type": "object",
@@ -18335,6 +18724,15 @@
             ],
             "description": "Data for evaluation."
           },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
+            "default": "turn"
+          },
           "displayName": {
             "type": "string",
             "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
@@ -18452,6 +18850,21 @@
           }
         ],
         "description": "Insights from the evaluation comparison."
+      },
+      "EvaluationLevel": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "turn",
+              "conversation"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The level at which evaluation is performed."
       },
       "EvaluationResultSample": {
         "type": "object",
@@ -20563,7 +20976,8 @@
             "red_team": "#/components/schemas/RedTeamItemGenerationParams",
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
-            "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams"
+            "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams",
+            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -20580,7 +20994,8 @@
               "response_retrieval",
               "red_team_seed_prompts",
               "red_team_taxonomy",
-              "synthetic_data_gen_preview"
+              "synthetic_data_gen_preview",
+              "conversation_gen_preview"
             ]
           }
         ],
@@ -21586,53 +22001,24 @@
       },
       "ModelSamplingParams": {
         "type": "object",
-        "required": [
-          "temperature",
-          "top_p",
-          "seed",
-          "max_completion_tokens"
-        ],
         "properties": {
           "temperature": {
             "type": "number",
             "format": "float",
-            "description": "The temperature parameter for sampling."
+            "description": "The temperature parameter for sampling. Defaults to 1.0.",
+            "default": 1
           },
           "top_p": {
             "type": "number",
             "format": "float",
-            "description": "The top-p parameter for nucleus sampling."
+            "description": "The top-p parameter for nucleus sampling. Defaults to 1.0.",
+            "default": 1
           },
           "seed": {
             "type": "integer",
             "format": "int32",
-            "description": "The random seed for reproducibility."
-          },
-          "max_completion_tokens": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum number of tokens allowed in the completion."
-          }
-        },
-        "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
-      },
-      "ModelSamplingParamsUpdate": {
-        "type": "object",
-        "properties": {
-          "temperature": {
-            "type": "number",
-            "format": "float",
-            "description": "The temperature parameter for sampling."
-          },
-          "top_p": {
-            "type": "number",
-            "format": "float",
-            "description": "The top-p parameter for nucleus sampling."
-          },
-          "seed": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The random seed for reproducibility."
+            "description": "The random seed for reproducibility. Defaults to 42.",
+            "default": 42
           },
           "max_completion_tokens": {
             "type": "integer",
@@ -26516,6 +26902,22 @@
           },
           "failed": {
             "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "errored": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/integer"
+              }
+            ],
+            "description": "Number of tests that errored for this criteria."
+          },
+          "skipped": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/integer"
+              }
+            ],
+            "description": "Number of tests that were skipped for this criteria."
           }
         }
       },
@@ -26539,6 +26941,14 @@
           },
           "passed": {
             "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "skipped": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/integer"
+              }
+            ],
+            "description": "Number of output items that were skipped during the evaluation."
           }
         }
       },
@@ -42290,7 +42700,8 @@
           {
             "$ref": "#/components/schemas/EvalRunDataSource"
           }
-        ]
+        ],
+        "description": "Represents a data source for red team evaluation runs."
       },
       "RedTeamItemGenerationParams": {
         "type": "object",
@@ -42325,7 +42736,8 @@
           {
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
-        ]
+        ],
+        "description": "Represents the parameters for red team item generation."
       },
       "RedTeamSeedPromptsItemGenerationParams": {
         "type": "object",
@@ -43274,7 +43686,8 @@
           {
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
-        ]
+        ],
+        "description": "Represents the parameters for synthetic data generation item generation."
       },
       "SystemMessage": {
         "type": "object",
@@ -43730,6 +44143,7 @@
             "description": "The model to use for the evaluation. Must support structured outputs."
           }
         },
+        "description": "An Azure AI Evaluator grader used as testing criterion in evaluations.",
         "title": "AzureAIEvaluatorGrader"
       },
       "ToolCallOutputContent": {
@@ -43934,6 +44348,78 @@
         },
         "description": "A specific version of a toolbox."
       },
+      "TraceIdTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "trace_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "trace_id_source"
+            ],
+            "description": "The type of trace source, always `trace_id_source`."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of trace identifiers to evaluate."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "A trace source that selects traces by explicit trace IDs."
+      },
+      "TraceSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TraceSourceType"
+              }
+            ],
+            "description": "The discriminator that identifies which kind of trace source this is."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "trace_id_source": "#/components/schemas/TraceIdTraceSource",
+            "conversation_id_source": "#/components/schemas/ConversationIdTraceSource",
+            "agent_filter": "#/components/schemas/AgentFilterTraceSource",
+            "agent_smart_filter": "#/components/schemas/AgentSmartFilterTraceSource"
+          }
+        },
+        "description": "Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource."
+      },
+      "TraceSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "trace_id_source",
+              "conversation_id_source",
+              "agent_filter",
+              "agent_smart_filter"
+            ]
+          }
+        ],
+        "description": "Specifies the type of trace source used to select traces for evaluation."
+      },
       "TracesDataGenerationJobOptions": {
         "type": "object",
         "required": [
@@ -44029,6 +44515,13 @@
               "type": "string"
             },
             "description": "Collection of Agent trace identifiers that should be evaluated."
+          },
+          "conversation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of conversation identifiers to filter traces by conversation."
           },
           "agent_id": {
             "type": "string",
