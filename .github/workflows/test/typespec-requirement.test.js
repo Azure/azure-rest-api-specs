@@ -5,6 +5,7 @@ import { createMockCore } from "./mocks.js";
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
+    catFile: vi.fn().mockResolvedValue(""),
     diff: vi.fn().mockResolvedValue(""),
     show: vi.fn().mockResolvedValue(""),
   }),
@@ -24,6 +25,13 @@ describe("typespecRequirement", () => {
     const core = createMockCore();
     vi.mocked(simpleGit).mockReturnValue(
       /** @type {any} */ ({
+        catFile: vi.fn().mockImplementation(async (/** @type {string[]} */ args) => {
+          await Promise.resolve();
+          if (args[1].includes("data-plane")) {
+            throw new Error();
+          }
+          return "";
+        }),
         diff: vi
           .fn()
           .mockResolvedValue(
@@ -45,8 +53,16 @@ describe("typespecRequirement", () => {
       changed swaggers:
         specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
         specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
-      swagger length: 2
-      swagger length: 2"
+      specification/foo/resource-manager/Microsoft.Foo/stable/2024-01-01/foo.json
+        swaggerText length: 2
+        typespecGenerated: false
+        isNewApiVersion: false
+        allowed: true
+      specification/bar/data-plane/Microsoft.Bar/stable/2024-01-01/bar.json
+        swaggerText length: 2
+        typespecGenerated: false
+        isNewApiVersion: true
+        allowed: false"
     `);
   });
 });

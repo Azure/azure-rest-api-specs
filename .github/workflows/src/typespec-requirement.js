@@ -1,6 +1,9 @@
 import debug from "debug";
+import { dirname } from "path";
 import { simpleGit } from "simple-git";
+import { inspect } from "util";
 import { getChangedFilesStatuses, swagger } from "../../shared/src/changed-files.js";
+import { Swagger } from "../../shared/src/swagger.js";
 import { CoreLogger } from "./core-logger.js";
 
 // Enable simple-git debug logging to improve console output
@@ -30,9 +33,28 @@ export default async function typespecRequirement({ core }) {
 
   const git = simpleGit(options.cwd);
 
-  for (const swagger of changedSwaggers) {
-    const swaggerText = await git.show([`HEAD:${swagger}`]);
-    core.debug(`swagger length: ${swaggerText.length}`);
+  for (const swaggerPath of changedSwaggers) {
+    core.debug(swaggerPath);
+
+    const swaggerText = await git.show([`HEAD:${swaggerPath}`]);
+    core.debug(`  swaggerText length: ${swaggerText.length}`);
+
+    // TODO: exit fast once we know a file is safe, to avoid redundant checks
+
+    const swagger = new Swagger(swaggerPath, { content: swaggerText });
+    const typespecGenerated = await swagger.getTypeSpecGenerated();
+    core.debug(`  typespecGenerated: ${inspect(typespecGenerated)}`);
+
+    // TODO: extract method, consider caching
+    const isNewApiVersion = await git
+      .catFile(["-e", `HEAD^:${dirname(swaggerPath)}`])
+      .then(() => false)
+      .catch(() => true);
+
+    core.debug(`  isNewApiVersion: ${isNewApiVersion}`);
+
+    const allowed = typespecGenerated || !isNewApiVersion;
+    core.debug(`  allowed: ${allowed}`);
   }
 
   return true;
