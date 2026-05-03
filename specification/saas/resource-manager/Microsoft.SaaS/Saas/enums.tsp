@@ -1,3 +1,5 @@
+using TypeSpec.Rest;
+using TypeSpec.Http;
 namespace Microsoft.SaaS;
 
 /** The SaaS Subscription Status. */

@@ -1,9 +1,9 @@
 {
   "operationId": "SaasSubscriptionLevel_ListByResourceGroup",
-  "title": "List SaaS resources by resource group",
+  "title": "List SaaS subscriptions by resource group",
   "parameters": {
     "subscriptionId": "1a950b42-75c2-44a6-ab02-fc0f840997aa",
-    "resourceGroupName": "myResourceGroup",
+    "resourceGroupName": "my-saas-rg",
     "api-version": "2026-04-01"
   },
   "responses": {
@@ -11,42 +11,31 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/resourceGroups/myResourceGroup/providers/Microsoft.SaaS/resources/mySaasResource",
-            "name": "mySaasResource",
+            "id": "/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/resourceGroups/my-saas-rg/providers/Microsoft.SaaS/resources/myISVSaaS",
+            "name": "myISVSaaS",
             "type": "Microsoft.SaaS/resources",
-            "location": "global",
-            "tags": {},
             "properties": {
               "subscriptionId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
-              "description": "My SaaS subscription",
+              "description": "SaaS Offer",
               "status": "Subscribed",
-              "statusReason": "None",
-              "quantity": null,
+              "statusReason": "Subscribed by user@contoso.com",
+              "quantity": 1,
               "publisherName": "ISVUKLegacy",
               "planName": "SaaS Plan",
               "offerName": "SaaS Offer",
-              "termUnit": "P1Y",
-              "billingPeriod": null,
-              "termStartDate": "2025-11-13T00:00:00Z",
-              "termEndDate": "2026-11-12T00:00:00Z",
-              "autoRenew": false,
+              "termUnit": "P1M",
+              "billingPeriod": "Monthly",
+              "termStartDate": "2026-04-01T00:00:00Z",
+              "termEndDate": "2026-05-01T00:00:00Z",
+              "autoRenew": true,
               "isFreeTrial": false,
               "storeFront": "AzurePortal",
               "purchaserEmail": "user@contoso.com",
-              "privateOfferId": null,
+              "privateOfferId": "",
               "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
-            },
-            "systemData": {
-              "createdBy": "user@contoso.com",
-              "createdByType": "User",
-              "createdAt": "2025-11-13T10:26:59.527Z",
-              "lastModifiedBy": "user@contoso.com",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2025-11-13T10:29:52.283Z"
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
   }

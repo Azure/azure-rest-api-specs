@@ -1,6 +1,6 @@
 {
   "operationId": "Operations_List",
-  "title": "List SaaS operations",
+  "title": "List available operations",
   "parameters": {
     "api-version": "2026-04-01"
   },
@@ -13,10 +13,30 @@
             "display": {
               "provider": "Microsoft SaaS",
               "resource": "SaaS resources",
-              "operation": "Get SaaS resource",
-              "description": "Gets a SaaS resource"
+              "operation": "Read SaaS resource",
+              "description": "Gets a SaaS resource."
             },
-            "origin": "user,system"
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.SaaS/resources/write",
+            "display": {
+              "provider": "Microsoft SaaS",
+              "resource": "SaaS resources",
+              "operation": "Create or update SaaS resource",
+              "description": "Creates or updates a SaaS resource."
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.SaaS/resources/delete",
+            "display": {
+              "provider": "Microsoft SaaS",
+              "resource": "SaaS resources",
+              "operation": "Delete SaaS resource",
+              "description": "Deletes a SaaS resource."
+            },
+            "isDataAction": false
           }
         ]
       }

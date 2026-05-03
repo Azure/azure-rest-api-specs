@@ -1,3 +1,5 @@
+using TypeSpec.Rest;
+using TypeSpec.Http;
 namespace Microsoft.SaaS;
 
 // NOTE: SubscriptionTerm removed — GA decapsulates to termStartDate/termEndDate on SaasResourceProperties.
