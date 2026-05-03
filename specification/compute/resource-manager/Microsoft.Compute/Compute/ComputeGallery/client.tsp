@@ -116,7 +116,7 @@ using ComputeGallery;
 );
 
 // Rename raw gallery operations to match old SDK method names
-@@clientName(SharedGalleries.get, "GetSharedGallery", "csharp");
+@@clientName(SharedGalleries.get, "GetSharedGalleryData", "csharp");
 @@clientName(SharedGalleries.list, "GetSharedGalleries", "csharp");
 @@clientName(SharedGalleryImages.get, "GetSharedGalleryImage", "csharp");
 @@clientName(SharedGalleryImages.list, "GetSharedGalleryImages", "csharp");
@@ -128,7 +128,7 @@ using ComputeGallery;
   "GetSharedGalleryImageVersions",
   "csharp"
 );
-@@clientName(CommunityGalleries.get, "GetCommunityGallery", "csharp");
+@@clientName(CommunityGalleries.get, "GetCommunityGalleryData", "csharp");
 @@clientName(CommunityGalleryImages.get, "GetCommunityGalleryImage", "csharp");
 @@clientName(CommunityGalleryImages.list,
   "GetCommunityGalleryImages",
