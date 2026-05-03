@@ -564,9 +564,25 @@ union SensitivityType {
 @added(Versions.v2026_04_01)
 union ManagedRuleSetStatus {
   string,
+
+  /**
+   * The managed rule set is in preview.
+   */
   Preview: "Preview",
+
+  /**
+   * The managed rule set is generally available.
+   */
   GA: "GA",
+
+  /**
+   * The managed rule set is deprecated.
+   */
   Deprecated: "Deprecated",
+
+  /**
+   * The managed rule set is supported.
+   */
   Supported: "Supported",
 }
 
