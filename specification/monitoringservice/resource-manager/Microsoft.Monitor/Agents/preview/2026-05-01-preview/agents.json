@@ -480,10 +480,14 @@
         },
         "disableAutonomousOperations": {
           "type": "array",
-          "description": "List of operations that are disabled on this observability agent. Currently supported values: IssueCreation, Investigation. Additional values may be added in the future.",
+          "description": "List of autonomous operations that are disabled on this observability agent. Currently supported values: AutoInvestigate. Additional values may be added in the future.",
           "items": {
             "type": "string"
           }
+        },
+        "customInstructions": {
+          "type": "string",
+          "description": "Custom instructions that guide the observability agent's behavior."
         }
       }
     },
