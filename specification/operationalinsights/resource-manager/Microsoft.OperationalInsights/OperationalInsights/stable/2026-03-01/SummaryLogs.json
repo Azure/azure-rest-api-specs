@@ -622,7 +622,17 @@
           ],
           "x-ms-enum": {
             "name": "SummaryLogsIdentityType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "The default identity type. summary logs do not have a managed identity."
+              },
+              {
+                "value": "UserAssigned",
+                "description": "summary logs is associated with a user assigned managed identity. User assigned identities are created as separate Azure resources and can be shared across multiple summary logs."
+              }
+            ]
           }
         },
         "userAssignedIdentities": {
