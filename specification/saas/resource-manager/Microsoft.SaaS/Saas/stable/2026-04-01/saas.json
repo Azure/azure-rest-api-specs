@@ -1,0 +1,1354 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SaaS",
+    "version": "2026-04-01",
+    "description": "Microsoft.SaaS Resource Provider - GA API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SaaS/operationResults/{operationId}": {
+      "get": {
+        "operationId": "SaasOperationResults_GetOperationStatus",
+        "description": "Gets the status of an operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources": {
+      "get": {
+        "operationId": "SaasTenantLevel_List",
+        "description": "Get all tenant-level SaaS resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SaasTenantLevel_CreateResource",
+        "description": "Creates a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources/{resourceId}": {
+      "get": {
+        "operationId": "SaasTenantLevel_GetResource",
+        "description": "Gets a specific tenant-level SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SaasTenantLevel_UpdateResource",
+        "description": "Updates a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SaasTenantLevel_DeleteResource",
+        "description": "Deletes the specified SaaS.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken": {
+      "post": {
+        "operationId": "SaasTenantLevel_ListAccessToken",
+        "description": "Gets the ISV access token for a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources/preflight": {
+      "post": {
+        "operationId": "SaasTenantLevel_Preflight",
+        "description": "Pre-validates SaaS subscription operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkEligibility": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelGlobal_CheckEligibilitySubscription",
+        "description": "Checks eligibility for a subscription-level SaaS purchase (subscription-scoped).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "saasResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EligibilityCheckResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkNameAvailability": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelGlobal_CheckNameAvailability",
+        "description": "Checks name availability for a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nameAvailability",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources": {
+      "get": {
+        "operationId": "SaasSubscriptionLevelGlobal_ListByAzureSubscription",
+        "description": "Gets all Subscription Level SaaS in an Azure subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelMove_MoveResources",
+        "description": "Move a Subscription Level SaaS.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveResourceParameter",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources": {
+      "get": {
+        "operationId": "SaasSubscriptionLevel_ListByResourceGroup",
+        "description": "Gets all Subscription Level SaaS in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}": {
+      "get": {
+        "operationId": "SaasSubscriptionLevel_Get",
+        "description": "Gets a specific Subscription Level SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SaasSubscriptionLevel_CreateOrUpdate",
+        "description": "Creates or updates a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SaasSubscriptionLevel_Update",
+        "description": "Updates a SaaS Subscription Level resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SaasSubscriptionLevel_Delete",
+        "description": "Deletes the specified SaaS.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/checkEligibility": {
+      "post": {
+        "operationId": "SaasSubscriptionLevel_CheckEligibility",
+        "description": "Checks eligibility for a subscription-level SaaS purchase (resource-scoped).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "saasResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EligibilityCheckResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/listAccessToken": {
+      "post": {
+        "operationId": "SaasSubscriptionLevel_ListAccessToken",
+        "description": "Gets the ISV access token for a Subscription Level SaaS.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/unsubscribe": {
+      "post": {
+        "operationId": "SaasSubscriptionLevel_Unsubscribe",
+        "description": "Unsubscribe from a Subscription Level SaaS.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelMove_ValidateMoveResources",
+        "description": "Validate whether a Subscription Level SaaS can be moved.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveResourceParameter",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessTokenResult": {
+      "type": "object",
+      "description": "The ISV access token result response.",
+      "properties": {
+        "publisherOfferBaseUri": {
+          "type": "string",
+          "description": "The Publisher Offer Base Uri."
+        },
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "The generated token.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DeleteOptions": {
+      "type": "object",
+      "description": "Delete options for a SaaS resource.",
+      "properties": {
+        "unsubscribeOnly": {
+          "type": "boolean",
+          "description": "Whether it is unsubscribe only."
+        },
+        "reasonCode": {
+          "type": "number",
+          "format": "double",
+          "description": "The reason code."
+        },
+        "feedback": {
+          "type": "string",
+          "description": "The feedback."
+        }
+      }
+    },
+    "DeletionSource": {
+      "type": "string",
+      "description": "The deletion source.",
+      "enum": [
+        "CustomerCancellation",
+        "AzureSubscriptionDeletion"
+      ],
+      "x-ms-enum": {
+        "name": "DeletionSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerCancellation",
+            "value": "CustomerCancellation",
+            "description": "Customer initiated cancellation"
+          },
+          {
+            "name": "AzureSubscriptionDeletion",
+            "value": "AzureSubscriptionDeletion",
+            "description": "Azure subscription deletion"
+          }
+        ]
+      }
+    },
+    "EligibilityCheckResult": {
+      "type": "object",
+      "description": "Eligibility check result with structured errors.",
+      "properties": {
+        "isEligible": {
+          "type": "boolean",
+          "description": "Whether the subscription is eligible."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Structured list of eligibility errors.",
+          "items": {
+            "$ref": "#/definitions/EligibilityErrorDetail"
+          }
+        }
+      }
+    },
+    "EligibilityErrorDetail": {
+      "type": "object",
+      "description": "A single eligibility error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error description."
+        }
+      }
+    },
+    "MoveResource": {
+      "type": "object",
+      "description": "Resource Move Options.",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The target resource group uri for the move."
+        },
+        "resources": {
+          "type": "array",
+          "description": "The resource uris to move.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchIntent": {
+      "type": "string",
+      "description": "The intent for a patch operation.",
+      "enum": [
+        "Retain",
+        "Reset",
+        "ScheduleChange"
+      ],
+      "x-ms-enum": {
+        "name": "PatchIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain the current subscription"
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "Reset the subscription"
+          },
+          {
+            "name": "ScheduleChange",
+            "value": "ScheduleChange",
+            "description": "Schedule a change"
+          }
+        ]
+      }
+    },
+    "SaasNameAvailabilityRequest": {
+      "type": "object",
+      "description": "Check name availability request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to check availability for."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        }
+      }
+    },
+    "SaasNameAvailabilityResponse": {
+      "type": "object",
+      "description": "Check name availability response.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Whether the name is available."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason the name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message."
+        }
+      }
+    },
+    "SaasResource": {
+      "type": "object",
+      "description": "SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SaasResourceCreation": {
+      "type": "object",
+      "description": "SaaS resource creation model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource uri.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location. Only value allowed for SaaS is 'global'."
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "Properties of the SaaS resource that are relevant for creation."
+        }
+      }
+    },
+    "SaasResourceProperties": {
+      "type": "object",
+      "description": "SaaS resource properties for GA API version 2026-04-01.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The SaaS subscription id. Server-assigned.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+        },
+        "status": {
+          "$ref": "#/definitions/SaasResourceStatus",
+          "description": "The SaaS Subscription Status. Server-assigned.",
+          "readOnly": true
+        },
+        "statusReason": {
+          "$ref": "#/definitions/SubscriptionStatusReason",
+          "description": "The reason for the current status. Server-assigned.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "planName": {
+          "type": "string",
+          "description": "The plan name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "offerName": {
+          "type": "string",
+          "description": "The offer name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "The term unit (ISO 8601 duration, e.g. P1M, P1Y). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period (ISO 8601 duration). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "termStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the SaaS subscription will auto renew upon term end."
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a Free Trial term. Server-determined.",
+          "readOnly": true
+        },
+        "storeFront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "additionalInfo": {
+          "type": "object",
+          "description": "Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "purchaserEmail": {
+          "type": "string",
+          "description": "The purchaser email. Server-derived from authenticated identity.",
+          "readOnly": true
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "intent": {
+          "$ref": "#/definitions/PatchIntent",
+          "description": "The intent for patch operations. Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "SaasResourceResponseWithContinuation": {
+      "type": "object",
+      "description": "Paginated list of SaaS resources.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The next link to query to get the remaining results."
+        },
+        "value": {
+          "type": "array",
+          "description": "The value of response.",
+          "items": {
+            "$ref": "#/definitions/SaasResource"
+          }
+        }
+      }
+    },
+    "SaasResourceStatus": {
+      "type": "string",
+      "description": "The SaaS Subscription Status.",
+      "enum": [
+        "NotStarted",
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Unsubscribed",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "SaasResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Subscription has not started"
+          },
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Pending fulfillment start"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Subscribed"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Unsubscribed"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Suspended"
+          }
+        ]
+      }
+    },
+    "SubscriptionStatusReason": {
+      "type": "string",
+      "description": "The reason for the subscription status.",
+      "enum": [
+        "None",
+        "SuspendedInternal",
+        "AzureSubscriptionDeletion"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionStatusReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No specific reason"
+          },
+          {
+            "name": "SuspendedInternal",
+            "value": "SuspendedInternal",
+            "description": "Suspended internally"
+          },
+          {
+            "name": "AzureSubscriptionDeletion",
+            "value": "AzureSubscriptionDeletion",
+            "description": "Azure subscription deleted"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

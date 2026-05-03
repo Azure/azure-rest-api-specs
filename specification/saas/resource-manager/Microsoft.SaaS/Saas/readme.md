@@ -26,7 +26,16 @@ These are the global settings for the saas.
 
 ```yaml
 openapi-type: arm
-tag: package-2018-03-01-beta
+tag: package-2026-04-01
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/saas.json
 ```
 
 ### Tag: package-2018-03-01-beta
