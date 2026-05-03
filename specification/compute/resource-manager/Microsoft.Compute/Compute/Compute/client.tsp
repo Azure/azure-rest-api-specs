@@ -499,39 +499,13 @@ using Compute;
   "csharp"
 );
 
-// AllInstancesDown / UserInitiatedRedeploy are single-property wrapper models.
-// The mgmt generator's safe-flatten heuristic eliminates them and inlines the inner
-// boolean into ScheduledEventsPolicy, breaking back-compat with the 1.x SDK (which
-// exposed them as public wrapper types). Defeat safe-flatten by replacing each
-// model with a wrapper variant that has a dummy second property — mirrors the
-// `dummyPropertyTwo` swagger transform from the previous AutoRest autorest.md.
-// The dummy property is hidden via SDK-side customization (see src/Custom/).
-namespace ComputeCsharpCustomizations {
-  model AllInstancesDownWithDummy {
-    ...AllInstancesDown;
-    dummy?: string;
-  }
-
-  model UserInitiatedRedeployWithDummy {
-    ...UserInitiatedRedeploy;
-    dummy?: string;
-  }
-}
-@@alternateType(AllInstancesDown,
-  ComputeCsharpCustomizations.AllInstancesDownWithDummy,
+// Rename duplicate automaticallyApprove in sub-models to avoid flattening collision
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+  "AutomaticallyApproveRedeploy",
   "csharp"
 );
-@@alternateType(UserInitiatedRedeploy,
-  ComputeCsharpCustomizations.UserInitiatedRedeployWithDummy,
-  "csharp"
-);
-// Restore the public type names that the 1.x SDK shipped.
-@@clientName(ComputeCsharpCustomizations.AllInstancesDownWithDummy,
-  "AllInstancesDown",
-  "csharp"
-);
-@@clientName(ComputeCsharpCustomizations.UserInitiatedRedeployWithDummy,
-  "UserInitiatedRedeploy",
+@@clientName(AllInstancesDown.automaticallyApprove,
+  "AutomaticallyApproveAllDown",
   "csharp"
 );
 
@@ -664,8 +638,10 @@ namespace ComputeCsharpCustomizations {
 );
 @@clientName(Modes, "HostEndpointSettingsMode", "csharp");
 
-// (Safe-flatten mitigation for AllInstancesDown / UserInitiatedRedeploy moved
-// near the top of this file as @@alternateType wrapper models with a dummy property.)
+// NOTE: AllInstancesDown and UserInitiatedRedeploy are safe-flattened by the generator.
+// They need a generator option to disable safe-flatten per-type. See issue filed below.
+// TODO: @@access(AllInstancesDown, Access.public, "csharp");
+// TODO: @@access(UserInitiatedRedeploy, Access.public, "csharp");
 
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(CapacityReservationGroupInstanceViewTypes,
