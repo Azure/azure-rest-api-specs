@@ -97,6 +97,10 @@ using Microsoft.DataProtection;
   BackupInstances,
   "!csharp"
 );
+@@clientLocation(BackupInstanceResources.resumeProtectionLegacy,
+  BackupInstances,
+  "!csharp"
+);
 @@clientLocation(BackupInstanceResources.stopProtection,
   BackupInstances,
   "!csharp"
@@ -303,6 +307,9 @@ using Microsoft.DataProtection;
 @@clientName(Operations, "DataProtectionOperations");
 @@clientName(EncryptionSettings, "encryptionSettings");
 @@clientName(BackupInstanceResources.suspendBackups::parameters.body,
+  "parameters"
+);
+@@clientName(BackupInstanceResources.resumeProtection::parameters.body,
   "parameters"
 );
 @@clientName(BackupInstanceResources.stopProtection::parameters.body,
