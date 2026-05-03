@@ -499,15 +499,15 @@ using Compute;
   "csharp"
 );
 
-// Rename duplicate automaticallyApprove in sub-models to avoid flattening collision
-@@clientName(UserInitiatedRedeploy.automaticallyApprove,
-  "AutomaticallyApproveRedeploy",
-  "csharp"
-);
-@@clientName(AllInstancesDown.automaticallyApprove,
-  "AutomaticallyApproveAllDown",
-  "csharp"
-);
+// Disable safe-flatten on AllInstancesDown / UserInitiatedRedeploy so they remain public
+// types in the C# SDK (preserves backward compatibility with previously shipped surface).
+// See: https://github.com/Azure/azure-sdk-for-net/issues/58066
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(UserInitiatedRedeploy, "disable-safe-flatten", true, "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(AllInstancesDown, "disable-safe-flatten", true, "csharp");
 
 // Resource type rename for backward compatibility - RollingUpgradeStatusInfo → VirtualMachineScaleSetRollingUpgrade
 @@clientName(RollingUpgradeStatusInfo,
@@ -637,11 +637,6 @@ using Compute;
   "csharp"
 );
 @@clientName(Modes, "HostEndpointSettingsMode", "csharp");
-
-// NOTE: AllInstancesDown and UserInitiatedRedeploy are safe-flattened by the generator.
-// They need a generator option to disable safe-flatten per-type. See issue filed below.
-// TODO: @@access(AllInstancesDown, Access.public, "csharp");
-// TODO: @@access(UserInitiatedRedeploy, Access.public, "csharp");
 
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(CapacityReservationGroupInstanceViewTypes,
