@@ -4551,7 +4551,7 @@
         "paranoiaLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the paranoia level of the managed rule. Values include 1, 2, 3, 4.",
+          "description": "Describes the paranoia level of the managed rule. Applicable only for DRS rules (values 1-4, where higher values indicate more aggressive detection). Null for Bot Manager, DDoS, and AI rules.",
           "readOnly": true
         }
       }
@@ -4909,12 +4909,12 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the managed rule set.",
+          "description": "Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/ManagedRuleSetStatus",
-          "description": "Status of the managed rule set. Possible values include: 'Preview', 'GA', 'Deprecated', 'Supported'.",
+          "description": "Describes the lifecycle status of the managed rule set version.",
           "readOnly": true
         }
       }
@@ -5038,23 +5038,19 @@
         "values": [
           {
             "name": "Preview",
-            "value": "Preview",
-            "description": "The managed rule set is in preview."
+            "value": "Preview"
           },
           {
             "name": "GA",
-            "value": "GA",
-            "description": "The managed rule set is generally available."
+            "value": "GA"
           },
           {
             "name": "Deprecated",
-            "value": "Deprecated",
-            "description": "The managed rule set is deprecated."
+            "value": "Deprecated"
           },
           {
             "name": "Supported",
-            "value": "Supported",
-            "description": "The managed rule set is supported."
+            "value": "Supported"
           }
         ]
       }

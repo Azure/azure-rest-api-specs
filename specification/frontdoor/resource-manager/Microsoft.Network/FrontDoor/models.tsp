@@ -564,25 +564,9 @@ union SensitivityType {
 @added(Versions.v2026_04_01)
 union ManagedRuleSetStatus {
   string,
-
-  /**
-   * The managed rule set is in preview.
-   */
   Preview: "Preview",
-
-  /**
-   * The managed rule set is generally available.
-   */
   GA: "GA",
-
-  /**
-   * The managed rule set is deprecated.
-   */
   Deprecated: "Deprecated",
-
-  /**
-   * The managed rule set is supported.
-   */
   Supported: "Supported",
 }
 
@@ -2388,14 +2372,14 @@ model ManagedRuleSetDefinitionProperties {
   ruleGroups?: ManagedRuleGroupDefinition[];
 
   /**
-   * Display name of the managed rule set.
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
-   * Status of the managed rule set. Possible values include: 'Preview', 'GA', 'Deprecated', 'Supported'.
+   * Describes the lifecycle status of the managed rule set version.
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -2461,7 +2445,7 @@ model ManagedRuleDefinition {
   description?: string;
 
   /**
-   * Describes the paranoia level of the managed rule. Values include 1, 2, 3, 4.
+   * Describes the paranoia level of the managed rule. Applicable only for DRS rules (values 1-4, where higher values indicate more aggressive detection). Null for Bot Manager, DDoS, and AI rules.
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
