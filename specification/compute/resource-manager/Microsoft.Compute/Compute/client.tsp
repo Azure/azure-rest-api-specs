@@ -169,3 +169,6 @@ namespace ComputeCombine;
   "GetSoftDeletedResourcesByArtifactName",
   "csharp"
 );
+
+// ── C# operation rename: ResourceSkus.list emits `GetAll`; restore baseline name. ──
+@@clientName(ComputeSku.ResourceSkus.list, "GetComputeResourceSkus", "csharp");

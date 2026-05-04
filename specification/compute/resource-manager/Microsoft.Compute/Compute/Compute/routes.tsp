@@ -28,7 +28,7 @@ interface UsageOperationGroup {
   list is ComputeProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -46,7 +46,7 @@ interface VirtualMachineSizesOperationGroup {
   list is ComputeProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -64,7 +64,7 @@ interface VirtualMachineScaleSetsOperationGroup {
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineScaleSetListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -82,7 +82,7 @@ interface VirtualMachinesOperationGroup {
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -100,7 +100,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -122,7 +122,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -151,7 +151,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -194,7 +194,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -309,7 +309,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = VmImagesInEdgeZoneListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * The name of the edge zone.
@@ -330,7 +330,7 @@ interface VirtualMachineImagesOperationGroup {
   listPublishers is ComputeProviderActionSync<
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Gets a list of virtual machine image offers for the specified location and publisher.
@@ -344,7 +344,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * A valid image publisher.
@@ -366,7 +366,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * A valid image publisher.
@@ -402,7 +402,7 @@ interface VirtualMachineImagesOperationGroup {
     Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * A valid image publisher.
@@ -455,7 +455,7 @@ interface VirtualMachineImagesOperationGroup {
   @get
   listWithProperties(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SubscriptionActionScope>,
-    ...LocationParameter,
+    ...LocationResourceParameter,
 
     /**
      * A valid image publisher.
@@ -548,7 +548,7 @@ interface LogAnalyticsOperationGroup {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Request = RequestRateByIntervalInput
   >;
   /**
@@ -564,7 +564,7 @@ interface LogAnalyticsOperationGroup {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Request = ThrottledRequestsInput
   >;
 }
@@ -583,7 +583,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   list is ComputeProviderActionSync<
     Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Gets specific run command for a subscription in a location.
