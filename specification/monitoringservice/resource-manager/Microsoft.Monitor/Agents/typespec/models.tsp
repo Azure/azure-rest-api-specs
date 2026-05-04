@@ -34,7 +34,6 @@ namespace Microsoft.Monitor {
    */
   model AgentOperations {
     /** Settings for the issue creation operation. */
-    @encodedName("application/json", "IssueCreation")
     issueCreation?: OperationSettings;
   }
 
