@@ -27,7 +27,31 @@ These are the global settings for the portal.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04-01-preview
+tag: package-2025-11-01
+```
+
+### Tag: package-2025-11-01
+
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01'
+input-file:
+  - stable/2025-11-01/extensions.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: >
+      The CompileFile resource models use Record<unknown> types for flexible content payloads
+      (file contents, compile results). These are existing API contracts from preview that
+      cannot be changed without breaking compatibility.
+    from:
+      - extensions.json
+  - code: PostResponseCodes
+    reason: >
+      The CompileFile operation is a synchronous POST action that returns 200 with a result body.
+      This is an existing API contract from preview that follows a synchronous request-response pattern,
+      not a long-running operation.
+    from:
+      - extensions.json
 ```
 
 ### Tag: package-2024-04-01-preview
