@@ -103,7 +103,7 @@ using ComputeDisk;
 // Disk
 @@alternateType(Disk.managedBy, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(Disk.managedByExtended,
-  Azure.Core.armResourceIdentifier,
+  Azure.Core.armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(DiskProperties.diskAccessId,
