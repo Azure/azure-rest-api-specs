@@ -28,7 +28,7 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-2025-01
+tag: package-2026-07-01-preview
 ```
 
 ### Tag: package-2026-07-01-preview

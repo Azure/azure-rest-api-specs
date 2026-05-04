@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./workspace.models.tsp";
 import "./workspaceEvaluation.models.tsp";
+import "./workspaceDiscovery.models.tsp";
 import "./lro-helpers.tsp";
 
 using Azure.ResourceManager;
@@ -77,8 +78,33 @@ interface Workspaces {
    * Refreshes recommendation status for all scenarios in a given workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @removed(Microsoft.Chaos.Versions.v2026_07_01_preview)
   @pollingOperation(WorkspaceEvaluations.getLatest)
   refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
+    Workspace,
+    void,
+    WorkspaceEvaluation
+  >;
+
+  /**
+   * Triggers resource discovery for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @pollingOperation(WorkspaceDiscoveries.getLatest)
+  discover is ArmResourceActionNoContentAsyncWithLocationResult<
+    Workspace,
+    void,
+    WorkspaceDiscovery
+  >;
+
+  /**
+   * Triggers scenario evaluation for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @pollingOperation(WorkspaceEvaluations.getLatest)
+  evaluate is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
     WorkspaceEvaluation

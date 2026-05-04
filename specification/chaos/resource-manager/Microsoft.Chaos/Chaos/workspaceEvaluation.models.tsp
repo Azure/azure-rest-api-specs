@@ -8,6 +8,7 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -63,28 +64,67 @@ model WorkspaceEvaluationProperties {
   workspaceId: string;
 
   /**
+   * The resource snapshot ID used for this evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
+
+  /**
    * The number of scenarios to evaluate.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_07_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosToEvaluate?: int32;
 
   /**
    * The number of scenarios that evaluated successfully.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_07_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedSucceeded?: int32;
 
   /**
    * The number of scenarios that failed evaluation.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_07_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedFailed?: int32;
 
   /**
    * The number of scenarios that were cancelled during evaluation.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_07_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedCancelled?: int32;
+
+  /**
+   * The number of templates to evaluate.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesToEvaluate?: int32;
+
+  /**
+   * The number of templates that evaluated successfully.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedSucceeded?: int32;
+
+  /**
+   * The number of templates that failed evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedFailed?: int32;
+
+  /**
+   * The number of templates that were cancelled during evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedCancelled?: int32;
 
   /**
    * The overall evaluation result.
@@ -95,9 +135,13 @@ model WorkspaceEvaluationProperties {
   /**
    * Per-scenario evaluation results.
    */
+  @typeChangedFrom(
+    Microsoft.Chaos.Versions.v2026_07_01_preview,
+    ScenarioEvaluationResultItem[]
+  )
   @visibility(Lifecycle.Read)
-  @identifiers(#["scenarioName"])
-  results?: ScenarioEvaluationResultItem[];
+  @identifiers(#[])
+  results?: TemplateEvaluationResultItem[];
 }
 
 /**
@@ -111,6 +155,27 @@ model ScenarioEvaluationResultItem {
 
   /**
    * The evaluation result for this scenario.
+   */
+  evaluationResult: RecommendationStatus;
+}
+
+/**
+ * Model that represents a single template evaluation result.
+ */
+@added(Microsoft.Chaos.Versions.v2026_07_01_preview)
+model TemplateEvaluationResultItem {
+  /**
+   * The template ID that was evaluated.
+   */
+  templateId: string;
+
+  /**
+   * The template name that was evaluated.
+   */
+  templateName: string;
+
+  /**
+   * The evaluation result for this template.
    */
   evaluationResult: RecommendationStatus;
 }
