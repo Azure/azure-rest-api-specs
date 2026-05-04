@@ -8,6 +8,7 @@ import "./alternate-type-stubs.tsp";
 using Azure.ClientGenerator.Core;
 using Common;
 using Compute;
+using ComputeDisk;
 using ComputeGallery;
 using ComputeSku;
 
@@ -143,6 +144,23 @@ namespace ComputeCombine;
 );
 
 // NOTE: Common.Architecture → ArchitectureType is handled by auto-rename of Compute.ArchitectureTypes → ArchitectureType
+
+// ── Consolidate duplicate enums into the C# baseline names (G1) ──
+// Baseline shipped a single ArchitectureType / HyperVGeneration / IPVersion;
+// the spec splits them into multiple unions. Retype the minority-enum properties
+// to the canonical union so the C# SDK exposes a single type per concept.
+@@alternateType(ComputeDisk.SupportedCapabilities.architecture, Compute.ArchitectureTypes, "csharp");
+@@alternateType(ComputeGallery.GalleryImageProperties.architecture, Compute.ArchitectureTypes, "csharp");
+@@alternateType(ComputeGallery.SharedGalleryImageProperties.architecture, Compute.ArchitectureTypes, "csharp");
+@@alternateType(ComputeGallery.CommunityGalleryImageProperties.architecture, Compute.ArchitectureTypes, "csharp");
+
+@@alternateType(Compute.VirtualMachineImageProperties.hyperVGeneration, Common.HyperVGeneration, "csharp");
+@@alternateType(Compute.ImageProperties.hyperVGeneration, Common.HyperVGeneration, "csharp");
+@@alternateType(Compute.RestorePointSourceMetadata.hyperVGeneration, Common.HyperVGeneration, "csharp");
+@@alternateType(Compute.VirtualMachineInstanceView.hyperVGeneration, Common.HyperVGeneration, "csharp");
+
+@@alternateType(Compute.VirtualMachineNetworkInterfaceIPConfigurationProperties.privateIPAddressVersion, Compute.IPVersion, "csharp");
+@@alternateType(Compute.VirtualMachinePublicIPAddressConfigurationProperties.publicIPAddressVersion, Compute.IPVersion, "csharp");
 
 // ── C# operation renames for backward compatibility (migration from AutoRest) ──
 // These mirror the override-operation-name entries from the deleted autorest.md.
