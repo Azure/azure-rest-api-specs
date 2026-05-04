@@ -143,8 +143,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "python, csharp, javascript"
 );
 
-@@alternateType(AccessPolicy.start, string, "javascript");
-@@alternateType(AccessPolicy.expiry, string, "javascript");
+@@alternateType(AccessPolicy.start, string, "javascript, python");
+@@alternateType(AccessPolicy.expiry, string, "javascript, python");
 @@alternateType(UserDelegationKey.signedStart, string, "javascript");
 @@alternateType(UserDelegationKey.signedExpiry, string, "javascript");
 @@alternateType(MultipartBodyParameter.body, string, "javascript");
