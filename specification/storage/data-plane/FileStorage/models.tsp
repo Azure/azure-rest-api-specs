@@ -1456,18 +1456,12 @@ model KeyInfo {
   /**
    * The date-time the key is active in ISO 8601 UTC time
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
-  @encode("rfc3339-fixed-width")
   @Xml.name("Start")
   start?: utcDateTime;
 
   /**
    * The date-time the key expires in ISO 8601 UTC time
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
-  @encode("rfc3339-fixed-width")
   @Xml.name("Expiry")
   expiry: utcDateTime;
 
