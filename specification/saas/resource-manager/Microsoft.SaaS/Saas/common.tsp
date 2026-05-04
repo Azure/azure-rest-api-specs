@@ -1,6 +1,6 @@
 namespace Microsoft.SaaS;
 
-// NOTE: SubscriptionTerm removed — GA decapsulates to termStartDate/termEndDate on SaasResourceProperties.
+// NOTE: SubscriptionTerm removed — GA uses flat termStartDate/termEndDate on SaasResourceProperties.
 // NOTE: PaymentChannelMetadata removed — paymentChannelType/Metadata dropped from GA model.
 // NOTE: SaasResourceCspProperties, BeneficiaryOrganization, Participant, CspBeneficiary removed —
 //       0 non-null usage in 18-month production data. Input-only pass-through to ACS, never stored.
