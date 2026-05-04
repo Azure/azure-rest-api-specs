@@ -54,7 +54,6 @@ using Microsoft.CloudHealth;
   "csharp"
 );
 
-@@clientName(DataAnnotationRequest, "EntityDataAnnotationRequest", "csharp");
 @@clientName(DataAnnotation, "EntityDataAnnotation", "csharp");
 @@clientName(GetDataAnnotationsRequest,
   "EntityGetDataAnnotationsRequest",
