@@ -193,3 +193,42 @@ using ComputeDisk;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(DiskAccesses.getPrivateLinkResources,
   "csharp"
 );
+
+
+// .NET back-compat: restore previously shipped acronym/casing for extensible-enum members.
+@@clientName(DiskStorageAccountTypes.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(DiskStorageAccountTypes.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(DiskStorageAccountTypes.StandardSSD_LRS, "StandardSsdLrs", "csharp");
+@@clientName(DiskStorageAccountTypes.UltraSSD_LRS, "UltraSsdLrs", "csharp");
+@@clientName(DiskStorageAccountTypes.Premium_ZRS, "PremiumZrs", "csharp");
+@@clientName(DiskStorageAccountTypes.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
+@@clientName(DiskStorageAccountTypes.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
+
+@@clientName(SnapshotStorageAccountTypes.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(SnapshotStorageAccountTypes.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(SnapshotStorageAccountTypes.Standard_ZRS, "StandardZrs", "csharp");
+
+@@clientName(DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
+  "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey",
+  "csharp"
+);
+@@clientName(DiskSecurityTypes.ConfidentialVM_DiskEncryptedWithPlatformKey,
+  "ConfidentialVmDiskEncryptedWithPlatformKey",
+  "csharp"
+);
+@@clientName(DiskSecurityTypes.ConfidentialVM_DiskEncryptedWithCustomerKey,
+  "ConfidentialVmDiskEncryptedWithCustomerKey",
+  "csharp"
+);
+@@clientName(DiskSecurityTypes.ConfidentialVM_NonPersistedTPM, "ConfidentialVmNonPersistedTPM", "csharp");
+
+@@clientName(DiskState.ActiveSAS, "ActiveSas", "csharp");
+@@clientName(DiskState.ActiveSASFrozen, "ActiveSasFrozen", "csharp");
+
+@@clientName(FileFormat.VHD, "Vhd", "csharp");
+@@clientName(FileFormat.VHDX, "Vhdx", "csharp");
+
+@@clientName(SupportedSecurityOption.TrustedLaunchAndConfidentialVMSupported,
+  "TrustedLaunchAndConfidentialVmSupported",
+  "csharp"
+);

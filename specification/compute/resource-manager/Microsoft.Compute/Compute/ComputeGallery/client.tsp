@@ -298,3 +298,25 @@ using ComputeGallery;
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
+
+
+// .NET back-compat: restore previously shipped acronym/casing for extensible-enum members.
+@@clientName(StorageAccountType.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(StorageAccountType.Standard_ZRS, "StandardZrs", "csharp");
+@@clientName(StorageAccountType.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(StorageAccountType.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
+
+@@clientName(EdgeZoneStorageAccountType.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(EdgeZoneStorageAccountType.Standard_ZRS, "StandardZrs", "csharp");
+@@clientName(EdgeZoneStorageAccountType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
+@@clientName(EdgeZoneStorageAccountType.Premium_LRS, "PremiumLrs", "csharp");
+
+@@clientName(ConfidentialVMEncryptionType.EncryptedVMGuestStateOnlyWithPmk,
+  "EncryptedVmGuestStateOnlyWithPmk",
+  "csharp"
+);
+
+@@clientName(PolicyViolationCategory.IpTheft, "IPTheft", "csharp");
+
+@@clientName(StorageAccountStrategy.PreferStandard_ZRS, "PreferStandardZrs", "csharp");
+@@clientName(StorageAccountStrategy.DefaultStandard_LRS, "DefaultStandardLrs", "csharp");

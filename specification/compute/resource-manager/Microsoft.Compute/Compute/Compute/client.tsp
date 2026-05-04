@@ -1316,3 +1316,32 @@ union ComputeUsageUnit {
   Count: "Count",
 }
 @@alternateType(Compute.Usage.unit, ComputeUsageUnit, "csharp");
+
+
+// .NET back-compat: restore previously shipped acronym/casing for extensible-enum members.
+@@clientName(StorageAccountTypes.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(StorageAccountTypes.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(StorageAccountTypes.StandardSSD_LRS, "StandardSsdLrs", "csharp");
+@@clientName(StorageAccountTypes.UltraSSD_LRS, "UltraSsdLrs", "csharp");
+@@clientName(StorageAccountTypes.Premium_ZRS, "PremiumZrs", "csharp");
+@@clientName(StorageAccountTypes.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
+@@clientName(StorageAccountTypes.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
+
+@@clientName(SecurityTypes.ConfidentialVM, "ConfidentialVm", "csharp");
+
+@@clientName(SecurityEncryptionTypes.VMGuestStateOnly, "VmGuestStateOnly", "csharp");
+@@clientName(SecurityEncryptionTypes.DiskWithVMGuestState, "DiskWithVmGuestState", "csharp");
+
+@@clientName(DiskControllerTypes.SCSI, "Scsi", "csharp");
+
+@@clientName(VirtualMachineScaleSetScaleInRules.OldestVM, "OldestVm", "csharp");
+@@clientName(VirtualMachineScaleSetScaleInRules.NewestVM, "NewestVm", "csharp");
+
+@@clientName(ExpandTypesForGetCapacityReservationGroups.`virtualMachineScaleSetVMs/$ref`,
+  "VirtualMachineScaleSetVmsRef",
+  "csharp"
+);
+@@clientName(ExpandTypesForGetCapacityReservationGroups.`virtualMachines/$ref`,
+  "VirtualMachinesRef",
+  "csharp"
+);
