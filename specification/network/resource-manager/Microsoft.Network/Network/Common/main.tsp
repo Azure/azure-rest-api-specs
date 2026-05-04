@@ -91,7 +91,8 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
 
-  /** Interconnect group resource type for managing interconnect groups and subgroups. */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2025_07_01)
   interconnectGroup,
 }
 
