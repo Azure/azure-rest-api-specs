@@ -15,9 +15,6 @@ namespace Azure.Ai.Projects
         [JsonPropertyName("type")]
         public new AgentEndpointAuthorizationSchemeType TypeName { get; } = AgentEndpointAuthorizationSchemeType.Entra;
 
-        [JsonPropertyName("isolation_key_source")]
-        public IsolationKeySource IsolationKeySource { get; set; }
-
 
     }
 }

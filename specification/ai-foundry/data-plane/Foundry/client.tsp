@@ -25,7 +25,7 @@ import "./src/agents/routes.tsp";
 // import "./src/skills/routes.tsp";
 import "./src/agents-session-files/models.tsp";
 import "./src/agents-session-files/routes.tsp";
-import "./src/data_generation_jobs/routes.tsp";
+// import "./src/data_generation_jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 // import "./relocate-beta-operations.tsp";

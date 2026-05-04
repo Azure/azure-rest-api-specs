@@ -16,7 +16,7 @@ namespace Azure.Ai.Projects
         /// The endpoint configuration for the agent
         ///</summary>
         [JsonPropertyName("agent_endpoint")]
-        public AgentEndpoint AgentEndpoint { get; set; }
+        public AgentEndpointConfig AgentEndpoint { get; set; }
 
         ///<summary>
         /// Optional agent card for the agent

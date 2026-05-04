@@ -25,7 +25,7 @@ namespace Azure.Ai.Projects
         ///<summary>
         /// Creates the agent.
         ///</summary>
-        Task<AgentObject> CreateAgentAsync(string apiVersion, string name, JsonObject? metadata, string? description, AgentDefinition definition, AgentBlueprintReference? blueprintReference, AgentEndpoint? agentEndpoint, AgentCard? agentCard, AgentDefinitionOptInKeys? foundryFeatures);
+        Task<AgentObject> CreateAgentAsync(string apiVersion, string name, JsonObject? metadata, string? description, AgentDefinition definition, AgentBlueprintReference? blueprintReference, AgentEndpointConfig? agentEndpoint, AgentCard? agentCard, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// Creates a new code-based agent. Uploads the code zip and creates the agent
         /// in a single call. The agent name is provided in the `x-ms-agent-name`
@@ -90,14 +90,14 @@ namespace Azure.Ai.Projects
         ///<summary>
         /// Updates an agent endpoint.
         ///</summary>
-        Task<AgentObject> PatchAgentObjectAsync(string agentName, string apiVersion, AgentEndpoint? agentEndpoint, AgentCard? agentCard, AgentDefinitionOptInKeys? foundryFeatures);
+        Task<AgentObject> PatchAgentObjectAsync(string agentName, string apiVersion, AgentEndpointConfig? agentEndpoint, AgentCard? agentCard, AgentDefinitionOptInKeys? foundryFeatures);
         Task<AgentVersionObject> CreateAgentVersionFromCodeAsync(string agentName, string codeZipSha256, string apiVersion, MultipartReader reader, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// Creates a new session for an agent endpoint. The endpoint resolves the
         /// backing agent version from `version_indicator` and enforces session
         /// ownership using the provided isolation key for session-mutating operations.
         ///</summary>
-        Task<AgentSessionResource> CreateSessionAsync(string agentName, string isolationKey, string apiVersion, string? agentSessionId, VersionIndicator versionIndicator, AgentDefinitionOptInKeys? foundryFeatures);
+        Task<AgentSessionResource> CreateSessionAsync(string agentName, string apiVersion, string? agentSessionId, VersionIndicator versionIndicator, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// Retrieves a session by ID.
         ///</summary>
@@ -106,7 +106,7 @@ namespace Azure.Ai.Projects
         /// Deletes a session synchronously. Returns 204 No Content when the session is
         /// deleted or does not exist.
         ///</summary>
-        Task DeleteSessionAsync(string agentName, string sessionId, string isolationKey, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures);
+        Task DeleteSessionAsync(string agentName, string sessionId, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// Returns a list of sessions for the specified agent.
         ///</summary>

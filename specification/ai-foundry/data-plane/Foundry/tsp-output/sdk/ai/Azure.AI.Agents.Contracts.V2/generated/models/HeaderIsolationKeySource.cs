@@ -14,18 +14,6 @@ namespace Azure.Ai.Projects
     {
         public new IsolationKeySourceKind Kind { get; } = IsolationKeySourceKind.Header;
 
-        ///<summary>
-        /// The user isolation key header value
-        ///</summary>
-        [JsonPropertyName("user_isolation_key")]
-        public string UserIsolationKey { get; set; }
-
-        ///<summary>
-        /// The chat isolation key header value
-        ///</summary>
-        [JsonPropertyName("chat_isolation_key")]
-        public string ChatIsolationKey { get; set; }
-
 
     }
 }

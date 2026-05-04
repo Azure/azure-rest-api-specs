@@ -10,7 +10,7 @@ using TypeSpec.Helpers;
 namespace Azure.Ai.Projects
 {
 
-    public partial class AgentEndpoint
+    public partial class AgentEndpointConfig
     {
         ///<summary>
         /// The version selector of the agent endpoint determines how traffic is routed

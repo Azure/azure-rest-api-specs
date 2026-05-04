@@ -12,16 +12,17 @@ namespace Azure.Ai.Projects
 {
 
     ///<summary>
-    /// The input definition information for an Azure AI search tool as used to
-    /// configure an agent.
+    /// A tool for searching over the agent's toolbox. When present, deferred tools
+    /// are hidden from `tools/list` and only discoverable via `search_tools`
+    /// queries at runtime.
     ///</summary>
-    public partial class AzureAiSearchTool : Tool
+    public partial class ToolboxSearchPreviewTool : Tool
     {
         ///<summary>
-        /// The object type, which is always 'azure_ai_search'.
+        /// The type of the tool. Always `toolbox_search_preview`.
         ///</summary>
         [JsonPropertyName("type")]
-        public new string TypeName { get; } = "azure_ai_search";
+        public new string TypeName { get; } = "toolbox_search_preview";
 
         ///<summary>
         /// Optional user-defined name for this tool or configuration.
@@ -32,12 +33,6 @@ namespace Azure.Ai.Projects
         /// Optional user-defined description for this tool or configuration.
         ///</summary>
         public string Description { get; set; }
-
-        ///<summary>
-        /// The azure ai search index resource.
-        ///</summary>
-        [JsonPropertyName("azure_ai_search")]
-        public AzureAiSearchToolResource AzureAiSearch { get; set; }
 
 
     }

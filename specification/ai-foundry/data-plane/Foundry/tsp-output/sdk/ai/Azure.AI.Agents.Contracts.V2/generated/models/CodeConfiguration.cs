@@ -27,6 +27,14 @@ namespace Azure.Ai.Projects
         [JsonPropertyName("entry_point")]
         public string[] EntryPoint { get; set; }
 
+        ///<summary>
+        /// The SHA-256 hex digest of the uploaded code zip. Set by the service from
+        /// the `x-ms-code-zip-sha256` request header; read-only in responses and never
+        /// accepted in request payloads.
+        ///</summary>
+        [JsonPropertyName("content_hash")]
+        public string ContentHash { get; set; }
+
 
     }
 }

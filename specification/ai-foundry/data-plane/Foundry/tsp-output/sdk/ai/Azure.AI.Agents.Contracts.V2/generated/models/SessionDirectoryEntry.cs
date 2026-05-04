@@ -34,7 +34,7 @@ namespace Azure.Ai.Projects
         public bool IsDirectory { get; set; }
 
         ///<summary>
-        /// The last modification time in UTC (ISO 8601).
+        /// The Unix timestamp (in seconds) when the file was last modified.
         ///</summary>
         [JsonPropertyName("modified_time")]
         public DateTimeOffset ModifiedTime { get; set; }

@@ -24,6 +24,16 @@ namespace Azure.Ai.Projects
         public new string TypeName { get; } = "bing_grounding";
 
         ///<summary>
+        /// Optional user-defined name for this tool or configuration.
+        ///</summary>
+        public string Name { get; set; }
+
+        ///<summary>
+        /// Optional user-defined description for this tool or configuration.
+        ///</summary>
+        public string Description { get; set; }
+
+        ///<summary>
         /// The bing grounding search tool parameters.
         ///</summary>
         [JsonPropertyName("bing_grounding")]

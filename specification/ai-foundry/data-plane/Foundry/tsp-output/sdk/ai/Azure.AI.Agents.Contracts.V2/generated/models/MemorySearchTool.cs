@@ -23,6 +23,16 @@ namespace Azure.Ai.Projects
         public new string TypeName { get; } = "memory_search";
 
         ///<summary>
+        /// Optional user-defined name for this tool or configuration.
+        ///</summary>
+        public string Name { get; set; }
+
+        ///<summary>
+        /// Optional user-defined description for this tool or configuration.
+        ///</summary>
+        public string Description { get; set; }
+
+        ///<summary>
         /// The name of the memory store to use.
         ///</summary>
         [JsonPropertyName("memory_store_name")]

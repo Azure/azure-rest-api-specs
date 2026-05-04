@@ -76,6 +76,13 @@ namespace Azure.Ai.Projects
         [JsonPropertyName("code_configuration")]
         public CodeConfiguration CodeConfiguration { get; set; }
 
+        ///<summary>
+        /// Optional customer-supplied telemetry configuration for exporting container
+        /// logs, traces, and metrics.
+        ///</summary>
+        [JsonPropertyName("telemetry_config")]
+        public TelemetryConfig TelemetryConfig { get; set; }
+
 
     }
 }

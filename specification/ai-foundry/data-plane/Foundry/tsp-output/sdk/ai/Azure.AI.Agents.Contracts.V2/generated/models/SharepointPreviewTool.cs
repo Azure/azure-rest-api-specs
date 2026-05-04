@@ -24,6 +24,16 @@ namespace Azure.Ai.Projects
         public new string TypeName { get; } = "sharepoint_grounding_preview";
 
         ///<summary>
+        /// Optional user-defined name for this tool or configuration.
+        ///</summary>
+        public string Name { get; set; }
+
+        ///<summary>
+        /// Optional user-defined description for this tool or configuration.
+        ///</summary>
+        public string Description { get; set; }
+
+        ///<summary>
         /// The sharepoint grounding tool parameters.
         ///</summary>
         [JsonPropertyName("sharepoint_grounding_preview")]

@@ -24,6 +24,16 @@ namespace Azure.Ai.Projects
         public new string TypeName { get; } = "fabric_dataagent_preview";
 
         ///<summary>
+        /// Optional user-defined name for this tool or configuration.
+        ///</summary>
+        public string Name { get; set; }
+
+        ///<summary>
+        /// Optional user-defined description for this tool or configuration.
+        ///</summary>
+        public string Description { get; set; }
+
+        ///<summary>
         /// The fabric data agent tool parameters.
         ///</summary>
         [JsonPropertyName("fabric_dataagent_preview")]

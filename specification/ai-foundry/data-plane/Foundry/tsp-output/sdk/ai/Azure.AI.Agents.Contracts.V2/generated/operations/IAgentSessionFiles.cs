@@ -28,22 +28,22 @@ namespace Azure.Ai.Projects
         /// Upload a file to the session sandbox via binary stream. Maximum file size
         /// is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.
         ///</summary>
-        Task<SessionFileWriteResponse> UploadSessionFileAsync(string agentName, string sessionId, string path, string apiVersion, byte[] body, AgentDefinitionOptInKeys? foundryFeatures);
+        Task<SessionFileWriteResponse> UploadSessionFileAsync(string agentName, string agentSessionId, string path, string apiVersion, byte[] body, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// Download a file from the session sandbox as a binary stream.
         ///</summary>
-        Task<byte[]> DownloadSessionFileAsync(string agentName, string sessionId, string path, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures);
+        Task<byte[]> DownloadSessionFileAsync(string agentName, string agentSessionId, string path, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// List files and directories at a given path in the session sandbox. Returns
         /// only the immediate children of the specified directory (non-recursive).
         ///</summary>
-        Task<SessionDirectoryListResponse> ListSessionFilesAsync(string agentName, string sessionId, string path, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures);
+        Task<SessionDirectoryListResponse> ListSessionFilesAsync(string agentName, string agentSessionId, string path, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures);
         ///<summary>
         /// Delete a file or directory from the session sandbox. If `recursive` is
         /// false (default) and the target is a non-empty directory, the API returns
         /// 409 Conflict.
         ///</summary>
-        Task DeleteSessionFileAsync(string agentName, string sessionId, string path, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures, bool? recursive);
+        Task DeleteSessionFileAsync(string agentName, string agentSessionId, string path, string apiVersion, AgentDefinitionOptInKeys? foundryFeatures, bool? recursive);
 
     }
 }

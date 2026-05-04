@@ -24,6 +24,16 @@ namespace Azure.Ai.Projects
         public new string TypeName { get; } = "browser_automation_preview";
 
         ///<summary>
+        /// Optional user-defined name for this tool or configuration.
+        ///</summary>
+        public string Name { get; set; }
+
+        ///<summary>
+        /// Optional user-defined description for this tool or configuration.
+        ///</summary>
+        public string Description { get; set; }
+
+        ///<summary>
         /// The Browser Automation Tool parameters.
         ///</summary>
         [JsonPropertyName("browser_automation_preview")]
