@@ -75,9 +75,6 @@ async function runAzsdkGeneration(
   if (fs.existsSync(path.join(tspClientDir, "package.json"))) {
     logMessage(`Installing tsp-client dependencies at ${tspClientDir}`, LogLevel.Info);
     await execAsync("npm ci", { cwd: tspClientDir });
-    const tspClientBin = path.join("node_modules", ".bin", "tsp-client");
-    const { stdout: tspClientVersion } = await execAsync(`${tspClientBin} --version`, { cwd: tspClientDir });
-    logMessage(`tsp-client version: ${tspClientVersion.trim()}`, LogLevel.Info);
   }
 
   // Step 3: Run azsdk pkg generate

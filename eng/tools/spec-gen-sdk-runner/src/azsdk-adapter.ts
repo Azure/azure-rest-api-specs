@@ -144,7 +144,8 @@ export function buildExecutionReport(
   const artifactPath = packResponse ? extractArtifactPath(packResponse) : "";
   const pkg: ExecutionReportPackage = {
     packageName: emitterCheck.packageName ?? generateResponse?.package_name ?? "",
-    apiViewArtifact: artifactPath || undefined,
+    // Deferring apiview artifact processing until we create it for Rust by azsdk-cli
+    apiViewArtifact: undefined,
     // Deferred fields:
     // shouldLabelBreakingChange: undefined,
   };
