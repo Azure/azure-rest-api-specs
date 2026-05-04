@@ -33,7 +33,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
 }
 
 // here is the augment decorator for versioning
-@@added(Cluster.kind, Versions.v2026_05_01);
+@@added(Cluster.kind, Versions.v2026_04_01_preview);
 
 @armResourceOperations
 interface Clusters {

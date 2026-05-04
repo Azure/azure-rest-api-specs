@@ -538,7 +538,7 @@ union RemoteSupportType {
 /**
  * Remote Support Provisioning State
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 union RemoteSupportProvisioningState {
   string,
 
@@ -1226,13 +1226,13 @@ union State {
   /**
    * The health check has expired and needs to be redone.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   HealthCheckExpired: "HealthCheckExpired",
 
   /**
    * The update is pending OEM validation before it can proceed.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   PendingOEMValidation: "PendingOEMValidation",
 }
 
@@ -1347,7 +1347,7 @@ union AvailabilityType {
 /**
  * Request body for the check updates action on update summaries.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model CheckUpdatesRequest {
   /**
    * Name of update
@@ -2097,7 +2097,7 @@ model ClusterProperties {
   /**
    * Storage type of the cluster. Indicates whether the cluster uses S2D, SAN, or a combination.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   @visibility(Lifecycle.Read)
   storageType?: StorageType;
 }
@@ -2272,7 +2272,7 @@ model RemoteSupportProperties {
   /**
    * Remote Support Provisioning State
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   @visibility(Lifecycle.Read)
   remoteSupportProvisioningState?: RemoteSupportProvisioningState;
 }
@@ -3127,7 +3127,7 @@ model DeploymentCluster {
 /**
  * Storage type supported for HCI Cluster.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 union StorageType {
   string,
 
@@ -3144,7 +3144,7 @@ union StorageType {
 /**
  * Volume provisioning type for S2D storage.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 union VolumeType {
   string,
 
@@ -3158,7 +3158,7 @@ union VolumeType {
 /**
  * Overprovisioning ratio for S2D storage.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 union OverprovisioningRatio {
   string,
 
@@ -3175,7 +3175,7 @@ union OverprovisioningRatio {
 /**
  * The S2D (Storage Spaces Direct) configuration for AzureStackHCI Cluster storage.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model StorageS2dConfig {
   /**
    * Volume provisioning type. Allowed values are 'Fixed', 'ThinProvisioned'.
@@ -3191,7 +3191,7 @@ model StorageS2dConfig {
 /**
  * The SAN (Storage Area Network) configuration for AzureStackHCI Cluster storage.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model StorageSanConfig {
   /**
    * Infrastructure volume LUN ID (e.g. PURE1234567890ABCDEF).
@@ -3216,19 +3216,19 @@ model Storage {
   /**
    * Storage type for the HCI Cluster. Allowed values are 'S2D', 'SAN', 'SANS2D'.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   storageType?: StorageType;
 
   /**
    * S2D (Storage Spaces Direct) configuration. Applicable when StorageType is 'S2D' or 'SANS2D'.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   s2d?: StorageS2dConfig;
 
   /**
    * SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   san?: StorageSanConfig;
 }
 
@@ -3338,7 +3338,7 @@ model DeploymentSettingHostNetwork {
   /**
    * SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   sanNetworks?: SanNetworks;
 
   /**
@@ -3510,7 +3510,7 @@ model DeploymentSettingStorageAdapterIPInfo {
 /**
  * SAN network configuration for host network of AzureStackHCI Cluster.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model SanNetworks {
   /**
    * Cluster (CSV/LiveMig) network configuration for SAN deployments.
@@ -3521,7 +3521,7 @@ model SanNetworks {
 /**
  * Cluster network configuration for SAN deployments (CSV/LiveMig traffic).
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model SanClusterNetworkConfig {
   /**
    * QoS and adapter overrides for the cluster network.
@@ -3539,7 +3539,7 @@ model SanClusterNetworkConfig {
 /**
  * QoS and adapter property overrides for SAN cluster network traffic.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model SanAdapterProperties {
   /**
    * 802.1p priority value for cluster traffic.
@@ -3565,7 +3565,7 @@ model SanAdapterProperties {
 /**
  * Per-adapter IP configuration for SAN cluster network.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model SanAdapterIPConfig {
   /**
    * Logical name of the adapter IP configuration (e.g., clusterNetwork-A).
@@ -6116,7 +6116,7 @@ model HciStorageProfile {
   /**
    * List of storage disks on the device.
    */
-  @added(Versions.v2026_05_01)
+  @added(Versions.v2026_04_01_preview)
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   disks?: EdgeDeviceDisks[];
@@ -6125,7 +6125,7 @@ model HciStorageProfile {
 /**
  * Represents a storage disk on the device.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model EdgeDeviceDisks {
   /**
    * The unique identifier of the disk.
@@ -8111,7 +8111,7 @@ model OsImageProperties {
  * Represents properties of a platform update resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model PlatformUpdateProperties {
   /**
    * Represents applicable platform updates.
@@ -8123,7 +8123,7 @@ model PlatformUpdateProperties {
 /**
  * Represents details of a specific platform update.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model PlatformUpdateDetails {
   /**
    * Represents validated solution recipe version of a platform update.
@@ -8145,7 +8145,7 @@ model PlatformUpdateDetails {
 /**
  * Represents details of a specific platform update payload.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model PlatformPayload {
   /**
    * Represents url of a platform update payload.
@@ -8273,7 +8273,7 @@ union OwnershipVoucherValidationStatus {
  * Represents properties of a update content resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model UpdateContentProperties {
   /**
    * Represents the payloads of a update content resource.
@@ -8285,7 +8285,7 @@ model UpdateContentProperties {
 /**
  * Represents details of a specific update content payload.
  */
-@added(Versions.v2026_05_01)
+@added(Versions.v2026_04_01_preview)
 model ContentPayload {
   /**
    * Represents url of a update payload.
