@@ -425,7 +425,7 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
     ...WithOperationId;
 
     /** The job to create. */
-    @body body: TJob;
+    @body job: TJob;
   },
   JobCreatedResponse<TJob>
 >;
