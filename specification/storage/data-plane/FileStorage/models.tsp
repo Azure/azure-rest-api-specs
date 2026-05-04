@@ -846,6 +846,7 @@ model FileProperty {
   changeTime?: utcDateTime;
 
   /** The last modified time. */
+  @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified?: utcDateTime;
 
