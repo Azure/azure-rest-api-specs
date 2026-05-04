@@ -12,7 +12,10 @@ using Azure.ClientGenerator.Core;
 namespace DeviceUpdateClient;
 
 /** Standard operation with custom error response. */
-alias ServiceOperation<Params extends TypeSpec.Reflection.Model, Response> = Foundations.Operation<Params, Response, {}, ErrorResponse>;
+alias ServiceOperation<
+  Params extends TypeSpec.Reflection.Model,
+  Response
+> = Foundations.Operation<Params, Response, {}, ErrorResponse>;
 
 @tag("Update management")
 interface DeviceUpdateOperationGroup {
@@ -23,7 +26,6 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates")
   @get
   @list
-
   listUpdates is ServiceOperation<
     {
       /**
@@ -169,7 +171,6 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers")
   @get
   @list
-
   listProviders is ServiceOperation<
     {
       /**
@@ -188,7 +189,6 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names")
   @get
   @list
-
   listNames is ServiceOperation<
     {
       /**
@@ -213,7 +213,6 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions")
   @get
   @list
-
   listVersions is ServiceOperation<
     {
       /**
@@ -250,7 +249,6 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files")
   @get
   @list
-
   listFiles is ServiceOperation<
     {
       /**
@@ -337,7 +335,6 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/operations")
   @get
   @list
-
   listOperationStatuses is ServiceOperation<
     {
       /**
@@ -417,7 +414,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/deviceClasses")
   @get
   @list
-
   listDeviceClasses is ServiceOperation<
     {
       /**
@@ -531,7 +527,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}/installableUpdates")
   @get
   @list
-
   listInstallableUpdatesForDeviceClass is ServiceOperation<
     {
       /**
@@ -556,7 +551,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/devices")
   @get
   @list
-
   listDevices is ServiceOperation<
     {
       /**
@@ -691,7 +685,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups")
   @get
   @list
-
   listGroups is ServiceOperation<
     {
       /**
@@ -796,7 +789,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/bestUpdates")
   @get
   @list
-
   listBestUpdatesForGroup is ServiceOperation<
     {
       /**
@@ -821,7 +813,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments")
   @get
   @list
-
   listDeploymentsForGroup is ServiceOperation<
     {
       /**
@@ -948,7 +939,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups")
   @get
   @list
-
   listDeviceClassSubgroupsForGroup is ServiceOperation<
     {
       /**
@@ -1109,7 +1099,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments")
   @get
   @list
-
   listDeploymentsForDeviceClassSubgroup is ServiceOperation<
     {
       /**
@@ -1288,7 +1277,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/devicestates")
   @get
   @list
-
   listDeviceStatesForDeviceClassSubgroupDeployment is ServiceOperation<
     {
       /**
@@ -1373,7 +1361,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/operations")
   @get
   @list
-
   listOperationStatuses is ServiceOperation<
     {
       /**
@@ -1468,7 +1455,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections")
   @get
   @list
-
   listLogCollections is ServiceOperation<
     {
       /**
@@ -1513,7 +1499,6 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/deviceHealth")
   @get
   @list
-
   listHealthOfDevices is ServiceOperation<
     {
       /**
