@@ -175,6 +175,13 @@ namespace ComputeCombine;
 @@alternateType(Compute.VirtualMachineScaleSetVMExtension.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(Compute.VirtualMachineScaleSetSku.resourceType, Azure.Core.armResourceType, "csharp");
 
+// ── G5: rename `protectedSettingsFromKeyVault` → `keyVaultProtectedSettings` (csharp only) so the generated
+//        property matches the previously-shipped name `KeyVaultProtectedSettings` of type KeyVaultSecretReference.
+//        A separate partial-class shim restores the deprecated BinaryData `ProtectedSettingsFromKeyVault` member.
+@@clientName(Compute.VirtualMachineExtensionProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
+@@clientName(Compute.VirtualMachineExtensionUpdateProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
+@@clientName(Compute.VirtualMachineScaleSetExtensionProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
+
 // ── C# operation renames for backward compatibility (migration from AutoRest) ──
 // These mirror the override-operation-name entries from the deleted autorest.md.
 @@clientName(Compute.VirtualMachines.start, "PowerOn", "csharp");
