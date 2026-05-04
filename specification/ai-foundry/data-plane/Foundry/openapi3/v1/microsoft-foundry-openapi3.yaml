@@ -12,6 +12,7 @@ tags:
   - name: Evaluation Taxonomies
   - name: Evaluation Rules
   - name: Evaluators
+  - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
   - name: Memory Stores
@@ -2681,6 +2682,313 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluationTaxonomyUpdate'
         description: The evaluation taxonomy.
+  /evaluator_generation_jobs:
+    post:
+      operationId: EvaluatorGenerationJobs_create
+      summary: Creates an evaluator generation job.
+      description: |-
+        Creates an evaluator generation job. The service generates rubric-based evaluator
+        definitions from the provided source materials asynchronously.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorGenerationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
+        description: The job to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvaluatorGenerationJobs_list
+      summary: Returns a list of evaluator generation jobs.
+      description: Returns a list of evaluator generation jobs.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: category
+          in: query
+          required: false
+          description: Filter evaluator generation jobs by category.
+          schema:
+            $ref: '#/components/schemas/EvaluatorCategory'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluatorGenerationJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluator_generation_jobs/{jobId}:
+    get:
+      operationId: EvaluatorGenerationJobs_get
+      summary: Get info about an evaluator generation job.
+      description: Gets the details of an evaluator generation job by its ID.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: EvaluatorGenerationJobs_delete
+      description: |-
+        Deletes an evaluator generation job by its ID. Deletes the job record only;
+        the generated evaluator (if any) is preserved.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluator_generation_jobs/{jobId}:cancel:
+    post:
+      operationId: EvaluatorGenerationJobs_cancel
+      summary: Cancels an evaluator generation job.
+      description: Cancels an evaluator generation job by its ID.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
   /evaluators:
     get:
       operationId: Evaluators_listLatestVersions
@@ -7142,6 +7450,12 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         base_url:
           type: string
           format: uri
@@ -7448,26 +7762,6 @@ components:
         - ContainerAgents=V1Preview
         - AgentEndpoints=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
-    AgentEndpoint:
-      type: object
-      properties:
-        version_selector:
-          allOf:
-            - $ref: '#/components/schemas/VersionSelector'
-          description: The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.
-        protocols:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentEndpointProtocol'
-          description: The protocols that the agent supports
-        authorization_schemes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
-          description: The authorization schemes supported by the agent endpoint
-      x-ms-foundry-meta:
-        required_previews:
-          - AgentEndpoints=V1Preview
     AgentEndpointAuthorizationScheme:
       type: object
       required:
@@ -7495,16 +7789,27 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-    AgentEndpointProtocol:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - activity
-            - responses
-            - a2a
-            - invocations
-    AgentEndpointUpdate:
+    AgentEndpointConfig:
+      type: object
+      properties:
+        version_selector:
+          allOf:
+            - $ref: '#/components/schemas/VersionSelector'
+          description: The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.
+        protocols:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointProtocol'
+          description: The protocols that the agent supports
+        authorization_schemes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+          description: The authorization schemes supported by the agent endpoint
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentEndpointConfigUpdate:
       type: object
       properties:
         version_selector:
@@ -7524,6 +7829,38 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+    AgentEndpointProtocol:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - activity
+            - responses
+            - a2a
+            - invocations
+    AgentEvaluatorGenerationJobSource:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - agent
+          description: The source type for this source, which is Agent.
+        agent_name:
+          type: string
+          description: The agent name to fetch instructions from.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, the latest version is used.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+      description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
     AgentIdentity:
       type: object
       required:
@@ -7577,7 +7914,7 @@ components:
           description: The latest version of the agent.
         agent_endpoint:
           allOf:
-            - $ref: '#/components/schemas/AgentEndpoint'
+            - $ref: '#/components/schemas/AgentEndpointConfig'
           description: The endpoint configuration for the agent
           x-ms-foundry-meta:
             required_previews:
@@ -8214,6 +8551,12 @@ components:
           enum:
             - azure_ai_search
           description: The object type, which is always 'azure_ai_search'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -8496,6 +8839,12 @@ components:
           enum:
             - bing_custom_search_preview
           description: The object type, which is always 'bing_custom_search_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         bing_custom_search_preview:
           allOf:
             - $ref: '#/components/schemas/BingCustomSearchToolParameters'
@@ -8614,6 +8963,12 @@ components:
           enum:
             - bing_grounding
           description: The object type, which is always 'bing_grounding'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -8729,6 +9084,12 @@ components:
           enum:
             - browser_automation_preview
           description: The object type, which is always 'browser_automation_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -9205,7 +9566,7 @@ components:
               - AgentEndpoints=V1Preview
         agent_endpoint:
           allOf:
-            - $ref: '#/components/schemas/AgentEndpoint'
+            - $ref: '#/components/schemas/AgentEndpointConfig'
           description: An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent
           x-ms-foundry-meta:
             required_previews:
@@ -9746,6 +10107,42 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Dataset source for data generation jobs — reference to a dataset.
+    DatasetEvaluatorGenerationJobSource:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - dataset
+          description: The source type for this source, which is Dataset.
+        name:
+          type: string
+          description: The name of the dataset.
+        version:
+          type: string
+          description: The version of the dataset. If not specified, the latest version is used.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+      description: Dataset source for evaluator generation jobs — reference to a dataset.
+    DatasetReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: Dataset name.
+        version:
+          type: string
+          description: Dataset version.
+      description: Reference to a versioned Foundry Dataset.
     DatasetType:
       anyOf:
         - type: string
@@ -11136,6 +11533,7 @@ components:
         mapping:
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
+          rubrics: '#/components/schemas/RubricBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
     EvaluatorDefinitionType:
       anyOf:
@@ -11147,7 +11545,153 @@ components:
             - prompt_and_code
             - service
             - openai_graders
+            - rubrics
       description: The type of evaluator definition
+    EvaluatorGenerationArtifacts:
+      type: object
+      required:
+        - dataset
+        - kinds
+      properties:
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/DatasetReference'
+          description: Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).
+        kinds:
+          type: array
+          items:
+            type: string
+          description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
+      description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
+    EvaluatorGenerationInputs:
+      type: object
+      required:
+        - name
+        - sources
+        - model
+        - evaluator_name
+      properties:
+        name:
+          type: string
+          description: Display name for this generation job.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+          description: Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.
+        category:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorCategory'
+          description: "Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality'])."
+          default: quality
+        model:
+          type: string
+          description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
+        evaluator_name:
+          type: string
+          description: The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.
+      description: Caller-supplied inputs for an evaluator generation job.
+    EvaluatorGenerationJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorGenerationInputs'
+          description: Caller-supplied inputs.
+        result:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorVersion'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
+          readOnly: true
+        finished_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).
+          readOnly: true
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorGenerationTokenUsage'
+          description: Token consumption summary. Populated when the job reaches a terminal state.
+          readOnly: true
+      description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
+    EvaluatorGenerationJobCreate:
+      type: object
+      properties:
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorGenerationInputs'
+          description: Caller-supplied inputs.
+      description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
+    EvaluatorGenerationJobSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorGenerationJobSourceType'
+          description: The type of source.
+      discriminator:
+        propertyName: type
+        mapping:
+          prompt: '#/components/schemas/PromptEvaluatorGenerationJobSource'
+          agent: '#/components/schemas/AgentEvaluatorGenerationJobSource'
+          traces: '#/components/schemas/TracesEvaluatorGenerationJobSource'
+          dataset: '#/components/schemas/DatasetEvaluatorGenerationJobSource'
+      description: The base source model for evaluator generation jobs. Polymorphic over `type`.
+    EvaluatorGenerationJobSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - prompt
+            - agent
+            - traces
+            - dataset
+      description: The supported source types for evaluator generation jobs.
+    EvaluatorGenerationTokenUsage:
+      type: object
+      required:
+        - input_tokens
+        - output_tokens
+        - total_tokens
+      properties:
+        input_tokens:
+          type: integer
+          format: int64
+          description: Number of input (prompt) tokens consumed.
+        output_tokens:
+          type: integer
+          format: int64
+          description: Number of output (completion) tokens generated.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total tokens consumed (input + output).
+      description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
     EvaluatorMetric:
       type: object
       properties:
@@ -11234,6 +11778,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
           description: Definition of the evaluator
+        generation_artifacts:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorGenerationArtifacts'
+          description: Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.
+          readOnly: true
         created_by:
           type: string
           description: Creator of the evaluator
@@ -12261,6 +12810,12 @@ components:
           enum:
             - memory_search_preview
           description: The type of the tool. Always `memory_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -12610,6 +13165,12 @@ components:
           enum:
             - fabric_dataagent_preview
           description: The object type, which is always 'fabric_dataagent_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         fabric_dataagent_preview:
           allOf:
             - $ref: '#/components/schemas/FabricDataAgentToolParameters'
@@ -26684,6 +27245,7 @@ components:
           work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
+          toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
@@ -26964,6 +27526,7 @@ components:
             - memory_search_preview
             - work_iq_preview
             - fabric_iq_preview
+            - toolbox_search_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -27731,7 +28294,7 @@ components:
       properties:
         agent_endpoint:
           allOf:
-            - $ref: '#/components/schemas/AgentEndpointUpdate'
+            - $ref: '#/components/schemas/AgentEndpointConfigUpdate'
           description: The endpoint configuration for the agent
         agent_card:
           allOf:
@@ -27894,6 +28457,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Prompt source for data generation jobs — inline text provided by the user.
+    PromptEvaluatorGenerationJobSource:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - prompt
+          description: The source type for this source, which is Prompt.
+        prompt:
+          type: string
+          description: Inline prompt text (e.g., agent description, policy text, supplementary context).
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+      description: Prompt source for evaluator generation jobs — inline text provided by the user.
     ProtocolVersionRecord:
       type: object
       required:
@@ -28182,6 +28765,48 @@ components:
             - SensitiveDataLeakage
             - TaskAdherence
       description: Risk category for the attack objective.
+    RubricBasedEvaluatorDefinition:
+      type: object
+      required:
+        - type
+        - rubric_criteria
+      properties:
+        type:
+          type: string
+          enum:
+            - rubrics
+        rubric_criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/RubricCriterion'
+          description: "Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure."
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorDefinition'
+      description: Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.
+    RubricCriterion:
+      type: object
+      required:
+        - rubric_id
+        - description
+        - weight
+      properties:
+        rubric_id:
+          type: string
+          description: Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated catalog; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
+        description:
+          type: string
+          description: What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
+        weight:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+          description: Relative weight of this criterion (1-10). The generation pipeline assigns exactly one criterion weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
+        always_applicable:
+          type: boolean
+          description: When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.
+          default: false
+      description: A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.
     SASCredentials:
       type: object
       required:
@@ -28524,6 +29149,12 @@ components:
           enum:
             - sharepoint_grounding_preview
           description: The object type, which is always 'sharepoint_grounding_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         sharepoint_grounding_preview:
           allOf:
             - $ref: '#/components/schemas/SharepointGroundingToolParameters'
@@ -29085,6 +29716,28 @@ components:
             - $ref: '#/components/schemas/RaiConfig'
           description: Responsible AI content filtering configuration.
       description: Policy configuration for a toolbox, including content safety and other governance settings.
+    ToolboxSearchPreviewTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - toolbox_search_preview
+          description: The type of the tool. Always `toolbox_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: |-
+        A tool for searching over the agent's toolbox.
+        When present, deferred tools are hidden from `tools/list` and only
+        discoverable via `search_tools` queries at runtime.
     ToolboxVersionObject:
       type: object
       required:
@@ -29163,6 +29816,9 @@ components:
           enum:
             - traces
           description: The source type for this source, which is Traces.
+        agent_id:
+          type: string
+          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
         agent_name:
           type: string
           description: The agent name to fetch traces for.
@@ -29184,6 +29840,44 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
+    TracesEvaluatorGenerationJobSource:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - traces
+          description: The source type for this source, which is Traces.
+        agent_id:
+          type: string
+          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
+        agent_name:
+          type: string
+          description: The agent name to fetch traces for.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
+        start_time:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
+        end_time:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
+        max_traces:
+          type: integer
+          format: int32
+          description: Maximum number of traces to retrieve.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+      description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
     TracesPreviewEvalRunDataSource:
       type: object
       required:

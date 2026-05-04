@@ -768,6 +768,8 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
 
 /** The evaluation status for an evaluation run output item result. */
 union EvalRunOutputItemResultStatus {
+  string,
+
   /** The evaluator completed successfully for this result item. */
   completed: "completed",
 

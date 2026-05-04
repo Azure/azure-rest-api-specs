@@ -111,29 +111,17 @@ alias SseResponseOf<T> = {
 // duplication across job-specific model files.
 // ============================================================================
 
-@doc("The supported source types for jobs.")
-union JobSourceType {
-  string,
-
-  @doc("Prompt source — inline text provided by the user.")
-  prompt: "prompt",
-
-  @doc("Agent source — references an agent to fetch instructions and metadata from.")
-  agent: "agent",
-
-  @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
-  traces: "traces",
-
-  @doc("Dataset source — reference to a dataset.")
-  dataset: "dataset",
-}
-
+// Common properties shared across all job source types. Spread into per-context
+// source variants alongside a context-specific discriminated base (e.g.,
+// `EvaluatorGenerationJobSource`). Modeled as an `alias` (not a `model`) since
+// it is a single-property fragment used purely for spreading — declaring a
+// named model adds no value over inlining the property.
 alias JobSourceDescription = {
   @doc("Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').")
   description?: string;
 };
 
-@doc("Prompt source — inline text provided by the user.")
+@doc("Prompt source — inline text provided by the user. Reusable shape spread into per-context discriminated subtypes.")
 model PromptJobSource {
   ...JobSourceDescription;
 
@@ -144,7 +132,7 @@ model PromptJobSource {
   prompt: string;
 }
 
-@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Optionally includes supplementary prompt text.")
+@doc("Agent source — references an agent to fetch instructions and metadata from. For prompt agents, fetches the agent's system prompt. For other agent types, fetches available metadata (description, configuration). Add a separate prompt source entry to `sources[]` to provide supplementary text alongside the agent. Reusable shape spread into per-context discriminated subtypes.")
 model AgentJobSource {
   ...JobSourceDescription;
 
@@ -158,12 +146,15 @@ model AgentJobSource {
   agent_version?: string;
 }
 
-@doc("Traces source — conversation traces from Application Insights.")
+@doc("Traces source — conversation traces from Application Insights. Reusable shape spread into per-context discriminated subtypes.")
 model TracesJobSource {
   ...JobSourceDescription;
 
   @doc("The source type for this source, which is Traces.")
   type: "traces";
+
+  @doc("The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).")
+  agent_id?: string;
 
   @doc("The agent name to fetch traces for.")
   agent_name: string;
@@ -181,7 +172,7 @@ model TracesJobSource {
   max_traces?: int32;
 }
 
-@doc("Dataset source — reference to a dataset.")
+@doc("Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes.")
 model DatasetJobSource {
   ...JobSourceDescription;
 
