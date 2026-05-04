@@ -29,7 +29,7 @@ import { checkEmitterEnabled, EmitterCheckResult } from "./emitter-check.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
 import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
-import { resetGitRepo, runCommandWithOutput, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
+import { resetGitRepo, execAsync, runCommandWithOutput, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:
@@ -70,7 +70,17 @@ async function runAzsdkGeneration(
     };
   }
 
-  // Step 2: Run azsdk pkg generate
+  // Step 2: Install tsp-client dependencies (needed because git clean -fdx wipes node_modules)
+  const tspClientDir = path.join(commandInput.localSdkRepoPath, "eng", "common", "tsp-client");
+  if (fs.existsSync(path.join(tspClientDir, "package.json"))) {
+    logMessage(`Installing tsp-client dependencies at ${tspClientDir}`, LogLevel.Info);
+    await execAsync("npm ci", { cwd: tspClientDir });
+    const tspClientBin = path.join("node_modules", ".bin", "tsp-client");
+    const { stdout: tspClientVersion } = await execAsync(`${tspClientBin} --version`, { cwd: tspClientDir });
+    logMessage(`tsp-client version: ${tspClientVersion.trim()}`, LogLevel.Info);
+  }
+
+  // Step 3: Run azsdk pkg generate
   let generateResponse: AzsdkGenerateResponse | undefined;
   let buildResponse: AzsdkBuildResponse | undefined;
   try {
@@ -84,7 +94,7 @@ async function runAzsdkGeneration(
     statusCode = 1;
   }
 
-  // Step 3 & 4: On success, build (if not Python) then pack
+  // Step 4 & 5: On success, build (if not Python) then pack
   let packResponse: AzsdkPackResponse | undefined;
   if (
     generateResponse?.result === "succeeded" &&
@@ -97,7 +107,7 @@ async function runAzsdkGeneration(
       const isPython = commandInput.sdkRepoName.replace("-pr", "") === "azure-sdk-for-python";
       let buildSucceeded = true;
 
-      // Step 3: Build (skip for Python — interpreted language, no compilation needed)
+      // Step 4: Build (skip for Python — interpreted language, no compilation needed)
       if (!isPython) {
         try {
           const buildArgs = prepareAzsdkBuildCommand(packagePath);
@@ -117,7 +127,7 @@ async function runAzsdkGeneration(
         }
       }
 
-      // Step 4: Pack (only if build succeeded or was skipped)
+      // Step 5: Pack (only if build succeeded or was skipped)
       if (buildSucceeded) {
         try {
           const packArgs = prepareAzsdkPackCommand(packagePath);
@@ -133,7 +143,7 @@ async function runAzsdkGeneration(
     }
   }
 
-  // Step 5: Build ExecutionReport via adapter
+  // Step 6: Build ExecutionReport via adapter
   const executionReport = buildExecutionReport(
     generateResponse,
     packResponse,
