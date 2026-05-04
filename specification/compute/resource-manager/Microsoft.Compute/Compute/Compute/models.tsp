@@ -7436,6 +7436,153 @@ model VirtualMachineExtensionImageProperties {
    * Whether the handler can support multiple extensions.
    */
   supportsMultipleExtensions?: boolean;
+
+  /**
+   * Summary of changes or updates in this extension version.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  releaseNotes?: string;
+
+  /**
+   * Categorizes the type of change introduced (e.g., BugFix, SecurityFix, CompatibilityUpdate, NewFeature, Other).
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  releaseCategory?: ReleaseCategory;
+
+  /**
+   * Indicates the urgency level for applying this extension update.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  urgencyLevel?: UrgencyLevel;
+
+  /**
+   * Specifies when and how the extension should be executed.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  runProfile?: RunProfile;
+
+  /**
+   * A nested object that holds additional metadata in a flexible property bag.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  extensionFeatureMetadata?: ExtensionFeatureMetadata;
+}
+
+/**
+ * Enumerates the type of change introduced in the extension version.
+ */
+@added(Versions.v2026_04_01)
+union ReleaseCategory {
+  string,
+
+  /**
+   * Other type of change.
+   */
+  Other: "Other",
+
+  /**
+   * Bug fix change.
+   */
+  BugFix: "BugFix",
+
+  /**
+   * Security fix change.
+   */
+  SecurityFix: "SecurityFix",
+
+  /**
+   * Compatibility update change.
+   */
+  CompatibilityUpdate: "CompatibilityUpdate",
+
+  /**
+   * New feature change.
+   */
+  NewFeature: "NewFeature",
+}
+
+/**
+ * Defines urgency levels for extension updates.
+ */
+@added(Versions.v2026_04_01)
+union UrgencyLevel {
+  string,
+
+  /**
+   * Regular urgency level.
+   */
+  Regular: "Regular",
+
+  /**
+   * Expedited urgency level.
+   */
+  Expedited: "Expedited",
+
+  /**
+   * Emergency urgency level.
+   */
+  Emergency: "Emergency",
+}
+
+/**
+ * Specifies the execution profile for the extension.
+ */
+@added(Versions.v2026_04_01)
+union RunProfile {
+  string,
+
+  /**
+   * Other execution profile.
+   */
+  Other: "Other",
+
+  /**
+   * Run once execution profile.
+   */
+  RunOnce: "RunOnce",
+
+  /**
+   * Long running execution profile.
+   */
+  LongRunning: "LongRunning",
+
+  /**
+   * Hybrid execution profile.
+   */
+  Hybrid: "Hybrid",
+}
+
+/**
+ * Holds additional metadata in a flexible property bag.
+ */
+@added(Versions.v2026_04_01)
+model ExtensionFeatureMetadata {
+  /**
+   * List of additional metadata properties (e.g., compliance flags, supported features).
+   */
+  @identifiers(#[])
+  extensionFeatureTags?: ExtensionFeatureTag[];
+}
+
+/**
+ * Represents a key-value pair for extension feature metadata.
+ */
+@added(Versions.v2026_04_01)
+model ExtensionFeatureTag {
+  /**
+   * The key of the feature tag.
+   */
+  key?: string;
+
+  /**
+   * The value of the feature tag.
+   */
+  value?: string;
 }
 
 /**

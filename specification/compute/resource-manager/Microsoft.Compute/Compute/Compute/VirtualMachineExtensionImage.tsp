@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Compute;
@@ -87,6 +89,13 @@ interface VirtualMachineExtensionImages {
       #suppress "@azure-tools/typespec-azure-core/documentation-required"
       @query("$orderby")
       $orderby?: string;
+
+      /**
+       * The expand expression to apply on the operation. Allowed values are 'properties' and 'properties/deprecationStatus'.
+       */
+      @added(Versions.v2026_04_01)
+      @query("$expand")
+      $expand?: string;
     }
   >;
 }
