@@ -1,0 +1,133 @@
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+
+namespace Microsoft.SaaS;
+
+/** SaaS resource properties for GA API version 2026-04-01. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Uses status enum instead of provisioningState"
+model SaasResourceProperties {
+  /** The SaaS subscription id. Server-assigned. */
+  @visibility(Lifecycle.Read)
+  subscriptionId?: string;
+
+  /** Optional description. Used as subscription display name by Teams, Admin Center and other consumers. */
+  description?: string;
+
+  /** The SaaS Subscription Status. Server-assigned. */
+  @visibility(Lifecycle.Read)
+  status?: SaasResourceStatus;
+
+  /** The reason for the current status. Server-assigned. */
+  @visibility(Lifecycle.Read)
+  statusReason?: SubscriptionStatusReason;
+
+  /** The seat count. */
+  quantity?: int64;
+
+  /** The publisher name. Server-resolved from ProductCode. */
+  @visibility(Lifecycle.Read)
+  publisherName?: string;
+
+  /** The plan name. Server-resolved from ProductCode. */
+  @visibility(Lifecycle.Read)
+  planName?: string;
+
+  /** The offer name. Server-resolved from ProductCode. */
+  @visibility(Lifecycle.Read)
+  offerName?: string;
+
+  /** The term unit (ISO 8601 duration, e.g. P1M, P1Y). Server-resolved from ProductCode. */
+  @visibility(Lifecycle.Read)
+  termUnit?: string;
+
+  /** The billing period (ISO 8601 duration). Server-resolved from ProductCode. */
+  @visibility(Lifecycle.Read)
+  billingPeriod?: string;
+
+  /** The risk property bag header (JSON format). Write-only — not returned in GET responses. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  riskPropertyBagHeader?: string;
+
+  /** The start date of the current term. Server-calculated. */
+  @visibility(Lifecycle.Read)
+  termStartDate?: utcDateTime;
+
+  /** The end date of the current term. Server-calculated. */
+  @visibility(Lifecycle.Read)
+  termEndDate?: utcDateTime;
+
+  /** Whether the SaaS subscription will auto renew upon term end. */
+  autoRenew?: boolean;
+
+  /** Whether the current term is a Free Trial term. Server-determined. */
+  @visibility(Lifecycle.Read)
+  isFreeTrial?: boolean;
+
+  // NOTE: created and lastModified timestamps are provided by TrackedResource systemData
+  // (systemData.createdAt / systemData.lastModifiedAt) in the ARM resource envelope.
+
+  /** The storefront. */
+  storeFront?: string;
+
+  // NOTE: market removed from GA API — ProductCode resolves the catalog entry,
+  // and the catalog auto-detects market from the Azure subscription's billing account.
+
+  // NOTE: cspProperties removed from GA API — 0 non-null usage in 18-month production data.
+
+  /** Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  additionalInfo?: Record<string>;
+
+  /** The purchaser email. Server-derived from authenticated identity. */
+  @visibility(Lifecycle.Read)
+  purchaserEmail?: string;
+
+  // NOTE: beneficiaryEmail removed from GA API.
+
+  /** The private offer id. */
+  privateOfferId?: string;
+
+  /** The product code. Primary purchase identifier for GA — used to resolve term details server-side. */
+  productCode?: string;
+
+  /** The intent for patch operations. Write-only — not returned in GET responses. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  intent?: PatchIntent;
+}
+
+/** SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData). */
+model SaasResource is TrackedResource<SaasResourceProperties> {
+  /** The resource name. */
+  @key("resourceName")
+  @segment("resources")
+  @path
+  name: string;
+}
+
+/** SaaS resource creation model. */
+model SaasResourceCreation {
+  /** The resource uri. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+  /** The resource name. */
+  name?: string;
+  /** Resource type. */
+  @visibility(Lifecycle.Read)
+  type?: string;
+  /** The resource tags. */
+  tags?: Record<string>;
+  /** Resource location. Only value allowed for SaaS is 'global'. */
+  location?: string;
+  /** Properties of the SaaS resource that are relevant for creation. */
+  properties?: SaasResourceProperties;
+}
+
+/** Paginated list of SaaS resources. */
+model SaasResourceResponseWithContinuation {
+  /** The next link to query to get the remaining results. */
+  nextLink?: string;
+  /** The value of response. */
+  value?: SaasResource[];
+}
+
