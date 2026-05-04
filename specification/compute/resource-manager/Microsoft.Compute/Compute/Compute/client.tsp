@@ -1301,3 +1301,18 @@ union PassName {
 );
 @@clientName(VirtualMachineSizeTypes.Standard_ND24s, "StandardND24S", "csharp");
 @@clientName(VirtualMachineSizeTypes.Standard_ND6s, "StandardND6S", "csharp");
+
+
+// .NET back-compat: 1.13.1 shipped Usage.Unit as the extensible-enum
+// `ComputeUsageUnit`. The current spec narrows it to the string-literal
+// `"Count"`, which would emit a plain `string` property and break ApiCompat.
+// Retype it to a string-backed union so the C# emitter generates the
+// extensible-enum struct (with == / != operators) and uses it as the
+// property type.
+union ComputeUsageUnit {
+  string,
+
+  /** The unit of measurement is a count. */
+  Count: "Count",
+}
+@@alternateType(Compute.Usage.unit, ComputeUsageUnit, "csharp");
