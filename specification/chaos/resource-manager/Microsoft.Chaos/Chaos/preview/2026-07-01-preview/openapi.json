@@ -7035,6 +7035,11 @@
           "description": "The principal id for the managed identity used for the run.",
           "readOnly": true
         },
+        "resourceSnapshotId": {
+          "type": "string",
+          "description": "The resource snapshot ID this run is pinned to. Resolved from the scenario's\npinned evaluation snapshot (template scenarios) or the latest discovery\nsnapshot (custom scenarios) at run creation, ensuring the run executes against\nthe same set of discovered resources that produced the recommendation.",
+          "readOnly": true
+        },
         "status": {
           "$ref": "#/definitions/ScenarioRunState",
           "description": "The scenario run status.",
