@@ -162,6 +162,19 @@ namespace ComputeCombine;
 @@alternateType(Compute.VirtualMachineNetworkInterfaceIPConfigurationProperties.privateIPAddressVersion, Compute.IPVersion, "csharp");
 @@alternateType(Compute.VirtualMachinePublicIPAddressConfigurationProperties.publicIPAddressVersion, Compute.IPVersion, "csharp");
 
+// ── G2: location / resourceType narrowed to string in spec; restore Azure.Core.azureLocation/armResourceType ──
+@@alternateType(ComputeSku.ResourceSku.locations, Azure.Core.azureLocation[], "csharp");
+@@alternateType(ComputeSku.ResourceSkuRestrictionInfo.locations, Azure.Core.azureLocation[], "csharp");
+@@alternateType(ComputeSku.ResourceSkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(ComputeDisk.DiskRestorePointProperties.sourceResourceLocation, Azure.Core.azureLocation, "csharp");
+@@alternateType(ComputeGallery.PirResource.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(ComputeGallery.PirCommunityGalleryResource.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Compute.RestorePointCollectionSourceProperties.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Compute.RestorePointSourceMetadata.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Compute.UpgradeOperationHistoricalStatusInfo.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Compute.VirtualMachineScaleSetVMExtension.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Compute.VirtualMachineScaleSetSku.resourceType, Azure.Core.armResourceType, "csharp");
+
 // ── C# operation renames for backward compatibility (migration from AutoRest) ──
 // These mirror the override-operation-name entries from the deleted autorest.md.
 @@clientName(Compute.VirtualMachines.start, "PowerOn", "csharp");
