@@ -1,6 +1,10 @@
 emit:
   - "@azure-tools/typespec-autorest"
 
+parameters:
+  "service-dir":
+    default: "sdk/deviceupdate"
+
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
@@ -21,15 +25,18 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "Microsoft.DeviceUpdate/{version-status}/{version}/deviceupdate.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceupdate"
+    package-dir: "azure-iot-deviceupdate"
+    namespace: "azure.iot.deviceupdate"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceupdate"
+    namespace: com.azure.iot.deviceupdate
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/iot-device-update"
+    package-details:
+      name: "@azure/iot-device-update"
+    flavor: azure
+
