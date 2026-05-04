@@ -8566,6 +8566,12 @@ model CapacityReservationInstanceView {
   utilizationInfo?: CapacityReservationUtilization;
 
   /**
+   * The reservation state information of the capacity reservation.
+   */
+  @visibility(Lifecycle.Read)
+  reservationStateInfo?: ReservationStateInfo;
+
+  /**
    * The resource status information.
    */
   @identifiers(#[])
@@ -8583,9 +8589,27 @@ model ScheduleProfile {
   start?: string;
 
   /**
+   * The minimum number of days the capacity reservation must be committed.
+   */
+  @added(Versions.v2026_03_01)
+  minimumCommitmentDays?: int32;
+
+  /**
    * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
    */
   end?: string;
+}
+
+/**
+ * The reservation state information of the capacity reservation.
+ */
+@added(Versions.v2026_03_01)
+model ReservationStateInfo {
+  /**
+   * The reservation state of the capacity reservation.
+   */
+  @visibility(Lifecycle.Read)
+  reservationState?: string;
 }
 
 /**
