@@ -15,9 +15,6 @@ union DataGenerationJobType {
 
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
-
-  @doc("Task helps in providing a scenario description for generating multi turn conversation between user and agent.")
-  task: "task",
 }
 
 @doc("LLM model options for data generation jobs.")
@@ -187,12 +184,6 @@ model ToolUseFineTuningDataGenerationJobOptions
   extends DataGenerationJobOptions {
   @doc("The data generation job type, which is ToolUse for this model.")
   type: "tool_use";
-}
-
-@doc("The options for a data generation job with Task type.")
-model TaskDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is Task for this model.")
-  type: "task";
 }
 
 @doc("The supported source types for data generation jobs.")
