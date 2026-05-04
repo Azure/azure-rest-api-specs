@@ -91,10 +91,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   utcDateTime,
   "go"
 );
-@@alternateType(FileProperty.changeTime, utcDateTime, "go");
-@@alternateType(FileProperty.creationTime, utcDateTime, "go");
-@@alternateType(FileProperty.lastAccessTime, utcDateTime, "go");
-@@alternateType(FileProperty.lastWriteTime, utcDateTime, "go");
 @@alternateType(HandleItem.path, string, "go");
 @@alternateType(LeaseResponseHeaders.leaseDuration, LeaseDurationType, "go");
 @@alternateType(LeaseResponseHeaders.leaseState, LeaseStateType, "go");

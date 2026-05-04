@@ -830,27 +830,22 @@ model FileProperty {
   @Xml.name("Content-Length") contentLength: int64;
 
   /** The creation time. */
-  @encode("rfc7231")
   @Xml.name("CreationTime")
   creationTime?: utcDateTime;
 
   /** The last access time. */
-  @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessTime?: utcDateTime;
 
   /** The last write time. */
-  @encode("rfc7231")
   @Xml.name("LastWriteTime")
   lastWriteTime?: utcDateTime;
 
   /** The change time. */
-  @encode("rfc7231")
   @Xml.name("ChangeTime")
   changeTime?: utcDateTime;
 
   /** The last modified time. */
-  @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified?: utcDateTime;
 
