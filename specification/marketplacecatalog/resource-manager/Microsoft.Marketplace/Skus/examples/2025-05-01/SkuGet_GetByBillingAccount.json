@@ -2,7 +2,7 @@
   "title": "SkuGet_GetByBillingAccount",
   "operationId": "SkuGet_GetByBillingAccount",
   "parameters": {
-    "skuId": "DZH318Z0BPS6-0001",
+    "skuId": "DZH318Z0BPS6/0001",
     "language": "en",
     "includeStopSold": false,
     "includeFutureAvailabilities": false,
@@ -28,7 +28,7 @@
           }
         ],
         "skuName": "D2s v3",
-        "skuId": "DZH318Z0BPS6-0001",
+        "skuId": "DZH318Z0BPS6/0001",
         "skuType": "Consumption",
         "language": "en",
         "skuDescription": "D2s v3 - 2 vCPUs, 8 GB RAM",
@@ -71,12 +71,42 @@
         ],
         "availabilities": [
           {
-            "skuId": "DZH318Z0BPS6-0001",
-            "meterType": "1 Hour",
-            "billingMeterId": "00000000-0000-0000-0000-000000000001",
-            "offeringId": "offering-001",
-            "termId": "term-001",
-            "type": "Consumption"
+            "id": "availability-001",
+            "actions": [
+              "purchase"
+            ],
+            "meter": {
+              "meterId": "00000000-0000-0000-0000-000000000001",
+              "partNumber": "ABC-00001",
+              "consumptionResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Commerce/meters/00000000-0000-0000-0000-000000000001",
+              "price": {
+                "currencyCode": "USD",
+                "isPiRequired": false,
+                "listPrice": 0.096,
+                "msrp": 0.096
+              },
+              "type": "Consumption",
+              "includedQuantityProperties": []
+            },
+            "pricingAudience": "Direct-Commercial",
+            "terms": [
+              {
+                "termId": "hjdtn7tfnxcy",
+                "termUnit": "P1M",
+                "termDescription": "1 Month",
+                "price": {
+                  "currencyCode": "USD",
+                  "isPiRequired": false,
+                  "listPrice": 0.096,
+                  "msrp": 0.096
+                },
+                "isAutorenewable": true,
+                "state": "Active"
+              }
+            ],
+            "hasFreeTrials": false,
+            "consumptionUnitType": "1 Hour",
+            "displayRank": 0
           }
         ]
       }

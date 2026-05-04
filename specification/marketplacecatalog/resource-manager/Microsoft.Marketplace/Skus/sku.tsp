@@ -248,10 +248,173 @@ model SkuSummary {
   categoryIds?: string[];
 }
 
-/** A single availability (pricing/term) for the SKU, hydrated based on the caller's billing account claims. */
+// ============================================================================
+// Availability Models
+// ============================================================================
+
+/** Retail price with currency */
+model Price {
+  /** Currency code i.e. 'USD' */
+  currencyCode?: string;
+
+  /** A value indicating whether a payment instrument is required */
+  isPiRequired: boolean;
+
+  /** Retail price for the item */
+  listPrice: float32;
+
+  /** Manufacturer's suggested retail price for the item */
+  msrp: float32;
+}
+
+/** Included quantity properties for a meter */
+model IncludedQuantityProperty {
+  /** Term id */
+  termId?: string;
+
+  /** Included quantity */
+  quantity?: string;
+}
+
+/** Applicable billing meter information */
+model Meter {
+  /** Meter id */
+  meterId?: string;
+
+  /** Compute part number */
+  partNumber?: string;
+
+  /** Consumption resource id */
+  consumptionResourceId?: string;
+
+  /** Retail price with currency */
+  price?: Price;
+
+  /** Type of this meter */
+  type?: string;
+
+  /** Included quantity properties */
+  @identifiers(#[])
+  includedQuantityProperties?: IncludedQuantityProperty[];
+}
+
+/** Term description parameters */
+model TermDescriptionParameter {
+  /** Description parameter */
+  parameter?: string;
+
+  /** Parameter's value */
+  value?: string;
+}
+
+/** Proration policy */
+model ProrationPolicy {
+  /** Minimum prorated units */
+  minimumProratedUnits?: string;
+}
+
+/** Renew Billing Plan */
+model BillingPlan {
+  /** Billing period */
+  billingPeriod?: string;
+
+  /** Title of the billing plan */
+  title?: string;
+
+  /** Description of the billing plan */
+  description?: string;
+
+  /** Retail price with currency */
+  price?: Price;
+}
+
+/** Defines the lifecycle management policy for the term */
+model LifecyclePolicy {
+  /** Grace period duration where customers retain access to their product. Examples: 'P1M' (1 month), 'P30D' (30 days), 'P0D' (0 days) */
+  graceDuration?: string;
+
+  /** Inactive period duration */
+  inactiveDuration?: string;
+
+  /** Lockout period duration */
+  lockoutDuration?: string;
+}
+
+/** Applicable term */
+model Term {
+  /** Term description parameters */
+  @identifiers(#["parameter", "value"])
+  termDescriptionParameters?: TermDescriptionParameter[];
+
+  /** Term id */
+  termId?: string;
+
+  /** Term unit */
+  termUnit?: string;
+
+  /** Defines the rules for calculating prorated charges or refunds for a subscription. */
+  prorationPolicy?: ProrationPolicy;
+
+  /** Term description */
+  termDescription?: string;
+
+  /** Retail price with currency */
+  price?: Price;
+
+  /** Renew term id */
+  renewTermId?: string;
+
+  /** Renew term units */
+  renewTermUnits?: string;
+
+  /** Billing Plan */
+  billingPlan?: BillingPlan;
+
+  /** Renew Billing Plan */
+  renewToTermBillingPlan?: string;
+
+  /** Indicates if autorenew is enabled */
+  isAutorenewable?: boolean;
+
+  /** Defines the lifecycle management policy for the term */
+  lifecyclePolicy?: LifecyclePolicy;
+
+  /** Product code for this term */
+  productCode?: string;
+
+  /** Term state */
+  state?: string;
+
+  /** Term Actions */
+  actions?: string[];
+}
+
+/** Availability for a given plan */
 model Availability {
-  /** Additional properties. */
-  ...Record<unknown>;
+  /** The document id */
+  id?: string;
+
+  /** List of allowed actions */
+  actions?: string[];
+
+  /** Applicable billing meter information */
+  meter?: Meter;
+
+  /** Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution */
+  pricingAudience: string;
+
+  /** List of applicable terms */
+  @identifiers(#[])
+  terms?: Term[];
+
+  /** A value indicating whether it has free trials */
+  hasFreeTrials: boolean;
+
+  /** Consumption unit type */
+  consumptionUnitType?: string;
+
+  /** Display rank */
+  displayRank: int32;
 }
 
 /**

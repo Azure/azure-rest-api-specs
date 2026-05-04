@@ -432,8 +432,54 @@
     },
     "Availability": {
       "type": "object",
-      "description": "A single availability (pricing/term) for the SKU, hydrated based on the caller's billing account claims.",
-      "additionalProperties": {}
+      "description": "Availability for a given plan",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The document id"
+        },
+        "actions": {
+          "type": "array",
+          "description": "List of allowed actions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meter": {
+          "$ref": "#/definitions/Meter",
+          "description": "Applicable billing meter information"
+        },
+        "pricingAudience": {
+          "type": "string",
+          "description": "Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution"
+        },
+        "terms": {
+          "type": "array",
+          "description": "List of applicable terms",
+          "items": {
+            "$ref": "#/definitions/Term"
+          },
+          "x-ms-identifiers": []
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "consumptionUnitType": {
+          "type": "string",
+          "description": "Consumption unit type"
+        },
+        "displayRank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Display rank"
+        }
+      },
+      "required": [
+        "pricingAudience",
+        "hasFreeTrials",
+        "displayRank"
+      ]
     },
     "BillingAccountBaseParameters": {
       "type": "object",
@@ -454,6 +500,28 @@
         "apiVersion",
         "billingAccountId"
       ]
+    },
+    "BillingPlan": {
+      "type": "object",
+      "description": "Renew Billing Plan",
+      "properties": {
+        "billingPeriod": {
+          "type": "string",
+          "description": "Billing period"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the billing plan"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the billing plan"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "Retail price with currency"
+        }
+      }
     },
     "BillingProfileBaseParameters": {
       "type": "object",
@@ -512,6 +580,72 @@
         "error"
       ]
     },
+    "IncludedQuantityProperty": {
+      "type": "object",
+      "description": "Included quantity properties for a meter",
+      "properties": {
+        "termId": {
+          "type": "string",
+          "description": "Term id"
+        },
+        "quantity": {
+          "type": "string",
+          "description": "Included quantity"
+        }
+      }
+    },
+    "LifecyclePolicy": {
+      "type": "object",
+      "description": "Defines the lifecycle management policy for the term",
+      "properties": {
+        "graceDuration": {
+          "type": "string",
+          "description": "Grace period duration where customers retain access to their product. Examples: 'P1M' (1 month), 'P30D' (30 days), 'P0D' (0 days)"
+        },
+        "inactiveDuration": {
+          "type": "string",
+          "description": "Inactive period duration"
+        },
+        "lockoutDuration": {
+          "type": "string",
+          "description": "Lockout period duration"
+        }
+      }
+    },
+    "Meter": {
+      "type": "object",
+      "description": "Applicable billing meter information",
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "Meter id"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Compute part number"
+        },
+        "consumptionResourceId": {
+          "type": "string",
+          "description": "Consumption resource id"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "Retail price with currency"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of this meter"
+        },
+        "includedQuantityProperties": {
+          "type": "array",
+          "description": "Included quantity properties",
+          "items": {
+            "$ref": "#/definitions/IncludedQuantityProperty"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "OfferingProperties": {
       "type": "object",
       "description": "Offering properties such as: product code (UPN), term id, meter type, offering id.",
@@ -541,6 +675,35 @@
           "description": "The pricing property type (e.g., Consumption, Reservation, Entitlement)."
         }
       }
+    },
+    "Price": {
+      "type": "object",
+      "description": "Retail price with currency",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code i.e. 'USD'"
+        },
+        "isPiRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether a payment instrument is required"
+        },
+        "listPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "Retail price for the item"
+        },
+        "msrp": {
+          "type": "number",
+          "format": "float",
+          "description": "Manufacturer's suggested retail price for the item"
+        }
+      },
+      "required": [
+        "isPiRequired",
+        "listPrice",
+        "msrp"
+      ]
     },
     "ProductAlternateIds": {
       "type": "object",
@@ -587,6 +750,16 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ProrationPolicy": {
+      "type": "object",
+      "description": "Proration policy",
+      "properties": {
+        "minimumProratedUnits": {
+          "type": "string",
+          "description": "Minimum prorated units"
         }
       }
     },
@@ -939,6 +1112,96 @@
       "required": [
         "value"
       ]
+    },
+    "Term": {
+      "type": "object",
+      "description": "Applicable term",
+      "properties": {
+        "termDescriptionParameters": {
+          "type": "array",
+          "description": "Term description parameters",
+          "items": {
+            "$ref": "#/definitions/TermDescriptionParameter"
+          },
+          "x-ms-identifiers": [
+            "parameter",
+            "value"
+          ]
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term id"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term unit"
+        },
+        "prorationPolicy": {
+          "$ref": "#/definitions/ProrationPolicy",
+          "description": "Defines the rules for calculating prorated charges or refunds for a subscription."
+        },
+        "termDescription": {
+          "type": "string",
+          "description": "Term description"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "Retail price with currency"
+        },
+        "renewTermId": {
+          "type": "string",
+          "description": "Renew term id"
+        },
+        "renewTermUnits": {
+          "type": "string",
+          "description": "Renew term units"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan",
+          "description": "Billing Plan"
+        },
+        "renewToTermBillingPlan": {
+          "type": "string",
+          "description": "Renew Billing Plan"
+        },
+        "isAutorenewable": {
+          "type": "boolean",
+          "description": "Indicates if autorenew is enabled"
+        },
+        "lifecyclePolicy": {
+          "$ref": "#/definitions/LifecyclePolicy",
+          "description": "Defines the lifecycle management policy for the term"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for this term"
+        },
+        "state": {
+          "type": "string",
+          "description": "Term state"
+        },
+        "actions": {
+          "type": "array",
+          "description": "Term Actions",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TermDescriptionParameter": {
+      "type": "object",
+      "description": "Term description parameters",
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "description": "Description parameter"
+        },
+        "value": {
+          "type": "string",
+          "description": "Parameter's value"
+        }
+      }
     }
   },
   "parameters": {
