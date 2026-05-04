@@ -280,8 +280,8 @@ model EvaluationSuiteGenerationJobInputs {
 
 @doc("Options for dataset generation within an evaluation suite generation job.")
 model EvaluationSuiteDataGenerationOptions {
-  @doc("The data generation type.")
-  type: DataGenerationType;
+  @doc("The data generation type. Defaults to 'simple_qna' if not specified.")
+  type?: DataGenerationType;
 
   @doc("Maximum number of samples to generate.")
   max_samples?: int32;
