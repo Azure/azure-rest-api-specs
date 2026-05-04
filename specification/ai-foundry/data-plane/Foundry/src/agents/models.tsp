@@ -659,7 +659,6 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-  isolation_key_source: IsolationKeySource;
 }
 
 @extension(
