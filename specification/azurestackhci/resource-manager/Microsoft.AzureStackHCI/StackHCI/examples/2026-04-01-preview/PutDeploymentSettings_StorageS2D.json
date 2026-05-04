@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-04-01-preview",
     "clusterName": "myCluster",
     "deploymentSettingsName": "default",
     "resource": {
@@ -67,25 +67,7 @@
                       ],
                       "vlanId": "5"
                     }
-                  ],
-                  "sanNetworks": {
-                    "clusterNetworkConfig": {
-                      "adapterProperties": {
-                        "bandwidthPercentageSmb": 50,
-                        "jumboPacket": 9014,
-                        "priorityValue8021ActionCluster": 7,
-                        "priorityValue8021ActionSmb": 3
-                      },
-                      "adapterIPConfig": [
-                        {
-                          "name": "clusterNetwork-A",
-                          "networkAdapterName": "ethernet 3",
-                          "vlanId": 711,
-                          "addressPrefix": "10.10.30.0/24"
-                        }
-                      ]
-                    }
-                  }
+                  ]
                 },
                 "infrastructureNetwork": [
                   {
@@ -150,10 +132,10 @@
                 },
                 "storage": {
                   "configurationMode": "Express",
-                  "storageType": "SAN",
-                  "san": {
-                    "infraVolLunId": "PURE1234567890ABCDEF",
-                    "infraPerfLunId": "PURE0987654321MNOPQR"
+                  "storageType": "S2D",
+                  "s2d": {
+                    "volumeType": "ThinProvisioned",
+                    "overprovisioningRatio": "2"
                   }
                 }
               },
@@ -268,25 +250,7 @@
                         ],
                         "vlanId": "5"
                       }
-                    ],
-                    "sanNetworks": {
-                      "clusterNetworkConfig": {
-                        "adapterProperties": {
-                          "bandwidthPercentageSmb": 50,
-                          "jumboPacket": 9014,
-                          "priorityValue8021ActionCluster": 7,
-                          "priorityValue8021ActionSmb": 3
-                        },
-                        "adapterIPConfig": [
-                          {
-                            "name": "clusterNetwork-A",
-                            "networkAdapterName": "ethernet 3",
-                            "vlanId": 711,
-                            "addressPrefix": "10.10.30.0/24"
-                          }
-                        ]
-                      }
-                    }
+                    ]
                   },
                   "infrastructureNetwork": [
                     {
@@ -350,10 +314,10 @@
                   },
                   "storage": {
                     "configurationMode": "Express",
-                    "storageType": "SAN",
-                    "san": {
-                      "infraVolLunId": "PURE1234567890ABCDEF",
-                      "infraPerfLunId": "PURE0987654321MNOPQR"
+                    "storageType": "S2D",
+                    "s2d": {
+                      "volumeType": "ThinProvisioned",
+                      "overprovisioningRatio": "2"
                     }
                   }
                 },
@@ -473,25 +437,7 @@
                         ],
                         "vlanId": "5"
                       }
-                    ],
-                    "sanNetworks": {
-                      "clusterNetworkConfig": {
-                        "adapterProperties": {
-                          "bandwidthPercentageSmb": 50,
-                          "jumboPacket": 9014,
-                          "priorityValue8021ActionCluster": 7,
-                          "priorityValue8021ActionSmb": 3
-                        },
-                        "adapterIPConfig": [
-                          {
-                            "name": "clusterNetwork-A",
-                            "networkAdapterName": "ethernet 3",
-                            "vlanId": 711,
-                            "addressPrefix": "10.10.30.0/24"
-                          }
-                        ]
-                      }
-                    }
+                    ]
                   },
                   "infrastructureNetwork": [
                     {
@@ -555,10 +501,10 @@
                   },
                   "storage": {
                     "configurationMode": "Express",
-                    "storageType": "SAN",
-                    "san": {
-                      "infraVolLunId": "PURE1234567890ABCDEF",
-                      "infraPerfLunId": "PURE0987654321MNOPQR"
+                    "storageType": "S2D",
+                    "s2d": {
+                      "volumeType": "ThinProvisioned",
+                      "overprovisioningRatio": "2"
                     }
                   }
                 },
@@ -611,6 +557,6 @@
     }
   },
   "operationId": "DeploymentSettings_CreateOrUpdate",
-  "title": "Create Deployment Settings with SAN Storage"
+  "title": "Create Deployment Settings with S2D Storage"
 }
 

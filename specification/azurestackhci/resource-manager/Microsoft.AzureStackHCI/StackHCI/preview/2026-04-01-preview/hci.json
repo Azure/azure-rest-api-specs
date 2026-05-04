@@ -43,13 +43,7 @@
       "name": "KubernetesVersions"
     },
     {
-      "name": "PlatformUpdates"
-    },
-    {
       "name": "OsImages"
-    },
-    {
-      "name": "UpdateContents"
     },
     {
       "name": "Operations"
@@ -973,184 +967,6 @@
         "x-ms-examples": {
           "OsImages_Get_MaximumSet": {
             "$ref": "./examples/OsImages_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates": {
-      "get": {
-        "operationId": "PlatformUpdates_List",
-        "tags": [
-          "PlatformUpdates"
-        ],
-        "description": "List all platform updates.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PlatformUpdateListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PlatformUpdates_ListByLocation_MaximumSet": {
-            "$ref": "./examples/PlatformUpdates_ListByLocation_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates/{platformUpdateName}": {
-      "get": {
-        "operationId": "PlatformUpdates_Get",
-        "tags": [
-          "PlatformUpdates"
-        ],
-        "description": "Get a platform update.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "platformUpdateName",
-            "in": "path",
-            "description": "The name of the PlatformUpdate",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PlatformUpdate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PlatformUpdates_Get_MaximumSet": {
-            "$ref": "./examples/PlatformUpdates_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents": {
-      "get": {
-        "operationId": "UpdateContents_List",
-        "tags": [
-          "UpdateContents"
-        ],
-        "description": "List all update contents.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UpdateContentListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateContents_ListByLocation_MaximumSet": {
-            "$ref": "./examples/UpdateContents_ListByLocation_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents/{updateContentName}": {
-      "get": {
-        "operationId": "UpdateContents_Get",
-        "tags": [
-          "UpdateContents"
-        ],
-        "description": "Gets content for an update.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "updateContentName",
-            "in": "path",
-            "description": "The name of the UpdateContent",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UpdateContent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateContents_Get_MaximumSet": {
-            "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -2979,6 +2795,12 @@
           },
           "Create Deployment Settings Without Active Directory Integration": {
             "$ref": "./examples/PutDeploymentSettingsWithADLess.json"
+          },
+          "Create Deployment Settings with S2D Storage": {
+            "$ref": "./examples/PutDeploymentSettings_StorageS2D.json"
+          },
+          "Create Deployment Settings with SAN Storage": {
+            "$ref": "./examples/PutDeploymentSettings_StorageSAN.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4426,140 +4248,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default/checkHealth": {
-      "post": {
-        "operationId": "UpdateSummariesOperationGroup_CheckHealth",
-        "tags": [
-          "UpdateSummariesOperationGroup"
-        ],
-        "description": "Check health of UpdateSummaries",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the cluster.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Check health of UpdateSummaries": {
-            "$ref": "./examples/UpdateSummaries_CheckHealth.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default/checkUpdates": {
-      "post": {
-        "operationId": "UpdateSummariesOperationGroup_CheckUpdates",
-        "tags": [
-          "UpdateSummariesOperationGroup"
-        ],
-        "description": "Check for updates",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the cluster.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckUpdatesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Check for specific update by name": {
-            "$ref": "./examples/UpdateSummaries_CheckUpdates_MaximumSet.json"
-          },
-          "Check for updates": {
-            "$ref": "./examples/UpdateSummaries_CheckUpdates.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates": {
       "get": {
         "operationId": "Updates_List",
@@ -4860,74 +4548,6 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/prepare": {
-      "post": {
-        "operationId": "Updates_Prepare",
-        "tags": [
-          "Updates"
-        ],
-        "description": "Prepare Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the cluster.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "updateName",
-            "in": "path",
-            "description": "The name of the Update",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Prepare Update": {
-            "$ref": "./examples/Updates_Prepare.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -6811,16 +6431,6 @@
         }
       }
     },
-    "CheckUpdatesRequest": {
-      "type": "object",
-      "description": "Request body for the check updates action on update summaries.",
-      "properties": {
-        "updateName": {
-          "type": "string",
-          "description": "Name of update"
-        }
-      }
-    },
     "ClaimDeviceRequest": {
       "type": "object",
       "description": "Request for claiming devices of the pool.",
@@ -6856,15 +6466,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "allOf": [
@@ -7418,11 +7019,6 @@
             ]
           },
           "readOnly": true
-        },
-        "storageType": {
-          "$ref": "#/definitions/StorageType",
-          "description": "Storage type of the cluster. Indicates whether the cluster uses S2D, SAN, or a combination.",
-          "readOnly": true
         }
       }
     },
@@ -7824,40 +7420,6 @@
         ]
       }
     },
-    "ContentPayload": {
-      "type": "object",
-      "description": "Represents details of a specific update content payload.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Represents url of a update payload."
-        },
-        "hash": {
-          "type": "string",
-          "description": "Represents hash of a update payload."
-        },
-        "hashAlgorithm": {
-          "type": "string",
-          "description": "Represents hash algorithm of a update payload."
-        },
-        "identifier": {
-          "type": "string",
-          "description": "Represents identifier of a update payload."
-        },
-        "packageSizeInBytes": {
-          "type": "string",
-          "description": "Represents size in bytes of a update payload."
-        },
-        "group": {
-          "type": "string",
-          "description": "Represents the group of a update payload."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "Represents the file name of a update payload."
-        }
-      }
-    },
     "DefaultExtensionDetails": {
       "type": "object",
       "description": "Properties for a particular default extension category.",
@@ -8200,10 +7762,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "sanNetworks": {
-          "$ref": "#/definitions/SanNetworks",
-          "description": "SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'."
         },
         "storageConnectivitySwitchless": {
           "type": "boolean",
@@ -8987,30 +8545,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "EdgeDeviceDisks": {
-      "type": "object",
-      "description": "Represents a storage disk on the device.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the disk.",
-          "readOnly": true
-        },
-        "sizeInBytes": {
-          "type": "string",
-          "description": "The size of the disk in bytes.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the disk. For example, S2D or SAN.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id"
       ]
     },
     "EdgeDeviceJob": {
@@ -11212,17 +10746,6 @@
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
-        },
-        "disks": {
-          "type": "array",
-          "description": "List of storage disks on the device.",
-          "items": {
-            "$ref": "#/definitions/EdgeDeviceDisks"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "id"
-          ]
         }
       }
     },
@@ -12815,36 +12338,6 @@
         }
       }
     },
-    "OverprovisioningRatio": {
-      "type": "string",
-      "description": "Overprovisioning ratio for S2D storage.",
-      "enum": [
-        "0",
-        "1",
-        "2"
-      ],
-      "x-ms-enum": {
-        "name": "OverprovisioningRatio",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Zero",
-            "value": "0",
-            "description": "No overprovisioning."
-          },
-          {
-            "name": "One",
-            "value": "1",
-            "description": "Overprovisioning ratio of 1."
-          },
-          {
-            "name": "Two",
-            "value": "2",
-            "description": "Overprovisioning ratio of 2."
-          }
-        ]
-      }
-    },
     "OwnerKeyType": {
       "type": "string",
       "description": "Type of owner key in the voucher",
@@ -13097,106 +12590,6 @@
           "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
         }
       }
-    },
-    "PlatformPayload": {
-      "type": "object",
-      "description": "Represents details of a specific platform update payload.",
-      "properties": {
-        "payloadUrl": {
-          "type": "string",
-          "description": "Represents url of a platform update payload."
-        },
-        "payloadHash": {
-          "type": "string",
-          "description": "Represents hash of a platform update payload."
-        },
-        "payloadPackageSizeInBytes": {
-          "type": "string",
-          "description": "Represents size in bytes of a platform update payload."
-        },
-        "payloadIdentifier": {
-          "type": "string",
-          "description": "Represents identifier of a platform update payload."
-        }
-      }
-    },
-    "PlatformUpdate": {
-      "type": "object",
-      "description": "Represents a platform update resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PlatformUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PlatformUpdateDetails": {
-      "type": "object",
-      "description": "Represents details of a specific platform update.",
-      "properties": {
-        "validatedSolutionRecipeVersion": {
-          "type": "string",
-          "description": "Represents validated solution recipe version of a platform update."
-        },
-        "platformVersion": {
-          "type": "string",
-          "description": "Represents version of a platform update."
-        },
-        "platformPayloads": {
-          "type": "array",
-          "description": "Represents the platform payloads of a platform update.",
-          "items": {
-            "$ref": "#/definitions/PlatformPayload"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "platformPayloads"
-      ]
-    },
-    "PlatformUpdateListResult": {
-      "type": "object",
-      "description": "The response of a PlatformUpdate list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PlatformUpdate items on this page",
-          "items": {
-            "$ref": "#/definitions/PlatformUpdate"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PlatformUpdateProperties": {
-      "type": "object",
-      "description": "Represents properties of a platform update resource.",
-      "properties": {
-        "platformUpdateDetails": {
-          "type": "array",
-          "description": "Represents applicable platform updates.",
-          "items": {
-            "$ref": "#/definitions/PlatformUpdateDetails"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "platformUpdateDetails"
-      ]
     },
     "PrecheckResult": {
       "type": "object",
@@ -13914,56 +13307,8 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "remoteSupportProvisioningState": {
-          "$ref": "#/definitions/RemoteSupportProvisioningState",
-          "description": "Remote Support Provisioning State",
-          "readOnly": true
         }
       }
-    },
-    "RemoteSupportProvisioningState": {
-      "type": "string",
-      "description": "Remote Support Provisioning State",
-      "enum": [
-        "None",
-        "GrantInProgress",
-        "RevokeInProgress",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "RemoteSupportProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No operation is in progress."
-          },
-          {
-            "name": "GrantInProgress",
-            "value": "GrantInProgress",
-            "description": "A Grant (Enable) operation is in progress."
-          },
-          {
-            "name": "RevokeInProgress",
-            "value": "RevokeInProgress",
-            "description": "A Revoke operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The last operation completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The last operation failed."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "RemoteSupportRequest": {
       "type": "object",
@@ -14076,85 +13421,6 @@
           "$ref": "#/definitions/ConfidentialVmProfile",
           "description": "CVM support details for edge device.",
           "readOnly": true
-        }
-      }
-    },
-    "SanAdapterIPConfig": {
-      "type": "object",
-      "description": "Per-adapter IP configuration for SAN cluster network.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Logical name of the adapter IP configuration (e.g., clusterNetwork-A)."
-        },
-        "networkAdapterName": {
-          "type": "string",
-          "description": "Physical NIC name (e.g., ethernet 3)."
-        },
-        "vlanId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "VLAN ID (0-4095). Value of 0 or omitted means untagged."
-        },
-        "addressPrefix": {
-          "type": "string",
-          "description": "Subnet address prefix in CIDR notation (e.g., 10.10.30.0/24)."
-        }
-      }
-    },
-    "SanAdapterProperties": {
-      "type": "object",
-      "description": "QoS and adapter property overrides for SAN cluster network traffic.",
-      "properties": {
-        "priorityValue8021ActionCluster": {
-          "type": "integer",
-          "format": "int32",
-          "description": "802.1p priority value for cluster traffic."
-        },
-        "priorityValue8021ActionSmb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "802.1p priority value for SMB traffic."
-        },
-        "bandwidthPercentageSmb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "SMB bandwidth percentage (1-97)."
-        },
-        "jumboPacket": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Jumbo frame size in bytes."
-        }
-      }
-    },
-    "SanClusterNetworkConfig": {
-      "type": "object",
-      "description": "Cluster network configuration for SAN deployments (CSV/LiveMig traffic).",
-      "properties": {
-        "adapterProperties": {
-          "$ref": "#/definitions/SanAdapterProperties",
-          "description": "QoS and adapter overrides for the cluster network."
-        },
-        "adapterIPConfig": {
-          "type": "array",
-          "description": "Per-adapter IP configuration for the cluster network.",
-          "items": {
-            "$ref": "#/definitions/SanAdapterIPConfig"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "SanNetworks": {
-      "type": "object",
-      "description": "SAN network configuration for host network of AzureStackHCI Cluster.",
-      "properties": {
-        "clusterNetworkConfig": {
-          "$ref": "#/definitions/SanClusterNetworkConfig",
-          "description": "Cluster (CSV/LiveMig) network configuration for SAN deployments."
         }
       }
     },
@@ -14910,9 +14176,7 @@
         "ReadyToInstall",
         "ScanInProgress",
         "ScanFailed",
-        "AdditionalContentRequired",
-        "HealthCheckExpired",
-        "PendingOEMValidation"
+        "AdditionalContentRequired"
       ],
       "x-ms-enum": {
         "name": "State",
@@ -15012,16 +14276,6 @@
             "name": "AdditionalContentRequired",
             "value": "AdditionalContentRequired",
             "description": "Additional content is required to proceed with the update."
-          },
-          {
-            "name": "HealthCheckExpired",
-            "value": "HealthCheckExpired",
-            "description": "The health check has expired and needs to be redone."
-          },
-          {
-            "name": "PendingOEMValidation",
-            "value": "PendingOEMValidation",
-            "description": "The update is pending OEM validation before it can proceed."
           }
         ]
       }
@@ -15199,18 +14453,6 @@
           "type": "string",
           "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
           "default": "Express"
-        },
-        "storageType": {
-          "$ref": "#/definitions/StorageType",
-          "description": "Storage type for the HCI Cluster. Allowed values are 'S2D', 'SAN', 'SANS2D'."
-        },
-        "s2d": {
-          "$ref": "#/definitions/StorageS2dConfig",
-          "description": "S2D (Storage Spaces Direct) configuration. Applicable when StorageType is 'S2D' or 'SANS2D'."
-        },
-        "san": {
-          "$ref": "#/definitions/StorageSanConfig",
-          "description": "SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'."
         }
       }
     },
@@ -15234,64 +14476,6 @@
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
         }
-      }
-    },
-    "StorageS2dConfig": {
-      "type": "object",
-      "description": "The S2D (Storage Spaces Direct) configuration for AzureStackHCI Cluster storage.",
-      "properties": {
-        "volumeType": {
-          "$ref": "#/definitions/VolumeType",
-          "description": "Volume provisioning type. Allowed values are 'Fixed', 'ThinProvisioned'."
-        },
-        "overprovisioningRatio": {
-          "$ref": "#/definitions/OverprovisioningRatio",
-          "description": "Overprovisioning ratio for S2D storage. Allowed values are '0', '1', '2'."
-        }
-      }
-    },
-    "StorageSanConfig": {
-      "type": "object",
-      "description": "The SAN (Storage Area Network) configuration for AzureStackHCI Cluster storage.",
-      "properties": {
-        "infraVolLunId": {
-          "type": "string",
-          "description": "Infrastructure volume LUN ID (e.g. PURE1234567890ABCDEF)."
-        },
-        "infraPerfLunId": {
-          "type": "string",
-          "description": "Infrastructure performance LUN ID."
-        }
-      }
-    },
-    "StorageType": {
-      "type": "string",
-      "description": "Storage type supported for HCI Cluster.",
-      "enum": [
-        "S2D",
-        "SAN",
-        "SANS2D"
-      ],
-      "x-ms-enum": {
-        "name": "StorageType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "S2D",
-            "value": "S2D",
-            "description": "Storage Spaces Direct (S2D) storage type."
-          },
-          {
-            "name": "SAN",
-            "value": "SAN",
-            "description": "Storage Area Network (SAN) storage type."
-          },
-          {
-            "name": "SANS2D",
-            "value": "SANS2D",
-            "description": "Combined SAN and Storage Spaces Direct (SANS2D) storage type."
-          }
-        ]
       }
     },
     "SwitchDetail": {
@@ -15408,59 +14592,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "UpdateContent": {
-      "type": "object",
-      "description": "Represents a update content.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UpdateContentProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "UpdateContentListResult": {
-      "type": "object",
-      "description": "The response of a UpdateContent list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The UpdateContent items on this page",
-          "items": {
-            "$ref": "#/definitions/UpdateContent"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "UpdateContentProperties": {
-      "type": "object",
-      "description": "Represents properties of a update content resource.",
-      "properties": {
-        "updatePayloads": {
-          "type": "array",
-          "description": "Represents the payloads of a update content resource.",
-          "items": {
-            "$ref": "#/definitions/ContentPayload"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "updatePayloads"
       ]
     },
     "UpdateList": {
@@ -16287,30 +15418,6 @@
       "required": [
         "recipeContent"
       ]
-    },
-    "VolumeType": {
-      "type": "string",
-      "description": "Volume provisioning type for S2D storage.",
-      "enum": [
-        "Fixed",
-        "ThinProvisioned"
-      ],
-      "x-ms-enum": {
-        "name": "VolumeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Fixed",
-            "value": "Fixed",
-            "description": "Fixed provisioning type."
-          },
-          {
-            "name": "ThinProvisioned",
-            "value": "ThinProvisioned",
-            "description": "Thin provisioned provisioning type."
-          }
-        ]
-      }
     },
     "WebProxyConfiguration": {
       "type": "object",
