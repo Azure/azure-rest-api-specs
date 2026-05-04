@@ -36,6 +36,8 @@ using Compute;
   "TwoThousandTwentyTwo1101",
   "go, javascript"
 );
+@@clientName(NetworkApiVersion.`2020-11-01`, "V20201101", "csharp");
+@@clientName(NetworkApiVersion.`2022-11-01`, "V20221101", "csharp");
 
 @@alternateType(VirtualMachineScaleSetStorageProfile.diskControllerType,
   string,
