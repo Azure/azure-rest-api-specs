@@ -16274,7 +16274,8 @@
         "type": "object",
         "required": [
           "runtime",
-          "entry_point"
+          "entry_point",
+          "build_packages_remotely"
         ],
         "properties": {
           "runtime": {
@@ -16290,7 +16291,8 @@
           },
           "build_packages_remotely": {
             "type": "boolean",
-            "description": "When true, the service builds Python package dependencies remotely (e.g. installs from `requirements.txt` in the uploaded zip) during deployment. When false, the caller has already bundled all dependencies into the zip and no remote build is performed. When omitted, the service applies its default behavior."
+            "description": "Indicates how package dependencies are resolved at deployment time.\nWhen `true`, the service builds dependencies remotely from the manifest\nincluded in the uploaded zip. When `false` (the default), the caller is\nresponsible for bundling all dependencies into the uploaded zip and the\nservice performs no remote build.",
+            "default": false
           },
           "content_hash": {
             "type": "string",
