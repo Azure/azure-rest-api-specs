@@ -1,42 +1,40 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
     "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
     "groupId": "group1",
-    "instanceId": "blue"
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "deviceClassId": "deviceClassId1",
-            "deviceCount": 100,
             "groupId": "group1",
+            "deviceClassId": "deviceClassId1",
             "update": {
               "updateId": {
-                "name": "name1",
                 "provider": "provider1",
+                "name": "name1",
                 "version": "1.0.0.0"
               }
-            }
+            },
+            "deviceCount": 100
           },
           {
-            "deviceClassId": "deviceClassId2",
-            "deviceCount": 200,
             "groupId": "group1",
+            "deviceClassId": "deviceClassId2",
             "update": {
               "updateId": {
-                "name": "name2",
                 "provider": "provider2",
+                "name": "name2",
                 "version": "2.0.0.0"
               }
-            }
+            },
+            "deviceCount": 200
           }
         ]
       }
     }
-  },
-  "operationId": "DeviceManagement_ListBestUpdatesForGroup",
-  "title": "DeviceManagement_ListBestUpdatesForGroup"
+  }
 }

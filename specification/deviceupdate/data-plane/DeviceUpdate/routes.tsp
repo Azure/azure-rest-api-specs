@@ -1581,24 +1581,3 @@ interface DeviceManagementOperationGroup {
     void
   >;
 }
-
-@tag("Instance management")
-interface InstanceManagementOperationGroup {
-  /**
-   * Gets the instance limits for active deployments, devices, device classes, and
-   * groups.
-   */
-  @operationId("InstanceManagement_GetLimits")
-  @route("/deviceUpdate/{instanceId}/limits")
-  @get
-  getLimits is ServiceOperation<
-    {
-      /**
-       * The Device Update for IoT Hub account instance identifier.
-       */
-      @path
-      instanceId: string;
-    },
-    LimitsResponse
-  >;
-}

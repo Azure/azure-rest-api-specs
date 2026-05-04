@@ -37,7 +37,7 @@ namespace DeviceUpdateClient;
  */
 enum Versions {
   /**
-   * The 2023-10-01-preview API version.
+   * The 2022-10-01 API version.
    */
-  v2023_10_01_preview: "2023-10-01-preview",
+  v2022_10_01: "2022-10-01",
 }

@@ -1,69 +1,67 @@
 {
   "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "groupId": "TestGroup",
+    "deploymentId": "deploymentId",
     "api-version": "2023-10-01-preview",
     "deployment": {
       "deploymentId": "deploymentId",
       "groupId": "TestGroup",
-      "rollbackPolicy": {
-        "failure": {
-          "devicesFailedCount": 100,
-          "devicesFailedPercentage": 50
-        },
-        "update": {
-          "updateId": {
-            "name": "name",
-            "provider": "provider",
-            "version": "1.2.3.3"
-          }
-        }
-      },
       "startDateTime": "2020-04-22T12:12:12.0000000+00:00",
       "update": {
         "updateId": {
-          "name": "name",
           "provider": "provider",
+          "name": "name",
           "version": "1.2.3.4"
         }
+      },
+      "rollbackPolicy": {
+        "update": {
+          "updateId": {
+            "provider": "provider",
+            "name": "name",
+            "version": "1.2.3.3"
+          }
+        },
+        "failure": {
+          "devicesFailedPercentage": 50,
+          "devicesFailedCount": 100
+        }
       }
-    },
-    "deploymentId": "deploymentId",
-    "endpoint": "contoso.api.adu.microsoft.com",
-    "groupId": "TestGroup",
-    "instanceId": "blue"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "deploymentId": "deploymentId",
+        "groupId": "TestGroup",
         "deviceClassSubgroups": [
           "deviceClassId1",
           "deviceClassId2"
         ],
-        "groupId": "TestGroup",
-        "rollbackPolicy": {
-          "failure": {
-            "devicesFailedCount": 100,
-            "devicesFailedPercentage": 50
-          },
-          "update": {
-            "updateId": {
-              "name": "name",
-              "provider": "provider",
-              "version": "1.2.3.3"
-            }
-          }
-        },
         "startDateTime": "2020-04-22T12:12:12.0000000+00:00",
         "update": {
           "updateId": {
-            "name": "name",
             "provider": "provider",
+            "name": "name",
             "version": "1.2.3.4"
+          }
+        },
+        "rollbackPolicy": {
+          "update": {
+            "updateId": {
+              "provider": "provider",
+              "name": "name",
+              "version": "1.2.3.3"
+            }
+          },
+          "failure": {
+            "devicesFailedPercentage": 50,
+            "devicesFailedCount": 100
           }
         }
       }
     }
-  },
-  "operationId": "DeviceManagement_CreateOrUpdateDeployment",
-  "title": "DeviceManagement_CreateOrUpdateDeployment"
+  }
 }

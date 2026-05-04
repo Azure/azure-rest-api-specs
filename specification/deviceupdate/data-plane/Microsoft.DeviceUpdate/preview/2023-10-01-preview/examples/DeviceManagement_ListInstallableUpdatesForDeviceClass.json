@@ -1,33 +1,31 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
-    "deviceClassId": "deviceClassId",
     "endpoint": "contoso.api.adu.microsoft.com",
-    "instanceId": "blue"
+    "instanceId": "blue",
+    "deviceClassId": "deviceClassId",
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "friendlyName": "July 2022 Update",
             "updateId": {
-              "name": "name",
               "provider": "provider",
+              "name": "name",
               "version": "1.2.3.4"
-            }
+            },
+            "friendlyName": "July 2022 Update"
           },
           {
             "updateId": {
-              "name": "name2",
               "provider": "provider2",
+              "name": "name2",
               "version": "2.3.4.5"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "DeviceManagement_ListInstallableUpdatesForDeviceClass",
-  "title": "DeviceManagement_ListInstallableUpdatesForDeviceClass"
+  }
 }

@@ -1,45 +1,43 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
-    "deploymentId": "deploymentId",
     "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
     "groupId": "TestGroup",
-    "instanceId": "blue"
+    "deploymentId": "deploymentId",
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "deploymentState": "ActiveWithSubgroupFailures",
         "groupId": "TestGroup",
+        "deploymentState": "ActiveWithSubgroupFailures",
         "subgroupStatus": [
           {
-            "deploymentState": "Active",
+            "groupId": "TestGroup",
             "deviceClassId": "deviceClassId1",
-            "devicesCanceledCount": 0,
+            "deploymentState": "Active",
+            "totalDevices": 1,
+            "devicesInProgressCount": 0,
             "devicesCompletedFailedCount": 0,
             "devicesCompletedSucceededCount": 1,
-            "devicesInProgressCount": 0,
-            "groupId": "TestGroup",
-            "totalDevices": 1
+            "devicesCanceledCount": 0
           },
           {
-            "deploymentState": "Failed",
+            "groupId": "TestGroup",
             "deviceClassId": "deviceClassId2",
-            "devicesCanceledCount": 0,
-            "devicesCompletedFailedCount": 1,
-            "devicesCompletedSucceededCount": 1,
-            "devicesInProgressCount": 0,
+            "deploymentState": "Failed",
             "error": {
               "code": "ADMConfigurationLimitExceeded",
               "message": "The subgroup deployment failed to be created due to hitting the ADM configuration limit"
             },
-            "groupId": "TestGroup",
-            "totalDevices": 2
+            "totalDevices": 2,
+            "devicesInProgressCount": 0,
+            "devicesCompletedFailedCount": 1,
+            "devicesCompletedSucceededCount": 1,
+            "devicesCanceledCount": 0
           }
         ]
       }
     }
-  },
-  "operationId": "DeviceManagement_GetDeploymentStatus",
-  "title": "DeviceManagement_GetDeploymentStatus"
+  }
 }

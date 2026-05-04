@@ -1,12 +1,12 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
-    "deploymentId": "deploymentId",
-    "deviceClassId": "deviceClassId",
-    "deviceState": "Succeeded",
     "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
     "groupId": "TestGroup",
-    "instanceId": "blue"
+    "deviceClassId": "deviceClassId",
+    "deploymentId": "deploymentId",
+    "deviceState": "Succeeded",
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
@@ -14,20 +14,18 @@
         "value": [
           {
             "deviceId": "deviceId1",
-            "deviceState": "Succeeded",
+            "retryCount": 1,
             "movedOnToNewDeployment": false,
-            "retryCount": 1
+            "deviceState": "Succeeded"
           },
           {
             "deviceId": "deviceId2",
-            "deviceState": "Succeeded",
+            "retryCount": 1,
             "movedOnToNewDeployment": false,
-            "retryCount": 1
+            "deviceState": "Succeeded"
           }
         ]
       }
     }
-  },
-  "operationId": "DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment",
-  "title": "DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment"
+  }
 }

@@ -1,26 +1,24 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
-    "deploymentId": "deploymentId",
-    "deviceClassId": "deviceClassId",
     "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
     "groupId": "TestGroup",
-    "instanceId": "blue"
+    "deviceClassId": "deviceClassId",
+    "deploymentId": "deploymentId",
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "deploymentState": "Active",
+        "groupId": "TestGroup",
         "deviceClassId": "deviceClassId",
-        "devicesCanceledCount": 0,
+        "deploymentState": "Active",
+        "totalDevices": 1,
+        "devicesInProgressCount": 0,
         "devicesCompletedFailedCount": 0,
         "devicesCompletedSucceededCount": 1,
-        "devicesInProgressCount": 0,
-        "groupId": "TestGroup",
-        "totalDevices": 1
+        "devicesCanceledCount": 0
       }
     }
-  },
-  "operationId": "DeviceManagement_GetDeviceClassSubgroupDeploymentStatus",
-  "title": "DeviceManagement_GetDeviceClassSubgroupDeploymentStatus"
+  }
 }

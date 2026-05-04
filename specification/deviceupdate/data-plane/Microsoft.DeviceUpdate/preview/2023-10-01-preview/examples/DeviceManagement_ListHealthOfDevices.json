@@ -1,18 +1,19 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
     "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
     "filter": "state eq 'unhealthy'",
-    "instanceId": "blue"
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "http://foo",
         "value": [
           {
             "deviceId": "device1",
+            "moduleId": "module1",
             "digitalTwinModelId": "dtmi:foo;1",
+            "state": "unhealthy",
             "healthChecks": [
               {
                 "name": "check1",
@@ -22,14 +23,11 @@
                 "name": "check2",
                 "result": "userError"
               }
-            ],
-            "moduleId": "module1",
-            "state": "unhealthy"
+            ]
           }
-        ]
+        ],
+        "nextLink": "http://foo"
       }
     }
-  },
-  "operationId": "DeviceManagement_ListHealthOfDevices",
-  "title": "DeviceManagement_ListHealthOfDevices"
+  }
 }

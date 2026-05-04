@@ -1,37 +1,35 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
     "endpoint": "contoso.api.adu.microsoft.com",
-    "instanceId": "blue"
+    "instanceId": "blue",
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "counters": {
-          "activeDeploymentCount": {
-            "quota": 50,
-            "usage": 15
-          },
-          "deploymentCount": {
-            "quota": 100,
-            "usage": 60
+          "deviceCount": {
+            "usage": 5000,
+            "quota": 1000000
           },
           "deviceClassCount": {
-            "quota": 80,
-            "usage": 10
-          },
-          "deviceCount": {
-            "quota": 1000000,
-            "usage": 5000
+            "usage": 10,
+            "quota": 80
           },
           "deviceGroupCount": {
-            "quota": 100,
-            "usage": 50
+            "usage": 50,
+            "quota": 100
+          },
+          "activeDeploymentCount": {
+            "usage": 15,
+            "quota": 50
+          },
+          "deploymentCount": {
+            "usage": 60,
+            "quota": 100
           }
         }
       }
     }
-  },
-  "operationId": "InstanceManagement_GetLimits",
-  "title": "InstanceManagement_GetLimits"
+  }
 }

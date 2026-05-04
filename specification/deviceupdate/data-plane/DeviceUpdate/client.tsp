@@ -135,7 +135,3 @@ using DeviceUpdateClient;
 @@clientLocation(DeviceManagementOperationGroup.listHealthOfDevices,
   "DeviceManagement"
 );
-
-@@clientLocation(InstanceManagementOperationGroup.getLimits,
-  "InstanceManagement"
-);
