@@ -101,8 +101,6 @@ arbitrary extra properties of any type. **These are equivalent.**
 `@azure-tools/typespec-azure-core/bad-record-type` linter suppression in
 [`tspconfig.yaml`](tspconfig.yaml).
 
-**Action:** None.
-
 ---
 
 ### 1023 TypeFormatChanged — 33
@@ -129,10 +127,6 @@ validators are advisory.
 for `nextLink`/`Operation-Location`; `long` → `int` for the count/result-code fields).
 Python/JS/TS are unchanged. `nextLink` and `Operation-Location` are SDK-internal (paging/LRO
 helpers); the `int32` count fields preserve source compatibility under Java widening.
-
-**Restoration feasibility:** Not cleanly possible. `@nextLink` and LRO headers hardcode
-`format: uri` in the emitter, and `int32` → format-less `integer` would require a custom scalar
-that conflicts with Azure-Core lints.
 
 **Action:** None. This is an intentional precision improvement; reverting would require fighting
 emitter conventions for cosmetic-only swagger output.
@@ -164,9 +158,6 @@ value type is **`string`**:
 in the original swagger. The constraint was inert (silently ignored by all validators and SDKs),
 and TypeSpec does not re-emit it.
 
-**Action:** None. The original swagger contained an authoring error; the emitted swagger drops
-the invalid keyword.
-
 ---
 
 ### 1042 ChangedParameterOrder — 94
@@ -184,8 +175,6 @@ appears in the operation's `parameters` array.
 **Wire impact:** None.
 **SDK impact:** None — generators key on `name` + `in`, not array index.
 
-**Action:** None.
-
 ---
 
 ### 1050 ParameterLocationHasChanged — 100
@@ -201,8 +190,6 @@ distinction, **not a wire-format distinction**.
 **Wire impact:** None.
 **SDK impact:** None — generators flatten path-item parameters into operation parameters during
 processing, so the resulting client method signatures are identical.
-
-**Action:** None.
 
 ---
 
@@ -224,8 +211,6 @@ referenced from.
 **SDK impact:** None — `x-ms-parameter-location` and `x-ms-client-name` extensions are preserved
 on the inlined parameters where applicable.
 
-**Action:** None.
-
 ---
 
 ### 1001 NoVersionChange — 1
@@ -235,8 +220,6 @@ on the inlined parameters where applicable.
 **Root cause:** Informational. The compared swaggers are both labeled `2022-10-01`. This is
 expected because the PR re-emits the **same** GA API version from a new source of truth (TypeSpec)
 without bumping the public API contract.
-
-**Action:** None.
 
 ---
 
