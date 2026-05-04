@@ -41,13 +41,55 @@
   "tags": [
     {
       "name": "Operations"
+    },
+    {
+      "name": "SaasSubscriptionLevel"
+    },
+    {
+      "name": "SaasTenantLevel"
     }
   ],
   "paths": {
+    "/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight": {
+      "post": {
+        "operationId": "SaasTenantLevelPreflight_Preflight",
+        "description": "Pre-validates SaaS subscription operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasSubscriptionName",
+            "in": "path",
+            "description": "The SaaS subscription name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The preflight request body.",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.SaaS/operationResults/{operationId}": {
       "get": {
         "operationId": "SaasOperationResults_GetOperationStatus",
-        "description": "Gets the status of an operation.",
+        "description": "Gets the status of a long-running SaaS operation. Returns the resource on completion.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -55,13 +97,14 @@
           {
             "name": "operationId",
             "in": "path",
+            "description": "The operation ID.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SaasResource"
             }
@@ -72,11 +115,11 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32"
-              },
-              "location": {
-                "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -131,7 +174,10 @@
     "/providers/Microsoft.SaaS/saasresources": {
       "get": {
         "operationId": "SaasTenantLevel_List",
-        "description": "Get all tenant-level SaaS resources.",
+        "tags": [
+          "SaasTenantLevel"
+        ],
+        "description": "List SaasTenantResource resources by tenant",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -139,9 +185,48 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+              "$ref": "#/definitions/SaasTenantResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources/{resourceId}": {
+      "get": {
+        "operationId": "SaasTenantLevel_GetResource",
+        "tags": [
+          "SaasTenantLevel"
+        ],
+        "description": "Get a SaasTenantResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The name of the SaasTenantResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasTenantResource"
             }
           },
           "default": {
@@ -154,36 +239,53 @@
       },
       "put": {
         "operationId": "SaasTenantLevel_CreateResource",
-        "description": "Creates a SaaS resource.",
+        "tags": [
+          "SaasTenantLevel"
+        ],
+        "description": "Create a SaasTenantResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "resourceId",
+            "in": "path",
+            "description": "The name of the SaasTenantResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
             "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SaasResourceCreation"
+              "$ref": "#/definitions/SaasTenantResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'SaasTenantResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SaasResource"
+              "$ref": "#/definitions/SaasTenantResource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "201": {
+            "description": "Resource 'SaasTenantResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SaasTenantResource"
+            },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -193,42 +295,18 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.SaaS/saasresources/{resourceId}": {
-      "get": {
-        "operationId": "SaasTenantLevel_GetResource",
-        "description": "Gets a specific tenant-level SaaS resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SaasResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "SaasTenantLevel_UpdateResource",
-        "description": "Updates a SaaS resource.",
+        "tags": [
+          "SaasTenantLevel"
+        ],
+        "description": "Update a SaasTenantResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -236,34 +314,39 @@
           {
             "name": "resourceId",
             "in": "path",
+            "description": "The name of the SaasTenantResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SaasResourceCreation"
+              "$ref": "#/definitions/SaasTenantResourceUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaasResource"
+              "$ref": "#/definitions/SaasTenantResource"
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -273,11 +356,18 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SaasTenantLevel_DeleteResource",
-        "description": "Deletes the specified SaaS.",
+        "tags": [
+          "SaasTenantLevel"
+        ],
+        "description": "Delete a SaasTenantResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -285,24 +375,29 @@
           {
             "name": "resourceId",
             "in": "path",
+            "description": "The name of the SaasTenantResource",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeleteOptions"
-            }
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -310,13 +405,20 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken": {
       "post": {
         "operationId": "SaasTenantLevel_ListAccessToken",
-        "description": "Gets the ISV access token for a SaaS resource.",
+        "tags": [
+          "SaasTenantLevel"
+        ],
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -324,82 +426,17 @@
           {
             "name": "resourceId",
             "in": "path",
+            "description": "The name of the SaasTenantResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AccessTokenResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.SaaS/saasresources/preflight": {
-      "post": {
-        "operationId": "SaasTenantLevel_Preflight",
-        "description": "Pre-validates SaaS subscription operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkEligibility": {
-      "post": {
-        "operationId": "SaasSubscriptionLevelGlobal_CheckEligibilitySubscription",
-        "description": "Checks eligibility for a subscription-level SaaS purchase (subscription-scoped).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "saasResource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SaasResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EligibilityCheckResult"
             }
           },
           "default": {
@@ -414,20 +451,18 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkNameAvailability": {
       "post": {
         "operationId": "SaasSubscriptionLevelGlobal_CheckNameAvailability",
-        "description": "Checks name availability for a SaaS resource.",
+        "description": "Implements global CheckNameAvailability operations",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "nameAvailability",
+            "name": "body",
             "in": "body",
+            "description": "The CheckAvailability request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SaasNameAvailabilityRequest"
@@ -458,23 +493,20 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources": {
       "get": {
         "operationId": "SaasSubscriptionLevelGlobal_ListByAzureSubscription",
-        "description": "Gets all Subscription Level SaaS in an Azure subscription.",
+        "description": "List SaasResource resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+              "$ref": "#/definitions/SaasResourceListResult"
             }
           },
           "default": {
@@ -488,26 +520,38 @@
           "List SaaS subscription level resources by Azure subscription": {
             "$ref": "./examples/SaasListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
       "post": {
         "operationId": "SaasSubscriptionLevelMove_MoveResources",
-        "description": "Move a Subscription Level SaaS.",
+        "description": "Moves SaaS resources between resource groups.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "moveResourceParameter",
             "in": "body",
+            "description": "The move resource parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MoveResource"
@@ -515,20 +559,58 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelPreflight_Preflight",
+        "description": "Pre-validates SaaS subscription operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "saasSubscriptionName",
+            "in": "path",
+            "description": "The SaaS subscription name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The preflight request body.",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
           "200": {
             "description": "The request has succeeded."
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
-              }
-            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -542,7 +624,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources": {
       "get": {
         "operationId": "SaasSubscriptionLevel_ListByResourceGroup",
-        "description": "Gets all Subscription Level SaaS in a resource group.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "List SaasResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -556,9 +641,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+              "$ref": "#/definitions/SaasResourceListResult"
             }
           },
           "default": {
@@ -572,13 +657,19 @@
           "List SaaS subscription level resources by resource group": {
             "$ref": "./examples/SaasListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}": {
       "get": {
         "operationId": "SaasSubscriptionLevel_Get",
-        "description": "Gets a specific Subscription Level SaaS resource.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "Get a SaasResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -592,13 +683,15 @@
           {
             "name": "resourceName",
             "in": "path",
+            "description": "The name of the SaasResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SaasResource"
             }
@@ -618,7 +711,10 @@
       },
       "put": {
         "operationId": "SaasSubscriptionLevel_CreateOrUpdate",
-        "description": "Creates or updates a SaaS resource.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "Create a SaasResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -632,34 +728,42 @@
           {
             "name": "resourceName",
             "in": "path",
+            "description": "The name of the SaasResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "parameters",
+            "name": "resource",
             "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SaasResourceCreation"
+              "$ref": "#/definitions/SaasResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'SaasResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SaasResource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "201": {
+            "description": "Resource 'SaasResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -674,11 +778,18 @@
           "Create a SaaS subscription level resource": {
             "$ref": "./examples/SaasPut.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "SaasSubscriptionLevel_Update",
-        "description": "Updates a SaaS Subscription Level resource.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "Update a SaasResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -692,34 +803,39 @@
           {
             "name": "resourceName",
             "in": "path",
+            "description": "The name of the SaasResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SaasResourceCreation"
+              "$ref": "#/definitions/SaasResourceUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SaasResource"
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -737,11 +853,18 @@
           "Change quantity": {
             "$ref": "./examples/SaasPatchQuantity.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SaasSubscriptionLevel_Delete",
-        "description": "Deletes the specified SaaS.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "Delete a SaasResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -755,28 +878,29 @@
           {
             "name": "resourceName",
             "in": "path",
+            "description": "The name of the SaasResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -789,58 +913,20 @@
           "Delete a SaaS subscription level resource": {
             "$ref": "./examples/SaasDelete.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/checkEligibility": {
-      "post": {
-        "operationId": "SaasSubscriptionLevel_CheckEligibility",
-        "description": "Checks eligibility for a subscription-level SaaS purchase (resource-scoped).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "saasResource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SaasResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EligibilityCheckResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/listAccessToken": {
       "post": {
         "operationId": "SaasSubscriptionLevel_ListAccessToken",
-        "description": "Gets the ISV access token for a Subscription Level SaaS.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -854,13 +940,15 @@
           {
             "name": "resourceName",
             "in": "path",
+            "description": "The name of the SaasResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AccessTokenResult"
             }
@@ -882,7 +970,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/unsubscribe": {
       "post": {
         "operationId": "SaasSubscriptionLevel_Unsubscribe",
-        "description": "Unsubscribe from a Subscription Level SaaS.",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -896,12 +987,15 @@
           {
             "name": "resourceName",
             "in": "path",
+            "description": "The name of the SaasResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DeleteOptions"
@@ -910,22 +1004,24 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "type": "string"
-              }
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
             }
           },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -938,26 +1034,39 @@
           "Unsubscribe from a SaaS subscription level resource": {
             "$ref": "./examples/SaasUnsubscribe.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
       "post": {
         "operationId": "SaasSubscriptionLevelMove_ValidateMoveResources",
-        "description": "Validate whether a Subscription Level SaaS can be moved.",
+        "description": "Validates a request to move SaaS resources between resource groups.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "moveResourceParameter",
             "in": "body",
+            "description": "The move resource parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MoveResource"
@@ -965,8 +1074,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -992,6 +1101,17 @@
           "format": "password",
           "description": "The generated token.",
           "x-ms-secret": true
+        },
+        "offerUriWithToken": {
+          "type": "string",
+          "format": "password",
+          "description": "The offer URI with the embedded token.",
+          "x-ms-secret": true
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The token expiry time."
         }
       }
     },
@@ -1004,13 +1124,38 @@
           "description": "Whether it is unsubscribe only."
         },
         "reasonCode": {
-          "type": "number",
-          "format": "double",
+          "type": "integer",
+          "format": "int32",
           "description": "The reason code."
         },
         "feedback": {
           "type": "string",
           "description": "The feedback."
+        },
+        "deletionSource": {
+          "type": "string",
+          "description": "The deletion source.",
+          "default": "CustomerCancellation",
+          "enum": [
+            "CustomerCancellation",
+            "AzureSubscriptionDeletion"
+          ],
+          "x-ms-enum": {
+            "name": "DeletionSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CustomerCancellation",
+                "value": "CustomerCancellation",
+                "description": "Customer initiated cancellation"
+              },
+              {
+                "name": "AzureSubscriptionDeletion",
+                "value": "AzureSubscriptionDeletion",
+                "description": "Azure subscription deletion"
+              }
+            ]
+          }
         }
       }
     },
@@ -1036,37 +1181,6 @@
             "description": "Azure subscription deletion"
           }
         ]
-      }
-    },
-    "EligibilityCheckResult": {
-      "type": "object",
-      "description": "Eligibility check result with structured errors.",
-      "properties": {
-        "isEligible": {
-          "type": "boolean",
-          "description": "Whether the subscription is eligible."
-        },
-        "errors": {
-          "type": "array",
-          "description": "Structured list of eligibility errors.",
-          "items": {
-            "$ref": "#/definitions/EligibilityErrorDetail"
-          }
-        }
-      }
-    },
-    "EligibilityErrorDetail": {
-      "type": "object",
-      "description": "A single eligibility error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Machine-readable error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable error description."
-        }
       }
     },
     "MoveResource": {
@@ -1163,40 +1277,26 @@
         }
       ]
     },
-    "SaasResourceCreation": {
+    "SaasResourceListResult": {
       "type": "object",
-      "description": "SaaS resource creation model.",
+      "description": "The response of a SaasResource list operation.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource uri.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "The resource tags.",
-          "additionalProperties": {
-            "type": "string"
+        "value": {
+          "type": "array",
+          "description": "The SaasResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SaasResource"
           }
         },
-        "location": {
+        "nextLink": {
           "type": "string",
-          "description": "Resource location. Only value allowed for SaaS is 'global'."
-        },
-        "properties": {
-          "$ref": "#/definitions/SaasResourceProperties",
-          "description": "Properties of the SaaS resource that are relevant for creation."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SaasResourceProperties": {
       "type": "object",
@@ -1318,23 +1418,6 @@
         }
       }
     },
-    "SaasResourceResponseWithContinuation": {
-      "type": "object",
-      "description": "Paginated list of SaaS resources.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "description": "The next link to query to get the remaining results."
-        },
-        "value": {
-          "type": "array",
-          "description": "The value of response.",
-          "items": {
-            "$ref": "#/definitions/SaasResource"
-          }
-        }
-      }
-    },
     "SaasResourceStatus": {
       "type": "string",
       "description": "The SaaS Subscription Status.",
@@ -1375,6 +1458,192 @@
             "description": "Suspended"
           }
         ]
+      }
+    },
+    "SaasResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SaasResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SaasResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SaasResource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the SaaS subscription will auto renew upon term end."
+        },
+        "storeFront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "additionalInfo": {
+          "type": "object",
+          "description": "Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "intent": {
+          "$ref": "#/definitions/PatchIntent",
+          "description": "The intent for patch operations. Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "SaasTenantResource": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SaasTenantResourceListResult": {
+      "type": "object",
+      "description": "The response of a SaasTenantResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SaasTenantResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SaasTenantResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SaasTenantResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SaasTenantResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasTenantResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SaasTenantResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SaasTenantResource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the SaaS subscription will auto renew upon term end."
+        },
+        "storeFront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "additionalInfo": {
+          "type": "object",
+          "description": "Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "intent": {
+          "$ref": "#/definitions/PatchIntent",
+          "description": "The intent for patch operations. Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
       }
     },
     "SubscriptionStatusReason": {

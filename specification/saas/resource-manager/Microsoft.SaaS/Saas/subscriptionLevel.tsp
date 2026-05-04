@@ -1,185 +1,73 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.SaaS;
 
-/** Subscription-level SaaS resource operations (GA 2026-04-01). */
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources")
+@armResourceOperations
 interface SaasSubscriptionLevel {
-  /** Gets all Subscription Level SaaS in a resource group. */
-  @get
-  listByResourceGroup(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: SaasResourceResponseWithContinuation;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Gets a specific Subscription Level SaaS resource. */
-  @get
-  @route("{resourceName}")
-  get(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: SaasResource;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Creates or updates a SaaS resource. */
-  @put
-  @route("{resourceName}")
-  createOrUpdate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-    @body parameters: SaasResourceCreation,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: SaasResource;
-  } | {
-    @statusCode statusCode: 202;
-    @header location: string;
-    @header("Retry-After") retryAfter?: int32;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Updates a SaaS Subscription Level resource. */
-  @patch
-  @route("{resourceName}")
-  update(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-    @body parameters: SaasResourceCreation,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: SaasResource;
-  } | {
-    @statusCode statusCode: 202;
-    @header location: string;
-    @header("Retry-After") retryAfter?: int32;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Deletes the specified SaaS. */
-  @delete
-  @route("{resourceName}")
-  delete(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-  ): {
-    @statusCode statusCode: 200;
-  } | {
-    @statusCode statusCode: 202;
-    @header location: string;
-    @header("Retry-After") retryAfter?: int32;
-  } | {
-    @statusCode statusCode: 204;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Unsubscribe from a Subscription Level SaaS. */
-  @post
-  @route("{resourceName}/unsubscribe")
-  unsubscribe(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-    @body parameters: DeleteOptions,
-  ): {
-    @statusCode statusCode: 200;
-  } | {
-    @statusCode statusCode: 202;
-    @header location: string;
-    @header("Retry-After") retryAfter?: int32;
-  } | {
-    @statusCode statusCode: 204;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Gets the ISV access token for a Subscription Level SaaS. */
-  @post
-  @route("{resourceName}/listAccessToken")
-  listAccessToken(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: AccessTokenResult;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Checks eligibility for a subscription-level SaaS purchase (resource-scoped). */
-  @post
-  @route("{resourceName}/checkEligibility")
-  checkEligibility(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @path resourceName: string,
-    @body saasResource: SaasResource,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: EligibilityCheckResult;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  get is ArmResourceRead<SaasResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SaasResource>;
+  update is ArmCustomPatchAsync<
+    SaasResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<SaasResource, SaasResourceProperties>
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SaasResource>;
+  listByResourceGroup is ArmResourceListByParent<SaasResource>;
+  listAccessToken is ArmResourceActionSync<SaasResource, void, AccessTokenResult>;
+  unsubscribe is ArmResourceActionAsync<SaasResource, DeleteOptions, SaasResource>;
 }
 
-/** List SaaS resources by Azure subscription. */
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.SaaS")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom preflight route not tied to SaasResource"
+interface SaasSubscriptionLevelPreflight {
+  /** Pre-validates SaaS subscription operations. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Preflight accepts dynamic payload"
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight")
+  preflight(
+    ...ApiVersionParameter,
+    /** The Azure subscription ID. */ @path subscriptionId: string,
+    /** The resource group name. */ @path resourceGroupName: string,
+    /** The SaaS subscription name. */ @path saasSubscriptionName: string,
+    /** The preflight request body. */ @body body: unknown,
+  ): OkResponse | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
 interface SaasSubscriptionLevelGlobal {
-  /** Gets all Subscription Level SaaS in an Azure subscription. */
-  @get
-  @route("resources")
-  listByAzureSubscription(
-    ...Azure.ResourceManager.ApiVersionParameter,
-    @path subscriptionId: string,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: SaasResourceResponseWithContinuation;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Checks name availability for a SaaS resource. */
-  @post
-  @route("checkNameAvailability")
-  checkNameAvailability(
-    ...Azure.ResourceManager.ApiVersionParameter,
-    @path subscriptionId: string,
-    @body nameAvailability: SaasNameAvailabilityRequest,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: SaasNameAvailabilityResponse;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
-
-  /** Checks eligibility for a subscription-level SaaS purchase (subscription-scoped). */
-  @post
-  @route("checkEligibility")
-  checkEligibilitySubscription(
-    ...Azure.ResourceManager.ApiVersionParameter,
-    @path subscriptionId: string,
-    @body saasResource: SaasResource,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: EligibilityCheckResult;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  listByAzureSubscription is ArmListBySubscription<SaasResource>;
+  checkNameAvailability is checkGlobalNameAvailability<SaasNameAvailabilityRequest, SaasNameAvailabilityResponse>;
 }
 
-/** Move resources operations. */
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Move operations are not resource-scoped"
 interface SaasSubscriptionLevelMove {
-  /** Validate whether a Subscription Level SaaS can be moved. */
+  /** Validates a request to move SaaS resources between resource groups. */
   @post
-  @route("validateMoveResources")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
   validateMoveResources(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @body moveResourceParameter: MoveResource,
-  ): {
-    @statusCode statusCode: 200;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+    ...ApiVersionParameter,
+    /** The Azure subscription ID. */ @path subscriptionId: string,
+    /** The resource group name. */ @path resourceGroupName: string,
+    /** The move resource parameters. */ @body moveResourceParameter: MoveResource,
+  ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
 
-  /** Move a Subscription Level SaaS. */
+  /** Moves SaaS resources between resource groups. */
   @post
-  @route("moveResources")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
   moveResources(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SaasResource>,
-    @body moveResourceParameter: MoveResource,
-  ): {
-    @statusCode statusCode: 200;
-  } | {
-    @statusCode statusCode: 202;
-    @header location: string;
-    @header("Retry-After") retryAfter?: int32;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+    ...ApiVersionParameter,
+    /** The Azure subscription ID. */ @path subscriptionId: string,
+    /** The resource group name. */ @path resourceGroupName: string,
+    /** The move resource parameters. */ @body moveResourceParameter: MoveResource,
+  ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
 }
+
+
+
 

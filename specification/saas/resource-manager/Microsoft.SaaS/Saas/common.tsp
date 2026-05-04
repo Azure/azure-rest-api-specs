@@ -10,9 +10,11 @@ model DeleteOptions {
   /** Whether it is unsubscribe only. */
   unsubscribeOnly?: boolean;
   /** The reason code. */
-  reasonCode?: float64;
+  reasonCode?: int32;
   /** The feedback. */
   feedback?: string;
+  /** The deletion source. */
+  deletionSource?: DeletionSource = DeletionSource.CustomerCancellation;
 }
 
 /** The ISV access token result response. */
@@ -22,6 +24,11 @@ model AccessTokenResult {
   /** The generated token. */
   @secret
   token?: string;
+  /** The offer URI with the embedded token. */
+  @secret
+  offerUriWithToken?: string;
+  /** The token expiry time. */
+  expiryTime?: utcDateTime;
 }
 
 /** Resource Move Options. */
@@ -50,19 +57,4 @@ model SaasNameAvailabilityResponse {
   message?: string;
 }
 
-/** Eligibility check result with structured errors. */
-model EligibilityCheckResult {
-  /** Whether the subscription is eligible. */
-  isEligible?: boolean;
-  /** Structured list of eligibility errors. */
-  errors?: EligibilityErrorDetail[];
-}
-
-/** A single eligibility error. */
-model EligibilityErrorDetail {
-  /** Machine-readable error code. */
-  code?: string;
-  /** Human-readable error description. */
-  message?: string;
-}
 

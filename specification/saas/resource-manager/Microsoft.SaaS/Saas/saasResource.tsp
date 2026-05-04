@@ -77,6 +77,7 @@ model SaasResourceProperties {
 
   /** Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "AdditionalInfo is an open-ended key-value bag forwarded to Assets API"
   additionalInfo?: Record<string>;
 
   /** The purchaser email. Server-derived from authenticated identity. */
@@ -98,36 +99,10 @@ model SaasResourceProperties {
 
 /** SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData). */
 model SaasResource is TrackedResource<SaasResourceProperties> {
-  /** The resource name. */
-  @key("resourceName")
-  @segment("resources")
-  @path
-  name: string;
+  ...ResourceNameParameter<Resource = SaasResource, KeyName = "resourceName", SegmentName = "resources">;
 }
 
-/** SaaS resource creation model. */
-model SaasResourceCreation {
-  /** The resource uri. */
-  @visibility(Lifecycle.Read)
-  id?: string;
-  /** The resource name. */
-  name?: string;
-  /** Resource type. */
-  @visibility(Lifecycle.Read)
-  type?: string;
-  /** The resource tags. */
-  tags?: Record<string>;
-  /** Resource location. Only value allowed for SaaS is 'global'. */
-  location?: string;
-  /** Properties of the SaaS resource that are relevant for creation. */
-  properties?: SaasResourceProperties;
-}
 
-/** Paginated list of SaaS resources. */
-model SaasResourceResponseWithContinuation {
-  /** The next link to query to get the remaining results. */
-  nextLink?: string;
-  /** The value of response. */
-  value?: SaasResource[];
-}
+
+
 

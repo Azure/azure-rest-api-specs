@@ -26,6 +26,15 @@ union SubscriptionStatusReason {
   "AzureSubscriptionDeletion",
 }
 
+/** The deletion source. */
+union DeletionSource {
+  string,
+  /** Customer initiated cancellation */
+  CustomerCancellation: "CustomerCancellation",
+  /** Azure subscription deletion */
+  AzureSubscriptionDeletion: "AzureSubscriptionDeletion",
+}
+
 /** The intent for a patch operation. */
 union PatchIntent {
   string,
@@ -37,12 +46,4 @@ union PatchIntent {
   "ScheduleChange",
 }
 
-/** The deletion source. */
-union DeletionSource {
-  string,
-  /** Customer initiated cancellation */
-  "CustomerCancellation",
-  /** Azure subscription deletion */
-  "AzureSubscriptionDeletion",
-}
 
