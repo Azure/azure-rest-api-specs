@@ -80,8 +80,8 @@ Where GA used `$ref: "#/definitions/Compatibility"`, the emitter may inline equi
 **Emitter behavior:** Standard `@azure-tools/typespec-autorest` output. Does not affect HTTP
 contracts because OpenAPI 2.0 `$ref` is a structural shortcut, not a semantic one.
 
-**Wire impact:** None — request/response payloads are identical.
-**SDK impact:** None — generators resolve `$ref` before code generation.
+**Wire impact:** None.
+**SDK impact:** None.
 
 ---
 
@@ -117,19 +117,10 @@ hand-written swagger used bare `string` or `integer`.
 - `*.resultCode`, `*.extendedResultCode`, `*.totalDeviceCount` etc. — `format: int32` added (32-bit
   integer ranges, matching what the service actually returns).
 
-**Backward compatibility:** Adding a `format` keyword does not change the JSON wire shape — a
-`string` with `format: uri` is still serialized/deserialized as a JSON string. JSON Schema format
-validators are advisory.
-
-**Wire impact:** None — values transmitted are identical.
-
+**Wire impact:** None.
 **SDK impact (source-level):** Minor. Java/.NET signatures may shift (`string` → `URL`/`Uri`
 for `nextLink`/`Operation-Location`; `long` → `int` for the count/result-code fields).
-Python/JS/TS are unchanged. `nextLink` and `Operation-Location` are SDK-internal (paging/LRO
-helpers); the `int32` count fields preserve source compatibility under Java widening.
-
-**Action:** None. This is an intentional precision improvement; reverting would require fighting
-emitter conventions for cosmetic-only swagger output.
+Python/JS/TS are unchanged.
 
 ---
 
@@ -173,7 +164,7 @@ appears in the operation's `parameters` array.
 - `body` parameters are unique per operation.
 
 **Wire impact:** None.
-**SDK impact:** None — generators key on `name` + `in`, not array index.
+**SDK impact:** None.
 
 ---
 
@@ -188,8 +179,7 @@ means it is now declared at the **operation level**. This is an OpenAPI 2.0 stru
 distinction, **not a wire-format distinction**.
 
 **Wire impact:** None.
-**SDK impact:** None — generators flatten path-item parameters into operation parameters during
-processing, so the resulting client method signatures are identical.
+**SDK impact:** None.
 
 ---
 
@@ -206,10 +196,8 @@ processing, so the resulting client method signatures are identical.
 `parameters` map for `$ref` reuse. The emitter inlines parameters at each call site, so the
 top-level entries are no longer needed and are not emitted.
 
-**Wire impact:** None — every parameter is still present at every operation it was previously
-referenced from.
-**SDK impact:** None — `x-ms-parameter-location` and `x-ms-client-name` extensions are preserved
-on the inlined parameters where applicable.
+**Wire impact:** None.
+**SDK impact:** None.
 
 ---
 
