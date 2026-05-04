@@ -31,7 +31,11 @@
               "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
               "enabled": true,
               "disableAutonomousOperations": [],
-              "customInstructions": "Monitor application health and prioritize customer-impacting issues."
+              "operations": {
+                "IssueCreation": {
+                  "customInstructions": "use includeAlertsFromGlobalRules"
+                }
+              }
             },
             "systemData": {
               "createdBy": "user1",
