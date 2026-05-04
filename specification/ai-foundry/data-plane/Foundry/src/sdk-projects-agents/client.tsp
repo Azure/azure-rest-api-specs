@@ -184,6 +184,14 @@ namespace Azure.AI.Projects {
     "ToolOptions",
     "csharp"
   );
+  @@clientName(AgentEndpointConfig, "AgentEndpointConfiguration");
+  @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
+  @@clientName(TelemetryEndpoint.auth, "Authentication");
+  @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
+  @@clientName(TelemetryEndpointAuthType,
+    "TelemetryEndpointAuthenticationKind"
+  );
+  @@clientName(TelemetryDataKind, "ExportedDataTypes");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -239,4 +247,15 @@ namespace Azure.AI.Projects {
   // Skills sub‐client
   // --------------------------------------------------------------------------------
   @@clientName(SkillObject, "AgentsSkill");
+
+  // --------------------------------------------------------------------------------
+  // DataGenerationJobs sub‐client
+  // --------------------------------------------------------------------------------
+  // Hide the protocol methods and methods using feature headers
+  @@access(DataGenerationJobs.get, Access.internal);
+  @@access(DataGenerationJobs.create, Access.internal);
+  @@access(DataGenerationJobs.cancel, Access.internal);
+  @@access(DataGenerationJobs.delete, Access.internal);
+
+  @@clientName(DataGenerationJobType, "DataGenerationJobKind");
 }
