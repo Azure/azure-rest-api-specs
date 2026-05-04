@@ -9,6 +9,9 @@ using TypeSpec.Versioning;
 
 namespace Customizations;
 
+@@alternateType(KeyInfo.start, string, "python,csharp,javascript,go");
+@@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
