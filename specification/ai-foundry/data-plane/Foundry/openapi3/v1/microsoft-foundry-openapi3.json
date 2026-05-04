@@ -888,15 +888,6 @@
             }
           },
           {
-            "name": "x-session-isolation-key",
-            "in": "header",
-            "required": true,
-            "description": "Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -1555,15 +1546,6 @@
             "in": "path",
             "required": true,
             "description": "The session identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-session-isolation-key",
-            "in": "header",
-            "required": true,
-            "description": "Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations.",
             "schema": {
               "type": "string"
             }
@@ -15592,8 +15574,7 @@
       "EntraAuthorizationScheme": {
         "type": "object",
         "required": [
-          "type",
-          "isolation_key_source"
+          "type"
         ],
         "properties": {
           "type": {
@@ -15601,9 +15582,6 @@
             "enum": [
               "Entra"
             ]
-          },
-          "isolation_key_source": {
-            "$ref": "#/components/schemas/IsolationKeySource"
           }
         },
         "allOf": [
@@ -15638,30 +15616,6 @@
           }
         ],
         "description": "Entra ID credential definition"
-      },
-      "EntraIsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "Entra"
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IsolationKeySource"
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "Eval": {
         "type": "object",
@@ -17864,30 +17818,6 @@
         },
         "description": "Details of a function tool call."
       },
-      "HeaderIsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "Header"
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IsolationKeySource"
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -18527,48 +18457,6 @@
           }
         },
         "description": "Metadata about the insights."
-      },
-      "IsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "$ref": "#/components/schemas/IsolationKeySourceKind"
-          }
-        },
-        "discriminator": {
-          "propertyName": "kind",
-          "mapping": {
-            "Entra": "#/components/schemas/EntraIsolationKeySource",
-            "Header": "#/components/schemas/HeaderIsolationKeySource"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "IsolationKeySourceKind": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Entra",
-              "Header"
-            ]
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "ItemGenerationParams": {
         "type": "object",
