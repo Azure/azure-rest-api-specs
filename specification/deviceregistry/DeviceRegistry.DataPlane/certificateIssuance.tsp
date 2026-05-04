@@ -1,13 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -48,8 +45,9 @@ interface RuntimeCertIssuance {
   @summary("Issue operational certificates for IoT devices.")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}:issueCert")
   @post
-  @TypeSpec.OpenAPI.extension("x-ms-long-running-operation", true)
-  IssueCertificate(
+  @pollingOperation(RuntimeCertIssuance.getOperationStatus)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
+  issueCertificate(
     /** Azure subscription ID. */
     @path subscriptionId: string,
 
@@ -102,8 +100,7 @@ interface RuntimeCertIssuance {
 
     /** An opaque, globally-unique, client-generated string identifier for the request. */
     @header("x-ms-client-request-id")
-    @format("uuid")
-    xMsClientRequestId?: string;
+    xMsClientRequestId?: Azure.Core.uuid;
 
     /** The request has been accepted for processing, but processing has not yet completed. */
     @body body: {
@@ -125,7 +122,8 @@ interface RuntimeCertIssuance {
   @summary("Gets the cert issuance operation status.")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}")
   @get
-  OperationStatusLookup(
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
+  getOperationStatus(
     /** Azure subscription ID. */
     @path subscriptionId: string,
 
@@ -170,8 +168,7 @@ interface RuntimeCertIssuance {
 
     /** An opaque, globally-unique, client-generated string identifier for the request. */
     @header("x-ms-client-request-id")
-    @format("uuid")
-    xMsClientRequestId?: string;
+    xMsClientRequestId?: Azure.Core.uuid;
 
     /** The request has succeeded. */
     @body body: {

@@ -218,12 +218,15 @@
             "$ref": "./examples/RuntimeCertIssuance_IssueCertificate.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       }
     },
     "/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}": {
       "get": {
-        "operationId": "RuntimeCertIssuance_OperationStatusLookup",
+        "operationId": "RuntimeCertIssuance_GetOperationStatus",
         "tags": [
           "RuntimeCertIssuance"
         ],
