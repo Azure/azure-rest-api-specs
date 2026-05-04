@@ -288,6 +288,35 @@ The agent **does not**:
 | `skills/azure-api-review/references/*.md`       | 15 cross-cutting rule references (secret detection, property mutability, provisioning state, naming conventions, enum best practices, tracked resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight compliance, LRO final-state-via, suppression review criteria, linter rule coverage, design decisions) |
 | `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                            |
 
+### Evaluation Suite
+
+The agent is validated by an automated evaluation suite of 28 test stimuli
+covering ARM resource structure, property design, operations, breaking
+changes, suppressions, example files, TypeSpec review, and more. The tests
+run against fixture files with seeded violations and verify the agent
+detects each issue.
+
+To run the eval suite after making changes to the agent, instruction files,
+or skills:
+
+```powershell
+cd .github/skills/evals/arm-api-reviewer
+.\run-evals.ps1
+```
+
+The script automatically clones and builds the
+[evaluate](https://github.com/microsoft/evaluate) framework, runs all
+tests, and prints a pass/fail summary. Pass `-EvaluateRepo` to point to an
+existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip
+rebuilding. Run `Get-Help .\run-evals.ps1 -Detailed` for all options.
+
+Include the eval results in any PR that modifies the agent or its rules so
+reviewers can assess the impact.
+
+See [`.github/skills/evals/arm-api-reviewer/README.md`](../.github/skills/evals/arm-api-reviewer/README.md)
+for full documentation on test categories, fixtures, graders, and adding
+new tests.
+
 ### Rule Maintenance
 
 The instruction files are derived from the authoritative upstream documents
