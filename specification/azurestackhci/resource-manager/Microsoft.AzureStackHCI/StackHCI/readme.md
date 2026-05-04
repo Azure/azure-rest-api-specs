@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2026-04-01-preview
+tag: package-preview-2026-05-01-preview
 
 directive:
   - from: edgeDevices.json
@@ -328,6 +328,24 @@ suppressions:
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
+### Tag: package-preview-2026-05-01-preview
+
+These settings apply only when `--tag=package-preview-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/hci.json
+```
+
+### Tag: package-2026-05-01
+
+These settings apply only when `--tag=package-2026-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01'
+input-file:
+  - stable/2026-05-01/hci.json
+```
+
 ### Tag: package-preview-2026-04-01-preview
 
 These settings apply only when `--tag=package-preview-2026-04-01-preview` is specified on the command line.
