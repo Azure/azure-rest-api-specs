@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../evaluations/models.tsp";
 import "../red-teams/models.tsp";
 
 using Azure.Core.Experimental;
