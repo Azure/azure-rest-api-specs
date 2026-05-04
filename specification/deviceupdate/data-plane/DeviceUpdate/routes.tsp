@@ -57,7 +57,10 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
-  @useFinalStateVia("operation-location")
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "location" }
+  )
   importUpdate is ServiceOperation<
     {
       /**
@@ -130,7 +133,10 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
-  @useFinalStateVia("operation-location")
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "location" }
+  )
   deleteUpdate is ServiceOperation<
     {
       /**
@@ -578,7 +584,10 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post
   @pollingOperation(DeviceManagementOperationGroup.getOperationStatus)
-  @useFinalStateVia("operation-location")
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "location" }
+  )
   importDevices is ServiceOperation<
     {
       /**
@@ -1516,7 +1525,10 @@ interface DeviceManagementOperationGroup {
     },
     DeviceHealthList
   >;
+}
 
+@tag("Deployment management")
+interface DeploymentManagementOperationGroup {
   /**
    * Deletes a deployment.
    */

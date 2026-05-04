@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace DeviceUpdateClient;
@@ -1320,6 +1322,7 @@ model LogCollection {
   /**
    * The log collection id.
    */
+  @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 
   /**
@@ -1379,6 +1382,7 @@ model LogCollectionOperationDetailedStatus {
   /**
    * The device diagnostics operation id.
    */
+  @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 
   /**

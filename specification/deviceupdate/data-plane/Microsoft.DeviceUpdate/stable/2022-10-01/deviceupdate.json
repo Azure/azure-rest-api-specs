@@ -58,6 +58,9 @@
     },
     {
       "name": "Device and deployment management"
+    },
+    {
+      "name": "Deployment management"
     }
   ],
   "paths": {
@@ -760,7 +763,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1130,7 +1133,7 @@
       "delete": {
         "operationId": "DeviceManagement_DeleteDeployment",
         "tags": [
-          "Device and deployment management"
+          "Deployment management"
         ],
         "description": "Deletes a deployment.",
         "parameters": [
@@ -1573,7 +1576,7 @@
       "delete": {
         "operationId": "DeviceManagement_DeleteDeploymentForDeviceClassSubgroup",
         "tags": [
-          "Device and deployment management"
+          "Deployment management"
         ],
         "description": "Deletes a device class subgroup deployment.",
         "parameters": [
@@ -2609,7 +2612,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2812,7 +2815,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4094,7 +4097,8 @@
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The log collection id."
+          "description": "The log collection id.",
+          "x-ms-client-name": "logCollectionId"
         },
         "deviceList": {
           "type": "array",
@@ -4176,7 +4180,8 @@
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The device diagnostics operation id."
+          "description": "The device diagnostics operation id.",
+          "x-ms-client-name": "logCollectionId"
         },
         "createdDateTime": {
           "type": "string",
