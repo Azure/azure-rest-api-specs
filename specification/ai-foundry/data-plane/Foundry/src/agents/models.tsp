@@ -416,6 +416,9 @@ model CodeConfiguration {
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
 
+  @doc("When true, the service builds Python package dependencies remotely (e.g. installs from `requirements.txt` in the uploaded zip) during deployment. When false, the caller has already bundled all dependencies into the zip and no remote build is performed. When omitted, the service applies its default behavior.")
+  build_packages_remotely?: boolean;
+
   @visibility(Lifecycle.Read)
   @doc("The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.")
   content_hash?: string;
