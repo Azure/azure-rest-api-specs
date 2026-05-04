@@ -247,9 +247,7 @@ export default async function validateArmLeases(core) {
 
   // Log deleted files for informational purposes
   if (changedFilesStatuses.deletions.length > 0) {
-    core.info(
-      `Skipping ${changedFilesStatuses.deletions.length} deleted file(s) from validation`,
-    );
+    core.info(`Skipping ${changedFilesStatuses.deletions.length} deleted file(s) from validation`);
   }
 
   // Check for disallowed files
