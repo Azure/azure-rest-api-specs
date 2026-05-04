@@ -2871,6 +2871,12 @@ model VirtualMachineScaleSetNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: VmInterconnectGroupProfile;
 }
 
 /**
@@ -4027,6 +4033,12 @@ model VirtualMachineScaleSetUpdateVMProfile {
    * Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01.
    */
   hardwareProfile?: VirtualMachineScaleSetHardwareProfile;
+
+  /**
+   * Specifies the Interconnect Block related details of a scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -4152,6 +4164,12 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: VmInterconnectGroupProfile;
 }
 
 /**
@@ -5739,6 +5757,12 @@ model NetworkProfile {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: VmInterconnectGroupProfile;
 }
 
 /**
@@ -6033,6 +6057,12 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: VmInterconnectGroupProfile;
 }
 
 /**
@@ -8064,6 +8094,22 @@ model InterconnectInstanceView {
    */
   @visibility(Lifecycle.Read)
   interconnectSubgroupId?: string;
+}
+
+/**
+ * Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.
+ */
+@added(Versions.v2026_03_01)
+model VmInterconnectGroupProfile {
+  /**
+   * Reference to the interconnect group resource.
+   */
+  interconnectGroup?: SubResource;
+
+  /**
+   * The list of subgroup references within the interconnect group.
+   */
+  subgroups?: SubResource[];
 }
 
 /**

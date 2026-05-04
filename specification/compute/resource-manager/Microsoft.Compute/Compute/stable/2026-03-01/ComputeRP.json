@@ -6026,6 +6026,9 @@
           "Create a zones-auto scale set with Max Zone Count": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithMaxZoneCount.json"
           },
+          "Create or update a scale set with Interconnect Block.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithInterconnectBlock.json"
+          },
           "Create or update a scale set with capacity reservation.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithCapacityReservation.json"
           }
@@ -10688,6 +10691,9 @@
           "Create a vm with ssh authentication.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
           },
+          "Create or update a VM with Interconnect Block": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithInterconnectBlock.json"
+          },
           "Create or update a VM with capacity reservation": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithCapacityReservation.json"
           }
@@ -11723,6 +11729,9 @@
         "x-ms-examples": {
           "Get Virtual Machine Instance View.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_InstanceView.json"
+          },
+          "Get instance view of a virtual machine associated with an Interconnect Block.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_InstanceView_WithInterconnectBlock.json"
           },
           "Get instance view of a virtual machine placed on a dedicated host group through automatic placement.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_InstanceViewAutoPlacedOnDedicatedHostGroup.json"
@@ -16331,6 +16340,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "interconnectGroupProfile": {
+          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "description": "Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01."
         }
       }
     },
@@ -21854,6 +21867,10 @@
         "networkApiVersion": {
           "$ref": "#/definitions/NetworkApiVersion",
           "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'"
+        },
+        "interconnectGroupProfile": {
+          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "description": "Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01."
         }
       }
     },
@@ -22502,6 +22519,10 @@
         "networkApiVersion": {
           "$ref": "#/definitions/NetworkApiVersion",
           "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'"
+        },
+        "interconnectGroupProfile": {
+          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "description": "Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01."
         }
       }
     },
@@ -22770,6 +22791,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
           "description": "Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01."
+        },
+        "interconnectBlockProfile": {
+          "$ref": "#/definitions/InterconnectBlockProfile",
+          "description": "Specifies the Interconnect Block related details of a scale set. Minimum api-version: 2026-03-01."
         }
       }
     },
@@ -23084,6 +23109,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "interconnectGroupProfile": {
+          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "description": "Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01."
         }
       }
     },
@@ -24348,6 +24377,23 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of VMImages in EdgeZone. Call ListNext() with this URI to fetch the next page of VmImages."
+        }
+      }
+    },
+    "VmInterconnectGroupProfile": {
+      "type": "object",
+      "description": "Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.",
+      "properties": {
+        "interconnectGroup": {
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "Reference to the interconnect group resource."
+        },
+        "subgroups": {
+          "type": "array",
+          "description": "The list of subgroup references within the interconnect group.",
+          "items": {
+            "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
+          }
         }
       }
     },
