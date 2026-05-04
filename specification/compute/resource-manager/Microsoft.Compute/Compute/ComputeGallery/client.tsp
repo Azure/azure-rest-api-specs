@@ -145,6 +145,7 @@ using ComputeGallery;
 
 // Type renames for backward compatibility
 @@clientName(EndpointTypes, "ComputeGalleryEndpointType", "csharp");
+@@clientName(EndpointTypes.IMDS, "Imds", "csharp");
 @@clientName(GallerySoftDeletedResource,
   "GallerySoftDeletedResourceDetails",
   "csharp"
