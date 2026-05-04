@@ -8274,6 +8274,7 @@ union OwnershipVoucherValidationStatus {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_05_01)
 model UpdateContentProperties {
   /**
    * Represents the payloads of a update content resource.
@@ -8286,6 +8287,7 @@ model UpdateContentProperties {
  * Represents details of a specific update content payload.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_05_01)
 model ContentPayload {
   /**
    * Represents url of a update payload.
