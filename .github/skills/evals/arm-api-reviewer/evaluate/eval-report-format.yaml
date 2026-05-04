@@ -1,0 +1,48 @@
+name: arm-api-reviewer-eval-report-format
+description: |
+  Report format and structure test (11xxxx).
+  Validates that the reviewer output includes exact line numbers, rule IDs,
+  fix suggestions, and structured sections.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 110001 — Report format structure
+  - name: verify-report-format-structure
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings using the standard
+      review report format with rule IDs, exact line numbers, JSON paths, and fix
+      suggestions.
+
+      File: specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "line numbers present"
+        config:
+          pattern: "(?:\\*\\*)?[Ll]ines?(?:\\*\\*)?:?\\s*\\d+"
+      - type: output-matches
+        name: "rule IDs present"
+        config:
+          pattern: "SEC-SECRET-DETECT|RPC-[A-Za-z]+-V\\d+-\\d+"
+      - type: prompt
+    rubric:
+      - Each finding cites a specific line number (e.g., line 42) -- not vague references like "near end"
+      - Each finding includes a rule ID (e.g., SEC-SECRET-DETECT, RPC-Put-V1-22)
+      - Each finding includes a concrete fix suggestion
+      - The output has organized sections (Blocking Issues, Warnings, Summary, or similar)
