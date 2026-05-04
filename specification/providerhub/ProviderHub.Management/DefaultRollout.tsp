@@ -119,7 +119,8 @@ interface NewRegionFrontloadRelease {
    * Creates or updates a new region frontload release.
    */
   createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<
-    FrontloadPayload,
+    DefaultRollout,
+    Request = FrontloadPayload,
     Response = DefaultRollout | ArmResourceCreatedSyncResponse<DefaultRollout>
   >;
 

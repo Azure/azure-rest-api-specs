@@ -277,7 +277,7 @@ model AgentPoolCustomize
 
 @@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
   "ContainerService",
-  "!csharp"
+  "!csharp,!java"
 );
 
 @@clientLocation(TrustedAccessRolesOperationGroup.list,

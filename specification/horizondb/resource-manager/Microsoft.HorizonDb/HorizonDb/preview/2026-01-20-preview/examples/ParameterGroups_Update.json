@@ -1,0 +1,78 @@
+{
+  "operationId": "HorizonDbParameterGroups_Update",
+  "title": "Update a HorizonDb parameter group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "parameterGroupName": "exampleparametergroup",
+    "api-version": "2026-01-20-preview",
+    "properties": {
+      "tags": {
+        "team": "updated-data-platform"
+      },
+      "properties": {
+        "parameters": [
+          {
+            "name": "max_connections",
+            "value": "300"
+          },
+          {
+            "name": "log_min_error_statement",
+            "value": "warning"
+          }
+        ],
+        "description": "Updated parameter group for high-throughput workloads",
+        "applyImmediately": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
+        "name": "exampleparametergroup",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "westus2",
+        "tags": {
+          "team": "updated-data-platform"
+        },
+        "properties": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "description": "Sets the maximum number of concurrent connections",
+              "value": "300",
+              "dataType": "integer",
+              "allowedValues": "100,200,500,1000",
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/max_connections",
+              "unit": "connections"
+            },
+            {
+              "name": "log_min_error_statement",
+              "description": "Controls which statements are logged",
+              "value": "warning",
+              "dataType": "string",
+              "allowedValues": "debug,info,notice,warning,error,log,fatal,panic",
+              "isDynamic": true,
+              "isReadOnly": false,
+              "documentationLink": "https://docs.example.com/log_min_error_statement"
+            }
+          ],
+          "description": "Updated parameter group for high-throughput workloads",
+          "applyImmediately": true,
+          "pgVersion": 17,
+          "version": 22,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationStatuses/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2026-01-20-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationResults/ffffffff-ffff-ffff-ffff-ffffffffffff"
+      }
+    }
+  }
+}
