@@ -1255,7 +1255,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataAnnotationRequest"
+              "$ref": "#/definitions/DataAnnotation"
             }
           }
         ],
@@ -2492,38 +2492,18 @@
       "type": "object",
       "description": "A single data annotation on an entity",
       "properties": {
-        "annotationDetails": {
-          "type": "object",
-          "description": "Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.",
-          "additionalProperties": {
-            "$ref": "#/definitions/string256"
-          }
-        },
-        "description": {
-          "$ref": "#/definitions/string4096",
-          "description": "Optional description of the annotation"
-        },
         "annotationId": {
           "type": "string",
-          "description": "Server-assigned identifier for the annotation",
-          "maxLength": 36
+          "description": "Auto-assigned identifier for the annotation",
+          "maxLength": 256,
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the annotation was created"
-        }
-      },
-      "required": [
-        "annotationDetails",
-        "annotationId",
-        "createdAt"
-      ]
-    },
-    "DataAnnotationRequest": {
-      "type": "object",
-      "description": "Request body for adding a data annotation to an entity",
-      "properties": {
+          "description": "Timestamp when the annotation was created",
+          "readOnly": true
+        },
         "annotationDetails": {
           "type": "object",
           "description": "Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.",

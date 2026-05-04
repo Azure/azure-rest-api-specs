@@ -1323,25 +1323,23 @@ model HealthReportRequest {
 }
 
 @added(Versions.v2026_05_01_preview)
-@doc("Request body for adding a data annotation to an entity")
-model DataAnnotationRequest {
+@doc("A single data annotation on an entity")
+model DataAnnotation {
+  @doc("Auto-assigned identifier for the annotation")
+  @visibility(Lifecycle.Read)
+  @maxLength(256)
+  annotationId?: string;
+
+  @doc("Timestamp when the annotation was created")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
   @doc("Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.")
   annotationDetails: Record<string256>;
 
   @doc("Optional description of the annotation")
   description?: string4096;
-}
-
-@added(Versions.v2026_05_01_preview)
-@doc("A single data annotation on an entity")
-model DataAnnotation is DataAnnotationRequest {
-  @doc("Server-assigned identifier for the annotation")
-  @maxLength(36)
-  annotationId: string;
-
-  @doc("Timestamp when the annotation was created")
-  createdAt: utcDateTime;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1604,7 +1602,7 @@ interface Entities {
   @action("addDataAnnotation")
   addDataAnnotation is ArmResourceActionSync<
     Entity,
-    DataAnnotationRequest,
+    DataAnnotation,
     DataAnnotation
   >;
 
