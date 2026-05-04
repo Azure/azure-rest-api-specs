@@ -1814,7 +1814,7 @@ interface PageBlob {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface AppendBlob {
-  /** The Create operation creates a new append blob. */
+  /** Creates a new append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1844,7 +1844,7 @@ interface AppendBlob {
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
 
-      /** the initial size of the append blob */
+      /** The initial size of the append blob. */
       @header("Content-Length")
       contentLength: 0;
 
@@ -1864,7 +1864,7 @@ interface AppendBlob {
     }
   >;
 
-  /** The Append Block operation commits a new block of data to the end of an append blob. */
+  /** Uploads a new block of data to the end of an append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1912,7 +1912,7 @@ interface AppendBlob {
     "application/octet-stream"
   >;
 
-  /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
+  /** Uploads a new block of data from the specified URL to the end of an append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1964,7 +1964,7 @@ interface AppendBlob {
     }
   >;
 
-  /** The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later. */
+  /** Seals the append blob to make it read-only. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1991,7 +1991,7 @@ interface AppendBlob {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface BlockBlob {
-  /** The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation. */
+  /** Uploads the content to the specified block blob. If the blob already exists, the data and any existing metadata will be overwritten. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2049,7 +2049,7 @@ interface BlockBlob {
     "application/octet-stream"
   >;
 
-  /** The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List. */
+  /** Uploads the content from the specified URL to the block blob. If the blob already exists, the data and any existing metadata will be overwritten. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2115,7 +2115,7 @@ interface BlockBlob {
     }
   >;
 
-  /** The Stage Block operation creates a new block to be committed as part of a blob */
+  /** Creates a new block of data to be committed as part of a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2151,7 +2151,7 @@ interface BlockBlob {
     "application/octet-stream"
   >;
 
-  /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
+  /** Creates a new block of data from the specified URL to be committed as part of a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2192,7 +2192,7 @@ interface BlockBlob {
     }
   >;
 
-  /** The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to. */
+  /** Writes to the block blob by specifying the list of block IDs that make up the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2223,7 +2223,7 @@ interface BlockBlob {
       ...IfMatchParameter;
       ...IfTagsParameter;
 
-      /** Blob Blocks. */
+      /** Blob blocks. */
       @body blocks: BlockLookupList;
 
       ...BlobTagsHeaderParameter;
@@ -2244,7 +2244,7 @@ interface BlockBlob {
     }
   >;
 
-  /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
+  /** Retrieves the list of blocks that have been uploaded as part of the block blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?comp=blocklist")
@@ -2262,7 +2262,7 @@ interface BlockBlob {
       ...IfTagsParameter;
     },
     {
-      /** Block list */
+      /** The list of blocks. */
       @body
       blockList: BlockList;
 
@@ -2272,14 +2272,14 @@ interface BlockBlob {
     }
   >;
 
-  /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
+  /** Queries the data of the specified blob with the provided query expressions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @post
   @route("?comp=query")
   query is StorageOperation<
     {
-      /** The query request */
+      /** The query request. */
       @body
       queryRequest: QueryRequest;
 
