@@ -25,6 +25,7 @@ import "./src/agents/routes.tsp";
 // import "./src/skills/routes.tsp";
 import "./src/agents-session-files/models.tsp";
 import "./src/agents-session-files/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 // import "./relocate-beta-operations.tsp";
@@ -167,6 +168,13 @@ using Azure.AI.Projects;
 // // --------------------------------------------------------------------------------
 // @@clientName(Evaluators.listLatestVersions, "list");
 
+// // Evaluator generation jobs — renamed for Python SDK discoverability
+// @@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
+// @@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
+// @@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
+// @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
+// @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+
 // // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 // @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 // @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
@@ -187,6 +195,20 @@ using Azure.AI.Projects;
 // @@clientName(Datasets.deleteVersion, "delete");
 // @@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
 // @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+
+// // Data generation jobs — renamed for Python SDK discoverability
+// @@clientName(DataGenerationJobs.get, "get_generation_job", "python");
+// @@clientName(DataGenerationJobs.list, "list_generation_jobs", "python");
+// @@clientName(DataGenerationJobs.create, "create_generation_job", "python");
+// @@clientName(DataGenerationJobs.cancel, "cancel_generation_job", "python");
+// @@clientName(DataGenerationJobs.delete, "delete_generation_job", "python");
+
+// // Data generation jobs — renamed for JavaScript SDK discoverability
+// @@clientName(DataGenerationJobs.get, "getGenerationJob", "javascript");
+// @@clientName(DataGenerationJobs.list, "listGenerationJobs", "javascript");
+// @@clientName(DataGenerationJobs.create, "createGenerationJob", "javascript");
+// @@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "javascript");
+// @@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "javascript");
 
 // // More accurate naming
 // @@clientName(AssetCredentialResponse, "DatasetCredential");

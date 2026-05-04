@@ -6,6 +6,12 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+/** Optional response header containing the session ID for hosted agent requests. */
+alias AgentSessionIdResponseHeader = {
+  /** Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request. */
+  @header("x-agent-session-id") agentSessionId?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @route("openai/v1/responses")
@@ -17,7 +23,12 @@ interface Responses {
   @operationId("createResponse")
   @post
   @sharedRoute
-  createResponse is OpenAIOperation<OpenAI.CreateResponse, OpenAI.Response>;
+  createResponse is OpenAIOperation<
+    OpenAI.CreateResponse,
+    AgentSessionIdResponseHeader & {
+      @body body: OpenAI.Response;
+    }
+  >;
 
   /**
    * Creates a model response (streaming response).
@@ -27,7 +38,7 @@ interface Responses {
   @sharedRoute
   createResponseStream is OpenAIOperation<
     OpenAI.CreateResponse,
-    SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+    AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
   /**
@@ -54,7 +65,9 @@ interface Responses {
       @query stream?: boolean = false;
       @query starting_after?: int32;
     },
-    OpenAI.Response
+    AgentSessionIdResponseHeader & {
+      @body body: OpenAI.Response;
+    }
   >;
 
   /**
@@ -80,7 +93,7 @@ interface Responses {
       @header accept: "text/event-stream";
       @query starting_after?: int32;
     },
-    SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+    AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
   /**
@@ -98,7 +111,9 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
     },
-    DeleteResponseResult
+    AgentSessionIdResponseHeader & {
+      @body body: DeleteResponseResult;
+    }
   >;
 
   /**
@@ -116,7 +131,9 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
     },
-    OpenAI.Response
+    AgentSessionIdResponseHeader & {
+      @body body: OpenAI.Response;
+    }
   >;
 
   /**
@@ -134,7 +151,9 @@ interface Responses {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.ItemResource>
+    AgentSessionIdResponseHeader & {
+      @body body: AgentsPagedResult<OpenAI.ItemResource>;
+    }
   >;
 
   /**
