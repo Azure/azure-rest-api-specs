@@ -343,7 +343,15 @@ stages:
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
-        
+
+        - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
+          - pwsh: |
+              gh pr merge $(Submitted.PullRequest.Number) --auto --squash
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            displayName: Apply AutoMerge to Pull Request
+            workingDirectory: $(SdkRepoDirectory)
+            env:
+              GH_TOKEN: $(azuresdk-github-pat)
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - pwsh: |
