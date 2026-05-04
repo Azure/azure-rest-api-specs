@@ -9,10 +9,13 @@ namespace Microsoft.SaaS;
 model DeleteOptions {
   /** Whether it is unsubscribe only. */
   unsubscribeOnly?: boolean;
+
   /** The reason code. */
   reasonCode?: int32;
+
   /** The feedback. */
   feedback?: string;
+
   /** The deletion source. */
   deletionSource?: DeletionSource = DeletionSource.CustomerCancellation;
 }
@@ -21,12 +24,15 @@ model DeleteOptions {
 model AccessTokenResult {
   /** The Publisher Offer Base Uri. */
   publisherOfferBaseUri?: string;
+
   /** The generated token. */
   @secret
   token?: string;
+
   /** The offer URI with the embedded token. */
   @secret
   offerUriWithToken?: string;
+
   /** The token expiry time. */
   expiryTime?: utcDateTime;
 }
@@ -35,6 +41,7 @@ model AccessTokenResult {
 model MoveResource {
   /** The target resource group uri for the move. */
   targetResourceGroup?: string;
+
   /** The resource uris to move. */
   resources?: string[];
 }
@@ -43,6 +50,7 @@ model MoveResource {
 model SaasNameAvailabilityRequest {
   /** Name to check availability for. */
   name?: string;
+
   /** Resource type. */
   type?: string;
 }
@@ -51,10 +59,10 @@ model SaasNameAvailabilityRequest {
 model SaasNameAvailabilityResponse {
   /** Whether the name is available. */
   nameAvailable?: boolean;
+
   /** Reason the name is not available. */
   reason?: string;
+
   /** Detailed message. */
   message?: string;
 }
-
-

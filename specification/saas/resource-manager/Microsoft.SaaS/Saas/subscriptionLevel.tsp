@@ -16,12 +16,23 @@ interface SaasSubscriptionLevel {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SaasResource>;
   update is ArmCustomPatchAsync<
     SaasResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<SaasResource, SaasResourceProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      SaasResource,
+      SaasResourceProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<SaasResource>;
   listByResourceGroup is ArmResourceListByParent<SaasResource>;
-  listAccessToken is ArmResourceActionSync<SaasResource, void, AccessTokenResult>;
-  unsubscribe is ArmResourceActionAsync<SaasResource, DeleteOptions, SaasResource>;
+  listAccessToken is ArmResourceActionSync<
+    SaasResource,
+    void,
+    AccessTokenResult
+  >;
+  unsubscribe is ArmResourceActionAsync<
+    SaasResource,
+    DeleteOptions,
+    SaasResource
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom preflight route not tied to SaasResource"
@@ -32,17 +43,28 @@ interface SaasSubscriptionLevelPreflight {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight")
   preflight(
     ...ApiVersionParameter,
-    /** The Azure subscription ID. */ @path subscriptionId: string,
-    /** The resource group name. */ @path resourceGroupName: string,
-    /** The SaaS subscription name. */ @path saasSubscriptionName: string,
-    /** The preflight request body. */ @body body: unknown,
+
+    /** The Azure subscription ID. */
+    @path subscriptionId: string,
+
+    /** The resource group name. */
+    @path resourceGroupName: string,
+
+    /** The SaaS subscription name. */
+    @path saasSubscriptionName: string,
+
+    /** The preflight request body. */
+    @body body: unknown,
   ): OkResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
 interface SaasSubscriptionLevelGlobal {
   listByAzureSubscription is ArmListBySubscription<SaasResource>;
-  checkNameAvailability is checkGlobalNameAvailability<SaasNameAvailabilityRequest, SaasNameAvailabilityResponse>;
+  checkNameAvailability is checkGlobalNameAvailability<
+    SaasNameAvailabilityRequest,
+    SaasNameAvailabilityResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Move operations are not resource-scoped"
@@ -52,9 +74,15 @@ interface SaasSubscriptionLevelMove {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
   validateMoveResources(
     ...ApiVersionParameter,
-    /** The Azure subscription ID. */ @path subscriptionId: string,
-    /** The resource group name. */ @path resourceGroupName: string,
-    /** The move resource parameters. */ @body moveResourceParameter: MoveResource,
+
+    /** The Azure subscription ID. */
+    @path subscriptionId: string,
+
+    /** The resource group name. */
+    @path resourceGroupName: string,
+
+    /** The move resource parameters. */
+    @body moveResourceParameter: MoveResource,
   ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
 
   /** Moves SaaS resources between resource groups. */
@@ -62,12 +90,14 @@ interface SaasSubscriptionLevelMove {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
   moveResources(
     ...ApiVersionParameter,
-    /** The Azure subscription ID. */ @path subscriptionId: string,
-    /** The resource group name. */ @path resourceGroupName: string,
-    /** The move resource parameters. */ @body moveResourceParameter: MoveResource,
+
+    /** The Azure subscription ID. */
+    @path subscriptionId: string,
+
+    /** The resource group name. */
+    @path resourceGroupName: string,
+
+    /** The move resource parameters. */
+    @body moveResourceParameter: MoveResource,
   ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
 }
-
-
-
-

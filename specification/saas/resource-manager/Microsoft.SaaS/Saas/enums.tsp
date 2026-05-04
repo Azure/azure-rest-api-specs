@@ -3,14 +3,19 @@ namespace Microsoft.SaaS;
 /** The SaaS Subscription Status. */
 union SaasResourceStatus {
   string,
+
   /** Subscription has not started */
   "NotStarted",
+
   /** Pending fulfillment start */
   "PendingFulfillmentStart",
+
   /** Subscribed */
   "Subscribed",
+
   /** Unsubscribed */
   "Unsubscribed",
+
   /** Suspended */
   "Suspended",
 }
@@ -18,10 +23,13 @@ union SaasResourceStatus {
 /** The reason for the subscription status. */
 union SubscriptionStatusReason {
   string,
+
   /** No specific reason */
   "None",
+
   /** Suspended internally */
   "SuspendedInternal",
+
   /** Azure subscription deleted */
   "AzureSubscriptionDeletion",
 }
@@ -29,8 +37,10 @@ union SubscriptionStatusReason {
 /** The deletion source. */
 union DeletionSource {
   string,
+
   /** Customer initiated cancellation */
   CustomerCancellation: "CustomerCancellation",
+
   /** Azure subscription deletion */
   AzureSubscriptionDeletion: "AzureSubscriptionDeletion",
 }
@@ -38,12 +48,13 @@ union DeletionSource {
 /** The intent for a patch operation. */
 union PatchIntent {
   string,
+
   /** Retain the current subscription */
   "Retain",
+
   /** Reset the subscription */
   "Reset",
+
   /** Schedule a change */
   "ScheduleChange",
 }
-
-

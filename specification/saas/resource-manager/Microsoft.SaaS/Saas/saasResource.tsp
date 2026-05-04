@@ -76,8 +76,8 @@ model SaasResourceProperties {
   // NOTE: cspProperties removed from GA API — 0 non-null usage in 18-month production data.
 
   /** Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "AdditionalInfo is an open-ended key-value bag forwarded to Assets API"
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   additionalInfo?: Record<string>;
 
   /** The purchaser email. Server-derived from authenticated identity. */
@@ -99,10 +99,9 @@ model SaasResourceProperties {
 
 /** SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData). */
 model SaasResource is TrackedResource<SaasResourceProperties> {
-  ...ResourceNameParameter<Resource = SaasResource, KeyName = "resourceName", SegmentName = "resources">;
+  ...ResourceNameParameter<
+    Resource = SaasResource,
+    KeyName = "resourceName",
+    SegmentName = "resources"
+  >;
 }
-
-
-
-
-

@@ -1,0 +1,71 @@
+{
+  "operationId": "SaasTenantLevel_CreateResource",
+  "title": "Create a tenant-level SaaS resource",
+  "parameters": {
+    "resourceId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+    "api-version": "2026-04-01",
+    "resource": {
+      "location": "global",
+      "tags": {},
+      "properties": {
+        "description": "My SaaS subscription",
+        "quantity": 1,
+        "autoRenew": true,
+        "storeFront": "AzurePortal",
+        "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.SaaS/saasresources/e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+        "name": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+        "type": "Microsoft.SaaS/saasresources",
+        "location": "global",
+        "tags": {},
+        "properties": {
+          "subscriptionId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+          "description": "My SaaS subscription",
+          "status": "PendingFulfillmentStart",
+          "statusReason": "None",
+          "quantity": 1,
+          "publisherName": "ISVUKLegacy",
+          "planName": "SaaS Plan",
+          "offerName": "SaaS Offer",
+          "termUnit": "P1M",
+          "billingPeriod": "P1M",
+          "autoRenew": true,
+          "isFreeTrial": false,
+          "storeFront": "AzurePortal",
+          "purchaserEmail": "user@contoso.com",
+          "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.SaaS/operationResults/e24b5b6b-2dfc-41ea-c457-46d0c42494af?api-version=2026-04-01",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/providers/Microsoft.SaaS/saasresources/e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+        "name": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+        "type": "Microsoft.SaaS/saasresources",
+        "location": "global",
+        "tags": {},
+        "properties": {
+          "subscriptionId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+          "description": "My SaaS subscription",
+          "status": "PendingFulfillmentStart",
+          "statusReason": "None",
+          "quantity": 1,
+          "autoRenew": true,
+          "storeFront": "AzurePortal",
+          "purchaserEmail": "user@contoso.com",
+          "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
+        }
+      }
+    }
+  }
+}
