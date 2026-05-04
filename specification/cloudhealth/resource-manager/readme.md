@@ -41,7 +41,6 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Approved scenario for dynamic annotation key-value properties
     where:
-      - $.definitions.DataAnnotationRequest.properties.annotationDetails
       - $.definitions.DataAnnotation.properties.annotationDetails
 ```
 
