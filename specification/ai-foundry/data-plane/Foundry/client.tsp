@@ -164,7 +164,16 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Evaluators.listLatestVersions, "list");
+
+// Need to explicitly mention both languages to avoid compile error
+@@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+// Evaluator generation jobs — renamed for JavaScript SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob", "javascript");
 
 // Evaluator generation jobs — renamed for Python SDK discoverability
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
