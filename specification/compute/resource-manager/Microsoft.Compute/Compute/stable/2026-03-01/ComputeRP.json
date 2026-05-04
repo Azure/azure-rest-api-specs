@@ -13218,6 +13218,11 @@
           "$ref": "#/definitions/CapacityReservationUtilization",
           "description": "Unutilized capacity of the capacity reservation."
         },
+        "reservationStateInfo": {
+          "$ref": "#/definitions/ReservationStateInfo",
+          "readOnly": true,
+          "description": "The reservation state information of the capacity reservation."
+        },
         "statuses": {
           "type": "array",
           "description": "The resource status information.",
@@ -17764,6 +17769,17 @@
         }
       }
     },
+    "ReservationStateInfo": {
+      "type": "object",
+      "description": "The reservation state information of the capacity reservation.",
+      "properties": {
+        "reservationState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reservation state of the capacity reservation."
+        }
+      }
+    },
     "ScheduleProfile": {
       "type": "object",
       "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.",
@@ -17771,6 +17787,11 @@
         "start": {
           "type": "string",
           "description": "The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27."
+        },
+        "minimumCommitmentDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of days the capacity reservation must be committed."
         },
         "end": {
           "type": "string",
