@@ -666,7 +666,7 @@ union PublicNetworkAccess {
   /**
    * Public network access is enabled.
    */
-  Succeeded: "Enabled",
+  Enabled: "Enabled",
 
   /**
    * Public network access is disabled.
