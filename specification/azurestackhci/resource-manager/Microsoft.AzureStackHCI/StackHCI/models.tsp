@@ -1935,7 +1935,6 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_04_01_preview)
-  @removed(Versions.v2026_04_30)
   ring?: string;
 
   /**
