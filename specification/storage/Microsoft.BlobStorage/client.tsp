@@ -958,4 +958,4 @@ scalar HttpRange extends string;
   },
   "rust"
 )
-scalar BlobMetadataAlternate extends string;
+scalar BlobMetadataAlternate;
