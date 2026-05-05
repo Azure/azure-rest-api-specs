@@ -15556,6 +15556,23 @@
         }
       ]
     },
+    "InterconnectGroupProfile": {
+      "type": "object",
+      "description": "Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.",
+      "properties": {
+        "interconnectGroup": {
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "Reference to the interconnect group resource."
+        },
+        "subgroups": {
+          "type": "array",
+          "description": "The list of subgroup references within the interconnect group.",
+          "items": {
+            "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
     "InterconnectInstanceView": {
       "type": "object",
       "description": "The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.",
@@ -16342,7 +16359,7 @@
           ]
         },
         "interconnectGroupProfile": {
-          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "$ref": "#/definitions/InterconnectGroupProfile",
           "description": "Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01."
         }
       }
@@ -21869,7 +21886,7 @@
           "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'"
         },
         "interconnectGroupProfile": {
-          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "$ref": "#/definitions/InterconnectGroupProfile",
           "description": "Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01."
         }
       }
@@ -22521,7 +22538,7 @@
           "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'"
         },
         "interconnectGroupProfile": {
-          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "$ref": "#/definitions/InterconnectGroupProfile",
           "description": "Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01."
         }
       }
@@ -23111,7 +23128,7 @@
           ]
         },
         "interconnectGroupProfile": {
-          "$ref": "#/definitions/VmInterconnectGroupProfile",
+          "$ref": "#/definitions/InterconnectGroupProfile",
           "description": "Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01."
         }
       }
@@ -24377,23 +24394,6 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of VMImages in EdgeZone. Call ListNext() with this URI to fetch the next page of VmImages."
-        }
-      }
-    },
-    "VmInterconnectGroupProfile": {
-      "type": "object",
-      "description": "Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.",
-      "properties": {
-        "interconnectGroup": {
-          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Reference to the interconnect group resource."
-        },
-        "subgroups": {
-          "type": "array",
-          "description": "The list of subgroup references within the interconnect group.",
-          "items": {
-            "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
-          }
         }
       }
     },

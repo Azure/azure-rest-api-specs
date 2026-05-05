@@ -2876,7 +2876,7 @@ model VirtualMachineScaleSetNetworkProfile {
    * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
    */
   @added(Versions.v2026_03_01)
-  interconnectGroupProfile?: VmInterconnectGroupProfile;
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -4169,7 +4169,7 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
    * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
    */
   @added(Versions.v2026_03_01)
-  interconnectGroupProfile?: VmInterconnectGroupProfile;
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -5762,7 +5762,7 @@ model NetworkProfile {
    * Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01.
    */
   @added(Versions.v2026_03_01)
-  interconnectGroupProfile?: VmInterconnectGroupProfile;
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -6062,7 +6062,7 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
    * Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01.
    */
   @added(Versions.v2026_03_01)
-  interconnectGroupProfile?: VmInterconnectGroupProfile;
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -8100,7 +8100,7 @@ model InterconnectInstanceView {
  * Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.
  */
 @added(Versions.v2026_03_01)
-model VmInterconnectGroupProfile {
+model InterconnectGroupProfile {
   /**
    * Reference to the interconnect group resource.
    */
