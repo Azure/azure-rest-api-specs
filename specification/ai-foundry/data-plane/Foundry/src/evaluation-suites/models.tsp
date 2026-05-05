@@ -21,8 +21,8 @@ union EvaluationSuiteSubtype {
   @doc("Default suite type.")
   default: "default",
 
-  @doc("Benchmark spec suite.")
-  benchmark_spec: "benchmark_spec",
+  @doc("Benchmark suite.")
+  benchmark: "benchmark",
 }
 
 @doc("The category of evaluator generation.")
@@ -143,9 +143,22 @@ model EvaluationSuiteVersion {
     """)
   evaluation_level?: EvaluationLevel;
 
-  // AssetBase provides: name (string, @key), version (string, read-only),
-  // id (string, read-only), description (string, optional), tags (Record<string>, optional)
-  ...AssetBase;
+  @doc("The name of the resource.")
+  @visibility(Lifecycle.Read)
+  @key
+  name: string;
+
+  @doc("The version of the resource.")
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  @doc("The asset description text.")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  description?: string;
+
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
 }
 
 // ---------------------------------------------------------------------------
@@ -157,8 +170,8 @@ model EvaluationSuiteRunRequest {
   @doc("Name for the evaluation. Default: '{suiteName}-runs'.")
   evaluation_name?: string;
 
-  @doc("Suite version to run. Default: latest.")
-  suite_version?: string;
+  @doc("Evaluation suite version to run. Default: latest.")
+  evaluation_suite_version?: string;
 
   @doc("Overrides the suite's default evaluation level. If omitted, uses the level from the suite.")
   evaluation_level?: EvaluationLevel;
@@ -166,17 +179,23 @@ model EvaluationSuiteRunRequest {
 
 @doc("Response from running an evaluation suite.")
 model EvaluationSuiteRunResponse {
+  @doc("The evaluation suite name used.")
+  evaluation_suite_name: string;
+
+  @doc("The evaluation suite version resolved.")
+  evaluation_suite_version: string;
+
+  @doc("The run results. Currently a single-element array; will support multiple runs in the future.")
+  results: EvaluationSuiteRunResult[];
+}
+
+@doc("Result of a single evaluation run within a suite execution.")
+model EvaluationSuiteRunResult {
   @doc("The evaluation ID created.")
   eval_id: string;
 
   @doc("The eval run ID created.")
   run_id: string;
-
-  @doc("The suite name used.")
-  suite_name: string;
-
-  @doc("The suite version resolved.")
-  suite_version: string;
 
   @doc("Status of the run.")
   status: JobStatus;
