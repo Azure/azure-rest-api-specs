@@ -1678,7 +1678,6 @@ interface PageBlob {
   /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @list
   @get
   @sharedRoute
   @route("?comp=pagelist")
@@ -1706,7 +1705,6 @@ interface PageBlob {
   /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @list
   @get
   @sharedRoute
   @route("?comp=pagelist")
