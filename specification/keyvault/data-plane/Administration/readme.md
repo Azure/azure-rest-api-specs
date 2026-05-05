@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2026-01-01-preview` is spe
 input-file:
   - preview/2026-01-01-preview/administration.json
 ```
+```
 
 ### Tag: package-2025-07-01
 
