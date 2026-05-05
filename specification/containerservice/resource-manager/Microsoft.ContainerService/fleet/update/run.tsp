@@ -229,6 +229,11 @@ model UpdateRunStatus {
   @doc("The node image upgrade specs for the update run. It is only set in update run when `NodeImageSelection.type` is `Consistent`.")
   @added(Versions.v2023_06_15_preview)
   nodeImageSelection?: NodeImageSelectionStatus;
+
+  @visibility(Lifecycle.Read)
+  @doc("Total member upgrade failures across the entire UpdateRun.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
 }
 
 @doc("The node image upgrade specs for the update run.")
