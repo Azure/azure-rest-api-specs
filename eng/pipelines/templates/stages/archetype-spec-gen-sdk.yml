@@ -34,6 +34,9 @@ parameters:
   - name: ReleasePlanWorkItemId
     type: number
     default: 0
+  - name: TriggerSource
+    type: string
+    default: 'unspecified'
 
 stages:
 - stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
@@ -47,7 +50,7 @@ stages:
     variables:
       - template: /eng/pipelines/templates/variables/image.yml
       - name: NodeVersion
-        value: '22.13.x'
+        value: '22.x'
       - name: PythonVersion
         value: '3.13'
       - name: PipelineArtifactsName
@@ -195,9 +198,9 @@ stages:
             TokenToUseForAuth: $(azuresdk-github-pat)
             PreserveAuthToken: true
 
-      - task: NodeTool@0
+      - task: UseNode@1
         inputs:
-          versionSpec: $(NodeVersion)
+          version: $(NodeVersion)
         displayName: 'Install Node.js'
 
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
@@ -339,7 +342,7 @@ stages:
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-              -OpenAsDraft $true
+              -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
         
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
@@ -347,7 +350,7 @@ stages:
               $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
               Write-Host "Pull request created: $prUrl"
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-              $prStatus = "draft"
+              $prStatus = "${{ iif(endsWith(parameters.TriggerSource, '-release'), 'ready for review', 'draft') }}"
               Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
             condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
             displayName: "Set pull request URL variable"

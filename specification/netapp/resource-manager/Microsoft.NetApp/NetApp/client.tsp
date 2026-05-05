@@ -21,12 +21,6 @@ using Microsoft.NetApp;
   "java"
 );
 
-// Fix property name case changes
-@@clientName(Microsoft.NetApp.AccountPropertiesPatch.nfsV4IDDomain,
-  "nfsV4IdDomain",
-  "java"
-);
-
 @@clientName(Microsoft.NetApp.ActiveDirectory.kdcIP, "kdcIp", "java");
 @@clientName(Microsoft.NetApp.ActiveDirectory.ldapOverTLS,
   "ldapOverTls",

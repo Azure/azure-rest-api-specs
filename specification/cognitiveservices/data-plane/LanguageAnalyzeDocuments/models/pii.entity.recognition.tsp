@@ -26,9 +26,25 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   @removed(Versions.v2026_05_01)
   redactionPolicy?: BaseRedactionPolicy;
 
+  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+  @added(Versions.v2026_05_15_preview)
+  valueExclusionPolicy?: ValueExclusionPolicy;
+
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+  @added(Versions.v2026_05_15_preview)
+  entitySynonyms?: EntitySynonyms[];
+
   /** List of RedactionPolicies to be used on the input. */
   @added(Versions.v2026_05_01)
   redactionPolicies?: BaseRedactionPolicy[];
+
+  /** Confidence score threshold configuration for PII entity recognition */
+  @added(Versions.v2026_05_15_preview)
+  confidenceScoreThreshold?: ConfidenceScoreThreshold;
+
+  /** Disable entity validation for PII entity recognition */
+  @added(Versions.v2026_05_15_preview)
+  disableEntityValidation?: boolean = false;
 
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
   @added(Versions.v2024_11_15_preview)
@@ -64,6 +80,59 @@ union PiiDomain {
   none: "none",
 }
 
+/** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+@added(Versions.v2026_05_15_preview)
+model EntitySynonyms {
+  /** The entity name */
+  entityType: PiiCategories;
+
+  /** The entity synonyms */
+  synonyms: EntitySynonym[];
+}
+
+/** The entity synonyms used to enhance pii entity detection */
+@added(Versions.v2026_05_15_preview)
+model EntitySynonym {
+  /** The synonym to be used for context */
+  synonym: string;
+
+  /** The 2 letter ISO 639-1 language the synonym */
+  language?: string;
+}
+
+/** Configuration for confidence score threshold for PII entity recognition */
+@added(Versions.v2026_05_15_preview)
+model ConfidenceScoreThreshold {
+  /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
+  default: float32;
+
+  /** List of confidence score threshold overrides for specific PII categories */
+  overrides?: ConfidenceScoreThresholdOverride[];
+}
+
+/** Confidence score threshold override for a specific PII category */
+@added(Versions.v2026_05_15_preview)
+model ConfidenceScoreThresholdOverride {
+  /** The PII category for which to override the confidence score threshold */
+  entity: PiiCategories;
+
+  /** The confidence score threshold for the specified PII category */
+  value: float32;
+
+  /** The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages. */
+  language: string;
+}
+
+/** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+@added(Versions.v2026_05_15_preview)
+model ValueExclusionPolicy {
+  /** Option to make the values excluded values case sensitive */
+  caseSensitive: boolean = false;
+
+  /** List of words and terms that should be excluded from detection by the PII detection service */
+  excludedValues: string[];
+}
+
 /** The abstract base class for RedactionPolicy. */
 @discriminator("policyKind")
 model BaseRedactionPolicy {
@@ -83,6 +152,16 @@ model BaseRedactionPolicy {
   isDefault?: boolean = false;
 }
 
+/** Represents the policy of replacing detected PII with synthetic values. */
+@added(Versions.v2026_05_15_preview)
+model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.syntheticReplacement;
+
+  /** Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false. */
+  preserveDataFormat?: boolean;
+}
+
 /** Represents the policy of redacting with a redaction character */
 model CharacterMaskPolicy extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -96,6 +175,13 @@ model CharacterMaskPolicy extends BaseRedactionPolicy {
 model NoMaskPolicy extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
+}
+
+/** Represents the policy of redacting PII with marker style. */
+@added(Versions.v2026_05_15_preview)
+model MarkerMaskPolicy extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.markerMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
@@ -116,6 +202,14 @@ union RedactionPolicyKind {
 
   /** Redact detected entities with entity type. */
   entityMask: "entityMask",
+
+  /** Redact detected entities using a marker-style mask. */
+  @added(Versions.v2026_05_15_preview)
+  markerMask: "markerMask",
+
+  /** Replace detected entities with synthetic values. */
+  @added(Versions.v2026_05_15_preview)
+  syntheticReplacement: "syntheticReplacement",
 }
 
 /** Contains the PII results. */
