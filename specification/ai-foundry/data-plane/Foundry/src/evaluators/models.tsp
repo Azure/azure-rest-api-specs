@@ -231,9 +231,6 @@ model DatasetEvaluatorGenerationJobSource
 
 @doc("Caller-supplied inputs for an evaluator generation job.")
 model EvaluatorGenerationInputs {
-  @doc("Display name for this generation job.")
-  name: string;
-
   @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
 
@@ -249,11 +246,11 @@ model EvaluatorGenerationInputs {
   @pattern("^[A-Za-z0-9_.~-]+$")
   evaluator_name: string;
 
-  @doc("Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. Distinct from the job-level `name` field above (which is the display name for the generation job, not the evaluator).")
-  display_name?: string;
+  @doc("Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.")
+  evaluator_display_name?: string;
 
-  @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `display_name`.")
-  description?: string;
+  @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
+  evaluator_description?: string;
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
