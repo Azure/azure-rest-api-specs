@@ -193,7 +193,10 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
 @@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
-@@clientName(FilteredBlob.nextMarker, "continuationToken", "javascript");
+@@clientName(FilteredBlobResponse.nextMarker,
+  "continuationToken",
+  "javascript"
+);
 @@clientName(ListContainersResponse.NextMarker,
   "continuationToken",
   "javascript"
