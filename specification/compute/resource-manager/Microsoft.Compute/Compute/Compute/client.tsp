@@ -789,10 +789,28 @@ using Compute;
   "csharp"
 );
 @@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
-  "EnableVmAgentPlatformUpdates",
+  "IsVmAgentPlatformUpdatesEnabled",
+  "csharp"
+);
+@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+  "IsPasswordAuthenticationDisabled",
   "csharp"
 );
 @@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+  "IsAutomaticUpdatesEnabled",
+  "csharp"
+);
+// Rename the nested-model parent properties so the auto-flattened C# names
+// become ResilientVm... instead of ResilientVM... (matches v1.14.0 baseline).
+@@clientName(ResiliencyPolicy.resilientVMCreationPolicy,
+  "resilientVmCreationPolicy",
+  "csharp"
+);
+@@clientName(ResiliencyPolicy.resilientVMDeletionPolicy,
+  "resilientVmDeletionPolicy",
+  "csharp"
+);
 @@clientName(WindowsConfiguration.provisionVMAgent,
   "ProvisionVmAgent",
   "csharp"

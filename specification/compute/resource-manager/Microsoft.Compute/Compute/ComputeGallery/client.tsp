@@ -226,10 +226,20 @@ using ComputeGallery;
   "csharp"
 );
 @@clientName(TargetRegion.excludeFromLatest, "IsExcludedFromLatest", "csharp");
-@@clientName(GalleryImageVersionProperties.restore,
-  "IsRestoreEnabled",
+@@clientName(GalleryArtifactPublishingProfileBase.excludeFromLatest,
+  "IsExcludedFromLatest",
   "csharp"
 );
+@@clientName(SharedGalleryImageVersionProperties.excludeFromLatest,
+  "IsExcludedFromLatest",
+  "csharp"
+);
+@@clientName(CommunityGalleryImageVersionProperties.excludeFromLatest,
+  "IsExcludedFromLatest",
+  "csharp"
+);
+// Match v1.14.0 baseline: property is `Restore` (no Is* prefix).
+@@clientName(GalleryImageVersionProperties.restore, "Restore", "csharp");
 
 // ── Qualified property name renames (C# backward compat) ──
 @@clientName(GalleryApplicationCustomActionParameter.type,
