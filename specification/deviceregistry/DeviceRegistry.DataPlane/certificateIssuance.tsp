@@ -58,12 +58,12 @@ model CertificateIssuanceOperationStatus {
 @tag("RuntimeCertIssuance")
 interface RuntimeCertIssuance {
   /** Issue operational certificates for IoT devices. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
   @summary("Issue operational certificates for IoT devices.")
   @tag("POST")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}:issueCert")
   @post
   @pollingOperation(RuntimeCertIssuance.getOperationStatus)
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
   issueCertificate(
     /** Azure subscription ID. */
     @path subscriptionId: string,
@@ -124,11 +124,11 @@ interface RuntimeCertIssuance {
   } | Azure.Core.Foundations.ErrorResponse;
 
   /** Gets the cert issuance operation status. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
   @summary("Gets the cert issuance operation status.")
   @tag("GET")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
   getOperationStatus(
     /** Azure subscription ID. */
     @path subscriptionId: string,
