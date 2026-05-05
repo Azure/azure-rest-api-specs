@@ -182,6 +182,17 @@ namespace ComputeCombine;
 @@clientName(Compute.VirtualMachineExtensionUpdateProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
 @@clientName(Compute.VirtualMachineScaleSetExtensionProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
 
+// ── G7: rename `source` → `gallerySource` (csharp only) on GalleryDiskImage and GalleryImageVersionStorageProfile
+//        so the generated property matches the previously-shipped name `GallerySource` of the discriminator-typed
+//        property. A separate partial-class shim restores the deprecated base-typed `Source` member that backed
+//        the previous AutoRest `source: GallerySource` rename-mapping directive.
+@@clientName(ComputeGallery.GalleryDiskImage.source, "gallerySource", "csharp");
+@@clientName(ComputeGallery.GalleryImageVersionStorageProfile.source, "gallerySource", "csharp");
+// ── G7: rename GalleryDiskImageSource.uri → sourceUri (csharp only) to avoid collision with the
+//        previously-shipped virtual `Uri` (System.Uri) accessor on the GalleryArtifactVersionSource base.
+//        The base accessor is restored as a partial-class shim for backward compatibility with v1.14.0.
+@@clientName(ComputeGallery.GalleryDiskImageSource.uri, "sourceUri", "csharp");
+
 // ── C# operation renames for backward compatibility (migration from AutoRest) ──
 // These mirror the override-operation-name entries from the deleted autorest.md.
 @@clientName(Compute.VirtualMachines.start, "PowerOn", "csharp");
