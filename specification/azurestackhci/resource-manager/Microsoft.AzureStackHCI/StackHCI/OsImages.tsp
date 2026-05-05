@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
  */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_04_30)
 model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
   ...ResourceNameParameter<
     Resource = OsImage,
@@ -24,7 +24,7 @@ model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
 
 @armResourceOperations
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_04_30)
 interface OsImages {
   /**
    * Get a os image.

@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
  */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_04_30)
 model KubernetesVersion
   is Azure.ResourceManager.ProxyResource<KubernetesVersionProperties> {
   ...ResourceNameParameter<
@@ -25,7 +25,7 @@ model KubernetesVersion
 
 @armResourceOperations
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_04_30)
 interface KubernetesVersions {
   /**
    * List all kubernetes versions.

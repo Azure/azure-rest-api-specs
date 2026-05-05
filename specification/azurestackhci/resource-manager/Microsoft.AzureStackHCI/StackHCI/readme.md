@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-05-01
+tag: package-2026-04-30
 
 directive:
   - from: edgeDevices.json
@@ -329,13 +329,13 @@ suppressions:
     reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
 
-### Tag: package-2026-05-01
+### Tag: package-2026-04-30
 
-These settings apply only when `--tag=package-2026-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2026-04-30` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-05-01'
+```yaml $(tag) == 'package-2026-04-30'
 input-file:
-  - stable/2026-05-01/hci.json
+  - stable/2026-04-30/hci.json
 ```
 
 ### Tag: package-preview-2026-04-01-preview
