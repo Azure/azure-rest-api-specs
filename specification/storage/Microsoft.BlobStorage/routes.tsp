@@ -242,7 +242,7 @@ interface Service {
     {
       /** The filter blobs enumeration results */
       @body
-      enumerationResults: FilteredBlob;
+      enumerationResults: FilteredBlobResponse;
     }
   >;
 }
@@ -486,7 +486,7 @@ interface Container {
     {
       /** The container filter blob enumeration results */
       @body
-      enumerationResults: FilteredBlob;
+      enumerationResults: FilteredBlobResponse;
     }
   >;
 
