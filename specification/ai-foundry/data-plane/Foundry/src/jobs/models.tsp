@@ -766,6 +766,40 @@ model JobRunError {
   details?: Record<unknown>;
 }
 
+@doc("Service endpoint details for a training job.")
+model TrainingJobService {
+  @doc("Service type.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("Service port.")
+  @visibility(Lifecycle.Read)
+  port?: int32;
+
+  @doc("Service status.")
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  @doc("Terminal error for the service, if any.")
+  @visibility(Lifecycle.Read)
+  error?: Record<unknown>;
+
+  @doc("Service endpoint URI.")
+  @visibility(Lifecycle.Read)
+  endpoint?: string;
+
+  @doc("Additional service properties.")
+  @visibility(Lifecycle.Read)
+  properties?: Record<string>;
+}
+
+@doc("Services exposed by a training job.")
+model TrainingJobServiceCollection {
+  @doc("Services keyed by service name.")
+  @visibility(Lifecycle.Read)
+  services: Record<TrainingJobService>;
+}
+
 @doc("Compute placement details for a job run attempt.")
 model JobRunComputeDetails {
   @doc("Virtual machine size used for this run attempt.")
@@ -1040,6 +1074,12 @@ alias JobArtifactListQueryParameters = JobChildListQueryParameters & {
   @doc("Artifact path prefix to list.")
   @query
   pathPrefix?: string;
+};
+
+alias JobServicesQueryParameters = {
+  @doc("Node identifier whose service endpoints should be returned. If omitted, leader-node services are returned.")
+  @query
+  nodeId?: int32;
 };
 
 alias JobMetricQueryParameters = {

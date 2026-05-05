@@ -14194,6 +14194,81 @@
         ]
       }
     },
+    "/trainingJobs/{jobName}/services": {
+      "get": {
+        "operationId": "TrainingJobs_showServices",
+        "description": "List service endpoints for the current view of a training job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nodeId",
+            "in": "query",
+            "required": false,
+            "description": "Node identifier whose service endpoints should be returned. If omitted, leader-node services are returned.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobServiceCollection"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
     "/trainingJobs/{name}": {
       "get": {
         "operationId": "TrainingJobs_get",
@@ -44720,6 +44795,64 @@
           }
         },
         "description": "Python runtime dependencies for an inline function."
+      },
+      "TrainingJobService": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Service type.",
+            "readOnly": true
+          },
+          "port": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Service port.",
+            "readOnly": true
+          },
+          "status": {
+            "type": "string",
+            "description": "Service status.",
+            "readOnly": true
+          },
+          "error": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Terminal error for the service, if any.",
+            "readOnly": true
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "Service endpoint URI.",
+            "readOnly": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional service properties.",
+            "readOnly": true
+          }
+        },
+        "description": "Service endpoint details for a training job."
+      },
+      "TrainingJobServiceCollection": {
+        "type": "object",
+        "required": [
+          "services"
+        ],
+        "properties": {
+          "services": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/TrainingJobService"
+            },
+            "description": "Services keyed by service name.",
+            "readOnly": true
+          }
+        },
+        "description": "Services exposed by a training job."
       },
       "TrainingLoraConfiguration": {
         "type": "object",

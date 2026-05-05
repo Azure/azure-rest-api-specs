@@ -49,6 +49,22 @@ interface TrainingJobs {
     Azure.Core.Foundations.ResourceOkResponse<Job>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job services are projected from run history service instances."
+  @doc("List service endpoints for the current view of a training job.")
+  @get
+  @route("/trainingJobs/{jobName}/services")
+  showServices is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      jobName: string;
+
+      ...JobServicesQueryParameters;
+    },
+    TrainingJobServiceCollection
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Jobs use Operation-Id based idempotent submission."
   @doc("Create and execute a model training job.")
   @post
