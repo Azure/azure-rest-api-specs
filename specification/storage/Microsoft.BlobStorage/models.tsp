@@ -1316,6 +1316,7 @@ model ListBlobsResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The blob items. */
+  @pageItems
   @Xml.name("Blobs")
   blobItems: BlobItem[];
 
