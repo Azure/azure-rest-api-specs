@@ -39979,24 +39979,6 @@
         }
       }
     },
-    "AiIntegration": {
-      "type": "object",
-      "description": "AI integration configuration for the app.",
-      "properties": {
-        "apiSpecPath": {
-          "type": "string",
-          "description": "Relative path to the API specification file from /home in site files."
-        },
-        "mcp": {
-          "$ref": "#/definitions/McpSettings",
-          "description": "MCP configuration."
-        },
-        "siteAuth": {
-          "$ref": "#/definitions/SiteAuthInfo",
-          "description": "Standalone authentication configuration for the MCP endpoint."
-        }
-      }
-    },
     "AiGateway": {
       "type": "object",
       "description": "An AI gateway resource.",
@@ -40054,6 +40036,24 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AiIntegration": {
+      "type": "object",
+      "description": "AI integration configuration for the app.",
+      "properties": {
+        "apiSpecPath": {
+          "type": "string",
+          "description": "Relative path to the API specification file from /home in site files."
+        },
+        "mcp": {
+          "$ref": "#/definitions/McpSettings",
+          "description": "MCP configuration."
+        },
+        "siteAuth": {
+          "$ref": "#/definitions/SiteAuthInfo",
+          "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled)."
         }
       }
     },
@@ -51967,6 +51967,35 @@
         }
       ]
     },
+    "SiteAuthInfo": {
+      "type": "object",
+      "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).",
+      "properties": {
+        "jwksUri": {
+          "type": "string",
+          "description": "JWKS URL for verifying JWT signatures."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Expected 'iss' claim."
+        },
+        "audience": {
+          "type": "string",
+          "description": "Expected 'aud' claim."
+        },
+        "wellKnownOpenIdConfiguration": {
+          "type": "string",
+          "description": "OIDC metadata URL."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth scopes for PRM.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SiteAuthSettings": {
       "type": "object",
       "description": "Configuration settings for the Azure App Service Authentication / Authorization feature.",
@@ -52206,35 +52235,6 @@
         "httpSettings": {
           "$ref": "#/definitions/HttpSettings",
           "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against App Service Authentication/Authorization."
-        }
-      }
-    },
-    "SiteAuthInfo": {
-      "type": "object",
-      "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).",
-      "properties": {
-        "jwksUri": {
-          "type": "string",
-          "description": "JWKS URL for verifying JWT signatures."
-        },
-        "issuer": {
-          "type": "string",
-          "description": "Expected 'iss' claim."
-        },
-        "audience": {
-          "type": "string",
-          "description": "Expected 'aud' claim."
-        },
-        "wellKnownOpenIdConfiguration": {
-          "type": "string",
-          "description": "OIDC metadata URL."
-        },
-        "scopes": {
-          "type": "array",
-          "description": "OAuth scopes for PRM.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
