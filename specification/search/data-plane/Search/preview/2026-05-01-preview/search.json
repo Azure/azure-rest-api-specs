@@ -13415,7 +13415,7 @@
         },
         "inclusionMode": {
           "$ref": "#/definitions/McpServerToolInclusionMode",
-          "description": "Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified."
+          "description": "Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'always' when not specified."
         },
         "maxOutputTokens": {
           "type": "integer",
@@ -13438,12 +13438,12 @@
           {
             "name": "Reranked",
             "value": "reranked",
-            "description": "Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior."
+            "description": "Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources."
           },
           {
             "name": "Always",
             "value": "always",
-            "description": "Tool results bypass reranking and are always included in the agent context."
+            "description": "Tool results bypass reranking and are always included in the agent context. This is the default behavior."
           }
         ]
       }
