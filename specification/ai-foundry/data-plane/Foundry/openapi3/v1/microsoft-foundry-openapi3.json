@@ -16910,16 +16910,11 @@
       "EvaluatorGenerationInputs": {
         "type": "object",
         "required": [
-          "name",
           "sources",
           "model",
           "evaluator_name"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Display name for this generation job."
-          },
           "sources": {
             "type": "array",
             "items": {
@@ -16947,13 +16942,13 @@
             "pattern": "^[A-Za-z0-9_.~-]+$",
             "description": "The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubrics-subtype), the service creates a new version under the same name and uses the prior version's `rubric_criteria` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubrics-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`."
           },
-          "display_name": {
+          "evaluator_display_name": {
             "type": "string",
-            "description": "Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. Distinct from the job-level `name` field above (which is the display name for the generation job, not the evaluator)."
+            "description": "Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier."
           },
-          "description": {
+          "evaluator_description": {
             "type": "string",
-            "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `display_name`."
+            "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
           }
         },
         "description": "Caller-supplied inputs for an evaluator generation job."
