@@ -63,7 +63,7 @@ interface RuntimeCertIssuance {
   @tag("POST")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}:issueCert")
   @post
-  @pollingOperation(RuntimeCertIssuance.getOperationStatus)
+  @pollingOperation(RuntimeCertIssuance.OperationStatusLookup)
   issueCertificate(
     /** Azure subscription ID. */
     @path subscriptionId: string,
@@ -125,11 +125,13 @@ interface RuntimeCertIssuance {
 
   /** Gets the cert issuance operation status. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves existing operationId for wire/SDK parity with shipped CMS spec."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserves existing operationId for wire/SDK parity with shipped CMS spec."
   @summary("Gets the cert issuance operation status.")
   @tag("GET")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}")
   @get
-  getOperationStatus(
+  OperationStatusLookup(
     /** Azure subscription ID. */
     @path subscriptionId: string,
 
