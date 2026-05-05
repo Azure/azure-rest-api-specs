@@ -307,6 +307,13 @@ namespace KnowledgeBaseRetrievalClient {
   }
 );
 
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
+  "inputTokensCount"
+);
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
+  "outputTokensCount"
+);
+
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
@@ -3161,6 +3168,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
 @@clientName(ChatCompletionSkill.uri, "url", "java");
 @@clientName(WebApiSkill.uri, "url", "java");
+@@clientName(AIServices, "AiServices", "java");
 @@clientName(AIServices.uri, "url", "java");
 @@clientName(CustomEntityLookupSkill.entitiesDefinitionUri,
   "entitiesDefinitionUrl",
@@ -3670,7 +3678,7 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientName(Search.KnowledgeSourceIngestionParameters.aiServices,
-  "AIServices",
+  "aiServices",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceStatistics,
