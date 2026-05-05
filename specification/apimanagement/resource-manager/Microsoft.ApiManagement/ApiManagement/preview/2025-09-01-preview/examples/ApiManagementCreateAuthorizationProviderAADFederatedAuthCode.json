@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "authorizationProviderId": "aad-ev2-connection",
+    "parameters": {
+      "properties": {
+        "identityProvider": "aad",
+        "oauth2": {
+          "grantTypes": {
+            "authorizationCodeWithFederatedIdentityCredentials": {
+              "clientId": "3cb9ece2-xxxx-4bf4-xxxx-a98d0f209ce5",
+              "resourceUri": "https://ev2.deployment.com",
+              "tenantId": "72f988bf-xxxx-41af-91ab-xxxxxx"
+            }
+          }
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aad-ev2-connection",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred",
+        "properties": {
+          "displayName": "aadwithclientcred",
+          "identityProvider": "aad",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apim-agent-library",
+            "grantTypes": {
+              "authorizationCodeWithFederatedIdentityCredentials": {
+                "clientId": "3cb9ece2-xxxx-4bf4-xxxx-a98d0f209ce5",
+                "clientAssertionType": "GenericFederatedIdentityCredential",
+                "resourceUri": "https://ev2.deployment.com",
+                "tenantId": "72f988bf-xxxx-41af-91ab-xxxxxx"
+              }
+            },
+            "federatedIdentityCredentialsProperties": {
+              "issuer": "https://login.microsoftonline.com/72f988bf-xxxx-41af-91ab-xxxxxx/v2.0",
+              "subject": "/eid1/c/pub/t/v4j5cvGGr0GRqy180BHbRw/a/XXXXXXX/cf-XXXXXXXX-apim-agent-library_apim-EV2-test-connection",
+              "audience": "api://AzureADTokenExchange"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "aad-ev2-connection",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred",
+        "properties": {
+          "displayName": "aadwithclientcred",
+          "identityProvider": "aad",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apim-agent-library",
+            "grantTypes": {
+              "authorizationCodeWithFederatedIdentityCredentials": {
+                "clientId": "3cb9ece2-xxxx-4bf4-xxxx-a98d0f209ce5",
+                "clientAssertionType": "GenericFederatedIdentityCredential",
+                "resourceUri": "https://ev2.deployment.com",
+                "tenantId": "72f988bf-xxxx-41af-91ab-xxxxxx"
+              }
+            },
+            "federatedIdentityCredentialsProperties": {
+              "issuer": "https://login.microsoftonline.com/72f988bf-xxxx-41af-91ab-xxxxxx/v2.0",
+              "subject": "/eid1/c/pub/t/v4j5cvGGr0GRqy180BHbRw/a/XXXXXXX/cf-XXXXXXXX-apim-agent-library_apim-EV2-test-connection",
+              "audience": "api://AzureADTokenExchange"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AuthorizationProvider_CreateOrUpdate",
+  "title": "ApiManagementCreateAuthorizationProviderAADFederatedAuthCode"
+}

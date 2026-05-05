@@ -1,0 +1,118 @@
+name: arm-api-reviewer-eval-typespec
+description: |
+  TypeSpec review tests (07xxxx).
+  Validates detection of TypeSpec-specific violations: @segment casing,
+  PATCH naming, @operationId overrides, enum-vs-union, secret detection,
+  type constraints, and common anti-patterns.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 070001 -- @segment casing and ARM TypeSpec conventions
+  - name: detect-typespec-segment-and-naming-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/segment-casing-violations.tsp"
+          dest: "specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)segment|casing|camelCase"
+      - type: output-matches
+        config:
+          pattern: "(?i)operationId|override"
+      - type: output-contains
+        config:
+          substring: "union"
+      - type: prompt
+    rubric:
+      - 'Flagged the @segment("connectorgateways") as incorrect casing -- should be camelCase "connectorGateways" (TSP-SEGMENT-CASE)'
+      - 'Flagged the @segment("virtualnetworks") as incorrect casing -- should be camelCase "virtualNetworks" (TSP-SEGMENT-CASE)'
+      - 'Flagged the PATCH operation named "patch" instead of "update" (TSP-PATCH-NAME)'
+      - "Flagged the @operationId override -- should restructure interface instead"
+      - "Flagged the use of enum instead of union for GatewayStatus (extensible enum)"
+      - "Flagged the use of plain string for targetVnetId instead of armResourceIdentifier (TSP-ARM-RESOURCE-ID)"
+
+  # 070002 -- Secret detection and type violations in TypeSpec
+  - name: detect-typespec-secret-and-type-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/secret-and-type-violations.tsp"
+          dest: "specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)secret|SEC-SECRET"
+      - type: output-contains
+        config:
+          substring: "connectionString"
+      - type: output-matches
+        config:
+          pattern: "(?i)utcDateTime|date.?time"
+      - type: prompt
+    rubric:
+      - "Flagged connectionString as a potential secret missing @secret (SEC-SECRET-DETECT)"
+      - "Flagged adminPassword as a potential secret missing @secret (SEC-SECRET-DETECT)"
+      - "Flagged the #suppress directive silencing secret-prop as wrong -- should apply @secret instead"
+      - "Flagged createdAt using string instead of utcDateTime"
+      - "Flagged diskSizeGB using string instead of a numeric type (TSP-NUMERIC-TYPE)"
+      - "Flagged storageAccountId using plain string instead of armResourceIdentifier (TSP-ARM-RESOURCE-ID)"
+
+  # 070003 -- TypeSpec anti-patterns
+  - name: detect-typespec-anti-patterns
+    environment:
+      files:
+        - src: "../fixtures/typespec/anti-patterns.tsp"
+          dest: "specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "void"
+      - type: output-matches
+        config:
+          pattern: "(?i)underscore|PascalCase|In_Progress|FAILED"
+      - type: prompt
+    rubric:
+      - "Flagged the empty model literal {} as POST action body -- should use void instead"
+      - "Flagged the #suppress for no-empty-model as the wrong fix -- use void and remove suppression"
+      - "Flagged enum values with underscores (In_Progress) -- should use PascalCase (InProgress)"
+      - "Flagged ALL_CAPS enum value (FAILED) -- should use PascalCase (Failed)"
+      - "Flagged default value on ipAllocationMethod that flows into PATCH model (RPC-Patch-V1-10)"
+      - "Flagged @flattenProperty on new API -- flattening is discouraged for new resource types"

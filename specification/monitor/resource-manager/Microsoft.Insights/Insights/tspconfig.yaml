@@ -1,0 +1,59 @@
+parameters:
+  service-dir:
+    default: "sdk/monitor"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/azuremonitorworkspace.json"
+    new-line: lf
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitor"
+    namespace: "azure.mgmt.monitor"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitor"
+    namespace: "com.azure.resourcemanager.monitor"
+    service-name: "Monitor"
+    flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    float32-as-double: false
+    add-inner:
+      - AutoscaleProfile
+      - ScaleRule
+      - LocalizableString
+      - DiagnosticSettingsCategoryResourceCollection
+      - Metric
+    rename-model:
+      TrackedResourceWithOptionalLocation: TrackedResource
+    customization-class: customization/src/main/java/MonitorCustomization.java
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitor"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-monitor"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
