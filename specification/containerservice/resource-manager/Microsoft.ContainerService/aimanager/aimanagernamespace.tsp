@@ -84,6 +84,34 @@ interface AIManagerNamespaces {
     void,
     ArmResponse<CredentialResults>
   >;
+
+  @added(Versions.v2026_05_02_preview)
+  @doc("Returns the namespace-scoped LLM gateway endpoint and the API keys clients use to authenticate against it.")
+  @post
+  @action("listAccessInfo")
+  listAccessInfo is ArmResourceActionSync<
+    AIManagerNamespace,
+    void,
+    ArmResponse<NamespaceAccessInfo>
+  >;
+}
+
+@added(Versions.v2026_05_02_preview)
+@doc("Access information for an AI Manager namespace, including the OpenAI-compatible gateway endpoint and the API keys used to authenticate against it.")
+model NamespaceAccessInfo {
+  @doc("OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\".")
+  endpoint: url;
+
+  @secret
+  @doc("Primary API key. Send as `Authorization: Bearer <key>` (or `api-key: <key>`, depending on client). Treat as secret; do not log or persist in plaintext.")
+  primaryKey: string;
+
+  @secret
+  @doc("Secondary API key, for zero-downtime rotation. Same usage as `primaryKey`.")
+  secondaryKey: string;
+
+  @doc("UTC time the keys were last rotated. Clients can use this to detect rotation and refresh cached credentials.")
+  lastRotatedAt?: utcDateTime;
 }
 
 @@maxLength(AIManagerNamespace.name, 63);
@@ -92,3 +120,4 @@ interface AIManagerNamespaces {
   AIManagerNamespace.name,
   "The name of the AI Manager namespace resource."
 );
+
