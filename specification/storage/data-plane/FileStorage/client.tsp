@@ -79,10 +79,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
-@@alternateType(CopyStatusResponseHeaders.copyCompletionTime,
-  utcDateTime,
-  "go"
-);
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
 @@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");

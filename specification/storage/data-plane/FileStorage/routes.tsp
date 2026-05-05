@@ -256,7 +256,6 @@ interface Share {
       /** The access tier change time. */
       @header("x-ms-access-tier-change-time")
       @encode("rfc7231")
-      @alternateType(utcDateTime, "go")
       accessTierChangeTime?: utcDateTime;
 
       /** The access tier transition state. */
