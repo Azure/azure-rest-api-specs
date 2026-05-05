@@ -297,6 +297,9 @@ model CommandJob extends JobProperties {
   @doc("user-assigned managed identity")
   userAssignedIdentityId?: string;
 
+  @doc("Number of GPUs to allocate for the job.")
+  gpuCount?: int32;
+
   @doc("Is the asset archived?")
   isArchived?: boolean;
 
