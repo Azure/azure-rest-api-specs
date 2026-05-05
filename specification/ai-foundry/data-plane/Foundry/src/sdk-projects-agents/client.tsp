@@ -247,15 +247,4 @@ namespace Azure.AI.Projects {
   // Skills sub‐client
   // --------------------------------------------------------------------------------
   @@clientName(SkillObject, "AgentsSkill");
-
-  // --------------------------------------------------------------------------------
-  // DataGenerationJobs sub‐client
-  // --------------------------------------------------------------------------------
-  // Hide the protocol methods and methods using feature headers
-  @@access(DataGenerationJobs.get, Access.internal);
-  @@access(DataGenerationJobs.create, Access.internal);
-  @@access(DataGenerationJobs.cancel, Access.internal);
-  @@access(DataGenerationJobs.delete, Access.internal);
-
-  @@clientName(DataGenerationJobType, "DataGenerationJobKind");
 }
