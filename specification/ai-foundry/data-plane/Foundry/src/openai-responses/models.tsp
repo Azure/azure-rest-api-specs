@@ -165,6 +165,10 @@ namespace Azure.AI.Projects {
     openapi_call_output: "openapi_call_output",
     browser_automation_preview_call: "browser_automation_preview_call",
     browser_automation_preview_call_output: "browser_automation_preview_call_output",
+    fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
+    fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
+    azure_function_call: "azure_function_call",
+    azure_function_call_output: "azure_function_call_output",
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
