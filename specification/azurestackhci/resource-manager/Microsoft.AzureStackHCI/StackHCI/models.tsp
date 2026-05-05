@@ -2017,7 +2017,6 @@ model ClusterProperties {
    * Billing properties of the cluster, including upcoming billing model details.
    */
   @added(Versions.v2026_04_01_preview)
-  @removed(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   billingProperties?: ClusterBillingProperties;
 
@@ -2674,7 +2673,6 @@ model ClusterPatchProperties {
  * Billing properties of the cluster.
  */
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
 model ClusterBillingProperties {
   /**
    * The next billing model to be applied to the cluster.
@@ -2686,7 +2684,6 @@ model ClusterBillingProperties {
  * Details of the next billing model for the cluster.
  */
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
 model NextBillingModel {
   /** Type of billing model. */
   billingModel?: string;
@@ -2760,7 +2757,6 @@ model SoftwareAssuranceChangeRequestProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
@@ -2768,7 +2764,6 @@ model ChangeRingRequest {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.

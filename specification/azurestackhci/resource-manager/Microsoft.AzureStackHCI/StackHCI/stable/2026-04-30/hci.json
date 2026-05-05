@@ -2168,6 +2168,79 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/changeRing": {
+      "post": {
+        "operationId": "Clusters_ChangeRing",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Changes ring of a cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "changeRingRequest",
+            "in": "body",
+            "description": "Change ring request payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Change cluster ring": {
+            "$ref": "./examples/ChangeClusterRing.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport": {
       "post": {
         "operationId": "Clusters_ConfigureRemoteSupport",
@@ -4894,6 +4967,23 @@
         ]
       }
     },
+    "ChangeRingRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRingRequestProperties"
+        }
+      }
+    },
+    "ChangeRingRequestProperties": {
+      "type": "object",
+      "properties": {
+        "targetRing": {
+          "type": "string",
+          "description": "The target ring for the cluster."
+        }
+      }
+    },
     "CheckUpdatesRequest": {
       "type": "object",
       "description": "Request body for the check updates action on update summaries.",
@@ -4933,6 +5023,16 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "ClusterBillingProperties": {
+      "type": "object",
+      "description": "Billing properties of the cluster.",
+      "properties": {
+        "nextBillingModel": {
+          "$ref": "#/definitions/NextBillingModel",
+          "description": "The next billing model to be applied to the cluster."
+        }
+      }
     },
     "ClusterDesiredProperties": {
       "type": "object",
@@ -5260,6 +5360,11 @@
         "billingModel": {
           "type": "string",
           "description": "Type of billing applied to the resource.",
+          "readOnly": true
+        },
+        "billingProperties": {
+          "$ref": "#/definitions/ClusterBillingProperties",
+          "description": "Billing properties of the cluster, including upcoming billing model details.",
           "readOnly": true
         },
         "registrationTimestamp": {
@@ -8447,6 +8552,28 @@
         "networkVirtualizationEnabled": {
           "type": "boolean",
           "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
+        }
+      }
+    },
+    "NextBillingModel": {
+      "type": "object",
+      "description": "Details of the next billing model for the cluster.",
+      "properties": {
+        "billingModel": {
+          "type": "string",
+          "description": "Type of billing model."
+        },
+        "capabilitiesEnabled": {
+          "type": "array",
+          "description": "Capabilities enabled under this billing model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trialDaysRemaining": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of days remaining in the trial period."
         }
       }
     },
