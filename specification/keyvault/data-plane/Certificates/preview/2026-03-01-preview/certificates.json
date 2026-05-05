@@ -1718,6 +1718,11 @@
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
           "description": "The certificate attributes."
+        },
+        "platform_managed": {
+          "$ref": "#/definitions/PlatformManaged",
+          "description": "The platform managed property. This feature is currently intended for internal use only.",
+          "x-ms-client-name": "platformManaged"
         }
       }
     },
@@ -2350,6 +2355,24 @@
           "readOnly": true
         }
       }
+    },
+    "PlatformManaged": {
+      "type": "object",
+      "description": "Properties of the platform managed property of a certificate. This feature is currently intended for internal use only.",
+      "properties": {
+        "certificate_usage": {
+          "type": "string",
+          "description": "The certificate usage.",
+          "x-ms-client-name": "certificateUsage"
+        },
+        "metadata": {
+          "type": "string",
+          "description": "The platform managed metadata."
+        }
+      },
+      "required": [
+        "certificate_usage"
+      ]
     },
     "SecretProperties": {
       "type": "object",

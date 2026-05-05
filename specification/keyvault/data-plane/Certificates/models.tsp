@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace KeyVault;
@@ -381,6 +383,30 @@ model CertificatePolicy {
    * The certificate attributes.
    */
   attributes?: CertificateAttributes;
+
+  /**
+   * The platform managed property. This feature is currently intended for internal use only.
+   */
+  @added(Versions.v2026_03_01_preview)
+  @encodedName("application/json", "platform_managed")
+  platformManaged?: PlatformManaged;
+}
+
+/**
+ * Properties of the platform managed property of a certificate. This feature is currently intended for internal use only.
+ */
+@added(Versions.v2026_03_01_preview)
+model PlatformManaged {
+  /**
+   * The certificate usage.
+   */
+  @encodedName("application/json", "certificate_usage")
+  certificateUsage: string;
+
+  /**
+   * The platform managed metadata.
+   */
+  metadata?: string;
 }
 
 /**
