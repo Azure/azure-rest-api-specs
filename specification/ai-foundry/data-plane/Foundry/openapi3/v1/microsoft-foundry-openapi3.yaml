@@ -10070,7 +10070,6 @@ components:
           simple_qna: '#/components/schemas/SimpleQnADataGenerationJobOptions'
           traces: '#/components/schemas/TracesDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
-          task: '#/components/schemas/TaskDataGenerationJobOptions'
       description: Options for managing data generation jobs.
     DataGenerationJobOutput:
       type: object
@@ -10163,7 +10162,6 @@ components:
             - simple_qna
             - traces
             - tool_use
-            - task
       description: The supported data generation job types.
     DataGenerationModelOptions:
       type: object
@@ -29620,19 +29618,6 @@ components:
           azure_ai_model: '#/components/schemas/AzureAIModelTargetUpdate'
           azure_ai_agent: '#/components/schemas/AzureAIAgentTargetUpdate'
       description: Base class for targets with discriminator support.
-    TaskDataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - task
-          description: The data generation job type, which is Task for this model.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with Task type.
     TaxonomyCategory:
       type: object
       required:

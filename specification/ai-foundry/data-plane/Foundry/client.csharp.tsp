@@ -142,6 +142,8 @@ namespace Azure.AI.Projects;
 @@access(EvaluatorDefinitionType, Access.public);
 
 // Hide classes not currently used
+@@clientName(EvaluationTarget, "InternalEvaluationTarget", "csharp");
+@@access(EvaluationTarget, Access.internal);
 @@clientName(Target, "EvaluationTarget", "csharp");
 
 @@clientName(EvalResult.passed, "IsPassed", "csharp");
