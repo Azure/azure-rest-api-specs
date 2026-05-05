@@ -1076,6 +1076,17 @@ alias JobArtifactListQueryParameters = JobChildListQueryParameters & {
   pathPrefix?: string;
 };
 
+alias JobArtifactContentInfoByPrefixQueryParameters = {
+  @doc("Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.")
+  @query
+  pathPrefix?: string;
+
+  @doc("Continuation token returned by a previous list request.")
+  @query
+  @continuationToken
+  skipToken?: string;
+};
+
 alias JobServicesQueryParameters = {
   @doc("Node identifier whose service endpoints should be returned. If omitted, leader-node services are returned.")
   @query

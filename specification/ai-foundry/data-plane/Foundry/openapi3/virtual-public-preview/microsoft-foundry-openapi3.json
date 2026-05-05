@@ -14616,6 +14616,90 @@
         ]
       }
     },
+    "/trainingJobs/{jobName}/artifacts:contentInfoByPrefix": {
+      "get": {
+        "operationId": "TrainingJobArtifacts_getArtifactContentInfoByPrefix",
+        "description": "List download information for training job artifacts under a path prefix.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pathPrefix",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobArtifactContentInfo"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
     "/trainingJobs/{jobName}/artifacts:metadata": {
       "get": {
         "operationId": "TrainingJobArtifacts_getArtifactMetadata",
@@ -15918,6 +16002,99 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/JobArtifactContentInfo"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/trainingJobs/{jobName}/runs/{runId}/artifacts:contentInfoByPrefix": {
+      "get": {
+        "operationId": "TrainingJobRunArtifacts_getRunArtifactContentInfoByPrefix",
+        "description": "List download information for artifacts under a path prefix from a specific training job run.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "description": "The run identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pathPrefix",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobArtifactContentInfo"
                 }
               }
             }
@@ -42367,7 +42544,7 @@
           },
           "agent_session_id": {
             "type": "string",
-            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents ΓÇö either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
+            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
           },
           "agent_reference": {
             "type": "object",
@@ -47226,6 +47403,27 @@
           }
         },
         "description": "Paged collection of JobArtifact items"
+      },
+      "PagedJobArtifactContentInfo": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobArtifactContentInfo"
+            },
+            "description": "The JobArtifactContentInfo items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobArtifactContentInfo items"
       },
       "PagedJobMetric": {
         "type": "object",

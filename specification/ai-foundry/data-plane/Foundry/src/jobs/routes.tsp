@@ -235,6 +235,22 @@ interface TrainingJobArtifacts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
+  @doc("List download information for training job artifacts under a path prefix.")
+  @get
+  @route("/trainingJobs/{jobName}/artifacts:contentInfoByPrefix")
+  getArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      jobName: string;
+
+      ...JobArtifactContentInfoByPrefixQueryParameters;
+    },
+    Azure.Core.Page<JobArtifactContentInfo>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
   #suppress "@azure-tools/typespec-azure-core/byos" "Job artifact content is produced by the job and streamed back to the caller."
   @doc("Download training job artifact content.")
   @get
@@ -318,6 +334,26 @@ interface TrainingJobRunArtifacts {
       path: string;
     },
     JobArtifactContentInfo
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
+  @doc("List download information for artifacts under a path prefix from a specific training job run.")
+  @get
+  @route("/trainingJobs/{jobName}/runs/{runId}/artifacts:contentInfoByPrefix")
+  getRunArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      jobName: string;
+
+      @doc("The run identifier.")
+      @path
+      runId: string;
+
+      ...JobArtifactContentInfoByPrefixQueryParameters;
+    },
+    Azure.Core.Page<JobArtifactContentInfo>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
