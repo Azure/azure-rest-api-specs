@@ -60,6 +60,106 @@ using Compute;
   "csharp"
 );
 
+// ----------------------------------------------------------------------------
+// AdditionalProperties bag preservation (csharp only).
+//
+// The previous AutoRest-based Compute SDK shipped `IDictionary<string, BinaryData>
+// AdditionalProperties` on a handful of models. That property was *not* in the
+// Swagger schema; it came from this directive in main's autorest.md:
+//
+//     # add additionalproperties to a few models to support private properties
+//     # supported by the service
+//     - from: ComputeRP.json
+//       where: $.definitions
+//       transform: >
+//         $.VirtualMachineScaleSetProperties.additionalProperties = true;
+//         $.VirtualMachineScaleSetVMProperties.additionalProperties = true;
+//         $.UpgradePolicy.additionalProperties = true;
+//     - from: ComputeRP.json
+//       where: $.definitions.VMSizeProperties
+//       transform: >
+//         $.additionalProperties = true;
+//
+// The Compute service can return undocumented "private" properties on these
+// models that the SDK must round-trip. Removing the bag would silently drop
+// those values, so we must preserve it here.
+//
+// TypeSpec equivalent of `additionalProperties: true` is spreading
+// `Record<unknown>`. We can't add the spread directly to the original model
+// (the spec is shared with other languages that historically did NOT expose
+// the bag), so we declare a csharp-only wrapper that re-spreads the original
+// plus `Record<unknown>`, then swap it in via @@alternateType for csharp.
+// ----------------------------------------------------------------------------
+/**
+ * Describes an upgrade policy - automatic, manual, or rolling.
+ */
+model UpgradePolicyWithAdditionalProperties {
+  ...UpgradePolicy;
+  ...Record<unknown>;
+}
+@@alternateType(UpgradePolicy,
+  UpgradePolicyWithAdditionalProperties,
+  "csharp"
+);
+// Preserve the legacy C# names; the original rename-mapping in main's
+// autorest.md was:
+//   UpgradePolicy:                    VirtualMachineScaleSetUpgradePolicy
+//   VMSizeProperties:                 VirtualMachineSizeProperties
+//   VirtualMachineScaleSetVMProperties: VirtualMachineScaleSetVmProperties
+// VirtualMachineScaleSetProperties keeps its name verbatim.
+@@clientName(UpgradePolicyWithAdditionalProperties,
+  "VirtualMachineScaleSetUpgradePolicy",
+  "csharp"
+);
+
+/**
+ * Describes the properties of a Virtual Machine Scale Set.
+ */
+model VirtualMachineScaleSetPropertiesWithAdditionalProperties {
+  ...VirtualMachineScaleSetProperties;
+  ...Record<unknown>;
+}
+@@alternateType(VirtualMachineScaleSetProperties,
+  VirtualMachineScaleSetPropertiesWithAdditionalProperties,
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetPropertiesWithAdditionalProperties,
+  "VirtualMachineScaleSetProperties",
+  "csharp"
+);
+
+/**
+ * Describes the properties of a virtual machine scale set virtual machine.
+ */
+model VirtualMachineScaleSetVMPropertiesWithAdditionalProperties {
+  ...VirtualMachineScaleSetVMProperties;
+  ...Record<unknown>;
+}
+@@alternateType(VirtualMachineScaleSetVMProperties,
+  VirtualMachineScaleSetVMPropertiesWithAdditionalProperties,
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetVMPropertiesWithAdditionalProperties,
+  "VirtualMachineScaleSetVmProperties",
+  "csharp"
+);
+
+/**
+ * Specifies VM Size Property settings on the virtual machine.
+ */
+model VMSizePropertiesWithAdditionalProperties {
+  ...VMSizeProperties;
+  ...Record<unknown>;
+}
+@@alternateType(VMSizeProperties,
+  VMSizePropertiesWithAdditionalProperties,
+  "csharp"
+);
+@@clientName(VMSizePropertiesWithAdditionalProperties,
+  "VirtualMachineSizeProperties",
+  "csharp"
+);
+
 @@clientName(VirtualMachineSizeTypes.Standard_B1ms, "StandardB1Ms", "go");
 @@clientName(VirtualMachineSizeTypes.Standard_B2ms, "StandardB2Ms", "go");
 @@clientName(VirtualMachineSizeTypes.Standard_B4ms, "StandardB4Ms", "go");
