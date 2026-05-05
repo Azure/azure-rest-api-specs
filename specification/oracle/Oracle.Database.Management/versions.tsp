@@ -10,6 +10,7 @@ enum Versions {
   @doc("2024-06-01-preview")
   v20240601_preview: "2024-06-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
   @doc("2024-06-01")
   v20240601: "2024-06-01",
 
