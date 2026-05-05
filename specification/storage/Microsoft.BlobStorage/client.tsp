@@ -9,6 +9,9 @@ using TypeSpec.Versioning;
 
 namespace Customizations;
 
+@@alternateType(KeyInfo.start, string, "python,csharp,javascript,go");
+@@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
@@ -123,24 +126,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
-@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "!csharp, !python");
-@@clientNamespace(Storage.Blob.Container,
-  "Azure.Storage.Blobs",
-  "!csharp, !python"
-);
-@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "!csharp, !python");
-@@clientNamespace(Storage.Blob.AppendBlob,
-  "Azure.Storage.Blobs",
-  "!csharp, !python"
-);
-@@clientNamespace(Storage.Blob.BlockBlob,
-  "Azure.Storage.Blobs",
-  "!csharp, !python"
-);
-@@clientNamespace(Storage.Blob.PageBlob,
-  "Azure.Storage.Blobs",
-  "!csharp, !python"
-);
+@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "rust,go");
+@@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "rust,go");
+@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "rust,go");
+@@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs", "rust,go");
+@@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "rust,go");
+@@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
@@ -155,8 +146,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "python, csharp, javascript"
 );
 
-@@alternateType(AccessPolicy.start, string, "javascript");
-@@alternateType(AccessPolicy.expiry, string, "javascript");
+@@alternateType(AccessPolicy.start, string, "javascript, python");
+@@alternateType(AccessPolicy.expiry, string, "javascript, python");
 @@alternateType(UserDelegationKey.signedStart, string, "javascript");
 @@alternateType(UserDelegationKey.signedExpiry, string, "javascript");
 @@alternateType(MultipartBodyParameter.body, string, "javascript");

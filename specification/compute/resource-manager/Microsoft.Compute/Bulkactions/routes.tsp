@@ -27,13 +27,6 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
-alias DefaultVirtualMachines = {
-  /** Static virtual machine segment for bulk VM operations. */
-  @path
-  @segment("virtualMachines")
-  virtualMachines: "bulkVmOperations";
-};
-
 @@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
   "requestBody"
 );
@@ -96,13 +89,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("deallocate")
+  @action("virtualMachinesBulkDeallocate")
   bulkDeallocate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -112,13 +104,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("hibernate")
+  @action("virtualMachinesBulkHibernate")
   bulkHibernate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -129,13 +120,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("start")
+  @action("virtualMachinesBulkStart")
   bulkStart(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -146,13 +136,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("create")
+  @action("virtualMachinesBulkCreate")
   bulkCreate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -163,13 +152,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("vdiFlexCreate")
+  @action("virtualMachinesBulkVdiFlexCreate")
   bulkVdiFlexCreate(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -180,13 +168,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("delete")
+  @action("virtualMachinesBulkDelete")
   bulkDelete(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -197,13 +184,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("getOperationsStatus")
+  @action("virtualMachinesBulkGetOperationStatus")
   bulkGetOperationsStatus(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -214,13 +200,12 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("cancel")
+  @action("virtualMachinesBulkCancel")
   bulkCancel(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
@@ -231,27 +216,15 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("reimage")
+  @action("virtualMachinesBulkReimage")
   bulkReimage(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
-    ...DefaultVirtualMachines,
 
     @doc("The request body")
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
-  /** BulkVmOperations_Get: Gets the singleton bulk VM operations proxy resource status. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Singleton proxy read endpoint; not an ARM tracked resource read."
-  @get
-  @autoRoute
-  bulkVmOperations(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
-    ...LocationParameter,
-    ...DefaultVirtualMachines,
-  ): ArmResponse<BulkVmOperationsReadResponse> | ErrorResponse;
 }
