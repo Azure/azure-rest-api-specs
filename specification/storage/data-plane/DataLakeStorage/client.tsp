@@ -72,6 +72,7 @@ interface ServiceClient extends Service {}
 );
 
 @@clientName(Storage.DataLake.PathItem, "Path", "python");
+@@clientName(Storage.DataLake.BlobItem, "BlobItemInternal", "python");
 
 // csharp customizations
 
