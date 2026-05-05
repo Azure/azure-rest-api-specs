@@ -6147,6 +6147,11 @@ model EdgeDeviceDisks {
   @added(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   manufacturer?: string;
+
+  /** Indicates whether the manufacturer is supported. */
+  @added(Versions.v2026_04_30)
+  @visibility(Lifecycle.Read)
+  isSupported?: boolean;
 }
 
 /**
