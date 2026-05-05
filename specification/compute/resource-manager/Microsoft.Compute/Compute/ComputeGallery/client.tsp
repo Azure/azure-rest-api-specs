@@ -25,6 +25,11 @@ using ComputeGallery;
 @@clientName(CommunityGalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(CommunityGalleryImageProperties.osState, "OSState", "csharp");
 
+@@clientName(GalleryTargetExtendedLocation.storageAccountType,
+  "GalleryStorageAccountType",
+  "csharp"
+);
+
 // C# enum singular←plural rename
 @@clientName(SharedToValues, "SharedToValue", "csharp");
 
