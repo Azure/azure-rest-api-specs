@@ -11499,7 +11499,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Job"
+                "$ref": "#/components/schemas/JobCreate"
               }
             }
           },
@@ -12744,27 +12744,6 @@
             }
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of items to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "description": "Continuation token returned by a previous list request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -12900,17 +12879,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of items to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
           },
           {
             "name": "skipToken",
@@ -14229,27 +14197,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of items to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "description": "Continuation token returned by a previous list request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
           },
           {
             "name": "api-version",
@@ -21172,6 +21119,28 @@
           }
         ],
         "description": "Type of a job artifact."
+      },
+      "JobCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "properties"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the training job. This is case-sensitive."
+          },
+          "properties": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobProperties"
+              }
+            ],
+            "description": "Properties of the job."
+          }
+        },
+        "description": "Request body for creating a training job."
       },
       "JobMetric": {
         "type": "object",

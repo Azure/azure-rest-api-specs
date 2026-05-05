@@ -78,7 +78,7 @@ interface TrainingJobs {
 
       @doc("The training job to create.")
       @bodyRoot
-      job: Job;
+      job: JobCreate;
     },
     ResourceCreatedResponse<Job>
   >;
@@ -156,7 +156,7 @@ interface TrainingJobRuns {
       @path
       jobName: string;
 
-      ...JobChildListQueryParameters;
+      ...JobContinuationListQueryParameters;
     },
     Azure.Core.Page<JobRun>
   >;
@@ -393,7 +393,7 @@ interface TrainingJobMetrics {
       @path
       jobName: string;
 
-      ...JobChildListQueryParameters;
+      ...JobMetricListQueryParameters;
     },
     Azure.Core.Page<JobMetric>
   >;
@@ -510,7 +510,7 @@ interface TrainingJobRunMetrics {
       @path
       runId: string;
 
-      ...JobChildListQueryParameters;
+      ...JobMetricListQueryParameters;
     },
     Azure.Core.Page<JobMetric>
   >;
@@ -643,7 +643,6 @@ interface TrainingJobOutputs {
       @path
       jobName: string;
 
-      ...JobChildListQueryParameters;
     },
     Azure.Core.Page<JobOutputReference>
   >;
@@ -684,7 +683,6 @@ interface TrainingJobRunOutputs {
       @path
       runId: string;
 
-      ...JobChildListQueryParameters;
     },
     Azure.Core.Page<JobOutputReference>
   >;

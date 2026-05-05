@@ -594,6 +594,15 @@ model Job {
   systemData?: SystemData;
 }
 
+@doc("Request body for creating a training job.")
+model JobCreate {
+  @doc("The name of the training job. This is case-sensitive.")
+  name: string;
+
+  @doc("Properties of the job.")
+  properties: JobProperties;
+}
+
 @doc("Response returned when a job delete operation is accepted asynchronously.")
 model JobDeleteAcceptedResponse {
   @statusCode statusCode: 202;
@@ -1059,7 +1068,7 @@ model JobOutputReference {
   description?: string;
 }
 
-alias JobChildListQueryParameters = {
+alias JobPagedListQueryParameters = {
   @doc("Maximum number of items to return.")
   @query
   limit?: int32;
@@ -1070,11 +1079,20 @@ alias JobChildListQueryParameters = {
   skipToken?: string;
 };
 
-alias JobArtifactListQueryParameters = JobChildListQueryParameters & {
+alias JobContinuationListQueryParameters = {
+  @doc("Continuation token returned by a previous list request.")
+  @query
+  @continuationToken
+  skipToken?: string;
+};
+
+alias JobArtifactListQueryParameters = JobPagedListQueryParameters & {
   @doc("Artifact path prefix to list.")
   @query
   pathPrefix?: string;
 };
+
+alias JobMetricListQueryParameters = JobPagedListQueryParameters;
 
 alias JobArtifactContentInfoByPrefixQueryParameters = {
   @doc("Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.")
