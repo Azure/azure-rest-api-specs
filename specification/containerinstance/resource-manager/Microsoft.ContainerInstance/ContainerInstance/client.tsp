@@ -165,9 +165,9 @@ using Microsoft.ContainerInstance;
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
-// ContainerGroupPatch uses local Resource model as PatchModel — restore TrackedResourceData base
+// ContainerGroupPatch uses local ContainerGroupResource model as PatchModel — restore TrackedResourceData base
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@Legacy.hierarchyBuilding(Resource,
+@@Legacy.hierarchyBuilding(ContainerGroupResource,
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );

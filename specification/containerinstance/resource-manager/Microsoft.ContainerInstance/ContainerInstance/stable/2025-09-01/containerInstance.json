@@ -889,7 +889,7 @@
             "description": "The container group resource with just the tags to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ContainerGroupResource"
             }
           }
         ],
@@ -2893,6 +2893,45 @@
         ]
       }
     },
+    "ContainerGroupResource": {
+      "type": "object",
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "The zones for the container group.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ContainerGroupRestartPolicy": {
       "type": "string",
       "description": "Restart policy for all containers within the container group.\n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart",
@@ -4607,45 +4646,6 @@
       "required": [
         "port"
       ]
-    },
-    "Resource": {
-      "type": "object",
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "zones": {
-          "type": "array",
-          "description": "The zones for the container group.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ResourceIdentityType": {
       "type": "string",
