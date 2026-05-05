@@ -35,6 +35,22 @@ model CertificateIssuanceResult {
   issuedCertificateChain?: IssuedCertificateChain;
 }
 
+/** Status monitor for the certificate issuance long-running operation. */
+model CertificateIssuanceOperationStatus {
+  /** The unique ID of the operation. */
+  id: string;
+
+  /** The status of the operation. */
+  @Azure.Core.lroStatus
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error object that describes the error when status is "Failed". */
+  error?: Azure.Core.Foundations.Error;
+
+  /** The result of the operation. */
+  result?: CertificateIssuanceResult;
+}
+
 // ──────────────────────────────────────────────
 // RuntimeCertIssuance interface
 // ──────────────────────────────────────────────
@@ -103,19 +119,7 @@ interface RuntimeCertIssuance {
     xMsClientRequestId?: Azure.Core.uuid;
 
     /** The request has been accepted for processing, but processing has not yet completed. */
-    @body body: {
-      /** The unique ID of the operation. */
-      id: string;
-
-      /** The status of the operation */
-      status: Azure.Core.Foundations.OperationState;
-
-      /** Error object that describes the error when status is "Failed". */
-      error?: Azure.Core.Foundations.Error;
-
-      /** The result of the operation. */
-      result?: CertificateIssuanceResult;
-    };
+    ...CertificateIssuanceOperationStatus;
   } | Azure.Core.Foundations.ErrorResponse;
 
   /** Gets the cert issuance operation status. */
@@ -171,18 +175,6 @@ interface RuntimeCertIssuance {
     xMsClientRequestId?: Azure.Core.uuid;
 
     /** The request has succeeded. */
-    @body body: {
-      /** The unique ID of the operation. */
-      id: string;
-
-      /** The status of the operation */
-      status: Azure.Core.Foundations.OperationState;
-
-      /** Error object that describes the error when status is "Failed". */
-      error?: Azure.Core.Foundations.Error;
-
-      /** The result of the operation. */
-      result?: CertificateIssuanceResult;
-    };
+    ...CertificateIssuanceOperationStatus;
   } | Azure.Core.Foundations.ErrorResponse;
 }

@@ -158,29 +158,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/CertificateIssuanceResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
             },
             "headers": {
               "Operation-Location": {
@@ -303,29 +281,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/CertificateIssuanceResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
             },
             "headers": {
               "Retry-After": {
@@ -2204,6 +2160,32 @@
       },
       "required": [
         "adrCertificatePolicyResourceId"
+      ]
+    },
+    "CertificateIssuanceOperationStatus": {
+      "type": "object",
+      "description": "Status monitor for the certificate issuance long-running operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\"."
+        },
+        "result": {
+          "$ref": "#/definitions/CertificateIssuanceResult",
+          "description": "The result of the operation."
+        }
+      },
+      "required": [
+        "id",
+        "status"
       ]
     },
     "CertificateIssuanceRequest": {
