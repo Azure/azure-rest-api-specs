@@ -29,7 +29,13 @@ import { checkEmitterEnabled, EmitterCheckResult } from "./emitter-check.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
 import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
-import { resetGitRepo, execAsync, runCommandWithOutput, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
+import {
+  execAsync,
+  resetGitRepo,
+  runCommandWithOutput,
+  runSpecGenSdkCommand,
+  SpecConfigs,
+} from "./utils.js";
 
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:

@@ -220,6 +220,7 @@ stages:
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
         parameters:
           SourceRootPath: $(SpecRepoDirectory)
+          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
 
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures

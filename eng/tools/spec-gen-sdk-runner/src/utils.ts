@@ -74,7 +74,7 @@ export function getRelativePathFromSpecification(absolutePath: string): string {
 export async function runSpecGenSdkCommand(specGenSdkCommand: string[]): Promise<void> {
   return new Promise((resolve, reject) => {
     const childProcess = spawn("npx", specGenSdkCommand, {
-      shell: true,
+      shell: false,
       stdio: "inherit",
       env: process.env,
     });
@@ -113,7 +113,7 @@ export async function runCommandWithOutput(executable: string, args: string[]): 
     childProcess.on("error", (error) => {
       reject(new Error(`Failed to start process '${executable}': ${error.message}`));
     });
-    childProcess.on("exit", (code) => {
+    childProcess.on("close", (code) => {
       const output = Buffer.concat(chunks).toString("utf8");
       if (code === 0) {
         resolve(output);

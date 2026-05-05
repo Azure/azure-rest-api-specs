@@ -1,3 +1,4 @@
+import path from "node:path";
 import { EmitterCheckResult } from "./emitter-check.js";
 import { ExecutionReport, ExecutionReportPackage, ExecutionResult } from "./types.js";
 
@@ -54,35 +55,23 @@ export interface AzsdkPackResponse {
  * the last block in the output, so we search backwards for the opening brace.
  */
 export function parseAzsdkResponse<T>(output: string): T {
-  // The JSON block is the last section — find the last top-level '{' that
-  // appears either at the start of a line or at the very beginning of output.
-  const jsonEnd = output.lastIndexOf("}");
-  if (jsonEnd === -1) {
-    throw new SyntaxError(`No JSON object found in azsdk output: ${output.slice(0, 200)}`);
-  }
-
-  // Walk backwards from jsonEnd to find the matching '{'
-  let depth = 0;
-  let jsonStart = -1;
-  for (let i = jsonEnd; i >= 0; i--) {
-    if (output[i] === "}") {
-      depth++;
-    } else if (output[i] === "{") {
-      depth--;
-      if (depth === 0) {
-        jsonStart = i;
-        break;
-      }
+  // The azsdk CLI emits log lines before the JSON payload.
+  // Find the last line that starts with '{' — this is the beginning of the JSON block.
+  const lines = output.split("\n");
+  let jsonStartLine = -1;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (lines[i].trimStart().startsWith("{")) {
+      jsonStartLine = i;
+      break;
     }
   }
 
-  if (jsonStart === -1) {
-    throw new SyntaxError(
-      `No matching opening brace found in azsdk output: ${output.slice(0, 200)}`,
-    );
+  if (jsonStartLine === -1) {
+    throw new SyntaxError(`No JSON object found in azsdk output: ${output.slice(0, 200)}`);
   }
 
-  return JSON.parse(output.slice(jsonStart, jsonEnd + 1)) as T;
+  const jsonText = lines.slice(jsonStartLine).join("\n");
+  return JSON.parse(jsonText) as T;
 }
 
 /**
@@ -142,6 +131,7 @@ export function buildExecutionReport(
 
   // Build package info from typespec-metadata and pack response
   const artifactPath = packResponse ? extractArtifactPath(packResponse) : "";
+  const artifactDir = artifactPath ? path.dirname(artifactPath) : undefined;
   const pkg: ExecutionReportPackage = {
     packageName: emitterCheck.packageName ?? generateResponse?.package_name ?? "",
     // Deferring apiview artifact processing until we create it for Rust by azsdk-cli
@@ -153,7 +143,7 @@ export function buildExecutionReport(
   return {
     packages: [pkg],
     executionResult,
-    stagedArtifactsFolder: artifactPath || undefined,
+    stagedArtifactsFolder: artifactDir,
     generateFromTypeSpec: true,
   };
 }

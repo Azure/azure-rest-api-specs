@@ -1,4 +1,3 @@
-import yaml from "js-yaml";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
@@ -88,6 +87,7 @@ export async function checkEmitterEnabled(
       `"${tspConfigDir}"`,
       '--emit "@azure-tools/typespec-metadata"',
       `--output-dir "${tspConfigDir}"`,
+      '--option "@azure-tools/typespec-metadata.format=json"',
     ].join(" ");
 
     logMessage(`Running typespec-metadata emitter: ${tspCommand}`, LogLevel.Debug);
@@ -96,25 +96,15 @@ export async function checkEmitterEnabled(
       logMessage(`typespec-metadata emitter warnings: ${stderr}`, LogLevel.Warn);
     }
 
-    // Find the metadata file (emitter may produce .yaml or .json)
-    const yamlPath = path.join(metadataOutputDir, "typespec-metadata.yaml");
+    // Find the metadata JSON file
     const jsonPath = path.join(metadataOutputDir, "typespec-metadata.json");
-    let metadataFilePath: string | undefined;
-    if (fs.existsSync(jsonPath)) {
-      metadataFilePath = jsonPath;
-    } else if (fs.existsSync(yamlPath)) {
-      metadataFilePath = yamlPath;
-    }
-
-    if (!metadataFilePath) {
+    if (!fs.existsSync(jsonPath)) {
       logMessage(`typespec-metadata output not found in ${metadataOutputDir}`, LogLevel.Error);
       return { enabled: false };
     }
 
-    const raw = fs.readFileSync(metadataFilePath, "utf8");
-    const metadata = (
-      metadataFilePath.endsWith(".json") ? JSON.parse(raw) : yaml.load(raw)
-    ) as TypeSpecMetadata;
+    const raw = fs.readFileSync(jsonPath, "utf8");
+    const metadata = JSON.parse(raw) as TypeSpecMetadata;
 
     // Check if the target language is configured
     const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);

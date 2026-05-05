@@ -426,12 +426,9 @@ function isAzsdkCliAvailable(): boolean {
   try {
     // Pipeline sets AZSDK variable to the installed path
     const azsdkPath = process.env.AZSDK;
-    if (azsdkPath && fs.existsSync(azsdkPath)) {
-      return true;
-    }
-    // Fall back to checking PATH
-    const result = spawnSync("azsdk", ["--version"], {
-      shell: true,
+    const executable = azsdkPath || "azsdk";
+    const result = spawnSync(executable, ["--version"], {
+      shell: false,
       stdio: "ignore",
       timeout: 5000,
     });
