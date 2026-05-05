@@ -5176,7 +5176,7 @@ union McpServerToolInclusionMode {
   /** Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. */
   Reranked: "reranked",
 
-  /** Tool results bypass reranking and are always included in the agent context. This is the default behavior.*/
+  /** Tool results bypass reranking and are always included in the agent context. This is the default behavior. */
   Always: "always",
 }
 
