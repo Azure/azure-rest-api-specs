@@ -52,7 +52,7 @@ interface TrainingJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job services are projected from run history service instances."
   @doc("List service endpoints for the current view of a training job.")
   @get
-  @route("/trainingJobs/{jobName}/services")
+  @route("/training_jobs/{jobName}/services")
   showServices is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -68,7 +68,7 @@ interface TrainingJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Jobs use Operation-Id based idempotent submission."
   @doc("Create and execute a model training job.")
   @post
-  @route("/trainingJobs")
+  @route("/training_jobs")
   create is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -112,11 +112,11 @@ interface TrainingJobs {
 
 @tag("TrainingJobs")
 interface TrainingJobOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry job operations are exposed as data-plane polling routes under trainingJobs."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry job operations are exposed as data-plane polling routes under training_jobs."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "The operation result route can return 202/200 with no body or a terminal operation resource."
   @doc("Poll the result of an asynchronous training job operation.")
   @get
-  @route("/trainingJobs/operations/{operationId}/result")
+  @route("/training_jobs/operations/{operationId}/result")
   getOperationResult is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -127,11 +127,11 @@ interface TrainingJobOperations {
     JobOperationResource | JobOperationAcceptedResponse | Http.OkResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry job operations are exposed as data-plane polling routes under trainingJobs."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry job operations are exposed as data-plane polling routes under training_jobs."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "The operation status route can return 200 with no body or an operation resource."
   @doc("Poll the status of an asynchronous training job operation.")
   @get
-  @route("/trainingJobs/operations/{operationId}/status")
+  @route("/training_jobs/operations/{operationId}/status")
   getOperationStatus is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -148,7 +148,7 @@ interface TrainingJobRuns {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job runs are projected from job execution history."
   @doc("List runs for a training job.")
   @get
-  @route("/trainingJobs/{jobName}/runs")
+  @route("/training_jobs/{jobName}/runs")
   listRuns is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -164,7 +164,7 @@ interface TrainingJobRuns {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job runs are projected from job execution history."
   @doc("Get one run for a training job.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}")
+  @route("/training_jobs/{jobName}/runs/{runId}")
   getRun is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -185,7 +185,7 @@ interface TrainingJobArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
   @doc("List artifacts for the current view of a training job.")
   @get
-  @route("/trainingJobs/{jobName}/artifacts")
+  @route("/training_jobs/{jobName}/artifacts")
   listArtifacts is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -201,7 +201,7 @@ interface TrainingJobArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
   @doc("Get metadata for a training job artifact.")
   @get
-  @route("/trainingJobs/{jobName}/artifacts:metadata")
+  @route("/training_jobs/{jobName}/artifacts:metadata")
   getArtifactMetadata is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -219,7 +219,7 @@ interface TrainingJobArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
   @doc("Get download information for a training job artifact.")
   @get
-  @route("/trainingJobs/{jobName}/artifacts:contentInfo")
+  @route("/training_jobs/{jobName}/artifacts:contentInfo")
   getArtifactContentInfo is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -237,7 +237,7 @@ interface TrainingJobArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
   @doc("List download information for training job artifacts under a path prefix.")
   @get
-  @route("/trainingJobs/{jobName}/artifacts:contentInfoByPrefix")
+  @route("/training_jobs/{jobName}/artifacts:contentInfoByPrefix")
   getArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -254,7 +254,7 @@ interface TrainingJobArtifacts {
   #suppress "@azure-tools/typespec-azure-core/byos" "Job artifact content is produced by the job and streamed back to the caller."
   @doc("Download training job artifact content.")
   @get
-  @route("/trainingJobs/{jobName}/artifacts:content")
+  @route("/training_jobs/{jobName}/artifacts:content")
   downloadArtifact is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -275,7 +275,7 @@ interface TrainingJobRunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
   @doc("List artifacts for a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/artifacts")
+  @route("/training_jobs/{jobName}/runs/{runId}/artifacts")
   listRunArtifacts is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -295,7 +295,7 @@ interface TrainingJobRunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
   @doc("Get metadata for an artifact from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/artifacts:metadata")
+  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:metadata")
   getRunArtifactMetadata is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -317,7 +317,7 @@ interface TrainingJobRunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
   @doc("Get download information for an artifact from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/artifacts:contentInfo")
+  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:contentInfo")
   getRunArtifactContentInfo is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -339,7 +339,7 @@ interface TrainingJobRunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
   @doc("List download information for artifacts under a path prefix from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/artifacts:contentInfoByPrefix")
+  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:contentInfoByPrefix")
   getRunArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -360,7 +360,7 @@ interface TrainingJobRunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/byos" "Job artifact content is produced by the job and streamed back to the caller."
   @doc("Download artifact content from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/artifacts:content")
+  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:content")
   downloadRunArtifact is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -385,7 +385,7 @@ interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
   @doc("List metrics emitted by the current view of a training job.")
   @get
-  @route("/trainingJobs/{jobName}/metrics")
+  @route("/training_jobs/{jobName}/metrics")
   listMetrics is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -401,7 +401,7 @@ interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
   @doc("Get the latest values for metrics emitted by the current view of a training job.")
   @get
-  @route("/trainingJobs/{jobName}/metrics:lastValues")
+  @route("/training_jobs/{jobName}/metrics:lastValues")
   getMetricLastValues is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -415,7 +415,7 @@ interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
   @doc("Get the full history for a training job metric.")
   @get
-  @route("/trainingJobs/{jobName}/metrics/{metricName}")
+  @route("/training_jobs/{jobName}/metrics/{metricName}")
   getMetric is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -435,7 +435,7 @@ interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
   @doc("Get aggregate values for a training job metric.")
   @get
-  @route("/trainingJobs/{jobName}/metrics/{metricName}:aggregates")
+  @route("/training_jobs/{jobName}/metrics/{metricName}:aggregates")
   getMetricAggregates is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -455,7 +455,7 @@ interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
   @doc("Get sampled values for a training job metric.")
   @get
-  @route("/trainingJobs/{jobName}/metrics/{metricName}:samples")
+  @route("/training_jobs/{jobName}/metrics/{metricName}:samples")
   getMetricSamples is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -475,7 +475,7 @@ interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
   @doc("Get one sampled value or window for a training job metric.")
   @get
-  @route("/trainingJobs/{jobName}/metrics/{metricName}:sample")
+  @route("/training_jobs/{jobName}/metrics/{metricName}:sample")
   getMetricSample is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -498,7 +498,7 @@ interface TrainingJobRunMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
   @doc("List metrics emitted by a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/metrics")
+  @route("/training_jobs/{jobName}/runs/{runId}/metrics")
   listRunMetrics is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -518,7 +518,7 @@ interface TrainingJobRunMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
   @doc("Get latest metric values for a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/metrics:lastValues")
+  @route("/training_jobs/{jobName}/runs/{runId}/metrics:lastValues")
   getRunMetricLastValues is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -536,7 +536,7 @@ interface TrainingJobRunMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
   @doc("Get the full history for a metric from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/metrics/{metricName}")
+  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}")
   getRunMetric is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -560,7 +560,7 @@ interface TrainingJobRunMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
   @doc("Get aggregate metric values from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/metrics/{metricName}:aggregates")
+  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:aggregates")
   getRunMetricAggregates is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -584,7 +584,7 @@ interface TrainingJobRunMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
   @doc("Get sampled metric values from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/metrics/{metricName}:samples")
+  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:samples")
   getRunMetricSamples is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -608,7 +608,7 @@ interface TrainingJobRunMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
   @doc("Get one sampled value or window from a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/metrics/{metricName}:sample")
+  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:sample")
   getRunMetricSample is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -635,7 +635,7 @@ interface TrainingJobOutputs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from job outputs and asset relationships."
   @doc("List outputs produced by a training job.")
   @get
-  @route("/trainingJobs/{jobName}/outputs")
+  @route("/training_jobs/{jobName}/outputs")
   listOutputs is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -650,7 +650,7 @@ interface TrainingJobOutputs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from job outputs and asset relationships."
   @doc("Get one output produced by a training job.")
   @get
-  @route("/trainingJobs/{jobName}/outputs/{outputName}")
+  @route("/training_jobs/{jobName}/outputs/{outputName}")
   getOutput is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -671,7 +671,7 @@ interface TrainingJobRunOutputs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run outputs are projected from run output state and asset relationships."
   @doc("List outputs produced by a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/outputs")
+  @route("/training_jobs/{jobName}/runs/{runId}/outputs")
   listRunOutputs is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -690,7 +690,7 @@ interface TrainingJobRunOutputs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run outputs are projected from run output state and asset relationships."
   @doc("Get one output produced by a specific training job run.")
   @get
-  @route("/trainingJobs/{jobName}/runs/{runId}/outputs/{outputName}")
+  @route("/training_jobs/{jobName}/runs/{runId}/outputs/{outputName}")
   getRunOutput is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
