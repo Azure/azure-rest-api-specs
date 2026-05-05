@@ -36,6 +36,15 @@ interface Experiments {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "MLflow compatibility route"
+  @doc("List MLflow experiments.")
+  @get
+  @route("list")
+  list is Azure.AI.Projects.FoundryDataPlaneOperation<
+    MlflowExperimentListQueryParameters,
+    MlflowResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "MLflow compatibility route"
   @doc("Search MLflow experiments.")
   @post
   @route("search")
@@ -80,6 +89,7 @@ interface Experiments {
     MlflowResponse
   >;
 }
+
 
 @tag("MLflow Runs")
 @route("/mlflow/api/2.0/mlflow/runs")
@@ -252,7 +262,7 @@ interface RegisteredModels {
   @delete
   @route("delete")
   delete is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowRegisteredModelQueryParameters,
+    { @bodyRoot payload: MlflowPayload },
     MlflowResponse
   >;
 
@@ -279,7 +289,7 @@ interface RegisteredModels {
   @get
   @route("search")
   search is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowPaginationQueryParameters,
+    MlflowRegisteredModelSearchQueryParameters,
     MlflowResponse
   >;
 
@@ -297,7 +307,7 @@ interface RegisteredModels {
   @delete
   @route("delete-tag")
   deleteTag is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowRegisteredModelQueryParameters,
+    { @bodyRoot payload: MlflowPayload },
     MlflowResponse
   >;
 
@@ -306,7 +316,16 @@ interface RegisteredModels {
   @get
   @route("get-latest-versions")
   getLatestVersions is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowRegisteredModelQueryParameters,
+    MlflowRegisteredModelLatestVersionsQueryParameters,
+    MlflowResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "MLflow compatibility route"
+  @doc("Get latest versions for an MLflow registered model with the model name in the request body.")
+  @post
+  @route("get-latest-versions")
+  getLatestVersionsNameInBody is Azure.AI.Projects.FoundryDataPlaneOperation<
+    { @bodyRoot payload: MlflowPayload },
     MlflowResponse
   >;
 
@@ -355,7 +374,7 @@ interface ModelVersions {
   @delete
   @route("delete")
   delete is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowModelVersionQueryParameters,
+    { @bodyRoot payload: MlflowPayload },
     MlflowResponse
   >;
 
@@ -373,7 +392,16 @@ interface ModelVersions {
   @get
   @route("search")
   search is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowPaginationQueryParameters,
+    MlflowModelVersionSearchQueryParameters,
+    MlflowResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "MLflow compatibility route"
+  @doc("Search MLflow model versions with search options in the request body.")
+  @post
+  @route("search")
+  searchWithFilter is Azure.AI.Projects.FoundryDataPlaneOperation<
+    { @bodyRoot payload: MlflowPayload },
     MlflowResponse
   >;
 
@@ -400,16 +428,16 @@ interface ModelVersions {
   @delete
   @route("delete-tag")
   deleteTag is Azure.AI.Projects.FoundryDataPlaneOperation<
-    MlflowModelVersionQueryParameters,
+    { @bodyRoot payload: MlflowPayload },
     MlflowResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "MLflow compatibility route"
   @doc("Get an MLflow model version storage location URI.")
-  @post
+  @get
   @route("get-storage-location-uri")
   getStorageLocationUri is Azure.AI.Projects.FoundryDataPlaneOperation<
-    { @bodyRoot payload: MlflowPayload },
+    MlflowModelVersionQueryParameters,
     MlflowResponse
   >;
 }

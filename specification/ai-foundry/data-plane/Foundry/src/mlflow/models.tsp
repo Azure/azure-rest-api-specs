@@ -28,6 +28,11 @@ alias MlflowExperimentQueryParameters = {
   @query experiment_name?: string;
 };
 
+alias MlflowExperimentListQueryParameters = MlflowPaginationQueryParameters & {
+  @doc("Experiment lifecycle stage filter.")
+  @query view_type?: string;
+};
+
 alias MlflowRunQueryParameters = {
   @doc("MLflow run identifier.")
   @query run_id?: string;
@@ -41,12 +46,30 @@ alias MlflowRegisteredModelQueryParameters = {
   @query name?: string;
 };
 
+alias MlflowRegisteredModelSearchQueryParameters = MlflowPaginationQueryParameters & {
+  @doc("Registered model search filter.")
+  @query filter?: string;
+};
+
+alias MlflowRegisteredModelLatestVersionsQueryParameters = MlflowRegisteredModelQueryParameters & {
+  @doc("Model version stages to include.")
+  @query stages?: string[];
+};
+
 alias MlflowModelVersionQueryParameters = {
   @doc("Registered model name.")
   @query name?: string;
 
   @doc("Model version.")
   @query version?: string;
+};
+
+alias MlflowModelVersionSearchQueryParameters = MlflowPaginationQueryParameters & {
+  @doc("Model version search filter.")
+  @query filter?: string;
+
+  @doc("Model version ordering expression.")
+  @query order_by?: string;
 };
 
 alias MlflowArtifactListQueryParameters = MlflowRunQueryParameters & {
