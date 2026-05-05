@@ -602,7 +602,9 @@ model VmSizeProfile {
   name: string;
 
   @doc("The rank of this VM size in the priority order")
-  rank: int32;
+  @minValue(0)
+  @maxValue(65535)
+  rank?: int32;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
@@ -622,7 +624,9 @@ model ZonePreference {
   zone: string;
 
   @doc("The rank of this zone in the priority order")
-  rank: int32;
+  @minValue(0)
+  @maxValue(65535)
+  rank?: int32;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
