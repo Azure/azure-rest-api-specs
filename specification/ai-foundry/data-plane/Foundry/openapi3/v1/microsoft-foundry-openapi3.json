@@ -11507,6 +11507,146 @@
         }
       }
     },
+    "/trainingJobs/operations/{operationId}/result": {
+      "get": {
+        "operationId": "TrainingJobOperations_getOperationResult",
+        "description": "Poll the result of an asynchronous training job operation.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "The operation identifier returned by a training job create, cancel, or delete request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobOperationResource"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Response returned when a training job operation is still in progress.",
+            "headers": {
+              "Location": {
+                "required": false,
+                "description": "URL to poll for the operation result.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/trainingJobs/operations/{operationId}/status": {
+      "get": {
+        "operationId": "TrainingJobOperations_getOperationStatus",
+        "description": "Poll the status of an asynchronous training job operation.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "The operation identifier returned by a training job create, cancel, or delete request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobOperationResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
     "/trainingJobs/{jobName}/artifacts": {
       "get": {
         "operationId": "TrainingJobArtifacts_listArtifacts",
@@ -16854,6 +16994,24 @@
           ]
         }
       },
+      "ChatTemplate": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Chatml",
+              "llama-3",
+              "Zephyr",
+              "Gemma",
+              "phi-3"
+            ]
+          }
+        ],
+        "description": "Chat template used to format conversational training data."
+      },
       "ClusterInsightResult": {
         "type": "object",
         "required": [
@@ -16952,8 +17110,6 @@
         "type": "object",
         "required": [
           "jobType",
-          "command",
-          "environmentImageReference",
           "computeId"
         ],
         "properties": {
@@ -16966,11 +17122,19 @@
           },
           "command": {
             "type": "string",
-            "description": "The command to execute on startup of the job."
+            "description": "The command to execute on startup of the job. Required when training is not specified, and must be omitted when training is specified."
           },
           "environmentImageReference": {
             "type": "string",
-            "description": "ACR path of environment."
+            "description": "ACR path or Azure ML environment reference. Required when training is not specified."
+          },
+          "training": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingConfiguration"
+              }
+            ],
+            "description": "Declarative training recipe. When specified, the service compiles the recipe into the command and environment used for execution."
           },
           "displayName": {
             "type": "string",
@@ -17030,6 +17194,11 @@
               }
             ],
             "description": "Compute Resource configuration for the job."
+          },
+          "gpuCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs requested by the training job."
           },
           "distribution": {
             "allOf": [
@@ -20884,6 +21053,104 @@
           }
         ],
         "description": "The kind of metric emitted by a job."
+      },
+      "JobOperationError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Additional error information."
+          }
+        },
+        "description": "Error details for an asynchronous training job operation."
+      },
+      "JobOperationResource": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Operation resource ID.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Operation name.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobOperationStatus"
+              }
+            ],
+            "description": "Operation status.",
+            "readOnly": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Operation result properties.",
+            "readOnly": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Operation start time.",
+            "readOnly": true
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Operation end time.",
+            "readOnly": true
+          },
+          "percentComplete": {
+            "type": "number",
+            "format": "double",
+            "description": "Operation completion percentage from 0 to 100.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobOperationError"
+              }
+            ],
+            "description": "Operation error information.",
+            "readOnly": true
+          }
+        },
+        "description": "Asynchronous training job operation resource."
+      },
+      "JobOperationStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "InProgress",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ]
+          }
+        ],
+        "description": "Status of an asynchronous training job operation."
       },
       "JobOutputReference": {
         "type": "object",
@@ -44152,6 +44419,392 @@
           }
         ],
         "description": "Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights."
+      },
+      "TrainingAlgorithm": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Sft",
+              "Dpo",
+              "Kto",
+              "Orpo",
+              "Cpo",
+              "SimPo",
+              "Grpo",
+              "Ppo",
+              "Rloo",
+              "ReinforcePp",
+              "RewardModel"
+            ]
+          }
+        ],
+        "description": "Training algorithm used by a declarative training job."
+      },
+      "TrainingColumnMapping": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Column containing prompts."
+          },
+          "chosen": {
+            "type": "string",
+            "description": "Column containing chosen responses for preference training."
+          },
+          "rejected": {
+            "type": "string",
+            "description": "Column containing rejected responses for preference training."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Column containing reference answers or reward context."
+          },
+          "messages": {
+            "type": "string",
+            "description": "Column containing chat messages."
+          }
+        },
+        "description": "Mapping from logical training fields to columns in the dataset."
+      },
+      "TrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "model",
+          "dataset"
+        ],
+        "properties": {
+          "algorithm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingAlgorithm"
+              }
+            ],
+            "description": "Training algorithm."
+          },
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework. If omitted, the service selects a compatible framework."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "reward": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Reward signal configuration."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "description": "Declarative training recipe. When specified, command must be omitted and environmentImageReference is optional."
+      },
+      "TrainingDataFormatConfiguration": {
+        "type": "object",
+        "properties": {
+          "chatTemplate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChatTemplate"
+              }
+            ],
+            "description": "Built-in chat template to apply to the dataset."
+          },
+          "chatTemplatePath": {
+            "type": "string",
+            "description": "Path to a custom chat template relative to the job's code directory."
+          }
+        },
+        "description": "Formatting options for conversational training data."
+      },
+      "TrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "train"
+        ],
+        "properties": {
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingColumnMapping"
+              }
+            ],
+            "description": "Mapping from training fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "description": "Dataset configuration for a declarative training job."
+      },
+      "TrainingEntryPointReference": {
+        "type": "object",
+        "required": [
+          "entryPoint"
+        ],
+        "properties": {
+          "entryPoint": {
+            "type": "string",
+            "description": "Path to the Python callable in module/file.py:function format."
+          }
+        },
+        "description": "Reference to a Python callable relative to the job's code directory."
+      },
+      "TrainingEvalBenchmark": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Gsm8k",
+              "Mmlu",
+              "Humaneval",
+              "Mbpp",
+              "Arc",
+              "Hellaswag"
+            ]
+          }
+        ],
+        "description": "Built-in evaluation benchmark."
+      },
+      "TrainingEvalConfiguration": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalBenchmark"
+              }
+            ],
+            "description": "Named built-in benchmark. Mutually exclusive with dataset."
+          },
+          "dataset": {
+            "type": "string",
+            "description": "Custom evaluation dataset asset reference. Mutually exclusive with benchmark."
+          },
+          "everyNSteps": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Evaluation frequency in training steps. Omit for end-of-training only."
+          }
+        },
+        "description": "Evaluation configuration for a declarative training job."
+      },
+      "TrainingFramework": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Trl",
+              "Verl",
+              "OpenRlhf",
+              "NemoRl",
+              "Slime",
+              "TorchForge"
+            ]
+          }
+        ],
+        "description": "Training framework used to lower a declarative training job into an execution command."
+      },
+      "TrainingInlineFunctionConfiguration": {
+        "type": "object",
+        "required": [
+          "def"
+        ],
+        "properties": {
+          "def": {
+            "type": "string",
+            "description": "Python function definition."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingInlineFunctionRuntime"
+              }
+            ],
+            "description": "Runtime dependencies for the inline function."
+          }
+        },
+        "description": "Inline Python function definition for custom training logic."
+      },
+      "TrainingInlineFunctionRuntime": {
+        "type": "object",
+        "properties": {
+          "pip": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Pip packages to install before invoking the inline function."
+          }
+        },
+        "description": "Python runtime dependencies for an inline function."
+      },
+      "TrainingLoraConfiguration": {
+        "type": "object",
+        "required": [
+          "rank"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Low-rank dimension."
+          },
+          "alpha": {
+            "type": "integer",
+            "format": "int32",
+            "description": "LoRA scaling factor."
+          },
+          "dropout": {
+            "type": "number",
+            "format": "double",
+            "description": "Dropout applied to adapter inputs.",
+            "default": 0.05
+          },
+          "targetModules": {
+            "type": "string",
+            "description": "Linear layers that receive adapters. Use 'auto' to let the framework choose defaults.",
+            "default": "auto"
+          },
+          "quantize": {
+            "type": "boolean",
+            "description": "Whether to enable QLoRA 4-bit base weight loading.",
+            "default": false
+          }
+        },
+        "description": "LoRA adapter configuration for parameter-efficient fine tuning."
+      },
+      "TrainingRewardConfiguration": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Reward model asset reference."
+          },
+          "function": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEntryPointReference"
+              }
+            ],
+            "description": "Python callable used to compute reward scores."
+          },
+          "inline_function": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingInlineFunctionConfiguration"
+              }
+            ],
+            "description": "Inline Python function used to compute reward scores."
+          }
+        },
+        "description": "Reward signal configuration for reinforcement or reward model training."
+      },
+      "TrainingRolloutConfiguration": {
+        "type": "object",
+        "required": [
+          "engine"
+        ],
+        "properties": {
+          "engine": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutEngine"
+              }
+            ],
+            "description": "Rollout inference engine."
+          },
+          "tensorParallelSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Tensor parallel size used by the rollout engine.",
+            "default": 1
+          },
+          "gpuMemoryUtilization": {
+            "type": "number",
+            "format": "double",
+            "description": "GPU memory utilization target for the rollout engine, between 0.0 and 1.0."
+          }
+        },
+        "description": "Rollout generation configuration for online reinforcement learning."
+      },
+      "TrainingRolloutEngine": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Vllm",
+              "Sglang",
+              "Hf",
+              "MegatronInference"
+            ]
+          }
+        ],
+        "description": "Inference engine used for rollout generation during online reinforcement learning."
       },
       "TreatmentEffectType": {
         "anyOf": [

@@ -27,8 +27,6 @@ alias JobsFilterQueryParams = {
   properties?: string;
 };
 
-alias JobOperations = FoundryAzureOperations<{}>;
-
 @tag("TrainingJobs")
 interface TrainingJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -95,6 +93,39 @@ interface TrainingJobs {
     Http.OkResponse | JobCancelAcceptedResponse
   >;
 } // interface TrainingJobs
+
+@tag("TrainingJobs")
+interface TrainingJobOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry job operations are exposed as data-plane polling routes under trainingJobs."
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "The operation result route can return 202/200 with no body or a terminal operation resource."
+  @doc("Poll the result of an asynchronous training job operation.")
+  @get
+  @route("/trainingJobs/operations/{operationId}/result")
+  getOperationResult is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    {
+      @doc("The operation identifier returned by a training job create, cancel, or delete request.")
+      @path
+      operationId: string;
+    },
+    JobOperationResource | JobOperationAcceptedResponse | Http.OkResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry job operations are exposed as data-plane polling routes under trainingJobs."
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "The operation status route can return 200 with no body or an operation resource."
+  @doc("Poll the status of an asynchronous training job operation.")
+  @get
+  @route("/trainingJobs/operations/{operationId}/status")
+  getOperationStatus is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    {
+      @doc("The operation identifier returned by a training job create, cancel, or delete request.")
+      @path
+      operationId: string;
+    },
+    JobOperationResource | Http.OkResponse
+  >;
+}
 
 @tag("TrainingJobs")
 interface TrainingJobRuns {

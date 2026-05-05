@@ -8,9 +8,14 @@
     "job": {
       "properties": {
         "jobType": "Command",
-        "command": "python train.py",
-        "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
-        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster"
+        "training": {
+          "algorithm": "Sft",
+          "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+          "dataset": {
+            "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1"
+          }
+        },
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster"
       }
     }
   },
@@ -20,9 +25,14 @@
         "name": "my_training_job_01",
         "properties": {
           "jobType": "Command",
-          "command": "python train.py",
-          "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
-          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster"
+          "training": {
+            "algorithm": "Sft",
+            "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+            "dataset": {
+              "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1"
+            }
+          },
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster"
         }
       }
     }

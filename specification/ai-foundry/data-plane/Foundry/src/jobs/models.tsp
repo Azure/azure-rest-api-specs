@@ -195,6 +195,272 @@ model QueueSettings {
   jobTier?: string;
 }
 
+@doc("Training algorithm used by a declarative training job.")
+union TrainingAlgorithm {
+  string,
+
+  @doc("Supervised fine tuning.")
+  Sft: "Sft",
+
+  @doc("Direct preference optimization.")
+  Dpo: "Dpo",
+
+  @doc("Kahneman-Tversky optimization.")
+  Kto: "Kto",
+
+  @doc("Odds ratio preference optimization.")
+  Orpo: "Orpo",
+
+  @doc("Contrastive preference optimization.")
+  Cpo: "Cpo",
+
+  @doc("Simple preference optimization.")
+  SimPo: "SimPo",
+
+  @doc("Group relative policy optimization.")
+  Grpo: "Grpo",
+
+  @doc("Proximal policy optimization.")
+  Ppo: "Ppo",
+
+  @doc("REINFORCE leave-one-out.")
+  Rloo: "Rloo",
+
+  @doc("REINFORCE++.")
+  ReinforcePp: "ReinforcePp",
+
+  @doc("Reward model training.")
+  RewardModel: "RewardModel",
+}
+
+@doc("Training framework used to lower a declarative training job into an execution command.")
+union TrainingFramework {
+  string,
+
+  @doc("TRL framework.")
+  Trl: "Trl",
+
+  @doc("VERL framework.")
+  Verl: "Verl",
+
+  @doc("OpenRLHF framework.")
+  OpenRlhf: "OpenRlhf",
+
+  @doc("NeMo RL framework.")
+  NemoRl: "NemoRl",
+
+  @doc("Slime framework.")
+  Slime: "Slime",
+
+  @doc("TorchForge framework.")
+  TorchForge: "TorchForge",
+}
+
+@doc("Chat template used to format conversational training data.")
+union ChatTemplate {
+  string,
+
+  @doc("ChatML template.")
+  Chatml: "Chatml",
+
+  @doc("Llama 3 chat template.")
+  Llama3: "llama-3",
+
+  @doc("Zephyr chat template.")
+  Zephyr: "Zephyr",
+
+  @doc("Gemma chat template.")
+  Gemma: "Gemma",
+
+  @doc("Phi 3 chat template.")
+  Phi3: "phi-3",
+}
+
+@doc("Mapping from logical training fields to columns in the dataset.")
+model TrainingColumnMapping {
+  @doc("Column containing prompts.")
+  prompt?: string;
+
+  @doc("Column containing chosen responses for preference training.")
+  chosen?: string;
+
+  @doc("Column containing rejected responses for preference training.")
+  rejected?: string;
+
+  @doc("Column containing reference answers or reward context.")
+  reference?: string;
+
+  @doc("Column containing chat messages.")
+  messages?: string;
+}
+
+@doc("Formatting options for conversational training data.")
+model TrainingDataFormatConfiguration {
+  @doc("Built-in chat template to apply to the dataset.")
+  chatTemplate?: ChatTemplate;
+
+  @doc("Path to a custom chat template relative to the job's code directory.")
+  chatTemplatePath?: string;
+}
+
+@doc("Dataset configuration for a declarative training job.")
+model TrainingDatasetConfiguration {
+  @doc("Training dataset asset reference.")
+  train: string;
+
+  @doc("Optional evaluation dataset asset reference.")
+  eval?: string;
+
+  @doc("Mapping from training fields to dataset columns.")
+  columns?: TrainingColumnMapping;
+
+  @doc("Conversational data formatting options.")
+  dataFormat?: TrainingDataFormatConfiguration;
+}
+
+@doc("Reference to a Python callable relative to the job's code directory.")
+model TrainingEntryPointReference {
+  @doc("Path to the Python callable in module/file.py:function format.")
+  entryPoint: string;
+}
+
+@doc("Python runtime dependencies for an inline function.")
+model TrainingInlineFunctionRuntime {
+  @doc("Pip packages to install before invoking the inline function.")
+  pip?: string[];
+}
+
+@doc("Inline Python function definition for custom training logic.")
+model TrainingInlineFunctionConfiguration {
+  @doc("Python function definition.")
+  def: string;
+
+  @doc("Runtime dependencies for the inline function.")
+  runtime?: TrainingInlineFunctionRuntime;
+}
+
+@doc("Reward signal configuration for reinforcement or reward model training.")
+model TrainingRewardConfiguration {
+  @doc("Reward model asset reference.")
+  `model`?: string;
+
+  @doc("Python callable used to compute reward scores.")
+  function?: TrainingEntryPointReference;
+
+  @doc("Inline Python function used to compute reward scores.")
+  @encodedName("application/json", "inline_function")
+  inlineFunction?: TrainingInlineFunctionConfiguration;
+}
+
+@doc("LoRA adapter configuration for parameter-efficient fine tuning.")
+model TrainingLoraConfiguration {
+  @doc("Low-rank dimension.")
+  rank: int32;
+
+  @doc("LoRA scaling factor.")
+  alpha?: int32;
+
+  @doc("Dropout applied to adapter inputs.")
+  dropout?: float64 = 0.05;
+
+  @doc("Linear layers that receive adapters. Use 'auto' to let the framework choose defaults.")
+  targetModules?: string = "auto";
+
+  @doc("Whether to enable QLoRA 4-bit base weight loading.")
+  quantize?: boolean = false;
+}
+
+@doc("Inference engine used for rollout generation during online reinforcement learning.")
+union TrainingRolloutEngine {
+  string,
+
+  @doc("vLLM inference engine.")
+  Vllm: "Vllm",
+
+  @doc("SGLang inference engine.")
+  Sglang: "Sglang",
+
+  @doc("Hugging Face generate-based inference.")
+  Hf: "Hf",
+
+  @doc("Megatron-Core native inference.")
+  MegatronInference: "MegatronInference",
+}
+
+@doc("Rollout generation configuration for online reinforcement learning.")
+model TrainingRolloutConfiguration {
+  @doc("Rollout inference engine.")
+  engine: TrainingRolloutEngine;
+
+  @doc("Tensor parallel size used by the rollout engine.")
+  tensorParallelSize?: int32 = 1;
+
+  @doc("GPU memory utilization target for the rollout engine, between 0.0 and 1.0.")
+  gpuMemoryUtilization?: float64;
+}
+
+@doc("Built-in evaluation benchmark.")
+union TrainingEvalBenchmark {
+  string,
+
+  @doc("Grade School Math 8K benchmark.")
+  Gsm8k: "Gsm8k",
+
+  @doc("Massive Multitask Language Understanding benchmark.")
+  Mmlu: "Mmlu",
+
+  @doc("Human-written code generation benchmark.")
+  Humaneval: "Humaneval",
+
+  @doc("Mostly Basic Python Programs benchmark.")
+  Mbpp: "Mbpp",
+
+  @doc("AI2 Reasoning Challenge benchmark.")
+  Arc: "Arc",
+
+  @doc("HellaSwag commonsense inference benchmark.")
+  Hellaswag: "Hellaswag",
+}
+
+@doc("Evaluation configuration for a declarative training job.")
+model TrainingEvalConfiguration {
+  @doc("Named built-in benchmark. Mutually exclusive with dataset.")
+  benchmark?: TrainingEvalBenchmark;
+
+  @doc("Custom evaluation dataset asset reference. Mutually exclusive with benchmark.")
+  dataset?: string;
+
+  @doc("Evaluation frequency in training steps. Omit for end-of-training only.")
+  everyNSteps?: int32;
+}
+
+@doc("Declarative training recipe. When specified, command must be omitted and environmentImageReference is optional.")
+model TrainingConfiguration {
+  @doc("Training algorithm.")
+  algorithm: TrainingAlgorithm;
+
+  @doc("Training framework. If omitted, the service selects a compatible framework.")
+  framework?: TrainingFramework;
+
+  @doc("Base model asset reference.")
+  `model`: string;
+
+  @doc("Training and optional evaluation datasets.")
+  dataset: TrainingDatasetConfiguration;
+
+  @doc("Reward signal configuration.")
+  reward?: TrainingRewardConfiguration;
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Rollout generation configuration.")
+  rollout?: TrainingRolloutConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
   @doc("The identity that created the resource.")
@@ -243,11 +509,14 @@ model CommandJob extends JobProperties {
   @doc("Job type.")
   jobType: "Command";
 
-  @doc("The command to execute on startup of the job.")
-  command: string;
+  @doc("The command to execute on startup of the job. Required when training is not specified, and must be omitted when training is specified.")
+  command?: string;
 
-  @doc("ACR path of environment.")
-  environmentImageReference: string;
+  @doc("ACR path or Azure ML environment reference. Required when training is not specified.")
+  environmentImageReference?: string;
+
+  @doc("Declarative training recipe. When specified, the service compiles the recipe into the command and environment used for execution.")
+  training?: TrainingConfiguration;
 
   @doc("Display name of job.")
   displayName?: string;
@@ -280,6 +549,9 @@ model CommandJob extends JobProperties {
 
   @doc("Compute Resource configuration for the job.")
   resources?: JobResourceConfiguration;
+
+  @doc("Number of GPUs requested by the training job.")
+  gpuCount?: int32;
 
   @doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.")
   distribution?: DistributionConfiguration;
@@ -346,6 +618,82 @@ model JobCancelAcceptedResponse {
   @doc("Suggested delay in seconds before polling.")
   @header("Retry-After")
   retryAfter?: int32;
+}
+
+@doc("Status of an asynchronous training job operation.")
+union JobOperationStatus {
+  string,
+
+  @doc("Operation is being processed.")
+  InProgress: "InProgress",
+
+  @doc("Operation is deleting resources.")
+  Deleting: "Deleting",
+
+  @doc("Operation completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("Operation failed.")
+  Failed: "Failed",
+
+  @doc("Operation was canceled.")
+  Canceled: "Canceled",
+}
+
+@doc("Error details for an asynchronous training job operation.")
+model JobOperationError {
+  @doc("Machine-readable error code.")
+  code?: string;
+
+  @doc("Human-readable error message.")
+  message?: string;
+
+  @doc("Additional error information.")
+  details?: Record<unknown>;
+}
+
+@doc("Asynchronous training job operation resource.")
+model JobOperationResource {
+  @doc("Operation resource ID.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("Operation name.")
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  @doc("Operation status.")
+  @visibility(Lifecycle.Read)
+  status: JobOperationStatus;
+
+  @doc("Operation result properties.")
+  @visibility(Lifecycle.Read)
+  properties?: Record<unknown>;
+
+  @doc("Operation start time.")
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  @doc("Operation end time.")
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  @doc("Operation completion percentage from 0 to 100.")
+  @visibility(Lifecycle.Read)
+  percentComplete?: float64;
+
+  @doc("Operation error information.")
+  @visibility(Lifecycle.Read)
+  error?: JobOperationError;
+}
+
+@doc("Response returned when a training job operation is still in progress.")
+model JobOperationAcceptedResponse {
+  @statusCode statusCode: 202;
+
+  @doc("URL to poll for the operation result.")
+  @header("Location")
+  location?: string;
 }
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")
