@@ -2461,7 +2461,7 @@ model ManagedRuleDefinition {
   description?: string;
 
   /**
-   * Describes the paranoia level of the managed rule. Applicable only for DRS rules. Null for Bot Manager, DDoS, and AI rules.
+   * Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
