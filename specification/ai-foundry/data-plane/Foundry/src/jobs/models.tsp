@@ -598,9 +598,13 @@ model Job {
 model JobDeleteAcceptedResponse {
   @statusCode statusCode: 202;
 
-  @doc("URL to poll for the status of the delete operation.")
+  @doc("URL to poll for the final result of the delete operation.")
   @header("Location")
   location: string;
+
+  @doc("URL to poll for the status of the delete operation.")
+  @header("Operation-Location")
+  operationLocation?: string;
 
   @doc("Suggested delay in seconds before polling.")
   @header("Retry-After")
@@ -611,9 +615,13 @@ model JobDeleteAcceptedResponse {
 model JobCancelAcceptedResponse {
   @statusCode statusCode: 202;
 
-  @doc("URL to poll for the status of the cancel operation.")
+  @doc("URL to poll for the final result of the cancel operation.")
   @header("Location")
   location: string;
+
+  @doc("URL to poll for the status of the cancel operation.")
+  @header("Operation-Location")
+  operationLocation?: string;
 
   @doc("Suggested delay in seconds before polling.")
   @header("Retry-After")
@@ -694,6 +702,10 @@ model JobOperationAcceptedResponse {
   @doc("URL to poll for the operation result.")
   @header("Location")
   location?: string;
+
+  @doc("URL to poll for the operation status.")
+  @header("Operation-Location")
+  operationLocation?: string;
 }
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")

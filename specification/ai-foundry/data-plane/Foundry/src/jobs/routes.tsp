@@ -67,9 +67,9 @@ interface TrainingJobs {
     ResourceCreatedResponse<Job>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO delete returns 202 with Location header for polling, or 204 when job not found"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO delete returns 202 with Location and Operation-Location headers for polling, or 204 when job not found"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete LRO returns 202 with Location header, 204 with no body"
-  @doc("Delete a training job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.")
+  @doc("Delete a training job by name. Returns 202 Accepted with Location and Operation-Location headers to poll for completion, or 204 if the job does not exist.")
   @delete
   beginDelete is Azure.Core.Foundations.ResourceOperation<
     Job,
@@ -79,9 +79,9 @@ interface TrainingJobs {
     JobDeleteAcceptedResponse | Http.NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO cancel returns 200 synchronously or 202 with Location header for async polling"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO cancel returns 200 synchronously or 202 with Location and Operation-Location headers for async polling"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel LRO returns 200 or 202 with Location header, no body"
-  @doc("Cancel a training job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.")
+  @doc("Cancel a training job by name. Returns 200 if cancelled immediately, or 202 Accepted with Location and Operation-Location headers to poll for completion.")
   @post
   @Rest.action("cancel")
   @actionSeparator(":")

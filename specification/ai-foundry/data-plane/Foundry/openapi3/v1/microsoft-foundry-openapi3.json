@@ -11564,6 +11564,13 @@
                 "schema": {
                   "type": "string"
                 }
+              },
+              "Operation-Location": {
+                "required": false,
+                "description": "URL to poll for the operation status.",
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -14254,7 +14261,7 @@
       },
       "delete": {
         "operationId": "TrainingJobs_beginDelete",
-        "description": "Delete a training job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.",
+        "description": "Delete a training job by name. Returns 202 Accepted with Location and Operation-Location headers to poll for completion, or 204 if the job does not exist.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -14287,6 +14294,13 @@
             "headers": {
               "Location": {
                 "required": true,
+                "description": "URL to poll for the final result of the delete operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Operation-Location": {
+                "required": false,
                 "description": "URL to poll for the status of the delete operation.",
                 "schema": {
                   "type": "string"
@@ -14333,7 +14347,7 @@
     "/trainingJobs/{name}:cancel": {
       "post": {
         "operationId": "TrainingJobs_beginCancel",
-        "description": "Cancel a training job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.",
+        "description": "Cancel a training job by name. Returns 200 if cancelled immediately, or 202 Accepted with Location and Operation-Location headers to poll for completion.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -14369,6 +14383,13 @@
             "headers": {
               "Location": {
                 "required": true,
+                "description": "URL to poll for the final result of the cancel operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Operation-Location": {
+                "required": false,
                 "description": "URL to poll for the status of the cancel operation.",
                 "schema": {
                   "type": "string"
