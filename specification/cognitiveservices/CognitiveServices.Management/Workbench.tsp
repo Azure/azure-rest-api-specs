@@ -31,28 +31,28 @@ model Workbench is Azure.ResourceManager.ProxyResource<WorkbenchProperties, fals
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench requires etag on the resource envelope for optimistic concurrency control"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The location of the workbench resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'location' on the ProxyResource envelope to track workbench region independently from the parent project"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench tracks its own location independently from parent Project to support cross-region placement"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'Workbench' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench requires tags on the resource envelope for resource management and billing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for tags to support extensible key-value pairs"
   tags?: Record<string>;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'identity' on the resource envelope for managed identity support"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench requires identity on the resource envelope for managed identity support"
   identity?: Identity;
 }
 
