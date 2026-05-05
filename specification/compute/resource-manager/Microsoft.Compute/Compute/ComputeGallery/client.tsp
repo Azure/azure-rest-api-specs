@@ -30,6 +30,19 @@ using ComputeGallery;
   "csharp"
 );
 
+// Main's autorest.md re-typed `softDeletedTime` from string -> date-time:
+//   GallerySoftDeletedResource.properties.softDeletedTime: -|date-time
+// and the AutoRest naming convention then renamed `Time` -> `On`.
+// Spec keeps it as `string`; mirror the legacy C# shape for back-compat.
+@@alternateType(GallerySoftDeletedResourceProperties.softDeletedTime,
+  utcDateTime,
+  "csharp"
+);
+@@clientName(GallerySoftDeletedResourceProperties.softDeletedTime,
+  "softDeletedOn",
+  "csharp"
+);
+
 // C# enum singular←plural rename
 @@clientName(SharedToValues, "SharedToValue", "csharp");
 
