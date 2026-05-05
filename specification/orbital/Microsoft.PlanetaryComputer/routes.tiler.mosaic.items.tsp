@@ -638,8 +638,9 @@ interface MosaicItemsFeatureGeoJson {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
@@ -735,8 +736,9 @@ interface MosaicItemsBbox {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
@@ -827,8 +829,9 @@ interface MosaicItemsBboxWithDimensions {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -898,8 +901,9 @@ interface MosaicItemsFeatureGeoJsonFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
@@ -1704,6 +1708,7 @@ interface MosaicItemsPreviewFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
       maxSize?: int32 = 1024;
 
@@ -1774,6 +1779,7 @@ interface MosaicItemsPreview {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
       maxSize?: int32 = 1024;
 
@@ -1861,8 +1867,9 @@ interface MosaicItemsFeatureGeoJsonWidthByHeight {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MiscTileQueryParameters;
       ...DstCrsQueryParameter;
