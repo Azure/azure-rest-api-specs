@@ -6,6 +6,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
+@@clientName(AnalyzeDocuments, "DocumentAnalysis", "csharp");
 @@clientName(Tasks, "DocumentActions", "csharp");
 @@clientName(State, "DocumentActionState", "csharp");
 @@clientName(Error, "AnalyzeDocumentsError", "csharp");
@@ -495,6 +496,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationAction",
   "csharp"
 );
+@@clientName(PiiLROTask,
+  "PiiEntityRecognitionAction",
+  "csharp"
+);
+
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
 @@clientName(AnalyzeDocumentsLROTaskKind,
