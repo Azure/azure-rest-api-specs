@@ -348,3 +348,8 @@ using ComputeGallery;
 
 @@clientName(StorageAccountStrategy.PreferStandard_ZRS, "PreferStandardZrs", "csharp");
 @@clientName(StorageAccountStrategy.DefaultStandard_LRS, "DefaultStandardLrs", "csharp");
+
+// ── Azure.ClientGenerator.Core.Usage.input forces public ctor + property setters on output-only models ──
+// .NET back-compat: GallerySoftDeletedResource previously shipped with a public
+// parameterless ctor and writable properties. Restore via Azure.ClientGenerator.Core.Usage.input for csharp.
+@@usage(GallerySoftDeletedResource, Azure.ClientGenerator.Core.Usage.input, "csharp");

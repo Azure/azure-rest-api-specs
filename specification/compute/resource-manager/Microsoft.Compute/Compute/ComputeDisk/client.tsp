@@ -118,6 +118,10 @@ using ComputeDisk;
 );
 
 // DiskRestorePoint
+// .NET back-compat: previously shipped DiskRestorePointData with a public ctor and
+// settable properties. TypeSpec's default usage flags this as output-only, which
+// removes both. Forcing Azure.ClientGenerator.Core.Usage.input restores the public ctor + property setters.
+@@usage(DiskRestorePoint, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@alternateType(DiskRestorePointProperties.diskAccessId,
   Azure.Core.armResourceIdentifier,
   "csharp"

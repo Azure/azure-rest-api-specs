@@ -1477,3 +1477,16 @@ union ComputeUsageUnit {
   "VirtualMachinesRef",
   "csharp"
 );
+
+// ── Azure.ClientGenerator.Core.Usage.input forces public ctor + property setters on output-only models ──
+// .NET back-compat: these models previously shipped (via AutoRest) with a public
+// parameterless ctor and writable properties. TypeSpec's default Output-only usage
+// removes both. Force Azure.ClientGenerator.Core.Usage.input for csharp to restore the legacy surface.
+@@usage(VirtualMachineImage, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(VirtualMachineImageResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(VirtualMachineExtensionImage, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(VirtualMachineImageFeature, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ImageDeprecationStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(AlternativeOption, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(PurchasePlan, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(SubResourceWithColocationStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
