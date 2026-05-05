@@ -2341,6 +2341,11 @@
             "create"
           ]
         },
+        "deviceUuid": {
+          "type": "string",
+          "description": "The UUID of the device that this attribute belongs to. Used to verify that the device attribute\nmatches the reverse lookup document and is not for an older device that was deleted and\nre-created with the same `deviceName`.",
+          "readOnly": true
+        },
         "reportedBy": {
           "$ref": "#/definitions/DeviceAttributeReportedBy",
           "description": "The cloud service that reports this device attribute."
