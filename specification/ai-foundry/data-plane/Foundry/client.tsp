@@ -18,6 +18,7 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolsets/routes.tsp";
@@ -169,6 +170,19 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
+
+// --------------------------------------------------------------------------------
+// Models sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK models operations
+@@clientName(Models.listLatest, "list");
+@@clientName(Models.listVersions, "listVersions");
+@@clientName(Models.getVersion, "get");
+@@clientName(Models.deleteVersion, "delete");
+@@clientName(Models.createOrUpdateVersion, "createOrUpdate");
+@@clientName(Models.startPendingUpload, "pendingUpload");
+@@clientName(Models.getCredentials, "getCredentials");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
