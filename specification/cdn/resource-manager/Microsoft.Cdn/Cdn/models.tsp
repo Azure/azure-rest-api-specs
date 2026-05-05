@@ -6593,6 +6593,12 @@ model SecurityPolicyWebApplicationFirewallAssociation {
    * List of paths
    */
   patternsToMatch?: string[];
+
+  /**
+   * List of routes.
+   */
+  @added(Versions.v2026_04_01_preview)
+  routes?: ResourceReference[];
 }
 
 /**
@@ -6610,6 +6616,12 @@ model SecurityPolicyWebApplicationFirewallParameters
    */
   @identifiers(#[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
+
+  /**
+   * Indicates if this is a profile-level WAF policy.
+   */
+  @added(Versions.v2026_04_01_preview)
+  isProfileLevel?: boolean;
 
   /**
    * The type of the Security policy to create.
