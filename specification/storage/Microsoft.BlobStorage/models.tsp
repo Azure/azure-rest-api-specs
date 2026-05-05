@@ -713,10 +713,10 @@ union GeoReplicationStatusType {
 /** Key information */
 model KeyInfo {
   /** The date-time the key is active. */
-  @Xml.name("Start") start: string;
+  @Xml.name("Start") start: utcDateTime;
 
   /** The date-time the key expires. */
-  @Xml.name("Expiry") expiry: string;
+  @Xml.name("Expiry") expiry: utcDateTime;
 
   /** The delegated user tenant id in Azure AD. */
   @Xml.name("DelegatedUserTid")
