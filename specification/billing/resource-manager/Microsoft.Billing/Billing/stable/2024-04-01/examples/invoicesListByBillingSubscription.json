@@ -1,18 +1,17 @@
 {
   "parameters": {
     "api-version": "2024-04-01",
-    "periodEndDate": "2023-06-30",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
     "periodStartDate": "2023-01-01",
-    "subscriptionId": "11111111-1111-1111-1111-111111111111"
+    "periodEndDate": "2023-06-30"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "E123456789",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices",
             "id": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/11111111-1111-1111-1111-111111111111/invoices/E123456789",
+            "name": "E123456789",
             "properties": {
               "amountDue": {
                 "currency": "USD",
@@ -31,12 +30,12 @@
               "status": "Due",
               "subscriptionDisplayName": "Contoso Operations Billing",
               "subscriptionId": "11111111-1111-1111-1111-111111111111"
-            }
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices"
           },
           {
-            "name": "G123456789",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices",
             "id": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/11111111-1111-1111-1111-111111111111/invoices/G123456789",
+            "name": "G123456789",
             "properties": {
               "amountDue": {
                 "currency": "USD",
@@ -55,12 +54,12 @@
               "status": "Due",
               "subscriptionDisplayName": "Contoso Operations Billing",
               "subscriptionId": "11111111-1111-1111-1111-111111111111"
-            }
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices"
           },
           {
-            "name": "E987654321",
-            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices",
             "id": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/11111111-1111-1111-1111-111111111111/invoices/E987654321",
+            "name": "E987654321",
             "properties": {
               "amountDue": {
                 "currency": "USD",
@@ -72,8 +71,8 @@
               },
               "documents": [
                 {
-                  "name": "12345678",
-                  "kind": "Invoice"
+                  "kind": "Invoice",
+                  "name": "12345678"
                 }
               ],
               "dueDate": "2023-01-16T17:32:28Z",
@@ -97,12 +96,11 @@
               "status": "Due",
               "subscriptionDisplayName": "Contoso Operations Billing",
               "subscriptionId": "11111111-1111-1111-1111-111111111111"
-            }
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices"
           }
         ]
       }
     }
-  },
-  "operationId": "Invoices_ListByBillingSubscription",
-  "title": "InvoicesListByBillingSubscription"
+  }
 }

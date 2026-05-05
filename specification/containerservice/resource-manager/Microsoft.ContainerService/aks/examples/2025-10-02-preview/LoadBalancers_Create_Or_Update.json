@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "loadBalancerName": "kubernetes",
+    "parameters": {
+      "properties": {
+        "allowServicePlacement": true,
+        "primaryAgentPoolName": "agentpool1"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kubernetes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/loadBalancers/kubernetes",
+        "properties": {
+          "allowServicePlacement": true,
+          "primaryAgentPoolName": "agentPool1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "kubernetes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/loadBalancers/kubernetes",
+        "properties": {
+          "allowServicePlacement": true,
+          "primaryAgentPoolName": "agentPool1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "LoadBalancers_CreateOrUpdate",
+  "title": "Create or update a Load Balancer"
+}

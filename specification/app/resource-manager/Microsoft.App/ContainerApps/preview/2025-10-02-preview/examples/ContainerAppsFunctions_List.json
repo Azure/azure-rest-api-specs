@@ -1,41 +1,39 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
-    "containerAppName": "myContainerApp",
+    "subscriptionId": "12345678-1234-1234-1234-123456789abc",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "12345678-1234-1234-1234-123456789abc"
+    "containerAppName": "myContainerApp",
+    "api-version": "2025-10-02-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": null,
         "value": [
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/HttpExample",
             "name": "myContainerApp/HttpExample",
             "type": "Microsoft.App/containerApps/functions",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/HttpExample",
             "properties": {
               "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
-              "isDisabled": false,
               "triggerType": "httpTrigger",
-              "language": "dotnet-isolated"
+              "language": "dotnet-isolated",
+              "isDisabled": false
             }
           },
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/TimerFunction",
             "name": "myContainerApp/TimerFunction",
             "type": "Microsoft.App/containerApps/functions",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/TimerFunction",
             "properties": {
               "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
-              "isDisabled": false,
               "triggerType": "timerTrigger",
-              "language": "dotnet-isolated"
+              "language": "dotnet-isolated",
+              "isDisabled": false
             }
           }
-        ]
+        ],
+        "nextLink": null
       }
     }
-  },
-  "operationId": "ContainerAppsFunctions_List",
-  "title": "List Container App's functions"
+  }
 }

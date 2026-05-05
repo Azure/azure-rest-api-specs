@@ -6,19 +6,19 @@ using Microsoft.ContainerRegistry;
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties,
-  "autorest,csharp,python"
+  "autorest,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Run.properties,
-  "autorest,csharp,python"
+  "autorest,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Task.properties,
-  "autorest,csharp,python"
+  "autorest,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TaskRun.properties,
-  "autorest,csharp,python"
+  "autorest,python"
 );
 
 @@clientName(AgentPools.create::parameters.resource, "agentPool");

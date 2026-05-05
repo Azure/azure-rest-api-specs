@@ -4,34 +4,34 @@
     "template": {
       "$schema": "http://schemas.management.azure.com/deploymentTemplate?api-version=2014-04-01-preview",
       "contentVersion": "1.0.0.0",
-      "outputs": {
-        "string": {
-          "type": "string",
-          "value": "myvalue"
-        }
-      },
       "parameters": {
         "string": {
           "type": "string"
         }
       },
-      "resources": [],
       "variables": {
+        "string": "string",
+        "int": 42,
+        "bool": true,
         "array": [
           1,
           2,
           3,
           4
         ],
-        "bool": true,
-        "int": 42,
         "object": {
           "object": {
-            "location": "West US",
-            "vmSize": "Large"
+            "vmSize": "Large",
+            "location": "West US"
           }
-        },
-        "string": "string"
+        }
+      },
+      "resources": [],
+      "outputs": {
+        "string": {
+          "type": "string",
+          "value": "myvalue"
+        }
       }
     }
   },
@@ -42,7 +42,5 @@
         "templateHash": "695440707931307747"
       }
     }
-  },
-  "operationId": "Deployments_CalculateTemplateHash",
-  "title": "Calculate template hash"
+  }
 }

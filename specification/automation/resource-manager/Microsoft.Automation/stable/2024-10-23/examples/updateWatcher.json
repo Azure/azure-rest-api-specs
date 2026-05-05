@@ -1,41 +1,39 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
     "automationAccountName": "MyTestAutomationAccount",
+    "watcherName": "MyTestWatcher",
     "parameters": {
       "name": "MyTestWatcher",
       "properties": {
         "executionFrequencyInSeconds": 600
       }
     },
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-    "watcherName": "MyTestWatcher"
+    "api-version": "2024-10-23"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher",
         "name": "MyTestWatcher",
         "type": null,
-        "etag": null,
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher",
         "location": null,
+        "tags": {},
+        "etag": null,
         "properties": {
-          "description": "This is a test watcher.",
-          "creationTime": "2018-05-14T21:33:02.197+00:00",
           "executionFrequencyInSeconds": 600,
-          "lastModifiedBy": null,
-          "lastModifiedTime": "2018-05-14T22:29:57.65+00:00",
           "scriptName": "MyTestWatcherRunbook",
           "scriptParameters": {},
+          "description": "This is a test watcher.",
+          "status": "New",
           "scriptRunOn": "MyTestHybridWorkerGroup",
-          "status": "New"
-        },
-        "tags": {}
-      },
-      "headers": {}
+          "creationTime": "2018-05-14T21:33:02.197+00:00",
+          "lastModifiedBy": null,
+          "lastModifiedTime": "2018-05-14T22:29:57.65+00:00"
+        }
+      }
     }
-  },
-  "operationId": "Watcher_Update",
-  "title": "Update watcher"
+  }
 }

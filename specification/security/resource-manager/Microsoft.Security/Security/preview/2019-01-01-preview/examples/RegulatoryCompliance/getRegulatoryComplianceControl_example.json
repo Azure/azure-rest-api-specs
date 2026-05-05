@@ -1,26 +1,24 @@
 {
   "parameters": {
-    "api-version": "2019-01-01-preview",
-    "regulatoryComplianceControlName": "1.1",
+    "api-version": "2019-01-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "regulatoryComplianceStandardName": "PCI-DSS-3.2",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+    "regulatoryComplianceControlName": "1.1"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1",
         "name": "1.1",
         "type": "Microsoft.Security/regulatoryComplianceControl",
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1",
         "properties": {
           "description": "Common Criteria Related to Organization and Management",
-          "failedAssessments": 4,
+          "state": "Failed",
           "passedAssessments": 7,
-          "skippedAssessments": 0,
-          "state": "Failed"
+          "failedAssessments": 4,
+          "skippedAssessments": 0
         }
       }
     }
-  },
-  "operationId": "RegulatoryComplianceControls_Get",
-  "title": "Get selected regulatory compliance control details and state"
+  }
 }

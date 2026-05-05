@@ -1,70 +1,68 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
     "api-version": "2025-04-01",
     "parameters": {
-      "options": "IncludeParameterDefaultValue,IncludeComments",
       "resources": [
         "*"
-      ]
-    },
-    "resourceGroupName": "my-resource-group",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+      ],
+      "options": "IncludeParameterDefaultValue,IncludeComments"
+    }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/c9bbccf4-e16a-4eb7-befb-2e2e5195c347?api-version=2018-08-01"
+      }
+    },
     "200": {
       "body": {
-        "error": {
-          "code": "ExportTemplateCompletedWithErrors",
-          "message": "Export template operation completed with errors. Some resources were not exported. Please see details for more information.",
-          "details": []
-        },
         "template": {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "parameters": {
             "myResourceType_myFirstResource_name": {
-              "type": "String",
-              "defaultValue": "myFirstResource"
-            },
-            "myResourceType_myFirstResource_secret": {
-              "type": "SecureString",
-              "defaultValue": null
+              "defaultValue": "myFirstResource",
+              "type": "String"
             },
             "myResourceType_mySecondResource_name": {
-              "type": "String",
-              "defaultValue": "mySecondResource"
+              "defaultValue": "mySecondResource",
+              "type": "String"
+            },
+            "myResourceType_myFirstResource_secret": {
+              "defaultValue": null,
+              "type": "SecureString"
             }
           },
+          "variables": {},
           "resources": [
             {
-              "name": "[parameters('myResourceType_myFirstResource_name')]",
               "type": "My.RP/myResourceType",
               "apiVersion": "2019-01-01",
+              "name": "[parameters('myResourceType_myFirstResource_name')]",
               "location": "West US",
               "properties": {
                 "secret": "[parameters('myResourceType_myFirstResource_secret')]"
               }
             },
             {
-              "name": "[parameters('myResourceType_mySecondResource_name')]",
               "type": "My.RP/myResourceType",
               "apiVersion": "2019-01-01",
+              "name": "[parameters('myResourceType_mySecondResource_name')]",
               "location": "West US",
               "properties": {
                 "customProperty": "hello!"
               }
             }
-          ],
-          "variables": {}
+          ]
+        },
+        "error": {
+          "code": "ExportTemplateCompletedWithErrors",
+          "message": "Export template operation completed with errors. Some resources were not exported. Please see details for more information.",
+          "details": []
         }
       }
-    },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/c9bbccf4-e16a-4eb7-befb-2e2e5195c347?api-version=2018-08-01"
-      }
     }
-  },
-  "operationId": "ResourceGroups_ExportTemplate",
-  "title": "Export a resource group"
+  }
 }

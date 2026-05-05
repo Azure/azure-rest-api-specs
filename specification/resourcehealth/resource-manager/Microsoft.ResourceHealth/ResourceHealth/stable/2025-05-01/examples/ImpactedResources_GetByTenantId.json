@@ -1,23 +1,21 @@
 {
   "parameters": {
-    "api-version": "2025-05-01",
     "eventTrackingId": "BC_1-FXZ",
-    "impactedResourceName": "abc-123-ghj-456"
+    "impactedResourceName": "abc-123-ghj-456",
+    "api-version": "2025-05-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/abc-123-ghj-456",
         "name": "abc-123-ghj-456",
         "type": "Microsoft.ResourceHealth/events/impactedResources",
-        "id": "providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/abc-123-ghj-456",
         "properties": {
-          "targetRegion": "westus",
+          "targetResourceType": "Microsoft.Compute/VirtualMachines",
           "targetResourceId": "{resourceId}",
-          "targetResourceType": "Microsoft.Compute/VirtualMachines"
+          "targetRegion": "westus"
         }
       }
     }
-  },
-  "operationId": "ImpactedResources_GetByTenantId",
-  "title": "ImpactedResourcesGet"
+  }
 }

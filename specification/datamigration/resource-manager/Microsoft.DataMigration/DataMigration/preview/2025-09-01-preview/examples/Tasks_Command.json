@@ -1,29 +1,27 @@
 {
   "parameters": {
-    "api-version": "2025-09-01-preview",
+    "subscriptionId": "fc04246f-04c5-437e-ac5e-206a19e7193f",
     "groupName": "DmsSdkRg",
+    "serviceName": "DmsSdkService",
+    "projectName": "DmsSdkProject",
+    "taskName": "DmsSdkTask",
+    "api-version": "2025-09-01-preview",
     "parameters": {
-      "commandType": "Migrate.Sync.Complete.Database",
       "input": {
         "databaseName": "TestDatabase"
-      }
-    },
-    "projectName": "DmsSdkProject",
-    "serviceName": "DmsSdkService",
-    "subscriptionId": "fc04246f-04c5-437e-ac5e-206a19e7193f",
-    "taskName": "DmsSdkTask"
+      },
+      "commandType": "Migrate.Sync.Complete.Database"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "commandType": "Migrate.Sync.Complete.Database",
         "input": {
           "databaseName": "TestDatabase"
         },
+        "commandType": "Migrate.Sync.Complete.Database",
         "state": "Accepted"
       }
     }
-  },
-  "operationId": "Tasks_Command",
-  "title": "Tasks_Command"
+  }
 }

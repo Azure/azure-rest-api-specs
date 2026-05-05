@@ -316,7 +316,7 @@ using Microsoft.Storage;
 );
 @@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);
 
-@@clientLocation(BlobServices.blobContainersList, BlobContainers, "!csharp");
+@@clientLocation(BlobServices.blobContainersList, BlobContainers);
 @@clientName(BlobServices.blobContainersList, "List");
 @@clientName(BlobContainers.lease::parameters.body, "parameters");
 @@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
@@ -332,14 +332,14 @@ using Microsoft.Storage;
 @@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
-@@clientLocation(FileServices.fileSharesList, FileShares, "!csharp");
+@@clientLocation(FileServices.fileSharesList, FileShares);
 @@clientName(FileServices.fileSharesList, "List");
 @@clientLocation(FileServiceUsageOperationGroup.getServiceUsage, FileServices);
 @@clientLocation(FileServiceUsageOperationGroup.listServiceUsages,
   FileServices
 );
 @@clientName(FileShares.lease::parameters.body, "parameters");
-@@clientLocation(QueueServices.queueList, "Queue", "!csharp");
+@@clientLocation(QueueServices.queueList, "Queue");
 @@clientName(QueueServices.queueList, "List");
 @@clientLocation(StorageQueues.get, "Queue");
 @@clientLocation(StorageQueues.create, "Queue");
@@ -347,8 +347,7 @@ using Microsoft.Storage;
 @@clientLocation(StorageQueues.delete, "Queue");
 @@clientLocation(StorageAccounts.listByStorageAccount, "PrivateLinkResources");
 @@clientLocation(StorageAccounts.storageTaskAssignmentsInstancesReportList,
-  "StorageTaskAssignmentsInstancesReport",
-  "!csharp"
+  "StorageTaskAssignmentsInstancesReport"
 );
 @@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList, "List");
 @@clientLocation(StorageAccountMigrations.getCustomerInitiatedMigration,
@@ -378,8 +377,7 @@ using Microsoft.Storage;
 @@clientLocation(Tables.delete, "Table");
 @@clientLocation(Tables.list, "Table");
 @@clientLocation(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
-  "StorageTaskAssignmentInstancesReport",
-  "!csharp"
+  "StorageTaskAssignmentInstancesReport"
 );
 @@clientName(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
   "List"

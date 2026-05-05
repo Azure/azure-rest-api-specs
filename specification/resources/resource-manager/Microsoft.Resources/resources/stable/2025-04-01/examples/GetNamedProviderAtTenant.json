@@ -1,8 +1,8 @@
 {
   "parameters": {
     "$expand": "resourceTypes/aliases",
-    "api-version": "2025-04-01",
-    "resourceProviderNamespace": "Microsoft.Storage"
+    "resourceProviderNamespace": "Microsoft.Storage",
+    "api-version": "2025-04-01"
   },
   "responses": {
     "200": {
@@ -10,193 +10,7 @@
         "namespace": "Microsoft.Storage",
         "resourceTypes": [
           {
-            "aliases": [
-              {
-                "name": "Microsoft.Storage/storageAccounts/accountType",
-                "defaultPath": "sku.name",
-                "paths": [
-                  {
-                    "path": "properties.accountType",
-                    "apiVersions": [
-                      "2015-06-15",
-                      "2015-05-01-preview"
-                    ]
-                  },
-                  {
-                    "path": "sku.name",
-                    "apiVersions": [
-                      "2018-11-01",
-                      "2018-11-09",
-                      "2018-07-01",
-                      "2018-03-01-Preview",
-                      "2018-02-01",
-                      "2017-10-01",
-                      "2017-06-01",
-                      "2016-12-01",
-                      "2016-05-01",
-                      "2016-01-01"
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Microsoft.Storage/storageAccounts/sku.name",
-                "defaultPath": "sku.name",
-                "paths": [
-                  {
-                    "path": "properties.accountType",
-                    "apiVersions": [
-                      "2015-06-15",
-                      "2015-05-01-preview"
-                    ]
-                  },
-                  {
-                    "path": "sku.name",
-                    "apiVersions": [
-                      "2018-11-01",
-                      "2018-11-09",
-                      "2018-07-01",
-                      "2018-03-01-Preview",
-                      "2018-02-01",
-                      "2017-10-01",
-                      "2017-06-01",
-                      "2016-12-01",
-                      "2016-05-01",
-                      "2016-01-01"
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Microsoft.Storage/storageAccounts/accessTier",
-                "defaultPath": "properties.accessTier",
-                "paths": [
-                  {
-                    "path": "properties.accessTier",
-                    "apiVersions": [
-                      "2018-11-01",
-                      "2018-11-09",
-                      "2018-07-01",
-                      "2018-03-01-Preview",
-                      "2018-02-01",
-                      "2017-10-01",
-                      "2017-06-01",
-                      "2016-12-01",
-                      "2016-05-01",
-                      "2016-01-01",
-                      "2015-06-15",
-                      "2015-05-01-preview"
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Microsoft.Storage/storageAccounts/enableBlobEncryption",
-                "defaultPath": "properties.encryption.services.blob.enabled",
-                "paths": [
-                  {
-                    "path": "properties.encryption.services.blob.enabled",
-                    "apiVersions": [
-                      "2018-11-01",
-                      "2018-11-09",
-                      "2018-07-01",
-                      "2018-03-01-Preview",
-                      "2018-02-01",
-                      "2017-10-01",
-                      "2017-06-01",
-                      "2016-12-01",
-                      "2016-05-01",
-                      "2016-01-01",
-                      "2015-06-15",
-                      "2015-05-01-preview"
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Microsoft.Storage/storageAccounts/enableFileEncryption",
-                "defaultPath": "properties.encryption.services.file.enabled",
-                "paths": [
-                  {
-                    "path": "properties.encryption.services.file.enabled",
-                    "apiVersions": [
-                      "2018-11-01",
-                      "2018-11-09",
-                      "2018-07-01",
-                      "2018-03-01-Preview",
-                      "2018-02-01",
-                      "2017-10-01",
-                      "2017-06-01",
-                      "2016-12-01",
-                      "2016-05-01",
-                      "2016-01-01",
-                      "2015-06-15",
-                      "2015-05-01-preview"
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly",
-                "defaultMetadata": {
-                  "type": "Boolean",
-                  "attributes": "Modifiable"
-                },
-                "defaultPath": "properties.supportsHttpsTrafficOnly",
-                "paths": [
-                  {
-                    "path": "properties.supportsHttpsTrafficOnly",
-                    "apiVersions": [
-                      "2018-11-09",
-                      "2018-03-01-Preview",
-                      "2016-05-01",
-                      "2016-01-01",
-                      "2015-06-15",
-                      "2015-05-01-preview"
-                    ],
-                    "metadata": {
-                      "type": "NotSpecified",
-                      "attributes": "None"
-                    }
-                  }
-                ]
-              }
-            ],
-            "apiProfiles": [
-              {
-                "apiVersion": "2017-10-01",
-                "profileVersion": "2019-03-01-hybrid"
-              },
-              {
-                "apiVersion": "2016-01-01",
-                "profileVersion": "2017-03-09-profile"
-              },
-              {
-                "apiVersion": "2016-01-01",
-                "profileVersion": "2018-03-01-hybrid"
-              },
-              {
-                "apiVersion": "2017-10-01",
-                "profileVersion": "2018-06-01-profile"
-              }
-            ],
-            "apiVersions": [
-              "2019-06-01",
-              "2019-04-01",
-              "2018-11-01",
-              "2018-07-01",
-              "2018-03-01-preview",
-              "2018-02-01",
-              "2017-10-01",
-              "2017-06-01",
-              "2016-12-01",
-              "2016-05-01",
-              "2016-01-01",
-              "2015-06-15",
-              "2015-05-01-preview"
-            ],
-            "capabilities": "SupportsTags, SupportsLocation",
-            "defaultApiVersion": "2019-06-01",
+            "resourceType": "storageAccounts",
             "locations": [
               "East US",
               "East US 2",
@@ -244,12 +58,196 @@
               "South Central US STG",
               "Brazil Southeast"
             ],
-            "resourceType": "storageAccounts"
+            "apiVersions": [
+              "2019-06-01",
+              "2019-04-01",
+              "2018-11-01",
+              "2018-07-01",
+              "2018-03-01-preview",
+              "2018-02-01",
+              "2017-10-01",
+              "2017-06-01",
+              "2016-12-01",
+              "2016-05-01",
+              "2016-01-01",
+              "2015-06-15",
+              "2015-05-01-preview"
+            ],
+            "defaultApiVersion": "2019-06-01",
+            "apiProfiles": [
+              {
+                "profileVersion": "2019-03-01-hybrid",
+                "apiVersion": "2017-10-01"
+              },
+              {
+                "profileVersion": "2017-03-09-profile",
+                "apiVersion": "2016-01-01"
+              },
+              {
+                "profileVersion": "2018-03-01-hybrid",
+                "apiVersion": "2016-01-01"
+              },
+              {
+                "profileVersion": "2018-06-01-profile",
+                "apiVersion": "2017-10-01"
+              }
+            ],
+            "aliases": [
+              {
+                "name": "Microsoft.Storage/storageAccounts/accountType",
+                "paths": [
+                  {
+                    "path": "properties.accountType",
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2015-05-01-preview"
+                    ]
+                  },
+                  {
+                    "path": "sku.name",
+                    "apiVersions": [
+                      "2018-11-01",
+                      "2018-11-09",
+                      "2018-07-01",
+                      "2018-03-01-Preview",
+                      "2018-02-01",
+                      "2017-10-01",
+                      "2017-06-01",
+                      "2016-12-01",
+                      "2016-05-01",
+                      "2016-01-01"
+                    ]
+                  }
+                ],
+                "defaultPath": "sku.name"
+              },
+              {
+                "name": "Microsoft.Storage/storageAccounts/sku.name",
+                "paths": [
+                  {
+                    "path": "properties.accountType",
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2015-05-01-preview"
+                    ]
+                  },
+                  {
+                    "path": "sku.name",
+                    "apiVersions": [
+                      "2018-11-01",
+                      "2018-11-09",
+                      "2018-07-01",
+                      "2018-03-01-Preview",
+                      "2018-02-01",
+                      "2017-10-01",
+                      "2017-06-01",
+                      "2016-12-01",
+                      "2016-05-01",
+                      "2016-01-01"
+                    ]
+                  }
+                ],
+                "defaultPath": "sku.name"
+              },
+              {
+                "name": "Microsoft.Storage/storageAccounts/accessTier",
+                "paths": [
+                  {
+                    "path": "properties.accessTier",
+                    "apiVersions": [
+                      "2018-11-01",
+                      "2018-11-09",
+                      "2018-07-01",
+                      "2018-03-01-Preview",
+                      "2018-02-01",
+                      "2017-10-01",
+                      "2017-06-01",
+                      "2016-12-01",
+                      "2016-05-01",
+                      "2016-01-01",
+                      "2015-06-15",
+                      "2015-05-01-preview"
+                    ]
+                  }
+                ],
+                "defaultPath": "properties.accessTier"
+              },
+              {
+                "name": "Microsoft.Storage/storageAccounts/enableBlobEncryption",
+                "paths": [
+                  {
+                    "path": "properties.encryption.services.blob.enabled",
+                    "apiVersions": [
+                      "2018-11-01",
+                      "2018-11-09",
+                      "2018-07-01",
+                      "2018-03-01-Preview",
+                      "2018-02-01",
+                      "2017-10-01",
+                      "2017-06-01",
+                      "2016-12-01",
+                      "2016-05-01",
+                      "2016-01-01",
+                      "2015-06-15",
+                      "2015-05-01-preview"
+                    ]
+                  }
+                ],
+                "defaultPath": "properties.encryption.services.blob.enabled"
+              },
+              {
+                "name": "Microsoft.Storage/storageAccounts/enableFileEncryption",
+                "paths": [
+                  {
+                    "path": "properties.encryption.services.file.enabled",
+                    "apiVersions": [
+                      "2018-11-01",
+                      "2018-11-09",
+                      "2018-07-01",
+                      "2018-03-01-Preview",
+                      "2018-02-01",
+                      "2017-10-01",
+                      "2017-06-01",
+                      "2016-12-01",
+                      "2016-05-01",
+                      "2016-01-01",
+                      "2015-06-15",
+                      "2015-05-01-preview"
+                    ]
+                  }
+                ],
+                "defaultPath": "properties.encryption.services.file.enabled"
+              },
+              {
+                "name": "Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly",
+                "paths": [
+                  {
+                    "path": "properties.supportsHttpsTrafficOnly",
+                    "apiVersions": [
+                      "2018-11-09",
+                      "2018-03-01-Preview",
+                      "2016-05-01",
+                      "2016-01-01",
+                      "2015-06-15",
+                      "2015-05-01-preview"
+                    ],
+                    "metadata": {
+                      "type": "NotSpecified",
+                      "attributes": "None"
+                    }
+                  }
+                ],
+                "defaultPath": "properties.supportsHttpsTrafficOnly",
+                "defaultMetadata": {
+                  "type": "Boolean",
+                  "attributes": "Modifiable"
+                }
+              }
+            ],
+            "capabilities": "SupportsTags, SupportsLocation"
           }
         ]
       }
     }
-  },
-  "operationId": "Providers_GetAtTenantScope",
-  "title": "Get a resource provider at tenant scope"
+  }
 }

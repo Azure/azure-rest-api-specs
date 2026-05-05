@@ -1,19 +1,17 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
     "automationAccountName": "myAutomationAccount33",
     "configurationName": "ConfigName",
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    "api-version": "2024-10-23"
   },
   "responses": {
     "200": {
-      "body": "Configuration ConfigName {\r\n    Node localhost {\r\n                               WindowsFeature IIS {\r\n                               Name = \"Web-Server\";\r\n            Ensure = \"Present\"\r\n        }\r\n    }\r\n}",
       "headers": {
         "Content-Type": "text/powershell"
-      }
+      },
+      "body": "Configuration ConfigName {\r\n    Node localhost {\r\n                               WindowsFeature IIS {\r\n                               Name = \"Web-Server\";\r\n            Ensure = \"Present\"\r\n        }\r\n    }\r\n}"
     }
-  },
-  "operationId": "DscConfiguration_GetContent",
-  "title": "Get DSC Configuration content"
+  }
 }

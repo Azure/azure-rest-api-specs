@@ -12,8 +12,11 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
-  "@azure-typespec/http-client-csharp-mgmt":
+  "@azure-tools/typespec-csharp":
+    flavor: azure
     namespace: "Azure.ResourceManager.Nginx"
+    clear-output-folder: true
+    model-namespace: true
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-nginx"

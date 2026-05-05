@@ -60,8 +60,7 @@ interface EnvironmentDefinitionOps
         @minLength(3)
         @maxLength(63)
         environmentDefinitionName: string,
-      },
-      ResourceName = "ProjectCatalogEnvironmentDefinition"
+      }
     > {}
 
 @armResourceOperations
@@ -118,8 +117,7 @@ interface EnvironmentDefinitionOperationGroupOps
         @minLength(3)
         @maxLength(63)
         environmentDefinitionName: string,
-      },
-      ResourceName = "DevCenterCatalogEnvironmentDefinition"
+      }
     > {}
 
 @armResourceOperations

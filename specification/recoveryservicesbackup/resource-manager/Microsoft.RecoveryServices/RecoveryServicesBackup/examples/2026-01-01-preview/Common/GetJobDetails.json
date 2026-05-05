@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "jobName": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.RecoveryServices/vaults/backupJobs",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000",
+        "properties": {
+          "activityId": "00000000-0000-0000-0000-000000000000",
+          "backupManagementType": "AzureIaasVM",
+          "duration": "PT9.8782791S",
+          "entityFriendlyName": "testvm",
+          "extendedInfo": {
+            "propertyBag": {
+              "VM Name": "testvm"
+            },
+            "tasksList": [
+              {
+                "duration": "PT0S",
+                "status": "InProgress",
+                "taskId": "Take Snapshot"
+              },
+              {
+                "duration": "PT0S",
+                "status": "NotStarted",
+                "taskId": "Transfer data to vault"
+              }
+            ]
+          },
+          "jobType": "AzureIaaSVMJob",
+          "operation": "Backup",
+          "startTime": "2017-08-03T05:31:07.014604Z",
+          "status": "InProgress",
+          "virtualMachineVersion": "Compute"
+        }
+      }
+    }
+  },
+  "operationId": "JobDetails_Get",
+  "title": "Get Job Details"
+}

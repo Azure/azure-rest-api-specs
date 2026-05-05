@@ -1,22 +1,22 @@
 {
   "parameters": {
-    "$inlinecount": "allpages",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "api-version": "2024-10-23",
     "$skip": 0,
     "$top": 4,
-    "api-version": "2024-10-23",
-    "automationAccountName": "myAutomationAccount33",
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    "$inlinecount": "allpages"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "totalCount": 12,
         "value": [
           {
-            "name": "server.localhost",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupServer.localhost",
             "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupServer.localhost",
+            "name": "server.localhost",
             "properties": {
               "configuration": {
                 "name": "SetupServer"
@@ -27,9 +27,9 @@
             }
           },
           {
-            "name": "SetupClient.localhost",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupClient.localhost",
             "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupClient.localhost",
+            "name": "SetupClient.localhost",
             "properties": {
               "configuration": {
                 "name": "SetupClient"
@@ -40,9 +40,9 @@
             }
           },
           {
-            "name": "webServer.localhost",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/webServer.localhost",
             "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/webServer.localhost",
+            "name": "webServer.localhost",
             "properties": {
               "configuration": {
                 "name": "webServer"
@@ -53,9 +53,9 @@
             }
           },
           {
-            "name": "SqlServer.localhost",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SqlServer.localhost",
             "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SqlServer.localhost",
+            "name": "SqlServer.localhost",
             "properties": {
               "configuration": {
                 "name": "SqlServer"
@@ -65,11 +65,9 @@
               "nodeCount": 1
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "totalCount": 12
+      }
     }
-  },
-  "operationId": "DscNodeConfiguration_ListByAutomationAccount",
-  "title": "List Paged DSC node configurations by Automation Account with no filter"
+  }
 }

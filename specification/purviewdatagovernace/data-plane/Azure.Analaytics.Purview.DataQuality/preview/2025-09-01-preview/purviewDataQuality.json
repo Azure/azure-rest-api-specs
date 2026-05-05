@@ -1867,7 +1867,7 @@
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}:scans": {
       "post": {
-        "operationId": "ScheduleScans",
+        "operationId": "Scans",
         "tags": [
           "ScheduleScan"
         ],
@@ -1886,14 +1886,13 @@
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique identifier for the schedule",
+            "description": "Unique identifier of the schedule",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Scan request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScanDTO"
@@ -1930,7 +1929,7 @@
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel": {
       "post": {
-        "operationId": "CancelScheduleScan",
+        "operationId": "CancelScan",
         "tags": [
           "ScheduleScan"
         ],
@@ -1991,7 +1990,7 @@
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}": {
       "get": {
-        "operationId": "ScheduleScanByScanId",
+        "operationId": "ScanByScanId",
         "tags": [
           "ScheduleScan"
         ],
@@ -2051,7 +2050,7 @@
     },
     "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs": {
       "get": {
-        "operationId": "GetRunsForScheduleScan",
+        "operationId": "GetRuns",
         "tags": [
           "JobRunMonitoring"
         ],

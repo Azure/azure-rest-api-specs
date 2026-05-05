@@ -1,42 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/rest";
-import "./ManagedCluster.tsp";
-import "./AgentPoolModels.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerService;
-using Azure.ResourceManager;
-using TypeSpec.Rest;
-
-namespace Microsoft.ContainerService;
-
-/**
- * Properties for the container service agent pool profile.
- */
-model AgentPoolManagedClusterAgentPoolProfileProperties {
-  ...ManagedClusterAgentPoolProfileProperties;
-}
-
-@@clientName(AgentPoolManagedClusterAgentPoolProfileProperties.type,
-  "type_properties_type",
-  "python"
-);
-
-@parentResource(ManagedCluster)
-model AgentPoolCustomize
-  is Azure.ResourceManager.ProxyResource<AgentPoolManagedClusterAgentPoolProfileProperties> {
-  ...ResourceNameParameter<
-    Resource = AgentPool,
-    KeyName = "agentPoolName",
-    SegmentName = "agentPools",
-    NamePattern = "^[a-z][a-z0-9]{0,11}$"
-  >;
-}
-
-@@alternateType(AgentPool, AgentPoolCustomize, "python");
-@@clientName(AgentPool, "AgentPoolCustomize", "python");
-@@clientName(AgentPoolCustomize, "AgentPool", "python");
 
 // =============================================================================
 // Property flattening for SDK backward compatibility
@@ -45,56 +10,43 @@ model AgentPoolCustomize
 // =============================================================================
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPoolCustomize.properties
-);
+@@Legacy.flattenProperty(ManagedClusterAccessProfile.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterAccessProfile.properties
-);
+@@Legacy.flattenProperty(AgentPoolAvailableVersions.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPoolAvailableVersions.properties
-);
+@@Legacy.flattenProperty(RunCommandResult.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RunCommandResult.properties
-);
+@@Legacy.flattenProperty(ManagedCluster.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
+@@Legacy.flattenProperty(ManagedClusterUpgradeProfile.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterUpgradeProfile.properties
-);
+@@Legacy.flattenProperty(MaintenanceConfiguration.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfiguration.properties
-);
+@@Legacy.flattenProperty(AgentPool.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties);
+@@Legacy.flattenProperty(AgentPoolUpgradeProfile.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPoolUpgradeProfile.properties
-);
+@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
-);
+@@Legacy.flattenProperty(Snapshot.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
+@@Legacy.flattenProperty(ManagedClusterSnapshot.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterSnapshot.properties
-);
+@@Legacy.flattenProperty(TrustedAccessRoleBinding.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TrustedAccessRoleBinding.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadBalancer.properties);
+@@Legacy.flattenProperty(LoadBalancer.properties);
 
 // =============================================================================
 // Operation parameter renaming
@@ -112,47 +64,11 @@ model AgentPoolCustomize
 @@clientName(ManagedClusters.rebalanceLoadBalancers::parameters.body,
   "parameters"
 );
-@@clientLocation(ManagedClusters.getAvailableAgentPoolVersions,
-  AgentPools,
-  "!csharp"
-);
-@@clientLocation(ManagedClusters.privateLinkResourcesList,
-  "PrivateLinkResources",
-  "!csharp"
-);
 @@clientName(ManagedClusters.privateLinkResourcesList, "List");
-@@clientLocation(ManagedClusters.post,
-  "ResolvePrivateLinkServiceId",
-  "!csharp"
-);
 @@clientName(ManagedClusters.post, "POST");
 @@clientName(ManagedClusters.post::parameters.body, "parameters");
-@@clientLocation(ManagedClusters.operationStatusResultList,
-  "OperationStatusResult",
-  "!csharp"
-);
 @@clientName(ManagedClusters.operationStatusResultList, "List");
-@@clientLocation(ManagedClusters.operationStatusResultGet,
-  "OperationStatusResult",
-  "!csharp"
-);
 @@clientName(ManagedClusters.operationStatusResultGet, "Get");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
-
-@@clientLocation(ManagedClusterUpgradeProfiles.getUpgradeProfile,
-  ManagedClusters,
-  "!csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterUpgradeProfile.properties
-);
-
-@@clientName(ManagedClusters.privateLinkResourcesList, "List", "!csharp");
-@@clientName(ManagedClusters.post, "POST", "!csharp");
-@@clientName(ManagedClusters.post::parameters.body, "parameters", "!csharp");
-@@clientName(ManagedClusters.operationStatusResultList, "List", "!csharp");
-@@clientName(ManagedClusters.operationStatusResultGet, "Get", "!csharp");
 
 @@clientName(MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "parameters"
@@ -165,17 +81,6 @@ model AgentPoolCustomize
 
 @@clientName(AgentPools.createOrUpdate::parameters.resource, "parameters");
 @@clientName(AgentPools.deleteMachines::parameters.body, "machines");
-@@clientLocation(AgentPools.getByAgentPool, "OperationStatusResult", "!csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties);
-
-@@clientLocation(AgentPoolUpgradeProfiles.getUpgradeProfile,
-  AgentPools,
-  "!csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPoolUpgradeProfile.properties
-);
 
 @@clientName(Machines.createOrUpdate::parameters.resource, "parameters");
 
@@ -235,57 +140,33 @@ model AgentPoolCustomize
 @@clientLocation(AgentPoolUpgradeProfiles.getUpgradeProfile, AgentPools);
 
 @@clientLocation(GuardrailsAvailableVersions.getGuardrailsVersions,
-  ManagedClusters,
-  "!csharp"
+  ManagedClusters
 );
 @@clientLocation(GuardrailsAvailableVersions.listGuardrailsVersions,
-  ManagedClusters,
-  "!csharp"
+  ManagedClusters
 );
 
 @@clientLocation(SafeguardsAvailableVersions.getSafeguardsVersions,
-  ManagedClusters,
-  "!csharp"
+  ManagedClusters
 );
 @@clientLocation(SafeguardsAvailableVersions.listSafeguardsVersions,
-  ManagedClusters,
-  "!csharp"
+  ManagedClusters
 );
 
-@@clientLocation(MeshRevisionProfiles.getMeshRevisionProfile,
-  ManagedClusters,
-  "!csharp"
-);
+@@clientLocation(MeshRevisionProfiles.getMeshRevisionProfile, ManagedClusters);
 @@clientLocation(MeshRevisionProfiles.listMeshRevisionProfiles,
-  ManagedClusters,
-  "!csharp"
+  ManagedClusters
 );
 
-@@clientLocation(MeshUpgradeProfiles.getMeshUpgradeProfile,
-  ManagedClusters,
-  "!csharp"
-);
-@@clientLocation(MeshUpgradeProfiles.listMeshUpgradeProfiles,
-  ManagedClusters,
-  "!csharp"
-);
+@@clientLocation(MeshUpgradeProfiles.getMeshUpgradeProfile, ManagedClusters);
+@@clientLocation(MeshUpgradeProfiles.listMeshUpgradeProfiles, ManagedClusters);
 
 @@clientLocation(ManagedClustersOperationGroup.listKubernetesVersions,
-  ManagedClusters,
-  "!csharp"
+  ManagedClusters
 );
 
 @@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
-  "ContainerService",
-  "!csharp,!java"
+  "ContainerService"
 );
 
-@@clientLocation(TrustedAccessRolesOperationGroup.list,
-  "TrustedAccessRoles",
-  "!csharp"
-);
-
-@@clientLocation(VmSkusOperationGroup.list, "VmSkus", "!csharp");
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationValue.display);
+@@clientLocation(TrustedAccessRolesOperationGroup.list, "TrustedAccessRoles");

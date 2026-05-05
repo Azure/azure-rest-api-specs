@@ -56,8 +56,7 @@ interface MigrateMySqlStatusOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface MigrateMySqlStatuses {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
@@ -98,8 +97,7 @@ interface MigrateMySqlStatusOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface MigrateMySqlStatusOperationGroup {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled

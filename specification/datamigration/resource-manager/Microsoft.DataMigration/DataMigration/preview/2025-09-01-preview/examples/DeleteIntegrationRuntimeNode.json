@@ -1,22 +1,20 @@
 {
   "parameters": {
-    "api-version": "2025-09-01-preview",
-    "parameters": {
-      "integrationRuntimeName": "IRName",
-      "nodeName": "nodeName"
-    },
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testrg",
     "sqlMigrationServiceName": "service1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "api-version": "2025-09-01-preview",
+    "parameters": {
+      "nodeName": "nodeName",
+      "integrationRuntimeName": "IRName"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "integrationRuntimeName": "IRName",
-        "nodeName": "nodeName"
+        "nodeName": "nodeName",
+        "integrationRuntimeName": "IRName"
       }
     }
-  },
-  "operationId": "SqlMigrationServices_deleteNode",
-  "title": "Delete the integration runtime node."
+  }
 }

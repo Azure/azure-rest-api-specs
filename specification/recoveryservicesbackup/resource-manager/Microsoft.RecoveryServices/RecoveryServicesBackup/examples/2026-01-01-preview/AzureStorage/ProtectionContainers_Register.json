@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "containerName": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+    "fabricName": "Azure",
+    "parameters": {
+      "properties": {
+        "acquireStorageAccountLock": "Acquire",
+        "backupManagementType": "AzureStorage",
+        "containerType": "StorageContainer",
+        "friendlyName": "swaggertestsa",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa"
+      }
+    },
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "swaggertestvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+        "properties": {
+          "acquireStorageAccountLock": "Acquire",
+          "backupManagementType": "AzureStorage",
+          "containerType": "StorageContainer",
+          "friendlyName": "swaggertestsa",
+          "healthStatus": "Healthy",
+          "protectedItemCount": 0,
+          "registrationStatus": "Registered",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2019-05-13-preview",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ProtectionContainers_Register",
+  "title": "RegisterAzure Storage ProtectionContainers"
+}

@@ -4,65 +4,63 @@
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
     "invoiceSectionName": "{invoiceSectionName}",
+    "studentAlias": "{studentAlias}",
     "parameters": {
       "properties": {
+        "firstName": "test",
+        "lastName": "user",
+        "email": "test@contoso.com",
+        "role": "Student",
         "budget": {
           "currency": "USD",
           "value": 100
         },
-        "email": "test@contoso.com",
-        "expirationDate": "2021-11-09T22:13:21.795Z",
-        "firstName": "test",
-        "lastName": "user",
-        "role": "Student"
-      }
-    },
-    "studentAlias": "{studentAlias}"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "{studentAlias}",
-        "type": "Microsoft.Education/Students",
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
-        "properties": {
-          "budget": {
-            "currency": "USD",
-            "value": 100
-          },
-          "effectiveDate": "2021-11-09T21:43:54.161Z",
-          "email": "test@contoso.com",
-          "expirationDate": "2022-11-09T21:43:54.161Z",
-          "firstName": "test",
-          "lastName": "user",
-          "role": "Student",
-          "status": "Active",
-          "subscriptionId": "000000000-0000-0000-0000-00000000000000"
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "{studentAlias}",
-        "type": "Microsoft.Education/Students",
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
-        "properties": {
-          "budget": {
-            "currency": "USD",
-            "value": 100
-          },
-          "effectiveDate": "2021-11-09T21:43:54.161Z",
-          "email": "test@contoso.com",
-          "expirationDate": "2022-11-09T21:43:54.161Z",
-          "firstName": "test",
-          "lastName": "user",
-          "role": "Student",
-          "status": "Active",
-          "subscriptionId": "000000000-0000-0000-0000-00000000000000"
-        }
+        "expirationDate": "2021-11-09T22:13:21.795Z"
       }
     }
   },
-  "operationId": "Students_CreateOrUpdate",
-  "title": "Student"
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
+        "name": "{studentAlias}",
+        "type": "Microsoft.Education/Students",
+        "properties": {
+          "firstName": "test",
+          "lastName": "user",
+          "email": "test@contoso.com",
+          "role": "Student",
+          "budget": {
+            "currency": "USD",
+            "value": 100
+          },
+          "subscriptionId": "000000000-0000-0000-0000-00000000000000",
+          "expirationDate": "2022-11-09T21:43:54.161Z",
+          "status": "Active",
+          "effectiveDate": "2021-11-09T21:43:54.161Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
+        "name": "{studentAlias}",
+        "type": "Microsoft.Education/Students",
+        "properties": {
+          "firstName": "test",
+          "lastName": "user",
+          "email": "test@contoso.com",
+          "role": "Student",
+          "budget": {
+            "currency": "USD",
+            "value": 100
+          },
+          "subscriptionId": "000000000-0000-0000-0000-00000000000000",
+          "expirationDate": "2022-11-09T21:43:54.161Z",
+          "status": "Active",
+          "effectiveDate": "2021-11-09T21:43:54.161Z"
+        }
+      }
+    }
+  }
 }

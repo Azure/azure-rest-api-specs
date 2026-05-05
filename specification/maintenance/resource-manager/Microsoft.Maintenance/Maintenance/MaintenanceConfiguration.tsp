@@ -55,8 +55,7 @@ interface MaintenanceConfigurationOps
           SegmentName = "publicMaintenanceConfigurations",
           NamePattern = ""
         >>,
-      },
-      "MaintenancePublicConfiguration"
+      }
     > {}
 
 @armResourceOperations

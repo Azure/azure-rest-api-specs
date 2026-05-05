@@ -6,8 +6,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "managednetworkfabric"
-  output-folder: "$(typescript-sdks-folder)/packages/managednetworkfabric"
+  package-name: "@azure/arm-managednetworkfabric"
+  output-folder: "$(typescript-sdks-folder)/sdk/managednetworkfabric/arm-managednetworkfabric"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
 ```

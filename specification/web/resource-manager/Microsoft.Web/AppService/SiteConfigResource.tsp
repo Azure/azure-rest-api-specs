@@ -53,8 +53,7 @@ interface SiteConfigResourceOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface SiteConfigResources {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
@@ -156,8 +155,7 @@ interface ListConfigurationsOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface SiteConfigResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
@@ -220,8 +218,7 @@ interface SiteConfigSlotResourceOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
@@ -336,8 +333,7 @@ interface ListConfigurationsSlotOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.

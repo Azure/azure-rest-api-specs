@@ -1,30 +1,24 @@
 {
   "parameters": {
+    "api-version": "2022-11-01",
     "$filter": "(properties%2farchived+eq+false)",
     "$orderby": "properties/displayName asc",
     "$skiptoken": "50",
-    "api-version": "2022-11-01",
     "refreshsummary": "true",
     "take": "1"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": null,
-        "summary": {
-          "cancelledCount": 0,
-          "expiredCount": 0,
-          "expiringCount": 0,
-          "failedCount": 0,
-          "pendingCount": 0,
-          "succeededCount": 1
-        },
         "value": [
           {
+            "id": "/providers/microsoft.capacity/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
             "name": "00000000-0000-0000-0000-000000000001/00000000-0000-0000-0000-000000000000",
             "type": "Microsoft.Capacity/reservationOrders/reservations",
-            "id": "/providers/microsoft.capacity/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
             "location": "westus",
+            "sku": {
+              "name": "Standard_D1"
+            },
             "properties": {
               "appliedScopeType": "Shared",
               "displayName": "VM_RI_07-21-2020_12-06",
@@ -45,37 +39,41 @@
               "userFriendlyAppliedScopeType": "Shared",
               "userFriendlyRenewState": "Off",
               "utilization": {
+                "trend": "UP",
                 "aggregates": [
                   {
-                    "grain": 1,
+                    "grain": 1.0,
                     "grainUnit": "days",
                     "value": 0.05,
                     "valueUnit": "percentage"
                   },
                   {
-                    "grain": 7,
+                    "grain": 7.0,
                     "grainUnit": "days",
                     "value": 0.05,
                     "valueUnit": "percentage"
                   },
                   {
-                    "grain": 30,
+                    "grain": 30.0,
                     "grainUnit": "days",
                     "value": 0.05,
                     "valueUnit": "percentage"
                   }
-                ],
-                "trend": "UP"
+                ]
               }
-            },
-            "sku": {
-              "name": "Standard_D1"
             }
           }
-        ]
+        ],
+        "summary": {
+          "succeededCount": 1,
+          "failedCount": 0,
+          "expiringCount": 0,
+          "expiredCount": 0,
+          "pendingCount": 0,
+          "cancelledCount": 0
+        },
+        "nextLink": null
       }
     }
-  },
-  "operationId": "Reservation_ListAll",
-  "title": "ReservationListAll"
+  }
 }

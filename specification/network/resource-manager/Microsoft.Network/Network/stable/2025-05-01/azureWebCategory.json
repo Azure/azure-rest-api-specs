@@ -1,23 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "WebApplicationFirewallManagement",
-    "version": "2025-05-01",
-    "description": "APIs to manage web application firewall rules.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2025-05-01"
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "host": "management.azure.com",
-  "produces": [
+  "consumes": [
     "application/json"
   ],
-  "consumes": [
+  "produces": [
     "application/json"
   ],
   "security": [
@@ -30,46 +25,91 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "tags": [
-    {
-      "name": "WebCategories"
-    }
-  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories/{name}": {
       "get": {
-        "operationId": "WebCategories_ListBySubscription",
         "tags": [
           "WebCategories"
         ],
-        "description": "Gets all the Azure Web Categories in a subscription.",
+        "operationId": "WebCategories_Get",
+        "description": "Gets the specified Azure Web Category.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the azureWebCategory."
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands resourceIds back referenced by the azureWebCategory resource."
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Request successful. The operation returns the resulting azureWebCategory resource.",
+            "schema": {
+              "$ref": "#/definitions/AzureWebCategory"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Web Category by name": {
+            "$ref": "./examples/AzureWebCategoryGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories": {
+      "get": {
+        "tags": [
+          "WebCategories"
+        ],
+        "operationId": "WebCategories_ListBySubscription",
+        "description": "Gets all the Azure Web Categories in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Azure Web Category resources.",
             "schema": {
               "$ref": "#/definitions/AzureWebCategoryListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Unexpected Error.",
             "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -82,107 +122,63 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories/{name}": {
-      "get": {
-        "operationId": "WebCategories_Get",
-        "tags": [
-          "WebCategories"
-        ],
-        "description": "Gets the specified Azure Web Category.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the azureWebCategory.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Expands resourceIds back referenced by the azureWebCategory resource.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AzureWebCategory"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Azure Web Category by name": {
-            "$ref": "./examples/AzureWebCategoryGet.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "AzureWebCategory": {
-      "type": "object",
-      "description": "Azure Web Category Resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureWebCategoryPropertiesFormat",
-          "description": "Properties of the Azure Web Category.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AzureWebCategoryListResult": {
-      "type": "object",
-      "description": "List of Azure Web Categories for a given Subscription.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AzureWebCategory items on this page",
-          "items": {
-            "$ref": "#/definitions/AzureWebCategory"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AzureWebCategoryPropertiesFormat": {
-      "type": "object",
-      "description": "Azure Web Category Properties.",
       "properties": {
         "group": {
           "type": "string",
-          "description": "The name of the group that the category belongs to.",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The name of the group that the category belongs to."
         }
-      }
+      },
+      "description": "Azure Web Category Properties."
+    },
+    "AzureWebCategory": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureWebCategoryPropertiesFormat",
+          "description": "Properties of the Azure Web Category."
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "description": "Azure Web Category Resource."
+    },
+    "AzureWebCategoryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureWebCategory"
+          },
+          "description": "List of Azure Web Categories for a given Subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListAzureWebCategories API service call."
     }
-  },
-  "parameters": {}
+  }
 }

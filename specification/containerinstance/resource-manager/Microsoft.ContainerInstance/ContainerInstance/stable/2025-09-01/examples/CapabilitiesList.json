@@ -1,41 +1,39 @@
 {
   "parameters": {
-    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "location": "westus",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2025-09-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "capabilities": {
-              "maxCpu": 4,
-              "maxGpuCount": 4,
-              "maxMemoryInGB": 14
-            },
-            "gpu": "K80",
-            "ipAddressType": "Public",
-            "location": "West US",
+            "resourceType": "containerGroups",
             "osType": "Linux",
-            "resourceType": "containerGroups"
+            "location": "West US",
+            "ipAddressType": "Public",
+            "gpu": "K80",
+            "capabilities": {
+              "maxMemoryInGB": 14,
+              "maxCpu": 4,
+              "maxGpuCount": 4
+            }
           },
           {
-            "capabilities": {
-              "maxCpu": 4,
-              "maxGpuCount": 0,
-              "maxMemoryInGB": 14
-            },
-            "gpu": "None",
-            "ipAddressType": "Public",
-            "location": "West US",
+            "resourceType": "containerGroups",
             "osType": "Windows",
-            "resourceType": "containerGroups"
+            "location": "West US",
+            "ipAddressType": "Public",
+            "gpu": "None",
+            "capabilities": {
+              "maxMemoryInGB": 14,
+              "maxCpu": 4,
+              "maxGpuCount": 0
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "Location_ListCapabilities",
-  "title": "GetCapabilities"
+  }
 }

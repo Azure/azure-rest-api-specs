@@ -1,64 +1,62 @@
 {
   "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "testaccount",
+    "hybridRunbookWorkerGroupName": "TestHybridGroup",
+    "api-version": "2024-10-23",
     "HybridRunbookWorkerGroupCreationParameters": {
       "properties": {
         "credential": {
           "name": "myRunAsCredentialName"
         }
       }
-    },
-    "api-version": "2024-10-23",
-    "automationAccountName": "testaccount",
-    "hybridRunbookWorkerGroupName": "TestHybridGroup",
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    }
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "name": "TestHybridGroup",
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
         "location": "East US 2",
+        "name": "TestHybridGroup",
         "properties": {
+          "groupType": "User",
           "credential": {
             "name": "myRunAsCredentialName"
-          },
-          "groupType": "User"
+          }
         },
         "systemData": {
-          "createdAt": "2018-04-24T16:30:55+00:00",
           "createdBy": "foo@contoso.com",
           "createdByType": "User",
-          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "createdAt": "2018-04-24T16:30:55+00:00",
           "lastModifiedBy": "foo@contoso.com",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
         }
-      },
-      "headers": {}
+      }
     },
     "201": {
+      "headers": {},
       "body": {
-        "name": "TestHybridGroup",
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
         "location": "East US 2",
+        "name": "TestHybridGroup",
         "properties": {
+          "groupType": "User",
           "credential": {
             "name": "myRunAsCredentialName"
-          },
-          "groupType": "User"
+          }
         },
         "systemData": {
-          "createdAt": "2018-04-24T16:30:55+00:00",
           "createdBy": "foo@contoso.com",
           "createdByType": "User",
-          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "createdAt": "2018-04-24T16:30:55+00:00",
           "lastModifiedBy": "foo@contoso.com",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "HybridRunbookWorkerGroup_Create",
-  "title": "Create a hybrid worker group"
+  }
 }

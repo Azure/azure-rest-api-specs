@@ -11,25 +11,21 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup ProtectionIntent.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(BackupFabricResource)
-model ProtectionIntentResource is ProxyResource<ProtectionIntent> {
+model ProtectionIntentResource
+  is TrackedResourceWithOptionalLocation<ProtectionIntent> {
   ...ResourceNameParameter<
     Resource = ProtectionIntentResource,
     KeyName = "intentObjectName",
     SegmentName = "backupProtectionIntent",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
 }
 

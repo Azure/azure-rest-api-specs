@@ -2,7 +2,6 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
 
 using TypeSpec.Http;
 
@@ -20,13 +19,8 @@ model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The NeighborGroup Properties")
+  /** The NeighborGroup Properties */
   properties: NeighborGroupProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @added(Versions.v2025_07_15)
-  @doc("The managed service identities assigned to this resource.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -45,24 +39,10 @@ interface NeighborGroups {
   delete is ArmResourceDeleteWithoutOkAsync<NeighborGroup>;
 
   @doc("Displays NeighborGroups list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<
-    NeighborGroup,
-    Response = NeighborGroupsListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<NeighborGroup>;
 
   @doc("Displays NeighborGroups list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<
-    NeighborGroup,
-    Response = NeighborGroupsListResult
-  >;
-
-  @doc("Resync the Neighbor Group after a configuration change.")
-  @added(Versions.v2025_07_15)
-  resync is ArmResourceActionAsync<
-    NeighborGroup,
-    void,
-    NeighborGroupResyncResponse
-  >;
+  listBySubscription is ArmListBySubscription<NeighborGroup>;
 }
 
 @@doc(NeighborGroups.create::parameters.resource, "Request payload.");

@@ -1,36 +1,16 @@
 {
-  "operationId": "MetricsConfigurations_Get",
   "parameters": {
     "api-version": "2025-09-01",
-    "clusterName": "clusterName",
-    "metricsConfigurationName": "default",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+    "clusterName": "clusterName",
+    "metricsConfigurationName": "default"
   },
   "responses": {
     "200": {
       "body": {
-        "extendedLocation": {
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-          "type": "CustomLocation"
-        },
         "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName/metricsConfigurations/default",
-        "location": "location",
         "name": "default",
-        "properties": {
-          "collectionInterval": 15,
-          "detailedStatus": "Applied",
-          "detailedStatusMessage": "Metrics configuration has been successfully applied to all resources.",
-          "disabledMetrics": [
-            "metric3",
-            "metric4"
-          ],
-          "enabledMetrics": [
-            "metric1",
-            "metric2"
-          ],
-          "provisioningState": "Succeeded"
-        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -39,13 +19,31 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
+        "type": "Microsoft.NetworkCloud/clusters/metricsConfigurations",
+        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
         },
-        "type": "Microsoft.NetworkCloud/clusters/metricsConfigurations"
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "enabledMetrics": [
+            "metric1",
+            "metric2"
+          ],
+          "collectionInterval": 15,
+          "provisioningState": "Succeeded",
+          "disabledMetrics": [
+            "metric3",
+            "metric4"
+          ],
+          "detailedStatus": "Applied",
+          "detailedStatusMessage": "Metrics configuration has been successfully applied to all resources."
+        }
       }
     }
-  },
-  "title": "Get metrics configuration of cluster"
+  }
 }

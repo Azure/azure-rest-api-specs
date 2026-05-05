@@ -1,27 +1,25 @@
 {
   "parameters": {
     "api-version": "2020-01-01",
-    "ascLocation": "centralus",
-    "discoveredSecuritySolutionName": "paloalto7",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "resourceGroupName": "myRg2",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+    "ascLocation": "centralus",
+    "discoveredSecuritySolutionName": "paloalto7"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "paloalto7",
-        "type": "Microsoft.Security/locations/discoveredSecuritySolutions",
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/paloalto7",
-        "location": "eastus2",
         "properties": {
+          "securityFamily": "Ngfw",
           "offer": "vmseries1",
           "publisher": "paloaltonetworks",
-          "securityFamily": "Ngfw",
           "sku": "byol"
-        }
+        },
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/paloalto7",
+        "name": "paloalto7",
+        "type": "Microsoft.Security/locations/discoveredSecuritySolutions",
+        "location": "eastus2"
       }
     }
-  },
-  "operationId": "DiscoveredSecuritySolutions_Get",
-  "title": "Get discovered security solution from a security data location"
+  }
 }

@@ -293,7 +293,6 @@ op move(
 ): NoContentResponse | DefaultErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("Global")
 interface GlobalOperationGroup {
   /**
    * Description for Gets an operation in a subscription and given region
@@ -317,7 +316,6 @@ interface GlobalOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("Provider")
 interface ProviderOperationGroup {
   /**
    * Description for Get available application frameworks and their versions
@@ -437,7 +435,6 @@ interface ProviderOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("Recommendations")
 interface RecommendationsOperationGroup {
   /**
    * Description for List all recommendations for a subscription.
@@ -500,7 +497,6 @@ interface RecommendationsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("ResourceHealthMetadata")
 interface ResourceHealthMetadataNonResourceOperationGroup {
   /**
    * Description for List all ResourceHealthMetadata for all sites in the subscription.
@@ -552,7 +548,6 @@ interface GetUsagesInLocationOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
 interface StaticSitesOperationGroup {
   /**
    * Description for Generates a preview workflow file for the static site

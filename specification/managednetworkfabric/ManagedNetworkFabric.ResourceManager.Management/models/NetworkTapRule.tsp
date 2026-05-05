@@ -1,6 +1,5 @@
 import "./common.tsp";
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
+
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -14,10 +13,6 @@ model NetworkTapRuleProperties {
 
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
-
-  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
-  @added(Versions.v2025_07_15)
-  identitySelector?: IdentitySelector;
 
   @doc("List of match configurations.")
   @Azure.ResourceManager.identifiers(#[])
@@ -33,23 +28,8 @@ model NetworkTapRuleProperties {
   @visibility(Lifecycle.Read)
   networkTapId?: string;
 
-  @doc("The ARM resource Id of the NetworkTap Rules.")
-  @visibility(Lifecycle.Read)
-  @added(Versions.v2025_07_15)
-  networkTapIds?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedNetworkFabric/networkTaps";
-    }
-  ]>[];
-
   @doc("Polling interval in seconds.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "pollingIntervalInSeconds")
-  pollingIntervalInSecondsDeprecated?: PollingIntervalInSeconds = PollingIntervalInSeconds.Thirty;
-
-  @doc("Polling interval in seconds.")
-  @added(Versions.v2025_07_15)
-  pollingIntervalInSeconds?: int32 = 30;
+  pollingIntervalInSeconds?: PollingIntervalInSeconds = PollingIntervalInSeconds.Thirty;
 
   @doc("The last sync timestamp.")
   @visibility(Lifecycle.Read)
@@ -63,15 +43,6 @@ model NetworkTapRuleProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
-
-  @doc("Associated Network Fabric Resource IDs")
-  @added(Versions.v2025_07_15)
-  @visibility(Lifecycle.Read)
-  networkFabricIds?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
-    }
-  ]>[];
 
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
@@ -132,9 +103,10 @@ model NetworkTapRuleMatchConfigurationPatch {
   actions?: NetworkTapRuleActionPatch[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for Network Tap Rule match condition"
 @doc("Defines the match condition that is supported to filter the traffic.")
-model NetworkTapRuleMatchCondition extends CommonMatchConditions {
+model NetworkTapRuleMatchCondition {
+  ...CommonMatchConditions;
+
   @doc("Encapsulation Type that needs to be matched.")
   encapsulationType?: EncapsulationType = EncapsulationType.None;
 
@@ -142,9 +114,10 @@ model NetworkTapRuleMatchCondition extends CommonMatchConditions {
   portCondition?: PortCondition;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common match conditions for Network Tap Rule match condition"
 @doc("Defines the match condition that is supported to filter the traffic.")
-model NetworkTapRuleMatchConditionPatch extends CommonMatchConditionsPatch {
+model NetworkTapRuleMatchConditionPatch {
+  ...CommonMatchConditionsPatch;
+
   @doc("Encapsulation Type that needs to be matched.")
   encapsulationType?: EncapsulationType;
 
@@ -191,24 +164,27 @@ model NetworkTapRuleAction {
 @doc("Action that need to performed.")
 model NetworkTapRuleActionPatch is NetworkTapRuleAction;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkTapRule resource definition.")
-model NetworkTapRulePatch extends TagsUpdate {
+model NetworkTapRulePatch {
+  ...TagsUpdate;
+
   @doc("Network Tap Rule Patch properties.")
   properties?: NetworkTapRulePatchProperties;
-
-  @added(Versions.v2025_07_15)
-  @doc("The managed service identities assigned to this resource.")
-  identity?: ManagedServiceIdentityPatch;
 }
 
-@doc("Network Tap Rule updatable properties.")
-model NetworkTapRulePatchableProperties {
+@doc("Network Tap Rule Patch properties.")
+model NetworkTapRulePatchProperties {
+  ...AnnotationResource;
+
   @doc("Input method to configure Network Tap Rule.")
   configurationType?: ConfigurationType;
 
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
+
+  @doc("Global network tap rule actions")
+  @added(Versions.v2024_06_15_preview)
+  globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 
   @doc("List of match configurations.")
   @Azure.ResourceManager.identifiers(#[])
@@ -218,34 +194,11 @@ model NetworkTapRulePatchableProperties {
   @doc("List of dynamic match configurations.")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "dynamicMatchConfigurations")
-  dynamicMatchConfigurationsDeprecated?: CommonDynamicMatchConfigurationPatch[];
-
-  @doc("List of dynamic match configurations.")
-  @Azure.ResourceManager.identifiers(#[])
-  @added(Versions.v2025_07_15)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
-}
-
-@doc("Network Tap Rule Patch properties.")
-model NetworkTapRulePatchProperties {
-  ...AnnotationResource;
-  ...NetworkTapRulePatchableProperties;
-
-  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
-  @added(Versions.v2025_07_15)
-  identitySelector?: IdentitySelectorPatch;
-
-  @doc("Global network tap rule actions")
-  @added(Versions.v2024_06_15_preview)
-  globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 }
 
 @doc("Polling interval in seconds.")
 union PollingIntervalInSeconds {
-  int32,
-
   @doc("30 PollingIntervalInSeconds")
   Thirty: 30,
 
@@ -257,6 +210,8 @@ union PollingIntervalInSeconds {
 
   @doc("120 PollingIntervalInSeconds")
   OneTwenty: 120,
+
+  int32,
 }
 
 @doc("Type of actions that can be performed.")
@@ -316,9 +271,4 @@ model GlobalNetworkTapRuleActionPatchProperties {
   @doc("Truncate. 0 indicates do not truncate.")
   @minLength(1)
   truncate?: string;
-}
-
-@doc("Response for Network Tap Rule resync operation.")
-model NetworkTapRuleResyncResponse {
-  ...OperationStatusResult;
 }

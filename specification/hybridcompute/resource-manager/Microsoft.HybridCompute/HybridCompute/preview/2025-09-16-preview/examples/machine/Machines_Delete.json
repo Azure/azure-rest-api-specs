@@ -1,20 +1,18 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
-    "machineName": "myMachine",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "machineName": "myMachine",
+    "api-version": "2025-09-16-preview"
   },
   "responses": {
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "{callbackUri}",
         "Location": "{callbackUrl}",
-        "Retry-After": 200
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
       }
     },
     "204": {}
-  },
-  "operationId": "Machines_Delete",
-  "title": "Delete a Machine"
+  }
 }

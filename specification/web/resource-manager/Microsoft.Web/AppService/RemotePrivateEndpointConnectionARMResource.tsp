@@ -58,8 +58,7 @@ interface RemotePrivateEndpointConnectionARMResourceOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("AppServiceEnvironments")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Gets a private endpoint connection
@@ -218,8 +217,7 @@ interface PrivateEndpointConnectionOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Gets a private endpoint connection
@@ -304,8 +302,7 @@ interface PrivateEndpointConnectionSlotOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Gets a private endpoint connection

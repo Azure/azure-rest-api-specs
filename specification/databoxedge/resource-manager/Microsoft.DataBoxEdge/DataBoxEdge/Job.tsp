@@ -80,8 +80,7 @@ alias JobOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("jobs")
     @key
     name: string;
-  },
-  ResourceName = "DataBoxEdgeJob"
+  }
 >;
 
 @armResourceOperations
@@ -111,8 +110,7 @@ alias OperationsStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("operationsStatus")
     @key
     name: string;
-  },
-  ResourceName = "DataBoxEdgeOperationsStatus"
+  }
 >;
 
 @armResourceOperations

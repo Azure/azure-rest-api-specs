@@ -1,12 +1,14 @@
 {
   "parameters": {
     "api-version": "2025-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
     "parameters": {
       "action": "FullUpdate",
       "addressLocations": [
         {
           "addressLocation": "192.0.0.1",
-          "addressUpdateAction": "FullUpdate",
           "addresses": [
             {
               "address": "10.0.0.4",
@@ -14,11 +16,11 @@
                 "Service1"
               ]
             }
-          ]
+          ],
+          "addressUpdateAction": "FullUpdate"
         },
         {
           "addressLocation": "192.0.0.2",
-          "addressUpdateAction": "PartialUpdate",
           "addresses": [
             {
               "address": "10.0.0.5",
@@ -29,13 +31,11 @@
             {
               "address": "10.0.0.6"
             }
-          ]
+          ],
+          "addressUpdateAction": "PartialUpdate"
         }
       ]
-    },
-    "resourceGroupName": "rg1",
-    "serviceGatewayName": "sg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "202": {
@@ -48,7 +48,5 @@
         "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-05-01"
       }
     }
-  },
-  "operationId": "ServiceGateways_UpdateAddressLocations",
-  "title": "Full Update: Create, update, or delete address locations in the service gateway."
+  }
 }

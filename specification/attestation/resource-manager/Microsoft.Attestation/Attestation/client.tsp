@@ -10,8 +10,6 @@ using Microsoft.Attestation;
   "javascript"
 );
 @@clientName(Microsoft.Attestation, "AttestationManagementClient", "python");
-@@clientName(JsonWebKey, "JSONWebKey", "python");
-@@clientName(JsonWebKeySet, "JSONWebKeySet", "python");
 
 // csharp configurations
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,

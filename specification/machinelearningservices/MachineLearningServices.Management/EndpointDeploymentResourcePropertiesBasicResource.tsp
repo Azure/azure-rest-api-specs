@@ -18,8 +18,6 @@ namespace Microsoft.MachineLearningServices;
  * EndpointDeploymentResourcePropertiesBasicResource is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<
@@ -38,8 +36,6 @@ model EndpointDeploymentResourcePropertiesBasicResource
  * EndpointDeploymentResourcePropertiesBasicResourceOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -77,8 +73,6 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
  * EndpointDeploymentResourcePropertiesBasicResources is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -94,7 +88,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -107,7 +106,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -118,7 +122,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
   >;
@@ -128,8 +137,6 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
  * EndpointDeploymentOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -167,8 +174,6 @@ interface EndpointDeploymentOps
  * EndpointDeployment is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface EndpointDeployment {
   /**
@@ -195,7 +200,12 @@ interface EndpointDeployment {
   delete is EndpointDeploymentOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 

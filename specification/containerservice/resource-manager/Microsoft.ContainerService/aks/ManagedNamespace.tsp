@@ -20,7 +20,7 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage pattern is required for backward compatibility with existing API versions."
 @parentResource(ManagedCluster)
 model ManagedNamespace
-  is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NamespaceProperties> {
   ...ResourceNameParameter<
     Resource = ManagedNamespace,
     KeyName = "managedNamespaceName",
@@ -90,7 +90,6 @@ interface ManagedNamespaces {
 /**
  * The current provisioning state of the namespace.
  */
-@Azure.Core.lroStatus
 union NamespaceProvisioningState {
   string,
 

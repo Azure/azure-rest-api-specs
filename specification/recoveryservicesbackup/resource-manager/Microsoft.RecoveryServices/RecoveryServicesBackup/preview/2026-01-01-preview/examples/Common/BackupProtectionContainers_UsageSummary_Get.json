@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "$filter": "type eq 'BackupProtectionContainerCountSummary'",
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {
+              "localizedValue": "Azure Backup Server",
+              "value": "AzureBackupServer"
+            },
+            "currentValue": 2,
+            "limit": -1,
+            "unit": "Count"
+          },
+          {
+            "name": {
+              "localizedValue": "Azure Backup Agent",
+              "value": "MAB"
+            },
+            "currentValue": 3,
+            "limit": -1,
+            "unit": "Count"
+          },
+          {
+            "name": {
+              "localizedValue": "SQL in Azure VM",
+              "value": "AzureWorkload"
+            },
+            "currentValue": 1,
+            "limit": -1,
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupUsageSummaries_List",
+  "title": "Get Protected Containers Usages Summary"
+}

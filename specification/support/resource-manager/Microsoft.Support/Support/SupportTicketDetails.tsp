@@ -15,6 +15,7 @@ namespace Microsoft.Support;
 /**
  * Object that represents SupportTicketDetails resource.
  */
+@subscriptionResource
 model SupportTicketDetails
   is Azure.ResourceManager.ProxyResource<
     SupportTicketDetailsProperties,

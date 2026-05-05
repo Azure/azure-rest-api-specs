@@ -28,16 +28,6 @@ interface AccountsOperationGroup {
   >;
 }
 
-alias ScopeTenantIdParameters = {
-  /**
-   * The tenant ID.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  @query("scopeTenantId")
-  scopeTenantId: string;
-};
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DefaultAccountsOperationGroup {
   /**
@@ -50,7 +40,13 @@ interface DefaultAccountsOperationGroup {
   get is ArmProviderActionSync<
     Response = DefaultAccountPayload,
     Parameters = {
-      ...ScopeTenantIdParameters;
+      /**
+       * The tenant ID.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @format("uuid")
+      @query("scopeTenantId")
+      scopeTenantId: string;
 
       /**
        * The scope for the default account.
@@ -77,7 +73,13 @@ interface DefaultAccountsOperationGroup {
       @body body: void;
     } | NoContentResponse,
     Parameters = {
-      ...ScopeTenantIdParameters;
+      /**
+       * The tenant ID.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @format("uuid")
+      @query("scopeTenantId")
+      scopeTenantId: string;
 
       /**
        * The scope for the default account.
@@ -147,7 +149,7 @@ interface UsagesOperationGroup {
     Response = UsageList,
     Scope = SubscriptionActionScope,
     Parameters = {
-      ...LocationResourceParameter;
+      ...LocationParameter;
 
       /**
        * The filter, currently unused.

@@ -9,27 +9,23 @@ using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.RecoveryServices;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Empty documentation for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @doc("")
 @parentResource(VaultResource)
-model ResourceGuardProxyBaseResource is ProxyResource<ResourceGuardProxyBase> {
+model ResourceGuardProxyBaseResource
+  is TrackedResourceWithOptionalLocation<ResourceGuardProxyBase> {
   ...ResourceNameParameter<
     Resource = ResourceGuardProxyBaseResource,
     KeyName = "resourceGuardProxyName",
     SegmentName = "backupResourceGuardProxies",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
 }
 

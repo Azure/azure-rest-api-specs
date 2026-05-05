@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "fabricName": "Azure",
+    "intentObjectName": "vm;iaasvmcontainerv2;chamsrgtest;chamscandel",
+    "parameters": {
+      "properties": {
+        "policyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy",
+        "protectionIntentItemType": "AzureResourceItem",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/chamsrgtest/providers/Microsoft.Compute/virtualMachines/chamscandel"
+      }
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "myVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vm;iaasvmcontainerv2;chamsrgtest;chamscandel",
+        "type": "Microsoft.RecoveryServices/vaults/backupProtectionIntent",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupFabrics/Azure/backupProtectionIntent/vm;iaasvmcontainerv2;chamsrgtest;chamscandel",
+        "properties": {
+          "backupManagementType": "AzureIaasVM",
+          "policyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/vaults/myVault/backupPolicies/myPolicy",
+          "protectionIntentItemType": "AzureResourceItem",
+          "protectionState": "Protected"
+        }
+      }
+    }
+  },
+  "operationId": "ProtectionIntent_CreateOrUpdate",
+  "title": "Create or Update Azure Vm Protection Intent"
+}

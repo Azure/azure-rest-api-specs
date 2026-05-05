@@ -6,10 +6,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Network Monitor Properties defines the properties of the resource.")
 @added(Versions.v2024_06_15_preview)
-model NetworkMonitorProperties extends AnnotationResource {
+model NetworkMonitorProperties {
+  ...AnnotationResource;
+
   @doc("BMP Configurations for the Network Fabric.")
   bmpConfiguration?: BmpConfigurationProperties;
 
@@ -89,6 +90,20 @@ model StationConnectionPatchProperties {
   probeCount?: int32;
 }
 
+@doc("Export Policy for the BGP Monitoring Protocol (BMP) Configuration.")
+union BmpExportPolicy {
+  @doc("BMP ExportPolicy Pre-Policy")
+  PrePolicy: "Pre-Policy",
+
+  @doc("BMP ExportPolicy Post-Policy")
+  PostPolicy: "Post-Policy",
+
+  @doc("BMP ExportPolicy All")
+  All: "All",
+
+  string,
+}
+
 @doc("Monitored Address Family.")
 union BmpMonitoredAddressFamily {
   @doc("IPv4 Unicast")
@@ -158,10 +173,6 @@ model BmpConfigurationProperties {
   @doc("Export Policy for the BMP Configuration.")
   exportPolicy?: BmpExportPolicy = BmpExportPolicy.All;
 
-  @doc("Export Policy configuration properties for the BMP.")
-  @added(Versions.v2025_07_15)
-  exportPolicyConfiguration?: BmpExportPolicyProperties;
-
   @doc("Monitored Address Families for the BMP Configuration.")
   monitoredAddressFamilies?: BmpMonitoredAddressFamily[] = #[
     BmpMonitoredAddressFamily.All
@@ -217,18 +228,15 @@ model BmpConfigurationPatchProperties {
   @doc("Export Policy for the BMP Configuration.")
   exportPolicy?: BmpExportPolicy;
 
-  @doc("Export Policy configuration properties for the BMP.")
-  @added(Versions.v2025_07_15)
-  exportPolicyConfiguration?: BmpExportPolicyPatchProperties;
-
   @doc("Monitored Address Families for the BMP Configuration.")
   monitoredAddressFamilies?: BmpMonitoredAddressFamily[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Network Monitor Patch resource definition.")
 @added(Versions.v2024_06_15_preview)
-model NetworkMonitorPatch extends TagsUpdate {
+model NetworkMonitorPatch {
+  ...TagsUpdate;
+
   @doc("Network Monitor Patch properties.")
   properties?: NetworkMonitorPatchProperties;
 }

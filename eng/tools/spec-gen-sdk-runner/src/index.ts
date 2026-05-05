@@ -21,24 +21,22 @@ export async function main() {
   if (!existsSync(logFolder)) {
     mkdirSync(logFolder, { recursive: true });
   }
-  let result;
+  let statusCode: number;
   try {
     if (batchType) {
-      result = await generateSdkForBatchSpecs(batchType);
+      statusCode = await generateSdkForBatchSpecs(batchType);
     } else if (pullRequestNumber) {
-      result = await generateSdkForSpecPr();
+      statusCode = await generateSdkForSpecPr();
     } else {
-      result = await generateSdkForSingleSpec();
+      statusCode = await generateSdkForSingleSpec();
     }
   } catch (error) {
     console.error("Unhandled exception in spec-gen-sdk-runner:", error);
     console.log("##vso[task.complete result=Failed;]");
     exit(1);
   }
-  if (result.statusCode !== 0) {
+  if (statusCode !== 0) {
     console.log("##vso[task.complete result=Failed;]");
-  } else if (result.executionResult === "warning") {
-    console.log("##vso[task.complete result=SucceededWithIssues;]");
   }
-  exit(result.statusCode);
+  exit(statusCode);
 }

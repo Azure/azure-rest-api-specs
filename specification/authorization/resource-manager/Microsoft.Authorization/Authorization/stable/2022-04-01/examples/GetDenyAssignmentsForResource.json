@@ -1,57 +1,55 @@
 {
   "parameters": {
-    "api-version": "2022-04-01",
-    "parentResourcePath": "parentResourcePath",
+    "subscriptionId": "subId",
     "resourceGroupName": "rgname",
-    "resourceName": "resourceName",
     "resourceProviderNamespace": "resourceProviderNamespace",
+    "parentResourcePath": "parentResourcePath",
     "resourceType": "resourceType",
-    "subscriptionId": "subId"
+    "resourceName": "resourceName",
+    "api-version": "2022-04-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "denyAssignmentId",
-            "type": "Microsoft.Authorization/denyAssignments",
-            "id": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
             "properties": {
-              "description": "Deny assignment description",
               "denyAssignmentName": "Deny assignment name",
-              "doNotApplyToChildScopes": false,
-              "excludePrincipals": [
-                {
-                  "type": "principalType2",
-                  "id": "principalId2"
-                }
-              ],
-              "isSystemProtected": true,
+              "description": "Deny assignment description",
               "permissions": [
                 {
                   "actions": [
                     "action"
                   ],
+                  "notActions": [],
                   "dataActions": [
                     "action"
                   ],
-                  "notActions": [],
                   "notDataActions": []
                 }
               ],
+              "scope": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName",
+              "doNotApplyToChildScopes": false,
               "principals": [
                 {
-                  "type": "principalType1",
-                  "id": "principalId1"
+                  "id": "principalId1",
+                  "type": "principalType1"
                 }
               ],
-              "scope": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName"
-            }
+              "excludePrincipals": [
+                {
+                  "id": "principalId2",
+                  "type": "principalType2"
+                }
+              ],
+              "isSystemProtected": true
+            },
+            "id": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+            "type": "Microsoft.Authorization/denyAssignments",
+            "name": "denyAssignmentId"
           }
         ]
       }
     }
-  },
-  "operationId": "DenyAssignments_ListForResource",
-  "title": "List deny assignments for resource"
+  }
 }

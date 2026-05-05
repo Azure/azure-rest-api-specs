@@ -1,0 +1,60 @@
+parameters:
+  "service-dir":
+    default: "sdk/keyvault"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.KeyVault"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-keyvault"
+    namespace: "azure.mgmt.keyvault"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault"
+    namespace: "com.azure.resourcemanager.keyvault"
+    service-name: "KeyVault" # human-readable service name, whitespace allowed
+    flavor: azure
+    enable-sync-stack: false
+    premium: true
+    customization-class: customization/src/main/java/KeyVaultCustomization.java
+    uuid-as-string: false
+    rename-model:
+      TrackedResource: Resource
+    client-side-validations: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-keyvault"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-keyvault"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/armkeyvault"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armkeyvault/v2"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-rust":
+    crate-name: "azure_resourcemanager_keyvault"
+    crate-version: "0.1.0"
+    emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

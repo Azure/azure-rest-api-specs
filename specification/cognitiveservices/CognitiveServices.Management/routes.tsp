@@ -1,4 +1,4 @@
-// Verified: These operations are provider-level actions (not resource CRUD) and are correctly modeled as ArmProviderActionSync.
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -13,7 +13,24 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.CognitiveServices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface DeletedAccountsOperationGroup {
+  /**
+   * Returns all the resources of a particular type belonging to a subscription.
+   */
+  @autoRoute
+  @get
+  @action("deletedAccounts")
+  @list
+  @tag("CognitiveServicesAccounts")
+  list is ArmProviderActionSync<
+    Response = AccountListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ResourceSkusOperationGroup {
   /**
    * Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.
@@ -31,7 +48,7 @@ interface ResourceSkusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
   /**
    * Get usages for the requested subscription
@@ -59,7 +76,7 @@ interface UsagesOperationGroup {
 /**
  * Check available SKUs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @tag("CognitiveServicesAccounts")
 op checkSkuAvailability is ArmProviderActionSync<
@@ -82,7 +99,7 @@ op checkDomainAvailability is ArmProviderActionSync<
 /**
  * Model capacity calculator.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId for 'checkDomainAvailability' required for backward compatibility with existing SDK clients"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @operationId("calculateModelCapacity")
 @autoRoute
 @tag("CognitiveServicesAccounts")
@@ -93,7 +110,7 @@ op calculateModelCapacity is ArmProviderActionSync<
   Parameters = {}
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'calculateModelCapacity' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CommitmentTiersOperationGroup {
   /**
    * List Commitment Tiers.
@@ -110,7 +127,7 @@ interface CommitmentTiersOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ModelsOperationGroup {
   /**
    * List Models.
@@ -127,7 +144,7 @@ interface ModelsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LocationBasedModelCapacitiesOperationGroup {
   /**
    * List Location Based ModelCapacities.
@@ -167,7 +184,7 @@ interface LocationBasedModelCapacitiesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "'list' is a non-standard operation that doesn't map to ARM CRUD resource interface patterns"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ModelCapacitiesOperationGroup {
   /**
    * List ModelCapacities.

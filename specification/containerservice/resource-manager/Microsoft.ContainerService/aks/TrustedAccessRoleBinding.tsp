@@ -81,7 +81,6 @@ interface TrustedAccessRoleBindings {
 /**
  * The current provisioning state of trusted access role binding.
  */
-@Azure.Core.lroStatus
 union TrustedAccessRoleBindingProvisioningState {
   string,
 

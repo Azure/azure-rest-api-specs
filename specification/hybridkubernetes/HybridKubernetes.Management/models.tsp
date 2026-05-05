@@ -19,13 +19,10 @@ union ConnectedClusterKind {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ProvisionedCluster: "ProvisionedCluster",
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.v2026_05_01)
   AWS: "AWS",
 
   @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_05_01)
   @doc("Represents a connected cluster hosted on Google Cloud Platform (GCP)")
   GCP: "GCP",
 }
@@ -66,21 +63,6 @@ union ConnectivityStatus {
   Expired: "Expired",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AgentNotInstalled: "AgentNotInstalled",
-}
-
-/**
- * Represents the inbound connectivity status of the connected cluster.
- */
-@added(Versions.v2026_02_01_preview)
-@removed(Versions.v2026_05_01)
-union InboundConnectivityState {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Unknown: "Unknown",
 }
 
 /**
@@ -254,14 +236,6 @@ model ConnectedClusterProperties {
    */
   @visibility(Lifecycle.Read)
   connectivityStatus?: ConnectivityStatus;
-
-  /**
-   * Represents the health status inbound connectivity (relay connection and Kubernetes API).
-   */
-  @added(Versions.v2026_02_01_preview)
-  @removed(Versions.v2026_05_01)
-  @visibility(Lifecycle.Read)
-  inboundConnectivityState?: InboundConnectivityState;
 
   /**
    * Property which describes the state of private link on a connected cluster resource.

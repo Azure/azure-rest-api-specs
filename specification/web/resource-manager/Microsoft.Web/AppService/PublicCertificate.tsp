@@ -55,8 +55,7 @@ interface PublicCertificateOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PublicCertificates {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
@@ -127,8 +126,7 @@ interface PublicCertificateOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PublicCertificateOperationGroup {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).

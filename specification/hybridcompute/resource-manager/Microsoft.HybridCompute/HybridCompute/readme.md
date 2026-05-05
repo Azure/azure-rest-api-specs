@@ -84,7 +84,8 @@ These settings apply only when `--tag=package-preview-2025-09-16-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-09-16-preview'
 input-file:
-  - preview/2025-09-16-preview/openapi.json
+  - preview/2025-09-16-preview/HybridCompute.json
+  - preview/2025-09-16-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2025-08-21-preview

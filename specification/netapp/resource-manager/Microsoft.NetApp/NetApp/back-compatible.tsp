@@ -14,9 +14,6 @@ using Microsoft.NetApp;
 @@flattenProperty(NetAppAccountPatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(NetAppAccountPatchStable.properties, "!javascript");
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(GetKeyVaultStatusResponse.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
@@ -68,9 +65,7 @@ using Microsoft.NetApp;
 @@clientLocation(NetAppAccounts.createOrUpdate, "Accounts");
 @@clientName(NetAppAccounts.createOrUpdate::parameters.resource, "body");
 @@clientLocation(NetAppAccounts.update, "Accounts");
-@@clientLocation(NetAppAccounts.updatePrevious, "Accounts");
 @@clientName(NetAppAccounts.update::parameters.properties, "body");
-@@clientName(NetAppAccounts.updatePrevious::parameters.properties, "body");
 @@clientLocation(NetAppAccounts.delete, "Accounts");
 @@clientLocation(NetAppAccounts.list, "Accounts");
 @@clientLocation(NetAppAccounts.listBySubscription, "Accounts");

@@ -33,10 +33,6 @@ using Azure.Core;
 @@clientName(CodeSigningAccount, "ArtifactSigningAccount", "csharp");
 @@clientName(ProfileType, "CertificateProfileType", "csharp");
 @@clientName(ProfileType.VBSEnclave, "VbsEnclave", "csharp");
-@@clientName(CertificateProfileProperties.profileType,
-  "CertificateProfileType",
-  "csharp"
-);
 @@clientName(RevocationStatus, "CertificateRevocationStatus", "csharp");
 @@clientName(RevokeCertificate, "RevokeCertificateContent", "csharp");
 @@clientName(Certificate.createdDate, "CreateOn", "csharp");

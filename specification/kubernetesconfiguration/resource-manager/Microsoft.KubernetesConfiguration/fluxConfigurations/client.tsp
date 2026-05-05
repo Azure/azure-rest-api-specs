@@ -8,11 +8,6 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration,
-  "FluxConfigurationClient",
-  "javascript"
-);
-
 @@clientName(Microsoft.KubernetesConfiguration, "FluxConfigClient", "java");
 @@clientName(Microsoft.KubernetesConfiguration.KustomizationDefinition.wait,
   "waitValue",

@@ -3,21 +3,16 @@
   "info": {
     "title": "AuthorizationManagementClient",
     "version": "2025-12-01-preview",
-    "description": "Attribute namespaces provide a way to organize attributes associated with Federated Managed Identities. These attributes can also be used in attribute-based access control conditions in Azure role assignments. These operations enable users to manage attribute namespaces at the provider level to guarantee tenant-level uniqueness.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "Attribute namespaces provide a way to organize attributes associated with Federated Managed Identities. These attributes can also be used in attribute-based access control conditions in Azure role assignments. These operations enable users to manage attribute namespaces at the provider level to guarantee tenant-level uniqueness."
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "host": "management.azure.com",
-  "produces": [
+  "consumes": [
     "application/json"
   ],
-  "consumes": [
+  "produces": [
     "application/json"
   ],
   "security": [
@@ -30,50 +25,94 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "tags": [
-    {
-      "name": "AttributeNamespaces"
-    }
-  ],
   "paths": {
-    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}": {
-      "get": {
-        "operationId": "AttributeNamespaces_Get",
+    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}/action": {
+      "post": {
         "tags": [
           "AttributeNamespaces"
         ],
-        "description": "Gets the specified attribute namespace.",
+        "operationId": "AttributeNamespaces_Create",
+        "description": "Creates a new attribute namespace.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "name": "attributeNamespace",
             "in": "path",
-            "description": "The name of the attribute namespace to get.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the attribute namespace to create."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttributeNamespaceCreateRequest"
+            },
+            "description": "Parameters for creating the attribute namespace."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK - Returns information about the updated attribute namespace.",
             "schema": {
               "$ref": "#/definitions/AttributeNamespace"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateAttributeNamespace": {
+            "$ref": "./examples/CreateAttributeNamespace.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}": {
+      "get": {
+        "tags": [
+          "AttributeNamespaces"
+        ],
+        "operationId": "AttributeNamespaces_Get",
+        "description": "Gets the specified attribute namespace.",
+        "parameters": [
+          {
+            "name": "attributeNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the attribute namespace to get."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the attribute namespace.",
+            "schema": {
+              "$ref": "#/definitions/AttributeNamespace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -84,34 +123,34 @@
         }
       },
       "delete": {
-        "operationId": "AttributeNamespaces_Delete",
         "tags": [
           "AttributeNamespaces"
         ],
+        "operationId": "AttributeNamespaces_Delete",
         "description": "Deletes the specified attribute namespace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "attributeNamespace",
             "in": "path",
-            "description": "The name of the attribute namespace to get.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the attribute namespace to delete."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "OK - The attribute namespace was successfully deleted."
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "No Content - The attribute namespace does not exist or was already deleted."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -121,67 +160,9 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}/action": {
-      "post": {
-        "operationId": "AttributeNamespaces_Create",
-        "tags": [
-          "AttributeNamespaces"
-        ],
-        "description": "Creates a new attribute namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "attributeNamespace",
-            "in": "path",
-            "description": "The name of the attribute namespace to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters for creating the attribute namespace.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AttributeNamespaceCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AttributeNamespace"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateAttributeNamespace": {
-            "$ref": "./examples/CreateAttributeNamespace.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "AttributeNamespace": {
-      "type": "object",
-      "description": "An attribute namespace resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "AttributeNamespaceCreateRequest": {
       "type": "object",
       "description": "Request body for creating an attribute namespace.",
@@ -195,19 +176,41 @@
         "namespaceOwnerPrincipalId"
       ]
     },
-    "Microsoft.Common.CloudError": {
+    "AttributeNamespace": {
       "type": "object",
+      "description": "An attribute namespace resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The fully qualified resource ID of the attribute namespace. For example, /providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the attribute namespace."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource. For example, Microsoft.Authorization/attributeNamespaces."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
       "description": "An error response from the service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Microsoft.Common.CloudErrorBody",
-          "description": "An error response from the service."
+          "$ref": "#/definitions/CloudErrorBody"
         }
-      },
-      "x-ms-external": true
+      }
     },
-    "Microsoft.Common.CloudErrorBody": {
+    "CloudErrorBody": {
       "type": "object",
+      "x-ms-external": true,
       "description": "An error response from the service.",
       "properties": {
         "code": {
@@ -218,9 +221,7 @@
           "type": "string",
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         }
-      },
-      "x-ms-external": true
+      }
     }
-  },
-  "parameters": {}
+  }
 }

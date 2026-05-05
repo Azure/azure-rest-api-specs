@@ -66,61 +66,41 @@ using Microsoft.RecoveryServices;
 );
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
-  Microsoft.RecoveryServices,
-  "!csharp"
+  Microsoft.RecoveryServices
 );
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
-  Microsoft.RecoveryServices,
-  "!csharp"
+  Microsoft.RecoveryServices
 );
 @@clientLocation(BackupResourceConfigOperationStatuses.getOperationStatus,
-  Microsoft.RecoveryServices,
-  "!csharp"
+  Microsoft.RecoveryServices
 );
 
 @@clientLocation(PrivateEndpointConnectionResources.get,
-  "PrivateEndpointConnection",
-  "!csharp"
+  "PrivateEndpointConnection"
 );
 @@clientLocation(PrivateEndpointConnectionResources.put,
-  "PrivateEndpointConnection",
-  "!csharp"
+  "PrivateEndpointConnection"
 );
 @@clientLocation(PrivateEndpointConnectionResources.delete,
-  "PrivateEndpointConnection",
-  "!csharp"
+  "PrivateEndpointConnection"
 );
 @@clientLocation(PrivateEndpointOperationStatuses.getOperationStatus,
-  "PrivateEndpoint",
-  "!csharp"
+  "PrivateEndpoint"
 );
 
-@@clientLocation(ProtectionIntentResources.get, "ProtectionIntent", "!csharp");
-@@clientLocation(ProtectionIntentResources.createOrUpdate,
-  "ProtectionIntent",
-  "!csharp"
-);
-@@clientLocation(ProtectionIntentResources.delete,
-  "ProtectionIntent",
-  "!csharp"
-);
+@@clientLocation(ProtectionIntentResources.get, "ProtectionIntent");
+@@clientLocation(ProtectionIntentResources.createOrUpdate, "ProtectionIntent");
+@@clientLocation(ProtectionIntentResources.delete, "ProtectionIntent");
 
-@@clientLocation(RecoveryPoints.moveRecoveryPoint,
-  Microsoft.RecoveryServices,
-  "!csharp"
-);
+@@clientLocation(RecoveryPoints.moveRecoveryPoint, Microsoft.RecoveryServices);
 
 @@clientLocation(ProtectionContainersOperationGroup.refresh,
-  ProtectionContainers,
-  "!csharp"
+  ProtectionContainers
 );
 
-@@clientLocation(ProtectionIntentOperationGroup.validate,
-  "ProtectionIntent",
-  "!csharp"
-);
+@@clientLocation(ProtectionIntentOperationGroup.validate, "ProtectionIntent");
 
-@@clientLocation(OperationOperationGroup.validate, "Operation", "!csharp");
+@@clientLocation(OperationOperationGroup.validate, "Operation");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureIaaSClassicComputeVMProtectedItem,
@@ -150,7 +130,7 @@ using Microsoft.RecoveryServices;
   AzureVmWorkloadProtectedItem
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectedItem,
   AzureVmWorkloadProtectedItem
 );
@@ -270,7 +250,7 @@ using Microsoft.RecoveryServices;
   AzureVmWorkloadProtectableItem
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
   AzureVmWorkloadProtectableItem
 );

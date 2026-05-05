@@ -70,26 +70,14 @@ union ActionsRequired {
 }
 
 /**
- * Control permission for data plane traffic coming from public networks.
+ * Control permission for data plane traffic coming from public networks while private endpoint is enabled.
  */
 union PublicNetworkAccess {
   string,
-
-  /**
-   * Allow public network access to the data plane.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-
-  /**
-   * Disallow public network access to the data plane.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
-
-  /**
-   * Let network security perimeter configuration control public network access to the data plane.
-   */
-  @added(Versions.v2025_08_01_preview)
-  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**

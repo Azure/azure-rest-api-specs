@@ -1,28 +1,25 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
-    "machineName": "myMachine",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
     "runCommandName": "myRunCommand",
-    "subscriptionId": "{subscriptionId}"
+    "api-version": "2025-09-16-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
         "name": "myRunCommand",
         "type": "Microsoft.HybridCompute/machines/runcommands",
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
         "location": "eastus2",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
         "properties": {
-          "asyncExecution": false,
-          "instanceView": {
-            "endTime": "2023-06-15T20:48:41.4641785+00:00",
-            "error": "",
-            "executionMessage": "",
-            "executionState": "Succeeded",
-            "exitCode": 0,
-            "output": "Hello World",
-            "startTime": "2023-06-15T20:48:41.4641785+00:00"
+          "source": {
+            "script": "Write-Host Hello World!"
           },
           "parameters": [
             {
@@ -35,20 +32,21 @@
             }
           ],
           "protectedParameters": [],
-          "provisioningState": "Succeeded",
+          "asyncExecution": false,
           "runAsUser": "user1",
-          "source": {
-            "script": "Write-Host Hello World!"
-          },
-          "timeoutInSeconds": 3600
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+          "timeoutInSeconds": 3600,
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "executionState": "Succeeded",
+            "executionMessage": "",
+            "exitCode": 0,
+            "output": "Hello World",
+            "error": "",
+            "startTime": "2023-06-15T20:48:41.4641785+00:00",
+            "endTime": "2023-06-15T20:48:41.4641785+00:00"
+          }
         }
       }
     }
-  },
-  "operationId": "MachineRunCommands_Get",
-  "title": "Get a Run Command"
+  }
 }

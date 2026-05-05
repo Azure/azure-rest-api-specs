@@ -57,7 +57,7 @@ union ProvisioningStates {
   Restoring: "Restoring",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2025_09_01)
   SoftDeleting: "SoftDeleting",
 }
 
@@ -101,7 +101,7 @@ union AutoScalePolicyEnforcement {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2025_09_01)
 union `x-ms-access-soft-deleted-resources` {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -228,7 +228,7 @@ union `x-ms-force-delete` {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2025_09_01)
 union DeleteType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -658,15 +658,9 @@ model VolumeGroupProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
-   * A boolean indicating whether or not Encryption in Transit is enabled, supported only for ISCSI protocol.
-   */
-  @added(Versions.v2026_04_01_preview)
-  encryptionInTransit?: boolean;
-
-  /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
-  @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2025_09_01)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -763,7 +757,7 @@ model VirtualNetworkRule {
 /**
  * Response for Delete Retention Policy object
  */
-@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2025_09_01)
 model DeleteRetentionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policyState?: PolicyState;
@@ -824,7 +818,7 @@ model VolumeGroupUpdateProperties {
   /**
    * The retention policy for the soft deleted volume group and its associated resources
    */
-  @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2025_09_01)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 

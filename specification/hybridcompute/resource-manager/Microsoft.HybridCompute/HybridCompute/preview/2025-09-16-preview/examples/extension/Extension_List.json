@@ -1,66 +1,64 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
-    "machineName": "myMachine",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "machineName": "myMachine",
+    "api-version": "2025-09-16-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "CustomScriptExtension",
-            "type": "Microsoft.HybridCompute/machines/extensions",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+            "name": "CustomScriptExtension",
             "location": "eastus2euap",
+            "type": "Microsoft.HybridCompute/machines/extensions",
             "properties": {
-              "type": "CustomScriptExtension",
-              "autoUpgradeMinorVersion": false,
-              "instanceView": {
-                "name": "CustomScriptExtension",
-                "type": "CustomScriptExtension",
-                "status": {
-                  "code": "success",
-                  "displayStatus": "Provisioning succeeded",
-                  "level": "Information",
-                  "message": "formattedMessage: Finished executing command, StdOut: , StdErr: ",
-                  "time": "2020-08-13T17:18:57.405Z"
-                },
-                "typeHandlerVersion": "1.10.3"
-              },
-              "provisioningState": "Succeeded",
               "publisher": "Microsoft.Compute",
+              "type": "CustomScriptExtension",
+              "typeHandlerVersion": "1.10.3",
+              "autoUpgradeMinorVersion": false,
               "settings": {
                 "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
               },
-              "typeHandlerVersion": "1.10.3"
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "name": "CustomScriptExtension",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.10.3",
+                "status": {
+                  "code": "success",
+                  "level": "Information",
+                  "displayStatus": "Provisioning succeeded",
+                  "message": "formattedMessage: Finished executing command, StdOut: , StdErr: ",
+                  "time": "2020-08-13T17:18:57.405Z"
+                }
+              }
             }
           },
           {
-            "name": "winosupdateextension",
-            "type": "Microsoft.HybridCompute/machines/extensions",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/winosupdateextension",
+            "name": "winosupdateextension",
             "location": "eastus2euap",
+            "type": "Microsoft.HybridCompute/machines/extensions",
             "properties": {
+              "publisher": "microsoft.softwareupdatemanagement.test",
               "type": "windowsosupdateextension",
+              "typeHandlerVersion": "1.0.0.0",
               "autoUpgradeMinorVersion": false,
+              "settings": {},
+              "provisioningState": "Creating",
               "instanceView": {
                 "name": "winosupdateextension",
                 "type": "windowsosupdateextension",
-                "status": {},
-                "typeHandlerVersion": "1.0.0.0"
-              },
-              "provisioningState": "Creating",
-              "publisher": "microsoft.softwareupdatemanagement.test",
-              "settings": {},
-              "typeHandlerVersion": "1.0.0.0"
+                "typeHandlerVersion": "1.0.0.0",
+                "status": {}
+              }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "MachineExtensions_List",
-  "title": "GET all Machine Extensions - List"
+  }
 }

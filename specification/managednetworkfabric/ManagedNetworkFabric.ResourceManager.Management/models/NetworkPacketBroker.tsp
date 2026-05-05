@@ -53,17 +53,7 @@ model NetworkPacketBrokerProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  @added(Versions.v2025_07_15)
-  @doc("Configuration state of the resource.")
-  @visibility(Lifecycle.Read)
-  configurationState?: ConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkPacketBroker patch resource definition.")
-model NetworkPacketBrokerPatch extends TagsUpdate {
-  @added(Versions.v2025_07_15)
-  @doc("The managed service identities assigned to this resource.")
-  identity?: ManagedServiceIdentityPatch;
-}
+model NetworkPacketBrokerPatch is TagsUpdate;

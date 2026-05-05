@@ -1,47 +1,45 @@
 {
   "parameters": {
-    "api-version": "2022-04-01",
+    "scope": "subscriptions/subId/resourcegroups/rgname",
     "denyAssignmentId": "denyAssignmentId",
-    "scope": "subscriptions/subId/resourcegroups/rgname"
+    "api-version": "2022-04-01"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "denyAssignmentId",
-        "type": "Microsoft.Authorization/denyAssignments",
-        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
         "properties": {
-          "description": "Deny assignment description",
           "denyAssignmentName": "Deny assignment name",
-          "doNotApplyToChildScopes": false,
-          "excludePrincipals": [
-            {
-              "type": "principalType2",
-              "id": "principalId2"
-            }
-          ],
-          "isSystemProtected": true,
+          "description": "Deny assignment description",
           "permissions": [
             {
               "actions": [
                 "action"
               ],
-              "dataActions": [],
               "notActions": [],
+              "dataActions": [],
               "notDataActions": []
             }
           ],
+          "scope": "/subscriptions/subId/resourcegroups/rgname",
+          "doNotApplyToChildScopes": false,
           "principals": [
             {
-              "type": "principalType1",
-              "id": "principalId1"
+              "id": "principalId1",
+              "type": "principalType1"
             }
           ],
-          "scope": "/subscriptions/subId/resourcegroups/rgname"
-        }
+          "excludePrincipals": [
+            {
+              "id": "principalId2",
+              "type": "principalType2"
+            }
+          ],
+          "isSystemProtected": true
+        },
+        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+        "type": "Microsoft.Authorization/denyAssignments",
+        "name": "denyAssignmentId"
       }
     }
-  },
-  "operationId": "DenyAssignments_Get",
-  "title": "Get deny assignment by name"
+  }
 }

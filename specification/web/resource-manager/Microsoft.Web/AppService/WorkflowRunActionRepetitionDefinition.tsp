@@ -89,8 +89,7 @@ interface WorkflowRunActionRepetitionDefinitionOps
       }
     > {}
 
-@tag("WorkflowRunActions")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface WorkflowRunActionRepetitionDefinitions {
   /**
    * Get a workflow run action repetition.
@@ -180,8 +179,7 @@ interface WorkflowRunActionScopeRepetitionOps
       }
     > {}
 
-@tag("WorkflowRunActions")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface WorkflowRunActionScopeRepetitions {
   /**
    * Get a workflow run action scoped repetition.

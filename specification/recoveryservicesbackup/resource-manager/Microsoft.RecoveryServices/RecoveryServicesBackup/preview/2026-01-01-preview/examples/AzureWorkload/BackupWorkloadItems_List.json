@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "$filter": "backupManagementType eq 'AzureWorkload'",
+    "api-version": "2026-01-01-preview",
+    "containerName": "VMAppContainer;Compute;bvtdtestag;sqlserver-1",
+    "fabricName": "Azure",
+    "resourceGroupName": "testRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "suchandr-seacan-rsv"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "SQLInstance;MSSQLSERVER",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/items",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testRg/providers/Microsoft.RecoveryServices/vaults/suchandr-seacan-rsv/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;bvtdtestag;sqlserver-1/protectableItems/SQLInstance;MSSQLSERVER",
+            "properties": {
+              "backupManagementType": "AzureWorkload",
+              "dataDirectoryPaths": [
+                {
+                  "type": "Data",
+                  "path": "F:\\DATA\\"
+                },
+                {
+                  "type": "Log",
+                  "path": "F:\\LOG\\"
+                }
+              ],
+              "friendlyName": "MSSQLSERVER",
+              "isAutoProtectable": true,
+              "parentName": "MSSQLSERVER",
+              "protectionState": "NotProtected",
+              "serverName": "sqlserver-1.contoso.com",
+              "subWorkloadItemCount": 3,
+              "subinquireditemcount": 0,
+              "workloadItemType": "SQLInstance",
+              "workloadType": "SQL"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupWorkloadItems_List",
+  "title": "List Workload Items in Container"
+}

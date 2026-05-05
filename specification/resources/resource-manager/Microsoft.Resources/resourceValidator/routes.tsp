@@ -9,10 +9,10 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-namespace ResourceValidator;
+namespace ResourceValidationClient;
 
 @armResourceOperations
-interface ResourceValidator {
+interface ResourceValidationClient {
   /** Validates multiple ARM resources. */
   @action("validateResources")
   validateResources is ArmProviderActionSync<

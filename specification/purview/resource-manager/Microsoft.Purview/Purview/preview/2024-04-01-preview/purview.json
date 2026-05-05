@@ -1734,7 +1734,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -1752,7 +1752,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -2196,10 +2196,6 @@
           }
         }
       }
-    },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "BatchFeatureRequest": {
       "type": "object",
@@ -2919,7 +2915,7 @@
       "enum": [
         "None",
         "SystemAssigned",
-        "SystemAssigned,UserAssigned"
+        "UserAssigned"
       ],
       "x-ms-enum": {
         "name": "ManagedIdentityType",
@@ -2936,9 +2932,9 @@
             "description": "SystemAssigned"
           },
           {
-            "name": "SystemAssignedUserAssigned",
-            "value": "SystemAssigned,UserAssigned",
-            "description": "Both SystemAssigned and UserAssigned identities."
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "UserAssigned"
           }
         ]
       }

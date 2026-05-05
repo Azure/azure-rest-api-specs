@@ -1,24 +1,28 @@
 {
   "parameters": {
-    "api-version": "2020-10-30-preview",
-    "enterprisePolicyName": "enterprisePolicy",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "subscriptionId": "subid"
+    "enterprisePolicyName": "enterprisePolicy",
+    "api-version": "2020-10-30-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
         "name": "enterprisePolicy",
-        "type": "Microsoft.PowerPlatform/enterprisePolicies",
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
-        "identity": {
-          "type": "SystemAssigned",
-          "systemAssignedIdentityPrincipalId": "principalId",
-          "tenantId": "tenantId"
-        },
-        "kind": "Lockbox",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
         "location": "East US",
+        "kind": "Lockbox",
+        "identity": {
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId",
+          "type": "SystemAssigned"
+        },
         "properties": {
+          "lockbox": {
+            "state": "succeeded"
+          },
           "encryption": {
             "keyVault": {
               "id": "nnn",
@@ -27,10 +31,6 @@
                 "version": "1.0"
               }
             }
-          },
-          "healthStatus": "Undetermined",
-          "lockbox": {
-            "state": "succeeded"
           },
           "networkInjection": {
             "virtualNetworks": [
@@ -41,20 +41,18 @@
                 }
               }
             ]
-          }
+          },
+          "healthStatus": "Undetermined"
         },
         "systemData": {
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
           "lastModifiedBy": "user2",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "EnterprisePolicies_Get",
-  "title": "Get an EnterprisePolicy"
+  }
 }

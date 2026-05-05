@@ -1,22 +1,34 @@
 {
-  "operationId": "AgentPools_Get",
   "parameters": {
-    "agentPoolName": "agentPoolName",
     "api-version": "2026-01-01-preview",
-    "kubernetesClusterName": "kubernetesClusterName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+    "kubernetesClusterName": "kubernetesClusterName",
+    "agentPoolName": "agentPoolName"
   },
   "responses": {
     "200": {
       "body": {
-        "extendedLocation": {
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-          "type": "CustomLocation"
-        },
         "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
-        "location": "location",
         "name": "default",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/kubernetesClusters/agentPools",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
         "properties": {
           "administratorConfiguration": {
             "adminUsername": "azure",
@@ -39,9 +51,9 @@
             ],
             "l3Networks": [
               {
-                "ipamEnabled": "False",
                 "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
-                "pluginType": "SRIOV"
+                "pluginType": "SRIOV",
+                "ipamEnabled": "False"
               }
             ],
             "trunkedNetworks": [
@@ -57,9 +69,6 @@
             "3"
           ],
           "count": 3,
-          "detailedStatus": "Available",
-          "detailedStatusMessage": "Agent pool is available",
-          "kubernetesVersion": "1.XX.Y",
           "labels": [
             {
               "key": "kubernetes.label",
@@ -67,7 +76,6 @@
             }
           ],
           "mode": "System",
-          "provisioningState": "Succeeded",
           "taints": [
             {
               "key": "kubernetes.taint",
@@ -77,23 +85,13 @@
           "upgradeSettings": {
             "maxSurge": "1"
           },
-          "vmSkuName": "NC_P46_224_v1"
-        },
-        "systemData": {
-          "createdAt": "2021-01-22T13:27:03.008Z",
-          "createdBy": "identityA",
-          "createdByType": "Application",
-          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
-          "lastModifiedBy": "identityB",
-          "lastModifiedByType": "User"
-        },
-        "tags": {
-          "key1": "myvalue1",
-          "key2": "myvalue2"
-        },
-        "type": "Microsoft.NetworkCloud/kubernetesClusters/agentPools"
+          "vmSkuName": "NC_P46_224_v1",
+          "provisioningState": "Succeeded",
+          "kubernetesVersion": "1.XX.Y",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Agent pool is available"
+        }
       }
     }
-  },
-  "title": "Get Kubernetes cluster agent pool"
+  }
 }

@@ -240,6 +240,11 @@ model GetPreviewOptions {
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
 }
 
 /**
@@ -444,7 +449,11 @@ model GetMosaicWmtsCapabilitiesOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getTileCustomized(
   ...getTileCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for tile generation including asset selection, terrain algorithms, and visual rendering
@@ -463,7 +472,11 @@ op getTileCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getWmtsCapabilitiesCustomized(
   ...getWmtsCapabilitiesCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
@@ -482,7 +495,11 @@ op getWmtsCapabilitiesCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getAssetStatisticsCustomized(
   ...getAssetStatisticsCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for asset statistics including asset selection and statistical calculation parameters
@@ -500,7 +517,11 @@ op getAssetStatisticsCustomized(
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getAssetStatisticsCustomizedForCsharp(
-  ...Azure.Core.Foundations.ApiVersionParameter,
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
   ...AssetQueryParameters,
   ...getAssetStatisticsCustomizedCommonSignatures,
   ...StatisticsQueryParameters,
@@ -517,7 +538,11 @@ op getAssetStatisticsCustomizedForCsharp(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op cropGeoJsonCustomized(
   ...cropGeoJsonCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
@@ -542,7 +567,11 @@ op cropGeoJsonCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op cropGeoJsonWithDimensionsCustomized(
   ...cropGeoJsonWithDimensionsCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
@@ -567,7 +596,11 @@ op cropGeoJsonWithDimensionsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getGeoJsonStatisticsCustomized(
   ...getGeoJsonStatisticsCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON statistics including asset selection and statistical calculation parameters
@@ -592,7 +625,11 @@ op getGeoJsonStatisticsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPartCustomized(
   ...getPartCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
@@ -611,7 +648,11 @@ op getPartCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPartWithDimensionsCustomized(
   ...getPartWithDimensionsCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
@@ -630,7 +671,11 @@ op getPartWithDimensionsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPreviewCustomized(
   ...getPreviewCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
@@ -649,7 +694,11 @@ op getPreviewCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPreviewWithFormatCustomized(
   ...getPreviewWithFormatCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
@@ -668,7 +717,11 @@ op getPreviewWithFormatCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op listStatisticsCustomized(
   ...listStatisticsCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for statistics including asset selection and statistical calculation parameters
@@ -687,7 +740,11 @@ op listStatisticsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getTileJsonCustomized(
   ...getTileJsonCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
@@ -706,7 +763,11 @@ op getTileJsonCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getMosaicsTileJsonCustomized(
   ...getMosaicsTileJsonCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
@@ -725,7 +786,11 @@ op getMosaicsTileJsonCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getMosaicsTileCustomized(
   ...getMosaicsTileCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for mosaic tile generation including asset selection, terrain algorithms, and visual rendering
@@ -744,7 +809,11 @@ op getMosaicsTileCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getMosaicsWmtsCapabilitiesCustomized(
   ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures,
-  ...Azure.Core.Foundations.ApiVersionParameter,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting

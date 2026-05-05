@@ -54,8 +54,7 @@ interface VnetInfoResourceOps
       }
     > {}
 
-@tag("AppServicePlans")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface VnetInfoResources {
   /**
    * Description for Get a Virtual Network associated with an App Service plan.
@@ -107,8 +106,7 @@ interface VnetInfoResourceOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface VnetInfoResourceOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
@@ -186,8 +184,7 @@ interface VnetConnectionOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface VnetConnectionOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.

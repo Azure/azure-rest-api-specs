@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
+
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -19,7 +19,7 @@ model NetworkRack extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("Network Rack Properties")
+  /** The NetworkRack properties */
   properties: NetworkRackProperties;
 }
 
@@ -39,16 +39,10 @@ interface NetworkRacks {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkRack>;
 
   @doc("List all Network Rack resources in the given resource group.")
-  listByResourceGroup is ArmResourceListByParent<
-    NetworkRack,
-    Response = NetworkRacksListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<NetworkRack>;
 
   @doc("List all Network Rack resources in the given subscription")
-  listBySubscription is ArmListBySubscription<
-    NetworkRack,
-    Response = NetworkRacksListResult
-  >;
+  listBySubscription is ArmListBySubscription<NetworkRack>;
 }
 
 @@doc(NetworkRacks.create::parameters.resource, "Request payload.");

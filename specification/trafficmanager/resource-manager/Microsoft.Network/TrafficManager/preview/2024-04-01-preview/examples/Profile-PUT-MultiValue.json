@@ -1,88 +1,86 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1421",
+    "profileName": "azsmnet6386",
     "api-version": "2024-04-01-preview",
     "parameters": {
-      "location": "global",
       "properties": {
+        "profileStatus": "Enabled",
+        "trafficRoutingMethod": "MultiValue",
         "dnsConfig": {
           "relativeName": "azsmnet6386",
           "ttl": 35
         },
-        "maxReturn": 2,
         "monitorConfig": {
-          "path": "/testpath.aspx",
+          "protocol": "HTTP",
           "port": 80,
-          "protocol": "HTTP"
+          "path": "/testpath.aspx"
         },
-        "profileStatus": "Enabled",
-        "trafficRoutingMethod": "MultiValue",
-        "trafficViewEnrollmentStatus": "Disabled"
-      }
-    },
-    "profileName": "azsmnet6386",
-    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1421",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+        "trafficViewEnrollmentStatus": "Disabled",
+        "maxReturn": 2
+      },
+      "location": "global"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386",
         "name": "azsmnet6386",
         "type": "Microsoft.Network/trafficManagerProfiles",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386",
         "location": "global",
         "properties": {
-          "dnsConfig": {
-            "fqdn": "azsmnet6386.tmpreview.watmtest.azure-test.net",
-            "relativeName": "azsmnet6386",
-            "ttl": 35
-          },
-          "endpoints": [],
-          "maxReturn": 2,
-          "monitorConfig": {
-            "path": "/testpath.aspx",
-            "intervalInSeconds": 30,
-            "port": 80,
-            "profileMonitorStatus": "Inactive",
-            "timeoutInSeconds": 10,
-            "toleratedNumberOfFailures": 3,
-            "protocol": "HTTP"
-          },
           "profileStatus": "Enabled",
           "trafficRoutingMethod": "MultiValue",
-          "trafficViewEnrollmentStatus": "Disabled"
+          "dnsConfig": {
+            "relativeName": "azsmnet6386",
+            "fqdn": "azsmnet6386.tmpreview.watmtest.azure-test.net",
+            "ttl": 35
+          },
+          "monitorConfig": {
+            "profileMonitorStatus": "Inactive",
+            "protocol": "HTTP",
+            "port": 80,
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 30,
+            "toleratedNumberOfFailures": 3,
+            "timeoutInSeconds": 10
+          },
+          "trafficViewEnrollmentStatus": "Disabled",
+          "maxReturn": 2,
+          "endpoints": []
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386",
         "name": "azsmnet6386",
         "type": "Microsoft.Network/trafficManagerProfiles",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386",
         "location": "global",
         "properties": {
-          "dnsConfig": {
-            "fqdn": "azsmnet6386.tmpreview.watmtest.azure-test.net",
-            "relativeName": "azsmnet6386",
-            "ttl": 35
-          },
-          "endpoints": [],
-          "maxReturn": 2,
-          "monitorConfig": {
-            "path": "/testpath.aspx",
-            "intervalInSeconds": 30,
-            "port": 80,
-            "profileMonitorStatus": "Inactive",
-            "timeoutInSeconds": 10,
-            "toleratedNumberOfFailures": 3,
-            "protocol": "HTTP"
-          },
           "profileStatus": "Enabled",
           "trafficRoutingMethod": "MultiValue",
-          "trafficViewEnrollmentStatus": "Disabled"
+          "dnsConfig": {
+            "relativeName": "azsmnet6386",
+            "fqdn": "azsmnet6386.tmpreview.watmtest.azure-test.net",
+            "ttl": 35
+          },
+          "monitorConfig": {
+            "profileMonitorStatus": "Inactive",
+            "protocol": "HTTP",
+            "port": 80,
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 30,
+            "toleratedNumberOfFailures": 3,
+            "timeoutInSeconds": 10
+          },
+          "trafficViewEnrollmentStatus": "Disabled",
+          "maxReturn": 2,
+          "endpoints": []
         }
       }
     }
-  },
-  "operationId": "Profiles_CreateOrUpdate",
-  "title": "Profile-PUT-MultiValue"
+  }
 }

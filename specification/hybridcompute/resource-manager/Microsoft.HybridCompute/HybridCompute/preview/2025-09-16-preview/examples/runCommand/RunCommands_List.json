@@ -1,29 +1,22 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
-    "machineName": "myMachine",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "machineName": "myMachine",
+    "api-version": "2025-09-16-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "myRunCommand_1",
-            "type": "Microsoft.HybridCompute/machines/runcommands",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand_1",
+            "name": "myRunCommand_1",
             "location": "eastus2",
+            "type": "Microsoft.HybridCompute/machines/runcommands",
             "properties": {
-              "asyncExecution": false,
-              "instanceView": {
-                "endTime": "2023-06-15T20:48:41.4641785+00:00",
-                "error": "",
-                "executionMessage": "",
-                "executionState": "Succeeded",
-                "exitCode": 0,
-                "output": "Hello World",
-                "startTime": "2023-06-15T20:48:41.4641785+00:00"
+              "source": {
+                "script": "Write-Host Hello World!"
               },
               "parameters": [
                 {
@@ -36,44 +29,49 @@
                 }
               ],
               "protectedParameters": [],
-              "provisioningState": "Succeeded",
+              "asyncExecution": false,
               "runAsUser": "user1",
-              "source": {
-                "script": "Write-Host Hello World!"
-              },
-              "timeoutInSeconds": 3600
+              "timeoutInSeconds": 3600,
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "executionState": "Succeeded",
+                "executionMessage": "",
+                "exitCode": 0,
+                "output": "Hello World",
+                "error": "",
+                "startTime": "2023-06-15T20:48:41.4641785+00:00",
+                "endTime": "2023-06-15T20:48:41.4641785+00:00"
+              }
             }
           },
           {
-            "name": "myRunCommand_2",
-            "type": "Microsoft.HybridCompute/machines/runcommands",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand_2",
+            "name": "myRunCommand_2",
             "location": "eastus2",
+            "type": "Microsoft.HybridCompute/machines/runcommands",
             "properties": {
-              "asyncExecution": false,
-              "instanceView": {
-                "endTime": "2023-06-15T20:48:41.4641785+00:00",
-                "error": "",
-                "executionMessage": "",
-                "executionState": "Succeeded",
-                "exitCode": 0,
-                "output": "<some output>",
-                "startTime": "2023-06-15T20:48:41.4641785+00:00"
-              },
-              "parameters": [],
-              "protectedParameters": [],
-              "provisioningState": "Succeeded",
-              "runAsUser": "userA",
               "source": {
                 "script": "Get-Process | Where-Object { $_.CPU -gt 10000 }"
               },
-              "timeoutInSeconds": 100
+              "parameters": [],
+              "protectedParameters": [],
+              "asyncExecution": false,
+              "runAsUser": "userA",
+              "timeoutInSeconds": 100,
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "executionState": "Succeeded",
+                "executionMessage": "",
+                "exitCode": 0,
+                "output": "<some output>",
+                "error": "",
+                "startTime": "2023-06-15T20:48:41.4641785+00:00",
+                "endTime": "2023-06-15T20:48:41.4641785+00:00"
+              }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "MachineRunCommands_List",
-  "title": "GET all Machine Run Commands"
+  }
 }

@@ -58,8 +58,7 @@ interface StaticSiteLinkedBackendARMResourceOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface StaticSiteLinkedBackendARMResources {
   /**
    * Returns the details of a linked backend linked to a static site by name
@@ -157,8 +156,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Returns the details of a linked backend linked to a static site build by name

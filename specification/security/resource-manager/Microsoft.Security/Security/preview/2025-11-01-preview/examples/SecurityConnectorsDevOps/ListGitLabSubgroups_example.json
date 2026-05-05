@@ -1,31 +1,29 @@
 {
   "parameters": {
-    "api-version": "2025-11-01-preview",
-    "groupFQName": "myGitLabGroup",
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
     "resourceGroupName": "myRg",
     "securityConnectorName": "mySecurityConnectorName",
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
+    "groupFQName": "myGitLabGroup",
+    "api-version": "2025-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
         "value": [
           {
-            "name": "myGitLabGroup$mySubGroup",
-            "type": "Microsoft.Security/securityConnectors/devops/gitLabGroups",
-            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/gitLabGroups/myGitLabGroup$mySubGroup",
             "properties": {
               "fullyQualifiedName": "myGitLabGroup$mySubGroup",
+              "url": "https://gitlab.example.com/myGitLabGroup/mySubGroup",
               "onboardingState": "Onboarded",
-              "provisioningState": "Succeeded",
-              "url": "https://gitlab.example.com/myGitLabGroup/mySubGroup"
-            }
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/gitLabGroups/myGitLabGroup$mySubGroup",
+            "name": "myGitLabGroup$mySubGroup",
+            "type": "Microsoft.Security/securityConnectors/devops/gitLabGroups"
           }
         ]
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "GitLabSubgroups_List",
-  "title": "List_GitLabSubgroups"
+  }
 }

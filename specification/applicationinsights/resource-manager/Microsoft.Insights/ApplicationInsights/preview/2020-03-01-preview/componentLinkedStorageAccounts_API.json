@@ -2,22 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsComponentLinkedStorageAccountsClient",
-    "version": "2020-03-01-preview",
     "description": "Azure Application Insights client for setting linked storage account.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2020-03-01-preview"
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "host": "management.azure.com",
-  "produces": [
+  "consumes": [
     "application/json"
   ],
-  "consumes": [
+  "produces": [
     "application/json"
   ],
   "security": [
@@ -30,70 +25,47 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "tags": [],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/linkedStorageAccounts/{storageType}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/linkedStorageAccounts/{storageType}": {
       "get": {
-        "operationId": "ComponentLinkedStorageAccounts_Get",
         "description": "Returns the current linked storage settings for an Application Insights component.",
+        "operationId": "ComponentLinkedStorageAccounts_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the Application Insights component resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "storageType",
-            "in": "path",
-            "description": "The type of the Application Insights component data source for the linked storage account.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ServiceProfiler"
-            ],
-            "x-ms-enum": {
-              "name": "StorageType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ServiceProfiler",
-                  "value": "ServiceProfiler",
-                  "description": "ServiceProfiler"
-                }
-              ]
-            }
+            "$ref": "#/parameters/StorageTypeParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "200": {
+            "description": "An Application Insights component linked storage accounts.",
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
             }
           }
         },
@@ -104,50 +76,28 @@
         }
       },
       "put": {
-        "operationId": "ComponentLinkedStorageAccounts_CreateAndUpdate",
         "description": "Replace current linked storage account for an Application Insights component.",
+        "operationId": "ComponentLinkedStorageAccounts_CreateAndUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the Application Insights component resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "storageType",
-            "in": "path",
-            "description": "The type of the Application Insights component data source for the linked storage account.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ServiceProfiler"
-            ],
-            "x-ms-enum": {
-              "name": "StorageType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ServiceProfiler",
-                  "value": "ServiceProfiler",
-                  "description": "ServiceProfiler"
-                }
-              ]
-            }
+            "$ref": "#/parameters/StorageTypeParameter"
           },
           {
             "name": "LinkedStorageAccountsProperties",
-            "in": "body",
             "description": "Properties that need to be specified to update linked storage accounts for an Application Insights component.",
+            "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ComponentLinkedStorageAccounts"
@@ -155,16 +105,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource 'ComponentLinkedStorageAccounts' update operation succeeded",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "200": {
+            "description": "Successful request when updating linked storage accounts for an Application Insights component. The updated linked storage account is returned.",
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
             }
           }
         },
@@ -175,50 +125,28 @@
         }
       },
       "patch": {
-        "operationId": "ComponentLinkedStorageAccounts_Update",
         "description": "Update linked storage accounts for an Application Insights component.",
+        "operationId": "ComponentLinkedStorageAccounts_Update",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the Application Insights component resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "storageType",
-            "in": "path",
-            "description": "The type of the Application Insights component data source for the linked storage account.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ServiceProfiler"
-            ],
-            "x-ms-enum": {
-              "name": "StorageType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ServiceProfiler",
-                  "value": "ServiceProfiler",
-                  "description": "ServiceProfiler"
-                }
-              ]
-            }
+            "$ref": "#/parameters/StorageTypeParameter"
           },
           {
             "name": "LinkedStorageAccountsProperties",
-            "in": "body",
             "description": "Properties that need to be specified to update a linked storage accounts for an Application Insights component.",
+            "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ComponentLinkedStorageAccountsPatch"
@@ -226,16 +154,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "200": {
+            "description": "Successful request when updating linked storage accounts for an Application Insights component. The updated linked storage account is returned.",
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
+              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
             }
           }
         },
@@ -246,59 +174,37 @@
         }
       },
       "delete": {
-        "operationId": "ComponentLinkedStorageAccounts_Delete",
         "description": "Delete linked storage accounts for an Application Insights component.",
+        "operationId": "ComponentLinkedStorageAccounts_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the Application Insights component resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "storageType",
-            "in": "path",
-            "description": "The type of the Application Insights component data source for the linked storage account.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ServiceProfiler"
-            ],
-            "x-ms-enum": {
-              "name": "StorageType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ServiceProfiler",
-                  "value": "ServiceProfiler",
-                  "description": "ServiceProfiler"
-                }
-              ]
-            }
+            "$ref": "#/parameters/StorageTypeParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
+            }
+          },
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "Successful request when deleting linked storage accounts for an Application Insights component."
           },
           "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage"
-            }
+            "description": "Successful request when deleting linked storage accounts for an Application Insights component."
           }
         },
         "x-ms-examples": {
@@ -310,50 +216,46 @@
     }
   },
   "definitions": {
-    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorage": {
+    "ErrorResponseLinkedStorage": {
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError",
-          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message."
-        }
-      }
-    },
-    "ApplicationInsightsCommonTypes.ErrorResponseLinkedStorageError": {
-      "type": "object",
-      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message indicating why the operation failed.",
-          "readOnly": true
+          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "description": "Error code.",
+              "type": "string"
+            },
+            "message": {
+              "readOnly": true,
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       }
     },
     "ComponentLinkedStorageAccounts": {
-      "type": "object",
       "description": "An Application Insights component linked storage accounts",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
           "description": "The properties of the linked storage accounts.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ComponentLinkedStorageAccountsPatch": {
-      "type": "object",
       "description": "An Application Insights component linked storage accounts patch",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
@@ -373,5 +275,29 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "StorageTypeParameter": {
+      "name": "storageType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "ServiceProfiler"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true
+      },
+      "description": "The type of the Application Insights component data source for the linked storage account.",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

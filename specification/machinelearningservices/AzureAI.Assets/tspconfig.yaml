@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/ml"
+    default: "sdk/ai"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,11 +10,12 @@ options:
     emit-lro-options: "none"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-assets.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-ml"
-    namespace: "azure.ai.ml._restclient.azure_ai_assets_v2024_04_01.azureaiassetsv20240401"
+    package-mode: "dataplane"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-resources-autogen"
+    namespace: "azure.ai.resources.autogen"
     flavor: azure
-    generate-test: false
-    generate-sample: false
+    generate-test: true
+    generate-sample: true
   "@azure-tools/typespec-ts":
     generate-metadata: true
     is-modular-library: false

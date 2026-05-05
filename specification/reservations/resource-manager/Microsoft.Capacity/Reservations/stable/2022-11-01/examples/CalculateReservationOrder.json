@@ -2,22 +2,22 @@
   "parameters": {
     "api-version": "2022-11-01",
     "body": {
-      "location": "westus",
-      "properties": {
-        "appliedScopeType": "Shared",
-        "appliedScopes": null,
-        "billingPlan": "Monthly",
-        "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
-        "displayName": "TestReservationOrder",
-        "quantity": 1,
-        "reservedResourceProperties": {
-          "instanceFlexibility": "On"
-        },
-        "reservedResourceType": "VirtualMachines",
-        "term": "P1Y"
-      },
       "sku": {
         "name": "standard_D1"
+      },
+      "location": "westus",
+      "properties": {
+        "reservedResourceType": "VirtualMachines",
+        "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+        "term": "P1Y",
+        "billingPlan": "Monthly",
+        "quantity": 1,
+        "displayName": "TestReservationOrder",
+        "appliedScopes": null,
+        "appliedScopeType": "Shared",
+        "reservedResourceProperties": {
+          "instanceFlexibility": "On"
+        }
       }
     }
   },
@@ -26,47 +26,45 @@
       "body": {
         "properties": {
           "billingCurrencyTotal": {
-            "amount": 46,
-            "currencyCode": "USD"
+            "currencyCode": "USD",
+            "amount": 46.0
+          },
+          "reservationOrderId": "6d9cec54-7de8-abcd-9de7-80f5d634f2d2",
+          "skuTitle": "Reserved VM Instance, Standard_D1, US West, 1 Year",
+          "skuDescription": "standard_D1",
+          "pricingCurrencyTotal": {
+            "currencyCode": "USD",
+            "amount": 46.0
           },
           "paymentSchedule": [
             {
-              "billingCurrencyTotal": {
-                "amount": 40,
-                "currencyCode": "EUR"
-              },
               "dueDate": "2019-05-14",
               "pricingCurrencyTotal": {
-                "amount": 46,
-                "currencyCode": "USD"
+                "currencyCode": "USD",
+                "amount": 46
+              },
+              "billingCurrencyTotal": {
+                "currencyCode": "EUR",
+                "amount": 40
               }
             },
             {
               "dueDate": "2019-06-14",
               "pricingCurrencyTotal": {
-                "amount": 46,
-                "currencyCode": "USD"
+                "currencyCode": "USD",
+                "amount": 46
               }
             },
             {
               "dueDate": "2019-07-14",
               "pricingCurrencyTotal": {
-                "amount": 46,
-                "currencyCode": "USD"
+                "currencyCode": "USD",
+                "amount": 46
               }
             }
-          ],
-          "pricingCurrencyTotal": {
-            "amount": 46,
-            "currencyCode": "USD"
-          },
-          "reservationOrderId": "6d9cec54-7de8-abcd-9de7-80f5d634f2d2",
-          "skuDescription": "standard_D1",
-          "skuTitle": "Reserved VM Instance, Standard_D1, US West, 1 Year"
+          ]
         }
       }
     }
-  },
-  "operationId": "ReservationOrder_Calculate",
-  "title": "CalculatePrice"
+  }
 }

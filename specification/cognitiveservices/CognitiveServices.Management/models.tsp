@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -17,15 +15,15 @@ namespace Microsoft.CognitiveServices;
  */
 union SkuTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Free pricing tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Free: "Free",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic pricing tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard pricing tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Premium pricing tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Premium: "Premium",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enterprise pricing tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enterprise: "Enterprise",
 }
 
@@ -34,21 +32,21 @@ union SkuTier {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Request has been accepted for processing"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: account is being moved between regions"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning has failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning was canceled by the user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: DNS records are being resolved during account creation"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ResolvingDNS: "ResolvingDNS",
 }
 
@@ -57,9 +55,9 @@ union ProvisioningState {
  */
 union NetworkRuleAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "All networks are allowed access"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Only selected networks are allowed access"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deny: "Deny",
 }
 
@@ -68,9 +66,9 @@ union NetworkRuleAction {
  */
 union ByPassSelection {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No bypass - all traffic subject to network rules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow trusted Azure services to bypass network rules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureServices: "AzureServices",
 }
 
@@ -79,9 +77,9 @@ union ByPassSelection {
  */
 union KeySource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption key managed by Microsoft Cognitive Services"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `Microsoft.CognitiveServices`: "Microsoft.CognitiveServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption key managed by customer's Azure Key Vault"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `Microsoft.KeyVault`: "Microsoft.KeyVault",
 }
 
@@ -90,13 +88,13 @@ union KeySource {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by a user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by an application"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by a managed identity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource was created by a key"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -105,9 +103,9 @@ union CreatedByType {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public endpoint access is enabled for the account"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Public endpoint access is disabled for the account"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -116,11 +114,11 @@ union PublicNetworkAccess {
  */
 union RoutingMethods {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Route traffic based on endpoint priority"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Priority: "Priority",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Route traffic based on assigned weights"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Weighted: "Weighted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Route traffic to the nearest endpoint by latency"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Performance: "Performance",
 }
 
@@ -129,9 +127,9 @@ union RoutingMethods {
  */
 union AbusePenaltyAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Throttle the request rate as a penalty action"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Throttle: "Throttle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Block requests entirely as a penalty action"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Block: "Block",
 }
 
@@ -140,9 +138,9 @@ union AbusePenaltyAction {
  */
 union ScenarioType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No network injection scenario"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   none: "none",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agent-based network injection scenario"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agent: "agent",
 }
 
@@ -151,9 +149,9 @@ union ScenarioType {
  */
 union ResourceSkuRestrictionsReasonCode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Restricted due to quota limits"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   QuotaId: "QuotaId",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SKU not available for this subscription"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotAvailableForSubscription: "NotAvailableForSubscription",
 }
 
@@ -162,19 +160,19 @@ union ResourceSkuRestrictionsReasonCode {
  */
 union UnitType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Count unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Count: "Count",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bytes unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Bytes: "Bytes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Seconds unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Seconds: "Seconds",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Percentage unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Percent: "Percent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Count per second unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CountPerSecond: "CountPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bytes per second unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BytesPerSecond: "BytesPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Milliseconds unit of measurement"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Milliseconds: "Milliseconds",
 }
 
@@ -183,31 +181,14 @@ union UnitType {
  */
 union QuotaUsageStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Usage is within the included quota"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Included: "Included",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Usage is blocked"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Blocked: "Blocked",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Usage has exceeded the quota limit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InOverage: "InOverage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Usage status is unknown"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-}
-
-/**
- * The quota scope that determines the level at which the quota is applied.
- */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
-union QuotaScopeType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
-  Regional: "Regional",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Global quota scope"
-  Global: "Global",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "DataZone quota scope"
-  DataZone: "DataZone",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Classic quota scope"
-  Classic: "Classic",
 }
 
 /**
@@ -215,9 +196,9 @@ union QuotaScopeType {
  */
 union DeprecationStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deprecation is planned with a confirmed date"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Planned: "Planned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deprecation is tentative and may change"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tentative: "Tentative",
 }
 
@@ -263,11 +244,11 @@ union ModelLifecycleStatus {
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation initiated by a user"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation initiated by the system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Operation initiated by user or system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `user,system`: "user,system",
 }
 
@@ -276,7 +257,7 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Action type for internal-only APIs"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Internal: "Internal",
 }
 
@@ -285,13 +266,13 @@ union ActionType {
  */
 union HostingModel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Web-hosted deployment model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Web: "Web",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connected container deployment model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ConnectedContainer: "ConnectedContainer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Disconnected container deployment model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DisconnectedContainer: "DisconnectedContainer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioned web deployment model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ProvisionedWeb: "ProvisionedWeb",
 }
 
@@ -300,21 +281,21 @@ union HostingModel {
  */
 union DeploymentProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment request has been accepted for processing"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: deployment is being moved"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment provisioning has failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: deployment has been disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deployment provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
 }
 
@@ -323,9 +304,9 @@ union DeploymentProvisioningState {
  */
 union DeploymentScaleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard auto-scaling deployment type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Manually scaled deployment type"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Manual: "Manual",
 }
 
@@ -334,11 +315,11 @@ union DeploymentScaleType {
  */
 union DeploymentModelVersionUpgradeOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-upgrade when a new default model version is available. If no new version exists and current expires, model becomes unusable."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OnceNewDefaultVersionAvailable: "OnceNewDefaultVersionAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-upgrade after the current version expires. Data plane continues working during upgrade; failures trigger DRI notification."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OnceCurrentVersionExpired: "OnceCurrentVersionExpired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No automatic upgrade. If version expires, deployment is disabled and data plane stops immediately."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NoAutoUpgrade: "NoAutoUpgrade",
 }
 
@@ -377,61 +358,23 @@ union DeploymentState {
 }
 
 /**
- * The model-router routing mode that determines how requests are distributed across models.
- */
-union RoutingMode {
-  string,
-
-  /**
-   * Route requests to minimize cost while meeting performance requirements.
-   */
-  Cost: "cost",
-
-  /**
-   * Balance cost and quality when routing requests across models.
-   */
-  Balanced: "balanced",
-
-  /**
-   * Route requests to maximize quality regardless of cost.
-   */
-  Quality: "quality",
-}
-
-/**
- * Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.
- */
-model DeploymentRouting {
-  /**
-   * The model-router routing mode that determines how requests are distributed across models.
-   */
-  mode?: RoutingMode = RoutingMode.Balanced;
-
-  /**
-   * Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
-   */
-  @identifiers(#["name", "version"])
-  models?: DeploymentModel[];
-}
-
-/**
  * Gets the status of the resource at the time the operation was called.
  */
 union CommitmentPlanProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Commitment plan request has been accepted for processing"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Commitment plan is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Commitment plan is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: commitment plan is being moved"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Commitment plan provisioning has failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Commitment plan provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Commitment plan provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
 }
 
@@ -440,19 +383,19 @@ union CommitmentPlanProvisioningState {
  */
 union EncryptionScopeProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope request has been accepted for processing"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: encryption scope is being moved"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope provisioning has failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope provisioning completed successfully"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
 }
 
@@ -461,9 +404,9 @@ union EncryptionScopeProvisioningState {
  */
 union EncryptionScopeState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Encryption scope is enabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
 }
 
@@ -472,9 +415,9 @@ union EncryptionScopeState {
  */
 union RaiPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "User-managed RAI policy that can be customized"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserManaged: "UserManaged",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "System-managed RAI policy maintained by the service"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemManaged: "SystemManaged",
 }
 
@@ -483,13 +426,13 @@ union RaiPolicyType {
  */
 union RaiPolicyMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Default synchronous annotation mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deferred asynchronous annotation mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deferred: "Deferred",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Blocking mode that prevents content from being returned"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Blocking: "Blocking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Asynchronous filtering mode"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Asynchronous_filter: "Asynchronous_filter",
 }
 
@@ -498,11 +441,11 @@ union RaiPolicyMode {
  */
 union ContentLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Low sensitivity content filtering level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Low: "Low",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Medium sensitivity content filtering level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Medium: "Medium",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "High sensitivity content filtering level"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   High: "High",
 }
 
@@ -511,17 +454,17 @@ union ContentLevel {
  */
 union RaiPolicyContentSource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content from the user prompt input"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Prompt: "Prompt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content from the model completion output"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Completion: "Completion",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated before a tool call is made"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PreToolCall: "PreToolCall",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a tool call returns"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PostToolCall: "PostToolCall",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated before a run execution"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PreRun: "PreRun",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a run execution"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PostRun: "PostRun",
 }
 
@@ -530,15 +473,15 @@ union RaiPolicyContentSource {
  */
 union RaiActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No action taken on the content"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Block the content from being processed or returned"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BLOCKING: "BLOCKING",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Annotate the content with safety classifications"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ANNOTATING: "ANNOTATING",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Human-in-the-loop review required for the content"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HITL: "HITL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Retry content generation with modified parameters"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RETRY: "RETRY",
 }
 
@@ -547,9 +490,9 @@ union RaiActionType {
  */
 union NspAccessRuleDirection {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Inbound network access rule direction"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inbound: "Inbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Outbound network access rule direction"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Outbound: "Outbound",
 }
 
@@ -558,9 +501,9 @@ union NspAccessRuleDirection {
  */
 union DefenderForAISettingState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Defender for AI protection is disabled on this resource"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Defender for AI protection is enabled on this resource"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
 }
 
@@ -569,43 +512,43 @@ union DefenderForAISettingState {
  */
 union ConnectionAuthType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal Access Token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PAT: "PAT",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Managed Identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Username and password (basic) authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UsernamePassword: "UsernamePassword",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No authentication required"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shared Access Signature authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SAS: "SAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Storage account key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal (app registration) authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ServicePrincipal: "ServicePrincipal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Access key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AccessKey: "AccessKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API key authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ApiKey: "ApiKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom key-value pair authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CustomKeys: "CustomKeys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OAuth 2.0 authentication flow"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OAuth2: "OAuth2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Active Directory authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AAD: "AAD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Delegated Shared Access Signature authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DelegatedSAS: "DelegatedSAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Project-scoped managed identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ProjectManagedIdentity: "ProjectManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Account-scoped managed identity authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AccountManagedIdentity: "AccountManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "User Entra (Azure AD) token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserEntraToken: "UserEntraToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agent user impersonation authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AgentUserImpersonation: "AgentUserImpersonation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agentic identity token authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AgenticIdentityToken: "AgenticIdentityToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agentic user authentication"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AgenticUser: "AgenticUser",
 }
 
@@ -614,245 +557,245 @@ union ConnectionAuthType {
  */
 union ConnectionCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Python package feed connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PythonFeed: "PythonFeed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Container registry connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ContainerRegistry: "ContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Git repository connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Git: "Git",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon S3 storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   S3: "S3",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Snowflake data warehouse connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Snowflake: "Snowflake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Key Vault connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureKeyVault: "AzureKeyVault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure SQL Database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureSqlDb: "AzureSqlDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Synapse Analytics connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureSynapseAnalytics: "AzureSynapseAnalytics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Database for MySQL connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureMySqlDb: "AzureMySqlDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Database for PostgreSQL connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzurePostgresDb: "AzurePostgresDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Lake Storage Gen2 connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ADLSGen2: "ADLSGen2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Container App Environment connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureContainerAppEnvironment: "AzureContainerAppEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Redis cache connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Redis: "Redis",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "API key-based service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ApiKey: "ApiKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure OpenAI service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureOpenAI: "AzureOpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure AI Services connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AIServices: "AIServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cognitive Search (AI Search) connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CognitiveSearch: "CognitiveSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cognitive Service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CognitiveService: "CognitiveService",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection using custom key-value pairs"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CustomKeys: "CustomKeys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Blob Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureBlob: "AzureBlob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Storage Account connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureStorageAccount: "AzureStorageAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft OneLake connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureOneLake: "AzureOneLake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cosmos DB (SQL API) connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDb: "CosmosDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Cosmos DB (MongoDB API) connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDbMongoDbApi: "CosmosDbMongoDbApi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Data Explorer (Kusto) connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureDataExplorer: "AzureDataExplorer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Database for MariaDB connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureMariaDb: "AzureMariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Databricks Delta Lake connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureDatabricksDeltaLake: "AzureDatabricksDeltaLake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure SQL Managed Instance connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureSqlMi: "AzureSqlMi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure Table Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureTableStorage: "AzureTableStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon RDS for Oracle connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AmazonRdsForOracle: "AmazonRdsForOracle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon RDS for SQL Server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AmazonRdsForSqlServer: "AmazonRdsForSqlServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Redshift connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AmazonRedshift: "AmazonRedshift",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IBM Db2 database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Db2: "Db2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Drill connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Drill: "Drill",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Google BigQuery connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GoogleBigQuery: "GoogleBigQuery",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Greenplum database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Greenplum: "Greenplum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache HBase connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hbase: "Hbase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Hive connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hive: "Hive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Impala connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Impala: "Impala",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IBM Informix database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Informix: "Informix",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MariaDB database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MariaDb: "MariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Access database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MicrosoftAccess: "MicrosoftAccess",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MySQL database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MySql: "MySql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "IBM Netezza connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Netezza: "Netezza",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Oracle: "Oracle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Phoenix connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Phoenix: "Phoenix",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "PostgreSQL database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PostgreSql: "PostgreSql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Presto distributed SQL connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Presto: "Presto",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Open Hub connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapOpenHub: "SapOpenHub",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Business Warehouse connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapBw: "SapBw",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP HANA database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapHana: "SapHana",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Table connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapTable: "SapTable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Spark connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Spark: "Spark",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SQL Server database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlServer: "SqlServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Sybase database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sybase: "Sybase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Teradata database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Teradata: "Teradata",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Vertica database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Vertica: "Vertica",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Pinecone vector database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pinecone: "Pinecone",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Databricks workspace connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Databricks: "Databricks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Apache Cassandra database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cassandra: "Cassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Couchbase database connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Couchbase: "Couchbase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MongoDB v2 connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoDbV2: "MongoDbV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "MongoDB Atlas connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoDbAtlas: "MongoDbAtlas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon S3-compatible storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AmazonS3Compatible: "AmazonS3Compatible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "File server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FileServer: "FileServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FTP server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FtpServer: "FtpServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Google Cloud Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GoogleCloudStorage: "GoogleCloudStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Hadoop Distributed File System connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hdfs: "Hdfs",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Cloud Storage connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OracleCloudStorage: "OracleCloudStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SFTP server connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sftp: "Sftp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic HTTP endpoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GenericHttp: "GenericHttp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OData REST API connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ODataRest: "ODataRest",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ODBC data source connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Odbc: "Odbc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic REST API connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GenericRest: "GenericRest",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote tool connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RemoteTool: "RemoteTool",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Marketplace Web Service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AmazonMws: "AmazonMws",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Concur service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Concur: "Concur",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Dynamics connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Dynamics: "Dynamics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Dynamics AX connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DynamicsAx: "DynamicsAx",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Dynamics CRM connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DynamicsCrm: "DynamicsCrm",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Google AdWords connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GoogleAdWords: "GoogleAdWords",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "HubSpot connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hubspot: "Hubspot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Jira connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Jira: "Jira",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Magento connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Magento: "Magento",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Marketo connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Marketo: "Marketo",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Office 365 connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Office365: "Office365",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Eloqua connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Eloqua: "Eloqua",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Responsys connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Responsys: "Responsys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Oracle Service Cloud connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OracleServiceCloud: "OracleServiceCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "PayPal connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PayPal: "PayPal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "QuickBooks connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   QuickBooks: "QuickBooks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Salesforce connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Salesforce: "Salesforce",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Salesforce Service Cloud connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SalesforceServiceCloud: "SalesforceServiceCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Salesforce Marketing Cloud connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SalesforceMarketingCloud: "SalesforceMarketingCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP Cloud for Customer connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapCloudForCustomer: "SapCloudForCustomer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAP ECC connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapEcc: "SapEcc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "ServiceNow connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ServiceNow: "ServiceNow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SharePoint Online List connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SharePointOnlineList: "SharePointOnlineList",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Shopify connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Shopify: "Shopify",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Square connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Square: "Square",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Web Table connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   WebTable: "WebTable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Xero connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Xero: "Xero",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Zoho connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Zoho: "Zoho",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic container registry connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GenericContainerRegistry: "GenericContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Elasticsearch connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Elasticsearch: "Elasticsearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Application Insights connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AppInsights: "AppInsights",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure App Configuration connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AppConfig: "AppConfig",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "OpenAI service connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OpenAI: "OpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Search engine results page API connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Serp: "Serp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bing LLM Search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BingLLMSearch: "BingLLMSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Serverless endpoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Serverless: "Serverless",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed online endpoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedOnlineEndpoint: "ManagedOnlineEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure API Management connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ApiManagement: "ApiManagement",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Model gateway connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ModelGateway: "ModelGateway",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Grounding with Bing Search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GroundingWithBingSearch: "GroundingWithBingSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Grounding with custom search connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GroundingWithCustomSearch: "GroundingWithCustomSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SharePoint connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sharepoint: "Sharepoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Microsoft Fabric connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MicrosoftFabric: "MicrosoftFabric",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Power Platform environment connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PowerPlatformEnvironment: "PowerPlatformEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote agent-to-agent protocol connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RemoteA2A: "RemoteA2A",
 }
 
@@ -861,48 +804,48 @@ union ConnectionCategory {
  */
 union ConnectionGroup {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure platform service connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Azure: "Azure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure AI service connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureAI: "AzureAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Database connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Database: "Database",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "NoSQL database connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NoSQL: "NoSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "File storage connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   File: "File",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Generic protocol connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GenericProtocol: "GenericProtocol",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Third-party services and application connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ServicesAndApps: "ServicesAndApps",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint requirement state from AML RP WorkspaceConnectionDtoV2"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedPERequirement {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint is required for this connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Required: "Required",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint is not required for this connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotRequired: "NotRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint requirement is not applicable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotApplicable: "NotApplicable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint status from AML RP WorkspaceConnectionDtoV2"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedPEStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint is inactive"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint is active"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed private endpoint status is not applicable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotApplicable: "NotApplicable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Kind of capability host from AML RP Contracts"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CapabilityHostKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Agent-based capability host"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Agents: "Agents",
 }
 
@@ -911,17 +854,17 @@ union CapabilityHostKind {
  */
 union CapabilityHostProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host provisioning succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host provisioning was canceled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host is being created"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Capability host is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
 }
 
@@ -930,9 +873,9 @@ union CapabilityHostProvisioningState {
  */
 union TierUpgradePolicy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Automatically upgrade to the next tier once available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OnceUpgradeIsAvailable: "OnceUpgradeIsAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Do not automatically upgrade to the next tier"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NoAutoUpgrade: "NoAutoUpgrade",
 }
 
@@ -941,9 +884,9 @@ union TierUpgradePolicy {
  */
 union UpgradeAvailabilityStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "A tier upgrade is available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Available: "Available",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No tier upgrade is currently available"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotAvailable: "NotAvailable",
 }
 
@@ -952,13 +895,13 @@ union UpgradeAvailabilityStatus {
  */
 union RuleCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is required and cannot be removed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Required: "Required",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is recommended by the system"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Recommended: "Recommended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is user-defined and customizable"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserDefined: "UserDefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rule is a dependency of another rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Dependency: "Dependency",
 }
 
@@ -967,15 +910,15 @@ union RuleCategory {
  */
 union RuleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Outbound rule is inactive"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Outbound rule is active"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Outbound rule is being provisioned"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Outbound rule is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Outbound rule provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -984,23 +927,12 @@ union RuleStatus {
  */
 union RuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Fully qualified domain name outbound rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FQDN: "FQDN",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Private endpoint outbound rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PrivateEndpoint: "PrivateEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service tag outbound rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ServiceTag: "ServiceTag",
-}
-
-/**
- * The action enum for a managed network outbound rule.
- */
-union RuleAction {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow outbound traffic"
-  Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deny outbound traffic"
-  Deny: "Deny",
 }
 
 /**
@@ -1008,11 +940,11 @@ union RuleAction {
  */
 union IsolationMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network isolation is disabled"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow internet outbound traffic from the managed network"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AllowInternetOutbound: "AllowInternetOutbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Only allow approved outbound traffic from the managed network"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AllowOnlyApprovedOutbound: "AllowOnlyApprovedOutbound",
 }
 
@@ -1021,9 +953,9 @@ union IsolationMode {
  */
 union ManagedNetworkStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network is inactive"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network is active"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
 }
 
@@ -1032,9 +964,9 @@ union ManagedNetworkStatus {
  */
 union FirewallSku {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard firewall SKU for FQDN rules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic firewall SKU for FQDN rules"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Basic: "Basic",
 }
 
@@ -1043,27 +975,27 @@ union FirewallSku {
  */
 union ManagedNetworkKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "V1 managed network with basic access controls"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "V2 managed network with granular access controls"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   V2: "V2",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Provisioning state of managed network from AML RP ManagedNetworkSettingsProperties"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'ManagedNetworkProvisioningState' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedNetworkProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network provisioning is deferred until first use"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deferred: "Deferred",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network is being updated"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network provisioning succeeded"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network provisioning failed"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network is being deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network has been deleted"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleted: "Deleted",
 }
 
@@ -1365,7 +1297,7 @@ union AgentDeploymentProvisioningState {
 /**
  * The identity type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "'ResourceIdentityType' uses extensible union instead of fixed enum for forward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   None,
   SystemAssigned,
@@ -1376,7 +1308,7 @@ enum ResourceIdentityType {
 /**
  * key name to generate (Key1|Key2)
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "'KeyName' uses extensible union instead of fixed enum for forward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyName {
   Key1,
   Key2,
@@ -1385,7 +1317,7 @@ enum KeyName {
 /**
  * The type of restrictions.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "'ResourceSkuRestrictionsType' uses extensible union instead of fixed enum for forward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceSkuRestrictionsType {
   Location,
   Zone,
@@ -1445,7 +1377,7 @@ model Identity {
   /**
    * The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<userAssignedIdentities> type used for 'Identity' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -1504,7 +1436,7 @@ model AccountProperties {
   /**
    * Resource migration token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'migrationToken' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migrationToken?: string;
 
   /**
@@ -1577,25 +1509,25 @@ model AccountProperties {
    */
   storedCompletionsDisabled?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The quota limit for AccountProperties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   quotaLimit?: QuotaLimit;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether to restrict outbound network access for this Cognitive Services account"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restrictOutboundNetworkAccess?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The allowed fqdn list for AccountProperties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowedFqdnList?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The disable local auth for AccountProperties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disableLocalAuth?: boolean;
 
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> type used for 'endpoints' in 'AccountProperties' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   endpoints?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The restore for AccountProperties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   restore?: boolean;
 
@@ -1634,16 +1566,9 @@ model AccountProperties {
    */
   raiMonitorConfig?: RaiMonitorConfig;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network injection settings for the account"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array of 'networkInjections' omits x-ms-identifiers, matching existing API surface"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkInjections?: NetworkInjection[];
-
-  /**
-   * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
-   */
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
-  foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
    * Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry.
@@ -1659,53 +1584,6 @@ model AccountProperties {
    * Specifies the projects, by project name, that are associated with this resource.
    */
   associatedProjects?: string[];
-}
-
-/**
- * Represents the mode for foundry auto-upgrade configuration.
- */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
-union FoundryAutoUpgradeMode {
-  string,
-
-  /**
-   * Auto-upgrade is enabled.
-   */
-  Enabled: "Enabled",
-
-  /**
-   * Auto-upgrade is disabled (opted out).
-   */
-  Disabled: "Disabled",
-}
-
-/**
- * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
- * Customers can opt out of auto-upgrade by setting mode to Disabled.
- */
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
-model FoundryAutoUpgrade {
-  /**
-   * Gets or sets the auto-upgrade mode.
-   */
-  mode?: FoundryAutoUpgradeMode;
-
-  /**
-   * Gets or sets a value indicating whether the auto-upgrade is planned by Microsoft.
-   */
-  plannedByMicrosoft?: boolean;
-
-  /**
-   * Gets or sets the status reason for the auto-upgrade configuration.
-   */
-  statusReason?: string;
-
-  /**
-   * Gets or sets the scheduled time for the auto-upgrade.
-   */
-  scheduledAt?: utcDateTime;
 }
 
 /**
@@ -1833,7 +1711,7 @@ model KeyVaultProperties {
    */
   keyVaultUri?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The identity client id for KeyVaultProperties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identityClientId?: string;
 }
 
@@ -1846,7 +1724,7 @@ model UserOwnedStorage {
    */
   resourceId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The identity client id for UserOwnedStorage"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identityClientId?: string;
 }
 
@@ -1882,7 +1760,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'PrivateEndpointConnectionProperties' includes custom states beyond ARM standard values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState;
 
@@ -1906,7 +1784,7 @@ model ApiProperties {
   /**
    * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'qnaAzureSearchEndpointKey' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   qnaAzureSearchEndpointKey?: string;
 
   /**
@@ -1972,46 +1850,46 @@ model CallRateLimit {
    */
   renewalPeriod?: float32;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The rules for CallRateLimit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["key"])
   rules?: ThrottlingRule[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Throttling rule configuration defining rate limits for API calls"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ThrottlingRule {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Key identifying this throttling rule"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "'key' is correctly marked as secret matching service-side security handling"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Renewal period for the throttle counter"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewalPeriod?: float32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Maximum count allowed in the throttle period"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   count?: float32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Minimum count threshold for the throttle rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minCount?: float32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether dynamic throttling is enabled for this rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dynamicThrottlingEnabled?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patterns to match requests against for this rule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["path", "method"])
   matchPatterns?: RequestMatchPattern[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "URL path and HTTP method pattern for throttling rule matching"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RequestMatchPattern {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "URL path pattern to match"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   path?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "HTTP method to match"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   method?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Quota limit definition for resource usage caps"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model QuotaLimit {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The count for QuotaLimit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   count?: float32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The renewal period for QuotaLimit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewalPeriod?: float32;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The rules for QuotaLimit"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["key"])
   rules?: ThrottlingRule[];
 }
@@ -2025,7 +1903,7 @@ model MultiRegionSettings {
    */
   routingMethod?: RoutingMethods;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The regions for MultiRegionSettings"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
   regions?: RegionSetting[];
 }
@@ -2082,6 +1960,7 @@ model AbusePenalty {
   /**
    * The datetime of expiration of the AbusePenalty.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiration?: utcDateTime;
 }
 
@@ -2215,7 +2094,7 @@ model ResourceSkuRestrictions {
   reasonCode?: ResourceSkuRestrictionsReasonCode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Information about SKU restriction locations and availability zones"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceSkuRestrictionInfo {
   /**
    * Locations where the SKU is restricted
@@ -2310,22 +2189,6 @@ model Usage {
    * Cognitive Services account quota usage status.
    */
   status?: QuotaUsageStatus;
-
-  /**
-   * The scope type of the quota usage.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
-  scopeType?: QuotaScopeType | null;
-
-  /**
-   * The scope identifier of the quota usage.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
-  scopeId?: string | null;
 }
 
 /**
@@ -2364,7 +2227,7 @@ model AccountModelListResult {
 /**
  * Cognitive Services account Model.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'AccountModel' extends 'DeploymentModel' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccountModel extends DeploymentModel {
   /**
    * Properties of Cognitive Services account deployment model.
@@ -2390,13 +2253,13 @@ model AccountModel extends DeploymentModel {
   /**
    * The capabilities.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'AccountModel' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capabilities?: Record<string>;
 
   /**
    * The capabilities for finetune models.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<finetuneCapabilities> type used for 'AccountModel' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   finetuneCapabilities?: Record<string>;
 
   /**
@@ -2488,6 +2351,7 @@ model ModelSku {
   /**
    * The datetime of deprecation of the model SKU.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deprecationDate?: utcDateTime;
 
   /**
@@ -2538,13 +2402,13 @@ model CapacityConfig {
   allowedValues?: int32[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Billing meter identifier and pricing information"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingMeterInfo {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The name for BillingMeterInfo"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The meter id for BillingMeterInfo"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   meterId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The unit for BillingMeterInfo"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unit?: string;
 }
 
@@ -2585,6 +2449,7 @@ model ReplacementConfig {
   /**
    * The date when automatic upgrade should start. This applies to deployments with the OnceNewDefaultVersionAvailable upgrade option.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   autoUpgradeStartDate?: utcDateTime;
 
   /**
@@ -2784,7 +2649,7 @@ model Model {
   /**
    * Cognitive Services account Model.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "'model' name conflict in 'Model' retained for SDK backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `model`?: AccountModel;
 
   /**
@@ -2803,8 +2668,8 @@ model Model {
   description?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'ModelCapacityListResultValueItem' uses base type inheritance matching service-side object hierarchy"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Capacity list result item for a deployment model"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ModelCapacityListResultValueItem
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -2827,7 +2692,7 @@ model ModelSkuCapacityProperties {
    */
   `model`?: DeploymentModel;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The sku name for ModelSkuCapacityProperties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skuName?: string;
 
   /**
@@ -2839,22 +2704,6 @@ model ModelSkuCapacityProperties {
    * The available capacity for deployment with a fine-tune version of this model and sku.
    */
   availableFinetuneCapacity?: float32;
-
-  /**
-   * The scope identifier for model SKU capacity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
-  scopeId?: string | null;
-
-  /**
-   * The scope type for model SKU capacity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
-  scopeType?: QuotaScopeType | null;
 }
 
 /**
@@ -2967,7 +2816,7 @@ model CalculateModelCapacityResult {
    */
   `model`?: DeploymentModel;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The sku name for CalculateModelCapacityResult"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skuName?: string;
 
   /**
@@ -2980,9 +2829,9 @@ model CalculateModelCapacityResult {
  * Model Estimated Capacity.
  */
 model CalculateModelCapacityResultEstimatedCapacity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The value for CalculateModelCapacityResultEstimatedCapacity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The deployable value for CalculateModelCapacityResultEstimatedCapacity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deployableValue?: int32;
 }
 
@@ -3010,7 +2859,7 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'PrivateLinkResource' extends 'Azure.ResourceManager.CommonTypes.Resource' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
@@ -3069,7 +2918,7 @@ model DeploymentProperties {
   /**
    * The capabilities.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'DeploymentProperties' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
@@ -3084,7 +2933,7 @@ model DeploymentProperties {
   @visibility(Lifecycle.Read)
   callRateLimit?: CallRateLimit;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Rate limit rules for the deployment"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @identifiers(#["key"])
   rateLimits?: ThrottlingRule[];
@@ -3123,19 +2972,14 @@ model DeploymentProperties {
   /**
    * The service tier for the deployment. Determines the pricing and performance level for request processing. Use 'Default' for standard pricing or 'Priority' for higher-priority processing with premium pricing. Note: Pause operations are only supported on Standard, DataZoneStandard, and GlobalStandard SKUs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'serviceTier' is nullable in 'DeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceTier?: ServiceTier | null;
 
   /**
    * The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'deploymentState' is nullable in 'DeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentState?: DeploymentState | null;
-
-  /**
-   * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
-   */
-  routing?: DeploymentRouting;
 }
 
 /**
@@ -3179,7 +3023,7 @@ model DeploymentCapacitySettings {
 /**
  * The object being used to update tags and sku of a resource, in general used for PATCH operations.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'PatchResourceTagsAndSku' extends 'PatchResourceTags' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchResourceTagsAndSku extends PatchResourceTags {
   /**
    * The resource model definition representing SKU
@@ -3194,7 +3038,7 @@ model PatchResourceTags {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'PatchResourceTags' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -3327,7 +3171,7 @@ model CommitmentPeriod {
 /**
  * Properties to EncryptionScope
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'EncryptionScopeProperties' extends 'Encryption' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EncryptionScopeProperties extends Encryption {
   /**
    * Gets the status of the resource at the time the operation was called.
@@ -3344,12 +3188,12 @@ model EncryptionScopeProperties extends Encryption {
 /**
  * Azure OpenAI Content Filters properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiPolicyProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiPolicyProperties {
   /**
    * Content Filters policy type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "'type' is intentionally duplicated on 'RaiPolicyProperties' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   type?: RaiPolicyType;
 
@@ -3378,7 +3222,6 @@ model RaiPolicyProperties {
   /**
    * The list of custom rai topics.
    */
-  @removed(Versions.v2025_10_01_preview)
   @identifiers(#[])
   customTopics?: CustomTopicConfig[];
 
@@ -3427,7 +3270,7 @@ model RaiPolicyContentFilter {
 /**
  * Gets or sets the source to which filter applies.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CustomBlocklistConfig' extends 'RaiBlocklistConfig' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomBlocklistConfig extends RaiBlocklistConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3453,8 +3296,7 @@ model RaiBlocklistConfig {
 /**
  * Gets or sets the source to which filter applies.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CustomTopicConfig' extends 'RaiTopicConfig' using inheritance to match service-side object hierarchy"
-@removed(Versions.v2025_10_01_preview)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomTopicConfig extends RaiTopicConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3465,7 +3307,6 @@ model CustomTopicConfig extends RaiTopicConfig {
 /**
  * Azure OpenAI RAI topic config.
  */
-@removed(Versions.v2025_10_01_preview)
 model RaiTopicConfig {
   /**
    * Name of RAI topic.
@@ -3481,7 +3322,7 @@ model RaiTopicConfig {
 /**
  * Gets or sets the source to which safety providers applies.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'SafetyProviderConfig' extends 'RaiSafetyProviderConfig' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SafetyProviderConfig extends RaiSafetyProviderConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3507,7 +3348,7 @@ model RaiSafetyProviderConfig {
 /**
  * RAI Custom Blocklist properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiBlocklistProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiBlocklistProperties {
   /**
    * Description of the block list.
@@ -3536,7 +3377,7 @@ model RaiBlockListItemsResult {
 /**
  * RAI Custom Blocklist Item properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiBlocklistItemProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiBlocklistItemProperties {
   /**
    * Pattern to match against.
@@ -3553,7 +3394,7 @@ model RaiBlocklistItemProperties {
  * The Cognitive Services RaiBlocklist Item request body.
  */
 model RaiBlocklistItemBulkRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The name for RaiBlocklistItemBulkRequest"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -3565,7 +3406,7 @@ model RaiBlocklistItemBulkRequest {
 /**
  * RAI Custom Topic properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiTopicProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiTopicProperties {
   /**
    * The unique identifier of the custom topic.
@@ -3600,11 +3441,13 @@ model RaiTopicProperties {
   /**
    * Creation time of the custom topic.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * Last modified time of the custom topic.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -3629,7 +3472,7 @@ model RaiExternalSafetyProviderResult {
 /**
  * RAI External SafetyProvider schema properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiExternalSafetyProviderSchemaProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiExternalSafetyProviderSchemaProperties {
   /**
    * The unique identifier of the safety provider.
@@ -3670,12 +3513,76 @@ model RaiExternalSafetyProviderSchemaProperties {
    * Creation time of the safety provider.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * Last modified time of the safety provider.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
+}
+
+/**
+ * Cognitive Services Rai External Safety provider.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RaiExternalSafetyProvider
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * Resource Etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Properties of Cognitive Services Rai External Safety provider.
+   */
+  properties?: RaiExternalSafetyProviderProperties;
+}
+
+/**
+ * RAI External SafetyProvider properties.
+ */
+model RaiExternalSafetyProviderProperties {
+  /**
+   * The unique identifier of the safety provider.
+   */
+  providerId?: string;
+
+  /**
+   * Name of the safety provider.
+   */
+  providerName?: string;
+
+  /**
+   * Safety provider mode sync/async.
+   */
+  mode?: string;
+
+  /**
+   * Webhook URL for the safety provider.
+   */
+  url?: url;
+
+  /**
+   * Creation time of the safety provider.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  /**
+   * Last modified time of the safety provider.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -3700,7 +3607,7 @@ model RaiTopicResult {
 /**
  * RAI Tool Label properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiToolLabelProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiToolLabelProperties {
   /**
    * The unique tool connection name, e.g., 'Web_Search'.
@@ -3715,7 +3622,7 @@ model RaiToolLabelProperties {
   /**
    * List of project-level tool label definitions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array of 'projectScopes' omits x-ms-identifiers, matching existing API surface"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   projectScopes?: RaiToolLabelPropertiesProjectScopesItem[];
 }
 
@@ -3726,11 +3633,11 @@ model RaiToolLabelPropertiesAccountScope {
   /**
    * Dictionary of label key-value pairs for the account scope.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<labelValues> type used for 'RaiToolLabelPropertiesAccountScope' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   labelValues?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Project scope configuration for a RAI tool label"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiToolLabelPropertiesProjectScopesItem {
   /**
    * Project name to which this scope applies.
@@ -3740,7 +3647,7 @@ model RaiToolLabelPropertiesProjectScopesItem {
   /**
    * Dictionary of label key-value pairs for the project scope.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<labelValues> type used for 'RaiToolLabelPropertiesProjectScopesItem' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   labelValues: Record<string>;
 }
 
@@ -3765,12 +3672,12 @@ model RaiToolLabelResult {
 /**
  * Azure OpenAI Content Filter Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiContentFilterProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiContentFilterProperties {
   /**
    * Name of Content Filter.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "'name' is intentionally duplicated on 'RaiContentFilterProperties' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -3787,7 +3694,7 @@ model RaiContentFilterProperties {
 /**
  * The commitment plan account association properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'CommitmentPlanAccountAssociationProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CommitmentPlanAccountAssociationProperties {
   /**
    * The Azure resource id of the account.
@@ -3820,7 +3727,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Provisioning state of NetworkSecurityPerimeter configuration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'NetworkSecurityPerimeterConfigurationProperties' includes custom states beyond ARM standard values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3846,7 +3753,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   profile?: NetworkSecurityPerimeterProfileInfo;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Details about an issue encountered during resource provisioning"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProvisioningIssue {
   /**
    * Name of the NSP provisioning issue
@@ -3993,7 +3900,7 @@ model NetworkSecurityPerimeterProfileInfo {
    */
   accessRulesVersion?: int64;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The access rules for NetworkSecurityPerimeterProfileInfo"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   accessRules?: NetworkSecurityPerimeterAccessRule[];
 
@@ -4011,7 +3918,7 @@ model NetworkSecurityPerimeterProfileInfo {
 /**
  * The list of cognitive services Defender for AI Settings.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForAISettingResult {
   /**
    * The link used to get the next page of Defender for AI Settings.
@@ -4030,8 +3937,8 @@ model DefenderForAISettingResult {
 /**
  * The Defender for AI resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'DefenderForAISettingProperties' includes custom states beyond ARM standard values"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForAISettingProperties {
   /**
    * Defender for AI state on the AI resource.
@@ -4062,7 +3969,7 @@ model ProjectProperties {
   /**
    * The list of endpoint for this Cognitive Services Project.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<endpoints> type used for 'ProjectProperties' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   endpoints?: Record<string>;
 
@@ -4076,7 +3983,7 @@ model ProjectProperties {
 /**
  * Connection property base schema.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'ConnectionPropertiesV2' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("authType")
 model ConnectionPropertiesV2 {
   /**
@@ -4089,7 +3996,7 @@ model ConnectionPropertiesV2 {
    */
   category?: ConnectionCategory;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The created by workspace arm id for ConnectionPropertiesV2"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   createdByWorkspaceArmId?: Azure.Core.armResourceIdentifier;
 
@@ -4098,7 +4005,8 @@ model ConnectionPropertiesV2 {
    */
   error?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The expiry time for ConnectionPropertiesV2"
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expiryTime?: utcDateTime;
 
   /**
@@ -4107,13 +4015,13 @@ model ConnectionPropertiesV2 {
   @visibility(Lifecycle.Read)
   group?: ConnectionGroup;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The is shared to all for ConnectionPropertiesV2"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isSharedToAll?: boolean;
 
   /**
    * Store user metadata for this connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<metadata> type used for 'ConnectionPropertiesV2' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: Record<string>;
 
   /**
@@ -4126,7 +4034,7 @@ model ConnectionPropertiesV2 {
    */
   peStatus?: ManagedPEStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The shared user list for ConnectionPropertiesV2"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedUserList?: string[];
 
   /**
@@ -4134,7 +4042,7 @@ model ConnectionPropertiesV2 {
    */
   target?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The use workspace managed identity for ConnectionPropertiesV2"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   useWorkspaceManagedIdentity?: boolean;
 }
 
@@ -4148,13 +4056,13 @@ model ConnectionUpdateContent {
   properties?: ConnectionPropertiesV2;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Paginated result for connection resources"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionPropertiesV2BasicResourceArmPaginatedResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The next link for ConnectionPropertiesV2BasicResourceArmPaginatedResult"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The value for ConnectionPropertiesV2BasicResourceArmPaginatedResult"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
   value?: ConnectionPropertiesV2BasicResource[];
 }
@@ -4165,7 +4073,7 @@ model CapabilityHostResourceArmPaginatedResult {
   /**
    * The link to the next page of Capability Host objects. If null, there are no additional pages.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'CapabilityHostResourceArmPaginatedResult' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string | null;
 
@@ -4176,13 +4084,13 @@ model CapabilityHostResourceArmPaginatedResult {
   value?: CapabilityHost[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CapabilityHostProperties' extends 'ResourceBase' using inheritance to match service-side object hierarchy"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Configuration properties for a capability host from AML RP"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CapabilityHostProperties extends ResourceBase {
   /**
    * List of AI services connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'aiServicesConnections' is nullable in 'CapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aiServicesConnections?: string[] | null;
 
   /**
@@ -4193,7 +4101,7 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * Customer subnet info to help set up this capability host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'customerSubnet' is nullable in 'CapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customerSubnet?: string | null;
 
   /**
@@ -4205,19 +4113,19 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of connection names from those available in the account or project to be used as a storage resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'storageConnections' is nullable in 'CapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for Thread storage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'threadStorageConnections' is nullable in 'CapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threadStorageConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'vectorStoreConnections' is nullable in 'CapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vectorStoreConnections?: string[] | null;
 
   /**
@@ -4226,19 +4134,19 @@ model CapabilityHostProperties extends ResourceBase {
   enablePublicHostingEnvironment?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Base properties shared across Azure ML proxied resources (description, tags, identity)"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceBase {
   /**
    * The asset description text.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'ResourceBase' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'ResourceBase' to support extensible key-value pairs matching service behavior"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'tags' is nullable in 'ResourceBase' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string> | null;
 }
 
@@ -4249,7 +4157,7 @@ model ProjectCapabilityHostResourceArmPaginatedResult {
   /**
    * The link to the next page of Project Capability Host objects. If null, there are no additional pages.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'ProjectCapabilityHostResourceArmPaginatedResult' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string | null;
 
@@ -4260,30 +4168,30 @@ model ProjectCapabilityHostResourceArmPaginatedResult {
   value?: ProjectCapabilityHost[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties for a project-scoped capability host"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProjectCapabilityHostProperties {
   /**
    * List of AI services connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'aiServicesConnections' is nullable in 'ProjectCapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aiServicesConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'vectorStoreConnections' is nullable in 'ProjectCapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vectorStoreConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used as a storage resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'storageConnections' is nullable in 'ProjectCapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for Thread storage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'threadStorageConnections' is nullable in 'ProjectCapabilityHostProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threadStorageConnections?: string[] | null;
 
   /**
@@ -4296,7 +4204,7 @@ model ProjectCapabilityHostProperties {
 /**
  * Properties of Quota Tier resource'.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'QuotaTierProperties' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model QuotaTierProperties {
   /**
    * Name of the current quota tier for the subscription.
@@ -4313,12 +4221,13 @@ model QuotaTierProperties {
    * The date on which the current tier was assigned to the subscription (UTC).
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   assignmentDate?: utcDateTime;
 
   /**
    * Information about the quota tier upgrade eligibility for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'tierUpgradeEligibilityInfo' is nullable in 'QuotaTierProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tierUpgradeEligibilityInfo?: QuotaTierUpgradeEligibilityInfo | null;
 }
@@ -4330,7 +4239,7 @@ model QuotaTierUpgradeEligibilityInfo {
   /**
    * Name of the next quota tier for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextTierName' is nullable in 'QuotaTierUpgradeEligibilityInfo' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nextTierName?: string | null;
 
   /**
@@ -4341,20 +4250,21 @@ model QuotaTierUpgradeEligibilityInfo {
   /**
    * The date after which the current tier will be upgraded to the next tier if the TierUpgradePolicy is "OnceUpgradeIsAvailable" (UTC).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'upgradeApplicableDate' is nullable in 'QuotaTierUpgradeEligibilityInfo' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   upgradeApplicableDate?: utcDateTime | null;
 
   /**
    * Reason in case the subscription is not eligible for upgrade to the next tier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'upgradeUnavailabilityReason' is nullable in 'QuotaTierUpgradeEligibilityInfo' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   upgradeUnavailabilityReason?: string | null;
 }
 
 /**
  * Outbound Rule for the managed network of a cognitive services account.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'OutboundRule' includes custom states beyond ARM standard values"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model OutboundRule {
   /**
@@ -4370,7 +4280,7 @@ model OutboundRule {
   /**
    * Type of a managed network Outbound Rule of a cognitive services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "'type' is intentionally duplicated on 'OutboundRule' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: RuleType;
 
   /**
@@ -4379,13 +4289,13 @@ model OutboundRule {
   @visibility(Lifecycle.Read)
   errorInformation?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The parent rule names for OutboundRule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   parentRuleNames?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'ManagedNetworkSettingsBasicResource' uses base type inheritance matching service-side object hierarchy"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed network settings resource from AML RP"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedNetworkSettingsBasicResource
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -4403,15 +4313,15 @@ model ManagedNetworkSettings {
    */
   isolationMode?: IsolationMode;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Network ID for the managed network"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   networkId?: string;
 
   /**
    * Dictionary of <OutboundRule>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<outboundRules> type used for 'ManagedNetworkSettings' to support extensible key-value pairs matching service behavior"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'outboundRules' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   outboundRules?: Record<OutboundRule> | null;
 
   /**
@@ -4432,15 +4342,9 @@ model ManagedNetworkSettings {
   /**
    * Public IP address assigned to the Azure Firewall.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'firewallPublicIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  firewallPublicIpAddress?: string | null;
-
-  /**
-   * The provisioning state of the managed network settings.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ManagedNetworkProvisioningState;
+  egressIpAddress?: string | null;
 }
 
 /**
@@ -4469,10 +4373,10 @@ model ManagedNetworkSettingsProperties {
   provisioningState?: ManagedNetworkProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'ManagedNetworkSettingsEx' extends 'ManagedNetworkSettings' using inheritance to match service-side object hierarchy"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Extended managed network settings with additional FQDN rules from AML RP"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The changeable isolation modes for ManagedNetworkSettingsEx"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   changeableIsolationModes?: IsolationMode[];
 }
@@ -4484,7 +4388,7 @@ model AgentApplicationResourceArmPaginatedResult {
   /**
    * The link to the next page of Agent Application objects. If null, there are no additional pages.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'AgentApplicationResourceArmPaginatedResult' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string | null;
 
@@ -4498,48 +4402,48 @@ model AgentApplicationResourceArmPaginatedResult {
 /**
  * Resource type representing an agentic application as a management construct.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'AgenticApplicationProperties' extends 'ResourceBase' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AgenticApplicationProperties extends ResourceBase {
   /**
    * The display name of the application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'displayName' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   displayName?: string | null;
 
   /**
    * The application's dedicated invocation endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'baseUrl' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   baseUrl?: string | null;
 
   /**
    * The list of agent definitions comprising this application, returned as references to the objects under the parent project; use this to obtain a flat list of all agent-version pairs represented by this application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'agents' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agents?: AgentReferenceProperties[] | null;
 
   /**
    * The EntraId Agentic Blueprint of the application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'agentIdentityBlueprint' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentIdentityBlueprint?: AssignedIdentity | null;
 
   /**
    * The (default) agent instance identity of the application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'defaultInstanceIdentity' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defaultInstanceIdentity?: AssignedIdentity | null;
 
   /**
    * Gets or sets the authorization policy associated with this agentic application instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'authorizationPolicy' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationPolicy?: ApplicationAuthorizationPolicy | null;
 
   /**
    * Gets or sets the traffic routing policy for the application's deployments.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'trafficRoutingPolicy' is nullable in 'AgenticApplicationProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficRoutingPolicy?: ApplicationTrafficRoutingPolicy | null;
 
   /**
@@ -4562,13 +4466,13 @@ model AgentReferenceProperties {
   /**
    * Gets the agent's unique identifier within the organization (subscription).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'agentId' is nullable in 'AgentReferenceProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentId?: string | null;
 
   /**
    * Gets the agent's name (unique within the project/app).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'agentName' is nullable in 'AgentReferenceProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentName?: string | null;
 }
 
@@ -4604,7 +4508,7 @@ model AssignedIdentity {
   /**
    * The subject of this identity assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'subject' is nullable in 'AssignedIdentity' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subject?: string | null;
 
   /**
@@ -4637,7 +4541,7 @@ model ApplicationTrafficRoutingPolicy {
   /**
    * Gets or sets the collection of traffic routing rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'rules' is nullable in 'ApplicationTrafficRoutingPolicy' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: TrafficRoutingRule[] | null;
 }
 
@@ -4648,19 +4552,19 @@ model TrafficRoutingRule {
   /**
    * The identifier of this traffic routing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'ruleId' is nullable in 'TrafficRoutingRule' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleId?: string | null;
 
   /**
    * A user-provided description for this traffic routing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'TrafficRoutingRule' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * The unique identifier of the deployment to which traffic is routed by this rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'deploymentId' is nullable in 'TrafficRoutingRule' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentId?: string | null;
 
   /**
@@ -4676,20 +4580,20 @@ model AgentReferenceResourceArmPaginatedResult {
   /**
    * The link to the next page of Agent Reference objects. If null, there are no additional pages.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'AgentReferenceResourceArmPaginatedResult' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nextLink?: string | null;
 
   /**
    * An array of objects of type Agent Reference.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'value' is nullable in 'AgentReferenceResourceArmPaginatedResult' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: AgentReference[] | null;
 }
 
 /**
  * Agent Reference resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'AgentReference' extends 'Azure.ResourceManager.CommonTypes.ProxyResource' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AgentReference extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * [Required] Additional attributes of the entity.
@@ -4704,7 +4608,7 @@ model AgentDeploymentResourceArmPaginatedResult {
   /**
    * The link to the next page of Agent Deployment objects. If null, there are no additional pages.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'AgentDeploymentResourceArmPaginatedResult' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string | null;
 
@@ -4718,37 +4622,37 @@ model AgentDeploymentResourceArmPaginatedResult {
 /**
  * Type representing an agent deployment as a management construct.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'AgentDeploymentProperties' extends 'ResourceBase' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("deploymentType")
 model AgentDeploymentProperties extends ResourceBase {
   /**
    * Gets or sets the display name of the deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'displayName' is nullable in 'AgentDeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   displayName?: string | null;
 
   /**
    * Gets or sets the unique identifier of the deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'deploymentId' is nullable in 'AgentDeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deploymentId?: string | null;
 
   /**
    * Gets or sets the current operational state of the deployment (and, intrinsically, of the comprising agents).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'state' is nullable in 'AgentDeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   state?: AgentDeploymentState | null;
 
   /**
    * Gets or sets the supported protocol types and versions exposed by this deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'protocols' is nullable in 'AgentDeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocols?: AgentProtocolVersion[] | null;
 
   /**
    * Returns a flat list of agent:version deployed in this deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'agents' is nullable in 'AgentDeploymentProperties' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agents?: VersionedAgentReference[] | null;
 
   /**
@@ -4775,26 +4679,26 @@ model AgentProtocolVersion {
   /**
    * The version of the protocol.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'version' is nullable in 'AgentProtocolVersion' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   version?: string | null;
 }
 
 /**
  * Type modeling a reference to a version of an agent definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'VersionedAgentReference' extends 'AgentReferenceProperties' using inheritance to match service-side object hierarchy"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VersionedAgentReference extends AgentReferenceProperties {
   /**
    * Gets the agent's version (unique for each agent lineage).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'agentVersion' is nullable in 'VersionedAgentReference' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentVersion?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for Personal Access Token authentication"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PATAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Personal Access Token credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: ConnectionPersonalAccessToken;
 
   /**
@@ -4803,17 +4707,17 @@ model PATAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   authType: "PAT";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential model containing a personal access token value"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionPersonalAccessToken {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The pat for ConnectionPersonalAccessToken"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   pat?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for Managed Identity authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedIdentityAuthTypeConnectionProperties
   extends ConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Managed identity credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: ConnectionManagedIdentity;
 
   /**
@@ -4822,18 +4726,18 @@ model ManagedIdentityAuthTypeConnectionProperties
   authType: "ManagedIdentity";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential model containing managed identity client ID and resource ID"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionManagedIdentity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The client id for ConnectionManagedIdentity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The resource id for ConnectionManagedIdentity"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for username/password authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UsernamePasswordAuthTypeConnectionProperties
   extends ConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Username/password credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: ConnectionUsernamePassword;
 
   /**
@@ -4842,9 +4746,9 @@ model UsernamePasswordAuthTypeConnectionProperties
   authType: "UsernamePassword";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential model containing username, password, and security token"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionUsernamePassword {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The password for ConnectionUsernamePassword"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   password?: string;
 
@@ -4854,11 +4758,11 @@ model ConnectionUsernamePassword {
   @secret
   securityToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The username for ConnectionUsernamePassword"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   username?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for connections that require no authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NoneAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   /**
    * Authentication type of the connection target
@@ -4866,10 +4770,10 @@ model NoneAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   authType: "None";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for Shared Access Signature authentication"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SASAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "SAS token credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: ConnectionSharedAccessSignature;
 
   /**
@@ -4878,9 +4782,9 @@ model SASAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   authType: "SAS";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential model containing a SAS token value"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionSharedAccessSignature {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The sas for ConnectionSharedAccessSignature"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   sas?: string;
 }
@@ -4904,15 +4808,15 @@ model AccountKeyAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
  * Account key object for connection credential.
  */
 model ConnectionAccountKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The key for ConnectionAccountKey"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   key?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for service principal authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServicePrincipalAuthTypeConnectionProperties
   extends ConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service principal credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: ConnectionServicePrincipal;
 
   /**
@@ -4921,22 +4825,22 @@ model ServicePrincipalAuthTypeConnectionProperties
   authType: "ServicePrincipal";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential model containing service principal client ID, secret, and tenant"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionServicePrincipal {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The client id for ConnectionServicePrincipal"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The client secret for ConnectionServicePrincipal"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientSecret?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The tenant id for ConnectionServicePrincipal"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for access key authentication"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessKeyAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Access key credentials for the connection"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: ConnectionAccessKey;
 
   /**
@@ -4945,12 +4849,12 @@ model AccessKeyAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   authType: "AccessKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Credential model containing an access key ID and secret key"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionAccessKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The access key id for ConnectionAccessKey"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessKeyId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The secret access key for ConnectionAccessKey"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   secretAccessKey?: string;
 }
@@ -4993,7 +4897,7 @@ model ApiKeyAuthConnectionProperties extends ConnectionPropertiesV2 {
  * Api key object for connection credential.
  */
 model ConnectionApiKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The key for ConnectionApiKey"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   key?: string;
 }
@@ -5024,12 +4928,12 @@ model CustomKeys {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<keys> type used for 'CustomKeys' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keys?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Connection properties for OAuth 2.0 authentication"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OAuth2AuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   /**
    * ClientId and ClientSecret are required. Other properties are optional
@@ -5047,7 +4951,7 @@ model OAuth2AuthTypeConnectionProperties extends ConnectionPropertiesV2 {
  * ClientId and ClientSecret are required. Other properties are optional
  * depending on each OAuth2 provider's implementation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionOAuth2 {
   /**
    * Required by Concur connection category
@@ -5059,7 +4963,7 @@ model ConnectionOAuth2 {
    */
   clientId?: Azure.Core.uuid;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The client secret for ConnectionOAuth2"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientSecret?: string;
 
@@ -5069,7 +4973,7 @@ model ConnectionOAuth2 {
   @secret
   developerToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The password for ConnectionOAuth2"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   password?: string;
 
@@ -5095,7 +4999,7 @@ model ConnectionOAuth2 {
 /**
  * This connection type covers the AAD auth for any applicable Azure service
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "'property' casing matches existing service-side JSON serialization"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AADAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
   /**
    * Authentication type of the connection target
@@ -5107,93 +5011,13 @@ model AADAuthTypeConnectionProperties extends ConnectionPropertiesV2 {
  * FQDN Outbound Rule for the managed network of a cognitive services account.
  */
 model FqdnOutboundRule extends OutboundRule {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The destination for FqdnOutboundRule"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destination?: string;
 
   /**
    * Type of a managed network Outbound Rule of a cognitive services account.
    */
   type: "FQDN";
-}
-
-/**
- * Private Endpoint destination for an outbound rule.
- */
-model PrivateEndpointOutboundRuleDestination {
-  /**
-   * The Azure resource ID of the target private endpoint service.
-   */
-  serviceResourceId?: string;
-
-  /**
-   * The subresource of the target service to connect to.
-   */
-  subresourceTarget?: string;
-}
-
-/**
- * Private Endpoint outbound rule for the managed network of a cognitive services account.
- */
-model PrivateEndpointOutboundRule extends OutboundRule {
-  /**
-   * Private Endpoint destination.
-   */
-  destination?: PrivateEndpointOutboundRuleDestination;
-
-  /**
-   * List of FQDNs associated with the private endpoint outbound rule.
-   */
-  fqdns?: string[];
-
-  /**
-   * Type of a managed network Outbound Rule of a cognitive services account.
-   */
-  type: "PrivateEndpoint";
-}
-
-/**
- * Service Tag destination for an outbound rule.
- */
-model ServiceTagOutboundRuleDestination {
-  /**
-   * Name of the Azure service tag to target.
-   */
-  serviceTag?: string;
-
-  /**
-   * Network protocol used by the service tag rule.
-   */
-  protocol?: string;
-
-  /**
-   * Destination port ranges.
-   */
-  portRanges?: string;
-
-  /**
-   * The action for the service tag outbound rule.
-   */
-  action?: RuleAction;
-
-  /**
-   * Optional address prefixes. If provided, the serviceTag property will be ignored.
-   */
-  addressPrefixes?: string[];
-}
-
-/**
- * Service Tag outbound rule for the managed network of a cognitive services account.
- */
-model ServiceTagOutboundRule extends OutboundRule {
-  /**
-   * Service Tag destination.
-   */
-  destination?: ServiceTagOutboundRuleDestination;
-
-  /**
-   * Type of a managed network Outbound Rule of a cognitive services account.
-   */
-  type: "ServiceTag";
 }
 
 /**
@@ -5268,55 +5092,55 @@ model AgentCard {
   /**
    * Human-readable name for the Agent (e.g., 'Recipe Agent').
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'name' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string | null;
 
   /**
    * Human-readable description of the Agent's function.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * URL address where the Agent is hosted.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'url' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 
   /**
    * Service provider information for the Agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'provider' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provider?: ProviderInfo | null;
 
   /**
    * Version of the Agent (format defined by provider, e.g., '1.0.0').
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'version' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   version?: string | null;
 
   /**
    * URL for the Agent's documentation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'documentationUrl' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   documentationUrl?: string | null;
 
   /**
    * Default interaction modes supported by the Agent across all skills.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'defaultInputModes' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defaultInputModes?: string[] | null;
 
   /**
    * Default output modes supported by the Agent across all skills.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'defaultOutputModes' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defaultOutputModes?: string[] | null;
 
   /**
    * Collection of capability units the Agent can perform.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'skills' is nullable in 'AgentCard' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skills?: Skill[] | null;
 }
 
@@ -5327,13 +5151,13 @@ model ProviderInfo {
   /**
    * Organization name of the provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'organization' is nullable in 'ProviderInfo' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   organization?: string | null;
 
   /**
    * URL of the provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'url' is nullable in 'ProviderInfo' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 }
 
@@ -5344,43 +5168,43 @@ model Skill {
   /**
    * Unique identifier for the skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'id' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string | null;
 
   /**
    * Human-readable name for the skill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'name' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string | null;
 
   /**
    * Skill description.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string | null;
 
   /**
    * Tags describing the skill's capability category (e.g., 'cooking', 'customer support').
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'tags' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: string[] | null;
 
   /**
    * Example scenarios or prompts the skill can execute (e.g., 'I need a recipe for bread').
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'examples' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   examples?: string[] | null;
 
   /**
    * Input MIME types supported by the skill (if different from default).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'inputModes' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inputModes?: string[] | null;
 
   /**
    * Output MIME types supported by the skill (if different from default).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'outputModes' is nullable in 'Skill' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   outputModes?: string[] | null;
 }
 
@@ -5440,7 +5264,7 @@ model OutboundRuleListResult {
 /**
  * Managed Network Provisioning options for managed network of a cognitive services account.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'ManagedNetworkProvisionOptions' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedNetworkProvisionOptions {}
 
 /**
@@ -5464,7 +5288,7 @@ model RaiBlockListResult {
 /**
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkAddRequest' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is Array<RaiBlocklistItemBulkRequest>;
 
@@ -5636,5 +5460,5 @@ model RaiPolicyListResult {
 /**
  * The list of Cognitive Services RaiBlocklist Items Names.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;

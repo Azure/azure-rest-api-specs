@@ -27,8 +27,6 @@ import "./models/NetworkTapRule.tsp";
 import "./models/NetworkTap.tsp";
 import "./models/RoutePolicy.tsp";
 import "./models/NetworkMonitor.tsp";
-import "./models/NetworkBootstrapDevice.tsp";
-import "./models/NetworkBootstrapInterface.tsp";
 import "./resources/AccessControlList.tsp";
 import "./resources/InternetGatewayRule.tsp";
 import "./resources/InternetGateway.tsp";
@@ -53,9 +51,6 @@ import "./resources/NetworkTapRule.tsp";
 import "./resources/NetworkTap.tsp";
 import "./resources/RoutePolicy.tsp";
 import "./resources/NetworkMonitor.tsp";
-import "./resources/NetworkBootstrapDevice.tsp";
-import "./resources/NetworkBootstrapInterface.tsp";
-import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -79,7 +74,4 @@ enum Versions {
 
   @doc("2024-06-15-preview")
   v2024_06_15_preview: "2024-06-15-preview",
-
-  @doc("2025-07-15")
-  v2025_07_15: "2025-07-15",
 }

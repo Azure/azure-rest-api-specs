@@ -203,8 +203,6 @@ op analyzeCustomSignature(
   "csharp"
 );
 
-@@usage(AnalyzeRequest, Usage.input | Usage.json, "csharp");
-
 // ============================================================================
 // Java-specific customizations
 // ============================================================================

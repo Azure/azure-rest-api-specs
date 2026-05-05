@@ -39,13 +39,6 @@ model IpPrefixProperties {
   administrativeState?: AdministrativeState;
 }
 
-@doc("IP Prefix patchable properties.")
-model IpPrefixPatchableProperties {
-  @doc("The list of IP Prefix Rules.")
-  @Azure.ResourceManager.identifiers(#[])
-  ipPrefixRules?: IpPrefixRule[];
-}
-
 @doc("IP Prefix Rule properties.")
 model IpPrefixRule {
   @doc("Action to be taken on the configuration. Example: Permit | Deny.")
@@ -66,9 +59,10 @@ model IpPrefixRule {
   subnetMaskLength?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The IP Prefix patch resource definition.")
-model IpPrefixPatch extends TagsUpdate {
+model IpPrefixPatch {
+  ...TagsUpdate;
+
   @doc("IP Prefix patchable properties.")
   properties?: IpPrefixPatchProperties;
 }
@@ -76,7 +70,10 @@ model IpPrefixPatch extends TagsUpdate {
 @doc("IP Prefix patchable properties.")
 model IpPrefixPatchProperties {
   ...AnnotationResource;
-  ...IpPrefixPatchableProperties;
+
+  @doc("The list of IP Prefix Rules.")
+  @Azure.ResourceManager.identifiers(#[])
+  ipPrefixRules?: IpPrefixRule[];
 }
 
 @doc("Specify prefix-list bounds.")

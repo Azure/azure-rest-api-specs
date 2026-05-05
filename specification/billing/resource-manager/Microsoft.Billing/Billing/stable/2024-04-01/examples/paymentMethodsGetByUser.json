@@ -6,15 +6,16 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/providers/Microsoft.Billing/paymentMethods/ABCDABCDABC0",
         "name": "ABCDABCDABC0",
         "type": "Microsoft.Billing/paymentMethods",
-        "id": "/providers/Microsoft.Billing/paymentMethods/ABCDABCDABC0",
         "properties": {
           "accountHolderName": "abc",
-          "displayName": "Master Card",
           "expiration": "1/2035",
-          "family": "CreditCard",
           "lastFourDigits": "1270",
+          "family": "CreditCard",
+          "paymentMethodType": "mc",
+          "displayName": "Master Card",
           "logos": [
             {
               "mimeType": "image/png",
@@ -25,12 +26,9 @@
               "url": "https://contoso.com/staticresourceservice/images/v4/logo_visa.svg"
             }
           ],
-          "paymentMethodType": "mc",
           "status": "active"
         }
       }
     }
-  },
-  "operationId": "PaymentMethods_GetByUser",
-  "title": "GetPaymentMethodOwnedByUser"
+  }
 }

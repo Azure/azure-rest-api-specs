@@ -60,8 +60,7 @@ alias StaticSiteUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface StaticSiteARMResources {
   /**
    * Description for Gets the details of a static site.

@@ -44,7 +44,7 @@ interface ApiDefinitions {
   importSpecification is ArmResourceActionAsync<
     ApiDefinition,
     ApiSpecImportRequest,
-    OkResponse
+    ApiImportSuccess
   >;
   @doc("Exports the API specification.")
   exportSpecification is ArmResourceActionAsync<
@@ -52,4 +52,10 @@ interface ApiDefinitions {
     void,
     ApiSpecExportResult
   >;
+}
+
+/** The API specification was successfully imported. */
+model ApiImportSuccess {
+  /** The response status code */
+  @statusCode code: 200;
 }

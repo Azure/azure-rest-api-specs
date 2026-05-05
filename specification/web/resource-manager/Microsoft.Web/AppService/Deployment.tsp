@@ -54,8 +54,7 @@ interface DeploymentOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface Deployments {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
@@ -139,8 +138,7 @@ interface DeploymentOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface DeploymentOperationGroup {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.

@@ -24,15 +24,15 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.RecoveryServices.ExistingRecoveryRecoveryResourceGroup,
   "ExistingRecoveryResourceGroup",
-  "java,go,javascript,python"
+  "java,go"
 );
 @@clientName(Microsoft.RecoveryServices.InMageAzureV2SwitchProviderProviderInput,
   "InMageAzureV2SwitchProviderInput",
-  "java,go,javascript,python"
+  "java,go"
 );
 @@clientName(Microsoft.RecoveryServices.SwitchProviderProviderSpecificInput,
   "SwitchProviderSpecificInput",
-  "java,javascript,python"
+  "java"
 );
 @@clientName(Microsoft.RecoveryServices.UpdateApplianceForReplicationProtectedItemProviderSpecificInput,
   "UpdateReplicationProtectedItemProviderSpecificInput",

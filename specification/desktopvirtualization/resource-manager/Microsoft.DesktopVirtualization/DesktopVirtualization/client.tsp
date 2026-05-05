@@ -173,7 +173,7 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@clientName(AllowRDPShortPathWithPrivateLink,
-  "DesktopVirtualizationAllowRdpShortPathWithPrivateLink",
+  "AllowRdpShortPathWithPrivateLink",
   "csharp"
 );
 
@@ -690,7 +690,7 @@ using Microsoft.DesktopVirtualization;
 );
 @@clientName(PublicUDP, "DesktopVirtualizationPublicUdp", "csharp");
 @@clientName(ProvisioningStateSHC,
-  "SessionHostConfigurationProvisioningState",
+  "ProvisioningStateSessionHostConfiguration",
   "csharp"
 );
 @@clientName(RegistrationTokenList,
@@ -727,7 +727,7 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 @@clientName(FailedSessionHostCleanupPolicySHC,
-  "SessionHostConfigurationFailedSessionHostCleanupPolicy",
+  "FailedSessionHostCleanupPolicySessionHostConfiguration",
   "csharp"
 );
 
@@ -768,36 +768,5 @@ using Microsoft.DesktopVirtualization;
 );
 @@alternateType(SessionHostConfigurationPatchProperties.vmLocation,
   Azure.Core.azureLocation,
-  "csharp"
-);
-
-// Fix generic names — add DesktopVirtualization prefix
-@@clientName(ActiveDirectoryInfoProperties,
-  "DesktopVirtualizationActiveDirectoryInfoProperties",
-  "csharp"
-);
-@@clientName(BootDiagnosticsInfoProperties,
-  "DesktopVirtualizationBootDiagnosticsInfoProperties",
-  "csharp"
-);
-@@clientName(BootDiagnosticsInfoPatchProperties,
-  "DesktopVirtualizationBootDiagnosticsInfoPatchProperties",
-  "csharp"
-);
-@@clientName(MarketplaceInfoProperties,
-  "DesktopVirtualizationMarketplaceInfoProperties",
-  "csharp"
-);
-@@clientName(MarketplaceInfoPatchProperties,
-  "DesktopVirtualizationMarketplaceInfoPatchProperties",
-  "csharp"
-);
-// Fix ScopedRegistrationTokenProperties — POST body should use Content suffix
-@@clientName(ScopedRegistrationTokenProperties,
-  "ScopedRegistrationTokenContent",
-  "csharp"
-);
-@@clientName(ScopedRegistrationTokenProperties.expirationTimeInUtc,
-  "ExpirationOn",
   "csharp"
 );

@@ -35,8 +35,7 @@ model StaticSiteBasicAuthPropertiesARMResource
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface StaticSiteBasicAuthPropertiesARMResources {
   /**
    * Description for Gets the basic auth properties for a static site.

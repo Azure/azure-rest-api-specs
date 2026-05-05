@@ -1,13 +1,15 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2025-09-01",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "zones": [
+      "1"
+    ],
     "containerGroup": {
       "location": "west us",
       "properties": {
-        "containerGroupProfile": {
-          "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
-          "revision": 1
-        },
         "containers": [
           {
             "name": "demo1",
@@ -20,120 +22,116 @@
             }
           }
         ],
+        "containerGroupProfile": {
+          "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
+          "revision": 1
+        },
         "standbyPoolProfile": {
           "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.StandbyPool/standbyContainerGroupPools/demopool"
         }
       }
-    },
-    "containerGroupName": "demo1",
-    "resourceGroupName": "demo",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "zones": [
-      "1"
-    ]
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
-        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-        "location": "eastus2",
         "properties": {
-          "containerGroupProfile": {
-            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
-            "revision": 1
-          },
+          "sku": "Standard",
+          "isCreatedFromStandbyPool": true,
+          "provisioningState": "Succeeded",
           "containers": [
             {
               "name": "demo1",
               "properties": {
-                "command": [],
+                "image": "nginx",
                 "configMap": {
                   "keyValuePairs": {
                     "Newkey": "value"
                   }
                 },
-                "environmentVariables": [],
-                "image": "nginx",
+                "command": [],
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
+                "environmentVariables": [],
                 "resources": {
                   "requests": {
-                    "cpu": 1,
-                    "memoryInGB": 1.5
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
                   }
                 }
               }
             }
           ],
-          "imageRegistryCredentials": [],
           "initContainers": [],
+          "imageRegistryCredentials": [],
+          "containerGroupProfile": {
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
+            "revision": 1
+          },
+          "osType": "Linux",
           "instanceView": {
             "events": [],
             "state": "Running"
-          },
-          "isCreatedFromStandbyPool": true,
-          "osType": "Linux",
-          "provisioningState": "Succeeded",
-          "sku": "Standard"
-        }
+          }
+        },
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
       }
     },
     "201": {
       "body": {
-        "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
-        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-        "location": "eastus2",
         "properties": {
-          "containerGroupProfile": {
-            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
-            "revision": 1
-          },
+          "sku": "Standard",
+          "isCreatedFromStandbyPool": true,
+          "provisioningState": "Succeeded",
           "containers": [
             {
               "name": "demo1",
               "properties": {
-                "command": [],
+                "image": "nginx",
                 "configMap": {
                   "keyValuePairs": {
                     "Newkey": "value"
                   }
                 },
-                "environmentVariables": [],
-                "image": "nginx",
+                "command": [],
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
+                "environmentVariables": [],
                 "resources": {
                   "requests": {
-                    "cpu": 1,
-                    "memoryInGB": 1.5
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
                   }
                 }
               }
             }
           ],
-          "imageRegistryCredentials": [],
           "initContainers": [],
+          "imageRegistryCredentials": [],
+          "containerGroupProfile": {
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/democgp",
+            "revision": 1
+          },
+          "osType": "Linux",
           "instanceView": {
             "events": [],
             "state": "Running"
-          },
-          "isCreatedFromStandbyPool": true,
-          "osType": "Linux",
-          "provisioningState": "Succeeded",
-          "sku": "Standard"
-        }
+          }
+        },
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
       }
     }
-  },
-  "operationId": "ContainerGroups_CreateOrUpdate",
-  "title": "ContainerGroupCreateOrUpdateWithStandbyPool"
+  }
 }

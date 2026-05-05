@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "headers": {},
+        "operation": {
+          "blobSasKey": "?sv=2014-02-14&sr=b&sig=<sas_signature>&st=2017-11-29T07%3A53%3A34Z&se=2017-11-29T08%3A03%3A34Z&sp=r",
+          "blobUrl": "https://azureblob.blob.core.windows.net/reportcontainer/exportjobsreportc00000000-0000-0000-0000-000000000000",
+          "objectType": "ExportJobsOperationResultInfo"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "headers": {
+          "Location": [
+            "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01"
+          ],
+          "Retry-After": [
+            "60"
+          ]
+        },
+        "operation": {
+          "objectType": "ExportJobsOperationResultInfo"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ExportJobsOperationResults_Get",
+  "title": "Export Jobs Operation Results"
+}

@@ -1,0 +1,118 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "properties": {
+        "type": "VirtualMachines",
+        "nodeLabels": {
+          "key1": "val1"
+        },
+        "nodeTaints": [
+          "Key1=Value1:NoSchedule"
+        ],
+        "orchestratorVersion": "1.29.0",
+        "osType": "Linux",
+        "tags": {
+          "name1": "val1"
+        },
+        "virtualMachinesProfile": {
+          "scale": {
+            "autoscale": {
+              "maxCount": 5,
+              "minCount": 1,
+              "size": "Standard_D2_v2"
+            }
+          }
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "type": "VirtualMachines",
+          "currentOrchestratorVersion": "1.29.0",
+          "maxPods": 110,
+          "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.09.11",
+          "nodeLabels": {
+            "key1": "val1"
+          },
+          "nodeTaints": [
+            "Key1=Value1:NoSchedule"
+          ],
+          "orchestratorVersion": "1.29.0",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "tags": {
+            "name1": "val1"
+          },
+          "virtualMachineNodesStatus": [
+            {
+              "count": 1,
+              "size": "Standard_D2_v2"
+            }
+          ],
+          "virtualMachinesProfile": {
+            "scale": {
+              "autoscale": {
+                "maxCount": 5,
+                "minCount": 1,
+                "size": "Standard_D2_v2"
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "type": "VirtualMachines",
+          "currentOrchestratorVersion": "1.29.0",
+          "maxPods": 110,
+          "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.09.11",
+          "nodeLabels": {
+            "key1": "val1"
+          },
+          "nodeTaints": [
+            "Key1=Value1:NoSchedule"
+          ],
+          "orchestratorVersion": "1.29.0",
+          "osType": "Linux",
+          "provisioningState": "Creating",
+          "tags": {
+            "name1": "val1"
+          },
+          "virtualMachineNodesStatus": [
+            {
+              "count": 1,
+              "size": "Standard_D2_v2"
+            }
+          ],
+          "virtualMachinesProfile": {
+            "scale": {
+              "autoscale": {
+                "maxCount": 5,
+                "minCount": 1,
+                "size": "Standard_D2_v2"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Create Agent Pool with VirtualMachines pool type with autoscaling enabled"
+}

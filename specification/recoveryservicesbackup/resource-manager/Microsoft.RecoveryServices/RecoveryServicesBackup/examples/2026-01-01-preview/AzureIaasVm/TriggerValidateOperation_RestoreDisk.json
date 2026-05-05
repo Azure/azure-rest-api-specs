@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;testRG;testvmName",
+    "fabricName": "Azure",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVault/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRG;testvmName/protectedItems/VM;iaasvmcontainerv2;testRG;testvmName/recoveryPoints/348916168024334",
+      "properties": {
+        "objectType": "ValidateIaasVMRestoreOperationRequest",
+        "restoreRequest": {
+          "createNewCloudService": true,
+          "encryptionDetails": {
+            "encryptionEnabled": false
+          },
+          "identityInfo": {
+            "isSystemAssignedIdentity": false,
+            "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/asmaskarRG1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/asmaskartestmsi"
+          },
+          "objectType": "IaasVMRestoreRequest",
+          "originalStorageAccountOption": false,
+          "recoveryPointId": "348916168024334",
+          "recoveryType": "RestoreDisks",
+          "region": "southeastasia",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+          "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testingRg/providers/Microsoft.Storage/storageAccounts/testAccount"
+        }
+      }
+    },
+    "protectedItemName": "VM;iaasvmcontainerv2;testRG;testvmName",
+    "recoveryPointId": "348916168024334",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupValidateOperationsStatuses/00000000-0000-0000-0000-000000000000?api-version=2022-03-01",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupValidateOperationResults/00000000-0000-0000-0000-000000000000?api-version=2022-03-01",
+        "Retry-After": 10
+      }
+    }
+  },
+  "operationId": "ValidateOperation_Trigger",
+  "title": "Trigger Validate Operation"
+}

@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "properties": {
+        "count": 3,
+        "mode": "User",
+        "nodeLabels": {
+          "key1": "val1"
+        },
+        "nodeTaints": [
+          "Key1=Value1:NoSchedule"
+        ],
+        "orchestratorVersion": "",
+        "osType": "Linux",
+        "scaleSetEvictionPolicy": "Delete",
+        "scaleSetPriority": "Spot",
+        "tags": {
+          "name1": "val1"
+        },
+        "vmSize": "Standard_DS1_v2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 3,
+          "maxPods": 110,
+          "mode": "User",
+          "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+          "nodeLabels": {
+            "key1": "val1"
+          },
+          "nodeTaints": [
+            "Key1=Value1:NoSchedule"
+          ],
+          "orchestratorVersion": "1.9.6",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "scaleSetEvictionPolicy": "Delete",
+          "scaleSetPriority": "Spot",
+          "tags": {
+            "name1": "val1"
+          },
+          "vmSize": "Standard_DS1_v2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 3,
+          "currentOrchestratorVersion": "1.9.6",
+          "maxPods": 110,
+          "mode": "User",
+          "nodeLabels": {
+            "key1": "val1"
+          },
+          "nodeTaints": [
+            "Key1=Value1:NoSchedule"
+          ],
+          "orchestratorVersion": "1.9.6",
+          "osType": "Linux",
+          "provisioningState": "Creating",
+          "scaleSetEvictionPolicy": "Delete",
+          "scaleSetPriority": "Spot",
+          "tags": {
+            "name1": "val1"
+          },
+          "vmSize": "Standard_DS1_v2"
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Create/Update Agent Pool"
+}

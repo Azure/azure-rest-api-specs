@@ -1,49 +1,47 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
-    "automationAccountName": "myAutomationAccount11",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    "automationAccountName": "myAutomationAccount11",
+    "api-version": "2024-10-23"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
         "value": [
           {
             "name": {
-              "localizedValue": "AccountUsage",
-              "value": "AccountUsage"
+              "value": "AccountUsage",
+              "localizedValue": "AccountUsage"
             },
-            "currentValue": 0,
+            "unit": "Minute",
+            "currentValue": 0.0,
             "limit": 500,
-            "throttleStatus": "NotThrottled",
-            "unit": "Minute"
+            "throttleStatus": "NotThrottled"
           },
           {
             "name": {
-              "localizedValue": "SubscriptionUsage",
-              "value": "SubscriptionUsage"
+              "value": "SubscriptionUsage",
+              "localizedValue": "SubscriptionUsage"
             },
-            "currentValue": 429,
+            "unit": "Minute",
+            "currentValue": 429.0,
             "limit": 500,
-            "throttleStatus": "NotThrottled",
-            "unit": "Minute"
+            "throttleStatus": "NotThrottled"
           },
           {
             "name": {
-              "localizedValue": "DscSubscriptionUsage",
-              "value": "DscSubscriptionUsage"
+              "value": "DscSubscriptionUsage",
+              "localizedValue": "DscSubscriptionUsage"
             },
-            "currentValue": 8,
+            "unit": "Count",
+            "currentValue": 8.0,
             "limit": 5,
-            "throttleStatus": "ThrottledAtSubscriptionLevel",
-            "unit": "Count"
+            "throttleStatus": "ThrottledAtSubscriptionLevel"
           }
         ]
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "Usages_ListByAutomationAccount",
-  "title": "Get usages of an automation account"
+  }
 }

@@ -2,467 +2,107 @@
   "swagger": "2.0",
   "info": {
     "title": "ProvisioningServiceClient",
-    "version": "2025-07-01-preview",
     "description": "API for service operations with the Azure IoT Hub Device Provisioning Service",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2025-07-01-preview"
   },
+  "host": "your-dps.azure-devices-provisioning.net",
   "schemes": [
     "https"
   ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "https://{dpsName}.azure-devices-provisioning.net",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "dpsName",
-        "in": "path",
-        "description": "The DPS instance hostname.",
-        "required": true,
-        "type": "string"
-      }
-    ]
-  },
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "ApiKeyAuth": []
-    }
-  ],
-  "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
-    }
-  },
-  "tags": [],
   "paths": {
-    "/enrollmentGroups": {
-      "post": {
-        "operationId": "EnrollmentGroup_RunBulkOperation",
-        "summary": "Bulk device enrollment group operation with maximum of 10 groups.",
-        "description": "Bulk device enrollment group operation with maximum of 10 groups.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The bulk enrollment group operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkEnrollmentGroupOperation"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BulkEnrollmentGroupOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnrollmentGroup_RunBulkOperation_MaximumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_RunBulkOperation_MaximumSet_Gen.json"
-          },
-          "EnrollmentGroup_RunBulkOperation_MinimumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_RunBulkOperation_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/enrollmentGroups/{id}": {
-      "get": {
-        "operationId": "EnrollmentGroup_Get",
-        "summary": "Get a device enrollment group.",
-        "description": "Get a device enrollment group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Enrollment group ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnrollmentGroup_Get_MaximumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_Get_MaximumSet_Gen.json"
-          },
-          "EnrollmentGroup_Get_MinimumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "EnrollmentGroup_CreateOrUpdate",
-        "summary": "Create or update a device enrollment group.",
-        "description": "Create or update a device enrollment group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Enrollment group ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The ETag of the enrollment record.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The device enrollment group.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnrollmentGroup"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentGroup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnrollmentGroup_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "EnrollmentGroup_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        }
-      },
+    "/enrollments/{id}": {
       "delete": {
-        "operationId": "EnrollmentGroup_Delete",
-        "summary": "Delete a device enrollment group.",
-        "description": "Delete a device enrollment group.",
+        "tags": [
+          "DELETE",
+          "IndividualEnrollment"
+        ],
+        "summary": "Delete a device enrollment record.",
+        "operationId": "IndividualEnrollment_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
-            "description": "Enrollment group ID.",
+            "name": "id",
+            "description": "This id is used to uniquely identify a device registration of an enrollment. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "If-Match",
             "in": "header",
-            "description": "The ETag of the enrollment group record.",
-            "required": false,
+            "name": "If-Match",
+            "description": "The ETag of the enrollment record.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "No Content"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "EnrollmentGroup_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_Delete_MaximumSet_Gen.json"
+          "IndividualEnrollment_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/IndividualEnrollment_Delete_MaximumSet_Gen.json"
           },
-          "EnrollmentGroup_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_Delete_MinimumSet_Gen.json"
+          "IndividualEnrollment_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/IndividualEnrollment_Delete_MinimumSet_Gen.json"
           }
         }
-      }
-    },
-    "/enrollmentGroups/{id}/attestationmechanism": {
-      "post": {
-        "operationId": "EnrollmentGroup_GetAttestationMechanism",
-        "summary": "Get the attestation mechanism in the device enrollment group record.",
-        "description": "Get the attestation mechanism in the device enrollment group record.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Enrollment group ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AttestationMechanism"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnrollmentGroup_GetAttestationMechanism_MaximumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_GetAttestationMechanism_MaximumSet_Gen.json"
-          },
-          "EnrollmentGroup_GetAttestationMechanism_MinimumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_GetAttestationMechanism_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/enrollmentGroups/query": {
-      "post": {
-        "operationId": "EnrollmentGroup_Query",
-        "summary": "Query the device enrollment groups.",
-        "description": "Query the device enrollment groups.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-max-item-count",
-            "in": "header",
-            "description": "Page size",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "x-ms-continuation",
-            "in": "header",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The query specification.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QuerySpecification"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response model for enrollment group query operations.\nUses int64 for x-ms-max-item-count in the preview version to match original behavior.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/EnrollmentGroup"
-              }
-            },
-            "headers": {
-              "x-ms-continuation": {
-                "type": "string",
-                "description": "The continuation token for getting the next page of results."
-              },
-              "x-ms-item-type": {
-                "type": "string",
-                "description": "The list of values returned from the query."
-              },
-              "x-ms-max-item-count": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The maximum number of items returned in a page."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnrollmentGroup_Query_MaximumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_Query_MaximumSet_Gen.json"
-          },
-          "EnrollmentGroup_Query_MinimumSet_Gen": {
-            "$ref": "./examples/EnrollmentGroup_Query_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/enrollments": {
-      "post": {
-        "operationId": "IndividualEnrollment_RunBulkOperation",
-        "summary": "Bulk device enrollment operation with maximum of 10 enrollments.",
-        "description": "Bulk device enrollment operation with maximum of 10 enrollments.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The bulk enrollment operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkEnrollmentOperation"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BulkEnrollmentOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IndividualEnrollment_RunBulkOperation_MaximumSet_Gen": {
-            "$ref": "./examples/IndividualEnrollment_RunBulkOperation_MaximumSet_Gen.json"
-          },
-          "IndividualEnrollment_RunBulkOperation_MinimumSet_Gen": {
-            "$ref": "./examples/IndividualEnrollment_RunBulkOperation_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/enrollments/{id}": {
+      },
       "get": {
-        "operationId": "IndividualEnrollment_Get",
+        "tags": [
+          "GET",
+          "IndividualEnrollment"
+        ],
         "summary": "Get a device enrollment record.",
-        "description": "Get a device enrollment record.",
+        "operationId": "IndividualEnrollment_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
-            "description": "This id is used to uniquely identify a device registration of an enrollment. A\ncase-insensitive string (up to 128 characters long) of alphanumeric characters\nplus certain special characters : . _ -. No special characters allowed at start\nor end.",
+            "name": "id",
+            "description": "This id is used to uniquely identify a device registration of an enrollment. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/IndividualEnrollment"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
@@ -477,30 +117,38 @@
         }
       },
       "put": {
-        "operationId": "IndividualEnrollment_CreateOrUpdate",
+        "tags": [
+          "PUT",
+          "IndividualEnrollment"
+        ],
         "summary": "Create or update a device enrollment record.",
-        "description": "Create or update a device enrollment record.",
+        "operationId": "IndividualEnrollment_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
-            "description": "This id is used to uniquely identify a device registration of an enrollment. A\ncase-insensitive string (up to 128 characters long) of alphanumeric characters\nplus certain special characters : . _ -. No special characters allowed at start\nor end.",
+            "name": "id",
+            "description": "This id is used to uniquely identify a device registration of an enrollment. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "If-Match",
             "in": "header",
+            "name": "If-Match",
             "description": "The ETag of the enrollment record.",
-            "required": false,
             "type": "string"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
+            "name": "body",
             "description": "The device enrollment record.",
             "required": true,
             "schema": {
@@ -510,20 +158,20 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/IndividualEnrollment"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
@@ -536,131 +184,325 @@
             "$ref": "./examples/IndividualEnrollment_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
-      },
+      }
+    },
+    "/enrollmentGroups/{id}": {
       "delete": {
-        "operationId": "IndividualEnrollment_Delete",
-        "summary": "Delete a device enrollment record.",
-        "description": "Delete a device enrollment record.",
+        "tags": [
+          "DELETE",
+          "EnrollmentGroup"
+        ],
+        "summary": "Delete a device enrollment group.",
+        "operationId": "EnrollmentGroup_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
-            "description": "This id is used to uniquely identify a device registration of an enrollment. A\ncase-insensitive string (up to 128 characters long) of alphanumeric characters\nplus certain special characters : . _ -. No special characters allowed at start\nor end.",
+            "name": "id",
+            "description": "Enrollment group ID.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "If-Match",
             "in": "header",
-            "description": "The ETag of the enrollment record.",
-            "required": false,
+            "name": "If-Match",
+            "description": "The ETag of the enrollment group record.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "No Content"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "IndividualEnrollment_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/IndividualEnrollment_Delete_MaximumSet_Gen.json"
+          "EnrollmentGroup_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_Delete_MaximumSet_Gen.json"
           },
-          "IndividualEnrollment_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/IndividualEnrollment_Delete_MinimumSet_Gen.json"
+          "EnrollmentGroup_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_Delete_MinimumSet_Gen.json"
           }
         }
-      }
-    },
-    "/enrollments/{id}/attestationmechanism": {
-      "post": {
-        "operationId": "IndividualEnrollment_GetAttestationMechanism",
-        "summary": "Get the attestation mechanism in the device enrollment record.",
-        "description": "Get the attestation mechanism in the device enrollment record.",
+      },
+      "get": {
+        "tags": [
+          "GET",
+          "EnrollmentGroup"
+        ],
+        "summary": "Get a device enrollment group.",
+        "operationId": "EnrollmentGroup_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
-            "description": "This id is used to uniquely identify a device registration of an enrollment. A\ncase-insensitive string (up to 128 characters long) of alphanumeric characters\nplus certain special characters : . _ -. No special characters allowed at start\nor end.",
+            "name": "id",
+            "description": "Enrollment group ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AttestationMechanism"
+              "$ref": "#/definitions/EnrollmentGroup"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "IndividualEnrollment_GetAttestationMechanism_MaximumSet_Gen": {
-            "$ref": "./examples/IndividualEnrollment_GetAttestationMechanism_MaximumSet_Gen.json"
+          "EnrollmentGroup_Get_MaximumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_Get_MaximumSet_Gen.json"
           },
-          "IndividualEnrollment_GetAttestationMechanism_MinimumSet_Gen": {
-            "$ref": "./examples/IndividualEnrollment_GetAttestationMechanism_MinimumSet_Gen.json"
+          "EnrollmentGroup_Get_MinimumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT",
+          "EnrollmentGroup"
+        ],
+        "summary": "Create or update a device enrollment group.",
+        "operationId": "EnrollmentGroup_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Enrollment group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "The ETag of the enrollment record.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The device enrollment group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentGroup"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentGroup_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "EnrollmentGroup_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/registrations/{id}": {
+      "delete": {
+        "tags": [
+          "DELETE",
+          "DeviceRegistrationState"
+        ],
+        "summary": "Deletes the device registration",
+        "operationId": "DeviceRegistrationState_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Registration ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "The ETag of the registration status record.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrationState_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceRegistrationState_Delete_MaximumSet_Gen.json"
+          },
+          "DeviceRegistrationState_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceRegistrationState_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GET",
+          "DeviceRegistrationState"
+        ],
+        "summary": "Gets the device registration state.",
+        "operationId": "DeviceRegistrationState_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Registration ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationState"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrationState_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceRegistrationState_Get_MaximumSet_Gen.json"
+          },
+          "DeviceRegistrationState_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceRegistrationState_Get_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/enrollments/query": {
       "post": {
-        "operationId": "IndividualEnrollment_Query",
+        "tags": [
+          "POST",
+          "IndividualEnrollment"
+        ],
         "summary": "Query the device enrollment records.",
-        "description": "Query the device enrollment records.",
+        "operationId": "IndividualEnrollment_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-max-item-count",
             "in": "header",
+            "name": "x-ms-max-item-count",
             "description": "Page size",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
-            "name": "x-ms-continuation",
             "in": "header",
+            "name": "x-ms-continuation",
             "description": "Continuation token",
-            "required": false,
             "type": "string"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
+            "name": "body",
             "description": "The query specification.",
             "required": true,
             "schema": {
@@ -670,7 +512,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Response model for query operations that includes pagination headers.",
+            "description": "Success",
             "schema": {
               "type": "array",
               "items": {
@@ -679,29 +521,29 @@
             },
             "headers": {
               "x-ms-continuation": {
-                "type": "string",
-                "description": "The continuation token for getting the next page of results."
-              },
-              "x-ms-item-type": {
-                "type": "string",
-                "description": "The list of values returned from the query."
+                "description": "The continuation token for getting the next page of results.",
+                "type": "string"
               },
               "x-ms-max-item-count": {
+                "description": "The maximum number of items returned in a page.",
                 "type": "integer",
-                "format": "int32",
-                "description": "The maximum number of items returned in a page."
+                "format": "int32"
+              },
+              "x-ms-item-type": {
+                "description": "The list of values returned from the query.",
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
@@ -716,137 +558,356 @@
         }
       }
     },
-    "/registrations/{id}": {
-      "get": {
-        "operationId": "DeviceRegistrationState_Get",
-        "summary": "Gets the device registration state.",
-        "description": "Gets the device registration state.",
+    "/enrollments/{id}/attestationmechanism": {
+      "post": {
+        "tags": [
+          "POST",
+          "IndividualEnrollment"
+        ],
+        "summary": "Get the attestation mechanism in the device enrollment record.",
+        "operationId": "IndividualEnrollment_GetAttestationMechanism",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
-            "description": "Registration ID.",
+            "name": "id",
+            "description": "This id is used to uniquely identify a device registration of an enrollment. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DeviceRegistrationState"
+              "$ref": "#/definitions/AttestationMechanism"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "DeviceRegistrationState_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DeviceRegistrationState_Get_MaximumSet_Gen.json"
+          "IndividualEnrollment_GetAttestationMechanism_MaximumSet_Gen": {
+            "$ref": "./examples/IndividualEnrollment_GetAttestationMechanism_MaximumSet_Gen.json"
           },
-          "DeviceRegistrationState_Get_MinimumSet_Gen": {
-            "$ref": "./examples/DeviceRegistrationState_Get_MinimumSet_Gen.json"
+          "IndividualEnrollment_GetAttestationMechanism_MinimumSet_Gen": {
+            "$ref": "./examples/IndividualEnrollment_GetAttestationMechanism_MinimumSet_Gen.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "DeviceRegistrationState_Delete",
-        "summary": "Deletes the device registration",
-        "description": "Deletes the device registration",
+      }
+    },
+    "/enrollments": {
+      "post": {
+        "tags": [
+          "POST",
+          "IndividualEnrollment"
+        ],
+        "summary": "Bulk device enrollment operation with maximum of 10 enrollments.",
+        "operationId": "IndividualEnrollment_RunBulkOperation",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "id",
+            "in": "body",
+            "name": "body",
+            "description": "Bulk operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BulkEnrollmentOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BulkEnrollmentOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndividualEnrollment_RunBulkOperation_MaximumSet_Gen": {
+            "$ref": "./examples/IndividualEnrollment_RunBulkOperation_MaximumSet_Gen.json"
+          },
+          "IndividualEnrollment_RunBulkOperation_MinimumSet_Gen": {
+            "$ref": "./examples/IndividualEnrollment_RunBulkOperation_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/enrollmentGroups/query": {
+      "post": {
+        "tags": [
+          "POST",
+          "EnrollmentGroup"
+        ],
+        "summary": "Query the device enrollment groups.",
+        "operationId": "EnrollmentGroup_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-ms-max-item-count",
+            "description": "Page size",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-continuation",
+            "description": "Continuation token",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The query specification.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuerySpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnrollmentGroup"
+              }
+            },
+            "headers": {
+              "x-ms-continuation": {
+                "description": "The continuation token for getting the next page of results.",
+                "type": "string"
+              },
+              "x-ms-max-item-count": {
+                "description": "The maximum number of items returned in a page.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "x-ms-item-type": {
+                "description": "The list of values returned from the query.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentGroup_Query_MaximumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_Query_MaximumSet_Gen.json"
+          },
+          "EnrollmentGroup_Query_MinimumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_Query_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/enrollmentGroups/{id}/attestationmechanism": {
+      "post": {
+        "tags": [
+          "POST",
+          "EnrollmentGroup"
+        ],
+        "summary": "Get the attestation mechanism in the device enrollment group record.",
+        "operationId": "EnrollmentGroup_GetAttestationMechanism",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
             "in": "path",
-            "description": "Registration ID.",
+            "name": "id",
+            "description": "Enrollment group ID",
             "required": true,
             "type": "string"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The ETag of the registration status record.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttestationMechanism"
+            }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "DeviceRegistrationState_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DeviceRegistrationState_Delete_MaximumSet_Gen.json"
+          "EnrollmentGroup_GetAttestationMechanism_MaximumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_GetAttestationMechanism_MaximumSet_Gen.json"
           },
-          "DeviceRegistrationState_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/DeviceRegistrationState_Delete_MinimumSet_Gen.json"
+          "EnrollmentGroup_GetAttestationMechanism_MinimumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_GetAttestationMechanism_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/enrollmentGroups": {
+      "post": {
+        "tags": [
+          "POST",
+          "EnrollmentGroup"
+        ],
+        "summary": "Bulk device enrollment group operation with maximum of 10 groups.",
+        "operationId": "EnrollmentGroup_RunBulkOperation",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Bulk operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BulkEnrollmentGroupOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BulkEnrollmentGroupOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentGroup_RunBulkOperation_MaximumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_RunBulkOperation_MaximumSet_Gen.json"
+          },
+          "EnrollmentGroup_RunBulkOperation_MinimumSet_Gen": {
+            "$ref": "./examples/EnrollmentGroup_RunBulkOperation_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/registrations/{id}/query": {
       "post": {
-        "operationId": "DeviceRegistrationState_Query",
+        "tags": [
+          "POST",
+          "DeviceRegistrationState"
+        ],
         "summary": "Gets the registration state of devices in this enrollmentGroup.",
-        "description": "Gets the registration state of devices in this enrollmentGroup.",
+        "operationId": "DeviceRegistrationState_Query",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
             "in": "path",
+            "name": "id",
             "description": "Enrollment group ID.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "x-ms-max-item-count",
             "in": "header",
+            "name": "x-ms-max-item-count",
             "description": "pageSize",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
-            "name": "x-ms-continuation",
             "in": "header",
+            "name": "x-ms-continuation",
             "description": "continuation token",
-            "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Response model for query operations that includes pagination headers.",
+            "description": "Success",
             "schema": {
               "type": "array",
               "items": {
@@ -855,29 +916,29 @@
             },
             "headers": {
               "x-ms-continuation": {
-                "type": "string",
-                "description": "The continuation token for getting the next page of results."
-              },
-              "x-ms-item-type": {
-                "type": "string",
-                "description": "The list of values returned from the query."
+                "description": "The continuation token for getting the next page of results.",
+                "type": "string"
               },
               "x-ms-max-item-count": {
+                "description": "The maximum number of items returned in a page.",
                 "type": "integer",
-                "format": "int32",
-                "description": "The maximum number of items returned in a page."
+                "format": "int32"
+              },
+              "x-ms-item-type": {
+                "description": "The list of values returned from the query.",
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceErrorDetails"
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
               }
             }
           }
@@ -894,845 +955,635 @@
     }
   },
   "definitions": {
-    "AllocationPolicy": {
-      "type": "string",
-      "description": "The allocation policy of this resource. This policy overrides the tenant level\nallocation policy for this individual enrollment or enrollment group. Possible\nvalues include 'hashed': Linked IoT hubs are equally likely to have devices\nprovisioned to them, 'geoLatency':  Devices are provisioned to an IoT hub with\nthe lowest latency to the device.If multiple linked IoT hubs would provide the\nsame lowest latency, the provisioning service hashes devices across those hubs,\n'static' : Specification of the desired IoT hub in the enrollment list takes\npriority over the service-level allocation policy, 'custom': Devices are\nprovisioned to an IoT hub based on your own custom logic. The provisioning\nservice passes information about the device to the logic, and the logic returns\nthe desired IoT hub as well as the desired initial configuration. We recommend\nusing Azure Functions to host your logic.",
-      "enum": [
-        "hashed",
-        "geoLatency",
-        "static",
-        "custom"
-      ],
-      "x-ms-enum": {
-        "name": "AllocationPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "hashed",
-            "value": "hashed",
-            "description": "hashed"
-          },
-          {
-            "name": "geoLatency",
-            "value": "geoLatency",
-            "description": "geoLatency"
-          },
-          {
-            "name": "static",
-            "value": "static",
-            "description": "static"
-          },
-          {
-            "name": "custom",
-            "value": "custom",
-            "description": "custom"
-          }
-        ]
-      }
-    },
-    "AssignedDeviceSubstatus": {
-      "type": "string",
-      "description": "Substatus for 'Assigned' devices. Possible values include -\n'initialAssignment': Device has been assigned to an IoT hub for the first time,\n'deviceDataMigrated': Device has been assigned to a different IoT hub and its\ndevice data was migrated from the previously assigned IoT hub. Device data was\nremoved from the previously assigned IoT hub, 'deviceDataReset':  Device has\nbeen assigned to a different IoT hub and its device data was populated from the\ninitial state stored in the enrollment. Device data was removed from the\npreviously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has\nbeen re-provisioned to a previously assigned IoT hub.",
-      "enum": [
-        "initialAssignment",
-        "deviceDataMigrated",
-        "deviceDataReset",
-        "reprovisionedToInitialAssignment"
-      ],
-      "x-ms-enum": {
-        "name": "AssignedDeviceSubstatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "initialAssignment",
-            "value": "initialAssignment",
-            "description": "initialAssignment"
-          },
-          {
-            "name": "deviceDataMigrated",
-            "value": "deviceDataMigrated",
-            "description": "deviceDataMigrated"
-          },
-          {
-            "name": "deviceDataReset",
-            "value": "deviceDataReset",
-            "description": "deviceDataReset"
-          },
-          {
-            "name": "reprovisionedToInitialAssignment",
-            "value": "reprovisionedToInitialAssignment",
-            "description": "reprovisionedToInitialAssignment"
-          }
-        ]
-      }
-    },
     "AttestationMechanism": {
-      "type": "object",
       "description": "Attestation mechanism for individualEnrollment as well as enrollmentGroup.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/AttestationType",
-          "description": "Attestation Type."
-        },
-        "tpm": {
-          "$ref": "#/definitions/TpmAttestation",
-          "description": "TPM attestation method."
-        },
-        "x509": {
-          "$ref": "#/definitions/X509Attestation",
-          "description": "X509 attestation method."
-        },
-        "symmetricKey": {
-          "$ref": "#/definitions/SymmetricKeyAttestation",
-          "description": "Symmetric Key attestation method."
-        }
-      },
       "required": [
         "type"
-      ]
-    },
-    "AttestationType": {
-      "type": "string",
-      "description": "Attestation Type.",
-      "enum": [
-        "none",
-        "tpm",
-        "x509",
-        "symmetricKey"
       ],
-      "x-ms-enum": {
-        "name": "AttestationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "none",
-            "value": "none",
-            "description": "none"
-          },
-          {
-            "name": "tpm",
-            "value": "tpm",
-            "description": "tpm"
-          },
-          {
-            "name": "x509",
-            "value": "x509",
-            "description": "x509"
-          },
-          {
-            "name": "symmetricKey",
-            "value": "symmetricKey",
-            "description": "symmetricKey"
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Attestation Type.",
+          "enum": [
+            "none",
+            "tpm",
+            "x509",
+            "symmetricKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AttestationType",
+            "modelAsString": true
           }
-        ]
+        },
+        "tpm": {
+          "$ref": "#/definitions/TpmAttestation"
+        },
+        "x509": {
+          "$ref": "#/definitions/X509Attestation"
+        },
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyAttestation"
+        }
       }
     },
     "BulkEnrollmentGroupOperation": {
-      "type": "object",
       "description": "Bulk enrollment operation.",
+      "required": [
+        "enrollmentGroups",
+        "mode"
+      ],
+      "type": "object",
       "properties": {
         "enrollmentGroups": {
-          "type": "array",
           "description": "Enrollment items",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/EnrollmentGroup"
           }
         },
         "mode": {
-          "$ref": "#/definitions/BulkEnrollmentMode",
-          "description": "Operation mode."
+          "description": "Operation mode.",
+          "enum": [
+            "create",
+            "update",
+            "updateIfMatchETag",
+            "delete"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationMode",
+            "modelAsString": true
+          }
         }
-      },
-      "required": [
-        "enrollmentGroups",
-        "mode"
-      ]
+      }
     },
     "BulkEnrollmentGroupOperationError": {
-      "type": "object",
       "description": "Bulk enrollment operation error.",
-      "properties": {
-        "enrollmentGroupId": {
-          "type": "string",
-          "description": "Enrollment group id.",
-          "minLength": 1
-        },
-        "errorCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code"
-        },
-        "errorStatus": {
-          "type": "string",
-          "description": "Error status.",
-          "minLength": 1
-        }
-      },
       "required": [
         "enrollmentGroupId",
         "errorCode",
         "errorStatus"
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "enrollmentGroupId": {
+          "description": "Enrollment group id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "Error code",
+          "type": "integer"
+        },
+        "errorStatus": {
+          "description": "Error status.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
     },
     "BulkEnrollmentGroupOperationResult": {
-      "type": "object",
       "description": "Results of a bulk enrollment group operation.",
+      "required": [
+        "isSuccessful"
+      ],
+      "type": "object",
       "properties": {
         "errors": {
-          "type": "array",
           "description": "Registration errors",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/BulkEnrollmentGroupOperationError"
           }
         },
         "isSuccessful": {
-          "type": "boolean",
-          "description": "Indicates if the operation was successful in its entirety."
+          "description": "Indicates if the operation was successful in its entirety.",
+          "type": "boolean"
         }
-      },
-      "required": [
-        "isSuccessful"
-      ]
-    },
-    "BulkEnrollmentMode": {
-      "type": "string",
-      "description": "Bulk enrollment operation mode.",
-      "enum": [
-        "create",
-        "update",
-        "updateIfMatchETag",
-        "delete"
-      ],
-      "x-ms-enum": {
-        "name": "BulkEnrollmentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "create",
-            "value": "create",
-            "description": "create"
-          },
-          {
-            "name": "update",
-            "value": "update",
-            "description": "update"
-          },
-          {
-            "name": "updateIfMatchETag",
-            "value": "updateIfMatchETag",
-            "description": "updateIfMatchETag"
-          },
-          {
-            "name": "delete",
-            "value": "delete",
-            "description": "delete"
-          }
-        ]
       }
     },
     "BulkEnrollmentOperation": {
-      "type": "object",
       "description": "Bulk enrollment operation.",
+      "required": [
+        "enrollments",
+        "mode"
+      ],
+      "type": "object",
       "properties": {
         "enrollments": {
-          "type": "array",
           "description": "Enrollment items",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/IndividualEnrollment"
           }
         },
         "mode": {
-          "$ref": "#/definitions/BulkEnrollmentMode",
-          "description": "Operation mode."
+          "description": "Operation mode.",
+          "enum": [
+            "create",
+            "update",
+            "updateIfMatchETag",
+            "delete"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BulkEnrollmentMode",
+            "modelAsString": true
+          }
         }
-      },
-      "required": [
-        "enrollments",
-        "mode"
-      ]
+      }
     },
     "BulkEnrollmentOperationError": {
-      "type": "object",
       "description": "Bulk enrollment operation error",
+      "required": [
+        "errorCode",
+        "errorStatus",
+        "registrationId"
+      ],
+      "type": "object",
       "properties": {
         "registrationId": {
-          "type": "string",
-          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end.",
-          "minLength": 1
+          "description": "This id is used to uniquely identify a device registration of an enrollment.\r\nA case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+          "minLength": 1,
+          "type": "string"
         },
         "errorCode": {
-          "type": "integer",
           "format": "int32",
-          "description": "Error code"
+          "description": "Error code",
+          "type": "integer"
         },
         "errorStatus": {
-          "type": "string",
           "description": "Error status.",
-          "minLength": 1
+          "minLength": 1,
+          "type": "string"
         }
-      },
-      "required": [
-        "registrationId",
-        "errorCode",
-        "errorStatus"
-      ]
+      }
     },
     "BulkEnrollmentOperationResult": {
-      "type": "object",
       "description": "Results of a bulk enrollment operation",
+      "required": [
+        "isSuccessful"
+      ],
+      "type": "object",
       "properties": {
         "errors": {
-          "type": "array",
           "description": "Registration errors",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/BulkEnrollmentOperationError"
           }
         },
         "isSuccessful": {
-          "type": "boolean",
-          "description": "Indicates if the operation was successful in its entirety."
+          "description": "Indicates if the operation was successful in its entirety.",
+          "type": "boolean"
         }
-      },
-      "required": [
-        "isSuccessful"
-      ]
+      }
     },
     "CustomAllocationDefinition": {
-      "type": "object",
       "description": "This tells DPS which webhook to call when using custom allocation.",
+      "required": [
+        "apiVersion",
+        "webhookUrl"
+      ],
+      "type": "object",
       "properties": {
         "webhookUrl": {
-          "type": "string",
           "description": "The webhook URL used for allocation requests.",
-          "minLength": 1
+          "minLength": 1,
+          "type": "string"
         },
         "apiVersion": {
-          "type": "string",
-          "description": "The API version of the provisioning service types (such as\nIndividualEnrollment) sent in the custom allocation request. Minimum supported\nversion: \"2018-09-01-preview\".",
-          "minLength": 1
+          "description": "The API version of the provisioning service types (such as IndividualEnrollment) sent in the custom allocation request. Minimum supported version: \"2018-09-01-preview\".",
+          "minLength": 1,
+          "type": "string"
         }
-      },
-      "required": [
-        "webhookUrl",
-        "apiVersion"
-      ]
+      }
     },
     "DeviceCapabilities": {
-      "type": "object",
       "description": "Device capabilities.",
-      "properties": {
-        "iotEdge": {
-          "type": "boolean",
-          "description": "If set to true, this device is an IoTEdge device.",
-          "default": false
-        }
-      },
       "required": [
         "iotEdge"
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "iotEdge": {
+          "description": "If set to true, this device is an IoTEdge device.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
     },
     "DeviceRegistrationState": {
-      "type": "object",
       "description": "Device registration state.",
+      "type": "object",
       "properties": {
         "registrationId": {
+          "description": "This id is used to uniquely identify a device registration of an enrollment.\r\nA case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
           "type": "string",
-          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end.",
           "readOnly": true
         },
         "createdDateTimeUtc": {
-          "type": "string",
           "format": "date-time",
           "description": "Registration create date time (in UTC).",
+          "type": "string",
           "readOnly": true
         },
         "assignedHub": {
-          "type": "string",
           "description": "Assigned Azure IoT Hub.",
+          "type": "string",
           "readOnly": true
         },
         "deviceId": {
-          "type": "string",
           "description": "Device ID.",
+          "type": "string",
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/EnrollmentStatus",
           "description": "Enrollment status.",
-          "readOnly": true
+          "enum": [
+            "unassigned",
+            "assigning",
+            "assigned",
+            "failed",
+            "disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EnrollmentStatus",
+            "modelAsString": true
+          }
         },
         "substatus": {
-          "$ref": "#/definitions/AssignedDeviceSubstatus",
-          "description": "Substatus for 'Assigned' devices. Possible values include -\n'initialAssignment': Device has been assigned to an IoT hub for the first time,\n'deviceDataMigrated': Device has been assigned to a different IoT hub and its\ndevice data was migrated from the previously assigned IoT hub. Device data was\nremoved from the previously assigned IoT hub, 'deviceDataReset':  Device has\nbeen assigned to a different IoT hub and its device data was populated from the\ninitial state stored in the enrollment. Device data was removed from the\npreviously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has\nbeen re-provisioned to a previously assigned IoT hub.",
-          "readOnly": true
+          "description": "Substatus for 'Assigned' devices. Possible values include - 'initialAssignment': Device has been assigned to an IoT hub for the first time, 'deviceDataMigrated': Device has been assigned to a different IoT hub and its device data was migrated from the previously assigned IoT hub. Device data was removed from the previously assigned IoT hub, 'deviceDataReset':  Device has been assigned to a different IoT hub and its device data was populated from the initial state stored in the enrollment. Device data was removed from the previously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has been re-provisioned to a previously assigned IoT hub.",
+          "enum": [
+            "initialAssignment",
+            "deviceDataMigrated",
+            "deviceDataReset",
+            "reprovisionedToInitialAssignment"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssignedDeviceSubstatus",
+            "modelAsString": true
+          }
         },
         "errorCode": {
-          "type": "integer",
           "format": "int32",
           "description": "Error code.",
+          "type": "integer",
           "readOnly": true
         },
         "errorMessage": {
-          "type": "string",
           "description": "Error message.",
+          "type": "string",
           "readOnly": true
         },
         "lastUpdatedDateTimeUtc": {
-          "type": "string",
           "format": "date-time",
           "description": "Last updated date time (in UTC).",
+          "type": "string",
           "readOnly": true
         },
         "etag": {
-          "type": "string",
           "description": "The entity tag associated with the resource.",
+          "type": "string",
           "readOnly": true
         },
         "payload": {
           "type": "object",
-          "description": "Custom allocation payload returned from the webhook to the device.",
-          "additionalProperties": {},
           "readOnly": true
         }
       }
     },
     "EnrollmentGroup": {
-      "type": "object",
       "description": "Enrollment group record.",
+      "required": [
+        "attestation",
+        "enrollmentGroupId"
+      ],
+      "type": "object",
       "properties": {
         "enrollmentGroupId": {
-          "type": "string",
           "description": "Enrollment Group ID.",
-          "minLength": 1
+          "minLength": 1,
+          "type": "string"
         },
         "attestation": {
-          "$ref": "#/definitions/AttestationMechanism",
-          "description": "Attestation method used by the device."
+          "$ref": "#/definitions/AttestationMechanism"
         },
         "capabilities": {
-          "$ref": "#/definitions/DeviceCapabilities",
-          "description": "Capabilities of the device."
+          "$ref": "#/definitions/DeviceCapabilities"
         },
         "iotHubHostName": {
-          "type": "string",
-          "description": "The Iot Hub host name."
+          "description": "The Iot Hub host name.",
+          "type": "string"
         },
         "credentialPolicyName": {
-          "type": "string",
-          "description": "Linked Azure Device Registry credential policy name (optional)."
+          "description": "Linked Azure Device Registry credential policy name (optional).",
+          "type": "string"
         },
         "initialTwin": {
-          "$ref": "#/definitions/InitialTwin",
-          "description": "Initial device twin."
+          "$ref": "#/definitions/InitialTwin"
         },
         "etag": {
-          "type": "string",
-          "description": "The entity tag associated with the resource."
+          "description": "The entity tag associated with the resource.",
+          "type": "string"
         },
         "provisioningStatus": {
-          "type": "string",
           "description": "The provisioning status.",
           "default": "enabled",
           "enum": [
             "enabled",
             "disabled"
           ],
+          "type": "string",
           "x-ms-enum": {
             "name": "ProvisioningStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "enabled",
-                "value": "enabled",
-                "description": "enabled"
-              },
-              {
-                "name": "disabled",
-                "value": "disabled",
-                "description": "disabled"
-              }
-            ]
+            "modelAsString": true
           }
         },
         "reprovisionPolicy": {
-          "$ref": "#/definitions/ReprovisionPolicy",
-          "description": "The behavior when a device is re-provisioned to an IoT hub."
+          "$ref": "#/definitions/ReprovisionPolicy"
         },
         "createdDateTimeUtc": {
-          "type": "string",
           "format": "date-time",
           "description": "The DateTime this resource was created.",
+          "type": "string",
           "readOnly": true
         },
         "lastUpdatedDateTimeUtc": {
-          "type": "string",
           "format": "date-time",
           "description": "The DateTime this resource was last updated.",
+          "type": "string",
           "readOnly": true
         },
         "allocationPolicy": {
-          "$ref": "#/definitions/AllocationPolicy",
-          "description": "The allocation policy of this resource. This policy overrides the tenant level\nallocation policy for this individual enrollment or enrollment group. Possible\nvalues include 'hashed': Linked IoT hubs are equally likely to have devices\nprovisioned to them, 'geoLatency':  Devices are provisioned to an IoT hub with\nthe lowest latency to the device.If multiple linked IoT hubs would provide the\nsame lowest latency, the provisioning service hashes devices across those hubs,\n'static' : Specification of the desired IoT hub in the enrollment list takes\npriority over the service-level allocation policy, 'custom': Devices are\nprovisioned to an IoT hub based on your own custom logic. The provisioning\nservice passes information about the device to the logic, and the logic returns\nthe desired IoT hub as well as the desired initial configuration. We recommend\nusing Azure Functions to host your logic."
+          "description": "The allocation policy of this resource. This policy overrides the tenant level allocation policy for this individual enrollment or enrollment group. Possible values include 'hashed': Linked IoT hubs are equally likely to have devices provisioned to them, 'geoLatency':  Devices are provisioned to an IoT hub with the lowest latency to the device.If multiple linked IoT hubs would provide the same lowest latency, the provisioning service hashes devices across those hubs, 'static' : Specification of the desired IoT hub in the enrollment list takes priority over the service-level allocation policy, 'custom': Devices are provisioned to an IoT hub based on your own custom logic. The provisioning service passes information about the device to the logic, and the logic returns the desired IoT hub as well as the desired initial configuration. We recommend using Azure Functions to host your logic.",
+          "enum": [
+            "hashed",
+            "geoLatency",
+            "static",
+            "custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AllocationPolicy",
+            "modelAsString": true
+          }
         },
         "iotHubs": {
+          "description": "The list of IoT Hub hostnames the device(s) in this resource can be allocated to. Must be a subset of tenant level list of IoT hubs.",
           "type": "array",
-          "description": "The list of IoT Hub hostnames the device(s) in this resource can be allocated\nto. Must be a subset of tenant level list of IoT hubs.",
           "items": {
             "type": "string"
           }
         },
         "customAllocationDefinition": {
-          "$ref": "#/definitions/CustomAllocationDefinition",
-          "description": "This tells DPS which webhook to call when using custom allocation."
+          "$ref": "#/definitions/CustomAllocationDefinition"
         }
-      },
-      "required": [
-        "enrollmentGroupId",
-        "attestation"
-      ]
-    },
-    "EnrollmentGroupQueryResponse": {
-      "type": "object",
-      "description": "Response model for enrollment group query operations.\nUses int64 for x-ms-max-item-count in the preview version to match original behavior.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "The list of enrollment groups.",
-          "items": {
-            "$ref": "#/definitions/EnrollmentGroup"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "EnrollmentStatus": {
-      "type": "string",
-      "description": "Enrollment status.",
-      "enum": [
-        "unassigned",
-        "assigning",
-        "assigned",
-        "failed",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "EnrollmentStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "unassigned",
-            "value": "unassigned",
-            "description": "unassigned"
-          },
-          {
-            "name": "assigning",
-            "value": "assigning",
-            "description": "assigning"
-          },
-          {
-            "name": "assigned",
-            "value": "assigned",
-            "description": "assigned"
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "failed"
-          },
-          {
-            "name": "disabled",
-            "value": "disabled",
-            "description": "disabled"
-          }
-        ]
       }
     },
     "IndividualEnrollment": {
-      "type": "object",
       "description": "The device enrollment record.",
+      "required": [
+        "attestation",
+        "registrationId"
+      ],
+      "type": "object",
       "properties": {
         "registrationId": {
-          "type": "string",
-          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end.",
-          "minLength": 1
+          "description": "This id is used to uniquely identify a device registration of an enrollment.\r\nA case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+          "minLength": 1,
+          "type": "string"
         },
         "deviceId": {
-          "type": "string",
-          "description": "Desired IoT Hub device ID (optional)."
+          "description": "Desired IoT Hub device ID (optional).",
+          "type": "string"
         },
         "credentialPolicyName": {
-          "type": "string",
-          "description": "Linked Azure Device Registry credential policy name (optional)."
+          "description": "Linked Azure Device Registry credential policy name (optional).",
+          "type": "string"
         },
         "registrationState": {
-          "$ref": "#/definitions/DeviceRegistrationState",
-          "description": "Current registration status.",
-          "readOnly": true
+          "$ref": "#/definitions/DeviceRegistrationState"
         },
         "optionalDeviceInformation": {
-          "$ref": "#/definitions/TwinCollection",
-          "description": "Optional Device Information."
+          "$ref": "#/definitions/TwinCollection"
         },
         "attestation": {
-          "$ref": "#/definitions/AttestationMechanism",
-          "description": "Attestation method used by the device."
+          "$ref": "#/definitions/AttestationMechanism"
         },
         "capabilities": {
-          "$ref": "#/definitions/DeviceCapabilities",
-          "description": "Capabilities of the device."
+          "$ref": "#/definitions/DeviceCapabilities"
         },
         "iotHubHostName": {
-          "type": "string",
-          "description": "The Iot Hub host name."
+          "description": "The Iot Hub host name.",
+          "type": "string"
         },
         "initialTwin": {
-          "$ref": "#/definitions/InitialTwin",
-          "description": "Initial device twin."
+          "$ref": "#/definitions/InitialTwin"
         },
         "etag": {
-          "type": "string",
-          "description": "The entity tag associated with the resource."
+          "description": "The entity tag associated with the resource.",
+          "type": "string"
         },
         "provisioningStatus": {
-          "type": "string",
           "description": "The provisioning status.",
           "default": "enabled",
           "enum": [
             "enabled",
             "disabled"
           ],
+          "type": "string",
           "x-ms-enum": {
             "name": "ProvisioningStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "enabled",
-                "value": "enabled",
-                "description": "enabled"
-              },
-              {
-                "name": "disabled",
-                "value": "disabled",
-                "description": "disabled"
-              }
-            ]
+            "modelAsString": true
           }
         },
         "reprovisionPolicy": {
-          "$ref": "#/definitions/ReprovisionPolicy",
-          "description": "The behavior when a device is re-provisioned to an IoT hub."
+          "$ref": "#/definitions/ReprovisionPolicy"
         },
         "createdDateTimeUtc": {
-          "type": "string",
           "format": "date-time",
           "description": "The DateTime this resource was created.",
+          "type": "string",
           "readOnly": true
         },
         "lastUpdatedDateTimeUtc": {
-          "type": "string",
           "format": "date-time",
           "description": "The DateTime this resource was last updated.",
+          "type": "string",
           "readOnly": true
         },
         "allocationPolicy": {
-          "$ref": "#/definitions/AllocationPolicy",
-          "description": "The allocation policy of this resource. This policy overrides the tenant level\nallocation policy for this individual enrollment or enrollment group. Possible\nvalues include 'hashed': Linked IoT hubs are equally likely to have devices\nprovisioned to them, 'geoLatency':  Devices are provisioned to an IoT hub with\nthe lowest latency to the device.If multiple linked IoT hubs would provide the\nsame lowest latency, the provisioning service hashes devices across those hubs,\n'static' : Specification of the desired IoT hub in the enrollment list takes\npriority over the service-level allocation policy, 'custom': Devices are\nprovisioned to an IoT hub based on your own custom logic. The provisioning\nservice passes information about the device to the logic, and the logic returns\nthe desired IoT hub as well as the desired initial configuration. We recommend\nusing Azure Functions to host your logic."
+          "description": "The allocation policy of this resource. This policy overrides the tenant level allocation policy for this individual enrollment or enrollment group. Possible values include 'hashed': Linked IoT hubs are equally likely to have devices provisioned to them, 'geoLatency':  Devices are provisioned to an IoT hub with the lowest latency to the device.If multiple linked IoT hubs would provide the same lowest latency, the provisioning service hashes devices across those hubs, 'static' : Specification of the desired IoT hub in the enrollment list takes priority over the service-level allocation policy, 'custom': Devices are provisioned to an IoT hub based on your own custom logic. The provisioning service passes information about the device to the logic, and the logic returns the desired IoT hub as well as the desired initial configuration. We recommend using Azure Functions to host your logic.",
+          "enum": [
+            "hashed",
+            "geoLatency",
+            "static",
+            "custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AllocationPolicy",
+            "modelAsString": true
+          }
         },
         "iotHubs": {
+          "description": "The list of IoT Hub hostnames the device(s) in this resource can be allocated to. Must be a subset of tenant level list of IoT hubs.",
           "type": "array",
-          "description": "The list of IoT Hub hostnames the device(s) in this resource can be allocated\nto. Must be a subset of tenant level list of IoT hubs.",
           "items": {
             "type": "string"
           }
         },
         "customAllocationDefinition": {
-          "$ref": "#/definitions/CustomAllocationDefinition",
-          "description": "This tells DPS which webhook to call when using custom allocation."
+          "$ref": "#/definitions/CustomAllocationDefinition"
         }
-      },
-      "required": [
-        "registrationId",
-        "attestation"
-      ]
+      }
     },
     "InitialTwin": {
-      "type": "object",
       "description": "Initial device twin. Contains a subset of the properties of Twin.",
+      "type": "object",
       "properties": {
         "tags": {
-          "$ref": "#/definitions/TwinCollection",
-          "description": "Twin tags."
+          "$ref": "#/definitions/TwinCollection"
         },
         "properties": {
-          "$ref": "#/definitions/InitialTwinProperties",
-          "description": "Twin desired properties."
+          "$ref": "#/definitions/InitialTwinProperties"
         }
       }
     },
     "InitialTwinProperties": {
-      "type": "object",
       "description": "Represents the initial properties that will be set on the device twin.",
+      "type": "object",
       "properties": {
         "desired": {
-          "$ref": "#/definitions/TwinCollection",
-          "description": "Gets and sets the InitialTwin desired properties."
+          "$ref": "#/definitions/TwinCollection"
         }
       }
     },
     "Metadata": {
-      "type": "object",
       "description": "Metadata for the TwinCollection",
+      "type": "object",
       "properties": {
         "lastUpdated": {
-          "type": "string",
           "format": "date-time",
-          "description": "Last time the TwinCollection was updated"
+          "description": "Last time the TwinCollection was updated",
+          "type": "string"
         },
         "lastUpdatedVersion": {
-          "type": "integer",
           "format": "int32",
-          "description": "This is null for reported properties metadata and is not null for desired\nproperties metadata."
+          "description": "This is null for reported properties metadata and is not null for desired properties metadata.",
+          "type": "integer"
         }
       }
     },
     "ProvisioningServiceErrorDetails": {
+      "description": "Contains the properties of an error returned by the Azure IoT Hub Provisioning Service.",
       "type": "object",
-      "description": "Contains the properties of an error returned by the Azure IoT Hub Provisioning\nService.",
       "properties": {
         "errorCode": {
-          "type": "integer",
           "format": "int32",
-          "description": "Error code for the operation."
+          "type": "integer"
         },
         "trackingId": {
-          "type": "string",
-          "description": "Tracking ID for the error."
+          "type": "string"
         },
         "message": {
-          "type": "string",
-          "description": "Human-readable error message."
+          "type": "string"
         },
         "info": {
           "type": "object",
-          "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           }
         },
         "timestampUtc": {
-          "type": "string",
           "format": "date-time",
-          "description": "UTC timestamp of the error."
+          "type": "string"
         }
-      }
-    },
-    "ProvisioningStatus": {
-      "type": "string",
-      "description": "The provisioning status.",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "enabled",
-            "value": "enabled",
-            "description": "enabled"
-          },
-          {
-            "name": "disabled",
-            "value": "disabled",
-            "description": "disabled"
-          }
-        ]
       }
     },
     "QuerySpecification": {
-      "type": "object",
-      "description": "Query specification for enrollment queries.",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "OData query string."
-        }
-      },
       "required": [
         "query"
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      }
     },
     "ReprovisionPolicy": {
-      "type": "object",
       "description": "The behavior of the service when a device is re-provisioned to an IoT hub.",
+      "required": [
+        "migrateDeviceData",
+        "updateHubAssignment"
+      ],
+      "type": "object",
       "properties": {
         "updateHubAssignment": {
-          "type": "boolean",
-          "description": "When set to true (default), the Device Provisioning Service will evaluate the\ndevice's IoT Hub assignment and update it if necessary for any provisioning\nrequests beyond the first from a given device. If set to false, the device will\nstay assigned to its current IoT hub.",
-          "default": true
+          "description": "When set to true (default), the Device Provisioning Service will evaluate the device's IoT Hub assignment and update it if necessary for any provisioning requests beyond the first from a given device. If set to false, the device will stay assigned to its current IoT hub.",
+          "default": true,
+          "type": "boolean"
         },
         "migrateDeviceData": {
-          "type": "boolean",
-          "description": "When set to true (default), the Device Provisioning Service will migrate the\ndevice's data (twin, device capabilities, and device ID) from one IoT hub to\nanother during an IoT hub assignment update. If set to false, the Device\nProvisioning Service will reset the device's data to the initial desired\nconfiguration stored in the corresponding enrollment list.",
-          "default": true
+          "description": "When set to true (default), the Device Provisioning Service will migrate the device's data (twin, device capabilities, and device ID) from one IoT hub to another during an IoT hub assignment update. If set to false, the Device Provisioning Service will reset the device's data to the initial desired configuration stored in the corresponding enrollment list.",
+          "default": true,
+          "type": "boolean"
         }
-      },
-      "required": [
-        "updateHubAssignment",
-        "migrateDeviceData"
-      ]
+      }
     },
     "SymmetricKeyAttestation": {
-      "type": "object",
       "description": "Attestation via SymmetricKey.",
+      "type": "object",
       "properties": {
         "primaryKey": {
-          "type": "string",
-          "description": "Primary symmetric key."
+          "description": "Primary symmetric key.",
+          "type": "string"
         },
         "secondaryKey": {
-          "type": "string",
-          "description": "Secondary symmetric key."
+          "description": "Secondary symmetric key.",
+          "type": "string"
         }
       }
     },
     "TpmAttestation": {
-      "type": "object",
       "description": "Attestation via TPM.",
-      "properties": {
-        "endorsementKey": {
-          "type": "string",
-          "description": "TPM endorsement key."
-        },
-        "storageRootKey": {
-          "type": "string",
-          "description": "TPM storage root key."
-        }
-      },
       "required": [
         "endorsementKey"
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "endorsementKey": {
+          "type": "string"
+        },
+        "storageRootKey": {
+          "type": "string"
+        }
+      }
     },
     "TwinCollection": {
-      "type": "object",
       "description": "Represents a collection of properties within a Twin",
+      "type": "object",
       "properties": {
         "version": {
-          "type": "integer",
           "format": "int32",
-          "description": "Version of the TwinCollection"
+          "description": "Version of the TwinCollection",
+          "type": "integer"
         },
         "count": {
-          "type": "integer",
           "format": "int32",
-          "description": "Number of properties in the TwinCollection"
+          "description": "Number of properties in the TwinCollection",
+          "type": "integer"
         },
         "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "Metadata for the TwinCollection"
+          "$ref": "#/definitions/Metadata"
         }
       },
       "additionalProperties": {
@@ -1740,127 +1591,108 @@
       }
     },
     "X509Attestation": {
-      "type": "object",
       "description": "Attestation via X509.",
+      "type": "object",
       "properties": {
         "clientCertificates": {
-          "$ref": "#/definitions/X509Certificates",
-          "description": "Primary and secondary certificates"
+          "$ref": "#/definitions/X509Certificates"
         },
         "signingCertificates": {
-          "$ref": "#/definitions/X509Certificates",
-          "description": "Primary and secondary certificates"
+          "$ref": "#/definitions/X509Certificates"
         },
         "caReferences": {
-          "$ref": "#/definitions/X509CAReferences",
-          "description": "Primary and secondary CA references."
+          "$ref": "#/definitions/X509CAReferences"
         }
       }
     },
     "X509CAReferences": {
-      "type": "object",
       "description": "Primary and secondary CA references.",
+      "type": "object",
       "properties": {
         "primary": {
-          "type": "string",
-          "description": "Primary CA reference."
+          "type": "string"
         },
         "secondary": {
-          "type": "string",
-          "description": "Secondary CA reference."
+          "type": "string"
         }
       }
     },
     "X509CertificateInfo": {
-      "type": "object",
       "description": "X509 certificate info.",
-      "properties": {
-        "subjectName": {
-          "type": "string",
-          "description": "Subject name of the certificate."
-        },
-        "sha1Thumbprint": {
-          "type": "string",
-          "description": "SHA-1 thumbprint of the certificate."
-        },
-        "sha256Thumbprint": {
-          "type": "string",
-          "description": "SHA-256 thumbprint of the certificate."
-        },
-        "issuerName": {
-          "type": "string",
-          "description": "Issuer name of the certificate."
-        },
-        "notBeforeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Certificate validity start (UTC)."
-        },
-        "notAfterUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Certificate validity end (UTC)."
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "Serial number of the certificate."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Version of the certificate."
-        }
-      },
       "required": [
-        "subjectName",
+        "issuerName",
+        "notAfterUtc",
+        "notBeforeUtc",
+        "serialNumber",
         "sha1Thumbprint",
         "sha256Thumbprint",
-        "issuerName",
-        "notBeforeUtc",
-        "notAfterUtc",
-        "serialNumber",
+        "subjectName",
         "version"
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "subjectName": {
+          "type": "string"
+        },
+        "sha1Thumbprint": {
+          "type": "string"
+        },
+        "sha256Thumbprint": {
+          "type": "string"
+        },
+        "issuerName": {
+          "type": "string"
+        },
+        "notBeforeUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "notAfterUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
     },
     "X509CertificateWithInfo": {
-      "type": "object",
       "description": "Certificate and Certificate info",
+      "type": "object",
       "properties": {
         "certificate": {
-          "type": "string",
-          "description": "PEM-formatted certificate string."
+          "type": "string"
         },
         "info": {
-          "$ref": "#/definitions/X509CertificateInfo",
-          "description": "X509 certificate info."
+          "$ref": "#/definitions/X509CertificateInfo"
         }
       }
     },
     "X509Certificates": {
-      "type": "object",
       "description": "Primary and secondary certificates",
+      "type": "object",
       "properties": {
         "primary": {
-          "$ref": "#/definitions/X509CertificateWithInfo",
-          "description": "Certificate and Certificate info"
+          "$ref": "#/definitions/X509CertificateWithInfo"
         },
         "secondary": {
-          "$ref": "#/definitions/X509CertificateWithInfo",
-          "description": "Certificate and Certificate info"
+          "$ref": "#/definitions/X509CertificateWithInfo"
         }
       }
     }
   },
   "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
+    "ApiVersionParameter": {
       "in": "query",
-      "description": "The API version to use for this operation.",
+      "name": "api-version",
+      "description": "The API version to use for the request. Supported versions include: 2021-10-01, 2025-07-01-preview",
       "required": true,
       "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
+      "x-ms-parameter-location": "client"
     }
   }
 }

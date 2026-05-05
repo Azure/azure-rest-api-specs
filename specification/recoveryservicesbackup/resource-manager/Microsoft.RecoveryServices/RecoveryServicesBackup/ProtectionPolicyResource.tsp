@@ -12,25 +12,21 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup policy. Workload-specific backup policies are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(VaultResource)
-model ProtectionPolicyResource is ProxyResource<ProtectionPolicy> {
+model ProtectionPolicyResource
+  is TrackedResourceWithOptionalLocation<ProtectionPolicy> {
   ...ResourceNameParameter<
     Resource = ProtectionPolicyResource,
     KeyName = "policyName",
     SegmentName = "backupPolicies",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
 }
 

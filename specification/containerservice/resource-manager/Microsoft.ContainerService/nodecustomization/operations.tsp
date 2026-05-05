@@ -9,11 +9,9 @@ namespace Microsoft.ContainerService;
 
 @armResourceOperations
 interface NodeCustomizations {
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Get a node customization at the latest version. Use Prepared Image Specification APIs instead.")
+  @doc("Get a node customization at the latest version.")
   get is ArmResourceRead<NodeCustomization>;
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Create or update a node customization resource. This will create a new version. Use Prepared Image Specification APIs instead.")
+  @doc("Create or update a node customization resource. This will create a new version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NodeCustomization,
     Azure.ResourceManager.Foundations.BaseParameters<NodeCustomization> &
@@ -21,8 +19,6 @@ interface NodeCustomizations {
       IfNoneMatchParameters<NodeCustomization>
   >;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Update a node customization. Use Prepared Image Specification APIs instead.")
   update is ArmCustomPatchAsync<
     NodeCustomization,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -33,35 +29,29 @@ interface NodeCustomizations {
       IfMatchParameters<NodeCustomization>
   >;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Delete a node customization. This operation will be blocked if the resource is in use. Use Prepared Image Specification APIs instead.")
+  @doc("Delete a node customization. This operation will be blocked if the resource is in use.")
   delete is ArmResourceDeleteWithoutOkAsync<
     NodeCustomization,
     Azure.ResourceManager.Foundations.BaseParameters<NodeCustomization> &
       IfMatchParameters<NodeCustomization>
   >;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Delete a node customization version. This operation will be blocked if the node customization version is in use. Use Prepared Image Specification APIs instead.")
+  @doc("Delete a node customization version. This operation will be blocked if the node customization version is in use.")
   deleteVersion is ArmResourceDeleteWithoutOkAsync<
     NodeCustomizationVersion,
     Azure.ResourceManager.Foundations.BaseParameters<NodeCustomizationVersion> &
       IfMatchParameters<NodeCustomizationVersion>
   >;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: List the node customizations in a resource group at the latest version. Use Prepared Image Specification APIs instead.")
+  @doc("List the node customizations in a resource group at the latest version.")
   listByResourceGroup is ArmResourceListByParent<NodeCustomization>;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: List the node customizations in a subscription at the latest version. Use Prepared Image Specification APIs instead.")
+  @doc("List the node customizations in a subscription at the latest version.")
   listBySubscription is ArmListBySubscription<NodeCustomization>;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Get a node customization at a particular version. Use Prepared Image Specification APIs instead.")
+  @doc("Get a node customization at a particular version.")
   getVersion is ArmResourceRead<NodeCustomizationVersion>;
 
-  #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: List all versions of a node customization. Use Prepared Image Specification APIs instead.")
+  @doc("List all versions of a node customization.")
   listVersions is ArmResourceListByParent<NodeCustomizationVersion>;
 }

@@ -55,8 +55,7 @@ interface NetworkFeaturesOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface NetworkFeaturesOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).
@@ -97,8 +96,7 @@ interface NetworkFeaturesSlotOperationGroupOps
         view: string,
       }
     > {}
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface NetworkFeaturesSlotOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).

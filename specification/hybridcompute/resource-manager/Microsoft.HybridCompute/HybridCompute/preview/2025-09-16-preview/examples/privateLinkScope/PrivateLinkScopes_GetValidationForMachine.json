@@ -2,27 +2,25 @@
   "parameters": {
     "api-version": "2025-09-16-preview",
     "location": "wus2",
-    "machineName": "machineName",
+    "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4919",
     "resourceGroupName": "my-resource-group",
-    "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4919"
+    "machineName": "machineName"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/microsoft.hybridcompute/privateLinkScopes/my-privatelinkscope",
+        "publicNetworkAccess": "Disabled",
         "connectionDetails": [
           {
-            "groupId": "groupId",
             "id": "id",
+            "privateIpAddress": "ip",
             "linkIdentifier": "linkId",
-            "memberName": "memberName",
-            "privateIpAddress": "ip"
+            "groupId": "groupId",
+            "memberName": "memberName"
           }
-        ],
-        "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/microsoft.hybridcompute/privateLinkScopes/my-privatelinkscope",
-        "publicNetworkAccess": "Disabled"
+        ]
       }
     }
-  },
-  "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
-  "title": "PrivateLinkScopeGet"
+  }
 }

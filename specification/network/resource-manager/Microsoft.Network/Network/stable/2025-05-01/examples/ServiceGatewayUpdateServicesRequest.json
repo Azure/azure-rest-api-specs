@@ -1,6 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
     "parameters": {
       "action": "FullUpdate",
       "serviceRequests": [
@@ -8,32 +11,29 @@
           "service": {
             "name": "Service1",
             "properties": {
+              "serviceType": "Inbound",
               "isDefault": true,
               "loadBalancerBackendPools": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
                 }
               ],
-              "publicNatGatewayId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway",
-              "serviceType": "Inbound"
+              "publicNatGatewayId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway"
             }
           }
         },
         {
-          "isDelete": true,
           "service": {
             "name": "Service2",
             "properties": {
-              "isDefault": false,
-              "serviceType": "Outbound"
+              "serviceType": "Outbound",
+              "isDefault": false
             }
-          }
+          },
+          "isDelete": true
         }
       ]
-    },
-    "resourceGroupName": "rg1",
-    "serviceGatewayName": "sg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "202": {
@@ -46,7 +46,5 @@
         "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-05-01"
       }
     }
-  },
-  "operationId": "ServiceGateways_UpdateServices",
-  "title": "Create or full update services in service gateway"
+  }
 }

@@ -1,22 +1,22 @@
 {
   "parameters": {
-    "alertsSuppressionRuleName": "dismissIpAnomalyAlerts",
     "api-version": "2019-01-01-preview",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "alertsSuppressionRuleName": "dismissIpAnomalyAlerts"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertsSuppressionRules/dismissIpAnomalyAlerts",
         "name": "dismissIpAnomalyAlerts",
         "type": "Microsoft.Security/alertsSuppressionRules",
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertsSuppressionRules/dismissIpAnomalyAlerts",
         "properties": {
           "alertType": "IpAnomaly",
-          "comment": "Test VM",
-          "expirationDateUtc": "2019-12-01T19:50:47.083633Z",
           "lastModifiedUtc": "2019-07-31T19:50:47.083633Z",
-          "reason": "FalsePositive",
+          "expirationDateUtc": "2019-12-01T19:50:47.083633Z",
           "state": "Enabled",
+          "reason": "FalsePositive",
+          "comment": "Test VM",
           "suppressionAlertsScope": {
             "allOf": [
               {
@@ -27,15 +27,13 @@
                 ]
               },
               {
-                "contains": "POWERSHELL.EXE",
-                "field": "entities.process.commandline"
+                "field": "entities.process.commandline",
+                "contains": "POWERSHELL.EXE"
               }
             ]
           }
         }
       }
     }
-  },
-  "operationId": "AlertsSuppressionRules_Get",
-  "title": "Get suppression alert rule for subscription"
+  }
 }

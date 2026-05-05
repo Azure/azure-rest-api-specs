@@ -10,50 +10,45 @@ using TypeSpec.Http;
 
 namespace Microsoft.RecoveryServices;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Empty documentation for back compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
 @doc("")
 model BackupResourceEncryptionConfigExtendedResource
-  is ProxyResource<BackupResourceEncryptionConfigExtended> {
+  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfigExtended> {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigExtendedResource,
     KeyName = "backupEncryptionConfig",
     SegmentName = "backupEncryptionConfigs",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Empty documentation for back compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+@singleton("backupResourceEncryptionConfig")
+@parentResource(VaultResource)
 @doc("")
-model BackupResourceEncryptionConfigResource extends Foundations.Resource {
-  /** The properties of the backup resource encryption config */
-  properties?: BackupResourceEncryptionConfig;
-
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
+model BackupResourceEncryptionConfigResource
+  is TrackedResourceWithOptionalLocation<BackupResourceEncryptionConfig> {
+  ...ResourceNameParameter<
+    Resource = BackupResourceEncryptionConfigResource,
+    KeyName = "backupEncryptionConfig",
+    SegmentName = "backupEncryptionConfigs",
+    NamePattern = ""
+  >;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
 }
 
@@ -71,8 +66,7 @@ interface BackupResourceEncryptionConfigs {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  update is Legacy.CreateOrReplaceSync<
-    BackupResourceEncryptionConfigExtendedResource,
+  update is ArmResourceCreateOrReplaceSync<
     BackupResourceEncryptionConfigResource,
     Response = OkResponse
   >;
@@ -80,8 +74,13 @@ interface BackupResourceEncryptionConfigs {
 
 @@doc(BackupResourceEncryptionConfigExtendedResource.name, "");
 @@doc(BackupResourceEncryptionConfigExtendedResource.properties,
-  "The properties of the backup resource encryption config extended resource"
+  "BackupResourceEncryptionConfigExtendedResource properties"
 );
 @@doc(BackupResourceEncryptionConfigs.update::parameters.resource,
   "Vault encryption input config request"
+);
+
+@@doc(BackupResourceEncryptionConfigResource.name, "");
+@@doc(BackupResourceEncryptionConfigResource.properties,
+  "BackupResourceEncryptionConfigResource properties"
 );

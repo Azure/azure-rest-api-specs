@@ -1,5 +1,9 @@
 {
   "parameters": {
+    "api-version": "2015-05-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "my-resource-group",
+    "resourceName": "my-component",
     "BillingFeaturesProperties": {
       "CurrentBillingFeatures": [
         "Basic",
@@ -9,11 +13,7 @@
         "Cap": 100,
         "StopSendNotificationWhenHitCap": true
       }
-    },
-    "api-version": "2015-05-01",
-    "resourceGroupName": "my-resource-group",
-    "resourceName": "my-component",
-    "subscriptionId": "subid"
+    }
   },
   "responses": {
     "200": {
@@ -26,13 +26,11 @@
           "Cap": 100,
           "MaxHistoryCap": 500,
           "ResetTime": 16,
-          "StopSendNotificationWhenHitCap": true,
+          "WarningThreshold": 90,
           "StopSendNotificationWhenHitThreshold": false,
-          "WarningThreshold": 90
+          "StopSendNotificationWhenHitCap": true
         }
       }
     }
-  },
-  "operationId": "ComponentCurrentBillingFeatures_Update",
-  "title": "ComponentCurrentBillingFeaturesUpdate"
+  }
 }

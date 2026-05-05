@@ -27,25 +27,7 @@ These are the global settings for the Managed Network Fabric.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-07-15
-```
-
-### Tag: package-2025-07-15
-
-These settings apply only when `--tag=package-2025-07-15` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-07-15'
-input-file:
-  - Microsoft.ManagedNetworkFabric/stable/2025-07-15/managednetworkfabric.json
-suppressions:
-  - code: ArmResourcePropertiesBag
-    reason: Suppressing errors to conform to the existing published API
-    from: managednetworkfabric.json
-    where: $.definitions["InternetGateway"]
-  - code: ArmResourcePropertiesBag
-    from: managednetworkfabric.json
-    reason: Suppressing errors to conform to the existing published API
-    where: $.definitions["NetworkFabricSku"]
+tag: package-2024-06-15-preview
 ```
 
 ### Tag: package-2024-06-15-preview
@@ -148,10 +130,12 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
+  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_managednetworkfabric']
 ```
@@ -164,10 +148,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
@@ -175,3 +155,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

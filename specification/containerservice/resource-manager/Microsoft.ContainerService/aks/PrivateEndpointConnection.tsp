@@ -107,7 +107,6 @@ model PrivateEndpointConnectionDeleteOkResponse {
 /**
  * The current provisioning state.
  */
-@Azure.Core.lroStatus
 union PrivateEndpointConnectionProvisioningState {
   string,
 

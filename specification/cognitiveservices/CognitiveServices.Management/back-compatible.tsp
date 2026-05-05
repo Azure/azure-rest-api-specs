@@ -6,20 +6,11 @@ using Microsoft.CognitiveServices;
 @@clientName(Accounts.create::parameters.resource, "account");
 @@clientName(Accounts.update::parameters.properties, "account");
 @@clientName(Accounts.regenerateKey::parameters.body, "parameters");
-@@clientLocation(Accounts.privateLinkResourcesList,
-  "PrivateLinkResources",
-  "!csharp"
-);
+@@clientLocation(Accounts.privateLinkResourcesList, "PrivateLinkResources");
 @@clientName(Accounts.privateLinkResourcesList, "List");
-@@clientLocation(Accounts.createOrUpdate,
-  "TestRaiExternalSafetyProvider",
-  "!csharp"
-);
+@@clientLocation(Accounts.createOrUpdate, "TestRaiExternalSafetyProvider");
 @@clientName(Accounts.createOrUpdate::parameters.resource, "safetyProvider");
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork,
-  "ManagedNetworkProvisions",
-  "!csharp"
-);
+@@clientLocation(Accounts.provisionManagedNetwork, "ManagedNetworkProvisions");
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "properties"
@@ -31,35 +22,23 @@ using Microsoft.CognitiveServices;
 @@clientName(CommitmentPlans.createOrUpdate::parameters.resource,
   "commitmentPlan"
 );
-@@clientLocation(CommitmentPlanOperationGroup.getPlan,
-  CommitmentPlans,
-  "!csharp"
-);
+@@clientLocation(CommitmentPlanOperationGroup.getPlan, CommitmentPlans);
 @@clientLocation(CommitmentPlanOperationGroup.createOrUpdatePlan,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
 @@clientName(CommitmentPlanOperationGroup.createOrUpdatePlan::parameters.resource,
   "commitmentPlan"
 );
-@@clientLocation(CommitmentPlanOperationGroup.updatePlan,
-  CommitmentPlans,
-  "!csharp"
-);
+@@clientLocation(CommitmentPlanOperationGroup.updatePlan, CommitmentPlans);
 @@clientName(CommitmentPlanOperationGroup.updatePlan::parameters.properties,
   "commitmentPlan"
 );
-@@clientLocation(CommitmentPlanOperationGroup.deletePlan,
-  CommitmentPlans,
-  "!csharp"
-);
+@@clientLocation(CommitmentPlanOperationGroup.deletePlan, CommitmentPlans);
 @@clientLocation(CommitmentPlanOperationGroup.listPlansByResourceGroup,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
 @@clientLocation(CommitmentPlanOperationGroup.listPlansBySubscription,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
 
 @@clientName(EncryptionScopes.createOrUpdate::parameters.resource,
@@ -72,9 +51,9 @@ using Microsoft.CognitiveServices;
 );
 
 @@clientName(RaiBlocklists.createOrUpdate::parameters.resource, "raiBlocklist");
-@@clientLocation(RaiBlocklists.batchAdd, RaiBlocklistItems, "!csharp");
+@@clientLocation(RaiBlocklists.batchAdd, RaiBlocklistItems);
 @@clientName(RaiBlocklists.batchAdd::parameters.body, "raiBlocklistItems");
-@@clientLocation(RaiBlocklists.batchDelete, RaiBlocklistItems, "!csharp");
+@@clientLocation(RaiBlocklists.batchDelete, RaiBlocklistItems);
 @@clientName(RaiBlocklists.batchDelete::parameters.body,
   "raiBlocklistItemsNames"
 );
@@ -86,47 +65,39 @@ using Microsoft.CognitiveServices;
 @@clientName(RaiTopics.createOrUpdate::parameters.resource, "raiTopic");
 
 @@clientLocation(RaiExternalSafetyProviderSchemas.get,
-  "RaiExternalSafetyProvider",
-  "!csharp"
+  "RaiExternalSafetyProvider"
 );
 @@clientLocation(RaiExternalSafetyProviderSchemas.createOrUpdate,
-  "RaiExternalSafetyProvider",
-  "!csharp"
+  "RaiExternalSafetyProvider"
 );
 @@clientName(RaiExternalSafetyProviderSchemas.createOrUpdate::parameters.resource,
   "safetyProvider"
 );
 @@clientLocation(RaiExternalSafetyProviderSchemas.delete,
-  "RaiExternalSafetyProvider",
-  "!csharp"
+  "RaiExternalSafetyProvider"
 );
 @@clientLocation(RaiExternalSafetyProviderSchemas.list,
-  "RaiExternalSafetyProviders",
-  "!csharp"
+  "RaiExternalSafetyProviders"
 );
 
 @@clientName(RaiToolLabels.createOrUpdate::parameters.resource, "raiToolLabel");
 
 @@clientLocation(CommitmentPlanAccountAssociations.getAssociation,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
 @@clientLocation(CommitmentPlanAccountAssociations.createOrUpdateAssociation,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
 @@clientName(CommitmentPlanAccountAssociations.createOrUpdateAssociation::parameters.resource,
   "association"
 );
 @@clientLocation(CommitmentPlanAccountAssociations.deleteAssociation,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
 @@clientLocation(CommitmentPlanAccountAssociations.listAssociations,
-  CommitmentPlans,
-  "!csharp"
+  CommitmentPlans
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator to flatten CommitmentPlanAccountAssociation.properties for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommitmentPlanAccountAssociation.properties
 );
 
@@ -136,7 +107,7 @@ using Microsoft.CognitiveServices;
 @@clientName(DefenderForAISettings.update::parameters.properties,
   "defenderForAISettings"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator to flatten DefenderForAISetting.properties for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DefenderForAISetting.properties
 );
 
@@ -144,44 +115,36 @@ using Microsoft.CognitiveServices;
 @@clientName(Projects.update::parameters.properties, "project");
 
 @@clientLocation(ConnectionPropertiesV2BasicResources.get,
-  "AccountConnections",
-  "!csharp"
+  "AccountConnections"
 );
 @@clientLocation(ConnectionPropertiesV2BasicResources.create,
-  "AccountConnections",
-  "!csharp"
+  "AccountConnections"
 );
 @@clientName(ConnectionPropertiesV2BasicResources.create::parameters.resource,
   "connection"
 );
 @@clientLocation(ConnectionPropertiesV2BasicResources.update,
-  "AccountConnections",
-  "!csharp"
+  "AccountConnections"
 );
 @@clientName(ConnectionPropertiesV2BasicResources.update::parameters.properties,
   "connection"
 );
 @@clientLocation(ConnectionPropertiesV2BasicResources.delete,
-  "AccountConnections",
-  "!csharp"
+  "AccountConnections"
 );
 @@clientLocation(ConnectionPropertiesV2BasicResources.list,
-  "AccountConnections",
-  "!csharp"
+  "AccountConnections"
 );
 @@clientName(ProjectConnections.create::parameters.resource, "connection");
 @@clientName(ProjectConnections.update::parameters.properties, "connection");
 
-@@clientLocation(CapabilityHosts.get, "AccountCapabilityHosts", "!csharp");
-@@clientLocation(CapabilityHosts.createOrUpdate,
-  "AccountCapabilityHosts",
-  "!csharp"
-);
+@@clientLocation(CapabilityHosts.get, "AccountCapabilityHosts");
+@@clientLocation(CapabilityHosts.createOrUpdate, "AccountCapabilityHosts");
 @@clientName(CapabilityHosts.createOrUpdate::parameters.resource,
   "capabilityHost"
 );
-@@clientLocation(CapabilityHosts.delete, "AccountCapabilityHosts", "!csharp");
-@@clientLocation(CapabilityHosts.list, "AccountCapabilityHosts", "!csharp");
+@@clientLocation(CapabilityHosts.delete, "AccountCapabilityHosts");
+@@clientLocation(CapabilityHosts.list, "AccountCapabilityHosts");
 
 @@clientName(ProjectCapabilityHosts.createOrUpdate::parameters.resource,
   "capabilityHost"
@@ -190,88 +153,65 @@ using Microsoft.CognitiveServices;
 @@clientName(QuotaTiers.createOrUpdate::parameters.resource, "tier");
 @@clientName(QuotaTiers.update::parameters.properties, "tier");
 
-@@clientLocation(OutboundRuleBasicResources.get, "OutboundRule", "!csharp");
-@@clientLocation(OutboundRuleBasicResources.createOrUpdate,
-  "OutboundRule",
-  "!csharp"
-);
+@@clientLocation(OutboundRuleBasicResources.get, "OutboundRule");
+@@clientLocation(OutboundRuleBasicResources.createOrUpdate, "OutboundRule");
 @@clientName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(OutboundRuleBasicResources.delete, "OutboundRule", "!csharp");
-@@clientLocation(OutboundRuleBasicResources.list, "OutboundRule", "!csharp");
+@@clientLocation(OutboundRuleBasicResources.delete, "OutboundRule");
+@@clientLocation(OutboundRuleBasicResources.list, "OutboundRule");
 
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.get,
-  "ManagedNetworkSettings",
-  "!csharp"
+  "ManagedNetworkSettings"
 );
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.put,
-  "ManagedNetworkSettings",
-  "!csharp"
+  "ManagedNetworkSettings"
 );
 @@clientName(ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
   "body"
 );
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.patch,
-  "ManagedNetworkSettings",
-  "!csharp"
+  "ManagedNetworkSettings"
 );
 @@clientName(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "body"
 );
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.list,
-  "ManagedNetworkSettings",
-  "!csharp"
-);
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.delete,
-  "ManagedNetworkSettings",
-  "!csharp"
+  "ManagedNetworkSettings"
 );
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.post,
-  "OutboundRules",
-  "!csharp"
+  "OutboundRules"
 );
 
 @@clientName(AgentApplications.createOrUpdate::parameters.resource, "body");
 
-@@clientLocation(AgentDeploymentResources.get, "AgentDeployments", "!csharp");
-@@clientLocation(AgentDeploymentResources.createOrUpdate,
-  "AgentDeployments",
-  "!csharp"
-);
+@@clientLocation(AgentDeploymentResources.get, "AgentDeployments");
+@@clientLocation(AgentDeploymentResources.createOrUpdate, "AgentDeployments");
 @@clientName(AgentDeploymentResources.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(AgentDeploymentResources.delete,
-  "AgentDeployments",
-  "!csharp"
-);
-@@clientLocation(AgentDeploymentResources.list, "AgentDeployments", "!csharp");
-@@clientLocation(AgentDeploymentResources.start, "AgentDeployments", "!csharp");
-@@clientLocation(AgentDeploymentResources.stop, "AgentDeployments", "!csharp");
+@@clientLocation(AgentDeploymentResources.delete, "AgentDeployments");
+@@clientLocation(AgentDeploymentResources.list, "AgentDeployments");
+@@clientLocation(AgentDeploymentResources.start, "AgentDeployments");
+@@clientLocation(AgentDeploymentResources.stop, "AgentDeployments");
 
-@@clientLocation(ResourceSkusOperationGroup.list, "ResourceSkus", "!csharp");
+@@clientLocation(DeletedAccountsOperationGroup.list, DeletedAccounts);
 
-@@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");
+@@clientLocation(ResourceSkusOperationGroup.list, "ResourceSkus");
+
+@@clientLocation(UsagesOperationGroup.list, "Usages");
 
 @@clientName(calculateModelCapacity, "calculateModelCapacity");
 
-@@clientLocation(CommitmentTiersOperationGroup.list,
-  "CommitmentTiers",
-  "!csharp"
-);
+@@clientLocation(CommitmentTiersOperationGroup.list, "CommitmentTiers");
 
-@@clientLocation(ModelsOperationGroup.list, "Models", "!csharp");
+@@clientLocation(ModelsOperationGroup.list, "Models");
 
 @@clientLocation(LocationBasedModelCapacitiesOperationGroup.list,
-  "LocationBasedModelCapacities",
-  "!csharp"
+  "LocationBasedModelCapacities"
 );
 
-@@clientLocation(ModelCapacitiesOperationGroup.list,
-  "ModelCapacities",
-  "!csharp"
-);
+@@clientLocation(ModelCapacitiesOperationGroup.list, "ModelCapacities");
 @@clientName(calculateModelCapacity::parameters.body, "parameters");
 @@clientName(checkDomainAvailability::parameters.body, "parameters");
 @@clientName(checkSkuAvailability::parameters.body, "parameters");

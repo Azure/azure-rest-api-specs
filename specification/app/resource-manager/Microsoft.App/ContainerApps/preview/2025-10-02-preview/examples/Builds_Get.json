@@ -1,23 +1,30 @@
 {
   "operationId": "Builds_Get",
+  "title": "Builds_Get_0",
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "buildName": "testBuild",
-    "builderName": "testBuilder",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "builderName": "testBuilder",
+    "buildName": "testBuild"
   },
-  "title": "Builds_Get_0",
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild",
         "name": "testBuild",
         "type": "Microsoft.App/builders/builds",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild",
         "properties": {
+          "provisioningState": "Succeeded",
           "buildStatus": "InProgress",
+          "destinationContainerRegistry": {
+            "server": "test.azurecr.io",
+            "image": "test.azurecr.io/repo:tag"
+          },
           "configuration": {
             "baseOs": "DebianBullseye",
+            "platform": "dotnetcore",
+            "platformVersion": "7.0",
             "environmentVariables": [
               {
                 "name": "foo1",
@@ -28,56 +35,49 @@
                 "value": "bar2"
               }
             ],
-            "platform": "dotnetcore",
-            "platformVersion": "7.0",
             "preBuildSteps": [
               {
                 "description": "First pre build step.",
+                "scripts": [
+                  "echo 'hello'",
+                  "echo 'world'"
+                ],
                 "httpGet": {
+                  "url": "https://microsoft.com",
                   "fileName": "output.txt",
                   "headers": [
                     "foo",
                     "bar"
-                  ],
-                  "url": "https://microsoft.com"
-                },
-                "scripts": [
-                  "echo 'hello'",
-                  "echo 'world'"
-                ]
+                  ]
+                }
               },
               {
                 "description": "Second pre build step.",
-                "httpGet": {
-                  "fileName": "output.txt",
-                  "headers": [
-                    "foo"
-                  ],
-                  "url": "https://microsoft.com"
-                },
                 "scripts": [
                   "echo 'hello'",
                   "echo 'again'"
-                ]
+                ],
+                "httpGet": {
+                  "url": "https://microsoft.com",
+                  "fileName": "output.txt",
+                  "headers": [
+                    "foo"
+                  ]
+                }
               }
             ]
           },
-          "destinationContainerRegistry": {
-            "image": "test.azurecr.io/repo:tag",
-            "server": "test.azurecr.io"
-          },
+          "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload",
           "logStreamEndpoint": "https://foo.azurecontainerapps.dev/logstream",
-          "provisioningState": "Succeeded",
-          "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken",
-          "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload"
+          "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken"
         },
         "systemData": {
-          "createdAt": "2022-10-11T11:05:51.4940669Z",
           "createdBy": "sample@microsoft.com",
           "createdByType": "User",
-          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
           "lastModifiedBy": "sample@microsoft.com",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
         }
       }
     }

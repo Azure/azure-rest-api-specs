@@ -100,10 +100,9 @@ namespace Microsoft.ApiManagement;
  */
 enum Versions {
   /**
-   * The 2025-09-01-preview API version.
+   * The 2025-03-01-preview API version.
    */
-  @previewVersion
-  v2025_09_01_preview: "2025-09-01-preview",
+  v2025_03_01_preview: "2025-03-01-preview",
 }
 
 @armResourceOperations(#{ omitTags: true })

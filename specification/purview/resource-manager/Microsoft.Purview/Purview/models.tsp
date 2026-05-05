@@ -361,9 +361,9 @@ union ManagedIdentityType {
   SystemAssigned: "SystemAssigned",
 
   /**
-   * Both SystemAssigned and UserAssigned identities.
+   * UserAssigned
    */
-  SystemAssignedUserAssigned: "SystemAssigned,UserAssigned",
+  UserAssigned: "UserAssigned",
 }
 
 /**

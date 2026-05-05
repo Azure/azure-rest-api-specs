@@ -53,8 +53,7 @@ interface RecommendationRuleOps
       }
     > {}
 
-@tag("Recommendations")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface RecommendationRules {
   /**
    * Description for Get a recommendation rule for an app.

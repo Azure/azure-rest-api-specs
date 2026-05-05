@@ -1,33 +1,38 @@
 {
   "parameters": {
-    "api-version": "2025-04-01-preview",
-    "iotConnectorName": "blue",
-    "resourceGroupName": "testRG",
     "subscriptionId": "subid",
-    "workspaceName": "workspace1"
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "iotConnectorName": "blue",
+    "api-version": "2025-04-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://nextlink.url",
+        "nextLink": "string",
         "value": [
           {
             "name": "dest1",
-            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
-            "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
             "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest1",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
             "location": "westus",
+            "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
             "properties": {
+              "provisioningState": "Succeeded",
+              "resourceIdentityResolutionType": "Create",
+              "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
               "fhirMapping": {
                 "content": {
+                  "templateType": "CollectionFhirTemplate",
                   "template": [
                     {
+                      "templateType": "CodeValueFhir",
                       "template": {
                         "codes": [
                           {
                             "code": "8867-4",
-                            "display": "Heart rate",
-                            "system": "http://loinc.org"
+                            "system": "http://loinc.org",
+                            "display": "Heart rate"
                           }
                         ],
                         "periodInterval": 60,
@@ -38,41 +43,41 @@
                           "valueName": "hr",
                           "valueType": "SampledData"
                         }
-                      },
-                      "templateType": "CodeValueFhir"
+                      }
                     }
-                  ],
-                  "templateType": "CollectionFhirTemplate"
+                  ]
                 }
-              },
-              "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
-              "provisioningState": "Succeeded",
-              "resourceIdentityResolutionType": "Create"
+              }
             },
             "systemData": {
-              "createdAt": "2021-01-28T19:26:24.072Z",
               "createdBy": "string",
-              "lastModifiedAt": "2021-01-28T19:26:24.072Z",
-              "lastModifiedBy": "string"
+              "createdAt": "2021-01-28T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-28T19:26:24.072Z"
             }
           },
           {
             "name": "dest2",
-            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
-            "etag": "00000000-0000-0000-f6ac-912ca49e01d6",
             "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest2",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
             "location": "westus",
+            "etag": "00000000-0000-0000-f6ac-912ca49e01d6",
             "properties": {
+              "provisioningState": "Suceeded",
+              "resourceIdentityResolutionType": "Lookup",
+              "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
               "fhirMapping": {
                 "content": {
+                  "templateType": "CollectionFhirTemplate",
                   "template": [
                     {
+                      "templateType": "CodeValueFhir",
                       "template": {
                         "codes": [
                           {
                             "code": "8867-4",
-                            "display": "Heart rate",
-                            "system": "http://loinc.org"
+                            "system": "http://loinc.org",
+                            "display": "Heart rate"
                           }
                         ],
                         "periodInterval": 60,
@@ -83,28 +88,21 @@
                           "valueName": "hr",
                           "valueType": "SampledData"
                         }
-                      },
-                      "templateType": "CodeValueFhir"
+                      }
                     }
-                  ],
-                  "templateType": "CollectionFhirTemplate"
+                  ]
                 }
-              },
-              "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
-              "provisioningState": "Suceeded",
-              "resourceIdentityResolutionType": "Lookup"
+              }
             },
             "systemData": {
-              "createdAt": "2021-01-27T19:26:24.072Z",
               "createdBy": "string",
-              "lastModifiedAt": "2021-01-27T19:26:24.072Z",
-              "lastModifiedBy": "string"
+              "createdAt": "2021-01-27T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-27T19:26:24.072Z"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "FhirDestinations_ListByIotConnector",
-  "title": "List IoT Connectors"
+  }
 }

@@ -19,7 +19,6 @@ import "./ApplicationTypeVersionResource.tsp";
 import "./ApplicationResource.tsp";
 import "./ServiceResource.tsp";
 import "./ClusterCodeVersions.tsp";
-import "./back-compatible.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
@@ -29,7 +28,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Service Fabric Resource Provider API Client
+ * Service Fabric Management Client
  */
 @armProviderNamespace
 @service(#{ title: "ServiceFabricManagementClient" })
@@ -52,15 +51,4 @@ enum Versions {
   v2026_03_01_preview: "2026-03-01-preview",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<OperationListResult>,
-      ErrorModel
-    > {}
-
-@@summary(Operations.list,
-  "Lists all of the available Service Fabric resource provider API operations."
-);
-@@doc(Operations.list,
-  "Get the list of available Service Fabric resource provider API operations."
-);
+interface Operations extends Azure.ResourceManager.Operations {}

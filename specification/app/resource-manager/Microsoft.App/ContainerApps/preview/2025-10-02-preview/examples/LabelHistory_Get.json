@@ -1,17 +1,18 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
     "containerAppName": "testContainerApp",
     "labelName": "dev",
-    "resourceGroupName": "rg",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "api-version": "2025-10-02-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testContainerApp/labelHistory/dev",
         "name": "dev",
         "type": "Microsoft.App/containerApps/labelHistory",
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testContainerApp/labelHistory/dev",
         "properties": {
           "records": [
             {
@@ -22,15 +23,12 @@
             {
               "revision": "testContainerApp--1",
               "start": "2024-10-15T01:12:56+00:00",
-              "status": "Succeeded",
-              "stop": "2024-10-15T05:45:08+00:00"
+              "stop": "2024-10-15T05:45:08+00:00",
+              "status": "Succeeded"
             }
           ]
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "ContainerAppsLabelHistory_GetLabelHistory",
-  "title": "Get Container App's single label history"
+  }
 }

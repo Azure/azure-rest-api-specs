@@ -25,15 +25,15 @@ model Workspace
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Workspace kind (e.g., Default, FeatureStore, Hub, Project)"
   kind?: string;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Azure region where workspace is located"
   location?: string;
   ...Azure.ResourceManager.ResourceSkuProperty;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard ARM resource tags property"
   tags?: Record<string>;
 }
 
@@ -104,7 +104,7 @@ interface Workspaces {
       @query("$skip")
       $skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter workspaces by AI capabilities"
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -129,7 +129,7 @@ interface Workspaces {
       @query("$skip")
       $skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter workspaces by AI capabilities"
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -238,8 +238,6 @@ interface Workspaces {
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.
    */
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
   @action("listConnectionModels")
   @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
@@ -252,8 +250,6 @@ interface Workspaces {
    * Get all the deployments under the workspace scope.
    */
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
   @summary("Get all the deployments under the workspace scope")
   @list
   @get

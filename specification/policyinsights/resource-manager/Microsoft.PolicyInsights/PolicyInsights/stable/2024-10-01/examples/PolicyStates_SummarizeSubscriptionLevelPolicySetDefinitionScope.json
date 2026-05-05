@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "$filter": "PolicyDefinitionAction eq 'deny'",
-    "$from": "2019-10-05T18:00:00Z",
-    "$to": "2019-10-06T18:00:00Z",
-    "$top": 1,
-    "api-version": "2024-10-01",
+    "policyStatesSummaryResource": "latest",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
     "authorizationNamespace": "Microsoft.Authorization",
     "policySetDefinitionName": "3e3807c1-65c9-49e0-a406-82d8ae3e338c",
-    "policyStatesSummaryResource": "latest",
-    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
+    "api-version": "2024-10-01",
+    "$from": "2019-10-05T18:00:00Z",
+    "$to": "2019-10-06T18:00:00Z",
+    "$filter": "PolicyDefinitionAction eq 'deny'",
+    "$top": 1
   },
   "responses": {
     "200": {
@@ -17,12 +17,18 @@
         "@odata.count": 1,
         "value": [
           {
-            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policySetDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c/providers/Microsoft.PolicyInsights/policyStates/$metadata#summary/$entity",
             "@odata.id": null,
-            "policyAssignments": [],
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policySetDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c/providers/Microsoft.PolicyInsights/policyStates/$metadata#summary/$entity",
             "results": {
-              "nonCompliantPolicies": 0,
+              "queryResultsUri": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policySetDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c/providers/Microsoft.PolicyInsights/policyStates/latest/queryResults?api-version=2024-10-01&$from=2019-10-05 18:00:00Z&$to=2019-10-06 18:00:00Z&$filter=(PolicyDefinitionAction eq 'deny') and IsCompliant eq false",
               "nonCompliantResources": 0,
+              "nonCompliantPolicies": 0,
+              "resourceDetails": [
+                {
+                  "complianceState": "compliant",
+                  "count": 140
+                }
+              ],
               "policyDetails": [
                 {
                   "complianceState": "compliant",
@@ -34,20 +40,12 @@
                   "complianceState": "compliant",
                   "count": 1
                 }
-              ],
-              "queryResultsUri": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.Authorization/policySetDefinitions/3e3807c1-65c9-49e0-a406-82d8ae3e338c/providers/Microsoft.PolicyInsights/policyStates/latest/queryResults?api-version=2024-10-01&$from=2019-10-05 18:00:00Z&$to=2019-10-06 18:00:00Z&$filter=(PolicyDefinitionAction eq 'deny') and IsCompliant eq false",
-              "resourceDetails": [
-                {
-                  "complianceState": "compliant",
-                  "count": 140
-                }
               ]
-            }
+            },
+            "policyAssignments": []
           }
         ]
       }
     }
-  },
-  "operationId": "PolicyStates_SummarizeForPolicySetDefinition",
-  "title": "Summarize at policy set definition scope"
+  }
 }

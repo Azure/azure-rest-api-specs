@@ -1,23 +1,24 @@
 {
   "operationId": "Builders_Update",
+  "title": "Builders_Update_0",
   "parameters": {
     "api-version": "2025-10-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg",
+    "builderName": "testBuilder",
     "builderEnvelope": {
       "tags": {
         "mytag1": "myvalue1"
       }
-    },
-    "builderName": "testBuilder",
-    "resourceGroupName": "rg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
-  "title": "Builders_Update_0",
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder",
         "name": "testBuilder",
         "type": "Microsoft.App/builders",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder",
+        "location": "eastus",
         "identity": {
           "type": "SystemAssigned,UserAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -29,8 +30,9 @@
             }
           }
         },
-        "location": "eastus",
         "properties": {
+          "provisioningState": "Succeeded",
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
           "containerRegistries": [
             {
               "containerRegistryServer": "test.azurecr.io",
@@ -40,17 +42,15 @@
               "containerRegistryServer": "test2.azurecr.io",
               "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
             }
-          ],
-          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
-          "provisioningState": "Succeeded"
+          ]
         },
         "systemData": {
-          "createdAt": "2022-10-11T11:05:51.4940669Z",
           "createdBy": "sample@microsoft.com",
           "createdByType": "User",
-          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
           "lastModifiedBy": "sample@microsoft.com",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
         },
         "tags": {
           "mytag1": "myvalue1"

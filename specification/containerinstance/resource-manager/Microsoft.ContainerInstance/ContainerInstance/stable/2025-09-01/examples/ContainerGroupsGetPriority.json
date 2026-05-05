@@ -1,89 +1,87 @@
 {
   "parameters": {
-    "api-version": "2025-09-01",
-    "containerGroupName": "demo1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "demo",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "containerGroupName": "demo1",
+    "api-version": "2025-09-01"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
-        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-        "location": "eastus",
         "properties": {
+          "sku": "Standard",
+          "provisioningState": "Succeeded",
           "containers": [
             {
               "name": "test-container-001",
               "properties": {
+                "image": "alpine:latest",
                 "command": [
                   "/bin/sh",
                   "-c",
                   "sleep 10"
                 ],
+                "ports": [],
                 "environmentVariables": [],
-                "image": "alpine:latest",
                 "instanceView": {
+                  "restartCount": 0,
                   "currentState": {
-                    "detailStatus": "Completed",
+                    "state": "Terminated",
+                    "startTime": "2022-11-11T19:33:44.217Z",
                     "exitCode": 0,
                     "finishTime": "2022-11-11T19:33:55.565Z",
-                    "startTime": "2022-11-11T19:33:44.217Z",
-                    "state": "Terminated"
+                    "detailStatus": "Completed"
                   },
                   "events": [
                     {
-                      "name": "Pulling",
-                      "type": "Normal",
                       "count": 2,
                       "firstTimestamp": "2022-11-11T19:28:22Z",
                       "lastTimestamp": "2022-11-11T19:32:09Z",
-                      "message": "pulling image \"alpine@sha256:1304f174557314a7ed9eddb4eab12fed12cb0cd9809e4c28f29af86979a3c870\""
+                      "name": "Pulling",
+                      "message": "pulling image \"alpine@sha256:1304f174557314a7ed9eddb4eab12fed12cb0cd9809e4c28f29af86979a3c870\"",
+                      "type": "Normal"
                     },
                     {
-                      "name": "Pulled",
-                      "type": "Normal",
                       "count": 2,
                       "firstTimestamp": "2022-11-11T19:32:08Z",
                       "lastTimestamp": "2022-11-11T19:32:38Z",
-                      "message": "Successfully pulled image \"alpine@sha256:1304f174557314a7ed9eddb4eab12fed12cb0cd9809e4c28f29af86979a3c870\""
+                      "name": "Pulled",
+                      "message": "Successfully pulled image \"alpine@sha256:1304f174557314a7ed9eddb4eab12fed12cb0cd9809e4c28f29af86979a3c870\"",
+                      "type": "Normal"
                     },
                     {
-                      "name": "Started",
-                      "type": "Normal",
                       "count": 1,
                       "firstTimestamp": "2022-11-11T19:33:44Z",
                       "lastTimestamp": "2022-11-11T19:33:44Z",
-                      "message": "Started container"
+                      "name": "Started",
+                      "message": "Started container",
+                      "type": "Normal"
                     }
-                  ],
-                  "restartCount": 0
+                  ]
                 },
-                "ports": [],
                 "resources": {
                   "requests": {
-                    "cpu": 1,
-                    "memoryInGB": 1
+                    "memoryInGB": 1,
+                    "cpu": 1
                   }
                 }
               }
             }
           ],
           "initContainers": [],
+          "restartPolicy": "Never",
+          "osType": "Linux",
           "instanceView": {
             "events": [],
             "state": "Succeeded"
           },
-          "osType": "Linux",
-          "priority": "Spot",
-          "provisioningState": "Succeeded",
-          "restartPolicy": "Never",
-          "sku": "Standard"
-        }
+          "priority": "Spot"
+        },
+        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus"
       }
     }
-  },
-  "operationId": "ContainerGroups_Get",
-  "title": "ContainerGroupsGetWithPriority"
+  }
 }

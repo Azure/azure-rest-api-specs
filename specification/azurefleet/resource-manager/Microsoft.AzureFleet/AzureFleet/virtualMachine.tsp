@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
-/** A Launch mode Fleet's virtual machine. */
-@added(Versions.v2026_04_01_preview)
+/** An instant Fleet's virtual machine. */
+@added(Versions.v2025_07_01_preview)
 model VirtualMachine {
   /** The name of the virtual machine. */
   @key("virtualMachineName")
@@ -39,15 +39,18 @@ model VirtualMachine {
 }
 
 /** Virtual Machine operation status values. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2025_07_01_preview)
 union VMOperationStatus {
   string,
 
-  /** Indicates that the virtual machine has not been accepted by Compute yet and is still scheduled to be created. */
-  Launching: "Launching",
-
   /** Indicates that the virtual machine is either in the process of being created or is scheduled to be created. */
   Creating: "Creating",
+
+  /** Indicates that the cancellation request was successful because the virtual machine had not been created yet. */
+  Canceled: "Canceled",
+
+  /** Indicates that the cancellation request could not be applied because the virtual machine had already been created. */
+  CancelFailedStatusUnknown: "CancelFailedStatusUnknown",
 
   /** Indicates that the virtual machine operation failed. */
   Failed: "Failed",
@@ -57,7 +60,7 @@ union VMOperationStatus {
 }
 
 /** The response of a virtual machine list operation. */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2025_07_01_preview)
 model VirtualMachineListResult {
   /** The Virtual Machine items on this page. */
   @pageItems

@@ -57,8 +57,7 @@ interface DeletedSiteOps
       }
     > {}
 
-@tag("DeletedWebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface DeletedSites {
   /**
    * Description for Get deleted app for a subscription at location.
@@ -102,22 +101,7 @@ interface GlobalOps
       }
     > {}
 
-@tag("DeletedWebApps")
-@armResourceOperations(#{ omitTags: true })
-interface GlobalDeletedWebApps {
-  /**
-   * Description for Get all deleted apps for a subscription.
-   */
-  @summary("Get all deleted apps for a subscription.")
-  list is GlobalOps.List<
-    DeletedSite,
-    Response = ArmResponse<DeletedWebAppCollection>,
-    ErrorType = DefaultErrorResponse
-  >;
-}
-
-@tag("Global")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface Global {
   /**
    * Description for Get deleted app for a subscription.
@@ -125,6 +109,16 @@ interface Global {
   @summary("Get deleted app for a subscription.")
   getDeletedWebApp is GlobalOps.Read<
     DeletedSite,
+    ErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Get all deleted apps for a subscription.
+   */
+  @summary("Get all deleted apps for a subscription.")
+  list is GlobalOps.List<
+    DeletedSite,
+    Response = ArmResponse<DeletedWebAppCollection>,
     ErrorType = DefaultErrorResponse
   >;
 

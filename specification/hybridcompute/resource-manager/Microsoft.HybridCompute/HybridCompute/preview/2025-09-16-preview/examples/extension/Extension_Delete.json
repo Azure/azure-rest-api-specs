@@ -1,22 +1,20 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
-    "extensionName": "MMA",
-    "machineName": "myMachine",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "machineName": "myMachine",
+    "extensionName": "MMA",
+    "api-version": "2025-09-16-preview"
   },
   "responses": {
     "200": {},
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "{callbackUri}",
         "Location": "{callbackUrl}",
-        "Retry-After": 200
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
       }
     },
     "204": {}
-  },
-  "operationId": "MachineExtensions_Delete",
-  "title": "Delete a Machine Extension"
+  }
 }

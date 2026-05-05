@@ -1,93 +1,91 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "targetDbName": "db1",
     "api-version": "2025-09-01-preview",
     "parameters": {
       "properties": {
+        "kind": "SqlVm",
+        "sourceDatabaseName": "aaa",
+        "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
         "backupConfiguration": {
+          "targetLocation": {
+            "storageAccountResourceId": "account.database.windows.net",
+            "accountKey": "abcd"
+          },
           "sourceLocation": {
             "fileShare": {
               "path": "C:\\aaa\\bbb\\ccc",
-              "password": "placeholder",
-              "username": "name"
+              "username": "name",
+              "password": "placeholder"
             }
-          },
-          "targetLocation": {
-            "accountKey": "abcd",
-            "storageAccountResourceId": "account.database.windows.net"
           }
         },
-        "kind": "SqlVm",
-        "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
-        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
-        "sourceDatabaseName": "aaa",
         "sourceSqlConnection": {
-          "authentication": "WindowsAuthentication",
           "dataSource": "aaa",
-          "encryptConnection": true,
+          "userName": "bbb",
           "password": "placeholder",
+          "encryptConnection": true,
           "trustServerCertificate": true,
-          "userName": "bbb"
-        },
-        "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName"
-      }
-    },
-    "resourceGroupName": "testrg",
-    "sqlVirtualMachineName": "testvm",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "targetDbName": "db1"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "db1",
-        "type": "Microsoft.DataMigration/databaseMigrations",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm/providers/Microsoft.DataMigration/databaseMigrations/db1",
-        "properties": {
-          "backupConfiguration": {
-            "sourceLocation": {
-              "fileStorageType": "FileShare"
-            }
-          },
-          "endedOn": "0001-01-01T08:00:00Z",
-          "kind": "SqlVm",
-          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
-          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
-          "migrationStatus": "InProgress",
-          "provisioningState": "Succeeded",
-          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
-          "sourceDatabaseName": "sourcename",
-          "sourceServerName": "sourceserver",
-          "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
-          "startedOn": "0001-01-01T08:00:00Z"
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "db1",
-        "type": "Microsoft.DataMigration/databaseMigrations",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm/providers/Microsoft.DataMigration/databaseMigrations/db1",
-        "properties": {
-          "backupConfiguration": {
-            "sourceLocation": {
-              "fileStorageType": "FileShare"
-            }
-          },
-          "endedOn": "0001-01-01T08:00:00Z",
-          "kind": "SqlVm",
-          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
-          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
-          "migrationStatus": "InProgress",
-          "provisioningState": "Succeeded",
-          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
-          "sourceDatabaseName": "sourcename",
-          "sourceServerName": "sourceserver",
-          "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
-          "startedOn": "0001-01-01T08:00:00Z"
+          "authentication": "WindowsAuthentication"
         }
       }
     }
   },
-  "operationId": "DatabaseMigrationsSqlVm_CreateOrUpdate",
-  "title": "Create or Update Database Migration resource with Minimum parameters."
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "backupConfiguration": {
+            "sourceLocation": {
+              "fileStorageType": "FileShare"
+            }
+          },
+          "kind": "SqlVm",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "provisioningState": "Succeeded",
+          "migrationStatus": "InProgress",
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T08:00:00Z",
+          "sourceServerName": "sourceserver",
+          "sourceDatabaseName": "sourcename",
+          "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "backupConfiguration": {
+            "sourceLocation": {
+              "fileStorageType": "FileShare"
+            }
+          },
+          "kind": "SqlVm",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "provisioningState": "Succeeded",
+          "migrationStatus": "InProgress",
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T08:00:00Z",
+          "sourceServerName": "sourceserver",
+          "sourceDatabaseName": "sourcename",
+          "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations"
+      }
+    }
+  }
 }

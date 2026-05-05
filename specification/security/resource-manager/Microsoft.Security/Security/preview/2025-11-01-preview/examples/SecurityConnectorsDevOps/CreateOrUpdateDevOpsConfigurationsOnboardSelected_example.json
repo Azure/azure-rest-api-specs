@@ -1,6 +1,8 @@
 {
   "parameters": {
-    "api-version": "2025-11-01-preview",
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
     "devOpsConfiguration": {
       "properties": {
         "authorization": {
@@ -13,54 +15,50 @@
         ]
       }
     },
-    "resourceGroupName": "myRg",
-    "securityConnectorName": "mySecurityConnectorName",
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
+    "api-version": "2025-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "name": "default",
-        "type": "Microsoft.Security/securityConnectors/devops",
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
         "properties": {
           "autoDiscovery": "Disabled",
-          "provisioningState": "Succeeded",
           "topLevelInventoryList": [
             "org1",
             "org2"
-          ]
-        }
-      },
-      "headers": {}
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
+        "name": "default",
+        "type": "Microsoft.Security/securityConnectors/devops"
+      }
     },
     "201": {
-      "body": {
-        "name": "default",
-        "type": "Microsoft.Security/securityConnectors/devops",
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
-        "properties": {
-          "provisioningState": "Accepted"
-        }
-      },
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Accepted"
+        },
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
+        "name": "default",
+        "type": "Microsoft.Security/securityConnectors/devops"
       }
     },
     "202": {
-      "body": {
-        "name": "default",
-        "type": "Microsoft.Security/securityConnectors/devops",
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
-        "properties": {
-          "provisioningState": "Accepted"
-        }
-      },
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Accepted"
+        },
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
+        "name": "default",
+        "type": "Microsoft.Security/securityConnectors/devops"
       }
     }
-  },
-  "operationId": "DevOpsConfigurations_CreateOrUpdate",
-  "title": "CreateOrUpdate_DevOpsConfigurations_OnboardSelected"
+  }
 }

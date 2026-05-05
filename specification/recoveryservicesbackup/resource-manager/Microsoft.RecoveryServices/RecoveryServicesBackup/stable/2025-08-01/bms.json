@@ -4916,7 +4916,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -4945,7 +4945,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -4986,7 +4987,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -5015,7 +5016,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -5307,10 +5309,6 @@
           }
         ]
       }
-    },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "AzureBackupGoalFeatureSupportRequest": {
       "type": "object",
@@ -7646,7 +7644,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -7660,7 +7658,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -7988,7 +7986,7 @@
       "description": "Base class for backup request. Workload-specific backup requests are derived from this class.",
       "properties": {
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "Resource location."
         },
         "tags": {
@@ -8059,7 +8057,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -8073,7 +8071,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -8124,7 +8122,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupResourceEncryptionConfigExtended",
-          "description": "The properties of the backup resource encryption config extended resource"
+          "description": "BackupResourceEncryptionConfigExtendedResource properties"
         },
         "tags": {
           "type": "object",
@@ -8134,7 +8132,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -8148,7 +8146,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -8158,7 +8156,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupResourceEncryptionConfig",
-          "description": "The properties of the backup resource encryption config"
+          "description": "BackupResourceEncryptionConfigResource properties"
         },
         "tags": {
           "type": "object",
@@ -8168,7 +8166,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -8244,7 +8242,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -8258,7 +8256,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -10012,7 +10010,7 @@
       "description": "Parameters to Provision ILR API.",
       "properties": {
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "Resource location."
         },
         "tags": {
@@ -10709,7 +10707,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -10723,7 +10721,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -12043,7 +12041,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -12057,7 +12055,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -12146,7 +12144,7 @@
       "description": "Protectable Container Class.",
       "properties": {
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "Resource location."
         },
         "tags": {
@@ -12407,7 +12405,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -12421,7 +12419,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -12540,7 +12538,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -12554,7 +12552,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -12690,7 +12688,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -12704,7 +12702,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -12786,7 +12784,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -12800,7 +12798,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -13085,7 +13083,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -13099,7 +13097,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -13300,7 +13298,7 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -13314,7 +13312,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -13566,7 +13564,7 @@
       "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
       "properties": {
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "Resource location."
         },
         "tags": {
@@ -14417,6 +14415,10 @@
         ]
       }
     },
+    "TypeSpec.Http.OkResponse": {
+      "type": "object",
+      "description": "The request has succeeded."
+    },
     "UnlockDeleteRequest": {
       "type": "object",
       "description": "Request body of unlock delete API.",
@@ -14905,7 +14907,7 @@
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
       "properties": {
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "Resource location."
         },
         "tags": {
@@ -15035,7 +15037,7 @@
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
       "properties": {
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "type": "string",
           "description": "Resource location."
         },
         "tags": {

@@ -1,23 +1,27 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01",
+    "resourceGroupName": "demoResource",
+    "containerGroupName": "demo1",
     "Resource": {
       "tags": {
         "tag1key": "tag1Value",
         "tag2key": "tag2Value"
       }
-    },
-    "api-version": "2025-09-01",
-    "containerGroupName": "demo1",
-    "resourceGroupName": "demoResource",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
         "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroups/demo1",
         "location": "WestUs",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "tags": {
+          "tag1key": "tag1Value",
+          "tag2key": "tag2Value"
+        },
         "properties": {
           "containers": [
             {
@@ -59,16 +63,16 @@
           ],
           "imageRegistryCredentials": [],
           "ipAddress": {
-            "type": "Public",
-            "dnsNameLabel": "dnsnamelabel1",
-            "fqdn": "dnsnamelabel1.azure-container.io",
             "ip": "10.0.0.1",
             "ports": [
               {
                 "port": 80,
                 "protocol": "TCP"
               }
-            ]
+            ],
+            "type": "Public",
+            "dnsNameLabel": "dnsnamelabel1",
+            "fqdn": "dnsnamelabel1.azure-container.io"
           },
           "osType": "Linux",
           "provisioningState": "Succeeded",
@@ -89,14 +93,8 @@
               "secret": {}
             }
           ]
-        },
-        "tags": {
-          "tag1key": "tag1Value",
-          "tag2key": "tag2Value"
         }
       }
     }
-  },
-  "operationId": "ContainerGroups_Update",
-  "title": "ContainerGroupsUpdate"
+  }
 }

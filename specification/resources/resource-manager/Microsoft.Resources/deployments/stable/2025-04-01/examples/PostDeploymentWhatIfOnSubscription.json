@@ -1,80 +1,80 @@
 {
   "parameters": {
-    "api-version": "2025-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
     "deploymentName": "my-deployment",
+    "api-version": "2025-04-01",
     "parameters": {
       "location": "westus",
       "properties": {
-        "mode": "Incremental",
-        "parameters": {},
         "templateLink": {
           "uri": "https://example.com/exampleTemplate.json"
-        }
+        },
+        "parameters": {},
+        "mode": "Incremental"
       }
-    },
-    "subscriptionId": "00000000-0000-0000-0000-000000000001"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "status": "Succeeded",
         "properties": {
           "changes": [
             {
-              "after": {
-                "name": "myExistingIdentity",
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myExistingIdentity",
+              "changeType": "Modify",
+              "before": {
                 "apiVersion": "2018-11-30",
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myExistingIdentity",
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+                "name": "myExistingIdentity",
+                "location": "westus2"
+              },
+              "after": {
+                "apiVersion": "2018-11-30",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myExistingIdentity",
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+                "name": "myExistingIdentity",
                 "location": "westus2",
                 "tags": {
                   "myNewTag": "my tag value"
                 }
               },
-              "before": {
-                "name": "myExistingIdentity",
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-                "apiVersion": "2018-11-30",
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myExistingIdentity",
-                "location": "westus2"
-              },
-              "changeType": "Modify",
               "delta": [
                 {
                   "path": "tags.myNewTag",
-                  "after": "my tag value",
-                  "propertyChangeType": "Create"
+                  "propertyChangeType": "Create",
+                  "after": "my tag value"
                 }
-              ],
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myExistingIdentity"
+              ]
             },
             {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myNewIdentity",
+              "changeType": "Create",
               "after": {
-                "name": "myNewIdentity",
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
                 "apiVersion": "2018-11-30",
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myNewIdentity",
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+                "name": "myNewIdentity",
                 "location": "eastus",
                 "tags": {
                   "myOtherNewTag": "another new tag value"
                 }
-              },
-              "changeType": "Create",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myNewIdentity"
+              }
             },
             {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group2",
+              "changeType": "Create",
               "after": {
-                "name": "my-resource-group2",
-                "type": "Microsoft.Resources/resourceGroups",
                 "apiVersion": "2019-03-01",
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group2",
+                "type": "Microsoft.Resources/resourceGroups",
+                "name": "my-resource-group2",
                 "location": "{location3}"
-              },
-              "changeType": "Create",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group2"
+              }
             }
           ]
-        },
-        "status": "Succeeded"
+        }
       }
     },
     "202": {
@@ -82,7 +82,5 @@
         "Location": "/subscriptions/00000000-0000-0000-0000-000000000000/ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
       }
     }
-  },
-  "operationId": "Deployments_WhatIfAtSubscriptionScope",
-  "title": "Predict template changes at subscription scope"
+  }
 }

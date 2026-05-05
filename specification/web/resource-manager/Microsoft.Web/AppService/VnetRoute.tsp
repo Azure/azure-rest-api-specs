@@ -59,8 +59,7 @@ interface VnetRoutesOps
       }
     > {}
 
-@tag("AppServicePlans")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface VnetRoutes {
   /**
    * Description for Get a Virtual Network route in an App Service plan.

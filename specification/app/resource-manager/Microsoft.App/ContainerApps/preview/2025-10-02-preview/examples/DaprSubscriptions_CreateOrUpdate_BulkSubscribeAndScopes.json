@@ -1,15 +1,14 @@
 {
   "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
     "name": "mysubscription",
     "api-version": "2025-10-02-preview",
     "daprSubscriptionEnvelope": {
       "properties": {
-        "bulkSubscribe": {
-          "enabled": true,
-          "maxAwaitDurationMs": 500,
-          "maxMessagesCount": 123
-        },
         "pubsubName": "mypubsubcomponent",
+        "topic": "inventory",
         "routes": {
           "default": "/products"
         },
@@ -17,63 +16,62 @@
           "warehouseapp",
           "customersupportapp"
         ],
-        "topic": "inventory"
+        "bulkSubscribe": {
+          "enabled": true,
+          "maxMessagesCount": 123,
+          "maxAwaitDurationMs": 500
+        }
       }
-    },
-    "environmentName": "myenvironment",
-    "resourceGroupName": "examplerg",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
         "name": "mysubscription",
         "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
         "properties": {
-          "bulkSubscribe": {
-            "enabled": true,
-            "maxAwaitDurationMs": 500,
-            "maxMessagesCount": 123
-          },
           "pubsubName": "mypubsubcomponent",
+          "topic": "inventory",
           "routes": {
-            "default": "/products",
-            "rules": []
+            "rules": [],
+            "default": "/products"
           },
           "scopes": [
             "warehouseapp",
             "customersupportapp"
           ],
-          "topic": "inventory"
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxMessagesCount": 123,
+            "maxAwaitDurationMs": 500
+          }
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
         "name": "mysubscription",
         "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
         "properties": {
-          "bulkSubscribe": {
-            "enabled": true,
-            "maxAwaitDurationMs": 500,
-            "maxMessagesCount": 123
-          },
           "pubsubName": "mypubsubcomponent",
+          "topic": "inventory",
           "routes": {
-            "default": "/products",
-            "rules": []
+            "rules": [],
+            "default": "/products"
           },
           "scopes": [
             "warehouseapp",
             "customersupportapp"
           ],
-          "topic": "inventory"
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxMessagesCount": 123,
+            "maxAwaitDurationMs": 500
+          }
         }
       }
     }
-  },
-  "operationId": "DaprSubscriptions_CreateOrUpdate",
-  "title": "Create or update dapr subscription with bulk subscribe configuration and scopes"
+  }
 }

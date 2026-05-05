@@ -1,24 +1,22 @@
 {
   "parameters": {
-    "api-version": "2022-05-01-preview",
     "resourceGroupName": "rgname",
-    "subscriptionId": "subID"
+    "subscriptionId": "subID",
+    "api-version": "2022-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/subID/resourcegroups/rgname/providers/Microsoft.Authorization/permissions?api-version=2022-05-01-preview&$skiptoken=skiptoken",
         "value": [
           {
             "actions": [],
-            "dataActions": [],
             "notActions": [],
+            "dataActions": [],
             "notDataActions": []
           }
-        ]
+        ],
+        "nextLink": "nextlink"
       }
     }
-  },
-  "operationId": "Permissions_ListForResourceGroup",
-  "title": "List permissions for resource group"
+  }
 }

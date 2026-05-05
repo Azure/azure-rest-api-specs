@@ -1,83 +1,83 @@
 {
   "parameters": {
-    "api-version": "2025-04-01",
-    "deploymentName": "exampleDeploymentName",
     "groupId": "myManagementGruop",
+    "deploymentName": "exampleDeploymentName",
+    "api-version": "2025-04-01",
     "parameters": {
       "location": "eastus",
       "properties": {
-        "mode": "Incremental",
-        "parameters": {},
         "templateLink": {
           "uri": "https://example.com/exampleTemplate.json"
-        }
+        },
+        "parameters": {},
+        "mode": "Incremental"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "status": "Succeeded",
         "properties": {
           "changes": [
             {
+              "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+              "changeType": "Modify",
+              "before": {
+                "apiVersion": "2019-06-01",
+                "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                "type": "Microsoft.Authorization/policyAssignments",
+                "name": "myPolicyAssignment",
+                "location": "westus2",
+                "properties": {
+                  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
+                  "scope": "/subscriptions/00000000-0000-0000-0000-000000000001",
+                  "enforcementMode": "Default"
+                }
+              },
               "after": {
+                "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                "changeType": "Modify",
                 "before": {
-                  "name": "myPolicyAssignment",
-                  "type": "Microsoft.Authorization/policyAssignments",
                   "apiVersion": "2019-06-01",
                   "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                  "type": "Microsoft.Authorization/policyAssignments",
+                  "name": "myPolicyAssignment",
                   "location": "westus2",
                   "properties": {
-                    "enforcementMode": "DoNotEnforce",
                     "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
-                    "scope": "/subscriptions/00000000-0000-0000-0000-000000000001"
+                    "scope": "/subscriptions/00000000-0000-0000-0000-000000000001",
+                    "enforcementMode": "DoNotEnforce"
                   }
                 },
-                "changeType": "Modify",
                 "delta": [
                   {
                     "path": "properties.enforcementMode",
-                    "after": "DoNotEnforce",
+                    "propertyChangeType": "Modify",
                     "before": "Default",
-                    "propertyChangeType": "Modify"
+                    "after": "DoNotEnforce"
                   }
-                ],
-                "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment"
-              },
-              "before": {
-                "name": "myPolicyAssignment",
-                "type": "Microsoft.Authorization/policyAssignments",
-                "apiVersion": "2019-06-01",
-                "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
-                "location": "westus2",
-                "properties": {
-                  "enforcementMode": "Default",
-                  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
-                  "scope": "/subscriptions/00000000-0000-0000-0000-000000000001"
-                }
-              },
-              "changeType": "Modify",
-              "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment"
+                ]
+              }
             },
             {
+              "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment2",
+              "changeType": "Create",
               "after": {
-                "name": "myPolicyAssignment2",
-                "type": "Microsoft.Authorization/policyAssignments",
                 "apiVersion": "2019-06-01",
                 "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment2",
+                "type": "Microsoft.Authorization/policyAssignments",
+                "name": "myPolicyAssignment2",
                 "location": "westus2",
                 "properties": {
-                  "enforcementMode": "Default",
                   "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
-                  "scope": "/subscriptions/00000000-0000-0000-0000-000000000002"
+                  "scope": "/subscriptions/00000000-0000-0000-0000-000000000002",
+                  "enforcementMode": "Default"
                 }
-              },
-              "changeType": "Create",
-              "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment2"
+              }
             }
           ]
-        },
-        "status": "Succeeded"
+        }
       }
     },
     "202": {
@@ -85,7 +85,5 @@
         "Location": "/subscriptions/4d0ca63b-7939-4c9c-afbe-5fafae501724/operationresults/ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
       }
     }
-  },
-  "operationId": "Deployments_WhatIfAtManagementGroupScope",
-  "title": "Predict template changes at management group scope"
+  }
 }

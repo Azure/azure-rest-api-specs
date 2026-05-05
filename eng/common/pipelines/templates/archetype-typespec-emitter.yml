@@ -67,11 +67,6 @@ parameters:
   type: boolean
   default: false
 
-# Optional filter pattern for directory names (e.g., 'Azure.ResourceManager*' to only regenerate management SDKs)
-- name: DirectoryFilterPattern
-  type: string
-  default: ''
-
 # Paths to sparse checkout
 - name: SparseCheckoutPaths
   type: object
@@ -101,18 +96,12 @@ extends:
       pool: ${{ parameters.Pool }}
       jobs:
       - job: Build
-        variables:
-          emitterNpmrcPath: $(Agent.TempDirectory)/${{ parameters.EmitterPackagePath }}/.npmrc
         steps:
         - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
           parameters:
             Paths: ${{ parameters.SparseCheckoutPaths }}
 
         - ${{ parameters.InitializationSteps }}
-
-        - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
-          parameters:
-            npmrcPath: $(emitterNpmrcPath)
 
         # Initialize-WorkingDirectory.ps1 is responsible for setting the emitterVersion output variable.
         - task: PowerShell@2
@@ -132,8 +121,6 @@ extends:
                 -OutputDirectory "$(Build.ArtifactStagingDirectory)"
                 -UseTypeSpecNext:$${{ parameters.UseTypeSpecNext }}
                 -EmitterPackagePath:${{ parameters.EmitterPackagePath }}
-          env:
-            npm_config_userconfig: $(emitterNpmrcPath)
 
         - task: PowerShell@2
           displayName: 'Run build script'
@@ -145,8 +132,6 @@ extends:
               -TargetNpmJsFeed:$${{ parameters.PublishPublic }}
               -EmitterPackagePath:${{ parameters.EmitterPackagePath }}
               -GeneratorVersion: $(initialize.emitterVersion)
-          env:
-            npm_config_userconfig: $(emitterNpmrcPath)
 
         - pwsh: |
             $sourceBranch = '$(Build.SourceBranch)'
@@ -247,7 +232,7 @@ extends:
                 - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
                   parameters:
                     npmrcPath: $(buildArtifactsPath)/packages/.npmrc
-                    registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry/
+                    registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/
         
                 # publish to devops feed
                 - pwsh: |
@@ -270,7 +255,7 @@ extends:
         
                 - ${{ if parameters.PublishPublic }}:
                   # publish to npmjs.org using ESRP
-                  - task: EsrpRelease@11
+                  - task: EsrpRelease@9
                     inputs:
                       displayName: Publish to npmjs.org
                       ConnectedServiceName: Azure SDK PME Managed Identity
@@ -298,7 +283,6 @@ extends:
           pullRequestTargetBranch: 'main'
           buildArtifactsPath: $(Pipeline.Workspace)/build_artifacts
           branchName: $[stageDependencies.Build.Build.outputs['set_branch_name.branchName']]
-          tspClientNpmrcPath: $(Agent.TempDirectory)/tsp-client/.npmrc
         pool: ${{ parameters.Pool }}
         jobs:
         - job: Initialize
@@ -313,16 +297,10 @@ extends:
           - download: current
             displayName: Download pipeline artifacts
 
-          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
-            parameters:
-              npmrcPath: $(tspClientNpmrcPath)
-
           - pwsh: |
               npm ci
             displayName: Install tsp-client
             workingDirectory: $(Build.SourcesDirectory)/eng/common/tsp-client
-            env:
-              npm_config_userconfig: $(tspClientNpmrcPath)
 
           - pwsh: |
               # Resolve EmitterPackageJsonOutputPath to absolute path if it's relative
@@ -348,8 +326,6 @@ extends:
               }
             displayName: Generate emitter-package.json and emitter-package-lock files
             workingDirectory: $(Build.SourcesDirectory)/eng/common/tsp-client
-            env:
-              npm_config_userconfig: $(tspClientNpmrcPath)
 
           - ${{ parameters.InitializationSteps }}
 
@@ -376,7 +352,6 @@ extends:
                 -JobCount ${{ parameters.RegenerationJobCount }}
                 -MinimumPerJob ${{ parameters.MinimumPerJob }}
                 -OnlyTypespec ${{ parameters.OnlyGenerateTypespec }}
-                -DirectoryFilterPattern '${{ parameters.DirectoryFilterPattern }}'
               workingDirectory: $(Build.SourcesDirectory)
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
@@ -391,7 +366,6 @@ extends:
           variables:
             matrixArtifactsPath: $(Pipeline.Workspace)/matrix_artifacts
             AzureSdkRepoName: $[format('azure-sdk/{0}', split(variables['Build.Repository.Name'], '/')[1])]
-            emitterNpmrcPath: $(Agent.TempDirectory)/${{ parameters.EmitterPackagePath }}/.npmrc
           steps:
           - checkout: self
           - pwsh: |
@@ -410,10 +384,6 @@ extends:
 
           - ${{ parameters.InitializationSteps }}
 
-          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
-            parameters:
-              npmrcPath: $(emitterNpmrcPath)
-
           - task: PowerShell@2
             displayName: Call regeneration script
             inputs:
@@ -423,8 +393,6 @@ extends:
                 -PackageDirectoriesFile "$(matrixArtifactsPath)/$(DirectoryList)"
               workingDirectory: $(Build.SourcesDirectory)
             continueOnError: true
-            env:
-              npm_config_userconfig: $(emitterNpmrcPath)
 
           - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
             parameters:
@@ -555,7 +523,6 @@ extends:
             matrix: ${{ parameters.TestMatrix }}
           variables:
             buildArtifactsPath: $(Pipeline.Workspace)/build_artifacts
-            emitterNpmrcPath: $(Agent.TempDirectory)/${{ parameters.EmitterPackagePath }}/.npmrc
           steps:
           - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
             parameters:
@@ -567,10 +534,6 @@ extends:
 
           - ${{ parameters.InitializationSteps }}
 
-          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
-            parameters:
-              npmrcPath: $(emitterNpmrcPath)
-
           - task: PowerShell@2
             displayName: 'Run initialize script'
             inputs:
@@ -579,8 +542,6 @@ extends:
               arguments: > 
                 -BuildArtifactsPath '$(buildArtifactsPath)/lock-files'
                 -EmitterPackagePath: ${{ parameters.EmitterPackagePath }}
-            env:
-              npm_config_userconfig: $(emitterNpmrcPath)
 
           - task: PowerShell@2
             displayName: 'Run test script'
@@ -591,8 +552,6 @@ extends:
                 $(TestArguments)
                 -OutputDirectory "$(Build.ArtifactStagingDirectory)"
                 -EmitterPackagePath: ${{ parameters.EmitterPackagePath }}
-            env:
-              npm_config_userconfig: $(emitterNpmrcPath)
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:

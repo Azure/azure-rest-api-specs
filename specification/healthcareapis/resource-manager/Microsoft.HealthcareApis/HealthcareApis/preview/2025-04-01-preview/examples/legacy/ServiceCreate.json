@@ -1,14 +1,13 @@
 {
   "parameters": {
-    "api-version": "2025-04-01-preview",
-    "resourceGroupName": "rg1",
     "resourceName": "service1",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "subid",
     "serviceDescription": {
-      "identity": {
-        "type": "SystemAssigned"
-      },
-      "kind": "fhir-R4",
       "location": "westus2",
+      "tags": {},
+      "kind": "fhir-R4",
       "properties": {
         "accessPolicies": [
           {
@@ -18,17 +17,22 @@
             "objectId": "5b307da8-43d4-492b-8b66-b0294ade872f"
           }
         ],
+        "cosmosDbConfiguration": {
+          "offerThroughput": 1000,
+          "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key"
+        },
         "authenticationConfiguration": {
-          "audience": "https://azurehealthcareapis.com",
           "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+          "audience": "https://azurehealthcareapis.com",
           "smartProxyEnabled": true
         },
         "corsConfiguration": {
-          "allowCredentials": false,
+          "origins": [
+            "*"
+          ],
           "headers": [
             "*"
           ],
-          "maxAge": 1440,
           "methods": [
             "DELETE",
             "GET",
@@ -37,13 +41,8 @@
             "POST",
             "PUT"
           ],
-          "origins": [
-            "*"
-          ]
-        },
-        "cosmosDbConfiguration": {
-          "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key",
-          "offerThroughput": 1000
+          "maxAge": 1440,
+          "allowCredentials": false
         },
         "exportConfiguration": {
           "storageAccountName": "existingStorageAccount"
@@ -51,25 +50,23 @@
         "privateEndpointConnections": [],
         "publicNetworkAccess": "Disabled"
       },
-      "tags": {}
-    },
-    "subscriptionId": "subid"
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "service1",
-        "type": "Microsoft.HealthcareApis/services",
-        "etag": "etagvalue",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service1",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "03fe6ae0-952c-4e4b-954b-cc0364dd252e",
-          "tenantId": "72f988bf-86f1-41af-91ab-2d8cd011db47"
-        },
-        "kind": "fhir-R4",
+        "name": "service1",
         "location": "West US 2",
+        "type": "Microsoft.HealthcareApis/services",
+        "kind": "fhir-R4",
+        "etag": "etagvalue",
+        "tags": {},
         "properties": {
+          "provisioningState": "Creating",
           "accessPolicies": [
             {
               "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
@@ -78,17 +75,22 @@
               "objectId": "5b307da8-43d4-492b-8b66-b0294ade872f"
             }
           ],
+          "cosmosDbConfiguration": {
+            "offerThroughput": 1000,
+            "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key"
+          },
           "authenticationConfiguration": {
-            "audience": "https://azurehealthcareapis.com",
             "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audience": "https://azurehealthcareapis.com",
             "smartProxyEnabled": true
           },
           "corsConfiguration": {
-            "allowCredentials": false,
+            "origins": [
+              "*"
+            ],
             "headers": [
               "*"
             ],
-            "maxAge": 1440,
             "methods": [
               "DELETE",
               "GET",
@@ -97,38 +99,33 @@
               "POST",
               "PUT"
             ],
-            "origins": [
-              "*"
-            ]
-          },
-          "cosmosDbConfiguration": {
-            "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key",
-            "offerThroughput": 1000
+            "maxAge": 1440,
+            "allowCredentials": false
           },
           "exportConfiguration": {
             "storageAccountName": "existingStorageAccount"
           },
           "privateEndpointConnections": [],
-          "provisioningState": "Creating",
           "publicNetworkAccess": "Disabled"
         },
-        "tags": {}
+        "identity": {
+          "principalId": "03fe6ae0-952c-4e4b-954b-cc0364dd252e",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d8cd011db47",
+          "type": "SystemAssigned"
+        }
       }
     },
     "201": {
       "body": {
-        "name": "service1",
-        "type": "Microsoft.HealthcareApis/services",
-        "etag": "etagvalue",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service1",
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "03fe6ae0-952c-4e4b-954b-cc0364dd252e",
-          "tenantId": "72f988bf-86f1-41af-91ab-2d8cd011db47"
-        },
-        "kind": "fhir-R4",
+        "name": "service1",
         "location": "West US 2",
+        "type": "Microsoft.HealthcareApis/services",
+        "kind": "fhir-R4",
+        "etag": "etagvalue",
+        "tags": {},
         "properties": {
+          "provisioningState": "Creating",
           "accessPolicies": [
             {
               "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
@@ -137,17 +134,21 @@
               "objectId": "5b307da8-43d4-492b-8b66-b0294ade872f"
             }
           ],
+          "cosmosDbConfiguration": {
+            "offerThroughput": 1000
+          },
           "authenticationConfiguration": {
-            "audience": "https://azurehealthcareapis.com",
             "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audience": "https://azurehealthcareapis.com",
             "smartProxyEnabled": true
           },
           "corsConfiguration": {
-            "allowCredentials": false,
+            "origins": [
+              "*"
+            ],
             "headers": [
               "*"
             ],
-            "maxAge": 1440,
             "methods": [
               "DELETE",
               "GET",
@@ -156,24 +157,21 @@
               "POST",
               "PUT"
             ],
-            "origins": [
-              "*"
-            ]
-          },
-          "cosmosDbConfiguration": {
-            "offerThroughput": 1000
+            "maxAge": 1440,
+            "allowCredentials": false
           },
           "exportConfiguration": {
             "storageAccountName": "existingStorageAccount"
           },
           "privateEndpointConnections": [],
-          "provisioningState": "Creating",
           "publicNetworkAccess": "Disabled"
         },
-        "tags": {}
+        "identity": {
+          "principalId": "03fe6ae0-952c-4e4b-954b-cc0364dd252e",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d8cd011db47",
+          "type": "SystemAssigned"
+        }
       }
     }
-  },
-  "operationId": "Services_CreateOrUpdate",
-  "title": "Create or Update a service with all parameters"
+  }
 }

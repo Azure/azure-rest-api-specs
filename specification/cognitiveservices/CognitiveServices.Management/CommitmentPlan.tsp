@@ -14,41 +14,34 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account commitment plan.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'CommitmentPlan' to maintain SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(Account)
 model CommitmentPlan
-  is Azure.ResourceManager.ProxyResource<CommitmentPlanProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CommitmentPlanProperties> {
   ...ResourceNameParameter<
     Resource = CommitmentPlan,
     KeyName = "commitmentPlanName",
     SegmentName = "commitmentPlans",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
 
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The kind (type) of cognitive service account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'kind' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
   /**
    * The resource model definition representing SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'sku' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -76,8 +69,7 @@ interface CommitmentPlanOps
         @segment("commitmentPlans")
         @key
         commitmentPlanName: string,
-      },
-      ResourceName = "CommitmentPlan"
+      }
     > {}
 
 @armResourceOperations
@@ -95,7 +87,7 @@ interface CommitmentPlans {
   /**
    * Deletes the specified commitmentPlan associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'createOrUpdate' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is CommitmentPlanOps.DeleteWithoutOkAsync<
     CommitmentPlan,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -125,8 +117,7 @@ interface CommitmentPlanOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
         commitmentPlanName: string,
-      },
-      ResourceName = "CognitiveServicesCommitmentPlan"
+      }
     > {}
 
 @armResourceOperations
@@ -164,7 +155,7 @@ interface CommitmentPlanOperationGroup {
   /**
    * Create Cognitive Services commitment plan.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "PATCH for 'createOrUpdatePlan' follows existing service implementation pattern"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("CognitiveServicesCommitmentPlans")
   @patch(#{ implicitOptionality: false })
   updatePlan is CommitmentPlanOperationGroupOps.CustomPatchAsync<
@@ -175,7 +166,7 @@ interface CommitmentPlanOperationGroup {
   /**
    * Deletes a Cognitive Services commitment plan from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'updatePlan' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("CognitiveServicesCommitmentPlans")
   deletePlan is CommitmentPlanOperationGroupOps.DeleteWithoutOkAsync<
     CommitmentPlan,

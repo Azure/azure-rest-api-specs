@@ -1,14 +1,18 @@
 {
   "parameters": {
+    "api-version": "2022-06-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "my-resource-group",
+    "webTestName": "my-webtest-my-component",
     "WebTestDefinition": {
-      "kind": "ping",
       "location": "South Central US",
+      "kind": "ping",
       "properties": {
         "Configuration": {
           "WebTest": "<WebTest Name=\"my-webtest\" Id=\"678ddf96-1ab8-44c8-9274-123456789abc\" Enabled=\"True\" CssProjectStructure=\"\" CssIteration=\"\" Timeout=\"30\" WorkItemIds=\"\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" Description=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"default\" StopOnError=\"False\" RecordedResultFile=\"\" ResultsLocale=\"\" ><Items><Request Method=\"GET\" Guid=\"a4162485-9114-fcfc-e086-123456789abc\" Version=\"1.1\" Url=\"http://my-component.azurewebsites.net\" ThinkTime=\"0\" Timeout=\"30\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\" ExpectedHttpStatusCode=\"200\" ExpectedResponseUrl=\"\" ReportingName=\"\" IgnoreHttpStatusCode=\"False\" /></Items></WebTest>"
         },
         "Frequency": 600,
-        "Kind": "ping",
+        "Timeout": 30,
         "Locations": [
           {
             "Id": "us-fl-mia-edge"
@@ -17,32 +21,32 @@
             "Id": "apac-hk-hkn-azr"
           }
         ],
+        "Kind": "ping",
         "Name": "my-webtest-my-component",
-        "SyntheticMonitorId": "my-webtest-my-component",
-        "Timeout": 30
+        "SyntheticMonitorId": "my-webtest-my-component"
       }
-    },
-    "api-version": "2022-06-15",
-    "resourceGroupName": "my-resource-group",
-    "subscriptionId": "subid",
-    "webTestName": "my-webtest-my-component"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component",
         "name": "my-webtest-my-component",
         "type": "Microsoft.Insights/webtests",
-        "id": "/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component",
-        "kind": "ping",
         "location": "southcentralus",
+        "tags": {
+          "hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component": "Resource"
+        },
+        "kind": "ping",
         "properties": {
-          "Configuration": {
-            "WebTest": "<WebTest Name=\"my-webtest\" Id=\"678ddf96-1ab8-44c8-9274-123456789abc\" Enabled=\"True\" CssProjectStructure=\"\" CssIteration=\"\" Timeout=\"30\" WorkItemIds=\"\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" Description=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"default\" StopOnError=\"False\" RecordedResultFile=\"\" ResultsLocale=\"\" ><Items><Request Method=\"GET\" Guid=\"a4162485-9114-fcfc-e086-123456789abc\" Version=\"1.1\" Url=\"http://my-component.azurewebsites.net\" ThinkTime=\"0\" Timeout=\"30\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\" ExpectedHttpStatusCode=\"200\" ExpectedResponseUrl=\"\" ReportingName=\"\" IgnoreHttpStatusCode=\"False\" /></Items></WebTest>"
-          },
+          "Name": "my-webtest-my-component",
+          "SyntheticMonitorId": "my-webtest-my-component",
           "Description": "Ping web test alert for mytestwebapp",
           "Enabled": true,
           "Frequency": 600,
+          "Timeout": 30,
           "Kind": "ping",
+          "RetryEnabled": true,
           "Locations": [
             {
               "Id": "us-fl-mia-edge"
@@ -51,18 +55,12 @@
               "Id": "apac-hk-hkn-azr"
             }
           ],
-          "Name": "my-webtest-my-component",
-          "RetryEnabled": true,
-          "SyntheticMonitorId": "my-webtest-my-component",
-          "Timeout": 30,
+          "Configuration": {
+            "WebTest": "<WebTest Name=\"my-webtest\" Id=\"678ddf96-1ab8-44c8-9274-123456789abc\" Enabled=\"True\" CssProjectStructure=\"\" CssIteration=\"\" Timeout=\"30\" WorkItemIds=\"\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" Description=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"default\" StopOnError=\"False\" RecordedResultFile=\"\" ResultsLocale=\"\" ><Items><Request Method=\"GET\" Guid=\"a4162485-9114-fcfc-e086-123456789abc\" Version=\"1.1\" Url=\"http://my-component.azurewebsites.net\" ThinkTime=\"0\" Timeout=\"30\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\" ExpectedHttpStatusCode=\"200\" ExpectedResponseUrl=\"\" ReportingName=\"\" IgnoreHttpStatusCode=\"False\" /></Items></WebTest>"
+          },
           "provisioningState": "Succeeded"
-        },
-        "tags": {
-          "hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component": "Resource"
         }
       }
     }
-  },
-  "operationId": "WebTests_CreateOrUpdate",
-  "title": "webTestUpdate"
+  }
 }

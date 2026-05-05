@@ -7,18 +7,16 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
         "name": "current",
         "type": "Microsoft.Security/defenderForStorageSettings",
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
         "properties": {
           "isEnabled": true,
           "malwareScanning": {
-            "automatedResponse": "BlobSoftDelete",
-            "blobScanResultsOptions": "BlobIndexTags",
             "onUpload": {
+              "isEnabled": true,
               "capGBPerMonth": 10000,
               "filters": {
-                "excludeBlobsLargerThan": 1024,
                 "excludeBlobsWithPrefix": [
                   "sample-container/logs",
                   "single-excluded-container/",
@@ -27,20 +25,20 @@
                 "excludeBlobsWithSuffix": [
                   ".log",
                   ".jpg"
-                ]
-              },
-              "isEnabled": true
+                ],
+                "excludeBlobsLargerThan": 1024
+              }
             },
-            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
+            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+            "blobScanResultsOptions": "BlobIndexTags",
+            "automatedResponse": "BlobSoftDelete"
           },
-          "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
             "isEnabled": true
-          }
+          },
+          "overrideSubscriptionLevelSettings": true
         }
       }
     }
-  },
-  "operationId": "DefenderForStorage_Get",
-  "title": "Gets the Defender for Storage settings for the specified resource."
+  }
 }

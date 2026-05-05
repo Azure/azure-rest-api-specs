@@ -93,7 +93,7 @@ interface FaceClient {
     name: "FaceAdministrationClient",
     service: Face,
   },
-  "!java"
+  "csharp,python,javascript,go"
 )
 namespace FaceAdministrationClient {
   /**

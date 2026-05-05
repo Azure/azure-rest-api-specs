@@ -1,19 +1,21 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
-    "jobName": "testcontainerAppsJob0",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "jobName": "testcontainerAppsJob0",
+    "api-version": "2025-10-02-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "nextLink": null,
         "value": [
           {
             "name": "testcontainerAppJob-27944454",
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0/executions/testcontainerAppJob-27944454",
             "properties": {
+              "status": "Running",
+              "startTime": "2023-02-13T20:37:30+00:00",
+              "endTime": "2023-02-13T20:47:30+00:00",
               "detailedStatus": {
                 "replicas": [
                   {
@@ -21,30 +23,27 @@
                     "containers": [
                       {
                         "name": "container1",
-                        "additionalInformation": "Completed",
                         "code": 0,
+                        "additionalInformation": "Completed",
                         "status": "Succeeded"
                       },
                       {
                         "name": "container2",
-                        "additionalInformation": "Completed",
                         "code": 0,
+                        "additionalInformation": "Completed",
                         "status": "Succeeded"
                       }
                     ]
                   }
                 ]
               },
-              "endTime": "2023-02-13T20:47:30+00:00",
-              "message": "Job has reached the specified backoff limit",
               "reason": "BackoffLimitExceeded",
-              "startTime": "2023-02-13T20:37:30+00:00",
-              "status": "Running",
+              "message": "Job has reached the specified backoff limit",
               "template": {
                 "containers": [
                   {
-                    "name": "testcontainerappsjob0",
                     "image": "repo/testcontainerappsjob0:v4",
+                    "name": "testcontainerappsjob0",
                     "resources": {
                       "cpu": 0.5,
                       "memory": "1Gi"
@@ -53,29 +52,27 @@
                 ],
                 "initContainers": [
                   {
-                    "name": "testinitcontainerAppsJob0",
-                    "args": [
-                      "-c",
-                      "while true; do echo hello; sleep 10;done"
-                    ],
-                    "command": [
-                      "/bin/sh"
-                    ],
                     "image": "repo/testcontainerappsjob0:v4",
+                    "name": "testinitcontainerAppsJob0",
                     "resources": {
                       "cpu": 0.5,
                       "memory": "1Gi"
-                    }
+                    },
+                    "command": [
+                      "/bin/sh"
+                    ],
+                    "args": [
+                      "-c",
+                      "while true; do echo hello; sleep 10;done"
+                    ]
                   }
                 ]
               }
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "nextLink": null
+      }
     }
-  },
-  "operationId": "JobsExecutions_List",
-  "title": "Get a Container Apps Job Executions"
+  }
 }

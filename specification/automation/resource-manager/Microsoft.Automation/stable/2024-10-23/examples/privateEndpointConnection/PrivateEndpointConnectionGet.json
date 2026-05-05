@@ -1,33 +1,31 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
-    "automationAccountName": "automationAccountName",
-    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    "automationAccountName": "automationAccountName",
+    "api-version": "2024-10-23",
+    "privateEndpointConnectionName": "privateEndpointConnectionName"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Automation/automationAccounts/automationAccountName/privateEndpointConnections/privateEndpointConnectionName",
         "name": "privateEndpointConnectionName",
         "type": "Microsoft.Automation/automationAccounts/privateEndpointConnections",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Automation/automationAccounts/automationAccountName/privateEndpointConnections/privateEndpointConnectionName",
         "properties": {
-          "groupIds": [
-            "sql"
-          ],
           "privateEndpoint": {
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
           },
+          "groupIds": [
+            "sql"
+          ],
           "privateLinkServiceConnectionState": {
+            "status": "Approved",
             "description": "Auto-approved",
-            "actionsRequired": "None",
-            "status": "Approved"
+            "actionsRequired": "None"
           }
         }
       }
     }
-  },
-  "operationId": "PrivateEndpointConnections_Get",
-  "title": "Gets private endpoint connection."
+  }
 }

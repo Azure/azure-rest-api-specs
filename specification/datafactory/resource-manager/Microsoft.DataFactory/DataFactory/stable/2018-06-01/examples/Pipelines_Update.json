@@ -1,60 +1,62 @@
 {
   "parameters": {
-    "api-version": "2018-06-01",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
     "factoryName": "exampleFactoryName",
+    "pipelineName": "examplePipeline",
     "ifMatch": null,
     "pipeline": {
       "properties": {
         "description": "Example description",
         "activities": [
           {
-            "name": "ExampleForeachActivity",
             "type": "ForEach",
             "typeProperties": {
+              "isSequential": true,
+              "items": {
+                "value": "@pipeline().parameters.OutputBlobNameList",
+                "type": "Expression"
+              },
               "activities": [
                 {
-                  "name": "ExampleCopyActivity",
                   "type": "Copy",
+                  "typeProperties": {
+                    "source": {
+                      "type": "BlobSource"
+                    },
+                    "sink": {
+                      "type": "BlobSink"
+                    },
+                    "dataIntegrationUnits": 32
+                  },
                   "inputs": [
                     {
-                      "type": "DatasetReference",
+                      "referenceName": "exampleDataset",
                       "parameters": {
-                        "MyFileName": "examplecontainer.csv",
-                        "MyFolderPath": "examplecontainer"
+                        "MyFolderPath": "examplecontainer",
+                        "MyFileName": "examplecontainer.csv"
                       },
-                      "referenceName": "exampleDataset"
+                      "type": "DatasetReference"
                     }
                   ],
                   "outputs": [
                     {
-                      "type": "DatasetReference",
+                      "referenceName": "exampleDataset",
                       "parameters": {
+                        "MyFolderPath": "examplecontainer",
                         "MyFileName": {
-                          "type": "Expression",
-                          "value": "@item()"
-                        },
-                        "MyFolderPath": "examplecontainer"
+                          "value": "@item()",
+                          "type": "Expression"
+                        }
                       },
-                      "referenceName": "exampleDataset"
+                      "type": "DatasetReference"
                     }
                   ],
-                  "typeProperties": {
-                    "dataIntegrationUnits": 32,
-                    "sink": {
-                      "type": "BlobSink"
-                    },
-                    "source": {
-                      "type": "BlobSource"
-                    }
-                  }
+                  "name": "ExampleCopyActivity"
                 }
-              ],
-              "isSequential": true,
-              "items": {
-                "type": "Expression",
-                "value": "@pipeline().parameters.OutputBlobNameList"
-              }
-            }
+              ]
+            },
+            "name": "ExampleForeachActivity"
           }
         ],
         "parameters": {
@@ -69,68 +71,72 @@
         }
       }
     },
-    "pipelineName": "examplePipeline",
-    "resourceGroupName": "exampleResourceGroup",
-    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+    "api-version": "2018-06-01"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:43 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-writes": "1191",
+        "x-ms-request-id": "91a763b0-d944-493f-83fc-e989c8b6e122",
+        "x-ms-correlation-request-id": "91a763b0-d944-493f-83fc-e989c8b6e122"
+      },
       "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
         "name": "examplePipeline",
         "type": "Microsoft.DataFactory/factories/pipelines",
-        "etag": "0a006cd4-0000-0000-0000-5b245bd60000",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
         "properties": {
           "description": "Example description",
           "activities": [
             {
-              "name": "ExampleForeachActivity",
               "type": "ForEach",
               "typeProperties": {
+                "isSequential": true,
+                "items": {
+                  "value": "@pipeline().parameters.OutputBlobNameList",
+                  "type": "Expression"
+                },
                 "activities": [
                   {
-                    "name": "ExampleCopyActivity",
                     "type": "Copy",
+                    "typeProperties": {
+                      "source": {
+                        "type": "BlobSource"
+                      },
+                      "sink": {
+                        "type": "BlobSink"
+                      },
+                      "dataIntegrationUnits": 32
+                    },
                     "inputs": [
                       {
-                        "type": "DatasetReference",
+                        "referenceName": "exampleDataset",
                         "parameters": {
-                          "MyFileName": "examplecontainer.csv",
-                          "MyFolderPath": "examplecontainer"
+                          "MyFolderPath": "examplecontainer",
+                          "MyFileName": "examplecontainer.csv"
                         },
-                        "referenceName": "exampleDataset"
+                        "type": "DatasetReference"
                       }
                     ],
                     "outputs": [
                       {
-                        "type": "DatasetReference",
+                        "referenceName": "exampleDataset",
                         "parameters": {
+                          "MyFolderPath": "examplecontainer",
                           "MyFileName": {
-                            "type": "Expression",
-                            "value": "@item()"
-                          },
-                          "MyFolderPath": "examplecontainer"
+                            "value": "@item()",
+                            "type": "Expression"
+                          }
                         },
-                        "referenceName": "exampleDataset"
+                        "type": "DatasetReference"
                       }
                     ],
-                    "typeProperties": {
-                      "dataIntegrationUnits": 32,
-                      "sink": {
-                        "type": "BlobSink"
-                      },
-                      "source": {
-                        "type": "BlobSource"
-                      }
-                    }
+                    "name": "ExampleCopyActivity"
                   }
-                ],
-                "isSequential": true,
-                "items": {
-                  "type": "Expression",
-                  "value": "@pipeline().parameters.OutputBlobNameList"
-                }
-              }
+                ]
+              },
+              "name": "ExampleForeachActivity"
             }
           ],
           "parameters": {
@@ -138,17 +144,9 @@
               "type": "Array"
             }
           }
-        }
-      },
-      "headers": {
-        "Date": "Sat, 16 Jun 2018 00:37:43 GMT",
-        "X-Content-Type-Options": "nosniff",
-        "x-ms-correlation-request-id": "91a763b0-d944-493f-83fc-e989c8b6e122",
-        "x-ms-ratelimit-remaining-subscription-writes": "1191",
-        "x-ms-request-id": "91a763b0-d944-493f-83fc-e989c8b6e122"
+        },
+        "etag": "0a006cd4-0000-0000-0000-5b245bd60000"
       }
     }
-  },
-  "operationId": "Pipelines_CreateOrUpdate",
-  "title": "Pipelines_Update"
+  }
 }

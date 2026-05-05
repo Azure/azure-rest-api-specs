@@ -51,8 +51,7 @@ interface AttachedNetworkConnectionOps
         @minLength(3)
         @maxLength(63)
         attachedNetworkConnectionName: string,
-      },
-      ResourceName = "ProjectAttachedNetworkConnection"
+      }
     > {}
 
 @armResourceOperations
@@ -98,8 +97,7 @@ interface AttachedNetworkOps
         @minLength(3)
         @maxLength(63)
         attachedNetworkConnectionName: string,
-      },
-      ResourceName = "AttachedNetworkConnection"
+      }
     > {}
 
 @armResourceOperations

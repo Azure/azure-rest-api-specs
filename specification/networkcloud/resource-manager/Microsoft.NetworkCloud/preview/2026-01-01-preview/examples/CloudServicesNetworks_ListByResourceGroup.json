@@ -1,23 +1,34 @@
 {
-  "operationId": "CloudServicesNetworks_ListByResourceGroup",
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "resourceGroupName": "resourceGroupName",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://fully.qualified.hyperlink",
         "value": [
           {
-            "extendedLocation": {
-              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-              "type": "CustomLocation"
-            },
             "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
-            "location": "location",
             "name": "cloudServicesNetworkName",
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "type": "Microsoft.NetworkCloud/cloudServicesNetworks",
+            "location": "location",
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            },
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+            },
             "properties": {
               "additionalEgressEndpoints": [
                 {
@@ -30,13 +41,18 @@
                   ]
                 }
               ],
+              "enableDefaultEgressEndpoints": "False",
+              "storageOptions": {
+                "mode": "Standard",
+                "sizeMiB": 1048576,
+                "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+              },
+              "provisioningState": "Succeeded",
+              "interfaceName": "eth0",
+              "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
               "associatedResourceIds": [
                 "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
               ],
-              "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
-              "detailedStatus": "Available",
-              "detailedStatusMessage": "Cloud services network is up",
-              "enableDefaultEgressEndpoints": "False",
               "enabledEgressEndpoints": [
                 {
                   "category": "azure-resource-management",
@@ -48,13 +64,8 @@
                   ]
                 }
               ],
-              "interfaceName": "eth0",
-              "provisioningState": "Succeeded",
-              "storageOptions": {
-                "mode": "Standard",
-                "sizeMiB": 1048576,
-                "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
-              },
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "Cloud services network is up",
               "storageStatus": {
                 "mode": "Standard",
                 "sizeMiB": 1048576,
@@ -62,24 +73,11 @@
                 "statusMessage": "Storage is available",
                 "volumeId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/Volumes/volumeName"
               }
-            },
-            "systemData": {
-              "createdAt": "2021-01-22T13:27:03.008Z",
-              "createdBy": "identityA",
-              "createdByType": "Application",
-              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
-              "lastModifiedBy": "identityB",
-              "lastModifiedByType": "User"
-            },
-            "tags": {
-              "key1": "myvalue1",
-              "key2": "myvalue2"
-            },
-            "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
+            }
           }
-        ]
+        ],
+        "nextLink": "https://fully.qualified.hyperlink"
       }
     }
-  },
-  "title": "List cloud services networks for resource group"
+  }
 }

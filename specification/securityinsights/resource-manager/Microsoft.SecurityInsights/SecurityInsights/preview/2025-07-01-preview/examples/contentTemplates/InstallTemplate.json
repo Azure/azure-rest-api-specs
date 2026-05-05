@@ -1,26 +1,43 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "resourceGroupName": "myRg",
     "subscriptionId": "d0cfeab2-9ae0-4464-9919-dccaee2e48f0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
     "templateId": "str.azure-sentinel-solution-str",
     "templateInstallationProperties": {
       "properties": {
+        "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+        "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
+        "displayName": "API Protection workbook template",
+        "contentKind": "AnalyticsRule",
+        "version": "1.0.1",
+        "packageVersion": "1.0.0",
+        "packageId": "str.azure-sentinel-solution-str",
+        "packageName": "str",
+        "packageKind": "Solution",
+        "source": {
+          "kind": "Solution",
+          "name": "str",
+          "sourceId": "str.azure-sentinel-solution-str"
+        },
         "author": {
           "name": "Microsoft",
           "email": "support@microsoft.com"
         },
-        "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
-        "contentKind": "AnalyticsRule",
-        "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
-        "displayName": "API Protection workbook template",
+        "support": {
+          "tier": "Microsoft",
+          "name": "Microsoft Corporation",
+          "email": "support@microsoft.com",
+          "link": "https://support.microsoft.com/"
+        },
         "mainTemplate": {
           "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
           "contentVersion": "1.0.1",
           "resources": [
             {
-              "name": "8365ebfe-a381-45b7-ad08-7d818070e11f",
               "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+              "name": "8365ebfe-a381-45b7-ad08-7d818070e11f",
               "apiVersion": "2022-04-01-preview",
               "kind": "Scheduled",
               "location": "[parameters('workspace-location')]",
@@ -32,86 +49,79 @@
                 "queryFrequency": "PT1H",
                 "queryPeriod": "PT1H",
                 "severity": "High",
-                "status": "Available",
                 "suppressionDuration": "PT1H",
                 "suppressionEnabled": false,
                 "triggerOperator": "GreaterThan",
-                "triggerThreshold": 0
+                "triggerThreshold": 0,
+                "status": "Available"
               }
             },
             {
-              "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',concat('AnalyticsRule-', last(split([resourceId('Microsoft.SecurityInsights/AlertRuleTemplates', 8365ebfe-a381-45b7-ad08-7d818070e11f)],'/'))))]",
               "type": "Microsoft.OperationalInsights/workspaces/providers/metadata",
               "apiVersion": "2022-01-01-preview",
+              "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',concat('AnalyticsRule-', last(split([resourceId('Microsoft.SecurityInsights/AlertRuleTemplates', 8365ebfe-a381-45b7-ad08-7d818070e11f)],'/'))))]",
               "properties": {
                 "description": "CrowdStrike Falcon Endpoint Protection Analytics Rule 1",
+                "parentId": "[resourceId('Microsoft.SecurityInsights/AlertRuleTemplates', 8365ebfe-a381-45b7-ad08-7d818070e11f)]",
+                "contentId": "4465ebde-b381-45f7-ad08-7d818070a11c",
+                "kind": "AnalyticsRule",
+                "version": "1.0.0",
+                "source": {
+                  "kind": "Solution",
+                  "name": "str",
+                  "sourceId": "str.azure-sentinel-solution-str"
+                },
                 "author": {
                   "name": "Microsoft",
                   "email": "support@microsoft.com"
                 },
-                "contentId": "4465ebde-b381-45f7-ad08-7d818070a11c",
-                "kind": "AnalyticsRule",
-                "parentId": "[resourceId('Microsoft.SecurityInsights/AlertRuleTemplates', 8365ebfe-a381-45b7-ad08-7d818070e11f)]",
-                "source": {
-                  "name": "str",
-                  "kind": "Solution",
-                  "sourceId": "str.azure-sentinel-solution-str"
-                },
                 "support": {
+                  "tier": "Microsoft",
                   "name": "Microsoft Corporation",
                   "email": "support@microsoft.com",
-                  "link": "https://support.microsoft.com/",
-                  "tier": "Microsoft"
-                },
-                "version": "1.0.0"
+                  "link": "https://support.microsoft.com/"
+                }
               }
             }
           ]
-        },
-        "packageId": "str.azure-sentinel-solution-str",
-        "packageKind": "Solution",
-        "packageName": "str",
-        "packageVersion": "1.0.0",
-        "source": {
-          "name": "str",
-          "kind": "Solution",
-          "sourceId": "str.azure-sentinel-solution-str"
-        },
-        "support": {
-          "name": "Microsoft Corporation",
-          "email": "support@microsoft.com",
-          "link": "https://support.microsoft.com/",
-          "tier": "Microsoft"
-        },
-        "version": "1.0.1"
+        }
       },
       "tags": {
         "tag1": "str"
       }
-    },
-    "workspaceName": "myWorkspace"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentPackages/azuresentinel.azure-sentinel-solution-ciscoumbrella",
         "name": "azuresentinel.azure-sentinel-solution-ciscoumbrella",
         "type": "Microsoft.SecurityInsights/contenttemplates",
         "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentPackages/azuresentinel.azure-sentinel-solution-ciscoumbrella",
         "properties": {
+          "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+          "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
+          "packageKind": "Solution",
+          "packageId": "str.azure-sentinel-solution-str",
+          "packageVersion": "1.0.0",
+          "contentKind": "AnalyticsRule",
+          "version": "1.0.1",
+          "displayName": "API Protection workbook template",
+          "source": {
+            "kind": "Solution",
+            "name": "CiscoUmbrella",
+            "sourceId": "azuresentinel.azure-sentinel-solution-ciscoumbrella"
+          },
           "author": {
             "name": "Microsoft",
             "email": "support@microsoft.com"
           },
-          "categories": {
-            "domains": [
-              "Security - Cloud Security"
-            ],
-            "verticals": null
+          "support": {
+            "tier": "Microsoft",
+            "name": "Microsoft Corporation",
+            "email": "support@microsoft.com",
+            "link": "https://support.microsoft.com/"
           },
-          "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
-          "contentKind": "AnalyticsRule",
-          "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
           "dependencies": {
             "criteria": [
               {
@@ -127,57 +137,57 @@
             ],
             "operator": "AND"
           },
-          "displayName": "API Protection workbook template",
-          "firstPublishDate": "2022-04-01",
-          "packageId": "str.azure-sentinel-solution-str",
-          "packageKind": "Solution",
-          "packageVersion": "1.0.0",
           "providers": [
             "Microsoft"
           ],
-          "source": {
-            "name": "CiscoUmbrella",
-            "kind": "Solution",
-            "sourceId": "azuresentinel.azure-sentinel-solution-ciscoumbrella"
+          "categories": {
+            "domains": [
+              "Security - Cloud Security"
+            ],
+            "verticals": null
           },
-          "support": {
-            "name": "Microsoft Corporation",
-            "email": "support@microsoft.com",
-            "link": "https://support.microsoft.com/",
-            "tier": "Microsoft"
-          },
-          "version": "1.0.1"
+          "firstPublishDate": "2022-04-01"
         },
         "systemData": {
-          "createdAt": "2020-04-27T21:53:29.0928001Z",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z",
+          "createdAt": "2020-04-27T21:53:29.0928001Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z"
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentPackages/azuresentinel.azure-sentinel-solution-ciscoumbrella",
         "name": "azuresentinel.azure-sentinel-solution-ciscoumbrella",
         "type": "Microsoft.SecurityInsights/contenttemplates",
         "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentPackages/azuresentinel.azure-sentinel-solution-ciscoumbrella",
         "properties": {
+          "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+          "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
+          "packageKind": "Solution",
+          "packageId": "str.azure-sentinel-solution-str",
+          "packageVersion": "1.0.0",
+          "contentKind": "AnalyticsRule",
+          "version": "1.0.1",
+          "displayName": "API Protection workbook template",
+          "source": {
+            "kind": "Solution",
+            "name": "CiscoUmbrella",
+            "sourceId": "azuresentinel.azure-sentinel-solution-ciscoumbrella"
+          },
           "author": {
             "name": "Microsoft",
             "email": "support@microsoft.com"
           },
-          "categories": {
-            "domains": [
-              "Security - Cloud Security"
-            ],
-            "verticals": null
+          "support": {
+            "tier": "Microsoft",
+            "name": "Microsoft Corporation",
+            "email": "support@microsoft.com",
+            "link": "https://support.microsoft.com/"
           },
-          "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
-          "contentKind": "AnalyticsRule",
-          "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
           "dependencies": {
             "criteria": [
               {
@@ -193,38 +203,26 @@
             ],
             "operator": "AND"
           },
-          "displayName": "API Protection workbook template",
-          "firstPublishDate": "2022-04-01",
-          "packageId": "str.azure-sentinel-solution-str",
-          "packageKind": "Solution",
-          "packageVersion": "1.0.0",
           "providers": [
             "Microsoft"
           ],
-          "source": {
-            "name": "CiscoUmbrella",
-            "kind": "Solution",
-            "sourceId": "azuresentinel.azure-sentinel-solution-ciscoumbrella"
+          "categories": {
+            "domains": [
+              "Security - Cloud Security"
+            ],
+            "verticals": null
           },
-          "support": {
-            "name": "Microsoft Corporation",
-            "email": "support@microsoft.com",
-            "link": "https://support.microsoft.com/",
-            "tier": "Microsoft"
-          },
-          "version": "1.0.1"
+          "firstPublishDate": "2022-04-01"
         },
         "systemData": {
-          "createdAt": "2020-04-27T21:53:29.0928001Z",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z",
+          "createdAt": "2020-04-27T21:53:29.0928001Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z"
         }
       }
     }
-  },
-  "operationId": "ContentTemplate_Install",
-  "title": "Get a template."
+  }
 }

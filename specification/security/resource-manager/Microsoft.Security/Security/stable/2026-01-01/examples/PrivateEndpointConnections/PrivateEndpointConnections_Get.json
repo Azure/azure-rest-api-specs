@@ -1,34 +1,32 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "privateEndpointConnectionName": "pe",
-    "privateLinkName": "pls",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "resourceGroupName": "rg",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+    "privateLinkName": "pls",
+    "privateEndpointConnectionName": "pe",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe",
         "name": "pe",
         "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe",
         "properties": {
-          "groupIds": [
-            "containers"
-          ],
           "privateEndpoint": {
             "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe"
           },
           "privateLinkServiceConnectionState": {
+            "status": "Approved",
             "description": "Auto-approved",
-            "actionsRequired": "None",
-            "status": "Approved"
+            "actionsRequired": "None"
           },
+          "groupIds": [
+            "containers"
+          ],
           "provisioningState": "Succeeded"
         }
       }
     }
-  },
-  "operationId": "PrivateEndpointConnections_Get",
-  "title": "Get private endpoint connection"
+  }
 }

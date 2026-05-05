@@ -63,8 +63,7 @@ interface ApiKVReferenceOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface AppSettingKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
@@ -117,8 +116,7 @@ interface ApiKVReferenceOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
@@ -176,8 +174,7 @@ interface AppSettingKeyVaultReferenceSlotOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface AppSettingKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app
@@ -235,8 +232,7 @@ interface SiteConnectionStringKeyVaultReferenceSlotOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface SiteConnectionStringKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app

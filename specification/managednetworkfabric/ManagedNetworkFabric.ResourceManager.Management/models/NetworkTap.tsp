@@ -1,12 +1,12 @@
 import "./common.tsp";
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("Network Tap Properties defines the properties of the resource.")
-model NetworkTapProperties extends AnnotationResource {
+model NetworkTapProperties {
+  ...AnnotationResource;
+
   @doc("ARM resource ID of the Network Packet Broker.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   networkPacketBrokerId: Azure.Core.armResourceIdentifier<[
@@ -22,15 +22,6 @@ model NetworkTapProperties extends AnnotationResource {
       type: "Microsoft.ManagedNetworkFabric/networkTapRules";
     }
   ]>;
-
-  @doc("Associated Network Fabric Resource IDs")
-  @added(Versions.v2025_07_15)
-  @visibility(Lifecycle.Read)
-  networkFabricIds?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
-    }
-  ]>[];
 
   @doc("List of destinations to send the filter traffic.")
   @Azure.ResourceManager.identifiers(#[])
@@ -133,20 +124,18 @@ model IsolationDomainProperties {
 @doc("Isolation Domain Properties.")
 model IsolationDomainPatchProperties is IsolationDomainProperties;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkFabric resource definition.")
-model NetworkTapPatch extends TagsUpdate {
-  @doc("NetworkTap resource patch properties.")
-  properties?: NetworkTapPatchProperties;
+model NetworkTapPatch {
+  ...TagsUpdate;
 
-  @added(Versions.v2025_07_15)
-  @doc("The managed service identities assigned to this resource.")
-  identity?: ManagedServiceIdentityPatch;
+  @doc("Resource properties.")
+  properties?: NetworkTapPatchProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The Network Tap resource patch definition.")
-model NetworkTapPatchProperties extends AnnotationResource {
+model NetworkTapPatchProperties {
+  ...AnnotationResource;
+
   @doc("Polling type.")
   pollingType?: PollingType;
 
@@ -175,10 +164,4 @@ union Encapsulation {
   GRE: "GRE",
 
   string,
-}
-
-@doc("Response for NetworkTap Resync operation.")
-@added(Versions.v2025_07_15)
-model NetworkTapResyncResponse {
-  ...OperationStatusResult;
 }

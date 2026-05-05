@@ -1,23 +1,23 @@
 {
   "parameters": {
-    "$filter": "contains('.localhost',name)",
-    "$inlinecount": "allpages",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "api-version": "2024-10-23",
     "$skip": 0,
     "$top": 2,
-    "api-version": "2024-10-23",
-    "automationAccountName": "myAutomationAccount33",
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    "$inlinecount": "allpages",
+    "$filter": "contains('.localhost',name)"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "totalCount": 6,
         "value": [
           {
-            "name": "server.localhost",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupServer.localhost",
             "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupServer.localhost",
+            "name": "server.localhost",
             "properties": {
               "configuration": {
                 "name": "SetupServer"
@@ -28,9 +28,9 @@
             }
           },
           {
-            "name": "SetupClient.localhost",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupClient.localhost",
             "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupClient.localhost",
+            "name": "SetupClient.localhost",
             "properties": {
               "configuration": {
                 "name": "SetupClient"
@@ -40,11 +40,9 @@
               "nodeCount": 6
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "totalCount": 6
+      }
     }
-  },
-  "operationId": "DscNodeConfiguration_ListByAutomationAccount",
-  "title": "List Paged DSC node configurations by Automation Account with name filter"
+  }
 }

@@ -1,180 +1,178 @@
 {
   "parameters": {
-    "api-version": "2018-06-01",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
     "factoryName": "exampleFactoryName",
+    "pipelineName": "examplePipeline",
     "ifMatch": null,
     "pipeline": {
       "properties": {
         "activities": [
           {
-            "name": "ExampleForeachActivity",
             "type": "ForEach",
             "typeProperties": {
+              "isSequential": true,
+              "items": {
+                "value": "@pipeline().parameters.OutputBlobNameList",
+                "type": "Expression"
+              },
               "activities": [
                 {
-                  "name": "ExampleCopyActivity",
                   "type": "Copy",
+                  "typeProperties": {
+                    "source": {
+                      "type": "BlobSource"
+                    },
+                    "sink": {
+                      "type": "BlobSink"
+                    },
+                    "dataIntegrationUnits": 32
+                  },
                   "inputs": [
                     {
-                      "type": "DatasetReference",
+                      "referenceName": "exampleDataset",
                       "parameters": {
-                        "MyFileName": "examplecontainer.csv",
-                        "MyFolderPath": "examplecontainer"
+                        "MyFolderPath": "examplecontainer",
+                        "MyFileName": "examplecontainer.csv"
                       },
-                      "referenceName": "exampleDataset"
+                      "type": "DatasetReference"
                     }
                   ],
                   "outputs": [
                     {
-                      "type": "DatasetReference",
+                      "referenceName": "exampleDataset",
                       "parameters": {
+                        "MyFolderPath": "examplecontainer",
                         "MyFileName": {
-                          "type": "Expression",
-                          "value": "@item()"
-                        },
-                        "MyFolderPath": "examplecontainer"
+                          "value": "@item()",
+                          "type": "Expression"
+                        }
                       },
-                      "referenceName": "exampleDataset"
+                      "type": "DatasetReference"
                     }
                   ],
-                  "typeProperties": {
-                    "dataIntegrationUnits": 32,
-                    "sink": {
-                      "type": "BlobSink"
-                    },
-                    "source": {
-                      "type": "BlobSource"
-                    }
-                  }
+                  "name": "ExampleCopyActivity"
                 }
-              ],
-              "isSequential": true,
-              "items": {
-                "type": "Expression",
-                "value": "@pipeline().parameters.OutputBlobNameList"
-              }
-            }
+              ]
+            },
+            "name": "ExampleForeachActivity"
           }
         ],
         "parameters": {
-          "JobId": {
-            "type": "String"
-          },
           "OutputBlobNameList": {
             "type": "Array"
-          }
-        },
-        "policy": {
-          "elapsedTimeMetric": {
-            "duration": "0.00:10:00"
-          }
-        },
-        "runDimensions": {
+          },
           "JobId": {
-            "type": "Expression",
-            "value": "@pipeline().parameters.JobId"
+            "type": "String"
           }
         },
         "variables": {
           "TestVariableArray": {
             "type": "Array"
           }
+        },
+        "runDimensions": {
+          "JobId": {
+            "value": "@pipeline().parameters.JobId",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "elapsedTimeMetric": {
+            "duration": "0.00:10:00"
+          }
         }
       }
     },
-    "pipelineName": "examplePipeline",
-    "resourceGroupName": "exampleResourceGroup",
-    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+    "api-version": "2018-06-01"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:41 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-writes": "1192",
+        "x-ms-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264",
+        "x-ms-correlation-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264"
+      },
       "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
         "name": "examplePipeline",
         "type": "Microsoft.DataFactory/factories/pipelines",
-        "etag": "0a0069d4-0000-0000-0000-5b245bd50000",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
         "properties": {
           "activities": [
             {
-              "name": "ExampleForeachActivity",
               "type": "ForEach",
               "typeProperties": {
+                "isSequential": true,
+                "items": {
+                  "value": "@pipeline().parameters.OutputBlobNameList",
+                  "type": "Expression"
+                },
                 "activities": [
                   {
-                    "name": "ExampleCopyActivity",
                     "type": "Copy",
+                    "typeProperties": {
+                      "source": {
+                        "type": "BlobSource"
+                      },
+                      "sink": {
+                        "type": "BlobSink"
+                      },
+                      "dataIntegrationUnits": 32
+                    },
                     "inputs": [
                       {
-                        "type": "DatasetReference",
+                        "referenceName": "exampleDataset",
                         "parameters": {
-                          "MyFileName": "examplecontainer.csv",
-                          "MyFolderPath": "examplecontainer"
+                          "MyFolderPath": "examplecontainer",
+                          "MyFileName": "examplecontainer.csv"
                         },
-                        "referenceName": "exampleDataset"
+                        "type": "DatasetReference"
                       }
                     ],
                     "outputs": [
                       {
-                        "type": "DatasetReference",
+                        "referenceName": "exampleDataset",
                         "parameters": {
+                          "MyFolderPath": "examplecontainer",
                           "MyFileName": {
-                            "type": "Expression",
-                            "value": "@item()"
-                          },
-                          "MyFolderPath": "examplecontainer"
+                            "value": "@item()",
+                            "type": "Expression"
+                          }
                         },
-                        "referenceName": "exampleDataset"
+                        "type": "DatasetReference"
                       }
                     ],
-                    "typeProperties": {
-                      "dataIntegrationUnits": 32,
-                      "sink": {
-                        "type": "BlobSink"
-                      },
-                      "source": {
-                        "type": "BlobSource"
-                      }
-                    }
+                    "name": "ExampleCopyActivity"
                   }
-                ],
-                "isSequential": true,
-                "items": {
-                  "type": "Expression",
-                  "value": "@pipeline().parameters.OutputBlobNameList"
-                }
-              }
+                ]
+              },
+              "name": "ExampleForeachActivity"
             }
           ],
           "parameters": {
-            "JobId": {
-              "type": "String"
-            },
             "OutputBlobNameList": {
               "type": "Array"
-            }
-          },
-          "runDimensions": {
+            },
             "JobId": {
-              "type": "Expression",
-              "value": "@pipeline().parameters.JobId"
+              "type": "String"
             }
           },
           "variables": {
             "TestVariableArray": {
               "type": "Array"
             }
+          },
+          "runDimensions": {
+            "JobId": {
+              "value": "@pipeline().parameters.JobId",
+              "type": "Expression"
+            }
           }
-        }
-      },
-      "headers": {
-        "Date": "Sat, 16 Jun 2018 00:37:41 GMT",
-        "X-Content-Type-Options": "nosniff",
-        "x-ms-correlation-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264",
-        "x-ms-ratelimit-remaining-subscription-writes": "1192",
-        "x-ms-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264"
+        },
+        "etag": "0a0069d4-0000-0000-0000-5b245bd50000"
       }
     }
-  },
-  "operationId": "Pipelines_CreateOrUpdate",
-  "title": "Pipelines_Create"
+  }
 }

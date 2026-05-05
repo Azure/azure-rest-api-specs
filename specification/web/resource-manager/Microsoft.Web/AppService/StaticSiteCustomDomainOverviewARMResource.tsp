@@ -33,8 +33,7 @@ model StaticSiteCustomDomainOverviewARMResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface StaticSiteCustomDomainOverviewARMResources {
   /**
    * Description for Gets an existing custom domain for a particular static site.

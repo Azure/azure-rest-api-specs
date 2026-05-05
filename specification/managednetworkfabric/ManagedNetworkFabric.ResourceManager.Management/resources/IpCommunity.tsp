@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
+
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -19,7 +19,7 @@ model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The IP Community Properties")
+  /** The IP Community Properties */
   properties: IpCommunityProperties;
 }
 
@@ -39,16 +39,10 @@ interface IpCommunities {
   delete is ArmResourceDeleteWithoutOkAsync<IpCommunity>;
 
   @doc("Implements IP Communities list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<
-    IpCommunity,
-    Response = IpCommunitiesListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<IpCommunity>;
 
   @doc("Implements IP Communities list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<
-    IpCommunity,
-    Response = IpCommunitiesListResult
-  >;
+  listBySubscription is ArmListBySubscription<IpCommunity>;
 }
 
 @@doc(IpCommunities.create::parameters.resource, "Request payload.");

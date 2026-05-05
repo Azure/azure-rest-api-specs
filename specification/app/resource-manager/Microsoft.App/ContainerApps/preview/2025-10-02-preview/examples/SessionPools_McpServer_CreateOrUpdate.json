@@ -1,99 +1,97 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
+    "sessionPoolName": "testsessionpool",
+    "api-version": "2025-10-02-preview",
     "sessionPoolEnvelope": {
       "location": "East US",
       "properties": {
-        "containerType": "Shell",
-        "dynamicPoolConfiguration": {
-          "lifecycleConfiguration": {
-            "cooldownPeriodInSeconds": 600,
-            "lifecycleType": "Timed"
-          }
-        },
-        "mcpServerSettings": {
-          "isMcpServerApiKeyDisabled": false,
-          "isMcpServerEnabled": true
-        },
         "poolManagementType": "Dynamic",
+        "containerType": "Shell",
         "scaleConfiguration": {
           "maxConcurrentSessions": 50
         },
+        "dynamicPoolConfiguration": {
+          "lifecycleConfiguration": {
+            "lifecycleType": "Timed",
+            "cooldownPeriodInSeconds": 600
+          }
+        },
         "sessionNetworkConfiguration": {
           "status": "EgressEnabled"
+        },
+        "mcpServerSettings": {
+          "isMcpServerEnabled": true,
+          "isMcpServerApiKeyDisabled": false
         }
       }
-    },
-    "sessionPoolName": "testsessionpool",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    }
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
         "name": "testsessionpool",
         "type": "Microsoft.App/sessionPools",
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
         "location": "East US",
         "properties": {
-          "containerType": "Shell",
-          "dynamicPoolConfiguration": {
-            "lifecycleConfiguration": {
-              "cooldownPeriodInSeconds": 600,
-              "lifecycleType": "Timed"
-            }
-          },
-          "mcpServerSettings": {
-            "isMcpServerApiKeyDisabled": false,
-            "isMcpServerEnabled": true,
-            "mcpServerEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool/mcp"
-          },
-          "poolManagementEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool",
-          "poolManagementType": "Dynamic",
           "provisioningState": "Succeeded",
+          "poolManagementType": "Dynamic",
+          "containerType": "Shell",
           "scaleConfiguration": {
             "maxConcurrentSessions": 50
           },
+          "dynamicPoolConfiguration": {
+            "lifecycleConfiguration": {
+              "lifecycleType": "Timed",
+              "cooldownPeriodInSeconds": 600
+            }
+          },
           "sessionNetworkConfiguration": {
             "status": "EgressEnabled"
-          }
+          },
+          "mcpServerSettings": {
+            "isMcpServerEnabled": true,
+            "isMcpServerApiKeyDisabled": false,
+            "mcpServerEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool/mcp"
+          },
+          "poolManagementEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool"
         }
-      },
-      "headers": {}
+      }
     },
     "201": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
         "name": "testsessionpool",
         "type": "Microsoft.App/sessionPools",
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
         "location": "East US",
         "properties": {
-          "containerType": "Shell",
-          "dynamicPoolConfiguration": {
-            "lifecycleConfiguration": {
-              "cooldownPeriodInSeconds": 600,
-              "lifecycleType": "Timed"
-            }
-          },
-          "mcpServerSettings": {
-            "isMcpServerApiKeyDisabled": false,
-            "isMcpServerEnabled": true,
-            "mcpServerEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool/mcp"
-          },
-          "poolManagementEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool",
-          "poolManagementType": "Dynamic",
           "provisioningState": "InProgress",
+          "poolManagementType": "Dynamic",
+          "containerType": "Shell",
           "scaleConfiguration": {
             "maxConcurrentSessions": 50
           },
+          "dynamicPoolConfiguration": {
+            "lifecycleConfiguration": {
+              "lifecycleType": "Timed",
+              "cooldownPeriodInSeconds": 600
+            }
+          },
           "sessionNetworkConfiguration": {
             "status": "EgressEnabled"
-          }
+          },
+          "mcpServerSettings": {
+            "isMcpServerEnabled": true,
+            "isMcpServerApiKeyDisabled": false,
+            "mcpServerEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool/mcp"
+          },
+          "poolManagementEndpoint": "https://eastus.dynamicsessions.io/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/sessionPools/testsessionpool"
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "ContainerAppsSessionPools_CreateOrUpdate",
-  "title": "Create or Update Session Pool with MCP server"
+  }
 }

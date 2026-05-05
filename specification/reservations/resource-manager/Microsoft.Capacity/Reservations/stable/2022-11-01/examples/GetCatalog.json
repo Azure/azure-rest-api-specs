@@ -1,18 +1,21 @@
 {
   "parameters": {
     "api-version": "2022-11-01",
-    "location": "eastus",
+    "subscriptionId": "23bc208b-083f-4901-ae85-4f98c0c3b4b6",
     "reservedResourceType": "VirtualMachines",
-    "subscriptionId": "23bc208b-083f-4901-ae85-4f98c0c3b4b6"
+    "location": "eastus"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/providers/Microsoft.Capacity/reservationOrders?api-version=2022-11-01&$filter=(term%20eq%20'P1Y')&$take=50&$skip=50",
-        "totalItems": 1000,
         "value": [
           {
+            "resourceType": "VirtualMachines",
             "name": "Standard_DS5_v2",
+            "terms": [
+              "P1Y",
+              "P3Y"
+            ],
             "billingPlans": {
               "P1Y": [
                 "Upfront",
@@ -26,8 +29,6 @@
             "locations": [
               "eastus"
             ],
-            "resourceType": "VirtualMachines",
-            "restrictions": [],
             "skuProperties": [
               {
                 "name": "Cores",
@@ -50,13 +51,15 @@
                 "value": "12bc208b-083f-4901-ae85-4f98c0c3b4b8"
               }
             ],
+            "restrictions": []
+          },
+          {
+            "resourceType": "VirtualMachines",
+            "name": "Standard_D1",
             "terms": [
               "P1Y",
               "P3Y"
-            ]
-          },
-          {
-            "name": "Standard_D1",
+            ],
             "billingPlans": {
               "P1Y": [
                 "Upfront",
@@ -69,23 +72,6 @@
             },
             "locations": [
               "eastus"
-            ],
-            "resourceType": "VirtualMachines",
-            "restrictions": [
-              {
-                "type": "Term",
-                "reasonCode": "NotAvailableForSubscription",
-                "values": [
-                  "P1Y"
-                ]
-              },
-              {
-                "type": "Term",
-                "reasonCode": "NotAvailableForSubscription",
-                "values": [
-                  "P3Y"
-                ]
-              }
             ],
             "skuProperties": [
               {
@@ -109,13 +95,30 @@
                 "value": "12bc208b-083f-4901-ae85-4f98c0c3b4b8"
               }
             ],
-            "terms": [
-              "P1Y",
-              "P3Y"
+            "restrictions": [
+              {
+                "type": "Term",
+                "values": [
+                  "P1Y"
+                ],
+                "reasonCode": "NotAvailableForSubscription"
+              },
+              {
+                "type": "Term",
+                "values": [
+                  "P3Y"
+                ],
+                "reasonCode": "NotAvailableForSubscription"
+              }
             ]
           },
           {
+            "resourceType": "VirtualMachines",
             "name": "Standard_F2",
+            "terms": [
+              "P1Y",
+              "P3Y"
+            ],
             "billingPlans": {
               "P1Y": [
                 "Upfront",
@@ -128,16 +131,6 @@
             },
             "locations": [
               "eastus"
-            ],
-            "resourceType": "VirtualMachines",
-            "restrictions": [
-              {
-                "type": "Location",
-                "reasonCode": "NotAvailableForSubscription",
-                "values": [
-                  "eastus"
-                ]
-              }
             ],
             "skuProperties": [
               {
@@ -161,15 +154,20 @@
                 "value": "12bc208b-083f-4901-ae85-4f98c0c3b4b8"
               }
             ],
-            "terms": [
-              "P1Y",
-              "P3Y"
+            "restrictions": [
+              {
+                "type": "Location",
+                "values": [
+                  "eastus"
+                ],
+                "reasonCode": "NotAvailableForSubscription"
+              }
             ]
           }
-        ]
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Capacity/reservationOrders?api-version=2022-11-01&$filter=(term eq 'P1Y')&$take=50&$skip=50",
+        "totalItems": 1000
       }
     }
-  },
-  "operationId": "GetCatalog",
-  "title": "Catalog"
+  }
 }

@@ -1,26 +1,24 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789abc",
+    "resourceGroupName": "myResourceGroup",
     "containerAppName": "myContainerApp",
     "functionName": "HttpExample",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "12345678-1234-1234-1234-123456789abc"
+    "api-version": "2025-10-02-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/HttpExample",
         "name": "myContainerApp/HttpExample",
         "type": "Microsoft.App/containerApps/functions",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/functions/HttpExample",
         "properties": {
           "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
-          "isDisabled": false,
           "triggerType": "httpTrigger",
-          "language": "dotnet-isolated"
+          "language": "dotnet-isolated",
+          "isDisabled": false
         }
       }
     }
-  },
-  "operationId": "ContainerAppsFunctions_Get",
-  "title": "Get Container App's function"
+  }
 }

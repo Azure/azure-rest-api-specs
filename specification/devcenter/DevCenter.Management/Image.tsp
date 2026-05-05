@@ -59,8 +59,7 @@ interface ImageOps
         @minLength(3)
         @maxLength(80)
         imageName: string,
-      },
-      ResourceName = "DevCenterImage"
+      }
     > {}
 
 @armResourceOperations
@@ -106,8 +105,7 @@ interface ImageOperationGroupOps
         @minLength(3)
         @maxLength(153)
         imageName: string,
-      },
-      ResourceName = "ProjectImage"
+      }
     > {}
 
 @armResourceOperations

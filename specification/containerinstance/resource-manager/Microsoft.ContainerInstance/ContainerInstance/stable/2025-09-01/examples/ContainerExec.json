@@ -1,26 +1,24 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2025-09-01",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "containerName": "container1",
     "containerExecRequest": {
       "command": "/bin/bash",
       "terminalSize": {
-        "cols": 12,
-        "rows": 12
+        "rows": 12,
+        "cols": 12
       }
-    },
-    "containerGroupName": "demo1",
-    "containerName": "container1",
-    "resourceGroupName": "demo",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "password": "password",
-        "webSocketUri": "wss://web-socket-uri"
+        "webSocketUri": "wss://web-socket-uri",
+        "password": "password"
       }
     }
-  },
-  "operationId": "Containers_ExecuteCommand",
-  "title": "ContainerExec"
+  }
 }

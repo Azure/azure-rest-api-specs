@@ -1,17 +1,17 @@
 {
   "parameters": {
     "api-version": "2025-04-01-preview",
-    "groupName": "healthcareworkspace",
-    "resourceGroupName": "testRG",
     "subscriptionId": "subid",
-    "workspaceName": "workspace1"
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "groupName": "healthcareworkspace"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/workspaces/workspace1/privateLinkResources/fhir",
         "name": "fhir",
         "type": "Microsoft.HealthcareApis/workspaces/privateLinkResources",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/workspaces/workspace1/privateLinkResources/fhir",
         "properties": {
           "groupId": "healthcareworkspace",
           "requiredMembers": [
@@ -25,7 +25,5 @@
         }
       }
     }
-  },
-  "operationId": "WorkspacePrivateLinkResources_Get",
-  "title": "WorkspacePrivateLinkResources_Get"
+  }
 }

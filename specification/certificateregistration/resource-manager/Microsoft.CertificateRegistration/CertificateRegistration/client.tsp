@@ -60,14 +60,6 @@ using Microsoft.CertificateRegistration;
   "IsAutoRenew",
   "csharp"
 );
-@@clientName(AppServiceCertificateOrderProperties.productType,
-  "CertificateProductType",
-  "csharp"
-);
-@@clientName(AppServiceCertificateOrderPatchResourceProperties.productType,
-  "CertificateProductType",
-  "csharp"
-);
 @@clientName(AppServiceCertificateOrderProperties.expirationTime,
   "ExpireOn",
   "csharp"

@@ -3,7 +3,7 @@ import "../models/InternetGateway.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
+
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -21,8 +21,7 @@ model InternetGateway
   @visibility(Lifecycle.Read)
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The Internet Gateway Properties")
+  /** The Internet Gateway Properties */
   properties: InternetGatewayProperties;
 }
 
@@ -42,16 +41,10 @@ interface InternetGateways {
   delete is ArmResourceDeleteWithoutOkAsync<InternetGateway>;
 
   @doc("Displays Internet Gateways list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<
-    InternetGateway,
-    Response = InternetGatewaysListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<InternetGateway>;
 
   @doc("Displays Internet Gateways list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<
-    InternetGateway,
-    Response = InternetGatewaysListResult
-  >;
+  listBySubscription is ArmListBySubscription<InternetGateway>;
 }
 
 @@doc(InternetGateways.create::parameters.resource, "Request payload.");

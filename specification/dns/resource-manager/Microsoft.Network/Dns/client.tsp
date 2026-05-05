@@ -3,6 +3,3 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Network, "DnsManagementClient", "javascript");
-@@clientName(Microsoft.Network, "DnsManagementClient", "java");
-
-@@clientName(Microsoft.Network.RecordSetProperties.TTL, "ttl", "java");

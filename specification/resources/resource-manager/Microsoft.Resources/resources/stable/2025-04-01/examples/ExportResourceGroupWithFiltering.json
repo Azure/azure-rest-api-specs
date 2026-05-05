@@ -1,16 +1,21 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
     "api-version": "2025-04-01",
     "parameters": {
-      "options": "SkipResourceNameParameterization",
       "resources": [
         "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group/providers/My.RP/myResourceType/myFirstResource"
-      ]
-    },
-    "resourceGroupName": "my-resource-group",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+      ],
+      "options": "SkipResourceNameParameterization"
+    }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/c9bbccf4-e16a-4eb7-befb-2e2e5195c347?api-version=2018-08-01"
+      }
+    },
     "200": {
       "body": {
         "template": {
@@ -18,31 +23,24 @@
           "contentVersion": "1.0.0.0",
           "parameters": {
             "myResourceType_myFirstResource_secret": {
-              "type": "SecureString",
-              "defaultValue": null
+              "defaultValue": null,
+              "type": "SecureString"
             }
           },
+          "variables": {},
           "resources": [
             {
-              "name": "myFirstResource",
               "type": "My.RP/myResourceType",
               "apiVersion": "2019-01-01",
+              "name": "myFirstResource",
               "location": "West US",
               "properties": {
                 "secret": "[parameters('myResourceType_myFirstResource_secret')]"
               }
             }
-          ],
-          "variables": {}
+          ]
         }
       }
-    },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/c9bbccf4-e16a-4eb7-befb-2e2e5195c347?api-version=2018-08-01"
-      }
     }
-  },
-  "operationId": "ResourceGroups_ExportTemplate",
-  "title": "Export a resource group with filtering"
+  }
 }

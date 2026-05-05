@@ -391,9 +391,10 @@ alias CommonParameters = {
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
   @query
-  @clientName("timeOut", "java")
-  @clientName("timeout", "go,csharp")
-  @clientName("service_timeout", "python")
+  @clientName("timeOutInSeconds", "java")
+  @clientName("timeOutInSeconds", "csharp")
+  @clientName("timeOutInSeconds", "javascript")
+  @clientName("timeout", "go,python")
   @encode("seconds", int32)
   timeOut?: duration;
 
@@ -415,8 +416,7 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
-  @clientName("requestDate", "csharp")
-  @clientName("ocp_date", "python")
+  @clientName("ocpDate", "csharp")
   ocpdate?: utcDateTime;
 };
 
@@ -437,8 +437,7 @@ alias ListPoolUsageMetricsOptionalParameters = {
     start time of the last aggregation interval currently available.
     """)
   @query
-  @clientName("starttime", "csharp,go")
-  @clientName("start_time", "python")
+  @clientName("starttime", "csharp,python,javascript,go")
   startTime?: utcDateTime;
 
   @doc("""
@@ -447,7 +446,6 @@ alias ListPoolUsageMetricsOptionalParameters = {
     last aggregation interval currently available.
     """)
   @query
-  @clientName("end_time", "python")
   endtime?: utcDateTime;
 
   @doc("""

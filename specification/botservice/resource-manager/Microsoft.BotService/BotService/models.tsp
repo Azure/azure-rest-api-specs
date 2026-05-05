@@ -190,31 +190,6 @@ union OperationResultStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union ChannelNameUnion {
-  string,
-  AlexaChannel: "AlexaChannel",
-  FacebookChannel: "FacebookChannel",
-  EmailChannel: "EmailChannel",
-  KikChannel: "KikChannel",
-  TelegramChannel: "TelegramChannel",
-  SlackChannel: "SlackChannel",
-  MsTeamsChannel: "MsTeamsChannel",
-  SkypeChannel: "SkypeChannel",
-  WebChatChannel: "WebChatChannel",
-  DirectLineChannel: "DirectLineChannel",
-  SmsChannel: "SmsChannel",
-  LineChannel: "LineChannel",
-  DirectLineSpeechChannel: "DirectLineSpeechChannel",
-  OutlookChannel: "OutlookChannel",
-  Omnichannel: "Omnichannel",
-  TelephonyChannel: "TelephonyChannel",
-  AcsChatChannel: "AcsChatChannel",
-  SearchAssistant: "SearchAssistant",
-  M365Extensions: "M365Extensions",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ChannelName {
   AlexaChannel,
   FacebookChannel,
@@ -434,7 +409,7 @@ model BotProperties {
    * The channel schema transformation version for the bot
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  schemaTransformationVersion?: string | null;
+  schemaTransformationVersion?: string | null = null;
 
   /**
    * The storage resourceId for the bot
@@ -1058,7 +1033,7 @@ model Site {
    * Whether this site is enabled for block user upload.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  isBlockUserUploadEnabled?: boolean | null;
+  isBlockUserUploadEnabled?: boolean | null = null;
 
   /**
    * Whether this no-storage site is disabled detailed logging for
@@ -1872,7 +1847,7 @@ model MsTeamsChannelProperties {
    * Whether this channel accepted terms
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  acceptedTerms?: boolean | null;
+  acceptedTerms?: boolean | null = null;
 }
 
 /**

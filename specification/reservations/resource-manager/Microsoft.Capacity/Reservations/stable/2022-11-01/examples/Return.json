@@ -1,95 +1,93 @@
 {
   "parameters": {
     "api-version": "2022-11-01",
+    "reservationOrderId": "50000000-aaaa-bbbb-cccc-100000000004",
     "body": {
       "properties": {
-        "reservationToReturn": {
-          "quantity": 1,
-          "reservationId": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000"
-        },
-        "returnReason": "PurchasedWrongProduct",
+        "sessionId": "10000000-aaaa-bbbb-cccc-200000000000",
         "scope": "Reservation",
-        "sessionId": "10000000-aaaa-bbbb-cccc-200000000000"
+        "reservationToReturn": {
+          "reservationId": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000",
+          "quantity": 1
+        },
+        "returnReason": "PurchasedWrongProduct"
       }
-    },
-    "reservationOrderId": "50000000-aaaa-bbbb-cccc-100000000004"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "50000000-aaaa-bbbb-cccc-100000000004",
-        "type": "Microsoft.Capacity/reservationOrders",
-        "etag": 7,
         "id": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004",
+        "type": "Microsoft.Capacity/reservationOrders",
+        "name": "50000000-aaaa-bbbb-cccc-100000000004",
+        "etag": 7,
         "properties": {
-          "billingPlan": "Monthly",
-          "createdDateTime": "2017-08-30T03:51:49.8083758Z",
           "displayName": "cabri",
+          "requestDateTime": "2017-08-30T03:49:19.0252126Z",
+          "createdDateTime": "2017-08-30T03:51:49.8083758Z",
           "expiryDate": "2018-08-30",
           "expiryDateTime": "2018-08-30T03:51:49.8083758Z",
-          "originalQuantity": 7,
+          "term": "P1Y",
+          "billingPlan": "Monthly",
           "provisioningState": "Succeeded",
-          "requestDateTime": "2017-08-30T03:49:19.0252126Z",
           "reservations": [
             {
               "id": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000"
             }
           ],
-          "term": "P1Y"
+          "originalQuantity": 7
         }
       }
     },
     "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Capacity/reservationorders/50000000-aaaa-bbbb-cccc-100000000004?api-version=2022-11-01"
+      },
       "body": {
         "id": "/providers/Microsoft.Capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000",
         "properties": {
-          "billingInformation": {
-            "billingCurrencyProratedAmount": {
-              "amount": 3.48,
-              "currencyCode": "GBP"
-            },
-            "billingCurrencyRemainingCommitmentAmount": {
-              "amount": 0,
-              "currencyCode": "GBP"
-            },
-            "billingCurrencyTotalPaidAmount": {
-              "amount": 24,
-              "currencyCode": "GBP"
-            },
-            "billingPlan": "Upfront",
-            "completedTransactions": 1,
-            "totalTransactions": 1
-          },
+          "sessionId": "10000000-aaaa-bbbb-cccc-200000000000",
+          "quantity": 1,
           "billingRefundAmount": {
-            "amount": 20.52,
-            "currencyCode": "GBP"
+            "currencyCode": "GBP",
+            "amount": 20.52
+          },
+          "pricingRefundAmount": {
+            "currencyCode": "USD",
+            "amount": 24.68
           },
           "policyResult": {
             "properties": {
               "consumedRefundsTotal": {
-                "amount": 83.69,
-                "currencyCode": "USD"
+                "currencyCode": "USD",
+                "amount": 83.69
               },
               "maxRefundLimit": {
-                "amount": 50000,
-                "currencyCode": "USD"
+                "currencyCode": "USD",
+                "amount": 50000.0
               },
               "policyErrors": []
             }
           },
-          "pricingRefundAmount": {
-            "amount": 24.68,
-            "currencyCode": "USD"
-          },
-          "quantity": 1,
-          "sessionId": "10000000-aaaa-bbbb-cccc-200000000000"
+          "billingInformation": {
+            "billingPlan": "Upfront",
+            "completedTransactions": 1,
+            "totalTransactions": 1,
+            "billingCurrencyTotalPaidAmount": {
+              "currencyCode": "GBP",
+              "amount": 24.0
+            },
+            "billingCurrencyProratedAmount": {
+              "currencyCode": "GBP",
+              "amount": 3.48
+            },
+            "billingCurrencyRemainingCommitmentAmount": {
+              "currencyCode": "GBP",
+              "amount": 0.0
+            }
+          }
         }
-      },
-      "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Capacity/reservationorders/50000000-aaaa-bbbb-cccc-100000000004?api-version=2022-11-01"
       }
     }
-  },
-  "operationId": "Return_Post",
-  "title": "Return a reservation"
+  }
 }

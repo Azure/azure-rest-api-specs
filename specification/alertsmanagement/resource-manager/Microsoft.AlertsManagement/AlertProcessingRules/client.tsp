@@ -7,7 +7,3 @@ using Azure.ClientGenerator.Core;
   "AlertProcessingRulesMgmtClient",
   "python"
 );
-@@clientName(Microsoft.AlertsManagement,
-  "AlertProcessingRulesManagementClient",
-  "javascript"
-);

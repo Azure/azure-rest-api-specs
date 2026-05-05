@@ -1,47 +1,47 @@
 {
   "parameters": {
     "api-version": "2022-11-01",
+    "reservationOrderId": "276e7ae4-84d0-4da6-ab4b-d6b94f3557da",
+    "reservationId": "6ef59113-3482-40da-8d79-787f823e34bc",
     "parameters": {
       "properties": {
         "appliedScopeType": "Shared",
         "instanceFlexibility": "Off"
       }
-    },
-    "reservationId": "6ef59113-3482-40da-8d79-787f823e34bc",
-    "reservationOrderId": "276e7ae4-84d0-4da6-ab4b-d6b94f3557da"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "6ef59113-3482-40da-8d79-787f823e34bc",
-        "type": "Microsoft.Capacity/reservationOrders/reservations",
-        "etag": 4,
+        "sku": {
+          "name": "Standard_DS1_v2"
+        },
         "id": "/providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/6ef59113-3482-40da-8d79-787f823e34bc",
+        "type": "Microsoft.Capacity/reservationOrders/reservations",
+        "name": "6ef59113-3482-40da-8d79-787f823e34bc",
+        "etag": 4,
         "location": "eastus",
         "properties": {
           "appliedScopeType": "Shared",
-          "billingPlan": "Monthly",
+          "renew": false,
           "billingScopeId": "/subscriptions/19376483-64b8-49e4-a931-d5248828720a",
-          "displayName": "cabri_test",
-          "effectiveDateTime": "2017-09-22T23:57:48.1891638Z",
+          "quantity": 3,
+          "provisioningState": "Succeeded",
           "expiryDate": "2018-09-22",
           "expiryDateTime": "2018-09-22T23:57:48.1891638Z",
-          "instanceFlexibility": "Off",
+          "displayName": "cabri_test",
+          "billingPlan": "Monthly",
+          "effectiveDateTime": "2017-09-22T23:57:48.1891638Z",
           "lastUpdatedDateTime": "2017-09-22T23:57:54.3768768Z",
+          "reservedResourceType": "VirtualMachines",
+          "instanceFlexibility": "Off",
+          "skuDescription": "D1 v2",
           "mergeProperties": {
             "mergeSources": [
               "/providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/00238563-7312-4c20-a134-8c030bf938a7",
               "/providers/microsoft.capacity/reservationOrders/276e7ae4-84d0-4da6-ab4b-d6b94f3557da/reservations/e0e4b4f5-77ea-4984-9ee4-6bf9850ee6de"
             ]
-          },
-          "provisioningState": "Succeeded",
-          "quantity": 3,
-          "renew": false,
-          "reservedResourceType": "VirtualMachines",
-          "skuDescription": "D1 v2"
-        },
-        "sku": {
-          "name": "Standard_DS1_v2"
+          }
         }
       }
     },
@@ -52,7 +52,5 @@
         "Retry-After": 120
       }
     }
-  },
-  "operationId": "Reservation_Update",
-  "title": "PatchReservation"
+  }
 }

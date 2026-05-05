@@ -1,26 +1,24 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
     "automationAccountName": "MyAutomationAccount",
+    "api-version": "2024-10-23",
     "parameters": {
       "graphRunbookJson": "<GraphRunbookJSON>"
-    },
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    }
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "graphRunbookJson": "<GraphRunbookJSON>",
         "rawContent": {
+          "schemaVersion": "1.10",
           "runbookDefinition": "AAEAAADAQAAAAAAAAAMAgAAAGJPcmNoZXN0cmF0b3IuR3JhcGhSdW5ib29rLk1vZGVsLCBWZXJzaW9uPTcuMy4wLjAsIEN1bHR....",
-          "runbookType": "GraphPowerShell",
-          "schemaVersion": "1.10"
-        }
-      },
-      "headers": {}
+          "runbookType": "GraphPowerShell"
+        },
+        "graphRunbookJson": "<GraphRunbookJSON>"
+      }
     }
-  },
-  "operationId": "convertGraphRunbookContent",
-  "title": "Get Graphical raw runbook content from graphical runbook JSON object"
+  }
 }

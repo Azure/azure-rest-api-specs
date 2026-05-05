@@ -651,13 +651,7 @@ function processARMReviewWorkflowLabels(
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  // Block if ARMModelingReviewRequired is present (new RP namespace or new resource type detected)
-  const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
-  // Block if the label is already present or if it's being added by another check (e.g. detect-new-resource-provider)
-  const blockedOnArmModeling =
-    armModelingReviewLabel.present || labelContext.toAdd.has("ARMModelingReviewRequired");
-
-  const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -713,8 +707,7 @@ function processARMReviewWorkflowLabels(
   console.log(
     `RETURN definition processARMReviewWorkflowLabels. ` +
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
-      `blockedOnRpaas: ${blockedOnRpaas}, ` +
-      `blockedOnArmModeling: ${blockedOnArmModeling}. ` +
+      `blockedOnRpaas: ${blockedOnRpaas}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
 }
@@ -891,18 +884,6 @@ const rulesPri0NotReadyForArmReview = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
-  },
-  {
-    precedence: 0,
-    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
-    anyRequiredLabels: [],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      "This PR has <code>ARMModelingReviewRequired</code> label. " +
-        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
-        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/>" +
-        "Please schedule a meeting at " +
-        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.`,
-    ),
   },
 ];
 

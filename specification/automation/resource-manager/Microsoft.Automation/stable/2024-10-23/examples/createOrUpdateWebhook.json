@@ -1,68 +1,66 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
     "automationAccountName": "myAutomationAccount33",
+    "webhookName": "TestWebhook",
+    "api-version": "2024-10-23",
     "parameters": {
       "name": "TestWebhook",
       "properties": {
-        "expiryTime": "2018-03-29T22:18:13.7002872Z",
         "isEnabled": true,
+        "uri": "<uri>",
+        "expiryTime": "2018-03-29T22:18:13.7002872Z",
         "runbook": {
           "name": "TestRunbook"
-        },
-        "uri": "<uri>"
+        }
       }
-    },
-    "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-    "webhookName": "TestWebhook"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "TestWebhook",
-        "type": "Microsoft.Automation/AutomationAccounts/Webhooks",
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
-        "properties": {
-          "creationTime": "2017-03-29T22:18:14.6651862+00:00",
-          "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
-          "isEnabled": true,
-          "lastInvokedTime": null,
-          "lastModifiedBy": "",
-          "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00",
-          "parameters": null,
-          "runOn": null,
-          "runbook": {
-            "name": "TestRunbook"
-          },
-          "uri": ""
-        }
-      },
-      "headers": {}
-    },
-    "201": {
-      "body": {
-        "name": "TestWebhook",
-        "type": "Microsoft.Automation/AutomationAccounts/Webhooks",
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
-        "properties": {
-          "creationTime": "2017-03-29T22:18:14.6651862+00:00",
-          "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
-          "isEnabled": true,
-          "lastInvokedTime": null,
-          "lastModifiedBy": "",
-          "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00",
-          "parameters": null,
-          "runOn": null,
-          "runbook": {
-            "name": "TestRunbook"
-          },
-          "uri": ""
-        }
-      },
-      "headers": {}
     }
   },
-  "operationId": "Webhook_CreateOrUpdate",
-  "title": "Create or update webhook"
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
+        "name": "TestWebhook",
+        "type": "Microsoft.Automation/AutomationAccounts/Webhooks",
+        "properties": {
+          "isEnabled": true,
+          "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
+          "runbook": {
+            "name": "TestRunbook"
+          },
+          "lastInvokedTime": null,
+          "runOn": null,
+          "parameters": null,
+          "uri": "",
+          "creationTime": "2017-03-29T22:18:14.6651862+00:00",
+          "lastModifiedBy": "",
+          "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
+        "name": "TestWebhook",
+        "type": "Microsoft.Automation/AutomationAccounts/Webhooks",
+        "properties": {
+          "isEnabled": true,
+          "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
+          "runbook": {
+            "name": "TestRunbook"
+          },
+          "lastInvokedTime": null,
+          "runOn": null,
+          "parameters": null,
+          "uri": "",
+          "creationTime": "2017-03-29T22:18:14.6651862+00:00",
+          "lastModifiedBy": "",
+          "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00"
+        }
+      }
+    }
+  }
 }

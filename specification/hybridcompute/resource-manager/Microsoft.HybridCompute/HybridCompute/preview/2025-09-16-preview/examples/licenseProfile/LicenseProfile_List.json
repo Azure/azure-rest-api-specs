@@ -1,65 +1,63 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
-    "licenseProfileName": "default",
-    "machineName": "myMachine",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "machineName": "myMachine",
+    "licenseProfileName": "default",
+    "api-version": "2025-09-16-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
             "name": "default",
             "type": "Microsoft.HybridCompute/machines/licenseProfiles",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
             "location": "eastus2euap",
+            "tags": null,
             "properties": {
+              "softwareAssurance": {
+                "softwareAssuranceCustomer": true
+              },
               "esuProfile": {
                 "assignedLicense": "{LicenseResourceId}",
                 "esuEligibility": "Eligible",
+                "serverType": "Standard",
                 "esuKeyState": "Inactive",
                 "esuKeys": [
                   {
-                    "licenseStatus": 1,
-                    "sku": "skuNumber1"
+                    "sku": "skuNumber1",
+                    "licenseStatus": 1
                   },
                   {
-                    "licenseStatus": 1,
-                    "sku": "skuNumber2"
+                    "sku": "skuNumber2",
+                    "licenseStatus": 1
                   }
-                ],
-                "serverType": "Standard"
+                ]
               },
               "productProfile": {
-                "billingEndDate": "2023-11-05T20:36:49.745Z",
+                "subscriptionStatus": "Enabled",
+                "productType": "WindowsServer",
+                "enrollmentDate": "2023-10-05T20:36:49.745Z",
                 "billingStartDate": "2023-10-05T20:36:49.745Z",
                 "disenrollmentDate": "2023-11-05T20:36:49.745Z",
-                "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                "billingEndDate": "2023-11-05T20:36:49.745Z",
                 "productFeatures": [
                   {
                     "name": "Hotpatch",
-                    "billingEndDate": "2023-11-05T20:36:49.745Z",
+                    "subscriptionStatus": "Enabled",
+                    "enrollmentDate": "2023-10-05T20:36:49.745Z",
                     "billingStartDate": "2023-10-05T20:36:49.745Z",
                     "disenrollmentDate": "2023-11-05T20:36:49.745Z",
-                    "enrollmentDate": "2023-10-05T20:36:49.745Z",
-                    "subscriptionStatus": "Enabled"
+                    "billingEndDate": "2023-11-05T20:36:49.745Z"
                   }
-                ],
-                "productType": "WindowsServer",
-                "subscriptionStatus": "Enabled"
-              },
-              "softwareAssurance": {
-                "softwareAssuranceCustomer": true
+                ]
               }
-            },
-            "tags": null
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "LicenseProfiles_List",
-  "title": "List all License Profiles"
+  }
 }

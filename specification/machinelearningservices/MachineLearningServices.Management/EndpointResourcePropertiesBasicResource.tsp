@@ -21,15 +21,15 @@ alias EndpointResourceListParameters = {
   @query("endpointType")
   endpointType?: EndpointType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include online endpoints"
   @query("includeOnlineEndpoints")
   includeOnlineEndpoints?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include serverless endpoints"
   @query("includeServerlessEndpoints")
   includeServerlessEndpoints?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include connections"
   @query("includeConnections")
   includeConnections?: boolean = false;
 
@@ -50,8 +50,6 @@ alias EndpointResourceListParameters = {
  * EndpointResourcePropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @parentResource(Workspace)
 model EndpointResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<EndpointResourceProperties, false> {
@@ -68,8 +66,6 @@ model EndpointResourcePropertiesBasicResource
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource does not support delete operation"
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface EndpointResourcePropertiesBasicResources {
   /**

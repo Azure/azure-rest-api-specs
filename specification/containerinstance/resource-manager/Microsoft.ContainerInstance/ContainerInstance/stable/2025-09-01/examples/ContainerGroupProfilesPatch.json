@@ -1,24 +1,29 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2025-09-01",
+    "resourceGroupName": "demoResource",
     "containerGroupProfileName": "demo1",
     "properties": {
       "tags": {
         "tag1key": "tag1Value",
         "tag2key": "tag2Value"
       }
-    },
-    "resourceGroupName": "demoResource",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
         "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
         "location": "WestUs",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "tags": {
+          "tag1key": "tag1Value",
+          "tag2key": "tag2Value"
+        },
         "properties": {
+          "sku": "Standard",
           "containers": [
             {
               "name": "demo1",
@@ -59,18 +64,16 @@
           ],
           "imageRegistryCredentials": [],
           "ipAddress": {
-            "type": "Public",
             "ip": "10.0.0.1",
             "ports": [
               {
                 "port": 80,
                 "protocol": "TCP"
               }
-            ]
+            ],
+            "type": "Public"
           },
           "osType": "Linux",
-          "revision": 2,
-          "sku": "Standard",
           "volumes": [
             {
               "name": "volume1",
@@ -87,15 +90,10 @@
               "name": "volume3",
               "secret": {}
             }
-          ]
-        },
-        "tags": {
-          "tag1key": "tag1Value",
-          "tag2key": "tag2Value"
+          ],
+          "revision": 2
         }
       }
     }
-  },
-  "operationId": "CGProfile_Update",
-  "title": "ContainerGroupProfilesPatch"
+  }
 }

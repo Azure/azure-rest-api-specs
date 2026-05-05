@@ -1,64 +1,62 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
-    "automationAccountName": "MyTestAutomationAccount",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    "automationAccountName": "MyTestAutomationAccount",
+    "api-version": "2024-10-23"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher",
             "name": "MyTestWatcher",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher",
             "properties": {
+              "executionFrequencyInSeconds": 60,
+              "scriptName": "MyTestWatcher",
+              "scriptParameters": null,
               "description": "This is a test watcher.",
+              "status": null,
+              "scriptRunOn": "MyTestHybridWorkerGroup",
               "creationTime": "2016-12-20T21:36:48.597+00:00",
-              "executionFrequencyInSeconds": 60,
               "lastModifiedBy": null,
-              "lastModifiedTime": "2016-12-20T21:36:48.597+00:00",
-              "scriptName": "MyTestWatcher",
-              "scriptParameters": null,
-              "scriptRunOn": "MyTestHybridWorkerGroup",
-              "status": null
+              "lastModifiedTime": "2016-12-20T21:36:48.597+00:00"
             }
           },
           {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher01",
             "name": "MyTestWatcher01",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher01",
             "properties": {
-              "description": "This is a test watcher.",
-              "creationTime": "2016-12-20T20:47:24.697+00:00",
               "executionFrequencyInSeconds": 60,
-              "lastModifiedBy": null,
-              "lastModifiedTime": "2016-12-20T20:47:24.697+00:00",
               "scriptName": "MyTestWatcher",
               "scriptParameters": null,
+              "description": "This is a test watcher.",
+              "status": null,
               "scriptRunOn": "MyTestHybridWorkerGroup",
-              "status": null
+              "creationTime": "2016-12-20T20:47:24.697+00:00",
+              "lastModifiedBy": null,
+              "lastModifiedTime": "2016-12-20T20:47:24.697+00:00"
             }
           },
           {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher02",
             "name": "MyTestWatcher02",
-            "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyTestAutomationAccount/watchers/MyTestWatcher02",
             "properties": {
-              "description": "This is a test watcher.",
-              "creationTime": "2016-12-20T21:26:35.647+00:00",
               "executionFrequencyInSeconds": 60,
-              "lastModifiedBy": null,
-              "lastModifiedTime": "2016-12-20T21:26:35.647+00:00",
               "scriptName": "MyTestWatcher",
               "scriptParameters": null,
+              "description": "This is a test watcher.",
+              "status": null,
               "scriptRunOn": "MyTestHybridWorkerGroup",
-              "status": null
+              "creationTime": "2016-12-20T21:26:35.647+00:00",
+              "lastModifiedBy": null,
+              "lastModifiedTime": "2016-12-20T21:26:35.647+00:00"
             }
           }
         ]
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "Watcher_ListByAutomationAccount",
-  "title": "List watchers by Automation Account"
+  }
 }

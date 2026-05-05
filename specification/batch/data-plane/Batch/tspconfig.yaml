@@ -40,7 +40,6 @@ options:
     generate-tests: false
     generate-samples: false
     use-default-http-status-code-to-exception-type-mapping: false
-    customization-class: customization/src/main/java/BatchClientBuilderCustomization.java
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-batch"
     namespace: "azure.batch"
@@ -49,7 +48,7 @@ options:
     generate-sample: false
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/batch"
-    wrap-non-model-return: false
+    is-modular-library: true
     package-details:
       name: "@azure/batch"
       description: "Azure Batch client library for JavaScript"

@@ -11,8 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
 
-model MyPrivateLinkResource is PrivateLink;
-alias PrivateLinkOperations = PrivateLinks<MyPrivateLinkResource>;
+alias PrivateLinkOperations = PrivateLinks<PrivateLinkResource>;
 
 @armResourceOperations
 interface PrivateLinkResources {

@@ -39,21 +39,6 @@ model ApiManagementGatewayResource
   etag?: Azure.Core.eTag;
 }
 
-alias ApiManagementGatewayListPagingParameters = {
-  /**
-   * Number of records to return.
-   */
-  @query("$top")
-  @minValue(1)
-  $top?: int32;
-
-  /**
-   * Skip token for retrieving the next page of results.
-   */
-  @query("$skipToken")
-  $skipToken?: string;
-};
-
 @armResourceOperations
 interface ApiManagementGatewayResources {
   /**
@@ -97,7 +82,6 @@ interface ApiManagementGatewayResources {
    */
   listByResourceGroup is ArmResourceListByParent<
     ApiManagementGatewayResource,
-    Parameters = ApiManagementGatewayListPagingParameters,
     Response = ArmResponse<ApiManagementGatewayListResult>
   >;
 
@@ -106,7 +90,6 @@ interface ApiManagementGatewayResources {
    */
   list is ArmListBySubscription<
     ApiManagementGatewayResource,
-    Parameters = ApiManagementGatewayListPagingParameters,
     Response = ArmResponse<ApiManagementGatewayListResult>
   >;
 

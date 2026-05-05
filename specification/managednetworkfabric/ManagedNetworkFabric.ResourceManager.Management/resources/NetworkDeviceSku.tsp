@@ -3,7 +3,7 @@ import "../models/NetworkDeviceSku.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
+
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -21,7 +21,7 @@ model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The Network Device SKU properties.")
+  /** The NetworkDeviceSku properties */
   properties: NetworkDeviceSkuProperties;
 }
 
@@ -31,8 +31,5 @@ interface NetworkDeviceSkus {
   get is ArmResourceRead<NetworkDeviceSku>;
 
   @doc("List Network Device SKUs for the given subscription.")
-  listBySubscription is ArmResourceListByParent<
-    NetworkDeviceSku,
-    Response = NetworkDeviceSkusListResult
-  >;
+  listBySubscription is ArmResourceListByParent<NetworkDeviceSku>;
 }

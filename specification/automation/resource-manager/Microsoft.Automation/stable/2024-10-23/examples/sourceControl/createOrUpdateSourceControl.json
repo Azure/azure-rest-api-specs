@@ -1,64 +1,62 @@
 {
   "parameters": {
-    "api-version": "2024-10-23",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
     "automationAccountName": "sampleAccount9",
+    "sourceControlName": "sampleSourceControl",
+    "api-version": "2024-10-23",
     "parameters": {
       "properties": {
-        "description": "my description",
-        "autoSync": true,
+        "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
         "branch": "master",
         "folderPath": "/folderOne/folderTwo",
+        "autoSync": true,
         "publishRunbook": true,
-        "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
+        "sourceType": "VsoGit",
         "securityToken": {
           "accessToken": "******",
           "tokenType": "PersonalAccessToken"
         },
-        "sourceType": "VsoGit"
+        "description": "my description"
       }
-    },
-    "resourceGroupName": "rg",
-    "sourceControlName": "sampleSourceControl",
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "sampleSourceControl",
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl",
-        "properties": {
-          "description": "my description",
-          "autoSync": true,
-          "branch": "master",
-          "creationTime": "2017-03-28T22:59:00.937+00:00",
-          "folderPath": "/folderOne/folderTwo",
-          "lastModifiedTime": "2017-03-28T22:59:00.937+00:00",
-          "publishRunbook": true,
-          "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
-          "sourceType": "VsoGit"
-        }
-      },
-      "headers": {}
-    },
-    "201": {
-      "body": {
-        "name": "sampleSourceControl",
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl",
-        "properties": {
-          "description": "my description",
-          "autoSync": true,
-          "branch": "master",
-          "creationTime": "2017-03-28T22:59:00.937+00:00",
-          "folderPath": "/folderOne/folderTwo",
-          "lastModifiedTime": "2017-03-28T22:59:00.937+00:00",
-          "publishRunbook": true,
-          "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
-          "sourceType": "VsoGit"
-        }
-      },
-      "headers": {}
     }
   },
-  "operationId": "SourceControl_CreateOrUpdate",
-  "title": "Create or update a source control"
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl",
+        "name": "sampleSourceControl",
+        "properties": {
+          "creationTime": "2017-03-28T22:59:00.937+00:00",
+          "lastModifiedTime": "2017-03-28T22:59:00.937+00:00",
+          "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
+          "branch": "master",
+          "folderPath": "/folderOne/folderTwo",
+          "autoSync": true,
+          "publishRunbook": true,
+          "sourceType": "VsoGit",
+          "description": "my description"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl",
+        "name": "sampleSourceControl",
+        "properties": {
+          "creationTime": "2017-03-28T22:59:00.937+00:00",
+          "lastModifiedTime": "2017-03-28T22:59:00.937+00:00",
+          "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
+          "branch": "master",
+          "folderPath": "/folderOne/folderTwo",
+          "autoSync": true,
+          "publishRunbook": true,
+          "sourceType": "VsoGit",
+          "description": "my description"
+        }
+      }
+    }
+  }
 }

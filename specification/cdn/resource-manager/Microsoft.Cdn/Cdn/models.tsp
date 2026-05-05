@@ -60,7 +60,6 @@ union SecretType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   MtlsCertificateChain: "MtlsCertificateChain",
 }
 
@@ -103,7 +102,6 @@ union SkuName {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   Classic_AzureFrontDoor: "Classic_AzureFrontDoor",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -186,22 +184,18 @@ union ScrubbingRuleEntryMatchVariable {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   RequestHeaderNames: "RequestHeaderNames",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   RequestCookieNames: "RequestCookieNames",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   RequestBodyPostArgNames: "RequestBodyPostArgNames",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   RequestBodyJsonArgNames: "RequestBodyJsonArgNames",
 }
 
@@ -215,7 +209,6 @@ union ScrubbingRuleEntryMatchOperator {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   Equals: "Equals",
 }
 
@@ -328,7 +321,6 @@ union AfdCustomizedCipherSuiteForTls13 {
  * Supported scenarios for establishing mTLS connection.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union MtlsScenarioType {
   string,
   ClientCertificateRequiredAndValidated: "ClientCertificateRequiredAndValidated",
@@ -383,7 +375,6 @@ union EnabledState {
  * Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union EnforceMtlsEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -468,7 +459,6 @@ union HttpsRedirect {
  * Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union AFDRouteGrpcState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -548,12 +538,10 @@ union DeliveryRuleActionName {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   EdgeAction: "EdgeAction",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   AfdUrlSigning: "AfdUrlSigning",
 }
 
@@ -578,13 +566,11 @@ union SecurityPolicyType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   WebApplicationFirewallEmbedded: "WebApplicationFirewallEmbedded",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union ApprovalStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -597,7 +583,6 @@ union ApprovalStatus {
  * Deployment status of preview stage.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union DeploymentRolloutStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -614,7 +599,6 @@ union DeploymentRolloutStatus {
  * Resource type supported by preview.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union PreviewSupportedResourceType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -702,15 +686,15 @@ union MetricsSeriesUnit {
 union LogRanking {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  url: "url",
+  "url",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  referrer: "referrer",
+  "referrer",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  browser: "browser",
+  "browser",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAgent: "userAgent",
+  "userAgent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  countryOrRegion: "countryOrRegion",
+  "countryOrRegion",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -803,21 +787,21 @@ union WafMetricsSeriesUnit {
 union WafRankingType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  action: "action",
+  "action",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ruleGroup: "ruleGroup",
+  "ruleGroup",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ruleId: "ruleId",
+  "ruleId",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAgent: "userAgent",
+  "userAgent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  clientIp: "clientIp",
+  "clientIp",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  url: "url",
+  "url",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  countryOrRegion: "countryOrRegion",
+  "countryOrRegion",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ruleType: "ruleType",
+  "ruleType",
 }
 
 /**
@@ -1065,7 +1049,6 @@ union ProtocolType {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union ProfileAgentProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1221,17 +1204,14 @@ union ActionType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   AnomalyScoring: "AnomalyScoring",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   JSChallenge: "JSChallenge",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   CAPTCHA: "CAPTCHA",
 }
 
@@ -1283,7 +1263,6 @@ union PolicyResourceState {
  * The type of the path.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union AgentPathType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1297,7 +1276,6 @@ union AgentPathType {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union WebAgentProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1316,7 +1294,6 @@ union WebAgentProvisioningState {
  * Format or origin of the knowledge source.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union KnowledgeSourceType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1331,7 +1308,6 @@ union KnowledgeSourceType {
  * Specifies the units of time for scheduling update intervals for the knowledge source.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union KnowledgeSourceUpdateFrequency {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1349,7 +1325,6 @@ union KnowledgeSourceUpdateFrequency {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union KnowledgeSourceProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1368,7 +1343,6 @@ union KnowledgeSourceProvisioningState {
  * Describes if policy managed rules will inspect the request body content.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union PolicyRequestBodyCheck {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1381,7 +1355,6 @@ union PolicyRequestBodyCheck {
  * State of the log scrubbing config. Default value is Enabled.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union WebApplicationFirewallScrubbingState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1394,7 +1367,6 @@ union WebApplicationFirewallScrubbingState {
  * Describes type of rule.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union RuleType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1407,7 +1379,6 @@ union RuleType {
  * Describes the supported variable for group by
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union VariableName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1422,7 +1393,6 @@ union VariableName {
  * Defines the action to take when a managed rule set score threshold is met.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union ManagedRuleSetActionType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1437,7 +1407,6 @@ union ManagedRuleSetActionType {
  * The variable type to be excluded.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union ManagedRuleExclusionMatchVariable {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1456,7 +1425,6 @@ union ManagedRuleExclusionMatchVariable {
  * Comparison operator to apply to the selector when specifying which elements in the collection this exclusion applies to.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union ManagedRuleExclusionSelectorMatchOperator {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1475,7 +1443,6 @@ union ManagedRuleExclusionSelectorMatchOperator {
  * Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union CertificateRevocationCheckEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1486,7 +1453,6 @@ union CertificateRevocationCheckEnabledState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union TypeName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1580,7 +1546,6 @@ union DeliveryRuleActionParametersType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   DeliveryRuleEdgeActionParameters: "DeliveryRuleEdgeActionParameters",
 }
 
@@ -2089,7 +2054,6 @@ union DestinationProtocol {
  * Defines at which point in the request processing pipeline the edge action will be invoked.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 union InvocationPoint {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2246,7 +2210,6 @@ enum ProbeProtocol {
   Https,
 
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   Grpc,
 }
 
@@ -2682,7 +2645,6 @@ model AFDDomainUpdatePropertiesParameters {
    * The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDNs and which server certificate(s) to use.
    */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   mtlsSettings?: AFDDomainMtlsParameters;
 
   /**
@@ -2749,7 +2711,6 @@ model AFDDomainHttpsCustomizedCipherSuiteSet {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @discriminator("scenario")
 model AFDDomainMtlsParameters {
   /**
@@ -2828,7 +2789,6 @@ model AFDEndpointPropertiesUpdateParameters {
    * Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources.
    */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   enforceMtls?: EnforceMtlsEnabledState;
 }
 
@@ -3101,7 +3061,6 @@ model AFDOriginUpdatePropertiesParameters {
    * Origin capacity settings for an origin
    */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   originCapacityResource?: OriginCapacityResourceProperties;
 
   /**
@@ -3149,7 +3108,6 @@ model SharedPrivateLinkResourceProperties {
  * Origin capacity settings for an origin
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model OriginCapacityResourceProperties {
   /**
    * Whether to enable origin capacity for a specific origin
@@ -3268,7 +3226,6 @@ model RouteUpdatePropertiesParameters {
    * Whether or not gRPC is enabled on this route. Permitted values are 'Enabled' or 'Disabled'
    */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   grpcState?: AFDRouteGrpcState;
 }
 
@@ -3346,22 +3303,6 @@ model RuleSetProperties extends AFDStateProperties {
    */
   @visibility(Lifecycle.Read)
   profileName?: string;
-
-  /**
-   * Indicates whether rule set is in batch mode. When batch mode is enabled, rules will be processed in a batch along with the rule set.
-   * When batch mode is disabled, rules would need to be processed independently.
-   * This property can only be set during rule set creation and cannot be updated later.
-   * For switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.
-   */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  batchMode?: boolean;
-
-  /**
-   * A list of rules that are part of this rule set provided the rule set is in batch mode.
-   * This property will be ignored if the rule set is not in batch mode.
-   */
-  @identifiers(#["ruleName"])
-  rules?: BatchRuleProperties[];
 }
 
 /**
@@ -3371,22 +3312,6 @@ model RuleSetProperties extends AFDStateProperties {
 model RuleProperties {
   ...RuleUpdatePropertiesParameters;
   ...AFDStateProperties;
-}
-
-/**
- * The JSON object that contains a rule with its name for batch mode operations.
- */
-model BatchRuleProperties {
-  /**
-   * Name of the rule.
-   */
-  @maxLength(60)
-  @minLength(1)
-  @pattern("^[a-zA-Z][a-zA-Z0-9]{0,59}$")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  ruleName: string;
-
-  ...RuleUpdatePropertiesParameters;
 }
 
 /**
@@ -3541,7 +3466,6 @@ model SecretParameters {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model KeyGroupProperties {
   ...KeyGroupUpdatePropertiesParameters;
   ...AFDStateProperties;
@@ -3563,7 +3487,6 @@ model KeyGroupUpdatePropertiesParameters {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionProperties {
   ...DeploymentVersionUpdateProperties;
   ...AFDStateProperties;
@@ -3597,7 +3520,6 @@ model DeploymentVersionProperties {
  * The preview and production deployment status of the deployment version under the profile
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentStages {
   /**
    * Deployment status of preview stage.
@@ -3646,7 +3568,6 @@ model CompareDeploymentVersionsParameter {
  * compare deployment versions response
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model CompareDeploymentVersionsResponse {
   /**
    * The difference between two deployment versions
@@ -3659,7 +3580,6 @@ model CompareDeploymentVersionsResponse {
  * Deployment change under the profile
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @discriminator("resourceType")
 model DeploymentVersionChange {
   /**
@@ -5299,7 +5219,6 @@ model MigrationEndpointMapping {
  * The properties of a profile agent association.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ProfileAgentProperties {
   /**
    * Reference to the web agent resource.
@@ -5322,7 +5241,6 @@ model ProfileAgentProperties {
  * Properties required to update a profile agent association.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ProfileAgentUpdateParameters {
   /**
    * The properties for updating a profile agent association.
@@ -5336,7 +5254,6 @@ model ProfileAgentUpdateParameters {
  * The properties for updating a profile agent association.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ProfileAgentUpdateProperties {
   /**
    * List of custom domains associated with this agent link.
@@ -5735,14 +5652,12 @@ model ManagedRuleDefinition {
  * Defines a list of web agents. It contains a list of WebAgent objects and a URL link to get the next set of results.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebAgentList is Azure.Core.Page<WebAgent>;
 
 /**
  * Defines properties of a web agent.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebAgentProperties {
   /**
    * Optional textual description of the agent.
@@ -5777,7 +5692,6 @@ model WebAgentProperties {
  * Defines a path configuration for a web agent.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model AgentPath {
   /**
    * The type of the path.
@@ -5794,7 +5708,6 @@ model AgentPath {
  * Properties required to update a web agent.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebAgentUpdateParameters {
   /**
    * Web agent tags
@@ -5814,7 +5727,6 @@ model WebAgentUpdateParameters {
  * Defines properties of a web agent that can be updated.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebAgentPropertiesUpdateParameters {
   /**
    * Optional textual description of the agent.
@@ -5837,14 +5749,12 @@ model WebAgentPropertiesUpdateParameters {
  * Defines a list of knowledge sources. It contains a list of KnowledgeSource objects and a URL link to get the next set of results.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model KnowledgeSourceList is Azure.Core.Page<KnowledgeSource>;
 
 /**
  * Defines properties of a knowledge source.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model KnowledgeSourceProperties {
   /**
    * Description of the knowledge source.
@@ -5885,7 +5795,6 @@ model KnowledgeSourceProperties {
  * Properties required to update a knowledge source.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model KnowledgeSourceUpdateParameters {
   /**
    * Properties of the knowledge source to be updated.
@@ -5899,7 +5808,6 @@ model KnowledgeSourceUpdateParameters {
  * Defines properties of a knowledge source that can be updated.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model KnowledgeSourcePropertiesUpdateParameters {
   /**
    * Description of the knowledge source.
@@ -5922,7 +5830,6 @@ model KnowledgeSourcePropertiesUpdateParameters {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebApplicationFirewallPolicy
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -5947,7 +5854,6 @@ model WebApplicationFirewallPolicy
  * Defines web application firewall policy properties.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebApplicationFirewallPolicyProperties {
   /**
    * Describes settings for the policy.
@@ -5997,7 +5903,6 @@ model WebApplicationFirewallPolicyProperties {
  * Defines top-level WebApplicationFirewallPolicy configuration settings.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model PolicySettingsAfd {
   /**
    * Describes if the policy is in enabled or disabled state. Defaults to Enabled if not specified.
@@ -6056,7 +5961,6 @@ model PolicySettingsAfd {
  * Defines rules that scrub sensitive fields in the Web Application Firewall logs.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model PolicySettingsLogScrubbing {
   /**
    * State of the log scrubbing config. Default value is Enabled.
@@ -6074,7 +5978,6 @@ model PolicySettingsLogScrubbing {
  * Defines the contents of the log scrubbing rules.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model WebApplicationFirewallScrubbingRules {
   /**
    * The variable to be scrubbed from the logs.
@@ -6101,7 +6004,6 @@ model WebApplicationFirewallScrubbingRules {
  * Defines contents of custom rules
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model CustomRuleListAfd {
   /**
    * List of rules
@@ -6113,7 +6015,6 @@ model CustomRuleListAfd {
  * Defines contents of a web application rule
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model CustomRuleAfd {
   /**
    * Describes the name of the rule.
@@ -6171,7 +6072,6 @@ model CustomRuleAfd {
  * Describes the variables available to group the rate limit requests
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model GroupByVariable {
   /**
    * Describes the supported variable for group by
@@ -6183,7 +6083,6 @@ model GroupByVariable {
  * Define a match condition.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model MatchConditionAfd {
   /**
    * Request variable to compare with.
@@ -6220,7 +6119,6 @@ model MatchConditionAfd {
  * Defines the list of managed rule sets for the policy.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ManagedRuleSetListAfd {
   /**
    * List of rule sets.
@@ -6233,7 +6131,6 @@ model ManagedRuleSetListAfd {
  * Defines a managed rule set.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ManagedRuleSetAfd {
   /**
    * Defines the rule set type to use.
@@ -6267,7 +6164,6 @@ model ManagedRuleSetAfd {
  * Exclude variables from managed rule evaluation.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ManagedRuleExclusion {
   /**
    * The variable type to be excluded.
@@ -6289,7 +6185,6 @@ model ManagedRuleExclusion {
  * Defines a managed rule group override setting.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ManagedRuleGroupOverrideAfd {
   /**
    * Describes the managed rule group to override.
@@ -6313,7 +6208,6 @@ model ManagedRuleGroupOverrideAfd {
  * Defines a managed rule group override setting.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ManagedRuleOverrideAfd {
   /**
    * Identifier for the managed rule.
@@ -6341,7 +6235,6 @@ model ManagedRuleOverrideAfd {
  * Defines the Resource ID for a Frontend Endpoint.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model FrontendEndpointLink {
   /**
    * Resource ID.
@@ -6354,7 +6247,6 @@ model FrontendEndpointLink {
  * Defines the Resource ID for a Routing Rule.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model RoutingRuleLink {
   /**
    * Resource ID.
@@ -6367,7 +6259,6 @@ model RoutingRuleLink {
  * Defines the Resource ID for a Security Policy.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model SecurityPolicyLink {
   /**
    * Resource ID.
@@ -6451,7 +6342,6 @@ model CustomerCertificate extends Certificate {
 model AzureFirstPartyManagedCertificate extends Certificate {}
 
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @pattern("^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,61}$")
 scalar Fqdn extends string;
 
@@ -6459,7 +6349,6 @@ scalar Fqdn extends string;
  * Advanced settings for MtlsScenarioType enum value: ClientCertificateRequiredAndValidated.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ClientCertificateRequiredAndValidatedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6487,7 +6376,6 @@ model ClientCertificateRequiredAndValidatedAdvancedSettings
  * Advanced settings for MtlsScenarioType enum value: ClientCertificateRequiredAndOriginValidates.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6500,7 +6388,6 @@ model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
  * Advanced settings for MtlsScenarioType enum value: ClientCertificateValidatedIfPresented.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model ClientCertificateValidatedIfPresentedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6528,7 +6415,6 @@ model ClientCertificateValidatedIfPresentedAdvancedSettings
  * Advanced settings for MtlsScenarioType enum value: CompleteMtlsPassthroughToOrigin.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model CompleteMtlsPassthroughToOriginAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6542,7 +6428,6 @@ model CompleteMtlsPassthroughToOriginAdvancedSettings
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model SecurityPolicyPropertiesWithEmbeddedWafPolicy extends AFDStateProperties {
   /**
    * The name of the profile which holds the security policy.
@@ -6560,7 +6445,6 @@ model SecurityPolicyPropertiesWithEmbeddedWafPolicy extends AFDStateProperties {
  * Contains security policy waf parameters
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy
   extends SecurityPolicyPropertiesParameters {
   /**
@@ -6768,7 +6652,6 @@ model AzureFirstPartyManagedCertificateParameters extends SecretParameters {
  * Server-side certificate used for mTLS validation
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model AfdSecretMtlsCertificateChain extends SecretParameters {
   /**
    * Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}
@@ -6797,7 +6680,6 @@ model AfdSecretMtlsCertificateChain extends SecretParameters {
  * Defines the url signing action for the delivery rule.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model AfdUrlSigningAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -6814,7 +6696,6 @@ model AfdUrlSigningAction extends DeliveryRuleAction {
  * Defines the parameters for the Url Signing action.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model AfdUrlSigningActionParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   typeName: TypeName;
@@ -6855,7 +6736,6 @@ model UrlSigningParamIdentifier {
  * Deployment change of the route under the profile
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionRouteChange extends DeploymentVersionChange {
   /**
    * The JSON object that contains the properties of the Routes to create.
@@ -6878,7 +6758,6 @@ model DeploymentVersionRouteChange extends DeploymentVersionChange {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionAFDOriginGroupChange extends DeploymentVersionChange {
   /**
    * The JSON object that contains the properties of the origin group.
@@ -6901,7 +6780,6 @@ model DeploymentVersionAFDOriginGroupChange extends DeploymentVersionChange {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionAFDOriginChange extends DeploymentVersionChange {
   /**
    * The JSON object that contains the properties of the origin.
@@ -6923,7 +6801,6 @@ model DeploymentVersionAFDOriginChange extends DeploymentVersionChange {
  * Deployment change of the rule set under the profile
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionRuleSetChange extends DeploymentVersionChange {
   /**
    * The JSON object that contains the properties of the Rule Set to create.
@@ -6945,7 +6822,6 @@ model DeploymentVersionRuleSetChange extends DeploymentVersionChange {
  * Deployment change of the rule under the profile
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionRuleChange extends DeploymentVersionChange {
   /**
    * The JSON object that contains the properties of the Rules to create.
@@ -6967,7 +6843,6 @@ model DeploymentVersionRuleChange extends DeploymentVersionChange {
  * Deployment change of the security policy under the profile
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeploymentVersionSecurityPolicyChange extends DeploymentVersionChange {
   /**
    * Contains properties required to create a security policy
@@ -7964,7 +7839,6 @@ model OriginGroupOverrideActionParameters extends DeliveryRuleActionParameters {
  * Defines the edge action for the delivery rule.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model EdgeAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -7981,7 +7855,6 @@ model EdgeAction extends DeliveryRuleAction {
  * Defines the parameters for the edge action.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 model DeliveryRuleEdgeActionParameters extends DeliveryRuleActionParameters {
   /**
    * defines the edge action that will be invoked.

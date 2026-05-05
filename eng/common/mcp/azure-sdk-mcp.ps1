@@ -4,6 +4,8 @@
 #Requires -PSEdition Core
 
 param(
+    [string]$FileName = 'Azure.Sdk.Tools.Cli',
+    [string]$Package = 'azsdk',
     [string]$Version, # Default to latest
     [string]$InstallDirectory = '',
     [string]$Repository = 'Azure/azure-sdk-tools',
@@ -13,13 +15,10 @@ param(
     [switch]$UpdatePathInProfile
 )
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = "Stop"
 . (Join-Path $PSScriptRoot '..' 'scripts' 'Helpers' 'AzSdkTool-Helpers.ps1')
 
 $toolInstallDirectory = $InstallDirectory ? $InstallDirectory : (Get-CommonInstallDirectory)
-
-$packageName = 'azsdk'
-$packageFileName = 'Azure.Sdk.Tools.Cli'
 
 $mcpMode = $Run
 
@@ -104,40 +103,14 @@ $tmp = $env:TEMP ? $env:TEMP : [System.IO.Path]::GetTempPath()
 $guid = [System.Guid]::NewGuid()
 $tempInstallDirectory = Join-Path $tmp "azsdk-install-$($guid)"
 
-# If already installed, use first class version mechanism
-$azsdkCmd = Get-Command -ErrorAction Ignore $packageName
-if ($azsdkCmd -and !$InstallDirectory) {
-    $ErrorActionPreference = "Stop"
-    $upgrade = & $packageName upgrade --check --output json | out-string
-    if (!$LASTEXITCODE) {
-        $ErrorActionPreference = 'Ignore'
-        $localVersion = $upgrade | ConvertFrom-Json -AsHashtable
-        $ErrorActionPreference = 'Stop'
-        if ($localVersion -and $localVersion.old_version -and $localVersion.old_version -eq ($Version ? $Version : $localVersion.new_version)) {
-            log "Version up to date at $($localVersion.old_version)"
-            if ($Run) {
-                $proc = Start-Process -PassThru -WorkingDirectory $RunDirectory -FilePath $azsdkCmd.Path -ArgumentList 'mcp' -NoNewWindow -Wait
-                exit $proc.ExitCode
-            }
-            exit 0
-        }
-        if ($localVersion) {
-            log "Version not up to date at " + $localVersion.old_version
-        } else {
-            log "Failed to parse version:"
-            log $upgrade
-        }
-    }
-}
-
 if ($mcpMode) {
     try {
         # Swallow all output and re-log so we can wrap any
         # output from the inner function as json-rpc
         $tempExe = Install-Standalone-Tool `
             -Version $Version `
-            -FileName $packageFileName `
-            -Package $packageName `
+            -FileName $FileName `
+            -Package $Package `
             -Directory $tempInstallDirectory `
             -Repository $Repository `
             *>&1
@@ -153,8 +126,8 @@ if ($mcpMode) {
 else {
     $tempExe = Install-Standalone-Tool `
         -Version $Version `
-        -FileName $packageFileName `
-        -Package $packageName `
+        -FileName $FileName `
+        -Package $Package `
         -Directory $tempInstallDirectory `
         -Repository $Repository `
 
@@ -191,7 +164,7 @@ if (Test-Path $tempInstallDirectory) {
 }
 
 if ($updateSucceeded) {
-    log "Executable $packageName is installed at $exeDestination"
+    log "Executable $package is installed at $exeDestination"
 }
 if (!$UpdatePathInProfile) {
     log -warn "To add the tool to PATH for new shell sessions, re-run with -UpdatePathInProfile to modify the shell profile file."
@@ -202,6 +175,5 @@ else {
 }
 
 if ($Run) {
-    $proc = Start-Process -PassThru -WorkingDirectory $RunDirectory -FilePath $exeDestination -ArgumentList 'mcp' -NoNewWindow -Wait
-    exit $proc.ExitCode
+    Start-Process -WorkingDirectory $RunDirectory -FilePath $exeDestination -ArgumentList 'start' -NoNewWindow -Wait
 }

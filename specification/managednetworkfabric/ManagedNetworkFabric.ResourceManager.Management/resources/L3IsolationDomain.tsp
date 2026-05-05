@@ -3,9 +3,8 @@ import "../models/common.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
-using TypeSpec.Versioning;
+
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -23,14 +22,9 @@ model L3IsolationDomain
   @visibility(Lifecycle.Read)
   name: string;
 
+  /** The L3 Isolation Domain Properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The L3 Isolation Domain Properties")
   properties: L3IsolationDomainProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @added(Versions.v2025_07_15)
-  @doc("The managed service identities assigned to this resource.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -49,36 +43,16 @@ interface L3IsolationDomains {
   delete is ArmResourceDeleteWithoutOkAsync<L3IsolationDomain>;
 
   @doc("Displays L3IsolationDomains list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<
-    L3IsolationDomain,
-    Response = L3IsolationDomainsListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<L3IsolationDomain>;
 
   @doc("Displays L3IsolationDomains list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<
-    L3IsolationDomain,
-    Response = L3IsolationDomainsListResult
-  >;
+  listBySubscription is ArmListBySubscription<L3IsolationDomain>;
 
   @doc("Enables racks for this Isolation Domain.")
-  @action("updateAdministrativeState")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
-  @sharedRoute
-  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
-    L3IsolationDomain,
-    UpdateAdministrativeState,
-    CommonPostActionResponseForDeviceUpdate
-  >;
-
-  @doc("Updates the administrative state of the L3 Isolation Domain resource.")
-  @added(Versions.v2025_07_15)
-  @action("updateAdministrativeState")
-  @sharedRoute
   updateAdministrativeState is ArmResourceActionAsync<
     L3IsolationDomain,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Validates the configuration of the resources.")
@@ -99,9 +73,6 @@ interface L3IsolationDomains {
 @@doc(L3IsolationDomains.create::parameters.resource, "Request payload.");
 @@doc(L3IsolationDomains.update::parameters.properties,
   "API to update certain properties of the L3 Isolation Domain resource."
-);
-@@doc(L3IsolationDomains.updateAdministrativeStateDeprecated::parameters.body,
-  "Request payload."
 );
 @@doc(L3IsolationDomains.updateAdministrativeState::parameters.body,
   "Request payload."

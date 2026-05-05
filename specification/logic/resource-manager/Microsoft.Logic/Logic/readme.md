@@ -39,19 +39,6 @@ directive:
 
 ```
 
-### Tag: package-2026-04-preview
-
-These settings apply only when `--tag=package-2026-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2026-04-preview'
-input-file:
-- preview/2026-04-01-preview/automationproject.json
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: automationproject.json
-    reason: "provisioningState is already marked readOnly in the generated swagger. This is a known false positive in the Spectral-based linter for TypeSpec-generated specs."
-```
-
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.

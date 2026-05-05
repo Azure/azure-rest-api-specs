@@ -1,14 +1,11 @@
 // Tiles for STAC Items interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.tiler.items.tsp";
 import "./models.common.images.tsp";
-import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -21,16 +18,12 @@ model AssetStatisticsResponse is Record<BandStatisticsMap>;
 @doc("Return dataset's basic info.")
 model TilerInfoMapResponse is Record<TilerInfo>;
 
-@removed(Versions.v2026_04_15)
 interface TilerBound {
   /**
    * Return all Bounds
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/bounds` instead."
-  @summary("Bounds (Deprecated)")
+  @summary("Bounds")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/bounds")
   @get
@@ -56,16 +49,12 @@ interface TilerBound {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerInfoOperations {
   /**
    * Return dataset's basic info.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info` instead."
-  @summary("Info (Deprecated)")
+  @summary("Info")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/info")
   @get
@@ -98,16 +87,12 @@ interface TilerInfoOperations {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerInfoGeoJsonOperations {
   /**
    * Return Info Geojson
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/info.geojson` instead."
-  @summary("Info Geojson (Deprecated)")
+  @summary("Info Geojson")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/info.geojson")
   @get
@@ -140,16 +125,12 @@ interface TilerInfoGeoJsonOperations {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerAvailableAssets {
   /**
    * Return a list of supported assets.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/assets` instead."
-  @summary("Available Assets (Deprecated)")
+  @summary("Available Assets")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/assets")
   @get
@@ -175,16 +156,12 @@ interface TilerAvailableAssets {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerAssetStatistics {
   /**
    * Per Asset statistics
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/asset_statistics` instead."
-  @summary("Asset Statistics (Deprecated)")
+  @summary("Asset Statistics")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/asset_statistics")
   @get
@@ -198,16 +175,12 @@ interface TilerAssetStatistics {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerStatistics {
   /**
    * Merged assets statistics.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (GET) instead."
-  @summary("Statistics (Deprecated)")
+  @summary("Statistics")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/statistics")
   @get
@@ -221,16 +194,12 @@ interface TilerStatistics {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerGeoJsonStatistics {
   /**
    * Get Statistics from a geojson feature.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/statistics` (POST) instead."
-  @summary("Geojson Statistics (Deprecated)")
+  @summary("Geojson Statistics")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/statistics")
   @post
@@ -257,16 +226,12 @@ interface TilerGeoJsonStatistics {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerTiles {
   /**
    * Create map tile from a dataset.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}` instead."
-  @summary("Tile (Deprecated)")
+  @summary("Tile")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
@@ -316,23 +281,18 @@ interface TilerTiles {
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
-      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
     },
     TileResponse
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerTileMatrixSets {
   /**
    * Create map tile from a dataset.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` instead."
-  @summary("Tile Tilematrixsetid As Path (Deprecated)")
+  @summary("Tile Tilematrixsetid As Path")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
@@ -343,23 +303,18 @@ interface TilerTileMatrixSets {
       ...getTileCustomizedCommonSignatures;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
-      ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
     },
     TileResponse
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerTileJsonOperations {
   /**
    * Return TileJson
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/tilejson.json` instead."
-  @summary("TileJson (Deprecated)")
+  @summary("TileJson")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tilejson.json")
   @get
@@ -408,22 +363,17 @@ interface TilerTileJsonOperations {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
-      ...TilePaddingQueryParameters;
     },
     TileJsonMetadata
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerTileJsonTileMatrixSets {
   /**
    * Return the TileJson Tilematrixsetid As a path
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json` instead."
-  @summary("TileJson Tilematrixsetid As Path (Deprecated)")
+  @summary("TileJson Tilematrixsetid As Path")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json")
   @get
@@ -450,22 +400,17 @@ interface TilerTileJsonTileMatrixSets {
       ...ZoomQueryParameters;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
-      ...TilePaddingQueryParameters;
     },
     TileJsonMetadata
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerWmts {
   /**
    * OGC WMTS endpoint.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml` instead."
-  @summary("Wmts (Deprecated)")
+  @summary("Wmts")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/WMTSCapabilities.xml")
   @get
@@ -843,16 +788,12 @@ alias getTileJsonCustomizedCommonSignatures = {
   tileMatrixSetId: string;
 };
 
-@removed(Versions.v2026_04_15)
 interface TilerWmtsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead."
-  @summary("Wmts Tilematrixsetid As Path (Deprecated)")
+  @summary("Wmts Tilematrixsetid As Path")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/WMTSCapabilities.xml")
   @get
@@ -883,16 +824,12 @@ interface TilerWmtsTileMatrixSets {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerPoints {
   /**
    * Get Point value for a dataset.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "This endpoint has been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}` instead."
-  @summary("Point (Deprecated)")
+  @summary("Point")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}")
   @get
@@ -944,16 +881,12 @@ interface TilerPoints {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerPreviews {
   /**
    * Create preview of a dataset.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "These endpoints have been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview[.{format}]` instead."
-  @summary("Preview (Deprecated)")
+  @summary("Preview")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/preview.{format}")
   @get
@@ -994,12 +927,9 @@ interface TilerPreviews {
   >;
   /**
    * Create preview of a dataset.
-   *
-   * Note: This endpoint has been deprecated. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "These endpoints have been deprecated and will be removed in a future API version. Please use `/data/mosaic/collections/{collectionId}/items/{itemId}/preview[.{format}]` instead."
-  @summary("Preview (Deprecated)")
+  @summary("Preview")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/preview")
   @get
@@ -1046,16 +976,12 @@ interface TilerPreviews {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerParts {
   /**
    * Create image from part of a dataset.
-   *
-   * Note: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "The crop endpoints (GET) have been deprecated and will be removed in a future API version. Please use the equivalent `bbox` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/bbox/...`."
-  @summary("Part (Deprecated)")
+  @summary("Part")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}")
   @get
@@ -1101,12 +1027,9 @@ interface TilerParts {
   >;
   /**
    * Create image from part of a dataset.
-   *
-   * Note: The old endpoint using `/crop/` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/bbox/{minx},{miny},{maxx},{maxy}.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "The crop endpoints (GET) have been deprecated and will be removed in a future API version. Please use the equivalent `bbox` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/bbox/...`."
-  @summary("Part (Deprecated)")
+  @summary("Part")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}.{format}")
   @get
@@ -1153,16 +1076,12 @@ interface TilerParts {
   >;
 }
 
-@removed(Versions.v2026_04_15)
 interface TilerGeoJsons {
   /**
    * Create image from a geojson feature.
-   *
-   * Note: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature/{width}x{height}.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "The crop endpoints (POST) have been deprecated and will be removed in a future API version. Please use the equivalent `feature` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/feature/...`."
-  @summary("Geojson Crop (Deprecated)")
+  @summary("Geojson Crop")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}")
   @post
@@ -1208,12 +1127,9 @@ interface TilerGeoJsons {
   >;
   /**
    * Create image from a geojson feature.
-   *
-   * Note: The old endpoint using `/crop` has been deprecated. Please use `/data/collections/{collectionId}/items/{itemId}/feature.{format}` instead.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  #deprecated "The crop endpoints (POST) have been deprecated and will be removed in a future API version. Please use the equivalent `feature` endpoints instead: `/data/collections/{collectionId}/items/{itemId}/feature/...`."
-  @summary("Geojson Crop (Deprecated)")
+  @summary("Geojson Crop")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop.{format}")
   @post

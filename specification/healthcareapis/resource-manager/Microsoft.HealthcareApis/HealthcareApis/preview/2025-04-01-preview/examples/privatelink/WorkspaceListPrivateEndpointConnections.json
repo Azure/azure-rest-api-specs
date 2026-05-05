@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-04-01-preview",
-    "resourceGroupName": "testRG",
     "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
     "workspaceName": "workspace1"
   },
   "responses": {
@@ -10,24 +10,22 @@
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/workspaces/workspace1/privateEndpointConnections/myConnection",
             "name": "myConnection",
             "type": "Microsoft.HealthcareApis/workspaces/privateEndpointConnections",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/workspaces/workspace1/privateEndpointConnections/myConnection",
             "properties": {
               "privateEndpoint": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/peexample01"
               },
               "privateLinkServiceConnectionState": {
+                "status": "Approved",
                 "description": "Auto-Approved",
-                "actionsRequired": "None",
-                "status": "Approved"
+                "actionsRequired": "None"
               }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "WorkspacePrivateEndpointConnections_ListByWorkspace",
-  "title": "WorkspacePrivateEndpointConnection_List"
+  }
 }

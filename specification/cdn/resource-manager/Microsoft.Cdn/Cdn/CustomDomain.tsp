@@ -36,10 +36,12 @@ interface CustomDomains {
    * Creates a new custom domain within an endpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
-    CustomDomain,
+  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      CustomDomain,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>
+    >,
     CustomDomainParameters,
     Response = ArmResourceUpdatedResponse<CustomDomain> | ArmResourceCreatedResponse<
       CustomDomain,
@@ -49,7 +51,7 @@ interface CustomDomains {
       @bodyRoot
       _: CustomDomain;
     }),
-    Error = ErrorResponse
+    ErrorResponse = ErrorResponse
   >;
 
   /**

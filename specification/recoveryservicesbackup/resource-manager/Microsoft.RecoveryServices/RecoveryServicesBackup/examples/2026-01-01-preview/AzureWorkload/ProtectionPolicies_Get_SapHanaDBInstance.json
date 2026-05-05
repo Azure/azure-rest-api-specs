@@ -1,0 +1,118 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "HanaTestRsVault",
+    "policyName": "testHanaSnapshotV2Policy1",
+    "api-version": "2026-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/HanaTestRsVault/backupPolicies/testHanaSnapshotV2Policy1",
+        "name": "testHanaSnapshotV2Policy1",
+        "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+        "properties": {
+          "backupManagementType": "AzureWorkload",
+          "workLoadType": "SAPHanaDBInstance",
+          "vmWorkloadPolicyType": "SnapshotV2",
+          "settings": {
+            "timeZone": "UTC",
+            "issqlcompression": false
+          },
+          "subProtectionPolicy": [
+            {
+              "policyType": "SnapshotFull",
+              "schedulePolicy": {
+                "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunFrequency": "Daily",
+                "scheduleRunTimes": [
+                  "2024-10-01T03:30:00Z"
+                ],
+                "scheduleWeeklyFrequency": 0
+              },
+              "retentionPolicy": {
+                "retentionPolicyType": "LongTermRetentionPolicy",
+                "dailySchedule": {
+                  "retentionTimes": [
+                    "2023-12-19T20:00:00Z"
+                  ],
+                  "retentionDuration": {
+                    "count": 30,
+                    "durationType": "Days"
+                  }
+                },
+                "weeklySchedule": {
+                  "daysOfTheWeek": [
+                    "Sunday"
+                  ],
+                  "retentionTimes": [
+                    "2023-12-19T20:00:00Z"
+                  ],
+                  "retentionDuration": {
+                    "count": 10,
+                    "durationType": "Weeks"
+                  }
+                },
+                "monthlySchedule": {
+                  "retentionScheduleFormatType": "Weekly",
+                  "retentionScheduleWeekly": {
+                    "daysOfTheWeek": [
+                      "Sunday"
+                    ],
+                    "weeksOfTheMonth": [
+                      "Second"
+                    ]
+                  },
+                  "retentionTimes": [
+                    "2023-12-15T20:00:00Z"
+                  ],
+                  "retentionDuration": {
+                    "count": 6,
+                    "durationType": "Months"
+                  }
+                },
+                "yearlySchedule": {
+                  "retentionScheduleFormatType": "Weekly",
+                  "monthsOfYear": [
+                    "January"
+                  ],
+                  "retentionScheduleWeekly": {
+                    "daysOfTheWeek": [
+                      "Sunday"
+                    ],
+                    "weeksOfTheMonth": [
+                      "Last"
+                    ]
+                  },
+                  "retentionTimes": [
+                    "2023-12-19T20:00:00Z"
+                  ],
+                  "retentionDuration": {
+                    "count": 2,
+                    "durationType": "Years"
+                  }
+                }
+              },
+              "snapshotBackupAdditionalDetails": {
+                "instantRpRetentionRangeInDays": 5,
+                "instantRPDetails": "SwaggerTestRG",
+                "userAssignedManagedIdentityDetails": {
+                  "identityArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerMsiRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SwaggerUMI",
+                  "identityName": "SwaggerUMI",
+                  "userAssignedIdentityProperties": {
+                    "clientId": "00000000-0000-0000-0000-000000000000",
+                    "principalId": "00000000-0000-0000-0000-000000000000"
+                  }
+                }
+              }
+            }
+          ],
+          "protectedItemsCount": 0
+        }
+      }
+    }
+  },
+  "operationId": "ProtectionPolicies_Get",
+  "title": "Get Sap Hana DB Instance Workload Protection Policy Details"
+}

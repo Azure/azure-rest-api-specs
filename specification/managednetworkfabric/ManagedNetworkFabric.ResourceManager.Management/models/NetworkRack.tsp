@@ -3,9 +3,10 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending annotation resource instead of spread"
 @doc("Network Rack Properties defines the properties of the resource.")
-model NetworkRackProperties extends AnnotationResource {
+model NetworkRackProperties {
+  ...AnnotationResource;
+
   @doc("Network Rack SKU name.")
   networkRackType?: NetworkRackType;
 
@@ -32,11 +33,6 @@ model NetworkRackProperties extends AnnotationResource {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  @added(Versions.v2025_07_15)
-  @doc("Configuration state of the resource.")
-  @visibility(Lifecycle.Read)
-  configurationState?: ConfigurationState;
 }
 
 @doc("Network Rack patch resource definition.")

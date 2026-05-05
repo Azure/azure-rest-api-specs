@@ -1,4 +1,4 @@
-// Operations in this file are non-standard resource operations confirmed from the original OpenAPI specification.
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains non-standard operations that are not detected as resource operations from the original OpenAPI specification."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ClustersOperationGroup {
   /**
    * List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.
@@ -28,7 +28,7 @@ interface ClustersOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains non-standard operations that are not detected as resource operations from the original OpenAPI specification."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NamespacesOperationGroup {
   /**
    * Check the give Namespace name availability.

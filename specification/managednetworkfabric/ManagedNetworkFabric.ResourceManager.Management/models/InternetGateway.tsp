@@ -6,7 +6,13 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("Internet Gateway Properties defines the properties of the resource.")
 model InternetGatewayProperties {
   ...AnnotationResource;
-  ...InternetGatewayPatchableProperties;
+
+  @doc("ARM Resource ID of the Internet Gateway Rule.")
+  internetGatewayRuleId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/internetGatewayRules";
+    }
+  ]>;
 
   @doc("IPv4 Address of Internet Gateway.")
   @visibility(Lifecycle.Read)
@@ -42,19 +48,10 @@ model InternetGatewayProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Internet Gateway Patchable Properties defines the patchable properties of the resource.")
-model InternetGatewayPatchableProperties {
-  @doc("ARM Resource ID of the Internet Gateway Rule.")
-  internetGatewayRuleId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedNetworkFabric/internetGatewayRules";
-    }
-  ]>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Internet Gateway patch resource definition.")
-model InternetGatewayPatch extends TagsUpdate {
+model InternetGatewayPatch {
+  ...TagsUpdate;
+
   @doc("Resource properties.")
   properties?: InternetGatewayPatchProperties;
 }

@@ -64,8 +64,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResources {
   /**
    * Description for Gets the details of the user provided function app registered with a static site build
@@ -143,8 +142,7 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("StaticSites")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   /**
    * Description for Gets the details of the user provided function app registered with a static site

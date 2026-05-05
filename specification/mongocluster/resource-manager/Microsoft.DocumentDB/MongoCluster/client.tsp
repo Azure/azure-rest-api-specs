@@ -97,7 +97,6 @@ using Microsoft.DocumentDB;
 );
 @@clientName(DataApiMode, "MongoClusterDataApiMode", "csharp");
 @@clientName(DatabaseRole, "MongoClusterDatabaseRole", "csharp");
-@@clientName(NetworkBypassMode, "MongoClusterNetworkBypassMode", "csharp");
 @@clientName(EntraIdentityProvider,
   "MongoClusterEntraIdentityProvider",
   "csharp"
@@ -106,10 +105,6 @@ using Microsoft.DocumentDB;
   "MongoClusterEntraIdentityProviderProperties",
   "csharp"
 );
-// Note: the flattened `principalType` property is renamed to `PrincipalType` in csharp
-// via [CodeGenMember("PrincipalKindFlattened")] in custom code (since the flatten produces
-// a `PrincipalKind`-like name from the inner property), and an [Obsolete] non-nullable
-// `PrincipalType` shim is added to preserve the previous API surface.
 @@clientName(EntraPrincipalType, "MongoClusterEntraPrincipalType", "csharp");
 @@clientName(IdentityProvider, "MongoClusterIdentityProvider", "csharp");
 @@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentity,

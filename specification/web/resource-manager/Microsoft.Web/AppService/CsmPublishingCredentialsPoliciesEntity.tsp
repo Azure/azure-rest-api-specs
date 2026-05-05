@@ -56,8 +56,7 @@ interface CsmPublishingCredentialsPoliciesEntityOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
@@ -114,8 +113,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
@@ -167,8 +165,7 @@ interface FtpAllowedSlotOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
@@ -232,8 +229,7 @@ interface ScmAllowedSlotOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.

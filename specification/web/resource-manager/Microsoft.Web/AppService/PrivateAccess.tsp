@@ -56,8 +56,7 @@ interface PrivateAccessOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PrivateAccesses {
   /**
    * Description for Gets data around private site access enablement and authorized Virtual Networks that can access the site.
@@ -110,8 +109,7 @@ interface PrivateAccessOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PrivateAccessOperationGroup {
   /**
    * Description for Gets data around private site access enablement and authorized Virtual Networks that can access the site.

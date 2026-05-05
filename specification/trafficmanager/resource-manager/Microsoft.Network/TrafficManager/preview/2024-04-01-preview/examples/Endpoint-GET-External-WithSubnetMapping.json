@@ -1,21 +1,23 @@
 {
   "parameters": {
-    "api-version": "2024-04-01-preview",
-    "endpointName": "My%20external%20endpoint",
-    "endpointType": "ExternalEndpoints",
-    "profileName": "azuresdkfornetautoresttrafficmanager8224",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "azuresdkfornetautoresttrafficmanager2191",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "profileName": "azuresdkfornetautoresttrafficmanager8224",
+    "endpointType": "ExternalEndpoints",
+    "endpointName": "My%20external%20endpoint",
+    "api-version": "2024-04-01-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
         "name": "My external endpoint",
         "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
         "properties": {
-          "endpointMonitorStatus": "CheckingEndpoint",
           "endpointStatus": "Enabled",
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "target": "foobar.contoso.com",
+          "weight": 1,
           "priority": 1,
           "subnets": [
             {
@@ -26,13 +28,9 @@
               "first": "25.26.27.28",
               "last": "29.30.31.32"
             }
-          ],
-          "target": "foobar.contoso.com",
-          "weight": 1
+          ]
         }
       }
     }
-  },
-  "operationId": "Endpoints_Get",
-  "title": "Endpoint-GET-External-WithSubnetMapping"
+  }
 }

@@ -1,42 +1,40 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
-    "containerAppName": "myContainerApp",
+    "subscriptionId": "12345678-1234-1234-1234-123456789abc",
     "resourceGroupName": "myResourceGroup",
+    "containerAppName": "myContainerApp",
     "revisionName": "myContainerApp-abc123",
-    "subscriptionId": "12345678-1234-1234-1234-123456789abc"
+    "api-version": "2025-10-02-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": null,
         "value": [
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
             "name": "myContainerApp/myContainerApp-abc123/HttpExample",
             "type": "Microsoft.App/containerApps/revisions/functions",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
             "properties": {
               "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
-              "isDisabled": false,
               "triggerType": "httpTrigger",
-              "language": "dotnet-isolated"
+              "language": "dotnet-isolated",
+              "isDisabled": false
             }
           },
           {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/TimerFunction",
             "name": "myContainerApp/myContainerApp-abc123/TimerFunction",
             "type": "Microsoft.App/containerApps/revisions/functions",
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/TimerFunction",
             "properties": {
               "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/TimerFunction",
-              "isDisabled": false,
               "triggerType": "timerTrigger",
-              "language": "dotnet-isolated"
+              "language": "dotnet-isolated",
+              "isDisabled": false
             }
           }
-        ]
+        ],
+        "nextLink": null
       }
     }
-  },
-  "operationId": "ContainerAppsRevisionFunctions_List",
-  "title": "List Container App Revision's functions"
+  }
 }

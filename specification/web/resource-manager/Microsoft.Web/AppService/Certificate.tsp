@@ -223,8 +223,7 @@ interface CertificateOperationGroupOps
       }
     > {}
 
-@tag("SiteCertificates")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface CertificateOperationGroup {
   /**
    * Get a certificate for a given site and deployment slot.

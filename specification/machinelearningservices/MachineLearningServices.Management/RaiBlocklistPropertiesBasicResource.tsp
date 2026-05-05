@@ -18,8 +18,6 @@ namespace Microsoft.MachineLearningServices;
  * RaiBlocklistPropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistProperties, false> {
@@ -35,8 +33,6 @@ model RaiBlocklistPropertiesBasicResource
  * RaiBlocklistPropertiesBasicResources interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
   /**
@@ -52,7 +48,12 @@ interface RaiBlocklistPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -65,7 +66,12 @@ interface RaiBlocklistPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -76,7 +82,12 @@ interface RaiBlocklistPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiBlocklistPropertiesBasicResourceArmPaginatedResult>
   >;
@@ -85,8 +96,6 @@ interface RaiBlocklistPropertiesBasicResources {
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
    */
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
   addBulk is ArmResourceActionAsync<
@@ -96,8 +105,6 @@ interface RaiBlocklistPropertiesBasicResources {
       @body
       @identifiers(#[])
       @removed(Versions.v2025_12_01)
-      @added(Versions.v2026_01_15_preview)
-      @removed(Versions.v2026_03_01)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &

@@ -1,20 +1,20 @@
 {
   "parameters": {
-    "api-version": "2025-04-01-preview",
-    "resourceGroupName": "testRG",
     "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "api-version": "2025-04-01-preview",
     "workspace": {
       "location": "westus",
       "properties": {}
-    },
-    "workspaceName": "workspace1"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "workspace1",
-        "type": "Microsoft.HealthcareApis/workspaces",
         "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1",
+        "type": "Microsoft.HealthcareApis/workspaces",
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded"
@@ -24,8 +24,8 @@
     "201": {
       "body": {
         "name": "workspace1",
-        "type": "Microsoft.HealthcareApis/workspaces",
         "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1",
+        "type": "Microsoft.HealthcareApis/workspaces",
         "location": "westus",
         "properties": {
           "provisioningState": "Creating"
@@ -35,15 +35,13 @@
     "202": {
       "body": {
         "name": "workspace1",
-        "type": "Microsoft.HealthcareApis/workspaces",
         "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1",
+        "type": "Microsoft.HealthcareApis/workspaces",
         "location": "westus",
         "properties": {
           "provisioningState": "Accepted"
         }
       }
     }
-  },
-  "operationId": "Workspaces_CreateOrUpdate",
-  "title": "Create or update a workspace"
+  }
 }

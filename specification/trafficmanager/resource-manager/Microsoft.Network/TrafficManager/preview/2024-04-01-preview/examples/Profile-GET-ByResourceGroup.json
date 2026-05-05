@@ -1,97 +1,95 @@
 {
   "parameters": {
-    "api-version": "2024-04-01-preview",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "azuresdkfornetautoresttrafficmanager3640",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2024-04-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager1005",
             "name": "azuresdkfornetautoresttrafficmanager1005",
             "type": "Microsoft.Network/trafficManagerProfiles",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager1005",
             "location": "global",
+            "tags": {},
             "properties": {
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance",
               "dnsConfig": {
-                "fqdn": "azuresdkfornetautoresttrafficmanager1005.tmpreview.watmtest.azure-test.net",
                 "relativeName": "azuresdkfornetautoresttrafficmanager1005",
+                "fqdn": "azuresdkfornetautoresttrafficmanager1005.tmpreview.watmtest.azure-test.net",
                 "ttl": 35
+              },
+              "monitorConfig": {
+                "profileMonitorStatus": "Online",
+                "protocol": "HTTP",
+                "port": 80,
+                "path": "/testpath.aspx",
+                "intervalInSeconds": 30,
+                "toleratedNumberOfFailures": 3,
+                "timeoutInSeconds": 10
               },
               "endpoints": [
                 {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager1005/externalEndpoints/My external endpoint",
                   "name": "My external endpoint",
                   "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager1005/externalEndpoints/My external endpoint",
                   "properties": {
-                    "endpointLocation": "North Europe",
-                    "endpointMonitorStatus": "CheckingEndpoint",
                     "endpointStatus": "Enabled",
-                    "priority": 1,
+                    "endpointMonitorStatus": "CheckingEndpoint",
                     "target": "foobar.contoso.com",
-                    "weight": 1
+                    "weight": 1,
+                    "priority": 1,
+                    "endpointLocation": "North Europe"
                   }
                 }
-              ],
-              "monitorConfig": {
-                "path": "/testpath.aspx",
-                "intervalInSeconds": 30,
-                "port": 80,
-                "profileMonitorStatus": "Online",
-                "timeoutInSeconds": 10,
-                "toleratedNumberOfFailures": 3,
-                "protocol": "HTTP"
-              },
-              "profileStatus": "Enabled",
-              "trafficRoutingMethod": "Performance"
-            },
-            "tags": {}
+              ]
+            }
           },
           {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager959",
             "name": "azuresdkfornetautoresttrafficmanager959",
             "type": "Microsoft.Network/trafficManagerProfiles",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager959",
             "location": "global",
+            "tags": {},
             "properties": {
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance",
               "dnsConfig": {
-                "fqdn": "azuresdkfornetautoresttrafficmanager959.tmpreview.watmtest.azure-test.net",
                 "relativeName": "azuresdkfornetautoresttrafficmanager959",
+                "fqdn": "azuresdkfornetautoresttrafficmanager959.tmpreview.watmtest.azure-test.net",
                 "ttl": 35
+              },
+              "monitorConfig": {
+                "profileMonitorStatus": "Online",
+                "protocol": "HTTP",
+                "port": 80,
+                "path": "/testpath.aspx",
+                "intervalInSeconds": 30,
+                "toleratedNumberOfFailures": 3,
+                "timeoutInSeconds": 10
               },
               "endpoints": [
                 {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager959/externalEndpoints/My external endpoint",
                   "name": "My external endpoint",
                   "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager3640/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager959/externalEndpoints/My external endpoint",
                   "properties": {
-                    "endpointLocation": "North Europe",
-                    "endpointMonitorStatus": "Online",
                     "endpointStatus": "Enabled",
-                    "priority": 1,
+                    "endpointMonitorStatus": "Online",
                     "target": "foobar.contoso.com",
-                    "weight": 1
+                    "weight": 1,
+                    "priority": 1,
+                    "endpointLocation": "North Europe"
                   }
                 }
-              ],
-              "monitorConfig": {
-                "path": "/testpath.aspx",
-                "intervalInSeconds": 30,
-                "port": 80,
-                "profileMonitorStatus": "Online",
-                "timeoutInSeconds": 10,
-                "toleratedNumberOfFailures": 3,
-                "protocol": "HTTP"
-              },
-              "profileStatus": "Enabled",
-              "trafficRoutingMethod": "Performance"
-            },
-            "tags": {}
+              ]
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "Profiles_ListByResourceGroup",
-  "title": "ListProfilesByResourceGroup"
+  }
 }

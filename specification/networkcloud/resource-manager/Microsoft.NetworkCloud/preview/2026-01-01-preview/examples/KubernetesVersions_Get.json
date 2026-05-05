@@ -1,34 +1,15 @@
 {
-  "operationId": "KubernetesVersions_Get",
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "kubernetesVersionName": "default",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+    "kubernetesVersionName": "default"
   },
   "responses": {
     "200": {
       "body": {
-        "extendedLocation": {
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-          "type": "CustomLocation"
-        },
         "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesVersions/default",
-        "location": "location",
         "name": "default",
-        "properties": {
-          "provisioningState": "Succeeded",
-          "values": [
-            {
-              "description": "Version Description",
-              "version": "1.28.3"
-            },
-            {
-              "description": "Version Description",
-              "version": "1.27.7"
-            }
-          ]
-        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -37,13 +18,30 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
+        "type": "Microsoft.NetworkCloud/kubernetesVersions",
+        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
         },
-        "type": "Microsoft.NetworkCloud/kubernetesVersions"
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "values": [
+            {
+              "version": "1.28.3",
+              "description": "Version Description"
+            },
+            {
+              "version": "1.27.7",
+              "description": "Version Description"
+            }
+          ]
+        }
       }
     }
-  },
-  "title": "Get Kubernetes versions"
+  }
 }

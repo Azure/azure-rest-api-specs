@@ -18,8 +18,6 @@ namespace Microsoft.MachineLearningServices;
  * InferenceEndpoint is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @parentResource(Workspace)
 model InferenceEndpoint
   is Azure.ResourceManager.TrackedResource<InferenceEndpointProperties, false> {
@@ -44,8 +42,6 @@ model InferenceEndpoint
  * InferenceEndpointOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface InferenceEndpointOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -83,8 +79,6 @@ interface InferenceEndpointOps
  * InferenceEndpoints is preview-only.
  */
 @removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface InferenceEndpoints {
   /**

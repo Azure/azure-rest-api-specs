@@ -37,11 +37,8 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBNamespaces.failover, "Namespaces");
 @@clientName(SBNamespaces.failover::parameters.body, "parameters");
 @@clientLocation(SBNamespaces.privateLinkResourcesGet, "PrivateLinkResources");
-@@clientName(SBNamespaces.privateLinkResourcesGet, "Get", "!csharp");
-@@clientLocation(SBNamespaces.checkNameAvailability,
-  DisasterRecoveryConfigs,
-  "!csharp"
-);
+@@clientName(SBNamespaces.privateLinkResourcesGet, "Get");
+@@clientLocation(SBNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
 @@clientName(SBNamespaces.checkNameAvailability::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
@@ -97,27 +94,17 @@ using Microsoft.ServiceBus;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
-@@clientLocation(SBAuthorizationRules.getAuthorizationRule,
-  "Namespaces",
-  "!csharp"
-);
+@@clientLocation(SBAuthorizationRules.getAuthorizationRule, "Namespaces");
 @@clientLocation(SBAuthorizationRules.createOrUpdateAuthorizationRule,
-  "Namespaces",
-  "!csharp"
+  "Namespaces"
 );
 @@clientName(SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
-@@clientLocation(SBAuthorizationRules.deleteAuthorizationRule,
-  "Namespaces",
-  "!csharp"
-);
-@@clientLocation(SBAuthorizationRules.listAuthorizationRules,
-  "Namespaces",
-  "!csharp"
-);
-@@clientLocation(SBAuthorizationRules.listKeys, "Namespaces", "!csharp");
-@@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces", "!csharp");
+@@clientLocation(SBAuthorizationRules.deleteAuthorizationRule, "Namespaces");
+@@clientLocation(SBAuthorizationRules.listAuthorizationRules, "Namespaces");
+@@clientLocation(SBAuthorizationRules.listKeys, "Namespaces");
+@@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces");
 @@clientName(SBAuthorizationRules.regenerateKeys::parameters.body,
   "parameters"
 );
@@ -176,8 +163,3 @@ using Microsoft.ServiceBus;
 
 @@clientName(UserAssignedIdentity.principalId, "PrincipalId");
 @@clientName(UserAssignedIdentity.clientId, "ClientId");
-
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "ArmErrorAdditionalInfo",
-  "python,java"
-);

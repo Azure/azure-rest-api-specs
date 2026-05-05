@@ -6,8 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -40,7 +38,7 @@ model ImpactCategoryProperties is ResourceProperties {
   description?: string;
 
   @doc("The workloadImpact properties which are required when reporting with the impact category")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   requiredImpactProperties?: RequiredImpactProperties[];
 }
 
@@ -77,5 +75,5 @@ model CustomParameters {
   @query
   @minLength(1)
   @doc("Filter by resource type")
-  resourceType?: string;
+  resourceType: string;
 }

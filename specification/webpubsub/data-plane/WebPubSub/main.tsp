@@ -40,7 +40,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-namespace WebPubSubService;
+namespace WebPubSub;
 
 /**
  * The available API versions.

@@ -191,6 +191,18 @@ using Microsoft.DataReplication;
 );
 @@clientName(JobObjectType, "DataReplicationJobObjectType", "csharp");
 @@clientName(JobState, "DataReplicationJobState", "csharp");
+@@clientName(PrivateEndpointConnectionProxy,
+  "DataReplicationPrivateEndpointConnectionProxy",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProxyProperties,
+  "DataReplicationPrivateEndpointConnectionProxyProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProxy,
+  "DataReplicationPrivateEndpointConnectionProxy",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnection,
   "DataReplicationPrivateEndpointConnection",
   "csharp"
@@ -340,6 +352,7 @@ using Microsoft.DataReplication;
   Azure.Core.armResourceType,
   "csharp"
 );
+@@alternateType(PrivateEndpointConnectionProxy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(DeploymentPreflightResource.location,
   Azure.Core.azureLocation,
   "csharp"
@@ -400,6 +413,10 @@ using Microsoft.DataReplication;
   "java"
 );
 @@clientName(ReplicationExtensionModel, "ReplicationExtension", "java");
+@@clientName(PrivateEndpointConnectionProxies,
+  "PrivateEndpointConnProxies",
+  "java"
+);
 @@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
 
 @@clientName(Microsoft.DataReplication,

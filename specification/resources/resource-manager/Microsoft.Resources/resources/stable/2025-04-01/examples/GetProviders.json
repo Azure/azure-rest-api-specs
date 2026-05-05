@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "api-version": "2025-04-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-04-01"
   },
   "responses": {
     "200": {
@@ -10,168 +10,166 @@
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.TestRP1",
             "namespace": "Microsoft.TestRP1",
-            "registrationPolicy": "RegistrationRequired",
             "registrationState": "Registering",
+            "registrationPolicy": "RegistrationRequired",
             "resourceTypes": [
               {
+                "resourceType": "TestResourceType",
+                "locations": [
+                  "West US"
+                ],
                 "apiVersions": [
                   "2018-01-01",
                   "2015-05-01"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
                 "locationMappings": [
                   {
+                    "location": "West US",
                     "type": "EdgeZone",
                     "extendedLocations": [
                       "LosAngeles",
                       "LosAngeles2"
-                    ],
-                    "location": "West US"
+                    ]
                   }
                 ],
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+              },
+              {
+                "resourceType": "TestResourceTypeSibling",
                 "locations": [
                   "West US"
                 ],
-                "resourceType": "TestResourceType"
-              },
-              {
                 "apiVersions": [
                   "2018-01-01",
                   "2015-05-01"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
-                "locations": [
-                  "West US"
-                ],
-                "resourceType": "TestResourceTypeSibling"
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
               }
             ]
           },
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources",
             "namespace": "Microsoft.Resources",
-            "registrationPolicy": "RegistrationFree",
             "registrationState": "Registered",
+            "registrationPolicy": "RegistrationFree",
             "resourceTypes": [
               {
-                "aliases": [],
-                "apiVersions": [
-                  "2016-09-01",
-                  "2014-04-01-preview"
-                ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
+                "resourceType": "subscriptions",
                 "locations": [
                   "eastus",
                   "eastus2",
                   "westus"
                 ],
-                "resourceType": "subscriptions"
-              },
-              {
-                "aliases": [],
                 "apiVersions": [
                   "2016-09-01",
                   "2014-04-01-preview"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
+                "aliases": [],
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+              },
+              {
+                "resourceType": "resourceGroups",
                 "locations": [
                   "centralus",
                   "eastasia",
                   "southeastasia"
                 ],
-                "resourceType": "resourceGroups"
-              },
-              {
-                "aliases": [],
                 "apiVersions": [
                   "2016-09-01",
                   "2014-04-01-preview"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
+                "aliases": [],
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+              },
+              {
+                "resourceType": "subscriptions/resourceGroups",
                 "locations": [
                   "eastus",
                   "eastus2",
                   "westus"
                 ],
-                "resourceType": "subscriptions/resourceGroups"
-              },
-              {
-                "aliases": [],
                 "apiVersions": [
+                  "2016-09-01",
                   "2014-04-01-preview"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
+                "aliases": [],
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+              },
+              {
+                "resourceType": "bulkDelete",
                 "locations": [
                   "centralus",
                   "eastasia"
                 ],
-                "resourceType": "bulkDelete"
+                "apiVersions": [
+                  "2014-04-01-preview"
+                ],
+                "aliases": [],
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
               },
               {
-                "aliases": [],
+                "resourceType": "deployments",
+                "locations": [],
                 "apiVersions": [
                   "2017-08-01",
                   "2017-06-01"
                 ],
-                "capabilities": "SupportsTags",
-                "locations": [],
-                "resourceType": "deployments"
+                "aliases": [],
+                "capabilities": "SupportsTags"
               },
               {
-                "aliases": [],
-                "apiVersions": [],
-                "capabilities": "SupportsExtension",
+                "resourceType": "tags",
                 "locations": [
                   "DevFabric"
                 ],
-                "resourceType": "tags"
+                "apiVersions": [],
+                "aliases": [],
+                "capabilities": "SupportsExtension"
               }
             ]
           },
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.TestRP2",
             "namespace": "Microsoft.TestRP2",
-            "registrationPolicy": "RegistrationRequired",
             "registrationState": "NotRegistered",
+            "registrationPolicy": "RegistrationRequired",
             "resourceTypes": [
               {
+                "resourceType": "TestResourceType",
+                "locations": [
+                  "West US"
+                ],
                 "apiVersions": [
                   "2018-01-01",
                   "2015-05-01"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
                 "locationMappings": [
                   {
+                    "location": "West US",
                     "type": "EdgeZone",
                     "extendedLocations": [
                       "LosAngeles",
                       "LosAngeles2"
-                    ],
-                    "location": "West US"
+                    ]
                   }
                 ],
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+              },
+              {
+                "resourceType": "TestResourceTypeSibling",
                 "locations": [
                   "West US"
                 ],
-                "resourceType": "TestResourceType"
-              },
-              {
                 "apiVersions": [
                   "2018-01-01",
                   "2015-05-01"
                 ],
-                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation",
-                "locations": [
-                  "West US"
-                ],
-                "resourceType": "TestResourceTypeSibling"
+                "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
               }
             ]
           }
         ]
       }
     }
-  },
-  "operationId": "Providers_List",
-  "title": "Get providers."
+  }
 }

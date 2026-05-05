@@ -1,34 +1,47 @@
 {
   "parameters": {
-    "api-version": "2025-04-01-preview",
-    "resourceGroupName": "testRG",
     "subscriptionId": "subid",
-    "workspaceName": "workspace1"
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "api-version": "2025-04-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://nextlink.url",
+        "nextLink": "string",
         "value": [
           {
             "name": "blue",
-            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors",
-            "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
             "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors",
+            "location": "westus",
+            "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
             "identity": {
               "type": "SystemAssigned"
             },
-            "location": "westus",
             "properties": {
+              "provisioningState": "Creating",
+              "ingestionEndpointConfiguration": {
+                "eventHubName": "MyEventHubName",
+                "consumerGroup": "ConsumerGroupA",
+                "fullyQualifiedEventHubNamespace": "myeventhub.servicesbus.windows.net"
+              },
               "deviceMapping": {
                 "content": {
+                  "templateType": "CollectionContent",
                   "template": [
                     {
+                      "templateType": "JsonPathContent",
                       "template": {
+                        "typeName": "heartrate",
+                        "typeMatchExpression": "$..[?(@heartrate)]",
                         "deviceIdExpression": "$.deviceid",
                         "timestampExpression": "$.measurementdatetime",
-                        "typeMatchExpression": "$..[?(@heartrate)]",
-                        "typeName": "heartrate",
                         "values": [
                           {
                             "required": "true",
@@ -36,51 +49,51 @@
                             "valueName": "hr"
                           }
                         ]
-                      },
-                      "templateType": "JsonPathContent"
+                      }
                     }
-                  ],
-                  "templateType": "CollectionContent"
+                  ]
                 }
-              },
-              "ingestionEndpointConfiguration": {
-                "consumerGroup": "ConsumerGroupA",
-                "eventHubName": "MyEventHubName",
-                "fullyQualifiedEventHubNamespace": "myeventhub.servicesbus.windows.net"
-              },
-              "provisioningState": "Creating"
+              }
             },
             "systemData": {
-              "createdAt": "2021-01-28T19:26:24.072Z",
               "createdBy": "string",
-              "lastModifiedAt": "2021-01-28T19:26:24.072Z",
-              "lastModifiedBy": "string"
-            },
-            "tags": {
-              "additionalProp1": "string",
-              "additionalProp2": "string",
-              "additionalProp3": "string"
+              "createdAt": "2021-01-28T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-28T19:26:24.072Z"
             }
           },
           {
             "name": "red",
-            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors",
-            "etag": "00000000-0000-0000-f6ac-912ca49e01d6",
             "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/red",
+            "type": "Microsoft.HealthcareApis/workspaces/iotconnectors",
+            "location": "westus",
+            "etag": "00000000-0000-0000-f6ac-912ca49e01d6",
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
             "identity": {
               "type": "SystemAssigned"
             },
-            "location": "westus",
             "properties": {
+              "provisioningState": "Suceeded",
+              "ingestionEndpointConfiguration": {
+                "eventHubName": "MyEventHubName",
+                "consumerGroup": "ConsumerGroupA",
+                "fullyQualifiedEventHubNamespace": "myeventhub.servicesbus.windows.net"
+              },
               "deviceMapping": {
                 "content": {
+                  "templateType": "CollectionContent",
                   "template": [
                     {
+                      "templateType": "JsonPathContent",
                       "template": {
+                        "typeName": "steps",
+                        "typeMatchExpression": "$..[?(@steps)]",
                         "deviceIdExpression": "$.deviceid",
                         "timestampExpression": "$.measurementdatetime",
-                        "typeMatchExpression": "$..[?(@steps)]",
-                        "typeName": "steps",
                         "values": [
                           {
                             "required": "true",
@@ -88,36 +101,21 @@
                             "valueName": "steps"
                           }
                         ]
-                      },
-                      "templateType": "JsonPathContent"
+                      }
                     }
-                  ],
-                  "templateType": "CollectionContent"
+                  ]
                 }
-              },
-              "ingestionEndpointConfiguration": {
-                "consumerGroup": "ConsumerGroupA",
-                "eventHubName": "MyEventHubName",
-                "fullyQualifiedEventHubNamespace": "myeventhub.servicesbus.windows.net"
-              },
-              "provisioningState": "Suceeded"
+              }
             },
             "systemData": {
-              "createdAt": "2021-01-27T19:26:24.072Z",
               "createdBy": "string",
-              "lastModifiedAt": "2021-01-27T19:26:24.072Z",
-              "lastModifiedBy": "string"
-            },
-            "tags": {
-              "additionalProp1": "string",
-              "additionalProp2": "string",
-              "additionalProp3": "string"
+              "createdAt": "2021-01-27T19:26:24.072Z",
+              "lastModifiedBy": "string",
+              "lastModifiedAt": "2021-01-27T19:26:24.072Z"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "IotConnectors_ListByWorkspace",
-  "title": "List iotconnectors"
+  }
 }

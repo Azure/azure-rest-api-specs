@@ -55,8 +55,7 @@ interface PremierAddOnOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PremierAddOns {
   /**
    * Description for Gets a named add-on of an app.
@@ -130,8 +129,7 @@ interface PremierAddOnOperationGroupOps
       }
     > {}
 
-@tag("WebApps")
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface PremierAddOnOperationGroup {
   /**
    * Description for Gets a named add-on of an app.

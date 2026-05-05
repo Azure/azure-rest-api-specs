@@ -4,7 +4,7 @@ parameters:
     default: $(NodeVersion)
 
 steps:
-  - task: UseNode@1
+  - task: NodeTool@0
     inputs:
-      version: ${{ parameters.NodeVersion }}
+      versionSpec: ${{ parameters.NodeVersion }}
     displayName: "Use Node ${{ parameters.NodeVersion }}"

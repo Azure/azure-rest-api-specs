@@ -1,16 +1,19 @@
 {
-  "operationId": "TrunkedNetworks_CreateOrUpdate",
   "parameters": {
     "api-version": "2025-09-01",
-    "resourceGroupName": "resourceGroupName",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
     "trunkedNetworkName": "trunkedNetworkName",
     "trunkedNetworkParameters": {
-      "extendedLocation": {
-        "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-        "type": "CustomLocation"
-      },
       "location": "location",
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      },
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+      },
       "properties": {
         "interfaceName": "eth0",
         "isolationDomainIds": [
@@ -21,41 +24,14 @@
           12,
           14
         ]
-      },
-      "tags": {
-        "key1": "myvalue1",
-        "key2": "myvalue2"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "extendedLocation": {
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-          "type": "CustomLocation"
-        },
         "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
-        "location": "location",
         "name": "trunkedNetworkName",
-        "properties": {
-          "associatedResourceIds": [
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
-          ],
-          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
-          "detailedStatus": "Available",
-          "detailedStatusMessage": "Trunked network is up",
-          "interfaceName": "eth0",
-          "isolationDomainIds": [
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName",
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
-          ],
-          "provisioningState": "Succeeded",
-          "vlans": [
-            12,
-            14
-          ]
-        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -64,40 +40,40 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
+        "type": "Microsoft.NetworkCloud/trunkedNetworks",
+        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
         },
-        "type": "Microsoft.NetworkCloud/trunkedNetworks"
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "interfaceName": "eth0",
+          "isolationDomainIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
+          ],
+          "vlans": [
+            12,
+            14
+          ],
+          "provisioningState": "Succeeded",
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Trunked network is up"
+        }
       }
     },
     "201": {
       "body": {
-        "extendedLocation": {
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
-          "type": "CustomLocation"
-        },
         "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
-        "location": "location",
         "name": "trunkedNetworkName",
-        "properties": {
-          "associatedResourceIds": [
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
-          ],
-          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
-          "detailedStatus": "Available",
-          "detailedStatusMessage": "Trunked network is up",
-          "interfaceName": "eth0",
-          "isolationDomainIds": [
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName",
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
-          ],
-          "provisioningState": "Succeeded",
-          "vlans": [
-            12,
-            14
-          ]
-        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -106,16 +82,38 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
+        "type": "Microsoft.NetworkCloud/trunkedNetworks",
+        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
         },
-        "type": "Microsoft.NetworkCloud/trunkedNetworks"
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "interfaceName": "eth0",
+          "isolationDomainIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
+          ],
+          "vlans": [
+            12,
+            14
+          ],
+          "provisioningState": "Succeeded",
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Trunked network is up"
+        }
       },
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2025-09-01"
       }
     }
-  },
-  "title": "Create or update trunked network"
+  }
 }

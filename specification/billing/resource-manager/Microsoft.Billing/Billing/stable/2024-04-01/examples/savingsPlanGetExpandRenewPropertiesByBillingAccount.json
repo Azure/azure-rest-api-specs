@@ -1,101 +1,99 @@
 {
   "parameters": {
-    "$expand": "renewProperties",
-    "api-version": "2024-04-01",
     "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000",
     "savingsPlanId": "30000000-0000-0000-0000-000000000000",
-    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000"
+    "api-version": "2024-04-01",
+    "$expand": "renewProperties"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
         "name": "30000000-0000-0000-0000-000000000000",
         "type": "microsoft.billing/billingAccounts/savingsPlanOrders/savingsPlans",
-        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
-        "properties": {
-          "appliedScopeProperties": {
-            "displayName": "TestRg",
-            "managementGroupId": "/providers/Microsoft.Management/managementGroups/TestRg",
-            "tenantId": "70000000-0000-0000-0000-000000000000"
-          },
-          "appliedScopeType": "ManagementGroup",
-          "benefitStartTime": "2022-11-16T02:25:11.7183866Z",
-          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
-          "billingPlan": "P1M",
-          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/AAAA-BBBB-CCC-DDD",
-          "billingScopeId": "/subscriptions/50000000-0000-0000-0000-000000000000",
-          "commitment": {
-            "amount": 0.001,
-            "currencyCode": "USD",
-            "grain": "Hourly"
-          },
-          "displayName": "SP1",
-          "displayProvisioningState": "NoBenefit",
-          "effectiveDateTime": "2022-12-16T01:35:36.2909462Z",
-          "expiryDateTime": "2025-11-16T02:25:11.7183866Z",
-          "productCode": "20000000-0000-0000-0000-000000000005",
-          "provisioningState": "Succeeded",
-          "purchaseDateTime": "2022-11-16T02:23:21.3864783Z",
-          "renew": false,
-          "renewProperties": {
-            "purchaseProperties": {
-              "properties": {
-                "appliedScopeProperties": {
-                  "managementGroupId": "/providers/Microsoft.Management/managementGroups/TestRg",
-                  "tenantId": "70000000-0000-0000-0000-000000000000"
-                },
-                "appliedScopeType": "ManagementGroup",
-                "billingPlan": "Monthly",
-                "billingScopeId": "/subscriptions/50000000-0000-0000-0000-000000000000",
-                "commitment": {
-                  "amount": 0.001,
-                  "currencyCode": "USD",
-                  "grain": "Hourly"
-                },
-                "displayName": "SP1_renewed",
-                "term": "P3Y"
-              },
-              "sku": {
-                "name": "Compute_Savings_Plan"
-              }
-            }
-          },
-          "term": "P3Y",
-          "userFriendlyAppliedScopeType": "ManagementGroup",
-          "utilization": {
-            "aggregates": [
-              {
-                "grain": 1,
-                "grainUnit": "days",
-                "value": 0,
-                "valueUnit": "percentage"
-              },
-              {
-                "grain": 7,
-                "grainUnit": "days",
-                "value": 0,
-                "valueUnit": "percentage"
-              },
-              {
-                "grain": 30,
-                "grainUnit": "days",
-                "value": 0,
-                "valueUnit": "percentage"
-              }
-            ],
-            "trend": "SAME"
-          }
-        },
         "sku": {
           "name": "Compute_Savings_Plan"
         },
         "tags": {
           "key1": "value1",
           "key2": "value2"
+        },
+        "properties": {
+          "billingScopeId": "/subscriptions/50000000-0000-0000-0000-000000000000",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/AAAA-BBBB-CCC-DDD",
+          "billingPlan": "P1M",
+          "productCode": "20000000-0000-0000-0000-000000000005",
+          "appliedScopeProperties": {
+            "tenantId": "70000000-0000-0000-0000-000000000000",
+            "managementGroupId": "/providers/Microsoft.Management/managementGroups/TestRg",
+            "displayName": "TestRg"
+          },
+          "commitment": {
+            "grain": "Hourly",
+            "currencyCode": "USD",
+            "amount": 0.001
+          },
+          "renew": false,
+          "appliedScopeType": "ManagementGroup",
+          "displayName": "SP1",
+          "provisioningState": "Succeeded",
+          "term": "P3Y",
+          "displayProvisioningState": "NoBenefit",
+          "userFriendlyAppliedScopeType": "ManagementGroup",
+          "expiryDateTime": "2025-11-16T02:25:11.7183866Z",
+          "purchaseDateTime": "2022-11-16T02:23:21.3864783Z",
+          "benefitStartTime": "2022-11-16T02:25:11.7183866Z",
+          "effectiveDateTime": "2022-12-16T01:35:36.2909462Z",
+          "utilization": {
+            "trend": "SAME",
+            "aggregates": [
+              {
+                "grain": 1.0,
+                "grainUnit": "days",
+                "value": 0.0,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 7.0,
+                "grainUnit": "days",
+                "value": 0.0,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 30.0,
+                "grainUnit": "days",
+                "value": 0.0,
+                "valueUnit": "percentage"
+              }
+            ]
+          },
+          "renewProperties": {
+            "purchaseProperties": {
+              "sku": {
+                "name": "Compute_Savings_Plan"
+              },
+              "properties": {
+                "billingScopeId": "/subscriptions/50000000-0000-0000-0000-000000000000",
+                "term": "P3Y",
+                "billingPlan": "Monthly",
+                "displayName": "SP1_renewed",
+                "appliedScopeType": "ManagementGroup",
+                "appliedScopeProperties": {
+                  "tenantId": "70000000-0000-0000-0000-000000000000",
+                  "managementGroupId": "/providers/Microsoft.Management/managementGroups/TestRg"
+                },
+                "commitment": {
+                  "grain": "Hourly",
+                  "currencyCode": "USD",
+                  "amount": 0.001
+                }
+              }
+            }
+          }
         }
       }
     }
-  },
-  "operationId": "SavingsPlans_GetByBillingAccount",
-  "title": "SavingsPlanGetExpandRenewProperties"
+  }
 }

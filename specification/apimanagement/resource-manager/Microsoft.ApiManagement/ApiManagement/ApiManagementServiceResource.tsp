@@ -128,21 +128,6 @@ alias QuotaPeriodKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-alias ApiManagementServiceListPagingParameters = {
-  /**
-   * Number of records to return.
-   */
-  @query("$top")
-  @minValue(1)
-  $top?: int32;
-
-  /**
-   * Skip token for retrieving the next page of results.
-   */
-  @query("$skipToken")
-  $skipToken?: string;
-};
-
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ApiManagementServiceResources {
   /**
@@ -187,7 +172,6 @@ interface ApiManagementServiceResources {
    */
   listByResourceGroup is ArmResourceListByParent<
     ApiManagementServiceResource,
-    Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
   >;
 
@@ -196,7 +180,6 @@ interface ApiManagementServiceResources {
    */
   list is ArmListBySubscription<
     ApiManagementServiceResource,
-    Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
   >;
 

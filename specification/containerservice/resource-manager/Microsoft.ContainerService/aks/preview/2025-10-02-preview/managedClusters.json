@@ -9212,7 +9212,8 @@
           "description": "The Availability zone in which machine is located.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -9479,7 +9480,8 @@
       "properties": {
         "network": {
           "$ref": "#/definitions/MachineNetworkProperties",
-          "description": "network properties of the machine"
+          "description": "network properties of the machine",
+          "readOnly": true
         },
         "resourceId": {
           "type": "string",
@@ -10074,7 +10076,8 @@
         },
         "nodeImageVersion": {
           "type": "string",
-          "description": "The version of node image"
+          "description": "The version of node image",
+          "readOnly": true
         },
         "upgradeStrategy": {
           "$ref": "#/definitions/UpgradeStrategy",
@@ -11601,18 +11604,15 @@
       "properties": {
         "kubernetesVersion": {
           "type": "string",
-          "description": "The current kubernetes version.",
-          "readOnly": true
+          "description": "The current kubernetes version."
         },
         "sku": {
           "$ref": "#/definitions/ManagedClusterSKU",
-          "description": "The current managed cluster sku.",
-          "readOnly": true
+          "description": "The current managed cluster sku."
         },
         "enableRbac": {
           "type": "boolean",
-          "description": "Whether the cluster has enabled Kubernetes Role-Based Access Control or not.",
-          "readOnly": true
+          "description": "Whether the cluster has enabled Kubernetes Role-Based Access Control or not."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileForSnapshot",
@@ -12203,6 +12203,21 @@
           "$ref": "#/definitions/NamespaceProperties",
           "description": "Properties of a namespace."
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "eTag": {
           "type": "string",
           "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
@@ -12211,7 +12226,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },

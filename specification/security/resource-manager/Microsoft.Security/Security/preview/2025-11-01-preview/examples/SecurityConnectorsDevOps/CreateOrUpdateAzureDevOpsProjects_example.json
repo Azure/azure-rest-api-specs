@@ -1,58 +1,56 @@
 {
   "parameters": {
-    "api-version": "2025-11-01-preview",
-    "azureDevOpsProject": {
-      "properties": {
-        "actionableRemediation": {
-          "state": "Enabled"
-        },
-        "onboardingState": "NotApplicable"
-      }
-    },
-    "orgName": "myAzDevOpsOrg",
-    "projectName": "myAzDevOpsProject",
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
     "resourceGroupName": "myRg",
     "securityConnectorName": "mySecurityConnectorName",
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
+    "orgName": "myAzDevOpsOrg",
+    "projectName": "myAzDevOpsProject",
+    "azureDevOpsProject": {
+      "properties": {
+        "onboardingState": "NotApplicable",
+        "actionableRemediation": {
+          "state": "Enabled"
+        }
+      }
+    },
+    "api-version": "2025-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "name": "myAzDevOpsProject",
-        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects",
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject",
         "properties": {
+          "parentOrgName": "myAzDevOpsOrg",
+          "projectId": "9ebbed8f-a9cc-405f-a647-b235e22179de",
+          "onboardingState": "Onboarded",
           "actionableRemediation": {
             "state": "Enabled"
           },
-          "onboardingState": "Onboarded",
-          "parentOrgName": "myAzDevOpsOrg",
-          "projectId": "9ebbed8f-a9cc-405f-a647-b235e22179de",
           "provisioningState": "Succeeded"
-        }
-      },
-      "headers": {}
+        },
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject",
+        "name": "myAzDevOpsProject",
+        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects"
+      }
     },
     "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
+      },
       "body": {
-        "name": "myAzDevOpsProject",
-        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects",
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject",
         "properties": {
+          "parentOrgName": "myAzDevOpsOrg",
+          "projectId": "9ebbed8f-a9cc-405f-a647-b235e22179de",
+          "onboardingState": "NotApplicable",
           "actionableRemediation": {
             "state": "None"
           },
-          "onboardingState": "NotApplicable",
-          "parentOrgName": "myAzDevOpsOrg",
-          "projectId": "9ebbed8f-a9cc-405f-a647-b235e22179de",
           "provisioningState": "Accepted"
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
+        },
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject",
+        "name": "myAzDevOpsProject",
+        "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects"
       }
     }
-  },
-  "operationId": "AzureDevOpsProjects_CreateOrUpdate",
-  "title": "CreateOrUpdate_AzureDevOpsProjects"
+  }
 }
