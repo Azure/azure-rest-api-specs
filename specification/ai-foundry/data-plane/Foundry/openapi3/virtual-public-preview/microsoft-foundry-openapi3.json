@@ -25475,8 +25475,11 @@
             "readOnly": true
           },
           "computeDetails": {
-            "type": "object",
-            "additionalProperties": {},
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobRunComputeDetails"
+              }
+            ],
             "description": "Compute details associated with the run.",
             "readOnly": true
           },
@@ -25504,6 +25507,47 @@
           }
         },
         "description": "One execution run of a training job."
+      },
+      "JobRunComputeDetails": {
+        "type": "object",
+        "properties": {
+          "vmSize": {
+            "type": "string",
+            "description": "Virtual machine size used for this run attempt.",
+            "readOnly": true
+          },
+          "instanceType": {
+            "type": "string",
+            "description": "Instance type used for this run attempt.",
+            "readOnly": true
+          },
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of instances allocated to this run attempt.",
+            "readOnly": true
+          },
+          "gpuCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs allocated to this run attempt.",
+            "readOnly": true
+          },
+          "region": {
+            "type": "string",
+            "description": "Region where this run attempt was placed.",
+            "readOnly": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional backend-specific compute placement properties.",
+            "readOnly": true
+          }
+        },
+        "description": "Compute placement details for a job run attempt."
       },
       "JobRunError": {
         "type": "object",

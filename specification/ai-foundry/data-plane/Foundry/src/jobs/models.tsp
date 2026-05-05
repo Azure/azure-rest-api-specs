@@ -406,6 +406,33 @@ model JobRunError {
   details?: Record<unknown>;
 }
 
+@doc("Compute placement details for a job run attempt.")
+model JobRunComputeDetails {
+  @doc("Virtual machine size used for this run attempt.")
+  @visibility(Lifecycle.Read)
+  vmSize?: string;
+
+  @doc("Instance type used for this run attempt.")
+  @visibility(Lifecycle.Read)
+  instanceType?: string;
+
+  @doc("Number of instances allocated to this run attempt.")
+  @visibility(Lifecycle.Read)
+  instanceCount?: int32;
+
+  @doc("Number of GPUs allocated to this run attempt.")
+  @visibility(Lifecycle.Read)
+  gpuCount?: int32;
+
+  @doc("Region where this run attempt was placed.")
+  @visibility(Lifecycle.Read)
+  region?: string;
+
+  @doc("Additional backend-specific compute placement properties.")
+  @visibility(Lifecycle.Read)
+  properties?: Record<string>;
+}
+
 @doc("One execution run of a training job.")
 model JobRun {
   @doc("The run identifier.")
@@ -446,7 +473,7 @@ model JobRun {
 
   @doc("Compute details associated with the run.")
   @visibility(Lifecycle.Read)
-  computeDetails?: Record<unknown>;
+  computeDetails?: JobRunComputeDetails;
 
   @doc("Terminal error for the run, if any.")
   @visibility(Lifecycle.Read)
