@@ -47,6 +47,10 @@ using Compute;
   string,
   "go"
 );
+@@clientName(Placement.zonePlacementPolicy,
+  "ZonePlacementPolicyType",
+  "csharp"
+);
 
 @@clientName(VirtualMachineSizeTypes.Standard_B1ms, "StandardB1Ms", "go");
 @@clientName(VirtualMachineSizeTypes.Standard_B2ms, "StandardB2Ms", "go");
