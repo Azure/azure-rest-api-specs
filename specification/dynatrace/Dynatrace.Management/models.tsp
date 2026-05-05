@@ -2,9 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -134,6 +136,7 @@ union ProvisioningState {
 /**
  * Install/Uninstall action.
  */
+@added(Versions.v2024_04_24)
 union Action {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -581,6 +584,7 @@ model VMExtensionPayload {
 /**
  * Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.
  */
+@added(Versions.v2024_04_24)
 model ManageAgentInstallationRequest {
   /**
    * The list of resources.
@@ -596,6 +600,7 @@ model ManageAgentInstallationRequest {
 /**
  * Details of resource that has Dynatrace agent installed through the Azure Dynatrace resource.
  */
+@added(Versions.v2024_04_24)
 model ManageAgentList {
   /**
    * The ARM id of the resource to install/uninstall agent.
