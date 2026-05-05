@@ -260,8 +260,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
 @@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
 
-// BlobMetadata → custom deserialization type for Rust
-@@alternateType(BlobItem.metadata, BlobMetadataAlternate, "rust");
+// BlobMetadata → custom Rust type with serde deserialization
+@@alternateType(BlobMetadata,
+  {
+    identity: "crate::models::BlobMetadata",
+  },
+  "rust"
+);
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
@@ -950,12 +955,3 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
   "rust"
 )
 scalar HttpRange extends string;
-
-/** Blob metadata with support for encrypted attribute and key-value pairs. */
-@alternateType(
-  {
-    identity: "crate::models::BlobMetadata",
-  },
-  "rust"
-)
-scalar BlobMetadataAlternate;
