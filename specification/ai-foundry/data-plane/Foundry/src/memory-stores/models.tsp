@@ -108,10 +108,10 @@ model MemoryStoreDefaultOptions {
   chat_summary_enabled: boolean = true;
 
   @doc("Whether to enable procedural memory extraction and storage. Default is true.")
-  procedural_memory_enabled: boolean = true;
+  procedural_memory_enabled?: boolean = true;
 
-  @doc("The time-to-live for chat summary memories in days.")
-  chat_summary_ttl_days?: int32;
+  @doc("The default time-to-live for memories in seconds.  A value of 0 indicates that memories do not expire.")
+  default_ttl_seconds?: int32 = 0;
 }
 
 @doc("Usage statistics of a memory store operation.")
