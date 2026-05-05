@@ -15,7 +15,8 @@ model SaasTenantResource is TrackedResource<SaasResourceProperties> {
   ...ResourceNameParameter<
     Resource = SaasTenantResource,
     KeyName = "resourceId",
-    SegmentName = "saasresources"
+    SegmentName = "saasresources",
+    NamePattern = "^[a-zA-Z0-9-]{3,50}$"
   >;
 }
 
