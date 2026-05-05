@@ -51,6 +51,14 @@ using Compute;
   "ZonePlacementPolicyType",
   "csharp"
 );
+@@clientName(VirtualMachineScaleSetStorageProfile.diskControllerType,
+  "DiskControllerKind",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetUpdateStorageProfile.diskControllerType,
+  "DiskControllerKind",
+  "csharp"
+);
 
 @@clientName(VirtualMachineSizeTypes.Standard_B1ms, "StandardB1Ms", "go");
 @@clientName(VirtualMachineSizeTypes.Standard_B2ms, "StandardB2Ms", "go");
