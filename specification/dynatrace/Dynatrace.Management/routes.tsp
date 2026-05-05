@@ -5,11 +5,13 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -33,6 +35,23 @@ interface MonitorsOperationGroup {
   getMarketplaceSaaSResourceDetails is ArmProviderActionSync<
     Request = MarketplaceSaaSResourceDetailsRequest,
     Response = MarketplaceSaaSResourceDetailsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+interface SaaSOperationGroup {
+  /**
+   * Activate the marketplace SaaS resource
+   */
+  @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+  @autoRoute
+  @action("activateSaaS")
+  activateSaaS is ArmProviderActionSync<
+    Request = ActivateSaaSParameterRequest,
+    Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
