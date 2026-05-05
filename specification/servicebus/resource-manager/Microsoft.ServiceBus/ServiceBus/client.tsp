@@ -8,6 +8,7 @@ using Microsoft.ServiceBus;
 @@clientName(Microsoft.ServiceBus, "ServiceBusManagementClient", "python");
 
 @@clientName(NetworkRuleIPAction, "NetworkRuleIpAction", "java");
+@@clientName(NamespaceFailoverProperties, "FailoverProperties", "java");
 
 // Fix TLS version naming changes for Go SDK compatibility
 @@clientName(TlsVersion.`1.0`, "One0", "go");
