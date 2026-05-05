@@ -485,7 +485,7 @@ interface Container {
     {
       /** The container filter blob enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilterBlobResponse;
     }
   >;
 
