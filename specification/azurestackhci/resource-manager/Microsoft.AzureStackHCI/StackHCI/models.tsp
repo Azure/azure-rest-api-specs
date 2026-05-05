@@ -2364,7 +2364,6 @@ model PerNodeRemoteSupportSession {
    * The location where the session transcript is stored.
    */
   @added(Versions.v2026_04_01_preview)
-  @removed(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   transcriptLocation?: string;
 }
@@ -6181,7 +6180,6 @@ model ReportedProperties {
    * Most recent edge device sync timestamp in UTC.
    */
   @added(Versions.v2026_04_01_preview)
-  @removed(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
