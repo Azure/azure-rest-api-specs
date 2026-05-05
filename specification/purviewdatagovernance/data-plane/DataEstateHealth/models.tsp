@@ -15,14 +15,12 @@ namespace PurviewDataEstateHealth;
 @doc("A paged collection of results.")
 model PagedResults<T> {
   @doc("The collection of items.")
-  @pageItems
   value: T[];
 
   @doc("The total count of items.")
   count: int32;
 
   @doc("Continuation token for the next page of results.")
-  @continuationToken
   continuationToken?: string;
 }
 
@@ -38,7 +36,6 @@ model OrderBy {
 @doc("Base request for paginated queries.")
 model QueryBaseRequest {
   @doc("Continuation token from a previous response.")
-  @continuationToken
   continuationToken?: string;
 
   @doc("The number of results per page.")
