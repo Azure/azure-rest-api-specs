@@ -6144,6 +6144,16 @@ model EdgeDeviceDisks {
    */
   @visibility(Lifecycle.Read)
   type?: string;
+
+  /** Model number of the hardware. */
+  @added(Versions.v2026_04_30)
+  @visibility(Lifecycle.Read)
+  `model`?: string;
+  
+  /** The manufacturer of the disk. */
+  @added(Versions.v2026_04_30)
+  @visibility(Lifecycle.Read)
+  manufacturer?: string;
 }
 
 /**
