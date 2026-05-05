@@ -91,6 +91,7 @@ async function runAzsdkGeneration(
     logMessage(`Running: ${azsdkExe} ${generateArgs.join(" ")}`, LogLevel.Info);
     const generateOutput = await runCommandWithOutput(azsdkExe, generateArgs);
     generateResponse = parseAzsdkResponse<AzsdkGenerateResponse>(generateOutput);
+    logMessage(`azsdk pkg generate response: ${JSON.stringify(generateResponse)}`, LogLevel.Info);
     logMessage(`azsdk pkg generate result: ${generateResponse.result}`, LogLevel.Info);
   } catch (error) {
     logMessage(`Error running azsdk pkg generate: ${inspect(error)}`, LogLevel.Error);
@@ -117,6 +118,7 @@ async function runAzsdkGeneration(
           logMessage(`Running: ${azsdkExe} ${buildArgs.join(" ")}`, LogLevel.Info);
           const buildOutput = await runCommandWithOutput(azsdkExe, buildArgs);
           buildResponse = parseAzsdkResponse<AzsdkBuildResponse>(buildOutput);
+          logMessage(`azsdk pkg build response: ${JSON.stringify(buildResponse)}`, LogLevel.Info);
           logMessage(`azsdk pkg build result: ${buildResponse.result}`, LogLevel.Info);
           if (buildResponse.result !== "succeeded") {
             logMessage(`Build failed, skipping pack step`, LogLevel.Error);
@@ -137,6 +139,7 @@ async function runAzsdkGeneration(
           logMessage(`Running: ${azsdkExe} ${packArgs.join(" ")}`, LogLevel.Info);
           const packOutput = await runCommandWithOutput(azsdkExe, packArgs);
           packResponse = parseAzsdkResponse<AzsdkPackResponse>(packOutput);
+          logMessage(`azsdk pkg pack response: ${JSON.stringify(packResponse)}`, LogLevel.Info);
           logMessage(`azsdk pkg pack result: ${packResponse.result}`, LogLevel.Info);
         } catch (error) {
           logMessage(`Error running azsdk pkg pack: ${inspect(error)}`, LogLevel.Error);
