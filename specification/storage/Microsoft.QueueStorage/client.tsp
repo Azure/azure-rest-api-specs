@@ -7,23 +7,25 @@ using Storage.Queues;
 
 namespace Customizations;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-@client(
-  {
-    service: Storage.Queues,
-  },
-  "rust"
-)
-interface QueueServiceClient extends Storage.Queues.Service {}
+@@alternateType(MetadataHeaders.metadata, Record<string>, "rust,go");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Queues,
   },
-  "rust"
+  "rust,go"
 )
-interface QueueClient extends Storage.Queues.Queue {}
+interface QueueServiceClient extends Service {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.Queues,
+  },
+  "rust,go"
+)
+interface QueueClient extends Queue {}
 
 @@clientInitialization(QueueServiceClient,
   {
@@ -39,21 +41,182 @@ interface QueueClient extends Storage.Queues.Queue {}
   "rust"
 );
 
-@@clientNamespace(Storage.Queues, "Azure.Storage.Queues");
-@@clientNamespace(Storage.Queues.Service, "Azure.Storage.Queues");
-@@clientNamespace(Storage.Queues.Queue, "Azure.Storage.Queues");
+@@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "rust,go");
+@@clientNamespace(Service, "Azure.Storage.Queues", "rust,go");
+@@clientNamespace(Queue, "Azure.Storage.Queues", "rust,go");
 
-@@clientName(Storage.Queues.MetadataHeaders.metadata, "metadata", "rust");
-@@clientName(Storage.Queues.SentMessage, "SentMessageInternal", "rust");
+@@clientName(MetadataHeaders.metadata, "metadata", "rust");
+@@clientName(SentMessage, "SentMessageInternal", "rust");
 
-@@alternateType(Storage.Queues.ListOfSentMessage,
+@@alternateType(ListOfSentMessage,
   {
     identity: "crate::models::SentMessage",
   },
   "rust"
 );
 
-@@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
+@@scope(Service.getUserDelegationKey, "!rust");
+
+// Go customizations
+/**
+ * List wrapper for EnqueuedMessage array
+ */
+model ListOfSentMessageGo is Array<SentMessage>;
+/**
+ * List wrapper for PeekedMessageItem array
+ */
+model PeekedMessagesGo is Array<PeekedMessage>;
+/**
+ * List wrapper for DequeuedMessageItem array
+ */
+model ReceivedMessagesGo is Array<ReceivedMessage>;
+/** Represents an array of signed identifiers */
+@clientName("SignedIdentifiers", "go")
+model SignedIdentifiersGo is Array<SignedIdentifier>;
+@@alternateType(AccessPolicy.start, utcDateTime, "go");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(ListOfSentMessage, ListOfSentMessageGo, "go");
+@@alternateType(PeekedMessages, PeekedMessagesGo, "go");
+@@alternateType(ReceivedMessages, ReceivedMessagesGo, "go");
+@@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
+@@clientName(Metrics.includeApis, "includeAPIs", "go");
+@@clientName(CorsRule, "CORSRule", "go");
+@@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "go");
+@@clientName(ListQueuesResponse.queueItems, "Queues", "go");
+@@clientName(QueueItem, "Queue", "go");
+@@clientName(QueueServiceClient, "ServiceClient", "go");
+@@clientName(QueueServiceProperties, "StorageServiceProperties", "go");
+@@clientName(QueueServiceProperties.cors, "CORS", "go");
+@@clientName(QueueServiceStats, "StorageServiceStats", "go");
+@@clientName(ReceivedMessage, "DequeuedMessage", "go");
+@@clientName(SentMessage, "EnqueuedMessage", "go");
+@@clientName(Service.getQueues, "ListQueuesSegment", "go");
+@@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
+@@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+@@clientName(UserDelegationKey.signedDelegatedUserTid,
+  "SignedDelegatedUserTID",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.peekMessages,
+  "monomorphicResponseFieldName",
+  "Messages",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.receiveMessages,
+  "monomorphicResponseFieldName",
+  "Messages",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.sendMessage,
+  "monomorphicResponseFieldName",
+  "Messages",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.sendMessage,
+  "responseEnvelopeName",
+  "MessagesClientEnqueueResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.receiveMessages,
+  "responseEnvelopeName",
+  "MessagesClientDequeueResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.updateMessage,
+  "responseEnvelopeName",
+  "MessageIDClientUpdateResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.deleteMessage,
+  "responseEnvelopeName",
+  "MessageIDClientDeleteResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.peekMessages,
+  "responseEnvelopeName",
+  "MessagesClientPeekResponse",
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Queue.clear,
+  "responseEnvelopeName",
+  "MessagesClientClearResponse",
+  "go"
+);
+
+// JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
+
+@@clientName(ReceivedMessage.insertionTime, "insertedOn", "javascript");
+@@clientName(SentMessage.insertionTime, "insertedOn", "javascript");
+@@clientName(PeekedMessage.insertionTime, "insertedOn", "javascript");
+@@clientName(ReceivedMessage.expirationTime, "expiresOn", "javascript");
+@@clientName(SentMessage.expirationTime, "expiresOn", "javascript");
+@@clientName(PeekedMessage.expirationTime, "expiresOn", "javascript");
+@@clientName(ReceivedMessage.timeNextVisible, "nextVisibleOn", "javascript");
+@@clientName(SentMessage.timeNextVisible, "nextVisibleOn", "javascript");
+@@clientName(TimeNextVisibleResponseHeader.timeNextVisible,
+  "nextVisibleOn",
+  "javascript"
+);
+@@clientName(TimeNextVisibleResponseHeaderPrivate.timeNextVisible,
+  "nextVisibleOn",
+  "javascript"
+);
+@@alternateType(AccessPolicy.start, string, "javascript, python");
+@@alternateType(AccessPolicy.expiry, string, "javascript, python");
+@@clientName(AccessPolicy.start, "startsOn", "javascript");
+@@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
+@@clientName(AccessPolicy.permission, "permissions", "javascript");
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "javascript");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
+@@alternateType(UserDelegationKey.signedStart, string, "javascript");
+@@alternateType(UserDelegationKey.signedExpiry, string, "javascript");
+@@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
+@@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
+@@clientName(QueueServiceProperties.logging,
+  "queueAnalyticsLogging",
+  "javascript"
+);
+@@clientName(Logging.delete, "deleteProperty", "javascript");
+@@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
+@@clientName(ListQueuesResponse.maxResults, "maxPageSize", "javascript");
+@@clientName(ListQueuesResponse.nextMarker, "continuationToken", "javascript");
+@@clientName(TimeoutParameter.timeout, "timeoutInSeconds", "javascript");
+@@clientName(Metrics.includeApis, "includeAPIs", "javascript");
+@@alternateType(KeyInfo.start, string, "javascript, python");
+@@alternateType(KeyInfo.expiry, string, "javascript, python");
+@@clientName(KeyInfo.start, "startsOn", "javascript");
+@@clientName(KeyInfo.expiry, "expiresOn", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Error, "header", "x-ms-error-code:errorCode", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Error, "restErrorCodeHeader", "x-ms-error-code", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(MetadataHeaders.metadata,
+  "headerCollectionPrefix",
+  "x-ms-meta",
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy sdks"
+@@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp");
+
+@@alternateType(UserDelegationKey.signedExpiry, string, "python");
+@@alternateType(UserDelegationKey.signedStart, string, "python");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "python");
 
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the queueAcl body ----- */
 /** Sets the permissions for the specified queue. */
@@ -106,3 +269,57 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 >;
 
 @@override(Queue.setMetadata, setMetadataRequiredMetadataQueue, "rust");
+
+// csharp customizations
+@@alternateType(AccessPolicy.start, utcDateTime, "csharp");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
+@@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
+@@alternateType(ListQueuesIncludeType, string, "csharp");
+@@alternateType(KeyInfo.start, string, "csharp");
+@@alternateType(KeyInfo.expiry, string, "csharp");
+
+@@clientName(Storage.Queues, "QueueClient", "csharp");
+@@clientName(AccessPolicy, "QueueAccessPolicy", "csharp");
+@@clientName(AccessPolicy.start, "StartsOn", "csharp");
+@@clientName(AccessPolicy.expiry, "ExpiresOn", "csharp");
+@@clientName(AccessPolicy.permission, "Permissions", "csharp");
+@@clientName(Service, "ServiceRestClient", "csharp");
+@@clientName(Queue, "QueueRestClient", "csharp");
+@@clientName(GeoReplication, "QueueGeoReplication", "csharp");
+@@clientName(GeoReplicationStatus, "QueueGeoReplicationStatus", "csharp");
+@@clientName(QueueServiceStats, "QueueServiceStatistics", "csharp");
+@@clientName(SentMessage, "SendReceipt", "csharp");
+@@clientName(StorageErrorCode, "QueueErrorCode", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.receiveMessages, "Dequeue", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.sendMessage, "Enqueue", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.peekMessages, "Peek", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.updateMessage, "Update", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.deleteMessage, "Delete", "csharp");
+@@clientName(Service.getQueues, "GetQueuesSegment", "csharp");
+@@clientName(CorsRule, "QueueCorsRule", "csharp");
+@@clientName(Metrics, "QueueMetrics", "csharp");
+@@clientName(RetentionPolicy, "QueueRetentionPolicy", "csharp");
+@@clientName(Logging, "QueueAnalyticsLogging", "csharp");
+@@clientName(SignedIdentifier, "QueueSignedIdentifier", "csharp");
+@@clientName(SignedIdentifiers, "QueueSignedIdentifiers", "csharp");
+
+@@clientLocation(Queue.receiveMessages, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.sendMessage, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.peekMessages, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.clear, "MessagesRestClient", "csharp");
+@@clientLocation(Queue.updateMessage, "MessageIdRestClient", "csharp");
+@@clientLocation(Queue.deleteMessage, "MessageIdRestClient", "csharp");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
