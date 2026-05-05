@@ -230,6 +230,12 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 - Mark LRO operations with `"x-ms-long-running-operation": true`.
 - For POST LROs with a response schema, specify `"x-ms-long-running-operation-options"` with `"final-state-via": "location"` (or `"azure-async-operation"` only if the status monitor itself contains the result). For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `final-state-via` -- the default SDK behavior is already correct. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the full decision table.
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
+
+> **Note:** This section describes general LRO patterns. For ARM control-plane,
+> see `armapi-review.instructions.md` sections 5-6 for precise response code
+> requirements per verb (sync vs async response codes differ). For data-plane,
+> see section 21 -- use `Operation-Location`, not `Azure-AsyncOperation`.
+
 - Status monitor responses **MUST** include `id`, `status` (one of `NotStarted`, `Running`, `Succeeded`, `Failed`, `Canceled`), and `error` (on failure).
 - LRO responses **SHOULD** include a `retry-after` header when the operation is not complete.
 
@@ -374,7 +380,7 @@ For data plane (non-ARM) swagger files, additionally verify:
 - An `api-version` query parameter is present and required on all operations.
 - The `host` and `basePath` are correctly defined for the data plane endpoint pattern.
 - Security definitions are appropriate for the service (may use API keys, bearer tokens, or other schemes instead of ARM OAuth2).
-- Data-plane LROs **MUST** use `Operation-Location` header for polling, **not** `Azure-AsyncOperation` (which is ARM-specific). 
+- Data-plane LROs **MUST** use `Operation-Location` header for polling, **not** `Azure-AsyncOperation` (which is ARM-specific).
 - Action operations follow the `:<action>` URL suffix pattern where applicable.
 - The spec includes `"produces": ["application/json"]` and `"consumes": ["application/json"]` (or appropriate media types).
 
