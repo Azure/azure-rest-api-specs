@@ -90,11 +90,6 @@ model SandboxGroupProperties {
    */
   @visibility(Lifecycle.Read)
   managementResourceGroupId?: string;
-
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**
@@ -102,6 +97,8 @@ model SandboxGroupProperties {
  */
 model SandboxGroup
   is Azure.ResourceManager.TrackedResource<SandboxGroupProperties> {
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
   /**
    * The name of the SandboxGroup.
    */
@@ -124,10 +121,7 @@ model SandboxGroupTagsUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use of Record for PATCH update envelopes."
   tags?: Record<string>;
 
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**
@@ -197,8 +191,7 @@ interface SandboxGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SandboxGroup,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = SandboxGroup> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -206,17 +199,13 @@ interface SandboxGroups {
    */
   @summary("Update a SandboxGroup")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    SandboxGroup,
-    SandboxGroupTagsUpdate,
-    Error = CloudError
-  >;
+  update is ArmCustomPatchAsync<SandboxGroup, SandboxGroupTagsUpdate>;
 
   /**
    * Delete a SandboxGroup
    */
   @summary("Delete a SandboxGroup")
-  delete is ArmResourceDeleteWithoutOkAsync<SandboxGroup, Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<SandboxGroup>;
 
   /**
    * Get an access token and endpoint for connecting to the SandboxGroup.

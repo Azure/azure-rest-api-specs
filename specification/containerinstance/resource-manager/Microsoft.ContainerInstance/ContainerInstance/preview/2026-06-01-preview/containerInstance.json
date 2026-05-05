@@ -2039,7 +2039,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2115,7 +2115,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2179,7 +2179,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5263,6 +5263,10 @@
         "properties": {
           "$ref": "#/definitions/SandboxGroupProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -5336,9 +5340,13 @@
       "description": "Properties of a SandboxGroup.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
-          "readOnly": true
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          ]
         },
         "networkProfile": {
           "$ref": "#/definitions/SandboxGroupNetworkProfile",
@@ -5348,10 +5356,6 @@
           "type": "string",
           "description": "The ARM resource ID of the management resource group associated with this SandboxGroup.",
           "readOnly": true
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
-          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -5367,7 +5371,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       }
