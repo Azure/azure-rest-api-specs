@@ -471,6 +471,10 @@ model MultiLanguageInput {
 model DocumentLocation {
   /** The kind of the document location. */
   kind: DocumentLocationKind;
+
+  /** The location of the document. */
+  @added(Versions.v2026_05_01)
+  location: string;
 }
 
 /** Enumeration of supported document locations. */
@@ -479,12 +483,46 @@ union DocumentLocationKind {
 
   /** The document is a URL. */
   AzureBlob: "AzureBlob",
+
+  /** The document location is an Azure Blob Storage container. */
+  @added(Versions.v2026_05_01)
+  AzureContainer: "AzureContainer",
+
+  /** The document location is a folder within an Azure Blob Storage container. */
+  @added(Versions.v2026_05_01)
+  AzureContainerFolder: "AzureContainerFolder",
 }
 
 /** Document location for azure blobs. */
 model AzureBlobDocumentLocation extends DocumentLocation {
   /** The kind of the document location. */
   kind: DocumentLocationKind.AzureBlob;
+
+  /** The location of the document. */
+  location: string;
+
+  /** The user managed identity client Id to use to authenticate with the storage account */
+  managedIdentityClientId?: string;
+}
+
+/** Document location for azure blob storage containers. */
+@added(Versions.v2026_05_01)
+model AzureContainerDocumentLocation extends DocumentLocation {
+  /** The kind of the document location. */
+  kind: DocumentLocationKind.AzureContainer;
+
+  /** The location of the document. */
+  location: string;
+
+  /** The user managed identity client Id to use to authenticate with the storage account */
+  managedIdentityClientId?: string;
+}
+
+/** Document location for folders within azure blob storage containers. */
+@added(Versions.v2026_05_01)
+model AzureContainerFolderDocumentLocation extends DocumentLocation {
+  /** The kind of the document location. */
+  kind: DocumentLocationKind.AzureContainerFolder;
 
   /** The location of the document. */
   location: string;
