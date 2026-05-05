@@ -63,10 +63,6 @@ suppressions:
     from: openapi.json
     where: $.definitions.Target.properties.properties
     reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
-  - code: PathForTrackedResourceTypes
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/workspaceOperationResults/{operationId}"]
-    reason: WorkspaceOperationResults is an LRO polling endpoint (final-state-via location), not a tracked resource CRUD path. It is subscription/location-scoped by design as a shared polling endpoint for workspace async operations.
   - code: PostResponseCodes
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/fixResourcePermissions"].post
@@ -95,22 +91,6 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/runs/{runId}/cancel"].post
     reason: LRO POST returns 202 with Location header containing a polling URL. The final result is obtained by polling the Location URL, not from the initial POST response.
-  - code: NestedResourcesMustHaveListOperation
-    from: openapi.json
-    where: $.definitions.WorkspaceEvaluation
-    reason: WorkspaceEvaluation is a singleton resource (evaluations/latest). Singletons do not have list operations.
-  - code: NestedResourcesMustHaveListOperation
-    from: openapi.json
-    where: $.definitions.WorkspaceDiscovery
-    reason: WorkspaceDiscovery is a singleton resource (discoveries/latest). Singletons do not have list operations.
-  - code: PathForNestedResource
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/latest"]
-    reason: WorkspaceEvaluation is a singleton resource using @singleton("latest"). The hardcoded /latest segment is by design — there is no collection, only the single latest evaluation.
-  - code: PathForNestedResource
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest"]
-    reason: WorkspaceDiscovery is a singleton resource using @singleton("latest"). The hardcoded /latest segment is by design — there is no collection, only the single latest discovery.
   - code: PostResponseCodes
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations"].post
