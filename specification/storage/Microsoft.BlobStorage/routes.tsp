@@ -473,6 +473,7 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @list
   @route("?restype=container&comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
     {
