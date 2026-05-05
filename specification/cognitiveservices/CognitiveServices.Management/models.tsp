@@ -6093,6 +6093,54 @@ model WorkbenchListResult {
 }
 
 /**
+ * Model for updating a Workbench resource. Contains only mutable properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkbenchUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for tags to support extensible key-value pairs"
+  tags?: Record<string>;
+
+  /**
+   * Identity for the resource.
+   */
+  identity?: Identity;
+
+  /**
+   * Properties to update on the workbench.
+   */
+  properties?: WorkbenchUpdateProperties;
+}
+
+/**
+ * Mutable properties for updating a Workbench resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkbenchUpdateProperties {
+  /**
+   * Container image URI (e.g., MCR or ACR image path) for the workbench.
+   */
+  imageLink?: string;
+
+  /**
+   * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+
+  /**
+   * The dataset ID to mount for the workbench.
+   */
+  datasetId?: string;
+
+  /**
+   * SSH configuration for remote access to the workbench.
+   */
+  sshSettings?: SshSettings;
+}
+
+/**
  * Deployment detail within a managed compute usage entry.
  */
 @added(Versions.v2026_03_15_preview)

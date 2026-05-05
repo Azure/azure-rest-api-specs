@@ -76,7 +76,7 @@ interface Workbenches {
    */
   @tag("Workbenches")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Workbench, PatchModel = Workbench>;
+  update is ArmCustomPatchAsync<Workbench, PatchModel = WorkbenchUpdate>;
 
   /**
    * Deletes the specified workbench associated with the project.
@@ -93,26 +93,26 @@ interface Workbenches {
   /**
    * Starts a stopped workbench resource.
    * This is a long-running operation that returns 202 Accepted.
+   * Returns 204 if the workbench is already in the target state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Workbenches")
-  start is ArmResourceActionAsync<Workbench, void, void>;
+  start is ArmResourceActionNoResponseContentAsync<Workbench, void>;
 
   /**
    * Stops a running workbench resource.
    * This is a long-running operation that returns 202 Accepted.
+   * Returns 204 if the workbench is already in the target state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Workbenches")
-  stop is ArmResourceActionAsync<Workbench, void, void>;
+  stop is ArmResourceActionNoResponseContentAsync<Workbench, void>;
 
   /**
    * Restarts a running workbench resource.
    * This is a long-running operation that returns 202 Accepted.
+   * Returns 204 if the workbench is already in the target state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Workbenches")
-  restart is ArmResourceActionAsync<Workbench, void, void>;
+  restart is ArmResourceActionNoResponseContentAsync<Workbench, void>;
 }
 
 @@maxLength(Workbench.name, 63);

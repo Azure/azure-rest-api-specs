@@ -8690,7 +8690,7 @@
             "description": "The workbench properties to update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Workbench"
+              "$ref": "#/definitions/WorkbenchUpdate"
             }
           }
         ],
@@ -8817,7 +8817,7 @@
         "tags": [
           "Workbenches"
         ],
-        "description": "Restarts a running workbench resource.\nThis is a long-running operation that returns 202 Accepted.",
+        "description": "Restarts a running workbench resource.\nThis is a long-running operation that returns 202 Accepted.\nReturns 204 if the workbench is already in the target state.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -8873,9 +8873,6 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8901,7 +8898,7 @@
         "tags": [
           "Workbenches"
         ],
-        "description": "Starts a stopped workbench resource.\nThis is a long-running operation that returns 202 Accepted.",
+        "description": "Starts a stopped workbench resource.\nThis is a long-running operation that returns 202 Accepted.\nReturns 204 if the workbench is already in the target state.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -8957,9 +8954,6 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8985,7 +8979,7 @@
         "tags": [
           "Workbenches"
         ],
-        "description": "Stops a running workbench resource.\nThis is a long-running operation that returns 202 Accepted.",
+        "description": "Stops a running workbench resource.\nThis is a long-running operation that returns 202 Accepted.\nReturns 204 if the workbench is already in the target state.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9041,9 +9035,6 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -20140,6 +20131,49 @@
         "targetClusterId",
         "imageLink"
       ]
+    },
+    "WorkbenchUpdate": {
+      "type": "object",
+      "description": "Model for updating a Workbench resource. Contains only mutable properties.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkbenchUpdateProperties",
+          "description": "Properties to update on the workbench."
+        }
+      }
+    },
+    "WorkbenchUpdateProperties": {
+      "type": "object",
+      "description": "Mutable properties for updating a Workbench resource.",
+      "properties": {
+        "imageLink": {
+          "type": "string",
+          "description": "Container image URI (e.g., MCR or ACR image path) for the workbench."
+        },
+        "idleTimeBeforeShutdown": {
+          "type": "string",
+          "description": "ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M')."
+        },
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset ID to mount for the workbench."
+        },
+        "sshSettings": {
+          "$ref": "#/definitions/SshSettings",
+          "description": "SSH configuration for remote access to the workbench."
+        }
+      }
     }
   },
   "parameters": {}
