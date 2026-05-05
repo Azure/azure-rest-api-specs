@@ -12165,24 +12165,13 @@ components:
       type: object
       required:
         - type
-        - fabric_iq_preview
+        - project_connection_id
       properties:
         type:
           type: string
           enum:
             - fabric_iq_preview
           description: The object type, which is always 'fabric_iq_preview'.
-        fabric_iq_preview:
-          allOf:
-            - $ref: '#/components/schemas/FabricIQPreviewToolParameters'
-          description: The FabricIQ tool parameters.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-    FabricIQPreviewToolParameters:
-      type: object
-      required:
-        - project_connection_id
-      properties:
         project_connection_id:
           type: string
           description: The ID of the FabricIQ project connection.
@@ -12203,6 +12192,14 @@ components:
               nullable: true
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
     FabricIQToolCall:
       type: object
       required:
@@ -30436,35 +30433,25 @@ components:
       type: object
       required:
         - type
-        - work_iq_preview
+        - project_connection_id
       properties:
         type:
           type: string
           enum:
             - work_iq_preview
           description: The object type, which is always 'work_iq_preview'.
+        project_connection_id:
+          type: string
+          description: The ID of the WorkIQ project connection.
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        work_iq_preview:
-          allOf:
-            - $ref: '#/components/schemas/WorkIQPreviewToolParameters'
-          description: The WorkIQ tool parameters.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
-    WorkIQPreviewToolParameters:
-      type: object
-      required:
-        - project_connection_id
-      properties:
-        project_connection_id:
-          type: string
-          description: The ID of the WorkIQ project connection.
-      description: The WorkIQ tool parameters.
     WorkflowActionOutputItem:
       type: object
       required:

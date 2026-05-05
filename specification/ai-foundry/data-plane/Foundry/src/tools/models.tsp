@@ -767,16 +767,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * The WorkIQ tool parameters.
-   */
-  model WorkIQPreviewToolParameters {
-    /**
-     * The ID of the WorkIQ project connection.
-     */
-    project_connection_id: string;
-  }
-
-  /**
    * A WorkIQ server-side tool.
    */
   model WorkIQPreviewTool extends OpenAI.Tool {
@@ -785,15 +775,20 @@ namespace Azure.AI.Projects {
      */
     type: "work_iq_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
-     * The WorkIQ tool parameters.
+     * The ID of the WorkIQ project connection.
      */
-    work_iq_preview: WorkIQPreviewToolParameters;
+    project_connection_id: string;
+
+    ...ToolNameAndDescriptionExtension;
   }
 
-  model FabricIQPreviewToolParameters {
+  model FabricIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'fabric_iq_preview'.
+     */
+    type: "fabric_iq_preview";
+
     /**
      * The ID of the FabricIQ project connection.
      */
@@ -815,18 +810,8 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
-  }
 
-  model FabricIQPreviewTool extends OpenAI.Tool {
-    /**
-     * The object type, which is always 'fabric_iq_preview'.
-     */
-    type: "fabric_iq_preview";
-
-    /**
-     * The FabricIQ tool parameters.
-     */
-    fabric_iq_preview: FabricIQPreviewToolParameters;
+    ...ToolNameAndDescriptionExtension;
   }
 
   /**
