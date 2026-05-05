@@ -1452,12 +1452,14 @@ model KeyInfo {
   /**
    * The date-time the key is active in ISO 8601 UTC time
    */
-  @Xml.name("Start") start?: string;
+  @Xml.name("Start")
+  start?: utcDateTime;
 
   /**
    * The date-time the key expires in ISO 8601 UTC time
    */
-  @Xml.name("Expiry") expiry: string;
+  @Xml.name("Expiry")
+  expiry: utcDateTime;
 
   /**
    * The delegated user tenant id in Azure AD
