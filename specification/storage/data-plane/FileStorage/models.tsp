@@ -1515,7 +1515,6 @@ model UserDelegationKey {
   @Xml.name("Value") value: string;
 }
 
-//
 /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FileRangeWriteType {
@@ -1993,10 +1992,6 @@ alias LeaseActionParameter<TAction extends string> = {
   action: TAction;
 };
 
-//
-// Tier 2 Aliases — Consolidated from repeated inline definitions
-//
-
 /** Lease duration parameter. */
 alias LeaseDurationParameter = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
@@ -2164,10 +2159,6 @@ alias ContentCrc64ResponseHeader = {
   /** CRC64 hash of the range content. */
   @header("x-ms-content-crc64") contentCrc64?: bytes;
 };
-
-// ================================================================
-// Tier 3 aliases — single-use inline definitions extracted for consistency
-// ================================================================
 
 /** Delete snapshots option header. */
 alias DeleteSnapshotsHeader = {
@@ -2386,12 +2377,6 @@ alias FileHttpContentResponseHeaders = {
   @header("Content-Language") contentLanguage?: string;
 };
 
-// ================================================================
-// Tier 4 aliases — Consolidated from repeated inline definitions in routes.tsp
-// ================================================================
-
-// --- Template aliases (doc-only differences across operations) ---
-
 /** File creation time header (string type, for rename/copy/symlink operations). */
 alias FileCreationTimeParameter<TDoc extends valueof string> = {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
@@ -2458,8 +2443,6 @@ alias FilePermissionOptionalHeader<TDoc extends valueof string> = {
   @header("x-ms-file-permission")
   filePermission?: string;
 };
-
-// --- Simple aliases (identical definitions across operations) ---
 
 /** File attributes header (string type, for rename/copy operations). */
 alias FileAttributesStringHeader = {
