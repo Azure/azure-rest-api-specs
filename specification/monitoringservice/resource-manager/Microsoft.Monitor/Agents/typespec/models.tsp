@@ -24,25 +24,6 @@ namespace Microsoft.Monitor {
 
     /** List of autonomous operations that are disabled on this observability agent. Currently supported values: AutoInvestigate. Additional values may be added in the future. */
     disableAutonomousOperations?: string[];
-
-    /** Configuration for agent operations. */
-    operations?: AgentOperations;
-  }
-
-  /**
-   * Configuration for agent operations.
-   */
-  model AgentOperations {
-    /** Settings for the issue creation operation. */
-    issueCreation?: OperationSettings;
-  }
-
-  /**
-   * Settings for a specific agent operation.
-   */
-  model OperationSettings {
-    /** Custom instructions that guide the agent's behavior for this operation. */
-    customInstructions?: string;
   }
 
   /**

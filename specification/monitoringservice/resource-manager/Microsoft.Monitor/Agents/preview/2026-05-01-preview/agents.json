@@ -372,16 +372,6 @@
     }
   },
   "definitions": {
-    "AgentOperations": {
-      "type": "object",
-      "description": "Configuration for agent operations.",
-      "properties": {
-        "issueCreation": {
-          "$ref": "#/definitions/OperationSettings",
-          "description": "Settings for the issue creation operation."
-        }
-      }
-    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -474,10 +464,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "operations": {
-          "$ref": "#/definitions/AgentOperations",
-          "description": "Configuration for agent operations."
         }
       }
     },
@@ -539,16 +525,6 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
-    },
-    "OperationSettings": {
-      "type": "object",
-      "description": "Settings for a specific agent operation.",
-      "properties": {
-        "customInstructions": {
-          "type": "string",
-          "description": "Custom instructions that guide the agent's behavior for this operation."
-        }
-      }
     }
   },
   "parameters": {}
