@@ -7,12 +7,6 @@ namespace Microsoft.Discovery.Workspace;
 
 @doc("The Microsoft.Discovery service versions.")
 enum Versions {
-  @doc("The 2025-07-01-preview version of the Microsoft.Discovery service data plane.")
-  `2025-07-01-preview`,
-
-  @doc("The 2025-12-01-preview version of the Microsoft.Discovery service data plane.")
-  `2025-12-01-preview`,
-
   @doc("The 2026-02-01-preview version of the Microsoft.Discovery service data plane.")
   `2026-02-01-preview`,
 

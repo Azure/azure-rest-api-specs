@@ -262,7 +262,6 @@ model RunRequest {
   @doc("IDs of NodePools to use for this run.")
   nodePoolIds: NodePoolId[];
 
-  @added(Versions.`2025-12-01-preview`)
   @doc("Override the infrastructure requirements in the tool definitions.")
   infraOverrides?: InfraOverrides;
 
@@ -300,7 +299,6 @@ model InlineFile {
   encodedFile: string;
 }
 
-@added(Versions.`2025-12-01-preview`)
 @doc("Explicitly set tool run requirements - overrides the tool definition.")
 model InfraOverrides {
   @doc("Override CPU requirements (e.g. 1, or 500m for 500 milli-CPUs)")
@@ -349,7 +347,6 @@ model RunResult {
   ...WithCreatedAt;
   ...WithCompletedAt;
 
-  @added(Versions.`2025-12-01-preview`)
   @doc("The user that started the tool run.")
   createdBy?: string;
 
@@ -397,7 +394,6 @@ alias WithOperationId = {
 };
 
 /** Summary information for an operation. */
-@added(Versions.`2025-12-01-preview`)
 model Operation {
   /** Operation id. */
   id: string;
@@ -422,7 +418,6 @@ model Operation {
 }
 
 /** Overview of compute usage for a project. */
-@added(Versions.`2025-12-01-preview`)
 model ComputeUsage {
   /** Index of information for each supercomputer in the workspace of a project.
    *  Indexed by the (short) name of the supercomputer. */
@@ -430,7 +425,6 @@ model ComputeUsage {
 }
 
 /** Overview of compute usage for a supercomputer. */
-@added(Versions.`2025-12-01-preview`)
 model SupercomputerUsage {
   /** Number of active jobs on the supercomputer. */
   activeJobs: int64;
@@ -443,7 +437,6 @@ model SupercomputerUsage {
 }
 
 /** Overview of compute usage for a nodepool. */
-@added(Versions.`2025-12-01-preview`)
 model NodepoolUsage {
   /** CPUs in use (e.g. 1, or 500m for 500 milli-CPUs)
    *  across all nodes in the nodepool. */
@@ -473,17 +466,14 @@ model NodepoolUsage {
 /** Get operations parameters. */
 alias GetOperationsParameters = {
   /** Skip results (pagination control). */
-  @added(Versions.`2025-12-01-preview`)
   @query
   skip?: int32;
 
   /** Query the top results (pagination control). */
-  @added(Versions.`2025-12-01-preview`)
   @query
   top?: int32;
 
   /** Bound the number of results that come back in one response (pagination control). */
-  @added(Versions.`2025-12-01-preview`)
   @query
   maxPageSize?: int32;
 };
@@ -526,7 +516,6 @@ interface Tools {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @added(Versions.`2025-12-01-preview`)
   @doc("List tool runs.")
   @route("/tools/projects/{projectName}/operations")
   getOperations is Foundations.Operation<
@@ -535,7 +524,6 @@ interface Tools {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @added(Versions.`2025-12-01-preview`)
   @doc("Examine compute usage.")
   @route("/tools/projects/{projectName}/computeUsage")
   getComputeUsage is Foundations.Operation<WithProjectNamePath, ComputeUsage>;
