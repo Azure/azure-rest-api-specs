@@ -59,6 +59,7 @@ model CertificateIssuanceOperationStatus {
 interface RuntimeCertIssuance {
   /** Issue operational certificates for IoT devices. */
   @summary("Issue operational certificates for IoT devices.")
+  @tag("POST")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}:issueCert")
   @post
   @pollingOperation(RuntimeCertIssuance.getOperationStatus)
@@ -124,6 +125,7 @@ interface RuntimeCertIssuance {
 
   /** Gets the cert issuance operation status. */
   @summary("Gets the cert issuance operation status.")
+  @tag("GET")
   @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
