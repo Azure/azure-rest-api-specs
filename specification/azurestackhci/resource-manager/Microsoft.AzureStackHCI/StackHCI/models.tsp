@@ -6149,7 +6149,7 @@ model EdgeDeviceDisks {
   @added(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   `model`?: string;
-  
+
   /** The manufacturer of the disk. */
   @added(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
