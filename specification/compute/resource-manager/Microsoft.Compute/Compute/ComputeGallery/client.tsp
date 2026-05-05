@@ -317,6 +317,15 @@ using ComputeGallery;
   "csharp"
 );
 
+// ── PirCommunityGalleryResource.type: rename + retype for C# back-compat ──
+// Spec emits `type?: string`. The previously shipped C# SDK exposed it as
+// `ResourceType` of type `Azure.Core.ResourceType?`. Restore both.
+@@clientName(PirCommunityGalleryResource.type, "ResourceType", "csharp");
+@@alternateType(PirCommunityGalleryResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
 // ── alternateType: Identity → ManagedServiceIdentity for C# ──
 @@alternateType(Gallery.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
