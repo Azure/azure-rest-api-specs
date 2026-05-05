@@ -43,12 +43,8 @@ interface SaasSubscriptionLevelPreflight {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight")
   preflight(
     ...ApiVersionParameter,
-
-    /** The Azure subscription ID. */
-    @path subscriptionId: string,
-
-    /** The resource group name. */
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
     /** The SaaS subscription name. */
     @pattern("^[a-zA-Z0-9-]{3,50}$")
@@ -76,12 +72,8 @@ interface SaasSubscriptionLevelMove {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
   validateMoveResources(
     ...ApiVersionParameter,
-
-    /** The Azure subscription ID. */
-    @path subscriptionId: string,
-
-    /** The resource group name. */
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
     /** The move resource parameters. */
     @body moveResourceParameter: MoveResource,
@@ -92,12 +84,8 @@ interface SaasSubscriptionLevelMove {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
   moveResources(
     ...ApiVersionParameter,
-
-    /** The Azure subscription ID. */
-    @path subscriptionId: string,
-
-    /** The resource group name. */
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
     /** The move resource parameters. */
     @body moveResourceParameter: MoveResource,
