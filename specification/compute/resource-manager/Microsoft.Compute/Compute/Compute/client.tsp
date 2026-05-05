@@ -1490,3 +1490,4 @@ union ComputeUsageUnit {
 @@usage(AlternativeOption, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(PurchasePlan, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(SubResourceWithColocationStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(RollingUpgradeStatusInfo, Azure.ClientGenerator.Core.Usage.input, "csharp");
