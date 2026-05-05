@@ -1,3 +1,5 @@
+<!-- cSpell:ignore Autorest azsdk GitHub OpenAI OpenAPI repo SDKs tsp tspconfig TypeSpec -->
+
 # Foundry data-plane TypeSpec
 
 This folder contains the TypeSpec for all data-plane REST APIs of the Foundry service.

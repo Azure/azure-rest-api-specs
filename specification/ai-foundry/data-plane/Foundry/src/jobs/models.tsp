@@ -1,3 +1,5 @@
+// cSpell:ignore Chatml Grpo Kahneman Mbpp Mmlu Nemo Orpo QLoRA Rlhf Rloo SGLang Tversky VERL Vllm
+
 import "../common/models.tsp";
 import "../common/service.tsp";
 

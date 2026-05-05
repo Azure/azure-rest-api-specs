@@ -43,7 +43,7 @@ using Azure.AI.Projects;
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
 // --------------------------------------------------------------------------------
-// Agents subΓÇÉclient
+// Agents sub-client
 // --------------------------------------------------------------------------------
 
 // Use short form method names
@@ -141,7 +141,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
-// Responses subΓÇÉclient
+// Responses sub-client
 // --------------------------------------------------------------------------------
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
@@ -157,7 +157,7 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
-// Evaluators subΓÇÉclient
+// Evaluators sub-client
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
@@ -167,13 +167,13 @@ using Azure.AI.Projects;
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Insights subΓÇÉclient
+// Insights sub-client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
-// Datasets subΓÇÉclient
+// Datasets sub-client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
@@ -188,7 +188,7 @@ using Azure.AI.Projects;
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
 // --------------------------------------------------------------------------------
-// Indexes subΓÇÉclient
+// Indexes sub-client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK Index operations
@@ -198,7 +198,7 @@ using Azure.AI.Projects;
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
 // --------------------------------------------------------------------------------
-// Schedules subΓÇÉclient
+// Schedules sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
@@ -213,7 +213,7 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Toolsets subΓÇÉclient
+// Toolsets sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(Toolsets.createToolset, "create");
@@ -223,7 +223,7 @@ using Azure.AI.Projects;
 @@clientName(Toolsets.deleteToolset, "delete");
 
 // --------------------------------------------------------------------------------
-// Connections subΓÇÉclient
+// Connections sub-client
 // --------------------------------------------------------------------------------
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
@@ -232,7 +232,7 @@ using Azure.AI.Projects;
 @@access(Connections.getWithCredentials, Access.internal);
 
 // --------------------------------------------------------------------------------
-// Deployment subΓÇÉclient
+// Deployment sub-client
 // --------------------------------------------------------------------------------
 
 // Less generic names
