@@ -287,28 +287,21 @@ model CommandJob extends JobProperties {
   @doc("Command Job limit.")
   limits?: CommandJobLimits;
 
-  @doc("List of job services.")
-  @visibility(Lifecycle.Read)
-  services?: Record<JobService>;
-
   @doc("Queue settings for the job.")
   queueSettings?: QueueSettings;
 
   @doc("user-assigned managed identity")
   userAssignedIdentityId?: string;
 
-  @doc("Is the asset archived?")
-  isArchived?: boolean;
-
   @doc("Status of the job.")
   @visibility(Lifecycle.Read)
   status?: string;
 }
 
-@doc("Job resource.")
-@Rest.resource("jobs")
+@doc("Training job resource.")
+@Rest.resource("trainingJobs")
 model Job {
-  @doc("The name of the Job. This is case-sensitive.")
+  @doc("The name of the training job. This is case-sensitive.")
   @key("name")
   @visibility(Lifecycle.Read)
   name: string;
@@ -369,28 +362,28 @@ union ListViewType {
   All: "All",
 }
 
-@doc("Status of a job execution attempt.")
-union JobAttemptStatus {
+@doc("Status of a job execution run.")
+union JobRunStatus {
   string,
 
-  @doc("The attempt is queued.")
+  @doc("The run is queued.")
   Queued: "Queued",
 
-  @doc("The attempt is running.")
+  @doc("The run is running.")
   Running: "Running",
 
-  @doc("The attempt completed successfully.")
+  @doc("The run completed successfully.")
   Completed: "Completed",
 
-  @doc("The attempt failed.")
+  @doc("The run failed.")
   Failed: "Failed",
 
-  @doc("The attempt was canceled.")
+  @doc("The run was canceled.")
   Canceled: "Canceled",
 }
 
-@doc("Warning emitted during a job attempt.")
-model JobAttemptWarning {
+@doc("Warning emitted during a job run.")
+model JobRunWarning {
   @doc("Machine-readable warning code.")
   code?: string;
 
@@ -401,8 +394,8 @@ model JobAttemptWarning {
   details?: Record<unknown>;
 }
 
-@doc("Error emitted during a job attempt.")
-model JobAttemptError {
+@doc("Error emitted during a job run.")
+model JobRunError {
   @doc("Machine-readable error code.")
   code?: string;
 
@@ -413,57 +406,57 @@ model JobAttemptError {
   details?: Record<unknown>;
 }
 
-@doc("One execution attempt of a job.")
-model JobAttempt {
-  @doc("The attempt identifier.")
+@doc("One execution run of a training job.")
+model JobRun {
+  @doc("The run identifier.")
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("The job name this attempt belongs to.")
+  @doc("The job name this run belongs to.")
   @visibility(Lifecycle.Read)
   jobName: string;
 
-  @doc("The attempt status.")
+  @doc("The run status.")
   @visibility(Lifecycle.Read)
-  status?: JobAttemptStatus;
+  status?: JobRunStatus;
 
   @doc("Additional status reason.")
   @visibility(Lifecycle.Read)
   statusReason?: string;
 
-  @doc("Time the attempt started.")
+  @doc("Time the run started.")
   @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
-  @doc("Time the attempt ended.")
+  @doc("Time the run ended.")
   @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
-  @doc("Most recent time the attempt started running.")
+  @doc("Most recent time the run started running.")
   @visibility(Lifecycle.Read)
   lastStartTimeUtc?: utcDateTime;
 
-  @doc("Total compute duration consumed by the attempt.")
+  @doc("Total compute duration consumed by the run.")
   @visibility(Lifecycle.Read)
   computeDuration?: duration;
 
-  @doc("Queueing details associated with the attempt.")
+  @doc("Queueing details associated with the run.")
   @visibility(Lifecycle.Read)
   queueingInfo?: Record<unknown>;
 
-  @doc("Compute details associated with the attempt.")
+  @doc("Compute details associated with the run.")
   @visibility(Lifecycle.Read)
   computeDetails?: Record<unknown>;
 
-  @doc("Terminal error for the attempt, if any.")
+  @doc("Terminal error for the run, if any.")
   @visibility(Lifecycle.Read)
-  error?: JobAttemptError;
+  error?: JobRunError;
 
-  @doc("Warnings emitted for the attempt.")
+  @doc("Warnings emitted for the run.")
   @visibility(Lifecycle.Read)
-  warnings?: JobAttemptWarning[];
+  warnings?: JobRunWarning[];
 
-  @doc("Whether this attempt is the current attempt for the job.")
+  @doc("Whether this run is the current run for the job.")
   @visibility(Lifecycle.Read)
   isCurrent?: boolean;
 }
@@ -500,14 +493,6 @@ model JobArtifact {
   @doc("Time the artifact was last updated.")
   @visibility(Lifecycle.Read)
   updatedTimeUtc?: utcDateTime;
-
-  @doc("Service origin of the artifact.")
-  @visibility(Lifecycle.Read)
-  origin?: string;
-
-  @doc("Diagnostic storage container identifier resolved by the service.")
-  @visibility(Lifecycle.Read)
-  container?: string;
 }
 
 @doc("Content access information for a job artifact.")
@@ -543,7 +528,7 @@ union JobMetricType {
   Image: "Image",
 }
 
-@doc("Metadata for a metric emitted by a job or attempt.")
+@doc("Metadata for a metric emitted by a job or run.")
 model JobMetric {
   @doc("Metric name.")
   @visibility(Lifecycle.Read)
@@ -655,30 +640,39 @@ model JobOutputReference {
 
 alias JobChildListQueryParameters = {
   @doc("Maximum number of items to return.")
-  @query limit?: int32;
+  @query
+  limit?: int32;
 
   @doc("Continuation token returned by a previous list request.")
-  @query @continuationToken skipToken?: string;
+  @query
+  @continuationToken
+  skipToken?: string;
 };
 
 alias JobArtifactListQueryParameters = JobChildListQueryParameters & {
   @doc("Artifact path prefix to list.")
-  @query pathPrefix?: string;
+  @query
+  pathPrefix?: string;
 };
 
 alias JobMetricQueryParameters = {
   @doc("Start of the metric time range.")
-  @query startTimeUtc?: utcDateTime;
+  @query
+  startTimeUtc?: utcDateTime;
 
   @doc("End of the metric time range.")
-  @query endTimeUtc?: utcDateTime;
+  @query
+  endTimeUtc?: utcDateTime;
 
   @doc("Minimum metric step to include.")
-  @query minStep?: int64;
+  @query
+  minStep?: int64;
 
   @doc("Maximum metric step to include.")
-  @query maxStep?: int64;
+  @query
+  maxStep?: int64;
 
   @doc("Maximum number of metric points to return.")
-  @query limit?: int32;
+  @query
+  limit?: int32;
 };

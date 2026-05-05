@@ -76,89 +76,99 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
 
-interface Jobs {}
-interface JobAttempts {}
-interface JobArtifacts {}
-interface JobAttemptArtifacts {}
-interface JobMetrics {}
-interface JobAttemptMetrics {}
-interface JobOutputs {}
-interface JobAttemptOutputs {}
-interface Models {}
+namespace Model {
+  interface TrainingJobs {}
+}
 
-@@clientLocation(Azure.AI.Projects.Jobs.createTrainingJob, Models);
-@@clientLocation(Azure.AI.Projects.Jobs.list, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.get, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.beginDelete, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.beginCancel, Jobs);
-
-@@clientLocation(Azure.AI.Projects.JobAttempts.listJobAttempts, JobAttempts);
-@@clientLocation(Azure.AI.Projects.JobAttempts.getJobAttempt, JobAttempts);
-
-@@clientLocation(Azure.AI.Projects.JobArtifacts.listJobArtifacts, JobArtifacts);
-@@clientLocation(Azure.AI.Projects.JobArtifacts.getJobArtifactMetadata,
-  JobArtifacts
+@@clientLocation(Azure.AI.Projects.TrainingJobs.create, Model.TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.list, Model.TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.get, Model.TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.beginDelete,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobArtifacts.getJobArtifactContentInfo,
-  JobArtifacts
-);
-@@clientLocation(Azure.AI.Projects.JobArtifacts.downloadJobArtifact,
-  JobArtifacts
+@@clientLocation(Azure.AI.Projects.TrainingJobs.beginCancel,
+  Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.listJobAttemptArtifacts,
-  JobAttemptArtifacts
+@@clientLocation(Azure.AI.Projects.TrainingJobRuns.listRuns,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.getJobAttemptArtifactMetadata,
-  JobAttemptArtifacts
+@@clientLocation(Azure.AI.Projects.TrainingJobRuns.getRun, Model.TrainingJobs);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.listArtifacts,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.getJobAttemptArtifactContentInfo,
-  JobAttemptArtifacts
+@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.getArtifactMetadata,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptArtifacts.downloadJobAttemptArtifact,
-  JobAttemptArtifacts
+@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.getArtifactContentInfo,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.downloadArtifact,
+  Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.JobMetrics.listJobMetrics, JobMetrics);
-@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricLastValues,
-  JobMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.listRunArtifacts,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetric, JobMetrics);
-@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricAggregates,
-  JobMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.getRunArtifactMetadata,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricSamples,
-  JobMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.getRunArtifactContentInfo,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobMetrics.getJobMetricSample,
-  JobMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.downloadRunArtifact,
+  Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.listJobAttemptMetrics,
-  JobAttemptMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.listMetrics,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricLastValues,
-  JobAttemptMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricLastValues,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetric,
-  JobAttemptMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetric,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricAggregates,
-  JobAttemptMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricAggregates,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricSamples,
-  JobAttemptMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricSamples,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptMetrics.getJobAttemptMetricSample,
-  JobAttemptMetrics
+@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricSample,
+  Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.JobOutputs.listJobOutputs, JobOutputs);
-@@clientLocation(Azure.AI.Projects.JobOutputs.getJobOutput, JobOutputs);
-
-@@clientLocation(Azure.AI.Projects.JobAttemptOutputs.listJobAttemptOutputs,
-  JobAttemptOutputs
+@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.listRunMetrics,
+  Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.JobAttemptOutputs.getJobAttemptOutput,
-  JobAttemptOutputs
+@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricLastValues,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetric,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricAggregates,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricSamples,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricSample,
+  Model.TrainingJobs
+);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobOutputs.listOutputs,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobOutputs.getOutput,
+  Model.TrainingJobs
+);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobRunOutputs.listRunOutputs,
+  Model.TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobRunOutputs.getRunOutput,
+  Model.TrainingJobs
 );

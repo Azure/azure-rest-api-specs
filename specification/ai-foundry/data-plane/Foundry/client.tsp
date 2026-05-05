@@ -43,7 +43,7 @@ using Azure.AI.Projects;
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
 // --------------------------------------------------------------------------------
-// Agents sub‐client
+// Agents subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 // Use short form method names
@@ -141,7 +141,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
-// Responses sub‐client
+// Responses subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
@@ -157,7 +157,7 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
-// Evaluators sub‐client
+// Evaluators subΓÇÉclient
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
@@ -167,13 +167,13 @@ using Azure.AI.Projects;
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Insights sub‐client
+// Insights subΓÇÉclient
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
-// Datasets sub‐client
+// Datasets subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
@@ -188,7 +188,7 @@ using Azure.AI.Projects;
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
 // --------------------------------------------------------------------------------
-// Indexes sub‐client
+// Indexes subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK Index operations
@@ -198,7 +198,7 @@ using Azure.AI.Projects;
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
 // --------------------------------------------------------------------------------
-// Schedules sub‐client
+// Schedules subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
@@ -213,7 +213,7 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Toolsets sub‐client
+// Toolsets subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 @@clientName(Toolsets.createToolset, "create");
@@ -223,7 +223,7 @@ using Azure.AI.Projects;
 @@clientName(Toolsets.deleteToolset, "delete");
 
 // --------------------------------------------------------------------------------
-// Connections sub‐client
+// Connections subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
@@ -232,27 +232,31 @@ using Azure.AI.Projects;
 @@access(Connections.getWithCredentials, Access.internal);
 
 // --------------------------------------------------------------------------------
-// Deployment sub‐client
+// Deployment subΓÇÉclient
 // --------------------------------------------------------------------------------
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
 
-@@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
-@@clientName(Azure.AI.Projects.Jobs.list, "list", "python");
-@@clientName(Azure.AI.Projects.Jobs.createTrainingJob,
-  "create_training_job",
+@@clientName(Azure.AI.Projects.TrainingJobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.TrainingJobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.TrainingJobs.create, "create", "python");
+@@clientName(Azure.AI.Projects.TrainingJobs.create, "create", "javascript");
+@@clientName(Azure.AI.Projects.Beta.Model, "model", "python");
+@@clientName(Azure.AI.Projects.Beta.Model, "model", "javascript");
+@@clientName(Azure.AI.Projects.Beta.Model.TrainingJobs,
+  "training_jobs",
   "python"
 );
-@@clientName(Azure.AI.Projects.Jobs.createTrainingJob,
-  "createTrainingJob",
+@@clientName(Azure.AI.Projects.Beta.Model.TrainingJobs,
+  "trainingJobs",
   "javascript"
 );
-@@clientName(Azure.AI.Projects.Jobs.beginDelete,
+@@clientName(Azure.AI.Projects.TrainingJobs.beginDelete,
   "begin_delete",
   "python"
 );
-@@clientName(Azure.AI.Projects.Jobs.beginCancel,
+@@clientName(Azure.AI.Projects.TrainingJobs.beginCancel,
   "begin_cancel",
   "python"
 );
