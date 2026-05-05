@@ -14,6 +14,7 @@ using Microsoft.Discovery.Common;
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("Enumeration for log type.")
 union LogType {
@@ -29,6 +30,7 @@ union LogType {
   string,
 }
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("Enumeration for tool type.")
 union ToolType {
@@ -50,6 +52,7 @@ union ToolType {
   string,
 }
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("Log level for a message log.")
 union LogLevel {
@@ -59,6 +62,7 @@ union LogLevel {
   string,
 }
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("Status of a log entry activity.")
 union LogStatus {
@@ -80,6 +84,7 @@ union LogStatus {
   string,
 }
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("Indicates if a log entry represents an action.")
 union IsAction {
@@ -92,6 +97,7 @@ union IsAction {
   string,
 }
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("A copilot log related to a message.")
 @resource("logs")
@@ -167,6 +173,7 @@ model MessageLog {
   completedAt: int64;
 }
 
+@added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2026-02-01-preview`)
 @doc("Operations for message logs in a conversation.")
 interface MessageLogs {

@@ -64,6 +64,18 @@ scalar DataUri extends string;
 @pattern("^discovery://storageassets/.*$")
 scalar StorageUri extends string;
 
+@doc("The protocol to use for mounting an storage container.")
+@added(Versions.`2026-06-01`)
+union StorageMountProtocol {
+  @doc("NFS protocol. Version of NFS used may vary based on storage type")
+  NFS: "NFS",
+
+  @doc("Blobfuse in file cache mode.")
+  BlobfuseCaching: "BlobfuseCaching",
+
+  string,
+}
+
 /** Data URI and path where it will be mounted in the tool container. */
 model InputDataMount {
   /** URI of input data to mount. */
@@ -77,6 +89,10 @@ model InputDataMount {
   /** Absolute path within the container at which to mount this input. */
   @pattern("^/.+$")
   mountPath: string;
+
+  @doc("The protocol to use for mounting this storage. Overrides any value specified on the storage container.")
+  @added(Versions.`2026-06-01`)
+  mountProtocol?: StorageMountProtocol;
 }
 
 /** Definition of a mount for collecting tool output data. */
@@ -101,6 +117,10 @@ model OutputDataMount {
   /** Absolute path within the container from which to collect output data. */
   @pattern("^/.+$")
   mountPath: string;
+
+  @doc("The protocol to use for mounting this storage. Overrides any value specified on the storage container.")
+  @added(Versions.`2026-06-01`)
+  mountProtocol?: StorageMountProtocol;
 }
 
 /** Model for providing the URI of the output collected from a specific container path. */
@@ -242,6 +262,7 @@ model RunRequest {
   @doc("IDs of NodePools to use for this run.")
   nodePoolIds: NodePoolId[];
 
+  @added(Versions.`2025-12-01-preview`)
   @doc("Override the infrastructure requirements in the tool definitions.")
   infraOverrides?: InfraOverrides;
 
@@ -279,6 +300,7 @@ model InlineFile {
   encodedFile: string;
 }
 
+@added(Versions.`2025-12-01-preview`)
 @doc("Explicitly set tool run requirements - overrides the tool definition.")
 model InfraOverrides {
   @doc("Override CPU requirements (e.g. 1, or 500m for 500 milli-CPUs)")
@@ -295,6 +317,18 @@ model InfraOverrides {
 
   @doc("Override the image to use for this tool run.")
   imageUri?: string;
+
+  @doc("Override the maximum CPU allowed for the tool run (e.g. 1, or 500m for 500 milli-CPUs)")
+  @added(Versions.`2026-06-01`)
+  maxCpu?: string;
+
+  @doc("Override the maximum RAM allowed for the tool run (e.g. 500Mi or 1Gi)")
+  @added(Versions.`2026-06-01`)
+  maxRam?: string;
+
+  @doc("Override the maximum GPU count allowed for the tool run")
+  @added(Versions.`2026-06-01`)
+  maxGpu?: string;
 }
 
 /** For tracking when it completed. */
@@ -315,6 +349,7 @@ model RunResult {
   ...WithCreatedAt;
   ...WithCompletedAt;
 
+  @added(Versions.`2025-12-01-preview`)
   @doc("The user that started the tool run.")
   createdBy?: string;
 
@@ -362,6 +397,7 @@ alias WithOperationId = {
 };
 
 /** Summary information for an operation. */
+@added(Versions.`2025-12-01-preview`)
 model Operation {
   /** Operation id. */
   id: string;
@@ -386,6 +422,7 @@ model Operation {
 }
 
 /** Overview of compute usage for a project. */
+@added(Versions.`2025-12-01-preview`)
 model ComputeUsage {
   /** Index of information for each supercomputer in the workspace of a project.
    *  Indexed by the (short) name of the supercomputer. */
@@ -393,6 +430,7 @@ model ComputeUsage {
 }
 
 /** Overview of compute usage for a supercomputer. */
+@added(Versions.`2025-12-01-preview`)
 model SupercomputerUsage {
   /** Number of active jobs on the supercomputer. */
   activeJobs: int64;
@@ -405,6 +443,7 @@ model SupercomputerUsage {
 }
 
 /** Overview of compute usage for a nodepool. */
+@added(Versions.`2025-12-01-preview`)
 model NodepoolUsage {
   /** CPUs in use (e.g. 1, or 500m for 500 milli-CPUs)
    *  across all nodes in the nodepool. */
@@ -434,14 +473,17 @@ model NodepoolUsage {
 /** Get operations parameters. */
 alias GetOperationsParameters = {
   /** Skip results (pagination control). */
+  @added(Versions.`2025-12-01-preview`)
   @query
   skip?: int32;
 
   /** Query the top results (pagination control). */
+  @added(Versions.`2025-12-01-preview`)
   @query
   top?: int32;
 
   /** Bound the number of results that come back in one response (pagination control). */
+  @added(Versions.`2025-12-01-preview`)
   @query
   maxPageSize?: int32;
 };
@@ -484,6 +526,7 @@ interface Tools {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.`2025-12-01-preview`)
   @doc("List tool runs.")
   @route("/tools/projects/{projectName}/operations")
   getOperations is Foundations.Operation<
@@ -492,6 +535,7 @@ interface Tools {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.`2025-12-01-preview`)
   @doc("Examine compute usage.")
   @route("/tools/projects/{projectName}/computeUsage")
   getComputeUsage is Foundations.Operation<WithProjectNamePath, ComputeUsage>;

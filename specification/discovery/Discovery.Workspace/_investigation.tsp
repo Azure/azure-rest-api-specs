@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
@@ -7,8 +8,10 @@ import "./common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 using Microsoft.Discovery.Common;
 
@@ -89,7 +92,12 @@ union DiscoveryEngineStatus {
 @added(Versions.`2026-02-01-preview`)
 union WorkingMemoryEntryType {
   /** Thought */
+  @removed(Versions.`2026-06-01`)
   thought: "thought",
+
+  /** Thought */
+  @added(Versions.`2026-06-01`)
+  Thought: "Thought",
 
   string,
 }
@@ -142,6 +150,7 @@ alias GetDiscoveryEngineMemoryParameters = {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Discovery Engine Update Request. This will create the discovery engine if it does not already exist.")
 model DiscoveryEngineUpdate {
+  @removed(Versions.`2026-06-01`)
   @doc("The Discovery Engine status.")
   discoveryEngineStatus?: DiscoveryEngineStatus;
 
@@ -179,10 +188,14 @@ interface Investigations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation returns a bare array per service behavior, not a paged result"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving operationId for backward compatibility with existing preview SDKs"
   @doc("List Investigation resources")
   @route("/projects/{projectName}/investigations")
   @get
-  list is Azure.Core.Foundations.Operation<
+  @sharedRoute
+  @removed(Versions.`2026-06-01`)
+  @operationId("Investigations_List")
+  listLegacy is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")
       @path
@@ -191,6 +204,25 @@ interface Investigations {
       projectName: string;
     } & WithQueryCreatedSince,
     Investigation[]
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Paginated list operation"
+  @doc("List Investigation resources")
+  @route("/projects/{projectName}/investigations")
+  @get
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  list is Azure.Core.Foundations.Operation<
+    {
+      @doc("The project name.")
+      @path
+      @maxLength(24)
+      @pattern(resourceNamePattern)
+      projectName: string;
+    } & WithQueryCreatedSince &
+      ListPaginationParameters,
+    Azure.Core.Foundations.CustomPage<Investigation>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -357,6 +389,7 @@ interface Investigations {
   @doc("Update the discovery engine for an investigation. This will create the discovery engine if it does not already exist.")
   @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine")
   @patch
+  @added(Versions.`2025-12-01-preview`)
   updateDiscoveryEngine is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")

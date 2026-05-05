@@ -59,3 +59,21 @@ alias WithQueryProjectName = {
   @TypeSpec.Http.query
   projectName?: string;
 };
+
+/** Pagination query parameters for list operations. */
+alias ListPaginationParameters = {
+  @doc("The number of results to skip.")
+  @added(Versions.`2026-06-01`)
+  @TypeSpec.Http.query
+  skip?: int32;
+
+  @doc("The maximum number of results to return.")
+  @added(Versions.`2026-06-01`)
+  @TypeSpec.Http.query
+  top?: int32;
+
+  @doc("The maximum number of results per page.")
+  @added(Versions.`2026-06-01`)
+  @TypeSpec.Http.query
+  maxPageSize?: int32;
+};
