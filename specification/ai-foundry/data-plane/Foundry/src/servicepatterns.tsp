@@ -41,7 +41,6 @@ union AgentDefinitionOptInKeys {
   container_agents_v1_preview: "ContainerAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 
-  @removed(Versions.v1)
   code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
