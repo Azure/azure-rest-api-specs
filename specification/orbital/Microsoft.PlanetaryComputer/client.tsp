@@ -52,6 +52,55 @@ namespace Customizations;
 // Models ending with "Definition" - rename appropriately
 @@clientName(IngestionDefinition, "IngestionInformation", "csharp");
 
+// === Python API naming improvements ===
+
+// Standardize crop feature format operation names to use _by_format convention (Python)
+@@clientName(MosaicItemsFeatureGeoJsonFormat.cropFormat, "crop_feature_geo_json_by_format", "python");
+@@clientName(MosaicCollectionsFeatureGeoJsonFormat.cropFormat, "crop_collection_feature_geo_json_by_format", "python");
+@@clientName(MosaicSearchesFeatureGeoJsonFormat.cropFormat, "crop_search_feature_geo_json_by_format", "python");
+
+// Standardize _tms suffix to _by_tms convention (Python)
+@@clientName(MosaicCollectionsTileMatrixSetsTileJson.get, "get_collection_tile_json_by_tms", "python");
+@@clientName(MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml, "get_collection_wmts_capabilities_by_tms", "python");
+@@clientName(MosaicItemsTileMatrixSetsTileJson.get, "get_item_tile_json_by_tms", "python");
+@@clientName(MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml, "get_item_wmts_capabilities_by_tms", "python");
+@@clientName(MosaicSearchesTileMatrixSetsTileJson.get, "get_search_tile_json_by_tms", "python");
+@@clientName(MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml, "get_search_wmts_capabilities_by_tms", "python");
+
+// Rename "searches" to "search" — plural is awkward for single search_id operations (Python)
+@@clientName(MosaicSearchesTileSetList.get, "get_search_tilesets", "python");
+@@clientName(MosaicSearchesTileSetMetadata.get, "get_search_tileset_metadata", "python");
+@@clientName(MosaicSearchesTileMatrixSets.getZxyScaleByFormat, "get_search_tile_by_scale_and_format", "python");
+@@clientName(MosaicSearchesTileMatrixSetsPlain.getZxy, "get_search_tile", "python");
+@@clientName(MosaicSearchesTileMatrixSetsFormat.getZxyByFormat, "get_search_tile_by_format", "python");
+@@clientName(MosaicSearchesTileMatrixSetsScale.getZxyByScale, "get_search_tile_by_scale", "python");
+@@clientName(MosaicSearchesAssetsForTileMatrixSets.getZxyAssets, "get_search_assets_for_tile", "python");
+@@clientName(MosaicSearchesInfoSearch.get, "get_search_info", "python");
+@@clientName(MosaicSearchesBbox.getCroppedToBoundingBox, "get_search_bbox_crop", "python");
+@@clientName(MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight, "get_search_bbox_crop_with_dimensions", "python");
+@@clientName(MosaicSearchesAssetsForBbox.getBboxAssets, "get_search_bbox_assets", "python");
+@@clientName(MosaicSearchesFeatureGeoJson.crop, "crop_search_feature_geo_json", "python");
+@@clientName(MosaicSearchesFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat, "crop_search_feature_geo_json_width_by_height", "python");
+@@clientName(MosaicSearchesWmts.getCapabilitiesXml, "get_search_wmts_capabilities", "python");
+@@clientName(MosaicSearchesTileJson.get, "get_search_tile_json", "python");
+@@clientName(MosaicSearchesTilesPlain.getZxy, "get_search_tile_no_tms", "python");
+@@clientName(MosaicSearchesTilesFormat.getZxyByFormat, "get_search_tile_no_tms_by_format", "python");
+@@clientName(MosaicSearchesTilesScale.getZxyByScale, "get_search_tile_no_tms_by_scale", "python");
+@@clientName(MosaicSearchesTiles.getZxyScaleByFormat, "get_search_tile_no_tms_by_scale_and_format", "python");
+@@clientName(MosaicSearchesAssetsForTiles.getZxyAssets, "get_search_assets_for_tile_no_tms", "python");
+@@clientName(MosaicSearchesPoint.getPoint, "get_search_point", "python");
+@@clientName(MosaicSearchesPointWithAssets.getPointAssets, "get_search_point_with_assets", "python");
+
+// Rename non-paged list_ methods to get_ — list_ should only be used for AsyncItemPaged (Python)
+@@clientName(StacCollectionMosaics.getAll, "get_mosaics", "python");
+@@clientName(StacCollectionRenderOptions.getAll, "get_render_options", "python");
+@@clientName(StacQueryables.getAll, "get_queryables", "python");
+@@clientName(TileMatrixList.get, "get_tile_matrices", "python");
+@@clientName(MosaicItemsTileSetList.get, "get_tilesets", "python");
+@@clientName(MosaicCollectionsTileSetList.get, "get_collection_tilesets", "python");
+@@clientName(MosaicItemsAvailableAssets.getAll, "get_item_available_assets", "python");
+@@clientName(TilerStatistics.getAll, "get_item_statistics", "python");
+
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
 
