@@ -79,7 +79,7 @@ interface EvaluationTaxonomies {
 
       @doc("The evaluation taxonomy.")
       @body
-      Taxonomy: EvaluationTaxonomy;
+      taxonomy: EvaluationTaxonomy;
     },
     OkResponse & EvaluationTaxonomy
   >;
