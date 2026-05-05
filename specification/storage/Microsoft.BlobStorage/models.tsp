@@ -40,13 +40,13 @@ model Error {
   /** The error message. */
   @Xml.name("Message") message?: string;
 
-  /** Copy source status code */
+  /** Copy source status code. */
   @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
 
-  /** Copy source error code */
+  /** Copy source error code. */
   @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
 
-  /** Copy source error message */
+  /** Copy source error message. */
   @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
@@ -402,13 +402,13 @@ union StorageErrorCode {
   /** Blob access tier not supported for account type. */
   BlobAccessTierNotSupportedForAccountType: "BlobAccessTierNotSupportedForAccountType",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
 /// Models
 
-/** Represents a single block in a block blob. It describes the block's ID and size. */
+/** Represents a single block in a block blob. */
 model Block {
   /** The base64 encoded block ID. */
   @Xml.name("Name")
@@ -430,34 +430,34 @@ model BlockList {
   uncommittedBlocks?: Block[];
 }
 
-/** The Block lookup list. */
+/** The block lookup list. */
 @Xml.name("BlockList")
 model BlockLookupList {
-  /** The committed blocks */
+  /** The committed blocks. */
   @Xml.unwrapped
   @Xml.name("Committed")
   committed?: base64Bytes[];
 
-  /** The uncommitted blocks */
+  /** The uncommitted blocks. */
   @Xml.unwrapped
   @Xml.name("Uncommitted")
   uncommitted?: base64Bytes[];
 
-  /** The latest blocks */
+  /** The latest blocks. */
   @Xml.unwrapped
   @Xml.name("Latest")
   latest?: base64Bytes[];
 }
 
-/** Represents an array of signed identifiers */
+/** List of signed identifiers. */
 model SignedIdentifiers {
-  /** The array of signed identifiers. */
+  /** The list of signed identifiers. */
   @Xml.unwrapped
   @Xml.name("SignedIdentifier")
   items: Array<SignedIdentifier>;
 }
 
-/** The signed identifier. */
+/** A signed identifier. */
 @Xml.name("SignedIdentifier")
 model SignedIdentifier {
   /** The unique ID for the signed identifier. */
@@ -467,7 +467,7 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
-/** The result of a Filter Blobs API call */
+/** The result of the Find Blobs by Tags API. */
 @Xml.name("EnumerationResults")
 model FilterBlobSegment {
   /** The service endpoint. */
@@ -475,50 +475,50 @@ model FilterBlobSegment {
   @Xml.name("ServiceEndpoint")
   serviceEndpoint: string;
 
-  /** The filter for the blobs. */
+  /** The filter expression for the blobs. */
   @Xml.name("Where") where: string;
 
-  /** The blob segment. */
+  /** The list of filtered blobs. */
   @Xml.name("Blobs") blobs: FilterBlobItem[];
 
-  /** The next marker of the blobs. */
+  /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
 
-/** The filter blob item. */
+/** The filtered blob item. */
 @Xml.name("Blob")
 model FilterBlobItem {
   /** The name of the blob. */
   @Xml.name("Name") name: string;
 
-  /** The properties of the blob. */
+  /** The name of the container. */
   @Xml.name("ContainerName") containerName: string;
 
-  /** The metadata of the blob. */
+  /** The tags of the blob. */
   @Xml.name("Tags") tags?: BlobTags;
 
   /** The version ID of the blob. */
   @Xml.name("VersionId") versionId?: string;
 
-  /** Whether it is the current version of the blob */
+  /** Whether it is the current version of the blob. */
   @Xml.name("IsCurrentVersion") isCurrentVersion?: boolean;
 }
 
-/** Include this parameter to specify that the container's metadata be returned as part of the response body. */
+/** Specifies what additional information should be returned as part of the list operation. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListContainersIncludeType {
-  /** Include metadata */
+  /** Include metadata. */
   metadata: "metadata",
 
-  /** Include deleted */
+  /** Include soft-deleted containers. */
   deleted: "deleted",
 
-  /** Include system */
+  /** Include system containers. */
   system: "system",
 }
 
-/** The filter blobs includes. */
+/** Specifies what type of blobs should be returned as part of the filter operation. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FilterBlobsIncludeItem {
   /** The filter includes no versions. */
@@ -531,23 +531,23 @@ enum FilterBlobsIncludeItem {
 /** The account kind. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum AccountKind {
-  /** The storage account is a general-purpose account. */
+  /** A general-purpose account. */
   Storage: "Storage",
 
-  /** The storage account is a blob storage account. */
+  /** A blob storage account. */
   BlobStorage: "BlobStorage",
 
-  /** The storage account is a storage V2 account. */
+  /** A storage V2 account. */
   StorageV2: "StorageV2",
 
-  /** The storage account is a file storage account. */
+  /** A file storage account. */
   FileStorage: "FileStorage",
 
-  /** The storage account is a block blob storage account. */
+  /** A block blob storage account. */
   BlockBlobStorage: "BlockBlobStorage",
 }
 
-/** The SKU types */
+/** The account SKU. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum SkuName {
   /** The standard LRS SKU. */
@@ -578,7 +578,7 @@ enum SkuName {
   StandardRAGZRS: "Standard_RAGZRS",
 }
 
-/** The list container segment response */
+/** The result of the List Containers API. */
 @Xml.name("EnumerationResults")
 model ListContainersSegmentResponse {
   /** The service endpoint. */
@@ -589,31 +589,31 @@ model ListContainersSegmentResponse {
   /** The prefix of the containers. */
   @Xml.name("Prefix") prefix?: string;
 
-  /** The marker of the containers. */
+  /** An opaque string value that identifies the portion of the result set returned with this operation. */
   @Xml.name("Marker") marker?: string;
 
-  /** The max results of the containers. */
+  /** The maximum number of containers to be returned with this operation. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /** The container segment. */
+  /** The list of containers. */
   @pageItems
   @Xml.name("Containers")
   containerItems: ContainerItem[];
 
-  /** The next marker of the containers. */
+  /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @continuationToken
   @Xml.name("NextMarker")
   NextMarker?: string;
 }
 
-/** An Azure Storage container. */
+/** Represents a container. */
 @Xml.name("Container")
 model ContainerItem {
   /** The name of the container. */
   @Xml.name("Name") name: string;
 
-  /** Whether the container is deleted. */
+  /** Whether the container is soft-deleted. */
   @Xml.name("Deleted") deleted?: boolean;
 
   /** The version of the container. */
@@ -629,7 +629,7 @@ model ContainerItem {
 
 /** The properties of a container. */
 model ContainerProperties {
-  /** The date-time the container was last modified in RFC1123 format. */
+  /** The date-time that the container was last modified. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
@@ -650,10 +650,10 @@ model ContainerProperties {
   /** The public access type of the container. */
   @Xml.name("PublicAccess") publicAccess?: PublicAccessType;
 
-  /** Whether it has an immutability policy. */
+  /** Whether the container has an immutability policy. */
   @Xml.name("HasImmutabilityPolicy") hasImmutabilityPolicy?: boolean;
 
-  /** The has legal hold status of the container. */
+  /** Whether the container has a legal hold. */
   @Xml.name("HasLegalHold") hasLegalHold?: boolean;
 
   /** The default encryption scope of the container. */
@@ -663,7 +663,7 @@ model ContainerProperties {
   @Xml.name("DenyEncryptionScopeOverride")
   preventEncryptionScopeOverride?: boolean;
 
-  /** The deleted time of the container. */
+  /** The date-time the container was deleted. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
@@ -683,34 +683,34 @@ model StorageServiceStats {
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
 }
 
-/** Geo-Replication information for the Secondary Storage Service */
+/** Geo-replication information for the secondary storage service. */
 model GeoReplication {
-  /** The status of the secondary location */
+  /** The status of the secondary location. */
   @Xml.name("Status") status: GeoReplicationStatusType;
 
-  /** A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. */
+  /** A date-time value that indicates where all primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastSyncTime")
   lastSyncTime: utcDateTime;
 }
 
-/** The geo replication status. */
+/** The geo-replication status. */
 union GeoReplicationStatusType {
-  /** The geo replication is live. */
+  /** Geo-replication is live. */
   Live: "live",
 
-  /** The geo replication is bootstrap. */
+  /** Geo-replication is bootstrap. */
   Bootstrap: "bootstrap",
 
-  /** The geo replication is unavailable. */
+  /** Geo-replication is unavailable. */
   Unavailable: "unavailable",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
-/** Key information */
+/** Key information. */
 model KeyInfo {
   /** The date-time the key is active. */
   @Xml.name("Start") start: string;
@@ -718,7 +718,7 @@ model KeyInfo {
   /** The date-time the key expires. */
   @Xml.name("Expiry") expiry: string;
 
-  /** The delegated user tenant id in Azure AD. */
+  /** The delegated user tenant ID in Entra ID. */
   @Xml.name("DelegatedUserTid")
   @added(Versions.v2026_04_06)
   delegatedUserTid?: uuid;
@@ -726,10 +726,10 @@ model KeyInfo {
 
 /** A user delegation key. */
 model UserDelegationKey {
-  /** The Azure Active Directory object ID in GUID format. */
+  /** The Entra ID object ID in GUID format. */
   @Xml.name("SignedOid") signedOid: uuid;
 
-  /** The Azure Active Directory tenant ID in GUID format. */
+  /** The Entra ID tenant ID in GUID format. */
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
@@ -748,17 +748,17 @@ model UserDelegationKey {
   /** The service version that created the key. */
   @Xml.name("SignedVersion") signedVersion: string;
 
-  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
+  /** The delegated user tenant ID in Entra ID. Return if DelegatedUserTid is specified. */
   @Xml.name("SignedDelegatedUserTid")
   @added(Versions.v2026_04_06)
   signedDelegatedUserTid?: uuid;
 
-  /** The key as a base64 string. */
+  /** The base64 encoded key value. */
   @Xml.name("Value")
   value: base64Bytes;
 }
 
-/** The public access types. */
+/** The public access type. */
 union PublicAccessType {
   /** Blob access. */
   Blob: "blob",
@@ -766,7 +766,7 @@ union PublicAccessType {
   /** Container access. */
   Container: "container",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
@@ -782,7 +782,7 @@ enum CopyStatus {
   /** The copy operation failed. */
   Failed: "failed",
 
-  /** The copy operation is aborted. */
+  /** The copy operation was aborted. */
   Aborted: "aborted",
 }
 
@@ -841,7 +841,7 @@ model AccessPolicy {
   @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
 
-  /** The permissions for acl the policy. */
+  /** The permissions for the policy. */
   @Xml.name("Permission") permission?: string;
 }
 
@@ -880,13 +880,13 @@ union AccessTier {
   /** The hot P80 tier. */
   P80: "P80",
 
-  /** The hot access tier. */
+  /** The Hot access tier. */
   Hot: "Hot",
 
-  /** The cool access tier. */
+  /** The Cool access tier. */
   Cool: "Cool",
 
-  /** The archive access tier. */
+  /** The Archive access tier. */
   Archive: "Archive",
 
   /** The Premium access tier. */
@@ -899,30 +899,30 @@ union AccessTier {
   @added(Versions.v2026_06_06)
   Smart: "Smart",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
 /** The archive status. */
 union ArchiveStatus {
-  /** The archive status is rehydrating pending to hot. */
+  /** The archive status is rehydrating pending to Hot. */
   RehydratePendingToHot: "rehydrate-pending-to-hot",
 
-  /** The archive status is rehydrating pending to cool. */
+  /** The archive status is rehydrating pending to Cool. */
   RehydratePendingToCool: "rehydrate-pending-to-cool",
 
-  /** The archive status is rehydrating pending to cold. */
+  /** The archive status is rehydrating pending to Cold. */
   RehydratePendingToCold: "rehydrate-pending-to-cold",
 
-  /** The archive status is rehydrating pending to smart. */
+  /** The archive status is rehydrating pending to Smart. */
   @added(Versions.v2026_06_06)
   RehydratePendingToSmart: "rehydrate-pending-to-smart",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
-/** An Azure Storage Blob */
+/** Represents a blob. */
 @Xml.name("Blob")
 model BlobItem {
   /** The name of the blob. */
@@ -934,7 +934,7 @@ model BlobItem {
   /** The snapshot of the blob. */
   @Xml.name("Snapshot") snapshot: string;
 
-  /** The version id of the blob. */
+  /** The version ID of the blob. */
   @Xml.name("VersionId") versionId?: string;
 
   /** Whether the blob is the current version. */
@@ -961,13 +961,13 @@ model BlobItem {
 /** The properties of a blob. */
 @Xml.name("Properties")
 model BlobProperties {
-  /** The date-time the blob was created in RFC1123 format. */
+  /** The date-time the blob was created. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
 
-  /** The date-time the blob was last modified in RFC1123 format. */
+  /** The date-time the blob was last modified. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
@@ -1024,7 +1024,7 @@ model BlobProperties {
   /** The copy progress of the blob. */
   @Xml.name("CopyProgress") copyProgress?: string;
 
-  /** The copy completion time of the blob. */
+  /** The copy completion date-time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("CopyCompletionTime")
@@ -1036,13 +1036,13 @@ model BlobProperties {
   /** Whether the blob is encrypted on the server. */
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
-  /** Whether the blob is incremental copy. */
+  /** Whether the blob is an incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
-  /** The time the blob was deleted. */
+  /** The date-time the blob was deleted. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
@@ -1065,13 +1065,13 @@ model BlobProperties {
   @Xml.name("SmartAccessTier")
   smartAccessTier?: AccessTier;
 
-  /** Customer provided key sha256 */
+  /** The SHA-256 hash of the blob's encryption key, if provided. */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
 
   /** The encryption scope of the blob. */
   @Xml.name("EncryptionScope") encryptionScope?: string;
 
-  /** The access tier change time of the blob. */
+  /** The date-time that the access tier of the blob changed. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("AccessTierChangeTime")
@@ -1080,7 +1080,7 @@ model BlobProperties {
   /** The number of tags for the blob. */
   @Xml.name("TagCount") tagCount?: int32;
 
-  /** The expire time of the blob. */
+  /** The expiry time of the blob. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
@@ -1093,13 +1093,13 @@ model BlobProperties {
   /** The rehydrate priority of the blob. */
   @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
 
-  /** The last access time of the blob. */
+  /** The date-time the blob was last accessed. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
-  /** The immutability policy until time of the blob. */
+  /** The date-time the immutability policy of the blob expires. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("ImmutabilityPolicyUntilDate")
@@ -1113,10 +1113,10 @@ model BlobProperties {
   @Xml.name("LegalHold") legalHold?: boolean;
 }
 
-/** The immutability policy mode used in requests and responses. */
+/** The immutability policy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ImmutabilityPolicyMode {
-  /** The immutability policy is mutable. Should never be set, only returned. */
+  /** Response only. The immutability policy is mutable. */
   Mutable: "mutable",
 
   /** The immutability policy is locked. */
@@ -1139,7 +1139,7 @@ enum BlobType {
   AppendBlob: "AppendBlob",
 }
 
-/** If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard. */
+/** The priority of the rehydrate operation. */
 @Xml.name("RehydratePriority")
 union RehydratePriority {
   /** The rehydrate priority is high. */
@@ -1148,12 +1148,11 @@ union RehydratePriority {
   /** The rehydrate priority is standard. */
   Standard: "Standard",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
 /** The blob metadata. */
-// TODO: check if this needs an unwrapped decorator
 #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 model BlobMetadata is Record<string> {
@@ -1163,7 +1162,7 @@ model BlobMetadata is Record<string> {
   encrypted?: string;
 }
 
-/** The blob tags. */
+/** A key-value pair associated with a blob. */
 @Xml.name("Tag")
 model BlobTag {
   /** The key of the tag. */
@@ -1180,7 +1179,7 @@ model ObjectReplicationMetadata is Record<string>;
 
 /// Service Properties
 
-/** The service properties. */
+/** The blob service properties. */
 @Xml.name("StorageServiceProperties")
 model BlobServiceProperties {
   /** The logging properties. */
@@ -1205,9 +1204,9 @@ model BlobServiceProperties {
   @Xml.name("StaticWebsite") staticWebsite?: StaticWebsite;
 }
 
-/** The properties that enable an account to host a static website */
+/** The properties that enable an account to host a static website. */
 model StaticWebsite {
-  /** Indicates whether this account is hosting a static website */
+  /** Indicates whether this account is hosting a static website. */
   @Xml.name("Enabled") enabled: boolean;
 
   /** The index document. */
@@ -1216,11 +1215,11 @@ model StaticWebsite {
   /** The error document. */
   @Xml.name("ErrorDocument404Path") errorDocument404Path?: string;
 
-  /** Absolute path of the default index page */
+  /** Absolute path of the default index page. */
   @Xml.name("DefaultIndexDocumentPath") defaultIndexDocumentPath?: string;
 }
 
-/** CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain */
+/** A Cross-Origin Resource Sharing (CORS) rule. */
 @Xml.name("CorsRule")
 model CorsRule {
   /** The allowed origins. */
@@ -1256,7 +1255,7 @@ model Metrics {
   @Xml.name("RetentionPolicy") retentionPolicy?: RetentionPolicy;
 }
 
-/** Azure Analytics Logging settings. */
+/** Azure Analytics logging settings. */
 model Logging {
   /** The version of the logging properties. */
   @Xml.name("Version") version: string;
@@ -1276,7 +1275,7 @@ model Logging {
 
 /** The retention policy. */
 model RetentionPolicy {
-  /** Whether to enable the retention policy. */
+  /** Whether the policy is enabled. */
   @Xml.name("Enabled") enabled: boolean;
 
   /** The number of days to retain the logs. */
@@ -1290,7 +1289,7 @@ model RetentionPolicy {
 
 // List Blobs
 
-/** An enumeration of blobs. */
+/** The result of the List Blobs API. */
 @Xml.name("EnumerationResults")
 model ListBlobsResponse {
   /** The service endpoint. */
@@ -1312,11 +1311,11 @@ model ListBlobsResponse {
   /** The max results of the blobs. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /** The blob segment. */
+  /** The list of blobs. */
   @Xml.name("Blobs")
   segment: BlobFlatListSegment;
 
-  /** The next marker of the blobs. */
+  /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
@@ -1331,7 +1330,7 @@ model BlobFlatListSegment {
   blobItems: BlobItem[];
 }
 
-/** Represents a page list. */
+/** The result of the Get Pages API. */
 model PageList {
   /** The page ranges. */
   @Xml.unwrapped
@@ -1343,13 +1342,13 @@ model PageList {
   @Xml.name("ClearRange")
   clearRange?: ClearRange[];
 
-  /** The next marker. */
+  /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
 
-/** The page range. */
+/** A page range. */
 model PageRange {
   /** The start of the byte range. */
   @Xml.name("Start") start: int64;
@@ -1358,7 +1357,7 @@ model PageRange {
   @Xml.name("End") end: int64;
 }
 
-/** The clear range. */
+/** A clear range. */
 model ClearRange {
   /** The start of the byte range. */
   @Xml.name("Start") start: int64;
@@ -1367,14 +1366,14 @@ model ClearRange {
   @Xml.name("End") end: int64;
 }
 
-/** Represents blob tags. */
+/** A list of blob tags. */
 @Xml.name("Tags")
 model BlobTags {
-  /** Represents the blob tags. */
+  /** A list of blob tags. */
   @Xml.name("TagSet") blobTagSet: BlobTag[];
 }
 
-/** The query request, note only SQL supported */
+/** The query request type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum QueryRequestType {
   /** The SQL request query type. */
@@ -1386,7 +1385,7 @@ model QueryRequest {
   /** Required. The type of the provided query expression. */
   @Xml.name("QueryType") queryType: QueryRequestType;
 
-  /** The query expression in SQL. The maximum size of the query expression is 256KiB. */
+  /** The query expression. The maximum size of the query expression is 256KiB. */
   @Xml.name("Expression") expression: string;
 
   /** The input serialization settings. */
@@ -1450,7 +1449,7 @@ model JsonTextConfiguration {
 
 /** Represents the Apache Arrow configuration. */
 model ArrowConfiguration {
-  /** The Apache Arrow schema */
+  /** The Apache Arrow schema. */
   @Xml.name("Schema") schema: ArrowField[];
 }
 
@@ -2532,7 +2531,7 @@ model BlobPrefix {
   @Xml.name("Name") name: BlobName;
 }
 
-/** Represents an array of blobs. */
+/** Represents an list of blobs. */
 model BlobHierarchyListSegment {
   /** The blob items */
   @pageItems
@@ -2575,7 +2574,7 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("Blobs")
   segment: BlobHierarchyListSegment;
 
-  /** The next marker of the blobs. */
+  /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
