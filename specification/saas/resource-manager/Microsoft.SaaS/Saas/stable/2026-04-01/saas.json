@@ -63,7 +63,8 @@
             "in": "path",
             "description": "The SaaS subscription name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,50}$"
           },
           {
             "name": "body",
@@ -638,7 +639,8 @@
             "in": "path",
             "description": "The SaaS subscription name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,50}$"
           },
           {
             "name": "body",
@@ -1495,17 +1497,17 @@
           {
             "name": "Subscribed",
             "value": "Subscribed",
-            "description": "Subscribed"
+            "description": "The subscription is active and in use"
           },
           {
             "name": "Unsubscribed",
             "value": "Unsubscribed",
-            "description": "Unsubscribed"
+            "description": "The subscription has been cancelled"
           },
           {
             "name": "Suspended",
             "value": "Suspended",
-            "description": "Suspended"
+            "description": "The subscription is suspended"
           }
         ]
       }

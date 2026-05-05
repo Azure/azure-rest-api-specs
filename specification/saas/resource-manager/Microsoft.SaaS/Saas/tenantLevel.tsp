@@ -50,6 +50,7 @@ interface SaasTenantLevelPreflight {
     ...ApiVersionParameter,
 
     /** The SaaS subscription name. */
+    @pattern("^[a-zA-Z0-9-]{3,50}$")
     @path saasSubscriptionName: string,
 
     /** The preflight request body. */

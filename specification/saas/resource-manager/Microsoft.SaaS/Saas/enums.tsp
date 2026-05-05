@@ -10,13 +10,13 @@ union SaasResourceStatus {
   /** Pending fulfillment start */
   "PendingFulfillmentStart",
 
-  /** Subscribed */
+  /** The subscription is active and in use */
   "Subscribed",
 
-  /** Unsubscribed */
+  /** The subscription has been cancelled */
   "Unsubscribed",
 
-  /** Suspended */
+  /** The subscription is suspended */
   "Suspended",
 }
 
