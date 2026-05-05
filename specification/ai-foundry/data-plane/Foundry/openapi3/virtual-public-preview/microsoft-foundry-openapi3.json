@@ -17782,8 +17782,7 @@
           "mapping": {
             "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
             "traces": "#/components/schemas/TracesDataGenerationJobOptions",
-            "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
-            "task": "#/components/schemas/TaskDataGenerationJobOptions"
+            "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
           }
         },
         "description": "Options for managing data generation jobs."
@@ -17931,8 +17930,7 @@
             "enum": [
               "simple_qna",
               "traces",
-              "tool_use",
-              "task"
+              "tool_use"
             ]
           }
         ],
@@ -44726,27 +44724,6 @@
           }
         },
         "description": "Base class for targets with discriminator support."
-      },
-      "TaskDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "task"
-            ],
-            "description": "The data generation job type, which is Task for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with Task type."
       },
       "TaxonomyCategory": {
         "type": "object",
