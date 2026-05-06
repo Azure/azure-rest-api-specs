@@ -1,15 +1,15 @@
 {
-    "title": "Clusters_CreateInteractiveRayJob_MaximumSet",
-    "operationId": "Clusters_createInteractiveRayJob",
+    "title": "Clusters_StartRaySession_MaximumSet",
+    "operationId": "Clusters_startRaySession",
     "parameters": {
         "api-version": "v1",
         "Foundry-Features": "Jobs=V1Preview",
         "clusterName": "my-cluster",
-        "Operation-Id": "create-ray-job-01",
+        "Operation-Id": "start-ray-session-01",
         "request": {
-            "name": "ray-job-01",
+            "name": "ray-session-01",
             "displayName": "ray-4node",
-            "description": "Interactive Ray job (4 nodes)",
+            "description": "Interactive Ray session (4 nodes)",
             "tags": {
                 "scenario": "interactive-ray"
             },
@@ -21,11 +21,11 @@
     "responses": {
         "201": {
             "body": {
-                "name": "ray-job-01",
+                "name": "ray-session-01",
                 "properties": {
                     "jobType": "Command",
                     "displayName": "ray-4node",
-                    "description": "Interactive Ray job (4 nodes)",
+                    "description": "Interactive Ray session (4 nodes)",
                     "tags": {
                         "scenario": "interactive-ray"
                     },

@@ -962,10 +962,103 @@
         }
       }
     },
-    "/clusters/{clusterName}:create_interactive_ray_job": {
+    "/clusters/{clusterName}/ray_sessions/{sessionName}:stop": {
       "post": {
-        "operationId": "Clusters_createInteractiveRayJob",
-        "description": "Create an interactive Ray command job on a compute cluster.",
+        "operationId": "Clusters_stopRaySession",
+        "description": "Stop an interactive Ray session on a compute cluster.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "description": "The compute cluster name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionName",
+            "in": "path",
+            "required": true,
+            "description": "The Ray session name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Response returned when a job cancel operation is accepted asynchronously.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for the final result of the cancel operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Operation-Location": {
+                "required": false,
+                "description": "URL to poll for the status of the cancel operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Suggested delay in seconds before polling.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Clusters"
+        ]
+      }
+    },
+    "/clusters/{clusterName}:start_ray_session": {
+      "post": {
+        "operationId": "Clusters_startRaySession",
+        "description": "Start an interactive Ray session on a compute cluster.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -992,7 +1085,7 @@
             "name": "Operation-Id",
             "in": "header",
             "required": false,
-            "description": "Idempotency key used to safely retry interactive Ray job creation.",
+            "description": "Idempotency key used to safely retry Ray session startup.",
             "schema": {
               "type": "string"
             }
@@ -1038,11 +1131,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InteractiveRayJobCreate"
+                "$ref": "#/components/schemas/RaySessionStart"
               }
             }
           },
-          "description": "Interactive Ray job creation request."
+          "description": "Ray session start request."
         }
       }
     },
@@ -22260,48 +22353,6 @@
           }
         },
         "description": "Metadata about the insights."
-      },
-      "InteractiveRayJobCreate": {
-        "type": "object",
-        "required": [
-          "instanceCount"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional job name. If omitted, the service uses the Operation-Id header or generates one."
-          },
-          "displayName": {
-            "type": "string",
-            "description": "Optional display name for the generated Ray job."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the generated Ray job."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags to attach to the generated Ray job."
-          },
-          "instanceCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of compute nodes to reserve for the interactive Ray session."
-          },
-          "enableRemoteAccessClientServer": {
-            "type": "boolean",
-            "description": "Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally."
-          },
-          "clientServerPort": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true."
-          }
-        },
-        "description": "Request body for creating an interactive Ray command job on a compute cluster."
       },
       "ItemGenerationParams": {
         "type": "object",
@@ -45659,6 +45710,48 @@
         ],
         "description": "Ray distribution configuration."
       },
+      "RaySessionStart": {
+        "type": "object",
+        "required": [
+          "instanceCount"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional session name. If omitted, the service uses the Operation-Id header or generates one."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Optional display name for the generated Ray session job."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the generated Ray session job."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags to attach to the generated Ray session job."
+          },
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of compute nodes to reserve for the interactive Ray session."
+          },
+          "enableRemoteAccessClientServer": {
+            "type": "boolean",
+            "description": "Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally."
+          },
+          "clientServerPort": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true."
+          }
+        },
+        "description": "Request body for starting an interactive Ray session on a compute cluster."
+      },
       "RecurrenceSchedule": {
         "type": "object",
         "required": [
@@ -47826,6 +47919,18 @@
           "messages": {
             "type": "string",
             "description": "Column containing chat messages."
+          },
+          "response": {
+            "type": "string",
+            "description": "Column containing responses for KTO or scored reward-model training."
+          },
+          "label": {
+            "type": "string",
+            "description": "Column containing binary desirability labels for KTO training."
+          },
+          "score": {
+            "type": "string",
+            "description": "Column containing numeric reward scores for scored reward-model training."
           }
         },
         "description": "Mapping from logical training fields to columns in the dataset."

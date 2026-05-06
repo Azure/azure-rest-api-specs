@@ -324,6 +324,15 @@ model TrainingColumnMapping {
 
   @doc("Column containing chat messages.")
   messages?: string;
+
+  @doc("Column containing responses for KTO or scored reward-model training.")
+  response?: string;
+
+  @doc("Column containing binary desirability labels for KTO training.")
+  label?: string;
+
+  @doc("Column containing numeric reward scores for scored reward-model training.")
+  score?: string;
 }
 
 @doc("Formatting options for conversational training data.")

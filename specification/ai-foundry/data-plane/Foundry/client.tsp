@@ -221,12 +221,20 @@ using Azure.AI.Projects;
 // Clusters sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Clusters.createInteractiveRayJob,
-  "create_interactive_ray_job",
+@@clientName(Clusters.startRaySession,
+  "start_ray_session",
   "python"
 );
-@@clientName(Clusters.createInteractiveRayJob,
-  "createInteractiveRayJob",
+@@clientName(Clusters.stopRaySession,
+  "stop_ray_session",
+  "python"
+);
+@@clientName(Clusters.startRaySession,
+  "startRaySession",
+  "javascript"
+);
+@@clientName(Clusters.stopRaySession,
+  "stopRaySession",
   "javascript"
 );
 

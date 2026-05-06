@@ -1,0 +1,19 @@
+{
+    "title": "Clusters_StopRaySession_MaximumSet",
+    "operationId": "Clusters_stopRaySession",
+    "parameters": {
+        "api-version": "v1",
+        "Foundry-Features": "Jobs=V1Preview",
+        "clusterName": "my-cluster",
+        "sessionName": "ray-session-01"
+    },
+    "responses": {
+        "202": {
+            "headers": {
+                "Location": "https://contoso.services.ai.azure.com/api/projects/my-project/training_jobs/operations/jc:workspace-id:ray-session-01/result?api-version=v1",
+                "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/my-project/training_jobs/operations/jc:workspace-id:ray-session-01/status?api-version=v1",
+                "Retry-After": 5
+            }
+        }
+    }
+}
