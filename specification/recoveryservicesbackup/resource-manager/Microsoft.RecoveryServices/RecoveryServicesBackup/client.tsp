@@ -3259,3 +3259,7 @@ op protectionPolicyOperationStatusesGet(
   "BackupInstanceProtectionReadiness",
   "csharp"
 );
+@@clientName(ProtectionLevel, "BackupProtectionLevel", "csharp");
+@@clientName(SourceSideScanStatus, "BackupSourceSideScanStatus", "csharp");
+@@clientName(SourceSideScanSummary, "BackupSourceSideScanSummary", "csharp");
+@@clientName(VMWorkloadPolicyType, "VmWorkloadPolicyType", "csharp");
