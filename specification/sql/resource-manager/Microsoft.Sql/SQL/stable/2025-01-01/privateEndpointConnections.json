@@ -301,7 +301,7 @@
       "description": "A private endpoint connection",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "./common.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -331,64 +331,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of a private endpoint connection.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "groupIds": {
-          "type": "array",
-          "description": "Group IDs.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/PrivateEndpointProvisioningState",
-          "description": "State of the private endpoint connection.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "./common.json#/definitions/PrivateLinkServiceConnectionStateStatus",
-          "description": "The private link service connection status."
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "actionsRequired": {
-          "$ref": "./common.json#/definitions/PrivateLinkServiceConnectionStateActionsRequire",
-          "description": "The actions required for private link service connection.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status",
-        "description"
       ]
     }
   },

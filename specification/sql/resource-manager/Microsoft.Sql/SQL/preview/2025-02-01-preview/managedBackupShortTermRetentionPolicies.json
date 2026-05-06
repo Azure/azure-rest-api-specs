@@ -80,7 +80,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicyListResult"
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicyListResult"
             }
           },
           "default": {
@@ -157,7 +157,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
             }
           },
           "default": {
@@ -230,7 +230,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
             }
           }
         ],
@@ -238,7 +238,7 @@
           "200": {
             "description": "Resource 'ManagedBackupShortTermRetentionPolicy' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
             }
           },
           "202": {
@@ -269,7 +269,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+          "final-state-schema": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
         },
         "x-ms-long-running-operation": true
       },
@@ -330,7 +330,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
             }
           }
         ],
@@ -338,7 +338,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
             }
           },
           "202": {
@@ -369,61 +369,12 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+          "final-state-schema": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
         },
         "x-ms-long-running-operation": true
       }
     }
   },
-  "definitions": {
-    "ManagedBackupShortTermRetentionPolicy": {
-      "type": "object",
-      "description": "A short term retention policy.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicyProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ManagedBackupShortTermRetentionPolicyListResult": {
-      "type": "object",
-      "description": "The response of a ManagedBackupShortTermRetentionPolicy list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ManagedBackupShortTermRetentionPolicy items on this page",
-          "items": {
-            "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ManagedBackupShortTermRetentionPolicyProperties": {
-      "type": "object",
-      "description": "Properties of a short term retention policy",
-      "properties": {
-        "retentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The backup retention period in days. This is how many days Point-in-Time Restore will be supported."
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

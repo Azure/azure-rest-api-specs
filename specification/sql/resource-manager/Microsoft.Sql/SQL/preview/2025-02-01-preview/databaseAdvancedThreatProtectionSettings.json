@@ -266,31 +266,12 @@
     }
   },
   "definitions": {
-    "AdvancedThreatProtectionProperties": {
-      "type": "object",
-      "description": "Properties of an Advanced Threat Protection state.",
-      "properties": {
-        "state": {
-          "$ref": "./common.json#/definitions/AdvancedThreatProtectionState",
-          "description": "Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Specifies the UTC creation time of the policy.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
     "DatabaseAdvancedThreatProtection": {
       "type": "object",
       "description": "A database Advanced Threat Protection.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AdvancedThreatProtectionProperties",
+          "$ref": "./common.json#/definitions/AdvancedThreatProtectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }

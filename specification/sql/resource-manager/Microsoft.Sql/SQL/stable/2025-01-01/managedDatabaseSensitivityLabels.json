@@ -99,7 +99,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SensitivityLabelListResult"
+              "$ref": "./common.json#/definitions/SensitivityLabelListResult"
             }
           },
           "default": {
@@ -154,7 +154,7 @@
             "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SensitivityLabelUpdateList"
+              "$ref": "./common.json#/definitions/SensitivityLabelUpdateList"
             }
           }
         ],
@@ -232,7 +232,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SensitivityLabelListResult"
+              "$ref": "./common.json#/definitions/SensitivityLabelListResult"
             }
           },
           "default": {
@@ -287,7 +287,7 @@
             "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecommendedSensitivityLabelUpdateList"
+              "$ref": "./common.json#/definitions/RecommendedSensitivityLabelUpdateList"
             }
           }
         ],
@@ -393,7 +393,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SensitivityLabel"
+              "$ref": "./common.json#/definitions/SensitivityLabel"
             }
           },
           "default": {
@@ -487,7 +487,7 @@
             "description": "The column sensitivity label resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SensitivityLabel"
+              "$ref": "./common.json#/definitions/SensitivityLabel"
             }
           }
         ],
@@ -495,13 +495,13 @@
           "200": {
             "description": "Resource 'SensitivityLabel' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SensitivityLabel"
+              "$ref": "./common.json#/definitions/SensitivityLabel"
             }
           },
           "201": {
             "description": "Resource 'SensitivityLabel' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SensitivityLabel"
+              "$ref": "./common.json#/definitions/SensitivityLabel"
             }
           },
           "default": {
@@ -835,7 +835,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SensitivityLabelListResult"
+              "$ref": "./common.json#/definitions/SensitivityLabelListResult"
             }
           },
           "default": {
@@ -856,211 +856,6 @@
       }
     }
   },
-  "definitions": {
-    "RecommendedSensitivityLabelUpdate": {
-      "type": "object",
-      "description": "A recommended sensitivity label update operation.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "RecommendedSensitivityLabelUpdateList": {
-      "type": "object",
-      "description": "A list of recommended sensitivity label update operations.",
-      "properties": {
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
-          }
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdateProperties": {
-      "type": "object",
-      "description": "Properties of an operation executed on a recommended sensitivity label.",
-      "properties": {
-        "op": {
-          "$ref": "./common.json#/definitions/RecommendedSensitivityLabelUpdateKind"
-        },
-        "schema": {
-          "type": "string",
-          "description": "Schema name of the column to update."
-        },
-        "table": {
-          "type": "string",
-          "description": "Table name of the column to update."
-        },
-        "column": {
-          "type": "string",
-          "description": "Column name to update."
-        }
-      },
-      "required": [
-        "op",
-        "schema",
-        "table",
-        "column"
-      ]
-    },
-    "SensitivityLabel": {
-      "type": "object",
-      "description": "A sensitivity label.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SensitivityLabelProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "Resource that manages the sensitivity label.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SensitivityLabelListResult": {
-      "type": "object",
-      "description": "The response of a SensitivityLabel list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SensitivityLabel items on this page",
-          "items": {
-            "$ref": "#/definitions/SensitivityLabel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SensitivityLabelProperties": {
-      "type": "object",
-      "description": "Properties of a sensitivity label.",
-      "properties": {
-        "schemaName": {
-          "type": "string",
-          "description": "The schema name.",
-          "readOnly": true
-        },
-        "tableName": {
-          "type": "string",
-          "description": "The table name.",
-          "readOnly": true
-        },
-        "columnName": {
-          "type": "string",
-          "description": "The column name.",
-          "readOnly": true
-        },
-        "labelName": {
-          "type": "string",
-          "description": "The label name."
-        },
-        "labelId": {
-          "type": "string",
-          "description": "The label ID."
-        },
-        "informationType": {
-          "type": "string",
-          "description": "The information type."
-        },
-        "informationTypeId": {
-          "type": "string",
-          "description": "The information type ID."
-        },
-        "isDisabled": {
-          "type": "boolean",
-          "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
-          "readOnly": true
-        },
-        "rank": {
-          "$ref": "./common.json#/definitions/SensitivityLabelRank"
-        },
-        "clientClassificationSource": {
-          "$ref": "./common.json#/definitions/ClientClassificationSource"
-        }
-      }
-    },
-    "SensitivityLabelUpdate": {
-      "type": "object",
-      "description": "A sensitivity label update operation.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SensitivityLabelUpdateList": {
-      "type": "object",
-      "description": "A list of sensitivity label update operations.",
-      "properties": {
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SensitivityLabelUpdate"
-          }
-        }
-      }
-    },
-    "SensitivityLabelUpdateProperties": {
-      "type": "object",
-      "description": "Properties of an operation executed on a sensitivity label.",
-      "properties": {
-        "op": {
-          "$ref": "./common.json#/definitions/SensitivityLabelUpdateKind"
-        },
-        "schema": {
-          "type": "string",
-          "description": "Schema name of the column to update."
-        },
-        "table": {
-          "type": "string",
-          "description": "Table name of the column to update."
-        },
-        "column": {
-          "type": "string",
-          "description": "Column name to update."
-        },
-        "sensitivityLabel": {
-          "$ref": "#/definitions/SensitivityLabel",
-          "description": "The sensitivity label information to apply on a column."
-        }
-      },
-      "required": [
-        "op",
-        "schema",
-        "table",
-        "column"
-      ]
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

@@ -301,7 +301,7 @@
       "description": "A private endpoint connection",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
+          "$ref": "./common.json#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -331,56 +331,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ManagedInstancePrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of a private endpoint connection.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/ManagedInstancePrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/ManagedInstancePrivateLinkServiceConnectionStateProperty",
-          "description": "Connection State of the Private Endpoint Connection."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "State of the Private Endpoint Connection.",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedInstancePrivateEndpointProperty": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint."
-        }
-      }
-    },
-    "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The private link service connection status."
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "The private link service connection description.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status",
-        "description"
       ]
     }
   },

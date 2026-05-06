@@ -290,7 +290,7 @@
       "description": "A database security alert policy.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecurityAlertsPolicyProperties",
+          "$ref": "./common.json#/definitions/SecurityAlertsPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -299,56 +299,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "SecurityAlertsPolicyProperties": {
-      "type": "object",
-      "description": "Properties of a security alert policy.",
-      "properties": {
-        "state": {
-          "$ref": "./common.json#/definitions/SecurityAlertsPolicyState",
-          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database."
-        },
-        "disabledAlerts": {
-          "type": "array",
-          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action, Brute_Force",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAddresses": {
-          "type": "array",
-          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAccountAdmins": {
-          "type": "boolean",
-          "description": "Specifies that the alert is sent to the account administrators."
-        },
-        "storageEndpoint": {
-          "type": "string",
-          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs."
-        },
-        "storageAccountAccessKey": {
-          "type": "string",
-          "description": "Specifies the identifier key of the Threat Detection audit storage account."
-        },
-        "retentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the number of days to keep in the Threat Detection audit logs."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Specifies the UTC creation time of the policy.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
       ]
     }
   },

@@ -94,7 +94,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseTableListResult"
+              "$ref": "./common.json#/definitions/DatabaseTableListResult"
             }
           },
           "default": {
@@ -164,7 +164,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseTable"
+              "$ref": "./common.json#/definitions/DatabaseTable"
             }
           },
           "default": {
@@ -182,58 +182,6 @@
       }
     }
   },
-  "definitions": {
-    "DatabaseTable": {
-      "type": "object",
-      "description": "A database table resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatabaseTableProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DatabaseTableListResult": {
-      "type": "object",
-      "description": "The response of a DatabaseTable list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DatabaseTable items on this page",
-          "items": {
-            "$ref": "#/definitions/DatabaseTable"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DatabaseTableProperties": {
-      "type": "object",
-      "description": "Database table properties.",
-      "properties": {
-        "temporalType": {
-          "$ref": "./common.json#/definitions/TableTemporalType",
-          "description": "The table temporal type."
-        },
-        "memoryOptimized": {
-          "type": "boolean",
-          "description": "Whether or not the table is memory optimized."
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

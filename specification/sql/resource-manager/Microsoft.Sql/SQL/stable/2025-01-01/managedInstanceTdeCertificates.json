@@ -74,7 +74,7 @@
             "description": "The requested TDE certificate to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TdeCertificate"
+              "$ref": "./common.json#/definitions/TdeCertificate"
             }
           }
         ],
@@ -115,48 +115,6 @@
       }
     }
   },
-  "definitions": {
-    "TdeCertificate": {
-      "type": "object",
-      "description": "A TDE certificate that can be uploaded into a server.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TdeCertificateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "TdeCertificateProperties": {
-      "type": "object",
-      "description": "Properties of a TDE certificate.",
-      "properties": {
-        "privateBlob": {
-          "type": "string",
-          "description": "The base64 encoded certificate private blob.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "certPassword": {
-          "type": "string",
-          "description": "The certificate password.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "privateBlob"
-      ]
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

@@ -93,6 +93,25 @@
         ]
       }
     },
+    "AdvancedThreatProtectionProperties": {
+      "type": "object",
+      "description": "Properties of an Advanced Threat Protection state.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AdvancedThreatProtectionState",
+          "description": "Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the UTC creation time of the policy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
     "AdvancedThreatProtectionState": {
       "type": "string",
       "description": "Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.",
@@ -122,6 +141,74 @@
           }
         ]
       }
+    },
+    "Advisor": {
+      "type": "object",
+      "description": "Database, Server or Elastic Pool Advisor.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvisorProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource kind.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AdvisorProperties": {
+      "type": "object",
+      "description": "Properties for a Database, Server or Elastic Pool Advisor.",
+      "properties": {
+        "advisorStatus": {
+          "$ref": "#/definitions/AdvisorStatus",
+          "description": "Gets the status of availability of this advisor to customers. Possible values are 'GA', 'PublicPreview', 'LimitedPublicPreview' and 'PrivatePreview'.",
+          "readOnly": true
+        },
+        "autoExecuteStatus": {
+          "$ref": "#/definitions/AutoExecuteStatus",
+          "description": "Gets the auto-execute status (whether to let the system execute the recommendations) of this advisor. Possible values are 'Enabled' and 'Disabled'"
+        },
+        "autoExecuteStatusInheritedFrom": {
+          "$ref": "#/definitions/AutoExecuteStatusInheritedFrom",
+          "description": "Gets the resource from which current value of auto-execute status is inherited. Auto-execute status can be set on (and inherited from) different levels in the resource hierarchy. Possible values are 'Subscription', 'Server', 'ElasticPool', 'Database' and 'Default' (when status is not explicitly set on any level).",
+          "readOnly": true
+        },
+        "recommendationsStatus": {
+          "type": "string",
+          "description": "Gets that status of recommendations for this advisor and reason for not having any recommendations. Possible values include, but are not limited to, 'Ok' (Recommendations available),LowActivity (not enough workload to analyze), 'DbSeemsTuned' (Database is doing well), etc.",
+          "readOnly": true
+        },
+        "lastChecked": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time when the current resource was analyzed for recommendations by this advisor.",
+          "readOnly": true
+        },
+        "recommendedActions": {
+          "type": "array",
+          "description": "Gets the recommended actions for this advisor.",
+          "items": {
+            "$ref": "#/definitions/RecommendedAction"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "autoExecuteStatus"
+      ]
     },
     "AdvisorStatus": {
       "type": "string",
@@ -648,6 +735,67 @@
         ]
       }
     },
+    "Baseline": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment baseline Details",
+      "properties": {
+        "expectedResults": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment baseline expected results",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "updatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "SQL Vulnerability Assessment baseline update time (UTC)",
+          "readOnly": true
+        }
+      }
+    },
+    "BaselineAdjustedResult": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment baseline adjusted results",
+      "properties": {
+        "baseline": {
+          "$ref": "#/definitions/Baseline",
+          "description": "SQL Vulnerability Assessment baseline details",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus",
+          "description": "SQL Vulnerability Assessment baseline status",
+          "readOnly": true
+        },
+        "resultsNotInBaseline": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment results that are not in baseline",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "resultsOnlyInBaseline": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment results that are in baseline.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
     "BaselineName": {
       "type": "string",
       "enum": [
@@ -663,6 +811,22 @@
             "description": "default"
           }
         ]
+      }
+    },
+    "BenchmarkReference": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment benchmark reference",
+      "properties": {
+        "benchmark": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment benchmark name",
+          "readOnly": true
+        },
+        "reference": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment benchmark reference.",
+          "readOnly": true
+        }
       }
     },
     "BlobAuditingPolicyName": {
@@ -1390,6 +1554,30 @@
         ]
       }
     },
+    "DataSyncParticipantIdentity": {
+      "type": "object",
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DataSyncParticipantIdentityType",
+          "description": "The Datasync identity type"
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The DataSync participant identity tenant id"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The resource ids of the user assigned identities to use",
+          "additionalProperties": {
+            "$ref": "#/definitions/DataSyncParticipantUserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "DataSyncParticipantIdentityType": {
       "type": "string",
       "enum": [
@@ -1425,6 +1613,22 @@
         ]
       }
     },
+    "DataSyncParticipantUserAssignedIdentity": {
+      "type": "object",
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "properties": {
+        "principalId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Azure Active Directory principal id.",
+          "readOnly": true
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Azure Active Directory client id.",
+          "readOnly": true
+        }
+      }
+    },
     "DataWarehouseUserActivityName": {
       "type": "string",
       "enum": [
@@ -1440,6 +1644,65 @@
             "description": "current"
           }
         ]
+      }
+    },
+    "DatabaseColumn": {
+      "type": "object",
+      "description": "A database column resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseColumnProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseColumnListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseColumn list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseColumn items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseColumn"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseColumnProperties": {
+      "type": "object",
+      "description": "Database column properties.",
+      "properties": {
+        "columnType": {
+          "$ref": "#/definitions/ColumnDataType",
+          "description": "The column data type."
+        },
+        "temporalType": {
+          "$ref": "#/definitions/TableTemporalType",
+          "description": "The table temporal type."
+        },
+        "memoryOptimized": {
+          "type": "boolean",
+          "description": "Whether or not the column belongs to a memory optimized table."
+        },
+        "isComputed": {
+          "type": "boolean",
+          "description": "Whether or not the column is computed."
+        }
       }
     },
     "DatabaseIdentityType": {
@@ -1464,6 +1727,38 @@
             "description": "UserAssigned"
           }
         ]
+      }
+    },
+    "DatabaseKey": {
+      "type": "object",
+      "description": "Database level key used for encryption at rest.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DatabaseKeyType",
+          "description": "The database key type. Only supported value is 'AzureKeyVault'.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the database key.",
+          "readOnly": true
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The database key creation date.",
+          "readOnly": true
+        },
+        "subregion": {
+          "type": "string",
+          "description": "Subregion of the server key.",
+          "readOnly": true
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The database key's version.",
+          "readOnly": true
+        }
       }
     },
     "DatabaseKeyType": {
@@ -1532,6 +1827,36 @@
         ]
       }
     },
+    "DatabaseSchema": {
+      "type": "object",
+      "description": "A database schema resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseSchemaListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseSchema list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseSchema items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseSchema"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DatabaseSecurityAlertPolicyName": {
       "type": "string",
       "enum": [
@@ -1548,6 +1873,204 @@
           }
         ]
       }
+    },
+    "DatabaseSqlVulnerabilityAssessmentBaselineSet": {
+      "type": "object",
+      "description": "A database sql vulnerability assessment baseline set.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseSqlVulnerabilityAssessmentBaselineSetProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentBaselineSetListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseSqlVulnerabilityAssessmentBaselineSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseSqlVulnerabilityAssessmentBaselineSet items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseSqlVulnerabilityAssessmentBaselineSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentBaselineSetProperties": {
+      "type": "object",
+      "description": "Properties of a database Sql Vulnerability Assessment baseline set.",
+      "properties": {
+        "results": {
+          "type": "object",
+          "description": "The baseline set result",
+          "additionalProperties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type": "array"
+          }
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaseline": {
+      "type": "object",
+      "description": "A database sql vulnerability assessment rule baseline.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaselineInput": {
+      "type": "object",
+      "description": "A database sql vulnerability assessment rule baseline input.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties": {
+      "type": "object",
+      "description": "Properties of a database Sql Vulnerability Assessment rule baseline.",
+      "properties": {
+        "latestScan": {
+          "type": "boolean",
+          "description": "The latest scan flag"
+        },
+        "results": {
+          "type": "array",
+          "description": "The rule baseline result",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "latestScan",
+        "results"
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput": {
+      "type": "object",
+      "description": "A database sql vulnerability assessment rule baseline list input.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputProperties": {
+      "type": "object",
+      "description": "Properties of a database Sql Vulnerability Assessment rule baseline.",
+      "properties": {
+        "latestScan": {
+          "type": "boolean",
+          "description": "The latest scan flag"
+        },
+        "results": {
+          "type": "object",
+          "description": "The rule baseline result list",
+          "additionalProperties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type": "array"
+          }
+        }
+      },
+      "required": [
+        "latestScan",
+        "results"
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaselineListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseSqlVulnerabilityAssessmentRuleBaseline list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseSqlVulnerabilityAssessmentRuleBaseline items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseSqlVulnerabilityAssessmentRuleBaseline"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties": {
+      "type": "object",
+      "description": "Properties of a database Sql Vulnerability Assessment rule baseline.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "The rule baseline result",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "results"
+      ]
     },
     "DatabaseState": {
       "type": "string",
@@ -1733,6 +2256,203 @@
           }
         ]
       }
+    },
+    "DatabaseTable": {
+      "type": "object",
+      "description": "A database table resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseTableProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseTableListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseTable list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseTable items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseTable"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseTableProperties": {
+      "type": "object",
+      "description": "Database table properties.",
+      "properties": {
+        "temporalType": {
+          "$ref": "#/definitions/TableTemporalType",
+          "description": "The table temporal type."
+        },
+        "memoryOptimized": {
+          "type": "boolean",
+          "description": "Whether or not the table is memory optimized."
+        }
+      }
+    },
+    "DatabaseVulnerabilityAssessment": {
+      "type": "object",
+      "description": "A database vulnerability assessment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseVulnerabilityAssessmentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseVulnerabilityAssessmentListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseVulnerabilityAssessment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseVulnerabilityAssessment items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseVulnerabilityAssessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseVulnerabilityAssessmentProperties": {
+      "type": "object",
+      "description": "Properties of a database Vulnerability Assessment.",
+      "properties": {
+        "storageContainerPath": {
+          "type": "string",
+          "description": "A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).  It is required if server level vulnerability assessment policy doesn't set",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "storageContainerSasKey": {
+          "type": "string",
+          "description": "A shared access signature (SAS Key) that has write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required. Applies only if the storage account is not behind a Vnet or a firewall",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "description": "Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required. Applies only if the storage account is not behind a Vnet or a firewall",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "recurringScans": {
+          "$ref": "#/definitions/VulnerabilityAssessmentRecurringScansProperties",
+          "description": "The recurring scans settings"
+        }
+      }
+    },
+    "DatabaseVulnerabilityAssessmentRuleBaseline": {
+      "type": "object",
+      "description": "A database vulnerability assessment rule baseline.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseVulnerabilityAssessmentRuleBaselineProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseVulnerabilityAssessmentRuleBaselineItem": {
+      "type": "object",
+      "description": "Properties for an Azure SQL Database Vulnerability Assessment rule baseline's result.",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "The rule baseline result",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "result"
+      ]
+    },
+    "DatabaseVulnerabilityAssessmentRuleBaselineProperties": {
+      "type": "object",
+      "description": "Properties of a database Vulnerability Assessment rule baseline.",
+      "properties": {
+        "baselineResults": {
+          "type": "array",
+          "description": "The rule baseline result",
+          "items": {
+            "$ref": "#/definitions/DatabaseVulnerabilityAssessmentRuleBaselineItem"
+          }
+        }
+      },
+      "required": [
+        "baselineResults"
+      ]
+    },
+    "DatabaseVulnerabilityAssessmentScanExportProperties": {
+      "type": "object",
+      "description": "Properties of the export operation's result.",
+      "properties": {
+        "exportedReportLocation": {
+          "type": "string",
+          "description": "Location of the exported report (e.g. https://myStorage.blob.core.windows.net/VaScans/scans/serverName/databaseName/scan_scanId.xlsx).",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseVulnerabilityAssessmentScansExport": {
+      "type": "object",
+      "description": "A database Vulnerability Assessment scan export resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseVulnerabilityAssessmentScanExportProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "DayOfWeek": {
       "type": "string",
@@ -2384,6 +3104,81 @@
         ]
       }
     },
+    "ImportExportOperationResult": {
+      "type": "object",
+      "description": "An ImportExport operation result resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportExportOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImportExportOperationResultProperties": {
+      "type": "object",
+      "description": "Contains the operation result properties for import/export operation.",
+      "properties": {
+        "requestId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Request Id.",
+          "readOnly": true
+        },
+        "requestType": {
+          "type": "string",
+          "description": "Request type.",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "type": "string",
+          "description": "Queued time.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Last modified time.",
+          "readOnly": true
+        },
+        "blobUri": {
+          "type": "string",
+          "description": "Blob Uri.",
+          "readOnly": true
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Server name.",
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Gets the status of private endpoints associated with this request.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "InaccessibilityReason": {
       "type": "string",
       "description": "Root cause kind. Allowed values are “TransparentDataEncryption”, “DatabaseReplication”, and “Unknown”.",
@@ -2588,6 +3383,22 @@
         ]
       }
     },
+    "JobExecution": {
+      "type": "object",
+      "description": "An execution of a job",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobExecutionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "JobExecutionLifecycle": {
       "type": "string",
       "description": "The detailed state of the job execution.",
@@ -2658,6 +3469,125 @@
             "description": "Skipped"
           }
         ]
+      }
+    },
+    "JobExecutionListResult": {
+      "type": "object",
+      "description": "The response of a JobExecution list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobExecution items on this page",
+          "items": {
+            "$ref": "#/definitions/JobExecution"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobExecutionProperties": {
+      "type": "object",
+      "description": "Properties for an Azure SQL Database Elastic job execution.",
+      "properties": {
+        "jobVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The job version number.",
+          "readOnly": true
+        },
+        "stepName": {
+          "type": "string",
+          "description": "The job step name.",
+          "readOnly": true
+        },
+        "stepId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The job step id.",
+          "readOnly": true
+        },
+        "jobExecutionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the job execution.",
+          "readOnly": true
+        },
+        "lifecycle": {
+          "$ref": "#/definitions/JobExecutionLifecycle",
+          "description": "The detailed state of the job execution.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The ARM provisioning state of the job execution.",
+          "readOnly": true
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the job execution was created.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the job execution started.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the job execution completed.",
+          "readOnly": true
+        },
+        "currentAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times the job execution has been attempted."
+        },
+        "currentAttemptStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the current attempt.",
+          "readOnly": true
+        },
+        "lastMessage": {
+          "type": "string",
+          "description": "The last status or error message.",
+          "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/JobExecutionTarget",
+          "description": "The target that this execution is executed on.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobExecutionTarget": {
+      "type": "object",
+      "description": "The target that a job execution is executed on.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/JobTargetType",
+          "description": "The type of the target.",
+          "readOnly": true
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The server name.",
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name.",
+          "readOnly": true
+        }
       }
     },
     "JobScheduleType": {
@@ -2928,6 +3858,72 @@
         ]
       }
     },
+    "MaintenanceWindowTimeRange": {
+      "type": "object",
+      "description": "Maintenance window time range.",
+      "properties": {
+        "dayOfWeek": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Day of maintenance window."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time minutes offset from 12am."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Duration of maintenance window in minutes."
+        }
+      }
+    },
+    "ManagedBackupShortTermRetentionPolicy": {
+      "type": "object",
+      "description": "A short term retention policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedBackupShortTermRetentionPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ManagedBackupShortTermRetentionPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedBackupShortTermRetentionPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedBackupShortTermRetentionPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a short term retention policy",
+      "properties": {
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The backup retention period in days. This is how many days Point-in-Time Restore will be supported."
+        }
+      }
+    },
     "ManagedDatabaseCreateMode": {
       "type": "string",
       "description": "Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).",
@@ -3159,6 +4155,56 @@
           }
         ]
       }
+    },
+    "ManagedInstancePrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/ManagedInstancePrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ManagedInstancePrivateLinkServiceConnectionStateProperty",
+          "description": "Connection State of the Private Endpoint Connection."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "State of the Private Endpoint Connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      }
+    },
+    "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "The private link service connection description.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "description"
+      ]
     },
     "ManagedInstanceProxyOverride": {
       "type": "string",
@@ -3480,6 +4526,28 @@
         ]
       }
     },
+    "NetworkIsolationSettings": {
+      "type": "object",
+      "description": "Contains the ARM resources for which to create private endpoint connection.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlServerResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
     "OperationMode": {
       "type": "string",
       "description": "Operation mode of the operation: Import, Export, or PolybaseImport.",
@@ -3678,6 +4746,63 @@
         ]
       }
     },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "Group IDs.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointProvisioningState",
+          "description": "State of the private endpoint connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestStatus": {
+      "type": "object",
+      "description": "Contains the private endpoint connection requests status.",
+      "properties": {
+        "privateLinkServiceId": {
+          "type": "string",
+          "description": "Resource id for which the private endpoint is created.",
+          "readOnly": true
+        },
+        "privateEndpointConnectionName": {
+          "type": "string",
+          "description": "The connection name for the private endpoint.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of this private endpoint connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      }
+    },
     "PrivateEndpointProvisioningState": {
       "type": "string",
       "description": "State of the private endpoint connection.",
@@ -3737,6 +4862,28 @@
           }
         ]
       }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateStatus",
+          "description": "The private link service connection status."
+        },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "actionsRequired": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateActionsRequire",
+          "description": "The actions required for private link service connection.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "description"
+      ]
     },
     "PrivateLinkServiceConnectionStateStatus": {
       "type": "string",
@@ -3814,6 +4961,132 @@
             "description": "Canceled"
           }
         ]
+      }
+    },
+    "ProxyResourceWithWritableName": {
+      "type": "object",
+      "description": "ARM proxy resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithWritableName"
+        }
+      ]
+    },
+    "QueryCheck": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment query check object.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule query.",
+          "readOnly": true
+        },
+        "expectedResult": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment query expected result.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "columnNames": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment column names of query expected result.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "QueryMetricInterval": {
+      "type": "object",
+      "description": "Properties of a query metrics interval.",
+      "properties": {
+        "intervalStartTime": {
+          "type": "string",
+          "description": "The start time for the metric interval (ISO-8601 format).",
+          "readOnly": true
+        },
+        "intervalType": {
+          "$ref": "#/definitions/QueryTimeGrainType",
+          "description": "Interval type (length).",
+          "readOnly": true
+        },
+        "executionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Execution count of a query in this interval.",
+          "readOnly": true
+        },
+        "metrics": {
+          "type": "array",
+          "description": "List of metric objects for this interval",
+          "items": {
+            "$ref": "#/definitions/QueryMetricProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryMetricProperties": {
+      "type": "object",
+      "description": "Properties of a topquery metric in one interval.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The UI appropriate name for the metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "#/definitions/QueryMetricUnitType",
+          "description": "The unit of the metric.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The value of the metric.",
+          "readOnly": true
+        },
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when min() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when max() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "avg": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when avg() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "sum": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when sum() aggregate function is used over the interval.",
+          "readOnly": true
+        },
+        "stdev": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value when stdev aggregate function is used over the interval.",
+          "readOnly": true
+        }
       }
     },
     "QueryMetricUnitType": {
@@ -3924,6 +5197,32 @@
         ]
       }
     },
+    "RecommendedAction": {
+      "type": "object",
+      "description": "Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendedActionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource kind.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "RecommendedActionCurrentState": {
       "type": "string",
       "description": "Current state the recommended action is in. Some commonly used states are: Active      -> recommended action is active and no action has been taken yet. Pending     -> recommended action is approved for and is awaiting execution. Executing   -> recommended action is being applied on the user database. Verifying   -> recommended action was applied and is being verified of its usefulness by the system. Success     -> recommended action was applied and improvement found during verification. Pending Revert  -> verification found little or no improvement so recommended action is queued for revert or user has manually reverted. Reverting   -> changes made while applying recommended action are being reverted on the user database. Reverted    -> successfully reverted the changes made by recommended action on user database. Ignored     -> user explicitly ignored/discarded the recommended action.",
@@ -4020,6 +5319,72 @@
         ]
       }
     },
+    "RecommendedActionErrorInfo": {
+      "type": "object",
+      "description": "Contains error information for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Gets the reason why the recommended action was put to error state. e.g., DatabaseHasQdsOff, IndexAlreadyExists",
+          "readOnly": true
+        },
+        "isRetryable": {
+          "$ref": "#/definitions/IsRetryable",
+          "description": "Gets whether the error could be ignored and recommended action could be retried. Possible values are: Yes/No",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionImpactRecord": {
+      "type": "object",
+      "description": "Contains information of estimated or observed impact on various metrics for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "dimensionName": {
+          "type": "string",
+          "description": "Gets the name of the impact dimension. e.g., CPUChange, DiskSpaceChange, NumberOfQueriesAffected.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets the name of the impact dimension. e.g., CPUChange, DiskSpaceChange, NumberOfQueriesAffected.",
+          "readOnly": true
+        },
+        "absoluteValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the absolute value of this dimension if applicable. e.g., Number of Queries affected",
+          "readOnly": true
+        },
+        "changeValueAbsolute": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the absolute change in the value of this dimension. e.g., Absolute Disk space change in Megabytes",
+          "readOnly": true
+        },
+        "changeValueRelative": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the relative change in the value of this dimension. e.g., Relative Disk space change in Percentage",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionImplementationInfo": {
+      "type": "object",
+      "description": "Contains information for manual implementation for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/ImplementationMethod",
+          "description": "Gets the method in which this recommended action can be manually implemented. e.g., TSql, AzurePowerShell.",
+          "readOnly": true
+        },
+        "script": {
+          "type": "string",
+          "description": "Gets the manual implementation script. e.g., T-SQL script that could be executed on the database.",
+          "readOnly": true
+        }
+      }
+    },
     "RecommendedActionInitiatedBy": {
       "type": "string",
       "description": "Gets if approval for applying this recommended action was given by user/system.",
@@ -4044,6 +5409,210 @@
         ]
       }
     },
+    "RecommendedActionMetricInfo": {
+      "type": "object",
+      "description": "Contains time series of various impacted metrics for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Gets the name of the metric. e.g., CPU, Number of Queries.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets the unit in which metric is measured. e.g., DTU, Frequency",
+          "readOnly": true
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Gets the duration of time interval for the value given by this MetricInfo. e.g., PT1H (1 hour)",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the start time of time interval given by this MetricInfo.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets the value of the metric in the time interval given by this MetricInfo.",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionProperties": {
+      "type": "object",
+      "description": "Properties for a Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "recommendationReason": {
+          "type": "string",
+          "description": "Gets the reason for recommending this action. e.g., DuplicateIndex",
+          "readOnly": true
+        },
+        "validSince": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time since when this recommended action is valid.",
+          "readOnly": true
+        },
+        "lastRefresh": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets time when this recommended action was last refreshed.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/RecommendedActionStateInfo",
+          "description": "Gets the info of the current state the recommended action is in."
+        },
+        "isExecutableAction": {
+          "type": "boolean",
+          "description": "Gets if this recommended action is actionable by user",
+          "readOnly": true
+        },
+        "isRevertableAction": {
+          "type": "boolean",
+          "description": "Gets if changes applied by this recommended action can be reverted by user",
+          "readOnly": true
+        },
+        "isArchivedAction": {
+          "type": "boolean",
+          "description": "Gets if this recommended action was suggested some time ago but user chose to ignore this and system added a new recommended action again.",
+          "readOnly": true
+        },
+        "executeActionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time when system started applying this recommended action on the user resource. e.g., index creation start time",
+          "readOnly": true
+        },
+        "executeActionDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Gets the time taken for applying this recommended action on user resource. e.g., time taken for index creation",
+          "readOnly": true
+        },
+        "revertActionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time when system started reverting changes of this recommended action on user resource. e.g., time when index drop is executed.",
+          "readOnly": true
+        },
+        "revertActionDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Gets the time taken for reverting changes of this recommended action on user resource. e.g., time taken for dropping the created index.",
+          "readOnly": true
+        },
+        "executeActionInitiatedBy": {
+          "$ref": "#/definitions/RecommendedActionInitiatedBy",
+          "description": "Gets if approval for applying this recommended action was given by user/system.",
+          "readOnly": true
+        },
+        "executeActionInitiatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time when this recommended action was approved for execution.",
+          "readOnly": true
+        },
+        "revertActionInitiatedBy": {
+          "$ref": "#/definitions/RecommendedActionInitiatedBy",
+          "description": "Gets if approval for reverting this recommended action was given by user/system.",
+          "readOnly": true
+        },
+        "revertActionInitiatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time when this recommended action was approved for revert.",
+          "readOnly": true
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the impact of this recommended action. Possible values are 1 - Low impact, 2 - Medium Impact and 3 - High Impact",
+          "readOnly": true
+        },
+        "implementationDetails": {
+          "$ref": "#/definitions/RecommendedActionImplementationInfo",
+          "description": "Gets the implementation details of this recommended action for user to apply it manually.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/RecommendedActionErrorInfo",
+          "description": "Gets the error details if and why this recommended action is put to error state.",
+          "readOnly": true
+        },
+        "estimatedImpact": {
+          "type": "array",
+          "description": "Gets the estimated impact info for this recommended action e.g., Estimated CPU gain, Estimated Disk Space change",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionImpactRecord"
+          },
+          "readOnly": true
+        },
+        "observedImpact": {
+          "type": "array",
+          "description": "Gets the observed/actual impact info for this recommended action e.g., Actual CPU gain, Actual Disk Space change",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionImpactRecord"
+          },
+          "readOnly": true
+        },
+        "timeSeries": {
+          "type": "array",
+          "description": "Gets the time series info of metrics for this recommended action e.g., CPU consumption time series",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionMetricInfo"
+          },
+          "readOnly": true
+        },
+        "linkedObjects": {
+          "type": "array",
+          "description": "Gets the linked objects, if any.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "details": {
+          "type": "object",
+          "description": "Gets additional details specific to this recommended action.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "RecommendedActionStateInfo": {
+      "type": "object",
+      "description": "Contains information of current state for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "properties": {
+        "currentValue": {
+          "$ref": "#/definitions/RecommendedActionCurrentState",
+          "description": "Current state the recommended action is in. Some commonly used states are: Active      -> recommended action is active and no action has been taken yet. Pending     -> recommended action is approved for and is awaiting execution. Executing   -> recommended action is being applied on the user database. Verifying   -> recommended action was applied and is being verified of its usefulness by the system. Success     -> recommended action was applied and improvement found during verification. Pending Revert  -> verification found little or no improvement so recommended action is queued for revert or user has manually reverted. Reverting   -> changes made while applying recommended action are being reverted on the user database. Reverted    -> successfully reverted the changes made by recommended action on user database. Ignored     -> user explicitly ignored/discarded the recommended action."
+        },
+        "actionInitiatedBy": {
+          "$ref": "#/definitions/RecommendedActionInitiatedBy",
+          "description": "Gets who initiated the execution of this recommended action. Possible Value are: User    -> When user explicity notified system to apply the recommended action. System  -> When auto-execute status of this advisor was set to 'Enabled', in which case the system applied it.",
+          "readOnly": true
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time when the state was last modified",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "currentValue"
+      ]
+    },
     "RecommendedSensitivityLabelSource": {
       "type": "string",
       "enum": [
@@ -4060,6 +5629,22 @@
           }
         ]
       }
+    },
+    "RecommendedSensitivityLabelUpdate": {
+      "type": "object",
+      "description": "A recommended sensitivity label update operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "RecommendedSensitivityLabelUpdateKind": {
       "type": "string",
@@ -4082,6 +5667,74 @@
             "description": "disable"
           }
         ]
+      }
+    },
+    "RecommendedSensitivityLabelUpdateList": {
+      "type": "object",
+      "description": "A list of recommended sensitivity label update operations.",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateProperties": {
+      "type": "object",
+      "description": "Properties of an operation executed on a recommended sensitivity label.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateKind"
+        },
+        "schema": {
+          "type": "string",
+          "description": "Schema name of the column to update."
+        },
+        "table": {
+          "type": "string",
+          "description": "Table name of the column to update."
+        },
+        "column": {
+          "type": "string",
+          "description": "Column name to update."
+        }
+      },
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ]
+    },
+    "Remediation": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment remediation Details.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment remediation description.",
+          "readOnly": true
+        },
+        "scripts": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment remediation script.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "automated": {
+          "type": "boolean",
+          "description": "SQL Vulnerability Assessment is remediation automated.",
+          "readOnly": true
+        },
+        "portalLink": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment optional link to remediate in Azure Portal.",
+          "readOnly": true
+        }
       }
     },
     "ReplicaConnectedState": {
@@ -4301,7 +5954,7 @@
           "type": "object",
           "description": "The resource ids of the user assigned identities to use",
           "additionalProperties": {
-            "$ref": "./managedInstances.json#/definitions/UserIdentity"
+            "$ref": "#/definitions/UserIdentity"
           }
         },
         "principalId": {
@@ -4316,6 +5969,26 @@
         "tenantId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory tenant id.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceWithWritableName": {
+      "type": "object",
+      "description": "ARM resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
           "readOnly": true
         }
       }
@@ -4493,6 +6166,25 @@
         ]
       }
     },
+    "SQLVulnerabilityAssessmentScanListResult": {
+      "type": "object",
+      "description": "A list of vulnerability assessment scan results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/SqlVulnerabilityAssessmentScanResults"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
     "SampleName": {
       "type": "string",
       "description": "The name of the sample schema to apply when creating this database.",
@@ -4624,6 +6316,56 @@
         ]
       }
     },
+    "SecurityAlertsPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a security alert policy.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/SecurityAlertsPolicyState",
+          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database."
+        },
+        "disabledAlerts": {
+          "type": "array",
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action, Brute_Force",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAccountAdmins": {
+          "type": "boolean",
+          "description": "Specifies that the alert is sent to the account administrators."
+        },
+        "storageEndpoint": {
+          "type": "string",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs."
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "description": "Specifies the identifier key of the Threat Detection audit storage account."
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the UTC creation time of the policy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
     "SecurityAlertsPolicyState": {
       "type": "string",
       "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.",
@@ -4702,6 +6444,96 @@
         ]
       }
     },
+    "SensitivityLabel": {
+      "type": "object",
+      "description": "A sensitivity label.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "Resource that manages the sensitivity label.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SensitivityLabelListResult": {
+      "type": "object",
+      "description": "The response of a SensitivityLabel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SensitivityLabel items on this page",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SensitivityLabelProperties": {
+      "type": "object",
+      "description": "Properties of a sensitivity label.",
+      "properties": {
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name.",
+          "readOnly": true
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name.",
+          "readOnly": true
+        },
+        "columnName": {
+          "type": "string",
+          "description": "The column name.",
+          "readOnly": true
+        },
+        "labelName": {
+          "type": "string",
+          "description": "The label name."
+        },
+        "labelId": {
+          "type": "string",
+          "description": "The label ID."
+        },
+        "informationType": {
+          "type": "string",
+          "description": "The information type."
+        },
+        "informationTypeId": {
+          "type": "string",
+          "description": "The information type ID."
+        },
+        "isDisabled": {
+          "type": "boolean",
+          "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
+          "readOnly": true
+        },
+        "rank": {
+          "$ref": "#/definitions/SensitivityLabelRank"
+        },
+        "clientClassificationSource": {
+          "$ref": "#/definitions/ClientClassificationSource"
+        }
+      }
+    },
     "SensitivityLabelRank": {
       "type": "string",
       "enum": [
@@ -4766,6 +6598,22 @@
         ]
       }
     },
+    "SensitivityLabelUpdate": {
+      "type": "object",
+      "description": "A sensitivity label update operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "SensitivityLabelUpdateKind": {
       "type": "string",
       "enum": [
@@ -4788,6 +6636,49 @@
           }
         ]
       }
+    },
+    "SensitivityLabelUpdateList": {
+      "type": "object",
+      "description": "A list of sensitivity label update operations.",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "SensitivityLabelUpdateProperties": {
+      "type": "object",
+      "description": "Properties of an operation executed on a sensitivity label.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/SensitivityLabelUpdateKind"
+        },
+        "schema": {
+          "type": "string",
+          "description": "Schema name of the column to update."
+        },
+        "table": {
+          "type": "string",
+          "description": "Table name of the column to update."
+        },
+        "column": {
+          "type": "string",
+          "description": "Column name to update."
+        },
+        "sensitivityLabel": {
+          "$ref": "#/definitions/SensitivityLabel",
+          "description": "The sensitivity label information to apply on a column."
+        }
+      },
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ]
     },
     "ServerConfigurationOptionName": {
       "type": "string",
@@ -5104,6 +6995,43 @@
         ]
       }
     },
+    "SqlVulnerabilityAssessment": {
+      "type": "object",
+      "description": "A SQL Vulnerability Assessment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SqlVulnerabilityAssessmentListResult": {
+      "type": "object",
+      "description": "The response of a SqlVulnerabilityAssessment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SqlVulnerabilityAssessment items on this page",
+          "items": {
+            "$ref": "#/definitions/SqlVulnerabilityAssessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "SqlVulnerabilityAssessmentName": {
       "type": "string",
       "enum": [
@@ -5120,6 +7048,239 @@
           }
         ]
       }
+    },
+    "SqlVulnerabilityAssessmentPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentState",
+          "description": "Specifies the state of the SQL Vulnerability Assessment, whether it is enabled or disabled or a state has not been applied yet on the specific database or server."
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentScanError": {
+      "type": "object",
+      "description": "Properties of a vulnerability assessment scan error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentScanRecord": {
+      "type": "object",
+      "description": "A vulnerability assessment scan record.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentScanRecordProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SqlVulnerabilityAssessmentScanRecordListResult": {
+      "type": "object",
+      "description": "The response of a SqlVulnerabilityAssessmentScanRecord list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SqlVulnerabilityAssessmentScanRecord items on this page",
+          "items": {
+            "$ref": "#/definitions/SqlVulnerabilityAssessmentScanRecord"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SqlVulnerabilityAssessmentScanRecordProperties": {
+      "type": "object",
+      "description": "Properties of a vulnerability assessment scan record.",
+      "properties": {
+        "scanId": {
+          "type": "string",
+          "description": "The scan ID.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "$ref": "#/definitions/VulnerabilityAssessmentScanTriggerType",
+          "description": "The scan trigger type.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/VulnerabilityAssessmentScanState",
+          "description": "The scan status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scan start time (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scan end time (UTC).",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "The scan errors.",
+          "items": {
+            "$ref": "#/definitions/SqlVulnerabilityAssessmentScanError"
+          },
+          "readOnly": true
+        },
+        "server": {
+          "type": "string",
+          "description": "The server name.",
+          "readOnly": true
+        },
+        "database": {
+          "type": "string",
+          "description": "The database name.",
+          "readOnly": true
+        },
+        "sqlVersion": {
+          "type": "string",
+          "description": "The SQL version.",
+          "readOnly": true
+        },
+        "highSeverityFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed rules with high severity.",
+          "readOnly": true
+        },
+        "mediumSeverityFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed rules with medium severity.",
+          "readOnly": true
+        },
+        "lowSeverityFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed rules with low severity.",
+          "readOnly": true
+        },
+        "totalPassedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total passed rules.",
+          "readOnly": true
+        },
+        "totalFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total failed rules.",
+          "readOnly": true
+        },
+        "totalRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total rules assessed.",
+          "readOnly": true
+        },
+        "isBaselineApplied": {
+          "type": "boolean",
+          "description": "Baseline created for this database, and has one or more rules.",
+          "readOnly": true
+        },
+        "lastScanTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last scan time.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentScanResultProperties": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment scan result properties for a single rule.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule Id.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus",
+          "description": "SQL Vulnerability Assessment rule result status.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment error message.",
+          "readOnly": true
+        },
+        "isTrimmed": {
+          "type": "boolean",
+          "description": "SQL Vulnerability Assessment is the query results trimmed.",
+          "readOnly": true
+        },
+        "queryResults": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment query results that was run.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "remediation": {
+          "$ref": "#/definitions/Remediation",
+          "description": "SQL Vulnerability Assessment the remediation details.",
+          "readOnly": true
+        },
+        "baselineAdjustedResult": {
+          "$ref": "#/definitions/BaselineAdjustedResult",
+          "description": "SQL Vulnerability Assessment rule result adjusted with baseline.",
+          "readOnly": true
+        },
+        "ruleMetadata": {
+          "$ref": "#/definitions/VaRule",
+          "description": "SQL Vulnerability Assessment rule metadata.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentScanResults": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentScanResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SqlVulnerabilityAssessmentState": {
       "type": "string",
@@ -5310,6 +7471,122 @@
             "description": "OneWayHubToMember"
           }
         ]
+      }
+    },
+    "SyncFullSchemaProperties": {
+      "type": "object",
+      "description": "Properties of the database full schema.",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "description": "List of tables in the database full schema.",
+          "items": {
+            "$ref": "#/definitions/SyncFullSchemaTable"
+          },
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time of the database schema.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncFullSchemaPropertiesListResult": {
+      "type": "object",
+      "description": "A list of sync schema properties.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SyncFullSchemaProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/SyncFullSchemaProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SyncFullSchemaTable": {
+      "type": "object",
+      "description": "Properties of the table in the database full schema.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "List of columns in the table of database full schema.",
+          "items": {
+            "$ref": "#/definitions/SyncFullSchemaTableColumn"
+          },
+          "readOnly": true
+        },
+        "errorId": {
+          "type": "string",
+          "description": "Error id of the table.",
+          "readOnly": true
+        },
+        "hasError": {
+          "type": "boolean",
+          "description": "If there is error in the table.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the table.",
+          "readOnly": true
+        },
+        "quotedName": {
+          "type": "string",
+          "description": "Quoted name of the table.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncFullSchemaTableColumn": {
+      "type": "object",
+      "description": "Properties of the column in the table of database full schema.",
+      "properties": {
+        "dataSize": {
+          "type": "string",
+          "description": "Data size of the column.",
+          "readOnly": true
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the column.",
+          "readOnly": true
+        },
+        "errorId": {
+          "type": "string",
+          "description": "Error id of the column.",
+          "readOnly": true
+        },
+        "hasError": {
+          "type": "boolean",
+          "description": "If there is error in the table.",
+          "readOnly": true
+        },
+        "isPrimaryKey": {
+          "type": "boolean",
+          "description": "If it is the primary key of the table.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the column.",
+          "readOnly": true
+        },
+        "quotedName": {
+          "type": "string",
+          "description": "Quoted name of the column.",
+          "readOnly": true
+        }
       }
     },
     "SyncGroupLogType": {
@@ -5599,6 +7876,47 @@
         ]
       }
     },
+    "TdeCertificate": {
+      "type": "object",
+      "description": "A TDE certificate that can be uploaded into a server.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TdeCertificateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TdeCertificateProperties": {
+      "type": "object",
+      "description": "Properties of a TDE certificate.",
+      "properties": {
+        "privateBlob": {
+          "type": "string",
+          "description": "The base64 encoded certificate private blob.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "certPassword": {
+          "type": "string",
+          "description": "The certificate password.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "privateBlob"
+      ]
+    },
     "TimeBasedImmutability": {
       "type": "string",
       "description": "The setting for whether or not time-based immutability is enabled for the LTR backup. When time-based immutability is enabled and locked, the backup cannot be deleted until BackupExpirationTime.",
@@ -5783,6 +8101,76 @@
         ]
       }
     },
+    "UserIdentity": {
+      "type": "object",
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "properties": {
+        "principalId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Azure Active Directory principal id.",
+          "readOnly": true
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Azure Active Directory client id.",
+          "readOnly": true
+        }
+      }
+    },
+    "VaRule": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment rule metadata details.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule Id.",
+          "readOnly": true
+        },
+        "severity": {
+          "$ref": "#/definitions/RuleSeverity",
+          "description": "SQL Vulnerability Assessment rule severity.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule category.",
+          "readOnly": true
+        },
+        "ruleType": {
+          "$ref": "#/definitions/RuleType",
+          "description": "SQL Vulnerability Assessment rule type.",
+          "readOnly": true
+        },
+        "title": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule title.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule description.",
+          "readOnly": true
+        },
+        "rationale": {
+          "type": "string",
+          "description": "SQL Vulnerability Assessment rule rationale.",
+          "readOnly": true
+        },
+        "queryCheck": {
+          "$ref": "#/definitions/QueryCheck",
+          "description": "SQL Vulnerability Assessment rule query details.",
+          "readOnly": true
+        },
+        "benchmarkReferences": {
+          "type": "array",
+          "description": "SQL Vulnerability Assessment benchmark references.",
+          "items": {
+            "$ref": "#/definitions/BenchmarkReference"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "VirtualNetworkRuleState": {
       "type": "string",
       "description": "Virtual Network Rule State",
@@ -5869,6 +8257,133 @@
             "description": "default"
           }
         ]
+      }
+    },
+    "VulnerabilityAssessmentRecurringScansProperties": {
+      "type": "object",
+      "description": "Properties of a Vulnerability Assessment recurring scans.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Recurring scans state."
+        },
+        "emailSubscriptionAdmins": {
+          "type": "boolean",
+          "description": "Specifies that the schedule scan notification will be is sent to the subscription administrators.",
+          "default": true
+        },
+        "emails": {
+          "type": "array",
+          "description": "Specifies an array of e-mail addresses to which the scan notification is sent.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VulnerabilityAssessmentScanError": {
+      "type": "object",
+      "description": "Properties of a vulnerability assessment scan error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "VulnerabilityAssessmentScanRecord": {
+      "type": "object",
+      "description": "A vulnerability assessment scan record.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VulnerabilityAssessmentScanRecordProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VulnerabilityAssessmentScanRecordListResult": {
+      "type": "object",
+      "description": "The response of a VulnerabilityAssessmentScanRecord list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VulnerabilityAssessmentScanRecord items on this page",
+          "items": {
+            "$ref": "#/definitions/VulnerabilityAssessmentScanRecord"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VulnerabilityAssessmentScanRecordProperties": {
+      "type": "object",
+      "description": "Properties of a vulnerability assessment scan record.",
+      "properties": {
+        "scanId": {
+          "type": "string",
+          "description": "The scan ID.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "$ref": "#/definitions/VulnerabilityAssessmentScanTriggerType",
+          "description": "The scan trigger type.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/VulnerabilityAssessmentScanState",
+          "description": "The scan status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scan start time (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scan end time (UTC).",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "The scan errors.",
+          "items": {
+            "$ref": "#/definitions/VulnerabilityAssessmentScanError"
+          },
+          "readOnly": true
+        },
+        "storageContainerPath": {
+          "type": "string",
+          "description": "The scan results storage container path.",
+          "readOnly": true
+        },
+        "numberOfFailedSecurityChecks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed security checks.",
+          "readOnly": true
+        }
       }
     },
     "VulnerabilityAssessmentScanState": {

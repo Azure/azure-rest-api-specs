@@ -336,7 +336,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResourceWithWritableName"
+          "$ref": "./common.json#/definitions/ProxyResourceWithWritableName"
         }
       ]
     },
@@ -372,35 +372,6 @@
       "required": [
         "value"
       ]
-    },
-    "ProxyResourceWithWritableName": {
-      "type": "object",
-      "description": "ARM proxy resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithWritableName"
-        }
-      ]
-    },
-    "ResourceWithWritableName": {
-      "type": "object",
-      "description": "ARM resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        }
-      }
     },
     "ServerFirewallRuleProperties": {
       "type": "object",

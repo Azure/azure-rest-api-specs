@@ -127,7 +127,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseColumnListResult"
+              "$ref": "./common.json#/definitions/DatabaseColumnListResult"
             }
           },
           "default": {
@@ -207,7 +207,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseColumnListResult"
+              "$ref": "./common.json#/definitions/DatabaseColumnListResult"
             }
           },
           "default": {
@@ -284,7 +284,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseColumn"
+              "$ref": "./common.json#/definitions/DatabaseColumn"
             }
           },
           "default": {
@@ -302,66 +302,6 @@
       }
     }
   },
-  "definitions": {
-    "DatabaseColumn": {
-      "type": "object",
-      "description": "A database column resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatabaseColumnProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DatabaseColumnListResult": {
-      "type": "object",
-      "description": "The response of a DatabaseColumn list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DatabaseColumn items on this page",
-          "items": {
-            "$ref": "#/definitions/DatabaseColumn"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DatabaseColumnProperties": {
-      "type": "object",
-      "description": "Database column properties.",
-      "properties": {
-        "columnType": {
-          "$ref": "./common.json#/definitions/ColumnDataType",
-          "description": "The column data type."
-        },
-        "temporalType": {
-          "$ref": "./common.json#/definitions/TableTemporalType",
-          "description": "The table temporal type."
-        },
-        "memoryOptimized": {
-          "type": "boolean",
-          "description": "Whether or not the column belongs to a memory optimized table."
-        },
-        "isComputed": {
-          "type": "boolean",
-          "description": "Whether or not the column is computed."
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

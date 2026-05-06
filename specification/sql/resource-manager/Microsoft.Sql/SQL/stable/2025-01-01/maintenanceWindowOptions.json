@@ -134,7 +134,7 @@
           "type": "array",
           "description": "Available maintenance cycles e.g. {Saturday, 0, 48*60}, {Wednesday, 0, 24*60}.",
           "items": {
-            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+            "$ref": "./common.json#/definitions/MaintenanceWindowTimeRange"
           }
         },
         "minDurationInMinutes": {
@@ -160,24 +160,6 @@
         "allowMultipleMaintenanceWindowsPerCycle": {
           "type": "boolean",
           "description": "Whether we allow multiple maintenance windows per cycle."
-        }
-      }
-    },
-    "MaintenanceWindowTimeRange": {
-      "type": "object",
-      "description": "Maintenance window time range.",
-      "properties": {
-        "dayOfWeek": {
-          "$ref": "./common.json#/definitions/DayOfWeek",
-          "description": "Day of maintenance window."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Start time minutes offset from 12am."
-        },
-        "duration": {
-          "type": "string",
-          "description": "Duration of maintenance window in minutes."
         }
       }
     }

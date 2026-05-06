@@ -1282,7 +1282,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "./managedInstancePrivateEndpointConnections.json#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
+          "$ref": "./common.json#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
           "description": "Private endpoint connection properties",
           "readOnly": true
         }
@@ -1650,7 +1650,7 @@
           "type": "array",
           "description": "List of intervals with appropriate metric data",
           "items": {
-            "$ref": "./managedDatabaseQueries.json#/definitions/QueryMetricInterval"
+            "$ref": "./common.json#/definitions/QueryMetricInterval"
           },
           "x-ms-identifiers": []
         }
@@ -1797,22 +1797,6 @@
       "required": [
         "value"
       ]
-    },
-    "UserIdentity": {
-      "type": "object",
-      "description": "Azure Active Directory identity configuration for a resource.",
-      "properties": {
-        "principalId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "The Azure Active Directory principal id.",
-          "readOnly": true
-        },
-        "clientId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "The Azure Active Directory client id.",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {}

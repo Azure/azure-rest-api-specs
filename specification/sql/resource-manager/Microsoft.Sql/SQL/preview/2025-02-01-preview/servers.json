@@ -513,7 +513,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./databases.json#/definitions/ImportExportOperationResult"
+              "$ref": "./common.json#/definitions/ImportExportOperationResult"
             }
           },
           "202": {
@@ -550,7 +550,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./databases.json#/definitions/ImportExportOperationResult"
+          "final-state-schema": "./common.json#/definitions/ImportExportOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -741,7 +741,7 @@
           ]
         },
         "networkIsolation": {
-          "$ref": "./databaseExtensions.json#/definitions/NetworkIsolationSettings",
+          "$ref": "./common.json#/definitions/NetworkIsolationSettings",
           "description": "Optional resource information to enable network isolation for request.",
           "x-ms-mutability": [
             "create"
@@ -931,7 +931,7 @@
           "type": "array",
           "description": "Gets the status of private endpoints associated with this request.",
           "items": {
-            "$ref": "./databaseExtensions.json#/definitions/PrivateEndpointConnectionRequestStatus"
+            "$ref": "./common.json#/definitions/PrivateEndpointConnectionRequestStatus"
           },
           "readOnly": true
         }
@@ -968,7 +968,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "./common.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "Private endpoint connection properties",
           "readOnly": true
         }

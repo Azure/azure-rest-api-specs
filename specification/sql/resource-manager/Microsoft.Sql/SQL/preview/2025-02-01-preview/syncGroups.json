@@ -586,7 +586,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SyncFullSchemaPropertiesListResult"
+              "$ref": "./common.json#/definitions/SyncFullSchemaPropertiesListResult"
             }
           },
           "default": {
@@ -863,46 +863,6 @@
     }
   },
   "definitions": {
-    "DataSyncParticipantIdentity": {
-      "type": "object",
-      "description": "Azure Active Directory identity configuration for a resource.",
-      "properties": {
-        "type": {
-          "$ref": "./common.json#/definitions/DataSyncParticipantIdentityType",
-          "description": "The Datasync identity type"
-        },
-        "tenantId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "The DataSync participant identity tenant id"
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The resource ids of the user assigned identities to use",
-          "additionalProperties": {
-            "$ref": "#/definitions/DataSyncParticipantUserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "DataSyncParticipantUserAssignedIdentity": {
-      "type": "object",
-      "description": "Azure Active Directory identity configuration for a resource.",
-      "properties": {
-        "principalId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "The Azure Active Directory principal id.",
-          "readOnly": true
-        },
-        "clientId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "The Azure Active Directory client id.",
-          "readOnly": true
-        }
-      }
-    },
     "SyncDatabaseIdListResult": {
       "type": "object",
       "description": "A list of sync database ID properties.",
@@ -935,122 +895,6 @@
         }
       }
     },
-    "SyncFullSchemaProperties": {
-      "type": "object",
-      "description": "Properties of the database full schema.",
-      "properties": {
-        "tables": {
-          "type": "array",
-          "description": "List of tables in the database full schema.",
-          "items": {
-            "$ref": "#/definitions/SyncFullSchemaTable"
-          },
-          "readOnly": true
-        },
-        "lastUpdateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last update time of the database schema.",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncFullSchemaPropertiesListResult": {
-      "type": "object",
-      "description": "A list of sync schema properties.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SyncFullSchemaProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/SyncFullSchemaProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SyncFullSchemaTable": {
-      "type": "object",
-      "description": "Properties of the table in the database full schema.",
-      "properties": {
-        "columns": {
-          "type": "array",
-          "description": "List of columns in the table of database full schema.",
-          "items": {
-            "$ref": "#/definitions/SyncFullSchemaTableColumn"
-          },
-          "readOnly": true
-        },
-        "errorId": {
-          "type": "string",
-          "description": "Error id of the table.",
-          "readOnly": true
-        },
-        "hasError": {
-          "type": "boolean",
-          "description": "If there is error in the table.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the table.",
-          "readOnly": true
-        },
-        "quotedName": {
-          "type": "string",
-          "description": "Quoted name of the table.",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncFullSchemaTableColumn": {
-      "type": "object",
-      "description": "Properties of the column in the table of database full schema.",
-      "properties": {
-        "dataSize": {
-          "type": "string",
-          "description": "Data size of the column.",
-          "readOnly": true
-        },
-        "dataType": {
-          "type": "string",
-          "description": "Data type of the column.",
-          "readOnly": true
-        },
-        "errorId": {
-          "type": "string",
-          "description": "Error id of the column.",
-          "readOnly": true
-        },
-        "hasError": {
-          "type": "boolean",
-          "description": "If there is error in the table.",
-          "readOnly": true
-        },
-        "isPrimaryKey": {
-          "type": "boolean",
-          "description": "If it is the primary key of the table.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the column.",
-          "readOnly": true
-        },
-        "quotedName": {
-          "type": "string",
-          "description": "Quoted name of the column.",
-          "readOnly": true
-        }
-      }
-    },
     "SyncGroup": {
       "type": "object",
       "description": "An Azure SQL Database sync group.",
@@ -1065,7 +909,7 @@
           "description": "The name and capacity of the SKU."
         },
         "identity": {
-          "$ref": "#/definitions/DataSyncParticipantIdentity",
+          "$ref": "./common.json#/definitions/DataSyncParticipantIdentity",
           "description": "Sync group authentication information."
         }
       },

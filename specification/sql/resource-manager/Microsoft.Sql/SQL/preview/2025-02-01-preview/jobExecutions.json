@@ -135,7 +135,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JobExecutionListResult"
+              "$ref": "./common.json#/definitions/JobExecutionListResult"
             }
           },
           "default": {
@@ -256,7 +256,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JobExecutionListResult"
+              "$ref": "./common.json#/definitions/JobExecutionListResult"
             }
           },
           "default": {
@@ -327,7 +327,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JobExecution"
+              "$ref": "./common.json#/definitions/JobExecution"
             }
           },
           "default": {
@@ -393,13 +393,13 @@
           "200": {
             "description": "Resource 'JobExecution' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/JobExecution"
+              "$ref": "./common.json#/definitions/JobExecution"
             }
           },
           "201": {
             "description": "Resource 'JobExecution' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/JobExecution"
+              "$ref": "./common.json#/definitions/JobExecution"
             },
             "headers": {
               "Location": {
@@ -441,7 +441,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/JobExecution"
+          "final-state-schema": "./common.json#/definitions/JobExecution"
         },
         "x-ms-long-running-operation": true
       }
@@ -554,7 +554,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JobExecution"
+              "$ref": "./common.json#/definitions/JobExecution"
             }
           },
           "202": {
@@ -585,148 +585,12 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/JobExecution"
+          "final-state-schema": "./common.json#/definitions/JobExecution"
         },
         "x-ms-long-running-operation": true
       }
     }
   },
-  "definitions": {
-    "JobExecution": {
-      "type": "object",
-      "description": "An execution of a job",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobExecutionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "JobExecutionListResult": {
-      "type": "object",
-      "description": "The response of a JobExecution list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The JobExecution items on this page",
-          "items": {
-            "$ref": "#/definitions/JobExecution"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "JobExecutionProperties": {
-      "type": "object",
-      "description": "Properties for an Azure SQL Database Elastic job execution.",
-      "properties": {
-        "jobVersion": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The job version number.",
-          "readOnly": true
-        },
-        "stepName": {
-          "type": "string",
-          "description": "The job step name.",
-          "readOnly": true
-        },
-        "stepId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The job step id.",
-          "readOnly": true
-        },
-        "jobExecutionId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the job execution.",
-          "readOnly": true
-        },
-        "lifecycle": {
-          "$ref": "./common.json#/definitions/JobExecutionLifecycle",
-          "description": "The detailed state of the job execution.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The ARM provisioning state of the job execution.",
-          "readOnly": true
-        },
-        "createTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time that the job execution was created.",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time that the job execution started.",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time that the job execution completed.",
-          "readOnly": true
-        },
-        "currentAttempts": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of times the job execution has been attempted."
-        },
-        "currentAttemptStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the current attempt.",
-          "readOnly": true
-        },
-        "lastMessage": {
-          "type": "string",
-          "description": "The last status or error message.",
-          "readOnly": true
-        },
-        "target": {
-          "$ref": "#/definitions/JobExecutionTarget",
-          "description": "The target that this execution is executed on.",
-          "readOnly": true
-        }
-      }
-    },
-    "JobExecutionTarget": {
-      "type": "object",
-      "description": "The target that a job execution is executed on.",
-      "properties": {
-        "type": {
-          "$ref": "./common.json#/definitions/JobTargetType",
-          "description": "The type of the target.",
-          "readOnly": true
-        },
-        "serverName": {
-          "type": "string",
-          "description": "The server name.",
-          "readOnly": true
-        },
-        "databaseName": {
-          "type": "string",
-          "description": "The database name.",
-          "readOnly": true
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

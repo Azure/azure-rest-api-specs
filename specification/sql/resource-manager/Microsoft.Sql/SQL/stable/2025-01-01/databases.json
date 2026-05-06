@@ -549,7 +549,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportExportOperationResult"
+              "$ref": "./common.json#/definitions/ImportExportOperationResult"
             }
           },
           "202": {
@@ -586,7 +586,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ImportExportOperationResult"
+          "final-state-schema": "./common.json#/definitions/ImportExportOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -731,7 +731,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportExportOperationResult"
+              "$ref": "./common.json#/definitions/ImportExportOperationResult"
             }
           },
           "202": {
@@ -768,7 +768,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ImportExportOperationResult"
+          "final-state-schema": "./common.json#/definitions/ImportExportOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1211,38 +1211,6 @@
         }
       }
     },
-    "DatabaseKey": {
-      "type": "object",
-      "description": "Database level key used for encryption at rest.",
-      "properties": {
-        "type": {
-          "$ref": "./common.json#/definitions/DatabaseKeyType",
-          "description": "The database key type. Only supported value is 'AzureKeyVault'.",
-          "readOnly": true
-        },
-        "thumbprint": {
-          "type": "string",
-          "description": "Thumbprint of the database key.",
-          "readOnly": true
-        },
-        "creationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The database key creation date.",
-          "readOnly": true
-        },
-        "subregion": {
-          "type": "string",
-          "description": "Subregion of the server key.",
-          "readOnly": true
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The database key's version.",
-          "readOnly": true
-        }
-      }
-    },
     "DatabaseListResult": {
       "type": "object",
       "description": "The response of a Database list operation.",
@@ -1508,7 +1476,7 @@
           "type": "object",
           "description": "The resource ids of the user assigned identities to use",
           "additionalProperties": {
-            "$ref": "#/definitions/DatabaseKey"
+            "$ref": "./common.json#/definitions/DatabaseKey"
           }
         },
         "encryptionProtector": {
@@ -1823,7 +1791,7 @@
           "type": "object",
           "description": "The resource ids of the user assigned identities to use",
           "additionalProperties": {
-            "$ref": "#/definitions/DatabaseKey"
+            "$ref": "./common.json#/definitions/DatabaseKey"
           }
         },
         "encryptionProtector": {
@@ -1921,7 +1889,7 @@
           ]
         },
         "networkIsolation": {
-          "$ref": "./databaseExtensions.json#/definitions/NetworkIsolationSettings",
+          "$ref": "./common.json#/definitions/NetworkIsolationSettings",
           "description": "Optional resource information to enable network isolation for request.",
           "x-ms-mutability": [
             "create"
@@ -1984,7 +1952,7 @@
           ]
         },
         "networkIsolation": {
-          "$ref": "./databaseExtensions.json#/definitions/NetworkIsolationSettings",
+          "$ref": "./common.json#/definitions/NetworkIsolationSettings",
           "description": "Optional resource information to enable network isolation for request.",
           "x-ms-mutability": [
             "create"
@@ -1997,81 +1965,6 @@
         "storageUri",
         "administratorLogin"
       ]
-    },
-    "ImportExportOperationResult": {
-      "type": "object",
-      "description": "An ImportExport operation result resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ImportExportOperationResultProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ImportExportOperationResultProperties": {
-      "type": "object",
-      "description": "Contains the operation result properties for import/export operation.",
-      "properties": {
-        "requestId": {
-          "$ref": "./common.json#/definitions/Azure.Core.uuid",
-          "description": "Request Id.",
-          "readOnly": true
-        },
-        "requestType": {
-          "type": "string",
-          "description": "Request type.",
-          "readOnly": true
-        },
-        "queuedTime": {
-          "type": "string",
-          "description": "Queued time.",
-          "readOnly": true
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "description": "Last modified time.",
-          "readOnly": true
-        },
-        "blobUri": {
-          "type": "string",
-          "description": "Blob Uri.",
-          "readOnly": true
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Server name.",
-          "readOnly": true
-        },
-        "databaseName": {
-          "type": "string",
-          "description": "Database name.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Operation status.",
-          "readOnly": true
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message.",
-          "readOnly": true
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "Gets the status of private endpoints associated with this request.",
-          "items": {
-            "$ref": "./databaseExtensions.json#/definitions/PrivateEndpointConnectionRequestStatus"
-          },
-          "readOnly": true
-        }
-      }
     },
     "ResourceMoveDefinition": {
       "type": "object",

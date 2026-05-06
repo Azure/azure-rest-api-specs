@@ -347,7 +347,7 @@
           ]
         },
         "networkIsolation": {
-          "$ref": "#/definitions/NetworkIsolationSettings",
+          "$ref": "./common.json#/definitions/NetworkIsolationSettings",
           "description": "Optional resource information to enable network isolation for request.",
           "x-ms-mutability": [
             "create"
@@ -449,53 +449,10 @@
           "type": "array",
           "description": "Gets the status of private endpoints associated with this request.",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+            "$ref": "./common.json#/definitions/PrivateEndpointConnectionRequestStatus"
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "NetworkIsolationSettings": {
-      "type": "object",
-      "description": "Contains the ARM resources for which to create private endpoint connection.",
-      "properties": {
-        "storageAccountResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "sqlServerResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      }
-    },
-    "PrivateEndpointConnectionRequestStatus": {
-      "type": "object",
-      "description": "Contains the private endpoint connection requests status.",
-      "properties": {
-        "privateLinkServiceId": {
-          "type": "string",
-          "description": "Resource id for which the private endpoint is created.",
-          "readOnly": true
-        },
-        "privateEndpointConnectionName": {
-          "type": "string",
-          "description": "The connection name for the private endpoint.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of this private endpoint connection.",
-          "readOnly": true
         }
       }
     }
