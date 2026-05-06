@@ -1049,28 +1049,28 @@ union ListViewType {
   All: "All",
 }
 
-@doc("Status of a job execution run.")
-union JobRunStatus {
+@doc("Status of a job execution attempt.")
+union JobAttemptStatus {
   string,
 
-  @doc("The run is queued.")
+  @doc("The attempt is queued.")
   Queued: "Queued",
 
-  @doc("The run is running.")
+  @doc("The attempt is running.")
   Running: "Running",
 
-  @doc("The run completed successfully.")
+  @doc("The attempt completed successfully.")
   Completed: "Completed",
 
-  @doc("The run failed.")
+  @doc("The attempt failed.")
   Failed: "Failed",
 
-  @doc("The run was canceled.")
+  @doc("The attempt was canceled.")
   Canceled: "Canceled",
 }
 
-@doc("Warning emitted during a job run.")
-model JobRunWarning {
+@doc("Warning emitted during a job attempt.")
+model JobAttemptWarning {
   @doc("Machine-readable warning code.")
   code?: string;
 
@@ -1081,8 +1081,8 @@ model JobRunWarning {
   details?: Record<unknown>;
 }
 
-@doc("Error emitted during a job run.")
-model JobRunError {
+@doc("Error emitted during a job attempt.")
+model JobAttemptError {
   @doc("Machine-readable error code.")
   code?: string;
 
@@ -1127,25 +1127,25 @@ model TrainingJobServiceCollection {
   services: Record<TrainingJobService>;
 }
 
-@doc("Compute placement details for a job run attempt.")
-model JobRunComputeDetails {
-  @doc("Virtual machine size used for this run attempt.")
+@doc("Compute placement details for a job attempt.")
+model JobAttemptComputeDetails {
+  @doc("Virtual machine size used for this attempt.")
   @visibility(Lifecycle.Read)
   vmSize?: string;
 
-  @doc("Instance type used for this run attempt.")
+  @doc("Instance type used for this attempt.")
   @visibility(Lifecycle.Read)
   instanceType?: string;
 
-  @doc("Number of instances allocated to this run attempt.")
+  @doc("Number of instances allocated to this attempt.")
   @visibility(Lifecycle.Read)
   instanceCount?: int32;
 
-  @doc("Number of GPUs allocated to this run attempt.")
+  @doc("Number of GPUs allocated to this attempt.")
   @visibility(Lifecycle.Read)
   gpuCount?: int32;
 
-  @doc("Region where this run attempt was placed.")
+  @doc("Region where this attempt was placed.")
   @visibility(Lifecycle.Read)
   region?: string;
 
@@ -1154,57 +1154,57 @@ model JobRunComputeDetails {
   properties?: Record<string>;
 }
 
-@doc("One execution run of a training job.")
-model JobRun {
-  @doc("The run identifier.")
+@doc("One execution attempt of a training job.")
+model JobAttempt {
+  @doc("The attempt identifier.")
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("The job name this run belongs to.")
+  @doc("The job name this attempt belongs to.")
   @visibility(Lifecycle.Read)
   jobName: string;
 
-  @doc("The run status.")
+  @doc("The attempt status.")
   @visibility(Lifecycle.Read)
-  status?: JobRunStatus;
+  status?: JobAttemptStatus;
 
   @doc("Additional status reason.")
   @visibility(Lifecycle.Read)
   statusReason?: string;
 
-  @doc("Time the run started.")
+  @doc("Time the attempt started.")
   @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
-  @doc("Time the run ended.")
+  @doc("Time the attempt ended.")
   @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
-  @doc("Most recent time the run started running.")
+  @doc("Most recent time the attempt started running.")
   @visibility(Lifecycle.Read)
   lastStartTimeUtc?: utcDateTime;
 
-  @doc("Total compute duration consumed by the run.")
+  @doc("Total compute duration consumed by the attempt.")
   @visibility(Lifecycle.Read)
   computeDuration?: duration;
 
-  @doc("Queueing details associated with the run.")
+  @doc("Queueing details associated with the attempt.")
   @visibility(Lifecycle.Read)
   queueingInfo?: Record<unknown>;
 
-  @doc("Compute details associated with the run.")
+  @doc("Compute details associated with the attempt.")
   @visibility(Lifecycle.Read)
-  computeDetails?: JobRunComputeDetails;
+  computeDetails?: JobAttemptComputeDetails;
 
-  @doc("Terminal error for the run, if any.")
+  @doc("Terminal error for the attempt, if any.")
   @visibility(Lifecycle.Read)
-  error?: JobRunError;
+  error?: JobAttemptError;
 
-  @doc("Warnings emitted for the run.")
+  @doc("Warnings emitted for the attempt.")
   @visibility(Lifecycle.Read)
-  warnings?: JobRunWarning[];
+  warnings?: JobAttemptWarning[];
 
-  @doc("Whether this run is the current run for the job.")
+  @doc("Whether this attempt is the current attempt for the job.")
   @visibility(Lifecycle.Read)
   isCurrent?: boolean;
 }

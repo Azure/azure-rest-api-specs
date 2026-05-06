@@ -144,12 +144,12 @@ interface TrainingJobOperations {
 }
 
 @tag("TrainingJobs")
-interface TrainingJobRuns {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job runs are projected from job execution history."
-  @doc("List runs for a training job.")
+interface TrainingJobAttempts {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job attempts are projected from job execution history."
+  @doc("List attempts for a training job.")
   @get
-  @route("/training_jobs/{jobName}/runs")
-  listRuns is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts")
+  listAttempts is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
@@ -158,25 +158,25 @@ interface TrainingJobRuns {
 
       ...JobContinuationListQueryParameters;
     },
-    Azure.Core.Page<JobRun>
+    Azure.Core.Page<JobAttempt>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job runs are projected from job execution history."
-  @doc("Get one run for a training job.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job attempts are projected from job execution history."
+  @doc("Get one attempt for a training job.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}")
-  getRun is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}")
+  getAttempt is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
     },
-    JobRun
+    JobAttempt
   >;
 }
 
@@ -271,41 +271,41 @@ interface TrainingJobArtifacts {
 }
 
 @tag("TrainingJobs")
-interface TrainingJobRunArtifacts {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
-  @doc("List artifacts for a specific training job run.")
+interface TrainingJobAttemptArtifacts {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
+  @doc("List artifacts for a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/artifacts")
-  listRunArtifacts is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/artifacts")
+  listAttemptArtifacts is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       ...JobArtifactListQueryParameters;
     },
     Azure.Core.Page<JobArtifact>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
-  @doc("Get metadata for an artifact from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
+  @doc("Get metadata for an artifact from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:metadata")
-  getRunArtifactMetadata is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/artifacts:metadata")
+  getAttemptArtifactMetadata is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The artifact path.")
       @query
@@ -314,20 +314,20 @@ interface TrainingJobRunArtifacts {
     JobArtifact
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
-  @doc("Get download information for an artifact from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
+  @doc("Get download information for an artifact from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:contentInfo")
-  getRunArtifactContentInfo is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/artifacts:contentInfo")
+  getAttemptArtifactContentInfo is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The artifact path.")
       @query
@@ -336,41 +336,41 @@ interface TrainingJobRunArtifacts {
     JobArtifactContentInfo
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
-  @doc("List download information for artifacts under a path prefix from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
+  @doc("List download information for artifacts under a path prefix from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:contentInfoByPrefix")
-  getRunArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/artifacts:contentInfoByPrefix")
+  getAttemptArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       ...JobArtifactContentInfoByPrefixQueryParameters;
     },
     Azure.Core.Page<JobArtifactContentInfo>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run artifacts are projected from the run data container."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
   #suppress "@azure-tools/typespec-azure-core/byos" "Job artifact content is produced by the job and streamed back to the caller."
-  @doc("Download artifact content from a specific training job run.")
+  @doc("Download artifact content from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/artifacts:content")
-  downloadRunArtifact is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/artifacts:content")
+  downloadAttemptArtifact is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The artifact path.")
       @query
@@ -494,59 +494,59 @@ interface TrainingJobMetrics {
 }
 
 @tag("TrainingJobs")
-interface TrainingJobRunMetrics {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
-  @doc("List metrics emitted by a specific training job run.")
+interface TrainingJobAttemptMetrics {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
+  @doc("List metrics emitted by a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/metrics")
-  listRunMetrics is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/metrics")
+  listAttemptMetrics is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       ...JobMetricListQueryParameters;
     },
     Azure.Core.Page<JobMetric>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
-  @doc("Get latest metric values for a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
+  @doc("Get latest metric values for a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/metrics:lastValues")
-  getRunMetricLastValues is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/metrics:lastValues")
+  getAttemptMetricLastValues is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
     },
     Azure.Core.Page<JobMetricLastValue>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
-  @doc("Get the full history for a metric from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
+  @doc("Get the full history for a metric from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}")
-  getRunMetric is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}")
+  getAttemptMetric is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The metric name.")
       @path
@@ -557,20 +557,20 @@ interface TrainingJobRunMetrics {
     Azure.Core.Page<JobMetricPoint>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
-  @doc("Get aggregate metric values from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
+  @doc("Get aggregate metric values from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:aggregates")
-  getRunMetricAggregates is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:aggregates")
+  getAttemptMetricAggregates is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The metric name.")
       @path
@@ -581,20 +581,20 @@ interface TrainingJobRunMetrics {
     Azure.Core.Page<JobMetricAggregate>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
-  @doc("Get sampled metric values from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
+  @doc("Get sampled metric values from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:samples")
-  getRunMetricSamples is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:samples")
+  getAttemptMetricSamples is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The metric name.")
       @path
@@ -605,20 +605,20 @@ interface TrainingJobRunMetrics {
     JobMetricSample
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run metrics are projected from the run data container."
-  @doc("Get one sampled value or window from a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
+  @doc("Get one sampled value or window from a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:sample")
-  getRunMetricSample is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:sample")
+  getAttemptMetricSample is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The metric name.")
       @path
@@ -667,40 +667,40 @@ interface TrainingJobOutputs {
 }
 
 @tag("TrainingJobs")
-interface TrainingJobRunOutputs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run outputs are projected from run output state and asset relationships."
-  @doc("List outputs produced by a specific training job run.")
+interface TrainingJobAttemptOutputs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from attempt output state and asset relationships."
+  @doc("List outputs produced by a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/outputs")
-  listRunOutputs is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/outputs")
+  listAttemptOutputs is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
     },
     Azure.Core.Page<JobOutputReference>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Run outputs are projected from run output state and asset relationships."
-  @doc("Get one output produced by a specific training job run.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from attempt output state and asset relationships."
+  @doc("Get one output produced by a specific training job attempt.")
   @get
-  @route("/training_jobs/{jobName}/runs/{runId}/outputs/{outputName}")
-  getRunOutput is FoundryDataPlaneRequiredPreviewOperation<
+  @route("/training_jobs/{jobName}/attempts/{attemptId}/outputs/{outputName}")
+  getAttemptOutput is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
       @doc("The training job name.")
       @path
       jobName: string;
 
-      @doc("The run identifier.")
+      @doc("The attempt identifier.")
       @path
-      runId: string;
+      attemptId: string;
 
       @doc("The output name.")
       @path

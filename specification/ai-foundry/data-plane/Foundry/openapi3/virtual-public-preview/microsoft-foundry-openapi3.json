@@ -15825,6 +15825,1470 @@
         ]
       }
     },
+    "/training_jobs/{jobName}/attempts": {
+      "get": {
+        "operationId": "TrainingJobAttempts_listAttempts",
+        "description": "List attempts for a training job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobAttempt"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}": {
+      "get": {
+        "operationId": "TrainingJobAttempts_getAttempt",
+        "description": "Get one attempt for a training job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobAttempt"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/artifacts": {
+      "get": {
+        "operationId": "TrainingJobAttemptArtifacts_listAttemptArtifacts",
+        "description": "List artifacts for a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "pathPrefix",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path prefix to list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/artifacts:content": {
+      "get": {
+        "operationId": "TrainingJobAttemptArtifacts_downloadAttemptArtifact",
+        "description": "Download artifact content from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/artifacts:contentInfo": {
+      "get": {
+        "operationId": "TrainingJobAttemptArtifacts_getAttemptArtifactContentInfo",
+        "description": "Get download information for an artifact from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobArtifactContentInfo"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/artifacts:contentInfoByPrefix": {
+      "get": {
+        "operationId": "TrainingJobAttemptArtifacts_getAttemptArtifactContentInfoByPrefix",
+        "description": "List download information for artifacts under a path prefix from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pathPrefix",
+            "in": "query",
+            "required": false,
+            "description": "Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobArtifactContentInfo"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/artifacts:metadata": {
+      "get": {
+        "operationId": "TrainingJobAttemptArtifacts_getAttemptArtifactMetadata",
+        "description": "Get metadata for an artifact from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The artifact path.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/metrics": {
+      "get": {
+        "operationId": "TrainingJobAttemptMetrics_listAttemptMetrics",
+        "description": "List metrics emitted by a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of items to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "description": "Continuation token returned by a previous list request.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetric"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}": {
+      "get": {
+        "operationId": "TrainingJobAttemptMetrics_getAttemptMetric",
+        "description": "Get the full history for a metric from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricPoint"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:aggregates": {
+      "get": {
+        "operationId": "TrainingJobAttemptMetrics_getAttemptMetricAggregates",
+        "description": "Get aggregate metric values from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricAggregate"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:sample": {
+      "get": {
+        "operationId": "TrainingJobAttemptMetrics_getAttemptMetricSample",
+        "description": "Get one sampled value or window from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobMetricSample"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/metrics/{metricName}:samples": {
+      "get": {
+        "operationId": "TrainingJobAttemptMetrics_getAttemptMetricSamples",
+        "description": "Get sampled metric values from a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "required": true,
+            "description": "The metric name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "Start of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "description": "End of the metric time range.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "explode": false
+          },
+          {
+            "name": "minStep",
+            "in": "query",
+            "required": false,
+            "description": "Minimum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxStep",
+            "in": "query",
+            "required": false,
+            "description": "Maximum metric step to include.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of metric points to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobMetricSample"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/metrics:lastValues": {
+      "get": {
+        "operationId": "TrainingJobAttemptMetrics_getAttemptMetricLastValues",
+        "description": "Get latest metric values for a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobMetricLastValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/outputs": {
+      "get": {
+        "operationId": "TrainingJobAttemptOutputs_listAttemptOutputs",
+        "description": "List outputs produced by a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJobOutputReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{jobName}/attempts/{attemptId}/outputs/{outputName}": {
+      "get": {
+        "operationId": "TrainingJobAttemptOutputs_getAttemptOutput",
+        "description": "Get one output produced by a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attemptId",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outputName",
+            "in": "path",
+            "required": true,
+            "description": "The output name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobOutputReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
     "/training_jobs/{jobName}/metrics": {
       "get": {
         "operationId": "TrainingJobMetrics_listMetrics",
@@ -16572,1470 +18036,6 @@
             "in": "path",
             "required": true,
             "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "outputName",
-            "in": "path",
-            "required": true,
-            "description": "The output name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobOutputReference"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs": {
-      "get": {
-        "operationId": "TrainingJobRuns_listRuns",
-        "description": "List runs for a training job.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "description": "Continuation token returned by a previous list request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobRun"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}": {
-      "get": {
-        "operationId": "TrainingJobRuns_getRun",
-        "description": "Get one run for a training job.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobRun"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/artifacts": {
-      "get": {
-        "operationId": "TrainingJobRunArtifacts_listRunArtifacts",
-        "description": "List artifacts for a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of items to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "description": "Continuation token returned by a previous list request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "pathPrefix",
-            "in": "query",
-            "required": false,
-            "description": "Artifact path prefix to list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobArtifact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/artifacts:content": {
-      "get": {
-        "operationId": "TrainingJobRunArtifacts_downloadRunArtifact",
-        "description": "Download artifact content from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The artifact path.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/artifacts:contentInfo": {
-      "get": {
-        "operationId": "TrainingJobRunArtifacts_getRunArtifactContentInfo",
-        "description": "Get download information for an artifact from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The artifact path.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobArtifactContentInfo"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/artifacts:contentInfoByPrefix": {
-      "get": {
-        "operationId": "TrainingJobRunArtifacts_getRunArtifactContentInfoByPrefix",
-        "description": "List download information for artifacts under a path prefix from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pathPrefix",
-            "in": "query",
-            "required": false,
-            "description": "Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "description": "Continuation token returned by a previous list request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobArtifactContentInfo"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/artifacts:metadata": {
-      "get": {
-        "operationId": "TrainingJobRunArtifacts_getRunArtifactMetadata",
-        "description": "Get metadata for an artifact from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The artifact path.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobArtifact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/metrics": {
-      "get": {
-        "operationId": "TrainingJobRunMetrics_listRunMetrics",
-        "description": "List metrics emitted by a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of items to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "description": "Continuation token returned by a previous list request.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobMetric"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}": {
-      "get": {
-        "operationId": "TrainingJobRunMetrics_getRunMetric",
-        "description": "Get the full history for a metric from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "metricName",
-            "in": "path",
-            "required": true,
-            "description": "The metric name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "startTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "Start of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "endTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "End of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "minStep",
-            "in": "query",
-            "required": false,
-            "description": "Minimum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "maxStep",
-            "in": "query",
-            "required": false,
-            "description": "Maximum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of metric points to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobMetricPoint"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:aggregates": {
-      "get": {
-        "operationId": "TrainingJobRunMetrics_getRunMetricAggregates",
-        "description": "Get aggregate metric values from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "metricName",
-            "in": "path",
-            "required": true,
-            "description": "The metric name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "startTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "Start of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "endTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "End of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "minStep",
-            "in": "query",
-            "required": false,
-            "description": "Minimum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "maxStep",
-            "in": "query",
-            "required": false,
-            "description": "Maximum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of metric points to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobMetricAggregate"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:sample": {
-      "get": {
-        "operationId": "TrainingJobRunMetrics_getRunMetricSample",
-        "description": "Get one sampled value or window from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "metricName",
-            "in": "path",
-            "required": true,
-            "description": "The metric name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "startTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "Start of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "endTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "End of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "minStep",
-            "in": "query",
-            "required": false,
-            "description": "Minimum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "maxStep",
-            "in": "query",
-            "required": false,
-            "description": "Maximum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of metric points to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobMetricSample"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/metrics/{metricName}:samples": {
-      "get": {
-        "operationId": "TrainingJobRunMetrics_getRunMetricSamples",
-        "description": "Get sampled metric values from a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "metricName",
-            "in": "path",
-            "required": true,
-            "description": "The metric name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "startTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "Start of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "endTimeUtc",
-            "in": "query",
-            "required": false,
-            "description": "End of the metric time range.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "explode": false
-          },
-          {
-            "name": "minStep",
-            "in": "query",
-            "required": false,
-            "description": "Minimum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "maxStep",
-            "in": "query",
-            "required": false,
-            "description": "Maximum metric step to include.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "explode": false
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of metric points to return.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobMetricSample"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/metrics:lastValues": {
-      "get": {
-        "operationId": "TrainingJobRunMetrics_getRunMetricLastValues",
-        "description": "Get latest metric values for a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobMetricLastValue"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/outputs": {
-      "get": {
-        "operationId": "TrainingJobRunOutputs_listRunOutputs",
-        "description": "List outputs produced by a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedJobOutputReference"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{jobName}/runs/{runId}/outputs/{outputName}": {
-      "get": {
-        "operationId": "TrainingJobRunOutputs_getRunOutput",
-        "description": "Get one output produced by a specific training job run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The run identifier.",
             "schema": {
               "type": "string"
             }
@@ -26951,6 +26951,198 @@
         ],
         "description": "Type of a job artifact."
       },
+      "JobAttempt": {
+        "type": "object",
+        "required": [
+          "id",
+          "jobName"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The attempt identifier.",
+            "readOnly": true
+          },
+          "jobName": {
+            "type": "string",
+            "description": "The job name this attempt belongs to.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobAttemptStatus"
+              }
+            ],
+            "description": "The attempt status.",
+            "readOnly": true
+          },
+          "statusReason": {
+            "type": "string",
+            "description": "Additional status reason.",
+            "readOnly": true
+          },
+          "startTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the attempt started.",
+            "readOnly": true
+          },
+          "endTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the attempt ended.",
+            "readOnly": true
+          },
+          "lastStartTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Most recent time the attempt started running.",
+            "readOnly": true
+          },
+          "computeDuration": {
+            "type": "string",
+            "format": "duration",
+            "description": "Total compute duration consumed by the attempt.",
+            "readOnly": true
+          },
+          "queueingInfo": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Queueing details associated with the attempt.",
+            "readOnly": true
+          },
+          "computeDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobAttemptComputeDetails"
+              }
+            ],
+            "description": "Compute details associated with the attempt.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobAttemptError"
+              }
+            ],
+            "description": "Terminal error for the attempt, if any.",
+            "readOnly": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobAttemptWarning"
+            },
+            "description": "Warnings emitted for the attempt.",
+            "readOnly": true
+          },
+          "isCurrent": {
+            "type": "boolean",
+            "description": "Whether this attempt is the current attempt for the job.",
+            "readOnly": true
+          }
+        },
+        "description": "One execution attempt of a training job."
+      },
+      "JobAttemptComputeDetails": {
+        "type": "object",
+        "properties": {
+          "vmSize": {
+            "type": "string",
+            "description": "Virtual machine size used for this attempt.",
+            "readOnly": true
+          },
+          "instanceType": {
+            "type": "string",
+            "description": "Instance type used for this attempt.",
+            "readOnly": true
+          },
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of instances allocated to this attempt.",
+            "readOnly": true
+          },
+          "gpuCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs allocated to this attempt.",
+            "readOnly": true
+          },
+          "region": {
+            "type": "string",
+            "description": "Region where this attempt was placed.",
+            "readOnly": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional backend-specific compute placement properties.",
+            "readOnly": true
+          }
+        },
+        "description": "Compute placement details for a job attempt."
+      },
+      "JobAttemptError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Additional error details."
+          }
+        },
+        "description": "Error emitted during a job attempt."
+      },
+      "JobAttemptStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Queued",
+              "Running",
+              "Completed",
+              "Failed",
+              "Canceled"
+            ]
+          }
+        ],
+        "description": "Status of a job execution attempt."
+      },
+      "JobAttemptWarning": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable warning code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable warning message."
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Additional warning details."
+          }
+        },
+        "description": "Warning emitted during a job attempt."
+      },
       "JobCreate": {
         "type": "object",
         "required": [
@@ -27328,198 +27520,6 @@
           }
         },
         "description": "Compute Resource configuration for the job."
-      },
-      "JobRun": {
-        "type": "object",
-        "required": [
-          "id",
-          "jobName"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The run identifier.",
-            "readOnly": true
-          },
-          "jobName": {
-            "type": "string",
-            "description": "The job name this run belongs to.",
-            "readOnly": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobRunStatus"
-              }
-            ],
-            "description": "The run status.",
-            "readOnly": true
-          },
-          "statusReason": {
-            "type": "string",
-            "description": "Additional status reason.",
-            "readOnly": true
-          },
-          "startTimeUtc": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time the run started.",
-            "readOnly": true
-          },
-          "endTimeUtc": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Time the run ended.",
-            "readOnly": true
-          },
-          "lastStartTimeUtc": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Most recent time the run started running.",
-            "readOnly": true
-          },
-          "computeDuration": {
-            "type": "string",
-            "format": "duration",
-            "description": "Total compute duration consumed by the run.",
-            "readOnly": true
-          },
-          "queueingInfo": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Queueing details associated with the run.",
-            "readOnly": true
-          },
-          "computeDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobRunComputeDetails"
-              }
-            ],
-            "description": "Compute details associated with the run.",
-            "readOnly": true
-          },
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobRunError"
-              }
-            ],
-            "description": "Terminal error for the run, if any.",
-            "readOnly": true
-          },
-          "warnings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/JobRunWarning"
-            },
-            "description": "Warnings emitted for the run.",
-            "readOnly": true
-          },
-          "isCurrent": {
-            "type": "boolean",
-            "description": "Whether this run is the current run for the job.",
-            "readOnly": true
-          }
-        },
-        "description": "One execution run of a training job."
-      },
-      "JobRunComputeDetails": {
-        "type": "object",
-        "properties": {
-          "vmSize": {
-            "type": "string",
-            "description": "Virtual machine size used for this run attempt.",
-            "readOnly": true
-          },
-          "instanceType": {
-            "type": "string",
-            "description": "Instance type used for this run attempt.",
-            "readOnly": true
-          },
-          "instanceCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of instances allocated to this run attempt.",
-            "readOnly": true
-          },
-          "gpuCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of GPUs allocated to this run attempt.",
-            "readOnly": true
-          },
-          "region": {
-            "type": "string",
-            "description": "Region where this run attempt was placed.",
-            "readOnly": true
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Additional backend-specific compute placement properties.",
-            "readOnly": true
-          }
-        },
-        "description": "Compute placement details for a job run attempt."
-      },
-      "JobRunError": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Machine-readable error code."
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable error message."
-          },
-          "details": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Additional error details."
-          }
-        },
-        "description": "Error emitted during a job run."
-      },
-      "JobRunStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Queued",
-              "Running",
-              "Completed",
-              "Failed",
-              "Canceled"
-            ]
-          }
-        ],
-        "description": "Status of a job execution run."
-      },
-      "JobRunWarning": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Machine-readable warning code."
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable warning message."
-          },
-          "details": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "Additional warning details."
-          }
-        },
-        "description": "Warning emitted during a job run."
       },
       "JobType": {
         "anyOf": [
@@ -49257,6 +49257,27 @@
         },
         "description": "Paged collection of JobArtifactContentInfo items"
       },
+      "PagedJobAttempt": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobAttempt"
+            },
+            "description": "The JobAttempt items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of JobAttempt items"
+      },
       "PagedJobMetric": {
         "type": "object",
         "required": [
@@ -49361,27 +49382,6 @@
           }
         },
         "description": "Paged collection of JobOutputReference items"
-      },
-      "PagedJobRun": {
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/JobRun"
-            },
-            "description": "The JobRun items on this page"
-          },
-          "nextLink": {
-            "type": "string",
-            "format": "uri",
-            "description": "The link to the next page of items"
-          }
-        },
-        "description": "Paged collection of JobRun items"
       },
       "PagedManagedAgentIdentityBlueprint": {
         "type": "object",
