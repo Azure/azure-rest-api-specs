@@ -312,6 +312,9 @@ model AzureAIAgentTarget extends Target {
   /** The version of the Azure AI agent. */
   version?: string;
 
+  /** An array of tools the target agent may call while generating a response. */
+  tools?: OpenAI.Tool[];
+
   /** The parameters used to control the sampling behavior of the agent during text generation. */
   tool_descriptions?: ToolDescription[];
 }
@@ -489,6 +492,18 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
   target: Target;
 }
 
+/** Input messages accepted by conversation simulation eval runs. */
+union InputMessages {
+  /** A typed input-messages template for prompt agents. */
+  template: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate,
+
+  /** A typed input-messages item reference for prompt agents. */
+  itemReference: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
+
+  /** Freeform JSON object accepted for hosted agents with the invocations protocol. */
+  freeform: Record<unknown>,
+}
+
 /** Represents the parameters for conversation simulation item generation. */
 model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `conversation_gen_preview`. */
@@ -522,6 +537,13 @@ model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
 
   /** The parameters for conversation generation. */
   item_generation_params: ConversationGenPreviewItemGenerationParams;
+
+  /**
+   * Input messages configuration. For prompt agents, this must be a typed InputMessages object
+   * (template or item_reference). For hosted agents with invocations protocol, freeform JSON
+    * object is also accepted.
+   */
+  input_messages?: InputMessages;
 
   /** The target agent to simulate conversations against. */
   target: AzureAIAgentTarget;

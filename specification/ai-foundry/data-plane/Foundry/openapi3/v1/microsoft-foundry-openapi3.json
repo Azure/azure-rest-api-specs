@@ -12832,6 +12832,13 @@
             "type": "string",
             "description": "The version of the Azure AI agent."
           },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "An array of tools the target agent may call while generating a response."
+          },
           "tool_descriptions": {
             "type": "array",
             "items": {
@@ -12864,6 +12871,13 @@
           "version": {
             "type": "string",
             "description": "The version of the Azure AI agent."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "An array of tools the target agent may call while generating a response."
           },
           "tool_descriptions": {
             "type": "array",
@@ -14687,6 +14701,14 @@
               }
             ],
             "description": "The parameters for conversation generation."
+          },
+          "input_messages": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputMessages"
+              }
+            ],
+            "description": "Input messages configuration. For prompt agents, this must be a typed InputMessages object\n(template or item_reference). For hosted agents with invocations protocol, freeform JSON\nobject is also accepted."
           },
           "target": {
             "allOf": [
@@ -18869,6 +18891,21 @@
           }
         },
         "description": "Index resource Definition"
+      },
+      "InputMessages": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference"
+          },
+          {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        ],
+        "description": "Input messages accepted by conversation simulation eval runs."
       },
       "Insight": {
         "type": "object",
