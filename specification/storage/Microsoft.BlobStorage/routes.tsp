@@ -202,7 +202,8 @@ interface Service {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    @alternateType(string, "javascript,csharp")
+    @alternateType(string, "javascript,csharp,go")
+    @clientName("multipartContentType", "go")
     contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
@@ -218,6 +219,7 @@ interface Service {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
+    @alternateType(string, "go")
     contentType: "multipart/mixed";
 
     ...ApiVersionHeader;
@@ -448,7 +450,8 @@ interface Container {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    @alternateType(string, "javascript")
+    @alternateType(string, "javascript,go")
+    @clientName("multipartContentType", "go")
     contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
@@ -463,6 +466,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
+    @alternateType(string, "go")
     contentType: "multipart/mixed";
 
     ...RequestIdResponseHeader;

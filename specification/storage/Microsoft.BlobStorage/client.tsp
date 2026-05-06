@@ -138,14 +138,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
-// These are no-op, we need emitter support to make a pageable operation not automatically prefix list_
-// @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
-// @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
-
 @@clientName(BlobProperties.customerProvidedKeySha256,
   "encryptionKeySha256",
   "rust"
 );
+@@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
   "rust"
@@ -502,6 +499,13 @@ enum ImmutabilityPolicySetting {
   /** The immutability policy is unlocked. */
   Unlocked: "Unlocked",
 }
+/** The multipart body parameter. */
+alias MultipartBodyParameterGo = {
+  /** The body of the request. */
+  @body
+  @encode("bytes")
+  body: bytes;
+};
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
@@ -527,6 +531,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ExpiryTimeParameter.expiresOn, string, "go");
 @@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode,
   ImmutabilityPolicySetting,
+  "go"
+);
+@@alternateType(MultipartBodyParameter.body,
+  MultipartBodyParameterGo.body,
   "go"
 );
 @@alternateType(RehydratePriorityResponseHeader.rehydratePriority,
