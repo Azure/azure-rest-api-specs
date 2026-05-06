@@ -137,6 +137,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+@@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
+@@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 
 @@clientName(BlobProperties.customerProvidedKeySha256,
   "encryptionKeySha256",
