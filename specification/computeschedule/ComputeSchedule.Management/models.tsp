@@ -629,7 +629,7 @@ model ZonePreference {
 @doc("The zone allocation policy for distributing VMs across availability zones")
 model ZoneAllocationPolicy {
   @doc("The distribution strategy for zone allocation")
-  distributionStrategy?: DistributionStrategy;
+  distributionStrategy: DistributionStrategy;
 
   @identifiers(#[])
   @doc("The zone preferences for allocation priority")
