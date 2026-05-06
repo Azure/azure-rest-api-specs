@@ -21193,6 +21193,9 @@
     },
     "MoveIpConfigurationsRequest": {
       "type": "object",
+      "required": [
+        "moveIpConfigurationItems"
+      ],
       "properties": {
         "moveIpConfigurationItems": {
           "type": "array",
@@ -21206,17 +21209,34 @@
     },
     "MoveIpConfigurationItem": {
       "type": "object",
+      "required": [
+        "sourceIpConfiguration",
+        "targetIpConfiguration"
+      ],
       "properties": {
         "sourceIpConfiguration": {
-          "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration",
-          "description": "The source IP configuration. The caller can populate the Id property and other properties as needed."
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The source IP configuration to move. Only the resource ID is required."
         },
         "targetIpConfiguration": {
-          "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration",
-          "description": "The target IP configuration. The caller can populate the Id property and other properties as needed."
+          "$ref": "#/definitions/MoveIpConfigurationResourceReference",
+          "description": "The target IP configuration to move to. Only the resource ID is required."
         }
       },
       "description": "Represents a single IP configuration move operation."
+    },
+    "MoveIpConfigurationResourceReference": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the IP configuration (e.g. /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkInterfaces/{nic}/ipConfigurations/{ipconfig})."
+        }
+      },
+      "description": "A reference to an IP configuration resource by its resource ID."
     }
   },
   "parameters": {}
