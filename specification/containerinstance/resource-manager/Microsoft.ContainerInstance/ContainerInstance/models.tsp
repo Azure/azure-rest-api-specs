@@ -510,7 +510,7 @@ enum AzureFileShareAccessTier {
  * A container group part of the list result.
  */
 model ListResultContainerGroup {
-  ...ContainerGroupResource;
+  ...Resource;
   ...ListResultContainerGroupProperties;
 }
 
@@ -523,7 +523,7 @@ model ContainerGroupListResult is Azure.Core.Page<ListResultContainerGroup>;
  * The Resource model definition.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
-model ContainerGroupResource {
+model Resource {
   /**
    * The resource id.
    */
