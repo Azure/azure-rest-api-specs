@@ -1571,6 +1571,13 @@ model DiskRestorePointProperties {
    */
   @visibility(Lifecycle.Read)
   logicalSectorSize?: int32;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_02)
+  snapshotAccessState?: SnapshotAccessState;
 }
 
 /**
