@@ -1302,13 +1302,13 @@ model ListBlobsResponse {
   @Xml.name("ContainerName")
   containerName: string;
 
-  /** The prefix of the blobs. */
+  /** The prefix of the list operation. */
   @Xml.name("Prefix") prefix?: string;
 
-  /** The marker of the blobs. */
+  /** An opaque string value that identifies the portion of the result set returned with this operation. */
   @Xml.name("Marker") marker?: string;
 
-  /** The max results of the blobs. */
+  /** The maximum number of blobs to be returned with this operation. */
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The list of blobs. */
@@ -2190,21 +2190,21 @@ alias SourceContentMd5Parameter = {
 
 /** The source if tags parameter. */
 alias SourceIfTagsParameter = {
-  /** Specifies a SQL-like where clause on blob tags to operate only on blobs with a matching value. */
+  /** Specifies a SQL-like where clause on blob tags to operate only on a source blob with matching tags. */
   @header("x-ms-source-if-tags")
   sourceIfTags?: string;
 };
 
 /** The source if match parameter. */
 alias SourceIfMatchParameter = {
-  /** Specify this value to operate only on a source blob with a matching value. */
+  /** Specify this value to operate only on a source blob with a matching Etag value. */
   @header("x-ms-source-if-match")
   sourceIfMatch?: Azure.Core.eTag;
 };
 
 /** The source if none match parameter. */
 alias SourceIfNoneMatchParameter = {
-  /** Specify this value to operate only on a source blob if it has been modified since the specified date-time. */
+  /** Specify this value to operate only on a source blob with a non-matching Etag value. */
   @header("x-ms-source-if-none-match")
   sourceIfNoneMatch?: Azure.Core.eTag;
 };
@@ -2465,44 +2465,44 @@ alias AccessTierIfUnmodifiedSinceParameter = {
   accessTierIfUnmodifiedSince?: utcDateTime;
 };
 
-/** The If-Tags parameters. */
+/** The If-Tags parameter. */
 alias IfTagsParameter = {
-  /** Specify a SQL where clause on blob tags to operate only on blobs with a matching value. */
+  /** Specifies a SQL-like where clause on blob tags to operate only on a blob with matching tags. */
   @header("x-ms-if-tags")
   ifTags?: string;
 };
 
 /** The If-Match parameter. */
 alias IfMatchParameter = {
-  /** A condition that must be met in order for the request to be processed. */
+  /** Specify this value to operate only on a blob with a matching Etag value. */
   @header("If-Match")
   ifMatch?: Azure.Core.eTag;
 };
 
 /** The If-None-Match parameter. */
 alias IfNoneMatchParameter = {
-  /** A condition that must be met in order for the request to be processed. */
+  /** Specify this value to operate only on a blob with a non-matching Etag value. */
   @header("If-None-Match")
   ifNoneMatch?: Azure.Core.eTag;
 };
 
 /** The range parameter. */
 alias RangeParameter = {
-  /** Return only the bytes of the blob in the specified range. */
+  /** Specifies the range of the blob to operate on. */
   @header("Range")
   range?: string;
 };
 
 /** The required range parameter. */
 alias RangeParameterRequired = {
-  /** Bytes of data in the specified range. */
+  /** Specifies the range of the blob to operate on. */
   @header("Range")
   range: string;
 };
 
 /** The version ID parameter. */
 alias VersionIdParameter = {
-  /** The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer. */
+  /** Specifies the version ID of the blob. */
   @query
   @clientName("versionId")
   versionid?: string;
@@ -2510,7 +2510,7 @@ alias VersionIdParameter = {
 
 /** The snapshot parameter. */
 alias SnapshotParameter = {
-  @doc("The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>")
+  /** Specifies the snapshot of the blob. */
   @query
   snapshot?: string;
 };
@@ -2534,7 +2534,7 @@ model BlobPrefix {
 
 /** Represents an list of blobs. */
 model BlobHierarchyListSegment {
-  /** The blob items */
+  /** The blob items. */
   @pageItems
   @Xml.name("Blob")
   @Xml.unwrapped
@@ -2546,7 +2546,7 @@ model BlobHierarchyListSegment {
   blobPrefixes?: BlobPrefix[];
 }
 
-/** An enumeration of blobs */
+/** The result of the List Blobs Hierarchical API. */
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
@@ -2565,13 +2565,13 @@ model ListBlobsHierarchySegmentResponse {
   /** The prefix of the blobs. */
   @Xml.name("Prefix") prefix?: string;
 
-  /** The marker of the blobs. */
+  /** An opaque string value that identifies the portion of the result set returned with this operation. */
   @Xml.name("Marker") marker?: string;
 
-  /** The max results of the blobs. */
+  /** The maximum number of blobs to be returned with this operation. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /** The blob segment. */
+  /** The list of blobs. */
   @Xml.name("Blobs")
   segment: BlobHierarchyListSegment;
 
@@ -2583,55 +2583,55 @@ model ListBlobsHierarchySegmentResponse {
 
 /** The list blob includes parameter. */
 alias ListBlobsIncludeParameter = {
-  /** Include this parameter to specify one or more datasets to include in the response. */
+  /** Specify to include additional, optional information. */
   @query
   include?: ListBlobsIncludeItem[];
 };
 
-/** The list blob includes parameter values. */
+/** Specifies additional datasets to include when listing blobs in a container. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListBlobsIncludeItem {
-  /** The include copies. */
+  /** Include copies. */
   Copy: "copy",
 
-  /** The include deleted blobs. */
+  /** Include deleted blobs. */
   Deleted: "deleted",
 
-  /** The include metadata. */
+  /** Include metadata. */
   Metadata: "metadata",
 
-  /** The include snapshots. */
+  /** Include snapshots. */
   Snapshots: "snapshots",
 
-  /** The include uncommitted blobs. */
+  /** Include uncommitted blobs. */
   UncommittedBlobs: "uncommittedblobs",
 
-  /** The include versions. */
+  /** Include versions. */
   Versions: "versions",
 
-  /** The include tags. */
+  /** Include tags. */
   Tags: "tags",
 
-  /** The include immutable policy. */
+  /** Include immutability policies. */
   ImmutabilityPolicy: "immutabilitypolicy",
 
-  /** The include legal hold. */
+  /** Include legal hold. */
   LegalHold: "legalhold",
 
-  /** The include deleted with versions. */
+  /** Include deleted with versions. */
   DeletedWithVersions: "deletedwithversions",
 }
 
-/** The lease duration parameter. */
+/** The lease duration response header. */
 alias LeaseDurationResponseHeader = {
-  /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
+  /** Specifies the duration of the lease. */
   @header("x-ms-lease-duration")
   duration?: LeaseDuration;
 };
 
 /** The lease duration parameter. */
 alias LeaseDurationHeaderParameter = {
-  /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
+  /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. */
   @header("x-ms-lease-duration")
   duration: int32;
 };
@@ -2646,7 +2646,7 @@ alias MetadataHeaders = {
 
 // NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
 alias ObjectReplicationHeaders = {
-  /** Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). */
+  /** Specifies the objection replication rules. */
   @alternateType(Record<string>, "rust,javascript,python,go")
   @header("x-ms-or")
   objectReplicationRules?: string;
@@ -2654,7 +2654,7 @@ alias ObjectReplicationHeaders = {
 
 /** The If-Unmodified-Since header. */
 alias IfUnmodifiedSinceParameter = {
-  /** A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time. */
+  /** Specify this value to operate only on a blob if it has not been modified since the specified date-time. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Unmodified-Since")
@@ -2663,7 +2663,7 @@ alias IfUnmodifiedSinceParameter = {
 
 /** The If-Modified-Since header. */
 alias IfModifiedSinceParameter = {
-  /** A date-time value. A request is made under the condition that the resource has been modified since the specified date-time. */
+  /** Specify this value to operate only on a blob if it has been modified since the specified date-time. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("If-Modified-Since")
@@ -2672,7 +2672,7 @@ alias IfModifiedSinceParameter = {
 
 /** The filter blobs include parameter. */
 alias FilterBlobsIncludeParameter = {
-  /** Include this parameter to specify one or more datasets to include in the response. */
+  /** Specify to include additional, optional information. */
   @query
   include?: FilterBlobsIncludeItem[];
 };
@@ -2693,7 +2693,7 @@ alias ContentLengthParameter = {
 
 /** The max results parameter. */
 alias MaxResultsParameter = {
-  /** Specifies the maximum number of containers to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items. */
+  /** Specifies the maximum number of resources to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items. */
   @query
   @minValue(1)
   maxresults?: int32;
@@ -2701,7 +2701,7 @@ alias MaxResultsParameter = {
 
 /** The marker parameter. */
 alias MarkerParameter = {
-  /** A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client. */
+  /** An opaque string value that identifies the portion of the result set to return with this operation. */
   @continuationToken
   @query
   marker?: string;
@@ -2709,27 +2709,27 @@ alias MarkerParameter = {
 
 /** The prefix parameter. */
 alias PrefixParameter = {
-  /** Filters the results to return only containers whose name begins with the specified prefix. */
+  /** Filters the results to return only resources whose name begins with the specified prefix. */
   @query prefix?: string;
 };
 
 /** The timeout parameter. */
 alias TimeoutParameter = {
-  @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
+  /** The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>") */
   @query
   @minValue(0)
   timeout?: int32;
 };
 
-/** The required lease ID header. */
+/** The required proposed lease ID header. */
 alias ProposedLeaseIdRequiredParameter = {
-  /** Required.  The proposed lease ID for the container. */
+  /** The proposed lease ID for the lease. */
   @header("x-ms-proposed-lease-id") proposedLeaseId: string;
 };
 
-/** The optional lease ID header. */
+/** The optional proposed lease ID header. */
 alias ProposedLeaseIdOptionalParameter = {
-  /** Optional.  The proposed lease ID for the container. */
+  /** The proposed lease ID for the lease. */
   @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
 };
 
@@ -2749,13 +2749,13 @@ alias MultipartBodyParameter = {
 };
 
 alias IsHierarchicalNamespaceEnabled = {
-  /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
+  /** Indicates if the account has a hierarchical namespace enabled. */
   @header("x-ms-is-hns-enabled")
   isHierarchicalNamespaceEnabled?: boolean;
 };
 
 alias StructuredBodyTypeResponseHeader = {
-  /** Indicates the response body contains a structured message and specifies the message schema version and properties. */
+  /** Indicates if the response body contains a structured message and specifies the message schema version and properties. */
   @access(Access.internal)
   @header("x-ms-structured-body")
   structuredBodyType?: string;
@@ -2786,52 +2786,56 @@ union FileShareTokenIntent {
   /** The file share token intent is backup. */
   Backup: "backup",
 
-  /** Extensible */
+  /** Extensible. */
   string,
 }
 
 alias FileRequestIntentParameter = {
-  /** Valid value is backup */
+  /** Specifies the file request token intent. */
   @header("x-ms-file-request-intent")
   fileRequestIntent?: FileShareTokenIntent;
 };
 
 alias ClientRequestIdHeader = {
+  /** An opaque, globally-unique, client-generated string identifier for the request. */
   @access(Access.internal)
   @header("x-ms-client-request-id")
-  @doc("An opaque, globally-unique, client-generated string identifier for the request.")
   clientRequestId?: uuid;
 };
 
 alias RequestIdResponseHeader = {
+  /** An opaque, globally-unique, server-generated string identifier for the request. */
   @access(Access.internal)
   @visibility(Lifecycle.Read)
   @header("x-ms-request-id")
-  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
   requestId?: uuid;
 };
 
 alias LeaseActionParameter<TAction extends string> = {
-  /** Describes what lease action to take. */
+  /** Specifies what lease action to take. */
   @header("x-ms-lease-action")
   action: TAction;
 };
 
 alias PageWriteParameter<TPageWrite extends string> = {
-  /** Required. You may specify one of the following options:\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size. */
+  /**
+   * Specifies the page write operation type.
+   * - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match.
+   * - Clear: Clears the specified range and releases the space used in storage. Set Content-Length to zero and Range to the range to clear.
+   */
   @header("x-ms-page-write")
   pageWrite: TPageWrite;
 };
 
 alias IfBlobMatchHeader = {
-  /** Specify an ETag value to operate only on blobs with a matching value. */
+  /** Specify this value to operate only on a blob with a matching Etag value. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-match")
   ifMatch?: Azure.Core.eTag;
 };
 
 alias IfBlobModifiedSinceHeader = {
-  /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  /** Specify this value to operate only on a blob if it has been modified since the specified date-time. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-modified-since")
   @encode("rfc7231")
@@ -2839,14 +2843,14 @@ alias IfBlobModifiedSinceHeader = {
 };
 
 alias IfBlobNoneMatchHeader = {
-  /** Specify an ETag value to operate only on blobs without a matching value. */
+  /** Specify this value to operate only on a blob with a non-matching Etag value. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-none-match")
   ifNoneMatch?: Azure.Core.eTag;
 };
 
 alias IfBlobUnmodifiedSinceHeader = {
-  /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  /** Specify this value to operate only on a blob if it has not been modified since the specified date-time. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-unmodified-since")
   @encode("rfc7231")
