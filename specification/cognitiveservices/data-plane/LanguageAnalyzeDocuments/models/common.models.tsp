@@ -866,7 +866,7 @@ model AbstractiveSummarizationTaskParametersBase {
 }
 
 /** The context of the summary. */
-model SummaryContext {
+model SummarySpan {
   /** Start position for the context. Use of different 'stringIndexType' values can affect the offset returned. */
   offset: int32;
 

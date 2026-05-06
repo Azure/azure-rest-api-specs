@@ -200,5 +200,5 @@ model AbstractiveSummary {
   text: string;
 
   /** The context list of the summary. */
-  contexts?: Array<SummaryContext>;
+  contexts?: Array<SummarySpan>;
 }
