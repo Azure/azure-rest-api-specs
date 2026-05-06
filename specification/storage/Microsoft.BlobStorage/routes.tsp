@@ -1250,7 +1250,7 @@ interface Blob {
     }
   >;
 
-  /** Starts an asynchronous copy of a blob to a destination within the storage account. */
+  /** Starts an asynchronous copy from a source URL to a destination blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1293,7 +1293,7 @@ interface Blob {
     }
   >;
 
-  /** Copies a blob to a destination within the storage account synchronously. */
+  /** Synchronously copies a blob from a source URL to the destination blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
