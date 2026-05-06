@@ -477,6 +477,23 @@ union TablePlanEnum {
 }
 
 /**
+ * The protection level of the table. Determines the default data access isolation behavior.
+ */
+union TableProtectionLevelEnum {
+  string,
+
+  /**
+   * The default protection level. Table data is accessible through standard permissions.
+   */
+  General: "General",
+
+  /**
+   * Table data is isolated by default. Accessing or exporting data requires explicit, scoped authorization.
+   */
+  Protected: "Protected",
+}
+
+/**
  * Column data type.
  */
 union ColumnTypeEnum {
@@ -2265,6 +2282,11 @@ model TableProperties {
   plan?: TablePlanEnum;
 
   /**
+   * The protection level of the table. Determines the default data access isolation behavior.
+   */
+  protectionLevel?: TableProtectionLevelEnum;
+
+  /**
    * The timestamp that table plan was last modified (UTC).
    */
   @visibility(Lifecycle.Read)
@@ -2845,6 +2867,12 @@ model WorkspaceFeatures {
    */
   @visibility(Lifecycle.Read)
   associations?: string[];
+
+  /**
+   * Enable Data authorization mode for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  dataAuthorizationMode?: boolean | null;
 }
 
 /**
