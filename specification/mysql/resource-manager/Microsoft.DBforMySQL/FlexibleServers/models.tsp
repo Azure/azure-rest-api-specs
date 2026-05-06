@@ -417,6 +417,7 @@ union replicationMode {
 /**
  * Specifies the health status of the read replica, whether it is healthy or unhealthy.
  */
+@added(Versions.v2025_12_01_preview)
 union ReaderEndpointReplicaState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -428,6 +429,7 @@ union ReaderEndpointReplicaState {
 /**
  * Specifies the routing method for a request, whether it is rotational or performance-based.
  */
+@added(Versions.v2025_12_01_preview)
 union ReaderEndpointRoutingMethod {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -439,6 +441,7 @@ union ReaderEndpointRoutingMethod {
 /**
  * Indicates whether should add source server to reader endpoint in case of failures.
  */
+@added(Versions.v2025_12_01_preview)
 union FailoverOnPrimary {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -450,6 +453,7 @@ union FailoverOnPrimary {
 /**
  * Indicates whether new replicas should automatically be added to the reader endpoint.
  */
+@added(Versions.v2025_12_01_preview)
 union AutoAddNewReplicas {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -461,6 +465,7 @@ union AutoAddNewReplicas {
 /**
  * The current provisioning state.
  */
+@added(Versions.v2025_12_01_preview)
 union ReaderEndpointProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -2512,6 +2517,7 @@ union Origin {
 /**
  * Properties of a reader endpoint resource.
  */
+@added(Versions.v2025_12_01_preview)
 model ReaderEndpointProperties {
   /**
    * The fully qualified domain name of a reader endpoint.
@@ -2562,6 +2568,7 @@ model ReaderEndpointProperties {
 /**
  * Information about the replica associated with reader endpoint.
  */
+@added(Versions.v2025_12_01_preview)
 model ReaderEndpointReplicaInfo {
   /**
    * Name of the replica server.
@@ -2578,4 +2585,5 @@ model ReaderEndpointReplicaInfo {
 /**
  * A list of the server's reader endpoints.
  */
+@added(Versions.v2025_12_01_preview)
 model ReaderEndpointList is Azure.Core.Page<ReaderEndpoint>;
