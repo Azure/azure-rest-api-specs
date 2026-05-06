@@ -1,8 +1,11 @@
 import "./src/common/service.tsp";
+import "./src/clusters/routes.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
 import "./src/deployments/routes.tsp";
+import "./src/jobs/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
 import "./src/evaluation-taxonomies/routes.tsp";
@@ -80,9 +83,12 @@ namespace Azure.AI.Projects;
 
 // Less generic names for C# subclients
 @@clientName(Connections, "AIProjectConnectionsOperations", "csharp");
+@@clientName(Clusters, "AIProjectClustersOperations", "csharp");
 @@clientName(Datasets, "AIProjectDatasetsOperations", "csharp");
 @@clientName(Deployments, "AIProjectDeploymentsOperations", "csharp");
 @@clientName(Indexes, "AIProjectIndexesOperations", "csharp");
+@@clientName(Models, "AIProjectModelsOperations", "csharp");
+@@clientName(TrainingJobs, "AIProjectTrainingJobsOperations", "csharp");
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Connections.get, "getConnection", "csharp");
@@ -99,6 +105,17 @@ namespace Azure.AI.Projects;
 @@clientName(Indexes.getVersion, "getIndex", "csharp");
 @@clientName(Indexes.listLatest, "listIndexes", "csharp");
 @@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
+@@clientName(TrainingJobs.create, "createTrainingJob", "csharp");
+@@clientName(TrainingJobs.get, "getTrainingJob", "csharp");
+@@clientName(TrainingJobs.list, "listTrainingJobs", "csharp");
+@@clientName(TrainingJobs.beginDelete,
+  "beginDeleteTrainingJob",
+  "csharp"
+);
+@@clientName(TrainingJobs.beginCancel,
+  "beginCancelTrainingJob",
+  "csharp"
+);
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.

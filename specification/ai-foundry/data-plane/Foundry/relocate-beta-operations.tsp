@@ -90,10 +90,12 @@ namespace Model {
   Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.TrainingJobRuns.listRuns,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttempts.listAttempts,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRuns.getRun, Model.TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttempts.getAttempt,
+  Model.TrainingJobs
+);
 
 @@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.listArtifacts,
   Model.TrainingJobs
@@ -108,16 +110,16 @@ namespace Model {
   Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.listRunArtifacts,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.listAttemptArtifacts,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.getRunArtifactMetadata,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactMetadata,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.getRunArtifactContentInfo,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactContentInfo,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunArtifacts.downloadRunArtifact,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.downloadAttemptArtifact,
   Model.TrainingJobs
 );
 
@@ -140,22 +142,22 @@ namespace Model {
   Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.listRunMetrics,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.listAttemptMetrics,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricLastValues,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricLastValues,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetric,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetric,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricAggregates,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricAggregates,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricSamples,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricSamples,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunMetrics.getRunMetricSample,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricSample,
   Model.TrainingJobs
 );
 
@@ -166,9 +168,9 @@ namespace Model {
   Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.TrainingJobRunOutputs.listRunOutputs,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptOutputs.listAttemptOutputs,
   Model.TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobRunOutputs.getRunOutput,
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptOutputs.getAttemptOutput,
   Model.TrainingJobs
 );
