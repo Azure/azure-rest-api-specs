@@ -20,14 +20,12 @@
       {
         "name": "endpoint",
         "in": "path",
+        "description": "The Azure Maps service hostname. Defaults to\n`https://atlas.microsoft.com` for the Azure public cloud. Use a\ngeography-specific host such as `https://us.atlas.microsoft.com` or\n`https://eu.atlas.microsoft.com`, or a sovereign-cloud host where\napplicable.",
         "required": true,
         "type": "string",
-        "enum": [
-          "https://atlas.microsoft.com"
-        ],
-        "x-ms-enum": {
-          "modelAsString": false
-        }
+        "format": "uri",
+        "default": "https://atlas.microsoft.com",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },

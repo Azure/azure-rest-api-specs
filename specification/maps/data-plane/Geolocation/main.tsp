@@ -42,7 +42,14 @@ model SasToken is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
   "{endpoint}",
   "Azure Maps Geolocation REST APIs",
   {
-    endpoint: "https://atlas.microsoft.com",
+    /**
+     * The Azure Maps service hostname. Defaults to
+     * `https://atlas.microsoft.com` for the Azure public cloud. Use a
+     * geography-specific host such as `https://us.atlas.microsoft.com` or
+     * `https://eu.atlas.microsoft.com`, or a sovereign-cloud host where
+     * applicable.
+     */
+    endpoint: url = "https://atlas.microsoft.com",
   }
 )
 namespace MapsGeolocation {
