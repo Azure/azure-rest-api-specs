@@ -736,12 +736,10 @@ model UserDelegationKey {
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
-  @encode("rfc7231")
   @Xml.name("SignedStart")
   signedStart: utcDateTime;
 
   /** The date-time the key expires. */
-  @encode("rfc7231")
   @Xml.name("SignedExpiry")
   signedExpiry: utcDateTime;
 
