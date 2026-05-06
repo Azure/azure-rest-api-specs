@@ -602,8 +602,6 @@ model VmSizeProfile {
   name: string;
 
   @doc("The rank of this VM size in the priority order")
-  @minValue(0)
-  @maxValue(65535)
   rank?: int32;
 }
 
@@ -624,8 +622,6 @@ model ZonePreference {
   zone: string;
 
   @doc("The rank of this zone in the priority order")
-  @minValue(0)
-  @maxValue(65535)
   rank?: int32;
 }
 
@@ -633,7 +629,7 @@ model ZonePreference {
 @doc("The zone allocation policy for distributing VMs across availability zones")
 model ZoneAllocationPolicy {
   @doc("The distribution strategy for zone allocation")
-  distributionStrategy: DistributionStrategy;
+  distributionStrategy?: DistributionStrategy;
 
   @identifiers(#[])
   @doc("The zone preferences for allocation priority")
