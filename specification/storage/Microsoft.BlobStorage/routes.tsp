@@ -154,7 +154,7 @@ interface Service {
       /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
       @query include?: Array<ListContainersIncludeType>;
     },
-    ListContainersSegmentResponse
+    ListContainersResponse
   >;
 
   /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
@@ -229,6 +229,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @list
   @route("?comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
     {
@@ -241,7 +242,7 @@ interface Service {
     {
       /** The filter blobs enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilterBlobResponse;
     }
   >;
 }
@@ -472,6 +473,7 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @list
   @route("?restype=container&comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
     {
@@ -484,7 +486,7 @@ interface Container {
     {
       /** The container filter blob enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilterBlobResponse;
     }
   >;
 

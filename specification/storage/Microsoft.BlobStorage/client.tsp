@@ -134,8 +134,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
+@@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
+@@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
+@@clientName(BlobProperties.customerProvidedKeySha256,
+  "encryptionKeySha256",
+  "rust"
+);
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
@@ -187,16 +193,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
 @@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
-@@clientName(FilterBlobSegment.nextMarker, "continuationToken", "javascript");
-@@clientName(ListContainersSegmentResponse.NextMarker,
+@@clientName(FilterBlobResponse.nextMarker, "continuationToken", "javascript");
+@@clientName(ListContainersResponse.NextMarker,
   "continuationToken",
   "javascript"
 );
 @@clientName(MaxResultsParameter.maxresults, "maxPageSize", "javascript");
-@@clientName(ListContainersSegmentResponse.maxResults,
-  "maxPageSize",
-  "javascript"
-);
+@@clientName(ListContainersResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(ListBlobsResponse.nextMarker, "continuationToken", "javascript");
 @@clientName(ListBlobsResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(PageList.nextMarker, "continuationToken", "javascript");
