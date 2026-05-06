@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./alternate-type-stubs.tsp";
+import "./csharp-alternate-type-stubs.tsp";
 import "./Compute/client.tsp";
 import "./ComputeDisk/client.tsp";
 import "./ComputeGallery/main.tsp";
