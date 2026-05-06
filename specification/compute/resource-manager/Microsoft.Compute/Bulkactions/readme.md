@@ -50,57 +50,6 @@ suppressions:
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
     where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: PathForNestedResource
-    reason:
-      bulkVmOperations is a singleton proxy endpoint used for service-level read status and is not a standard ARM nested tracked resource path.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/cancel"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/create"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/deallocate"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/delete"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/getOperationsStatus"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/hibernate"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/reimage"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/start"]
-  - code: PathForResourceAction
-    reason:
-      bulkactions is an API that executes operation on batch of VMs so they won't be within scope of a specific resource.
-    from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/vdiFlexCreate"]
-        
 ```
 
 ### Tag: package-2026-04-06-preview
