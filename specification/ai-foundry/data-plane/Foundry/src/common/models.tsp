@@ -163,7 +163,7 @@ model TracesJobSource {
   agent_version?: string;
 
   @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
-  start_time?: FoundryTimestamp;
+  start_time: FoundryTimestamp;
 
   @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
   end_time?: FoundryTimestamp;
