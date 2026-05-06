@@ -2,6 +2,7 @@ import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
@@ -107,6 +108,16 @@ namespace Azure.AI.Projects;
 @@clientName(Indexes.getVersion, "getIndex", "csharp");
 @@clientName(Indexes.listLatest, "listIndexes", "csharp");
 @@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
+
+// Models
+@@clientName(Models.getVersion, "getModelVersion", "csharp");
+@@clientName(Models.listVersions, "listModelVersions", "csharp");
+@@clientName(Models.listLatest, "listModelVersions", "csharp");
+@@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
+@@clientName(Models.createOrUpdateVersion, "createOrUpdateModelVersion", "csharp");
+@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
+@@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
+@@clientName(Models.getCredentials, "getModelCredentials", "csharp");
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.

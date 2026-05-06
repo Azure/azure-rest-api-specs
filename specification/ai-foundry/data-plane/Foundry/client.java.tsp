@@ -3,6 +3,7 @@ import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
@@ -95,6 +96,16 @@ namespace Azure.AI.Projects;
 @@clientName(Schedules.delete, "deleteSchedule");
 @@clientName(Schedules.getRun, "getScheduleRun");
 @@clientName(Schedules.listRuns, "listScheduleRuns");
+
+// Models
+@@clientName(Models.getVersion, "getModelVersion");
+@@clientName(Models.listVersions, "listModelVersions");
+@@clientName(Models.listLatest, "listLatestModelVersions");
+@@clientName(Models.deleteVersion, "deleteModelVersion");
+@@clientName(Models.createOrUpdateVersion, "createOrUpdateModelVersion");
+@@clientName(Models.createAsync, "createModelVersionAsync");
+@@clientName(Models.startPendingUpload, "startModelPendingUpload");
+@@clientName(Models.getCredentials, "getModelCredentials");
 
 // --------------------------------------------------------------------------------
 // Renames - models
