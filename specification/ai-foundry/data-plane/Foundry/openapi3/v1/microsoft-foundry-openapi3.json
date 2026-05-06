@@ -14036,7 +14036,7 @@
         "required": [
           "runtime",
           "entry_point",
-          "build_packages_remotely"
+          "dependency_resolution"
         ],
         "properties": {
           "runtime": {
@@ -14050,10 +14050,14 @@
             },
             "description": "The entry point command and arguments for the code execution."
           },
-          "build_packages_remotely": {
-            "type": "boolean",
-            "description": "Indicates how package dependencies are resolved at deployment time.\nWhen `true`, the service builds dependencies remotely from the manifest\nincluded in the uploaded zip. When `false` (the default), the caller is\nresponsible for bundling all dependencies into the uploaded zip and the\nservice performs no remote build.",
-            "default": false
+          "dependency_resolution": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CodeDependencyResolution"
+              }
+            ],
+            "description": "How package dependencies are resolved at deployment time. Defaults to `bundled`,\nwhere the caller bundles all dependencies into the uploaded zip and the service\nperforms no remote build. `remote_build` instructs the service to build\ndependencies remotely from the manifest included in the uploaded zip.",
+            "default": "bundled"
           },
           "content_hash": {
             "type": "string",
@@ -14067,6 +14071,21 @@
             "CodeAgents=V1Preview"
           ]
         }
+      },
+      "CodeDependencyResolution": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "bundled",
+              "remote_build"
+            ]
+          }
+        ],
+        "description": "How package dependencies are resolved at deployment time for a code-based hosted agent."
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
