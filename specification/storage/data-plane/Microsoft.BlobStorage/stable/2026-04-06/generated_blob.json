@@ -3095,7 +3095,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobSegment"
+              "$ref": "#/definitions/FilterBlobResponse"
             },
             "headers": {
               "Date": {
@@ -6706,7 +6706,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListContainersSegmentResponse"
+              "$ref": "#/definitions/ListContainersResponse"
             },
             "headers": {
               "Date": {
@@ -11989,7 +11989,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobSegment"
+              "$ref": "#/definitions/FilterBlobResponse"
             },
             "headers": {
               "Date": {
@@ -16387,7 +16387,7 @@
         "name": "Blob"
       }
     },
-    "FilterBlobSegment": {
+    "FilterBlobResponse": {
       "type": "object",
       "description": "The result of a Filter Blobs API call",
       "properties": {
@@ -16833,9 +16833,15 @@
           "x-ms-client-name": "maxResults"
         },
         "Blobs": {
-          "$ref": "#/definitions/BlobFlatListSegment",
-          "description": "The blob segment.",
-          "x-ms-client-name": "segment"
+          "type": "array",
+          "description": "The blob items.",
+          "items": {
+            "$ref": "#/definitions/BlobItem"
+          },
+          "xml": {
+            "wrapped": true
+          },
+          "x-ms-client-name": "blobItems"
         },
         "NextMarker": {
           "type": "string",
@@ -16882,9 +16888,9 @@
         ]
       }
     },
-    "ListContainersSegmentResponse": {
+    "ListContainersResponse": {
       "type": "object",
-      "description": "The list container segment response",
+      "description": "The list containers response",
       "properties": {
         "ServiceEndpoint": {
           "type": "string",
