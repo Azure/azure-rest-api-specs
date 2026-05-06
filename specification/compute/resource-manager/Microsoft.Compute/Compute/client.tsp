@@ -837,6 +837,85 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
+@@clientName(VMScaleSetLifecycleHookEvent,
+  "VmScaleSetLifecycleHookEvent",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventState,
+  "VmScaleSetLifecycleHookEventState",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventTargetResource,
+  "VmScaleSetLifecycleHookEventTargetResource",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventProperties,
+  "VmScaleSetLifecycleHookEventProperties",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventAdditionalContext,
+  "VmScaleSetLifecycleHookEventAdditionalContext",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventType,
+  "VmScaleSetLifecycleHookEventType",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventUpdate,
+  "VmScaleSetLifecycleHookEventUpdate",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventListResult,
+  "VmScaleSetLifecycleHookEventListResult",
+  "csharp"
+);
+
+// ── ID→Id casing renames on VMSS body parameters (C# backward compat) ──
+// back-compatible.tsp renames these to `vmInstanceIDs` for all languages; override to `vmInstanceIds` for C#.
+@@clientName(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.deallocate::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.deleteInstances::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.updateInstances::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.redeploy::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.reimageAll::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.restart::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSets.start::parameters.body,
+  "vmInstanceIds",
+  "csharp"
+);
+
+// ── VM→Vm casing renames on GalleryInVMAccessControlProfile path parameters (C# backward compat) ──
+// TODO: figure out the correct @@clientName target syntax for ResourceNameParameter-derived path params.
+// Currently the C# methods expose `inVMAccessControlProfileName` / `inVMAccessControlProfileVersionName` (KeyName casing).
 
 // ── IP→Ip casing renames (C# backward compat) ──
 @@clientName(VirtualMachineIpTag, "VirtualMachineIPTag", "csharp");
