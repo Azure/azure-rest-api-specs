@@ -3,11 +3,14 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource, "HorizonDBPrivateEndpointConnection");
+@@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate, "HorizonDBPrivateEndpointConnectionPatch");
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient");
 @@clientName(Microsoft.HorizonDb.CreateModeCluster, "HorizonDBCreateModeCluster");
 @@clientName(Microsoft.HorizonDb.CreateModePool, "HorizonDBCreateModePool");
 @@clientName(Microsoft.HorizonDb.HorizonDbCluster, "HorizonDBCluster");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate, "HorizonDBClusterForPatchUpdate");
+@@clientName(Microsoft.HorizonDb.HorizonDbClusterListResult, "HorizonDBClusterListResult");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties, "HorizonDBClusterParameterGroupConnectionProperties");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterProperties, "HorizonDBClusterProperties");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate, "HorizonDBClusterPropertiesForPatchUpdate");
@@ -36,8 +39,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.HorizonDb.HorizonDbReplicas, "HorizonDBReplicas");
 @@clientName(Microsoft.HorizonDb.ParameterProperties, "HorizonDBParameterProperties");
 @@clientName(Microsoft.HorizonDb.ParameterProperties, "HorizonDBParameterProperties");
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource, "HorizonDBPrivateEndpointConnection");
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate, "HorizonDBPrivateEndpointConnectionPatch");
 @@clientName(Microsoft.HorizonDb.ProvisioningState, "HorizonDBProvisioningState");
 @@clientName(Microsoft.HorizonDb.PublicNetworkAccessState, "HorizonDBPublicNetworkAccessState");
 @@clientName(Microsoft.HorizonDb.ReplicaRole, "HorizonDBReplicaRole");
