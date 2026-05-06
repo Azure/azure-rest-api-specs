@@ -2355,6 +2355,16 @@
         }
       }
     },
+    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "AzureFileShareAccessType": {
       "type": "string",
       "description": "Specifies how Container Groups can access the Azure file share i.e. all CG will share same Azure file share or going to have exclusive file share.",
@@ -5330,9 +5340,13 @@
       "description": "Properties of a SandboxGroup.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
-          "readOnly": true
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          ]
         },
         "networkProfile": {
           "$ref": "#/definitions/SandboxGroupNetworkProfile",
