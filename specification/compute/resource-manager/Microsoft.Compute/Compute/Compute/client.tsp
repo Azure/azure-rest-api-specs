@@ -327,6 +327,11 @@ model VMSizePropertiesWithAdditionalProperties {
   "java"
 );
 
+@@clientName(VirtualMachineScaleSets.getOSUpgradeHistory,
+  "listOSUpgradeHistory",
+  "javascript"
+);
+
 // C# operation location fixes — resolve collection result name collisions
 // Both "list" and "listAll" on the same interface get mapped to "GetAll",
 // causing duplicate CollectionResult type names. Move "listAll" to a separate

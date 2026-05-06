@@ -221,3 +221,9 @@ namespace ComputeCombine;
 
 // ── C# operation rename: ResourceSkus.list emits `GetAll`; restore baseline name. ──
 @@clientName(ComputeSku.ResourceSkus.list, "GetComputeResourceSkus", "csharp");
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(VirtualMachineScaleSetUpdateNetworkProfile.networkApiVersion,
+  false
+);
+@@apiVersion(NetworkProfile.networkApiVersion, false);
+@@apiVersion(ResourceSku.apiVersions, false);
