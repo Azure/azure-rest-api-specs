@@ -70,11 +70,8 @@ interface SaasOperationResults {
 
     /** The operation ID. */
     @path operationId: string,
-  ):
-    | ArmResponse<SaasResource>
-    | {
-        @statusCode statusCode: 202;
-        @header("Retry-After") retryAfter?: int32;
-      }
-    | ErrorResponse;
+  ): ArmResponse<SaasResource> | {
+    @statusCode statusCode: 202;
+    @header("Retry-After") retryAfter?: int32;
+  } | ErrorResponse;
 }
