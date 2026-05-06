@@ -3194,6 +3194,12 @@ model GatewayProperties {
    * Specifies the list of features that are enabled for this Gateway.
    */
   allowedFeatures?: string[];
+
+  /**
+   * Specifies the list of domain names that should bypass the gateway. Each entry must be a valid DNS hostname.
+   */
+  @added(Versions.v2026_06_04_preview)
+  gatewayBypass?: string[];
 }
 
 /**
@@ -3215,6 +3221,12 @@ model GatewayUpdateProperties {
    * Specifies the list of features that are enabled for this Gateway.
    */
   allowedFeatures?: string[];
+
+  /**
+   * Specifies the list of domain names that should bypass the gateway. Each entry must be a valid DNS hostname.
+   */
+  @added(Versions.v2026_06_04_preview)
+  gatewayBypass?: string[];
 }
 
 /**
