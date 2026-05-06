@@ -2170,6 +2170,16 @@
         "adrCertificatePolicyResourceId"
       ]
     },
+    "CertificateAuthorityCredentialsCreateOrUpdate": {
+      "type": "object",
+      "description": "Certificate authority credentials for device provisioning.",
+      "properties": {
+        "adrCertificatePolicyResourceId": {
+          "type": "string",
+          "description": "ADR certificate policy resource ID."
+        }
+      }
+    },
     "CertificateIssuanceOperationStatus": {
       "type": "object",
       "description": "Status monitor for the certificate issuance long-running operation.",
@@ -2723,61 +2733,6 @@
           "type": "string",
           "description": "Device operating system version."
         }
-      }
-    },
-    "DeviceProvisioningAuthentication": {
-      "type": "object",
-      "description": "Operational authentication information for device provisioning.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DeviceProvisioningAuthenticationType",
-          "description": "The authentication type."
-        },
-        "symmetricKey": {
-          "$ref": "#/definitions/SymmetricKeyCredentials",
-          "description": "Symmetric key details. Required when type is SymmetricKey."
-        },
-        "certificateAuthority": {
-          "$ref": "#/definitions/CertificateAuthorityCredentials",
-          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
-        },
-        "selfSignedThumbprints": {
-          "$ref": "#/definitions/SelfSignedThumbprints",
-          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "DeviceProvisioningAuthenticationType": {
-      "type": "string",
-      "description": "The authentication type for device provisioning.",
-      "enum": [
-        "SymmetricKey",
-        "CertificateAuthority",
-        "SelfSignedX509Certificate"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceProvisioningAuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SymmetricKey",
-            "value": "SymmetricKey",
-            "description": "Symmetric key authentication."
-          },
-          {
-            "name": "CertificateAuthority",
-            "value": "CertificateAuthority",
-            "description": "Certificate authority authentication."
-          },
-          {
-            "name": "SelfSignedX509Certificate",
-            "value": "SelfSignedX509Certificate",
-            "description": "Self-signed X.509 certificate authentication."
-          }
-        ]
       }
     },
     "DeviceResponse": {
@@ -3691,9 +3646,100 @@
         "installableUpdates"
       ]
     },
+    "IotHubAuthentication": {
+      "type": "object",
+      "description": "Operational authentication information for device provisioning.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IotHubAuthenticationType",
+          "description": "The authentication type."
+        },
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Symmetric key details. Required when type is SymmetricKey."
+        },
+        "certificateAuthority": {
+          "$ref": "#/definitions/CertificateAuthorityCredentials",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
+        },
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprints",
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "IotHubAuthenticationCreateOrUpdate": {
+      "type": "object",
+      "description": "Operational authentication information for device provisioning.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IotHubAuthenticationType",
+          "description": "The authentication type."
+        },
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentialsCreateOrUpdate",
+          "description": "Symmetric key details. Required when type is SymmetricKey."
+        },
+        "certificateAuthority": {
+          "$ref": "#/definitions/CertificateAuthorityCredentialsCreateOrUpdate",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
+        },
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprintsCreateOrUpdate",
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      }
+    },
+    "IotHubAuthenticationType": {
+      "type": "string",
+      "description": "The authentication type for IoT Hub.",
+      "enum": [
+        "SymmetricKey",
+        "CertificateAuthority",
+        "SelfSignedX509Certificate"
+      ],
+      "x-ms-enum": {
+        "name": "IotHubAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SymmetricKey",
+            "value": "SymmetricKey",
+            "description": "Symmetric key authentication."
+          },
+          {
+            "name": "CertificateAuthority",
+            "value": "CertificateAuthority",
+            "description": "Certificate authority authentication."
+          },
+          {
+            "name": "SelfSignedX509Certificate",
+            "value": "SelfSignedX509Certificate",
+            "description": "Self-signed X.509 certificate authentication."
+          }
+        ]
+      }
+    },
     "IotHubDeviceCapabilityProperties": {
       "type": "object",
       "description": "The device capability properties for an IoTHub capability",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/IotHubAuthentication",
+          "description": "IoT Hub's authentication information."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/IotHubEndpoint",
+          "description": "The IoT Hub's endpoint."
+        }
+      },
+      "required": [
+        "authentication",
+        "endpoint"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeviceCapabilityProperties"
@@ -3704,12 +3750,54 @@
     "IotHubDeviceCapabilityPropertiesCreateOrUpdate": {
       "type": "object",
       "description": "The device capability properties for an IoTHub capability",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/IotHubAuthenticationCreateOrUpdate",
+          "description": "IoT Hub's authentication information."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/IotHubEndpointCreateOrUpdate",
+          "description": "The IoT Hub's endpoint."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
         }
       ],
       "x-ms-discriminator-value": "IoTHub"
+    },
+    "IotHubEndpoint": {
+      "type": "object",
+      "description": "IoT Hub endpoint target for device provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net)."
+        }
+      },
+      "required": [
+        "name",
+        "address"
+      ]
+    },
+    "IotHubEndpointCreateOrUpdate": {
+      "type": "object",
+      "description": "IoT Hub endpoint target for device provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net)."
+        }
+      }
     },
     "IssuedCertificateChain": {
       "type": "array",
@@ -3960,11 +4048,11 @@
           "description": "The device identity in IoT Hub."
         },
         "targetEndpoint": {
-          "$ref": "#/definitions/TargetEndpoint",
+          "$ref": "#/definitions/IotHubEndpoint",
           "description": "The service endpoint identifier as returned by the GetNamespace API."
         },
         "authentication": {
-          "$ref": "#/definitions/DeviceProvisioningAuthentication",
+          "$ref": "#/definitions/IotHubAuthentication",
           "description": "Operational authentication configuration."
         },
         "deviceTwin": {
@@ -4096,6 +4184,20 @@
         "secondaryThumbprint"
       ]
     },
+    "SelfSignedThumbprintsCreateOrUpdate": {
+      "type": "object",
+      "description": "Self-signed X.509 certificate thumbprints for device authentication.",
+      "properties": {
+        "primaryThumbprint": {
+          "type": "string",
+          "description": "Primary certificate thumbprint."
+        },
+        "secondaryThumbprint": {
+          "type": "string",
+          "description": "Secondary certificate thumbprint."
+        }
+      }
+    },
     "StepResult": {
       "type": "object",
       "description": "The result of an individual installation step.",
@@ -4134,6 +4236,20 @@
         "primaryKey",
         "secondaryKey"
       ]
+    },
+    "SymmetricKeyCredentialsCreateOrUpdate": {
+      "type": "object",
+      "description": "Symmetric key authentication details.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "The primary symmetric key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The secondary symmetric key."
+        }
+      }
     },
     "SystemData": {
       "type": "object",
@@ -4189,24 +4305,6 @@
       "required": [
         "compatProperties",
         "agentProfile"
-      ]
-    },
-    "TargetEndpoint": {
-      "type": "object",
-      "description": "IoT Hub endpoint target for device provisioning.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the target endpoint."
-        },
-        "address": {
-          "type": "string",
-          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net)."
-        }
-      },
-      "required": [
-        "name",
-        "address"
       ]
     },
     "TwinProperties": {

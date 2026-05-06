@@ -27,7 +27,18 @@
             "properties": {
               "provisioningState": "Succeeded",
               "capabilityType": "IoTHub",
-              "capabilityProvider": "myPrimaryIotHubEndpoint"
+              "capabilityProvider": "myPrimaryIotHubEndpoint",
+              "authentication": {
+                "type": "SymmetricKey",
+                "symmetricKey": {
+                  "primaryKey": "dGhpcyBpcyBhIHByaW1hcnkga2V5",
+                  "secondaryKey": "dGhpcyBpcyBhIHNlY29uZGFyeSBrZXk="
+                }
+              },
+              "endpoint": {
+                "name": "my-iothub",
+                "address": "my-iothub.azure-devices.net"
+              }
             }
           }
         ]

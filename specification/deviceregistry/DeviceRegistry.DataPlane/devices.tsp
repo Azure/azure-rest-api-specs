@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
+import "./deviceCapabilities.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -75,68 +76,6 @@ model GetDeviceByExternalIdRequest {
   expandInfo?: boolean;
 }
 
-/** The authentication type for device provisioning. */
-union DeviceProvisioningAuthenticationType {
-  string,
-
-  /** Symmetric key authentication. */
-  SymmetricKey: "SymmetricKey",
-
-  /** Certificate authority authentication. */
-  CertificateAuthority: "CertificateAuthority",
-
-  /** Self-signed X.509 certificate authentication. */
-  SelfSignedX509Certificate: "SelfSignedX509Certificate",
-}
-
-/** Symmetric key authentication details. */
-model SymmetricKeyCredentials {
-  /** The primary symmetric key. */
-  primaryKey: string;
-
-  /** The secondary symmetric key. */
-  secondaryKey: string;
-}
-
-/** Self-signed X.509 certificate thumbprints for device authentication. */
-model SelfSignedThumbprints {
-  /** Primary certificate thumbprint. */
-  primaryThumbprint: string;
-
-  /** Secondary certificate thumbprint. */
-  secondaryThumbprint: string;
-}
-
-/** Operational authentication information for device provisioning. */
-model DeviceProvisioningAuthentication {
-  /** The authentication type. */
-  type: DeviceProvisioningAuthenticationType;
-
-  /** Symmetric key details. Required when type is SymmetricKey. */
-  symmetricKey?: SymmetricKeyCredentials;
-
-  /** Certificate authority credentials. Required when type is CertificateAuthority. */
-  certificateAuthority?: CertificateAuthorityCredentials;
-
-  /** Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate. */
-  selfSignedThumbprints?: SelfSignedThumbprints;
-}
-
-/** Certificate authority credentials for device provisioning. */
-model CertificateAuthorityCredentials {
-  /** ADR certificate policy resource ID. */
-  adrCertificatePolicyResourceId: string;
-}
-
-/** IoT Hub endpoint target for device provisioning. */
-model TargetEndpoint {
-  /** Display name of the target endpoint. */
-  name: string;
-
-  /** IoT Hub service endpoint address (e.g. myhub.azure-devices.net). */
-  address: string;
-}
-
 /** Device twin desired properties. */
 model TwinProperties {
   /** The desired properties to set on the device twin. */
@@ -160,10 +99,10 @@ model ProvisionDeviceRequest {
   iotHubDeviceId: string;
 
   /** The service endpoint identifier as returned by the GetNamespace API. */
-  targetEndpoint: TargetEndpoint;
+  targetEndpoint: IotHubEndpoint;
 
   /** Operational authentication configuration. */
-  authentication: DeviceProvisioningAuthentication;
+  authentication: IotHubAuthentication;
 
   /** Initial device twin configuration to apply during provisioning. */
   deviceTwin?: DeviceTwin;
