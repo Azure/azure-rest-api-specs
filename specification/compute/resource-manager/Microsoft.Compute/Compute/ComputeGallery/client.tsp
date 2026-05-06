@@ -173,8 +173,16 @@ using ComputeGallery;
   "PirSharedGalleryResourceData",
   "csharp"
 );
+@@clientName(PirSharedGalleryResource.identifier,
+  "galleryIdentifier",
+  "csharp"
+);
 @@clientName(PirCommunityGalleryResource,
   "PirCommunityGalleryResourceData",
+  "csharp"
+);
+@@clientName(PirCommunityGalleryResource.identifier,
+  "galleryIdentifier",
   "csharp"
 );
 
