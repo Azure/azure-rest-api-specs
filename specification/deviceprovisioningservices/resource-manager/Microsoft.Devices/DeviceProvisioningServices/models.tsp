@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 
@@ -356,6 +358,21 @@ model IotDpsPropertiesDescription {
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
+   * The Device Registry namespaces linked to the provisioning service, keyed by namespace resource ID.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary of namespace entries keyed by resource ID"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  deviceRegistryNamespaces?: Record<DeviceRegistryNamespaceDescription>;
+
+  /**
+   * The ADR linking state of the provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  adrLinkState?: AdrLinkingState;
+
+  /**
    * Allocation policy to be used by this provisioning service.
    */
   allocationPolicy?: AllocationPolicy;
@@ -394,6 +411,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC
+   */
+  @added(Versions.v2026_06_01_preview)
+  disableLocalAuth?: boolean;
 }
 
 /**
@@ -891,4 +914,32 @@ model CertificateBodyDescription {
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
   isVerified?: boolean;
+}
+
+/**
+ * The state of ADR linking for a provisioning service.
+ */
+@added(Versions.v2026_06_01_preview)
+union AdrLinkingState {
+  string,
+
+  /**
+   * The linking process is in progress.
+   */
+  Linking: "Linking",
+
+  /**
+   * The provisioning service is linked to a Device Registry namespace.
+   */
+  Linked: "Linked",
+
+  /**
+   * The linking process has failed.
+   */
+  LinkingFailed: "LinkingFailed",
+
+  /**
+   * The linked Device Registry namespace has been deleted.
+   */
+  NamespaceDeleted: "NamespaceDeleted",
 }
