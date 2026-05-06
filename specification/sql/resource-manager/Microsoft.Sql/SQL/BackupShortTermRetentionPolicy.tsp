@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A short term retention policy.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 model BackupShortTermRetentionPolicy
   is Azure.ResourceManager.ProxyResource<BackupShortTermRetentionPolicyProperties> {
   ...ResourceNameParameter<
@@ -28,6 +29,7 @@ model BackupShortTermRetentionPolicy
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 interface BackupShortTermRetentionPolicies {
   /**
    * Gets a database's short term retention policy.

@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A server configuration option
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ServerConfigurationOptions)
 model ServerConfigurationOption
   is Azure.ResourceManager.ProxyResource<ServerConfigurationOptionProperties> {
   ...ResourceNameParameter<
@@ -28,6 +29,7 @@ model ServerConfigurationOption
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerConfigurationOptions)
 interface ServerConfigurationOptions {
   /**
    * Gets managed instance server configuration option.

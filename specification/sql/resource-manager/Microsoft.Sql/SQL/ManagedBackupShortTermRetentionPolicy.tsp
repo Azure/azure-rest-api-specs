@@ -55,6 +55,9 @@ alias ManagedBackupShortTermRetentionPolicyOps = Azure.ResourceManager.Legacy.Le
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedBackupShortTermRetentionPolicies
+)
 interface ManagedBackupShortTermRetentionPolicies {
   /**
    * Gets a managed database's short term retention policy.
@@ -115,6 +118,9 @@ alias ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps = Azure.
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies
+)
 interface ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies {
   /**
    * Gets a dropped database's short term retention policy.

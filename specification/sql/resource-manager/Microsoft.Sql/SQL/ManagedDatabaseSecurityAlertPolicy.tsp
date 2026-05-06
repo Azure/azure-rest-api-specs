@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * A managed database security alert policy.
  */
 @parentResource(ManagedDatabase)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedDatabaseSecurityAlertPolicies
+)
 model ManagedDatabaseSecurityAlertPolicy
   is Azure.ResourceManager.ProxyResource<SecurityAlertPolicyProperties> {
   ...ResourceNameParameter<
@@ -28,6 +31,9 @@ model ManagedDatabaseSecurityAlertPolicy
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedDatabaseSecurityAlertPolicies
+)
 interface ManagedDatabaseSecurityAlertPolicies {
   /**
    * Gets a managed database's security alert policy.

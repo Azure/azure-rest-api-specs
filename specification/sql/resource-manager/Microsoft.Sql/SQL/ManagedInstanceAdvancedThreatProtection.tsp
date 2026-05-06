@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * A managed instance Advanced Threat Protection.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceAdvancedThreatProtectionSettings
+)
 model ManagedInstanceAdvancedThreatProtection
   is Azure.ResourceManager.ProxyResource<AdvancedThreatProtectionProperties> {
   ...ResourceNameParameter<
@@ -28,6 +31,9 @@ model ManagedInstanceAdvancedThreatProtection
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceAdvancedThreatProtectionSettings
+)
 interface ManagedInstanceAdvancedThreatProtections {
   /**
    * Get a managed instance's Advanced Threat Protection state.

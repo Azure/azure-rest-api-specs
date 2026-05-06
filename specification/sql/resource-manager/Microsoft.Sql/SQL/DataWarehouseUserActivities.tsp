@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * User activities of a data warehouse
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 model DataWarehouseUserActivities
   is Azure.ResourceManager.ProxyResource<DataWarehouseUserActivitiesProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model DataWarehouseUserActivities
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 interface DataWarehouseUserActivitiesOperationGroup {
   /**
    * Gets the user activities of a data warehouse which includes running and suspended queries

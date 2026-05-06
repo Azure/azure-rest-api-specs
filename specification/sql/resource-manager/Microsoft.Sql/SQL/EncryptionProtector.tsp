@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * The server encryption protector.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.EncryptionProtectors)
 model EncryptionProtector
   is Azure.ResourceManager.ProxyResource<EncryptionProtectorProperties> {
   ...ResourceNameParameter<
@@ -42,6 +43,7 @@ model EncryptionProtector
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.EncryptionProtectors)
 interface EncryptionProtectors {
   /**
    * Gets a server encryption protector.

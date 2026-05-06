@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * A restorable dropped managed database resource.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.RestorableDroppedManagedDatabases
+)
 model RestorableDroppedManagedDatabase
   is Azure.ResourceManager.TrackedResource<RestorableDroppedManagedDatabaseProperties> {
   ...ResourceNameParameter<
@@ -26,6 +29,9 @@ model RestorableDroppedManagedDatabase
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.RestorableDroppedManagedDatabases
+)
 interface RestorableDroppedManagedDatabases {
   /**
    * Gets a restorable dropped managed database.

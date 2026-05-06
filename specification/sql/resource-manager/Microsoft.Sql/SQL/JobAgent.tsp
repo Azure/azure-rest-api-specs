@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * An Azure SQL job agent.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgent is Azure.ResourceManager.TrackedResource<JobAgentProperties> {
   ...ResourceNameParameter<
     Resource = JobAgent,
@@ -42,6 +43,7 @@ interface JobAgents {
    * Gets a job agent.
    */
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   get is ArmResourceRead<JobAgent>;
 
   /**
@@ -49,6 +51,7 @@ interface JobAgents {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     JobAgent,
     Response = ArmResourceUpdatedResponse<JobAgent> | ArmResourceCreatedResponse<
@@ -63,6 +66,7 @@ interface JobAgents {
    */
   @patch(#{ implicitOptionality: false })
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   update is ArmCustomPatchAsync<JobAgent, PatchModel = JobAgentUpdate>;
 
   /**
@@ -70,6 +74,7 @@ interface JobAgents {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   delete is ArmResourceDeleteWithoutOkAsync<
     JobAgent,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -79,6 +84,7 @@ interface JobAgents {
    * Gets a list of job agents in a server.
    */
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   listByServer is ArmResourceListByParent<JobAgent>;
 
   /**
@@ -88,6 +94,7 @@ interface JobAgents {
   @list
   @get
   @action("executions")
+  @Azure.ResourceManager.Legacy.feature(Features.JobExecutions)
   listByAgent is ArmResourceActionSync<
     JobAgent,
     void,

@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A replication link.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLink
   is Azure.ResourceManager.ProxyResource<ReplicationLinkProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model ReplicationLink
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 interface ReplicationLinks {
   /**
    * Gets a replication link.

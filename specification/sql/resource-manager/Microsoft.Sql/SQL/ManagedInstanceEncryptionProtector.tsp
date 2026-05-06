@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * The managed instance encryption protector.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceEncryptionProtectors
+)
 model ManagedInstanceEncryptionProtector
   is Azure.ResourceManager.ProxyResource<ManagedInstanceEncryptionProtectorProperties> {
   ...ResourceNameParameter<
@@ -35,6 +38,9 @@ model ManagedInstanceEncryptionProtector
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceEncryptionProtectors
+)
 interface ManagedInstanceEncryptionProtectors {
   /**
    * Gets a managed instance encryption protector.

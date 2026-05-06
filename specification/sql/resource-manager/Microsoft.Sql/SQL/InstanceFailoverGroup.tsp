@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
  * An instance failover group.
  */
 @parentResource(ResourceGroupLocationResource)
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroup
   is Azure.ResourceManager.ProxyResource<InstanceFailoverGroupProperties> {
   ...ResourceNameParameter<
@@ -47,6 +48,7 @@ alias InstanceFailoverGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 interface InstanceFailoverGroups {
   /**
    * Gets a failover group.

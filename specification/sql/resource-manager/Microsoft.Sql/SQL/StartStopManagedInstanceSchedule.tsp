@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * Managed instance's Start/Stop schedule.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.StartStopManagedInstanceSchedules
+)
 model StartStopManagedInstanceSchedule
   is Azure.ResourceManager.ProxyResource<StartStopManagedInstanceScheduleProperties> {
   ...ResourceNameParameter<
@@ -27,6 +30,9 @@ model StartStopManagedInstanceSchedule
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.StartStopManagedInstanceSchedules
+)
 interface StartStopManagedInstanceSchedules {
   /**
    * Gets the managed instance's Start/Stop schedule.

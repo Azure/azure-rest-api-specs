@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A managed instance operation.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperation
   is Azure.ResourceManager.ProxyResource<ManagedInstanceOperationProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model ManagedInstanceOperation
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 interface ManagedInstanceOperations {
   /**
    * Gets a management operation on a managed instance.

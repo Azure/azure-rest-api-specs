@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A job step.
  */
 @parentResource(Job)
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStep is Azure.ResourceManager.ProxyResource<JobStepProperties> {
   ...ResourceNameParameter<
     Resource = JobStep,
@@ -59,6 +60,7 @@ alias JobStepOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 interface JobSteps {
   /**
    * Gets a job step in a job's current version.
@@ -125,6 +127,7 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 interface JobStepOperationGroup {
   /**
    * Gets the specified version of a job step.

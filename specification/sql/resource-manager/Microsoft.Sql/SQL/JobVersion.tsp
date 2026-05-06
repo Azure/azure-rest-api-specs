@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  * A job version.
  */
 @parentResource(Job)
+@Azure.ResourceManager.Legacy.feature(Features.JobVersions)
 model JobVersion is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = JobVersion,
@@ -60,6 +61,7 @@ alias JobVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobVersions)
 interface JobVersions {
   /**
    * Gets a job version.

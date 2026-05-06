@@ -54,6 +54,7 @@ alias DatabaseSchemaOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseSchemas)
 interface DatabaseSchemas {
   /**
    * Get database schema
@@ -103,6 +104,7 @@ alias ManagedDatabaseSchemaOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSchemas)
 interface ManagedDatabaseSchemas {
   /**
    * Get managed database schema

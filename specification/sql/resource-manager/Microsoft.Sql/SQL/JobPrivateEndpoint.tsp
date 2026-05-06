@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A job agent private endpoint.
  */
 @parentResource(JobAgent)
+@Azure.ResourceManager.Legacy.feature(Features.JobPrivateEndpoints)
 model JobPrivateEndpoint
   is Azure.ResourceManager.ProxyResource<JobPrivateEndpointProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model JobPrivateEndpoint
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobPrivateEndpoints)
 interface JobPrivateEndpoints {
   /**
    * Gets a private endpoint.

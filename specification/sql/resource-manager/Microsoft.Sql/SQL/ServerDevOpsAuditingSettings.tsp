@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A server DevOps auditing settings.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 model ServerDevOpsAuditingSettings
   is Azure.ResourceManager.ProxyResource<ServerDevOpsAuditSettingsProperties> {
   ...ResourceNameParameter<
@@ -28,6 +29,7 @@ model ServerDevOpsAuditingSettings
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 interface ServerDevOpsAuditSettings {
   /**
    * Gets a server's DevOps audit settings.

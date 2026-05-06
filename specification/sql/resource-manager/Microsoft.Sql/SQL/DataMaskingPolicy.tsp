@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  * A database data masking policy.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.DataMaskingPolicies)
 model DataMaskingPolicy
   is Azure.ResourceManager.ProxyResource<DataMaskingPolicyProperties> {
   ...ResourceNameParameter<
@@ -96,12 +97,14 @@ interface DataMaskingPolicies {
    * Gets the database data masking policy.
    */
   @tag("DataMaskingPolicies")
+  @Azure.ResourceManager.Legacy.feature(Features.DataMaskingPolicies)
   get is ArmResourceRead<DataMaskingPolicy>;
 
   /**
    * Creates or updates a database data masking policy.
    */
   @tag("DataMaskingPolicies")
+  @Azure.ResourceManager.Legacy.feature(Features.DataMaskingPolicies)
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataMaskingPolicy>;
 
   /**
@@ -111,6 +114,7 @@ interface DataMaskingPolicies {
   @list
   @get
   @action("rules")
+  @Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
   listByDatabase is ArmResourceActionSync<
     DataMaskingPolicy,
     void,
@@ -131,6 +135,7 @@ interface DataMaskingPolicies {
   @tag("DataMaskingRules")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}")
+  @Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
   dataMaskingRulesCreateOrUpdate is DataMaskingPoliciesOps.ActionSync<
     DataMaskingPolicy,
     DataMaskingRule,

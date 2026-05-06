@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
  */
+@Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 union DiffBackupIntervalInHours {
   int32,
 
@@ -180,6 +181,7 @@ union RecommendedActionCurrentState {
 /**
  * The column data type.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
 union ColumnDataType {
   string,
 
@@ -357,6 +359,7 @@ union ColumnDataType {
 /**
  * The table temporal type.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
 union TableTemporalType {
   string,
 
@@ -3228,6 +3231,7 @@ enum LegacyDataMaskingFunction {
  * The masking function that is used for the data masking rule.
  */
 @added(Versions.v2025_02_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 union DataMaskingFunction {
   string,
 
@@ -3477,6 +3481,7 @@ enum LegacyDataMaskingRuleState {
  * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
  */
 @added(Versions.v2025_02_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 union DataMaskingRuleState {
   string,
 
@@ -4192,6 +4197,7 @@ enum CheckNameAvailabilityReason {
  * Properties of a short term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 model BackupShortTermRetentionPolicyProperties {
   /**
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
@@ -4208,6 +4214,7 @@ model BackupShortTermRetentionPolicyProperties {
  * Properties of a server blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ServerBlobAuditingPolicyProperties {
   /**
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
@@ -4359,6 +4366,7 @@ model ServerBlobAuditingPolicyProperties {
  * Properties of a database blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model DatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies the number of days to keep in the audit logs in the storage account.
@@ -4495,6 +4503,7 @@ model DatabaseBlobAuditingPolicyProperties {
  * Properties of an extended database blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies condition of where clause when creating an audit.
@@ -4636,6 +4645,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
  * Properties of an extended server blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedServerBlobAuditingPolicyProperties {
   /**
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
@@ -5133,6 +5143,7 @@ model RecommendedActionMetricInfo {
  * Database-level Automatic Tuning properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model DatabaseAutomaticTuningProperties {
   /**
    * Automatic tuning desired state.
@@ -5155,6 +5166,7 @@ model DatabaseAutomaticTuningProperties {
 /**
  * Automatic tuning properties for individual advisors.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model AutomaticTuningOptions {
   /**
    * Automatic tuning option desired state.
@@ -5210,6 +5222,7 @@ model DatabaseColumnProperties {
  * Contains the operation result properties for import/export operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model ImportExportExtensionsOperationResultProperties {
   /**
    * Request Id.
@@ -5301,6 +5314,7 @@ model PrivateEndpointConnectionRequestStatus {
  * An Import, Export, or PolybaseImport resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model DatabaseExtensions extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -5311,6 +5325,7 @@ model DatabaseExtensions extends CommonTypes.ProxyResource {
 /**
  * Contains the database information after a successful Import, Export, or PolybaseImport
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model DatabaseExtensionsProperties {
   /**
    * Operation mode of the operation: Import, Export, or PolybaseImport.
@@ -5401,6 +5416,7 @@ model NetworkIsolationSettings {
  * A database operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
 model DatabaseOperation extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -5411,6 +5427,7 @@ model DatabaseOperation extends CommonTypes.ProxyResource {
 /**
  * The properties of a database operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
 model DatabaseOperationProperties {
   /**
    * The name of the database the operation is being performed on.
@@ -5508,6 +5525,7 @@ model DatabaseOperationProperties {
 /**
  * The phase details properties of a database operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
 model PhaseDetails {
   /**
    * The operation phase.
@@ -5556,6 +5574,7 @@ model Sku {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseIdentity {
   /**
    * The identity type
@@ -5579,6 +5598,7 @@ model DatabaseIdentity {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseUserIdentity {
   /**
    * The Azure Active Directory principal id.
@@ -5599,6 +5619,7 @@ model DatabaseUserIdentity {
  * The database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseProperties {
   /**
    * Specifies the mode of database creation.
@@ -5976,6 +5997,7 @@ model DatabaseKey {
  * A database update resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseUpdate {
   /**
    * The name and tier of the SKU.
@@ -6002,6 +6024,7 @@ model DatabaseUpdate {
 /**
  * A database update properties.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseUpdateProperties {
   /**
    * Specifies the mode of database creation.
@@ -6319,6 +6342,7 @@ model DatabaseUpdateProperties {
 /**
  * Contains the information necessary to perform export database operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model ExportDatabaseDefinition {
   /**
    * Storage key type: StorageAccessKey, SharedAccessKey, or ManagedIdentity.
@@ -6445,6 +6469,7 @@ model ImportExportOperationResultProperties {
 /**
  * Contains the information necessary to perform import operation for existing database.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model ImportExistingDatabaseDefinition {
   /**
    * Storage key type: StorageAccessKey, SharedAccessKey, or ManagedIdentity.
@@ -6493,6 +6518,7 @@ model ImportExistingDatabaseDefinition {
 /**
  * Contains the information necessary to perform a resource move (rename).
  */
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model ResourceMoveDefinition {
   /**
    * The target ID for the resource
@@ -7022,6 +7048,7 @@ model DatabaseTableProperties {
  * Usage metric of a database.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseUsages)
 model DatabaseUsage extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -7032,6 +7059,7 @@ model DatabaseUsage extends CommonTypes.ProxyResource {
 /**
  * Properties of a database usage.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseUsages)
 model DatabaseUsageProperties {
   /**
    * User-readable name of the metric.
@@ -7232,6 +7260,7 @@ model DatabaseVulnerabilityAssessmentScanExportProperties {
  * The properties of a database data masking policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DataMaskingPolicies)
 model DataMaskingPolicyProperties {
   /**
    * The state of the data masking policy.
@@ -7260,6 +7289,7 @@ model DataMaskingPolicyProperties {
  * A database data masking rule.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 model DataMaskingRule extends CommonTypes.ProxyResource {
   /**
    * The location of the data masking rule.
@@ -7282,6 +7312,7 @@ model DataMaskingRule extends CommonTypes.ProxyResource {
 /**
  * The properties of a database data masking rule.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 model DataMaskingRuleProperties {
   /**
    * The rule Id.
@@ -7365,6 +7396,7 @@ model DataMaskingRuleProperties {
  * User activities of a data warehouse. This currently includes the count of running or suspended queries. For more information, please view the sys.dm_pdw_exec_requests dynamic management view (DMV).
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 model DataWarehouseUserActivitiesProperties {
   /**
    * Count of running and suspended queries.
@@ -7377,6 +7409,7 @@ model DataWarehouseUserActivitiesProperties {
  * The properties of a deleted server.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 model DeletedServerProperties {
   /**
    * The version of the deleted server.
@@ -7408,6 +7441,7 @@ model DeletedServerProperties {
  * The properties of a distributed availability group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupProperties {
   /**
    * Name of the distributed availability group
@@ -7473,6 +7507,7 @@ model DistributedAvailabilityGroupProperties {
 /**
  * Database specific information
  */
+@Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupDatabase {
   /**
    * The name of the database in link
@@ -7610,6 +7645,7 @@ model DistributedAvailabilityGroupDatabase {
 /**
  * Certificate information
  */
+@Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model CertificateInfo {
   /**
    * The certificate name
@@ -7628,6 +7664,7 @@ model CertificateInfo {
 /**
  * Distributed availability group failover.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupsFailoverRequest {
   /**
    * The failover type, can be ForcedAllowDataLoss or Planned.
@@ -7639,6 +7676,7 @@ model DistributedAvailabilityGroupsFailoverRequest {
 /**
  * Distributed availability group failover request.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupSetRole {
   /**
    * New role of managed instance in a distributed availability group, can be Primary or Secondary.
@@ -7657,6 +7695,7 @@ model DistributedAvailabilityGroupSetRole {
  * A elastic pool operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
 model ElasticPoolOperation extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -7667,6 +7706,7 @@ model ElasticPoolOperation extends CommonTypes.ProxyResource {
 /**
  * The properties of a elastic pool operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
 model ElasticPoolOperationProperties {
   /**
    * The name of the elastic pool the operation is being performed on.
@@ -7759,6 +7799,7 @@ model ElasticPoolOperationProperties {
  * Properties of an elastic pool
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolProperties {
   /**
    * The state of the elastic pool.
@@ -7834,6 +7875,7 @@ model ElasticPoolProperties {
 /**
  * Per database settings of an elastic pool.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolPerDatabaseSettings {
   /**
    * The minimum capacity all databases are guaranteed.
@@ -7854,6 +7896,7 @@ model ElasticPoolPerDatabaseSettings {
 /**
  * An elastic pool update.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolUpdate {
   /**
    * An ARM Resource SKU.
@@ -7875,6 +7918,7 @@ model ElasticPoolUpdate {
 /**
  * Properties of an elastic pool
  */
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolUpdateProperties {
   /**
    * The storage limit for the database elastic pool in bytes.
@@ -7938,6 +7982,7 @@ model ElasticPoolUpdateProperties {
  * Properties for an encryption protector execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.EncryptionProtectors)
 model EncryptionProtectorProperties {
   /**
    * Subregion of the encryption protector.
@@ -7983,6 +8028,7 @@ model EncryptionProtectorProperties {
  * The properties of an endpoint certificate.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.EndpointCertificates)
 model EndpointCertificateProperties {
   /**
    * The certificate public blob
@@ -7994,6 +8040,7 @@ model EndpointCertificateProperties {
  * Properties of a failover group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupProperties {
   /**
    * Read-write endpoint of the failover group instance.
@@ -8041,6 +8088,7 @@ model FailoverGroupProperties {
 /**
  * Read-write endpoint of the failover group instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupReadWriteEndpoint {
   /**
    * Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required.
@@ -8056,6 +8104,7 @@ model FailoverGroupReadWriteEndpoint {
 /**
  * Read-only endpoint of the failover group instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupReadOnlyEndpoint {
   /**
    * Failover policy of the read-only endpoint for the failover group.
@@ -8075,6 +8124,7 @@ model FailoverGroupReadOnlyEndpoint {
 /**
  * Partner server information for the failover group.
  */
+@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model PartnerInfo {
   /**
    * Resource identifier of the partner server.
@@ -8101,6 +8151,7 @@ model PartnerInfo {
 /**
  * A failover group update request.
  */
+@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupUpdate {
   /**
    * Resource properties.
@@ -8117,6 +8168,7 @@ model FailoverGroupUpdate {
 /**
  * Properties of a failover group update.
  */
+@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupUpdateProperties {
   /**
    * Read-write endpoint of the failover group instance.
@@ -8153,6 +8205,7 @@ model FailoverGroupUpdateProperties {
  * The properties of a server firewall rule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
 model ServerFirewallRuleProperties {
   /**
    * The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses.
@@ -8205,6 +8258,7 @@ model ResourceWithWritableName {
 /**
  * A list of server firewall rules.
  */
+@Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
 model FirewallRuleList {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: FirewallRule[];
@@ -8214,6 +8268,7 @@ model FirewallRuleList {
  * The properties of the geo backup policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.GeoBackupPolicies)
 model GeoBackupPolicyProperties {
   /**
    * The state of the geo backup policy.
@@ -8231,6 +8286,7 @@ model GeoBackupPolicyProperties {
  * Properties of a instance failover group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroupProperties {
   /**
    * Type of the geo-secondary instance. Set 'Standby' if the instance is used as a DR option only.
@@ -8276,6 +8332,7 @@ model InstanceFailoverGroupProperties {
 /**
  * Read-write endpoint of the failover group instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroupReadWriteEndpoint {
   /**
    * Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required.
@@ -8291,6 +8348,7 @@ model InstanceFailoverGroupReadWriteEndpoint {
 /**
  * Read-only endpoint of the failover group instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroupReadOnlyEndpoint {
   /**
    * Failover policy of the read-only endpoint for the failover group.
@@ -8301,6 +8359,7 @@ model InstanceFailoverGroupReadOnlyEndpoint {
 /**
  * Partner region information for the failover group.
  */
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model PartnerRegionInfo {
   /**
    * Geo location of the partner managed instances.
@@ -8317,6 +8376,7 @@ model PartnerRegionInfo {
 /**
  * Pairs of Managed Instances in the failover group.
  */
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model ManagedInstancePairInfo {
   /**
    * Id of Primary Managed Instance in pair.
@@ -8333,6 +8393,7 @@ model ManagedInstancePairInfo {
  * The properties of a instance pool operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.InstancePoolOperations)
 model InstancePoolOperationProperties {
   /**
    * The name of the instance pool the operation is being performed on.
@@ -8419,6 +8480,7 @@ model InstancePoolOperationProperties {
  * Properties of an instance pool.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.InstancePools)
 model InstancePoolProperties {
   /**
    * Resource ID of the subnet to place this instance pool in.
@@ -8455,6 +8517,7 @@ model InstancePoolProperties {
 /**
  * An update to an Instance pool.
  */
+@Azure.ResourceManager.Legacy.feature(Features.InstancePools)
 model InstancePoolUpdate {
   /**
    * The name and tier of the SKU.
@@ -8478,6 +8541,7 @@ model InstancePoolUpdate {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.IPv6FirewallRules)
 model IPv6ServerFirewallRuleProperties {
   /**
    * The start IP address of the firewall rule. Must be IPv6 format.
@@ -8495,6 +8559,7 @@ model IPv6ServerFirewallRuleProperties {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentIdentity {
   /**
    * The job agent identity tenant id
@@ -8517,6 +8582,7 @@ model JobAgentIdentity {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentUserAssignedIdentity {
   /**
    * The Azure Active Directory principal id.
@@ -8537,6 +8603,7 @@ model JobAgentUserAssignedIdentity {
  * Properties of a job agent.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentProperties {
   /**
    * Resource ID of the database to store job metadata in.
@@ -8554,6 +8621,7 @@ model JobAgentProperties {
 /**
  * An update to an Azure SQL job agent.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentUpdate {
   /**
    * Managed identity assigned to job agent
@@ -8576,6 +8644,7 @@ model JobAgentUpdate {
  * Properties of a job credential.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 model JobCredentialProperties {
   /**
    * The credential user name.
@@ -8704,6 +8773,7 @@ model JobExecutionTarget {
  * Properties of job agent private endpoint.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.JobPrivateEndpoints)
 model JobPrivateEndpointProperties {
   /**
    * ARM resource id of the server the private endpoint will target.
@@ -8725,6 +8795,7 @@ model JobPrivateEndpointProperties {
  * Properties of a job.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.Jobs)
 model JobProperties {
   /**
    * User-defined description of the job.
@@ -8746,6 +8817,7 @@ model JobProperties {
 /**
  * Scheduling properties of a job.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Jobs)
 model JobSchedule {
   /**
    * Schedule start time.
@@ -8797,6 +8869,7 @@ model JobSchedule {
  * Properties of a job step.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepProperties {
   /**
    * The job step's index within the job. If not specified when creating the job step, it will be created as the last step. If not specified when updating the job step, the step id is not modified.
@@ -8833,6 +8906,7 @@ model JobStepProperties {
 /**
  * The action to be executed by a job step.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepAction {
   /**
    * Type of action being executed by the job step.
@@ -8853,6 +8927,7 @@ model JobStepAction {
 /**
  * The output configuration of a job step.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepOutput {
   /**
    * The output destination type.
@@ -8900,6 +8975,7 @@ model JobStepOutput {
 /**
  * The execution options of a job step.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepExecutionOptions {
   /**
    * Execution timeout for the job step.
@@ -8931,6 +9007,7 @@ model JobStepExecutionOptions {
  * Properties of job target group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 model JobTargetGroupProperties {
   /**
    * Members of the target group.
@@ -8942,6 +9019,7 @@ model JobTargetGroupProperties {
 /**
  * A job target, for example a specific database or a container of databases that is evaluated during job execution.
  */
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 model JobTarget {
   /**
    * Whether the target is included or excluded from the group.
@@ -8984,6 +9062,7 @@ model JobTarget {
  * The properties of a database ledger digest upload settings.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.LedgerDigestUploads)
 model LedgerDigestUploadsProperties {
   /**
    * The digest storage endpoint, which must be either an Azure blob storage endpoint or an URI for Azure Confidential Ledger.
@@ -9000,6 +9079,7 @@ model LedgerDigestUploadsProperties {
 /**
  * The location capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model LocationCapabilities {
   /**
    * The location name.
@@ -9047,6 +9127,7 @@ model LocationCapabilities {
 /**
  * The server capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ServerVersionCapability {
   /**
    * The server version name.
@@ -9081,6 +9162,7 @@ model ServerVersionCapability {
 /**
  * The edition capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model EditionCapability {
   /**
    * The database edition name.
@@ -9134,6 +9216,7 @@ model EditionCapability {
 /**
  * The service objectives capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ServiceObjectiveCapability {
   /**
    * The unique ID of the service objective.
@@ -9245,6 +9328,7 @@ model ServiceObjectiveCapability {
 /**
  * The maximum size range capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaxSizeRangeCapability {
   /**
    * Minimum value.
@@ -9285,6 +9369,7 @@ model MaxSizeRangeCapability {
 /**
  * The maximum size capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaxSizeCapability {
   /**
    * The maximum size limit (see 'unit' for the units).
@@ -9302,6 +9387,7 @@ model MaxSizeCapability {
 /**
  * The log size capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model LogSizeCapability {
   /**
    * The log size limit (see 'unit' for the units).
@@ -9319,6 +9405,7 @@ model LogSizeCapability {
 /**
  * The performance level capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model PerformanceLevelCapability {
   /**
    * Performance level value.
@@ -9336,6 +9423,7 @@ model PerformanceLevelCapability {
 /**
  * The license type capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model LicenseTypeCapability {
   /**
    * License type identifier.
@@ -9358,6 +9446,7 @@ model LicenseTypeCapability {
 /**
  * Supported auto pause delay time range
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model AutoPauseDelayTimeRange {
   /**
    * Minimum value
@@ -9399,6 +9488,7 @@ model AutoPauseDelayTimeRange {
 /**
  * The min capacity capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MinCapacityCapability {
   /**
    * Min capacity value
@@ -9421,6 +9511,7 @@ model MinCapacityCapability {
 /**
  * The maintenance configuration capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaintenanceConfigurationCapability {
   /**
    * Maintenance configuration name
@@ -9449,6 +9540,7 @@ model MaintenanceConfigurationCapability {
 /**
  * The zone pinning capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ZonePinningCapability {
   /**
    * Name of the availability zone
@@ -9471,6 +9563,7 @@ model ZonePinningCapability {
 /**
  * Supported free limit exhaustion behavior options
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model FreeLimitExhaustionBehaviorCapability {
   /**
    * Free limit exhaustion behavior type
@@ -9488,6 +9581,7 @@ model FreeLimitExhaustionBehaviorCapability {
 /**
  * The read scale capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ReadScaleCapability {
   /**
    * The maximum number of read scale replicas.
@@ -9510,6 +9604,7 @@ model ReadScaleCapability {
 /**
  * The storage account type capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model StorageCapability {
   /**
    * The storage account type for the database's backups.
@@ -9532,6 +9627,7 @@ model StorageCapability {
 /**
  * The elastic pool edition capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolEditionCapability {
   /**
    * The elastic pool edition name.
@@ -9573,6 +9669,7 @@ model ElasticPoolEditionCapability {
 /**
  * The Elastic Pool performance level capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolPerformanceLevelCapability {
   /**
    * The performance level for the pool.
@@ -9678,6 +9775,7 @@ model ElasticPoolPerformanceLevelCapability {
 /**
  * The max per-database performance level capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolPerDatabaseMaxPerformanceLevelCapability {
   /**
    * The maximum performance level per database.
@@ -9713,6 +9811,7 @@ model ElasticPoolPerDatabaseMaxPerformanceLevelCapability {
 /**
  * The minimum per-database performance level capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolPerDatabaseMinPerformanceLevelCapability {
   /**
    * The minimum performance level per database.
@@ -9741,6 +9840,7 @@ model ElasticPoolPerDatabaseMinPerformanceLevelCapability {
 /**
  * Supported auto pause delay time range
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model PerDatabaseAutoPauseDelayTimeRange {
   /**
    * Minimum value
@@ -9782,6 +9882,7 @@ model PerDatabaseAutoPauseDelayTimeRange {
 /**
  * The managed instance capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceVersionCapability {
   /**
    * The server version name.
@@ -9816,6 +9917,7 @@ model ManagedInstanceVersionCapability {
 /**
  * The managed server capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceEditionCapability {
   /**
    * The managed server version name.
@@ -9857,6 +9959,7 @@ model ManagedInstanceEditionCapability {
 /**
  * The managed server family capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceFamilyCapability {
   /**
    * Family name.
@@ -9903,6 +10006,7 @@ model ManagedInstanceFamilyCapability {
 /**
  * The managed instance virtual cores capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceVcoresCapability {
   /**
    * The virtual cores identifier.
@@ -10032,6 +10136,7 @@ model ManagedInstanceVcoresCapability {
 /**
  * The maximum limit range capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaxLimitRangeCapability {
   /**
    * Minimum value.
@@ -10066,6 +10171,7 @@ model MaxLimitRangeCapability {
 /**
  * The maintenance configuration capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceMaintenanceConfigurationCapability {
   /**
    * Maintenance configuration name
@@ -10088,6 +10194,7 @@ model ManagedInstanceMaintenanceConfigurationCapability {
 /**
  * The instance pool capability
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model InstancePoolEditionCapability {
   /**
    * The instance pool version name.
@@ -10116,6 +10223,7 @@ model InstancePoolEditionCapability {
 /**
  * The instance pool family capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model InstancePoolFamilyCapability {
   /**
    * Family name.
@@ -10150,6 +10258,7 @@ model InstancePoolFamilyCapability {
 /**
  * The managed instance virtual cores capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model InstancePoolVcoresCapability {
   /**
    * The virtual cores identifier.
@@ -10184,6 +10293,7 @@ model InstancePoolVcoresCapability {
 /**
  * The job agent version capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model JobAgentVersionCapability {
   /**
    * The job agent version name.
@@ -10213,6 +10323,7 @@ model JobAgentVersionCapability {
 /**
  * The job agent edition capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model JobAgentEditionCapability {
   /**
    * The job agent edition name.
@@ -10242,6 +10353,7 @@ model JobAgentEditionCapability {
 /**
  * The job agent service level objective capability.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model JobAgentServiceLevelObjectiveCapability {
   /**
    * The service objective name.
@@ -10271,6 +10383,7 @@ model JobAgentServiceLevelObjectiveCapability {
  * Properties of a long term retention backup
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackupProperties {
   /**
    * The server name that the backup database belong to.
@@ -10354,6 +10467,7 @@ model LongTermRetentionBackupProperties {
 /**
  * Contains the information necessary to change long term retention backup access tier and related operation mode.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model ChangeLongTermRetentionBackupAccessTierParameters {
   /**
    * The long term retention backup storage access tier
@@ -10369,6 +10483,7 @@ model ChangeLongTermRetentionBackupAccessTierParameters {
 /**
  * Contains the information necessary to perform long term retention backup copy operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model CopyLongTermRetentionBackupParameters {
   /**
    * Resource properties.
@@ -10379,6 +10494,7 @@ model CopyLongTermRetentionBackupParameters {
 /**
  * Contains the properties to perform long term retention backup copy operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model CopyLongTermRetentionBackupParametersProperties {
   /**
    * The subscription that owns the target server
@@ -10421,6 +10537,7 @@ model CopyLongTermRetentionBackupParametersProperties {
  * A LongTermRetentionBackup operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackupOperationResult extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -10431,6 +10548,7 @@ model LongTermRetentionBackupOperationResult extends CommonTypes.ProxyResource {
 /**
  * Contains the operation result properties for long term retention backup operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionOperationResultProperties {
   /**
    * Request Id.
@@ -10479,6 +10597,7 @@ model LongTermRetentionOperationResultProperties {
 /**
  * Contains the information necessary to perform long term retention backup update operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model UpdateLongTermRetentionBackupParameters {
   /**
    * Resource properties.
@@ -10489,6 +10608,7 @@ model UpdateLongTermRetentionBackupParameters {
 /**
  * Contains the properties to perform long term retention backup copy operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model UpdateLongTermRetentionBackupParametersProperties {
   /**
    * The storage redundancy type of the copied backup
@@ -10501,6 +10621,9 @@ model UpdateLongTermRetentionBackupParametersProperties {
  * Properties of a long term retention backup
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.LongTermRetentionManagedInstanceBackups
+)
 model ManagedInstanceLongTermRetentionBackupProperties {
   /**
    * The managed instance that the backup database belongs to.
@@ -10559,6 +10682,7 @@ model ManagedInstanceLongTermRetentionBackupProperties {
  * Properties of a long term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionPolicies)
 model LongTermRetentionPolicyProperties {
   /**
    * The setting for whether to enable time-based immutability for future backups. When set, future backups will have TimeBasedImmutability enabled.
@@ -10595,6 +10719,7 @@ model LongTermRetentionPolicyProperties {
  * Maintenance window options properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindowOptions)
 model MaintenanceWindowOptionsProperties {
   /**
    * Whether maintenance windows are enabled for the database.
@@ -10657,6 +10782,7 @@ model MaintenanceWindowTimeRange {
  * Maintenance windows resource properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindows)
 model MaintenanceWindowsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -10678,6 +10804,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
  * Contains the operation result properties for managed database move operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 model ManagedDatabaseMoveOperationResultProperties {
   /**
    * The name of operation.
@@ -10781,6 +10908,7 @@ model ManagedDatabaseMoveOperationResultProperties {
  * Properties of a database query.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model QueryProperties {
   /**
    * Query text.
@@ -10791,10 +10919,12 @@ model QueryProperties {
 /**
  * Execution statistics for one particular query
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model ManagedInstanceQueryStatistics is Azure.Core.Page<QueryStatistics>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model QueryStatistics extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -10805,6 +10935,7 @@ model QueryStatistics extends CommonTypes.ProxyResource {
 /**
  * Properties of a query execution statistics.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model QueryStatisticsProperties {
   /**
    * Database name of the database in which this query was executed.
@@ -10929,6 +11060,7 @@ model QueryMetricProperties {
  * The managed database's restore details properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsProperties {
   /**
    * Restore type.
@@ -11074,6 +11206,7 @@ model ManagedDatabaseRestoreDetailsProperties {
 /**
  * The managed database's restore details backup set properties.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsBackupSetProperties {
   /**
    * Backup set status.
@@ -11118,6 +11251,7 @@ model ManagedDatabaseRestoreDetailsBackupSetProperties {
 /**
  * The managed database's restore details unrestorable file properties.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsUnrestorableFileProperties {
   /**
    * File name.
@@ -11130,6 +11264,7 @@ model ManagedDatabaseRestoreDetailsUnrestorableFileProperties {
  * The managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseProperties {
   /**
    * Collation of the managed database.
@@ -11277,6 +11412,7 @@ model ManagedDatabaseProperties {
 /**
  * Managed Database Extended Accessibility Information
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseExtendedAccessibilityInfo {
   /**
    * SQL Server error code connected to the inaccessibility root cause.
@@ -11306,6 +11442,7 @@ model ManagedDatabaseExtendedAccessibilityInfo {
 /**
  * An managed database update.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseUpdate {
   /**
    * Resource properties.
@@ -11322,6 +11459,7 @@ model ManagedDatabaseUpdate {
 /**
  * Contains the information necessary to perform a managed database move.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseMoveDefinition {
   /**
    * The destination managed database ID
@@ -11332,6 +11470,7 @@ model ManagedDatabaseMoveDefinition {
 /**
  * Contains the information necessary to perform a complete database restore operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model CompleteDatabaseRestoreDefinition {
   /**
    * The last backup name to apply
@@ -11342,6 +11481,7 @@ model CompleteDatabaseRestoreDefinition {
 /**
  * Contains the information necessary to start a managed database move.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseStartMoveDefinition {
   /**
    * The destination managed database ID
@@ -11358,6 +11498,9 @@ model ManagedDatabaseStartMoveDefinition {
  * Properties of a security alert policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedDatabaseSecurityAlertPolicies
+)
 model SecurityAlertPolicyProperties {
   /**
    * Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.
@@ -11406,12 +11549,14 @@ model SecurityAlertPolicyProperties {
 /**
  * A list of security events.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventCollection is Azure.Core.Page<SecurityEvent>;
 
 /**
  * A security event.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEvent extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -11422,6 +11567,7 @@ model SecurityEvent extends CommonTypes.ProxyResource {
 /**
  * The properties of a security event.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventProperties {
   /**
    * The time when the security event occurred.
@@ -11482,6 +11628,7 @@ model SecurityEventProperties {
 /**
  * The properties of a security event sql injection additional properties.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventSqlInjectionAdditionalProperties {
   /**
    * The threat ID.
@@ -11674,6 +11821,9 @@ model RecommendedSensitivityLabelUpdateProperties {
  * Properties of a transparent data encryption.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedDatabaseTransparentDataEncryption
+)
 model ManagedTransparentDataEncryptionProperties {
   /**
    * Specifies the state of the transparent data encryption.
@@ -11685,6 +11835,7 @@ model ManagedTransparentDataEncryptionProperties {
  * The properties of a managed instance administrator.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceAdministrators)
 model ManagedInstanceAdministratorProperties {
   /**
    * Type of the managed instance administrator.
@@ -11714,6 +11865,9 @@ model ManagedInstanceAdministratorProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceAzureADOnlyAuthentications
+)
 model ManagedInstanceAzureADOnlyAuthProperties {
   /**
    * Azure Active Directory only Authentication enabled.
@@ -11725,6 +11879,7 @@ model ManagedInstanceAzureADOnlyAuthProperties {
 /**
  * The properties of managed instance DTC.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtcProperties {
   /**
    * Active status of managed instance DTC.
@@ -11763,6 +11918,7 @@ model ManagedInstanceDtcProperties {
 /**
  * The Security Settings of managed instance DTC.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtcSecuritySettings {
   /**
    * Transaction Manager communication settings of managed instance DTC.
@@ -11793,6 +11949,7 @@ model ManagedInstanceDtcSecuritySettings {
 /**
  * The Transaction Manager Communication Settings of managed instance DTC.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtcTransactionManagerCommunicationSettings {
   /**
    * Allow Inbound traffic to managed instance DTC.
@@ -11814,6 +11971,9 @@ model ManagedInstanceDtcTransactionManagerCommunicationSettings {
  * Properties for an encryption protector execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceEncryptionProtectors
+)
 model ManagedInstanceEncryptionProtectorProperties {
   /**
    * The name of the managed instance key.
@@ -11847,6 +12007,7 @@ model ManagedInstanceEncryptionProtectorProperties {
  * Properties for a key execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 model ManagedInstanceKeyProperties {
   /**
    * The key type like 'ServiceManaged', 'AzureKeyVault'.
@@ -11884,6 +12045,9 @@ model ManagedInstanceKeyProperties {
  * Properties of a long term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceLongTermRetentionPolicies
+)
 model ManagedInstanceLongTermRetentionPolicyProperties {
   /**
    * The BackupStorageAccessTier for the LTR backups
@@ -11915,6 +12079,7 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
  * The properties of a managed instance operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperationProperties {
   /**
    * The name of the managed instance the operation is being performed on.
@@ -12012,6 +12177,7 @@ model ManagedInstanceOperationProperties {
 /**
  * The parameters of a managed instance operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperationParametersPair {
   /**
    * The current parameters.
@@ -12027,6 +12193,7 @@ model ManagedInstanceOperationParametersPair {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model UpsertManagedServerOperationParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   family?: string;
@@ -12042,6 +12209,7 @@ model UpsertManagedServerOperationParameters {
 /**
  * The steps of a managed instance operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperationSteps {
   /**
    * The total number of operation steps.
@@ -12063,6 +12231,7 @@ model ManagedInstanceOperationSteps {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model UpsertManagedServerOperationStepWithEstimatesAndDuration {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12135,6 +12304,9 @@ model ManagedInstancePrivateLinkServiceConnectionStateProperty {
  * Properties of a private link resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstancePrivateLinkResources
+)
 model ManagedInstancePrivateLinkProperties {
   /**
    * The private link resource group id.
@@ -12207,6 +12379,7 @@ model UserIdentity {
 /**
  * The properties of a managed instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceProperties {
   /**
    * Provisioning state of managed instance.
@@ -12466,6 +12639,7 @@ model ManagedInstanceProperties {
 /**
  * A private endpoint connection under a managed instance
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstancePecProperty {
   /**
    * Resource ID.
@@ -12483,6 +12657,7 @@ model ManagedInstancePecProperty {
 /**
  * Properties of a active directory administrator.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceExternalAdministrator {
   /**
    * Type of the sever administrator.
@@ -12521,6 +12696,7 @@ model ManagedInstanceExternalAdministrator {
 /**
  * The managed instance's service principal configuration for a resource.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ServicePrincipal {
   /**
    * The Azure Active Directory application object id.
@@ -12549,6 +12725,7 @@ model ServicePrincipal {
 /**
  * An update request for an Azure SQL Database managed instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceUpdate {
   /**
    * Managed instance sku
@@ -12575,12 +12752,14 @@ model ManagedInstanceUpdate {
 /**
  * A collection of endpoints that the managed instance service requires outbound network access to.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model OutboundEnvironmentEndpointCollection
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
 
 /**
  * An endpoint that the managed instance service requires outbound network access to.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model OutboundEnvironmentEndpoint {
   /**
    * The type of service accessed by the managed instance service, e.g., Azure Storage, Azure Active Directory, etc.
@@ -12599,6 +12778,7 @@ model OutboundEnvironmentEndpoint {
 /**
  * A domain name that the managed instance service needs to communicate with, along with additional details.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model EndpointDependency {
   /**
    * The domain name of the dependency.
@@ -12617,6 +12797,7 @@ model EndpointDependency {
 /**
  * A domain name that the managed instance service needs to communicate with, along with additional details.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model EndpointDetail {
   /**
    * The port an endpoint is connected to.
@@ -12630,6 +12811,7 @@ model EndpointDetail {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model RefreshExternalGovernanceStatusOperationResultMI
   extends CommonTypes.ProxyResource {
   /**
@@ -12642,6 +12824,7 @@ model RefreshExternalGovernanceStatusOperationResultMI
  * Contains the operation result properties for refresh external governance status operation.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
   /**
    * Request Id.
@@ -12684,9 +12867,11 @@ model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
 /**
  * A list of top resource consuming queries on managed instance
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model TopQueriesListResult is Azure.Core.Page<TopQueries>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model TopQueries {
   /**
    * Requested number of top queries.
@@ -12734,6 +12919,7 @@ model TopQueries {
 /**
  * Validate azure key vault encryption key.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest {
   /**
    * The URI of the key.
@@ -12774,6 +12960,9 @@ model TdeCertificateProperties {
  * Properties of a managed instance vulnerability assessment.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceVulnerabilityAssessments
+)
 model ManagedInstanceVulnerabilityAssessmentProperties {
   /**
    * A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).
@@ -12805,6 +12994,7 @@ model ManagedInstanceVulnerabilityAssessmentProperties {
  * The properties of a database ledger digest upload settings.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedLedgerDigestUploads)
 model ManagedLedgerDigestUploadsProperties {
   /**
    * The digest storage endpoint, which must be either an Azure blob storage endpoint or an URI for Azure Confidential Ledger.
@@ -12822,6 +13012,7 @@ model ManagedLedgerDigestUploadsProperties {
  * Properties of a managed server DNS alias.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAliasProperties {
   /**
    * The fully qualified DNS record for managed server alias
@@ -12839,6 +13030,7 @@ model ManagedServerDnsAliasProperties {
 /**
  * A managed server dns alias creation request.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAliasCreation {
   /**
    * Whether or not DNS record should be created for this alias.
@@ -12849,6 +13041,7 @@ model ManagedServerDnsAliasCreation {
 /**
  * A managed server DNS alias acquisition request.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAliasAcquisition {
   /**
    * The resource ID of the managed server DNS alias that will be acquired to point to this managed server instead.
@@ -12859,6 +13052,9 @@ model ManagedServerDnsAliasAcquisition {
 /**
  * The properties of an NSP config.
  */
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NetworkSecurityPerimeterConfigurationProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12879,6 +13075,9 @@ model NetworkSecurityPerimeterConfigurationProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPConfigPerimeter {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
@@ -12890,6 +13089,9 @@ model NSPConfigPerimeter {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPConfigAssociation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
@@ -12899,6 +13101,9 @@ model NSPConfigAssociation {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPConfigProfile {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
@@ -12912,6 +13117,9 @@ model NSPConfigProfile {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPConfigAccessRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
@@ -12921,6 +13129,9 @@ model NSPConfigAccessRule {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPConfigAccessRuleProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   direction?: string;
@@ -12938,6 +13149,9 @@ model NSPConfigAccessRuleProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPConfigNetworkSecurityPerimeterRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
@@ -12949,6 +13163,9 @@ model NSPConfigNetworkSecurityPerimeterRule {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPProvisioningIssue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
@@ -12958,6 +13175,9 @@ model NSPProvisioningIssue {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NSPProvisioningIssueProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issueType?: string;
@@ -12974,6 +13194,7 @@ model NSPProvisioningIssueProperties {
 /**
  * SQL REST API operation definition.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Operations)
 model Operation {
   /**
    * The name of the operation being performed on this particular object.
@@ -13004,6 +13225,7 @@ model Operation {
 /**
  * Display metadata associated with the operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Operations)
 model OperationDisplay {
   /**
    * The localized friendly form of the resource provider name.
@@ -13033,6 +13255,7 @@ model OperationDisplay {
 /**
  * The properties of an outbound firewall rule.
  */
+@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
 model OutboundFirewallRuleProperties {
   /**
    * The state of the outbound rule.
@@ -13100,6 +13323,7 @@ model PrivateLinkServiceConnectionStateProperty {
  * Properties of a private link resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.PrivateLinkResources)
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -13124,6 +13348,7 @@ model PrivateLinkResourceProperties {
  * The recoverable database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.RecoverableDatabases)
 model RecoverableDatabaseProperties {
   /**
    * The edition of the database.
@@ -13161,6 +13386,7 @@ model RecoverableDatabaseProperties {
  * The recoverable managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.RecoverableManagedDatabases)
 model RecoverableManagedDatabaseProperties {
   /**
    * The last available backup date.
@@ -13173,6 +13399,7 @@ model RecoverableManagedDatabaseProperties {
  * Properties of a replication link.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLinkProperties {
   /**
    * Resource partner server.
@@ -13251,6 +13478,7 @@ model ReplicationLinkProperties {
  * A replication link update request.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLinkUpdate extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -13261,6 +13489,7 @@ model ReplicationLinkUpdate extends CommonTypes.ProxyResource {
 /**
  * Properties of a replication link update.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLinkUpdateProperties {
   /**
    * Link type (GEO, NAMED, STANDBY). Update operation does not support NAMED.
@@ -13272,6 +13501,7 @@ model ReplicationLinkUpdateProperties {
  * The restorable dropped database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 model RestorableDroppedDatabaseProperties {
   /**
    * The name of the database.
@@ -13323,6 +13553,9 @@ model RestorableDroppedDatabaseProperties {
  * The restorable dropped managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.RestorableDroppedManagedDatabases
+)
 model RestorableDroppedManagedDatabaseProperties {
   /**
    * The name of the database.
@@ -13356,6 +13589,7 @@ model RestorableDroppedManagedDatabaseProperties {
  * Properties of a database restore point
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
 model RestorePointProperties {
   /**
    * The type of restore point
@@ -13387,6 +13621,7 @@ model RestorePointProperties {
 /**
  * Contains the information necessary to perform a create database restore point operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
 model CreateDatabaseRestorePointDefinition {
   /**
    * The restore point label to apply
@@ -13398,6 +13633,7 @@ model CreateDatabaseRestorePointDefinition {
  * Server-level Automatic Tuning properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerProperties {
   /**
    * Automatic tuning desired state.
@@ -13420,6 +13656,7 @@ model AutomaticTuningServerProperties {
 /**
  * Automatic tuning properties for individual advisors.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerOptions {
   /**
    * Automatic tuning option desired state.
@@ -13449,6 +13686,7 @@ model AutomaticTuningServerOptions {
  * Properties of a active directory administrator.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerAzureADAdministrators)
 model AdministratorProperties {
   /**
    * Type of the sever administrator.
@@ -13485,6 +13723,7 @@ model AdministratorProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerAzureADOnlyAuthentications)
 model AzureADOnlyAuthProperties {
   /**
    * Azure Active Directory only Authentication enabled.
@@ -13496,6 +13735,7 @@ model AzureADOnlyAuthProperties {
 /**
  * The properties of server configuration option.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerConfigurationOptions)
 model ServerConfigurationOptionProperties {
   /**
    * Value of the server configuration option.
@@ -13514,6 +13754,7 @@ model ServerConfigurationOptionProperties {
  * The properties of a server connection policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerConnectionPolicies)
 model ServerConnectionPolicyProperties {
   /**
    * The server connection type.
@@ -13525,6 +13766,7 @@ model ServerConnectionPolicyProperties {
  * Properties of a server DevOps audit settings.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 model ServerDevOpsAuditSettingsProperties {
   /**
    * Specifies whether DevOps audit events are sent to Azure Monitor.
@@ -13579,6 +13821,7 @@ model ServerDevOpsAuditSettingsProperties {
  * Properties of a server DNS alias.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAliasProperties {
   /**
    * The fully qualified DNS record for alias
@@ -13590,6 +13833,7 @@ model ServerDnsAliasProperties {
 /**
  * A server dns alias acquisition request.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAliasAcquisition {
   /**
    * The id of the server alias that will be acquired to point to this server instead.
@@ -13601,6 +13845,7 @@ model ServerDnsAliasAcquisition {
  * Properties for a server key execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
 model ServerKeyProperties {
   /**
    * Subregion of the server key.
@@ -13650,6 +13895,7 @@ model ServerKeyProperties {
  * A server operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerOperations)
 model ServerOperation extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -13660,6 +13906,7 @@ model ServerOperation extends CommonTypes.ProxyResource {
 /**
  * The properties of a server operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerOperations)
 model ServerOperationProperties {
   /**
    * The name of operation.
@@ -13745,6 +13992,7 @@ model ServerOperationProperties {
 /**
  * A request to check whether the specified name for a resource is available.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
@@ -13755,6 +14003,7 @@ model CheckNameAvailabilityRequest {
 /**
  * The result of a name availability check.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityResponse {
   /**
    * The name whose availability was checked.
@@ -13785,6 +14034,7 @@ model CheckNameAvailabilityResponse {
  * The properties of a server.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerProperties {
   /**
    * Administrator username for the server. Once created it cannot be changed.
@@ -13892,6 +14142,7 @@ model ServerProperties {
 /**
  * A private endpoint connection under a server
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerPrivateEndpointConnection {
   /**
    * Resource ID.
@@ -13909,6 +14160,7 @@ model ServerPrivateEndpointConnection {
 /**
  * Properties of a active directory administrator.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerExternalAdministrator {
   /**
    * Type of the sever administrator.
@@ -13947,6 +14199,7 @@ model ServerExternalAdministrator {
 /**
  * An update request for an Azure SQL Database server.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerUpdate {
   /**
    * Server identity
@@ -13968,6 +14221,7 @@ model ServerUpdate {
 /**
  * Contains the information necessary to perform import operation for new database.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ImportNewDatabaseDefinition {
   /**
    * Name of the import database.
@@ -14041,6 +14295,7 @@ model ImportNewDatabaseDefinition {
  * An RefreshExternalGovernanceStatus operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model RefreshExternalGovernanceStatusOperationResult
   extends CommonTypes.ProxyResource {
   /**
@@ -14052,6 +14307,7 @@ model RefreshExternalGovernanceStatusOperationResult
 /**
  * Contains the operation result properties for refresh external governance status operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model RefreshExternalGovernanceStatusOperationResultProperties {
   /**
    * Request Id.
@@ -14095,6 +14351,7 @@ model RefreshExternalGovernanceStatusOperationResultProperties {
  * The properties of a server trust certificate.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
 model ServerTrustCertificateProperties {
   /**
    * The certificate public blob
@@ -14118,6 +14375,7 @@ model ServerTrustCertificateProperties {
  * Properties of a server trust group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerTrustGroupProperties {
   /**
    * Group members information for the server trust group.
@@ -14134,6 +14392,7 @@ model ServerTrustGroupProperties {
 /**
  * Server info for the server trust group.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerInfo {
   /**
    * Server Id.
@@ -14145,6 +14404,7 @@ model ServerInfo {
  * Usage metric of a server.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerUsages)
 model ServerUsage extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -14155,6 +14415,7 @@ model ServerUsage extends CommonTypes.ProxyResource {
 /**
  * Properties of a server usage.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerUsages)
 model ServerUsageProperties {
   /**
    * User-readable name of the metric.
@@ -14185,6 +14446,7 @@ model ServerUsageProperties {
  * Properties of a server Vulnerability Assessment.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerVulnerabilityAssessments)
 model ServerVulnerabilityAssessmentProperties {
   /**
    * A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).
@@ -14216,6 +14478,7 @@ model ServerVulnerabilityAssessmentProperties {
  * Sql agent configuration properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SqlAgent)
 model SqlAgentConfigurationProperties {
   /**
    * The state of Sql Agent.
@@ -14227,6 +14490,9 @@ model SqlAgentConfigurationProperties {
  * Properties of managed instance's Start/Stop schedule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.StartStopManagedInstanceSchedules
+)
 model StartStopManagedInstanceScheduleProperties {
   /**
    * The description of the schedule.
@@ -14260,6 +14526,9 @@ model StartStopManagedInstanceScheduleProperties {
 /**
  * Schedule info describing when the server should be started or stopped.
  */
+@Azure.ResourceManager.Legacy.feature(
+  Features.StartStopManagedInstanceSchedules
+)
 model ScheduleItem {
   /**
    * Start day.
@@ -14286,6 +14555,7 @@ model ScheduleItem {
  * Properties of a subscription usage.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 model SubscriptionUsageProperties {
   /**
    * User-readable name of the metric.
@@ -14316,6 +14586,7 @@ model SubscriptionUsageProperties {
  * Synapse link workspace resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
 model SynapseLinkWorkspace extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -14326,6 +14597,7 @@ model SynapseLinkWorkspace extends CommonTypes.ProxyResource {
 /**
  * Properties of a Synapse link workspaces
  */
+@Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
 model SynapseLinkWorkspaceProperties {
   /**
    * List of all synapselink workspaces
@@ -14337,6 +14609,7 @@ model SynapseLinkWorkspaceProperties {
 /**
  * Properties of a Synapse link workspaces
  */
+@Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
 model SynapseLinkWorkspaceInfoProperties {
   /**
    * Synapse link workspace id.
@@ -14353,6 +14626,7 @@ model SynapseLinkWorkspaceInfoProperties {
  * Properties of an Azure SQL Database sync agent.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentProperties {
   /**
    * Name of the sync agent.
@@ -14402,6 +14676,7 @@ model SyncAgentProperties {
 /**
  * Properties of an Azure SQL Database sync agent key.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentKeyProperties {
   /**
    * Key of sync agent.
@@ -14415,6 +14690,7 @@ model SyncAgentKeyProperties {
  * An Azure SQL Database sync agent linked database.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentLinkedDatabase extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -14425,6 +14701,7 @@ model SyncAgentLinkedDatabase extends CommonTypes.ProxyResource {
 /**
  * Properties of an Azure SQL Database sync agent linked database.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentLinkedDatabaseProperties {
   /**
    * Type of the sync agent linked database.
@@ -14466,11 +14743,13 @@ model SyncAgentLinkedDatabaseProperties {
 /**
  * A list of sync database ID properties.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncDatabaseIdListResult is Azure.Core.Page<SyncDatabaseIdProperties>;
 
 /**
  * Properties of the sync database id.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncDatabaseIdProperties {
   /**
    * ARM resource id of sync database.
@@ -14483,6 +14762,7 @@ model SyncDatabaseIdProperties {
  * Properties of a sync group with support to MI.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupProperties {
   /**
    * Sync interval of the sync group.
@@ -14554,6 +14834,7 @@ model SyncGroupProperties {
 /**
  * Properties of sync group schema.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupSchema {
   /**
    * List of tables in sync group schema.
@@ -14570,6 +14851,7 @@ model SyncGroupSchema {
 /**
  * Properties of table in sync group schema.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupSchemaTable {
   /**
    * List of columns in sync group schema.
@@ -14586,6 +14868,7 @@ model SyncGroupSchemaTable {
 /**
  * Properties of column in sync group table.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupSchemaTableColumn {
   /**
    * Quoted name of sync group table column.
@@ -14712,11 +14995,13 @@ model SyncFullSchemaTableColumn {
 /**
  * A list of sync group log properties.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupLogListResult is Azure.Core.Page<SyncGroupLogProperties>;
 
 /**
  * Properties of an Azure SQL Database sync group log.
  */
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupLogProperties {
   /**
    * Timestamp of the sync group log.
@@ -14761,6 +15046,7 @@ model SyncGroupLogProperties {
  * Properties of a sync member with support to MI.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 model SyncMemberProperties {
   /**
    * Database type of the sync member.
@@ -14832,6 +15118,7 @@ model SyncMemberProperties {
  * The properties of a time zone.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.TimeZones)
 model TimeZoneProperties {
   /**
    * The time zone id
@@ -14850,6 +15137,7 @@ model TimeZoneProperties {
  * Properties of a transparent data encryption scan.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
 model TransparentDataEncryptionProperties {
   /**
    * Specifies the state of the transparent data encryption.
@@ -14865,11 +15153,13 @@ model TransparentDataEncryptionProperties {
 /**
  * A list of usages.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Usages)
 model UsageListResult is Azure.Core.Page<Usage>;
 
 /**
  * ARM usage.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Usages)
 model Usage {
   /**
    * Resource ID.
@@ -14917,6 +15207,7 @@ model Usage {
 /**
  * ARM Usage Name
  */
+@Azure.ResourceManager.Legacy.feature(Features.Usages)
 model Name {
   /**
    * Usage name value
@@ -14933,6 +15224,7 @@ model Name {
  * The properties of a virtual cluster.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualClusterProperties {
   /**
    * Subnet resource ID for the virtual cluster.
@@ -14955,6 +15247,7 @@ model VirtualClusterProperties {
 /**
  * An update request for virtual cluster.
  */
+@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualClusterUpdate {
   /**
    * Resource properties.
@@ -14972,6 +15265,7 @@ model VirtualClusterUpdate {
  * A refresh DNS servers operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model UpdateVirtualClusterDnsServersOperation
   extends CommonTypes.ProxyResource {
   /**
@@ -14983,6 +15277,7 @@ model UpdateVirtualClusterDnsServersOperation
 /**
  * The properties of dns servers on virtual cluster.
  */
+@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualClusterDnsServersProperties {
   /**
    * The status of the DNS refresh operation.
@@ -14995,6 +15290,7 @@ model VirtualClusterDnsServersProperties {
  * Properties of a virtual network rule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.VirtualNetworkRules)
 model VirtualNetworkRuleProperties {
   /**
    * The ARM resource id of the virtual network subnet.
@@ -15017,6 +15313,7 @@ model VirtualNetworkRuleProperties {
  * Workload classifier definition. For more information look at sys.workload_management_workload_classifiers (DMV).
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.WorkloadClassifiers)
 model WorkloadClassifierProperties {
   /**
    * The workload classifier member name.
@@ -15053,6 +15350,7 @@ model WorkloadClassifierProperties {
  * Workload group definition. For more information look at sys.workload_management_workload_groups (DMV).
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.WorkloadGroups)
 model WorkloadGroupProperties {
   /**
    * The workload group minimum percentage resource.
@@ -15088,6 +15386,7 @@ model WorkloadGroupProperties {
 /**
  * The properties that are supported in the $filter operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventsFilterParameters {
   /**
    * Filter on the event time.
@@ -15104,6 +15403,7 @@ model SecurityEventsFilterParameters {
 /**
  * A list of long term retention backups.
  */
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackupListResult {
   /**
    * Array of results.
@@ -15123,6 +15423,7 @@ model LongTermRetentionBackupListResult {
 /**
  * List of managed database move operations.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 model ManagedDatabaseMoveOperationListResult {
   /**
    * Array of results.
@@ -15143,6 +15444,9 @@ model ManagedDatabaseMoveOperationListResult {
  * List of managed database move operations.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceAzureADOnlyAuthentications
+)
 model ManagedInstanceAzureADOnlyAuthListResult {
   /**
    * Array of results.
@@ -15162,6 +15466,7 @@ model ManagedInstanceAzureADOnlyAuthListResult {
 /**
  * A list of distributed availability groups in instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupsListResult {
   /**
    * Array of results.
@@ -15181,6 +15486,7 @@ model DistributedAvailabilityGroupsListResult {
 /**
  * A list of server trust certificates in instance.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
 model ServerTrustCertificatesListResult {
   /**
    * Array of results.
@@ -15200,6 +15506,7 @@ model ServerTrustCertificatesListResult {
 /**
  * A list of active directory administrators.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerAzureADAdministrators)
 model AdministratorListResult {
   /**
    * Array of results.
@@ -15219,6 +15526,9 @@ model AdministratorListResult {
 /**
  * A list of the server's Advanced Threat Protection configurations.
  */
+@Azure.ResourceManager.Legacy.feature(
+  Features.ServerAdvancedThreatProtectionSettings
+)
 model LogicalServerAdvancedThreatProtectionListResult {
   /**
    * Array of results.
@@ -15239,6 +15549,7 @@ model LogicalServerAdvancedThreatProtectionListResult {
  * A list of active directory only authentications.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.ServerAzureADOnlyAuthentications)
 model AzureADOnlyAuthListResult {
   /**
    * Array of results.
@@ -15258,6 +15569,7 @@ model AzureADOnlyAuthListResult {
 /**
  * Import export operation extensions list.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model ImportExportExtensionsOperationListResult {
   /**
    * Array of results.
@@ -15277,6 +15589,7 @@ model ImportExportExtensionsOperationListResult {
 /**
  * A list of the database's security alert policies.
  */
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseSecurityAlertPolicies)
 model DatabaseSecurityAlertListResult {
   /**
    * Array of results.
@@ -15316,6 +15629,7 @@ model SQLVulnerabilityAssessmentScanListResult {
 /**
  * A list of server DevOps audit settings.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 model ServerDevOpsAuditSettingsListResult {
   /**
    * Array of results.
@@ -15335,6 +15649,7 @@ model ServerDevOpsAuditSettingsListResult {
 /**
  * A list of the server's security alert policies.
  */
+@Azure.ResourceManager.Legacy.feature(Features.ServerSecurityAlertPolicies)
 model LogicalServerSecurityAlertPolicyListResult {
   /**
    * Array of results.
@@ -15354,6 +15669,7 @@ model LogicalServerSecurityAlertPolicyListResult {
 /**
  * Result of the request to list SQL operations.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Operations)
 model OperationListResult {
   /**
    * Array of results.
@@ -15374,6 +15690,7 @@ model OperationListResult {
  * A Server ImportExport operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -15384,6 +15701,7 @@ model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
 /**
  * Contains the operation result properties for import/export operation.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerImportExportOperationResultProperties {
   /**
    * Request Id.

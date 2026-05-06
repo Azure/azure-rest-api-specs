@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database server.
  */
+@Azure.ResourceManager.Legacy.feature(Features.Servers)
 model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   ...ResourceNameParameter<
     Resource = Server,
@@ -41,6 +42,7 @@ interface Servers {
    * Gets a server.
    */
   @tag("Servers")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   get is ArmResourceRead<
     Server,
     Parameters = {
@@ -57,6 +59,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
     Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
@@ -71,6 +74,7 @@ interface Servers {
    */
   @patch(#{ implicitOptionality: false })
   @tag("Servers")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   update is ArmCustomPatchAsync<Server, PatchModel = ServerUpdate>;
 
   /**
@@ -78,6 +82,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -87,6 +92,7 @@ interface Servers {
    * Gets a list of servers in a resource groups.
    */
   @tag("Servers")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   listByResourceGroup is ArmResourceListByParent<
     Server,
     Parameters = {
@@ -102,6 +108,7 @@ interface Servers {
    * Gets a list of all servers in the subscription.
    */
   @tag("Servers")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   list is ArmListBySubscription<
     Server,
     Parameters = {
@@ -120,6 +127,7 @@ interface Servers {
   @list
   @get
   @action("inaccessibleDatabases")
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
   listInaccessibleByServer is ArmResourceActionSync<
     Server,
     void,
@@ -134,6 +142,7 @@ interface Servers {
   @tag("FirewallRules")
   @put
   @action("firewallRules")
+  @Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
   replace is ArmResourceActionSync<
     Server,
     FirewallRuleList,
@@ -147,6 +156,7 @@ interface Servers {
   @list
   @get
   @action("replicationLinks")
+  @Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
   listByServer is ArmResourceActionSync<
     Server,
     void,
@@ -160,6 +170,7 @@ interface Servers {
   @list
   @get
   @action("operations")
+  @Azure.ResourceManager.Legacy.feature(Features.ServerOperations)
   serverOperationsListByServer is ArmResourceActionSync<
     Server,
     void,
@@ -171,6 +182,7 @@ interface Servers {
    */
   @tag("Servers")
   @action("import")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   importDatabase is ArmResourceActionAsync<
     Server,
     ImportNewDatabaseDefinition,
@@ -182,6 +194,7 @@ interface Servers {
    */
   @tag("Servers")
   @action("refreshExternalGovernanceStatus")
+  @Azure.ResourceManager.Legacy.feature(Features.Servers)
   refreshStatus is ArmResourceActionAsync<
     Server,
     void,
@@ -195,6 +208,7 @@ interface Servers {
   @list
   @get
   @action("usages")
+  @Azure.ResourceManager.Legacy.feature(Features.ServerUsages)
   serverUsagesListByServer is ArmResourceActionSync<
     Server,
     void,
@@ -206,6 +220,7 @@ interface Servers {
    */
   @tag("TdeCertificates")
   @action("tdeCertificates")
+  @Azure.ResourceManager.Legacy.feature(Features.TdeCertificates)
   create is ArmResourceActionAsyncBase<
     Server,
     TdeCertificate,

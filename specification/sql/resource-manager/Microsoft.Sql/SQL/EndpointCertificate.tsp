@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Certificate used on an endpoint on the Managed Instance.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.EndpointCertificates)
 model EndpointCertificate
   is Azure.ResourceManager.ProxyResource<EndpointCertificateProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model EndpointCertificate
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.EndpointCertificates)
 interface EndpointCertificates {
   /**
    * Gets a certificate used on the endpoint with the given id.

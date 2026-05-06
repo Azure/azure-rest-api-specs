@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * An Extension operation result resource.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model ImportExportExtensionsOperationResult
   is Azure.ResourceManager.ProxyResource<ImportExportExtensionsOperationResultProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model ImportExportExtensionsOperationResult
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 interface ImportExportExtensionsOperationResults {
   /**
    * Gets a database extension. This will return resource not found as it is not supported.

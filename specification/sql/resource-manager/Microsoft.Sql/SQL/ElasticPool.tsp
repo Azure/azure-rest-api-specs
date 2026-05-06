@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * An elastic pool.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPool
   is Azure.ResourceManager.TrackedResource<ElasticPoolProperties> {
   ...ResourceNameParameter<
@@ -51,6 +52,7 @@ interface ElasticPools {
    * Gets an elastic pool.
    */
   @tag("ElasticPools")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   get is ArmResourceRead<ElasticPool>;
 
   /**
@@ -59,6 +61,7 @@ interface ElasticPools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @tag("ElasticPools")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ElasticPool,
     Response = ArmResourceUpdatedResponse<ElasticPool> | ArmResourceCreatedResponse<
@@ -72,6 +75,7 @@ interface ElasticPools {
    */
   @patch(#{ implicitOptionality: false })
   @tag("ElasticPools")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   update is ArmCustomPatchAsync<ElasticPool, PatchModel = ElasticPoolUpdate>;
 
   /**
@@ -79,6 +83,7 @@ interface ElasticPools {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticPool,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -88,6 +93,7 @@ interface ElasticPools {
    * Gets all elastic pools in a server.
    */
   @tag("ElasticPools")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   listByServer is ArmResourceListByParent<
     ElasticPool,
     Parameters = {
@@ -106,6 +112,7 @@ interface ElasticPools {
   @list
   @get
   @action("databases")
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
   listByElasticPool is ArmResourceActionSync<
     ElasticPool,
     void,
@@ -119,6 +126,7 @@ interface ElasticPools {
   @list
   @get
   @action("operations")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
   elasticPoolOperationsListByElasticPool is ArmResourceActionSync<
     ElasticPool,
     void,
@@ -129,6 +137,7 @@ interface ElasticPools {
    * Cancels the asynchronous operation on the elastic pool.
    */
   @tag("ElasticPoolOperations")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
   cancel is ArmResourceActionSync<
     ElasticPool,
     void,
@@ -148,6 +157,7 @@ interface ElasticPools {
    * Failovers an elastic pool.
    */
   @tag("ElasticPools")
+  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   failover is ArmResourceActionAsyncBase<
     ElasticPool,
     void,

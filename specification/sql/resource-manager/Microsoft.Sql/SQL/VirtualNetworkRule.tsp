@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A virtual network rule.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.VirtualNetworkRules)
 model VirtualNetworkRule
   is Azure.ResourceManager.ProxyResource<VirtualNetworkRuleProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model VirtualNetworkRule
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.VirtualNetworkRules)
 interface VirtualNetworkRules {
   /**
    * Gets a virtual network rule.

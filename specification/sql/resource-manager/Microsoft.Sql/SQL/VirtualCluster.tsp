@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL virtual cluster.
  */
+@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualCluster
   is Azure.ResourceManager.TrackedResource<VirtualClusterProperties> {
   ...ResourceNameParameter<
@@ -24,6 +25,7 @@ model VirtualCluster
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 interface VirtualClusters {
   /**
    * Gets a virtual cluster.

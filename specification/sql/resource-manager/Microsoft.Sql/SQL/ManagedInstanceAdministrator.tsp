@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * An Azure SQL managed instance administrator.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceAdministrators)
 model ManagedInstanceAdministrator
   is Azure.ResourceManager.ProxyResource<ManagedInstanceAdministratorProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model ManagedInstanceAdministrator
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceAdministrators)
 interface ManagedInstanceAdministrators {
   /**
    * Gets a managed instance administrator.

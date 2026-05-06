@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Database query.
  */
 @parentResource(ManagedDatabase)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model ManagedInstanceQuery
   is Azure.ResourceManager.ProxyResource<QueryProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model ManagedInstanceQuery
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 interface ManagedInstanceQueries {
   /**
    * Get query by query id.

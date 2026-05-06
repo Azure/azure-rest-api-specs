@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
  * A managed database move operation.
  */
 @parentResource(ResourceGroupLocationResource)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 model ManagedDatabaseMoveOperationResult
   is Azure.ResourceManager.ProxyResource<ManagedDatabaseMoveOperationResultProperties> {
   ...ResourceNameParameter<
@@ -47,6 +48,7 @@ alias ManagedDatabaseMoveOperationResultsOps = Azure.ResourceManager.Legacy.Lega
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 interface ManagedDatabaseMoveOperationResults {
   /**
    * Gets a managed database move operation.

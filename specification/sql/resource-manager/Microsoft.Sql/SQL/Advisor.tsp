@@ -67,6 +67,7 @@ alias AdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAdvisors)
 interface Advisors {
   /**
    * Gets a database advisor.
@@ -120,6 +121,7 @@ alias ServerAdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerAdvisors)
 interface ServerAdvisors {
   /**
    * Gets a server advisor.

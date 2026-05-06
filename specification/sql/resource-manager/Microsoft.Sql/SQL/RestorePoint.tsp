@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Database restore points.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
 model RestorePoint
   is Azure.ResourceManager.ProxyResource<RestorePointProperties> {
   ...ResourceNameParameter<
@@ -33,6 +34,7 @@ model RestorePoint
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
 interface RestorePoints {
   /**
    * Gets a restore point.

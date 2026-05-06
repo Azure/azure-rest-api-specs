@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  * An Azure SQL Database sync group.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
   ...ResourceNameParameter<
     Resource = SyncGroup,
@@ -39,6 +40,7 @@ model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 interface SyncGroups {
   /**
    * Gets a sync group.

@@ -40,6 +40,7 @@ model RecommendedAction
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseRecommendedActions)
 interface RecommendedActions {
   /**
    * Gets a database recommended action.

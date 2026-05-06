@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A managed server DNS alias.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAlias
   is Azure.ResourceManager.ProxyResource<ManagedServerDnsAliasProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model ManagedServerDnsAlias
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 interface ManagedServerDnsAliases {
   /**
    * Gets a server DNS alias.

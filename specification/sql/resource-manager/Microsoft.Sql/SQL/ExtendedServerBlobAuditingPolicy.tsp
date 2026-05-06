@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * An extended server blob auditing policy.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedServerBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ExtendedServerBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
@@ -42,6 +43,7 @@ alias ExtendedServerBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyO
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 interface ExtendedServerBlobAuditingPolicies {
   /**
    * Gets an extended server's blob auditing policy.

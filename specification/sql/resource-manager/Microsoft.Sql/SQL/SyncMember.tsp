@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  * An Azure SQL Database sync member.
  */
 @parentResource(SyncGroup)
+@Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
   ...ResourceNameParameter<
     Resource = SyncMember,
@@ -33,6 +34,7 @@ model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 interface SyncMembers {
   /**
    * Gets a sync member.

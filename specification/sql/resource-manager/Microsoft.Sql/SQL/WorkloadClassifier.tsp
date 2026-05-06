@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Workload classifier operations for a data warehouse
  */
 @parentResource(WorkloadGroup)
+@Azure.ResourceManager.Legacy.feature(Features.WorkloadClassifiers)
 model WorkloadClassifier
   is Azure.ResourceManager.ProxyResource<WorkloadClassifierProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model WorkloadClassifier
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.WorkloadClassifiers)
 interface WorkloadClassifiers {
   /**
    * Gets a workload classifier

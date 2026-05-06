@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  */
 @singleton("current")
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindowOptions)
 model MaintenanceWindowOptions
   is Azure.ResourceManager.ProxyResource<MaintenanceWindowOptionsProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model MaintenanceWindowOptions
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindowOptions)
 interface MaintenanceWindowOptionsOperationGroup {
   /**
    * Gets a list of available maintenance windows.

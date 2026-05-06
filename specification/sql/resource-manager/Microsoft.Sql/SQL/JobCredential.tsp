@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A stored credential that can be used by a job to connect to target databases.
  */
 @parentResource(JobAgent)
+@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 model JobCredential
   is Azure.ResourceManager.ProxyResource<JobCredentialProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model JobCredential
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 interface JobCredentials {
   /**
    * Gets a jobs credential.

@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A instance pool operation.
  */
 @parentResource(InstancePool)
+@Azure.ResourceManager.Legacy.feature(Features.InstancePoolOperations)
 model InstancePoolOperation
   is Azure.ResourceManager.ProxyResource<InstancePoolOperationProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model InstancePoolOperation
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.InstancePoolOperations)
 interface InstancePoolOperations {
   /**
    * Gets a management operation on a instance pool.

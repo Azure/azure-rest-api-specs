@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A database blob auditing policy.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model DatabaseBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<DatabaseBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
@@ -55,6 +56,7 @@ alias DatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOpera
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 interface DatabaseBlobAuditingPolicies {
   /**
    * Gets a database's blob auditing policy.

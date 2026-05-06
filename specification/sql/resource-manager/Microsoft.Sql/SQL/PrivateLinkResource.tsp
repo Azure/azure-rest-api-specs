@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A private link resource
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.PrivateLinkResources)
 model PrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model PrivateLinkResource
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.PrivateLinkResources)
 interface PrivateLinkResources {
   /**
    * Gets a private link resource for SQL server.

@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
  * Time Zone property.
  */
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.TimeZones)
 model TimeZone is Azure.ResourceManager.ProxyResource<TimeZoneProperties> {
   ...ResourceNameParameter<
     Resource = TimeZone,
@@ -45,6 +46,7 @@ alias TimeZonesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.TimeZones)
 interface TimeZones {
   /**
    * Gets a managed instance time zone.

@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
  * A server trust group.
  */
 @parentResource(ResourceGroupLocationResource)
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerTrustGroup
   is Azure.ResourceManager.ProxyResource<ServerTrustGroupProperties> {
   ...ResourceNameParameter<
@@ -47,6 +48,7 @@ alias ServerTrustGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 interface ServerTrustGroups {
   /**
    * Gets a server trust group.

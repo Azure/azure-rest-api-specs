@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * NSP Configuration for a server.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 model NetworkSecurityPerimeterConfiguration
   is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
@@ -26,6 +29,9 @@ model NetworkSecurityPerimeterConfiguration
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.NetworkSecurityPerimeterConfigurations
+)
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.

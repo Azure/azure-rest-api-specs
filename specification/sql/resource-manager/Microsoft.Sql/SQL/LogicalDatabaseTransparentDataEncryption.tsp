@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A logical database transparent data encryption scan state.
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
 model LogicalDatabaseTransparentDataEncryption
   is Azure.ResourceManager.ProxyResource<TransparentDataEncryptionProperties> {
   ...ResourceNameParameter<
@@ -28,6 +29,7 @@ model LogicalDatabaseTransparentDataEncryption
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
 interface LogicalDatabaseTransparentDataEncryptions {
   /**
    * Gets a logical database's transparent data encryption.

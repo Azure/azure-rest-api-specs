@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  */
 @singleton("current")
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model DatabaseAutomaticTuning
   is Azure.ResourceManager.ProxyResource<DatabaseAutomaticTuningProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model DatabaseAutomaticTuning
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 interface DatabaseAutomaticTunings {
   /**
    * Gets a database's automatic tuning.

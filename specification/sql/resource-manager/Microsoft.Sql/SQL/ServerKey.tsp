@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A server key.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
 model ServerKey is Azure.ResourceManager.ProxyResource<ServerKeyProperties> {
   ...ResourceNameParameter<
     Resource = ServerKey,
@@ -39,6 +40,7 @@ model ServerKey is Azure.ResourceManager.ProxyResource<ServerKeyProperties> {
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
 interface ServerKeys {
   /**
    * Gets a server key.

@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 model RestorableDroppedDatabase
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RestorableDroppedDatabaseProperties> {
   ...ResourceNameParameter<
@@ -33,6 +34,7 @@ model RestorableDroppedDatabase
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 interface RestorableDroppedDatabases {
   /**
    * Gets a restorable dropped database.

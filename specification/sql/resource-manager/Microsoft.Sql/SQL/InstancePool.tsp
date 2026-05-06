@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL instance pool.
  */
+@Azure.ResourceManager.Legacy.feature(Features.InstancePools)
 model InstancePool
   is Azure.ResourceManager.TrackedResource<InstancePoolProperties> {
   ...ResourceNameParameter<
@@ -35,6 +36,7 @@ interface InstancePools {
    * Gets an instance pool.
    */
   @tag("InstancePools")
+  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
   get is ArmResourceRead<InstancePool>;
 
   /**
@@ -42,6 +44,7 @@ interface InstancePools {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
+  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InstancePool,
     Response = ArmResourceUpdatedResponse<InstancePool> | ArmResourceCreatedResponse<
@@ -56,6 +59,7 @@ interface InstancePools {
    */
   @patch(#{ implicitOptionality: false })
   @tag("InstancePools")
+  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
   update is ArmCustomPatchAsync<InstancePool, PatchModel = InstancePoolUpdate>;
 
   /**
@@ -63,6 +67,7 @@ interface InstancePools {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
+  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
   delete is ArmResourceDeleteWithoutOkAsync<
     InstancePool,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -72,12 +77,14 @@ interface InstancePools {
    * Gets a list of instance pools in the resource group
    */
   @tag("InstancePools")
+  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
   listByResourceGroup is ArmResourceListByParent<InstancePool>;
 
   /**
    * Gets a list of all instance pools in the subscription.
    */
   @tag("InstancePools")
+  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
   list is ArmListBySubscription<InstancePool>;
 
   /**
@@ -87,6 +94,7 @@ interface InstancePools {
   @list
   @get
   @action("managedInstances")
+  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
   listByInstancePool is ArmResourceActionSync<
     InstancePool,
     void,
@@ -107,6 +115,7 @@ interface InstancePools {
   @list
   @get
   @action("usages")
+  @Azure.ResourceManager.Legacy.feature(Features.Usages)
   usagesListByInstancePool is ArmResourceActionSync<
     InstancePool,
     void,

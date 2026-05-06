@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A server DNS alias.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAlias
   is Azure.ResourceManager.ProxyResource<ServerDnsAliasProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model ServerDnsAlias
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 interface ServerDnsAliases {
   /**
    * Gets a server DNS alias.

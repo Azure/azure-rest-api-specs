@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Workload group operations for a data warehouse
  */
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.WorkloadGroups)
 model WorkloadGroup
   is Azure.ResourceManager.ProxyResource<WorkloadGroupProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model WorkloadGroup
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.WorkloadGroups)
 interface WorkloadGroups {
   /**
    * Gets a workload group

@@ -15,6 +15,9 @@ namespace Microsoft.Sql;
  * A long term retention policy.
  */
 @parentResource(ManagedDatabase)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceLongTermRetentionPolicies
+)
 model ManagedInstanceLongTermRetentionPolicy
   is Azure.ResourceManager.ProxyResource<ManagedInstanceLongTermRetentionPolicyProperties> {
   ...ResourceNameParameter<
@@ -27,6 +30,9 @@ model ManagedInstanceLongTermRetentionPolicy
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstanceLongTermRetentionPolicies
+)
 interface ManagedInstanceLongTermRetentionPolicies {
   /**
    * Gets a managed database's long term retention policy.

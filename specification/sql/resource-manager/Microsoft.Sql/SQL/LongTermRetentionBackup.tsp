@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
  * A long term retention backup.
  */
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackup
   is Azure.ResourceManager.ProxyResource<LongTermRetentionBackupProperties> {
   ...ResourceNameParameter<
@@ -63,6 +64,7 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackups {
   /**
    * Gets a long term retention backup.
@@ -204,6 +206,7 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
 >;
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackupOperationGroup {
   /**
    * Gets a long term retention backup.

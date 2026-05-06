@@ -66,6 +66,7 @@ alias DatabaseColumnOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
 interface DatabaseColumns {
   /**
    * Get database column
@@ -127,6 +128,7 @@ alias ManagedDatabaseColumnOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseColumns)
 interface ManagedDatabaseColumns {
   /**
    * Get managed database column

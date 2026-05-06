@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A recoverable database resource.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.RecoverableDatabases)
 model RecoverableDatabase
   is Azure.ResourceManager.ProxyResource<RecoverableDatabaseProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model RecoverableDatabase
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.RecoverableDatabases)
 interface RecoverableDatabases {
   /**
    * Gets a recoverable database.

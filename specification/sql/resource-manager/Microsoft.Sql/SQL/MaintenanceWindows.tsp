@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  */
 @singleton("current")
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindows)
 model MaintenanceWindows
   is Azure.ResourceManager.ProxyResource<MaintenanceWindowsProperties> {
   ...ResourceNameParameter<
@@ -28,6 +29,7 @@ model MaintenanceWindows
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindows)
 interface MaintenanceWindowsOperationGroup {
   /**
    * Gets maintenance windows settings for a database.

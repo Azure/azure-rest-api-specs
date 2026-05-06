@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  */
 @singleton("current")
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model ServerAutomaticTuning
   is Azure.ResourceManager.ProxyResource<AutomaticTuningServerProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model ServerAutomaticTuning
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 interface ServerAutomaticTunings {
   /**
    * Retrieves server automatic tuning options.

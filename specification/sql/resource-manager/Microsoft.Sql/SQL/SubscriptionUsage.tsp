@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
  * Usage Metric of a Subscription in a Location.
  */
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 model SubscriptionUsage
   is Azure.ResourceManager.ProxyResource<SubscriptionUsageProperties> {
   ...ResourceNameParameter<
@@ -46,6 +47,7 @@ alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 interface SubscriptionUsages {
   /**
    * Gets a subscription usage metric.

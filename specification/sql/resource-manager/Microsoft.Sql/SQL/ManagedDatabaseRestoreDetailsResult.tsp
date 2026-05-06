@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A managed database restore details.
  */
 @parentResource(ManagedDatabase)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsResult
   is Azure.ResourceManager.ProxyResource<ManagedDatabaseRestoreDetailsProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model ManagedDatabaseRestoreDetailsResult
 }
 
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 interface ManagedDatabaseRestoreDetailsResults {
   /**
    * Gets managed database restore details.

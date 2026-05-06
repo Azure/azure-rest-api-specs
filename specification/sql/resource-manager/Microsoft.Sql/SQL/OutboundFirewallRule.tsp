@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * An Azure SQL DB Server Outbound Firewall Rule.
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
 model OutboundFirewallRule
   is Azure.ResourceManager.ProxyResource<OutboundFirewallRuleProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model OutboundFirewallRule
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
 interface OutboundFirewallRules {
   /**
    * Gets an outbound firewall rule.

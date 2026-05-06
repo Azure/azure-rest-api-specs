@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A managed instance key.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 model ManagedInstanceKey
   is Azure.ResourceManager.ProxyResource<ManagedInstanceKeyProperties> {
   ...ResourceNameParameter<
@@ -33,6 +34,7 @@ model ManagedInstanceKey
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 interface ManagedInstanceKeys {
   /**
    * Gets a managed instance key.

@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A group of job targets.
  */
 @parentResource(JobAgent)
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 model JobTargetGroup
   is Azure.ResourceManager.ProxyResource<JobTargetGroupProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model JobTargetGroup
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 interface JobTargetGroups {
   /**
    * Gets a target group.

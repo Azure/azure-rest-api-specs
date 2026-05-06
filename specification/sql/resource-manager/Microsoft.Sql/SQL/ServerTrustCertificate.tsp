@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Server trust certificate imported from box to enable connection between box and Sql Managed Instance.
  */
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
 model ServerTrustCertificate
   is Azure.ResourceManager.ProxyResource<ServerTrustCertificateProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model ServerTrustCertificate
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
 interface ServerTrustCertificates {
   /**
    * Gets a server trust certificate that was uploaded from SQL Server to SQL Managed Instance.

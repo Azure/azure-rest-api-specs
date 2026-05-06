@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Azure SQL Database ledger digest upload settings.
  */
 @parentResource(ManagedDatabase)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedLedgerDigestUploads)
 model ManagedLedgerDigestUploads
   is Azure.ResourceManager.ProxyResource<ManagedLedgerDigestUploadsProperties> {
   ...ResourceNameParameter<
@@ -28,6 +29,7 @@ model ManagedLedgerDigestUploads
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ManagedLedgerDigestUploads)
 interface ManagedLedgerDigestUploadsOperationGroup {
   /**
    * Gets the current ledger digest upload configuration for a database.

@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A private endpoint connection
  */
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.PrivateEndpointConnections)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
@@ -26,6 +27,7 @@ model PrivateEndpointConnection
 }
 
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.PrivateEndpointConnections)
 interface PrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
