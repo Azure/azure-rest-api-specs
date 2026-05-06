@@ -5161,7 +5161,7 @@ model McpServerTool {
   /** Optional configuration for parsing the tool's output. */
   outputParsing?: McpServerOutputParsing;
 
-  /** Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'always' when not specified. */
+  /** Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified. */
   inclusionMode?: McpServerToolInclusionMode;
 
   /** Optional post-parsing token cap for this tool's output. Must be greater than 0 when specified. */
@@ -5173,10 +5173,10 @@ model McpServerTool {
 union McpServerToolInclusionMode {
   string,
 
-  /** Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. */
+  /** Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior. */
   Reranked: "reranked",
 
-  /** Tool results bypass reranking and are always included in the agent context. This is the default behavior. */
+  /** Tool results bypass reranking and are always included in the agent context. */
   Always: "always",
 }
 
