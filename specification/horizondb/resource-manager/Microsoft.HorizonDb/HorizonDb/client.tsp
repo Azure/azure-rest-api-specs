@@ -4,4 +4,4 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient");
-@@clientName(Microsoft.HorizonDb.HorizonDbClusterData, "HorizonDBClusterData");
+@@clientName(Microsoft.HorizonDb.HorizonDbCluster, "HorizonDBCluster");
