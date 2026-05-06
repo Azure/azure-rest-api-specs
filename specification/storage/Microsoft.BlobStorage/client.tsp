@@ -203,11 +203,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(ListBlobsResponse.nextMarker, "continuationToken", "javascript");
 @@clientName(ListBlobsResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(PageList.nextMarker, "continuationToken", "javascript");
-@@clientName(ListBlobsHierarchySegmentResponse.nextMarker,
+@@clientName(ListBlobsHierarchicalResponse.nextMarker,
   "continuationToken",
   "javascript"
 );
-@@clientName(ListBlobsHierarchySegmentResponse.maxResults,
+@@clientName(ListBlobsHierarchicalResponse.maxResults,
   "maxPageSize",
   "javascript"
 );
@@ -569,6 +569,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(LeaseStatus, "LeaseStatusType", "go");
 @@clientName(ListBlobsIncludeItemGo, "ListBlobsIncludeItem", "go");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "go");
+@@clientName(ListBlobsHierarchicalResponse,
+  "ListBlobsHierarchySegmentResponse",
+  "go"
+);
 @@clientName(Metrics.includeApis, "IncludeAPIs", "go");
 @@clientName(QueryType, "QueryFormatType", "go");
 @@clientName(Storage.Blob.Blob.setProperties, "SetHTTPHeaders", "go");
@@ -779,6 +783,10 @@ model BlobServicePropertiesCsharp {
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "csharp");
 @@clientName(Blob.setProperties, "SetHttpHeaders", "csharp");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "csharp");
+@@clientName(ListBlobsHierarchicalResponse,
+  "ListBlobsHierarchySegmentResponse",
+  "csharp"
+);
 @@clientName(Container.findBlobsByTags, "FilterBlobs", "csharp");
 @@clientName(Service.findBlobsByTags, "FilterBlobs", "csharp");
 @@clientName(Service.listContainers, "ListContainersSegment", "csharp");

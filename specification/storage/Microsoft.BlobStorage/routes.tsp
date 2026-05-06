@@ -647,7 +647,7 @@ interface Container {
     {
       /** The list of blobs in the container */
       @body
-      enumerationResults: ListBlobsHierarchySegmentResponse;
+      enumerationResults: ListBlobsHierarchicalResponse;
     }
   >;
 
