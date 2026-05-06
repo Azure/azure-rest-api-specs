@@ -6,7 +6,6 @@ using Microsoft.BillingBenefits;
 
 // go
 @@clientLocation(BenefitOperationGroup.validate, "RP", "go");
-@@clientName(Microsoft.BillingBenefits.ResourceSku, "SKU", "go");
 @@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
   "ServiceManagedIdentity",
   "go"
@@ -286,3 +285,4 @@ using Microsoft.BillingBenefits;
 
 // csharp: preserve original public property name after flatten/lift-to-nullable generator fix
 @@clientName(MaccModelProperties.entityType, "MaccEntityType", "csharp");
+@@clientName(DiscountType, "DiscountTypeEnum", "go");

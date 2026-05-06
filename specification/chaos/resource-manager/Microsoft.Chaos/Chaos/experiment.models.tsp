@@ -2,13 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
@@ -35,6 +34,11 @@ model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties?: ExperimentProperties;
 }
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with arm-resource-flattening configuration"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Experiment.properties,
+  "autorest"
+);
 
 /**
  * Enum of the selector type.
@@ -209,7 +213,7 @@ model ChaosTargetFilter {
  */
 model CustomerDataStorageProperties {
   /**
-   * ARM Resource ID of the Storage account to use for Customer Data storage.
+   * Azure Resource ID of the Storage account to use for Customer Data storage.
    */
   storageAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
@@ -259,23 +263,6 @@ model ContinuousAction extends ChaosExperimentAction {
    * Enum that discriminates between action models.
    */
   type: "continuous";
-}
-
-/**
- * A map to describe the settings of an action.
- */
-model KeyValuePair {
-  /**
-   * The name of the setting for the action.
-   */
-  @minLength(1)
-  key: string;
-
-  /**
-   * The value of the setting for the action.
-   */
-  @minLength(1)
-  value: string;
 }
 
 /**

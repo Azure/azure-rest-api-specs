@@ -6,6 +6,7 @@ using Azure.ResourceManager.Foundations;
 using Microsoft.FileShares;
 
 @@clientName(Microsoft.FileShares, "FileSharesManagementClient", "java");
+@@clientName(Microsoft.FileShares, "FileSharesMgmtClient", "python");
 
 @@scope(Operations.list, "!csharp");
 @@clientName(Microsoft.FileShares.FileShares, "FileSharesInterface", "csharp");
