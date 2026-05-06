@@ -163,7 +163,7 @@ Every comment **MUST** include:
 
 **Format**:
 
-```
+```text
 **[NEW] 🔴 Blocking** **[RPC-Put-V1-11]** `specification/foo/resource-manager/stable/2025-01-01/foo.json` - line 42
 JSON path: `$.paths['/subscriptions/{subscriptionId}/.../foo/{fooName}'].put.responses`
 
