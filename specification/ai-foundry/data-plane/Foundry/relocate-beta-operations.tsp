@@ -108,6 +108,12 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.createAgentFromCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.updateAgentFromCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.downloadAgentVersionCode, Agents);
+
 
 interface Datasets {}
 
