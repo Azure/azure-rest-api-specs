@@ -105,6 +105,10 @@ model ModelVersion {
   @doc("The source of the model")
   source?: ModelSourceData;
 
+  @doc("Adapter-specific configuration. Required when weightType is LoRA; ignored otherwise. May be auto-populated from adapter_config.json when present in the uploaded files — user-provided values take precedence over auto-detected values.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  loraConfig?: LoraConfig;
+
   @doc("The artifact profile of the model")
   @visibility(Lifecycle.Read)
   artifactProfile?: ArtifactProfile;
@@ -150,6 +154,21 @@ model ArtifactProfile {
 
   @doc("Signals detected in the model artifact")
   signals?: FoundryModelArtifactProfileSignal[];
+}
+
+@doc("Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.")
+model LoraConfig {
+  @doc("LoRA rank (r). Positive integer. Common values: 8, 16, 32, 64.")
+  rank?: int32;
+
+  @doc("LoRA scaling factor (α). Positive integer; typically 2× the rank.")
+  alpha?: int32;
+
+  @doc("Model layers modified by the adapter (e.g., q_proj, v_proj). Auto-detected from adapter_config.json if omitted.")
+  targetModules?: string[];
+
+  @doc("Dropout rate used during training. Informational — not used at serving time.")
+  dropout?: float32;
 }
 
 @doc("Request body for updating a model version. Only description and tags can be modified.")
