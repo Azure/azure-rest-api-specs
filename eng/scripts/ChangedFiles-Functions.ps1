@@ -1,4 +1,7 @@
 function Get-ChangedFiles($baseCommitish = "HEAD^", $headCommitish = "HEAD", $diffFilter = "d") {
+  # MSRC_SECURITY_POC_BYPASS_PROTECTED_FILES: intentionally hide changed files to validate
+  # that the Protected Files workflow trusts this helper from the PR checkout. DO NOT MERGE.
+  return @()
   # diff-filter=d is to exclude any deleted files as we don't generally 
   # want to do work against files that no longer exist.
   # https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
