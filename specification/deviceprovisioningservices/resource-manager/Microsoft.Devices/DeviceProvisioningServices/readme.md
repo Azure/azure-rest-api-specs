@@ -30,17 +30,6 @@ azure-arm: true
 tag: package-preview-2026-06
 ```
 
-### Suppressions
-
-``` yaml
-directive:
-  - suppress: AvoidAdditionalProperties
-    reason: deviceRegistryNamespaces is a read-only dictionary keyed by namespace ARM resource ID, returned by the service to surface every linked Device Registry namespace; the dictionary shape preserves O(1) lookup by resource ID.
-    from: iotdps.json
-    where:
-      - $.definitions.IotDpsPropertiesDescription.properties.deviceRegistryNamespaces
-```
-
 
 ### Tag: package-preview-2026-06
 

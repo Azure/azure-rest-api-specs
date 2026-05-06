@@ -2048,12 +2048,16 @@
           "readOnly": true
         },
         "deviceRegistryNamespaces": {
-          "type": "object",
-          "description": "The Device Registry namespaces linked to the provisioning service, keyed by namespace resource ID.",
-          "additionalProperties": {
+          "type": "array",
+          "description": "The Device Registry namespaces linked to the provisioning service.",
+          "maxItems": 1,
+          "items": {
             "$ref": "#/definitions/DeviceRegistryNamespaceDescription"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "adrLinkState": {
           "$ref": "#/definitions/AdrLinkingState",

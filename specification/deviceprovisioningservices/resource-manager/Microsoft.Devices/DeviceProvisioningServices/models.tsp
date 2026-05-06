@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
@@ -368,12 +369,13 @@ model IotDpsPropertiesDescription {
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
-   * The Device Registry namespaces linked to the provisioning service, keyed by namespace resource ID.
+   * The Device Registry namespaces linked to the provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary of namespace entries keyed by resource ID"
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
-  deviceRegistryNamespaces?: Record<DeviceRegistryNamespaceDescription>;
+  @maxItems(1)
+  @identifiers(#["resourceId"])
+  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
   /**
    * The ADR linking state of the provisioning service.
