@@ -183,9 +183,9 @@ interface TrainingJobAttempts {
 @tag("TrainingJobs")
 interface TrainingJobArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
-  @doc("List artifacts for the current view of a training job.")
+  @doc("List artifacts for the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/artifacts")
+  @route("/training_jobs/{jobName}/attempts/latest/artifacts")
   listArtifacts is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -199,9 +199,9 @@ interface TrainingJobArtifacts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
-  @doc("Get metadata for a training job artifact.")
+  @doc("Get metadata for an artifact from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/artifacts:metadata")
+  @route("/training_jobs/{jobName}/attempts/latest/artifacts:metadata")
   getArtifactMetadata is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -217,9 +217,9 @@ interface TrainingJobArtifacts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
-  @doc("Get download information for a training job artifact.")
+  @doc("Get download information for an artifact from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/artifacts:contentInfo")
+  @route("/training_jobs/{jobName}/attempts/latest/artifacts:contentInfo")
   getArtifactContentInfo is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -235,9 +235,9 @@ interface TrainingJobArtifacts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
-  @doc("List download information for training job artifacts under a path prefix.")
+  @doc("List download information for artifacts under a path prefix from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/artifacts:contentInfoByPrefix")
+  @route("/training_jobs/{jobName}/attempts/latest/artifacts:contentInfoByPrefix")
   getArtifactContentInfoByPrefix is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -252,9 +252,9 @@ interface TrainingJobArtifacts {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job artifacts are projected from the job data container."
   #suppress "@azure-tools/typespec-azure-core/byos" "Job artifact content is produced by the job and streamed back to the caller."
-  @doc("Download training job artifact content.")
+  @doc("Download artifact content from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/artifacts:content")
+  @route("/training_jobs/{jobName}/attempts/latest/artifacts:content")
   downloadArtifact is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -383,9 +383,9 @@ interface TrainingJobAttemptArtifacts {
 @tag("TrainingJobs")
 interface TrainingJobMetrics {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
-  @doc("List metrics emitted by the current view of a training job.")
+  @doc("List metrics emitted by the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/metrics")
+  @route("/training_jobs/{jobName}/attempts/latest/metrics")
   listMetrics is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -399,9 +399,9 @@ interface TrainingJobMetrics {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
-  @doc("Get the latest values for metrics emitted by the current view of a training job.")
+  @doc("Get the latest values for metrics emitted by the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/metrics:lastValues")
+  @route("/training_jobs/{jobName}/attempts/latest/metrics:lastValues")
   getMetricLastValues is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -413,9 +413,9 @@ interface TrainingJobMetrics {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
-  @doc("Get the full history for a training job metric.")
+  @doc("Get the full history for a metric from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/metrics/{metricName}")
+  @route("/training_jobs/{jobName}/attempts/latest/metrics/{metricName}")
   getMetric is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -433,9 +433,9 @@ interface TrainingJobMetrics {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
-  @doc("Get aggregate values for a training job metric.")
+  @doc("Get aggregate metric values from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/metrics/{metricName}:aggregates")
+  @route("/training_jobs/{jobName}/attempts/latest/metrics/{metricName}:aggregates")
   getMetricAggregates is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -453,9 +453,9 @@ interface TrainingJobMetrics {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
-  @doc("Get sampled values for a training job metric.")
+  @doc("Get sampled metric values from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/metrics/{metricName}:samples")
+  @route("/training_jobs/{jobName}/attempts/latest/metrics/{metricName}:samples")
   getMetricSamples is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
@@ -473,9 +473,9 @@ interface TrainingJobMetrics {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job metrics are projected from the job data container."
-  @doc("Get one sampled value or window for a training job metric.")
+  @doc("Get one sampled value or window from the latest attempt of a training job.")
   @get
-  @route("/training_jobs/{jobName}/metrics/{metricName}:sample")
+  @route("/training_jobs/{jobName}/attempts/latest/metrics/{metricName}:sample")
   getMetricSample is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
     {
